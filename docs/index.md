@@ -4,7 +4,7 @@ These are the working docs for a design take-home: an app that puts a high stree
 
 ## What this is
 
-A working record, not a presentation. It's where I log the work I do with AI agents: what we researched, what I decided and why, what the agents produced, and what I kept or threw away. It's written for me, for the agents and for anyone else working on this with us.
+A working record, not a presentation. It's where I log the work I do with AI agents: what was researched, what I decided and why, what the agents produced, and what I kept or threw away. It's written for me, for the agents and for anyone else who joins the work.
 
 The final output for review is a recorded walkthrough of the work, with this record behind it as the evidence. So these pages favour completeness and traceability over storytelling.
 
@@ -27,4 +27,4 @@ Claims about people come from public posts, quoted word for word with the author
 
 ## How it was made
 
-I directed the work; AI agents (Claude Code as the main one, Codex for reviews) did most of the collecting, coding and drafting. Every page says how AI was used in that step, and [how AI was used](process/ai-log.md) logs what each agent was asked, what came back and what I threw away or fixed. The prototype is built in code; Figma and Apple Freeform are used only for exploration.
+I directed the work and made the decisions; AI agents did most of the collecting, tagging and drafting: a main agent with subagents, and a second agent for reviews. Every page says how AI was used in that step, and [how AI was used](process/ai-log.md) logs what each agent was asked, what came back and what I threw away or fixed. The prototype is built in code; Figma and Apple Freeform are used only for exploration.

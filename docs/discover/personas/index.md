@@ -11,7 +11,7 @@ Call:
 - Cluster the posts on two dimensions that speak to the brief, and define the personas from the clusters.
 - Call them proto-personas: nobody was interviewed ([000](../../decision-log.md)).
 AI:
-- Claude and a second agent tagged every post blind, from a fixed list of labels. A script scored both dimensions and ran the clustering.
+- Two agents tagged every post separately, from a fixed list of labels. A script scored both dimensions and ran the clustering.
 - I chose the dimensions and checked the clusters against the quotes.
 Trade-offs:
 - Small numbers (4 to 11 posts per cluster). These are directions to test in Define, not findings.
@@ -19,7 +19,7 @@ Trade-offs:
 
 ## The two dimensions
 
-| Dimension | What it measures | Why we chose it |
+| Dimension | What it measures | Why I chose it |
 | --- | --- | --- |
 | **Need urgency** · browsing → needs it now | How specific and time-bound the shopper's need was: browsing, routine shopping, a specific item, or a specific item with a deadline. | It separates the occasions the netnography kept showing, from a casual wander to a same-day hunt. Each occasion asks something different of a product. |
 | **Point of failure** · knowing → getting | Where the trip went wrong: couldn't find out (stock, hours, who sells it), the thing wasn't there, it wasn't worth the price, or couldn't get it (hours, payment, delivery time). | It maps straight onto the brief. Failures of knowing are a findability problem, and failures of getting are a transaction problem. |
@@ -45,7 +45,7 @@ Both are scored from tags that two agents applied separately and mostly agreed o
 
 How the scores and clusters were calculated: [method](method.md).
 
-**About the names and photos.** Each persona is one cluster. The names are labels: common British first names, short and easy to tell apart. The photos are stand-ins from Unsplash. The posts rarely say anyone's age or gender, so the personas don't either. Every attribute listed comes from the posts in that cluster.
+**About the names and photos.** Each persona is one cluster. The names are labels: common British first names, short and easy to tell apart. The photos are stand-ins from Unsplash. The posts rarely say anyone's age or gender, so the names, pronouns and photos carry no evidence: treat them as labels. The attributes listed come from the posts in that cluster.
 
 ## Sam, the mission shopper
 
@@ -91,7 +91,7 @@ tagline: Would use local shops if they fitted his week. They don't, so he's stop
 image: img/dan.jpg
 credit: Photo: Rasheed Kemy, Unsplash
 credit_url: https://unsplash.com/photos/man-inside-bus-using-earphones-Z4V6OVZR5W4
-- Where: London
+- Where: London and elsewhere in the UK
 - Week: Weekday hours that match the shops' hours
 - Pays: Card or phone, no cash
 - Buys: Supermarket and Amazon for routine shopping
@@ -125,11 +125,11 @@ status: verified
 
 ```persona
 name: Ruth, the regular
-tagline: Has shopped on the same street for years and is watching her shops close.
+tagline: Keeps shopping locally while her shops close.
 image: img/ruth.jpg
 credit: Photo: Centre for Ageing Better, Unsplash
 credit_url: https://unsplash.com/photos/elderly-woman-smiling-in-a-room-filled-with-clothes-UZCqtOcY8b4
-- Where: Same West London neighbourhood for years
+- Where: Mostly West London: Kew, Ealing, Hammersmith
 - Routine: Weekly butcher, newsagent post-office counter
 - When a shop closes: Travels further rather than switch
 - Hears from: Neighbours, local forums

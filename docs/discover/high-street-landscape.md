@@ -8,8 +8,8 @@ Takeaways:
 - High streets are shifting from shops to food and services.
 - Small shops pay lower business rates from April 2026. Cash is 8% of payments but about a fifth of retail transactions.
 Call:
-- Include regulation and payments, because they constrain any purchase flow we design.
-- Use Hammersmith as the worked example, since it's where I can go and look.
+- I widened the desk research beyond shop numbers to the rules and payment facts (business rates, consumer law for click and collect, cash access) because they limit what any app could ask of a shop or promise a shopper.
+- I made Hammersmith the worked example, so the claims can be checked against one real street, its BID and its neighbours.
 AI:
 - A desk-research agent gathered the facts. A writing agent re-checked the surprising claims (a new Prime Minister, the October Budget) and the top numbers in two or more sources.
 - Anything it couldn't confirm went to "Not confirmed".
@@ -194,7 +194,7 @@ What public sources say merchants struggle with:
 
 ## What this means for the brief
 
-*Interpretation. Each point is our reading of the evidence above, not a sourced fact.*
+*Interpretation. Each point is my reading of the evidence above, not a sourced fact.*
 
 - **The shopper is probably on foot, so collection may matter more than delivery.** 90% of Londoners live within ten minutes of a high street and 63% of users walk to theirs. With Hammersmith Bridge closed to cars, shoppers from south of the river arrive on foot or by bike, or need delivery.
 - **"What's available" has to cover more than shop stock.** Retail jobs on central high streets fell 19% while food and accommodation rose 18%, and Use Class E lets a shop become a café or clinic overnight. Food items also bring allergen rules with them.

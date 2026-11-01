@@ -1,12 +1,12 @@
 # Discover
 
-Before choosing between findability and transaction, we tried to understand the high street from the outside in: what it is in 2026, what London shoppers say about it in public, and what the products already serving them get right and wrong. Hammersmith, where King Street meets the Broadway, is the worked example throughout.
+Before choosing between findability and transaction, I set out to understand the high street from the outside in: what it is in 2026, what London shoppers say about it in public, and what the products already serving them get right and wrong. Hammersmith, where King Street meets the Broadway, is the worked example throughout.
 
 ```summary
 Takeaways:
 - Shoppers can't tell whether a nearby shop has something, or is open, without going. That was the strongest signal.
 - A failed trip usually ends on Amazon, unless online can't arrive in time.
-- The mission shopper is the clearest proto-persona, and information failures are the most common.
+- Sam, the mission shopper, is the largest and clearest of the three proto-personas (11 of 21 clustered posts). "Couldn't find out" is the most common point of failure.
 Call:
 - Discovery before choosing findability or transaction ([001](../decision-log.md)).
 - Outside-in, because the product doesn't exist yet ([000](../decision-log.md)). Hammersmith as the worked example.
@@ -17,7 +17,7 @@ Trade-offs:
 - Speed and traceability over depth. No interviews, and public posts over-represent people with a complaint.
 ```
 
-## What we did
+## What I did
 
 | Piece of work | Question | Page |
 | --- | --- | --- |
@@ -28,9 +28,9 @@ Trade-offs:
 | Proto-personas | Which shopping occasions recur, and where do they break? | [The proto-personas](personas/index.md) · [Method](personas/method.md) |
 | Benchmarks | Which products already serve these shoppers, and what do their users say? | [Benchmarks](benchmarks.md) |
 
-Every quote is a short excerpt from a public post, dated between May 2025 and November 2026, with the author's handle and a link. Most are marked as checked against the live page. The full list is on [Sources](sources.md), and the decisions behind the method are in the [decision log](../decision-log.md).
+Every quote is a short excerpt from a public post, dated between May 2025 and November 2026, with the author's handle and a link. All but one are checked against the live page. The full list is on [Sources](sources.md), and the decisions behind the method are in the [decision log](../decision-log.md).
 
-## What we heard
+## What shoppers say
 
 **Shoppers can't tell what a shop has, or whether it's open, without going there.** This came up more than anything else. When a need is urgent (eclipse glasses the day before, a fan in a heatwave, flowers on a Sunday evening), Londoners ask strangers on Reddit, phone around, or join WhatsApp groups that post stock counts with timestamps. Google listings and shop websites are trusted less than a neighbour's reply.
 
@@ -46,7 +46,7 @@ The street is changing shape rather than dying. Empty units are being let again 
 
 ## What existing products show
 
-The complaint users repeat most, across delivery apps, surplus-food apps and stock-search tools, is being told something was available when it wasn't. One basket across several sellers now exists (Etsy, Amazon, and since October 2026 Shop app and Google), but only with postal delivery. Nobody combines several shops on one street with collection at each shop or a single local courier run. Directories without live stock, like ShopAppy, haven't lasted.
+The complaint users repeat most, across delivery apps, surplus-food apps and stock-search tools, is being told something was available when it wasn't. One basket across several sellers now exists (Etsy, Amazon, and since October 2026 Shop app, and Google in the US only), but only with postal delivery. Nobody combines several shops on one street with collection at each shop or a single local courier run. Directories without live stock, like ShopAppy, haven't lasted.
 
 ## What this means for the choice ahead
 
@@ -60,11 +60,11 @@ The evidence pulls in two directions, and the choice between them is the first d
 
 ## Open questions for Define
 
-- Which shopper do we design for? The [personas](personas/index.md) put the strongest pain with Sam and Tom, the two mission shoppers, who need a specific thing soon.
+- Which shopper do I design for? The [proto-personas](personas/index.md) put the strongest pain with Sam, the mission shopper, who needs a specific thing soon.
 - How does a shop with no product codes say what it has, with almost no extra work?
 - Is collection the default and delivery the option, given most people reach their high street on foot?
 - What would the street's existing organisers, such as the Hammersmith BID, need to see to take part?
 
-## Gaps we know about
+## Known gaps
 
 X and TikTok were read, but X carries little shopping talk and TikTok comments couldn't be collected, so younger shoppers are seen mostly through creators' captions. Instagram and Nextdoor weren't collected, so older residents in neighbourhood groups are under-represented. Nobody was interviewed: every quote occurred naturally, and no one was asked about an app. Both gaps are listed on the [method](netnography/method.md) page.

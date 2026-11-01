@@ -8,7 +8,8 @@ Takeaways:
 - Point of failure: from knowing (couldn't find out, findability) to getting (couldn't get it, transaction).
 - What people did next (kept going, or gave up) is shown on each point, but it isn't an axis. Most posts don't show it.
 Call:
-- Choose axes that speak to the brief's choice, and that can be coded from what people wrote.
+- I picked need urgency and point of failure from the candidates, because the second maps straight onto findability versus transaction and both can be coded from what people wrote.
+- I kept "what people did next" off the axes, because most posts don't show it.
 AI:
 - The research agent proposed candidate axes from its coding. A reviewer agent tested them against the brief. Two agents coded every post on both axes.
 Trade-offs:

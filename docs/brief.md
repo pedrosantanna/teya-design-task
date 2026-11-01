@@ -15,7 +15,7 @@ Imagine an app, mobile or web, that brings them together. A shopper opens it and
 
 The brief asks for a clear position on one of them, and for evidence that the other one's constraints are understood.
 
-We define the shopper and the scope. Anything missing (data, merchant behaviour, logistics, business model) gets assumed, and the assumption gets written down.
+I define the shopper and the scope. Anything missing (data, merchant behaviour, logistics, business model) gets assumed, and the assumption gets written down.
 
 ## What gets delivered
 

@@ -6,11 +6,12 @@ The clearest thing Londoners say about their high street is that they can't tell
 Takeaways:
 - Not knowing what's in stock, or what's open, is the strongest theme.
 - Loyalty to local is real but stops at the first wasted trip.
-- On X and TikTok the high street is something to show, not somewhere to check.
+- On X and TikTok the high street is a place to discover, with little practical talk.
 Call:
-- Rank themes by strength of evidence. Keep quotes short and linked, and mark interpretation as interpretation.
+- I ranked the themes by strength of evidence (number of quotes, networks, recency, how specific to West London), not by how useful they are to the brief.
+- Quotes stay short and linked, and interpretation is labelled as mine.
 AI:
-- The research agent coded 14 tags and grouped them into themes. A writing agent picked about 40 quotes and wrote each theme.
+- The research agent tagged the quotes with 14 codes and grouped them into themes. A writing agent picked about 40 quotes and wrote each theme.
 Trade-offs:
 - Themes come from posts people chose to write, so strength means "repeated", not "common".
 ```
@@ -82,7 +83,7 @@ status: verified
 
 **Evidence: strong.** West London Reddit plus a 649-reply Mumsnet thread.
 
-Independents' hours are short and clash with working lives, and the published hours are often wrong. Google and Facebook are both distrusted. Our reading is that people who get burnt a few times stop checking and go straight to a chain or online.
+Independents' hours are short and clash with working lives, and the published hours are often wrong. Google and Facebook are both distrusted. My reading is that people who get burnt a few times stop checking and go straight to a chain or online.
 
 ```quote
 text: Google says it's temporarily closed but I've been done over by google before and a store was still open.
@@ -221,7 +222,7 @@ status: verified
 
 **Evidence: strong for West London.** Reddit only.
 
-Locals send visitors away from King Street and towards Chiswick High Road. King Street's assets, its charity shops and markets, are described as being for locals. Our interpretation: a product anchored on Hammersmith has to work for everyday errands before it can work for browsing.
+Locals send visitors away from King Street and towards Chiswick High Road. King Street's assets, its charity shops and markets, are described as being for locals. My interpretation: a product anchored on Hammersmith has to work for everyday errands before it can work for browsing.
 
 ```quote
 text: King Street isn't great for window shopping, it's mainly takeaways, slot casinos, tk maxx and other cheap chains. The shops in Chiswick are nicer…
@@ -412,15 +413,15 @@ context: On plans to reopen the bridge to cars being dropped.
 status: verified
 ```
 
-## 10. On X and TikTok the high street is something to show, not somewhere to check
+## 10. On X and TikTok the high street is a place to discover
 
 **Evidence: moderate for TikTok, weak for X.** Read live on 1 November 2026.
 
-Neither network carries much of the practical talk Reddit does. On X, "high street" in London mostly appears in arguments about national decline, which we read but did not quote, and in council posts promoting independents. The one King Street post from a shopper calls a walk along it depressing.
+Neither network carries much of the practical talk Reddit does. On X, "high street" in London mostly appears in arguments about national decline, which were read but not quoted, and in council posts promoting independents. The one King Street post from a shopper calls a walk along it depressing.
 
 TikTok treats the high street as discovery. Videos pin a place with 📍, call it a steal or a hidden find, and offer it as an alternative to Oxford Street. Around Hammersmith the results are food, charity-shop hauls, bargain shops, a florist stall and a flea market, and many are made by the shops themselves. That fits the browse end of the [first dimension](dimensions.md): people find places through content, without searching for an item.
 
-One small, new signal: shoppers on X asking the platform's AI chatbot which shop has an item in stock. We found it twice, so it is a note to watch, not a finding.
+One small, new signal: shoppers on X asking the platform's AI chatbot which shop has an item in stock. It turned up once, in the post below, so it is a note to watch, not a finding.
 
 ```quote
 text: Just walked the length of King Street in Hammersmith. Blimey, that was a thoroughly depressing experience.
@@ -515,7 +516,7 @@ status: verified
 - **How often any of this happens.** These are posts people chose to write. They show what annoys people enough to post, and say nothing about frequency.
 - **What older and offline shoppers think.** They barely appear on Reddit or Mumsnet.
 - **Anything from shopkeepers.** Shop-owner posts were excluded, so why hours and stock are the way they are is still a guess.
-- **Whether people would use an app for this.** Nobody was asked. The pull towards live stock and reliable hours is our reading of unprompted complaints.
+- **Whether people would use an app for this.** Nobody was asked. The pull towards live stock and reliable hours is my reading of unprompted complaints.
 - **What TikTok viewers say back.** Only captions were collected.
 
 These themes feed the [empathy map](empathy-map.md) and the [proposed dimensions](dimensions.md).

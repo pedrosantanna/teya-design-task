@@ -5,11 +5,11 @@ The major decisions that shaped the process, in the order they were made. Each e
 ---
 
 ## 000 — A 0-to-1 product, with depth sized to a take-home
-**2026-11-01 · Decided at the start, recorded later**
+**2026-11-01 · Decided**
 
-We treat this as a product that doesn't exist yet: no users, no usage data and no merchants to learn from. That shapes discovery. It starts from the outside, with public conversation, desk research and the products people already use, instead of analytics or interviews with existing customers.
+I decided to treat this as a product that doesn't exist yet: no users, no usage data and no merchants to learn from. That shapes discovery. It starts from the outside, with public conversation, desk research and the products people already use, instead of analytics or interviews with existing customers.
 
-It is also a take-home with a budget of a few hours. Each step goes as deep as the next decision needs, and no deeper. A real 0-to-1 discovery would interview shoppers and shopkeepers, code with more than one person and run for weeks. Where we stop short, the page says so, and Define lists what should be validated next.
+It is also a take-home with a budget of a few hours. Each step goes as deep as the next decision needs, and no deeper. A real 0-to-1 discovery would interview shoppers and shopkeepers, code with more than one person and run for weeks. Where I stop short, the page says so, and Define lists what should be validated next.
 
 ## 001 — Start with discovery, not with the problem choice
 **2026-11-01 · Decided**
@@ -36,12 +36,12 @@ The final prototype (and, if it makes sense, a running application) is built in 
 ## 004 — These docs are the working record; the video is the output
 **2026-11-01 · Decided**
 
-Everything (discovery, decisions, prototype, app) lives in this repo, and a Claude Artifact renders it as a docs site. The site is the working record of what I do with the AI agents: the research, the decisions, what came back and what I kept. It's written for me, the agents and anyone working on this with us. It is not the presentation. The output for review is the recorded walkthrough, with this record behind it as evidence.
+Everything (discovery, decisions, prototype, app) lives in this repo and is published as a hosted docs site. The site is the working record of what I do with the AI agents: the research, the decisions, what came back and what I kept. It's written for me, the agents and anyone else who joins the work. It is not the presentation. The output for review is the recorded walkthrough, with this record behind it as evidence.
 
-## 005 — Agent setup: Claude Code primary, Codex secondary
+## 005 — Agent setup: one main agent, a second for reviews
 **2026-11-01 · Decided**
 
-`AGENTS.md` holds the shared instructions so both Claude Code (primary) and Codex (reviews, parallel tasks) understand the repo; `CLAUDE.md` imports it.
+I set up `AGENTS.md` as the shared instructions, so every agent working in the repo follows the same rules: the main agent, which also runs subagents, and a second agent I use for reviews and side tasks.
 
 ## 006 — Discovery method: netnography, empathy map, benchmarks, landscape
 **2026-11-01 · Decided**
@@ -71,7 +71,7 @@ Everything in the repo is in English. Writing follows explicit anti-AI-pattern r
 ## 009 — Which social networks the netnography uses
 **2026-11-01 · Decided**
 
-Networks were chosen with Kozinets' site-selection criteria: is the site relevant to the question, active in the time window, interactive (people talk to each other), substantial, heterogeneous, and rich in descriptive data? On top of that sits our own ethics rule: public content only.
+Networks were chosen with Kozinets' site-selection criteria: is the site relevant to the question, active in the time window, interactive (people talk to each other), substantial, heterogeneous, and rich in descriptive data? On top of that sits my own ethics rule: public content only.
 
 | Network | Why | Weight |
 | --- | --- | --- |
@@ -79,15 +79,15 @@ Networks were chosen with Kozinets' site-selection criteria: is the site relevan
 | TikTok | Younger shoppers: high-street vlogs, "shop local" content, comment threads | High |
 | X | Reaction to news (closures, Hammersmith Bridge, business rates); public debate more than shopping habits | Medium |
 | Mumsnet, App Store, Trustpilot | Open to read without an account; long-form experience and product reviews | Supporting |
-| Instagram | Mostly the shops' voice rather than the shoppers'; used for comments on local accounts only | Optional |
+| Instagram | Mostly the shops' voice rather than the shoppers'; comments on local accounts only | Optional; not collected in the end |
 | Facebook, Nextdoor | Where older residents talk about their high street, but mostly in closed groups or neighbour-only feeds | Excluded from quotes |
 
-**Why:** an automated first pass couldn't read Reddit, X or TikTok (blocked or login-walled), which skewed the voice towards older, complaint-heavy sources. Fieldwork on those three is done by reading through a logged-in browser session: read only, no posting, liking or following.
+**Why:** an automated first pass couldn't read Reddit, X or TikTok (blocked or login-walled), which skewed the voice towards older, complaint-heavy sources. X and TikTok were then read through my logged-in browser session (read only: no posting, liking or following), and Reddit through a public archive (decision 010).
 
 ## 010 — Reddit through an archive, checked against the live site
 **2026-11-01 · Decided**
 
-Reddit blocked every automated route we had: the fetch tool, both browsers and its public JSON. The official API now needs an approval that takes days. So the Reddit fieldwork was read through Arctic Shift, a public archive of Reddit used in academic research, and then checked against pages I saved by hand from the live site. Every Reddit quote carries a status: **verified** (matched against the live page) or **via archive** (not yet matched). Two quotes were dropped because the live check showed them removed. X and TikTok were read in a second pass through my logged-in browser. TikTok comments could not be read by the tools, so TikTok evidence is captions only. Posts that used the high street to argue about national decline in racial terms were read but not quoted.
+Reddit blocked every automated route I had: the fetch tool, both browsers and its public JSON. The official API now needs an approval that takes days. So the Reddit fieldwork was read through Arctic Shift, a public archive of Reddit used in academic research, and then checked against pages I saved by hand from the live site. Every Reddit quote carries a status: **verified** (matched against the live page) or **archive** (not yet matched). Two quotes were dropped because the live check showed them removed. X and TikTok were read in a second pass through my logged-in browser. TikTok comments could not be read by the tools, so TikTok evidence is captions only. Posts that used the high street to argue about national decline in racial terms were read but not quoted.
 
 ## 011 — Quotes are short excerpts
 **2026-11-01 · Decided**

@@ -23,7 +23,7 @@ The unit is one public post. A post is coded only if it describes the poster's o
 
 ## Two coders, tagging separately
 
-Claude coded first. A second agent then coded the same 44 posts from the codebook alone, without seeing the first codes. Agreement before reconciliation:
+One agent tagged first. A second agent then tagged the same 44 posts from the codebook alone, without seeing the first codes. Agreement before reconciliation:
 
 <!-- generated:agreement -->
 | Field | Posts compared | Agreement | Cohen's kappa |

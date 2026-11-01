@@ -10,7 +10,7 @@ Call:
 - Two dimensions that map onto the brief: need urgency and point of failure.
 - Lewrick, Link and Leifer's persona fields to describe each cluster.
 AI:
-- Claude wrote the codebook and coded 44 posts. A second agent coded them blind.
+- An agent wrote the codebook and tagged 44 posts. A second agent tagged them blind.
 - A script turned the codes into scores, ran the clustering and drew the map.
 Trade-offs:
 - Both coders are AI models. Two scores per post means many posts share a spot on the map.
@@ -44,7 +44,7 @@ Trade-offs:
 
 ## The persona tool
 
-Lewrick, Link and Leifer's persona/user profile ([*The Design Thinking Playbook*](https://www.wiley.com/en-us/The+Design+Thinking+Playbook%3A+Mindful+Digital+Transformation+of+Teams%2C+Products%2C+Services%2C+Businesses+and+Ecosystems-p-9781119467472), 2018; [*The Design Thinking Toolbox*](https://www.wiley.com/en-us/The+Design+Thinking+Toolbox%3A+A+Guide+to+Mastering+the+Most+Popular+and+Valuable+Innovation+Methods-p-9781119629214), 2020) describes a fictional user built from research, and expects it to change as the team learns. We used its fields. The scoring and clustering are ours.
+Lewrick, Link and Leifer's persona/user profile ([*The Design Thinking Playbook*](https://www.wiley.com/en-us/The+Design+Thinking+Playbook%3A+Mindful+Digital+Transformation+of+Teams%2C+Products%2C+Services%2C+Businesses+and+Ecosystems-p-9781119467472), 2018; [*The Design Thinking Toolbox*](https://www.wiley.com/en-us/The+Design+Thinking+Toolbox%3A+A+Guide+to+Mastering+the+Most+Popular+and+Valuable+Innovation+Methods-p-9781119629214), 2020) describes a fictional user built from research, and expects it to change as the team learns. I used its fields. The scoring and clustering are my own addition.
 
 ## Limits
 

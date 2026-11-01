@@ -1,16 +1,16 @@
 # Sources
 
-Every quote and every link used across the docs, in one place. 79 quotes (78 checked against the live source) and 147 other sources. This page is generated from the other pages by `scripts/build_sources.py`.
+Every quote and every link used across the docs, in one place. 72 quotes (71 checked against the live source) and 155 other sources. This page is generated from the other pages by `scripts/build_sources.py`.
 
 ## Quotes by network
 
 | Network | Quotes |
 | --- | --- |
 | Reddit | 33 |
-| App Store (UK) | 21 |
+| App Store (UK) | 16 |
 | Mumsnet | 11 |
-| Trustpilot (UK) | 6 |
 | TikTok | 5 |
+| Trustpilot (UK) | 4 |
 | X | 3 |
 
 ## Quotes
@@ -39,7 +39,6 @@ Status **verified** means the text, author and date were matched against the liv
 | 2025-12-05 | LividArse | Mumsnet · Talk › AIBU | verified | [Proto-personas](personas/index.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977221) |
 | 2025-12-05 | Valentando | Mumsnet · Talk › AIBU | verified | [Findings](netnography/findings.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977465) |
 | 2025-12-05 | zingally | Mumsnet · Am I Being Unreasonable | verified | [Benchmarks](benchmarks.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148978039) |
-| 2025-12-17 | Alexandra Grant | Trustpilot (UK) · Hive | verified | [Benchmarks](benchmarks.md) | [Open](https://uk.trustpilot.com/reviews/6942fe627b355bd0d9bb1e20) |
 | 2025-12-19 | customer | Trustpilot (UK) · Hive | verified | [Benchmarks](benchmarks.md) | [Open](https://uk.trustpilot.com/reviews/694484566e150e09333d2c40) |
 | 2025-12-25 | u/Rhubarbatross | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1pvd92z/comment/nvw7a0u/) |
 | 2026-03-07 | u/Peppy_Tomato | Reddit · r/AskUK | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/AskUK/comments/1rn7npv/comment/o94plrm/) |
@@ -56,7 +55,6 @@ Status **verified** means the text, author and date were matched against the liv
 | 2026-06-26 | u/Accomplished-Pen2660 | Reddit · r/Ealing | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/Ealing/comments/1ug10pv/comment/oty3pvk/) |
 | 2026-07-01 | u/anonypanda | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1uke914/comment/ouyun00/) |
 | 2026-07-01 | u/sd_1874 | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1ukfwni/comment/ouvf2m5/) |
-| 2026-07-31 | Eddy G1 | App Store (UK) · Zapp | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1545579060?see-all=reviews) |
 | 2026-08-08 | AppleG69 | App Store (UK) · Nextdoor | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id640360962?see-all=reviews) |
 | 2026-08-10 | u/jamesshovlin | Reddit · r/london | verified | [Proposed dimensions](netnography/dimensions.md) | [Open](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tdld2/) |
 | 2026-08-10 | u/jamesshovlin | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tdld2/) |
@@ -73,25 +71,20 @@ Status **verified** means the text, author and date were matched against the liv
 | 2026-09-23 | Montymoo2 | App Store (UK) · Too Good To Go | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1060683933?see-all=reviews) |
 | 2026-09-26 | @hackneyfleamarket | TikTok | verified | [Findings](netnography/findings.md) | [Open](https://www.tiktok.com/@hackneyfleamarket/video/7689755751471959318) |
 | 2026-09-26 | sleepy.uwu.nova | App Store (UK) · OLIO | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1008237086?see-all=reviews) |
-| 2026-09-27 | duahhhhhhh | App Store (UK) · OLIO | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1008237086?see-all=reviews) |
 | 2026-10-03 | user64946284 | App Store (UK) · Google Maps | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id585027354?see-all=reviews) |
 | 2026-10-06 | @stillshipping | TikTok | verified | [Findings](netnography/findings.md) | [Open](https://www.tiktok.com/@stillshipping/video/7693511674925518102) |
 | 2026-10-06 | Dj wade mister | App Store (UK) · Nextdoor | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id640360962?see-all=reviews) |
-| 2026-10-06 | Jzelf | App Store (UK) · Too Good To Go | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1060683933?see-all=reviews) |
 | 2026-10-07 | BikeCam David | Trustpilot (UK) · SumUp | verified | [Benchmarks](benchmarks.md) | [Open](https://uk.trustpilot.com/reviews/6ac57954df7990f1219e4121) |
 | 2026-10-08 | vicsipro | App Store (UK) · Zoom by Ocado | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1447126432?see-all=reviews) |
 | 2026-10-09 | Barry Griffiths | Trustpilot (UK) · Gophr | verified | [Benchmarks](benchmarks.md) | [Open](https://uk.trustpilot.com/reviews/6ac90d1b34558118b76c3fb3) |
 | 2026-10-11 | u/Inge_Jones | Reddit · r/Ealing | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/Ealing/comments/1x3g7ci/comment/pfbvje4/) |
 | 2026-10-15 | MoogStarr | App Store (UK) · Shop | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1223471316?see-all=reviews) |
 | 2026-10-17 | Jim Rickety | App Store (UK) · Uber Eats | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1058959277?see-all=reviews) |
-| 2026-10-19 | jkljhhgg | App Store (UK) · Shop | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1223471316?see-all=reviews) |
 | 2026-10-20 | @Jojo_agboola | X | verified | [Findings](netnography/findings.md) | [Open](https://x.com/Jojo_agboola/status/2112618905525276980) |
 | 2026-10-20 | Grotty75 | App Store (UK) · Etsy | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id477128284?see-all=reviews) |
-| 2026-10-21 | guFgda | App Store (UK) · Etsy | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id477128284?see-all=reviews) |
 | 2026-10-22 | KJCM98...3 | App Store (UK) · Amazon Shopping | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id335187483?see-all=reviews) |
 | 2026-10-23 | gidfles | App Store (UK) · Amazon Shopping | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id335187483?see-all=reviews) |
 | 2026-10-24 | TheCuriousTravellers | App Store (UK) · Just Eat | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id566347057?see-all=reviews) |
-| 2026-10-26 | Neoclis Neocleous | Trustpilot (UK) · Teya | verified | [Benchmarks](benchmarks.md) | [Open](https://uk.trustpilot.com/reviews/6adf50fcfa872c9c65a7a8d6) |
 | 2026-10-27 | Anthony Tindall | App Store (UK) · Deliveroo | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1001501844?see-all=reviews) |
 | 2026-10-27 | Mel59u | App Store (UK) · Deliveroo | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1001501844?see-all=reviews) |
 | 2026-10-28 | Udohulk | App Store (UK) · Uber Eats | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1058959277?see-all=reviews) |
@@ -106,29 +99,29 @@ Status **verified** means the text, author and date were matched against the liv
 | [Benchmarks](benchmarks.md) | [Google Merchant Center Help](https://support.google.com/merchants/answer/15609877?hl=en-GB) |
 | [Benchmarks](benchmarks.md) | [Asian Trader](https://www.asiantrader.biz/nearst-tech-connects-uber-eats-deliveroo-just-eat) |
 | [Benchmarks](benchmarks.md) | [Digital Commerce 360](https://www.digitalcommerce360.com/2026/10/16/google-universal-cart-launch-features/) |
+| [Benchmarks](benchmarks.md) | [About Amazon](https://www.aboutamazon.co.uk/news/retail/amazon-customers-can-now-add-fresh-groceries-to-same-day-delivery-orders-in-parts-of-london) |
 | [Benchmarks](benchmarks.md) | [Nextdoor via Nasdaq](https://www.nasdaq.com/press-release/nextdoor-deepens-its-commitment-local-business-discovery-and-recommendations-2026-09) |
+| [Benchmarks](benchmarks.md) | [Companies House](https://find-and-update.company-information.service.gov.uk/company/10285855) |
+| [Benchmarks](benchmarks.md) | [ShopAppy story](https://shopappy.com/the-shopappy-story) |
+| [Benchmarks](benchmarks.md) | [BID Leamington](https://bidleamington.com/love-leam-app-launches/) |
 | [Benchmarks](benchmarks.md) | [Business Wire](https://secure.businesswire.com/news/home/20251002060133/en/DoorDash-Completes-Acquisition-of-Deliveroo) |
 | [Benchmarks](benchmarks.md) | [DineOpen](https://www.dineopen.com/blog/deliveroo-vs-just-eat-vs-uber-eats-commission-2026) |
 | [Benchmarks](benchmarks.md) | [Grocery Gazette](https://www.grocerygazette.co.uk/2025/03/19/co-op-uber-eats-partnership/) |
 | [Benchmarks](benchmarks.md) | [Uber](https://www.uber.com/us/en/newsroom/multi-store-ordering/) |
 | [Benchmarks](benchmarks.md) | [RetailDetail](https://www.retaildetail.eu/news/food/acquisition-of-just-eat-takeaway-completed-the-hard-work-is-just-beginning/) |
 | [Benchmarks](benchmarks.md) | [The Grocer](https://www.thegrocer.co.uk/news/co-op-launches-rapid-grocery-delivery-app-for-independents-called-peckish/701536.article) |
-| [Benchmarks](benchmarks.md) | [Too Good To Go](https://www.toogoodtogo.co.uk/en-gb/business) |
-| [Benchmarks](benchmarks.md) | [The Grocer](https://www.thegrocer.co.uk/news/tescos-olio-food-waste-partnership-hits-100-million-meals/723887.article) |
-| [Benchmarks](benchmarks.md) | [Shopify](https://www.shopify.com/local-delivery) |
-| [Benchmarks](benchmarks.md) | [Shopifreaks](https://www.shopifreaks.com/shopify-launches-universal-checkout-in-the-shop-app-letting-shoppers-buy-from-multiple-brands-with-one-cart-and-one-checkout/) |
-| [Benchmarks](benchmarks.md) | [Etsy Help](https://help.etsy.com/hc/articles/115015627947) |
-| [Benchmarks](benchmarks.md) | [About Amazon](https://www.aboutamazon.co.uk/news/retail/amazon-customers-can-now-add-fresh-groceries-to-same-day-delivery-orders-in-parts-of-london) |
-| [Benchmarks](benchmarks.md) | [The Bookseller](https://www.thebookseller.com/news/bookshoporg-surpasses-4m-profit-for-indie-bookshops) |
-| [Benchmarks](benchmarks.md) | [Companies House](https://find-and-update.company-information.service.gov.uk/company/10285855) |
-| [Benchmarks](benchmarks.md) | [ShopAppy story](https://shopappy.com/the-shopappy-story) |
-| [Benchmarks](benchmarks.md) | [BID Leamington](https://bidleamington.com/love-leam-app-launches/) |
 | [Benchmarks](benchmarks.md) | [London Loves Business](https://londonlovesbusiness.com/bq-to-start-same-day-deliveries/) |
 | [Benchmarks](benchmarks.md) | [Stuart](https://stuart.com/courier-service-london/) |
-| [Benchmarks](benchmarks.md) | [The Grocer](https://www.thegrocer.co.uk/news/rapid-grocer-getir-confirms-uk-exit/690798.article) |
-| [Benchmarks](benchmarks.md) | [Zoom](https://zoom.ocado.com/) |
 | [Benchmarks](benchmarks.md) | [Square](https://squareup.com/gb/en/online-store) |
 | [Benchmarks](benchmarks.md) | [Teya Pay by Link](https://www.teya.com/online-payments/pay-by-link) |
+| [Benchmarks](benchmarks.md) | [Too Good To Go](https://www.toogoodtogo.co.uk/en-gb/business) |
+| [Benchmarks](benchmarks.md) | [The Grocer](https://www.thegrocer.co.uk/news/tescos-olio-food-waste-partnership-hits-100-million-meals/723887.article) |
+| [Benchmarks](benchmarks.md) | [Shopifreaks](https://www.shopifreaks.com/shopify-launches-universal-checkout-in-the-shop-app-letting-shoppers-buy-from-multiple-brands-with-one-cart-and-one-checkout/) |
+| [Benchmarks](benchmarks.md) | [Shopify](https://www.shopify.com/local-delivery) |
+| [Benchmarks](benchmarks.md) | [Etsy Help](https://help.etsy.com/hc/articles/115015627947) |
+| [Benchmarks](benchmarks.md) | [The Bookseller](https://www.thebookseller.com/news/bookshoporg-surpasses-4m-profit-for-indie-bookshops) |
+| [Benchmarks](benchmarks.md) | [The Grocer](https://www.thegrocer.co.uk/news/rapid-grocer-getir-confirms-uk-exit/690798.article) |
+| [Benchmarks](benchmarks.md) | [Zoom](https://zoom.ocado.com/) |
 | [The high street today](high-street-landscape.md) | [ONS, 2019](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/articles/highstreetsingreatbritain/2019-06-06) |
 | [The high street today](high-street-landscape.md) | [ONS, March 2026](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/highstreetsandretailareasingreatbritain/march2026) |
 | [The high street today](high-street-landscape.md) | [Historic England](https://cms.historicengland.org.uk/whats-new/features/historic-high-streets-quiz) |
@@ -197,8 +190,43 @@ Status **verified** means the text, author and date were matched against the liv
 | [The high street today](high-street-landscape.md) | [PSR](https://www.psr.org.uk/news-and-updates/latest-news/news/psr-finds-market-isn-t-working-well-for-card-scheme-and-processing-services/) |
 | [The high street today](high-street-landscape.md) | [Fintech Times, GoCardless/FSB survey](https://thefintechtimes.com/gocardless-report-highlights-the-domino-effect-of-late-payments-and-calls-for-change/) |
 | [The high street today](high-street-landscape.md) | [Economics Observatory](https://economicsobservatory.com/update-are-small-businesses-ready-to-compete-as-consumers-move-online) |
+| [Empathy map](netnography/empathy-map.md) | [u/Outside-Assignment85](https://www.reddit.com/r/london/comments/1vr9i0n/comment/p4brlc4/) |
+| [Empathy map](netnography/empathy-map.md) | [u/JollyExPat](https://www.reddit.com/r/london/comments/1tatyc0/comment/olc54ib/) |
+| [Empathy map](netnography/empathy-map.md) | [u/Accomplished-Pen2660](https://www.reddit.com/r/Ealing/comments/1ug10pv/comment/oty3pvk/) |
+| [Empathy map](netnography/empathy-map.md) | [u/zanarah85](https://www.reddit.com/r/chiswick/comments/1vtqzdw/comment/p5hx5hw/) |
+| [Empathy map](netnography/empathy-map.md) | [u/Tasmeena27](https://www.reddit.com/r/Ealing/comments/1xjkdgb/) |
+| [Empathy map](netnography/empathy-map.md) | [u/dy14n19](https://www.reddit.com/r/HammersmithandFulham/comments/1myug4c/) |
+| [Empathy map](netnography/empathy-map.md) | [u/Dazzling-Market6811](https://www.reddit.com/r/london/comments/1tq59un/comment/oodp0mt/) |
+| [Empathy map](netnography/empathy-map.md) | [u/moanyjoany](https://www.reddit.com/r/Ealing/comments/1vlcuor/comment/p30r2af/) |
+| [Empathy map](netnography/empathy-map.md) | [u/Miraclefish](https://www.reddit.com/r/london/comments/1ueg96t/comment/otjhcgo/) |
 | [Empathy map](netnography/empathy-map.md) | [u/jamesshovlin](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tdld2/) |
+| [Empathy map](netnography/empathy-map.md) | [u/getkilled22](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2qesc2/) |
+| [Empathy map](netnography/empathy-map.md) | [u/Chinita_Loca](https://www.reddit.com/r/london/comments/1tq59un/comment/oodsdvi/) |
+| [Empathy map](netnography/empathy-map.md) | [u/Greg-Normal](https://www.reddit.com/r/london/comments/1niwnlw/comment/neo7ha3/) |
+| [Empathy map](netnography/empathy-map.md) | [u/abitofasitdown](https://www.reddit.com/r/london/comments/1niwnlw/) |
+| [Empathy map](netnography/empathy-map.md) | [u/Same_Candle_6273](https://www.reddit.com/r/Ealing/comments/1vhe1k8/comment/p28vd5g/) |
+| [Empathy map](netnography/empathy-map.md) | [u/sd_1874](https://www.reddit.com/r/london/comments/1ukfwni/comment/ouvf2m5/) |
+| [Empathy map](netnography/empathy-map.md) | [LividArse](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977221) |
+| [Empathy map](netnography/empathy-map.md) | [u/Username8831](https://www.reddit.com/r/Ealing/comments/1v6423y/comment/oznttbd/) |
+| [Empathy map](netnography/empathy-map.md) | [u/Inge_Jones](https://www.reddit.com/r/Ealing/comments/1x3g7ci/comment/pfbvje4/) |
+| [Empathy map](netnography/empathy-map.md) | [u/xmastreee](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb31nms/) |
+| [Empathy map](netnography/empathy-map.md) | [FerrisWheelsandLilacs](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976658) |
+| [Empathy map](netnography/empathy-map.md) | [Dbank](https://www.mumsnet.com/talk/_chat/5509007-do-you-still-enjoy-shopping-on-the-high-street-or-mostly-online?reply=151334565) |
+| [Empathy map](netnography/empathy-map.md) | [BeansAndNoodles](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves) |
+| [Empathy map](netnography/empathy-map.md) | [u/are_wethere_yet](https://www.reddit.com/r/london/comments/1vr9i0n/comment/p4d3g76/) |
+| [Empathy map](netnography/empathy-map.md) | [u/Poo_Poo_La_Foo](https://www.reddit.com/r/HammersmithandFulham/comments/1njaadm/comment/neyb55l/) |
+| [Empathy map](netnography/empathy-map.md) | [u/killmetruck](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq967k5/) |
+| [Empathy map](netnography/empathy-map.md) | [u/grand_web](https://www.reddit.com/r/chiswick/comments/1vlibmn/) |
+| [Empathy map](netnography/empathy-map.md) | [u/Mediocre_Sprinkles](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb2z980/) |
+| [Empathy map](netnography/empathy-map.md) | [u/WearyChampionship365](https://www.reddit.com/r/Ealing/comments/1vlc46x/comment/p30rnx7/) |
+| [Empathy map](netnography/empathy-map.md) | [u/mjfh2](https://www.reddit.com/r/london/comments/1niwnlw/comment/nemvjcy/) |
+| [Empathy map](netnography/empathy-map.md) | [Agix](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976563) |
+| [Empathy map](netnography/empathy-map.md) | [u/rsweb](https://www.reddit.com/r/AskUK/comments/1my0t02/comment/na8v8ju/) |
 | [Empathy map](netnography/empathy-map.md) | [Ansjovis](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977291) |
+| [Empathy map](netnography/empathy-map.md) | [u/akat224](https://www.reddit.com/r/london/comments/1ueg96t/) |
+| [Empathy map](netnography/empathy-map.md) | [u/Vermathorax](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq989gy/) |
+| [Empathy map](netnography/empathy-map.md) | [u/rising_then_falling](https://www.reddit.com/r/london/comments/1niwnlw/comment/nema5k6/) |
+| [Empathy map](netnography/empathy-map.md) | [u/Peppy_Tomato](https://www.reddit.com/r/AskUK/comments/1rn7npv/comment/o94plrm/) |
 | [Method in detail](netnography/method-details.md) | [Kozinets 2020, *Netnography: The Essential Guide*, 3rd ed., publisher preview](https://api.pageplace.de/preview/DT0400.9781526482365_A37042502/preview-9781526482365_A37042502.pdf) |
 | [Method in detail](netnography/method-details.md) | [Fenton and Parry](https://eprints.bournemouth.ac.uk/37932/) |
 | [Method in detail](netnography/method-details.md) | [Kozinets and Gretzel (2024)](https://doi.org/10.1016/j.annals.2023.103693) |
@@ -207,46 +235,19 @@ Status **verified** means the text, author and date were matched against the liv
 | [Method in detail](netnography/method-details.md) | [revised it](https://medium.com/the-xplane-collection/46df22df3c8a) |
 | [Method in detail](personas/method-details.md) | [u/jamesshovlin](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tb0s2/) |
 | [Method in detail](personas/method-details.md) | [Valentando](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977465) |
-| [Method in detail](personas/method-details.md) | [u/Miraclefish](https://www.reddit.com/r/london/comments/1ueg96t/comment/otjhcgo/) |
-| [Method in detail](personas/method-details.md) | [u/killmetruck](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq967k5/) |
-| [Method in detail](personas/method-details.md) | [u/Inge_Jones](https://www.reddit.com/r/Ealing/comments/1x3g7ci/comment/pfbvje4/) |
-| [Method in detail](personas/method-details.md) | [u/mjfh2](https://www.reddit.com/r/london/comments/1niwnlw/comment/nemvjcy/) |
-| [Method in detail](personas/method-details.md) | [u/Accomplished-Pen2660](https://www.reddit.com/r/Ealing/comments/1ug10pv/comment/oty3pvk/) |
-| [Method in detail](personas/method-details.md) | [u/Vermathorax](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq989gy/) |
-| [Method in detail](personas/method-details.md) | [u/rising_then_falling](https://www.reddit.com/r/london/comments/1niwnlw/comment/nema5k6/) |
-| [Method in detail](personas/method-details.md) | [u/Peppy_Tomato](https://www.reddit.com/r/AskUK/comments/1rn7npv/comment/o94plrm/) |
-| [Method in detail](personas/method-details.md) | [u/Aggravating-Desk4004](https://www.reddit.com/r/Ealing/comments/1xjkdgb/) |
 | [Method in detail](personas/method-details.md) | [@hollygardnerx](https://www.tiktok.com/@hollygardnerx/video/7578215485968354582) |
 | [Method in detail](personas/method-details.md) | [@tafsonthemove](https://www.tiktok.com/@tafsonthemove/video/7503202705293266198) |
-| [Method in detail](personas/method-details.md) | [u/Username8831](https://www.reddit.com/r/Ealing/comments/1v6423y/comment/oznttbd/) |
-| [Method in detail](personas/method-details.md) | [u/moanyjoany](https://www.reddit.com/r/Ealing/comments/1vlcuor/comment/p30r2af/) |
-| [Method in detail](personas/method-details.md) | [u/Mediocre_Sprinkles](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb2z980/) |
-| [Method in detail](personas/method-details.md) | [u/xmastreee](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb31nms/) |
-| [Method in detail](personas/method-details.md) | [u/akat224](https://www.reddit.com/r/london/comments/1ueg96t/) |
-| [Method in detail](personas/method-details.md) | [Dbank](https://www.mumsnet.com/talk/_chat/5509007-do-you-still-enjoy-shopping-on-the-high-street-or-mostly-online?reply=151334565) |
-| [Method in detail](personas/method-details.md) | [u/dy14n19](https://www.reddit.com/r/HammersmithandFulham/comments/1myug4c/) |
 | [Method in detail](personas/method-details.md) | [@Jojo_agboola](https://x.com/Jojo_agboola/status/2112618905525276980) |
-| [Method in detail](personas/method-details.md) | [u/grand_web](https://www.reddit.com/r/chiswick/comments/1vlibmn/) |
 | [Method in detail](personas/method-details.md) | [u/claudiav2603](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2y26dy/) |
-| [Method in detail](personas/method-details.md) | [LividArse](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977221) |
-| [Method in detail](personas/method-details.md) | [FerrisWheelsandLilacs](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976658) |
-| [Method in detail](personas/method-details.md) | [u/rsweb](https://www.reddit.com/r/AskUK/comments/1my0t02/comment/na8v8ju/) |
-| [Method in detail](personas/method-details.md) | [u/WearyChampionship365](https://www.reddit.com/r/Ealing/comments/1vlc46x/comment/p30rnx7/) |
 | [Method in detail](personas/method-details.md) | [@London_W4](https://x.com/London_W4/status/2102723893463044506) |
 | [Method in detail](personas/method-details.md) | [Kenjenny](https://www.mumsnet.com/talk/_chat/5509007-do-you-still-enjoy-shopping-on-the-high-street-or-mostly-online?reply=151334270) |
-| [Method in detail](personas/method-details.md) | [Agix](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976563) |
-| [Method in detail](personas/method-details.md) | [u/Outside-Assignment85](https://www.reddit.com/r/london/comments/1vr9i0n/comment/p4brlc4/) |
 | [Method in detail](personas/method-details.md) | [u/No_Witness9533](https://www.reddit.com/r/london/comments/1vr9i0n/comment/p4bxk0e/) |
-| [Method in detail](personas/method-details.md) | [u/JollyExPat](https://www.reddit.com/r/london/comments/1tatyc0/comment/olc54ib/) |
-| [Method in detail](personas/method-details.md) | [u/abitofasitdown](https://www.reddit.com/r/london/comments/1niwnlw/) |
 | [Method in detail](personas/method-details.md) | [u/squeakyeggs](https://www.reddit.com/r/Ealing/comments/1vhe1k8/comment/p7t14xd/) |
-| [Method in detail](personas/method-details.md) | [u/sd_1874](https://www.reddit.com/r/london/comments/1ukfwni/comment/ouvf2m5/) |
 | [Method in detail](personas/method-details.md) | [u/Rhubarbatross](https://www.reddit.com/r/london/comments/1pvd92z/comment/nvw7a0u/) |
 | [Method in detail](personas/method-details.md) | [u/anonypanda](https://www.reddit.com/r/london/comments/1uke914/comment/ouyun00/) |
 | [Method in detail](personas/method-details.md) | [@OpenChiswickW4](https://x.com/OpenChiswickW4/status/2069295025561760040) |
 | [Method in detail](personas/method-details.md) | [@loveandlondon](https://www.tiktok.com/@loveandlondon/video/7509933373075492118) |
 | [Method in detail](personas/method-details.md) | [@stillshipping](https://www.tiktok.com/@stillshipping/video/7693511674925518102) |
 | [Method in detail](personas/method-details.md) | [@hackneyfleamarket](https://www.tiktok.com/@hackneyfleamarket/video/7689755751471959318) |
-| [Method in detail](personas/method-details.md) | [u/Greg-Normal](https://www.reddit.com/r/london/comments/1niwnlw/comment/neo7ha3/) |
 | [Method](personas/method.md) | [*The Design Thinking Playbook*](https://www.wiley.com/en-us/The+Design+Thinking+Playbook%3A+Mindful+Digital+Transformation+of+Teams%2C+Products%2C+Services%2C+Businesses+and+Ecosystems-p-9781119467472) |
 | [Method](personas/method.md) | [*The Design Thinking Toolbox*](https://www.wiley.com/en-us/The+Design+Thinking+Toolbox%3A+A+Guide+to+Mastering+the+Most+Popular+and+Valuable+Innovation+Methods-p-9781119629214) |

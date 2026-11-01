@@ -29,4 +29,4 @@ Then open http://localhost:4173. No dependencies beyond Python 3.
 
 ## How it was made
 
-The work is done with AI agents, Claude Code as the main one and Codex for reviews and parallel tasks. Both read [`AGENTS.md`](AGENTS.md). How AI was used, including where it went wrong, is documented as part of the process.
+I do the work with AI agents: a main agent that runs subagents, and a second agent for reviews and parallel tasks. Every agent reads [`AGENTS.md`](AGENTS.md). How AI was used, including where it went wrong, is documented as part of the process.
