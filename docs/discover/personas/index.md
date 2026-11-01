@@ -5,7 +5,7 @@ Three proto-personas, found by plotting 21 tagged posts on two dimensions, need 
 ```summary
 Takeaways:
 - Sam (11 posts): needs a specific thing, often by a deadline, and can't find out who has it. This is the findability side.
-- Dan (6 posts): mostly routine shopping that breaks on getting it: hours, cash, delivery time. He gives up on local. This is the transaction side.
+- Jess (6 posts): mostly routine shopping that breaks on getting it: hours, cash, delivery time. She gives up on local. This is the transaction side.
 - Ruth (4 posts): keeps shopping locally while her shops disappear. The thinnest of the three.
 Call:
 - Cluster the posts on two dimensions that speak to the brief, and define the personas from the clusters.
@@ -30,7 +30,7 @@ Both are scored from tags that two agents applied separately and mostly agreed o
 
 <!-- generated:chart -->
 ```cluster-map
-{"x": {"label": "Need urgency", "ticks": [[1, "Discovery"], [4, "Routine"], [7, "Specific item"], [10, "Specific + deadline"]], "min": "Browsing", "max": "Needs it now"}, "y": {"label": "Point of failure", "ticks": [[9, "Couldn't find out"], [6, "Wasn't there"], [4, "Not worth it"], [1, "Couldn't get it"]], "min": "Getting · transaction", "max": "Knowing · findability"}, "names": {"mission": "Sam, the mission shopper", "lapsed": "Dan, the lapsed local", "regular": "Ruth, the regular"}, "centres": {"mission": {"x": 9.2, "y": 7.9, "n": 11}, "lapsed": {"x": 5.5, "y": 1.5, "n": 6}, "regular": {"x": 3.2, "y": 6.8, "n": 4}}, "points": [{"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/jamesshovlin"}, {"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/akat224"}, {"x": 10, "y": 6, "c": "mission", "s": "persists", "h": "u/moanyjoany"}, {"x": 7, "y": 9, "c": "mission", "s": "defects", "h": "Dbank"}, {"x": 7, "y": 9, "c": "mission", "s": "unknown", "h": "u/dy14n19"}, {"x": 4, "y": 9, "c": "regular", "s": "persists", "h": "Valentando"}, {"x": 10, "y": 6, "c": "mission", "s": "defects", "h": "u/Mediocre_Sprinkles"}, {"x": 4, "y": 1, "c": "lapsed", "s": "defects", "h": "LividArse"}, {"x": 10, "y": 1, "c": "lapsed", "s": "unknown", "h": "u/WearyChampionship365"}, {"x": 10, "y": 6, "c": "mission", "s": "unknown", "h": "u/Miraclefish"}, {"x": 4, "y": 1, "c": "lapsed", "s": "unknown", "h": "FerrisWheelsandLilacs"}, {"x": 10, "y": 6, "c": "mission", "s": "unknown", "h": "u/xmastreee"}, {"x": 4, "y": 1, "c": "lapsed", "s": "defects", "h": "u/killmetruck"}, {"x": 4, "y": 6, "c": "regular", "s": "persists", "h": "u/mjfh2"}, {"x": 4, "y": 6, "c": "regular", "s": "unknown", "h": "u/Aggravating-Desk4004"}, {"x": 4, "y": 1, "c": "lapsed", "s": "unknown", "h": "u/rsweb"}, {"x": 1, "y": 6, "c": "regular", "s": "unknown", "h": "@London_W4"}, {"x": 7, "y": 9, "c": "mission", "s": "unknown", "h": "@Jojo_agboola"}, {"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/grand_web"}, {"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/claudiav2603"}, {"x": 7, "y": 4, "c": "lapsed", "s": "defects", "h": "u/Username8831"}], "worked": ["u/jamesshovlin", "u/Inge_Jones", "u/Vermathorax", "u/rising_then_falling", "u/Peppy_Tomato", "Kenjenny"]}
+{"x": {"label": "Need urgency", "ticks": [[1, "Discovery"], [4, "Routine"], [7, "Specific item"], [10, "Specific + deadline"]], "min": "Browsing", "max": "Needs it now"}, "y": {"label": "Point of failure", "ticks": [[9, "Couldn't find out"], [6, "Wasn't there"], [4, "Not worth it"], [1, "Couldn't get it"]], "min": "Getting · transaction", "max": "Knowing · findability"}, "names": {"mission": "Sam, the mission shopper", "lapsed": "Jess, the lapsed local", "regular": "Ruth, the regular"}, "centres": {"mission": {"x": 9.2, "y": 7.9, "n": 11}, "lapsed": {"x": 5.5, "y": 1.5, "n": 6}, "regular": {"x": 3.2, "y": 6.8, "n": 4}}, "points": [{"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/jamesshovlin"}, {"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/akat224"}, {"x": 10, "y": 6, "c": "mission", "s": "persists", "h": "u/moanyjoany"}, {"x": 7, "y": 9, "c": "mission", "s": "defects", "h": "Dbank"}, {"x": 7, "y": 9, "c": "mission", "s": "unknown", "h": "u/dy14n19"}, {"x": 4, "y": 9, "c": "regular", "s": "persists", "h": "Valentando"}, {"x": 10, "y": 6, "c": "mission", "s": "defects", "h": "u/Mediocre_Sprinkles"}, {"x": 4, "y": 1, "c": "lapsed", "s": "defects", "h": "LividArse"}, {"x": 10, "y": 1, "c": "lapsed", "s": "unknown", "h": "u/WearyChampionship365"}, {"x": 10, "y": 6, "c": "mission", "s": "unknown", "h": "u/Miraclefish"}, {"x": 4, "y": 1, "c": "lapsed", "s": "unknown", "h": "FerrisWheelsandLilacs"}, {"x": 10, "y": 6, "c": "mission", "s": "unknown", "h": "u/xmastreee"}, {"x": 4, "y": 1, "c": "lapsed", "s": "defects", "h": "u/killmetruck"}, {"x": 4, "y": 6, "c": "regular", "s": "persists", "h": "u/mjfh2"}, {"x": 4, "y": 6, "c": "regular", "s": "unknown", "h": "u/Aggravating-Desk4004"}, {"x": 4, "y": 1, "c": "lapsed", "s": "unknown", "h": "u/rsweb"}, {"x": 1, "y": 6, "c": "regular", "s": "unknown", "h": "@London_W4"}, {"x": 7, "y": 9, "c": "mission", "s": "unknown", "h": "@Jojo_agboola"}, {"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/grand_web"}, {"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/claudiav2603"}, {"x": 7, "y": 4, "c": "lapsed", "s": "defects", "h": "u/Username8831"}], "worked": ["u/jamesshovlin", "u/Inge_Jones", "u/Vermathorax", "u/rising_then_falling", "u/Peppy_Tomato", "Kenjenny"]}
 ```
 <!-- /generated:chart -->
 
@@ -38,14 +38,14 @@ Both are scored from tags that two agents applied separately and mostly agreed o
 | Group | Posts | People | Centre (urgency, failure) | Sources | Where it broke | What they did next |
 | --- | --- | --- | --- | --- | --- | --- |
 | Sam, the mission shopper | 11 | 11 | 9.2, 7.9 | West London 4, London 3, UK-wide 3, X/TikTok 1 | information 7, availability 4 | unknown 8, defects 2, persists 1 |
-| Dan, the lapsed local | 6 | 6 | 5.5, 1.5 | UK-wide 3, West London 2, London 1 | access 5, value 1 | defects 3, unknown 3 |
+| Jess, the lapsed local | 6 | 6 | 5.5, 1.5 | UK-wide 3, West London 2, London 1 | access 5, value 1 | defects 3, unknown 3 |
 | Ruth, the regular | 4 | 4 | 3.2, 6.8 | UK-wide 1, London 1, West London 1, X/TikTok 1 | availability 3, information 1 | persists 2, unknown 2 |
 | Nothing broke (not clustered) | 6 | 6 | – | London 3, UK-wide 2, West London 1 | none 6 | unknown 4, persists 1, defects 1 |
 <!-- /generated:groups -->
 
 How the scores and clusters were calculated: [method](method.md).
 
-**About the names and photos.** Each persona is one cluster. The names are labels: common British first names, short and easy to tell apart. The photos are stand-ins from Unsplash. The posts rarely say anyone's age or gender, so the names, pronouns and photos carry no evidence: treat them as labels. The attributes listed come from the posts in that cluster.
+**About the names and photos.** Each persona is one cluster. The names are labels: common British first names, short and easy to tell apart. The photos are stand-ins from Unsplash. The posts rarely say anyone's age or gender, so the names, pronouns and photos carry no evidence: treat them as labels. The attributes listed come from the posts in that cluster. I chose the genders to balance the set: two women and one man.
 
 ## Sam, the mission shopper
 
@@ -83,14 +83,14 @@ status: verified
 | **Influencers** | Reddit threads, WhatsApp restock groups, AI chatbots. |
 | **For the brief** | Findability. The question is "who has it, right now?" |
 
-## Dan, the lapsed local
+## Jess, the lapsed local
 
 ```persona
-name: Dan, the lapsed local
-tagline: Would use local shops if they fitted his week. They don't, so he's stopped.
-image: img/dan.jpg
-credit: Photo: Rasheed Kemy, Unsplash
-credit_url: https://unsplash.com/photos/man-inside-bus-using-earphones-Z4V6OVZR5W4
+name: Jess, the lapsed local
+tagline: Would use local shops if they fitted her week. They don't, so she's stopped.
+image: img/jess.jpg
+credit: Photo: Louis Zhang, Unsplash
+credit_url: https://unsplash.com/photos/a-woman-sitting-in-a-train-looking-out-the-window-8czqNBTRcXI
 - Where: London and elsewhere in the UK
 - Week: Weekday hours that match the shops' hours
 - Pays: Card or phone, no cash
@@ -99,7 +99,7 @@ credit_url: https://unsplash.com/photos/man-inside-bus-using-earphones-Z4V6OVZR5
 ```
 
 
-**Mostly routine shopping · couldn't get it.** Six posts. Hours that clash with work, cash only, a delivery that can't arrive in time, a price not worth it. Half of them show him giving up on local.
+**Mostly routine shopping · couldn't get it.** Six posts. Hours that clash with work, cash only, a delivery that can't arrive in time, a price not worth it. Half of them show her giving up on local.
 
 ```quote
 text: So I end up in McDonald's, cos it's always open, and shop on Amazon, because it's always there.
@@ -115,8 +115,8 @@ status: verified
 | | |
 | --- | --- |
 | **Jobs to be done** | Get routine shopping done with the least effort. |
-| **Use cases** | Independents shut when he finishes work. The butcher for anniversaries, the supermarket for the week. Cash-only stalls. |
-| **Pains** | Opening hours that match his working hours. A local premium with no extra convenience. |
+| **Use cases** | Independents shut when she finishes work. The butcher for anniversaries, the supermarket for the week. Cash-only stalls. |
+| **Pains** | Opening hours that match her working hours. A local premium with no extra convenience. |
 | **Gains** | Always open, no surprises. |
 | **Influencers** | Habit: Amazon, the supermarket. |
 | **For the brief** | Transaction. Collection out of hours, card payment, or delivery from the local shop. |

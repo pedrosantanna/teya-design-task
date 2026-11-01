@@ -1,15 +1,15 @@
 # Benchmarks
 
-I compared seventeen products that a London shopper can use today, or that failed recently in a way that teaches something, and sorted them by how they relate to the three [proto-personas](personas/index.md). Eleven touch what Sam, Dan or Ruth actually struggle with, or are what they already fall back on. Six are useful for the brief in general and stay as short notes. Across all of them, the complaint users repeat most is that the app said something was available and the shop didn't have it.
+I compared seventeen products that a London shopper can use today, or that failed recently in a way that teaches something, and sorted them by how they relate to the three [proto-personas](personas/index.md). Eleven touch what Sam, Jess or Ruth actually struggle with, or are what they already fall back on. Six are useful for the brief in general and stay as short notes. Across all of them, the complaint users repeat most is that the app said something was available and the shop didn't have it.
 
 ```summary
 Takeaways:
 - Sam: no product tells him which nearby independent has an item right now. He asks people on Reddit and WhatsApp, and falls back on Amazon.
-- Dan: delivery apps and Co-op's Peckish already solve getting things from local shops, at 14–35% commission and one shop per order. His default is still Amazon.
+- Jess: delivery apps and Co-op's Peckish already solve getting things from local shops, at 14–35% commission and one shop per order. Her default is still Amazon.
 - Ruth: nothing is built for her. Directories of what's still open on a street haven't lasted.
 - The most repeated complaint, whatever the model, is being told something was available when it wasn't.
 Call:
-- I re-sorted the benchmarks around Sam, Dan and Ruth. Define will choose a problem for a shopper, and a list grouped by product category didn't show whose problem each product touches.
+- I re-sorted the benchmarks around Sam, Jess and Ruth. Define will choose a problem for a shopper, and a list grouped by product category didn't show whose problem each product touches.
 - Products that don't touch the personas' problems stay on the page as short notes, because they still answer questions in the brief (surplus, multi-shop checkout, quick commerce, merchant storefronts).
 - A ✓ needs a post from the findings or persona pages. Without one, the mark is ○.
 AI:
@@ -24,11 +24,11 @@ Trade-offs:
 
 ✓ the persona uses it today, with a post as evidence. ○ it addresses the persona's problem, but no post shows them using it. – not related to their problem.
 
-| Product | Sam (knowing) | Dan (getting) | Ruth (wasn't there) | Evidence for ✓ |
+| Product | Sam (knowing) | Jess (getting) | Ruth (wasn't there) | Evidence for ✓ |
 | --- | --- | --- | --- | --- |
 | Google local listings + NearSt | ✓ | – | ○ | Sam: u/dy14n19 checks Google for a patisserie's hours and doesn't trust it |
 | Instagram / WhatsApp / Facebook | ○ | – | ○ | |
-| Amazon | ✓ | ✓ | – | Sam: Dbank, u/Mediocre_Sprinkles buy on Amazon after a failed trip. Dan: LividArse "shop on Amazon"; u/WearyChampionship365 checks it before a deadline |
+| Amazon | ✓ | ✓ | – | Sam: Dbank, u/Mediocre_Sprinkles buy on Amazon after a failed trip. Jess: LividArse "shop on Amazon"; u/WearyChampionship365 checks it before a deadline |
 | Nextdoor | – | – | ○ | |
 | ShopAppy and BID apps | – | ○ | ○ | |
 | Deliveroo | – | ○ | ○ | |
@@ -44,7 +44,7 @@ Trade-offs:
 | Zapp / Zoom by Ocado | – | – | – | |
 | Square Online / SumUp / Teya | – | ○ | – | |
 
-**What the personas use that isn't a product here.** Sam asks on Reddit (u/akat224, u/grand_web, u/claudiav2603), phones ahead (u/jamesshovlin), checks a chain's website before collecting (Dbank) and, once, asks X's AI chatbot which shop has an item (@Jojo_agboola). Dan uses the supermarket for the week (u/killmetruck). Ruth buys something at the newsagent that keeps a post office counter (u/Aggravating-Desk4004). The evidence is in [findings](netnography/findings.md) and on the [persona page](personas/index.md).
+**What the personas use that isn't a product here.** Sam asks on Reddit (u/akat224, u/grand_web, u/claudiav2603), phones ahead (u/jamesshovlin), checks a chain's website before collecting (Dbank) and, once, asks X's AI chatbot which shop has an item (@Jojo_agboola). Jess uses the supermarket for the week (u/killmetruck). Ruth buys something at the newsagent that keeps a post office counter (u/Aggravating-Desk4004). The evidence is in [findings](netnography/findings.md) and on the [persona page](personas/index.md).
 
 ## How I chose and listened
 
@@ -144,7 +144,7 @@ status: verified
 
 ### Amazon
 
-**Sam ✓ (knowing) · Dan ✓ (getting).** Amazon is where both fall back. Sam: Dbank found none of the seven a shop's website listed and bought on Amazon; u/Mediocre_Sprinkles walked every shop and went home to order. Dan: LividArse shops on Amazon "because it's always there". It has limits for them too: before the eclipse u/WearyChampionship365 found nobody could deliver in time.
+**Sam ✓ (knowing) · Jess ✓ (getting).** Amazon is where both fall back. Sam: Dbank found none of the seven a shop's website listed and bought on Amazon; u/Mediocre_Sprinkles walked every shop and went home to order. Jess: LividArse shops on Amazon "because it's always there". It has limits for them too: before the eclipse u/WearyChampionship365 found nobody could deliver in time.
 
 Amazon is what a high-street app is measured against: one basket, one payment, a delivery promise and easy returns. Since June 2026 it adds fresh groceries to same-day delivery in parts of central and east London ([About Amazon](https://www.aboutamazon.co.uk/news/retail/amazon-customers-can-now-add-fresh-groceries-to-same-day-delivery-orders-in-parts-of-london)). Its users praise price and returns and complain about search when they don't know exactly what they want. Some say slipping delivery promises are sending them back to the high street.
 
@@ -200,13 +200,13 @@ status: verified
 
 ### ShopAppy and BID apps
 
-**Dan ○ (getting) · Ruth ○ (wasn't there).** ShopAppy offered what Dan lacks, click & collect and pay on pickup from independents, and a list of which shops a town still has, which is Ruth's question. Neither can use it: it closed in 2023.
+**Jess ○ (getting) · Ruth ○ (wasn't there).** ShopAppy offered what Jess lacks, click & collect and pay on pickup from independents, and a list of which shops a town still has, which is Ruth's question. Neither can use it: it closed in 2023.
 
 ShopAppy was a "virtual high street" founded around 2016: each town got a directory of independent shops with click & collect, couriers, pay on pickup and collection points, often paid for by councils (Kingston and Enfield in London among them). It reached more than 120 towns, ceased trading in October 2023, and the company was dissolved in February 2025 ([Companies House](https://find-and-update.company-information.service.gov.uk/company/10285855)). The account now on its old domain says the cost of running a platform for thousands of micro-merchants outran its revenue, and that most small shops couldn't keep up real-time stock, online payments and shipping ([ShopAppy story](https://shopappy.com/the-shopappy-story)). Today's BID apps are loyalty and discount schemes, such as Love Leam in Leamington ([BID Leamington](https://bidleamington.com/love-leam-app-launches/)), and I found no London BID app that searches stock or takes orders. There are no reviews in the window.
 
 ### Deliveroo
 
-**Dan ○ (getting) · Ruth ○ (wasn't there).** Deliveroo gets a local shop's goods to Dan outside his working hours, paid by card. No post in his cluster mentions it. The one post that does, u/Inge_Jones ordering from a local restaurant "to keep them afloat", sits outside the map, closest to Ruth.
+**Jess ○ (getting) · Ruth ○ (wasn't there).** Deliveroo gets a local shop's goods to Jess outside her working hours, paid by card. No post in her cluster mentions it. The one post that does, u/Inge_Jones ordering from a local restaurant "to keep them afloat", sits outside the map, closest to Ruth.
 
 Deliveroo has gone well beyond restaurants: groceries, Hop dark stores and, since 2023, non-food "Shopping" from partners such as Boots and B&Q, plus what it calls thousands of independent retailers. DoorDash completed its £2.9bn purchase in October 2025 ([Business Wire](https://secure.businesswire.com/news/home/20251002060133/en/DoorDash-Completes-Acquisition-of-Deliveroo)). Shoppers browse by store and category, and paid placement shapes ranking. Each order is one store, delivered by Deliveroo riders, with commission reported at 20–35% plus shopper fees ([DineOpen](https://www.dineopen.com/blog/deliveroo-vs-just-eat-vs-uber-eats-commission-2026)). Stock comes from menus the shop maintains, so items often turn out to be unavailable only after payment.
 
@@ -234,7 +234,7 @@ status: verified
 
 ### Uber Eats
 
-**Dan ○ (getting).** Same role as Deliveroo for Dan: delivery from nearby shops, card only, outside shop hours. No post shows him using it. Its reviewers hit Dan's two complaints from the other side: wrong hours and slow delivery.
+**Jess ○ (getting).** Same role as Deliveroo for Jess: delivery from nearby shops, card only, outside shop hours. No post shows her using it. Its reviewers hit Jess's two complaints from the other side: wrong hours and slow delivery.
 
 Uber Eats carries a lot of UK grocery and convenience stock, including Co-op in more than 1,300 stores ([Grocery Gazette](https://www.grocerygazette.co.uk/2025/03/19/co-op-uber-eats-partnership/)). Its "bundle a second store" feature, two nearby shops for one delivery fee, launched in the US in 2023 and I could not confirm it in the UK ([Uber](https://www.uber.com/us/en/newsroom/multi-store-ordering/)). Uber Direct rents its couriers to shops that keep their own storefront. Reviews complain about mark-ups against shelf prices, opening hours that don't match reality and slow grocery deliveries.
 
@@ -262,7 +262,7 @@ status: verified
 
 ### Just Eat
 
-**Dan ○ (getting).** An option Dan doesn't use, with the lowest headline commission of the big three. Its users already feel the guilt Dan's cluster shows about not buying locally.
+**Jess ○ (getting).** An option Jess doesn't use, with the lowest headline commission of the big three. Its users already feel the guilt Jess's cluster shows about not buying locally.
 
 Just Eat, owned by Prosus since October 2025, has a "Shops" section for convenience and grocery and delivers for Peckish ([RetailDetail](https://www.retaildetail.eu/news/food/acquisition-of-just-eat-takeaway-completed-the-hard-work-is-just-beginning/)). Its reported commission, about 14% when the shop delivers, is the lowest headline rate of the big three. Orders are one store each, and large ones can be split between two drivers, which reviewers find confusing. Its users know the fees hurt local shops, and some ask for more non-food retail.
 
@@ -290,13 +290,13 @@ status: verified
 
 ### Co-op Peckish
 
-**Dan ○ (getting).** Peckish lets an independent convenience shop deliver at its own prices. That answers Dan's routine shopping, not a special trip. No post shows him using it.
+**Jess ○ (getting).** Peckish lets an independent convenience shop deliver at its own prices. That answers Jess's routine shopping, not a special trip. No post shows her using it.
 
 Peckish launched in February 2025 as a delivery app and order system that any independent convenience shop can use, selling at its own prices ([The Grocer](https://www.thegrocer.co.uk/news/co-op-launches-rapid-grocery-delivery-app-for-independents-called-peckish/701536.article)). The shop delivers itself, or Co-op passes the order to Uber Direct or Just Eat, for a commission reported at single digits or about half the aggregators' rate. I found no shared browsing across shops and no UK App Store listing under that name, and there are no consumer reviews in the window. It matters because a large incumbent is betting that independents need cheaper infrastructure more than another marketplace.
 
 ### Gophr and Stuart
 
-**Dan ○ (getting).** The courier leg behind a same-day local delivery. Dan never sees it; a shop or an app would book it for him. It also bears on Sam's deadline, though Sam's failure is knowing, not delivery.
+**Jess ○ (getting).** The courier leg behind a same-day local delivery. Jess never sees it; a shop or an app would book it for her. It also bears on Sam's deadline, though Sam's failure is knowing, not delivery.
 
 Gophr is a London-founded same-day courier network that delivers for Screwfix Sprint and runs B&Q's TradePoint Express service ([London Loves Business](https://londonlovesbusiness.com/bq-to-start-same-day-deliveries/)). Stuart offers couriers through an API with live tracking ([Stuart](https://stuart.com/courier-service-london/)). The shop books and pays per job, and the shopper never sees the courier company's app. Hardware chains already sell 30-to-90-minute delivery through them to Londoners without a car.
 
@@ -324,7 +324,7 @@ status: verified
 
 ### Square Online, SumUp and Teya
 
-**Dan ○ (getting).** Card readers answer one of Dan's frictions directly: cash-only stalls when he carries no cash (u/rsweb). No post shows him choosing a shop because it takes cards.
+**Jess ○ (getting).** Card readers answer one of Jess's frictions directly: cash-only stalls when she carries no cash (u/rsweb). No post shows her choosing a shop because it takes cards.
 
 The card-payment companies small shops already use, each with a way to sell from the shop's own site ([Square](https://squareup.com/gb/en/online-store)). Teya, the company that set this brief, publicly lists card terminals, a business account, payment links and Shopify and WooCommerce plugins ([Teya Pay by Link](https://www.teya.com/online-payments/pay-by-link)). Each store is an island, with no browsing across shops; a shop's sales and, in some cases, its stock data already pass through them.
 
@@ -341,7 +341,7 @@ status: verified
 
 ## Related, but not about the personas' problems
 
-Useful for the brief in general. None of them answers what Sam, Dan or Ruth need now.
+Useful for the brief in general. None of them answers what Sam, Jess or Ruth need now.
 
 ### Too Good To Go
 
@@ -442,9 +442,9 @@ status: verified
 1. **No product answers "who has it, right now" for an independent.** Google with NearSt is the only item-level local search, and it needs clean product codes from a till, which most bakers, florists and butchers don't have. So Sam asks people: Reddit, a WhatsApp restock group, an AI chatbot.
 2. **Wrong availability is the most common complaint, whatever the model.** Deliveroo shoppers pay and then hear items are out of stock (Anthony Tindall), Too Good To Go shoppers reach the till and there's no surplus (Montymoo2), and Hive takes orders for books it doesn't have (customer). Opening hours fail the same way on Google (zingally) and Uber Eats (Udohulk). For Sam, a product that claims stock and is wrong costs him the trip and the deadline (Dbank).
 
-**Dan, getting.**
+**Jess, getting.**
 
-3. **Getting from local shops already exists, one shop at a time and at a price.** Deliveroo, Uber Eats, Just Eat and Peckish deliver out of hours and take cards, at 14–35% commission plus fees. Dan still goes to Amazon. No post in his cluster mentions a delivery app.
+3. **Getting from local shops already exists, one shop at a time and at a price.** Deliveroo, Uber Eats, Just Eat and Peckish deliver out of hours and take cards, at 14–35% commission plus fees. Jess still goes to Amazon. No post in her cluster mentions a delivery app.
 4. **Amazon's promise is the bar, and it is slipping.** Some Amazon users say same-day delivery doesn't arrive and they would rather go to the high street (gidfles). Delivery from a nearby shop has to beat walking there (Jim Rickety). Gophr shows the courier leg already works in an hour for car-free Londoners (Barry Griffiths).
 
 **Ruth, wasn't there.**
@@ -462,6 +462,6 @@ status: verified
 *Interpretation. These follow from the patterns above; none is a product I found.*
 
 - **For Sam: availability as a promise the shop confirms.** He already asks people who has it. The same question could go to nearby shops, and the shop that has it accepts and holds it, so he sees "it's bagged" before leaving. That answers the most common complaint without asking shops for a catalogue.
-- **For Dan: getting it from the street on his hours.** Collection after the shop shuts, card payment, or one courier run across several shops on the same street, each shop still the seller. The checkout pieces exist (Shop app, Etsy) and the courier pieces exist (Gophr, Uber Direct); nobody has joined them for a high street, priced against Amazon same-day.
+- **For Jess: getting it from the street on her hours.** Collection after the shop shuts, card payment, or one courier run across several shops on the same street, each shop still the seller. The checkout pieces exist (Shop app, Etsy) and the courier pieces exist (Gophr, Uber Direct); nobody has joined them for a high street, priced against Amazon same-day.
 - **For Ruth: what's still here and open, kept current without work from the owner.** Till and card-payment records already pass through providers like Square, SumUp and Teya, and could feed opening hours and "trading today" without new admin.
 - **Not tied to a persona: "what's new on your street today" for shops without product codes.** Today's bake, this week's flowers. Amazon users say search fails when they don't know what they want (KJCM98...3), and surprise works for Too Good To Go. This sits at the browsing end, where none of the three clusters is.

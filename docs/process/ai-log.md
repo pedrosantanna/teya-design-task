@@ -47,7 +47,7 @@ I logged in to X and TikTok in Chrome. An agent searched both through my session
 I asked a reviewer agent to read every page in order and fix what didn't hold together. It rewrote unclear "My call" boxes as real decisions, removed leftovers from earlier drafts and stale counts, and fixed contradictions between pages. It also took out personal details and sent me six open questions. I answered them; the main agent applied the answers.
 
 ### 8. Benchmarks re-sorted around the proto-personas
-An agent re-sorted the 17 benchmarks against Sam, Dan and Ruth: 11 directly relevant, 6 related. Every product a persona already uses is backed by a post. Where there was no post, it is marked as an option the persona doesn't use yet.
+An agent re-sorted the 17 benchmarks against Sam, Jess and Ruth: 11 directly relevant, 6 related. Every product a persona already uses is backed by a post. Where there was no post, it is marked as an option the persona doesn't use yet.
 
 ### 9. Design pass
 A design agent researched common "AI slop" patterns in interface design and polished the docs site against them, in the same neutral style.

@@ -13,7 +13,7 @@ Each post with a failure gets two scores:
 Posts where nothing broke are listed beside the chart, not clustered.
 Clusters: k-means on (need, breaks), k from 2 to 5, keeping the k with the
 best mean silhouette. Clusters are named by fixed rules on their centres:
-highest need -> Sam (mission); of the rest, lowest breaks -> Dan; the rest -> Ruth.
+highest need -> Sam (mission); of the rest, lowest breaks -> Jess; the rest -> Ruth.
 
 Writes the generated blocks between <!-- generated:NAME --> markers.
 """
@@ -37,7 +37,7 @@ FAILURES = [
 ]
 GROUPS = {
     "mission": "Sam, the mission shopper",
-    "lapsed": "Dan, the lapsed local",
+    "lapsed": "Jess, the lapsed local",
     "regular": "Ruth, the regular",
     "worked": "Nothing broke (not clustered)",
 }
@@ -46,7 +46,7 @@ FIELDS = ("include", "job", "urgent", "failure", "stance")
 
 NEED = {"discovery": 1, "routine": 4, "specific": 7}
 BREAKS = {"information": 9, "availability": 6, "value": 4, "access": 1}
-NAMES = {"mission": "Sam, the mission shopper", "lapsed": "Dan, the lapsed local", "regular": "Ruth, the regular"}
+NAMES = {"mission": "Sam, the mission shopper", "lapsed": "Jess, the lapsed local", "regular": "Ruth, the regular"}
 
 
 def dist(a, b):

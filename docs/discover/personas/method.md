@@ -40,7 +40,7 @@ Trade-offs:
 | 5 | 0.48 |
 <!-- /generated:silhouette -->
 
-5. **Name.** The cluster with the highest need urgency is Sam. Of the rest, the one closest to "couldn't get it" is Dan, and the other is Ruth. Each one is then described with the persona fields: jobs to be done, use cases, pains, gains and influencers.
+5. **Name.** The cluster with the highest need urgency is Sam. Of the rest, the one closest to "couldn't get it" is Jess, and the other is Ruth. Each one is then described with the persona fields: jobs to be done, use cases, pains, gains and influencers.
 
 ## The persona tool
 
