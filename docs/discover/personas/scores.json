@@ -1,0 +1,94 @@
+{
+  "_about": "Rubric indicators coded per netnography quote. Edit here, then run scripts/score_personas.py. 'match' is a substring of the quote text used to find it in the docs.",
+  "rubric": {
+    "x": {
+      "label": "Need: browse ↔ mission",
+      "mission": {
+        "M1": [3, "Names a specific item, shop or service they need"],
+        "M2": [3, "States a deadline or time pressure (today, asap, before an event)"],
+        "M3": [2, "Checks or asks about availability before or during the trip"],
+        "M4": [2, "Switches channel to get it in time (delivery, online, another area)"]
+      },
+      "browse": {
+        "B1": [4, "No specific item: exploring, hunting for finds or bargains"],
+        "B2": [3, "Talks about the place, its mix or atmosphere rather than an item"],
+        "B3": [3, "Recurring or flexible timing (weekly, Saturdays, special occasions)"]
+      }
+    },
+    "y": {
+      "label": "Effort for local: pragmatist ↔ committed",
+      "committed": {
+        "C1": [3, "States a reason to support local shops (loyalty, community, keeping them open)"],
+        "C2": [3, "Keeps buying local despite a cost: higher price, odd hours, a wasted trip"],
+        "C3": [2, "Goes out of their way: travels further, calls ahead, tries several shops"],
+        "C4": [2, "Values something only independents give: advice, custom cuts, range"]
+      },
+      "pragmatist": {
+        "P1": [4, "Falls back to online, a chain or a supermarket after friction"],
+        "P2": [3, "Makes convenience, hours or price the condition for using local"],
+        "P3": [3, "Has stopped using the local high street or steers others away"]
+      }
+    }
+  },
+  "personas": {
+    "deadline": "Sam, the deadline shopper",
+    "willing": "Tom, the willing local",
+    "regular": "Ruth, the regular",
+    "lapsed": "Dan, the lapsed browser",
+    "finds": "Priya, the finds hunter"
+  },
+  "quotes": [
+    {"handle": "u/jamesshovlin", "match": "Hard to know stock levels", "codes": ["M1", "M3", "C3"], "persona": "deadline"},
+    {"handle": "u/jamesshovlin", "match": "90 pairs in stock", "codes": ["M1", "M3", "C3"], "persona": "deadline"},
+    {"handle": "u/akat224", "match": "portable AC in stock", "codes": ["M1", "M2", "M3", "M4"], "persona": "deadline"},
+    {"handle": "u/moanyjoany", "match": "both sold out", "codes": ["M1", "M2", "M3", "C3"], "persona": "deadline"},
+    {"handle": "u/WearyChampionship365", "match": "None of them are delivering", "codes": ["M1", "M2", "M4"], "persona": "deadline"},
+    {"handle": "u/Miraclefish", "match": "Most places are out of stock", "codes": ["M1", "M2", "M3"], "persona": "deadline"},
+    {"handle": "@Jojo_agboola", "match": "walk in store currently has this in stock", "codes": ["M1", "M3", "M4"], "persona": "deadline"},
+    {"handle": "u/grand_web", "match": "Left it a bit last minute", "codes": ["M1", "M2", "M3"], "persona": "deadline"},
+    {"handle": "u/claudiav2603", "match": "Anyone knows a store", "codes": ["M1", "M2", "M3"], "persona": "deadline"},
+    {"handle": "u/dy14n19", "match": "Google says it's temporarily closed", "codes": ["M1", "M3"], "persona": "deadline"},
+
+    {"handle": "Dbank", "match": "JL list 7 on the website", "codes": ["M1", "M2", "M3", "M4", "C1", "C3", "P1"], "persona": "willing"},
+    {"handle": "u/Mediocre_Sprinkles", "match": "Walked around every shop", "codes": ["M1", "M3", "M4", "C3", "P1"], "persona": "willing"},
+    {"handle": "u/xmastreee", "match": "I would even have paid the premium", "codes": ["M1", "M3", "C1", "C2", "C3"], "persona": "willing"},
+    {"handle": "FerrisWheelsandLilacs", "match": "I will pay more", "codes": ["M1", "C1", "C2", "P2"], "persona": "willing"},
+    {"handle": "u/mjfh2", "match": "Having to go to Chiswick", "codes": ["M1", "C3", "C4", "P2"], "persona": "willing"},
+    {"handle": "u/Peppy_Tomato", "match": "collection time is in my control", "codes": ["M1", "C3", "P2"], "persona": "willing"},
+
+    {"handle": "Valentando", "match": "advertised \"open hours\"", "codes": ["B3", "C1", "C2"], "persona": "regular"},
+    {"handle": "Valentando", "match": "try to buy something from every week", "codes": ["B3", "C1", "C2"], "persona": "regular"},
+    {"handle": "u/Inge_Jones", "match": "via deliveroo", "codes": ["B3", "C1", "C2"], "persona": "regular"},
+    {"handle": "u/abitofasitdown", "match": "can't support a proper butcher", "codes": ["B2", "C1", "C4"], "persona": "regular"},
+    {"handle": "u/Accomplished-Pen2660", "match": "more practical shops have gone", "codes": ["B2", "C4"], "persona": "regular"},
+    {"handle": "u/Vermathorax", "match": "the quality is better", "codes": ["B3", "C2", "C4"], "persona": "regular"},
+    {"handle": "u/rising_then_falling", "match": "cut any bit of meat", "codes": ["B3", "C4"], "persona": "regular"},
+    {"handle": "u/Aggravating-Desk4004", "match": "I always buy something", "codes": ["B3", "C1", "C2"], "persona": "regular"},
+    {"handle": "@OpenChiswickW4", "match": "send and receive parcels", "codes": ["B3", "C1", "C2"], "persona": "regular"},
+    {"handle": "u/Greg-Normal", "match": "use them or lose them", "codes": ["B3", "C1"], "persona": "regular"},
+
+    {"handle": "Agix", "match": "shut when people with the money", "codes": ["P2", "P3"], "persona": "lapsed"},
+    {"handle": "LividArse", "match": "end up in McDonald's", "codes": ["B3", "P1", "P2"], "persona": "lapsed"},
+    {"handle": "LividArse", "match": "I'd love to support local", "codes": ["C1", "P2"], "persona": "lapsed"},
+    {"handle": "u/killmetruck", "match": "I go to them for anniversaries", "codes": ["B3", "C1", "P1", "P2"], "persona": "lapsed"},
+    {"handle": "u/Outside-Assignment85", "match": "isn't great for window shopping", "codes": ["B2", "P3"], "persona": "lapsed"},
+    {"handle": "@London_W4", "match": "thoroughly depressing experience", "codes": ["B2", "P3"], "persona": "lapsed"},
+    {"handle": "Kenjenny", "match": "can't actually remember the last time", "codes": ["B1", "P1", "P3"], "persona": "lapsed"},
+    {"handle": "u/Username8831", "match": "only used them once", "codes": ["C1", "P2", "P3"], "persona": "lapsed"},
+    {"handle": "u/rsweb", "match": "I don't carry cash", "codes": ["P2"], "persona": "lapsed"},
+
+    {"handle": "u/No_Witness9533", "match": "good if you like thrifting", "codes": ["B1", "B2"], "persona": "finds"},
+    {"handle": "u/JollyExPat", "match": "I second Chiswick", "codes": ["B2", "C3"], "persona": "finds"},
+    {"handle": "@loveandlondon", "match": "SO much better than Oxford Street", "codes": ["B1", "B2", "C3"], "persona": "finds"},
+    {"handle": "@hollygardnerx", "match": "a charity shop that sells only", "codes": ["B1", "C3"], "persona": "finds"},
+    {"handle": "@tafsonthemove", "match": "such a steal", "codes": ["B1"], "persona": "finds"}
+  ],
+  "excluded": [
+    {"handle": "u/squeakyeggs", "why": "Speaks for a shop owner's family, not as a shopper"},
+    {"handle": "u/sd_1874", "why": "Opinion on chains, no shopping behaviour described"},
+    {"handle": "u/Rhubarbatross", "why": "About the bridge and traffic, not shopping"},
+    {"handle": "u/anonypanda", "why": "About the bridge and traffic, not shopping"},
+    {"handle": "@stillshipping", "why": "Market commentary, not a shopper's own behaviour"},
+    {"handle": "@hackneyfleamarket", "why": "Written by the market organiser"}
+  ]
+}

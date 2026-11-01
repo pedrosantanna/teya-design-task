@@ -87,6 +87,14 @@ Reddit blocked every automated route we had: the fetch tool, both browsers and i
 
 Posts belong to the people who wrote them. Quotes are kept to the phrase that carries the point, about 25 words at most, always with a link to the full original. This also follows Kozinets' advice to use the least of a person's words that does the job.
 
+## 012 — Personas placed by scoring, not by feel
+**2026-11-01 · Decided**
+
+Discover gets a personas layer: five personas built with the persona/user profile tool from Lewrick, Link and Leifer. To place them on the two proposed dimensions, every shopper quote from the netnography was coded against a rubric of observable indicators (for example "names a specific item", "falls back to online after friction"). The codes become a 0–10 score on each axis, and each persona sits at the average of its quotes.
+
+**Why:** a persona chart drawn by hand shows what the team already believes. Scoring from the quotes makes the placement checkable, and changing a code in the data file shows how much a persona moves.
+**Open:** the coding was done once, by one coder. The two mission personas, Sam and Tom, sit close together, and the split between them needs testing.
+
 ---
 
 ## Still open

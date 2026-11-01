@@ -21,6 +21,13 @@
             { "id": "dimensions", "title": "Proposed dimensions", "src": "docs/discover/netnography/dimensions.md" }
           ]
         },
+        {
+          "title": "Personas",
+          "children": [
+            { "id": "personas", "title": "The five personas", "src": "docs/discover/personas/index.md" },
+            { "id": "persona-scoring", "title": "Method and scoring", "src": "docs/discover/personas/scoring.md" }
+          ]
+        },
         { "id": "benchmarks", "title": "Benchmarks", "src": "docs/discover/benchmarks.md" },
         { "id": "sources", "title": "Sources", "src": "docs/discover/sources.md" }
       ]

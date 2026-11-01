@@ -10,6 +10,7 @@ Before choosing between findability and transaction, we tried to understand the 
 | Netnography | What do London shoppers say, in their own words, about using their high street? | [Method](netnography/method.md) · [Findings](netnography/findings.md) |
 | Empathy map | What does that shopper see, hear, think, say and do, and what hurts? | [Empathy map](netnography/empathy-map.md) |
 | Segmentation | Which differences between shoppers matter for this brief? | [Proposed dimensions](netnography/dimensions.md) |
+| Personas | Who are the shoppers, and where does each sit on those dimensions? | [The five personas](personas/index.md) · [Method and scoring](personas/scoring.md) |
 | Benchmarks | Which products already serve these shoppers, and what do their users say? | [Benchmarks](benchmarks.md) |
 
 Every quote is a short excerpt from a public post, dated between May 2025 and November 2026, with the author's handle and a link. Most are marked as checked against the live page. The full list is on [Sources](sources.md), and the decisions behind the method are in the [decision log](../decision-log.md).
@@ -44,7 +45,7 @@ The evidence pulls in two directions, and the choice between them is the first d
 
 ## Open questions for Define
 
-- Which shopper do we design for? The [proposed dimensions](netnography/dimensions.md) suggest the "mission" shopper, who needs a specific thing soon, feels these pains most.
+- Which shopper do we design for? The [personas](personas/index.md) put the strongest pain with Sam and Tom, the two mission shoppers, who need a specific thing soon.
 - How does a shop with no product codes say what it has, with almost no extra work?
 - Is collection the default and delivery the option, given most people reach their high street on foot?
 - What would the street's existing organisers, such as the Hammersmith BID, need to see to take part?
