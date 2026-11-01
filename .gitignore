@@ -6,3 +6,4 @@ node_modules/
 # Claude local settings and anything private
 .claude/settings.local.json
 private/
+__pycache__/
