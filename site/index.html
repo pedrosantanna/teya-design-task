@@ -72,8 +72,14 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .brand-sub { color: var(--muted-fg); font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .brand-sep { color: var(--border-strong); }
 .topbar-spacer { flex: 1; }
-.phase-pill { font-size: 13px; color: var(--muted-fg); white-space: nowrap; }
-.phase-pill b { color: var(--fg); font-weight: 500; }
+.controls { display: flex; align-items: center; gap: 8px; }
+.seg { display: inline-flex; align-items: center; gap: 2px; padding: 2px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg); }
+.seg button { display: inline-grid; place-items: center; height: 26px; min-width: 26px; padding: 0 8px; border: 0; border-radius: 999px; background: transparent; color: var(--muted-fg); font: 500 12px var(--font-sans); letter-spacing: .02em; cursor: pointer; }
+.seg button svg { width: 14px; height: 14px; }
+.seg.icons button { padding: 0; width: 26px; }
+.seg button:hover { color: var(--fg); }
+.seg button[aria-checked="true"] { background: var(--muted); color: var(--fg); box-shadow: inset 0 0 0 1px var(--border); }
+.lang-note { font-size: 13px; color: var(--muted-fg); border-left: 2px solid var(--border); padding: 2px 0 2px 12px; margin: 0 0 var(--s-5); }
 .menu-btn {
   display: none; width: 36px; height: 36px; border: 1px solid var(--border); border-radius: var(--radius);
   background: var(--bg); color: var(--fg); cursor: pointer; place-items: center; flex: none;
@@ -379,7 +385,17 @@ i.m.unknown { opacity: .45; }
     <span class="brand-sub">Design take-home, process docs</span>
   </a>
   <span class="topbar-spacer"></span>
-  <span class="phase-pill">Phase · <b id="phase-now">Discover</b></span>
+  <div class="controls">
+    <div class="seg" role="radiogroup" aria-label="Language" id="lang-seg">
+      <button type="button" role="radio" data-lang="en" aria-checked="true" title="English">EN</button>
+      <button type="button" role="radio" data-lang="pt" aria-checked="false" title="Português (Brasil)">PT</button>
+    </div>
+    <div class="seg icons" role="radiogroup" aria-label="Theme" id="theme-seg">
+      <button type="button" role="radio" data-mode="light" aria-checked="false" aria-label="Light" title="Light"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.4"/><path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M3.4 12.6l1.1-1.1M11.5 4.5l1.1-1.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
+      <button type="button" role="radio" data-mode="system" aria-checked="true" aria-label="System" title="System"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="2.5" width="12" height="8.5" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M6 13.5h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
+      <button type="button" role="radio" data-mode="dark" aria-checked="false" aria-label="Dark" title="Dark"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.5 9.6A5.5 5.5 0 0 1 6.4 2.5a5.5 5.5 0 1 0 7.1 7.1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
 </header>
 
 <div class="shell">
@@ -401,7 +417,60 @@ i.m.unknown { opacity: .45; }
   // Served from the repo root in dev (site/serve.py) and from the artifact root when published,
   // so every content path is the repo-relative path, e.g. docs/discover/index.md.
   const $ = (s, el = document) => el.querySelector(s);
-  const els = { nav: $('#nav'), content: $('#content'), toc: $('#toc'), search: $('#search'), sidebar: $('#sidebar'), scrim: $('#scrim'), menu: $('#menu-btn'), phase: $('#phase-now') };
+  const els = { nav: $('#nav'), content: $('#content'), toc: $('#toc'), search: $('#search'), sidebar: $('#sidebar'), scrim: $('#scrim'), menu: $('#menu-btn') };
+
+  // --- Language and theme (per-viewer, remembered when storage is available) ----
+  const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  let LANG = store.get('hs-lang') === 'pt' ? 'pt' : 'en';
+  const UI = {
+    en: { filter: 'Filter pages', noMatch: 'No pages match', soon: 'Soon', onPage: 'On this page', prev: '← Previous', next: 'Next →',
+      takeaways: 'Key takeaways', call: 'My call', ai: 'AI in this step', tradeoffs: 'Trade-offs', verified: 'Verified', archive: 'Via archive',
+      verifiedTip: 'Checked against the live source', archiveTip: 'Collected from a public archive; not yet checked against the live source', source: 'Source ↗',
+      photoFor: 'Photo standing in for', kept: 'kept going', gaveUp: 'gave up on local', notShown: 'not shown',
+      mapNote: n => `Each dot is one post; posts with the same codes sit side by side. Not on the chart: ${n} posts where nothing broke.`,
+      persists: 'persists', defects: 'defects', unknown: 'stance unknown', urgent: 'urgent', notPublished: 'Not published yet',
+      loadFail: (src, m) => `Couldn’t load <code>${src}</code> (${m}). Check that the file exists in the repo and is published with the page.`,
+      notTranslated: 'This page isn’t translated yet, so it shows in English.' },
+    pt: { filter: 'Filtrar páginas', noMatch: 'Nenhuma página com', soon: 'Em breve', onPage: 'Nesta página', prev: '← Anterior', next: 'Próxima →',
+      takeaways: 'Principais pontos', call: 'Minha decisão', ai: 'IA nesta etapa', tradeoffs: 'Trade-offs', verified: 'Verificada', archive: 'Via arquivo',
+      verifiedTip: 'Conferida na fonte original', archiveTip: 'Coletada de um arquivo público; ainda não conferida na fonte original', source: 'Fonte ↗',
+      photoFor: 'Foto que representa', kept: 'continuou', gaveUp: 'desistiu do comércio local', notShown: 'não aparece',
+      mapNote: n => `Cada ponto é um post; posts com as mesmas etiquetas ficam lado a lado. Fora do gráfico: ${n} posts em que nada deu errado.`,
+      persists: 'continuou', defects: 'desistiu', unknown: 'não aparece', urgent: 'urgente', notPublished: 'Ainda não publicada',
+      loadFail: (src, m) => `Não foi possível carregar <code>${src}</code> (${m}).`,
+      notTranslated: 'Esta página ainda não foi traduzida, por isso aparece em inglês.' }
+  };
+  const t = k => (UI[LANG][k] !== undefined ? UI[LANG][k] : UI.en[k]);
+  // Labels that come from generated data (chart JSON) and are written in English.
+  const PT_STR = {
+    'Need urgency': 'Urgência da necessidade', 'Point of failure': 'Ponto de falha', 'Browsing': 'Passeando', 'Needs it now': 'Precisa agora',
+    'Knowing · findability': 'Saber · findability', 'Getting · transaction': 'Conseguir · transaction',
+    'Discovery': 'Descoberta', 'Routine': 'Rotina', 'Specific item': 'Item específico', 'Specific + deadline': 'Específico + prazo',
+    "Couldn't find out": 'Não conseguiu saber', "Wasn't there": 'Não estava lá', 'Not worth it': 'Não valeu a pena', "Couldn't get it": 'Não conseguiu pegar',
+    'Sam, the mission shopper': 'Sam, o comprador em missão', 'Jess, the lapsed local': 'Jess, a local que desistiu', 'Ruth, the regular': 'Ruth, a frequentadora',
+    'Nothing broke (not clustered)': 'Nada deu errado (fora dos clusters)',
+    'Specific item or shop': 'Item ou loja específica', 'Routine shopping and services': 'Compras de rotina e serviços', 'Discovery and browsing': 'Descoberta e navegação',
+    'Information': 'Informação', 'Access': 'Acesso', 'Availability': 'Disponibilidade', 'Value': 'Valor', 'No failure': 'Sem falha',
+    'findability': 'findability', 'transaction': 'transaction', "the street's offer": 'a oferta da rua'
+  };
+  const tr = s => (LANG === 'pt' && PT_STR[s]) ? PT_STR[s] : s;
+  const L = o => (o && LANG === 'pt' && o.pt) ? o.pt : (o ? o.title : '');
+  const srcFor = src => LANG === 'pt' ? src.replace(/^docs\//, 'docs/pt-br/') : src;
+  const canon = src => src.replace(/^docs\/pt-br\//, 'docs/');
+  const EMPATHY_CLASS = { 'vê': 'see', 'ouve': 'hear', 'pensa-e-sente': 'think-and-feel', 'diz-e-faz': 'say-and-do', 'dores': 'pains', 'ganhos': 'gains' };
+
+  let MODE = ['light', 'dark'].includes(store.get('hs-theme')) ? store.get('hs-theme') : 'system';
+  function applyMode() {
+    if (MODE === 'system') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', MODE);
+    document.querySelectorAll('#theme-seg button').forEach(b => b.setAttribute('aria-checked', String(b.dataset.mode === MODE)));
+  }
+  function applyLangUI() {
+    document.documentElement.lang = LANG === 'pt' ? 'pt-BR' : 'en';
+    document.querySelectorAll('#lang-seg button').forEach(b => b.setAttribute('aria-checked', String(b.dataset.lang === LANG)));
+    els.search.placeholder = t('filter'); els.search.setAttribute('aria-label', t('filter'));
+  }
+  applyMode();
   const cache = new Map();
   let NAV = null, PAGES = [], BY_SRC = new Map(), tocObserver = null;
 
@@ -426,7 +495,7 @@ i.m.unknown { opacity: .45; }
     const text = (q.text || '').replace(/^["“]|["”]$/g, '');
     const tags = (q.tags || '').split(',').map(t => t.trim()).filter(Boolean);
     return `<figure class="quote-card"><blockquote class="quote-text">“${inline(esc(text))}”</blockquote>
-      <figcaption class="quote-meta"><span class="who"><span class="handle">${esc(q.handle || 'unknown')}</span>${q.network ? `<span class="net">${esc(q.network)}</span>` : ''}</span>${q.date ? `<time datetime="${esc(q.date)}">${esc(q.date)}</time>` : ''}${q.status ? `<span class="status status-${esc(q.status)}" title="${q.status === 'verified' ? 'Checked against the live source' : 'Collected from a public archive; not yet checked against the live source'}">${q.status === 'verified' ? 'Verified' : 'Via archive'}</span>` : ''}${q.url ? `<a href="${esc(q.url)}" target="_blank" rel="noopener">Source ↗</a>` : ''}</figcaption>
+      <figcaption class="quote-meta"><span class="who"><span class="handle">${esc(q.handle || 'unknown')}</span>${q.network ? `<span class="net">${esc(q.network)}</span>` : ''}</span>${q.date ? `<time datetime="${esc(q.date)}">${esc(q.date)}</time>` : ''}${q.status ? `<span class="status status-${esc(q.status)}" title="${q.status === 'verified' ? t('verifiedTip') : t('archiveTip')}">${q.status === 'verified' ? t('verified') : t('archive')}</span>` : ''}${q.url ? `<a href="${esc(q.url)}" target="_blank" rel="noopener">${t('source')}</a>` : ''}</figcaption>
       ${q.context ? `<p class="quote-context">${inline(esc(q.context))}</p>` : ''}
       ${tags.length ? `<div class="tags">${tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>` : ''}</figure>`;
   }
@@ -438,7 +507,7 @@ i.m.unknown { opacity: .45; }
       else if (t.endsWith(':')) { cur = { label: t.slice(0, -1), items: [] }; cells.push(cur); }
     });
     return `<div class="empathy">${cells.map(c => {
-      const k = slug(c.label);
+      const k = EMPATHY_CLASS[slug(c.label)] || slug(c.label);
       return `<section class="empathy-cell ${k}"><p class="empathy-label">${esc(c.label)}</p><ul>${c.items.map(i => `<li>${inline(i)}</li>`).join('')}</ul></section>`;
     }).join('')}</div>`;
   }
@@ -458,7 +527,7 @@ i.m.unknown { opacity: .45; }
       else if (t.endsWith(':')) { cur = t.slice(0, -1).toLowerCase(); parts[cur] = []; }
     });
     const sec = (key, title) => parts[key] ? `<section class="${key.replace(/[^a-z]/g, '')}"><h5>${title}</h5><ul>${parts[key].map(i => `<li>${inline(i)}</li>`).join('')}</ul></section>` : '';
-    return `<div class="summary">${sec('takeaways', 'Key takeaways')}${sec('call', 'My call')}${sec('ai', 'AI in this step')}${sec('trade-offs', 'Trade-offs')}</div>`;
+    return `<div class="summary">${sec('takeaways', t('takeaways'))}${sec('call', t('call'))}${sec('ai', t('ai'))}${sec('trade-offs', t('tradeoffs'))}</div>`;
   }
 
   // ```persona  key: value lines (name, tagline, image, credit, credit_url) and "- Label: value | evidence|assumed" attributes.
@@ -472,7 +541,7 @@ i.m.unknown { opacity: .45; }
         attrs.push({ k: body.slice(0, i).trim(), v: body.slice(i + 1).trim(), kind: kind.toLowerCase() });
       } else { const i = t.indexOf(':'); if (i > 0) q[t.slice(0, i).trim()] = t.slice(i + 1).trim(); }
     });
-    const img = q.image ? `<figure><img data-src="${esc(q.image)}" alt="Photo standing in for ${esc(q.name || 'the persona')}"></figure>` : '<span></span>';
+    const img = q.image ? `<figure><img data-src="${esc(q.image)}" alt="${t('photoFor')} ${esc(q.name || '')}"></figure>` : '<span></span>';
     const credit = q.credit ? `<span class="credit">${q.credit_url ? `<a href="${esc(q.credit_url)}" target="_blank" rel="noopener">${esc(q.credit)}</a>` : esc(q.credit)}</span>` : '';
     const kind = k => k === 'evidence' ? 'From the posts' : k === 'assumed' ? 'Assumed' : esc(k);
     const dl = attrs.length ? `<dl>${attrs.map(a => `<div><dt>${esc(a.k)}</dt><dd>${inline(a.v)}${a.kind ? `<span class="src ${esc(a.kind)}">${kind(a.kind)}</span>` : ''}</dd></div>`).join('')}</dl>` : '';
@@ -483,8 +552,8 @@ i.m.unknown { opacity: .45; }
   function clusterMap(src) {
     let d;
     try { d = JSON.parse(src); } catch (e) { return `<pre><code>${esc(src)}</code></pre>`; }
-    const W = 680, H = 440, L = 128, R = 24, T = 24, B = 52;
-    const sx = v => L + (v / 10.5) * (W - L - R), sy = v => T + (1 - v / 10) * (H - T - B);
+    const W = 680, H = 440, Lm = 128, R = 24, T = 24, B = 52;
+    const sx = v => Lm + (v / 10.5) * (W - Lm - R), sy = v => T + (1 - v / 10) * (H - T - B);
     const ids = Object.keys(d.names);
     const col = c => `var(--c${ids.indexOf(c) + 1})`;
     // Posts with the same codes share a coordinate; lay them out in a small grid around it.
@@ -497,11 +566,11 @@ i.m.unknown { opacity: .45; }
       placed.push({ ...p, cx: sx(p.x) - w / 2 + c * off, cy: sy(p.y) - h / 2 + r * off });
     }));
     let g = '';
-    d.x.ticks.forEach(([v, t]) => g += `<line class="gl" x1="${sx(v)}" x2="${sx(v)}" y1="${sy(10)}" y2="${sy(0)}"/><text class="tk" x="${sx(v)}" y="${sy(0) + 18}" text-anchor="middle">${esc(t)}</text>`);
-    d.y.ticks.forEach(([v, t]) => g += `<line class="gl" x1="${sx(0)}" x2="${sx(10.5)}" y1="${sy(v)}" y2="${sy(v)}"/><text class="tk" x="${L - 10}" y="${sy(v) + 4}" text-anchor="end">${esc(t)}</text>`);
+    d.x.ticks.forEach(([v, lab]) => g += `<line class="gl" x1="${sx(v)}" x2="${sx(v)}" y1="${sy(10)}" y2="${sy(0)}"/><text class="tk" x="${sx(v)}" y="${sy(0) + 18}" text-anchor="middle">${esc(tr(lab))}</text>`);
+    d.y.ticks.forEach(([v, lab]) => g += `<line class="gl" x1="${sx(0)}" x2="${sx(10.5)}" y1="${sy(v)}" y2="${sy(v)}"/><text class="tk" x="${Lm - 10}" y="${sy(v) + 4}" text-anchor="end">${esc(tr(lab))}</text>`);
     g += `<line class="base" x1="${sx(0)}" x2="${sx(10.5)}" y1="${sy(0)}" y2="${sy(0)}"/><line class="base" x1="${sx(0)}" x2="${sx(0)}" y1="${sy(10)}" y2="${sy(0)}"/>`;
-    g += `<text class="ax" x="${sx(0)}" y="${H - 6}">← ${esc(d.x.min)}</text><text class="ax" x="${sx(10.5)}" y="${H - 6}" text-anchor="end">${esc(d.x.max)} →</text>`;
-    g += `<text class="ax" x="8" y="${sy(10) + 4}">↑ ${esc(d.y.max)}</text><text class="ax" x="8" y="${sy(0)}">↓ ${esc(d.y.min)}</text>`;
+    g += `<text class="ax" x="${sx(0)}" y="${H - 6}">← ${esc(tr(d.x.min))}</text><text class="ax" x="${sx(10.5)}" y="${H - 6}" text-anchor="end">${esc(tr(d.x.max))} →</text>`;
+    g += `<text class="ax" x="8" y="${sy(10) + 4}">↑ ${esc(tr(d.y.max))}</text><text class="ax" x="8" y="${sy(0)}">↓ ${esc(tr(d.y.min))}</text>`;
     // A soft zone around each cluster: the box around its points, padded.
     ids.forEach(c => {
       const mine = placed.filter(p => p.c === c); if (!mine.length) return;
@@ -509,17 +578,17 @@ i.m.unknown { opacity: .45; }
       const x0 = Math.min(...xs) - pad, x1 = Math.max(...xs) + pad, y0 = Math.min(...ys) - pad, y1 = Math.max(...ys) + pad;
       g += `<rect class="zone" x="${x0}" y="${y0}" width="${x1 - x0}" height="${y1 - y0}" rx="14" fill="${col(c)}" stroke="${col(c)}"/>`;
     });
-    g += placed.map(p => `<circle class="pt ${p.s}" cx="${p.cx.toFixed(1)}" cy="${p.cy.toFixed(1)}" r="5" fill="${col(p.c)}" stroke="${col(p.c)}"><title>${esc(p.h)} · ${esc(d.names[p.c])} · ${p.s}</title></circle>`).join('');
+    g += placed.map(p => `<circle class="pt ${p.s}" cx="${p.cx.toFixed(1)}" cy="${p.cy.toFixed(1)}" r="5" fill="${col(p.c)}" stroke="${col(p.c)}"><title>${esc(p.h)} · ${esc(tr(d.names[p.c]))} · ${p.s}</title></circle>`).join('');
     ids.forEach(c => {
       const mine = placed.filter(p => p.c === c); if (!mine.length) return;
       const top = Math.min(...mine.map(p => p.cy)) - 24, mid = mine.reduce((a, p) => a + p.cx, 0) / mine.length;
-      const name = d.names[c].split(',')[0], n = d.centres[c].n;
+      const name = tr(d.names[c]).split(',')[0], n = d.centres[c].n;
       g += `<text class="cl" x="${mid}" y="${top}" text-anchor="middle">${esc(name)} <tspan class="cn">(${n})</tspan></text>`;
     });
-    const legend = ids.map(c => `<span><i class="m" style="color:${col(c)}"></i>${esc(d.names[c])}</span>`).join('') +
-      `<span class="sep"></span><span class="enc"><i class="m" style="color:var(--muted-fg)"></i>kept going</span><span class="enc"><i class="m defects" style="color:var(--muted-fg)"></i>gave up on local</span><span class="enc"><i class="m unknown" style="color:var(--muted-fg)"></i>not shown</span>`;
+    const legend = ids.map(c => `<span><i class="m" style="color:${col(c)}"></i>${esc(tr(d.names[c]))}</span>`).join('') +
+      `<span class="sep"></span><span class="enc"><i class="m" style="color:var(--muted-fg)"></i>${t('kept')}</span><span class="enc"><i class="m defects" style="color:var(--muted-fg)"></i>${t('gaveUp')}</span><span class="enc"><i class="m unknown" style="color:var(--muted-fg)"></i>${t('notShown')}</span>`;
     return `<figure class="cmap"><div class="cmap-scroll"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Posts by need and by where the occasion broke, grouped into clusters">${g}</svg></div>
-      <figcaption><div class="cmap-foot">${legend}</div><p class="cmap-note">Each dot is one post; posts with the same codes sit side by side. Not on the chart: ${d.worked.length} posts where nothing broke.</p></figcaption></figure>`;
+      <figcaption><div class="cmap-foot">${legend}</div><p class="cmap-note">${t('mapNote')(d.worked.length)}</p></figcaption></figure>`;
   }
 
   // ```occasion-grid  JSON from scripts/build_personas.py: jobs x where the occasion broke, one mark per post.
@@ -529,16 +598,16 @@ i.m.unknown { opacity: .45; }
     const gids = Object.keys(d.groups);
     const col = g => g === 'worked' ? 'var(--muted-fg)' : `var(--c${gids.indexOf(g) + 1})`;
     const cell = (r, c) => d.cells.find(x => x.row === r && x.col === c);
-    const head = `<tr><th></th>${d.cols.map(c => `<th>${esc(c.label)}${c.maps ? `<small>→ ${esc(c.maps)}</small>` : ''}</th>`).join('')}</tr>`;
-    const body = d.rows.map(r => `<tr><th>${esc(r.label)}</th>${d.cols.map(c => {
+    const head = `<tr><th></th>${d.cols.map(c => `<th>${esc(tr(c.label))}${c.maps ? `<small>→ ${esc(tr(c.maps))}</small>` : ''}</th>`).join('')}</tr>`;
+    const body = d.rows.map(r => `<tr><th>${esc(tr(r.label))}</th>${d.cols.map(c => {
       const x = cell(r.id, c.id);
       if (!x) return '<td class="empty"></td>';
-      const marks = x.posts.map(p => `<i class="m ${p.s}" style="color:${col(p.g)}" title="${esc(p.h)} · ${esc(d.groups[p.g])} · ${p.s}${p.u ? ' · urgent' : ''}"></i>`).join('');
+      const marks = x.posts.map(p => `<i class="m ${p.s}" style="color:${col(p.g)}" title="${esc(p.h)} · ${esc(tr(d.groups[p.g]))} · ${p.s}${p.u ? ' · ' + t('urgent') : ''}"></i>`).join('');
       return `<td><span class="n">${x.posts.length}</span><span class="marks">${marks}</span></td>`;
     }).join('')}</tr>`).join('');
     const used = gids.filter(g => d.cells.some(x => x.posts.some(p => p.g === g)));
-    const legend = used.map(g => `<span><i class="m" style="color:${col(g)}"></i>${esc(d.groups[g])}</span>`).join('') +
-      `<span class="sep"></span><span class="enc"><i class="m" style="color:var(--muted-fg)"></i>persists</span><span class="enc"><i class="m defects" style="color:var(--muted-fg)"></i>defects</span><span class="enc"><i class="m unknown" style="color:var(--muted-fg)"></i>stance unknown</span>`;
+    const legend = used.map(g => `<span><i class="m" style="color:${col(g)}"></i>${esc(tr(d.groups[g]))}</span>`).join('') +
+      `<span class="sep"></span><span class="enc"><i class="m" style="color:var(--muted-fg)"></i>${t('persists')}</span><span class="enc"><i class="m defects" style="color:var(--muted-fg)"></i>${t('defects')}</span><span class="enc"><i class="m unknown" style="color:var(--muted-fg)"></i>${t('unknown')}</span>`;
     return `<div class="ogrid-wrap"><table class="ogrid"><thead>${head}</thead><tbody>${body}</tbody></table></div><div class="ogrid-legend">${legend}</div>`;
   }
 
@@ -563,34 +632,35 @@ i.m.unknown { opacity: .45; }
   function flatten(nav) {
     const out = [];
     nav.sections.forEach(sec => (sec.items || []).forEach(it => {
-      if (it.children) it.children.forEach(ch => out.push({ ...ch, section: sec.title, group: it.title }));
-      else out.push({ ...it, section: sec.title });
+      if (it.children) it.children.forEach(ch => out.push({ ...ch, sec, grp: it }));
+      else out.push({ ...it, sec });
     }));
     return out;
   }
   function renderNav(filter = '') {
     const f = filter.trim().toLowerCase();
-    const match = p => !f || p.title.toLowerCase().includes(f) || (p.group || '').toLowerCase().includes(f);
+    const match = p => !f || L(p).toLowerCase().includes(f) || L(p.grp).toLowerCase().includes(f);
     let html = '';
     NAV.sections.forEach(sec => {
       if (sec.disabled) {
         if (f) return;
-        html += `<div class="nav-group is-disabled"><div class="nav-group-title">${esc(sec.title)}<span class="badge">Soon</span></div>${sec.note ? `<div class="nav-empty">${esc(sec.note)}</div>` : ''}</div>`;
+        const note = LANG === 'pt' && sec.note_pt ? sec.note_pt : sec.note;
+        html += `<div class="nav-group is-disabled"><div class="nav-group-title">${esc(L(sec))}<span class="badge">${t('soon')}</span></div>${note ? `<div class="nav-empty">${esc(note)}</div>` : ''}</div>`;
         return;
       }
       let inner = '';
       (sec.items || []).forEach(it => {
         if (it.children) {
-          const kids = it.children.filter(ch => match({ ...ch, group: it.title }));
-          if (kids.length) inner += `<div class="nav-sub-title">${esc(it.title)}</div><div class="nav-sub">${kids.map(link).join('')}</div>`;
+          const kids = it.children.filter(ch => match({ ...ch, grp: it }));
+          if (kids.length) inner += `<div class="nav-sub-title">${esc(L(it))}</div><div class="nav-sub">${kids.map(link).join('')}</div>`;
         } else if (match(it)) inner += link(it);
       });
-      if (inner) html += `<div class="nav-group"><div class="nav-group-title">${esc(sec.title)}</div>${inner}</div>`;
+      if (inner) html += `<div class="nav-group"><div class="nav-group-title">${esc(L(sec))}</div>${inner}</div>`;
     });
-    els.nav.innerHTML = html || `<div class="nav-empty">No pages match “${esc(filter)}”.</div>`;
+    els.nav.innerHTML = html || `<div class="nav-empty">${t('noMatch')} “${esc(filter)}”.</div>`;
     markCurrent();
   }
-  const link = p => `<a class="nav-link" href="#${p.id}" data-id="${p.id}">${esc(p.title)}</a>`;
+  const link = p => `<a class="nav-link" href="#${p.id}" data-id="${p.id}">${esc(L(p))}</a>`;
   function markCurrent() {
     const id = currentId();
     els.nav.querySelectorAll('.nav-link').forEach(a => {
@@ -625,20 +695,24 @@ i.m.unknown { opacity: .45; }
     const page = PAGES.find(p => p.id === id);
     markCurrent();
     closeNav();
-    els.phase.textContent = ['Discover', 'Define', 'Develop', 'Deliver'].includes(page.section) ? page.section : 'Discover';
-    let md;
-    try { md = await load(page.src); }
+    let md, src = srcFor(page.src), fallback = false;
+    try { md = await load(src); }
     catch (e) {
-      els.content.innerHTML = `<h1 class="page-title">${esc(page.title)}</h1><p class="state">Couldn’t load <code>${esc(page.src)}</code> (${esc(e.message)}). Check that the file exists in the repo and is published with the page.</p>`;
-      els.toc.innerHTML = '';
-      return;
+      if (src !== page.src) {
+        try { md = await load(page.src); src = page.src; fallback = true; } catch (e2) {}
+      }
+      if (md === undefined) {
+        els.content.innerHTML = `<h1 class="page-title">${esc(L(page))}</h1><p class="state">${t('loadFail')(esc(src), esc(e.message))}</p>`;
+        els.toc.innerHTML = '';
+        return;
+      }
     }
     const tmp = document.createElement('div');
     tmp.innerHTML = marked.parse(md);
 
     // Title and lede come from the Markdown's own H1 and first paragraph.
     const h1 = tmp.querySelector('h1');
-    const title = h1 ? h1.innerHTML : esc(page.title);
+    const title = h1 ? h1.innerHTML : esc(L(page));
     if (h1) h1.remove();
     let lede = '';
     const first = tmp.firstElementChild;
@@ -684,15 +758,16 @@ i.m.unknown { opacity: .45; }
       if (href.startsWith('#')) return;
       const [path, frag] = href.split('#');
       if (path.endsWith('.md')) {
-        const target = BY_SRC.get(resolve(page.src, path));
+        const target = BY_SRC.get(canon(resolve(src, path)));
         if (target) a.setAttribute('href', `#${target.id}`);
-        else { a.removeAttribute('href'); a.title = 'Not published yet'; }
+        else { a.removeAttribute('href'); a.title = t('notPublished'); }
       }
     });
     // Images are written relative to their Markdown file.
+    const srcOf = src;
     tmp.querySelectorAll('img[data-src], img[src]').forEach(img => {
       const src = img.getAttribute('data-src') || img.getAttribute('src');
-      if (!/^(https?:|data:|\/)/.test(src)) img.setAttribute('src', resolve(page.src, src));
+      if (!/^(https?:|data:|\/)/.test(src)) img.setAttribute('src', resolve(srcOf, src));
       img.removeAttribute('data-src');
     });
     // Consecutive quote cards sit in a grid.
@@ -703,19 +778,20 @@ i.m.unknown { opacity: .45; }
 
     const idx = PAGES.indexOf(page);
     const prev = PAGES[idx - 1], next = PAGES[idx + 1];
-    const crumbs = [page.section, page.group].filter(Boolean).map(esc).join('<span aria-hidden="true">›</span>');
+    const crumbs = [L(page.sec), page.grp ? L(page.grp) : ''].filter(Boolean).map(esc).join('<span aria-hidden="true">›</span>');
 
     els.content.innerHTML = `
       <div class="crumbs">${crumbs}</div>
       <h1 class="page-title">${title}</h1>
       ${lede ? `<p class="page-lede">${lede}</p>` : ''}
-      <div class="page-meta"><code>${esc(page.src)}</code>${page.updated ? `<span>Updated ${esc(page.updated)}</span>` : ''}</div>
+      <div class="page-meta"><code>${esc(src)}</code>${page.updated ? `<span>Updated ${esc(page.updated)}</span>` : ''}</div>
+      ${fallback ? `<p class="lang-note">${t('notTranslated')}</p>` : ''}
       <div class="prose">${tmp.innerHTML}</div>
       <nav class="pager" aria-label="Pages">
-        ${prev ? `<a class="prev" href="#${prev.id}"><span class="dir">← Previous</span><span class="ttl">${esc(prev.title)}</span></a>` : ''}
-        ${next ? `<a class="next" href="#${next.id}"><span class="dir">Next →</span><span class="ttl">${esc(next.title)}</span></a>` : ''}
+        ${prev ? `<a class="prev" href="#${prev.id}"><span class="dir">${t('prev')}</span><span class="ttl">${esc(L(prev))}</span></a>` : ''}
+        ${next ? `<a class="next" href="#${next.id}"><span class="dir">${t('next')}</span><span class="ttl">${esc(L(next))}</span></a>` : ''}
       </nav>`;
-    document.title = `${page.title} · High Street Docs`;
+    document.title = `${L(page)} · High Street Docs`;
     buildToc();
     window.scrollTo(0, 0);
   }
@@ -723,7 +799,7 @@ i.m.unknown { opacity: .45; }
     const hs = [...els.content.querySelectorAll('.prose h2, .prose h3')];
     if (tocObserver) tocObserver.disconnect();
     if (hs.length < 2) { els.toc.innerHTML = ''; return; }
-    els.toc.innerHTML = `<p class="toc-title">On this page</p><ul>${hs.map(h => `<li class="lvl-${h.tagName[1]}"><a href="#${currentId()}" data-target="${h.id}">${esc(h.textContent)}</a></li>`).join('')}</ul>`;
+    els.toc.innerHTML = `<p class="toc-title">${t('onPage')}</p><ul>${hs.map(h => `<li class="lvl-${h.tagName[1]}"><a href="#${currentId()}" data-target="${h.id}">${esc(h.textContent)}</a></li>`).join('')}</ul>`;
     els.toc.querySelectorAll('a').forEach(a => a.addEventListener('click', e => {
       e.preventDefault();
       document.getElementById(a.dataset.target)?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
@@ -746,6 +822,12 @@ i.m.unknown { opacity: .45; }
     if (e.key === '/' && document.activeElement !== els.search) { e.preventDefault(); els.search.focus(); }
   });
   els.search.addEventListener('input', () => renderNav(els.search.value));
+  document.querySelectorAll('#theme-seg button').forEach(b => b.addEventListener('click', () => { MODE = b.dataset.mode; store.set('hs-theme', MODE); applyMode(); }));
+  document.querySelectorAll('#lang-seg button').forEach(b => b.addEventListener('click', () => {
+    if (b.dataset.lang === LANG) return;
+    LANG = b.dataset.lang; store.set('hs-lang', LANG); applyLangUI(); renderNav(els.search.value); render();
+  }));
+  applyLangUI();
 
   fetch('site/nav.json', { cache: 'no-store' })
     .then(r => r.json())

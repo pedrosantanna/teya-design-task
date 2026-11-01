@@ -1,0 +1,79 @@
+# PT-BR translation brief and glossary
+
+Source: English Markdown in `docs/`. Target: Brazilian Portuguese in `docs/pt-br/`, same relative path (e.g. `docs/discover/benchmarks.md` → `docs/pt-br/discover/benchmarks.md`).
+
+## Voice
+- Brazilian Portuguese, natural, first person ("eu decidi", "um agente coletou"). Decisions are always "eu", never "nós". AI work is "um agente" / "o agente", never a product name.
+- Follow the human-writing rules: no "não é X, é Y" in separate sentences; no triple anaphora; no empty adjectives; no "mergulhar"/"navegar" in the figurative sense; no title case in headings (sentence case); no colon in headings; em dash (travessão) rarely — prefer comma or full stop; no rhetorical question followed by an answer.
+- Short, objective sentences. Keep the same structure, headings and order as the English page; don't add or remove content.
+
+## Keep exactly as in English (do not translate)
+- Everything inside ```quote blocks EXCEPT the `context:` line. `text`, `handle`, `network`, `date`, `url`, `tags`, `status` stay identical. Translate `context:` only.
+- Block syntax keys: in ```summary keep the keys `Takeaways:`, `Call:`, `AI:`, `Trade-offs:` (translate the bullets). In ```persona keep `name:`, `tagline:`, `image:`, `credit:`, `credit_url:` keys; translate tagline and the attribute labels/values (`- Onde: ...`); keep the first names and translate the descriptor: "Sam, o comprador em missão", "Jess, a local que desistiu", "Ruth, a frequentadora"). The `| evidence` / `| desk research` marker after an attribute: translate to `| evidência` / `| pesquisa documental`.
+- In ```persona, change `image: img/x.jpg` to `image: ../../../discover/personas/img/x.jpg` (images live only in the English tree).
+- ```empathy-map labels: translate as `Vê:`, `Ouve:`, `Pensa e sente:`, `Diz e faz:`, `Dores:`, `Ganhos:`.
+- ```timeline dates stay; translate the text.
+- Everything between `<!-- generated:NAME -->` and `<!-- /generated:NAME -->`: copy unchanged (a script regenerates it).
+- URLs, file paths, code, handles, product and organisation names, figures and dates.
+- Relative links between pages keep the same relative path (the PT tree mirrors the EN tree). Links to `../decision-log.md` etc. stay as they are.
+
+## Glossary
+| English | PT-BR |
+| --- | --- |
+| high street | high street (on first use per page: "high street, a rua comercial do bairro") |
+| findability / transaction | findability / transaction (brief terms, keep in English, italic not needed) |
+| proto-persona | proto-persona |
+| netnography | netnografia |
+| empathy map | mapa de empatia |
+| desk research | pesquisa documental |
+| benchmark(s) | benchmark(s) |
+| codebook | codebook |
+| coding / to code (qualitative) | etiquetagem / etiquetar ("codificação" only when explaining the research term) |
+| tag(s) | etiqueta(s) |
+| cluster / clustering | cluster / clusterização |
+| need urgency | urgência da necessidade |
+| point of failure | ponto de falha |
+| browsing ↔ needs it now | passeando ↔ precisa agora |
+| knowing ↔ getting | saber ↔ conseguir |
+| couldn't find out / wasn't there / not worth it / couldn't get it | não conseguiu saber / não estava lá / não valeu a pena / não conseguiu pegar |
+| mission shopper | comprador em missão |
+| lapsed local | local que desistiu |
+| the regular | a frequentadora |
+| kept going / gave up on local | continuou / desistiu do comércio local |
+| shop local / support local | comprar no comércio local / apoiar o comércio local |
+| independent shop(s) | loja(s) independente(s) |
+| click and collect | click and collect (compra online, retirada na loja) on first use |
+| business rates | business rates (imposto sobre imóveis comerciais) on first use |
+| BID | BID (associação de negócios do bairro) on first use |
+| decision log | registro de decisões |
+| Key takeaways / My call / AI in this step / Trade-offs | (UI labels — rendered by the site, not in the Markdown) |
+| Method / Method in detail | Método / Método em detalhe |
+| verified / archive | verificada / via arquivo |
+| take-home | take-home |
+| agent / subagent | agente / subagente |
+
+## Terms settled during the first translation
+| English | PT-BR |
+| --- | --- |
+| landscape (desk-research page) | panorama |
+| findings | achados |
+| worked example | exemplo trabalhado |
+| shopper / shopkeeper / merchant | comprador (or "quem compra") / lojista / comerciante |
+| footfall / vacancy | fluxo de pedestres / vacância |
+| Budget (UK) / Chancellor | Orçamento / ministro das Finanças |
+| rateable value / multiplier / relief threshold / tapered relief | valor locativo / multiplicador / limite de isenção / desconto escalonado |
+| council | prefeitura |
+| cash / mobile wallet / contactless / card reader | dinheiro vivo / carteira digital / por aproximação / maquininha |
+| charity shop / off-licence / newsagent / post office | brechó beneficente / loja de bebidas / banca de jornal / agência dos correios |
+| wasted trip | ida perdida |
+| White space | Espaço em aberto |
+| Use cases / Influencers (persona fields) | Casos de uso / Influências ("Jobs to be done" stays in English) |
+| second coder / coded blind | segundo etiquetador / etiquetou às cegas |
+| mean silhouette | silhueta média |
+| Open / Why (decision-log labels) | Em aberto / Por quê |
+| Codebook values (specific, routine, information, persists…) and tag names | stay in English, as in the generated tables |
+| Phase names (Discover, Define, Develop, Deliver) | stay in English |
+| Inline quotes in prose | stay in English, with a short gloss in parentheses |
+| Numbers | decimal comma (13,2%) |
+| code (noun, a qualitative tag) | etiqueta ("código" only for the research term) |
+| dates inside citations ("Aug 2026") | stay in English, as part of the citation |

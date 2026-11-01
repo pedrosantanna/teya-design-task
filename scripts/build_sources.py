@@ -36,9 +36,30 @@ def parse_quote(block):
     return q
 
 
+STRINGS = {
+    "en": {"title": "Sources", "intro": "Every quote and every link used across the docs, in one place. {q} quotes ({v} checked against the live source) and {l} other sources. This page is generated from the other pages by `scripts/build_sources.py`.",
+           "by_net": "Quotes by network", "net": "Network", "quotes": "Quotes",
+           "status_note": "Status **verified** means the text, author and date were matched against the live page. **Archive** means the quote came from a public Reddit archive and has not been matched yet.",
+           "cols": "| Date | Author | Network | Status | Used on | Link |", "open": "Open", "other": "Other sources", "other_cols": "| Used on | Source |"},
+    "pt": {"title": "Fontes", "intro": "Todas as citações e todos os links usados na documentação, num só lugar. {q} citações ({v} conferidas na fonte original) e {l} outras fontes. Esta página é gerada a partir das outras pelo `scripts/build_sources.py`.",
+           "by_net": "Citações por rede", "net": "Rede", "quotes": "Citações",
+           "status_note": "Status **verified** quer dizer que texto, autor e data foram conferidos na página original. **Archive** quer dizer que a citação veio de um arquivo público do Reddit e ainda não foi conferida.",
+           "cols": "| Data | Autor | Rede | Status | Usada em | Link |", "open": "Abrir", "other": "Outras fontes", "other_cols": "| Usada em | Fonte |"},
+}
+
+
 def main():
+    ok = build(DOCS, OUT, STRINGS["en"], skip=DOCS / "pt-br")
+    pt = DOCS / "pt-br"
+    if (pt / "discover").exists():
+        ok = build(pt, pt / "discover" / "sources.md", STRINGS["pt"]) and ok
+    if not ok:
+        sys.exit(1)
+
+
+def build(DOCS, OUT, S, skip=None):
     quotes, links, problems = [], [], []
-    pages = sorted(p for p in DOCS.rglob("*.md") if p != OUT)
+    pages = sorted(p for p in DOCS.rglob("*.md") if p != OUT and not (skip and skip in p.parents))
     for page in pages:
         md = page.read_text(encoding="utf-8")
         rel = page.relative_to(DOCS).as_posix()
@@ -76,35 +97,32 @@ def main():
         by_network[net] = by_network.get(net, 0) + 1
 
     lines = [
-        "# Sources",
+        f"# {S['title']}",
         "",
-        f"Every quote and every link used across the docs, in one place. {len(quotes)} quotes "
-        f"({verified} checked against the live source) and {len(unique_links)} other sources. "
-        "This page is generated from the other pages by `scripts/build_sources.py`.",
+        S["intro"].format(q=len(quotes), v=verified, l=len(unique_links)),
         "",
-        "## Quotes by network",
+        f"## {S['by_net']}",
         "",
-        "| Network | Quotes |",
+        f"| {S['net']} | {S['quotes']} |",
         "| --- | --- |",
     ]
     lines += [f"| {n} | {c} |" for n, c in sorted(by_network.items(), key=lambda kv: -kv[1])]
     lines += [
         "",
-        "## Quotes",
+        f"## {S['quotes']}",
         "",
-        "Status **verified** means the text, author and date were matched against the live page. "
-        "**Archive** means the quote came from a public Reddit archive and has not been matched yet.",
+        S["status_note"],
         "",
-        "| Date | Author | Network | Status | Used on | Link |",
+        S["cols"],
         "| --- | --- | --- | --- | --- | --- |",
     ]
     for q in sorted(quotes, key=lambda q: (q.get("date", ""), q.get("handle", ""))):
         lines.append(
             f"| {q.get('date', '')} | {q.get('handle', '')} | {q.get('network', '')} | {q.get('status', '–')} "
             f"| [{q['page']}]({q['rel'].replace('discover/', '', 1) if q['rel'].startswith('discover/') else '../' + q['rel']}) "
-            f"| [Open]({q.get('url', '')}) |"
+            f"| [{S['open']}]({q.get('url', '')}) |"
         )
-    lines += ["", "## Other sources", "", "| Used on | Source |", "| --- | --- |"]
+    lines += ["", f"## {S['other']}", "", S["other_cols"], "| --- | --- |"]
     for name, rel, label, url in unique_links:
         page_link = rel.replace("discover/", "", 1) if rel.startswith("discover/") else "../" + rel
         lines.append(f"| [{name}]({page_link}) | [{label.replace('|', '/')}]({url}) |")
@@ -113,7 +131,8 @@ def main():
     print(f"{len(quotes)} quotes ({verified} verified), {len(unique_links)} links -> {OUT.relative_to(ROOT)}")
     if problems:
         print("\n".join(problems))
-        sys.exit(1)
+        return False
+    return True
 
 
 if __name__ == "__main__":

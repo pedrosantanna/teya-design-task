@@ -93,7 +93,7 @@ image: img/jess.jpg
 credit: Photo: Louis Zhang, Unsplash
 credit_url: https://unsplash.com/photos/a-woman-sitting-in-a-train-looking-out-the-window-8czqNBTRcXI
 - Where: London and elsewhere in the UK
-- Week: Weekday hours that match the shops' hours
+- Week: At work during the hours the shops are open
 - Pays: Card or phone, no cash
 - Buys: Supermarket and Amazon for routine shopping
 - Buys locally: Special occasions only
@@ -103,7 +103,7 @@ credit_url: https://unsplash.com/photos/a-woman-sitting-in-a-train-looking-out-t
 | --- | --- |
 | **Jobs to be done** | Get routine shopping done with the least effort. |
 | **Use cases** | Independents shut when she finishes work. The butcher for anniversaries, the supermarket for the week. Cash-only stalls. |
-| **Pains** | Opening hours that match her working hours. A local premium with no extra convenience. |
+| **Pains** | Shops open only while she's at work. A local premium with no extra convenience. |
 | **Gains** | Always open, no surprises. |
 | **Influencers** | Habit: Amazon, the supermarket. |
 | **For the brief** | Transaction. Collection out of hours, card payment, or delivery from the local shop. |

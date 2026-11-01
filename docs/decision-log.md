@@ -14,7 +14,7 @@ It is also a take-home with a budget of a few hours. Each step goes as deep as t
 ## 001 — Start with discovery, not with the problem choice
 **2026-11-01 · Decided**
 
-The brief asks to pick Findability or Transaction as the primary focus. That choice is deferred until after a discovery pass on the high-street universe (who the shops are, how they sell today, who shops there and why).
+The brief asks to pick Findability or Transaction as the primary focus. I deferred that choice until after a discovery pass on the high-street universe (who the shops are, how they sell today, who shops there and why).
 
 **Why:** choosing before understanding the space would be picking on intuition; the position the brief asks for should come out of evidence.
 **Open:** Findability vs. Transaction — decided at the end of discovery.
@@ -63,10 +63,10 @@ The artifact is a docs site with a structured sidebar, organised by phase (Disco
 
 **Why:** the process is the deliverable as much as the prototype, and a docs structure lets a reviewer go straight to the part they care about.
 
-## 008 — English only, written in a human voice
+## 008 — English first, written in a human voice
 **2026-11-01 · Decided**
 
-Everything in the repo is in English. Writing follows explicit anti-AI-pattern rules (listed in `AGENTS.md`).
+English is the source language of the repo; a Portuguese mirror came later (decision 014). Writing follows explicit anti-AI-pattern rules (listed in `AGENTS.md`).
 
 ## 009 — Which social networks the netnography uses
 **2026-11-01 · Decided**
@@ -107,6 +107,13 @@ Posts from the netnography are coded, scored on two dimensions (need urgency and
 **2026-11-01 · Decided**
 
 Every page opens with key takeaways, my call, how AI was used in that step, and the trade-offs. Method detail sits in subpages for whoever wants it. A running [log](process/ai-log.md) records what each agent was asked, what came back and what was thrown away.
+
+## 014 — The docs are bilingual
+**2026-11-01 · Decided**
+
+English stays the source. Every page also has a full Brazilian Portuguese version, chosen with a switch at the top of the site, which opens in English by default. From now on, anything new is written in both languages and the Portuguese is reviewed against the English. Quotes stay in their original language in both. The same switch area holds a light, dark or system theme control, which replaces the old phase label.
+
+**Why:** the record is for me and for whoever works on this with me, and some of them read Portuguese more comfortably. Keeping English as the source keeps one version authoritative.
 
 ---
 

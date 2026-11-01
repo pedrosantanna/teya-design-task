@@ -52,6 +52,9 @@ An agent re-sorted the 17 benchmarks against Sam, Jess and Ruth: 11 directly rel
 ### 9. Design pass
 A design agent researched common "AI slop" patterns in interface design and polished the docs site against them, in the same neutral style.
 
+### 10. A Portuguese version
+I asked for every page in Brazilian Portuguese too, with a language switch on the site. Three agents translated the pages in parallel from a shared glossary, and passed new terms to each other as they went. A fourth agent then reviewed all 15 pages against the English. It made about 60 fixes: calques, two consistency slips and one structural slip. It also found four unclear sentences in the English, which I fixed in both languages.
+
 ## What AI did badly here
 
 - **Built before the method was right.** A first persona draft looked finished but was circular. The reviewer agent caught it; the agent that wrote it didn't.

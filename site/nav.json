@@ -6,14 +6,17 @@
         {
           "id": "introduction",
           "title": "Introduction",
-          "src": "docs/index.md"
+          "src": "docs/index.md",
+          "pt": "Introdução"
         },
         {
           "id": "brief",
           "title": "The brief",
-          "src": "docs/brief.md"
+          "src": "docs/brief.md",
+          "pt": "O brief"
         }
-      ]
+      ],
+      "pt": "Visão geral"
     },
     {
       "title": "Discover",
@@ -21,12 +24,14 @@
         {
           "id": "discover",
           "title": "Overview",
-          "src": "docs/discover/index.md"
+          "src": "docs/discover/index.md",
+          "pt": "Visão geral"
         },
         {
           "id": "landscape",
           "title": "The high street today",
-          "src": "docs/discover/high-street-landscape.md"
+          "src": "docs/discover/high-street-landscape.md",
+          "pt": "A high street hoje"
         },
         {
           "title": "Netnography",
@@ -34,29 +39,35 @@
             {
               "id": "netnography-method",
               "title": "Method",
-              "src": "docs/discover/netnography/method.md"
+              "src": "docs/discover/netnography/method.md",
+              "pt": "Método"
             },
             {
               "id": "netnography-method-details",
               "title": "Method in detail",
-              "src": "docs/discover/netnography/method-details.md"
+              "src": "docs/discover/netnography/method-details.md",
+              "pt": "Método em detalhe"
             },
             {
               "id": "netnography-findings",
               "title": "Findings",
-              "src": "docs/discover/netnography/findings.md"
+              "src": "docs/discover/netnography/findings.md",
+              "pt": "Achados"
             },
             {
               "id": "empathy-map",
               "title": "Empathy map",
-              "src": "docs/discover/netnography/empathy-map.md"
+              "src": "docs/discover/netnography/empathy-map.md",
+              "pt": "Mapa de empatia"
             },
             {
               "id": "dimensions",
               "title": "Proposed dimensions",
-              "src": "docs/discover/netnography/dimensions.md"
+              "src": "docs/discover/netnography/dimensions.md",
+              "pt": "Dimensões propostas"
             }
-          ]
+          ],
+          "pt": "Netnografia"
         },
         {
           "title": "Proto-personas",
@@ -64,46 +75,59 @@
             {
               "id": "personas",
               "title": "The proto-personas",
-              "src": "docs/discover/personas/index.md"
+              "src": "docs/discover/personas/index.md",
+              "pt": "As proto-personas"
             },
             {
               "id": "persona-method",
               "title": "Method",
-              "src": "docs/discover/personas/method.md"
+              "src": "docs/discover/personas/method.md",
+              "pt": "Método"
             },
             {
               "id": "persona-method-details",
               "title": "Method in detail",
-              "src": "docs/discover/personas/method-details.md"
+              "src": "docs/discover/personas/method-details.md",
+              "pt": "Método em detalhe"
             }
-          ]
+          ],
+          "pt": "Proto-personas"
         },
         {
           "id": "benchmarks",
           "title": "Benchmarks",
-          "src": "docs/discover/benchmarks.md"
+          "src": "docs/discover/benchmarks.md",
+          "pt": "Benchmarks"
         },
         {
           "id": "sources",
           "title": "Sources",
-          "src": "docs/discover/sources.md"
+          "src": "docs/discover/sources.md",
+          "pt": "Fontes"
         }
-      ]
+      ],
+      "pt": "Discover"
     },
     {
       "title": "Define",
       "disabled": true,
-      "note": "Problem focus and the shopper"
+      "note": "Problem focus and the shopper",
+      "pt": "Define",
+      "note_pt": "Foco do problema e o comprador"
     },
     {
       "title": "Develop",
       "disabled": true,
-      "note": "Concepts and the journey"
+      "note": "Concepts and the journey",
+      "pt": "Develop",
+      "note_pt": "Conceitos e a jornada"
     },
     {
       "title": "Deliver",
       "disabled": true,
-      "note": "Prototype and app"
+      "note": "Prototype and app",
+      "pt": "Deliver",
+      "note_pt": "Protótipo e app"
     },
     {
       "title": "Process",
@@ -111,14 +135,17 @@
         {
           "id": "decision-log",
           "title": "Decision log",
-          "src": "docs/decision-log.md"
+          "src": "docs/decision-log.md",
+          "pt": "Registro de decisões"
         },
         {
           "id": "ai-log",
           "title": "How AI was used",
-          "src": "docs/process/ai-log.md"
+          "src": "docs/process/ai-log.md",
+          "pt": "Como a IA foi usada"
         }
-      ]
+      ],
+      "pt": "Processo"
     }
   ]
 }

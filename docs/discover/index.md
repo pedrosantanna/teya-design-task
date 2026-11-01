@@ -60,7 +60,7 @@ The evidence pulls in two directions, and the choice between them is the first d
 
 ## Open questions for Define
 
-- Which shopper do I design for? The [proto-personas](personas/index.md) put the strongest pain with Sam, the mission shopper, who needs a specific thing soon.
+- The shopper to design for. The [proto-personas](personas/index.md) put the strongest pain with Sam, the mission shopper, who needs a specific thing soon.
 - How does a shop with no product codes say what it has, with almost no extra work?
 - Is collection the default and delivery the option, given most people reach their high street on foot?
 - What would the street's existing organisers, such as the Hammersmith BID, need to see to take part?

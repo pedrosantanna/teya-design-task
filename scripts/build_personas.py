@@ -26,6 +26,30 @@ from collections import Counter
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DIR = ROOT / "docs" / "discover" / "personas"
 PAGES = [DIR / "index.md", DIR / "method.md", DIR / "method-details.md"]
+PT_DIR = ROOT / "docs" / "pt-br" / "discover" / "personas"
+PT_PAGES = [PT_DIR / "index.md", PT_DIR / "method.md", PT_DIR / "method-details.md"]
+# Generated tables keep the same data; their headers and labels are translated for the PT-BR pages.
+PT_TERMS = [
+    ("Sam, the mission shopper", "Sam, o comprador em missão"), ("Jess, the lapsed local", "Jess, a local que desistiu"),
+    ("Ruth, the regular", "Ruth, a frequentadora"), ("Nothing broke (not clustered)", "Nada deu errado (fora dos clusters)"),
+    ("| Group |", "| Grupo |"), ("| Posts |", "| Posts |"), ("| People |", "| Pessoas |"), ("Centre (urgency, failure)", "Centro (urgência, falha)"),
+    ("| Sources |", "| Fontes |"), ("| Where it broke |", "| Onde deu errado |"), ("| What they did next |", "| O que fizeram depois |"),
+    ("| Where it broke | Posts | Points to |", "| Onde deu errado | Posts | Aponta para |"), ("| Information |", "| Informação |"),
+    ("| Access |", "| Acesso |"), ("| Availability |", "| Disponibilidade |"), ("| Value |", "| Valor |"), ("| No failure |", "| Sem falha |"),
+    ("| findability |", "| findability |"), ("| transaction |", "| transaction |"), ("| the street's offer |", "| a oferta da rua |"), ("| nothing to fix |", "| nada a resolver |"),
+    ("| Field | Posts compared | Agreement | Cohen's kappa |", "| Campo | Posts comparados | Concordância | Kappa de Cohen |"),
+    ("| Clusters (k) | Mean silhouette |", "| Clusters (k) | Silhouette médio |"), ("← chosen", "← escolhido"),
+    ("| Post | Date | Job | Urgent | Failure | Stance | Urgency | Failure score | Group | Why |", "| Post | Data | Tarefa | Urgente | Falha | Atitude | Urgência | Nota de falha | Grupo | Por quê |"),
+    ("| Post | Settled as | Why |", "| Post | Resolvido como | Por quê |"), ("| Post | Why it was left out |", "| Post | Por que ficou de fora |"),
+    ("West London", "West London"), ("UK-wide", "Reino Unido"), ("excluded", "excluído"),
+]
+
+
+def to_pt(text):
+    for a, b in PT_TERMS:
+        text = text.replace(a, b)
+    return text
+
 
 JOBS = [("specific", "Specific item or shop"), ("routine", "Routine shopping and services"), ("discovery", "Discovery and browsing")]
 FAILURES = [
@@ -223,12 +247,13 @@ def main():
 
     blocks = {"chart": chart_md, "silhouette": sil_md, "resolutions": "\n".join(resolutions), "grid": grid_md, "groups": summary_md, "failures": failures_md, "coding": "\n".join(table),
               "excluded": "\n".join(excluded), "agreement": agreement_md}
-    for page in PAGES:
-        if page.exists():
-            text = page.read_text(encoding="utf-8")
-            for name, body in blocks.items():
-                text = replace_block(text, name, body)
-            page.write_text(text, encoding="utf-8")
+    for pages, conv in ((PAGES, lambda x: x), (PT_PAGES, to_pt)):
+        for page in pages:
+            if page.exists():
+                text = page.read_text(encoding="utf-8")
+                for name, body in blocks.items():
+                    text = replace_block(text, name, body if name in ("chart", "grid") else conv(body))
+                page.write_text(text, encoding="utf-8")
     print(sil_md)
     print(summary_md)
     print(failures_md)
