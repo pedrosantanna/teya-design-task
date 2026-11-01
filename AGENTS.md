@@ -1,0 +1,44 @@
+# AGENTS.md
+
+Shared instructions for every coding agent working in this repo (Claude Code is the primary one; Codex is used for reviews and parallel tasks). `CLAUDE.md` imports this file — keep shared guidance here, not there.
+
+## What this repo is
+
+The deliverable for a design take-home task: the discovery, the definition and design decisions, a clickable prototype, and possibly a running application. The repo will be **public** and is part of what gets evaluated — the documented process matters as much as the prototype.
+
+The final deliverable is presented as a Claude Artifact whose source lives in this repo. The prototype is built in **code**. Figma and Apple Freeform are used only for exploration; their outputs may be attached as process assets, but they are not deliverables and not a handoff source.
+
+Platform (mobile vs. web), the prototype's stack and repo layout are deliberately undecided — see `docs/decision-log.md`. Update this file once they are decided.
+
+## Layout and commands
+
+- `docs/` — all content, in Markdown. Single source of truth. `docs/discover/` holds the discovery research.
+- `site/` — the docs site that renders `docs/` (shadcn/ui-style neutral design, sidebar IA). `site/nav.json` defines the sidebar; every page is an entry pointing at a `docs/*.md` file. Adding a page = write the Markdown + add it to `nav.json`.
+- Preview: `python3 site/serve.py` → http://localhost:4173 (serves the repo root and wraps `site/index.html` in the document skeleton the artifact platform adds at publish time, so `index.html` itself has no `<html>/<head>/<body>`).
+- Publishing: the site is published as a Claude Artifact with `site/index.html` as the page and `site/nav.json` + every `docs/**/*.md` as supporting files under their repo paths.
+
+### Markdown extensions the site understands
+Fenced blocks with these languages render as components:
+- ` ```quote ` — evidence card. One `key: value` per line: `text`, `handle`, `network`, `date` (YYYY-MM-DD), `url`, `tags` (comma-separated), `context`. Consecutive cards become a grid.
+- ` ```empathy-map ` — Strategyzer empathy map. `Label:` lines (See, Hear, Think and feel, Say and do, Pains, Gains) each followed by `- bullet` lines.
+- ` ```timeline ` — `- YYYY-MM-DD — text` lines.
+Relative links between `.md` files are rewritten to the matching site page. A page's H1 is its title and its first paragraph is the lede.
+
+## The brief (summary)
+
+An app (mobile or web) that brings a high street's small independent shops (bakery, hardware, florist, butcher…) into one place: a shopper sees what's available nearby right now, finds it, buys it, and chooses pickup or delivery.
+
+- Pick **one** primary problem and take a clear position on it: **Findability** (finding things across hundreds of tiny, badly-catalogued merchants) or **Transaction** (one basket across several independent shops resolving into a purchase, with pickup + delivery). Show how the other one constrains it.
+- We define the shopper and the scope. Anything missing (data, merchant behaviour, logistics, business model) is **assumed and stated explicitly**.
+- Deliverables: a prototype (a few key steps of one journey, clickable; one or two screens at real polish, the rest rough) and a 5–20 min screen recording: ~5 min thinking (framing, decisions, what was deliberately left out), ~10 min of the real work on screen including where AI came in (prompts, outputs, what was thrown away, what was fixed by hand), ~5 min what's next / what to validate.
+- Constraints: a few honest hours, not a polished weekend. No slides. Any AI tooling is fair game, shown honestly including failures.
+
+## Working rules
+
+- **This repo is only about the take-home task.** Nothing about the role, interview conversations, the candidate's background, or people/internals of the company goes in — not in files, commit messages, PRs or published artifacts.
+- Major process decisions go in `docs/decision-log.md` (newest entry last): what was decided, why, and what stays open. Only the decisions that shape the process, not every small choice. Assumptions are logged as assumptions.
+- AI usage (what was prompted, what was kept or discarded, where it failed) is part of the deliverable — keep that trail when it's meaningful.
+- The author decides direction (problem focus, platform, when to use which tool). Agents propose and record; they don't pre-empt those calls.
+- **Everything in the repo is in English** (docs, code, comments, commits). Only the conversation with the author is in Portuguese.
+- Prose follows human-voice writing rules (the author's `escrita-humana` skill): no "it's not X, it's Y" pairs, no triple anaphora, no empty adjectives, none of delve / leverage / utilize / landscape (in the vague sense) / seamlessly / empower / unlock / journey (as metaphor) / furthermore / moreover, no defensive hedging, no rhetorical-question openers. Sentence case for headings.
+- Evidence rules for research: quotes are verbatim, with public handle, network, date and direct URL; only content from the last 18 months at the time of research; nothing from private accounts or closed groups; never invent or reconstruct a quote, handle or link.

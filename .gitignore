@@ -1,0 +1,8 @@
+.DS_Store
+node_modules/
+.env*
+!.env.example
+
+# Claude local settings and anything private
+.claude/settings.local.json
+private/
