@@ -7,7 +7,7 @@ Takeaways:
 - Three clusters fit the data best (mean silhouette 0.55, against 0.48–0.53 for 2, 4 or 5).
 - The two coders agreed on 89–96% of the codes behind both dimensions.
 Call:
-- Two dimensions that map onto the brief: need, and where the occasion broke.
+- Two dimensions that map onto the brief: need urgency and point of failure.
 - Lewrick, Link and Leifer's persona fields to describe each cluster.
 AI:
 - Claude wrote the codebook and coded 44 posts. A second agent coded them blind.
@@ -20,9 +20,9 @@ Trade-offs:
 
 1. **Tag ("code").** Each post from the [netnography](../netnography/findings.md) gets labels from a fixed list, the codebook: the job, whether it's urgent, where it broke, and what the shopper did next. In qualitative research this tagging is called coding; it isn't programming. 27 of 44 posts describe the poster's own shopping.
 2. **Check.** A second agent tags every post blind, without seeing the first tags. Three written rules settle the disagreements.
-3. **Score** each post on the two [dimensions](../netnography/dimensions.md):
+3. **Score** each post on the two [dimensions](../netnography/dimensions.md), need urgency and point of failure:
 
-| Need | Score | Where it broke | Score |
+| Need urgency | Score | Point of failure | Score |
 | --- | --- | --- | --- |
 | Discovery | 1 | Couldn't find out (information) | 9 |
 | Routine | 4 | Wasn't there (availability) | 6 |
@@ -40,7 +40,7 @@ Trade-offs:
 | 5 | 0.48 |
 <!-- /generated:silhouette -->
 
-5. **Name.** The cluster with the highest need is Sam. Of the rest, the one closest to "couldn't get it" is Dan, and the other is Ruth. Each one is then described with the persona fields: jobs to be done, use cases, pains, gains and influencers.
+5. **Name.** The cluster with the highest need urgency is Sam. Of the rest, the one closest to "couldn't get it" is Dan, and the other is Ruth. Each one is then described with the persona fields: jobs to be done, use cases, pains, gains and influencers.
 
 ## The persona tool
 

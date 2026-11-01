@@ -150,8 +150,8 @@ def main():
     worked = [p for p in posts if p["group"] == "worked"]
 
     chart = {
-        "x": {"label": "Need", "ticks": [[1, "Discovery"], [4, "Routine"], [7, "Specific item"], [10, "Specific + deadline"]], "min": "Browse", "max": "Mission"},
-        "y": {"label": "Where it broke", "ticks": [[9, "Couldn't find out"], [6, "Wasn't there"], [4, "Not worth it"], [1, "Couldn't get it"]], "min": "Transaction", "max": "Findability"},
+        "x": {"label": "Need urgency", "ticks": [[1, "Discovery"], [4, "Routine"], [7, "Specific item"], [10, "Specific + deadline"]], "min": "Browsing", "max": "Needs it now"},
+        "y": {"label": "Point of failure", "ticks": [[9, "Couldn't find out"], [6, "Wasn't there"], [4, "Not worth it"], [1, "Couldn't get it"]], "min": "Getting · transaction", "max": "Knowing · findability"},
         "names": {k: NAMES.get(k, k) for k in centres},
         "centres": centres,
         "points": [{"x": p["x"], "y": p["y"], "c": p["cluster"], "s": p["stance"], "h": p["handle"]} for p in pts],
@@ -176,7 +176,7 @@ def main():
     grid_md = "```occasion-grid\n" + json.dumps(grid, ensure_ascii=False) + "\n```"
 
     # Group summary with source mix.
-    rows = ["| Group | Posts | People | Centre (need, breaks) | Sources | Where it broke | What they did next |", "| --- | --- | --- | --- | --- | --- | --- |"]
+    rows = ["| Group | Posts | People | Centre (urgency, failure) | Sources | Where it broke | What they did next |", "| --- | --- | --- | --- | --- | --- | --- |"]
     for gid, name in GROUPS.items():
         mine = [p for p in posts if p["group"] == gid]
         if not mine:
@@ -199,7 +199,7 @@ def main():
     failures_md = "\n".join(fail_rows)
 
     # Per-post coding table.
-    table = ["| Post | Date | Job | Urgent | Failure | Stance | Need | Breaks | Group | Why |", "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
+    table = ["| Post | Date | Job | Urgent | Failure | Stance | Urgency | Failure score | Group | Why |", "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
     for p in sorted(posts, key=lambda p: (list(GROUPS).index(p["group"]), p["job"], p["failure"])):
         table.append(f"| [{p['handle']}]({p['url']}) | {p['date']} | {p['job']} | {p['urgent']} | {p['failure']} | {p['stance']} | {p.get('x', '–')} | {p.get('y', '–')} | {GROUPS[p['group']].split(',')[0]} | {p['rationale']} |")
     excluded = ["| Post | Why it was left out |", "| --- | --- |"]

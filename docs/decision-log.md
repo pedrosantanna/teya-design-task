@@ -97,7 +97,7 @@ Posts belong to the people who wrote them. Quotes are kept to the phrase that ca
 ## 012 — Proto-personas from clustered posts
 **2026-11-01 · Decided**
 
-Posts from the netnography are coded, scored on two dimensions (need, and where the occasion broke) and clustered with k-means. Each cluster becomes a proto-persona, described with Lewrick, Link and Leifer's persona fields. A second agent codes every post blind, so the scores can be checked. The data supports three clusters.
+Posts from the netnography are coded, scored on two dimensions (need urgency and point of failure) and clustered with k-means. Each cluster becomes a proto-persona, described with Lewrick, Link and Leifer's persona fields. A second agent codes every post blind, so the scores can be checked. The data supports three clusters.
 
 **Why:** the personas should come out of the data, and the dimensions should speak to the brief's choice between findability and transaction.
 **Trade-off:** three thin groups (11, 6 and 4 posts), each one traceable to its posts. They are proto-personas because nobody was interviewed.

@@ -1,6 +1,6 @@
 # Proto-personas
 
-Three proto-personas, found by plotting 21 tagged posts on two dimensions, need and where the occasion broke, and letting clusters form. Each persona is one cluster.
+Three proto-personas, found by plotting 21 tagged posts on two dimensions, need urgency and point of failure, and letting clusters form. Each persona is one cluster.
 
 ```summary
 Takeaways:
@@ -17,16 +17,25 @@ Trade-offs:
 - Small numbers (4 to 11 posts per cluster). These are directions to test in Define, not findings.
 ```
 
+## The two dimensions
+
+| Dimension | What it measures | Why we chose it |
+| --- | --- | --- |
+| **Need urgency** · browsing → needs it now | How specific and time-bound the shopper's need was: browsing, routine shopping, a specific item, or a specific item with a deadline. | It separates the occasions the netnography kept showing, from a casual wander to a same-day hunt. Each occasion asks something different of a product. |
+| **Point of failure** · knowing → getting | Where the trip went wrong: couldn't find out (stock, hours, who sells it), the thing wasn't there, it wasn't worth the price, or couldn't get it (hours, payment, delivery time). | It maps straight onto the brief. Failures of knowing are a findability problem, and failures of getting are a transaction problem. |
+
+Both are scored from tags that two agents applied separately and mostly agreed on (89–96%). More in [proposed dimensions](../netnography/dimensions.md).
+
 ## The map
 
 <!-- generated:chart -->
 ```cluster-map
-{"x": {"label": "Need", "ticks": [[1, "Discovery"], [4, "Routine"], [7, "Specific item"], [10, "Specific + deadline"]], "min": "Browse", "max": "Mission"}, "y": {"label": "Where it broke", "ticks": [[9, "Couldn't find out"], [6, "Wasn't there"], [4, "Not worth it"], [1, "Couldn't get it"]], "min": "Transaction", "max": "Findability"}, "names": {"mission": "Sam, the mission shopper", "lapsed": "Dan, the lapsed local", "regular": "Ruth, the regular"}, "centres": {"mission": {"x": 9.2, "y": 7.9, "n": 11}, "lapsed": {"x": 5.5, "y": 1.5, "n": 6}, "regular": {"x": 3.2, "y": 6.8, "n": 4}}, "points": [{"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/jamesshovlin"}, {"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/akat224"}, {"x": 10, "y": 6, "c": "mission", "s": "persists", "h": "u/moanyjoany"}, {"x": 7, "y": 9, "c": "mission", "s": "defects", "h": "Dbank"}, {"x": 7, "y": 9, "c": "mission", "s": "unknown", "h": "u/dy14n19"}, {"x": 4, "y": 9, "c": "regular", "s": "persists", "h": "Valentando"}, {"x": 10, "y": 6, "c": "mission", "s": "defects", "h": "u/Mediocre_Sprinkles"}, {"x": 4, "y": 1, "c": "lapsed", "s": "defects", "h": "LividArse"}, {"x": 10, "y": 1, "c": "lapsed", "s": "unknown", "h": "u/WearyChampionship365"}, {"x": 10, "y": 6, "c": "mission", "s": "unknown", "h": "u/Miraclefish"}, {"x": 4, "y": 1, "c": "lapsed", "s": "unknown", "h": "FerrisWheelsandLilacs"}, {"x": 10, "y": 6, "c": "mission", "s": "unknown", "h": "u/xmastreee"}, {"x": 4, "y": 1, "c": "lapsed", "s": "defects", "h": "u/killmetruck"}, {"x": 4, "y": 6, "c": "regular", "s": "persists", "h": "u/mjfh2"}, {"x": 4, "y": 6, "c": "regular", "s": "unknown", "h": "u/Aggravating-Desk4004"}, {"x": 4, "y": 1, "c": "lapsed", "s": "unknown", "h": "u/rsweb"}, {"x": 1, "y": 6, "c": "regular", "s": "unknown", "h": "@London_W4"}, {"x": 7, "y": 9, "c": "mission", "s": "unknown", "h": "@Jojo_agboola"}, {"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/grand_web"}, {"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/claudiav2603"}, {"x": 7, "y": 4, "c": "lapsed", "s": "defects", "h": "u/Username8831"}], "worked": ["u/jamesshovlin", "u/Inge_Jones", "u/Vermathorax", "u/rising_then_falling", "u/Peppy_Tomato", "Kenjenny"]}
+{"x": {"label": "Need urgency", "ticks": [[1, "Discovery"], [4, "Routine"], [7, "Specific item"], [10, "Specific + deadline"]], "min": "Browsing", "max": "Needs it now"}, "y": {"label": "Point of failure", "ticks": [[9, "Couldn't find out"], [6, "Wasn't there"], [4, "Not worth it"], [1, "Couldn't get it"]], "min": "Getting · transaction", "max": "Knowing · findability"}, "names": {"mission": "Sam, the mission shopper", "lapsed": "Dan, the lapsed local", "regular": "Ruth, the regular"}, "centres": {"mission": {"x": 9.2, "y": 7.9, "n": 11}, "lapsed": {"x": 5.5, "y": 1.5, "n": 6}, "regular": {"x": 3.2, "y": 6.8, "n": 4}}, "points": [{"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/jamesshovlin"}, {"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/akat224"}, {"x": 10, "y": 6, "c": "mission", "s": "persists", "h": "u/moanyjoany"}, {"x": 7, "y": 9, "c": "mission", "s": "defects", "h": "Dbank"}, {"x": 7, "y": 9, "c": "mission", "s": "unknown", "h": "u/dy14n19"}, {"x": 4, "y": 9, "c": "regular", "s": "persists", "h": "Valentando"}, {"x": 10, "y": 6, "c": "mission", "s": "defects", "h": "u/Mediocre_Sprinkles"}, {"x": 4, "y": 1, "c": "lapsed", "s": "defects", "h": "LividArse"}, {"x": 10, "y": 1, "c": "lapsed", "s": "unknown", "h": "u/WearyChampionship365"}, {"x": 10, "y": 6, "c": "mission", "s": "unknown", "h": "u/Miraclefish"}, {"x": 4, "y": 1, "c": "lapsed", "s": "unknown", "h": "FerrisWheelsandLilacs"}, {"x": 10, "y": 6, "c": "mission", "s": "unknown", "h": "u/xmastreee"}, {"x": 4, "y": 1, "c": "lapsed", "s": "defects", "h": "u/killmetruck"}, {"x": 4, "y": 6, "c": "regular", "s": "persists", "h": "u/mjfh2"}, {"x": 4, "y": 6, "c": "regular", "s": "unknown", "h": "u/Aggravating-Desk4004"}, {"x": 4, "y": 1, "c": "lapsed", "s": "unknown", "h": "u/rsweb"}, {"x": 1, "y": 6, "c": "regular", "s": "unknown", "h": "@London_W4"}, {"x": 7, "y": 9, "c": "mission", "s": "unknown", "h": "@Jojo_agboola"}, {"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/grand_web"}, {"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/claudiav2603"}, {"x": 7, "y": 4, "c": "lapsed", "s": "defects", "h": "u/Username8831"}], "worked": ["u/jamesshovlin", "u/Inge_Jones", "u/Vermathorax", "u/rising_then_falling", "u/Peppy_Tomato", "Kenjenny"]}
 ```
 <!-- /generated:chart -->
 
 <!-- generated:groups -->
-| Group | Posts | People | Centre (need, breaks) | Sources | Where it broke | What they did next |
+| Group | Posts | People | Centre (urgency, failure) | Sources | Where it broke | What they did next |
 | --- | --- | --- | --- | --- | --- | --- |
 | Sam, the mission shopper | 11 | 11 | 9.2, 7.9 | West London 4, London 3, UK-wide 3, X/TikTok 1 | information 7, availability 4 | unknown 8, defects 2, persists 1 |
 | Dan, the lapsed local | 6 | 6 | 5.5, 1.5 | UK-wide 3, West London 2, London 1 | access 5, value 1 | defects 3, unknown 3 |

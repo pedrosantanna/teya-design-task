@@ -1,11 +1,11 @@
 # Proposed dimensions
 
-Two dimensions that come out of the [findings](findings.md) and are used to cluster the [proto-personas](../personas/index.md). One describes the need. The other says where the occasion broke, which is the choice the brief asks for.
+Two dimensions that come out of the [findings](findings.md) and are used to cluster the [proto-personas](../personas/index.md): **need urgency** and **point of failure**. The second one is the choice the brief asks for.
 
 ```summary
 Takeaways:
-- Need: from browsing to a mission (a specific item, often with a deadline).
-- Where it broke: from not knowing (findability) to not being able to get it (transaction).
+- Need urgency: from browsing to needing a specific thing now.
+- Point of failure: from knowing (couldn't find out, findability) to getting (couldn't get it, transaction).
 - What people did next (kept going, or gave up) is shown on each point, but it isn't an axis. Most posts don't show it.
 Call:
 - Choose axes that speak to the brief's choice, and that can be coded from what people wrote.
@@ -15,9 +15,9 @@ Trade-offs:
 - Need describes occasions more than people: the same person browses on Saturday and is on a mission on Tuesday.
 ```
 
-## Need: browse ↔ mission
+## Need urgency: browsing ↔ needs it now
 
-How specific and urgent the need is. At the **mission** end the shopper wants a particular thing, often by a deadline, and won't tolerate an uncertain trip. At the **browse** end there's no item in mind; routine shopping sits in between.
+How specific and time-bound the need is. At the **needs it now** end the shopper wants a particular thing, often by a deadline, and won't tolerate an uncertain trip. At the **browsing** end there's no item in mind; routine shopping sits in between.
 
 Scored from two codes: the job (discovery, routine or a specific item) and whether the post states a deadline. See the [scale](../personas/method.md).
 
@@ -28,7 +28,7 @@ network: Reddit · r/chiswick
 date: 2026-08-11
 url: https://www.reddit.com/r/chiswick/comments/1vlibmn/
 tags: stock-visibility, urgency
-context: Mission end: specific item, deadline the next day.
+context: Needs-it-now end: specific item, deadline the next day.
 status: verified
 ```
 
@@ -39,7 +39,7 @@ network: Reddit · r/london
 date: 2026-08-11
 url: https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2y26dy/
 tags: stock-visibility, urgency
-context: Mission end: same eclipse rush, near Hammersmith.
+context: Needs-it-now end: same eclipse rush, near Hammersmith.
 status: archive
 ```
 
@@ -50,13 +50,13 @@ network: Mumsnet · Talk › Chat
 date: 2026-03-27
 url: https://www.mumsnet.com/talk/_chat/5509007-do-you-still-enjoy-shopping-on-the-high-street-or-mostly-online?reply=151334270
 tags: online-default
-context: Browse end, gone quiet: shops nearby, no recent trips.
+context: Browsing end, gone quiet: shops nearby, no recent trips.
 status: verified
 ```
 
-## Where it broke: findability ↔ transaction
+## Point of failure: knowing ↔ getting
 
-Where the shopping occasion failed. At the top the shopper **couldn't find out**: whether a shop has the item, whether it's open, who sells it. That points to findability. At the bottom they **couldn't get it**: hours that clash with work, cash only, delivery too slow. That points to transaction. In between, the item or the shop simply **wasn't there**, or wasn't worth the price. That is the street's own offer, which an app can show but not fix.
+Where the trip went wrong. At the **knowing** end the shopper couldn't find out: whether a shop has the item, whether it's open, who sells it. That points to findability. At the **getting** end they couldn't get it: hours that clash with work, cash only, delivery too slow. That points to transaction. In between, the item or the shop simply **wasn't there**, or wasn't worth the price. That is the street's own offer, which an app can show but not fix.
 
 ```quote
 text: Hard to know stock levels without visiting, unless you can somehow get through on the phone..!
@@ -65,7 +65,7 @@ network: Reddit · r/london
 date: 2026-08-10
 url: https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tdld2/
 tags: stock-visibility
-context: Findability end: stock can't be known without going.
+context: Knowing end: stock can't be known without going.
 status: verified
 ```
 
@@ -87,7 +87,7 @@ network: Mumsnet · Talk › AIBU
 date: 2025-12-05
 url: https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977221
 tags: opening-hours, online-default
-context: Transaction end: shops not open when they can go.
+context: Getting end: shops not open when they can go.
 status: verified
 ```
 
@@ -98,7 +98,7 @@ network: Reddit · r/london
 date: 2026-06-07
 url: https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq967k5/
 tags: opening-hours, price, support-local
-context: Transaction end: office hours and price push the weekly shop elsewhere.
+context: Getting end: office hours and price push the weekly shop elsewhere.
 status: verified
 ```
 

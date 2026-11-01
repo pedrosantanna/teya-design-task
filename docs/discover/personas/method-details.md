@@ -61,7 +61,7 @@ Kappa corrects agreement for chance. Above 0.8 is usually read as strong and 0.4
 ## Every coded post
 
 <!-- generated:coding -->
-| Post | Date | Job | Urgent | Failure | Stance | Need | Breaks | Group | Why |
+| Post | Date | Job | Urgent | Failure | Stance | Urgency | Failure score | Group | Why |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [u/moanyjoany](https://www.reddit.com/r/Ealing/comments/1vlcuor/comment/p30r2af/) | 2026-08-11 | specific | yes | availability | persists | 10 | 6 | Sam | Tried two shops for eclipse glasses; both sold out. |
 | [u/Mediocre_Sprinkles](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb2z980/) | 2025-08-28 | specific | yes | availability | defects | 10 | 6 | Sam | 'In a pinch', every shop, nothing; paid parking; buys on Amazon. |
