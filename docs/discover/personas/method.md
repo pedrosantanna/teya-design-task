@@ -51,6 +51,6 @@ Lewrick, Link and Leifer's persona/user profile ([*The Design Thinking Playbook*
 - **Small clusters.** 11, 6 and 4 posts. Ruth especially needs testing.
 - **Coarse scores.** Codes are categories, so many posts share a point. The map shows them side by side.
 - **AI on both sides.** Agreement between two models is weaker evidence than agreement between two people.
-- **Missing shoppers.** Older and offline shoppers hardly appear in the data.
+- **Missing shoppers.** Older and offline shoppers hardly appear in the data. Ruth is the persona most exposed to this: the behaviour her cluster shows (routine, loyal, watching shops close) may belong mostly to people who don't post on Reddit. Her age therefore comes from desk research (a 2018 GLA/YouGov poll), not from the posts, and she is the first persona to test.
 
 Codebook, agreement, every disagreement and every tagged post: [method in detail](method-details.md).

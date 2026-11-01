@@ -45,7 +45,7 @@ Both are scored from tags that two agents applied separately and mostly agreed o
 
 How the scores and clusters were calculated: [method](method.md).
 
-**About the names and photos.** Each persona is one cluster. The names are labels: common British first names, short and easy to tell apart. The photos are stand-ins from Unsplash. The posts rarely say anyone's age or gender, so the names, pronouns and photos carry no evidence: treat them as labels. The attributes listed come from the posts in that cluster. I chose the genders to balance the set: two women and one man.
+**About the names and photos.** Each persona is one cluster. The names are labels: common British first names, short and easy to tell apart. The photos are stand-ins from Unsplash. The posts rarely say anyone's age or gender, so the names, pronouns and photos carry no evidence: treat them as labels. The one exception is Ruth's age, which comes from desk research. The attributes listed come from the posts in that cluster. I chose the genders to balance the set: two women and one man.
 
 ## Sam, the mission shopper
 
@@ -82,6 +82,8 @@ status: verified
 | **Gains** | Knowing before leaving. Getting it today. |
 | **Influencers** | Reddit threads, WhatsApp restock groups, AI chatbots. |
 | **For the brief** | Findability. The question is "who has it, right now?" |
+
+**Why 50 or over.** The posts don't say anyone's age, and Reddit skews young, so the age comes from desk research instead. In a 2018 YouGov poll for the GLA, Londoners aged 50–64 were the most likely to visit a high street weekly (61%, against 48–51% of under-50s) and to go for independent shops or markets (57% against 46–48%). Those aged 65 and over were the most likely to call high-street shops very important (64%, against 36% of 18–24s) ([GLA/YouGov, 2018](https://data.london.gov.uk/download/gla-poll-results-2018/f9749162-4ba4-4370-a01e-459cde67158d/October%25202018%2520GLA%2520YouGov%2520poll%2520results%2520.pdf)). Older shoppers also buy online less ([ONS, 2020](https://www.ons.gov.uk/peoplepopulationandcommunity/householdcharacteristics/homeinternetandsocialmediausage/bulletins/internetaccesshouseholdsandindividuals/2020)). The gaps are moderate and peak at 50–64, not 65+. No source measures loyalty to shops by age, and the FCA finds that digital exclusion and income, more than age itself, drive reliance on cash ([FCA, 2024](https://www.fca.org.uk/publication/research-notes/research-note-cash-reliance.pdf)). So her age is a supported guess, to test in interviews.
 
 ## Jess, the lapsed local
 
@@ -130,6 +132,7 @@ image: img/ruth.jpg
 credit: Photo: Centre for Ageing Better, Unsplash
 credit_url: https://unsplash.com/photos/elderly-woman-smiling-in-a-room-filled-with-clothes-UZCqtOcY8b4
 - Where: Mostly West London: Kew, Ealing, Hammersmith
+- Age: Probably 50 or over | desk research
 - Routine: Weekly butcher, newsagent post-office counter
 - When a shop closes: Travels further rather than switch
 - Hears from: Neighbours, local forums
@@ -157,6 +160,14 @@ status: verified
 | **Gains** | A relationship with the shop. Quality and special requests. |
 | **Influencers** | Neighbours, local forums, council "shop local" campaigns. |
 | **For the brief** | Neither problem, directly. She needs to know what's still there and open. That's a lighter form of findability. |
+
+## What to test first
+
+These personas come from public posts, so they inherit who posts. Before Define commits to one of them, I want to check three things with five or six short interviews on King Street:
+
+- **Ruth:** is routine, loyal local shopping mostly a habit of people over 50, as London polling suggests? And how do people who never post online find out what's still open?
+- **Sam:** would a shop confirming "it's here, I'll hold it" be enough to make the trip?
+- **Jess:** which matters more, opening hours, collection after hours or card payment?
 
 ## Outside the map
 

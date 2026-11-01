@@ -101,6 +101,7 @@ Posts from the netnography are coded, scored on two dimensions (need urgency and
 
 **Why:** the personas should come out of the data, and the dimensions should speak to the brief's choice between findability and transaction.
 **Trade-off:** three thin groups (11, 6 and 4 posts), each one traceable to its posts. They are proto-personas because nobody was interviewed.
+**Names, gender, age:** names and genders are labels I chose to balance the set (two women, one man). Age is left out unless another source supports it: Ruth's "probably 50 or over" comes from London polling, because the posts can't speak for older shoppers.
 
 ## 013 — Docs say who did what
 **2026-11-01 · Decided**

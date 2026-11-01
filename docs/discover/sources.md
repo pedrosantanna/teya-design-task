@@ -1,6 +1,6 @@
 # Sources
 
-Every quote and every link used across the docs, in one place. 72 quotes (71 checked against the live source) and 155 other sources. This page is generated from the other pages by `scripts/build_sources.py`.
+Every quote and every link used across the docs, in one place. 72 quotes (71 checked against the live source) and 158 other sources. This page is generated from the other pages by `scripts/build_sources.py`.
 
 ## Quotes by network
 
@@ -233,6 +233,9 @@ Status **verified** means the text, author and date were matched against the liv
 | [Method in detail](netnography/method-details.md) | [Arctic Shift](https://arctic-shift.photon-reddit.com/) |
 | [Method in detail](netnography/method-details.md) | [pp. 130–131](https://relayto.com/explore/business-model-generation-flipbook-r2k3tfx35p0cg/J1RVxTlK137) |
 | [Method in detail](netnography/method-details.md) | [revised it](https://medium.com/the-xplane-collection/46df22df3c8a) |
+| [Proto-personas](personas/index.md) | [GLA/YouGov, 2018](https://data.london.gov.uk/download/gla-poll-results-2018/f9749162-4ba4-4370-a01e-459cde67158d/October%25202018%2520GLA%2520YouGov%2520poll%2520results%2520.pdf) |
+| [Proto-personas](personas/index.md) | [ONS, 2020](https://www.ons.gov.uk/peoplepopulationandcommunity/householdcharacteristics/homeinternetandsocialmediausage/bulletins/internetaccesshouseholdsandindividuals/2020) |
+| [Proto-personas](personas/index.md) | [FCA, 2024](https://www.fca.org.uk/publication/research-notes/research-note-cash-reliance.pdf) |
 | [Method in detail](personas/method-details.md) | [u/jamesshovlin](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tb0s2/) |
 | [Method in detail](personas/method-details.md) | [Valentando](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977465) |
 | [Method in detail](personas/method-details.md) | [@hollygardnerx](https://www.tiktok.com/@hollygardnerx/video/7578215485968354582) |
