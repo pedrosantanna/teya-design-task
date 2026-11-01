@@ -1,8 +1,10 @@
-# Coding in detail
+# Method in detail
 
-The codebook, how the two coders compared, how disagreements were settled, and the codes and scores for every post. The short version is on [method](method.md).
+The codebook, how the two coders compared, how disagreements were settled, and the tags and scores for every post.
 
-## Codebook
+**What "coding" means here.** It's the qualitative research term for tagging: reading each post and giving it labels from a fixed list, such as "specific item" or "couldn't find out". It has nothing to do with programming. The list of labels and the rule for each one is the codebook. A "coder" is whoever applies it; here, two AI agents. The short version is on [method](method.md).
+
+## Codebook: the labels and their rules
 
 The unit is one public post. A post is coded only if it describes the poster's own shopping: a specific occasion or a habit of their own. Opinions about other people or the street, content written by or for a business, and posts that aren't about shopping are left out.
 
@@ -19,7 +21,7 @@ The unit is one public post. A post is coded only if it describes the poster's o
 2. The full post counts, not only the excerpt shown.
 3. Persists needs a cost stated in the post. A loyal habit with no cost stays unknown.
 
-## Two coders
+## Two coders, tagging separately
 
 Claude coded first. A second agent then coded the same 44 posts from the codebook alone, without seeing the first codes. Agreement before reconciliation:
 

@@ -18,8 +18,8 @@ Trade-offs:
 
 ## Steps
 
-1. **Code.** Each post from the [netnography](../netnography/findings.md) is coded with a written codebook: the job, whether it's urgent, where it broke, and what the shopper did next. 27 of 44 posts describe the poster's own shopping.
-2. **Check.** A second agent codes every post blind. Three written rules settle the disagreements.
+1. **Tag ("code").** Each post from the [netnography](../netnography/findings.md) gets labels from a fixed list, the codebook: the job, whether it's urgent, where it broke, and what the shopper did next. In qualitative research this tagging is called coding; it isn't programming. 27 of 44 posts describe the poster's own shopping.
+2. **Check.** A second agent tags every post blind, without seeing the first tags. Three written rules settle the disagreements.
 3. **Score** each post on the two [dimensions](../netnography/dimensions.md):
 
 | Need | Score | Where it broke | Score |
@@ -53,4 +53,4 @@ Lewrick, Link and Leifer's persona/user profile ([*The Design Thinking Playbook*
 - **AI on both sides.** Agreement between two models is weaker evidence than agreement between two people.
 - **Missing shoppers.** Older and offline shoppers hardly appear in the data.
 
-Codebook, agreement, every disagreement and every coded post: [coding in detail](coding.md).
+Codebook, agreement, every disagreement and every tagged post: [method in detail](method-details.md).

@@ -1,6 +1,6 @@
 # Proto-personas
 
-Three proto-personas, found by plotting 21 coded posts on two dimensions, need and where the occasion broke, and letting clusters form. Each persona is one cluster.
+Three proto-personas, found by plotting 21 tagged posts on two dimensions, need and where the occasion broke, and letting clusters form. Each persona is one cluster.
 
 ```summary
 Takeaways:
@@ -11,7 +11,7 @@ Call:
 - Cluster the posts on two dimensions that speak to the brief, and define the personas from the clusters.
 - Call them proto-personas: nobody was interviewed ([000](../../decision-log.md)).
 AI:
-- Claude and a second agent coded every post blind. A script scored both dimensions and ran the clustering.
+- Claude and a second agent tagged every post blind, from a fixed list of labels. A script scored both dimensions and ran the clustering.
 - I chose the dimensions and checked the clusters against the quotes.
 Trade-offs:
 - Small numbers (4 to 11 posts per cluster). These are directions to test in Define, not findings.

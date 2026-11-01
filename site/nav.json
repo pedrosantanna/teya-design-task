@@ -72,9 +72,9 @@
               "src": "docs/discover/personas/method.md"
             },
             {
-              "id": "persona-coding",
-              "title": "Coding in detail",
-              "src": "docs/discover/personas/coding.md"
+              "id": "persona-method-details",
+              "title": "Method in detail",
+              "src": "docs/discover/personas/method-details.md"
             }
           ]
         },

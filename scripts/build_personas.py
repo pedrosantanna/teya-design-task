@@ -25,7 +25,7 @@ from collections import Counter
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DIR = ROOT / "docs" / "discover" / "personas"
-PAGES = [DIR / "index.md", DIR / "method.md", DIR / "coding.md"]
+PAGES = [DIR / "index.md", DIR / "method.md", DIR / "method-details.md"]
 
 JOBS = [("specific", "Specific item or shop"), ("routine", "Routine shopping and services"), ("discovery", "Discovery and browsing")]
 FAILURES = [
