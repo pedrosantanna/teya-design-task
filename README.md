@@ -13,7 +13,7 @@ The brief asks for a clear position on one of two problems, **findability** (fin
 | [`docs/decision-log.md`](docs/decision-log.md) | The decisions that shaped the process, in order |
 | [`site/`](site/) | The docs site that presents all of the above (published as a Claude Artifact) |
 
-The Markdown in `docs/` is the single source of truth. The site only renders it.
+The Markdown in `docs/` is the single source of truth. The site only renders it. Published version: https://claude.ai/artifact/3EGakxt82GJ2meFSJhm6QJ
 
 ## Status
 
