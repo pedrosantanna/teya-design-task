@@ -36,7 +36,21 @@ Trade-offs:
 
 How the scores and clusters were calculated: [method](method.md).
 
+**About the names and photos.** Each persona is one cluster. The names are labels: common British first names, short and easy to tell apart. The photos are stand-ins from Unsplash. The posts rarely say anyone's age or gender, so the personas don't either. Every attribute listed comes from the posts in that cluster.
+
 ## Sam, the mission shopper
+
+```persona
+name: Sam, the mission shopper
+tagline: Needs a specific thing, often by a deadline, and can't find out who has it.
+image: img/sam.jpg
+credit: Photo: Raymond Okoro, Unsplash
+credit_url: https://unsplash.com/photos/man-in-coat-uses-phone-outside-a-building-20RwJn43ixM
+- Where: Lives or works in West London
+- Asks: Reddit, WhatsApp groups, AI chatbots
+- Buys locally: A specific item, at short notice
+```
+
 
 **Specific item, often a deadline · couldn't find out, or it wasn't there.** The largest and clearest cluster: 11 posts from 11 people, 8 of them with a deadline.
 
@@ -62,6 +76,20 @@ status: verified
 
 ## Dan, the lapsed local
 
+```persona
+name: Dan, the lapsed local
+tagline: Would use local shops if they fitted his week. They don't, so he's stopped.
+image: img/dan.jpg
+credit: Photo: Rasheed Kemy, Unsplash
+credit_url: https://unsplash.com/photos/man-inside-bus-using-earphones-Z4V6OVZR5W4
+- Where: London
+- Week: Weekday hours that match the shops' hours
+- Pays: Card or phone, no cash
+- Buys: Supermarket and Amazon for routine shopping
+- Buys locally: Special occasions only
+```
+
+
 **Mostly routine shopping · couldn't get it.** Six posts. Hours that clash with work, cash only, a delivery that can't arrive in time, a price not worth it. Half of them show him giving up on local.
 
 ```quote
@@ -85,6 +113,19 @@ status: verified
 | **For the brief** | Transaction. Collection out of hours, card payment, or delivery from the local shop. |
 
 ## Ruth, the regular
+
+```persona
+name: Ruth, the regular
+tagline: Has shopped on the same street for years and is watching her shops close.
+image: img/ruth.jpg
+credit: Photo: Centre for Ageing Better, Unsplash
+credit_url: https://unsplash.com/photos/elderly-woman-smiling-in-a-room-filled-with-clothes-UZCqtOcY8b4
+- Where: Same West London neighbourhood for years
+- Routine: Weekly butcher, newsagent post-office counter
+- When a shop closes: Travels further rather than switch
+- Hears from: Neighbours, local forums
+```
+
 
 **Routine shopping · the shop wasn't there.** Four posts, the thinnest cluster. She keeps going to local shops, but the butcher closes, the post office goes and the street thins out.
 
