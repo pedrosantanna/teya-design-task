@@ -18,9 +18,17 @@ Trade-offs:
 
 ## Steps
 
-1. **Tag ("code").** Each post from the [netnography](../netnography/findings.md) gets labels from a fixed list, the codebook: the job, whether it's urgent, where it broke, and what the shopper did next. In qualitative research this tagging is called coding; it isn't programming. 27 of 44 posts describe the poster's own shopping.
-2. **Check.** A second agent tags every post blind, without seeing the first tags. Three written rules settle the disagreements.
-3. **Score** each post on the two [dimensions](../netnography/dimensions.md), need urgency and point of failure:
+### 1. Tag ("code")
+
+Each post from the [netnography](../netnography/findings.md) gets labels from a fixed list, the codebook: the job, whether it's urgent, where it broke, and what the shopper did next. In qualitative research this tagging is called coding; it isn't programming. 27 of 44 posts describe the poster's own shopping.
+
+### 2. Check
+
+A second agent tags every post blind, without seeing the first tags. Three written rules settle the disagreements.
+
+### 3. Score
+
+Each post is scored on the two [dimensions](../netnography/dimensions.md), need urgency and point of failure:
 
 | Need urgency | Score | Point of failure | Score |
 | --- | --- | --- | --- |
@@ -29,7 +37,9 @@ Trade-offs:
 | Specific item | 7 | Not worth it (value) | 4 |
 | Deadline stated | +3 | Couldn't get it (access) | 1 |
 
-4. **Cluster.** k-means on the two scores, trying 2 to 5 clusters and keeping the number with the best mean silhouette, which measures how well separated the clusters are. The 6 posts where nothing broke are listed but not clustered.
+### 4. Cluster
+
+k-means on the two scores, trying 2 to 5 clusters and keeping the number with the best mean silhouette, which measures how well separated the clusters are. The 6 posts where nothing broke are listed but not clustered.
 
 <!-- generated:silhouette -->
 | Clusters (k) | Mean silhouette |
@@ -40,7 +50,9 @@ Trade-offs:
 | 5 | 0.48 |
 <!-- /generated:silhouette -->
 
-5. **Name.** The cluster with the highest need urgency is Sam. Of the rest, the one closest to "couldn't get it" is Jess, and the other is Ruth. Each one is then described with the persona fields: jobs to be done, use cases, pains, gains and influencers.
+### 5. Name
+
+The cluster with the highest need urgency is Sam. Of the rest, the one closest to "couldn't get it" is Jess, and the other is Ruth. Each one is then described with the persona fields: jobs to be done, use cases, pains, gains and influencers.
 
 ## The persona tool
 

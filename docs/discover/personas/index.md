@@ -60,6 +60,16 @@ credit_url: https://unsplash.com/photos/man-in-coat-uses-phone-outside-a-buildin
 - Buys locally: A specific item, at short notice
 ```
 
+| | |
+| --- | --- |
+| **Jobs to be done** | Find out which nearby shop has a specific item, before setting off. Get it in time. |
+| **Use cases** | Eclipse glasses the day before. A fan in a heatwave. Whether a patisserie is still open. A website showing stock the shop didn't have. |
+| **Pains** | No stock or hours information he trusts. Wasted trips, sold-out shelves. |
+| **Gains** | Knowing before leaving. Getting it today. |
+| **Influencers** | Reddit threads, WhatsApp restock groups, AI chatbots. |
+| **For the brief** | Findability. The question is "who has it, right now?" |
+
+#### Evidence
 
 **Specific item, often a deadline · couldn't find out, or it wasn't there.** The largest and clearest cluster: 11 posts from 11 people, 8 of them with a deadline.
 
@@ -73,17 +83,6 @@ tags: stock-visibility, urgency
 context: Opening post during the June 2026 heatwave; the AC ordered online arrived faulty.
 status: verified
 ```
-
-| | |
-| --- | --- |
-| **Jobs to be done** | Find out which nearby shop has a specific item, before setting off. Get it in time. |
-| **Use cases** | Eclipse glasses the day before. A fan in a heatwave. Whether a patisserie is still open. A website showing stock the shop didn't have. |
-| **Pains** | No stock or hours information he trusts. Wasted trips, sold-out shelves. |
-| **Gains** | Knowing before leaving. Getting it today. |
-| **Influencers** | Reddit threads, WhatsApp restock groups, AI chatbots. |
-| **For the brief** | Findability. The question is "who has it, right now?" |
-
-**Why 50 or over.** The posts don't say anyone's age, and Reddit skews young, so the age comes from desk research instead. In a 2018 YouGov poll for the GLA, Londoners aged 50–64 were the most likely to visit a high street weekly (61%, against 48–51% of under-50s) and to go for independent shops or markets (57% against 46–48%). Those aged 65 and over were the most likely to call high-street shops very important (64%, against 36% of 18–24s) ([GLA/YouGov, 2018](https://data.london.gov.uk/download/gla-poll-results-2018/f9749162-4ba4-4370-a01e-459cde67158d/October%25202018%2520GLA%2520YouGov%2520poll%2520results%2520.pdf)). Older shoppers also buy online less ([ONS, 2020](https://www.ons.gov.uk/peoplepopulationandcommunity/householdcharacteristics/homeinternetandsocialmediausage/bulletins/internetaccesshouseholdsandindividuals/2020)). The gaps are moderate and peak at 50–64, not 65+. No source measures loyalty to shops by age, and the FCA finds that digital exclusion and income, more than age itself, drive reliance on cash ([FCA, 2024](https://www.fca.org.uk/publication/research-notes/research-note-cash-reliance.pdf)). So her age is a supported guess, to test in interviews.
 
 ## Jess, the lapsed local
 
@@ -100,6 +99,16 @@ credit_url: https://unsplash.com/photos/a-woman-sitting-in-a-train-looking-out-t
 - Buys locally: Special occasions only
 ```
 
+| | |
+| --- | --- |
+| **Jobs to be done** | Get routine shopping done with the least effort. |
+| **Use cases** | Independents shut when she finishes work. The butcher for anniversaries, the supermarket for the week. Cash-only stalls. |
+| **Pains** | Opening hours that match her working hours. A local premium with no extra convenience. |
+| **Gains** | Always open, no surprises. |
+| **Influencers** | Habit: Amazon, the supermarket. |
+| **For the brief** | Transaction. Collection out of hours, card payment, or delivery from the local shop. |
+
+#### Evidence
 
 **Mostly routine shopping · couldn't get it.** Six posts. Hours that clash with work, cash only, a delivery that can't arrive in time, a price not worth it. Half of them show her giving up on local.
 
@@ -113,15 +122,6 @@ tags: opening-hours, online-default
 context: Same Mumsnet thread on independents' hours.
 status: verified
 ```
-
-| | |
-| --- | --- |
-| **Jobs to be done** | Get routine shopping done with the least effort. |
-| **Use cases** | Independents shut when she finishes work. The butcher for anniversaries, the supermarket for the week. Cash-only stalls. |
-| **Pains** | Opening hours that match her working hours. A local premium with no extra convenience. |
-| **Gains** | Always open, no surprises. |
-| **Influencers** | Habit: Amazon, the supermarket. |
-| **For the brief** | Transaction. Collection out of hours, card payment, or delivery from the local shop. |
 
 ## Ruth, the regular
 
@@ -138,6 +138,18 @@ credit_url: https://unsplash.com/photos/elderly-woman-smiling-in-a-room-filled-w
 - Hears from: Neighbours, local forums
 ```
 
+| | |
+| --- | --- |
+| **Jobs to be done** | Keep using the shops she relies on. |
+| **Use cases** | A weekly butcher, shut on the day she went. The nearest butcher now a trip to Chiswick. Buying something at the newsagent each time she uses its post office counter. |
+| **Pains** | Practical shops closing. Hours that aren't kept. |
+| **Gains** | A relationship with the shop. Quality and special requests. |
+| **Influencers** | Neighbours, local forums, council "shop local" campaigns. |
+| **For the brief** | Neither problem, directly. She needs to know what's still there and open. That's a lighter form of findability. |
+
+**Why 50 or over.** The posts don't say anyone's age, and Reddit skews young, so the age comes from desk research instead. In a 2018 YouGov poll for the GLA, Londoners aged 50–64 were the most likely to visit a high street weekly (61%, against 48–51% of under-50s) and to go for independent shops or markets (57% against 46–48%). Those aged 65 and over were the most likely to call high-street shops very important (64%, against 36% of 18–24s) ([GLA/YouGov, 2018](https://data.london.gov.uk/download/gla-poll-results-2018/f9749162-4ba4-4370-a01e-459cde67158d/October%25202018%2520GLA%2520YouGov%2520poll%2520results%2520.pdf)). Older shoppers also buy online less ([ONS, 2020](https://www.ons.gov.uk/peoplepopulationandcommunity/householdcharacteristics/homeinternetandsocialmediausage/bulletins/internetaccesshouseholdsandindividuals/2020)). The gaps are moderate and peak at 50–64, not 65+. No source measures loyalty to shops by age, and the FCA finds that digital exclusion and income, more than age itself, drive reliance on cash ([FCA, 2024](https://www.fca.org.uk/publication/research-notes/research-note-cash-reliance.pdf)). So her age is a supported guess, to test in interviews.
+
+#### Evidence
 
 **Routine shopping · the shop wasn't there.** Four posts, the thinnest cluster. She keeps going to local shops, but the butcher closes, the post office goes and the street thins out.
 
@@ -151,15 +163,6 @@ tags: access-transport, decline-closure
 context: Same thread; the nearest butcher is now a trip away.
 status: verified
 ```
-
-| | |
-| --- | --- |
-| **Jobs to be done** | Keep using the shops she relies on. |
-| **Use cases** | A weekly butcher, shut on the day she went. The nearest butcher now a trip to Chiswick. Buying something at the newsagent each time she uses its post office counter. |
-| **Pains** | Practical shops closing. Hours that aren't kept. |
-| **Gains** | A relationship with the shop. Quality and special requests. |
-| **Influencers** | Neighbours, local forums, council "shop local" campaigns. |
-| **For the brief** | Neither problem, directly. She needs to know what's still there and open. That's a lighter form of findability. |
 
 ## What to test first
 

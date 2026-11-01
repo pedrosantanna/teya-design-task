@@ -347,6 +347,25 @@ i.m.unknown { opacity: .45; }
   .ogrid tbody th { width: 120px; }
 }
 @media (prefers-reduced-motion: reduce) { .sidebar, .pager a { transition: none; } html { scroll-behavior: auto; } }
+
+/* Vertical rhythm — one scale for the whole page.
+   Proximity follows gestalt: a heading sits close to what it introduces and far from what came before;
+   items inside a block are tight; blocks in a section are medium; sections are far apart. */
+:root { --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 40px; --s-7: 64px; }
+.prose.prose > * { margin-top: 0; margin-bottom: 0; }
+.prose.prose > * + * { margin-top: var(--s-5); }          /* block to block within a section */
+.prose.prose > p + p,
+.prose.prose > p + ul, .prose.prose > p + ol,
+.prose.prose > ul + p, .prose.prose > ol + p { margin-top: var(--s-4); }   /* running text */
+.prose.prose > h2 { margin-top: var(--s-7); }              /* new section */
+.prose.prose > h3 { margin-top: var(--s-6); }              /* new subsection */
+.prose.prose > h4 { margin-top: var(--s-5); }
+.prose.prose > h2 + *, .prose.prose > h2 + h3 { margin-top: var(--s-3); }   /* heading hugs its content */
+.prose.prose > h3 + *, .prose.prose > h4 + * { margin-top: var(--s-2); }
+.prose.prose > :first-child { margin-top: 0; }
+.prose h4 { font-size: 13px; font-weight: 600; letter-spacing: .01em; color: var(--muted-fg); }
+.summary { margin-bottom: var(--s-6) !important; }
+.prose table.fit { width: auto; min-width: min(100%, 24rem); }
 </style>
 
 <header class="topbar">
@@ -631,6 +650,11 @@ i.m.unknown { opacity: .45; }
       let s = slug(h.textContent) || 'section', n = 2;
       while (used.has(s)) s = `${slug(h.textContent)}-${n++}`;
       used.add(s); h.id = s;
+    });
+    tmp.querySelectorAll('table').forEach(t => {
+      const cols = t.rows[0] ? t.rows[0].cells.length : 0;
+      const emptyHead = t.tHead && ![...t.tHead.querySelectorAll('th')].some(th => th.textContent.trim());
+      if (cols <= 3 && !emptyHead && t.rows.length <= 8) t.classList.add('fit');
     });
     tmp.querySelectorAll('table').forEach(t => {
       if (t.classList.contains('ogrid')) return;
