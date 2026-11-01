@@ -1,6 +1,6 @@
 # Coding in detail
 
-Everything behind the proto-personas: the codebook, how the two coders compared, how disagreements were settled, and the code for every post. The short version is on [method](method.md).
+The codebook, how the two coders compared, how disagreements were settled, and the codes and scores for every post. The short version is on [method](method.md).
 
 ## Codebook
 
@@ -13,7 +13,7 @@ The unit is one public post. A post is coded only if it describes the poster's o
 | Where it broke | **information**: couldn't find out, or was told wrongly, about stock, hours or who sells it · **access**: hours that don't fit, travel, parking, delivery speed, payment · **availability**: the item, shop or a worthwhile offer wasn't there · **value**: price or quality not worth it · **none** |
 | Stance | **persists**: kept using local despite a stated cost · **defects**: moved to online, a chain or a supermarket, or stopped going · **unknown** |
 
-**Tie-break rules**, added after the two codings were compared:
+**Tie-break rules:**
 
 1. Where it broke = the root cause. A closed butcher that forces a longer trip is availability, not access.
 2. The full post counts, not only the excerpt shown.
@@ -59,35 +59,35 @@ Kappa corrects agreement for chance. Above 0.8 is usually read as strong and 0.4
 ## Every coded post
 
 <!-- generated:coding -->
-| Post | Date | Job | Urgent | Failure | Stance | Proto-persona | Why |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [u/WearyChampionship365](https://www.reddit.com/r/Ealing/comments/1vlc46x/comment/p30rnx7/) | 2026-08-11 | specific | yes | access | unknown | Sam | Online can't deliver before the deadline. |
-| [u/moanyjoany](https://www.reddit.com/r/Ealing/comments/1vlcuor/comment/p30r2af/) | 2026-08-11 | specific | yes | availability | persists | Sam | Tried two shops for eclipse glasses; both sold out. |
-| [u/Mediocre_Sprinkles](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb2z980/) | 2025-08-28 | specific | yes | availability | defects | Sam | 'In a pinch', every shop, nothing; paid parking; buys on Amazon. |
-| [u/Miraclefish](https://www.reddit.com/r/london/comments/1ueg96t/comment/otjhcgo/) | 2026-06-24 | specific | yes | availability | unknown | Sam | Shops out of stock in the heatwave; online 2+ weeks. |
-| [u/xmastreee](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb31nms/) | 2025-08-28 | specific | yes | availability | unknown | Sam | Hardware shop had nothing in stock; says he'd have paid the premium. Outcome not stated. |
-| [u/jamesshovlin](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tdld2/) | 2026-08-10 | specific | yes | information | unknown | Sam | Eclipse glasses before the eclipse; says stock can't be known without visiting or phoning. |
-| [u/akat224](https://www.reddit.com/r/london/comments/1ueg96t/) | 2026-06-24 | specific | yes | information | unknown | Sam | Needs a portable AC 'asap'; asks which places have it in stock. |
-| [Dbank](https://www.mumsnet.com/talk/_chat/5509007-do-you-still-enjoy-shopping-on-the-high-street-or-mostly-online?reply=151334565) | 2026-03-27 | specific | no | information | defects | Sam | Website listed 7 in stock, shop had none; bought on Amazon. |
-| [u/dy14n19](https://www.reddit.com/r/HammersmithandFulham/comments/1myug4c/) | 2025-08-24 | specific | no | information | unknown | Sam | Google says the patisserie is closed and they don't trust it. |
-| [@Jojo_agboola](https://x.com/Jojo_agboola/status/2112618905525276980) | 2026-10-20 | specific | no | information | unknown | Sam | Asks X's AI chatbot which walk-in store stocks a fragrance. |
-| [u/grand_web](https://www.reddit.com/r/chiswick/comments/1vlibmn/) | 2026-08-11 | specific | yes | information | unknown | Sam | Last minute; asks which stores nearby sell eclipse glasses. |
-| [u/claudiav2603](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2y26dy/) | 2026-08-11 | specific | yes | information | unknown | Sam | Asks which store near Hammersmith has eclipse glasses, the day before. |
-| [u/jamesshovlin](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tb0s2/) | 2026-08-10 | specific | yes | none | unknown | Sam | Same hunt; shares a shop's stock count and a WhatsApp restock group to fill the information gap. |
-| [u/Username8831](https://www.reddit.com/r/Ealing/comments/1v6423y/comment/oznttbd/) | 2026-07-25 | specific | no | value | defects | Sam | Used the bike workshop once; thought it too expensive. |
-| [u/mjfh2](https://www.reddit.com/r/london/comments/1niwnlw/comment/nemvjcy/) | 2025-09-17 | routine | no | availability | persists | Ruth | Local butcher gone; now has to go to Chiswick, 'a pain'. |
-| [Valentando](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977465) | 2025-12-05 | routine | no | information | persists | Ruth | Weekly butcher shut during its advertised hours; keeps buying there. |
-| [u/Vermathorax](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq989gy/) | 2026-06-07 | routine | no | none | persists | Ruth | Chooses the butcher: better quality, accommodates special requests. |
-| [Kenjenny](https://www.mumsnet.com/talk/_chat/5509007-do-you-still-enjoy-shopping-on-the-high-street-or-mostly-online?reply=151334270) | 2026-03-27 | discovery | no | none | defects | Dan | Lives near Oxford Street but can't remember last going clothes shopping there. |
-| [LividArse](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977221) | 2025-12-05 | routine | no | access | defects | Dan | Independents not consistently open; ends up at McDonald's and Amazon. |
-| [u/killmetruck](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq967k5/) | 2026-06-07 | routine | no | access | defects | Dan | Butcher open office hours only and double the price; supermarket for the week, butcher for anniversaries. |
-| [@London_W4](https://x.com/London_W4/status/2102723893463044506) | 2026-09-23 | discovery | no | availability | unknown | Priya | Walked the length of King Street; found it depressing. |
-| [FerrisWheelsandLilacs](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976658) | 2025-12-05 | routine | no | access | unknown | Not placed | States her own rule: pays more locally if convenient, won't jump through hoops. No behaviour shown. |
-| [u/rsweb](https://www.reddit.com/r/AskUK/comments/1my0t02/comment/na8v8ju/) | 2025-08-23 | routine | no | access | unknown | Not placed | Doesn't carry cash, so cash-only stalls don't work for them. |
-| [u/Aggravating-Desk4004](https://www.reddit.com/r/Ealing/comments/1xjkdgb/) | 2026-10-31 | routine | no | availability | unknown | Not placed | Post offices lost; always buys something at the newsagent counter that remains. |
-| [u/Inge_Jones](https://www.reddit.com/r/Ealing/comments/1x3g7ci/comment/pfbvje4/) | 2026-10-11 | routine | no | none | unknown | Not placed | Eats a local restaurant's food often via Deliveroo to keep it afloat. |
-| [u/rising_then_falling](https://www.reddit.com/r/london/comments/1niwnlw/comment/nema5k6/) | 2025-09-17 | routine | no | none | unknown | Not placed | 'My local guy will cut any bit of meat you ask for.' |
-| [u/Peppy_Tomato](https://www.reddit.com/r/AskUK/comments/1rn7npv/comment/o94plrm/) | 2026-03-07 | routine | no | none | unknown | Not placed | Chooses click and collect for control over timing; describes no failure. |
+| Post | Date | Job | Urgent | Failure | Stance | Need | Breaks | Group | Why |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [u/moanyjoany](https://www.reddit.com/r/Ealing/comments/1vlcuor/comment/p30r2af/) | 2026-08-11 | specific | yes | availability | persists | 10 | 6 | Sam | Tried two shops for eclipse glasses; both sold out. |
+| [u/Mediocre_Sprinkles](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb2z980/) | 2025-08-28 | specific | yes | availability | defects | 10 | 6 | Sam | 'In a pinch', every shop, nothing; paid parking; buys on Amazon. |
+| [u/Miraclefish](https://www.reddit.com/r/london/comments/1ueg96t/comment/otjhcgo/) | 2026-06-24 | specific | yes | availability | unknown | 10 | 6 | Sam | Shops out of stock in the heatwave; online 2+ weeks. |
+| [u/xmastreee](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb31nms/) | 2025-08-28 | specific | yes | availability | unknown | 10 | 6 | Sam | Hardware shop had nothing in stock; says he'd have paid the premium. Outcome not stated. |
+| [u/jamesshovlin](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tdld2/) | 2026-08-10 | specific | yes | information | unknown | 10 | 9 | Sam | Eclipse glasses before the eclipse; says stock can't be known without visiting or phoning. |
+| [u/akat224](https://www.reddit.com/r/london/comments/1ueg96t/) | 2026-06-24 | specific | yes | information | unknown | 10 | 9 | Sam | Needs a portable AC 'asap'; asks which places have it in stock. |
+| [Dbank](https://www.mumsnet.com/talk/_chat/5509007-do-you-still-enjoy-shopping-on-the-high-street-or-mostly-online?reply=151334565) | 2026-03-27 | specific | no | information | defects | 7 | 9 | Sam | Website listed 7 in stock, shop had none; bought on Amazon. |
+| [u/dy14n19](https://www.reddit.com/r/HammersmithandFulham/comments/1myug4c/) | 2025-08-24 | specific | no | information | unknown | 7 | 9 | Sam | Google says the patisserie is closed and they don't trust it. |
+| [@Jojo_agboola](https://x.com/Jojo_agboola/status/2112618905525276980) | 2026-10-20 | specific | no | information | unknown | 7 | 9 | Sam | Asks X's AI chatbot which walk-in store stocks a fragrance. |
+| [u/grand_web](https://www.reddit.com/r/chiswick/comments/1vlibmn/) | 2026-08-11 | specific | yes | information | unknown | 10 | 9 | Sam | Last minute; asks which stores nearby sell eclipse glasses. |
+| [u/claudiav2603](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2y26dy/) | 2026-08-11 | specific | yes | information | unknown | 10 | 9 | Sam | Asks which store near Hammersmith has eclipse glasses, the day before. |
+| [LividArse](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977221) | 2025-12-05 | routine | no | access | defects | 4 | 1 | Dan | Independents not consistently open; ends up at McDonald's and Amazon. |
+| [FerrisWheelsandLilacs](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976658) | 2025-12-05 | routine | no | access | unknown | 4 | 1 | Dan | States her own rule: pays more locally if convenient, won't jump through hoops. No behaviour shown. |
+| [u/killmetruck](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq967k5/) | 2026-06-07 | routine | no | access | defects | 4 | 1 | Dan | Butcher open office hours only and double the price; supermarket for the week, butcher for anniversaries. |
+| [u/rsweb](https://www.reddit.com/r/AskUK/comments/1my0t02/comment/na8v8ju/) | 2025-08-23 | routine | no | access | unknown | 4 | 1 | Dan | Doesn't carry cash, so cash-only stalls don't work for them. |
+| [u/WearyChampionship365](https://www.reddit.com/r/Ealing/comments/1vlc46x/comment/p30rnx7/) | 2026-08-11 | specific | yes | access | unknown | 10 | 1 | Dan | Online can't deliver before the deadline. |
+| [u/Username8831](https://www.reddit.com/r/Ealing/comments/1v6423y/comment/oznttbd/) | 2026-07-25 | specific | no | value | defects | 7 | 4 | Dan | Used the bike workshop once; thought it too expensive. |
+| [@London_W4](https://x.com/London_W4/status/2102723893463044506) | 2026-09-23 | discovery | no | availability | unknown | 1 | 6 | Ruth | Walked the length of King Street; found it depressing. |
+| [u/mjfh2](https://www.reddit.com/r/london/comments/1niwnlw/comment/nemvjcy/) | 2025-09-17 | routine | no | availability | persists | 4 | 6 | Ruth | Local butcher gone; now has to go to Chiswick, 'a pain'. |
+| [u/Aggravating-Desk4004](https://www.reddit.com/r/Ealing/comments/1xjkdgb/) | 2026-10-31 | routine | no | availability | unknown | 4 | 6 | Ruth | Post offices lost; always buys something at the newsagent counter that remains. |
+| [Valentando](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977465) | 2025-12-05 | routine | no | information | persists | 4 | 9 | Ruth | Weekly butcher shut during its advertised hours; keeps buying there. |
+| [Kenjenny](https://www.mumsnet.com/talk/_chat/5509007-do-you-still-enjoy-shopping-on-the-high-street-or-mostly-online?reply=151334270) | 2026-03-27 | discovery | no | none | defects | – | – | Nothing broke (not clustered) | Lives near Oxford Street but can't remember last going clothes shopping there. |
+| [u/Inge_Jones](https://www.reddit.com/r/Ealing/comments/1x3g7ci/comment/pfbvje4/) | 2026-10-11 | routine | no | none | unknown | – | – | Nothing broke (not clustered) | Eats a local restaurant's food often via Deliveroo to keep it afloat. |
+| [u/Vermathorax](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq989gy/) | 2026-06-07 | routine | no | none | persists | – | – | Nothing broke (not clustered) | Chooses the butcher: better quality, accommodates special requests. |
+| [u/rising_then_falling](https://www.reddit.com/r/london/comments/1niwnlw/comment/nema5k6/) | 2025-09-17 | routine | no | none | unknown | – | – | Nothing broke (not clustered) | 'My local guy will cut any bit of meat you ask for.' |
+| [u/Peppy_Tomato](https://www.reddit.com/r/AskUK/comments/1rn7npv/comment/o94plrm/) | 2026-03-07 | routine | no | none | unknown | – | – | Nothing broke (not clustered) | Chooses click and collect for control over timing; describes no failure. |
+| [u/jamesshovlin](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tb0s2/) | 2026-08-10 | specific | yes | none | unknown | – | – | Nothing broke (not clustered) | Same hunt; shares a shop's stock count and a WhatsApp restock group to fill the information gap. |
 <!-- /generated:coding -->
 
 ### Left out
@@ -114,6 +114,12 @@ Kappa corrects agreement for chance. Above 0.8 is usually read as strong and 0.4
 | [u/Greg-Normal](https://www.reddit.com/r/london/comments/1niwnlw/comment/neo7ha3/) | Scolds other people; no own behaviour. |
 <!-- /generated:excluded -->
 
-## What changed from the first version
+## Codes by job and failure
 
-The first version drafted five personas, assigned each quote to one of them by hand, and then scored the quotes on two attitude axes. A reviewer agent showed that the chart could only confirm the assignment it started from. It also found that two of the personas couldn't be told apart, and that missing codes had been plotted as neutral. This version reverses the order, codes behaviour only and uses axes that map onto the brief. The data files are `docs/discover/personas/coding-a.json` (first coder), `coding-b.json` (second coder) and `coding.json` (final). Run `python3 scripts/build_personas.py` to rebuild every table.
+<!-- generated:grid -->
+```occasion-grid
+{"rows": [{"id": "specific", "label": "Specific item or shop"}, {"id": "routine", "label": "Routine shopping and services"}, {"id": "discovery", "label": "Discovery and browsing"}], "cols": [{"id": "information", "label": "Information", "maps": "findability"}, {"id": "access", "label": "Access", "maps": "transaction"}, {"id": "availability", "label": "Availability", "maps": "the street's offer"}, {"id": "value", "label": "Value", "maps": "the street's offer"}, {"id": "none", "label": "No failure", "maps": ""}], "groups": {"mission": "Sam, the mission shopper", "lapsed": "Dan, the lapsed local", "regular": "Ruth, the regular", "worked": "Nothing broke (not clustered)"}, "cells": [{"row": "specific", "col": "information", "posts": [{"h": "u/jamesshovlin", "s": "unknown", "g": "mission", "u": true}, {"h": "u/akat224", "s": "unknown", "g": "mission", "u": true}, {"h": "Dbank", "s": "defects", "g": "mission", "u": false}, {"h": "u/dy14n19", "s": "unknown", "g": "mission", "u": false}, {"h": "@Jojo_agboola", "s": "unknown", "g": "mission", "u": false}, {"h": "u/grand_web", "s": "unknown", "g": "mission", "u": true}, {"h": "u/claudiav2603", "s": "unknown", "g": "mission", "u": true}]}, {"row": "specific", "col": "access", "posts": [{"h": "u/WearyChampionship365", "s": "unknown", "g": "lapsed", "u": true}]}, {"row": "specific", "col": "availability", "posts": [{"h": "u/moanyjoany", "s": "persists", "g": "mission", "u": true}, {"h": "u/Mediocre_Sprinkles", "s": "defects", "g": "mission", "u": true}, {"h": "u/Miraclefish", "s": "unknown", "g": "mission", "u": true}, {"h": "u/xmastreee", "s": "unknown", "g": "mission", "u": true}]}, {"row": "specific", "col": "value", "posts": [{"h": "u/Username8831", "s": "defects", "g": "lapsed", "u": false}]}, {"row": "specific", "col": "none", "posts": [{"h": "u/jamesshovlin", "s": "unknown", "g": "worked", "u": true}]}, {"row": "routine", "col": "information", "posts": [{"h": "Valentando", "s": "persists", "g": "regular", "u": false}]}, {"row": "routine", "col": "access", "posts": [{"h": "LividArse", "s": "defects", "g": "lapsed", "u": false}, {"h": "FerrisWheelsandLilacs", "s": "unknown", "g": "lapsed", "u": false}, {"h": "u/killmetruck", "s": "defects", "g": "lapsed", "u": false}, {"h": "u/rsweb", "s": "unknown", "g": "lapsed", "u": false}]}, {"row": "routine", "col": "availability", "posts": [{"h": "u/mjfh2", "s": "persists", "g": "regular", "u": false}, {"h": "u/Aggravating-Desk4004", "s": "unknown", "g": "regular", "u": false}]}, {"row": "routine", "col": "none", "posts": [{"h": "u/Inge_Jones", "s": "unknown", "g": "worked", "u": false}, {"h": "u/Vermathorax", "s": "persists", "g": "worked", "u": false}, {"h": "u/rising_then_falling", "s": "unknown", "g": "worked", "u": false}, {"h": "u/Peppy_Tomato", "s": "unknown", "g": "worked", "u": false}]}, {"row": "discovery", "col": "availability", "posts": [{"h": "@London_W4", "s": "unknown", "g": "regular", "u": false}]}, {"row": "discovery", "col": "none", "posts": [{"h": "Kenjenny", "s": "defects", "g": "worked", "u": false}]}]}
+```
+<!-- /generated:grid -->
+
+Data files: `docs/discover/personas/coding-a.json` (first coder), `coding-b.json` (second coder), `coding.json` (final). Run `python3 scripts/build_personas.py` to rebuild every table and the map.

@@ -1,53 +1,44 @@
 # Proto-personas
 
-Three proto-personas drawn from 44 public posts. The posts were coded first, and the groups were read off the coded data afterwards. One persona is well supported. Two are thin and need testing in Define.
+Three proto-personas, found by plotting 21 coded posts on two dimensions, need and where the occasion broke, and letting clusters form. Each persona is one cluster.
 
 ```summary
 Takeaways:
-- The mission shopper (Sam) is the clearest group: 14 of 27 posts, and half of them broke on information.
-- Information and availability failures outnumber access failures, 15 to 5, so findability carries more of the pain.
-- Ruth (regular) and Dan (lapsed) have 3 posts each, and discovery has 1. Treat them as hypotheses.
+- Sam (11 posts): needs a specific thing, often by a deadline, and can't find out who has it. This is the findability side.
+- Dan (6 posts): mostly routine shopping that breaks on getting it: hours, cash, delivery time. He gives up on local. This is the transaction side.
+- Ruth (4 posts): keeps shopping locally while her shops disappear. The thinnest of the three.
 Call:
-- Code the posts first and let the groups appear, instead of drafting personas and placing them.
-- Call them proto-personas, since nobody was interviewed ([000](../../decision-log.md)).
+- Cluster the posts on two dimensions that speak to the brief, and define the personas from the clusters.
+- Call them proto-personas: nobody was interviewed ([000](../../decision-log.md)).
 AI:
-- Claude coded every post with a written codebook. A second agent coded them blind. Rules settled the disagreements.
-- I discarded a first five-persona version after a reviewer agent showed it was circular. [Log](../../process/ai-log.md).
+- Claude and a second agent coded every post blind. A script scored both dimensions and ran the clustering.
+- I chose the dimensions and checked the clusters against the quotes.
 Trade-offs:
-- Honest but thin: three groups, two of them with very few posts.
+- Small numbers (4 to 11 posts per cluster). These are directions to test in Define, not findings.
 ```
 
-**Why proto-personas.** No shoppers were interviewed, so these are hypotheses built from what people posted, not validated personas. For a take-home that's enough to choose a direction ([decision 000](../../decision-log.md)). Define should test them with five or six short interviews on King Street.
+## The map
 
-## Where each post sits
-
-Each mark is one post. Rows show what the shopper was trying to do; columns show where it broke. The column headings say which side of the brief each failure points to.
-
-<!-- generated:grid -->
-```occasion-grid
-{"rows": [{"id": "specific", "label": "Specific item or shop"}, {"id": "routine", "label": "Routine shopping and services"}, {"id": "discovery", "label": "Discovery and browsing"}], "cols": [{"id": "information", "label": "Information", "maps": "findability"}, {"id": "access", "label": "Access", "maps": "transaction"}, {"id": "availability", "label": "Availability", "maps": "the street's offer"}, {"id": "value", "label": "Value", "maps": "the street's offer"}, {"id": "none", "label": "No failure", "maps": ""}], "groups": {"mission": "Sam, the mission shopper", "regular": "Ruth, the regular", "lapsed": "Dan, the lapsed local", "discovery": "Priya, the finds hunter", "unassigned": "Not placed"}, "cells": [{"row": "specific", "col": "information", "posts": [{"h": "u/jamesshovlin", "s": "unknown", "g": "mission", "u": true}, {"h": "u/akat224", "s": "unknown", "g": "mission", "u": true}, {"h": "Dbank", "s": "defects", "g": "mission", "u": false}, {"h": "u/dy14n19", "s": "unknown", "g": "mission", "u": false}, {"h": "@Jojo_agboola", "s": "unknown", "g": "mission", "u": false}, {"h": "u/grand_web", "s": "unknown", "g": "mission", "u": true}, {"h": "u/claudiav2603", "s": "unknown", "g": "mission", "u": true}]}, {"row": "specific", "col": "access", "posts": [{"h": "u/WearyChampionship365", "s": "unknown", "g": "mission", "u": true}]}, {"row": "specific", "col": "availability", "posts": [{"h": "u/moanyjoany", "s": "persists", "g": "mission", "u": true}, {"h": "u/Mediocre_Sprinkles", "s": "defects", "g": "mission", "u": true}, {"h": "u/Miraclefish", "s": "unknown", "g": "mission", "u": true}, {"h": "u/xmastreee", "s": "unknown", "g": "mission", "u": true}]}, {"row": "specific", "col": "value", "posts": [{"h": "u/Username8831", "s": "defects", "g": "mission", "u": false}]}, {"row": "specific", "col": "none", "posts": [{"h": "u/jamesshovlin", "s": "unknown", "g": "mission", "u": true}]}, {"row": "routine", "col": "information", "posts": [{"h": "Valentando", "s": "persists", "g": "regular", "u": false}]}, {"row": "routine", "col": "access", "posts": [{"h": "LividArse", "s": "defects", "g": "lapsed", "u": false}, {"h": "FerrisWheelsandLilacs", "s": "unknown", "g": "unassigned", "u": false}, {"h": "u/killmetruck", "s": "defects", "g": "lapsed", "u": false}, {"h": "u/rsweb", "s": "unknown", "g": "unassigned", "u": false}]}, {"row": "routine", "col": "availability", "posts": [{"h": "u/mjfh2", "s": "persists", "g": "regular", "u": false}, {"h": "u/Aggravating-Desk4004", "s": "unknown", "g": "unassigned", "u": false}]}, {"row": "routine", "col": "none", "posts": [{"h": "u/Inge_Jones", "s": "unknown", "g": "unassigned", "u": false}, {"h": "u/Vermathorax", "s": "persists", "g": "regular", "u": false}, {"h": "u/rising_then_falling", "s": "unknown", "g": "unassigned", "u": false}, {"h": "u/Peppy_Tomato", "s": "unknown", "g": "unassigned", "u": false}]}, {"row": "discovery", "col": "availability", "posts": [{"h": "@London_W4", "s": "unknown", "g": "discovery", "u": false}]}, {"row": "discovery", "col": "none", "posts": [{"h": "Kenjenny", "s": "defects", "g": "lapsed", "u": false}]}]}
+<!-- generated:chart -->
+```cluster-map
+{"x": {"label": "Need", "ticks": [[1, "Discovery"], [4, "Routine"], [7, "Specific item"], [10, "Specific + deadline"]], "min": "Browse", "max": "Mission"}, "y": {"label": "Where it broke", "ticks": [[9, "Couldn't find out"], [6, "Wasn't there"], [4, "Not worth it"], [1, "Couldn't get it"]], "min": "Transaction", "max": "Findability"}, "names": {"mission": "Sam, the mission shopper", "lapsed": "Dan, the lapsed local", "regular": "Ruth, the regular"}, "centres": {"mission": {"x": 9.2, "y": 7.9, "n": 11}, "lapsed": {"x": 5.5, "y": 1.5, "n": 6}, "regular": {"x": 3.2, "y": 6.8, "n": 4}}, "points": [{"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/jamesshovlin"}, {"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/akat224"}, {"x": 10, "y": 6, "c": "mission", "s": "persists", "h": "u/moanyjoany"}, {"x": 7, "y": 9, "c": "mission", "s": "defects", "h": "Dbank"}, {"x": 7, "y": 9, "c": "mission", "s": "unknown", "h": "u/dy14n19"}, {"x": 4, "y": 9, "c": "regular", "s": "persists", "h": "Valentando"}, {"x": 10, "y": 6, "c": "mission", "s": "defects", "h": "u/Mediocre_Sprinkles"}, {"x": 4, "y": 1, "c": "lapsed", "s": "defects", "h": "LividArse"}, {"x": 10, "y": 1, "c": "lapsed", "s": "unknown", "h": "u/WearyChampionship365"}, {"x": 10, "y": 6, "c": "mission", "s": "unknown", "h": "u/Miraclefish"}, {"x": 4, "y": 1, "c": "lapsed", "s": "unknown", "h": "FerrisWheelsandLilacs"}, {"x": 10, "y": 6, "c": "mission", "s": "unknown", "h": "u/xmastreee"}, {"x": 4, "y": 1, "c": "lapsed", "s": "defects", "h": "u/killmetruck"}, {"x": 4, "y": 6, "c": "regular", "s": "persists", "h": "u/mjfh2"}, {"x": 4, "y": 6, "c": "regular", "s": "unknown", "h": "u/Aggravating-Desk4004"}, {"x": 4, "y": 1, "c": "lapsed", "s": "unknown", "h": "u/rsweb"}, {"x": 1, "y": 6, "c": "regular", "s": "unknown", "h": "@London_W4"}, {"x": 7, "y": 9, "c": "mission", "s": "unknown", "h": "@Jojo_agboola"}, {"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/grand_web"}, {"x": 10, "y": 9, "c": "mission", "s": "unknown", "h": "u/claudiav2603"}, {"x": 7, "y": 4, "c": "lapsed", "s": "defects", "h": "u/Username8831"}], "worked": ["u/jamesshovlin", "u/Inge_Jones", "u/Vermathorax", "u/rising_then_falling", "u/Peppy_Tomato", "Kenjenny"]}
 ```
-<!-- /generated:grid -->
+<!-- /generated:chart -->
 
 <!-- generated:groups -->
-| Proto-persona | Posts | People | Sources | Where the occasion broke | Stance |
-| --- | --- | --- | --- | --- | --- |
-| Sam, the mission shopper | 14 | 13 | West London 6, London 4, UK-wide 3, X/TikTok 1 | information 7, availability 4, none 1, access 1, value 1 | unknown 10, defects 3, persists 1 |
-| Ruth, the regular | 3 | 3 | London 2, UK-wide 1 | information 1, availability 1, none 1 | persists 3 |
-| Dan, the lapsed local | 3 | 3 | UK-wide 2, London 1 | access 2, none 1 | defects 3 |
-| Priya, the finds hunter | 1 | 1 | X/TikTok 1 | availability 1 | unknown 1 |
-| Not placed | 6 | 6 | UK-wide 3, West London 2, London 1 | none 3, access 2, availability 1 | unknown 6 |
+| Group | Posts | People | Centre (need, breaks) | Sources | Where it broke | What they did next |
+| --- | --- | --- | --- | --- | --- | --- |
+| Sam, the mission shopper | 11 | 11 | 9.2, 7.9 | West London 4, London 3, UK-wide 3, X/TikTok 1 | information 7, availability 4 | unknown 8, defects 2, persists 1 |
+| Dan, the lapsed local | 6 | 6 | 5.5, 1.5 | UK-wide 3, West London 2, London 1 | access 5, value 1 | defects 3, unknown 3 |
+| Ruth, the regular | 4 | 4 | 3.2, 6.8 | UK-wide 1, London 1, West London 1, X/TikTok 1 | availability 3, information 1 | persists 2, unknown 2 |
+| Nothing broke (not clustered) | 6 | 6 | – | London 3, UK-wide 2, West London 1 | none 6 | unknown 4, persists 1, defects 1 |
 <!-- /generated:groups -->
 
-**What the grid says** *(interpretation)*
-
-- Specific-item occasions are the largest group, and most broke on not knowing (information) or the thing not being there (availability).
-- Availability (7 posts) is the street's own offer. An app can surface what exists, but it can't stock a shop that closed.
-- Access failures (5) cluster in routine shopping: hours that clash with work, cash only. That is where transaction design would help.
+How the scores and clusters were calculated: [method](method.md).
 
 ## Sam, the mission shopper
 
-Needs a particular thing, usually soon, and asks around to find who has it. Strong evidence: 14 posts from 13 people, 10 of them with a deadline.
+**Specific item, often a deadline · couldn't find out, or it wasn't there.** The largest and clearest cluster: 11 posts from 11 people, 8 of them with a deadline.
 
 ```quote
 text: Does anyone know any places that have a portable AC in stock around London? Wife is pregnant so need to get one asap!
@@ -64,35 +55,14 @@ status: verified
 | --- | --- |
 | **Jobs to be done** | Find out which nearby shop has a specific item, before setting off. Get it in time. |
 | **Use cases** | Eclipse glasses the day before. A fan in a heatwave. Whether a patisserie is still open. A website showing stock the shop didn't have. |
-| **Pains** | No stock or hours information he can trust. Wasted trips. Online too slow. |
-| **Gains** | Certainty before leaving. Getting it today. |
-| **Influencers** | Reddit, WhatsApp restock groups, AI chatbots. |
-| **Varies by** | Whether he wants a local shop or any shop. The data can't separate the two (see [method](method.md)). |
+| **Pains** | No stock or hours information he trusts. Wasted trips, sold-out shelves. |
+| **Gains** | Knowing before leaving. Getting it today. |
+| **Influencers** | Reddit threads, WhatsApp restock groups, AI chatbots. |
+| **For the brief** | Findability. The question is "who has it, right now?" |
 
-## Ruth, the regular *(thin: 3 posts)*
+## Dan, the lapsed local
 
-Shops locally for routine things and keeps going despite a cost: odd hours, a higher price, a longer trip.
-
-```quote
-text: Good independent local butcher (who I try to buy something from every week)
-handle: Valentando
-network: Mumsnet · Talk › AIBU
-date: 2025-12-05
-url: https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977465
-tags: support-local
-context: Committed pole. Keeps going even after finding the shop shut during its advertised hours.
-status: verified
-```
-
-| | |
-| --- | --- |
-| **Jobs to be done** | Keep using the shops she relies on. |
-| **Pains** | Shops shut when they say they're open. The nearest butcher closing. |
-| **Gains** | Quality, special requests, a relationship with the shop. |
-
-## Dan, the lapsed local *(thin: 3 posts)*
-
-Used to shop locally, now defaults to online or a chain because local didn't fit his life.
+**Mostly routine shopping · couldn't get it.** Six posts. Hours that clash with work, cash only, a delivery that can't arrive in time, a price not worth it. Half of them show him giving up on local.
 
 ```quote
 text: So I end up in McDonald's, cos it's always open, and shop on Amazon, because it's always there.
@@ -108,12 +78,36 @@ status: verified
 | | |
 | --- | --- |
 | **Jobs to be done** | Get routine shopping done with the least effort. |
-| **Pains** | Opening hours that match his working hours. A local premium without extra convenience. |
+| **Use cases** | Independents shut when he finishes work. The butcher for anniversaries, the supermarket for the week. Cash-only stalls. |
+| **Pains** | Opening hours that match his working hours. A local premium with no extra convenience. |
 | **Gains** | Always open, no surprises. |
+| **Influencers** | Habit: Amazon, the supermarket. |
+| **For the brief** | Transaction. Collection out of hours, card payment, or delivery from the local shop. |
 
-## Not yet a persona
+## Ruth, the regular
 
-- **Discovery.** Only one coded post. TikTok shows plenty of browsing and "finds", but that content promotes places, so it was excluded from coding ([theme 10](../netnography/findings.md)). Kept as an occasion to explore.
-- **Six routine posts with no clear stance.** These are loyal habits with no stated cost, or rules people describe for themselves. They could belong to Ruth or Dan; interviews would tell.
+**Routine shopping · the shop wasn't there.** Four posts, the thinnest cluster. She keeps going to local shops, but the butcher closes, the post office goes and the street thins out.
 
-How the coding and grouping worked: [method](method.md). Every post and code: [coding in detail](coding.md).
+```quote
+text: Having to go to Chiswick is a pain though.
+handle: u/mjfh2
+network: Reddit · r/london
+date: 2025-09-17
+url: https://www.reddit.com/r/london/comments/1niwnlw/comment/nemvjcy/
+tags: access-transport, decline-closure
+context: Same thread; the nearest butcher is now a trip away.
+status: verified
+```
+
+| | |
+| --- | --- |
+| **Jobs to be done** | Keep using the shops she relies on. |
+| **Use cases** | A weekly butcher, shut on the day she went. The nearest butcher now a trip to Chiswick. Buying something at the newsagent each time she uses its post office counter. |
+| **Pains** | Practical shops closing. Hours that aren't kept. |
+| **Gains** | A relationship with the shop. Quality and special requests. |
+| **Influencers** | Neighbours, local forums, council "shop local" campaigns. |
+| **For the brief** | Neither problem, directly. She needs to know what's still there and open. That's a lighter form of findability. |
+
+## Outside the map
+
+Six posts where nothing broke: a favourite restaurant ordered through Deliveroo, a butcher who cuts to order, click and collect chosen for control over timing. They show the high street working, and they sit closest to Ruth.

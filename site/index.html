@@ -196,6 +196,22 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .summary li { margin: 4px 0; max-width: none; }
 @media (max-width: 860px) { .summary { grid-template-columns: minmax(0, 1fr); } }
 
+/* Cluster map: need x where it broke */
+.cmap { border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 16px 12px; margin: 8px 0 24px; }
+.cmap svg { display: block; width: 100%; height: auto; }
+.cmap .gl { stroke: var(--border); }
+.cmap .tk { fill: var(--muted-fg); font: 400 11px var(--font-sans); }
+.cmap .ax { fill: var(--muted-fg); font: 500 10.5px var(--font-mono); letter-spacing: .05em; text-transform: uppercase; }
+.cmap .zone { fill-opacity: .07; stroke-opacity: .5; stroke-dasharray: 4 4; }
+.cmap .pt { stroke-width: 2; }
+.cmap .pt.defects { fill: var(--bg) !important; }
+.cmap .pt.unknown { fill-opacity: .45; stroke-opacity: .6; }
+.cmap .cl { fill: var(--fg); font: 600 13px var(--font-sans); paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round; }
+.cmap .cn { fill: var(--muted-fg); font: 400 11px var(--font-mono); paint-order: stroke; stroke: var(--bg); stroke-width: 4px; }
+.cmap-foot { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 10px; font-size: 13px; color: var(--muted-fg); }
+.cmap-foot span { display: inline-flex; align-items: center; gap: 6px; }
+.cmap-note { font-size: 12.5px; color: var(--muted-fg); margin: 8px 0 0; }
+
 /* Occasion grid (job x where it broke) */
 .ogrid-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); margin: 8px 0 8px; }
 .ogrid { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 13px; }
@@ -354,12 +370,54 @@ i.m.unknown { opacity: .5; }
     return `<div class="summary">${sec('takeaways', 'Key takeaways')}${sec('call', 'My call')}${sec('ai', 'AI in this step')}${sec('trade-offs', 'Trade-offs')}</div>`;
   }
 
+  // ```cluster-map  JSON from scripts/build_personas.py: posts on need x where it broke, k-means clusters.
+  function clusterMap(src) {
+    let d;
+    try { d = JSON.parse(src); } catch (e) { return `<pre><code>${esc(src)}</code></pre>`; }
+    const W = 680, H = 440, L = 128, R = 24, T = 24, B = 52;
+    const sx = v => L + (v / 10.5) * (W - L - R), sy = v => T + (1 - v / 10) * (H - T - B);
+    const ids = Object.keys(d.names);
+    const col = c => `var(--c${ids.indexOf(c) + 1})`;
+    // Posts with the same codes share a coordinate; lay them out in a small grid around it.
+    const groups = {};
+    d.points.forEach(p => (groups[`${p.x},${p.y}`] = groups[`${p.x},${p.y}`] || []).push(p));
+    const placed = [];
+    Object.values(groups).forEach(list => list.forEach((p, i) => {
+      const per = Math.ceil(Math.sqrt(list.length)), r = Math.floor(i / per), c = i % per;
+      const off = 13, w = (Math.min(per, list.length) - 1) * off, h = (Math.ceil(list.length / per) - 1) * off;
+      placed.push({ ...p, cx: sx(p.x) - w / 2 + c * off, cy: sy(p.y) - h / 2 + r * off });
+    }));
+    let g = '';
+    d.x.ticks.forEach(([v, t]) => g += `<line class="gl" x1="${sx(v)}" x2="${sx(v)}" y1="${sy(10)}" y2="${sy(0)}"/><text class="tk" x="${sx(v)}" y="${sy(0) + 18}" text-anchor="middle">${esc(t)}</text>`);
+    d.y.ticks.forEach(([v, t]) => g += `<line class="gl" x1="${sx(0)}" x2="${sx(10.5)}" y1="${sy(v)}" y2="${sy(v)}"/><text class="tk" x="${L - 10}" y="${sy(v) + 4}" text-anchor="end">${esc(t)}</text>`);
+    g += `<text class="ax" x="${sx(0)}" y="${H - 6}">← ${esc(d.x.min)}</text><text class="ax" x="${sx(10.5)}" y="${H - 6}" text-anchor="end">${esc(d.x.max)} →</text>`;
+    g += `<text class="ax" x="8" y="${sy(10) + 4}">↑ ${esc(d.y.max)}</text><text class="ax" x="8" y="${sy(0)}">↓ ${esc(d.y.min)}</text>`;
+    // A soft zone around each cluster: the box around its points, padded.
+    ids.forEach(c => {
+      const mine = placed.filter(p => p.c === c); if (!mine.length) return;
+      const xs = mine.map(p => p.cx), ys = mine.map(p => p.cy), pad = 16;
+      const x0 = Math.min(...xs) - pad, x1 = Math.max(...xs) + pad, y0 = Math.min(...ys) - pad, y1 = Math.max(...ys) + pad;
+      g += `<rect class="zone" x="${x0}" y="${y0}" width="${x1 - x0}" height="${y1 - y0}" rx="14" fill="${col(c)}" stroke="${col(c)}"/>`;
+    });
+    g += placed.map(p => `<circle class="pt ${p.s}" cx="${p.cx.toFixed(1)}" cy="${p.cy.toFixed(1)}" r="5" fill="${col(p.c)}" stroke="${col(p.c)}"><title>${esc(p.h)} · ${esc(d.names[p.c])} · ${p.s}</title></circle>`).join('');
+    ids.forEach(c => {
+      const mine = placed.filter(p => p.c === c); if (!mine.length) return;
+      const top = Math.min(...mine.map(p => p.cy)) - 24, mid = mine.reduce((a, p) => a + p.cx, 0) / mine.length;
+      const name = d.names[c].split(',')[0], n = d.centres[c].n;
+      g += `<text class="cl" x="${mid}" y="${top}" text-anchor="middle">${esc(name)} <tspan class="cn">(${n})</tspan></text>`;
+    });
+    const legend = ids.map(c => `<span><i class="m" style="color:${col(c)}"></i>${esc(d.names[c])}</span>`).join('') +
+      `<span><i class="m" style="color:var(--fg)"></i>kept going</span><span><i class="m defects" style="color:var(--fg)"></i>gave up on local</span><span><i class="m unknown" style="color:var(--fg)"></i>not shown</span>`;
+    return `<figure class="cmap"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Posts by need and by where the occasion broke, grouped into clusters">${g}</svg>
+      <figcaption><div class="cmap-foot">${legend}</div><p class="cmap-note">Each dot is one post; posts with the same codes sit side by side. Not on the chart: ${d.worked.length} posts where nothing broke.</p></figcaption></figure>`;
+  }
+
   // ```occasion-grid  JSON from scripts/build_personas.py: jobs x where the occasion broke, one mark per post.
   function occasionGrid(src) {
     let d;
     try { d = JSON.parse(src); } catch (e) { return `<pre><code>${esc(src)}</code></pre>`; }
     const gids = Object.keys(d.groups);
-    const col = g => g === 'unassigned' ? 'var(--muted-fg)' : `var(--c${gids.indexOf(g) + 1})`;
+    const col = g => g === 'worked' ? 'var(--muted-fg)' : `var(--c${gids.indexOf(g) + 1})`;
     const cell = (r, c) => d.cells.find(x => x.row === r && x.col === c);
     const head = `<tr><th></th>${d.cols.map(c => `<th>${esc(c.label)}${c.maps ? `<small>→ ${esc(c.maps)}</small>` : ''}</th>`).join('')}</tr>`;
     const body = d.rows.map(r => `<tr><th>${esc(r.label)}</th>${d.cols.map(c => {
@@ -384,6 +442,7 @@ i.m.unknown { opacity: .5; }
         if (l === 'timeline') return timeline(code);
         if (l === 'occasion-grid') return occasionGrid(code);
         if (l === 'summary') return summary(code);
+        if (l === 'cluster-map') return clusterMap(code);
         return `<pre><code>${esc(code)}</code></pre>`;
       }
     }

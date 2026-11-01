@@ -1,29 +1,25 @@
 # Proposed dimensions
 
-Two ways to tell shoppers apart that came out of the [findings](findings.md). They are a proposal: Define will decide whether to keep, change or drop them when we choose the shopper and the problem.
+Two dimensions that come out of the [findings](findings.md) and are used to cluster the [proto-personas](../personas/index.md). One describes the need. The other says where the occasion broke, which is the choice the brief asks for.
 
 ```summary
 Takeaways:
-- First proposal: need (mission ↔ browse) and effort for local (committed ↔ pragmatist).
-- For the personas these were replaced by job × where the occasion broke, which maps onto findability versus transaction.
+- Need: from browsing to a mission (a specific item, often with a deadline).
+- Where it broke: from not knowing (findability) to not being able to get it (transaction).
+- What people did next (kept going, or gave up) is shown on each point, but it isn't an axis. Most posts don't show it.
 Call:
-- Keep this page as a record of the first proposal, not delete it.
+- Choose axes that speak to the brief's choice, and that can be coded from what people wrote.
 AI:
-- The research agent proposed these axes. A reviewer agent showed the effort axis measured attitude and didn't help choose a problem.
+- The research agent proposed candidate axes from its coding. A reviewer agent tested them against the brief. Two agents coded every post on both axes.
 Trade-offs:
-- Two sets of axes to read. The [personas method](../personas/method.md) explains the switch.
+- Need describes occasions more than people: the same person browses on Saturday and is on a mission on Tuesday.
 ```
 
-## Axis 1: how specific and urgent the need is
+## Need: browse ↔ mission
 
-**What it measures.** The shape of a shopping occasion: whether the shopper knows exactly what they want and when they need it, or is open to whatever they find.
+How specific and urgent the need is. At the **mission** end the shopper wants a particular thing, often by a deadline, and won't tolerate an uncertain trip. At the **browse** end there's no item in mind; routine shopping sits in between.
 
-- **Mission:** a specific item with a deadline. Flowers by 7pm, eclipse glasses by Wednesday, an AC for a pregnant partner today. No tolerance for an uncertain trip, will pay more, and the only case where online loses outright.
-- **Browse:** open-ended, no deadline. Charity shops, the weekend market, a wander down Chiswick High Road. Uncertainty is part of the fun.
-
-The same person moves along this axis from one day to the next, so it describes occasions as much as people.
-
-**Why it matters for the brief.** Our reading: mission occasions are a findability problem in its sharpest form, because the question is "who has it, now?" and the answer has to be trusted. Browse occasions need discovery and a reason to go. The transaction side matters more at the mission end too, since collection or same-day delivery is what beats Amazon there.
+Scored from two codes: the job (discovery, routine or a specific item) and whether the post states a deadline. See the [scale](../personas/method.md).
 
 ```quote
 text: Left it a bit last minute, but does anyone know any stores nearby selling solar eclipse glasses?
@@ -32,7 +28,7 @@ network: Reddit · r/chiswick
 date: 2026-08-11
 url: https://www.reddit.com/r/chiswick/comments/1vlibmn/
 tags: stock-visibility, urgency
-context: Mission pole. One of four near-identical West London posts that day.
+context: Mission end: specific item, deadline the next day.
 status: verified
 ```
 
@@ -43,19 +39,8 @@ network: Reddit · r/london
 date: 2026-08-11
 url: https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2y26dy/
 tags: stock-visibility, urgency
-context: Mission pole. Eclipse-glasses thread, the day before the eclipse.
+context: Mission end: same eclipse rush, near Hammersmith.
 status: archive
-```
-
-```quote
-text: Hammersmith is good if you like thrifting (we call them charity shops)… but otherwise it isn't great for shopping.
-handle: u/No_Witness9533
-network: Reddit · r/london
-date: 2026-08-18
-url: https://www.reddit.com/r/london/comments/1vr9i0n/comment/p4bxk0e/
-tags: place-identity
-context: Browse pole. Advice to a visitor looking for somewhere to browse.
-status: verified
 ```
 
 ```quote
@@ -65,76 +50,65 @@ network: Mumsnet · Talk › Chat
 date: 2026-03-27
 url: https://www.mumsnet.com/talk/_chat/5509007-do-you-still-enjoy-shopping-on-the-high-street-or-mostly-online?reply=151334270
 tags: online-default
-context: Browse pole, gone quiet. Lives under 16 minutes from Oxford Street.
+context: Browse end, gone quiet: shops nearby, no recent trips.
 status: verified
 ```
 
-## Axis 2: how much effort they will spend on local
+## Where it broke: findability ↔ transaction
 
-**What it measures.** How much friction a shopper absorbs before they default to the supermarket or Amazon. Almost everyone says they like independents, so liking them doesn't separate anyone; effort does.
-
-- **Committed localist:** goes weekly, accepts higher prices, orders from a favourite to keep it going, takes closures personally.
-- **Convenience pragmatist:** will pay more "if it's reasonably convenient", and leaves after one wasted trip.
-
-**Why it matters for the brief.** This axis predicts what a product has to do to convert someone. Our hypothesis: for localists, knowing what's in stock and when the shop is open may be enough (findability). Pragmatists probably also need the purchase to be as easy as Amazon's, with collection or delivery and one basket (transaction).
+Where the shopping occasion failed. At the top the shopper **couldn't find out**: whether a shop has the item, whether it's open, who sells it. That points to findability. At the bottom they **couldn't get it**: hours that clash with work, cash only, delivery too slow. That points to transaction. In between, the item or the shop simply **wasn't there**, or wasn't worth the price. That is the street's own offer, which an app can show but not fix.
 
 ```quote
-text: Haven't been in over a year and then wonder why shops are shutting - use them or lose them !
-handle: u/Greg-Normal
+text: Hard to know stock levels without visiting, unless you can somehow get through on the phone..!
+handle: u/jamesshovlin
 network: Reddit · r/london
-date: 2025-09-17
-url: https://www.reddit.com/r/london/comments/1niwnlw/comment/neo7ha3/
-tags: support-local, decline-closure
-context: Committed pole. Reply to the post about Kew losing its butcher.
+date: 2026-08-10
+url: https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tdld2/
+tags: stock-visibility
+context: Findability end: stock can't be known without going.
 status: verified
 ```
 
 ```quote
-text: Good independent local butcher (who I try to buy something from every week)
-handle: Valentando
-network: Mumsnet · Talk › AIBU
-date: 2025-12-05
-url: https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977465
-tags: support-local
-context: Committed pole. Keeps going even after finding the shop shut during its advertised hours.
+text: I've been to Robert Dyas in Ealing and Chiswick today and both sold out
+handle: u/moanyjoany
+network: Reddit · r/Ealing
+date: 2026-08-11
+url: https://www.reddit.com/r/Ealing/comments/1vlcuor/comment/p30r2af/
+tags: stock-visibility, access-transport
+context: Middle: the shops existed, the stock didn't.
 status: verified
 ```
 
 ```quote
-text: I'd love to support local independent places but unless they are consistently open…
+text: So I end up in McDonald's, cos it's always open, and shop on Amazon, because it's always there.
 handle: LividArse
 network: Mumsnet · Talk › AIBU
 date: 2025-12-05
 url: https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977221
-tags: opening-hours, support-local
-context: Pragmatist pole. Ends up at McDonald's and Amazon.
+tags: opening-hours, online-default
+context: Transaction end: shops not open when they can go.
 status: verified
 ```
 
 ```quote
-text: I confess that I only used them once as I thought they were extremely expensive…
-handle: u/Username8831
-network: Reddit · r/Ealing
-date: 2026-07-25
-url: https://www.reddit.com/r/Ealing/comments/1v6423y/comment/oznttbd/
-tags: price, decline-closure
-context: Pragmatist pole. On a bike workshop in Ealing closing, which the same comment regrets.
+text: it's only open during office hours and then Saturday morning, and b) it's more than double the cost… I go to them for anniversaries
+handle: u/killmetruck
+network: Reddit · r/london
+date: 2026-06-07
+url: https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq967k5/
+tags: opening-hours, price, support-local
+context: Transaction end: office hours and price push the weekly shop elsewhere.
 status: verified
 ```
 
-## Crossing the two
+## A modifier, not an axis: what people did next
 
-All four quadrants are hypotheses to test with real shoppers in Define.
-
-| | Committed localist | Convenience pragmatist |
-| --- | --- | --- |
-| **Mission** | **"If only I knew they had it."** Would rather buy from the shop down the road and will go if stock is confirmed. | **"Just tell me who has it, now."** Takes whichever shop answers first; collection or delivery may decide it. |
-| **Browse** | **The regulars.** Market Saturdays, the weekly butcher run. Already shopping local; want to know what's new. | **The lapsed browser.** Rarely goes; online by default. Hardest to move. |
+Some posts show what the shopper did after the friction: kept going despite a cost, or switched to online or a chain. It matters for who a product can win back, but only 10 of the 27 coded posts show it, and the two coders agreed less on it. So it's drawn as the style of each point, not as an axis.
 
 ## Considered and rejected
 
-- **Price sensitivity (budget to affluent).** Price comes up often, but it is tangled up with geography (Kew's butcher closed despite the area's wealth) and with convenience. Several posters say they would have paid the premium if the shop had been reliable. As an axis it would mostly repeat Axis 2.
-- **Time available (nine-to-five worker to flexible).** It clearly drives the opening-hours pain, but it pushes people towards the pragmatist end and towards mission trips. It works better as an attribute of the shopper we define than as a separate axis.
-- **Place loyalty (King Street local to Chiswick-goer).** Vivid in the data, but it splits high streets, not shoppers, and the same people move between them.
-
-See the [empathy map](empathy-map.md) for the composite these axes come from, and [sources](../sources.md) for every link.
+- **Effort for local as an axis.** Too few posts show behaviour, and what people say about supporting local is not what they do ([empathy map](empathy-map.md)).
+- **Price sensitivity.** Tangled up with convenience: several posters would have paid more if the shop had been reliable.
+- **Time available.** It drives the opening-hours pain, but works better as a trait of the persona than as an axis.
+- **Place loyalty (King Street versus Chiswick).** It separates high streets, not shoppers.

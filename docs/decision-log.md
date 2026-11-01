@@ -94,23 +94,15 @@ Reddit blocked every automated route we had: the fetch tool, both browsers and i
 
 Posts belong to the people who wrote them. Quotes are kept to the phrase that carries the point, about 25 words at most, always with a link to the full original. This also follows Kozinets' advice to use the least of a person's words that does the job.
 
-## 012 — Personas placed by scoring, not by feel
-**2026-11-01 · Superseded by 013**
-
-Discover gets a personas layer: five personas built with the persona/user profile tool from Lewrick, Link and Leifer. To place them on the two proposed dimensions, every shopper quote from the netnography was coded against a rubric of observable indicators (for example "names a specific item", "falls back to online after friction"). The codes become a 0–10 score on each axis, and each persona sits at the average of its quotes.
-
-**Why:** a persona chart drawn by hand shows what the team already believes. Scoring from the quotes makes the placement checkable, and changing a code in the data file shows how much a persona moves.
-**Open:** the coding was done once, by one coder. The two mission personas, Sam and Tom, sit close together, and the split between them needs testing.
-
-## 013 — Proto-personas from coded occasions
+## 012 — Proto-personas from clustered posts
 **2026-11-01 · Decided**
 
-A reviewer agent showed that 012 was circular: quotes were assigned to personas by hand and then scored, so the chart could only confirm the assignment. I inverted the method. Posts are coded first on what the shopper was doing and where it broke. A second agent codes them blind. Groups are read off the grid with rules fixed in advance. The result is three proto-personas instead of five: one well supported (the mission shopper) and two thin (regular, lapsed). Discovery stays an occasion, not a persona.
+Posts from the netnography are coded, scored on two dimensions (need, and where the occasion broke) and clustered with k-means. Each cluster becomes a proto-persona, described with Lewrick, Link and Leifer's persona fields. A second agent codes every post blind, so the scores can be checked. The data supports three clusters.
 
-**Why:** the groups should come from the data, and the axes should speak to the brief's choice between findability and transaction.
-**Trade-off:** fewer, thinner personas, but each one can be traced to its posts.
+**Why:** the personas should come out of the data, and the dimensions should speak to the brief's choice between findability and transaction.
+**Trade-off:** three thin groups (11, 6 and 4 posts), each one traceable to its posts. They are proto-personas because nobody was interviewed.
 
-## 014 — Docs say who did what
+## 013 — Docs say who did what
 **2026-11-01 · Decided**
 
 Every page opens with key takeaways, my call, how AI was used in that step, and the trade-offs. Method detail sits in subpages for whoever wants it. A running [log](process/ai-log.md) records what each agent was asked, what came back and what was thrown away.

@@ -1,41 +1,56 @@
 # Method
 
-How the proto-personas were made: code the posts first, then read the groups off the data. Claude and a second agent did the coding; I set the method after the first version failed.
+How the proto-personas were made. Posts were coded, scored on two dimensions and clustered. Each cluster became a persona.
 
 ```summary
 Takeaways:
-- Groups come from the data, not from personas drafted first.
-- The two coders agreed on 89–96% of job, urgency and failure codes, and on 74% of stance.
+- Three clusters fit the data best (mean silhouette 0.55, against 0.48–0.53 for 2, 4 or 5).
+- The two coders agreed on 89–96% of the codes behind both dimensions.
 Call:
-- Invert the first method. Pick axes that map onto the brief's choice. Keep Lewrick, Link and Leifer's persona fields.
+- Two dimensions that map onto the brief: need, and where the occasion broke.
+- Lewrick, Link and Leifer's persona fields to describe each cluster.
 AI:
-- Claude wrote the codebook and coded 44 posts. A second agent coded them blind. A reviewer agent's critique of the first version led here.
+- Claude wrote the codebook and coded 44 posts. A second agent coded them blind.
+- A script turned the codes into scores, ran the clustering and drew the map.
 Trade-offs:
-- Both coders are AI models, which makes their agreement weaker evidence than agreement between two people.
+- Both coders are AI models. Two scores per post means many posts share a spot on the map.
 ```
 
 ## Steps
 
-1. **Unit.** One public post from the netnography. 44 posts after removing duplicates.
-2. **Codebook.** Each post is included or excluded, then coded on three things: the **job** (specific item, routine, discovery), **where it broke** (information, access, availability, value, none) and the **stance** (persists, defects, unknown; behaviour only).
-3. **Blind second coder.** A second agent coded every post without seeing the first codes. Disagreements were settled by three written rules, and each one is listed.
-4. **Grid.** Job × where it broke, one mark per post.
-5. **Groups by fixed rules,** written before the second coder's results came in: specific job → mission; defects → lapsed; routine and persists → regular; discovery → discovery; anything else isn't placed.
-6. **Name and describe.** Each group is written up with the persona fields: jobs, use cases, pains, gains and influencers.
+1. **Code.** Each post from the [netnography](../netnography/findings.md) is coded with a written codebook: the job, whether it's urgent, where it broke, and what the shopper did next. 27 of 44 posts describe the poster's own shopping.
+2. **Check.** A second agent codes every post blind. Three written rules settle the disagreements.
+3. **Score** each post on the two [dimensions](../netnography/dimensions.md):
 
-## Why these two axes
+| Need | Score | Where it broke | Score |
+| --- | --- | --- | --- |
+| Discovery | 1 | Couldn't find out (information) | 9 |
+| Routine | 4 | Wasn't there (availability) | 6 |
+| Specific item | 7 | Not worth it (value) | 4 |
+| Deadline stated | +3 | Couldn't get it (access) | 1 |
 
-The job axis separates occasions: the same person can be on a mission on Tuesday and browsing on Saturday. The "where it broke" axis maps straight onto the brief. Information failures point to findability, access failures to transaction, and availability failures to the street itself. They replace the first [proposed dimensions](../netnography/dimensions.md), which measured attitude and couldn't say which problem to solve.
+4. **Cluster.** k-means on the two scores, trying 2 to 5 clusters and keeping the number with the best mean silhouette, which measures how well separated the clusters are. The 6 posts where nothing broke are listed but not clustered.
+
+<!-- generated:silhouette -->
+| Clusters (k) | Mean silhouette |
+| --- | --- |
+| 2 | 0.5 |
+| 3 | 0.55 ← chosen |
+| 4 | 0.53 |
+| 5 | 0.48 |
+<!-- /generated:silhouette -->
+
+5. **Name.** The cluster with the highest need is Sam. Of the rest, the one closest to "couldn't get it" is Dan, and the other is Ruth. Each one is then described with the persona fields: jobs to be done, use cases, pains, gains and influencers.
 
 ## The persona tool
 
-Lewrick, Link and Leifer's persona/user profile ([*The Design Thinking Playbook*](https://www.wiley.com/en-us/The+Design+Thinking+Playbook%3A+Mindful+Digital+Transformation+of+Teams%2C+Products%2C+Services%2C+Businesses+and+Ecosystems-p-9781119467472), 2018; [*The Design Thinking Toolbox*](https://www.wiley.com/en-us/The+Design+Thinking+Toolbox%3A+A+Guide+to+Mastering+the+Most+Popular+and+Valuable+Innovation+Methods-p-9781119629214), 2020) describes a fictional user built from research: jobs to be done, use cases, pains, gains, influencers and trends. It is meant to change as the team learns. We used those fields. The codebook, the grid and the grouping rules are our own addition.
+Lewrick, Link and Leifer's persona/user profile ([*The Design Thinking Playbook*](https://www.wiley.com/en-us/The+Design+Thinking+Playbook%3A+Mindful+Digital+Transformation+of+Teams%2C+Products%2C+Services%2C+Businesses+and+Ecosystems-p-9781119467472), 2018; [*The Design Thinking Toolbox*](https://www.wiley.com/en-us/The+Design+Thinking+Toolbox%3A+A+Guide+to+Mastering+the+Most+Popular+and+Valuable+Innovation+Methods-p-9781119629214), 2020) describes a fictional user built from research, and expects it to change as the team learns. We used its fields. The scoring and clustering are ours.
 
 ## Limits
 
-- **Thin groups.** Only Sam has enough posts to stand on. Ruth and Dan have three each.
-- **Stance is the weakest code.** Kappa is 0.55, and most posts don't show what the person did next.
-- **Missing shoppers.** Older and offline shoppers are hardly in the data.
-- **AI on both sides.** Both coders are AI agents. Agreement between two models is weaker evidence than agreement between two people.
+- **Small clusters.** 11, 6 and 4 posts. Ruth especially needs testing.
+- **Coarse scores.** Codes are categories, so many posts share a point. The map shows them side by side.
+- **AI on both sides.** Agreement between two models is weaker evidence than agreement between two people.
+- **Missing shoppers.** Older and offline shoppers hardly appear in the data.
 
-The codebook, agreement scores, each disagreement and every coded post: [coding in detail](coding.md).
+Codebook, agreement, every disagreement and every coded post: [coding in detail](coding.md).

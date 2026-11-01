@@ -3,21 +3,23 @@
     python3 scripts/build_personas.py
 
 Inputs (docs/discover/personas/):
-  coding.json      final codes, one object per post (coder A after reconciliation)
-  coding-b.json    the blind second coder's codes, used only to report agreement
+  coding.json      final codes, one object per post
+  coding-a.json    first coder, before reconciliation
+  coding-b.json    blind second coder, used to report agreement
 
-Groups come from fixed rules on the codes, written before the second coder's
-results were seen:
-  job = specific                        -> mission
-  job != specific and stance = defects  -> lapsed
-  job = routine and stance = persists   -> regular
-  job = discovery                       -> discovery
-  anything else                         -> unassigned (shown, not placed)
+Each post with a failure gets two scores:
+  need   = discovery 1, routine 4, specific 7, plus 3 if urgent      (0 browse .. 10 mission)
+  breaks = information 9, availability 6, value 4, access 1        (10 findability .. 0 transaction)
+Posts where nothing broke are listed beside the chart, not clustered.
+Clusters: k-means on (need, breaks), k from 2 to 5, keeping the k with the
+best mean silhouette. Clusters are named by fixed rules on their centres:
+highest need -> Sam (mission); of the rest, lowest breaks -> Dan; the rest -> Ruth.
 
 Writes the generated blocks between <!-- generated:NAME --> markers.
 """
 import json
 import pathlib
+import math
 import re
 from collections import Counter
 
@@ -35,24 +37,79 @@ FAILURES = [
 ]
 GROUPS = {
     "mission": "Sam, the mission shopper",
-    "regular": "Ruth, the regular",
     "lapsed": "Dan, the lapsed local",
-    "discovery": "Priya, the finds hunter",
-    "unassigned": "Not placed",
+    "regular": "Ruth, the regular",
+    "worked": "Nothing broke (not clustered)",
 }
 FIELDS = ("include", "job", "urgent", "failure", "stance")
 
 
-def group_of(p):
-    if p["job"] == "specific":
-        return "mission"
-    if p["stance"] == "defects":
-        return "lapsed"
-    if p["job"] == "routine" and p["stance"] == "persists":
-        return "regular"
-    if p["job"] == "discovery":
-        return "discovery"
-    return "unassigned"
+NEED = {"discovery": 1, "routine": 4, "specific": 7}
+BREAKS = {"information": 9, "availability": 6, "value": 4, "access": 1}
+NAMES = {"mission": "Sam, the mission shopper", "lapsed": "Dan, the lapsed local", "regular": "Ruth, the regular"}
+
+
+def dist(a, b):
+    return math.hypot(a["x"] - b["x"], a["y"] - b["y"])
+
+
+def kmeans(pts, k):
+    # Deterministic farthest-point start, then Lloyd iterations.
+    centres = [max(pts, key=lambda p: (p["x"], p["y"]))]
+    while len(centres) < k:
+        centres.append(max(pts, key=lambda p: min(dist(p, c) for c in centres)))
+    centres = [{"x": c["x"], "y": c["y"]} for c in centres]
+    for _ in range(100):
+        labels = [min(range(k), key=lambda i: dist(p, centres[i])) for p in pts]
+        new = []
+        for i in range(k):
+            mine = [p for p, l in zip(pts, labels) if l == i] or [centres[i]]
+            new.append({"x": sum(p["x"] for p in mine) / len(mine), "y": sum(p["y"] for p in mine) / len(mine)})
+        if new == centres:
+            break
+        centres = new
+    return labels, centres
+
+
+def silhouette(pts, labels, k):
+    scores = []
+    for i, p in enumerate(pts):
+        same = [dist(p, q) for j, q in enumerate(pts) if labels[j] == labels[i] and j != i]
+        if not same:
+            scores.append(0.0)
+            continue
+        a = sum(same) / len(same)
+        b = min(sum(dist(p, q) for j, q in enumerate(pts) if labels[j] == o) / labels.count(o)
+                for o in range(k) if o != labels[i] and labels.count(o))
+        scores.append((b - a) / max(a, b) if max(a, b) else 0.0)
+    return sum(scores) / len(scores)
+
+
+def cluster(posts):
+    pts = []
+    for p in posts:
+        if p["failure"] in BREAKS:
+            p["x"] = NEED[p["job"]] + (3 if p["urgent"] == "yes" else 0)
+            p["y"] = BREAKS[p["failure"]]
+            pts.append(p)
+    trials = {}
+    for k in range(2, 6):
+        labels, centres = kmeans(pts, k)
+        trials[k] = (silhouette(pts, labels, k), labels, centres)
+    best = max(trials, key=lambda k: trials[k][0])
+    _, labels, centres = trials[best]
+    order = sorted(range(best), key=lambda i: -centres[i]["x"])
+    rest = sorted(order[1:], key=lambda i: centres[i]["y"])
+    names = {order[0]: "mission"}
+    if rest:
+        names[rest[0]] = "lapsed"
+    for i in rest[1:]:
+        names[i] = "regular" if "regular" not in names.values() else f"group{i}"
+    for p, l in zip(pts, labels):
+        p["cluster"] = names[l]
+    summary = {names[i]: {"x": round(centres[i]["x"], 1), "y": round(centres[i]["y"], 1), "n": labels.count(i)} for i in range(best)}
+    return pts, best, {k: round(v[0], 2) for k, v in trials.items()}, summary
+
 
 
 def geo(p):
@@ -86,8 +143,22 @@ def main():
     second = {p["id"]: p for p in json.loads((DIR / "coding-b.json").read_text(encoding="utf-8"))}
     posts = [p for p in coded if p["include"]]
     for p in posts:
-        p["group"] = group_of(p)
         p["where"] = geo(p)
+    pts, best_k, sil, centres = cluster(posts)
+    for p in posts:
+        p["group"] = p.get("cluster", "worked")
+    worked = [p for p in posts if p["group"] == "worked"]
+
+    chart = {
+        "x": {"label": "Need", "ticks": [[1, "Discovery"], [4, "Routine"], [7, "Specific item"], [10, "Specific + deadline"]], "min": "Browse", "max": "Mission"},
+        "y": {"label": "Where it broke", "ticks": [[9, "Couldn't find out"], [6, "Wasn't there"], [4, "Not worth it"], [1, "Couldn't get it"]], "min": "Transaction", "max": "Findability"},
+        "names": {k: NAMES.get(k, k) for k in centres},
+        "centres": centres,
+        "points": [{"x": p["x"], "y": p["y"], "c": p["cluster"], "s": p["stance"], "h": p["handle"]} for p in pts],
+        "worked": [p["handle"] for p in worked],
+    }
+    chart_md = "```cluster-map\n" + json.dumps(chart, ensure_ascii=False) + "\n```"
+    sil_md = "| Clusters (k) | Mean silhouette |\n| --- | --- |\n" + "\n".join(f"| {k} | {v}{' ← chosen' if k == best_k else ''} |" for k, v in sil.items())
 
     # Grid: jobs x failures, each post a mark styled by stance and coloured by group.
     cells = []
@@ -105,7 +176,7 @@ def main():
     grid_md = "```occasion-grid\n" + json.dumps(grid, ensure_ascii=False) + "\n```"
 
     # Group summary with source mix.
-    rows = ["| Proto-persona | Posts | People | Sources | Where the occasion broke | Stance |", "| --- | --- | --- | --- | --- | --- |"]
+    rows = ["| Group | Posts | People | Centre (need, breaks) | Sources | Where it broke | What they did next |", "| --- | --- | --- | --- | --- | --- | --- |"]
     for gid, name in GROUPS.items():
         mine = [p for p in posts if p["group"] == gid]
         if not mine:
@@ -115,7 +186,9 @@ def main():
         fail = Counter(p["failure"] for p in mine)
         stance = Counter(p["stance"] for p in mine)
         fmt = lambda c: ", ".join(f"{k} {v}" for k, v in c.most_common())
-        rows.append(f"| {name} | {len(mine)} | {people} | {fmt(src)} | {fmt(fail)} | {fmt(stance)} |")
+        c = centres.get(gid)
+        where = f"{c['x']}, {c['y']}" if c else "–"
+        rows.append(f"| {name} | {len(mine)} | {people} | {where} | {fmt(src)} | {fmt(fail)} | {fmt(stance)} |")
     summary_md = "\n".join(rows)
 
     # Failure totals, the part that speaks to the brief.
@@ -126,9 +199,9 @@ def main():
     failures_md = "\n".join(fail_rows)
 
     # Per-post coding table.
-    table = ["| Post | Date | Job | Urgent | Failure | Stance | Proto-persona | Why |", "| --- | --- | --- | --- | --- | --- | --- | --- |"]
+    table = ["| Post | Date | Job | Urgent | Failure | Stance | Need | Breaks | Group | Why |", "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
     for p in sorted(posts, key=lambda p: (list(GROUPS).index(p["group"]), p["job"], p["failure"])):
-        table.append(f"| [{p['handle']}]({p['url']}) | {p['date']} | {p['job']} | {p['urgent']} | {p['failure']} | {p['stance']} | {GROUPS[p['group']].split(',')[0]} | {p['rationale']} |")
+        table.append(f"| [{p['handle']}]({p['url']}) | {p['date']} | {p['job']} | {p['urgent']} | {p['failure']} | {p['stance']} | {p.get('x', '–')} | {p.get('y', '–')} | {GROUPS[p['group']].split(',')[0]} | {p['rationale']} |")
     excluded = ["| Post | Why it was left out |", "| --- | --- |"]
     excluded += [f"| [{p['handle']}]({p['url']}) | {p['exclude_reason']} |" for p in coded if not p["include"]]
 
@@ -148,7 +221,7 @@ def main():
     resolutions = ["| Post | Settled as | Why |", "| --- | --- | --- |"]
     resolutions += [f"| [{p['handle']}]({p['url']}) | {'excluded' if not p['include'] else ', '.join(p[k] for k in ('job', 'failure', 'stance'))} | {p['resolution']} |" for p in coded if p.get("resolution")]
 
-    blocks = {"resolutions": "\n".join(resolutions), "grid": grid_md, "groups": summary_md, "failures": failures_md, "coding": "\n".join(table),
+    blocks = {"chart": chart_md, "silhouette": sil_md, "resolutions": "\n".join(resolutions), "grid": grid_md, "groups": summary_md, "failures": failures_md, "coding": "\n".join(table),
               "excluded": "\n".join(excluded), "agreement": agreement_md}
     for page in PAGES:
         if page.exists():
@@ -156,6 +229,7 @@ def main():
             for name, body in blocks.items():
                 text = replace_block(text, name, body)
             page.write_text(text, encoding="utf-8")
+    print(sil_md)
     print(summary_md)
     print(failures_md)
     print(agreement_md)

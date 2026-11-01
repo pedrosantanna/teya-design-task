@@ -37,16 +37,15 @@ Two writing agents turned the research into pages. Rules: quotes of 25 words at 
 ### 5. X and TikTok
 I logged in to X and TikTok in Chrome. Claude searched both through my session, read only. TikTok comments wouldn't load for the tools, so only captions were used. Posts that used the high street for racial or political arguments were read and left out.
 
-### 6. Personas, first version, then rebuilt
-- **First version:** Claude wrote five personas and placed them on a chart with a scoring rubric.
-- **Review:** I asked for an independent review. A reviewer agent, given only the files, found the chart circular. The personas had been assigned by hand before scoring, so the chart could only confirm them. It also showed that two of the five couldn't be told apart.
-- **My fix:** code the posts first, then let the groups appear.
-- **Rebuilt:** Claude wrote a new codebook and coded 44 posts. A second agent coded them blind, without seeing Claude's codes. Agreement was high on four fields and weaker on stance (kappa 0.55). Disagreements were resolved by written rules.
-- **Result:** one strong proto-persona and two thin ones, where there had been five. See [method](../discover/personas/method.md).
+### 6. Proto-personas
+- **Method:** I set it. Code the posts, score them on two dimensions that map onto the brief, cluster, then describe each cluster as a persona.
+- **Coding:** Claude wrote the codebook and coded 44 posts. A second agent coded them blind. Agreement was high on the codes behind both dimensions (kappa 0.85–0.93) and weaker on what people did next (0.55). Written rules settled the disagreements.
+- **Review:** before the method was settled, a reviewer agent read the files cold. It found a first draft circular, because personas had been assigned before scoring. That draft was thrown away.
+- **Result:** three clusters, so three proto-personas. See [method](../discover/personas/method.md).
 
 ## What AI did badly here
 
-- **Started building before the method was right.** The first personas looked finished but were circular. A separate reviewer caught it; the first draft didn't.
+- **Built before the method was right.** A first persona draft looked finished but was circular. The reviewer agent caught it; the agent that wrote it didn't.
 - **Wrote as if a lone human researcher did the work.** The method pages hid the agents until I pointed it out.
 - **Couldn't reach key sources.** Reddit, TikTok comments and Nextdoor. The workaround (an archive plus pages saved by hand) cost me time.
 - **Trimmed quotes too far at first.** Some Trustpilot quotes came back cut down by a summarising tool and had to be re-fetched or dropped.
