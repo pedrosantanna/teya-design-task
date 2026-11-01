@@ -2,7 +2,7 @@
 
 The clearest thing Londoners say about their high street is that they can't tell whether a shop has what they need, or is even open, without going there. When the need is urgent they ask strangers on Reddit and WhatsApp, and when a trip fails they order online and stop trying.
 
-Nine themes came out of the coding, ordered here from strongest evidence to weakest. The [method](method.md) page explains how quotes were chosen and what `verified` and `archive` mean.
+Ten themes came out of the coding, ordered here from strongest evidence to weakest. The [method](method.md) page explains how quotes were chosen and what `verified` and `archive` mean.
 
 ## 1. "Is it in stock right now?" has no answer except asking people
 
@@ -399,12 +399,110 @@ context: On plans to reopen the bridge to cars being dropped.
 status: verified
 ```
 
+## 10. On X and TikTok the high street is something to show, not somewhere to check
+
+**Evidence: moderate for TikTok, weak for X.** Read live on 1 November 2026.
+
+Neither network carries much of the practical talk Reddit does. On X, "high street" in London mostly appears in arguments about national decline, which we read but did not quote, and in council posts promoting independents. The one King Street post from a shopper calls a walk along it depressing.
+
+TikTok treats the high street as discovery. Videos pin a place with 📍, call it a steal or a hidden find, and offer it as an alternative to Oxford Street. Around Hammersmith the results are food, charity-shop hauls, bargain shops, a florist stall and a flea market, and many are made by the shops themselves. That fits the browse end of the [first dimension](dimensions.md): people find places through content, without searching for an item.
+
+One small, new signal: shoppers on X asking the platform's AI chatbot which shop has an item in stock. We found it twice, so it is a note to watch, not a finding.
+
+```quote
+text: Just walked the length of King Street in Hammersmith. Blimey, that was a thoroughly depressing experience.
+handle: @London_W4
+network: X
+date: 2026-09-23
+url: https://x.com/London_W4/status/2102723893463044506
+tags: place-identity
+context: Then praises Chiswick, at the other end of the street.
+status: verified
+```
+
+```quote
+text: People actually living in 2026 just use their local independent shop a short walk from where they live to send and receive parcels
+handle: @OpenChiswickW4
+network: X
+date: 2026-06-23
+url: https://x.com/OpenChiswickW4/status/2069295025561760040
+tags: delivery-collect, support-local
+context: Reply in a debate about Chiswick losing its post office.
+status: verified
+```
+
+```quote
+text: Boots may have it @grok what UK walk in store currently has this in stock
+handle: @Jojo_agboola
+network: X
+date: 2026-10-20
+url: https://x.com/Jojo_agboola/status/2112618905525276980
+tags: stock-visibility, discovery
+context: Asking X's AI chatbot which physical shop stocks a fragrance.
+status: verified
+```
+
+```quote
+text: you can do SO much better than Oxford Street 😉 One of my favorite alternatives is just a few minutes away
+handle: @loveandlondon
+network: TikTok
+date: 2025-05-29
+url: https://www.tiktok.com/@loveandlondon/video/7509933373075492118
+tags: discovery, place-identity
+context: Creator video caption; a high street offered as the better place to shop.
+status: verified
+```
+
+```quote
+text: a charity shop that sells only £8 & under with 50% off all designer clothes?!?! … 📍crisis's dropshop in Hammersmith
+handle: @hollygardnerx
+network: TikTok
+date: 2025-11-29
+url: https://www.tiktok.com/@hollygardnerx/video/7578215485968354582
+tags: discovery, price
+context: Try-on video caption. King Street's charity shops, as content.
+status: verified
+```
+
+```quote
+text: such a steal!🌺🌻🪻 📍Wheelers of Chiswick, Hammersmith station
+handle: @tafsonthemove
+network: TikTok
+date: 2025-05-11
+url: https://www.tiktok.com/@tafsonthemove/video/7503202705293266198
+tags: discovery, price
+context: The flower stall at Hammersmith station, the same one Reddit users point to when someone needs flowers late.
+status: verified
+```
+
+```quote
+text: Every single category is in decline. Except one. The independent bookshop has turned.
+handle: @stillshipping
+network: TikTok
+date: 2026-10-06
+url: https://www.tiktok.com/@stillshipping/video/7693511674925518102
+tags: decline-closure
+context: Caption from a creator who tracks UK high-street openings and closures.
+status: verified
+```
+
+```quote
+text: THE GIANT WEST LONDON FLEA … 100+ vintage, antiques & flea market traders 💳 Card payments accepted
+handle: @hackneyfleamarket
+network: TikTok
+date: 2026-09-26
+url: https://www.tiktok.com/@hackneyfleamarket/video/7689755751471959318
+tags: cash-card, discovery
+context: A market under the Hammersmith Flyover; organisers flag card payments up front.
+status: verified
+```
+
 ## What this does not tell us
 
 - **How often any of this happens.** These are posts people chose to write. They show what annoys people enough to post, and say nothing about frequency.
 - **What older and offline shoppers think.** They barely appear on Reddit or Mumsnet.
 - **Anything from shopkeepers.** Shop-owner posts were excluded, so why hours and stock are the way they are is still a guess.
 - **Whether people would use an app for this.** Nobody was asked. The pull towards live stock and reliable hours is our reading of unprompted complaints.
-- **Whether the Reddit comments still read the same live.** Most are `archive` until the comment trees are saved and matched.
+- **What TikTok viewers say back.** Only captions were collected.
 
 These themes feed the [empathy map](empathy-map.md) and the [proposed dimensions](dimensions.md).

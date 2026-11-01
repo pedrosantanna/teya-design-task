@@ -51,4 +51,4 @@ The evidence pulls in two directions, and the choice between them is the first d
 
 ## Gaps we know about
 
-We couldn't collect from X, TikTok, Instagram or Nextdoor, so younger shoppers on video platforms and older residents in neighbourhood groups are under-represented. Nobody was interviewed: every quote occurred naturally, and no one was asked about an app. Both gaps are listed on the [method](netnography/method.md) page.
+X and TikTok were read, but X carries little shopping talk and TikTok comments couldn't be collected, so younger shoppers are seen mostly through creators' captions. Instagram and Nextdoor weren't collected, so older residents in neighbourhood groups are under-represented. Nobody was interviewed: every quote occurred naturally, and no one was asked about an app. Both gaps are listed on the [method](netnography/method.md) page.

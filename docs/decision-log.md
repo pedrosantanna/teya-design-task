@@ -80,7 +80,7 @@ Networks were chosen with Kozinets' site-selection criteria: is the site relevan
 ## 010 — Reddit through an archive, checked against the live site
 **2026-11-01 · Decided**
 
-Reddit blocked every automated route we had: the fetch tool, both browsers and its public JSON. The official API now needs an approval that takes days. So the Reddit fieldwork was read through Arctic Shift, a public archive of Reddit used in academic research, and then checked against pages the author saved by hand from the live site. Every Reddit quote carries a status: **verified** (matched against the live page) or **via archive** (not yet matched). Two quotes were dropped because the live check showed them removed. X and TikTok were not collected in this first pass, despite decision 009; they stay listed as gaps.
+Reddit blocked every automated route we had: the fetch tool, both browsers and its public JSON. The official API now needs an approval that takes days. So the Reddit fieldwork was read through Arctic Shift, a public archive of Reddit used in academic research, and then checked against pages the author saved by hand from the live site. Every Reddit quote carries a status: **verified** (matched against the live page) or **via archive** (not yet matched). Two quotes were dropped because the live check showed them removed. X and TikTok were read in a second pass through the author's logged-in browser. TikTok comments could not be read by the tools, so TikTok evidence is captions only. Posts that used the high street to argue about national decline in racial terms were read but not quoted.
 
 ## 011 — Quotes are short excerpts
 **2026-11-01 · Decided**

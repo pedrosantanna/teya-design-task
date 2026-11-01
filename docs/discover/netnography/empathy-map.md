@@ -15,6 +15,7 @@ Hear:
 - "Use them or lose them" pressure from other locals (u/Greg-Normal, Sep 2025)
 - Shared mourning for lost institutions like Kew's butcher and City Radio Stores (u/abitofasitdown, Sep 2025; u/Same_Candle_6273, Aug 2026)
 - Pushback against anti-chain campaigns: an empty unit is worse (u/sd_1874, Jul 2026)
+- TikTok creators pinning a "steal" or a hidden find, often a few streets away (@tafsonthemove, May 2025; @loveandlondon, May 2025)
 Think and feel:
 - Wants to be a good local customer and feels uneasy defaulting to Amazon (LividArse, Mumsnet, Dec 2025; u/Username8831, Jul 2026)
 - Worries the places they like will close (u/Inge_Jones, Oct 2026)

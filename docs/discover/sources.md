@@ -1,6 +1,6 @@
 # Sources
 
-Every quote and every link used across the docs, in one place. 69 quotes (68 checked against the live source) and 102 other sources. This page is generated from the other pages by `scripts/build_sources.py`.
+Every quote and every link used across the docs, in one place. 77 quotes (76 checked against the live source) and 102 other sources. This page is generated from the other pages by `scripts/build_sources.py`.
 
 ## Quotes by network
 
@@ -10,6 +10,8 @@ Every quote and every link used across the docs, in one place. 69 quotes (68 che
 | App Store (UK) | 21 |
 | Mumsnet | 11 |
 | Trustpilot (UK) | 6 |
+| TikTok | 5 |
+| X | 3 |
 
 ## Quotes
 
@@ -17,6 +19,8 @@ Status **verified** means the text, author and date were matched against the liv
 
 | Date | Author | Network | Status | Used on | Link |
 | --- | --- | --- | --- | --- | --- |
+| 2025-05-11 | @tafsonthemove | TikTok | verified | [Findings](netnography/findings.md) | [Open](https://www.tiktok.com/@tafsonthemove/video/7503202705293266198) |
+| 2025-05-29 | @loveandlondon | TikTok | verified | [Findings](netnography/findings.md) | [Open](https://www.tiktok.com/@loveandlondon/video/7509933373075492118) |
 | 2025-08-23 | u/rsweb | Reddit · r/AskUK | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/AskUK/comments/1my0t02/comment/na8v8ju/) |
 | 2025-08-24 | u/dy14n19 | Reddit · r/HammersmithandFulham | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/HammersmithandFulham/comments/1myug4c/) |
 | 2025-08-28 | u/Mediocre_Sprinkles | Reddit · r/CasualUK | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb2z980/) |
@@ -25,6 +29,7 @@ Status **verified** means the text, author and date were matched against the liv
 | 2025-09-17 | u/Greg-Normal | Reddit · r/london | verified | [Proposed dimensions](netnography/dimensions.md) | [Open](https://www.reddit.com/r/london/comments/1niwnlw/comment/neo7ha3/) |
 | 2025-09-17 | u/mjfh2 | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1niwnlw/comment/nemvjcy/) |
 | 2025-09-17 | u/rising_then_falling | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1niwnlw/comment/nema5k6/) |
+| 2025-11-29 | @hollygardnerx | TikTok | verified | [Findings](netnography/findings.md) | [Open](https://www.tiktok.com/@hollygardnerx/video/7578215485968354582) |
 | 2025-12-05 | Agix | Mumsnet · Talk › AIBU | verified | [Findings](netnography/findings.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976563) |
 | 2025-12-05 | BeansAndNoodles | Mumsnet · Am I Being Unreasonable | verified | [Benchmarks](benchmarks.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves) |
 | 2025-12-05 | Codyrhodesisaheel | Mumsnet · Am I Being Unreasonable | verified | [Benchmarks](benchmarks.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977812) |
@@ -43,6 +48,7 @@ Status **verified** means the text, author and date were matched against the liv
 | 2026-05-12 | u/JollyExPat | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1tatyc0/comment/olc54ib/) |
 | 2026-06-07 | u/Vermathorax | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq989gy/) |
 | 2026-06-07 | u/killmetruck | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq967k5/) |
+| 2026-06-23 | @OpenChiswickW4 | X | verified | [Findings](netnography/findings.md) | [Open](https://x.com/OpenChiswickW4/status/2069295025561760040) |
 | 2026-06-24 | u/Miraclefish | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1ueg96t/comment/otjhcgo/) |
 | 2026-06-24 | u/akat224 | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1ueg96t/) |
 | 2026-06-26 | u/Accomplished-Pen2660 | Reddit · r/Ealing | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/Ealing/comments/1ug10pv/comment/oty3pvk/) |
@@ -61,10 +67,13 @@ Status **verified** means the text, author and date were matched against the liv
 | 2026-08-18 | u/No_Witness9533 | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1vr9i0n/comment/p4bxk0e/) |
 | 2026-08-18 | u/Outside-Assignment85 | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1vr9i0n/comment/p4brlc4/) |
 | 2026-09-04 | u/squeakyeggs | Reddit · r/Ealing | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/Ealing/comments/1vhe1k8/comment/p7t14xd/) |
+| 2026-09-23 | @London_W4 | X | verified | [Findings](netnography/findings.md) | [Open](https://x.com/London_W4/status/2102723893463044506) |
 | 2026-09-23 | Montymoo2 | App Store (UK) · Too Good To Go | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1060683933?see-all=reviews) |
+| 2026-09-26 | @hackneyfleamarket | TikTok | verified | [Findings](netnography/findings.md) | [Open](https://www.tiktok.com/@hackneyfleamarket/video/7689755751471959318) |
 | 2026-09-26 | sleepy.uwu.nova | App Store (UK) · OLIO | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1008237086?see-all=reviews) |
 | 2026-09-27 | duahhhhhhh | App Store (UK) · OLIO | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1008237086?see-all=reviews) |
 | 2026-10-03 | user64946284 | App Store (UK) · Google Maps | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id585027354?see-all=reviews) |
+| 2026-10-06 | @stillshipping | TikTok | verified | [Findings](netnography/findings.md) | [Open](https://www.tiktok.com/@stillshipping/video/7693511674925518102) |
 | 2026-10-06 | Dj wade mister | App Store (UK) · Nextdoor | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id640360962?see-all=reviews) |
 | 2026-10-06 | Jzelf | App Store (UK) · Too Good To Go | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1060683933?see-all=reviews) |
 | 2026-10-07 | BikeCam David | Trustpilot (UK) · SumUp | verified | [Benchmarks](benchmarks.md) | [Open](https://uk.trustpilot.com/reviews/6ac57954df7990f1219e4121) |
@@ -74,6 +83,7 @@ Status **verified** means the text, author and date were matched against the liv
 | 2026-10-15 | MoogStarr | App Store (UK) · Shop | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1223471316?see-all=reviews) |
 | 2026-10-17 | Jim Rickety | App Store (UK) · Uber Eats | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1058959277?see-all=reviews) |
 | 2026-10-19 | jkljhhgg | App Store (UK) · Shop | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1223471316?see-all=reviews) |
+| 2026-10-20 | @Jojo_agboola | X | verified | [Findings](netnography/findings.md) | [Open](https://x.com/Jojo_agboola/status/2112618905525276980) |
 | 2026-10-20 | Grotty75 | App Store (UK) · Etsy | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id477128284?see-all=reviews) |
 | 2026-10-21 | guFgda | App Store (UK) · Etsy | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id477128284?see-all=reviews) |
 | 2026-10-22 | KJCM98...3 | App Store (UK) · Amazon Shopping | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id335187483?see-all=reviews) |

@@ -12,7 +12,7 @@ Netnography is Kozinets' name for qualitative research on social media that trie
 | Investigation | Find and save existing traces | Searched local and London subreddits and Mumsnet; saved threads with timestamps |
 | Interaction | Talk to people (optional) | None. We only read |
 | Immersion | Keep a reflective journal while reading | Running notes over about 30 threads and 3,000 comments |
-| Integration | Code, theme, interpret | 14 codes, 9 themes, an empathy map, two dimensions |
+| Integration | Code, theme, interpret | 14 codes, 10 themes, an empathy map, two dimensions |
 | Incarnation | Communicate the findings | These four pages |
 
 ## Where we looked
@@ -21,12 +21,13 @@ Kozinets asks that a field site be relevant, active, interactive, substantial, h
 
 - **Reddit** was the primary site. Local subs (r/HammersmithandFulham, r/hammersmith, r/chiswick, r/shepherdsbush, r/fulham, r/ealing, r/acton) are thin, so most West London voices came from r/london threads about the area, plus r/AskUK and r/CasualUK for a few UK-wide contrasts.
 - **Mumsnet** gave long-form, first-person threads that are readable without an account. It skews towards mothers and rarely says where posters live.
-- **X, TikTok, Instagram and Nextdoor** produced no usable shopper posts. They are log-in-walled or not searchable, and what TikTok search returned was shop promotion. Nextdoor is probably where Hammersmith residents ask "is X open" most, so its absence is the biggest gap. Facebook groups were excluded as closed.
+- **X and TikTok** were read in a second pass on 1 November 2026, through the author's logged-in browser, read only. X search was limited to the window with `since:` and `until:`; TikTok dates come from the video ID, which encodes the upload time. TikTok comments could not be read by the tools, so TikTok evidence is video captions, written by creators and by shops. Both produced far less shopper talk than Reddit; theme 10 in the [findings](findings.md) covers what they did show.
+- **Instagram and Nextdoor** were not collected. Nextdoor is probably where Hammersmith residents ask "is X open" most, so its absence is the biggest gap. Facebook groups were excluded as closed.
 
-**How Reddit was read.** reddit.com refused every automated route we tried (fetch, embedded browser, curl). Reddit content was read through the [Arctic Shift](https://arctic-shift.photon-reddit.com/) public archive, which returns each post or comment with its author, timestamp and ID. The author then saved 217 posts from live Reddit search results on 1 November 2026 and every quote was checked against them. Each quote card carries a status:
+**How Reddit was read.** reddit.com refused every automated route we tried (fetch, embedded browser, curl). Reddit content was read through the [Arctic Shift](https://arctic-shift.photon-reddit.com/) public archive, which returns each post or comment with its author, timestamp and ID. The author then saved 217 posts from live Reddit search and 21 full comment threads on 1 November 2026, and `scripts/verify_reddit_quotes.py` matched every quote's text, author and date against them. Two quotes were dropped because the live check showed them removed. Each quote card carries a status:
 
-- `verified`: text, author and date match the live-Reddit save, or the quote was read directly on Mumsnet.
-- `archive`: collected from Arctic Shift and not yet matched against the live site. Most Reddit quotes are comments, and the live saves hold post bodies only, so most stay `archive` until the comment trees are saved.
+- `verified`: text, author and date match the live-Reddit save, or the quote was read directly on Mumsnet, X or TikTok.
+- `archive`: collected from Arctic Shift and not matched against the live site. One quote is in this state, because its comment sits in a part of the thread the save didn't load.
 
 ## The empathy map we used
 
@@ -53,7 +54,7 @@ We used the six-box version from Osterwalder and Pigneur's *Business Model Gener
 
 **Geography.** Each quote is labelled West London, London-wide or UK-wide. UK-wide quotes were capped at about a sixth of the set and only used to sharpen something the London data already showed.
 
-**Coding.** Open coding produced 14 codes. Each quote got one to three. Codes were then clustered into nine themes, with strength judged on how many quotes, how many networks, how recent, and how specific to West London.
+**Coding.** Open coding produced 14 codes. Each quote got one to three. Codes were then clustered into nine themes from Reddit and Mumsnet, plus a tenth from the X and TikTok pass, with strength judged on how many quotes, how many networks, how recent, and how specific to West London.
 
 | Code | Meaning |
 | --- | --- |
@@ -83,6 +84,6 @@ Everything quoted was public and readable without an account, and nobody was con
 - **No interactive data.** Nobody was asked about an app; everything is what people said unprompted.
 - **Local subs are quiet.** r/hammersmith and r/shepherdsbush had two posts each in the window, so "Hammersmith" evidence leans on r/london threads about it.
 - **A few events dominate.** The August 2026 eclipse and the June 2026 heatwave produced most of the urgent-stock posts. We read them as natural experiments in finding local stock fast, and that reading is our interpretation.
-- **Most Reddit quotes are still `archive`.** Text can change or disappear after archiving.
+- **TikTok is captions only.** Comments, where shoppers talk back, couldn't be read, and captions are written to promote a place or a shop.
 
 Next: [findings](findings.md), the [empathy map](empathy-map.md) and the [proposed dimensions](dimensions.md). Full link list in [sources](../sources.md).
