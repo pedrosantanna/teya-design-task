@@ -6,7 +6,7 @@ Shared instructions for every coding agent working in this repo (Claude Code is 
 
 The deliverable for a design take-home task: the discovery, the definition and design decisions, a clickable prototype, and possibly a running application. The repo will be **public** and is part of what gets evaluated — the documented process matters as much as the prototype.
 
-The final deliverable is presented as a Claude Artifact whose source lives in this repo. The prototype is built in **code**. Figma and Apple Freeform are used only for exploration; their outputs may be attached as process assets, but they are not deliverables and not a handoff source.
+These docs are a working record for the author, the agents and collaborators, rendered as a Claude Artifact from this repo. They are not the presentation: the output for review is a recorded walkthrough, with this record as evidence. Favour completeness and traceability over storytelling. The prototype is built in **code**. Figma and Apple Freeform are used only for exploration; their outputs may be attached as process assets, but they are not deliverables and not a handoff source.
 
 Platform (mobile vs. web), the prototype's stack and repo layout are deliberately undecided — see `docs/decision-log.md`. Update this file once they are decided.
 

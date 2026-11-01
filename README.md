@@ -2,7 +2,7 @@
 
 A design take-home for Teya Design: an app that brings a high street's independent shops together, so a shopper can see what is available near them right now, buy it, and choose to collect it or have it delivered.
 
-The brief asks for a clear position on one of two problems, **findability** (finding something worth buying across hundreds of small, badly catalogued shops) or **transaction** (one basket across several independent shops resolving into a purchase, with pickup and delivery). This repo holds the whole answer: the research behind the choice, the decisions along the way, and the prototype.
+The brief asks for a clear position on one of two problems, **findability** (finding something worth buying across hundreds of small, badly catalogued shops) or **transaction** (one basket across several independent shops resolving into a purchase, with pickup and delivery). This repo is the working record of how I'm answering it with AI agents: the research behind the choice, the decisions along the way, what the agents produced and what I kept, and the prototype. The output for review is a recorded walkthrough, with this record as the evidence behind it.
 
 ## What's here
 

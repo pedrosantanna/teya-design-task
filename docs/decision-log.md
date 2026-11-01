@@ -33,10 +33,10 @@ The final prototype (and, if it makes sense, a running application) is built in 
 
 **Why:** code is the real working medium in this process; designing and building happen in the same place.
 
-## 004 — The repo is the deliverable, presented as a Claude Artifact
+## 004 — These docs are the working record; the video is the output
 **2026-11-01 · Decided**
 
-Everything (discovery, decisions, prototype, app) lives in this public repo. The final presentation is a Claude Artifact built from sources in the repo.
+Everything (discovery, decisions, prototype, app) lives in this repo, and a Claude Artifact renders it as a docs site. The site is the working record of what I do with the AI agents: the research, the decisions, what came back and what I kept. It's written for me, the agents and anyone working on this with us. It is not the presentation. The output for review is the recorded walkthrough, with this record behind it as evidence.
 
 ## 005 — Agent setup: Claude Code primary, Codex secondary
 **2026-11-01 · Decided**

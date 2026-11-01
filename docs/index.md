@@ -2,6 +2,12 @@
 
 These are the working docs for a design take-home: an app that puts a high street's independent shops in one place, so a shopper can see what is available nearby right now, buy it, and collect it or have it delivered.
 
+## What this is
+
+A working record, not a presentation. It's where I log the work I do with AI agents: what we researched, what I decided and why, what the agents produced, and what I kept or threw away. It's written for me, for the agents and for anyone else working on this with us.
+
+The final output for review is a recorded walkthrough of the work, with this record behind it as the evidence. So these pages favour completeness and traceability over storytelling.
+
 ## How the work is organised
 
 The docs follow the order the work happens in. Each phase only opens once the one before it has given it something to stand on.
