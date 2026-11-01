@@ -186,21 +186,33 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .timeline li::before { content: ""; position: absolute; left: -4px; top: 8px; width: 7px; height: 7px; border-radius: 50%; background: var(--bg); border: 1px solid var(--muted-fg); }
 .timeline time { display: block; font-family: var(--font-mono); font-size: 12px; color: var(--muted-fg); font-variant-numeric: tabular-nums; }
 
-/* Persona map (two-dimension scatter) */
-.pmap { border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 16px 12px; margin: 8px 0 24px; }
-.pmap svg { display: block; width: 100%; height: auto; overflow: visible; }
-.pmap .grid { stroke: var(--border); }
-.pmap .mid { stroke: var(--ring); stroke-dasharray: 3 4; }
-.pmap .axis-txt { fill: var(--muted-fg); font: 500 11px var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
-.pmap .tick { fill: var(--muted-fg); font: 400 10px var(--font-mono); }
-.pmap .quad { fill: var(--muted-fg); font: 400 12px var(--font-sans); opacity: .8; }
-.pmap .dot { fill-opacity: .35; stroke-width: 1; }
-.pmap .pdot { stroke: var(--bg); stroke-width: 2.5; }
-.pmap .plabel { fill: var(--fg); font: 600 12.5px var(--font-sans); paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round; }
-.pmap-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 10px; font-size: 13px; color: var(--muted-fg); }
-.pmap-legend span { display: inline-flex; align-items: center; gap: 6px; }
-.pmap-legend i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-.pmap-note { font-size: 12.5px; color: var(--muted-fg); margin: 8px 0 0; }
+/* Page summary: key takeaways + AI in this step */
+.summary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); margin: 0 0 28px; overflow: hidden; }
+.summary section { padding: 14px 18px 12px; min-width: 0; background: var(--bg); }
+.summary section.ai, .summary section.tradeoffs { background: var(--bg-subtle); }
+.summary section:only-child, .summary section:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.summary h5 { margin: 0 0 8px; font: 500 11px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted-fg); }
+.summary ul { margin: 0; padding-left: 18px; font-size: 14px; }
+.summary li { margin: 4px 0; max-width: none; }
+@media (max-width: 860px) { .summary { grid-template-columns: minmax(0, 1fr); } }
+
+/* Occasion grid (job x where it broke) */
+.ogrid-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); margin: 8px 0 8px; }
+.ogrid { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 13px; }
+.ogrid th, .ogrid td { border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); padding: 10px 12px; vertical-align: top; text-align: left; }
+.ogrid tr > :last-child { border-right: 0; }
+.ogrid tbody tr:last-child > * { border-bottom: 0; }
+.ogrid thead th { background: var(--bg-subtle); font-weight: 500; }
+.ogrid thead th small { display: block; font: 400 11px var(--font-mono); color: var(--muted-fg); letter-spacing: .02em; }
+.ogrid tbody th { font-weight: 500; width: 150px; background: var(--bg-subtle); }
+.ogrid .n { font: 500 12px var(--font-mono); color: var(--muted-fg); display: block; margin-bottom: 6px; }
+.ogrid .marks { display: flex; flex-wrap: wrap; gap: 4px; }
+i.m { width: 12px; height: 12px; border-radius: 50%; border: 2px solid currentColor; background: currentColor; display: inline-block; }
+i.m.defects { background: transparent; }
+i.m.unknown { opacity: .5; }
+.ogrid td.empty { background: transparent; }
+.ogrid-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted-fg); margin: 10px 0 24px; }
+.ogrid-legend span { display: inline-flex; align-items: center; gap: 6px; }
 
 /* Prev / next */
 .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border); }
@@ -330,39 +342,36 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     });
     return `<ol class="timeline">${items.join('')}</ol>`;
   }
-  // ```persona-map  JSON from scripts/score_personas.py: axes, quote points and persona centroids.
-  function personaMap(src) {
+  // ```summary  "Takeaways:", "Call:", "AI:" and "Trade-offs:" headings, each followed by "- " bullets. Sits at the top of a page.
+  function summary(src) {
+    const parts = {}; let cur = null;
+    src.split('\n').forEach(line => {
+      const t = line.trim(); if (!t) return;
+      if (t.startsWith('- ')) { if (cur) parts[cur].push(t.slice(2)); }
+      else if (t.endsWith(':')) { cur = t.slice(0, -1).toLowerCase(); parts[cur] = []; }
+    });
+    const sec = (key, title) => parts[key] ? `<section class="${key.replace(/[^a-z]/g, '')}"><h5>${title}</h5><ul>${parts[key].map(i => `<li>${inline(i)}</li>`).join('')}</ul></section>` : '';
+    return `<div class="summary">${sec('takeaways', 'Key takeaways')}${sec('call', 'My call')}${sec('ai', 'AI in this step')}${sec('trade-offs', 'Trade-offs')}</div>`;
+  }
+
+  // ```occasion-grid  JSON from scripts/build_personas.py: jobs x where the occasion broke, one mark per post.
+  function occasionGrid(src) {
     let d;
     try { d = JSON.parse(src); } catch (e) { return `<pre><code>${esc(src)}</code></pre>`; }
-    const W = 640, H = 440, L = 56, R = 20, T = 20, B = 56;
-    const sx = v => L + (v / 10) * (W - L - R), sy = v => T + (1 - v / 10) * (H - T - B);
-    const ids = Object.keys(d.groups);
-    const col = id => `var(--c${ids.indexOf(id) + 1})`;
-    // Spread quotes that land on the same score so every one stays visible.
-    const seen = {};
-    const pts = d.points.map(p => {
-      const k = `${p.x},${p.y}`; const n = seen[k] = (seen[k] || 0) + 1;
-      const a = n * 2.4, r = n > 1 ? 7 * Math.sqrt(n - 1) : 0;
-      return { ...p, cx: sx(p.x) + r * Math.cos(a), cy: sy(p.y) + r * Math.sin(a) };
-    });
-    let g = '';
-    for (let i = 0; i <= 10; i += 2.5) g += `<line class="grid" x1="${sx(i)}" x2="${sx(i)}" y1="${sy(0)}" y2="${sy(10)}"/><line class="grid" x1="${sx(0)}" x2="${sx(10)}" y1="${sy(i)}" y2="${sy(i)}"/>`;
-    g += `<line class="mid" x1="${sx(5)}" x2="${sx(5)}" y1="${sy(0)}" y2="${sy(10)}"/><line class="mid" x1="${sx(0)}" x2="${sx(10)}" y1="${sy(5)}" y2="${sy(5)}"/>`;
-    for (let i = 0; i <= 10; i += 5) g += `<text class="tick" x="${sx(i)}" y="${sy(0) + 16}" text-anchor="middle">${i}</text><text class="tick" x="${L - 10}" y="${sy(i) + 3}" text-anchor="end">${i}</text>`;
-    g += `<text class="quad" x="${sx(0.2)}" y="${sy(9.6)}">Browse · committed</text><text class="quad" x="${sx(9.8)}" y="${sy(9.6)}" text-anchor="end">Mission · committed</text>`;
-    g += `<text class="quad" x="${sx(0.2)}" y="${sy(0.3)}">Browse · pragmatist</text><text class="quad" x="${sx(9.8)}" y="${sy(0.3)}" text-anchor="end">Mission · pragmatist</text>`;
-    g += `<text class="axis-txt" x="${sx(0)}" y="${H - 8}">← ${esc(d.x.min)}</text><text class="axis-txt" x="${sx(10)}" y="${H - 8}" text-anchor="end">${esc(d.x.max)} →</text>`;
-    g += `<text class="axis-txt" transform="translate(14 ${sy(0)}) rotate(-90)">← ${esc(d.y.min)}</text><text class="axis-txt" transform="translate(14 ${sy(10)}) rotate(-90)" text-anchor="end">${esc(d.y.max)} →</text>`;
-    g += pts.map(p => `<circle class="dot" cx="${p.cx.toFixed(1)}" cy="${p.cy.toFixed(1)}" r="4.5" fill="${col(p.group)}" stroke="${col(p.group)}"><title>${esc(p.label)}: need ${p.x}, effort ${p.y}</title></circle>`).join('');
-    g += d.personas.map(p => {
-      const right = p.x > 7;
-      const name = p.label.split(',')[0];
-      return `<circle class="pdot" cx="${sx(p.x)}" cy="${sy(p.y)}" r="9" fill="${col(p.id)}"><title>${esc(p.label)}: need ${p.x}, effort ${p.y}, ${p.n} quotes</title></circle>
-        <text class="plabel" x="${sx(p.x) + (right ? -14 : 14)}" y="${sy(p.y) + 4}" text-anchor="${right ? 'end' : 'start'}">${esc(name)}</text>`;
-    }).join('');
-    const legend = d.personas.map(p => `<span><i style="background:${col(p.id)}"></i>${esc(p.label)} (${p.n})</span>`).join('');
-    return `<figure class="pmap"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(d.x.label)} against ${esc(d.y.label)}">${g}</svg>
-      <figcaption><div class="pmap-legend">${legend}</div><p class="pmap-note">Small dots are single quotes; large dots are each persona's average. Horizontal: ${esc(d.x.label.toLowerCase())}. Vertical: ${esc(d.y.label.toLowerCase())}.</p></figcaption></figure>`;
+    const gids = Object.keys(d.groups);
+    const col = g => g === 'unassigned' ? 'var(--muted-fg)' : `var(--c${gids.indexOf(g) + 1})`;
+    const cell = (r, c) => d.cells.find(x => x.row === r && x.col === c);
+    const head = `<tr><th></th>${d.cols.map(c => `<th>${esc(c.label)}${c.maps ? `<small>→ ${esc(c.maps)}</small>` : ''}</th>`).join('')}</tr>`;
+    const body = d.rows.map(r => `<tr><th>${esc(r.label)}</th>${d.cols.map(c => {
+      const x = cell(r.id, c.id);
+      if (!x) return '<td class="empty"></td>';
+      const marks = x.posts.map(p => `<i class="m ${p.s}" style="color:${col(p.g)}" title="${esc(p.h)} · ${esc(d.groups[p.g])} · ${p.s}${p.u ? ' · urgent' : ''}"></i>`).join('');
+      return `<td><span class="n">${x.posts.length}</span><span class="marks">${marks}</span></td>`;
+    }).join('')}</tr>`).join('');
+    const used = gids.filter(g => d.cells.some(x => x.posts.some(p => p.g === g)));
+    const legend = used.map(g => `<span><i class="m" style="color:${col(g)}"></i>${esc(d.groups[g])}</span>`).join('') +
+      `<span><i class="m" style="color:var(--fg)"></i>persists</span><span><i class="m defects" style="color:var(--fg)"></i>defects</span><span><i class="m unknown" style="color:var(--fg)"></i>stance unknown</span>`;
+    return `<div class="ogrid-wrap"><table class="ogrid"><thead>${head}</thead><tbody>${body}</tbody></table></div><div class="ogrid-legend">${legend}</div>`;
   }
 
   marked.use({
@@ -373,7 +382,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
         if (l === 'quote') return quoteCard(code);
         if (l === 'empathy-map') return empathyMap(code);
         if (l === 'timeline') return timeline(code);
-        if (l === 'persona-map') return personaMap(code);
+        if (l === 'occasion-grid') return occasionGrid(code);
+        if (l === 'summary') return summary(code);
         return `<pre><code>${esc(code)}</code></pre>`;
       }
     }

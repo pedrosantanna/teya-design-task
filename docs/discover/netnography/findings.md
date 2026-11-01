@@ -2,6 +2,19 @@
 
 The clearest thing Londoners say about their high street is that they can't tell whether a shop has what they need, or is even open, without going there. When the need is urgent they ask strangers on Reddit and WhatsApp, and when a trip fails they order online and stop trying.
 
+```summary
+Takeaways:
+- Not knowing what's in stock, or what's open, is the strongest theme.
+- Loyalty to local is real but stops at the first wasted trip.
+- On X and TikTok the high street is something to show, not somewhere to check.
+Call:
+- Rank themes by strength of evidence. Keep quotes short and linked, and mark interpretation as interpretation.
+AI:
+- The research agent coded 14 tags and grouped them into themes. A writing agent picked about 40 quotes and wrote each theme.
+Trade-offs:
+- Themes come from posts people chose to write, so strength means "repeated", not "common".
+```
+
 Ten themes came out of the coding, ordered here from strongest evidence to weakest. The [method](method.md) page explains how quotes were chosen and what `verified` and `archive` mean.
 
 ## 1. "Is it in stock right now?" has no answer except asking people

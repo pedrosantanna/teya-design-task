@@ -2,6 +2,18 @@
 
 Two ways to tell shoppers apart that came out of the [findings](findings.md). They are a proposal: Define will decide whether to keep, change or drop them when we choose the shopper and the problem.
 
+```summary
+Takeaways:
+- First proposal: need (mission ↔ browse) and effort for local (committed ↔ pragmatist).
+- For the personas these were replaced by job × where the occasion broke, which maps onto findability versus transaction.
+Call:
+- Keep this page as a record of the first proposal, not delete it.
+AI:
+- The research agent proposed these axes. A reviewer agent showed the effort axis measured attitude and didn't help choose a problem.
+Trade-offs:
+- Two sets of axes to read. The [personas method](../personas/method.md) explains the switch.
+```
+
 ## Axis 1: how specific and urgent the need is
 
 **What it measures.** The shape of a shopping occasion: whether the shopper knows exactly what they want and when they need it, or is open to whatever they find.

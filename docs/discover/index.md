@@ -2,6 +2,21 @@
 
 Before choosing between findability and transaction, we tried to understand the high street from the outside in: what it is in 2026, what London shoppers say about it in public, and what the products already serving them get right and wrong. Hammersmith, where King Street meets the Broadway, is the worked example throughout.
 
+```summary
+Takeaways:
+- Shoppers can't tell whether a nearby shop has something, or is open, without going. That was the strongest signal.
+- A failed trip usually ends on Amazon, unless online can't arrive in time.
+- The mission shopper is the clearest proto-persona, and information failures are the most common.
+Call:
+- Discovery before choosing findability or transaction ([001](../decision-log.md)).
+- Outside-in, because the product doesn't exist yet ([000](../decision-log.md)). Hammersmith as the worked example.
+AI:
+- Three research agents worked in parallel, then two writing agents, a reviewer and a blind second coder.
+- I chose the sources, saved the Reddit pages the tools couldn't reach, and challenged the method. [Full log](../process/ai-log.md).
+Trade-offs:
+- Speed and traceability over depth. No interviews, and public posts over-represent people with a complaint.
+```
+
 ## What we did
 
 | Piece of work | Question | Page |
@@ -10,7 +25,7 @@ Before choosing between findability and transaction, we tried to understand the 
 | Netnography | What do London shoppers say, in their own words, about using their high street? | [Method](netnography/method.md) · [Findings](netnography/findings.md) |
 | Empathy map | What does that shopper see, hear, think, say and do, and what hurts? | [Empathy map](netnography/empathy-map.md) |
 | Segmentation | Which differences between shoppers matter for this brief? | [Proposed dimensions](netnography/dimensions.md) |
-| Personas | Who are the shoppers, and where does each sit on those dimensions? | [The five personas](personas/index.md) · [Method and scoring](personas/scoring.md) |
+| Proto-personas | Which shopping occasions recur, and where do they break? | [The proto-personas](personas/index.md) · [Method](personas/method.md) |
 | Benchmarks | Which products already serve these shoppers, and what do their users say? | [Benchmarks](benchmarks.md) |
 
 Every quote is a short excerpt from a public post, dated between May 2025 and November 2026, with the author's handle and a link. Most are marked as checked against the live page. The full list is on [Sources](sources.md), and the decisions behind the method are in the [decision log](../decision-log.md).

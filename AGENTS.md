@@ -22,7 +22,8 @@ Fenced blocks with these languages render as components:
 - ` ```quote ` — evidence card. One `key: value` per line: `text`, `handle`, `network`, `date` (YYYY-MM-DD), `url`, `tags` (comma-separated), `context`, `status` (`verified` = matched against the live source; `archive` = from a public archive, not yet matched). Consecutive cards become a grid. Quotes are short excerpts (about 25 words at most). `docs/discover/sources.md` is generated: run `python3 scripts/build_sources.py` after changing quotes.
 - ` ```empathy-map ` — Strategyzer empathy map. `Label:` lines (See, Hear, Think and feel, Say and do, Pains, Gains) each followed by `- bullet` lines.
 - ` ```timeline ` — `- YYYY-MM-DD — text` lines.
-- ` ```persona-map ` — two-dimension scatter (JSON). Generated, never hand-written: persona coding lives in `docs/discover/personas/scores.json`; run `python3 scripts/score_personas.py` to refresh the chart and tables between `<!-- generated:NAME -->` markers in `docs/discover/personas/`.
+- ` ```summary ` — the box at the top of every page: `Takeaways:`, `Call:`, `AI:` and `Trade-offs:`, each followed by `- ` bullets. Put it right after the lede paragraph.
+- ` ```occasion-grid ` — generated, never hand-written. Coding lives in `docs/discover/personas/coding*.json`; run `python3 scripts/build_personas.py` to refresh the grid and tables between `<!-- generated:NAME -->` markers.
 Relative links between `.md` files are rewritten to the matching site page. A page's H1 is its title and its first paragraph is the lede.
 
 ## The brief (summary)
@@ -38,7 +39,8 @@ An app (mobile or web) that brings a high street's small independent shops (bake
 
 - **This repo is only about the take-home task.** Nothing about the role, interview conversations, the candidate's background, or people/internals of the company goes in — not in files, commit messages, PRs or published artifacts.
 - Major process decisions go in `docs/decision-log.md` (newest entry last): what was decided, why, and what stays open. Only the decisions that shape the process, not every small choice. Assumptions are logged as assumptions.
-- AI usage (what was prompted, what was kept or discarded, where it failed) is part of the deliverable — keep that trail when it's meaningful.
+- Write in the first person, as the author documenting their own process: "I decided…", "Claude collected…". Make the AI's role explicit on every page and add each significant step to `docs/process/ai-log.md` (what the agent was given, what came back, what was kept, thrown away or fixed).
+- Keep pages short: summary box, objective paragraphs, then detail in a linked subpage (progressive disclosure). No lecturing about methods on the main page.
 - The author decides direction (problem focus, platform, when to use which tool). Agents propose and record; they don't pre-empt those calls.
 - **Everything in the repo is in English** (docs, code, comments, commits). Only the conversation with the author is in Portuguese.
 - Prose follows human-voice writing rules (the author's `escrita-humana` skill): no "it's not X, it's Y" pairs, no triple anaphora, no empty adjectives, none of delve / leverage / utilize / landscape (in the vague sense) / seamlessly / empower / unlock / journey (as metaphor) / furthermore / moreover, no defensive hedging, no rhetorical-question openers. Sentence case for headings.

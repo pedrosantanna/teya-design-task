@@ -2,6 +2,21 @@
 
 For most British people the high street is the main street of their town or neighbourhood: shops, cafés, a post office and a pub within walking distance of home, often with flats above them. In 2026 it has fewer shops and more cafés and services than it did ten years ago, and footfall is still falling, but empty units are being let again and the latest Budget cut business rates for the smallest shops.
 
+```summary
+Takeaways:
+- Empty shops are being let again (13.2% vacancy), but September 2026 footfall fell 3%.
+- High streets are shifting from shops to food and services.
+- Small shops pay lower business rates from April 2026. Cash is 8% of payments but about a fifth of retail transactions.
+Call:
+- Include regulation and payments, because they constrain any purchase flow we design.
+- Use Hammersmith as the worked example, since it's where I can go and look.
+AI:
+- A desk-research agent gathered the facts. A writing agent re-checked the surprising claims (a new Prime Minister, the October Budget) and the top numbers in two or more sources.
+- Anything it couldn't confirm went to "Not confirmed".
+Trade-offs:
+- Some figures come from secondary sources, and there is no recent vacancy data for Hammersmith itself.
+```
+
 ## What a high street means
 
 The Office for National Statistics counts a high street as any cluster of 15 or more retail addresses within 150 metres. By that measure Britain had 6,969 of them in 2019, and London had the most, 1,204 ([ONS, 2019](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/articles/highstreetsingreatbritain/2019-06-06)). Today they are as much places to live as places to shop: more than half the addresses on Britain's central high streets are homes, about a third are shops and about one in ten are offices ([ONS, March 2026](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/highstreetsandretailareasingreatbritain/march2026)).

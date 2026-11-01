@@ -4,6 +4,13 @@ The major decisions that shaped the process, in the order they were made. Each e
 
 ---
 
+## 000 — A 0-to-1 product, with depth sized to a take-home
+**2026-11-01 · Decided at the start, recorded later**
+
+We treat this as a product that doesn't exist yet: no users, no usage data and no merchants to learn from. That shapes discovery. It starts from the outside, with public conversation, desk research and the products people already use, instead of analytics or interviews with existing customers.
+
+It is also a take-home with a budget of a few hours. Each step goes as deep as the next decision needs, and no deeper. A real 0-to-1 discovery would interview shoppers and shopkeepers, code with more than one person and run for weeks. Where we stop short, the page says so, and Define lists what should be validated next.
+
 ## 001 — Start with discovery, not with the problem choice
 **2026-11-01 · Decided**
 
@@ -22,7 +29,7 @@ Mobile vs. web is not chosen up front. It follows from how the chosen problem ge
 ## 003 — The prototype is built in code
 **2026-11-01 · Decided**
 
-The final prototype (and, if it makes sense, a running application) is built in code. Figma and Apple Freeform are used only as exploration tools, when the author chooses to. Their outputs may be attached as process assets but are not deliverables, and Figma is not a handoff source.
+The final prototype (and, if it makes sense, a running application) is built in code. Figma and Apple Freeform are used only as exploration tools, when I choose to. Their outputs may be attached as process assets but are not deliverables, and Figma is not a handoff source.
 
 **Why:** code is the real working medium in this process; designing and building happen in the same place.
 
@@ -46,7 +53,7 @@ Discovery runs on four pieces of work, all scoped to London with Hammersmith as 
 3. Benchmarks of products that already serve these shoppers, with a netnography of what users say about them.
 4. A desk review of the high street itself: history, regulation, data and recent news.
 
-**Why:** the goal is to understand the space from evidence instead of inference. Every claim about people is backed by a verbatim quote with handle, network, date and link, from the last 18 months only.
+**Why:** the goal is to understand the space from evidence instead of inference. Every claim about people is backed by a verbatim quote with handle, network, date and link, from the last 18 months only. Netnography in particular was chosen because it builds that evidence base quickly and cheaply, which fits a take-home. On a real product it would be one input among several, not the only one; the [method](discover/netnography/method.md) page explains the trade-off.
 **Ethics call:** quotes keep the author's public handle because the link already exposes it and it makes the evidence checkable. Private accounts and closed groups are excluded.
 
 ## 007 — The deliverable reads like software documentation
@@ -80,7 +87,7 @@ Networks were chosen with Kozinets' site-selection criteria: is the site relevan
 ## 010 — Reddit through an archive, checked against the live site
 **2026-11-01 · Decided**
 
-Reddit blocked every automated route we had: the fetch tool, both browsers and its public JSON. The official API now needs an approval that takes days. So the Reddit fieldwork was read through Arctic Shift, a public archive of Reddit used in academic research, and then checked against pages the author saved by hand from the live site. Every Reddit quote carries a status: **verified** (matched against the live page) or **via archive** (not yet matched). Two quotes were dropped because the live check showed them removed. X and TikTok were read in a second pass through the author's logged-in browser. TikTok comments could not be read by the tools, so TikTok evidence is captions only. Posts that used the high street to argue about national decline in racial terms were read but not quoted.
+Reddit blocked every automated route we had: the fetch tool, both browsers and its public JSON. The official API now needs an approval that takes days. So the Reddit fieldwork was read through Arctic Shift, a public archive of Reddit used in academic research, and then checked against pages I saved by hand from the live site. Every Reddit quote carries a status: **verified** (matched against the live page) or **via archive** (not yet matched). Two quotes were dropped because the live check showed them removed. X and TikTok were read in a second pass through my logged-in browser. TikTok comments could not be read by the tools, so TikTok evidence is captions only. Posts that used the high street to argue about national decline in racial terms were read but not quoted.
 
 ## 011 — Quotes are short excerpts
 **2026-11-01 · Decided**
@@ -88,12 +95,25 @@ Reddit blocked every automated route we had: the fetch tool, both browsers and i
 Posts belong to the people who wrote them. Quotes are kept to the phrase that carries the point, about 25 words at most, always with a link to the full original. This also follows Kozinets' advice to use the least of a person's words that does the job.
 
 ## 012 — Personas placed by scoring, not by feel
-**2026-11-01 · Decided**
+**2026-11-01 · Superseded by 013**
 
 Discover gets a personas layer: five personas built with the persona/user profile tool from Lewrick, Link and Leifer. To place them on the two proposed dimensions, every shopper quote from the netnography was coded against a rubric of observable indicators (for example "names a specific item", "falls back to online after friction"). The codes become a 0–10 score on each axis, and each persona sits at the average of its quotes.
 
 **Why:** a persona chart drawn by hand shows what the team already believes. Scoring from the quotes makes the placement checkable, and changing a code in the data file shows how much a persona moves.
 **Open:** the coding was done once, by one coder. The two mission personas, Sam and Tom, sit close together, and the split between them needs testing.
+
+## 013 — Proto-personas from coded occasions
+**2026-11-01 · Decided**
+
+A reviewer agent showed that 012 was circular: quotes were assigned to personas by hand and then scored, so the chart could only confirm the assignment. I inverted the method. Posts are coded first on what the shopper was doing and where it broke. A second agent codes them blind. Groups are read off the grid with rules fixed in advance. The result is three proto-personas instead of five: one well supported (the mission shopper) and two thin (regular, lapsed). Discovery stays an occasion, not a persona.
+
+**Why:** the groups should come from the data, and the axes should speak to the brief's choice between findability and transaction.
+**Trade-off:** fewer, thinner personas, but each one can be traced to its posts.
+
+## 014 — Docs say who did what
+**2026-11-01 · Decided**
+
+Every page opens with key takeaways, my call, how AI was used in that step, and the trade-offs. Method detail sits in subpages for whoever wants it. A running [log](process/ai-log.md) records what each agent was asked, what came back and what was thrown away.
 
 ---
 

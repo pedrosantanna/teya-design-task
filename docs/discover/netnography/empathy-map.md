@@ -2,6 +2,18 @@
 
 The subject is a composite: a Hammersmith or West London resident who would like to use the local high street but runs on a tight weekday schedule. Each line points back to the post it came from; the quotes themselves are on the [findings](findings.md) page.
 
+```summary
+Takeaways:
+- The main pain: not knowing whether the shop has it, or is open, before leaving home.
+- What people say about supporting local often differs from what they do.
+Call:
+- Use the Strategyzer empathy map, so each box points back to real posts.
+AI:
+- A writing agent filled each box from the coded quotes, with a pointer to the source.
+Trade-offs:
+- It's a composite of many voices, not one person, and it inherits the netnography's gaps.
+```
+
 ```empathy-map
 See:
 - A King Street of takeaways, slot shops, cheap chains and charity shops, while Chiswick "has everything" (u/Outside-Assignment85, Aug 2026; u/JollyExPat, May 2026)

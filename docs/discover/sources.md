@@ -1,16 +1,16 @@
 # Sources
 
-Every quote and every link used across the docs, in one place. 82 quotes (81 checked against the live source) and 141 other sources. This page is generated from the other pages by `scripts/build_sources.py`.
+Every quote and every link used across the docs, in one place. 80 quotes (79 checked against the live source) and 147 other sources. This page is generated from the other pages by `scripts/build_sources.py`.
 
 ## Quotes by network
 
 | Network | Quotes |
 | --- | --- |
-| Reddit | 33 |
+| Reddit | 32 |
 | App Store (UK) | 21 |
 | Mumsnet | 13 |
 | Trustpilot (UK) | 6 |
-| TikTok | 6 |
+| TikTok | 5 |
 | X | 3 |
 
 ## Quotes
@@ -25,23 +25,21 @@ Status **verified** means the text, author and date were matched against the liv
 | 2025-08-24 | u/dy14n19 | Reddit · r/HammersmithandFulham | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/HammersmithandFulham/comments/1myug4c/) |
 | 2025-08-28 | u/Mediocre_Sprinkles | Reddit · r/CasualUK | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb2z980/) |
 | 2025-08-28 | u/xmastreee | Reddit · r/CasualUK | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb31nms/) |
-| 2025-08-28 | u/xmastreee | Reddit · r/CasualUK | verified | [Personas](personas/index.md) | [Open](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb31nms/) |
 | 2025-09-16 | u/abitofasitdown | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1niwnlw/) |
 | 2025-09-17 | u/Greg-Normal | Reddit · r/london | verified | [Proposed dimensions](netnography/dimensions.md) | [Open](https://www.reddit.com/r/london/comments/1niwnlw/comment/neo7ha3/) |
 | 2025-09-17 | u/mjfh2 | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1niwnlw/comment/nemvjcy/) |
 | 2025-09-17 | u/rising_then_falling | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1niwnlw/comment/nema5k6/) |
 | 2025-11-29 | @hollygardnerx | TikTok | verified | [Findings](netnography/findings.md) | [Open](https://www.tiktok.com/@hollygardnerx/video/7578215485968354582) |
-| 2025-11-29 | @hollygardnerx | TikTok | verified | [Personas](personas/index.md) | [Open](https://www.tiktok.com/@hollygardnerx/video/7578215485968354582) |
 | 2025-12-05 | Agix | Mumsnet · Talk › AIBU | verified | [Findings](netnography/findings.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976563) |
 | 2025-12-05 | BeansAndNoodles | Mumsnet · Am I Being Unreasonable | verified | [Benchmarks](benchmarks.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves) |
 | 2025-12-05 | Codyrhodesisaheel | Mumsnet · Am I Being Unreasonable | verified | [Benchmarks](benchmarks.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977812) |
 | 2025-12-05 | FerrisWheelsandLilacs | Mumsnet · Talk › AIBU | verified | [Findings](netnography/findings.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976658) |
 | 2025-12-05 | LividArse | Mumsnet · Talk › AIBU | verified | [Proposed dimensions](netnography/dimensions.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977221) |
 | 2025-12-05 | LividArse | Mumsnet · Talk › AIBU | verified | [Findings](netnography/findings.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977221) |
-| 2025-12-05 | LividArse | Mumsnet · Talk › AIBU | verified | [Personas](personas/index.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977221) |
+| 2025-12-05 | LividArse | Mumsnet · Talk › AIBU | verified | [Proto-personas](personas/index.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977221) |
 | 2025-12-05 | Valentando | Mumsnet · Talk › AIBU | verified | [Proposed dimensions](netnography/dimensions.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977465) |
 | 2025-12-05 | Valentando | Mumsnet · Talk › AIBU | verified | [Findings](netnography/findings.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977465) |
-| 2025-12-05 | Valentando | Mumsnet · Talk › AIBU | verified | [Personas](personas/index.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977465) |
+| 2025-12-05 | Valentando | Mumsnet · Talk › AIBU | verified | [Proto-personas](personas/index.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977465) |
 | 2025-12-05 | zingally | Mumsnet · Am I Being Unreasonable | verified | [Benchmarks](benchmarks.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148978039) |
 | 2025-12-17 | Alexandra Grant | Trustpilot (UK) · Hive | verified | [Benchmarks](benchmarks.md) | [Open](https://uk.trustpilot.com/reviews/6942fe627b355bd0d9bb1e20) |
 | 2025-12-19 | customer | Trustpilot (UK) · Hive | verified | [Benchmarks](benchmarks.md) | [Open](https://uk.trustpilot.com/reviews/694484566e150e09333d2c40) |
@@ -55,7 +53,7 @@ Status **verified** means the text, author and date were matched against the liv
 | 2026-06-23 | @OpenChiswickW4 | X | verified | [Findings](netnography/findings.md) | [Open](https://x.com/OpenChiswickW4/status/2069295025561760040) |
 | 2026-06-24 | u/Miraclefish | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1ueg96t/comment/otjhcgo/) |
 | 2026-06-24 | u/akat224 | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1ueg96t/) |
-| 2026-06-24 | u/akat224 | Reddit · r/london | verified | [Personas](personas/index.md) | [Open](https://www.reddit.com/r/london/comments/1ueg96t/) |
+| 2026-06-24 | u/akat224 | Reddit · r/london | verified | [Proto-personas](personas/index.md) | [Open](https://www.reddit.com/r/london/comments/1ueg96t/) |
 | 2026-06-26 | u/Accomplished-Pen2660 | Reddit · r/Ealing | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/Ealing/comments/1ug10pv/comment/oty3pvk/) |
 | 2026-07-01 | u/anonypanda | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1uke914/comment/ouyun00/) |
 | 2026-07-01 | u/sd_1874 | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1ukfwni/comment/ouvf2m5/) |
@@ -202,48 +200,54 @@ Status **verified** means the text, author and date were matched against the liv
 | [The high street today](high-street-landscape.md) | [Economics Observatory](https://economicsobservatory.com/update-are-small-businesses-ready-to-compete-as-consumers-move-online) |
 | [Empathy map](netnography/empathy-map.md) | [u/jamesshovlin](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tdld2/) |
 | [Empathy map](netnography/empathy-map.md) | [Ansjovis](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977291) |
-| [Method](netnography/method.md) | [Kozinets 2020, *Netnography: The Essential Guide*, 3rd ed., publisher preview](https://api.pageplace.de/preview/DT0400.9781526482365_A37042502/preview-9781526482365_A37042502.pdf) |
-| [Method](netnography/method.md) | [Fenton and Parry](https://eprints.bournemouth.ac.uk/37932/) |
-| [Method](netnography/method.md) | [Kozinets and Gretzel (2024)](https://doi.org/10.1016/j.annals.2023.103693) |
-| [Method](netnography/method.md) | [Arctic Shift](https://arctic-shift.photon-reddit.com/) |
-| [Method](netnography/method.md) | [pp. 130–131](https://relayto.com/explore/business-model-generation-flipbook-r2k3tfx35p0cg/J1RVxTlK137) |
-| [Method](netnography/method.md) | [revised it](https://medium.com/the-xplane-collection/46df22df3c8a) |
-| [Method and scoring](personas/scoring.md) | [*The Design Thinking Playbook*](https://www.wiley.com/en-us/The+Design+Thinking+Playbook%3A+Mindful+Digital+Transformation+of+Teams%2C+Products%2C+Services%2C+Businesses+and+Ecosystems-p-9781119467472) |
-| [Method and scoring](personas/scoring.md) | [*The Design Thinking Toolbox*](https://www.wiley.com/en-us/The+Design+Thinking+Toolbox%3A+A+Guide+to+Mastering+the+Most+Popular+and+Valuable+Innovation+Methods-p-9781119629214) |
-| [Method and scoring](personas/scoring.md) | [u/akat224](https://www.reddit.com/r/london/comments/1ueg96t/) |
-| [Method and scoring](personas/scoring.md) | [u/moanyjoany](https://www.reddit.com/r/Ealing/comments/1vlcuor/comment/p30r2af/) |
-| [Method and scoring](personas/scoring.md) | [u/WearyChampionship365](https://www.reddit.com/r/Ealing/comments/1vlc46x/comment/p30rnx7/) |
-| [Method and scoring](personas/scoring.md) | [u/Miraclefish](https://www.reddit.com/r/london/comments/1ueg96t/comment/otjhcgo/) |
-| [Method and scoring](personas/scoring.md) | [u/grand_web](https://www.reddit.com/r/chiswick/comments/1vlibmn/) |
-| [Method and scoring](personas/scoring.md) | [u/claudiav2603](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2y26dy/) |
-| [Method and scoring](personas/scoring.md) | [@Jojo_agboola](https://x.com/Jojo_agboola/status/2112618905525276980) |
-| [Method and scoring](personas/scoring.md) | [u/jamesshovlin](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tb0s2/) |
-| [Method and scoring](personas/scoring.md) | [u/dy14n19](https://www.reddit.com/r/HammersmithandFulham/comments/1myug4c/) |
-| [Method and scoring](personas/scoring.md) | [u/JollyExPat](https://www.reddit.com/r/london/comments/1tatyc0/comment/olc54ib/) |
-| [Method and scoring](personas/scoring.md) | [@hollygardnerx](https://www.tiktok.com/@hollygardnerx/video/7578215485968354582) |
-| [Method and scoring](personas/scoring.md) | [@tafsonthemove](https://www.tiktok.com/@tafsonthemove/video/7503202705293266198) |
-| [Method and scoring](personas/scoring.md) | [u/No_Witness9533](https://www.reddit.com/r/london/comments/1vr9i0n/comment/p4bxk0e/) |
-| [Method and scoring](personas/scoring.md) | [@loveandlondon](https://www.tiktok.com/@loveandlondon/video/7509933373075492118) |
-| [Method and scoring](personas/scoring.md) | [Agix](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976563) |
-| [Method and scoring](personas/scoring.md) | [LividArse](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977221) |
-| [Method and scoring](personas/scoring.md) | [u/Username8831](https://www.reddit.com/r/Ealing/comments/1v6423y/comment/oznttbd/) |
-| [Method and scoring](personas/scoring.md) | [u/rsweb](https://www.reddit.com/r/AskUK/comments/1my0t02/comment/na8v8ju/) |
-| [Method and scoring](personas/scoring.md) | [u/killmetruck](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq967k5/) |
-| [Method and scoring](personas/scoring.md) | [u/Outside-Assignment85](https://www.reddit.com/r/london/comments/1vr9i0n/comment/p4brlc4/) |
-| [Method and scoring](personas/scoring.md) | [@London_W4](https://x.com/London_W4/status/2102723893463044506) |
-| [Method and scoring](personas/scoring.md) | [Kenjenny](https://www.mumsnet.com/talk/_chat/5509007-do-you-still-enjoy-shopping-on-the-high-street-or-mostly-online?reply=151334270) |
-| [Method and scoring](personas/scoring.md) | [Valentando](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977465) |
-| [Method and scoring](personas/scoring.md) | [u/Inge_Jones](https://www.reddit.com/r/Ealing/comments/1x3g7ci/comment/pfbvje4/) |
-| [Method and scoring](personas/scoring.md) | [u/abitofasitdown](https://www.reddit.com/r/london/comments/1niwnlw/) |
-| [Method and scoring](personas/scoring.md) | [u/Accomplished-Pen2660](https://www.reddit.com/r/Ealing/comments/1ug10pv/comment/oty3pvk/) |
-| [Method and scoring](personas/scoring.md) | [u/Vermathorax](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq989gy/) |
-| [Method and scoring](personas/scoring.md) | [u/rising_then_falling](https://www.reddit.com/r/london/comments/1niwnlw/comment/nema5k6/) |
-| [Method and scoring](personas/scoring.md) | [u/Aggravating-Desk4004](https://www.reddit.com/r/Ealing/comments/1xjkdgb/) |
-| [Method and scoring](personas/scoring.md) | [@OpenChiswickW4](https://x.com/OpenChiswickW4/status/2069295025561760040) |
-| [Method and scoring](personas/scoring.md) | [u/Greg-Normal](https://www.reddit.com/r/london/comments/1niwnlw/comment/neo7ha3/) |
-| [Method and scoring](personas/scoring.md) | [Dbank](https://www.mumsnet.com/talk/_chat/5509007-do-you-still-enjoy-shopping-on-the-high-street-or-mostly-online?reply=151334565) |
-| [Method and scoring](personas/scoring.md) | [u/Mediocre_Sprinkles](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb2z980/) |
-| [Method and scoring](personas/scoring.md) | [u/xmastreee](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb31nms/) |
-| [Method and scoring](personas/scoring.md) | [FerrisWheelsandLilacs](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976658) |
-| [Method and scoring](personas/scoring.md) | [u/mjfh2](https://www.reddit.com/r/london/comments/1niwnlw/comment/nemvjcy/) |
-| [Method and scoring](personas/scoring.md) | [u/Peppy_Tomato](https://www.reddit.com/r/AskUK/comments/1rn7npv/comment/o94plrm/) |
+| [Method in detail](netnography/method-details.md) | [Kozinets 2020, *Netnography: The Essential Guide*, 3rd ed., publisher preview](https://api.pageplace.de/preview/DT0400.9781526482365_A37042502/preview-9781526482365_A37042502.pdf) |
+| [Method in detail](netnography/method-details.md) | [Fenton and Parry](https://eprints.bournemouth.ac.uk/37932/) |
+| [Method in detail](netnography/method-details.md) | [Kozinets and Gretzel (2024)](https://doi.org/10.1016/j.annals.2023.103693) |
+| [Method in detail](netnography/method-details.md) | [Arctic Shift](https://arctic-shift.photon-reddit.com/) |
+| [Method in detail](netnography/method-details.md) | [pp. 130–131](https://relayto.com/explore/business-model-generation-flipbook-r2k3tfx35p0cg/J1RVxTlK137) |
+| [Method in detail](netnography/method-details.md) | [revised it](https://medium.com/the-xplane-collection/46df22df3c8a) |
+| [Coding in detail](personas/coding.md) | [u/jamesshovlin](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tb0s2/) |
+| [Coding in detail](personas/coding.md) | [Valentando](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977465) |
+| [Coding in detail](personas/coding.md) | [u/Miraclefish](https://www.reddit.com/r/london/comments/1ueg96t/comment/otjhcgo/) |
+| [Coding in detail](personas/coding.md) | [u/killmetruck](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq967k5/) |
+| [Coding in detail](personas/coding.md) | [u/Inge_Jones](https://www.reddit.com/r/Ealing/comments/1x3g7ci/comment/pfbvje4/) |
+| [Coding in detail](personas/coding.md) | [u/mjfh2](https://www.reddit.com/r/london/comments/1niwnlw/comment/nemvjcy/) |
+| [Coding in detail](personas/coding.md) | [u/Accomplished-Pen2660](https://www.reddit.com/r/Ealing/comments/1ug10pv/comment/oty3pvk/) |
+| [Coding in detail](personas/coding.md) | [u/Vermathorax](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq989gy/) |
+| [Coding in detail](personas/coding.md) | [u/rising_then_falling](https://www.reddit.com/r/london/comments/1niwnlw/comment/nema5k6/) |
+| [Coding in detail](personas/coding.md) | [u/Peppy_Tomato](https://www.reddit.com/r/AskUK/comments/1rn7npv/comment/o94plrm/) |
+| [Coding in detail](personas/coding.md) | [u/Aggravating-Desk4004](https://www.reddit.com/r/Ealing/comments/1xjkdgb/) |
+| [Coding in detail](personas/coding.md) | [@hollygardnerx](https://www.tiktok.com/@hollygardnerx/video/7578215485968354582) |
+| [Coding in detail](personas/coding.md) | [@tafsonthemove](https://www.tiktok.com/@tafsonthemove/video/7503202705293266198) |
+| [Coding in detail](personas/coding.md) | [u/Username8831](https://www.reddit.com/r/Ealing/comments/1v6423y/comment/oznttbd/) |
+| [Coding in detail](personas/coding.md) | [u/WearyChampionship365](https://www.reddit.com/r/Ealing/comments/1vlc46x/comment/p30rnx7/) |
+| [Coding in detail](personas/coding.md) | [u/moanyjoany](https://www.reddit.com/r/Ealing/comments/1vlcuor/comment/p30r2af/) |
+| [Coding in detail](personas/coding.md) | [u/Mediocre_Sprinkles](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb2z980/) |
+| [Coding in detail](personas/coding.md) | [u/xmastreee](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb31nms/) |
+| [Coding in detail](personas/coding.md) | [u/akat224](https://www.reddit.com/r/london/comments/1ueg96t/) |
+| [Coding in detail](personas/coding.md) | [Dbank](https://www.mumsnet.com/talk/_chat/5509007-do-you-still-enjoy-shopping-on-the-high-street-or-mostly-online?reply=151334565) |
+| [Coding in detail](personas/coding.md) | [u/dy14n19](https://www.reddit.com/r/HammersmithandFulham/comments/1myug4c/) |
+| [Coding in detail](personas/coding.md) | [@Jojo_agboola](https://x.com/Jojo_agboola/status/2112618905525276980) |
+| [Coding in detail](personas/coding.md) | [u/grand_web](https://www.reddit.com/r/chiswick/comments/1vlibmn/) |
+| [Coding in detail](personas/coding.md) | [u/claudiav2603](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2y26dy/) |
+| [Coding in detail](personas/coding.md) | [Kenjenny](https://www.mumsnet.com/talk/_chat/5509007-do-you-still-enjoy-shopping-on-the-high-street-or-mostly-online?reply=151334270) |
+| [Coding in detail](personas/coding.md) | [LividArse](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977221) |
+| [Coding in detail](personas/coding.md) | [@London_W4](https://x.com/London_W4/status/2102723893463044506) |
+| [Coding in detail](personas/coding.md) | [FerrisWheelsandLilacs](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976658) |
+| [Coding in detail](personas/coding.md) | [u/rsweb](https://www.reddit.com/r/AskUK/comments/1my0t02/comment/na8v8ju/) |
+| [Coding in detail](personas/coding.md) | [Agix](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976563) |
+| [Coding in detail](personas/coding.md) | [u/Outside-Assignment85](https://www.reddit.com/r/london/comments/1vr9i0n/comment/p4brlc4/) |
+| [Coding in detail](personas/coding.md) | [u/No_Witness9533](https://www.reddit.com/r/london/comments/1vr9i0n/comment/p4bxk0e/) |
+| [Coding in detail](personas/coding.md) | [u/JollyExPat](https://www.reddit.com/r/london/comments/1tatyc0/comment/olc54ib/) |
+| [Coding in detail](personas/coding.md) | [u/abitofasitdown](https://www.reddit.com/r/london/comments/1niwnlw/) |
+| [Coding in detail](personas/coding.md) | [u/squeakyeggs](https://www.reddit.com/r/Ealing/comments/1vhe1k8/comment/p7t14xd/) |
+| [Coding in detail](personas/coding.md) | [u/sd_1874](https://www.reddit.com/r/london/comments/1ukfwni/comment/ouvf2m5/) |
+| [Coding in detail](personas/coding.md) | [u/Rhubarbatross](https://www.reddit.com/r/london/comments/1pvd92z/comment/nvw7a0u/) |
+| [Coding in detail](personas/coding.md) | [u/anonypanda](https://www.reddit.com/r/london/comments/1uke914/comment/ouyun00/) |
+| [Coding in detail](personas/coding.md) | [@OpenChiswickW4](https://x.com/OpenChiswickW4/status/2069295025561760040) |
+| [Coding in detail](personas/coding.md) | [@loveandlondon](https://www.tiktok.com/@loveandlondon/video/7509933373075492118) |
+| [Coding in detail](personas/coding.md) | [@stillshipping](https://www.tiktok.com/@stillshipping/video/7693511674925518102) |
+| [Coding in detail](personas/coding.md) | [@hackneyfleamarket](https://www.tiktok.com/@hackneyfleamarket/video/7689755751471959318) |
+| [Coding in detail](personas/coding.md) | [u/Greg-Normal](https://www.reddit.com/r/london/comments/1niwnlw/comment/neo7ha3/) |
+| [Method](personas/method.md) | [*The Design Thinking Playbook*](https://www.wiley.com/en-us/The+Design+Thinking+Playbook%3A+Mindful+Digital+Transformation+of+Teams%2C+Products%2C+Services%2C+Businesses+and+Ecosystems-p-9781119467472) |
+| [Method](personas/method.md) | [*The Design Thinking Toolbox*](https://www.wiley.com/en-us/The+Design+Thinking+Toolbox%3A+A+Guide+to+Mastering+the+Most+Popular+and+Valuable+Innovation+Methods-p-9781119629214) |

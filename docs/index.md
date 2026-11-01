@@ -21,4 +21,4 @@ Claims about people come from public posts, quoted word for word with the author
 
 ## How it was made
 
-The research and these docs were produced with AI agents (Claude Code as the main one, Codex for reviews). The prompts, what came back and what was changed by hand are part of the process and are recorded alongside it. The prototype is built in code; Figma and Apple Freeform are used only for exploration.
+I directed the work; AI agents (Claude Code as the main one, Codex for reviews) did most of the collecting, coding and drafting. Every page says how AI was used in that step, and [how AI was used](process/ai-log.md) logs what each agent was asked, what came back and what I threw away or fixed. The prototype is built in code; Figma and Apple Freeform are used only for exploration.

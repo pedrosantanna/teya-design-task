@@ -1,0 +1,442 @@
+[
+ {
+  "id": "p01",
+  "include": true,
+  "exclude_reason": "",
+  "job": "specific",
+  "urgent": "yes",
+  "failure": "information",
+  "stance": "unknown",
+  "rationale": "'Hard to know stock levels without visiting... get through on the phone': couldn't find out who has eclipse glasses; eclipse week = deadline. Borderline include: generic phrasing but reads as own search in a where-to-buy thread."
+ },
+ {
+  "id": "p02",
+  "include": true,
+  "exclude_reason": "",
+  "job": "specific",
+  "urgent": "yes",
+  "failure": "none",
+  "stance": "unknown",
+  "rationale": "Reports '90 pairs in stock as of 11.50am today' and a WhatsApp restock group: the search worked; 'today'/eclipse = time pressure. No switch or cost shown."
+ },
+ {
+  "id": "p03",
+  "include": true,
+  "exclude_reason": "",
+  "job": "specific",
+  "urgent": "yes",
+  "failure": "information",
+  "stance": "unknown",
+  "rationale": "'any places that have a portable AC in stock... need to get one asap': can't find out who stocks it; 'asap' + pregnant wife. Faulty online order is background, main breakdown is not knowing local stock."
+ },
+ {
+  "id": "p04",
+  "include": true,
+  "exclude_reason": "",
+  "job": "specific",
+  "urgent": "yes",
+  "failure": "availability",
+  "stance": "persists",
+  "rationale": "'been to Robert Dyas in Ealing and Chiswick today and both sold out': sold out; 'today' before eclipse; tried a second shop = persists."
+ },
+ {
+  "id": "p05",
+  "include": true,
+  "exclude_reason": "",
+  "job": "specific",
+  "urgent": "no",
+  "failure": "information",
+  "stance": "defects",
+  "rationale": "'JL list 7 on the website, but none in stock': told wrongly about stock; ended up buying from Amazon = defects. 'Same day' is a capability, not a stated deadline."
+ },
+ {
+  "id": "p06",
+  "include": true,
+  "exclude_reason": "",
+  "job": "specific",
+  "urgent": "no",
+  "failure": "information",
+  "stance": "unknown",
+  "rationale": "'Google says it's temporarily closed... been done over by google before': can't find out if the patisserie is open. No behaviour after."
+ },
+ {
+  "id": "p07",
+  "include": false,
+  "exclude_reason": "opinion about independent shops' hours, no own behaviour described",
+  "job": "",
+  "urgent": "",
+  "failure": "",
+  "stance": "",
+  "rationale": "Excluded: opinion about independent shops' hours, no own behaviour described"
+ },
+ {
+  "id": "p08",
+  "include": true,
+  "exclude_reason": "",
+  "job": "routine",
+  "urgent": "no",
+  "failure": "information",
+  "stance": "unknown",
+  "rationale": "Weekly butcher; 'during their advertised open hours... they were closed' = told wrongly whether open. Post doesn't show whether they kept going."
+ },
+ {
+  "id": "p09",
+  "include": true,
+  "exclude_reason": "",
+  "job": "specific",
+  "urgent": "yes",
+  "failure": "availability",
+  "stance": "defects",
+  "rationale": "'left empty handed' after every shop; thread 'in a pinch'; 'buy it all off Amazon' = defects. Parking £5 is secondary."
+ },
+ {
+  "id": "p10",
+  "include": true,
+  "exclude_reason": "",
+  "job": "routine",
+  "urgent": "no",
+  "failure": "access",
+  "stance": "defects",
+  "rationale": "Habit: 'end up in McDonald's, cos it's always open, and shop on Amazon': independents' hours don't fit = access; chain/online = defects."
+ },
+ {
+  "id": "p11",
+  "include": true,
+  "exclude_reason": "",
+  "job": "specific",
+  "urgent": "yes",
+  "failure": "access",
+  "stance": "unknown",
+  "rationale": "'None of them are delivering this early' (day before eclipse): delivery too slow = access; deadline = eclipse. Only considering online, no purchase shown."
+ },
+ {
+  "id": "p12",
+  "include": true,
+  "exclude_reason": "",
+  "job": "specific",
+  "urgent": "no",
+  "failure": "availability",
+  "stance": "unknown",
+  "rationale": "'Most places are out of stock and delivery online is 2+ weeks': main failure is stock not there. No deadline in the post itself. Borderline: could be general report rather than own trip."
+ },
+ {
+  "id": "p13",
+  "include": true,
+  "exclude_reason": "",
+  "job": "routine",
+  "urgent": "no",
+  "failure": "access",
+  "stance": "unknown",
+  "rationale": "Stated habit: 'I will pay more... But I won't be jumping through hoops' (re: hours) = access. Only a belief/conditional, no behaviour shown. Borderline include."
+ },
+ {
+  "id": "p14",
+  "include": true,
+  "exclude_reason": "",
+  "job": "specific",
+  "urgent": "yes",
+  "failure": "availability",
+  "stance": "unknown",
+  "rationale": "'would even have paid the premium if they'd had stock': no stock; thread is 'in a pinch' and order-in for next week too late. 'I tried' but outcome not shown."
+ },
+ {
+  "id": "p15",
+  "include": true,
+  "exclude_reason": "",
+  "job": "routine",
+  "urgent": "no",
+  "failure": "access",
+  "stance": "persists",
+  "rationale": "'only open during office hours... b) more than double the cost... I go to them for anniversaries': hours listed first (access), value secondary; still goes for anniversaries despite cost = persists. Job closest to routine (repeated occasion)."
+ },
+ {
+  "id": "p16",
+  "include": true,
+  "exclude_reason": "",
+  "job": "routine",
+  "urgent": "no",
+  "failure": "none",
+  "stance": "unknown",
+  "rationale": "'eat their food frequently... via deliveroo': repeated, no failure stated. Delivery app from a local restaurant is neither clear defection nor persistence."
+ },
+ {
+  "id": "p17",
+  "include": false,
+  "exclude_reason": "opinion about the street given as advice, no own shopping occasion",
+  "job": "",
+  "urgent": "",
+  "failure": "",
+  "stance": "",
+  "rationale": "Excluded: opinion about the street given as advice, no own shopping occasion"
+ },
+ {
+  "id": "p18",
+  "include": false,
+  "exclude_reason": "opinion about the street, no own behaviour",
+  "job": "",
+  "urgent": "",
+  "failure": "",
+  "stance": "",
+  "rationale": "Excluded: opinion about the street, no own behaviour"
+ },
+ {
+  "id": "p19",
+  "include": false,
+  "exclude_reason": "opinion about the street ('best high street'), no own behaviour",
+  "job": "",
+  "urgent": "",
+  "failure": "",
+  "stance": "",
+  "rationale": "Excluded: opinion about the street ('best high street'), no own behaviour"
+ },
+ {
+  "id": "p20",
+  "include": false,
+  "exclude_reason": "opinion about the street/area losing its butcher, no own behaviour stated",
+  "job": "",
+  "urgent": "",
+  "failure": "",
+  "stance": "",
+  "rationale": "Excluded: opinion about the street/area losing its butcher, no own behaviour stated"
+ },
+ {
+  "id": "p21",
+  "include": true,
+  "exclude_reason": "",
+  "job": "routine",
+  "urgent": "no",
+  "failure": "access",
+  "stance": "persists",
+  "rationale": "'Having to go to Chiswick is a pain': butcher closed so travel is the problem = access; travelling further = persists."
+ },
+ {
+  "id": "p22",
+  "include": false,
+  "exclude_reason": "opinion about how the street has changed, no own shopping behaviour",
+  "job": "",
+  "urgent": "",
+  "failure": "",
+  "stance": "",
+  "rationale": "Excluded: opinion about how the street has changed, no own shopping behaviour"
+ },
+ {
+  "id": "p23",
+  "include": false,
+  "exclude_reason": "written by the former owner's son (business side)",
+  "job": "",
+  "urgent": "",
+  "failure": "",
+  "stance": "",
+  "rationale": "Excluded: written by the former owner's son (business side)"
+ },
+ {
+  "id": "p24",
+  "include": false,
+  "exclude_reason": "opinion about policy/protest over a shop opening",
+  "job": "",
+  "urgent": "",
+  "failure": "",
+  "stance": "",
+  "rationale": "Excluded: opinion about policy/protest over a shop opening"
+ },
+ {
+  "id": "p25",
+  "include": true,
+  "exclude_reason": "",
+  "job": "routine",
+  "urgent": "no",
+  "failure": "none",
+  "stance": "unknown",
+  "rationale": "Chose butcher: 'quality is better... always happy to accommodate': works well, no failure. No cost stated so not 'persists'."
+ },
+ {
+  "id": "p26",
+  "include": true,
+  "exclude_reason": "",
+  "job": "routine",
+  "urgent": "no",
+  "failure": "none",
+  "stance": "unknown",
+  "rationale": "'My local guy will cut any bit of meat you ask for': positive habit, no failure or cost."
+ },
+ {
+  "id": "p27",
+  "include": true,
+  "exclude_reason": "",
+  "job": "routine",
+  "urgent": "no",
+  "failure": "none",
+  "stance": "defects",
+  "rationale": "Click and collect food shop: 'collection time is in my control': works, no failure. Supermarket online order = defects. Borderline: not clearly high-street."
+ },
+ {
+  "id": "p28",
+  "include": true,
+  "exclude_reason": "",
+  "job": "routine",
+  "urgent": "no",
+  "failure": "none",
+  "stance": "unknown",
+  "rationale": "'I always buy something if I use the post office' at newsagent in Acton: routine, no failure; no cost to justify 'persists'."
+ },
+ {
+  "id": "p29",
+  "include": true,
+  "exclude_reason": "",
+  "job": "routine",
+  "urgent": "no",
+  "failure": "access",
+  "stance": "unknown",
+  "rationale": "'I don't carry cash': payment is the barrier (cash-only) = access. Job unclear, routine closest. No behaviour toward the shop shown. Thread topic unknown ('Same thread')."
+ },
+ {
+  "id": "p30",
+  "include": false,
+  "exclude_reason": "about a bridge/traffic, not shopping",
+  "job": "",
+  "urgent": "",
+  "failure": "",
+  "stance": "",
+  "rationale": "Excluded: about a bridge/traffic, not shopping"
+ },
+ {
+  "id": "p31",
+  "include": false,
+  "exclude_reason": "about a bridge/traffic, not shopping",
+  "job": "",
+  "urgent": "",
+  "failure": "",
+  "stance": "",
+  "rationale": "Excluded: about a bridge/traffic, not shopping"
+ },
+ {
+  "id": "p32",
+  "include": true,
+  "exclude_reason": "",
+  "job": "discovery",
+  "urgent": "no",
+  "failure": "availability",
+  "stance": "unknown",
+  "rationale": "'Just walked the length of King Street... thoroughly depressing': strolling the street, nothing worthwhile there. Praising Chiswick isn't shown as a behaviour. Borderline: account may be a local-area page."
+ },
+ {
+  "id": "p33",
+  "include": false,
+  "exclude_reason": "generalisation about other people; account appears to be a local campaign/promotional handle",
+  "job": "",
+  "urgent": "",
+  "failure": "",
+  "stance": "",
+  "rationale": "Excluded: generalisation about other people; account appears to be a local campaign/promotional handle"
+ },
+ {
+  "id": "p34",
+  "include": true,
+  "exclude_reason": "",
+  "job": "specific",
+  "urgent": "no",
+  "failure": "information",
+  "stance": "unknown",
+  "rationale": "'what UK walk in store currently has this in stock': can't find out who stocks the fragrance. No deadline."
+ },
+ {
+  "id": "p35",
+  "include": false,
+  "exclude_reason": "creator content promoting a place",
+  "job": "",
+  "urgent": "",
+  "failure": "",
+  "stance": "",
+  "rationale": "Excluded: creator content promoting a place"
+ },
+ {
+  "id": "p36",
+  "include": false,
+  "exclude_reason": "creator try-on content promoting a shop",
+  "job": "",
+  "urgent": "",
+  "failure": "",
+  "stance": "",
+  "rationale": "Excluded: creator try-on content promoting a shop"
+ },
+ {
+  "id": "p37",
+  "include": false,
+  "exclude_reason": "creator content promoting a stall",
+  "job": "",
+  "urgent": "",
+  "failure": "",
+  "stance": "",
+  "rationale": "Excluded: creator content promoting a stall"
+ },
+ {
+  "id": "p38",
+  "include": false,
+  "exclude_reason": "creator commentary on high-street trends, no own shopping",
+  "job": "",
+  "urgent": "",
+  "failure": "",
+  "stance": "",
+  "rationale": "Excluded: creator commentary on high-street trends, no own shopping"
+ },
+ {
+  "id": "p39",
+  "include": false,
+  "exclude_reason": "written by market organisers (business)",
+  "job": "",
+  "urgent": "",
+  "failure": "",
+  "stance": "",
+  "rationale": "Excluded: written by market organisers (business)"
+ },
+ {
+  "id": "p40",
+  "include": true,
+  "exclude_reason": "",
+  "job": "specific",
+  "urgent": "yes",
+  "failure": "information",
+  "stance": "unknown",
+  "rationale": "'Left it a bit last minute... anyone know any stores nearby selling solar eclipse glasses?': can't find who sells; 'last minute' = urgent."
+ },
+ {
+  "id": "p41",
+  "include": true,
+  "exclude_reason": "",
+  "job": "specific",
+  "urgent": "yes",
+  "failure": "information",
+  "stance": "unknown",
+  "rationale": "'Anyone knows a store around hammersmith or holborn?' day before eclipse: can't find who sells; deadline."
+ },
+ {
+  "id": "p42",
+  "include": true,
+  "exclude_reason": "",
+  "job": "discovery",
+  "urgent": "no",
+  "failure": "none",
+  "stance": "defects",
+  "rationale": "'plenty of shops to browse! But I can't actually remember the last time I went there for clothes shopping': stopped using the high street (thread is online vs high street); no failure reason given."
+ },
+ {
+  "id": "p43",
+  "include": false,
+  "exclude_reason": "opinion aimed at other people ('use them or lose them'), not own behaviour",
+  "job": "",
+  "urgent": "",
+  "failure": "",
+  "stance": "",
+  "rationale": "Excluded: opinion aimed at other people ('use them or lose them'), not own behaviour"
+ },
+ {
+  "id": "p44",
+  "include": true,
+  "exclude_reason": "",
+  "job": "specific",
+  "urgent": "no",
+  "failure": "value",
+  "stance": "defects",
+  "rationale": "'only used them once as I thought they were extremely expensive': price not worth it; stopped using the bike workshop = defects."
+ }
+]

@@ -2,6 +2,21 @@
 
 We compared seventeen products that a London shopper can use today, or that failed recently in a way that teaches something, from Google's local stock listings to delivery apps, surplus-food apps, multi-shop checkouts and the card-payment companies small shops already use. Across all of them, the complaint users repeat most is that the app said something was available and the shop didn't have it.
 
+```summary
+Takeaways:
+- The complaint users repeat most is being told something was available when it wasn't.
+- One basket across several sellers exists, but only with postal delivery. Nobody does it for one street.
+- Local directories without live stock haven't lasted.
+Call:
+- Include recent failures (ShopAppy, quick commerce) alongside live products.
+- Judge every product on both findability and transaction.
+AI:
+- A research agent chose 17 products and pulled dated reviews from the App Store feed, Trustpilot and Mumsnet.
+- A writing agent re-fetched quotes that had come back truncated and dropped the ones it couldn't confirm.
+Trade-offs:
+- Review sites skew towards complaints, and there's no Reddit here. Commission rates are as reported by third parties.
+```
+
 ## How we chose and listened
 
 **Products.** We started from the brief and kept every product that serves someone trying to buy from a nearby shop, plus two recent failures (ShopAppy and the quick-commerce start-ups). We added Co-op's Peckish and Hive, which weren't on the first list, and dropped Faire because it sells wholesale to shops, not to shoppers.

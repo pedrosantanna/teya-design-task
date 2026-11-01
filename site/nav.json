@@ -3,42 +3,121 @@
     {
       "title": "Overview",
       "items": [
-        { "id": "introduction", "title": "Introduction", "src": "docs/index.md" },
-        { "id": "brief", "title": "The brief", "src": "docs/brief.md" }
+        {
+          "id": "introduction",
+          "title": "Introduction",
+          "src": "docs/index.md"
+        },
+        {
+          "id": "brief",
+          "title": "The brief",
+          "src": "docs/brief.md"
+        }
       ]
     },
     {
       "title": "Discover",
       "items": [
-        { "id": "discover", "title": "Overview", "src": "docs/discover/index.md" },
-        { "id": "landscape", "title": "The high street today", "src": "docs/discover/high-street-landscape.md" },
+        {
+          "id": "discover",
+          "title": "Overview",
+          "src": "docs/discover/index.md"
+        },
+        {
+          "id": "landscape",
+          "title": "The high street today",
+          "src": "docs/discover/high-street-landscape.md"
+        },
         {
           "title": "Netnography",
           "children": [
-            { "id": "netnography-method", "title": "Method", "src": "docs/discover/netnography/method.md" },
-            { "id": "netnography-findings", "title": "Findings", "src": "docs/discover/netnography/findings.md" },
-            { "id": "empathy-map", "title": "Empathy map", "src": "docs/discover/netnography/empathy-map.md" },
-            { "id": "dimensions", "title": "Proposed dimensions", "src": "docs/discover/netnography/dimensions.md" }
+            {
+              "id": "netnography-method",
+              "title": "Method",
+              "src": "docs/discover/netnography/method.md"
+            },
+            {
+              "id": "netnography-method-details",
+              "title": "Method in detail",
+              "src": "docs/discover/netnography/method-details.md"
+            },
+            {
+              "id": "netnography-findings",
+              "title": "Findings",
+              "src": "docs/discover/netnography/findings.md"
+            },
+            {
+              "id": "empathy-map",
+              "title": "Empathy map",
+              "src": "docs/discover/netnography/empathy-map.md"
+            },
+            {
+              "id": "dimensions",
+              "title": "Proposed dimensions",
+              "src": "docs/discover/netnography/dimensions.md"
+            }
           ]
         },
         {
-          "title": "Personas",
+          "title": "Proto-personas",
           "children": [
-            { "id": "personas", "title": "The five personas", "src": "docs/discover/personas/index.md" },
-            { "id": "persona-scoring", "title": "Method and scoring", "src": "docs/discover/personas/scoring.md" }
+            {
+              "id": "personas",
+              "title": "The proto-personas",
+              "src": "docs/discover/personas/index.md"
+            },
+            {
+              "id": "persona-method",
+              "title": "Method",
+              "src": "docs/discover/personas/method.md"
+            },
+            {
+              "id": "persona-coding",
+              "title": "Coding in detail",
+              "src": "docs/discover/personas/coding.md"
+            }
           ]
         },
-        { "id": "benchmarks", "title": "Benchmarks", "src": "docs/discover/benchmarks.md" },
-        { "id": "sources", "title": "Sources", "src": "docs/discover/sources.md" }
+        {
+          "id": "benchmarks",
+          "title": "Benchmarks",
+          "src": "docs/discover/benchmarks.md"
+        },
+        {
+          "id": "sources",
+          "title": "Sources",
+          "src": "docs/discover/sources.md"
+        }
       ]
     },
-    { "title": "Define", "disabled": true, "note": "Problem focus and the shopper" },
-    { "title": "Develop", "disabled": true, "note": "Concepts and the journey" },
-    { "title": "Deliver", "disabled": true, "note": "Prototype and app" },
+    {
+      "title": "Define",
+      "disabled": true,
+      "note": "Problem focus and the shopper"
+    },
+    {
+      "title": "Develop",
+      "disabled": true,
+      "note": "Concepts and the journey"
+    },
+    {
+      "title": "Deliver",
+      "disabled": true,
+      "note": "Prototype and app"
+    },
     {
       "title": "Process",
       "items": [
-        { "id": "decision-log", "title": "Decision log", "src": "docs/decision-log.md" }
+        {
+          "id": "decision-log",
+          "title": "Decision log",
+          "src": "docs/decision-log.md"
+        },
+        {
+          "id": "ai-log",
+          "title": "How AI was used",
+          "src": "docs/process/ai-log.md"
+        }
       ]
     }
   ]
