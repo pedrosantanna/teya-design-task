@@ -1,0 +1,195 @@
+# Sources
+
+Every quote and every link used across the docs, in one place. 69 quotes (68 checked against the live source) and 102 other sources. This page is generated from the other pages by `scripts/build_sources.py`.
+
+## Quotes by network
+
+| Network | Quotes |
+| --- | --- |
+| Reddit | 31 |
+| App Store (UK) | 21 |
+| Mumsnet | 11 |
+| Trustpilot (UK) | 6 |
+
+## Quotes
+
+Status **verified** means the text, author and date were matched against the live page. **Archive** means the quote came from a public Reddit archive and has not been matched yet.
+
+| Date | Author | Network | Status | Used on | Link |
+| --- | --- | --- | --- | --- | --- |
+| 2025-08-23 | u/rsweb | Reddit · r/AskUK | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/AskUK/comments/1my0t02/comment/na8v8ju/) |
+| 2025-08-24 | u/dy14n19 | Reddit · r/HammersmithandFulham | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/HammersmithandFulham/comments/1myug4c/) |
+| 2025-08-28 | u/Mediocre_Sprinkles | Reddit · r/CasualUK | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb2z980/) |
+| 2025-08-28 | u/xmastreee | Reddit · r/CasualUK | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb31nms/) |
+| 2025-09-16 | u/abitofasitdown | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1niwnlw/) |
+| 2025-09-17 | u/Greg-Normal | Reddit · r/london | verified | [Proposed dimensions](netnography/dimensions.md) | [Open](https://www.reddit.com/r/london/comments/1niwnlw/comment/neo7ha3/) |
+| 2025-09-17 | u/mjfh2 | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1niwnlw/comment/nemvjcy/) |
+| 2025-09-17 | u/rising_then_falling | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1niwnlw/comment/nema5k6/) |
+| 2025-12-05 | Agix | Mumsnet · Talk › AIBU | verified | [Findings](netnography/findings.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976563) |
+| 2025-12-05 | BeansAndNoodles | Mumsnet · Am I Being Unreasonable | verified | [Benchmarks](benchmarks.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves) |
+| 2025-12-05 | Codyrhodesisaheel | Mumsnet · Am I Being Unreasonable | verified | [Benchmarks](benchmarks.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977812) |
+| 2025-12-05 | FerrisWheelsandLilacs | Mumsnet · Talk › AIBU | verified | [Findings](netnography/findings.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976658) |
+| 2025-12-05 | LividArse | Mumsnet · Talk › AIBU | verified | [Proposed dimensions](netnography/dimensions.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977221) |
+| 2025-12-05 | LividArse | Mumsnet · Talk › AIBU | verified | [Findings](netnography/findings.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977221) |
+| 2025-12-05 | Valentando | Mumsnet · Talk › AIBU | verified | [Proposed dimensions](netnography/dimensions.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977465) |
+| 2025-12-05 | Valentando | Mumsnet · Talk › AIBU | verified | [Findings](netnography/findings.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977465) |
+| 2025-12-05 | zingally | Mumsnet · Am I Being Unreasonable | verified | [Benchmarks](benchmarks.md) | [Open](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148978039) |
+| 2025-12-17 | Alexandra Grant | Trustpilot (UK) · Hive | verified | [Benchmarks](benchmarks.md) | [Open](https://uk.trustpilot.com/reviews/6942fe627b355bd0d9bb1e20) |
+| 2025-12-19 | customer | Trustpilot (UK) · Hive | verified | [Benchmarks](benchmarks.md) | [Open](https://uk.trustpilot.com/reviews/694484566e150e09333d2c40) |
+| 2025-12-25 | u/Rhubarbatross | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1pvd92z/comment/nvw7a0u/) |
+| 2026-03-07 | u/Peppy_Tomato | Reddit · r/AskUK | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/AskUK/comments/1rn7npv/comment/o94plrm/) |
+| 2026-03-27 | Dbank | Mumsnet · Talk › Chat | verified | [Findings](netnography/findings.md) | [Open](https://www.mumsnet.com/talk/_chat/5509007-do-you-still-enjoy-shopping-on-the-high-street-or-mostly-online?reply=151334565) |
+| 2026-03-27 | Kenjenny | Mumsnet · Talk › Chat | verified | [Proposed dimensions](netnography/dimensions.md) | [Open](https://www.mumsnet.com/talk/_chat/5509007-do-you-still-enjoy-shopping-on-the-high-street-or-mostly-online?reply=151334270) |
+| 2026-05-12 | u/JollyExPat | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1tatyc0/comment/olc54ib/) |
+| 2026-06-07 | u/Vermathorax | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq989gy/) |
+| 2026-06-07 | u/killmetruck | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq967k5/) |
+| 2026-06-24 | u/Miraclefish | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1ueg96t/comment/otjhcgo/) |
+| 2026-06-24 | u/akat224 | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1ueg96t/) |
+| 2026-06-26 | u/Accomplished-Pen2660 | Reddit · r/Ealing | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/Ealing/comments/1ug10pv/comment/oty3pvk/) |
+| 2026-07-01 | u/anonypanda | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1uke914/comment/ouyun00/) |
+| 2026-07-01 | u/sd_1874 | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1ukfwni/comment/ouvf2m5/) |
+| 2026-07-25 | u/Username8831 | Reddit · r/Ealing | verified | [Proposed dimensions](netnography/dimensions.md) | [Open](https://www.reddit.com/r/Ealing/comments/1v6423y/comment/oznttbd/) |
+| 2026-07-31 | Eddy G1 | App Store (UK) · Zapp | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1545579060?see-all=reviews) |
+| 2026-08-08 | AppleG69 | App Store (UK) · Nextdoor | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id640360962?see-all=reviews) |
+| 2026-08-10 | u/jamesshovlin | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tdld2/) |
+| 2026-08-10 | u/jamesshovlin | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tb0s2/) |
+| 2026-08-11 | u/WearyChampionship365 | Reddit · r/Ealing | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/Ealing/comments/1vlc46x/comment/p30rnx7/) |
+| 2026-08-11 | u/claudiav2603 | Reddit · r/london | archive | [Proposed dimensions](netnography/dimensions.md) | [Open](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2y26dy/) |
+| 2026-08-11 | u/grand_web | Reddit · r/chiswick | verified | [Proposed dimensions](netnography/dimensions.md) | [Open](https://www.reddit.com/r/chiswick/comments/1vlibmn/) |
+| 2026-08-11 | u/moanyjoany | Reddit · r/Ealing | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/Ealing/comments/1vlcuor/comment/p30r2af/) |
+| 2026-08-18 | u/No_Witness9533 | Reddit · r/london | verified | [Proposed dimensions](netnography/dimensions.md) | [Open](https://www.reddit.com/r/london/comments/1vr9i0n/comment/p4bxk0e/) |
+| 2026-08-18 | u/No_Witness9533 | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1vr9i0n/comment/p4bxk0e/) |
+| 2026-08-18 | u/Outside-Assignment85 | Reddit · r/london | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/london/comments/1vr9i0n/comment/p4brlc4/) |
+| 2026-09-04 | u/squeakyeggs | Reddit · r/Ealing | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/Ealing/comments/1vhe1k8/comment/p7t14xd/) |
+| 2026-09-23 | Montymoo2 | App Store (UK) · Too Good To Go | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1060683933?see-all=reviews) |
+| 2026-09-26 | sleepy.uwu.nova | App Store (UK) · OLIO | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1008237086?see-all=reviews) |
+| 2026-09-27 | duahhhhhhh | App Store (UK) · OLIO | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1008237086?see-all=reviews) |
+| 2026-10-03 | user64946284 | App Store (UK) · Google Maps | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id585027354?see-all=reviews) |
+| 2026-10-06 | Dj wade mister | App Store (UK) · Nextdoor | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id640360962?see-all=reviews) |
+| 2026-10-06 | Jzelf | App Store (UK) · Too Good To Go | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1060683933?see-all=reviews) |
+| 2026-10-07 | BikeCam David | Trustpilot (UK) · SumUp | verified | [Benchmarks](benchmarks.md) | [Open](https://uk.trustpilot.com/reviews/6ac57954df7990f1219e4121) |
+| 2026-10-08 | vicsipro | App Store (UK) · Zoom by Ocado | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1447126432?see-all=reviews) |
+| 2026-10-09 | Barry Griffiths | Trustpilot (UK) · Gophr | verified | [Benchmarks](benchmarks.md) | [Open](https://uk.trustpilot.com/reviews/6ac90d1b34558118b76c3fb3) |
+| 2026-10-11 | u/Inge_Jones | Reddit · r/Ealing | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/Ealing/comments/1x3g7ci/comment/pfbvje4/) |
+| 2026-10-15 | MoogStarr | App Store (UK) · Shop | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1223471316?see-all=reviews) |
+| 2026-10-17 | Jim Rickety | App Store (UK) · Uber Eats | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1058959277?see-all=reviews) |
+| 2026-10-19 | jkljhhgg | App Store (UK) · Shop | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1223471316?see-all=reviews) |
+| 2026-10-20 | Grotty75 | App Store (UK) · Etsy | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id477128284?see-all=reviews) |
+| 2026-10-21 | guFgda | App Store (UK) · Etsy | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id477128284?see-all=reviews) |
+| 2026-10-22 | KJCM98...3 | App Store (UK) · Amazon Shopping | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id335187483?see-all=reviews) |
+| 2026-10-23 | gidfles | App Store (UK) · Amazon Shopping | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id335187483?see-all=reviews) |
+| 2026-10-24 | TheCuriousTravellers | App Store (UK) · Just Eat | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id566347057?see-all=reviews) |
+| 2026-10-26 | Neoclis Neocleous | Trustpilot (UK) · Teya | verified | [Benchmarks](benchmarks.md) | [Open](https://uk.trustpilot.com/reviews/6adf50fcfa872c9c65a7a8d6) |
+| 2026-10-27 | Anthony Tindall | App Store (UK) · Deliveroo | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1001501844?see-all=reviews) |
+| 2026-10-27 | Mel59u | App Store (UK) · Deliveroo | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1001501844?see-all=reviews) |
+| 2026-10-28 | Udohulk | App Store (UK) · Uber Eats | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id1058959277?see-all=reviews) |
+| 2026-10-30 | KR | Trustpilot (UK) · Gophr | verified | [Benchmarks](benchmarks.md) | [Open](https://uk.trustpilot.com/reviews/6ae4599dc4731f35a7af3d90) |
+| 2026-10-30 | Mykul1982 | App Store (UK) · Just Eat | verified | [Benchmarks](benchmarks.md) | [Open](https://apps.apple.com/gb/app/id566347057?see-all=reviews) |
+| 2026-10-31 | u/Aggravating-Desk4004 | Reddit · r/Ealing | verified | [Findings](netnography/findings.md) | [Open](https://www.reddit.com/r/Ealing/comments/1xjkdgb/) |
+
+## Other sources
+
+| Used on | Source |
+| --- | --- |
+| [Benchmarks](benchmarks.md) | [Google Merchant Center Help](https://support.google.com/merchants/answer/15609877?hl=en-GB) |
+| [Benchmarks](benchmarks.md) | [Asian Trader](https://www.asiantrader.biz/nearst-tech-connects-uber-eats-deliveroo-just-eat) |
+| [Benchmarks](benchmarks.md) | [Digital Commerce 360](https://www.digitalcommerce360.com/2026/10/16/google-universal-cart-launch-features/) |
+| [Benchmarks](benchmarks.md) | [Nextdoor via Nasdaq](https://www.nasdaq.com/press-release/nextdoor-deepens-its-commitment-local-business-discovery-and-recommendations-2026-09) |
+| [Benchmarks](benchmarks.md) | [Business Wire](https://secure.businesswire.com/news/home/20251002060133/en/DoorDash-Completes-Acquisition-of-Deliveroo) |
+| [Benchmarks](benchmarks.md) | [DineOpen](https://www.dineopen.com/blog/deliveroo-vs-just-eat-vs-uber-eats-commission-2026) |
+| [Benchmarks](benchmarks.md) | [Grocery Gazette](https://www.grocerygazette.co.uk/2025/03/19/co-op-uber-eats-partnership/) |
+| [Benchmarks](benchmarks.md) | [Uber](https://www.uber.com/us/en/newsroom/multi-store-ordering/) |
+| [Benchmarks](benchmarks.md) | [RetailDetail](https://www.retaildetail.eu/news/food/acquisition-of-just-eat-takeaway-completed-the-hard-work-is-just-beginning/) |
+| [Benchmarks](benchmarks.md) | [The Grocer](https://www.thegrocer.co.uk/news/co-op-launches-rapid-grocery-delivery-app-for-independents-called-peckish/701536.article) |
+| [Benchmarks](benchmarks.md) | [Too Good To Go](https://www.toogoodtogo.co.uk/en-gb/business) |
+| [Benchmarks](benchmarks.md) | [The Grocer](https://www.thegrocer.co.uk/news/tescos-olio-food-waste-partnership-hits-100-million-meals/723887.article) |
+| [Benchmarks](benchmarks.md) | [Shopify](https://www.shopify.com/local-delivery) |
+| [Benchmarks](benchmarks.md) | [Shopifreaks](https://www.shopifreaks.com/shopify-launches-universal-checkout-in-the-shop-app-letting-shoppers-buy-from-multiple-brands-with-one-cart-and-one-checkout/) |
+| [Benchmarks](benchmarks.md) | [Etsy Help](https://help.etsy.com/hc/articles/115015627947) |
+| [Benchmarks](benchmarks.md) | [About Amazon](https://www.aboutamazon.co.uk/news/retail/amazon-customers-can-now-add-fresh-groceries-to-same-day-delivery-orders-in-parts-of-london) |
+| [Benchmarks](benchmarks.md) | [The Bookseller](https://www.thebookseller.com/news/bookshoporg-surpasses-4m-profit-for-indie-bookshops) |
+| [Benchmarks](benchmarks.md) | [Companies House](https://find-and-update.company-information.service.gov.uk/company/10285855) |
+| [Benchmarks](benchmarks.md) | [ShopAppy story](https://shopappy.com/the-shopappy-story) |
+| [Benchmarks](benchmarks.md) | [BID Leamington](https://bidleamington.com/love-leam-app-launches/) |
+| [Benchmarks](benchmarks.md) | [London Loves Business](https://londonlovesbusiness.com/bq-to-start-same-day-deliveries/) |
+| [Benchmarks](benchmarks.md) | [Stuart](https://stuart.com/courier-service-london/) |
+| [Benchmarks](benchmarks.md) | [The Grocer](https://www.thegrocer.co.uk/news/rapid-grocer-getir-confirms-uk-exit/690798.article) |
+| [Benchmarks](benchmarks.md) | [Zoom](https://zoom.ocado.com/) |
+| [Benchmarks](benchmarks.md) | [Square](https://squareup.com/gb/en/online-store) |
+| [Benchmarks](benchmarks.md) | [Teya Pay by Link](https://www.teya.com/online-payments/pay-by-link) |
+| [The high street today](high-street-landscape.md) | [ONS, 2019](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/articles/highstreetsingreatbritain/2019-06-06) |
+| [The high street today](high-street-landscape.md) | [ONS, March 2026](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/highstreetsandretailareasingreatbritain/march2026) |
+| [The high street today](high-street-landscape.md) | [Historic England](https://cms.historicengland.org.uk/whats-new/features/historic-high-streets-quiz) |
+| [The high street today](high-street-landscape.md) | [Londonist, 2005](https://londonist.com/2005/06/attack_of_the_c) |
+| [The high street today](high-street-landscape.md) | [Portas Review](https://www.gov.uk/government/publications/the-portas-review-the-future-of-our-high-streets) |
+| [The high street today](high-street-landscape.md) | [Retail Tech Innovation Hub, 2018](https://retailtechinnovationhub.com/home/2018/7/4/grimsey-review-2-nostalgia-wont-save-the-high-street) |
+| [The high street today](high-street-landscape.md) | [GLA / LSE Cities, *High Streets for All*](https://www.lse.ac.uk/asset-library/information/high-streets-for-all-report-web-final.pdf) |
+| [The high street today](high-street-landscape.md) | [GLA](https://london.gov.uk/programmes-strategies/shaping-local-spaces/high-streets-all-join-high-street-network) |
+| [The high street today](high-street-landscape.md) | [Wikipedia](https://en.wikipedia.org/wiki/King_Street,_Hammersmith) |
+| [The high street today](high-street-landscape.md) | [M&S](https://www.marksandspencer.com/stores/hammersmith-1290) |
+| [The high street today](high-street-landscape.md) | [Sainsbury's](https://stores.sainsburys.co.uk/4388/hammersmith-king-street-local) |
+| [The high street today](high-street-landscape.md) | [Retail Gazette, 2020](https://www.retailgazette.co.uk/blog/2020/01/ikea-buys-hammersmiths-kings-mall-launch-first-small-uk-store/) |
+| [The high street today](high-street-landscape.md) | [Evening Standard via AOL, 2026-08-05](https://www.aol.co.uk/articles/gails-bakery-set-open-major-100159000.html) |
+| [The high street today](high-street-landscape.md) | [HammersmithToday](https://static.hammersmithtoday.co.uk/page/hammersmithtoday/info/cyclehighway054.htm) |
+| [The high street today](high-street-landscape.md) | [Hammersmith Broadway](https://www.hammersmithbroadway.co.uk/shopping/made-in-handf) |
+| [The high street today](high-street-landscape.md) | [Hammersmith BID annual report](https://hammersmithbid.co.uk/the-last-12-months-in-review-our-annual-report/) |
+| [The high street today](high-street-landscape.md) | [LBHF](https://www.lbhf.gov.uk/councillors-and-democracy/elections/hammersmith-bid-notice-ballot-and-arrangements-ballot/hammersmith-bid-result-ballot) |
+| [The high street today](high-street-landscape.md) | [HammersmithToday](https://static.hammersmithtoday.co.uk/page/hammersmithtoday/info/conbid019.htm) |
+| [The high street today](high-street-landscape.md) | [Hammersmith BID](https://www.hammersmithbid.co.uk/) |
+| [The high street today](high-street-landscape.md) | [Time Out](https://www.timeout.com/london/news/hammersmith-bridge-has-finally-reopened-to-cyclists-after-a-3-million-project-042225) |
+| [The high street today](high-street-landscape.md) | [Wandsworth Council](https://www.wandsworth.gov.uk/news/news-june-2026/wandsworths-deep-disappointment-at-hammersmith-bridge-latest/) |
+| [The high street today](high-street-landscape.md) | [ITV](https://www.itv.com/news/london/2026-07-01/hammersmith-bridge-may-never-reopen-to-cars-because-of-lack-of-money-for-repairs) |
+| [The high street today](high-street-landscape.md) | ["Plans to reopen Hammersmith Bridge to cars and buses axed over £300m cost"](https://www.reddit.com/r/london/comments/1uke914/plans_to_reopen_hammersmith_bridge_to_cars_and/) |
+| [The high street today](high-street-landscape.md) | [Thames Gazette/LDRS](https://thamesgazette.azurewebsites.net/breaking-news/shepherds-bush-market-redevelopment-moves-forward-after-acv-bid-rejected) |
+| [The high street today](high-street-landscape.md) | [LBHF](https://lbhf.gov.uk/business/business-connects/business-events-and-networking/business-associations-hf/askew-road-business-association) |
+| [The high street today](high-street-landscape.md) | [ChiswickW4](https://www.chiswickw4.com/info/contaskforcereport001.htm) |
+| [The high street today](high-street-landscape.md) | [LBHF](https://www.lbhf.gov.uk/business/business-connects/thinking-moving-hf/our-town-centres) |
+| [The high street today](high-street-landscape.md) | [GOV.UK multipliers 2026/27](https://www.gov.uk/government/publications/22026-notification-of-non-domestic-rating-multipliers-for-202627/22026-notification-of-non-domestic-rating-multipliers-for-202627) |
+| [The high street today](high-street-landscape.md) | [PwC](https://www.pwc.co.uk/press-room/press-releases/research-commentary/2025/uk-budget-2025--pwc-comments-on-business-rates-.html) |
+| [The high street today](high-street-landscape.md) | [Restaurant Online, 2026-01-27](https://www.restaurantonline.co.uk/Article/2026/01/27/government-confirms-pub-business-rates-support-package) |
+| [The high street today](high-street-landscape.md) | [Deloitte](https://taxscape.deloitte.com/measures-budget-2026/extension-of-small-business-rate-relief.aspx) |
+| [The high street today](high-street-landscape.md) | [ITV, 2026-10-28](https://www.itv.com/news/2026-10-28/chancellor-john-healey-reveals-what-is-in-his-first-budget) |
+| [The high street today](high-street-landscape.md) | [Talking Retail](https://www.talkingretail.com/news/industry-news/budget-reaction-business-rates-threshold-rise-a-major-win-for-local-shops-28-10-2026/) |
+| [The high street today](high-street-landscape.md) | [BRC](https://brc.org.uk/news-and-events/news/corporate-affairs/2026/ungated/no-breathing-space-for-retail-as-budget-keeps-costs-climbing/) |
+| [The high street today](high-street-landscape.md) | ["Pubs, cafes, and high street shops to be spared business rates in Budget overhaul"](https://www.reddit.com/r/unitedkingdom/comments/1x91emd/pubs_cafes_and_high_street_shops_to_be_spared/) |
+| [The high street today](high-street-landscape.md) | [GOV.UK guidance](https://www.gov.uk/government/publications/high-street-rental-auctions-non-statutory-guidance) |
+| [The high street today](high-street-landscape.md) | [SI 2024/1139](https://www.legislation.gov.uk/uksi/2024/1139/made) |
+| [The high street today](high-street-landscape.md) | [London Assembly briefing](https://gla.moderngov.co.uk/documents/s123120/4%20Appendix%202%20High%20Street%20Rental%20Auctions_Assembly%20Briefing%202026.pdf) |
+| [The high street today](high-street-landscape.md) | [SI 2020/757](https://www.legislation.gov.uk/uksi/2020/757/contents/made) |
+| [The high street today](high-street-landscape.md) | [Local Government Act 2003, Part 4](https://www.legislation.gov.uk/ukpga/2003/26/part/4) |
+| [The high street today](high-street-landscape.md) | [GOV.UK](https://www.gov.uk/government/news/english-devolution-bill-receives-royal-assent) |
+| [The high street today](high-street-landscape.md) | [Locality](https://locality.org.uk/news/new-community-right-to-buy-introduced) |
+| [The high street today](high-street-landscape.md) | [GOV.UK factsheet](https://www.gov.uk/government/publications/crime-and-policing-act-2026-factsheets/crime-and-policing-act-2026-retail-crime-factsheet) |
+| [The high street today](high-street-landscape.md) | [The Grocer](https://www.thegrocer.co.uk/news/shop-theft-falls-4-but-retailers-warn-crisis-remains-underreported/721658.article) |
+| [The high street today](high-street-landscape.md) | [FCA](https://www.fca.org.uk/news/press-releases/new-fca-rules-protect-access-cash-already-having-impact) |
+| [The high street today](high-street-landscape.md) | [STV](https://news.stv.tv/scotland/nearly-100-lloyds-halifax-and-bank-of-scotland-branches-to-close) |
+| [The high street today](high-street-landscape.md) | [Irish News/PA](https://www.irishnews.com/news/uk/bank-of-england-will-monitor-cash-acceptance-on-ongoing-basis-ABTIVRHVDBJ6PO223QXJDCMXTQ/) |
+| [The high street today](high-street-landscape.md) | [SI 2013/3134](https://www.legislation.gov.uk/uksi/2013/3134/contents) |
+| [The high street today](high-street-landscape.md) | [Consumer Rights Act 2015](https://www.legislation.gov.uk/ukpga/2015/15/contents) |
+| [The high street today](high-street-landscape.md) | [CMS](https://cms.law/en/gbr/legal-updates/the-dmcc-act-consumer-elements-come-into-force-from-6-april-2025) |
+| [The high street today](high-street-landscape.md) | [FSA](https://www.food.gov.uk/business-industry/guidancenotes/food-sold-online) |
+| [The high street today](high-street-landscape.md) | [Knight Frank (Green Street data)](https://www.knightfrank.co.uk/research/article/2026/7/retail-renaissance-store-wars-a-new-hope) |
+| [The high street today](high-street-landscape.md) | [Savills](https://www.savills.co.uk/research_articles/229130/390116-0) |
+| [The high street today](high-street-landscape.md) | [Retail Rewired (BRC-Sensormatic)](https://retailrewired.co.uk/2026/10/09/sluggish-september-footfall-prompts-calls-for-the-budget-to-deliver-for-shoppers-retail-businesses/) |
+| [The high street today](high-street-landscape.md) | [ONS](https://www.ons.gov.uk/businessindustryandtrade/retailindustry/bulletins/retailsales/september2026) |
+| [The high street today](high-street-landscape.md) | [Retail Insight Network (Centre for Retail Research)](https://www.retail-insight-network.com/newsletters/crr-data-store-closures-2024) |
+| [The high street today](high-street-landscape.md) | [UK Finance](https://www.ukfinance.org.uk/news-and-insight/press-release/digital-payments-continue-grow-mobile-wallets-become-more-popular) |
+| [The high street today](high-street-landscape.md) | [BRC Payments Survey](https://brc.org.uk/news-and-events/news/corporate-affairs/2025/ungated/high-interest-rates-push-shoppers-from-credit-to-debit-cards/) |
+| [The high street today](high-street-landscape.md) | [Source](https://www.thegrocer.co.uk/news/shop-theft-at-record-level-growing-20-past-500k-offences/707339.article) |
+| [The high street today](high-street-landscape.md) | [Source](https://www.gov.uk/government/news/pm-backs-true-patriots-to-lead-uk-renewal-with-5bn-investment) |
+| [The high street today](high-street-landscape.md) | [Source](https://www.gpb.org/news/2026/07/20/andy-burnham-becomes-uk-prime-minister-after-starmer-resigns) |
+| [The high street today](high-street-landscape.md) | [Teya pricing](https://www.teya.com/pricing) |
+| [The high street today](high-street-landscape.md) | [SumUp comparison page](https://www.sumup.com/en-gb/compare/sumup-vs-zettle/) |
+| [The high street today](high-street-landscape.md) | [MobileTransaction](https://mobiletransaction.org/square-vs-izettle-vs-sumup) |
+| [The high street today](high-street-landscape.md) | [ExpertMarket](https://www.expertmarket.com/uk/merchant-accounts/dojo-review?p=29692) |
+| [The high street today](high-street-landscape.md) | [PSR](https://www.psr.org.uk/news-and-updates/latest-news/news/psr-finds-market-isn-t-working-well-for-card-scheme-and-processing-services/) |
+| [The high street today](high-street-landscape.md) | [Fintech Times, GoCardless/FSB survey](https://thefintechtimes.com/gocardless-report-highlights-the-domino-effect-of-late-payments-and-calls-for-change/) |
+| [The high street today](high-street-landscape.md) | [Economics Observatory](https://economicsobservatory.com/update-are-small-businesses-ready-to-compete-as-consumers-move-online) |
+| [Empathy map](netnography/empathy-map.md) | [u/jamesshovlin](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tdld2/) |
+| [Empathy map](netnography/empathy-map.md) | [Ansjovis](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148977291) |
+| [Method](netnography/method.md) | [Kozinets 2020, *Netnography: The Essential Guide*, 3rd ed., publisher preview](https://api.pageplace.de/preview/DT0400.9781526482365_A37042502/preview-9781526482365_A37042502.pdf) |
+| [Method](netnography/method.md) | [Fenton and Parry](https://eprints.bournemouth.ac.uk/37932/) |
+| [Method](netnography/method.md) | [Kozinets and Gretzel (2024)](https://doi.org/10.1016/j.annals.2023.103693) |
+| [Method](netnography/method.md) | [Arctic Shift](https://arctic-shift.photon-reddit.com/) |
+| [Method](netnography/method.md) | [pp. 130–131](https://relayto.com/explore/business-model-generation-flipbook-r2k3tfx35p0cg/J1RVxTlK137) |
+| [Method](netnography/method.md) | [revised it](https://medium.com/the-xplane-collection/46df22df3c8a) |

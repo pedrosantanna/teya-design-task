@@ -19,7 +19,7 @@ Platform (mobile vs. web), the prototype's stack and repo layout are deliberatel
 
 ### Markdown extensions the site understands
 Fenced blocks with these languages render as components:
-- ` ```quote ` — evidence card. One `key: value` per line: `text`, `handle`, `network`, `date` (YYYY-MM-DD), `url`, `tags` (comma-separated), `context`. Consecutive cards become a grid.
+- ` ```quote ` — evidence card. One `key: value` per line: `text`, `handle`, `network`, `date` (YYYY-MM-DD), `url`, `tags` (comma-separated), `context`, `status` (`verified` = matched against the live source; `archive` = from a public archive, not yet matched). Consecutive cards become a grid. Quotes are short excerpts (about 25 words at most). `docs/discover/sources.md` is generated: run `python3 scripts/build_sources.py` after changing quotes.
 - ` ```empathy-map ` — Strategyzer empathy map. `Label:` lines (See, Hear, Think and feel, Say and do, Pains, Gains) each followed by `- bullet` lines.
 - ` ```timeline ` — `- YYYY-MM-DD — text` lines.
 Relative links between `.md` files are rewritten to the matching site page. A page's H1 is its title and its first paragraph is the lede.
