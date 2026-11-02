@@ -21,6 +21,6 @@ Trade-offs:
 | Foundation | Status | Source |
 | --- | --- | --- |
 | [Typography](typography.md) | Defined (decisions 027, 028, 029) | [Type scale](../ideation/type-scale.md), round 4 |
-| Colour | Neutral pre-decided: Biscuit grey (decision 034). Accents open: Pillar box is a lead, round 5 compares the saturated palettes | [Identity](../ideation/identity.md) |
+| Colour | Neutral pre-decided: Biscuit grey (decision 034). Accents open: round 5 compares the saturated palettes, round 6 derives and stresses Night bus | [Identity](../ideation/identity.md) |
 | [Mark](mark.md) | Provisional (decision 033): a terrier with an awning for a mouth, drawn by hand in Figma | [Identity](../ideation/identity.md) |
 | Spacing, radius, elevation | Not started; the wireframes follow Apple's 16 pt margins and 44 pt touch targets | [App flow](../ideation/app-flow.md) |

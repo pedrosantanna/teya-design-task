@@ -21,6 +21,6 @@ Trade-offs:
 | Fundação | Situação | Fonte |
 | --- | --- | --- |
 | [Tipografia](typography.md) | Definida (decisões 027, 028, 029) | [Escala tipográfica](../ideation/type-scale.md), rodada 4 |
-| Cor | Neutro pré-decidido: Cinza biscoito (decisão 034). Acentos em aberto: a Caixa de correio é uma pista, a rodada 5 compara as paletas saturadas | [Identidade](../ideation/identity.md) |
+| Cor | Neutro pré-decidido: Cinza biscoito (decisão 034). Acentos em aberto: a rodada 5 compara as paletas saturadas, a rodada 6 deriva e testa a Night bus | [Identidade](../ideation/identity.md) |
 | [Marca](mark.md) | Provisória (decisão 033): um terrier com um toldo no lugar da boca, desenhado à mão no Figma | [Identidade](../ideation/identity.md) |
 | Espaçamento, raio, elevação | Não começado; os wireframes seguem as margens de 16 pt e os alvos de toque de 44 pt da Apple | [Fluxo do app](../ideation/app-flow.md) |
