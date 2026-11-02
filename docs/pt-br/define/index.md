@@ -30,6 +30,21 @@ Trade-offs:
 
 O [blueprint de serviço](blueprint.md) mostra cada etapa passando pelo comprador, pelo concierge, pelos agentes por trás dele e pela loja.
 
+## Área
+
+O concierge trabalha a partir de onde o comprador está, ou vai estar, e procura até onde ele consegue chegar antes do prazo. As high streets, as ruas comerciais do bairro, agrupam lojas para explorar e para o destaque pago; elas não limitam a busca. Uma loja entra no escopo se é pequena, independente e está ao alcance, numa high street ou numa fileira de lojas. A maioria das pequenas lojas independentes fica em high streets, então na prática as duas coisas quase sempre coincidem.
+
+Os wireframes usam um comprador na Blythe Road, W14. Distâncias a pé a partir dali, medidas no OpenStreetMap a 4,8 km/h:
+
+| Anel | Ruas comerciais | A pé |
+| --- | --- | --- |
+| Na porta de casa | As lojas da própria Blythe Road | Menos de 5 min |
+| Até 15 minutos | Shepherd's Bush Road, Shepherd's Bush Green e Uxbridge Road, Hammersmith Broadway, Kensington High Street (lado do Olympia), Goldhawk Road, King Street | 9 a 13 min (0,7 a 1,1 km) |
+| De 15 a 25 minutos | Holland Park Avenue, Askew Road | 21 a 22 min |
+| Ônibus, metrô ou entrega | Mercado da North End Road, Kensington High Street (centro), Chiswick High Road | 32 a 39 min |
+
+Seis ruas comerciais ficam a menos de 15 minutos a pé. Prender o comprador a uma delas esconderia as outras cinco, e numa rua nova com poucas lojas a primeira busca voltaria vazia. O prazo define o anel: para o prazo das 16h do Sam, o concierge consulta os dois primeiros anéis e verifica a entrega a partir do terceiro.
+
 ## Por que um agente
 
 Um agente é a minha principal hipótese para este produto. O concierge é esse agente: aquele com quem o comprador conversa e a interface do produto, seja no app, no WhatsApp ou como um servidor MCP para o assistente de IA do próprio comprador. Por trás dele, vários agentes dividem o trabalho. Espero quatro coisas desse arranjo.
@@ -68,7 +83,8 @@ O brief pede que o que falta seja suposto e registrado.
 - **Reserva e pagamento.** A loja confirma que separou o item antes de o comprador ser cobrado. O valor inteiro é cobrado nesse momento e estornado se a reserva expirar; autorizar na reserva e capturar na retirada é a alternativa que deixei em aberto.
 - **Depois do trabalho.** Quem trabalha no horário das lojas retira num horário mais tarde numa loja que fecha tarde o bastante, num ponto de retirada na rua, ou recebe uma entrega à noite. Quem entrega, onde e quando está no [blueprint](blueprint.md).
 - **Agentes.** Agentes separados para estoque, seleção de lojas, contato com as lojas, pagamento e entrega trabalham por trás de um concierge só. Quando o estoque é desconhecido, o concierge pergunta à loja e nunca chuta.
-- **A quem perguntar.** O agente de seleção de lojas sabe quais lojas próximas vendem que tipo de coisa (por listagens públicas e categorias), mesmo sem dados de estoque.
+- **A quem perguntar.** O agente de seleção de lojas sabe quais lojas ao alcance vendem que tipo de coisa (por listagens públicas e categorias), mesmo sem dados de estoque.
+- **Área.** A localização e o prazo do comprador definem até onde o concierge procura. As high streets são uma forma de agrupar lojas, e não um limite.
 - **Dados.** Dados de caixa com detalhe por item existem para uma minoria das lojas e são usados onde existem; todo o resto vira uma pergunta à loja.
 - **Canais.** O app vem primeiro. O WhatsApp e uma conexão MCP para outros assistentes reaproveitam os mesmos agentes depois.
 - **Logística.** A retirada é o padrão. A entrega usa um entregador que a loja ou o concierge chama, uma loja por vez; uma cesta com várias lojas fica fora do escopo do protótipo.

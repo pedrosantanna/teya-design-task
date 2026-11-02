@@ -184,6 +184,14 @@ Defini o modelo de negócio como hipóteses num cenário: o concierge pertence a
 **Por quê:** a comissão de 14–35% dos apps de delivery é o custo de que as lojas independentes reclamam (F9). Um provedor de pagamento ganha no próprio pagamento, e uma loja que entra traz todas as suas vendas.
 **Em aberto:** H12 a H16. Se a lista mostra só as lojas no POS do provedor ou todas as lojas; a prova de conceito começa aberta e registra quais lojas estão na rede.
 
+## 024 · O escopo é a área do comprador
+**2026-11-02 · Decidido**
+
+O concierge trabalha a partir da localização e do prazo do comprador, em todas as high streets e fileiras de lojas ao alcance. As high streets agrupam lojas para explorar e para o destaque pago; elas não limitam a busca. Uma loja entra no escopo se é pequena, independente e está ao alcance. A prova de conceito sai da King Street sozinha para cerca de dez lojas a até 15 minutos a pé da Blythe Road, o que inclui a King Street (isso muda o local da decisão 020).
+
+**Por quê:** a partir da Blythe Road, seis ruas comerciais ficam a menos de 15 minutos a pé. Prender o comprador a uma delas esconderia as outras, e uma rua com poucas lojas responderia à maioria das buscas com nada.
+**Em aberto:** até onde os compradores vão para cada tipo de necessidade, o que o prazo só aproxima. A H16 registra com que frequência eles compram além da distância a pé.
+
 ## Ainda em aberto
 
 - Estrutura do repo (app único ou monorepo): decidir quando a construção começar e o formato dela estiver claro.

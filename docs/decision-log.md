@@ -184,6 +184,14 @@ I set the business model as hypotheses in one scenario: the concierge belongs to
 **Why:** the delivery apps' 14–35% commission is the cost independents complain about (F9). A payment provider earns on the payment itself, and a shop that joins brings all its sales.
 **Open:** H12 to H16. Whether to list only shops on the provider's POS or every shop; the proof of concept starts open and records which shops are on the network.
 
+## 024 · The shopper's area, not one high street
+**2026-11-02 · Decided**
+
+The concierge works from the shopper's location and deadline, across every high street and parade within reach. High streets group shops for browsing and promotion; they don't limit the search. A shop is in scope if it's small, independent and within reach. The proof of concept moves from King Street alone to about ten shops within a 15-minute walk of Blythe Road, which includes King Street (this changes the location in decision 020).
+
+**Why:** from Blythe Road, six shopping streets are within a 15-minute walk. Tying the shopper to one would hide the others, and a street with few shops would answer most searches with nothing.
+**Open:** how far shoppers will go for each kind of need, which the deadline only approximates. H16 records how often they buy beyond walking distance.
+
 ## Still open
 
 - Repo layout (single app or monorepo): to decide when the build starts and its shape is known.

@@ -82,6 +82,9 @@ I decided to run a proof of concept with King Street shops instead of another ro
 
 For Develop, an agent collected 14 home-screen references from Mobbin (Granola, Shop, Deliveroo, Uber Eats, Wolt, Too Good To Go, Airbnb, ChatGPT, Perplexity) and proposed the module order for the home. The main agent built the canvas (pan, zoom, selection, a drawer for notes and links) and a black-and-white iOS wireframe kit, then drew the app flow from the blueprint and the shop's request states. I set the structure: the composer bar at the bottom, the avatar menu, the screens in the flow, and hold before payment. When I looked at the first drawings, the concierge read as a person next to the agents; I made it explicit that the concierge is the agent the shopper talks to, in the app, on WhatsApp or over MCP.
 
+### 17. The shopper's area
+I decided the concierge works from the shopper's location and deadline, across every high street within reach, instead of one high street (decision 024). An agent measured walking routes on OpenStreetMap from Blythe Road to the shopping streets around it and grouped them in rings: six streets within 15 minutes. It also checked whether the GLA defines a high street by a minimum number of shops; the sources it found give no number, so the docs don't use one. The proof of concept moved to about ten shops in the 15-minute ring, and the wireframes now show the street of each shop. The agent replaced the chains it had used in the first wireframes (a stationery chain, a pharmacy chain, an optician chain) with made-up independents, because the product is for independents.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.

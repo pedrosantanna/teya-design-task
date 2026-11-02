@@ -24,7 +24,7 @@ Trade-offs:
 | Pagamentos no app | O comprador paga no app por uma reserva, um pedido pago antes ou uma entrega. O provedor processa o pagamento e ganha a sua taxa, inclusive em compras que antes eram em dinheiro vivo ou em outra maquininha | H12 |
 | Lojas novas na rede | Uma loja que quer receber pagamentos e pedidos do app adota a conta de pagamento ou o POS do provedor. A partir daí, o provedor também processa as vendas de balcão da loja | H13 |
 | Valor da rede de POS | As lojas no POS do provedor recebem compradores do app. Isso aumenta as vendas delas, então vale a pena manter o POS e recomendá-lo | H14 |
-| Destaque pago | Uma loja paga para aparecer na tela inicial ("Open near you", "New on King Street") ou para alcançar um bairro além da própria rua | H15 |
+| Destaque pago | Uma loja paga para aparecer na tela inicial ("Open near you", "New nearby") ou para alcançar compradores além da própria rua, por exemplo uma loja da Goldhawk Road mostrada a quem está em volta da Blythe Road | H15 |
 | Alcance por Londres | Um comprador compra de uma loja mais distante porque ela é a única com o item e ele pode pagar antes. É isso que faz o alcance pago valer a compra | H16 |
 
 ## Cenário de rede

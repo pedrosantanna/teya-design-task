@@ -10,7 +10,7 @@ Takeaways:
 - The hold is confirmed by the shop before Apple Pay appears, so the payment only happens for an item that is really set aside.
 Call:
 - Native iOS patterns first (decision 021): large titles, sheets, Apple Pay, Live Activities.
-- Home modules, top to bottom: active request, recent orders, promoted shops, new on King Street, categories. The order comes from the Mobbin references below.
+- Home modules, top to bottom: active request, recent orders, promoted shops, new nearby, categories. The order comes from the Mobbin references below.
 AI:
 - An agent looked at well-crafted home screens on Mobbin (Granola, Shop, Deliveroo, Uber Eats, Wolt, Too Good To Go, Airbnb, ChatGPT, Perplexity) and proposed the module order. Another agent drew the wireframes from the blueprint. I set the structure: the bottom composer, the avatar menu and the screens in the flow.
 Trade-offs:

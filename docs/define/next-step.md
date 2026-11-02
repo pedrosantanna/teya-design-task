@@ -1,6 +1,6 @@
 # Next step
 
-Define ends with a decision about how to learn next. I won't run another round of research with shopkeepers before building. I'll build a proof of concept of the concierge agent, take it to a few King Street shops, and use it with them and with shoppers. The shopper app is where the design craft goes; the shop side is designed as states, without an interface.
+Define ends with a decision about how to learn next. I won't run another round of research with shopkeepers before building. I'll build a proof of concept of the concierge agent, take it to a few shops around one shopper's location, and use it with them and with shoppers. The shopper app is where the design craft goes; the shop side is designed as states, without an interface.
 
 ```summary
 Takeaways:
@@ -21,12 +21,16 @@ Trade-offs:
 
 | Part | What it is | Hypotheses it tests |
 | --- | --- | --- |
-| Concierge agent to shops | The agent sends real requests to about ten King Street shops on WhatsApp, or through the POS where the shop's system allows it, and handles their replies | H1, H6, H11 |
+| Concierge agent to shops | The agent sends real requests to about ten shops within 15 minutes' walk of Blythe Road on WhatsApp, or through the POS where the shop's system allows it, and handles their replies | H1, H6, H11 |
 | Shopper app prototype | The shopper side of the blueprint, steps 1 to 5, with the agent's answers coming from the real shops when they reply | H2, H3, H4, H5, H7, H8, H10 |
 | Demand summary | A weekly summary of what nearby shoppers asked for, sent to the shops in the proof of concept | H9 |
 | Payments and paid offers | Every hold can be paid now or at the counter. After four weeks, shops are offered the provider's POS and paid promotion | H12 to H16 |
 
 The pass marks stay as written in [hypotheses](hypotheses.md).
+
+## Test area
+
+The proof of concept runs around one shopper's location instead of one street: about ten small independent shops within a 15-minute walk of Blythe Road, spread over its own shops, Shepherd's Bush Road, Shepherd's Bush Green, Goldhawk Road, Hammersmith Broadway and King Street, and Kensington High Street at the Olympia end (distances in the [concept](index.md)). The shops are picked from categories that came up in the netnography: hardware, florist, bakery, butcher, chemist, stationery. Ten shops in that ring are close enough to visit in a day, which the invitations need.
 
 ## Shops as discovery
 
@@ -34,7 +38,7 @@ Inviting a shop is the first conversation with a shopkeeper in this project. Eac
 
 ## Shops as an acquisition channel
 
-The shops in the proof of concept can point their own customers to it: a sign at the counter, a line in their WhatsApp replies. I assume that is enough to reach the first shoppers on King Street. Other acquisition channels are left out of this take-home.
+The shops in the proof of concept can point their own customers to it: a sign at the counter, a line in their WhatsApp replies. I assume that is enough to reach the first shoppers around Blythe Road. Other acquisition channels are left out of this take-home.
 
 ## Scope for Develop
 

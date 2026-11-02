@@ -83,6 +83,10 @@ Source: English Markdown in `docs/`. Target: Brazilian Portuguese in `docs/pt-br
 ## Terms settled in Define
 | English | PT-BR |
 | --- | --- |
+| ring (walking distance) | anel |
+| shopping street | rua comercial |
+| parade of shops | fileira de lojas / pequeno trecho comercial |
+| within reach | ao alcance |
 | concierge (the agent's role) | concierge |
 | value proposition canvas / value map / customer profile | canvas de proposta de valor / mapa de valor / perfil do cliente |
 | Products and services / Pain relievers / Gain creators / Jobs / Pains / Gains (canvas labels) | Produtos e serviços / Aliviadores de dores / Criadores de ganhos / Tarefas / Dores / Ganhos |

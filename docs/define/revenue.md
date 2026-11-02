@@ -24,7 +24,7 @@ Trade-offs:
 | Payments in the app | The shopper pays in the app for a hold, a prepaid order or a delivery. The provider processes the payment and earns its fee, including on purchases that used to be cash or another terminal | H12 |
 | New shops on the network | A shop that wants to receive app payments and requests takes the provider's payment account or POS. The provider then processes the shop's counter sales too | H13 |
 | Value of the POS network | Shops on the provider's POS get shoppers from the app. That raises their sales, so the POS is worth keeping and worth recommending | H14 |
-| Promotion | A shop pays to appear on the home screen ("Open near you", "New on King Street") or to reach a neighbourhood beyond its own street | H15 |
+| Promotion | A shop pays to appear on the home screen ("Open near you", "New nearby") or to reach shoppers beyond its own street, for example a Goldhawk Road shop shown to people around Blythe Road | H15 |
 | Reach across London | A shopper buys from a shop farther away because it's the only one with the item and they can pay ahead. This is what makes paid reach worth buying | H16 |
 
 ## Network scenario

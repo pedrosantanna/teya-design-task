@@ -82,6 +82,9 @@ Decidi fazer uma prova de conceito com lojas da King Street em vez de mais uma r
 
 Para a Develop, um agente reuniu 14 referências de home no Mobbin (Granola, Shop, Deliveroo, Uber Eats, Wolt, Too Good To Go, Airbnb, ChatGPT, Perplexity) e propôs a ordem dos módulos da home. O agente principal construiu o canvas (mover, zoom, seleção, uma gaveta com notas e ligações) e um kit de wireframe iOS em preto e branco, e depois desenhou o fluxo do app a partir do blueprint e os estados do pedido na loja. Eu defini a estrutura: a barra de pedido embaixo, o menu no avatar, as telas do fluxo e a reserva antes do pagamento. Quando vi os primeiros desenhos, o concierge parecia uma pessoa ao lado dos agentes; deixei explícito que o concierge é o agente com quem o comprador conversa, no app, no WhatsApp ou via MCP.
 
+### 17. A área do comprador
+Decidi que o concierge trabalha a partir da localização e do prazo do comprador, em todas as high streets ao alcance, em vez de uma high street só (decisão 024). Um agente mediu no OpenStreetMap rotas a pé da Blythe Road até as ruas comerciais em volta e as agrupou em anéis: seis ruas a até 15 minutos. Ele também verificou se a GLA define uma high street por um número mínimo de lojas; as fontes que encontrou não dão número nenhum, então os docs não usam um. A prova de conceito passou para cerca de dez lojas no anel de 15 minutos, e os wireframes agora mostram a rua de cada loja. O agente trocou as redes que tinha usado nos primeiros wireframes (uma rede de papelarias, uma de farmácias e uma de óticas) por lojas independentes inventadas, porque o produto é para lojas independentes.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.

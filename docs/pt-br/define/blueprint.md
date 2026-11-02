@@ -26,7 +26,7 @@ Comprador {c1 card user}: Diz o quê, onde e até quando ; Ou deixa um pedido an
 --- Linha de interação
 Agente concierge {c3 card bot}: Confirma em uma linha ; Pergunta só o que falta | "Consultando seis lojas perto de você" | Mostra cada resposta quando chega ; Na hora só com caixa compartilhado ; Continua procurando | "Separado", vindo da loja ; Depois o pagamento ; Código, local e prazo da reserva | Como chegar ; Aviso antes de a reserva acabar | Pergunta como foi ; Executa pedidos recorrentes
 --- Linha de visibilidade
-Agentes por trás dele {c4 agent settings}: **Orquestrador** planeja as tarefas | **Estoque** lê os caixas compartilhados ; **Seleção** escolhe as lojas prováveis ; **Contato** manda mensagem a cada loja | Reúne as respostas ; **Entrega** cota o frete ; Amplia a busca perto do prazo | **Contato** recebe a confirmação da loja ; **Pagamento** cobra ; **Contato** libera as outras | Acompanha a reserva ; **Entrega** agenda a corrida ou a entrega à noite | Registra a demanda ; Cruza pedidos recorrentes
+Agentes por trás dele {c4 agent settings}: **Orquestrador** planeja as tarefas | **Estoque** lê os caixas compartilhados ; **Seleção** escolhe as lojas prováveis ao alcance ; **Contato** manda mensagem a cada loja | Reúne as respostas ; **Entrega** cota o frete ; Amplia a busca perto do prazo | **Contato** recebe a confirmação da loja ; **Pagamento** cobra ; **Contato** libera as outras | Acompanha a reserva ; **Entrega** agenda a corrida ou a entrega à noite | Registra a demanda ; Cruza pedidos recorrentes
 Loja {c2 card store}: - | Recebe o pedido no app da maquininha ou no WhatsApp | Responde: tem, preço, reserva, entrega | Separa o item ; Confirma | Passa o item ao comprador ; Ou deixa num ponto de retirada | Resumo semanal da demanda
 --- Linha de interação interna
 Sistemas {muted text server}: Localização ; Preferências salvas | Estoque do caixa ; Perfis e horários | Entregador ; Mapas | Cartão, carteira, link de pagamento | Entregador ; Pontos de retirada ; Repasse | Registro da demanda
@@ -59,7 +59,7 @@ Pagar antes não adianta se a loja fecha antes de ela sair do trabalho, o que su
 | Ponto de retirada | Alguém de uma loja que abre até mais tarde, ou um armário com o código da reserva | Na mesma rua; a loja ou um entregador deixa o item lá durante o dia | Depois do trabalho, até o ponto fechar |
 | Entrega à noite | Um entregador chamado pelo agente de entrega | A casa da Jess | Um horário à noite; o entregador busca o item antes de a loja fechar |
 
-A H6, nas [hipóteses](hypotheses.md), testa se as lojas ofereceriam um horário mais tarde ou deixariam um item pago num ponto de retirada, e se existe um ponto assim na King Street.
+A H6, nas [hipóteses](hypotheses.md), testa se as lojas ofereceriam um horário mais tarde ou deixariam um item pago num ponto de retirada, e se existe um ponto assim ao alcance do comprador.
 
 ## O que o protótipo cobre
 

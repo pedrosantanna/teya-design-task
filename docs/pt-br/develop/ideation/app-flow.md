@@ -10,7 +10,7 @@ Takeaways:
 - A loja confirma a reserva antes de o Apple Pay aparecer, então o pagamento só acontece para um item que foi mesmo separado.
 Call:
 - Padrões nativos de iOS primeiro (decisão 021): títulos grandes, sheets, Apple Pay, Live Activities.
-- Módulos da tela inicial, de cima para baixo: pedido em andamento, compras recentes, lojas em destaque, novidades na King Street, categorias. A ordem vem das referências do Mobbin abaixo.
+- Módulos da tela inicial, de cima para baixo: pedido em andamento, compras recentes, lojas em destaque, novidades por perto, categorias. A ordem vem das referências do Mobbin abaixo.
 AI:
 - Um agente analisou telas iniciais bem resolvidas no Mobbin (Granola, Shop, Deliveroo, Uber Eats, Wolt, Too Good To Go, Airbnb, ChatGPT, Perplexity) e propôs a ordem dos módulos. Outro agente desenhou os wireframes a partir do blueprint. Eu defini a estrutura: a barra de pedido embaixo, o menu do avatar e as telas do fluxo.
 Trade-offs:

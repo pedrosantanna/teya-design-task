@@ -30,6 +30,21 @@ Trade-offs:
 
 The [service blueprint](blueprint.md) shows each step across the shopper, the concierge, the agents behind it and the shop.
 
+## Area
+
+The concierge works from where the shopper is, or will be, and looks as far as they can get before their deadline. High streets group shops for browsing and promotion; they don't limit the search. A shop is in scope if it's small, independent and within reach, whether it sits on a high street or on a short parade of shops. Most small independents are on high streets, so in practice the two mostly overlap.
+
+The wireframes use a shopper on Blythe Road, W14. Walking distances from there, measured on OpenStreetMap at 4.8 km/h:
+
+| Ring | Shopping streets | Walk |
+| --- | --- | --- |
+| On the doorstep | Blythe Road's own shops | Under 5 min |
+| Within 15 minutes | Shepherd's Bush Road, Shepherd's Bush Green and Uxbridge Road, Hammersmith Broadway, Kensington High Street (Olympia end), Goldhawk Road, King Street | 9 to 13 min (0.7 to 1.1 km) |
+| 15 to 25 minutes | Holland Park Avenue, Askew Road | 21 to 22 min |
+| Bus, tube or delivery | North End Road market, Kensington High Street (centre), Chiswick High Road | 32 to 39 min |
+
+Six shopping streets sit within a 15-minute walk. Tying the shopper to one of them would hide five, and on a new street with few shops the first search would come back empty. The deadline sets the ring: for Sam's 4pm deadline the concierge asks the first two rings and checks delivery from the third.
+
 ## Why an agent
 
 An agent is my main hypothesis for this product. The concierge is that agent: the one the shopper talks to, and the product's interface, whether it shows up as the app, in WhatsApp or as an MCP server for the shopper's own AI assistant. Behind it, several agents split the work. I expect four things from this setup.
@@ -68,7 +83,8 @@ The brief asks for what's missing to be assumed and written down.
 - **Hold and payment.** The shop confirms it has set the item aside before the shopper is charged. The full amount is taken then and refunded if the hold lapses; authorising at the hold and capturing at collection is the alternative I left open.
 - **After work.** Shoppers who work shop hours collect through a later slot at a shop that closes late enough, a collection point on the street, or evening delivery. Who hands over, where and when is in the [blueprint](blueprint.md).
 - **Agents.** Separate agents for stock, shop matching, shop contact, payment and couriers work behind one concierge. When stock is unknown, the concierge asks the shop and never guesses.
-- **Who to ask.** The matching agent knows which nearby shops sell which kinds of things (from public listings and categories), even without stock data.
+- **Who to ask.** The matching agent knows which shops within reach sell which kinds of things (from public listings and categories), even without stock data.
+- **Area.** The shopper's location and deadline set how far the concierge looks. High streets are a way to group shops, not a boundary.
 - **Data.** Till data with item detail exists for a minority of shops and is used where it does; everything else is a question to the shop.
 - **Channels.** The app comes first. WhatsApp and an MCP connection for other assistants reuse the same agents later.
 - **Logistics.** Collection is the default. Delivery uses a courier the shop or the concierge books, one shop at a time; a basket across shops is out of scope for the prototype.

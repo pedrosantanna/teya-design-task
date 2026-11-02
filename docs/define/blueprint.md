@@ -26,7 +26,7 @@ Shopper {c1 card user}: Says what, where, by when ; Or leaves a request ahead | 
 --- Line of interaction
 Concierge agent {c3 card bot}: Confirms in one line ; Asks only what's missing | "Checking six shops near you" | Shows each answer as it arrives ; Instant only from shared tills ; Keeps looking | "Set aside" from the shop ; Then the payment ; Hold code, place and time | Directions ; Reminder before the hold ends | Follows up ; Acts on standing requests
 --- Line of visibility
-Agents behind it {c4 agent settings}: **Orchestrator** plans the tasks | **Stock** reads shared tills ; **Matching** picks likely shops ; **Contact** messages each shop | Collects replies ; **Courier** quotes delivery ; Widens the search near the deadline | **Contact** gets the shop's confirmation ; **Payment** charges ; **Contact** releases the others | Watches the hold ; **Courier** books the drop or evening run | Logs demand ; Matches standing requests
+Agents behind it {c4 agent settings}: **Orchestrator** plans the tasks | **Stock** reads shared tills ; **Matching** picks likely shops within reach ; **Contact** messages each shop | Collects replies ; **Courier** quotes delivery ; Widens the search near the deadline | **Contact** gets the shop's confirmation ; **Payment** charges ; **Contact** releases the others | Watches the hold ; **Courier** books the drop or evening run | Logs demand ; Matches standing requests
 Shop {c2 card store}: - | Gets the request in its merchant app or WhatsApp | Answers: has it, price, hold, delivery | Sets the item aside ; Confirms it | Hands it over ; Or leaves it at a collection point | Weekly demand summary
 --- Line of internal interaction
 Systems {muted text server}: Location ; Saved preferences | Till stock ; Listings and hours | Courier ; Maps | Card, wallet, pay by link | Courier ; Collection points ; Settlement | Demand records
@@ -59,7 +59,7 @@ Paying ahead doesn't help if the shop closes before she finishes work, which I a
 | Collection point | Staff at a late-opening shop, or a locker against the hold code | On the same street; the shop or a courier drops the item there during the day | After work, until the point closes |
 | Evening delivery | A courier booked by the courier agent | Jess's home | An evening slot; the courier collects before the shop closes |
 
-Whether shops would offer a later slot or hand a paid item to a collection point, and whether such a point exists on King Street, is part of H6 in the [hypotheses](hypotheses.md).
+Whether shops would offer a later slot or hand a paid item to a collection point, and whether such a point exists within reach of the shopper, is part of H6 in the [hypotheses](hypotheses.md).
 
 ## What the prototype covers
 

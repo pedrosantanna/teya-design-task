@@ -29,6 +29,7 @@
   --header-h: 56px;
   --sidebar-w: 260px;
   --toc-w: 208px;
+  --content-w: 800px;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -87,10 +88,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   background: var(--bg); color: var(--fg); cursor: pointer; place-items: center; flex: none;
 }
 
-/* Shell */
+/* Shell: sidebar pinned to the left edge, "On this page" to the right edge, content centred between them (Vercel docs layout) */
 .shell {
   display: grid; grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
-  max-width: 1440px; margin: 0 auto;
 }
 .sidebar {
   position: sticky; top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
@@ -124,10 +124,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* Main */
 .main {
-  display: grid; grid-template-columns: minmax(0, 1fr) var(--toc-w); gap: 56px;
-  padding: 40px max(24px, env(safe-area-inset-right, 0px)) 96px 56px; min-width: 0;
+  display: grid; grid-template-columns: minmax(0, 1fr) var(--toc-w); gap: 48px;
+  padding: 40px max(32px, env(safe-area-inset-right, 0px)) 96px 48px; min-width: 0;
 }
-.content { min-width: 0; max-width: 840px; }
+.content { min-width: 0; width: 100%; max-width: var(--content-w); margin: 0 auto; }
 .crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--muted-fg); margin-bottom: 12px; }
 .crumbs span[aria-hidden] { opacity: .6; }
 .page-title { font-size: 34px; line-height: 1.15; letter-spacing: -.025em; font-weight: 600; margin: 0 0 12px; text-wrap: balance; }
@@ -369,6 +369,10 @@ i.m.unknown { opacity: .45; }
 .skeleton { height: 14px; border-radius: 4px; background: var(--muted); margin: 10px 0; }
 
 /* Responsive */
+@media (min-width: 1680px) {
+  :root { --sidebar-w: 280px; --toc-w: 240px; --content-w: 860px; }
+  .main { gap: 64px; padding-left: 64px; padding-right: 40px; }
+}
 @media (max-width: 1180px) {
   .main { grid-template-columns: minmax(0, 1fr); padding-left: 48px; padding-right: 48px; }
   .toc { display: none; }
