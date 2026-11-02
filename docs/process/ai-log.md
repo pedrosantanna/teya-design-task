@@ -106,6 +106,9 @@ I asked for a test where Requests is a round button beside the ask bar, as on Gr
 ### 24. App flow v3, and one canvas per exploration
 I chose option G with the button on the left (decision 026). The main agent removed the tabs from the home, put the round Requests button left of the ask bar, and turned the Requests screen into a sheet over the street. I also asked to version only the app flow and the shop's request states; the other ideation canvases (tab placement, identity) now keep every round side by side on one board, so their version menus were merged back into a single canvas. The agent also restored two section headings its own scripts had deleted from the Portuguese decision log and the AI log.
 
+### 25. Palettes in Figma for testing
+I wanted to test the ten round-2 palettes by hand in Figma. The agent created a colour variable collection with Light and Dark modes (44 variables, one per colour) in a test file of mine, a swatch component, and a board with the ten palettes bound to those variables. Its first board showed flattened swatches, because it fixed the component's height before letting it hug its content; it fixed that on the component. Figma is only a scratch space here (decision 003); the palettes' source stays on the identity canvas.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.

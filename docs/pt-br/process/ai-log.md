@@ -106,6 +106,9 @@ Pedi um teste em que Requests é um botão redondo ao lado da barra de pedido, c
 ### 24. Fluxo do app v3, e um canvas por exploração
 Escolhi a opção G com o botão à esquerda (decisão 026). O agente principal tirou as abas da home, pôs o botão redondo de Requests à esquerda da barra de pedido e transformou a tela de Requests numa folha sobre a rua. Também pedi para versionar só o fluxo do app e os estados do pedido na loja; os outros canvas de ideação (posição das abas, identidade) agora guardam todas as rodadas lado a lado num quadro só, então os menus de versão deles voltaram a ser um canvas único. O agente também restaurou dois títulos de seção que os próprios scripts dele tinham apagado do registro de decisões em português e do log de AI.
 
+### 25. Paletas no Figma para teste
+Eu queria testar à mão no Figma as dez paletas da segunda rodada. O agente criou num arquivo de testes meu uma coleção de variáveis de cor com os modos Light e Dark (44 variáveis, uma por cor), um componente de amostra e um quadro com as dez paletas ligadas a essas variáveis. O primeiro quadro saiu com as amostras achatadas, porque o agente fixou a altura do componente antes de deixá-lo se ajustar ao conteúdo; ele corrigiu isso no componente. Aqui o Figma é só um espaço de rascunho (decisão 003); a fonte das paletas continua sendo o canvas de identidade.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.
