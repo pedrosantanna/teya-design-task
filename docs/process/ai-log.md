@@ -145,6 +145,9 @@ I pre-decided Biscuit grey and asked whether the saturated palettes from round 2
 ### 37. Night bus, derived and stressed
 I asked to explore Night bus: its badges looked worse than Corner shop's, Pastel parade's or Lido's, I wanted more interface examples that stress it, a range of nuances per colour for contrast, and a look at Indigo in place of the blue in Lido or Pastel parade. An agent built a ten-step OKLCH ramp for each colour, found that the solid badges glared because three of the four colours are light and very saturated, and replaced them with tonal badges (all above 7:1). It drew four screens in light and dark (home, chat with offers, requests, a held order) and two hybrid sets. Its first screens reused class names that the site and the canvas already style, which darkened a chip row; it renamed them.
 
+### 38. The mark's optical centre
+I noticed the mark sat too high, most visibly in Android's circle mask, and that the Figma board had more white below than above. The agent had moved the glyph up 4 units by reasoning that the awning makes it bottom-heavy. This time it rendered offsets from -4 to +9 in a circle, a tile and a dark circle, and judged them by eye: the wide ears meet the circle's curve, so a centred glyph reads high. It chose 4 units below centre and recropped the board evenly with rounded corners.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.

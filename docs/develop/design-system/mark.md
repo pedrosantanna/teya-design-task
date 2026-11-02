@@ -10,7 +10,7 @@ Takeaways:
 Call:
 - Provisional (decision 033). Black and white until the palette is chosen.
 AI:
-- An agent drew the icon tests in SVG from my seeds (a sniffer dog, British shopping, the parade's awnings). I took the first two into Figma and changed the vectors by hand. The agent exported my version, rebuilt it on one axis and drew the platform applications; it changed proportions only where the drawing was off-centre.
+- An agent drew the icon tests in SVG from my seeds (a sniffer dog, British shopping, the parade's awnings). I took the first two into Figma and changed the vectors by hand. The agent exported my version, rebuilt it on one axis and drew the platform applications. Its first optical centre put the glyph too high; I pointed it out and it chose a new one by comparing offsets by eye.
 Trade-offs:
 - On Android the glyph has to fit a 66 dp safe zone, so it is about half the icon's width and the stripes get thin at small sizes. A simpler version for small sizes is still open.
 ```
@@ -23,7 +23,7 @@ Trade-offs:
 ## From the tests to the mark
 
 <div class="marks wide">
-<figure><img src="img/mark-figma-board.png" alt="Four icons on a Figma board: two agent tests, an arrow, and two hand-drawn versions" width="1161" height="300"><figcaption>My Figma board. Left of the arrow: the agent's icon tests 1 and 2. Right: my two versions; I chose the last one.</figcaption></figure>
+<figure><img src="img/mark-figma-board.png" alt="Four icons on a Figma board: two agent tests, an arrow, and two hand-drawn versions" width="1000" height="260"><figcaption>My Figma board. Left of the arrow: the agent's icon tests 1 and 2. Right: my two versions; I chose the last one.</figcaption></figure>
 </div>
 
 The agent's tests had the parade's awning as a bar across the face, with stripes hanging from it and two dashes for brows. In Figma I changed the vectors myself:
@@ -44,10 +44,10 @@ The agent rebuilt the drawing from the Figma vectors without changing its shapes
 | --- | --- | --- |
 | Symmetry axis | Three centres: eyes and nose at 85.0, ears at 85.3, awning at 85.65 (of 168) | One axis for all parts; the right ear is a mirror of the left |
 | Stripes | Five stripes of 17 units, with a 0.3 unit step between the second and third | Five stripes of exactly 17 units |
-| Position | Glyph centred 2.5 units below the tile's centre and 1.3 to the right | Centred horizontally and moved 4 units above centre, because the awning makes the glyph bottom-heavy |
+| Position | Glyph centred 2.5 units below the tile's centre and 1.3 to the right | Centred horizontally; vertically 4 units below the tile's centre, chosen by eye from offsets of 0 to 9 in the circle mask, where the wide ears meet the curve and make a centred glyph look high |
 
 <div class="marks">
-<figure><img src="img/mark-grid.svg" alt="The mark on a construction grid with axis, optical centre and content circle" width="336" height="336"><figcaption>8-unit grid on a 168 tile. Red: the tile's centre lines. Blue dashed: the glyph's optical centre. Grey circle: 80% of the tile.</figcaption></figure>
+<figure><img src="img/mark-grid.svg" alt="The mark on a construction grid with axis, optical centre and content circle" width="336" height="336"><figcaption>8-unit grid on a 168 tile. Red: the tile's centre lines. Blue dashed: the glyph's centre, 4 units below. Grey circle: 80% of the tile.</figcaption></figure>
 </div>
 
 ## iOS

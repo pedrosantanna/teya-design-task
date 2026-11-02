@@ -145,6 +145,9 @@ Pré-decidi o Cinza biscoito e perguntei se as paletas saturadas da rodada 2 fun
 ### 37. A Night bus, derivada e testada
 Pedi para explorar a Night bus: as badges dela pareciam piores que as da Corner shop, da Pastel parade ou da Lido, eu queria mais exemplos de interface que a forçassem, uma gama de nuances de cada cor para garantir contraste, e ver o Índigo no lugar do azul na Lido ou na Pastel parade. Um agente montou uma escala de dez passos em OKLCH para cada cor, viu que as badges sólidas ofuscavam porque três das quatro cores são claras e muito saturadas, e as trocou por badges tonais (todas acima de 7:1). Ele desenhou quatro telas no claro e no escuro (home, chat com ofertas, pedidos, um item guardado) e dois conjuntos híbridos. As primeiras telas usavam nomes de classe que o site e o canvas já estilizam, o que escureceu uma fileira de chips; ele trocou os nomes.
 
+### 38. O centro ótico da marca
+Percebi que a marca estava alta demais, principalmente na máscara circular do Android, e que o quadro do Figma tinha mais branco embaixo do que em cima. O agente tinha subido o desenho 4 unidades pelo raciocínio de que o toldo o deixa pesado embaixo. Dessa vez ele renderizou deslocamentos de -4 a +9 num círculo, numa base e num círculo escuro, e julgou no olho: as orelhas largas encontram a curva do círculo, então um desenho centralizado parece alto. Ele escolheu 4 unidades abaixo do centro e recortou o quadro por igual, com cantos arredondados.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.

@@ -10,7 +10,7 @@ Takeaways:
 Call:
 - Provisória (decisão 033). Em preto e branco até a paleta ser escolhida.
 AI:
-- Um agente desenhou os testes de ícone em SVG a partir das minhas sementes (um cão farejador, as compras britânicas, os toldos da parade). Levei os dois primeiros para o Figma e mudei os vetores à mão. O agente exportou a minha versão, reconstruiu-a sobre um eixo só e desenhou as aplicações nas plataformas; ele só mudou proporções onde o desenho estava fora de centro.
+- Um agente desenhou os testes de ícone em SVG a partir das minhas sementes (um cão farejador, as compras britânicas, os toldos da parade). Levei os dois primeiros para o Figma e mudei os vetores à mão. O agente exportou a minha versão, reconstruiu-a sobre um eixo só e desenhou as aplicações nas plataformas. O primeiro centro ótico deixou o desenho alto demais; eu apontei, e ele escolheu outro comparando deslocamentos no olho.
 Trade-offs:
 - No Android o desenho precisa caber numa zona segura de 66 dp, então ele ocupa cerca de metade da largura do ícone e as listras ficam finas em tamanhos pequenos. Uma versão mais simples para tamanhos pequenos continua em aberto.
 ```
@@ -23,7 +23,7 @@ Trade-offs:
 ## Dos testes à marca
 
 <div class="marks wide">
-<figure><img src="../../../develop/design-system/img/mark-figma-board.png" alt="Quatro ícones num quadro do Figma: dois testes do agente, uma seta e duas versões desenhadas à mão" width="1161" height="300"><figcaption>Meu quadro no Figma. À esquerda da seta, os testes de ícone 1 e 2 do agente. À direita, as minhas duas versões; escolhi a última.</figcaption></figure>
+<figure><img src="../../../develop/design-system/img/mark-figma-board.png" alt="Quatro ícones num quadro do Figma: dois testes do agente, uma seta e duas versões desenhadas à mão" width="1000" height="260"><figcaption>Meu quadro no Figma. À esquerda da seta, os testes de ícone 1 e 2 do agente. À direita, as minhas duas versões; escolhi a última.</figcaption></figure>
 </div>
 
 Nos testes do agente, o toldo da parade era uma barra atravessando o rosto, com listras penduradas e dois traços como sobrancelhas. No Figma, eu mesmo mudei os vetores:
@@ -44,10 +44,10 @@ O agente reconstruiu o desenho a partir dos vetores do Figma sem mudar as formas
 | --- | --- | --- |
 | Eixo de simetria | Três centros: olhos e nariz em 85,0, orelhas em 85,3, toldo em 85,65 (de 168) | Um eixo só para todas as partes; a orelha direita é o espelho da esquerda |
 | Listras | Cinco listras de 17 unidades, com um degrau de 0,3 entre a segunda e a terceira | Cinco listras de exatamente 17 unidades |
-| Posição | Desenho centralizado 2,5 unidades abaixo do centro da base e 1,3 à direita | Centralizado na horizontal e 4 unidades acima do centro, porque o toldo deixa o desenho pesado embaixo |
+| Posição | Desenho centralizado 2,5 unidades abaixo do centro da base e 1,3 à direita | Centralizado na horizontal; na vertical, 4 unidades abaixo do centro da base, escolhido no olho entre deslocamentos de 0 a 9 na máscara circular, onde as orelhas largas encontram a curva e fazem um desenho centralizado parecer alto |
 
 <div class="marks">
-<figure><img src="../../../develop/design-system/img/mark-grid.svg" alt="A marca sobre um grid de construção com eixo, centro ótico e círculo de conteúdo" width="336" height="336"><figcaption>Grid de 8 unidades sobre uma base de 168. Vermelho: as linhas de centro da base. Azul tracejado: o centro ótico do desenho. Círculo cinza: 80% da base.</figcaption></figure>
+<figure><img src="../../../develop/design-system/img/mark-grid.svg" alt="A marca sobre um grid de construção com eixo, centro ótico e círculo de conteúdo" width="336" height="336"><figcaption>Grid de 8 unidades sobre uma base de 168. Vermelho: as linhas de centro da base. Azul tracejado: o centro do desenho, 4 unidades abaixo. Círculo cinza: 80% da base.</figcaption></figure>
 </div>
 
 ## iOS
