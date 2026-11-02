@@ -10,7 +10,8 @@ Takeaways:
 - Vários nomes óbvios já existem ou estão concorridos (Parade, Fetch, Errand, Legwork), e "Nip" sozinho é uma ofensa étnica.
 - A rodada 4 mantém Oat e Brew como base e acrescenta três escalas de cinza quente, no estilo do shadcn, e quatro conjuntos de cinco acentos (Lata de chá, Esmalte de fachada, Quitanda, Caixa de correio). Texto preto puro e branco sobre o Brew passam em todo lugar; o agente sugere Lata de chá com o Cinza biscoito.
 Call:
-- Escolhido: a marca segue o teste de ícone 3, o toldo da parade como barba de terrier, com sobrancelhas e bigode de quatro ou cinco faixas. Pré-selecionadas: as paletas A, C, F, I e J. Em aberto: o nome e a paleta, as duas decisões minhas.
+- Marca provisória (decisão 033): desenhei à mão no Figma um terrier com um toldo no lugar da boca, a partir dos testes de ícone 1 e 2; ela está no [design system](../design-system/mark.md).
+- Linha escolhida: a marca segue o teste de ícone 3, o toldo da parade como barba de terrier, com sobrancelhas e bigode de quatro ou cinco faixas. Pré-selecionadas: as paletas A, C, F, I e J. Em aberto: o nome e a paleta, as duas decisões minhas.
 - Com personagem, multicor e sem a cara genérica de produto de IA (sem gradientes roxos, brilhos ou orbes luminosos).
 AI:
 - Eu dei as sementes: um cachorro farejador, um investigador no estilo Sherlock, a cultura de compras britânica. Um agente buscou na web referências e conflitos de nome, verificou a situação de direito autoral e de marca de Sherlock Holmes, montou as paletas com um script que calcula o contraste WCAG e as paletas tonais do Material 3, desenhou os esboços de marca em SVG, aplicou as paletas aos wireframes da v2 e capturou nove apps do Mobbin.

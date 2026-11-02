@@ -136,6 +136,9 @@ Pedi para manter Oat e Brew, da paleta I, e explorar cinco acentos que funcionem
 ### 34. A reserva sem pagamento sai
 Questionei se valia manter a reserva sem pagamento e perguntei se a pesquisa tinha alguma evidência cultural forte a favor dela. O agente conferiu a pesquisa documental: o dinheiro é 19,2% das transações do varejo, mas a Argos acabou com as reservas sem pagamento e nada na evidência mostra compradores dependendo delas. Decidi tirá-la (decisão 032). O agente a removeu do Define, das hipóteses (H6 e H12 reescritas), dos estados da loja v3 e do fluxo do app v6, onde a folha agora avisa que sem pagar não há reserva. No quadro de posicionamento das abas ele também corrigiu a opção D, cuja barra ficava espremida em cima do indicador do iPhone por um nome de classe que ela dividia com as tags pequenas.
 
+### 35. Uma marca provisória
+Levei os dois primeiros testes de ícone do agente para o Figma e ajustei os vetores à mão: orelhas mais baixas, dois olhos no lugar das sobrancelhas, o toldo embaixo do nariz, e dois tons. Escolhi a quarta versão do meu quadro no Figma e pedi que ela fosse registrada como a primeira decisão de identidade. O agente exportou o SVG do Figma sem alterações, registrou a decisão 033 e acrescentou uma página de Marca ao design system e a marca ao "Onde está" do quadro de identidade.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.

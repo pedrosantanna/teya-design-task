@@ -257,6 +257,14 @@ Tirei a reserva sem pagamento. Um comprador que recebe um sim paga e a loja guar
 **Por quê:** a reserva sem pagamento existia por comodidade e para quem paga em dinheiro, mas o pagamento acontece fora do app, a loja fica com o risco de a pessoa não aparecer, muitas vezes com a única unidade que tem, e a pesquisa documental não encontrou um hábito forte por trás dela (a Argos acabou com as reservas sem pagamento; a Beaverbrooks guarda por 2 dias). Duas formas também são mais simples de explicar numa resposta só.
 **Em aberto:** se quem reservaria passa a pagar ou só vai até a loja; a H12 agora conta quantos sins terminam numa reserva paga. Quem paga em dinheiro é um ponto cego: ninguém assim aparece na netnografia.
 
+## 033 · Uma marca provisória
+**2026-11-02 · Provisória**
+
+O ícone do app é um terrier cuja boca é o toldo de uma loja: orelhas dobradas e baixas, dois olhos em ponto, um nariz apoiado em cinco listras. Eu o desenhei à mão no Figma a partir dos dois primeiros testes de ícone do agente, baixando as orelhas e trocando as sobrancelhas por olhos. Ele tem dois tons, um de mais contraste e um de menos contraste, sobre Oat e Brew por enquanto. É a primeira decisão de identidade; o design system tem uma página para ela.
+
+**Por quê:** ele junta as duas direções de que eu mais gostei, o terrier que entra nas lojas e os toldos da parade, e se lê como um rosto antes de se ler como uma loja.
+**Em aberto:** o desenho final e uma versão mais simples para tamanhos pequenos, as cores (elas seguem a paleta) e o nome.
+
 ## Ainda em aberto
 
 - Estrutura do repo (app único ou monorepo): decidir quando a construção começar e o formato dela estiver claro.

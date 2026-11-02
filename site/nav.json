@@ -260,6 +260,12 @@
               "title": "Typography",
               "src": "docs/develop/design-system/typography.md",
               "pt": "Tipografia"
+            },
+            {
+              "id": "mark",
+              "title": "Mark",
+              "pt": "Marca",
+              "src": "docs/develop/design-system/mark.md"
             }
           ]
         }

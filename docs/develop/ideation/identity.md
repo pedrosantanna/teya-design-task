@@ -10,7 +10,8 @@ Takeaways:
 - Several obvious names are taken or crowded (Parade, Fetch, Errand, Legwork), and "Nip" alone is an ethnic slur.
 - Round 4 keeps Oat and Brew as the base and adds three warm grey scales, shadcn-style, and four sets of five accents (Tea tin, Shopfront enamel, Greengrocer, Pillar box). Pure black text and white on Brew pass everywhere; the agent suggests Tea tin with Biscuit grey.
 Call:
-- Chosen: the mark follows icon test 3, the parade's awning as a terrier's beard with brows and a moustache of four or five stripes. Shortlisted: palettes A, C, F, I and J. Open: the name and the palette, both my decisions.
+- Provisional mark (decision 033): I drew a terrier with an awning for a mouth by hand in Figma from icon tests 1 and 2; it is in the [design system](../design-system/mark.md).
+- Chosen line: the mark follows icon test 3, the parade's awning as a terrier's beard with brows and a moustache of four or five stripes. Shortlisted: palettes A, C, F, I and J. Open: the name and the palette, both my decisions.
 - Character-led, multi-colour, and without the generic AI look (no purple gradients, sparkles or glowing orbs).
 AI:
 - I gave the seeds: a sniffer dog, a Sherlock-style investigator, British shopping culture. An agent searched the web for references and name conflicts, checked the Sherlock Holmes copyright and trademark position, built the palettes with a script that computes WCAG contrast and Material 3 tonal palettes, drew the mark sketches in SVG, applied the palettes to the v2 wireframes and captured nine apps from Mobbin.

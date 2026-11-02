@@ -257,6 +257,14 @@ I dropped the unpaid reserve. A shopper who gets a yes either pays and the shop 
 **Why:** the unpaid reserve was there for convenience and for shoppers who pay cash, but the payment happens outside the app, the shop carries the risk of a no-show on what is often its only unit, and the desk research found no strong habit behind it (Argos dropped unpaid reservations; Beaverbrooks keeps them for 2 days). Two ways are also simpler to explain in one answer.
 **Open:** whether shoppers who would have reserved pay instead or just walk over; H12 now counts how many yeses end in a paid hold. Shoppers who pay cash are a blind spot: none are in the netnography.
 
+## 033 · A provisional mark
+**2026-11-02 · Provisional**
+
+The app's icon is a terrier whose mouth is a shop's awning: low folded ears, two dot eyes, a nose resting on five stripes. I drew it by hand in Figma from the agent's first two icon tests, lowering the ears and replacing the brows with eyes. It is in two tones, a high-contrast one and a low-contrast one, on Oat and Brew for now. It is the first identity decision; the design system has a page for it.
+
+**Why:** it joins the two directions I liked most, the terrier that goes into the shops and the parade's awnings, and reads as a face before it reads as a shop.
+**Open:** the final drawing and a simpler version for small sizes, the colours (they follow the palette), and the name.
+
 ## Still open
 
 - Repo layout (single app or monorepo): to decide when the build starts and its shape is known.
