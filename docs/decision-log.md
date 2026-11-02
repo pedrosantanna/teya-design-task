@@ -152,7 +152,40 @@ An external review found that the post from @London_W4 is a walk along King Stre
 **Effect:** three clusters still score best (mean silhouette 0.55, against 0.54 for two, four and five). Sam and Jess keep their posts; Ruth goes from four posts to three, all routine shopping. 20 posts are clustered instead of 21.
 **Open:** Ruth now rests on three posts, which makes her the least supported persona by a wider margin.
 
+## 020 · Proof of concept with shops before more research
+**2026-11-02 · Decided**
+
+I won't interview shopkeepers before building. I'll build a proof of concept of the concierge agent, take it to about ten King Street shops, and run the hypotheses through it with shops and shoppers. Inviting the shops doubles as discovery about how they work, and the shops can bring the first shoppers.
+
+**Why:** an agent prototype takes days, and what a shop does with a real request answers H1, H6 and H9 better than what it would say in an interview.
+**Open:** whether the agent is ready in time. The hand-run concierge stays as the fallback. The shops as an acquisition channel is an assumption.
+
+## 021 · Native app, iOS first
+**2026-11-02 · Decided**
+
+The shopper app is a native mobile app. I follow Apple's Human Interface Guidelines first and Material Design second, as closely as possible. Where brand work needs a change, or a pattern exists on iOS and not on Android, I go with iOS. The shop side has no interface in this take-home.
+
+**Why:** native patterns are what shoppers already know, and starting from one guideline keeps the wireframes consistent.
+**Open:** the prototype's stack.
+
+## 022 · Ideation canvases
+**2026-11-02 · Decided**
+
+Ideation in Develop is a group of pages. Some are text; others are canvases with a dotted background, zoom and pan like FigJam, where wireframes and diagrams sit with arrows between them. Each canvas has its own HTML file next to a Markdown page that gives its title and summary. Items on a canvas can be selected, not moved. Interface copy in the wireframes stays in English in both languages of the site, because the app is for London; notes and labels follow the site's language.
+
+**Why:** flows and state diagrams read better in space than as text, and one reusable canvas keeps them all in the same record.
+**Open:** an inspection drawer, which opens on selection with basic details for now.
+
+## 023 · Revenue through payments, network and promotion
+**2026-11-02 · Decided**
+
+I set the business model as hypotheses in one scenario: the concierge belongs to a payment provider with its own POS. Revenue comes from payments made in the app, from shops joining the provider's network to receive them, from more sales for the shops already on that network (which makes its POS worth keeping), and from paid promotion and reach. There is no commission on the sale.
+
+**Why:** the delivery apps' 14–35% commission is the cost independents complain about (F9). A payment provider earns on the payment itself, and a shop that joins brings all its sales.
+**Open:** H12 to H16. Whether to list only shops on the provider's POS or every shop; the proof of concept starts open and records which shops are on the network.
+
 ## Still open
 
 - Repo layout (single app or monorepo): to decide when the build starts and its shape is known.
+- Prototype stack: to decide in Deliver.
 - Spec-driven workflow: whether to write specs before building, and how light they should be.

@@ -32,7 +32,7 @@ The [service blueprint](blueprint.md) shows each step across the shopper, the co
 
 ## Why an agent
 
-An agent is my main hypothesis for this product. It is several agents coordinated behind one conversation, and I expect four things from it.
+An agent is my main hypothesis for this product. The concierge is that agent: the one the shopper talks to, and the product's interface, whether it shows up as the app, in WhatsApp or as an MCP server for the shopper's own AI assistant. Behind it, several agents split the work. I expect four things from this setup.
 
 - **One interface for many tasks.** Searching, asking shops, holding, paying and arranging delivery happen in the same conversation, in the same pattern every time. I expect that to be simpler to learn than a screen per task.
 - **Waiting handled for the shopper.** Shops are slow and hard to reach. The concierge asks several at once, keeps looking while they answer, and checks delivery in the meantime, so the shopper doesn't chase contacts or wait on one reply.
@@ -72,7 +72,7 @@ The brief asks for what's missing to be assumed and written down.
 - **Data.** Till data with item detail exists for a minority of shops and is used where it does; everything else is a question to the shop.
 - **Channels.** The app comes first. WhatsApp and an MCP connection for other assistants reuse the same agents later.
 - **Logistics.** Collection is the default. Delivery uses a courier the shop or the concierge books, one shop at a time; a basket across shops is out of scope for the prototype.
-- **Business model.** Not decided for this take-home. Options include commission, paid promotion for shops, or the concierge as a way for a payment provider to bring shops in.
+- **Business model.** The concierge belongs to a payment provider with its own POS. Revenue comes from payments made in the app, from shops joining the provider's network, and from promotion, with no commission on the sale. See [revenue](revenue.md).
 
 ## Risks
 

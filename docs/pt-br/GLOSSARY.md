@@ -111,3 +111,17 @@ Source: English Markdown in `docs/`. Target: Brazilian Portuguese in `docs/pt-br
 | exploratory (hypothesis) | exploratória |
 | search resolved / valid answer | busca resolvida / resposta válida |
 | charge / authorise / capture / refund | cobrar / autorizar / capturar / estornar (estorno) |
+| proof of concept | prova de conceito |
+| ideation / canvas / wireframe | ideação / canvas / wireframe |
+| composer (the concierge bar) | barra de pedido |
+| tab bar / avatar menu / settings / sheet (iOS) / large title | barra de abas / menu do avatar / ajustes / sheet / título grande |
+| home screen / module (home) | tela inicial / módulo |
+| request / order (in the app) | pedido / compra ("compras recentes") |
+| promotion (paid) / promoted / promoted slot | destaque pago / em destaque / espaço em destaque |
+| revenue / payment provider / payout | receita / provedor de pagamento / repasse |
+| POS / card terminal | POS / maquininha |
+| network (the provider's) / paid reach | rede / alcance pago |
+| acquisition channel | canal de aquisição |
+| prepaid order | pedido pré-pago |
+| Live Activity, Human Interface Guidelines, Material Design | stay in English |
+| interface copy quoted from the wireframes ("Open near you", "Promoted") | stays in English |

@@ -1,6 +1,6 @@
 # Hypotheses
 
-The concept rests on eleven hypotheses. Most come from an assumption or open question in the [Discover conclusion](../discover/conclusion.md); four come from my reasons for making the concierge an agent. Each has a test. Nine have a pass mark set before testing; H10 and H11 are exploratory and record a split or a count that sets an order or a size. They are ordered by risk: how badly the concept fails if the hypothesis is wrong, and how little evidence there is today.
+The concept rests on sixteen hypotheses. Most come from an assumption or open question in the [Discover conclusion](../discover/conclusion.md); four come from my reasons for making the concierge an agent, and five from how it makes money ([revenue](revenue.md)). Each has a test. Thirteen have a pass mark set before testing; H10, H11 and H16 are exploratory and record a split or a count that sets an order or a size. They are ordered by risk: how badly the concept fails if the hypothesis is wrong, and how little evidence there is today.
 
 ```summary
 Takeaways:
@@ -35,10 +35,17 @@ Trade-offs:
 | H9 | Shopkeepers see value in knowing what nearby shoppers ask for, including what they didn't have | Open question 1 | Show 5 shopkeepers a mock weekly demand summary for their street | 3 of 5 say it would change what they stock or would make them answer requests |
 | H10 | Some shoppers would rather use the concierge in WhatsApp or their own assistant than install an app | Concept | Ask each shopper in the H3 and H4 tests where they'd want it | Exploratory: recorded as a split, no pass mark. It sets the order of channels |
 | H11 | A minority of shops on a street have till data with item detail | F8; open question 3 | Count, on the 10 King Street shops in H1, which tills hold product codes | Exploratory: recorded as a number, no pass mark. It sizes the instant-answer shortcut |
+| H12 | Shoppers pay in the app for most holds and prepaid orders, instead of paying at the counter | Revenue | In the proof of concept, offer "pay now" and "pay at the counter" for every hold; count which is chosen | 70% of completed holds paid in the app |
+| H13 | Shops not yet on the provider's POS would join it to receive app payments and requests | Revenue | After four weeks of the proof of concept, offer the shops that use another terminal the provider's payment account or POS | 2 of the first 5 such shops agree to switch or to a trial |
+| H14 | Shops already on the provider's POS see the app's shoppers as a reason to keep it | Revenue; decision 023 | Compare sales from app holds per shop over four weeks, then ask the shops on the network whether it changes how they value their POS | 3 of 5 say it would make them keep or recommend the POS |
+| H15 | Shops would pay to be promoted on the home screen or to a neighbourhood beyond their street | Revenue | After four weeks of demand summaries, offer a promoted slot at a stated weekly price | 2 of 10 shops pay for, or agree to, a paid trial |
+| H16 | Shoppers buy from a shop farther away when it's the only one with the item and they can pay ahead | Revenue | Proof-of-concept data: share of completed holds at shops more than 15 minutes' walk away | Exploratory: recorded as a share; it sizes the case for paid reach |
 
 A prototype test records stated choice: what a shopper says or clicks in a scenario. It can't show whether they would go, pay or collect. For H2 and H7 the hand-run concierge adds the behavioural check, with real needs and real holds.
 
 ## What each test needs
+
+These tests run inside the [proof of concept](next-step.md): the concierge agent reaches the shops, and the shopper app prototype is what shoppers use. The hand-run version below is the fallback if the agent isn't ready.
 
 - **Concierge by hand over WhatsApp (H1, H2 and H7 follow-ups, H4, H6, H10, H11).** A phone with WhatsApp, a list of ten King Street shops that answer on WhatsApp, in categories that came up in the netnography (hardware, florist, bakery, butcher, chemist), and six shoppers with real needs, at least three of them working shop hours. I play the concierge. No build. Two days, plus a walk along King Street after 6:30pm.
 - **Prototype test (H2, H3, H5, H7, H8, H10).** The clickable prototype from Deliver, with scenarios taken from the persona posts (eclipse glasses the day before, a fan in a heatwave, a weekly shop after work). Six shoppers, 30 minutes each.

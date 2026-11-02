@@ -15,8 +15,8 @@ The docs follow the order of the work. Each phase starts once the one before it 
 | Phase | Question it answers | Status |
 | --- | --- | --- |
 | Discover | What is a high street today, who shops there, and what do they say about it? | Done |
-| Define | Findability or transaction, for which shopper, under which assumptions? | In progress |
-| Develop | What does the journey look like, and which concept holds up? | Not started |
+| Define | Findability or transaction, for which shopper, under which assumptions? | Done |
+| Develop | What does the journey look like, and which concept holds up? | In progress |
 | Deliver | The prototype, the polished screens and, if it's worth building, a running app | Not started |
 
 The [decision log](decision-log.md) records the calls that shaped the process, in the order I made them.

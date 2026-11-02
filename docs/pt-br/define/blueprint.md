@@ -1,6 +1,6 @@
 # Blueprint de serviço
 
-Como um pedido passa entre o comprador, o concierge e a loja, da primeira mensagem até a retirada e o que acontece depois. As raias acima da linha de visibilidade são o que o comprador vê; as de baixo são os agentes, a loja e os sistemas por trás deles. O exemplo é o do Sam: óculos para eclipse perto de Hammersmith antes das 16h.
+Como um pedido passa entre o comprador, o concierge e a loja, da primeira mensagem até a retirada e o que acontece depois. As raias acima da linha de visibilidade são o que o comprador vê; as de baixo são os agentes, a loja e os sistemas por trás deles. O exemplo é o do Sam: óculos para eclipse perto de Hammersmith antes das 16h. O concierge é um agente, e o único com quem o comprador conversa, no app, no WhatsApp ou pelo próprio assistente de AI via MCP. Os agentes abaixo da linha de visibilidade são partes do mesmo sistema, que fazem o trabalho por trás dele.
 
 ```summary
 Takeaways:
@@ -24,9 +24,9 @@ Steps: Pedir | Buscar | Ofertas | Reservar e pagar | Retirar ou receber | Depois
 Ponto de contato {muted text smartphone}: Chat no app ; WhatsApp ; Assistente de AI próprio (MCP) | Mesma conversa | Cartões de opções | Tela de pagamento | Balcão da loja ; Ponto de retirada ; Entregador | Notificação
 Comprador {c1 card user}: Diz o quê, onde e até quando ; Ou deixa um pedido antes | Espera, ou sai da conversa | Compara as opções | Escolhe a loja e o horário de retirada ; Paga quando o item está separado | Mostra o código ; Ou retira depois do trabalho ; Ou recebe a entrega | Avalia a loja ; Mantém um pedido recorrente
 --- Linha de interação
-Concierge {c3 card concierge-bell}: Confirma em uma linha ; Pergunta só o que falta | "Consultando seis lojas perto de você" | Mostra cada resposta quando chega ; Na hora só com caixa compartilhado ; Continua procurando | "Separado", vindo da loja ; Depois o pagamento ; Código, local e prazo da reserva | Como chegar ; Aviso antes de a reserva acabar | Pergunta como foi ; Executa pedidos recorrentes
+Agente concierge {c3 card bot}: Confirma em uma linha ; Pergunta só o que falta | "Consultando seis lojas perto de você" | Mostra cada resposta quando chega ; Na hora só com caixa compartilhado ; Continua procurando | "Separado", vindo da loja ; Depois o pagamento ; Código, local e prazo da reserva | Como chegar ; Aviso antes de a reserva acabar | Pergunta como foi ; Executa pedidos recorrentes
 --- Linha de visibilidade
-Agentes {c4 agent bot}: **Orquestrador** planeja as tarefas | **Estoque** lê os caixas compartilhados ; **Seleção** escolhe as lojas prováveis ; **Contato** manda mensagem a cada loja | Reúne as respostas ; **Entrega** cota o frete ; Amplia a busca perto do prazo | **Contato** recebe a confirmação da loja ; **Pagamento** cobra ; **Contato** libera as outras | Acompanha a reserva ; **Entrega** agenda a corrida ou a entrega à noite | Registra a demanda ; Cruza pedidos recorrentes
+Agentes por trás dele {c4 agent settings}: **Orquestrador** planeja as tarefas | **Estoque** lê os caixas compartilhados ; **Seleção** escolhe as lojas prováveis ; **Contato** manda mensagem a cada loja | Reúne as respostas ; **Entrega** cota o frete ; Amplia a busca perto do prazo | **Contato** recebe a confirmação da loja ; **Pagamento** cobra ; **Contato** libera as outras | Acompanha a reserva ; **Entrega** agenda a corrida ou a entrega à noite | Registra a demanda ; Cruza pedidos recorrentes
 Loja {c2 card store}: - | Recebe o pedido no app da maquininha ou no WhatsApp | Responde: tem, preço, reserva, entrega | Separa o item ; Confirma | Passa o item ao comprador ; Ou deixa num ponto de retirada | Resumo semanal da demanda
 --- Linha de interação interna
 Sistemas {muted text server}: Localização ; Preferências salvas | Estoque do caixa ; Perfis e horários | Entregador ; Mapas | Cartão, carteira, link de pagamento | Entregador ; Pontos de retirada ; Repasse | Registro da demanda

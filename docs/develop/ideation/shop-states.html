@@ -1,0 +1,136 @@
+<!-- Shop request states: one request on the shop's side, as the proof of concept runs it on WhatsApp. Format: see AGENTS.md, canvas pages. -->
+
+<div class="area" data-x="-60" data-y="-120" data-w="2420" data-h="560" data-title-en="The request goes through" data-title-pt="O pedido dá certo"></div>
+<div class="area" data-x="-60" data-y="500" data-w="2420" data-h="420" data-title-en="When it doesn't" data-title-pt="Quando não dá"></div>
+<div class="area" data-x="-60" data-y="980" data-w="2420" data-h="520" data-title-en="What the shop sees on WhatsApp" data-title-pt="O que a loja vê no WhatsApp"></div>
+
+<!-- Happy path -->
+<div class="state start" id="received" data-x="0" data-y="160" style="--tone: var(--c1)">
+  <span class="state-name"><i data-icon="message-circle"></i>Request received</span>
+  <p lang="en">The concierge asks about one item, for one shopper, with a deadline.</p>
+  <p lang="pt">O concierge pergunta por um item, para um comprador, com um prazo.</p>
+</div>
+<div class="state" id="seen" data-x="330" data-y="160" style="--tone: var(--c1)">
+  <span class="state-name"><i data-icon="check"></i>Seen</span>
+  <p lang="en">Read receipt, when the shop has them on.</p>
+  <p lang="pt">Confirmação de leitura, quando a loja deixa ativada.</p>
+</div>
+<div class="state" id="answered" data-x="660" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="circle-check"></i>Has it</span>
+  <p lang="en">A clear yes, with a price. This is a valid answer for H1.</p>
+  <p lang="pt">Um sim claro, com preço. É uma resposta válida para a H1.</p>
+</div>
+<div class="state" id="hold" data-x="990" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="hourglass"></i>Hold requested</span>
+  <p lang="en">The shopper picked this shop. The concierge asks the shop to put it aside until a time.</p>
+  <p lang="pt">O comprador escolheu esta loja. O concierge pede para a loja separar o item até um horário.</p>
+</div>
+<div class="state" id="aside" data-x="1320" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="package"></i>Set aside</span>
+  <p lang="en">The shop confirms. Only now is the shopper charged.</p>
+  <p lang="pt">A loja confirma. Só agora o comprador é cobrado.</p>
+</div>
+<div class="state" id="paid" data-x="1650" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="credit-card"></i>Paid</span>
+  <p lang="en">Payment taken. The shop holds the item for the code until the end time.</p>
+  <p lang="pt">Pagamento feito. A loja segura o item para o código até o horário combinado.</p>
+</div>
+<div class="state end" id="collected" data-x="1980" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="shopping-bag"></i>Collected</span>
+  <p lang="en">Handed over at the counter, or to a courier.</p>
+  <p lang="pt">Entregue no balcão, ou a um entregador.</p>
+</div>
+<div class="state" id="alt" data-x="660" data-y="-40" style="--tone: var(--c2)">
+  <span class="state-name"><i data-icon="repeat"></i>Something similar</span>
+  <p lang="en">The shop offers an alternative. The shopper decides.</p>
+  <p lang="pt">A loja oferece uma alternativa. O comprador decide.</p>
+</div>
+<div class="state" id="point" data-x="1815" data-y="-40" style="--tone: var(--c2)">
+  <span class="state-name"><i data-icon="map-pin"></i>At a collection point</span>
+  <p lang="en">Jess's case: the item waits somewhere open after work (an assumption).</p>
+  <p lang="pt">O caso da Jess: o item espera num lugar aberto depois do trabalho (suposição).</p>
+</div>
+
+<!-- Branches -->
+<div class="state end fail" id="noreply" data-x="330" data-y="620" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="clock"></i>No reply in 10 min</span>
+  <p lang="en">The shopper sees the other shops. A late reply is still logged as demand.</p>
+  <p lang="pt">O comprador vê as outras lojas. Uma resposta atrasada ainda conta como demanda.</p>
+</div>
+<div class="state end fail" id="doesnt" data-x="660" data-y="620" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="circle-x"></i>Doesn't have it</span>
+  <p lang="en">Also a valid answer for H1. Logged for the weekly demand summary.</p>
+  <p lang="pt">Também é uma resposta válida para a H1. Entra no resumo semanal da demanda.</p>
+</div>
+<div class="state end fail" id="declined" data-x="990" data-y="620" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="x"></i>Can't hold</span>
+  <p lang="en">The shopper can still go without a hold, or take the next option.</p>
+  <p lang="pt">O comprador ainda pode ir sem reserva, ou ficar com a próxima opção.</p>
+</div>
+<div class="state end fail" id="sold" data-x="1320" data-y="620" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="circle-x"></i>Already sold</span>
+  <p lang="en">Found when putting it aside. No charge; the concierge offers the next shop.</p>
+  <p lang="pt">Descoberto na hora de separar. Sem cobrança; o concierge oferece a próxima loja.</p>
+</div>
+<div class="state fail" id="expired" data-x="1650" data-y="620" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="hourglass"></i>Hold expired</span>
+  <p lang="en">The shopper didn't come. Reminder first, then release.</p>
+  <p lang="pt">O comprador não veio. Primeiro um lembrete, depois a liberação.</p>
+</div>
+<div class="state end" id="released" data-x="1980" data-y="620" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="repeat"></i>Released and refunded</span>
+  <p lang="en">The shop can sell the item again; the shopper gets the money back.</p>
+  <p lang="pt">A loja pode vender o item de novo; o comprador recebe o dinheiro de volta.</p>
+</div>
+
+<!-- Messages the shop sees (interface copy stays in English) -->
+<div class="note" data-for="received" data-x="0" data-y="1080">
+  <p><strong>King Street Concierge</strong><br>Hi Ana, someone 300 m away needs <strong>eclipse glasses</strong> before 4pm. Do you have them?<br>Reply <strong>1</strong> Yes · <strong>2</strong> No · <strong>3</strong> Something similar</p>
+  <p lang="en"><span class="tag">Template</span> The first message is a pre-approved template: the shop hasn't written in the last 24 hours.</p>
+  <p lang="pt"><span class="tag">Modelo</span> A primeira mensagem é um modelo pré-aprovado: a loja não escreveu nas últimas 24 horas.</p>
+</div>
+<div class="note" data-for="answered" data-x="660" data-y="1080">
+  <p><strong>King Street Concierge</strong><br>Thanks! How much are they, and could you put a pair aside until 4pm if they want them?</p>
+  <p lang="en">Inside the 24-hour window, so free text from here on.</p>
+  <p lang="pt">Já dentro da janela de 24 horas, então daqui em diante é texto livre.</p>
+</div>
+<div class="note" data-for="hold" data-x="990" data-y="1080">
+  <p><strong>King Street Concierge</strong><br>They'd like them. Please put a pair aside for code <strong>K7Q2</strong> until 4pm and reply <strong>done</strong>.</p>
+  <p lang="en">The shopper isn't charged until the shop replies "done".</p>
+  <p lang="pt">O comprador só é cobrado quando a loja responde "done".</p>
+</div>
+<div class="note" data-for="paid" data-x="1650" data-y="1080">
+  <p><strong>King Street Concierge</strong><br>Paid £14.99 for <strong>K7Q2</strong>. They'll be with you by 4pm. Reply <strong>collected</strong> when they've picked it up.</p>
+  <p lang="en">The payment lands in the shop's own payment account.</p>
+  <p lang="pt">O pagamento cai na conta de pagamentos da própria loja.</p>
+</div>
+<div class="note" data-for="expired" data-x="1980" data-y="1080">
+  <p><strong>King Street Concierge</strong><br>The hold for <strong>K7Q2</strong> ended at 4pm. You can sell them again; we've refunded the shopper.</p>
+</div>
+<div class="note" data-for="doesnt" data-x="330" data-y="1080">
+  <p><strong>King Street Concierge</strong><br>Thanks, noted. 3 people near you asked for this this week; you'll see it in Monday's summary.</p>
+  <p lang="en">The demand signal (H9) starts with the first "no".</p>
+  <p lang="pt">O sinal de demanda (H9) começa no primeiro "não".</p>
+</div>
+<div class="note" data-x="1320" data-y="1080">
+  <p lang="en"><strong>On a POS instead of WhatsApp</strong><br>The same states appear on the shop's card terminal: the request as a notification with Yes, No and Similar; "set aside" as one tap; the payment in the same account. No typing at the counter.</p>
+  <p lang="pt"><strong>Num POS em vez do WhatsApp</strong><br>Os mesmos estados aparecem na maquininha da loja: o pedido como notificação com Sim, Não e Parecido; "separado" com um toque; o pagamento na mesma conta. Nada de digitar no balcão.</p>
+</div>
+
+<!-- Transitions: what the shop does -->
+<a class="link" data-from="received" data-to="seen" data-label-en="opens chat" data-label-pt="abre a conversa"></a>
+<a class="link" data-from="seen" data-to="answered" data-label-en="replies 1 + price" data-label-pt="responde 1 + preço"></a>
+<a class="link alt" data-from="seen" data-to="alt" data-label-en="replies 3" data-label-pt="responde 3"></a>
+<a class="link" data-from="answered" data-to="hold" data-label-en="shopper picks it" data-label-pt="o comprador escolhe"></a>
+<a class="link alt" data-from="alt" data-to="hold" data-label-en="shopper accepts" data-label-pt="o comprador aceita"></a>
+<a class="link" data-from="hold" data-to="aside" data-label-en="replies done" data-label-pt="responde done"></a>
+<a class="link" data-from="aside" data-to="paid" data-label-en="shopper pays" data-label-pt="o comprador paga"></a>
+<a class="link" data-from="paid" data-to="collected" data-label-en="replies collected" data-label-pt="responde collected"></a>
+<a class="link alt" data-from="paid" data-to="point" data-label-en="drops it off" data-label-pt="deixa no ponto"></a>
+<a class="link alt" data-from="point" data-to="collected"></a>
+<a class="link" data-from="received" data-to="noreply" data-label-en="10 min, no reply" data-label-pt="10 min sem resposta"></a>
+<a class="link" data-from="seen" data-to="doesnt" data-label-en="replies 2" data-label-pt="responde 2"></a>
+<a class="link" data-from="hold" data-to="declined" data-label-en="replies no hold" data-label-pt="não pode segurar"></a>
+<a class="link" data-from="aside" data-to="sold" data-label-en="replies sold" data-label-pt="responde sold"></a>
+<a class="link" data-from="paid" data-to="expired" data-label-en="end time passes" data-label-pt="passa do horário"></a>
+<a class="link" data-from="expired" data-to="released" data-label-en="after a reminder" data-label-pt="depois de um lembrete"></a>

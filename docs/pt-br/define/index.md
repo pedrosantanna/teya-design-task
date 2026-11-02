@@ -32,7 +32,7 @@ O [blueprint de serviço](blueprint.md) mostra cada etapa passando pelo comprado
 
 ## Por que um agente
 
-Um agente é a minha principal hipótese para este produto. São vários agentes coordenados por trás de uma conversa só, e espero quatro coisas deles.
+Um agente é a minha principal hipótese para este produto. O concierge é esse agente: aquele com quem o comprador conversa e a interface do produto, seja no app, no WhatsApp ou como um servidor MCP para o assistente de IA do próprio comprador. Por trás dele, vários agentes dividem o trabalho. Espero quatro coisas desse arranjo.
 
 - **Uma interface para várias tarefas.** Buscar, perguntar às lojas, segurar, pagar e combinar a entrega acontecem na mesma conversa, sempre do mesmo jeito. Espero que isso seja mais simples de aprender do que uma tela para cada tarefa.
 - **A espera resolvida no lugar do comprador.** As lojas são lentas e difíceis de alcançar. O concierge pergunta a várias de uma vez, continua procurando enquanto elas respondem e verifica a entrega nesse meio-tempo, e o comprador não precisa correr atrás de contatos nem ficar esperando uma resposta só.
@@ -72,7 +72,7 @@ O brief pede que o que falta seja suposto e registrado.
 - **Dados.** Dados de caixa com detalhe por item existem para uma minoria das lojas e são usados onde existem; todo o resto vira uma pergunta à loja.
 - **Canais.** O app vem primeiro. O WhatsApp e uma conexão MCP para outros assistentes reaproveitam os mesmos agentes depois.
 - **Logística.** A retirada é o padrão. A entrega usa um entregador que a loja ou o concierge chama, uma loja por vez; uma cesta com várias lojas fica fora do escopo do protótipo.
-- **Modelo de negócio.** Não decidido neste take-home. As opções incluem comissão, promoção paga para as lojas, ou o concierge como forma de um provedor de pagamento atrair lojas.
+- **Modelo de negócio.** O concierge pertence a um provedor de pagamento com POS próprio. A receita vem dos pagamentos feitos no app, das lojas que entram na rede do provedor e do destaque pago, sem comissão sobre a venda. Veja [receita](revenue.md).
 
 ## Riscos
 

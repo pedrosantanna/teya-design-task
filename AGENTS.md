@@ -8,14 +8,14 @@ The deliverable for a design take-home task: the discovery, the definition and d
 
 These docs are a working record for the author, the agents and collaborators, rendered as a Claude Artifact from this repo. They are not the presentation: the output for review is a recorded walkthrough, with this record as evidence. Favour completeness and traceability over storytelling. The prototype is built in **code**. Figma and Apple Freeform are used only for exploration; their outputs may be attached as process assets, but they are not deliverables and not a handoff source.
 
-Platform (mobile vs. web), the prototype's stack and repo layout are deliberately undecided — see `docs/decision-log.md`. Update this file once they are decided.
+The shopper app is a native mobile app, iOS first: follow Apple's Human Interface Guidelines first and Material Design second, and favour iOS where they differ (decision 021). The shop side has no interface; it is designed as states. The prototype's stack and repo layout are still undecided — see `docs/decision-log.md`.
 
 ## Layout and commands
 
 - `docs/` — all content, in Markdown. Single source of truth. `docs/discover/` holds the discovery research.
 - `site/` — the docs site that renders `docs/` (shadcn/ui-style neutral design, sidebar IA). `site/nav.json` defines the sidebar; every page is an entry pointing at a `docs/*.md` file. Adding a page = write the Markdown + add it to `nav.json`.
 - Preview: `python3 site/serve.py` → http://localhost:4173 (serves the repo root and wraps `site/index.html` in the document skeleton the artifact platform adds at publish time, so `index.html` itself has no `<html>/<head>/<body>`).
-- Publishing: the site is published as a Claude Artifact with `site/index.html` as the page and `site/nav.json` + every `docs/**/*.md` as supporting files under their repo paths.
+- Publishing: the site is published as a Claude Artifact with `site/index.html` as the page and `site/nav.json`, `site/canvas.js`, `site/canvas.css`, every `docs/**/*.md`, every canvas `docs/**/*.html` and the persona images as supporting files under their repo paths.
 
 ### Markdown extensions the site understands
 Fenced blocks with these languages render as components:
@@ -23,6 +23,7 @@ Fenced blocks with these languages render as components:
 - ` ```empathy-map ` — Strategyzer empathy map. `Label:` lines (See, Hear, Think and feel, Say and do, Pains, Gains) each followed by `- bullet` lines.
 - ` ```timeline ` — `- YYYY-MM-DD — text` lines.
 - ` ```summary ` — the box at the top of every page: `Takeaways:`, `Call:`, `AI:` and `Trade-offs:`, each followed by `- ` bullets. Put it right after the lede paragraph.
+- Canvas pages (decision 022): a nav item with `"canvas": "docs/…/name.html"` next to `src` renders as a FigJam-like canvas; the `.md` gives title, lede and summary. In the HTML, `<section class="frame" id data-x data-y data-title>` holds an iOS wireframe built from the `.ios-*` kit in `site/index.html`, `class="state"` a state node, `class="note"` a sticky note with `<p lang="en">` and `<p lang="pt">`, and `<a class="link" data-from data-to data-label-en data-label-pt>` an arrow (`data-from` may be a CSS selector inside a frame). Wireframe interface copy stays English in both languages; notes and labels carry both.
 - ` ```occasion-grid ` — generated, never hand-written. Coding lives in `docs/discover/personas/coding*.json`; run `python3 scripts/build_personas.py` to refresh the grid and tables between `<!-- generated:NAME -->` markers.
 Relative links between `.md` files are rewritten to the matching site page. A page's H1 is its title and its first paragraph is the lede.
 

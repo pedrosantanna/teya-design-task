@@ -1,6 +1,6 @@
 # Hipóteses
 
-O conceito se apoia em onze hipóteses. A maioria vem de uma suposição ou pergunta em aberto da [conclusão do Discover](../discover/conclusion.md); quatro vêm dos meus motivos para fazer do concierge um agente. Cada uma tem um teste. Nove têm um critério de aprovação definido antes do teste; a H10 e a H11 são exploratórias e registram uma divisão ou uma contagem que define uma ordem ou um tamanho. Estão ordenadas por risco: o tamanho do estrago no conceito se a hipótese estiver errada, e o pouco de evidência que existe hoje.
+O conceito se apoia em dezesseis hipóteses. A maioria vem de uma suposição ou pergunta em aberto da [conclusão do Discover](../discover/conclusion.md); quatro vêm dos meus motivos para fazer do concierge um agente, e cinco da forma como ele ganha dinheiro ([receita](revenue.md)). Cada uma tem um teste. Treze têm um critério de aprovação definido antes do teste; a H10, a H11 e a H16 são exploratórias e registram uma divisão ou uma contagem que define uma ordem ou um tamanho. Estão ordenadas por risco: o tamanho do estrago no conceito se a hipótese estiver errada, e o pouco de evidência que existe hoje.
 
 ```summary
 Takeaways:
@@ -35,10 +35,17 @@ Trade-offs:
 | H9 | Os lojistas veem valor em saber o que os compradores próximos pedem, inclusive o que eles não tinham | Pergunta em aberto 1 | Mostrar a 5 lojistas um resumo semanal fictício da demanda na rua deles | 3 de 5 dizem que isso mudaria o que estocam ou os faria responder pedidos |
 | H10 | Alguns compradores preferem usar o concierge no WhatsApp ou no próprio assistente a instalar um app | Conceito | Perguntar a cada comprador dos testes da H3 e da H4 onde gostaria de usá-lo | Exploratória: registrada como uma divisão, sem critério de aprovação. Serve para definir a ordem dos canais |
 | H11 | Uma minoria das lojas de uma rua tem dados de caixa com detalhe por item | F8; pergunta em aberto 3 | Contar, nas 10 lojas da King Street da H1, quais caixas têm códigos de produto | Exploratória: registrada como número, sem critério de aprovação. Serve para dimensionar o atalho da resposta na hora |
+| H12 | Os compradores pagam no app pela maioria das reservas e dos pedidos pré-pagos, em vez de pagar no balcão | Receita | Na prova de conceito, oferecer "pagar agora" e "pagar no balcão" em toda reserva; contar qual é escolhido | 70% das reservas concluídas pagas no app |
+| H13 | Lojas que ainda não estão no POS do provedor entrariam nele para receber pagamentos e pedidos do app | Receita | Depois de quatro semanas de prova de conceito, oferecer às lojas que usam outra maquininha a conta de pagamento ou o POS do provedor | 2 das primeiras 5 lojas nessa situação aceitam trocar ou fazer um teste |
+| H14 | As lojas que já estão no POS do provedor veem os compradores do app como um motivo para mantê-lo | Receita; decisão 023 | Comparar as vendas por reservas do app em cada loja ao longo de quatro semanas e depois perguntar às lojas da rede se isso muda o valor que dão ao seu POS | 3 de 5 dizem que isso as faria manter ou recomendar o POS |
+| H15 | As lojas pagariam para aparecer em destaque na tela inicial ou para um bairro além da sua rua | Receita | Depois de quatro semanas de resumos da demanda, oferecer um espaço em destaque a um preço semanal informado | 2 de 10 lojas pagam ou aceitam um teste pago |
+| H16 | Os compradores compram de uma loja mais distante quando ela é a única com o item e eles podem pagar antes | Receita | Dados da prova de conceito: parcela das reservas concluídas em lojas a mais de 15 minutos a pé | Exploratória: registrada como parcela; serve para dimensionar o caso do alcance pago |
 
 Um teste de protótipo registra a escolha declarada: o que o comprador diz ou clica num cenário. Ele não mostra se a pessoa iria, pagaria ou retiraria. Para a H2 e a H7, o concierge feito à mão acrescenta a verificação de comportamento, com necessidades reais e itens seguros de verdade.
 
 ## O que cada teste precisa
+
+Estes testes acontecem dentro da [prova de conceito](next-step.md): o agente concierge chega às lojas, e o protótipo do app de quem compra é o que os compradores usam. A versão feita à mão abaixo é a alternativa se o agente não estiver pronto.
 
 - **Concierge à mão pelo WhatsApp (H1, acompanhamentos da H2 e da H7, H4, H6, H10, H11).** Um telefone com WhatsApp, uma lista de dez lojas da King Street que respondem pelo WhatsApp, de categorias que apareceram na netnografia (ferragens, floricultura, padaria, açougue, farmácia), e seis compradores com necessidades reais, pelo menos três deles trabalhando no horário das lojas. Eu faço o papel de concierge. Nada construído. Dois dias, mais uma volta pela King Street depois das 18h30.
 - **Teste do protótipo (H2, H3, H5, H7, H8, H10).** O protótipo clicável do Deliver, com cenários tirados dos posts das personas (óculos para eclipse na véspera, um ventilador numa onda de calor, as compras da semana depois do trabalho). Seis compradores, 30 minutos cada.

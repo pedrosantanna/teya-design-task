@@ -152,7 +152,40 @@ Uma revisão externa mostrou que o post de @London_W4 é uma caminhada pela King
 **Efeito:** três clusters continuam com o melhor resultado (silhueta média 0,55, contra 0,54 para dois, quatro e cinco). Sam e Jess mantêm seus posts; a Ruth passa de quatro posts para três, todos de compras de rotina. São 20 posts clusterizados em vez de 21.
 **Em aberto:** a Ruth agora se apoia em três posts, o que a deixa ainda mais claramente como a persona com menos evidência.
 
+## 020 · Prova de conceito com lojas antes de mais pesquisa
+**2026-11-02 · Decidido**
+
+Não vou entrevistar lojistas antes de construir. Vou construir uma prova de conceito do agente concierge, levá-la a cerca de dez lojas da King Street e passar as hipóteses por ela com lojas e compradores. Convidar as lojas também serve de descoberta sobre como elas trabalham, e as lojas podem trazer os primeiros compradores.
+
+**Por quê:** um protótipo do agente leva dias, e o que uma loja faz com um pedido real responde à H1, à H6 e à H9 melhor do que o que ela diria numa entrevista.
+**Em aberto:** se o agente fica pronto a tempo. O concierge feito à mão continua como alternativa. As lojas como canal de aquisição são uma suposição.
+
+## 021 · App nativo, iOS primeiro
+**2026-11-02 · Decidido**
+
+O app de quem compra é um app móvel nativo. Sigo primeiro as Human Interface Guidelines da Apple e depois o Material Design, o mais de perto possível. Quando o trabalho de marca pede uma mudança, ou quando um padrão existe no iOS e não no Android, fico com o iOS. O lado da loja não tem interface neste take-home.
+
+**Por quê:** os padrões nativos são o que os compradores já conhecem, e partir de uma diretriz só mantém os wireframes consistentes.
+**Em aberto:** a stack do protótipo.
+
+## 022 · Canvas de ideação
+**2026-11-02 · Decidido**
+
+A ideação na Develop é um grupo de páginas. Algumas são texto; outras são canvas com fundo pontilhado, zoom e movimento como no FigJam, onde wireframes e diagramas ficam lado a lado, ligados por setas. Cada canvas tem um arquivo HTML próprio ao lado de uma página em Markdown com o título e o resumo. Os itens de um canvas podem ser selecionados, mas não movidos. O texto da interface nos wireframes fica em inglês nos dois idiomas do site, porque o app é para Londres; notas e rótulos seguem o idioma do site.
+
+**Por quê:** fluxos e diagramas de estados se leem melhor no espaço do que em texto, e um canvas reutilizável mantém todos eles no mesmo registro.
+**Em aberto:** um painel de inspeção, que por enquanto abre na seleção com detalhes básicos.
+
+## 023 · Receita por pagamentos, rede e destaque pago
+**2026-11-02 · Decidido**
+
+Defini o modelo de negócio como hipóteses num cenário: o concierge pertence a um provedor de pagamento com POS próprio. A receita vem dos pagamentos feitos no app, das lojas que entram na rede do provedor para recebê-los, de mais vendas para as lojas que já estão nessa rede (o que faz o POS valer a pena) e do destaque e do alcance pagos. Não há comissão sobre a venda.
+
+**Por quê:** a comissão de 14–35% dos apps de delivery é o custo de que as lojas independentes reclamam (F9). Um provedor de pagamento ganha no próprio pagamento, e uma loja que entra traz todas as suas vendas.
+**Em aberto:** H12 a H16. Se a lista mostra só as lojas no POS do provedor ou todas as lojas; a prova de conceito começa aberta e registra quais lojas estão na rede.
+
 ## Ainda em aberto
 
 - Estrutura do repo (app único ou monorepo): decidir quando a construção começar e o formato dela estiver claro.
+- Stack do protótipo: decidir no Deliver.
 - Fluxo guiado por specs: se vale escrever specs antes de construir, e quão leves elas devem ser.

@@ -131,6 +131,12 @@
           "pt": "Proposta de valor"
         },
         {
+          "id": "revenue",
+          "title": "Revenue",
+          "src": "docs/define/revenue.md",
+          "pt": "Receita"
+        },
+        {
           "id": "blueprint",
           "title": "Service blueprint",
           "src": "docs/define/blueprint.md",
@@ -141,15 +147,46 @@
           "title": "Hypotheses",
           "src": "docs/define/hypotheses.md",
           "pt": "Hipóteses"
+        },
+        {
+          "id": "next-step",
+          "title": "Next step",
+          "src": "docs/define/next-step.md",
+          "pt": "Próximo passo"
         }
       ]
     },
     {
       "title": "Develop",
-      "disabled": true,
-      "note": "Concepts and the journey",
       "pt": "Develop",
-      "note_pt": "Conceitos e a jornada"
+      "items": [
+        {
+          "id": "develop",
+          "title": "Overview",
+          "src": "docs/develop/index.md",
+          "pt": "Visão geral"
+        },
+        {
+          "title": "Ideation",
+          "pt": "Ideação",
+          "children": [
+            {
+              "id": "app-flow",
+              "title": "App flow",
+              "src": "docs/develop/ideation/app-flow.md",
+              "canvas": "docs/develop/ideation/app-flow.html",
+              "pt": "Fluxo do app"
+            },
+            {
+              "id": "shop-states",
+              "title": "Shop request states",
+              "src": "docs/develop/ideation/shop-states.md",
+              "canvas": "docs/develop/ideation/shop-states.html",
+              "pt": "Estados do pedido na loja"
+            }
+          ]
+        }
+      ]
     },
     {
       "title": "Deliver",

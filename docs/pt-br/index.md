@@ -15,8 +15,8 @@ A documentação segue a ordem do trabalho. Cada fase começa quando a anterior 
 | Fase | Pergunta que responde | Status |
 | --- | --- | --- |
 | Discover | O que é uma high street hoje, quem compra nela e o que essas pessoas dizem sobre ela? | Concluída |
-| Define | Findability ou transaction, para qual comprador, com quais premissas? | Em andamento |
-| Develop | Como fica a jornada, e qual conceito se sustenta? | Não iniciada |
+| Define | Findability ou transaction, para qual comprador, com quais premissas? | Concluída |
+| Develop | Como fica a jornada, e qual conceito se sustenta? | Em andamento |
 | Deliver | O protótipo, as telas refinadas e, se valer a pena construir, um app funcionando | Não iniciada |
 
 O [registro de decisões](decision-log.md) guarda as escolhas que moldaram o processo, na ordem em que eu as fiz.

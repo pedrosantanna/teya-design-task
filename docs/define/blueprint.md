@@ -1,6 +1,6 @@
 # Service blueprint
 
-How a request moves between the shopper, the concierge and the shop, from the first message to collection and what happens after. The lanes above the line of visibility are what the shopper sees; the lanes below are the agents, the shop and the systems behind them. The example is Sam's: eclipse glasses near Hammersmith before 4pm.
+How a request moves between the shopper, the concierge and the shop, from the first message to collection and what happens after. The lanes above the line of visibility are what the shopper sees; the lanes below are the agents, the shop and the systems behind them. The example is Sam's: eclipse glasses near Hammersmith before 4pm. The concierge is an agent, and the only one the shopper talks to, in the app, on WhatsApp or through their own AI assistant over MCP. The agents below the line of visibility are parts of the same system that do the work behind it.
 
 ```summary
 Takeaways:
@@ -24,9 +24,9 @@ Steps: Ask | Search | Offer | Reserve and pay | Collect or receive | After
 Touchpoint {muted text smartphone}: App chat ; WhatsApp ; Own AI assistant (MCP) | Same thread | Option cards | Payment sheet | Shop counter ; Collection point ; Courier | Notification
 Shopper {c1 card user}: Says what, where, by when ; Or leaves a request ahead | Waits, or leaves the thread | Compares the options | Picks a shop and a collection time ; Pays once it's set aside | Shows the code ; Or collects after work ; Or gets the delivery | Rates the shop ; Keeps a standing request
 --- Line of interaction
-Concierge {c3 card concierge-bell}: Confirms in one line ; Asks only what's missing | "Checking six shops near you" | Shows each answer as it arrives ; Instant only from shared tills ; Keeps looking | "Set aside" from the shop ; Then the payment ; Hold code, place and time | Directions ; Reminder before the hold ends | Follows up ; Acts on standing requests
+Concierge agent {c3 card bot}: Confirms in one line ; Asks only what's missing | "Checking six shops near you" | Shows each answer as it arrives ; Instant only from shared tills ; Keeps looking | "Set aside" from the shop ; Then the payment ; Hold code, place and time | Directions ; Reminder before the hold ends | Follows up ; Acts on standing requests
 --- Line of visibility
-Agents {c4 agent bot}: **Orchestrator** plans the tasks | **Stock** reads shared tills ; **Matching** picks likely shops ; **Contact** messages each shop | Collects replies ; **Courier** quotes delivery ; Widens the search near the deadline | **Contact** gets the shop's confirmation ; **Payment** charges ; **Contact** releases the others | Watches the hold ; **Courier** books the drop or evening run | Logs demand ; Matches standing requests
+Agents behind it {c4 agent settings}: **Orchestrator** plans the tasks | **Stock** reads shared tills ; **Matching** picks likely shops ; **Contact** messages each shop | Collects replies ; **Courier** quotes delivery ; Widens the search near the deadline | **Contact** gets the shop's confirmation ; **Payment** charges ; **Contact** releases the others | Watches the hold ; **Courier** books the drop or evening run | Logs demand ; Matches standing requests
 Shop {c2 card store}: - | Gets the request in its merchant app or WhatsApp | Answers: has it, price, hold, delivery | Sets the item aside ; Confirms it | Hands it over ; Or leaves it at a collection point | Weekly demand summary
 --- Line of internal interaction
 Systems {muted text server}: Location ; Saved preferences | Till stock ; Listings and hours | Courier ; Maps | Card, wallet, pay by link | Courier ; Collection points ; Settlement | Demand records
