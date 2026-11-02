@@ -330,3 +330,8 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .ios-tabbar .askpill { flex-direction: row; justify-content: space-between; gap: 8px; height: 46px; padding: 0 14px 0 16px; border-radius: 23px; background: var(--ios-fill); font-size: 15px; font-weight: 400; color: var(--ios-label-2); white-space: nowrap; }
 .ios-tabbar .askpill .ic { width: 18px; height: 18px; color: var(--ios-label); }
 .ios-tabbar.pill .ios-count { right: -6px; }
+/* Ask bar with a round Requests button beside it (option G) */
+.ios-bar { display: flex; align-items: center; gap: 10px; }
+.ios-fab { position: relative; flex: none; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--ios-bg); box-shadow: 0 0 0 1px var(--ios-sep), 0 6px 20px rgb(0 0 0 / .10); }
+.ios-fab .ic { width: 22px; height: 22px; }
+.ios-fab .ios-count { position: absolute; top: -2px; right: -2px; box-shadow: 0 0 0 2px var(--ios-bg); }

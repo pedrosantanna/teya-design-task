@@ -100,6 +100,12 @@ Não encontrei a paleta na primeira rodada e pedi mais, com quatro ou cinco core
 ### 22. Identidade v3: uma linha de ícone em cinco paletas
 Escolhi o teste de ícone 3 (sobrancelhas e bigode) e cinco paletas (A, C, F, I, J). O agente principal redesenhou o bigode com quatro e cinco listras e aplicou nas cinco paletas, sobre o tint, num fundo claro e num fundo escuro, e em tamanhos pequenos. O zoom mínimo do canvas caiu para 4%, porque o quadro de identidade ficou mais alto do que o ajuste à tela conseguia mostrar.
 
+### 23. Posição das abas, opção G
+Pedi um teste em que Requests é um botão redondo ao lado da barra de pedido, como na barra do Granola. O agente principal desenhou o botão à esquerda e à direita, e a folha que ele abre, comparou com as opções A a F e deu a opinião dele: a G mantém a barra de pedido grande e põe Requests sob o polegar, ao custo de um ícone sem rótulo. O canvas de posição das abas agora também tem versões.
+
+### 24. Fluxo do app v3, e um canvas por exploração
+Escolhi a opção G com o botão à esquerda (decisão 026). O agente principal tirou as abas da home, pôs o botão redondo de Requests à esquerda da barra de pedido e transformou a tela de Requests numa folha sobre a rua. Também pedi para versionar só o fluxo do app e os estados do pedido na loja; os outros canvas de ideação (posição das abas, identidade) agora guardam todas as rodadas lado a lado num quadro só, então os menus de versão deles voltaram a ser um canvas único. O agente também restaurou dois títulos de seção que os próprios scripts dele tinham apagado do registro de decisões em português e do log de AI.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.

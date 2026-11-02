@@ -100,6 +100,12 @@ I didn't find the palette in the first round and asked for more, with four or fi
 ### 22. Identity v3: one icon line in five palettes
 I picked icon test 3 (brows and a moustache) and five palettes (A, C, F, I, J). The main agent redrew the moustache with four and five stripes and rendered each in the five palettes, on the tint, a light tile and a dark tile, and at small sizes. The canvas's minimum zoom went down to 4%, because the identity board had grown taller than the fit could show.
 
+### 23. Tab placement, option G
+I asked for a test where Requests is a round button beside the ask bar, as on Granola's bar. The main agent drew it on the left and on the right, and the sheet it opens, compared it with A to F, and gave its view: G keeps the large ask bar and puts Requests under the thumb, at the cost of an icon without a label. The tab placement canvas now has versions too.
+
+### 24. App flow v3, and one canvas per exploration
+I chose option G with the button on the left (decision 026). The main agent removed the tabs from the home, put the round Requests button left of the ask bar, and turned the Requests screen into a sheet over the street. I also asked to version only the app flow and the shop's request states; the other ideation canvases (tab placement, identity) now keep every round side by side on one board, so their version menus were merged back into a single canvas. The agent also restored two section headings its own scripts had deleted from the Portuguese decision log and the AI log.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.

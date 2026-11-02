@@ -176,6 +176,10 @@
               "src": "docs/develop/ideation/app-flow.md",
               "canvas": [
                 {
+                  "version": "v3",
+                  "file": "docs/develop/ideation/app-flow-v3.html"
+                },
+                {
                   "version": "v2",
                   "file": "docs/develop/ideation/app-flow-v2.html"
                 },
@@ -204,20 +208,7 @@
               "id": "identity",
               "title": "Identity",
               "src": "docs/develop/ideation/identity.md",
-              "canvas": [
-                {
-                  "version": "v3",
-                  "file": "docs/develop/ideation/identity-v3.html"
-                },
-                {
-                  "version": "v2",
-                  "file": "docs/develop/ideation/identity-v2.html"
-                },
-                {
-                  "version": "v1",
-                  "file": "docs/develop/ideation/identity-v1.html"
-                }
-              ],
+              "canvas": "docs/develop/ideation/identity.html",
               "pt": "Identidade"
             }
           ]

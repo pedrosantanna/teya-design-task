@@ -24,7 +24,8 @@ Trade-offs:
 
 | Versão | O que mudou | Por quê |
 | --- | --- | --- |
-| v2 (atual) | A tela inicial e a tela inicial rolada viraram uma tela só, com as abas Nearby e Requests no topo. O pedido em andamento e as compras recentes saíram da tela inicial e foram para a aba Requests, uma lista de chats com um status em cada linha. Uma tela em que o concierge propõe dividir um pedido em dois. Espaçamento dos títulos mais justo, rótulos dos botões numa linha só | Percebi que a tela inicial misturava duas funções, explorar a rua e acompanhar o que eu pedi, e que o cartão do pedido e as compras recentes pareciam módulos avulsos |
+| v3 (atual) | Sem abas: um botão redondo de Requests à esquerda da barra de pedido abre Requests como uma folha sobre a rua (decisão 026) | Comparei sete posições para a troca e escolhi a que mantém a barra de pedido grande |
+| v2 | A tela inicial e a tela inicial rolada viraram uma tela só, com as abas Nearby e Requests no topo. O pedido em andamento e as compras recentes saíram da tela inicial e foram para a aba Requests, uma lista de chats com um status em cada linha. Uma tela em que o concierge propõe dividir um pedido em dois. Espaçamento dos títulos mais justo, rótulos dos botões numa linha só | Percebi que a tela inicial misturava duas funções, explorar a rua e acompanhar o que eu pedi, e que o cartão do pedido e as compras recentes pareciam módulos avulsos |
 | v1 | Primeiro fluxo a partir do blueprint: tela inicial no estilo do Granola, chat, reservas, pagamento, caminhos de falha, outros caminhos | Primeira versão depois das referências do Mobbin |
 
 ## O que é um pedido

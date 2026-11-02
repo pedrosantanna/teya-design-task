@@ -200,6 +200,14 @@ Each request is one chat with the concierge, holding what the shopper asked for 
 **Why:** it keeps the shopper's own words as the unit, and splits only where one status per row would stop being true. One chat per product fragments a shopping list; one chat per shop gives the shopper back the work the concierge exists to do.
 **Open:** how often the concierge's split is right, and the tab's name ("Requests" for now).
 
+## 026 · Requests button left of the ask bar
+**2026-11-02 · Decided**
+
+The home has no tabs. A round Requests button sits left of the ask bar, with a count when a request needs the shopper, and opens Requests as a sheet over the street. This replaces the Nearby and Requests tabs of app flow v2 (option G in Tab placement).
+
+**Why:** it keeps the large ask bar that makes asking the main way in, and puts Requests under the thumb. On the left it stays clear of the send button while typing.
+**Open:** a chat icon says less than a label, so the count and a first-run hint have to carry it; a third mode would need another pattern.
+
 ## Still open
 
 - Repo layout (single app or monorepo): to decide when the build starts and its shape is known.

@@ -200,6 +200,15 @@ Cada pedido é um chat com o concierge e reúne o que o comprador pediu de uma v
 **Por quê:** a unidade continua sendo as palavras do próprio comprador, e a separação só acontece quando um status por linha deixaria de ser verdade. Um chat por produto fragmenta uma lista de compras; um chat por loja devolve ao comprador o trabalho que o concierge existe para fazer.
 **Em aberto:** com que frequência a sugestão de separar acerta, e o nome da aba ("Requests" por enquanto).
 
+## 026 · Botão de Requests à esquerda da barra de pedido
+**2026-11-02 · Decidido**
+
+A home não tem abas. Um botão redondo de Requests fica à esquerda da barra de pedido, com uma contagem quando um pedido precisa do comprador, e abre Requests como uma folha sobre a rua. Isso substitui as abas Nearby e Requests da v2 do fluxo do app (opção G em Posição das abas).
+
+**Por quê:** mantém a barra de pedido grande, que faz de pedir a entrada principal, e põe Requests sob o polegar. À esquerda, fica longe do botão de enviar durante a digitação.
+**Em aberto:** um ícone de conversa diz menos que um rótulo, então a contagem e uma dica no primeiro uso precisam segurar isso; um terceiro modo pediria outro padrão.
+
+## Ainda em aberto
 
 - Estrutura do repo (app único ou monorepo): decidir quando a construção começar e o formato dela estiver claro.
 - Stack do protótipo: decidir no Deliver.

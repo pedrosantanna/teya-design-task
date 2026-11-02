@@ -19,13 +19,15 @@ Trade-offs:
 - Showing every palette on the same two screens makes them easy to compare, and hides how each would change layout, type or illustration.
 ```
 
-## Versions
+## Rounds
 
-| Version | What changed |
+Every round stays on the same board, newest at the top.
+
+| Round | What it added |
 | --- | --- |
-| v3 (current) | Icon test 3 (brows and moustache) with a four or five-stripe moustache, in palettes A, C, F, I and J |
-| v2 | Ten more palettes of four or five colours, and six icon tests where the parade's awning becomes a terrier's beard |
-| v1 | Four concept directions, three palettes, applications on the v2 home, references |
+| 3 | Icon test 3 (brows and moustache) with a four or five-stripe moustache, in palettes A, C, F, I and J |
+| 2 | Ten more palettes of four or five colours, and six icon tests where the parade's awning becomes a terrier's beard |
+| 1 | Four concept directions, three palettes, applications on the v2 home, references |
 
 ## Palettes, round 2
 

@@ -19,13 +19,15 @@ Trade-offs:
 - Mostrar todas as paletas nas mesmas duas telas facilita a comparação, e esconde como cada uma mudaria layout, tipografia ou ilustração.
 ```
 
-## Versões
+## Rodadas
 
-| Versão | O que mudou |
+Todas as rodadas ficam no mesmo quadro, a mais recente no topo.
+
+| Rodada | O que acrescentou |
 | --- | --- |
-| v3 (atual) | Teste de ícone 3 (sobrancelhas e bigode) com bigode de quatro ou cinco listras, nas paletas A, C, F, I e J |
-| v2 | Mais dez paletas de quatro ou cinco cores, e seis testes de ícone em que o toldo da parade vira a barba de um terrier |
-| v1 | Quatro direções de conceito, três paletas, aplicações na home da v2, referências |
+| 3 | Teste de ícone 3 (sobrancelhas e bigode) com bigode de quatro ou cinco listras, nas paletas A, C, F, I e J |
+| 2 | Mais dez paletas de quatro ou cinco cores, e seis testes de ícone em que o toldo da parade vira a barba de um terrier |
+| 1 | Quatro direções de conceito, três paletas, aplicações na home da v2, referências |
 
 ## Paletas, segunda rodada
 

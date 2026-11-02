@@ -1,0 +1,457 @@
+<!-- App flow, v3: no tabs; a round Requests button left of the ask bar opens Requests as a sheet (decision 026). Earlier: app-flow-v2.html, app-flow-v1.html. iOS wireframes (decision 021). Format: see AGENTS.md, canvas pages. Interface copy stays in English. -->
+
+<div class="area" data-x="-100" data-y="0" data-w="3593" data-h="1290" data-title-en="1 · Ask and wait" data-title-pt="1 · Pedir e esperar"></div>
+<div class="area" data-x="-100" data-y="1370" data-w="3593" data-h="1290" data-title-en="2 · Choose, hold, pay and collect" data-title-pt="2 · Escolher, reservar, pagar e retirar"></div>
+<div class="area" data-x="-92" data-y="2740" data-w="1640" data-h="1290" data-title-en="3 · When something fails" data-title-pt="3 · Quando algo dá errado"></div>
+<div class="area" data-x="1892" data-y="2740" data-w="2160" data-h="1290" data-title-en="4 · Other paths" data-title-pt="4 · Outros caminhos"></div>
+
+<!-- ============ Row 1 ============ -->
+<section class="frame" id="home" data-x="0" data-y="110" data-title="Home">
+  <div class="ios">
+    <div class="ios-top">
+      <img class="ios-avatar" src="../../discover/personas/img/sam.jpg" alt="Sam">
+      <div class="grow"><div class="loc">Blythe Road, W14 <i data-icon="chevron-right"></i></div><div class="sub">6 shopping streets within 15 min</div></div>
+      <span class="ios-icon-btn"><i data-icon="bell"></i></span>
+    </div>
+    <div class="ios-body">
+      <div>
+        <div class="ios-h">Open near you <small>Promoted</small></div>
+        <div class="ios-scroll">
+          <div class="ios-tile"><div class="img h120"><span class="ios-badge">Promoted</span></div><div class="name">Rossi's Bakery</div><div class="meta">Blythe Road · till 6pm · 2 min</div></div>
+          <div class="ios-tile"><div class="img h120"></div><div class="name">Paper &amp; Co</div><div class="meta">King Street · till 7pm · 13 min</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="ios-h">New near you</div>
+        <div class="ios-chips" style="margin-bottom:12px"><span class="ios-chip on">All</span><span class="ios-chip">Blythe Rd</span><span class="ios-chip">King St</span><span class="ios-chip">Goldhawk Rd</span></div>
+        <div class="ios-scroll">
+          <div class="ios-tile md"><div class="img h96"><span class="ios-badge">New</span></div><div class="name">Halo Florist</div><div class="meta">Goldhawk Road · 13 min</div></div>
+          <div class="ios-tile md"><div class="img h96"></div><div class="name">Olympia Cameras</div><div class="meta">Kensington High St · 12 min</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="ios-h">Shops by kind</div>
+        <div class="ios-cats">
+          <div><div class="img"></div>Bakery</div><div><div class="img"></div>Butcher</div><div><div class="img"></div>Florist</div><div><div class="img"></div>Hardware</div>
+        </div>
+      </div>
+    </div>
+    <div class="ios-composer-wrap">
+      <div class="ios-chips"><span class="ios-chip"><i data-icon="clock"></i>Open now</span><span class="ios-chip">Flowers for tonight</span><span class="ios-chip">Picture hooks</span></div>
+      <div class="ios-bar"><span class="ios-fab"><i data-icon="message-circle"></i><b class="ios-count">2</b></span><div class="ios-composer" style="flex:1"><span class="ph">Ask for anything nearby</span><span class="mic"><i data-icon="mic"></i></span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="frame" id="requests" data-x="600" data-y="110" data-title="Requests (sheet)">
+  <div class="ios">
+    <div class="ios-top">
+      <img class="ios-avatar" src="../../discover/personas/img/sam.jpg" alt="Sam">
+      <div class="grow"><div class="loc">Blythe Road, W14 <i data-icon="chevron-right"></i></div><div class="sub">6 shopping streets within 15 min</div></div>
+      <span class="ios-icon-btn"><i data-icon="bell"></i></span>
+    </div>
+    <div class="ios-dim"></div>
+    <div class="ios-sheet" style="top:64px;gap:12px;padding-bottom:0">
+      <div class="ios-grabber"></div>
+      <div class="ios-sheet-head"><span style="font-size:22px;font-weight:700;letter-spacing:.35px">Requests</span><span class="ios-icon-btn" style="width:30px;height:30px"><i data-icon="x"></i></span></div>
+      <div class="ios-chips"><span class="ios-chip on">All</span><span class="ios-chip">Needs you · 1</span><span class="ios-chip">Active</span><span class="ios-chip">Done</span></div>
+      <div class="ios-reqs">
+        <div class="ios-req unread"><div class="thumb"><div class="img sq56"></div><i class="logo"></i><i class="logo"></i></div><div class="grow"><div class="t"><span>Eclipse glasses × 2</span><time>13:16</time></div><div class="p"><b>Concierge:</b> Paper &amp; Co can hold them until 4pm.</div><div class="st"><i class="d search"></i>2 shops have them · by 4pm</div></div><b class="ios-count">2</b></div>
+        <div class="ios-req unread"><div class="thumb"><div class="img sq56"></div><i class="logo"></i></div><div class="grow"><div class="t"><span>Birthday cake for Saturday</span><time>11:02</time></div><div class="p"><b>Concierge:</b> Rossi's can do it with 2 days' notice.</div><div class="st"><i class="d needs"></i>Needs you · order by tomorrow</div><span class="ios-btn sm">Order at Rossi's</span></div></div>
+        <div class="ios-req"><div class="thumb"><div class="img sq56"></div><i class="logo"></i></div><div class="grow"><div class="t"><span>Sourdough, every Friday</span><time>Fri</time></div><div class="p">You: Collect after work as usual</div><div class="st"><i class="d prog"></i>Held at Rossi's · until 6pm</div></div><i data-icon="repeat" class="pin"></i></div>
+        <div class="ios-req done"><div class="thumb"><div class="img sq56"></div><i class="logo"></i></div><div class="grow"><div class="t"><span>Picture hooks</span><time>12 Oct</time></div><div class="p"><b>Concierge:</b> Collected. Thanks for shopping local.</div><div class="st"><i class="d done"></i>Collected at Brook Hardware · £4.20</div></div></div>
+        <div class="ios-req done"><div class="thumb"><div class="img sq56"></div></div><div class="grow"><div class="t"><span>Desk fan</span><time>Aug</time></div><div class="p"><b>Concierge:</b> No shop nearby had one in time.</div><div class="st"><i class="d done"></i>Not found · closed</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="frame" id="compose" data-x="1200" data-y="110" data-title="Ask">
+  <div class="ios">
+    <div class="ios-nav"><span class="back"><i data-icon="x"></i></span><span class="title">New request</span><span></span></div>
+    <div class="ios-body tight">
+      <div class="ios-h" style="font-size:15px;color:#3c3c4399;font-weight:600;margin:0">Try asking</div>
+      <div class="ios-list plain">
+        <div class="ios-cell"><i data-icon="search"></i><div class="grow">Eclipse glasses near me, today</div></div>
+        <div class="ios-cell"><i data-icon="clock"></i><div class="grow">A fan I can pick up after work</div></div>
+        <div class="ios-cell"><i data-icon="repeat"></i><div class="grow">Sourdough from Rossi's every Friday</div></div>
+      </div>
+    </div>
+    <div class="ios-composer-wrap" style="bottom:300px;padding-bottom:10px">
+      <div class="ios-chips"><span class="ios-chip on"><i data-icon="map-pin"></i>Within 15 min</span><span class="ios-chip"><i data-icon="clock"></i>By 4pm</span></div>
+      <div class="ios-composer"><span class="txt">Eclipse glasses, 2 pairs, before 4pm<i class="caret"></i></span><span class="send"><i data-icon="arrow-up"></i></span></div>
+    </div>
+    <div class="ios-keyboard"><div class="r"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="r"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="r"><i class="m"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="m"></i></div><div class="r"><i class="m"></i><i class="w"></i><i class="m"></i></div></div>
+  </div>
+</section>
+
+<section class="frame" id="clarify" data-x="1800" data-y="110" data-title="Concierge confirms">
+  <div class="ios">
+    <div class="ios-nav"><span class="back"><i data-icon="chevron-left"></i>Requests</span><span class="title">Eclipse glasses</span><span class="end"><i data-icon="ellipsis"></i></span></div>
+    <div class="ios-chat">
+      <div class="ios-bubble me">Eclipse glasses, 2 pairs, before 4pm</div>
+      <div class="ios-agent"><i data-icon="bot"></i>Concierge</div>
+      <div class="ios-bubble agent">Got it: 2 pairs within 15 minutes of you, by 4pm. Do you want to collect, or should I check delivery too?</div>
+      <div class="ios-chips" style="padding:0"><span class="ios-chip">Collect</span><span class="ios-chip">Delivery too</span></div>
+      <div class="ios-bubble me">Collect</div>
+      <div class="ios-bubble agent">I'll ask the shops most likely to have them.</div>
+    </div>
+    <div class="ios-composer-wrap"><div class="ios-composer"><span class="ph">Reply</span><span class="mic"><i data-icon="mic"></i></span></div></div>
+  </div>
+</section>
+
+<section class="frame" id="searching" data-x="2400" data-y="110" data-title="Asking shops">
+  <div class="ios">
+    <div class="ios-nav"><span class="back"><i data-icon="chevron-left"></i>Requests</span><span class="title">Eclipse glasses</span><span class="end"><i data-icon="ellipsis"></i></span></div>
+    <div class="ios-chat">
+      <div class="ios-agent"><i data-icon="bot"></i>Concierge</div>
+      <div class="ios-bubble agent">I'm asking 6 shops on five streets near you. You can leave; I'll let you know as they answer.</div>
+      <div class="ios-status-list">
+        <div class="ios-cell"><div class="grow">Paper &amp; Co<div class="sub">King Street</div></div><span class="st ok"><i data-icon="circle-check"></i>Has them · £14.99</span></div>
+        <div class="ios-cell"><div class="grow">Broadway Chemist<div class="sub">Hammersmith Broadway</div></div><span class="st ok"><i data-icon="circle-check"></i>Has them · £9.50</span></div>
+        <div class="ios-cell"><div class="grow">Bush Opticians<div class="sub">Shepherd's Bush Green</div></div><span class="st"><i data-icon="circle-x"></i>No</span></div>
+        <div class="ios-cell"><div class="grow">Olympia Cameras<div class="sub">Kensington High Street</div></div><span class="st"><i data-icon="clock"></i>Asked 2 min ago</span></div>
+        <div class="ios-cell"><div class="grow">Goldhawk Pharmacy<div class="sub">Goldhawk Road</div></div><span class="st"><i data-icon="clock"></i>Asked 2 min ago</span></div>
+        <div class="ios-cell"><div class="grow">Brook Green Toys<div class="sub">Shepherd's Bush Road</div></div><span class="st"><i data-icon="clock"></i>Asked 2 min ago</span></div>
+      </div>
+      <div class="ios-typing"><i></i><i></i><i></i></div>
+    </div>
+    <div class="ios-composer-wrap"><div class="ios-composer"><span class="ph">Reply</span><span class="mic"><i data-icon="mic"></i></span></div></div>
+  </div>
+</section>
+
+<section class="frame" id="lock" data-x="3000" data-y="110" data-title="Away from the app">
+  <div class="ios lock">
+    <div class="ios-lock-time"><div class="d">Monday 2 November</div><div class="t">13:12</div></div>
+    <div style="flex:1"></div>
+    <div class="ios-live"><div class="row"><i data-icon="bot"></i><div class="grow">Eclipse glasses<div class="sub">2 shops have them · 3 of 6 replied</div></div><span class="sub">until 4pm</span></div><div class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div></div>
+    <div style="height:10px"></div>
+    <div class="ios-notif"><span class="app"><i data-icon="bot"></i></span><div class="grow"><strong>Concierge</strong><span class="when"> now</span><br>Paper &amp; Co on King Street has them: £14.99, can hold until 4pm.</div></div>
+    <div style="height:120px"></div>
+  </div>
+</section>
+
+<!-- ============ Row 2 ============ -->
+<section class="frame" id="offers" data-x="0" data-y="1480" data-title="Answers as they arrive">
+  <div class="ios">
+    <div class="ios-nav"><span class="back"><i data-icon="chevron-left"></i>Requests</span><span class="title">Eclipse glasses</span><span class="end"><i data-icon="ellipsis"></i></span></div>
+    <div class="ios-chat">
+      <div class="ios-agent"><i data-icon="bot"></i>Concierge</div>
+      <div class="ios-bubble agent">Two shops have them. Still waiting on 3.</div>
+      <div class="ios-option">
+        <div class="row"><div class="img sq"></div><div><div class="name">Paper &amp; Co</div><div class="ios-caption">Replied 4 min ago</div></div><span class="price">£14.99</span></div>
+        <div class="facts"><span><i data-icon="navigation"></i>13 min walk</span><span><i data-icon="clock"></i>Open till 7pm</span><span><i data-icon="hourglass"></i>Holds till 4pm</span><span><i data-icon="truck"></i>Delivery £3.50</span></div>
+        <div class="acts"><span class="ios-btn">Hold</span><span class="ios-btn tinted">Details</span></div>
+      </div>
+      <div class="ios-option">
+        <div class="row"><div class="img sq"></div><div><div class="name">Broadway Chemist</div><div class="ios-caption">Replied 2 min ago</div></div><span class="price">£9.50</span></div>
+        <div class="facts"><span><i data-icon="navigation"></i>12 min walk</span><span><i data-icon="clock"></i>Open till 8pm</span><span><i data-icon="hourglass"></i>Holds 1 hour</span></div>
+        <div class="acts"><span class="ios-btn">Hold</span><span class="ios-btn tinted">Details</span></div>
+      </div>
+    </div>
+    <div class="ios-composer-wrap"><div class="ios-composer"><span class="ph">Reply</span><span class="mic"><i data-icon="mic"></i></span></div></div>
+  </div>
+</section>
+
+<section class="frame" id="option" data-x="600" data-y="1480" data-title="Shop details">
+  <div class="ios">
+    <div class="ios-nav"><span class="back"><i data-icon="chevron-left"></i>Requests</span><span class="title">Eclipse glasses</span><span></span></div>
+    <div class="ios-dim"></div>
+    <div class="ios-sheet">
+      <div class="ios-grabber"></div>
+      <div class="ios-pad" style="display:flex;gap:12px;align-items:center"><div class="img sq56"></div><div class="grow"><div style="font-size:20px;font-weight:700">Paper &amp; Co</div><div class="ios-caption">King Street · 13 min walk · open till 7pm</div></div></div>
+      <div class="ios-pad"><div class="ios-map"><span class="pin"><i data-icon="store"></i></span></div></div>
+      <div class="ios-list">
+        <div class="ios-cell"><div class="grow">Eclipse glasses, ISO certified</div><span class="val">£14.99</span></div>
+        <div class="ios-cell"><div class="grow">Quantity</div><span class="val">2</span></div>
+        <div class="ios-cell"><div class="grow">Collect by</div><span class="val">4:00 pm</span></div>
+      </div>
+      <div class="ios-seg"><span class="on">Collect</span><span>Later</span><span>Delivery</span></div>
+      <div class="ios-pad"><div class="ios-btn">Ask Paper &amp; Co to hold them</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="frame" id="waiting" data-x="1200" data-y="1480" data-title="Waiting for the shop">
+  <div class="ios">
+    <div class="ios-nav"><span class="back"><i data-icon="chevron-left"></i>Requests</span><span class="title">Eclipse glasses</span><span class="end"><i data-icon="ellipsis"></i></span></div>
+    <div class="ios-chat">
+      <div class="ios-bubble me">Hold 2 at Paper &amp; Co</div>
+      <div class="ios-agent"><i data-icon="bot"></i>Concierge</div>
+      <div class="ios-bubble agent">Asking Paper &amp; Co to put 2 pairs aside until 4pm. You'll only pay once they confirm.</div>
+      <div class="ios-card outline" style="align-self:stretch">
+        <ol class="ios-steps" style="padding:0">
+          <li><span class="dot on"><i data-icon="check"></i></span><div>Request sent to Paper &amp; Co<div class="sub">13:16</div></div></li>
+          <li><span class="dot">2</span><div>Paper &amp; Co sets them aside<div class="sub">Usually within 5 minutes</div></div></li>
+          <li><span class="dot">3</span><div>You pay £29.98<div class="sub">Refunded if the hold ends</div></div></li>
+        </ol>
+      </div>
+    </div>
+    <div class="ios-composer-wrap"><div class="ios-composer"><span class="ph">Reply</span><span class="mic"><i data-icon="mic"></i></span></div></div>
+  </div>
+</section>
+
+<section class="frame" id="pay" data-x="1800" data-y="1480" data-title="Shop confirms, then Apple Pay">
+  <div class="ios">
+    <div class="ios-nav"><span class="back"><i data-icon="chevron-left"></i>Requests</span><span class="title">Eclipse glasses</span><span></span></div>
+    <div class="ios-toast"><i data-icon="circle-check"></i><div><strong>Paper &amp; Co set them aside</strong><br><span class="ios-caption">Pay to keep the hold until 4pm</span></div></div>
+    <div class="ios-dim"></div>
+    <div class="ios-sheet float">
+      <div class="ios-sheet-head"><span>Pay</span><span class="ios-icon-btn" style="width:30px;height:30px"><i data-icon="x"></i></span></div>
+      <div class="ios-list">
+        <div class="ios-cell"><i data-icon="credit-card"></i><div class="grow">Debit card<div class="sub">•••• 4021</div></div><i data-icon="chevron-right" class="chev"></i></div>
+        <div class="ios-cell"><div class="grow">Paper &amp; Co<div class="sub">2 × eclipse glasses · hold until 4pm</div></div><span class="val" style="color:#000;font-weight:600">£29.98</span></div>
+      </div>
+      <div class="ios-foot ios-pad">Refunded automatically if you don't collect by 4pm.</div>
+      <div class="ios-applepay">Confirm with Side Button</div>
+      <div class="ios-btn plain">Pay at the counter instead</div>
+    </div>
+  </div>
+</section>
+
+<section class="frame" id="ready" data-x="2400" data-y="1480" data-title="Held for you">
+  <div class="ios">
+    <div class="ios-nav"><span class="back"><i data-icon="chevron-left"></i>Requests</span><span class="title">Order</span><span class="end"><i data-icon="ellipsis"></i></span></div>
+    <div class="ios-body">
+      <div class="ios-pad" style="text-align:center"><div style="font-size:28px;font-weight:700;letter-spacing:.3px">Ready at Paper &amp; Co</div><div class="ios-caption" style="font-size:15px">2 pairs held until 4:00 pm</div></div>
+      <div class="ios-pad"><div class="ios-code"><div class="ios-caption">Show at the counter</div><div class="big">K7Q2</div></div></div>
+      <div class="ios-pad"><div class="ios-map" style="height:120px"><span class="pin"><i data-icon="store"></i></span></div></div>
+      <div class="ios-list">
+        <div class="ios-cell"><i data-icon="map-pin"></i><div class="grow">King Street<div class="sub">13 min walk · open till 7pm</div></div></div>
+        <div class="ios-cell"><i data-icon="credit-card"></i><div class="grow">Paid £29.98<div class="sub">Refunded if not collected</div></div></div>
+      </div>
+      <div class="ios-pad" style="display:flex;gap:10px"><span class="ios-btn" style="flex:1"><i data-icon="navigation"></i>Directions</span><span class="ios-btn tinted" style="flex:1"><i data-icon="message-circle"></i>Message</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="frame" id="collect" data-x="3000" data-y="1480" data-title="At the counter">
+  <div class="ios">
+    <div class="ios-nav"><span class="back"><i data-icon="chevron-left"></i>Order</span><span class="title">Collect</span><span></span></div>
+    <div class="ios-body">
+      <div class="ios-pad"><div class="ios-card"><div class="row"><i data-icon="bell"></i><div class="grow"><div class="title">Hold ends at 4pm</div><div class="ios-caption">Paper &amp; Co · 13 min walk from here</div></div></div></div></div>
+      <div class="ios-pad"><div class="ios-code"><div class="ios-qr"></div><div class="big">K7Q2</div><div class="ios-caption">2 × eclipse glasses · Paper &amp; Co</div></div></div>
+            <div class="ios-pad"><div class="ios-btn tinted">I've collected them</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Row 3: failures ============ -->
+<section class="frame" id="sold" data-x="0" data-y="2850" data-title="Already sold">
+  <div class="ios">
+    <div class="ios-nav"><span class="back"><i data-icon="chevron-left"></i>Requests</span><span class="title">Eclipse glasses</span><span></span></div>
+    <div class="ios-chat">
+      <div class="ios-agent"><i data-icon="bot"></i>Concierge</div>
+      <div class="ios-bubble agent">Paper &amp; Co sold the last pairs before they could set them aside. You haven't been charged.</div>
+      <div class="ios-bubble agent">Broadway Chemist still has them:</div>
+      <div class="ios-option">
+        <div class="row"><div class="img sq"></div><div><div class="name">Broadway Chemist</div><div class="ios-caption">Confirmed 6 min ago</div></div><span class="price">£9.50</span></div>
+        <div class="facts"><span><i data-icon="navigation"></i>12 min walk</span><span><i data-icon="hourglass"></i>Holds 1 hour</span></div>
+        <div class="acts"><span class="ios-btn">Hold</span><span class="ios-btn tinted">Keep looking</span></div>
+      </div>
+    </div>
+    <div class="ios-composer-wrap"><div class="ios-composer"><span class="ph">Reply</span><span class="mic"><i data-icon="mic"></i></span></div></div>
+  </div>
+</section>
+
+<section class="frame" id="payfail" data-x="600" data-y="2850" data-title="Payment didn't go through">
+  <div class="ios">
+    <div class="ios-nav"><span class="back"><i data-icon="chevron-left"></i>Requests</span><span class="title">Eclipse glasses</span><span></span></div>
+    <div class="ios-chat">
+      <div class="ios-agent"><i data-icon="bot"></i>Concierge</div>
+      <div class="ios-bubble agent">The payment didn't go through, so nothing was charged. Paper &amp; Co will keep them aside for 10 more minutes.</div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-self:stretch"><span class="ios-btn">Try again</span><span class="ios-btn tinted">Use another card</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="frame" id="expired" data-x="1200" data-y="2850" data-title="Hold ended">
+  <div class="ios">
+    <div class="ios-nav"><span class="back"><i data-icon="chevron-left"></i>Requests</span><span class="title">Eclipse glasses</span><span></span></div>
+    <div class="ios-chat">
+      <div class="ios-agent"><i data-icon="bot"></i>Concierge</div>
+      <div class="ios-bubble agent">Your hold at Paper &amp; Co ended at 4pm, so they can sell the glasses again. £29.98 is on its way back to your card.</div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-self:stretch"><span class="ios-btn">Ask Paper &amp; Co for a new hold</span><span class="ios-btn tinted">Find another shop</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Row 4: other paths ============ -->
+<section class="frame" id="later" data-x="2031" data-y="2850" data-title="Collect after work">
+  <div class="ios">
+    <div class="ios-nav"><span class="back"><i data-icon="chevron-left"></i>Requests</span><span class="title">Sourdough</span><span></span></div>
+    <div class="ios-dim"></div>
+    <div class="ios-sheet">
+      <div class="ios-grabber"></div>
+      <div class="ios-sheet-head">When can you collect?</div>
+      <div class="ios-list">
+        <div class="ios-cell"><i data-icon="store"></i><div class="grow">Rossi's Bakery<div class="sub">Until 6pm, when it closes</div></div></div>
+        <div class="ios-cell"><i data-icon="map-pin"></i><div class="grow">Collection point<div class="sub">Corner shop, Blythe Road · until 11pm</div></div><i data-icon="check"></i></div>
+        <div class="ios-cell"><i data-icon="truck"></i><div class="grow">Evening delivery<div class="sub">7–9pm · £3.50</div></div></div>
+      </div>
+      <div class="ios-foot ios-pad">Rossi's drops it at the collection point before closing.</div>
+      <div class="ios-pad"><div class="ios-btn">Continue</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="frame" id="ahead" data-x="2631" data-y="2850" data-title="Leave a request">
+  <div class="ios">
+    <div class="ios-nav"><span class="back"><i data-icon="x"></i></span><span class="title">Keep it open</span><span></span></div>
+    <div class="ios-body tight">
+      <div class="ios-seg"><span class="on">Once</span><span>Every week</span></div>
+      <div class="ios-list">
+        <div class="ios-cell"><i data-icon="bell"></i><div class="grow">Tell me when it's back<div class="sub">Rye loaf, Rossi's Bakery</div></div></div>
+        <div class="ios-cell"><div class="grow">Hold it for me</div><span class="val">Until 6pm</span></div>
+        <div class="ios-cell"><div class="grow">Pay when it's set aside</div><span class="val">On</span></div>
+      </div>
+      <div class="ios-pad ios-foot">You'll get one message. Nothing is charged until a shop sets it aside.</div>
+      <div class="ios-pad"><div class="ios-btn">Save request</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="frame" id="shop" data-x="3231" data-y="2850" data-title="Shop page">
+  <div class="ios">
+    <div class="img h180" style="border-radius:0;flex:none;margin-top:-54px;height:230px"></div>
+    <div class="ios-body tight" style="padding-top:12px">
+      <div class="ios-pad"><div style="font-size:28px;font-weight:700">Rossi's Bakery</div><div class="ios-caption" style="font-size:15px">Blythe Road · open till 6pm · 2 min walk</div></div>
+      <div class="ios-chips"><span class="ios-chip on">Ask Rossi's</span><span class="ios-chip">Call</span><span class="ios-chip">Directions</span></div>
+      <div class="ios-h" style="margin:8px 0 0">Asked about recently</div>
+      <div class="ios-list">
+        <div class="ios-cell"><div class="grow">Sourdough<div class="sub">Had it · 2 hours ago</div></div></div>
+        <div class="ios-cell"><div class="grow">Rye loaf<div class="sub">Sold out · this morning</div></div></div>
+        <div class="ios-cell"><div class="grow">Birthday cake to order<div class="sub">2 days' notice</div></div></div>
+      </div>
+    </div>
+    <div class="ios-composer-wrap"><div class="ios-composer"><span class="ph">Ask Rossi's anything</span><span class="mic"><i data-icon="mic"></i></span></div></div>
+  </div>
+</section>
+
+<section class="frame" id="menu" data-x="3831" data-y="2850" data-title="Avatar menu">
+  <div class="ios">
+    <div class="ios-dim"></div>
+    <div class="ios-sheet" style="top:60px">
+      <div class="ios-grabber"></div>
+      <div class="ios-pad" style="display:flex;gap:14px;align-items:center"><img class="ios-avatar lg" src="../../discover/personas/img/sam.jpg" alt=""><div><div style="font-size:22px;font-weight:700">Sam</div><div class="ios-caption">Hammersmith</div></div></div>
+      <div class="ios-list">
+        <div class="ios-cell"><i data-icon="map-pin"></i><div class="grow">Places</div><span class="val">Home, work</span><i data-icon="chevron-right" class="chev"></i></div>
+        <div class="ios-cell"><i data-icon="repeat"></i><div class="grow">Kept requests</div><span class="val">2</span><i data-icon="chevron-right" class="chev"></i></div>
+      </div>
+      <div class="ios-list">
+        <div class="ios-cell"><i data-icon="credit-card"></i><div class="grow">Payment</div><i data-icon="chevron-right" class="chev"></i></div>
+        <div class="ios-cell"><i data-icon="bell"></i><div class="grow">Notifications</div><i data-icon="chevron-right" class="chev"></i></div>
+        <div class="ios-cell"><i data-icon="settings"></i><div class="grow">Settings</div><i data-icon="chevron-right" class="chev"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="frame" id="split" data-x="4431" data-y="2850" data-title="Concierge suggests two requests">
+  <div class="ios">
+    <div class="ios-nav"><span class="back"><i data-icon="chevron-left"></i>Requests</span><span class="title">New request</span><span></span></div>
+    <div class="ios-chat">
+      <div class="ios-bubble me">Eclipse glasses for today, and a birthday cake for Saturday</div>
+      <div class="ios-agent"><i data-icon="bot"></i>Concierge</div>
+      <div class="ios-bubble agent">These go to different shops on different days. Shall I keep them as two requests, so each has its own answers?</div>
+      <div class="ios-option">
+        <div class="ios-split"><i data-icon="clock"></i><div class="grow"><div class="name">Eclipse glasses × 2</div><div class="ios-caption">Today, by 4pm · stationery, chemists, opticians</div></div></div>
+        <div class="ios-split"><i data-icon="clock"></i><div class="grow"><div class="name">Birthday cake</div><div class="ios-caption">Saturday · bakeries, 2 days' notice</div></div></div>
+        <div class="acts"><span class="ios-btn">Split into 2</span><span class="ios-btn tinted">Keep as one</span></div>
+      </div>
+    </div>
+    <div class="ios-composer-wrap"><div class="ios-composer"><span class="ph">Reply</span><span class="mic"><i data-icon="mic"></i></span></div></div>
+  </div>
+</section>
+
+<!-- ============ Notes ============ -->
+<div class="note" data-for="home" data-x="0" data-y="1000">
+  <p lang="en"><strong>One home, no tabs.</strong> The street fills the screen: open shops, what's new, kinds of shop. The round button left of the ask bar opens Requests, with a count when something needs the shopper (decision 026). <strong>Promoted</strong> slots are paid and labelled.</p>
+  <p lang="pt"><strong>Uma home, sem abas.</strong> A rua ocupa a tela: lojas abertas, novidades, tipos de loja. O botão redondo à esquerda da barra de pedido abre Requests, com uma contagem quando algo precisa do comprador (decisão 026). Os espaços <strong>Promoted</strong> são pagos e marcados.</p>
+  <p><span class="tag">H3</span><span class="tag">H15</span><span class="tag">v3</span></p>
+</div>
+<div class="note" data-for="requests" data-x="600" data-y="1000">
+  <p lang="en"><strong>Requests as a sheet of chats.</strong> It opens over the street, so closing it brings the shopper back to Nearby. Each row is one conversation with the concierge: the item's photo with the shops' logos, the request in the shopper's words, the latest message, and one status line (searching, needs you, in progress, done). A button appears only when the shopper is the one holding things up.</p>
+  <p lang="pt"><strong>Pedidos numa folha de conversas.</strong> Ela abre sobre a rua, então fechar leva o comprador de volta para Nearby. Cada linha é uma conversa com o concierge: a foto do item com os logos das lojas, o pedido nas palavras do comprador, a última mensagem e uma linha de status (buscando, precisa de você, em andamento, concluído). Um botão só aparece quando é o comprador que está segurando o pedido.</p>
+  <p><span class="tag">v2</span></p>
+</div>
+<div class="note" data-for="split" data-x="4431" data-y="3740">
+  <p lang="en">One request per errand. When items need different shops or days, the concierge proposes splitting; the shopper decides with one tap.</p>
+  <p lang="pt">Um pedido por tarefa. Quando os itens pedem lojas ou dias diferentes, o concierge propõe separar; o comprador decide com um toque.</p>
+  <p><span class="tag">v2</span></p>
+</div>
+<div class="note" data-for="compose" data-x="1200" data-y="1000">
+  <p lang="en">Place and deadline are chips in the composer, filled from what the shopper typed. The concierge asks only for what's missing.</p>
+  <p lang="pt">Lugar e prazo são chips no compositor, preenchidos a partir do que o comprador digitou. O concierge só pergunta o que falta.</p>
+</div>
+<div class="note" data-for="searching" data-x="2400" data-y="1000">
+  <p lang="en">Each shop's answer shows as it arrives, with the street it's on. The concierge asks across every street within reach of the deadline, not one high street. Instant answers appear only for shops whose till shares stock.</p>
+  <p lang="pt">A resposta de cada loja aparece quando chega, com a rua onde ela fica. O concierge pergunta em todas as ruas ao alcance do prazo, não numa high street só. Respostas na hora só para lojas cujo caixa compartilha estoque.</p>
+  <p><span class="tag">H1</span><span class="tag">H4</span><span class="tag">Blueprint 2</span></p>
+</div>
+<div class="note" data-for="lock" data-x="3000" data-y="1000">
+  <p lang="en">Leaving is expected. A Live Activity keeps the count on the lock screen; each reply is a notification.</p>
+  <p lang="pt">Sair do app é o esperado. Uma Live Activity mantém a contagem na tela bloqueada; cada resposta vira notificação.</p>
+  <p><span class="tag">H4</span></p>
+</div>
+<div class="note" data-for="offers" data-x="0" data-y="2370">
+  <p lang="en">Options sit in the conversation, with walk time, closing time, hold and delivery on one line.</p>
+  <p lang="pt">As opções ficam na conversa, com caminhada, horário, reserva e entrega numa linha.</p>
+  <p><span class="tag">H2</span><span class="tag">H5</span><span class="tag">Blueprint 3</span></p>
+</div>
+<div class="note" data-for="pay" data-x="1800" data-y="2370">
+  <p lang="en"><strong>Hold before payment.</strong> Apple Pay appears only after the shop confirms the item is set aside. Paying at the counter stays possible; how many choose to pay now tests H12.</p>
+  <p lang="pt"><strong>Reserva antes do pagamento.</strong> O Apple Pay só aparece depois que a loja confirma que separou o item. Pagar no balcão continua possível; quantos escolhem pagar agora testa a H12.</p>
+  <p><span class="tag">H12</span><span class="tag">Blueprint 4</span></p>
+</div>
+<div class="note" data-for="collect" data-x="3000" data-y="2370">
+  <p lang="en">A reminder before the hold ends, then the code at the counter. The shop replies "collected".</p>
+  <p lang="pt">Um lembrete antes de a reserva acabar, depois o código no balcão. A loja responde "collected".</p>
+  <p><span class="tag">H2</span><span class="tag">Blueprint 5</span></p>
+</div>
+<div class="note" data-for="sold" data-x="0" data-y="3740">
+  <p lang="en">No charge, and the next option is already on screen.</p>
+  <p lang="pt">Sem cobrança, e a próxima opção já está na tela.</p>
+</div>
+<div class="note" data-for="expired" data-x="1200" data-y="3740">
+  <p lang="en">Reminder first, then release and refund. The shop can sell the item again.</p>
+  <p lang="pt">Primeiro o lembrete, depois a liberação e o estorno. A loja pode vender o item de novo.</p>
+</div>
+<div class="note" data-for="later" data-x="2031" data-y="3740">
+  <p lang="en"><strong>Jess.</strong> Three after-work options, all assumptions until H6 is tested: the shop's own hours, a collection point, evening delivery.</p>
+  <p lang="pt"><strong>Jess.</strong> Três opções depois do trabalho, todas suposições até a H6 ser testada: o horário da loja, um ponto de retirada, entrega à noite.</p>
+  <p><span class="tag">H6</span><span class="tag">H7</span></p>
+</div>
+<div class="note" data-for="ahead" data-x="2631" data-y="3740">
+  <p lang="en">"Once" is the one-off alert; "Every week" is the recurring order. They're tested separately.</p>
+  <p lang="pt">"Once" é o aviso pontual; "Every week" é o pedido recorrente. São testados separadamente.</p>
+  <p><span class="tag">H8</span></p>
+</div>
+<div class="note" data-for="shop" data-x="3231" data-y="3740">
+  <p lang="en">No catalogue: the page shows what people asked the shop about and what it answered.</p>
+  <p lang="pt">Sem catálogo: a página mostra o que as pessoas perguntaram à loja e o que ela respondeu.</p>
+  <p><span class="tag">A14</span></p>
+</div>
+
+<!-- ============ Links ============ -->
+<a class="link" data-from="#home .ios-composer" data-to="compose" data-label-en="tap the bar" data-label-pt="toca na barra"></a>
+<a class="link" data-from="#home .ios-fab" data-to="requests" data-label-en="Requests button" data-label-pt="botão Requests"></a>
+<a class="link" data-from="compose" data-to="clarify" data-label-en="send" data-label-pt="envia"></a>
+<a class="link" data-from="clarify" data-to="searching" data-label-en="collect" data-label-pt="retirar"></a>
+<a class="link alt" data-from="searching" data-to="lock" data-label-en="leaves the app" data-label-pt="sai do app"></a>
+<a class="link" data-from="#lock .ios-notif" data-to="offers" data-label-en="taps the notification" data-label-pt="toca na notificação"></a>
+<a class="link" data-from="#requests .ios-req" data-to="offers" data-label-en="opens the chat" data-label-pt="abre a conversa"></a>
+<a class="link alt" data-from="compose" data-to="split" data-label-en="two errands" data-label-pt="duas tarefas"></a>
+<a class="link alt" data-from="#split .ios-btn" data-to="requests" data-label-en="split into 2" data-label-pt="separa em 2"></a>
+<a class="link alt" data-from="#offers .ios-option .tinted" data-to="option" data-label-en="details" data-label-pt="detalhes"></a>
+<a class="link" data-from="#offers .ios-option .ios-btn" data-to="waiting" data-label-en="hold" data-label-pt="reservar"></a>
+<a class="link" data-from="waiting" data-to="pay" data-label-en="Paper &amp; Co sets it aside" data-label-pt="a Paper &amp; Co separa"></a>
+<a class="link" data-from="pay" data-to="ready" data-label-en="pays" data-label-pt="paga"></a>
+<a class="link" data-from="ready" data-to="collect" data-label-en="reminder at 3:30" data-label-pt="lembrete às 15h30"></a>
+<a class="link alt" data-from="waiting" data-to="sold" data-label-en="already sold" data-label-pt="já vendido"></a>
+<a class="link alt" data-from="pay" data-to="payfail" data-label-en="payment fails" data-label-pt="pagamento falha"></a>
+<a class="link alt" data-from="ready" data-to="expired" data-label-en="4pm passes" data-label-pt="passa das 16h"></a>
+<a class="link alt" data-from="#option .ios-seg" data-to="later" data-label-en="later" data-label-pt="mais tarde"></a>
+<a class="link alt" data-from="#home .ios-tile" data-to="shop" data-label-en="taps a shop" data-label-pt="toca numa loja"></a>
+<a class="link alt" data-from="#home .ios-avatar" data-to="menu" data-label-en="avatar" data-label-pt="avatar"></a>
+<a class="link alt" data-from="collect" data-to="ahead" data-label-en="keep it open" data-label-pt="manter aberto"></a>
