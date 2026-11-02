@@ -160,6 +160,9 @@ I found the brown dark mode badly made next to the three themes and asked for a 
 ### 42. Snuffle, and a Brand page
 I chose Snuffle as the app's name and asked for a Brand page in Ideation with the naming brainstorm under it. The agent created the page, moved the three name sections and their sources from the identity page to it, recorded decision 035, and renamed the docs site to Snuffle with the mark as its logo. The sidebar only nests two levels, so Naming is a section of the Brand page rather than a page of its own. I found the moved lists too long and asked for the naming in two paragraphs with my reasons for Snuffle; I also corrected the docs where they said the agent had picked Snuffle.
 
+### 43. Every mode side by side, without borders
+I didn't want to drop the round 6 brown dark mode yet and asked to compare everything side by side, light mode included, with no borders on screens or cards. The agent added a borderless option to the screen builder and redrew round 7 with five columns per theme: light, the round 6 brown and the three new darks. Without borders, cards separate from the background by 1.04:1 in light mode, 1.12:1 on the brown and 1.08:1 on the new darks; it noted that a lighter card step would be needed to drop borders.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.

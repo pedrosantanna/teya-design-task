@@ -160,6 +160,9 @@ Achei o modo escuro marrom malfeito ao lado dos três temas e pedi um modo escur
 ### 42. Snuffle, e uma página de Brand
 Escolhi Snuffle como nome do app e pedi uma página de Brand na Ideação com o brainstorm de naming dentro dela. O agente criou a página, levou para ela as três seções de nomes e as fontes delas, que estavam na página de identidade, registrou a decisão 035 e trocou o nome do site da documentação para Snuffle, com a marca como logo. A barra lateral só tem dois níveis, então Naming é uma seção da página de Brand e não uma página própria. Achei as listas longas demais e pedi o naming em dois parágrafos, com os meus motivos para Snuffle; também corrigi os trechos que diziam que o agente tinha escolhido Snuffle.
 
+### 43. Todos os modos lado a lado, sem bordas
+Eu ainda não queria descartar o modo escuro marrom da rodada 6 e pedi para comparar tudo lado a lado, incluindo o modo claro, sem bordas nas telas nem nos cartões. O agente acrescentou uma opção sem bordas ao gerador de telas e refez a rodada 7 com cinco colunas por tema: claro, o marrom da rodada 6 e os três escuros novos. Sem bordas, os cartões se separam do fundo a 1,04:1 no modo claro, 1,12:1 no marrom e 1,08:1 nos escuros novos; ele anotou que seria preciso um passo de cartão mais claro para tirar as bordas.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.
