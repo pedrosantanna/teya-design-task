@@ -279,7 +279,7 @@ The app's neutral is Biscuit grey from round 4 of the identity board: an OKLCH r
 
 The shopper app is Snuffle. A dog snuffles when it works the ground with its nose; a snuffle mat hides treats for a dog to find by smell. The docs site now carries the name and the mark.
 
-**Why:** it describes the concierge's job, finding one item across many small shops, in a word that is cute and a little childlike, and it belongs to the retriever in the mark. It came out of three rounds of names (concept directions, retriever names, sniffing and fetching words), with words dropped for conflicts or for a negative second meaning.
+**Why:** it sounds good, it is playful, and it is about looking for things and finding them, which is the concierge's job; it comes from the retriever in the mark. It came out of three rounds of names (concept directions, retriever names, sniffing and fetching words), with words dropped for conflicts or for a negative second meaning.
 **Open:** a trademark search (UK IPO) and an App Store check; so far only quick web searches were run.
 
 ## Still open

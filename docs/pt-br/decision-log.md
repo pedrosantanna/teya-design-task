@@ -279,7 +279,7 @@ O neutro do app é o Cinza biscoito, da rodada 4 do quadro de identidade: uma es
 
 O app do comprador é Snuffle. Um cachorro faz "snuffle" quando trabalha o chão com o nariz; o snuffle mat esconde petiscos para o cachorro achar pelo cheiro. O site da documentação agora leva o nome e a marca.
 
-**Por quê:** descreve o trabalho do concierge, achar um item entre muitas lojas pequenas, numa palavra fofa e um pouco infantil, e pertence ao retriever da marca. Saiu de três rodadas de nomes (direções de conceito, nomes de retriever, palavras de farejar e buscar), com palavras descartadas por conflito ou por segundo sentido negativo.
+**Por quê:** é sonoro, lúdico e remete a procurar e encontrar coisas, que é o trabalho do concierge; vem do retriever da marca. Saiu de três rodadas de nomes (direções de conceito, nomes de retriever, palavras de farejar e buscar), com palavras descartadas por conflito ou por segundo sentido negativo.
 **Em aberto:** uma busca de marca registrada (UK IPO) e uma conferência na App Store; até agora só foram feitas buscas rápidas na web.
 
 ## Ainda em aberto
