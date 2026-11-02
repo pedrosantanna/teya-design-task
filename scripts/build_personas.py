@@ -38,11 +38,11 @@ PT_TERMS = [
     ("| Group |", "| Grupo |"), ("| Posts |", "| Posts |"), ("| People |", "| Pessoas |"), ("Centre (urgency, stage)", "Centro (urgência, etapa)"),
     ("| Sources |", "| Fontes |"), ("| Where it stopped |", "| Onde parou |"), ("| What they did next |", "| O que fizeram depois |"),
     ("| Where it stopped | Posts | Points to |", "| Onde parou | Posts | Aponta para |"), ("| 1 · Find out |", "| 1 · Saber |"),
-    ("| 4 · Get it |", "| 4 · Levar |"), ("| 2 · Find it |", "| 2 · Encontrar |"), ("| 3 · Accept it |", "| 3 · Aceitar |"), ("| No failure |", "| Sem falha |"),
+    ("| 4 · Get it |", "| 4 · Levar |"), ("| 2 · Find it |", "| 2 · Encontrar |"), ("| 3 · Accept it |", "| 3 · Aceitar |"), ("| Nothing broke |", "| Nada deu errado |"),
     ("| findability |", "| findability |"), ("| transaction |", "| transaction |"), ("| the street's offer |", "| a oferta da rua |"), ("| nothing to fix |", "| nada a resolver |"),
     ("| Field | Posts compared | Agreement | Cohen's kappa |", "| Campo | Posts comparados | Concordância | Kappa de Cohen |"),
     ("| Clusters (k) | Mean silhouette |", "| Clusters (k) | Silhouette médio |"), ("← chosen", "← escolhido"),
-    ("| Post | Date | Job | Urgent | Failure | Stance | Urgency | Stage score | Group | Why |", "| Post | Data | Tarefa | Urgente | Falha | Atitude | Urgência | Nota da etapa | Grupo | Por quê |"),
+    ("| Post | Date | Job | Urgent | Stage | Stance | Urgency | Stage score | Group | Why |", "| Post | Data | Tarefa | Urgente | Etapa | Atitude | Urgência | Nota da etapa | Grupo | Por quê |"),
     ("| Post | Settled as | Why |", "| Post | Resolvido como | Por quê |"), ("| Post | Why it was left out |", "| Post | Por que ficou de fora |"),
     ("West London", "West London"), ("UK-wide", "Reino Unido"), ("excluded", "excluído"),
 ]
@@ -60,7 +60,7 @@ FAILURES = [
     ("availability", "2 · Find it", "the street's offer"),
     ("value", "3 · Accept it", "the street's offer"),
     ("access", "4 · Get it", "transaction"),
-    ("none", "No failure", ""),
+    ("none", "Nothing broke", ""),
 ]
 GROUPS = {
     "mission": "Sam, the mission shopper",
@@ -226,7 +226,7 @@ def main():
     failures_md = "\n".join(fail_rows)
 
     # Per-post coding table.
-    table = ["| Post | Date | Job | Urgent | Failure | Stance | Urgency | Stage score | Group | Why |", "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
+    table = ["| Post | Date | Job | Urgent | Stage | Stance | Urgency | Stage score | Group | Why |", "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
     for p in sorted(posts, key=lambda p: (list(GROUPS).index(p["group"]), p["job"], p["failure"])):
         table.append(f"| [{p['handle']}]({p['url']}) | {p['date']} | {p['job']} | {p['urgent']} | {p['failure']} | {p['stance']} | {p.get('x', '–')} | {p.get('y', '–')} | {GROUPS[p['group']].split(',')[0]} | {p['rationale']} |")
     excluded = ["| Post | Why it was left out |", "| --- | --- |"]
@@ -242,7 +242,7 @@ def main():
         xa = [str(a_first[i][field]) for i in ids]
         xb = [str(second[i][field]) for i in ids]
         same = sum(x == y for x, y in zip(xa, xb))
-        agree.append(f"| {field} | {len(ids)} | {same}/{len(ids)} ({same / len(ids):.0%}) | {kappa(xa, xb):.2f} |")
+        agree.append(f"| {'stage' if field == 'failure' else field} | {len(ids)} | {same}/{len(ids)} ({same / len(ids):.0%}) | {kappa(xa, xb):.2f} |")
     agreement_md = "\n".join(agree)
 
     resolutions = ["| Post | Settled as | Why |", "| --- | --- | --- |"]

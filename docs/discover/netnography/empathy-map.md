@@ -5,7 +5,7 @@ The subject is a composite: a Hammersmith or West London resident who would like
 ```summary
 Takeaways:
 - The main pain: not knowing whether the shop has it, or is open, before leaving home.
-- What people say about supporting local often differs from what they do.
+- People who say they support local often describe buying elsewhere.
 Call:
 - I used the Strategyzer empathy map and tied every line to a post.
 AI:
@@ -40,7 +40,7 @@ Say and do:
 - Asks strangers on Reddit where to find something when search comes up empty ([u/grand_web](https://www.reddit.com/r/chiswick/comments/1vlibmn/), Aug 2026)
 - Orders from Amazon after a failed trip ([u/Mediocre_Sprinkles](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb2z980/), Aug 2025)
 - Pays a delivery premium when Amazon can't arrive in time ([u/WearyChampionship365](https://www.reddit.com/r/Ealing/comments/1vlc46x/comment/p30rnx7/), Aug 2026)
-- Supports a favourite through Deliveroo rather than visits ([u/Inge_Jones](https://www.reddit.com/r/Ealing/comments/1x3g7ci/comment/pfbvje4/), Oct 2026)
+- Supports a favourite by ordering from it on Deliveroo ([u/Inge_Jones](https://www.reddit.com/r/Ealing/comments/1x3g7ci/comment/pfbvje4/), Oct 2026)
 - Travels to the next high street when the local one lacks something ([u/mjfh2](https://www.reddit.com/r/london/comments/1niwnlw/comment/nemvjcy/), Sep 2025)
 Pains:
 - Not knowing whether the item is there before leaving the house ([u/jamesshovlin](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tdld2/), Aug 2026)
@@ -62,7 +62,7 @@ Gains:
 
 The boxes disagree in three places. Each reading below is mine; nobody in the posts said it outright.
 
-- Almost everyone says they value independents, and the money still goes elsewhere. The butcher thread shows the routine shop going to the supermarket, with the independent kept for special occasions ([u/killmetruck](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq967k5/), Jun 2026).
+- Almost everyone says they value independents, and many describe spending their money elsewhere. The butcher thread shows the routine shop going to the supermarket, with the independent kept for special occasions ([u/killmetruck](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq967k5/), Jun 2026).
 - People mourn shops they rarely used. A poster regrets a bike workshop closing in the same comment where they admit going once because it seemed expensive ([u/Username8831](https://www.reddit.com/r/Ealing/comments/1v6423y/comment/oznttbd/), Jul 2026). Another local replies to the Kew butcher post with "haven't been in over a year and then wonder why shops are shutting" ([u/Greg-Normal](https://www.reddit.com/r/london/comments/1niwnlw/comment/neo7ha3/), Sep 2025).
 - People name price when they explain shopping online, yet several say they would have paid the premium if the shop had been open or had stock ([u/xmastreee](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb31nms/), Aug 2025; [FerrisWheelsandLilacs](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976658), Mumsnet, Dec 2025). That makes me read the effort of a wasted trip as the bigger deterrent.
 

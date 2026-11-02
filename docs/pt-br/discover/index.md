@@ -6,7 +6,7 @@ Antes de escolher entre findability e transaction, eu me propus a entender a hig
 Takeaways:
 - Quem compra não consegue saber se uma loja próxima tem algo, ou se está aberta, sem ir até lá. Esse foi o sinal mais forte.
 - Uma ida frustrada costuma terminar na Amazon, a menos que a compra online não chegue a tempo.
-- Sam, o comprador em missão, é a maior e mais clara das três proto-personas (11 de 21 posts clusterizados). A maioria das compras que falharam parou na primeira etapa: saber quem tem o item e se a loja está aberta.
+- Sam, o comprador em missão, é a maior e mais clara das três proto-personas (11 de 21 posts clusterizados). O ponto de parada mais comum foi a primeira etapa: saber quem tem o item e se a loja está aberta (8 de 21 posts clusterizados).
 Call:
 - Descoberta antes de escolher findability ou transaction ([001](../decision-log.md)).
 - De fora para dentro, porque o produto ainda não existe ([000](../decision-log.md)). Hammersmith como exemplo trabalhado.
@@ -23,11 +23,12 @@ Trade-offs:
 | Frente de trabalho | Pergunta | Página |
 | --- | --- | --- |
 | Pesquisa documental | O que é uma high street hoje, e quais regras, dinheiro e acontecimentos a afetam? Usei para aprender o contexto. | [A high street hoje](high-street-landscape.md) |
-| Coleta de dados: netnografia | O que compradores de Londres dizem, com as próprias palavras, sobre usar a sua high street? Dados atitudinais, a única fonte sobre compradores. | [Método](netnography/method.md) · [Achados](netnography/findings.md) |
+| Netnografia | O que compradores de Londres dizem, com as próprias palavras, sobre usar a sua high street? Dados atitudinais, a única fonte sobre compradores. | [Método](netnography/method.md) · [Achados](netnography/findings.md) |
 | Mapa de empatia | O que esse comprador vê, ouve, pensa, diz e faz, e o que dói? | [Mapa de empatia](netnography/empathy-map.md) |
 | Segmentação | Quais diferenças entre compradores importam para este brief? | [Dimensões propostas](netnography/dimensions.md) |
 | Proto-personas | Quais ocasiões de compra se repetem, e onde elas quebram? | [As proto-personas](personas/index.md) · [Método](personas/method.md) |
-| Benchmarks | Quais produtos já atendem esses compradores, e o que os usuários deles dizem? | [Benchmarks](benchmarks.md) |
+| Benchmarks | Quais produtos já atendem esses compradores, e o que os usuários deles dizem? Levantados junto com a netnografia e organizados por persona depois. | [Benchmarks](benchmarks.md) |
+| Conclusão | O que é fato, o que é suposição e quanto confio nela, e o que ainda não se sabe? | [Conclusão](conclusion.md) |
 
 Cada citação é um trecho curto de um post público, datado entre maio de 2025 e novembro de 2026, com o handle do autor e um link. Todas menos uma foram conferidas com a página ao vivo. A lista completa está em [Fontes](sources.md), e as decisões por trás do método estão no [registro de decisões](../decision-log.md).
 
@@ -35,7 +36,7 @@ Cada citação é um trecho curto de um post público, datado entre maio de 2025
 
 A reclamação mais frequente é que não dá para saber o que uma loja tem, ou se está aberta, sem ir até lá. Quando a necessidade é urgente (óculos para eclipse na véspera, um ventilador numa onda de calor, flores num domingo à noite), os londrinos perguntam a desconhecidos no Reddit, ligam para várias lojas ou entram em grupos de WhatsApp que postam contagens de estoque com horário. Eles confiam mais na resposta de um vizinho do que em listagens do Google ou sites das lojas.
 
-Depois de uma ida frustrada, as pessoas costumam comprar na Amazon. Quem tentou o comércio local, pagou estacionamento e voltou de mãos vazias diz isso sem rodeios. A exceção é quando a compra online não chega a tempo. Aí uma loja próxima que tem o item ganha, a quase qualquer preço.
+Depois de uma ida frustrada, a maioria diz que compra na Amazon. Quem tentou o comércio local, pagou estacionamento e voltou de mãos vazias diz isso sem rodeios. A exceção é quando a compra online não chega a tempo. Aí uma loja próxima que tem o item ganha, a quase qualquer preço.
 
 A lealdade ao comércio local tem limite. Compradores pagam mais num pequeno negócio "if it's reasonably convenient" (se for razoavelmente conveniente), e o abandonam depois de uma ida perdida ou de horários que conflitam com o trabalho. O açougue independente vira o lugar dos aniversários de casamento, e o supermercado fica com as compras da semana.
 

@@ -118,7 +118,7 @@ Some posts show what the shopper did after the friction: kept going despite a co
 
 ## Considered and rejected
 
-- **Effort for local as an axis.** Too few posts show behaviour, and what people say about supporting local differs from what they do ([empathy map](empathy-map.md)).
+- **Effort for local as an axis.** Too few posts say what people did, and what people say about supporting local differs from what they report doing ([empathy map](empathy-map.md)).
 - **Price sensitivity.** Tangled up with convenience: several posters would have paid more if the shop had been reliable.
 - **Time available.** It drives the opening-hours pain, and fits better as a persona trait.
 - **Place loyalty (King Street versus Chiswick).** It separates one high street from another and says nothing about the shoppers.

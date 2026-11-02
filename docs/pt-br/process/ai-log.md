@@ -60,6 +60,11 @@ Li os documentos e achei que ainda pareciam escritos por IA, principalmente nos 
 
 Na mesma rodada, vi que o "ponto de falha" não dava para medir como escala. Troquei pela etapa da compra em que a tentativa parou (de 1 saber a 4 levar, decisão 016). O agente rodou a clusterização de novo, e os mesmos posts caíram nos mesmos três clusters.
 
+Também reorganizei o Discover pela forma como os dados foram coletados (decisão 015). A pesquisa documental é contexto, e a netnografia é o único método usado sobre compradores, o que faz o mapa de empatia e as proto-personas se apoiarem em dados atitudinais. Agentes reescreveram a página de método e os resumos para deixar isso claro, e a barra lateral ganhou uma página de Pesquisa documental e um grupo Coleta de dados. Depois, um agente revisor leu todas as páginas em ordem, nos dois idiomas, e corrigiu as contradições que essas mudanças deixaram.
+
+### 12. Telas e Teya
+Um agente capturou as telas principais de oito apps dos benchmarks no Mobbin, pelo meu navegador logado, e salvou as imagens localmente. Just Eat, SumUp e Teya não estão no Mobbin. As imagens ficam fora do repositório público porque são telas de terceiros. O agente também leu as páginas públicas da Teya e escreveu o que a Teya faz e não faz pela Jess. Por fim, um agente montou a conclusão do Discover: fatos, suposições com nível de confiança sugerido por uma regra fixa e perguntas em aberto. Eu defino os níveis finais.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.

@@ -1,6 +1,6 @@
 # Método
 
-Eu precisava de evidências sobre compradores que pudesse reunir em poucas horas, quase sem custo, e conferir linha por linha. Das formas de coletar, usei uma: uma netnografia, lendo o que os compradores de Londres já escrevem em público sobre a high street, a rua comercial do bairro. O que as pessoas escrevem é quase todo atitudinal, então o mapa de empatia e as proto-personas se apoiam no que as pessoas dizem que pensam e fazem. Ninguém foi observado.
+O Discover coletou dados de três fontes: pesquisa documental sobre a rua, benchmarks de produtos que já existem e posts de compradores. Sobre compradores, eu precisava de evidências que pudesse reunir em poucas horas, quase sem custo, e conferir linha por linha. Das formas de coletar, usei uma: uma netnografia, lendo o que os compradores de Londres já escrevem em público sobre a high street, a rua comercial do bairro. O que as pessoas escrevem é quase todo atitudinal, então o mapa de empatia e as proto-personas se apoiam no que as pessoas dizem que pensam e fazem. Ninguém foi observado.
 
 ```summary
 Takeaways:
@@ -23,6 +23,7 @@ Trade-offs:
 | Método | Tipo de dado | Custo para este take-home | Usado |
 | --- | --- | --- | --- |
 | Pesquisa documental (relatórios, estatísticas, notícias) | Contexto sobre a própria rua | Baixo | Sim, para entender como a high street funciona ([a high street hoje](../high-street-landscape.md)) |
+| Benchmarks (páginas de produto, avaliações de apps) | O que os produtos existentes fazem e o que os usuários dizem deles | Baixo | Sim, em paralelo com a netnografia ([benchmarks](../benchmarks.md)) |
 | Netnografia (posts públicos) | Atitudinal: o que as pessoas dizem que pensam, sentem e fizeram | Baixo: o material já existe | Sim, a única fonte sobre compradores |
 | Entrevistas | Atitudinal, com perguntas de acompanhamento | Médio: recrutamento, sessões, anotações | Não |
 | Survey | Atitudinal, em escala | Médio: precisa de um painel para valer alguma coisa | Não |

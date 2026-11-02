@@ -19,7 +19,7 @@ Netnografia é o nome que Kozinets dá à pesquisa qualitativa em redes sociais 
 
 O trabalho precisava de uma base de evidências sobre compradores, rápida e quase sem custo, dentro das poucas horas que um take-home permite. As pessoas já disseram muita coisa em público, dá para coletar em horas, e cada afirmação continua rastreável até um post datado.
 
-Os limites são claros. As pessoas postam quando algo as irrita ou encanta, então os posts mostram o que importa para elas e dizem pouco sobre a frequência com que acontece. Não dá para fazer uma pergunta de acompanhamento a ninguém, e quem não posta fica de fora. Fora de um take-home, eu não tomaria essas decisões só com netnografia. Ela abriria a descoberta e apontaria para onde entrevistas, visitas a lojas e dados de uso deveriam ir depois. A decisão [000](../../decision-log.md) registra como dimensionei a profundidade para este exercício.
+Os limites são claros. As pessoas postam quando algo as irrita ou encanta, então os posts mostram o que importa para elas e dizem pouco sobre a frequência com que acontece. Não dá para fazer uma pergunta de acompanhamento a ninguém, e quem não posta fica de fora. Os posts são atitudinais: mostram o que as pessoas dizem que pensam e fazem. Para um produto que ainda não existe, eu os transformaria rápido numa ideia testável e buscaria evidência de comportamento na reação de compradores a ela ([método](method.md), decisão [015](../../decision-log.md)). A decisão [000](../../decision-log.md) registra como dimensionei a profundidade para este exercício.
 
 ## Sites
 

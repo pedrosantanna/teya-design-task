@@ -1,6 +1,6 @@
 # Achados
 
-O que os londrinos dizem com mais clareza sobre a high street, a rua comercial do bairro, é que não conseguem saber se uma loja tem o que precisam, ou se está aberta, sem ir até lá. Quando a necessidade é urgente, perguntam a desconhecidos no Reddit e no WhatsApp, e quando uma ida dá errado, pedem online e param de tentar.
+O que os londrinos dizem com mais clareza sobre a high street, a rua comercial do bairro, é que não conseguem saber se uma loja tem o que precisam, ou se está aberta, sem ir até lá. Quando a necessidade é urgente, perguntam a desconhecidos no Reddit e no WhatsApp, e depois de uma ida frustrada dizem que pedem online e param de tentar.
 
 ```summary
 Takeaways:
@@ -24,7 +24,7 @@ O único jeito de saber se uma loja tem algo agora é perguntar a alguém.
 
 **Evidência: forte.** Muitas citações, duas redes, a maioria do oeste de Londres e de Londres, todas de 2025–26.
 
-Quando a necessidade é específica e tem prazo (óculos para eclipse, um ar-condicionado portátil numa onda de calor, flores num domingo à noite), ninguém consulta o site de uma loja. As pessoas postam no Reddit, ligam antes ou entram em grupos de WhatsApp que circulam contagens de estoque com horário. Esta é a evidência mais direta para o "see what's available nearby right now" (ver o que está disponível por perto agora) do brief.
+Quando a necessidade é específica e tem prazo (óculos para eclipse, um ar-condicionado portátil numa onda de calor, flores num domingo à noite), ninguém menciona consultar o site de uma loja. As pessoas postam no Reddit, ligam antes ou entram em grupos de WhatsApp que circulam contagens de estoque com horário. Esta é a evidência mais direta para o "see what's available nearby right now" (ver o que está disponível por perto agora) do brief.
 
 ```quote
 text: Hard to know stock levels without visiting, unless you can somehow get through on the phone..!

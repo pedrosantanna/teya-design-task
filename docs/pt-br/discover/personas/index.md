@@ -167,7 +167,7 @@ status: verified
 
 ## O que testar primeiro
 
-As personas vêm de posts públicos, então só cobrem quem posta. Antes de me comprometer com uma delas no Define, quero conferir três coisas em cinco ou seis entrevistas curtas na King Street:
+As personas vêm de posts públicos, então só cobrem quem posta. Antes de me comprometer com uma delas no Define, quero conferir três coisas com cinco ou seis compradores na King Street, com um protótipo simples na frente deles quando couber:
 
 - **Ruth:** comprar no comércio local de forma rotineira e leal é sobretudo um hábito de quem tem mais de 50 anos, como as pesquisas de Londres sugerem? E como as pessoas que nunca postam online descobrem o que ainda está aberto?
 - **Sam:** uma loja confirmar "it's here, I'll hold it" (está aqui, eu separo para você) bastaria para ele decidir ir até lá?

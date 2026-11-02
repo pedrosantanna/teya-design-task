@@ -51,7 +51,7 @@ A descoberta tem quatro frentes de trabalho, todas restritas a Londres, com Hamm
 3. Benchmarks de produtos que já atendem esses compradores, com uma netnografia do que os usuários dizem sobre eles.
 4. Uma revisão documental da própria high street: história, regulação, dados e notícias recentes.
 
-**Por quê:** eu queria entender o espaço a partir de evidência. Toda afirmação sobre pessoas se apoia numa citação literal com handle, rede, data e link, só dos últimos 18 meses. Escolhi a netnografia porque ela monta essa base de evidência de forma rápida e barata, o que cabe num take-home. Num produto completo ela seria uma fonte entre várias; a página de [método](discover/netnography/method.md) explica o trade-off.
+**Por quê:** eu queria entender o espaço a partir de evidência. Toda afirmação sobre pessoas se apoia numa citação literal com handle, rede, data e link, só dos últimos 18 meses. Escolhi a netnografia porque ela monta essa base de evidência de forma rápida e barata, o que cabe num take-home. Ela ficou como o único método sobre compradores (decisão 015); a página de [método](discover/netnography/method.md) explica o trade-off.
 **Escolha ética:** as citações mantêm o handle público do autor, porque o link já o expõe e o handle torna a evidência verificável. Contas privadas e grupos fechados ficam de fora.
 
 ## 007 · Formato do site de documentação
@@ -116,7 +116,7 @@ O inglês continua sendo a fonte. Cada página também tem uma versão completa 
 ## 015 · Método de coleta de dados
 **2026-11-02 · Decidido**
 
-Para dados sobre compradores eu usei um método só, a netnografia, e parei aí. Entrevistas, um questionário, observação na rua e um estudo de diário eram todos possíveis. Para um take-home, a netnografia era o jeito mais rápido e barato de conseguir evidência rastreável. Usei a pesquisa documental sobre a high street para aprender o contexto; ela não traz dados sobre compradores.
+Para dados sobre compradores eu usei um método só, a netnografia, e parei aí. Entrevistas, um survey, observação na rua e um estudo de diário eram todos possíveis. Para um take-home, a netnografia era o jeito mais rápido e barato de conseguir evidência rastreável. A pesquisa documental e os benchmarks também coletaram dados, sobre a rua e sobre os produtos que já existem. Usei a pesquisa documental sobre a high street para aprender o contexto. Ela cita alguns números publicados sobre compradores, como a forma de chegar à rua e a pesquisa de opinião por trás da idade de Ruth, mas não coletou nada dos compradores.
 
 Posts públicos são dados atitudinais: o que as pessoas dizem que pensam, sentem e fizeram. O mapa de empatia e as proto-personas se apoiam neles, então carregam a distância conhecida entre o que as pessoas dizem e o que fazem. Num produto já estabelecido, eu acrescentaria dados comportamentais em seguida. Num produto 0-to-1, prefiro chegar rápido a uma ideia testável e colocá-la na frente de compradores. É desse teste que viria a evidência comportamental.
 

@@ -19,7 +19,7 @@ Netnography is Kozinets' name for qualitative research on social media that trie
 
 The work needed a base of evidence about shoppers, fast and at almost no cost, inside the few hours a take-home allows. People have already said a great deal in public, it can be collected in hours, and every claim stays traceable to a dated post.
 
-The limits are clear. People post when something annoys or delights them, so the posts show what matters to them and say little about how often it happens. Nobody can be asked a follow-up question, and people who don't post are missing. Outside a take-home I would not make these decisions on netnography alone. It would open discovery and point to where interviews, shop visits and usage data should go next. Decision [000](../../decision-log.md) records how depth was sized for this exercise.
+The limits are clear. People post when something annoys or delights them, so the posts show what matters to them and say little about how often it happens. Nobody can be asked a follow-up question, and people who don't post are missing. The posts are attitudinal: they show what people say they think and do. For a product that doesn't exist yet, I'd turn them into a testable idea quickly and get behavioural evidence from shoppers reacting to it ([method](method.md), decision [015](../../decision-log.md)). Decision [000](../../decision-log.md) records how depth was sized for this exercise.
 
 ## Sites
 

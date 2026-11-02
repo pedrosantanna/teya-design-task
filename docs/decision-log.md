@@ -51,7 +51,7 @@ Discovery has four pieces of work, all scoped to London, with Hammersmith as the
 3. Benchmarks of products that already serve these shoppers, with a netnography of what users say about them.
 4. A desk review of the high street itself: history, regulation, data and recent news.
 
-**Why:** I wanted to understand the space from evidence. Every claim about people is backed by a verbatim quote with handle, network, date and link, from the last 18 months only. I chose netnography because it builds that evidence base quickly and cheaply, which fits a take-home. On a full product it would be one input among several; the [method](discover/netnography/method.md) page explains the trade-off.
+**Why:** I wanted to understand the space from evidence. Every claim about people is backed by a verbatim quote with handle, network, date and link, from the last 18 months only. I chose netnography because it builds that evidence base quickly and cheaply, which fits a take-home. It stayed the only method on shoppers (decision 015); the [method](discover/netnography/method.md) page explains the trade-off.
 **Ethics call:** quotes keep the author's public handle, because the link already exposes it and the handle makes the evidence checkable. Private accounts and closed groups are excluded.
 
 ## 007 · Docs site format
@@ -116,7 +116,7 @@ English stays the source. Every page also has a full Brazilian Portuguese versio
 ## 015 · Data collection method
 **2026-11-02 · Decided**
 
-For data about shoppers I used one method, netnography, and stopped there. Interviews, a survey, street observation and a diary study were all possible. For a take-home, netnography was the fastest and cheapest way to get evidence I could trace. I used the desk research on the high street to learn the context; it holds no data about shoppers.
+For data about shoppers I used one method, netnography, and stopped there. Interviews, a survey, street observation and a diary study were all possible. For a take-home, netnography was the fastest and cheapest way to get evidence I could trace. Desk research and benchmarks also collected data, about the street and about existing products. I used the desk research on the high street to learn the context. It cites a few published figures about shoppers, such as how they reach the street and the poll behind Ruth's age, but it collected nothing from shoppers.
 
 Public posts are attitudinal data: what people say they think, feel and did. The empathy map and the proto-personas rest on it, so they carry the known gap between what people say and what they do. On an established product I'd add behavioural data next. For a 0-to-1 product I prefer to reach a testable idea quickly and put it in front of shoppers. That test is where the behavioural evidence would come from.
 

@@ -118,7 +118,7 @@ Alguns posts mostram o que o comprador fez depois do atrito: continuou apesar de
 
 ## Considerados e descartados
 
-- **Esforço pelo comércio local como eixo.** Poucos posts mostram comportamento, e o que as pessoas dizem sobre apoiar o comércio local difere do que fazem ([mapa de empatia](empathy-map.md)).
+- **Esforço pelo comércio local como eixo.** Poucos posts dizem o que as pessoas fizeram, e o que elas dizem sobre apoiar o comércio local difere do que contam fazer ([mapa de empatia](empathy-map.md)).
 - **Sensibilidade a preço.** Se mistura com a conveniência: várias pessoas teriam pagado mais se a loja fosse confiável.
 - **Tempo disponível.** Alimenta a dor do horário de funcionamento, e encaixa melhor como traço da persona.
 - **Lealdade ao lugar (King Street versus Chiswick).** Separa uma high street da outra e não diz nada sobre os compradores.

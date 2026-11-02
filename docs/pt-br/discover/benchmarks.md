@@ -2,10 +2,13 @@
 
 Comparei dezessete produtos que um comprador em Londres pode usar hoje, ou que fracassaram recentemente de um jeito que ensina alguma coisa, e organizei todos pela relação com as três [proto-personas](personas/index.md). Onze tocam no que Sam, Jess ou Ruth enfrentam, ou são aquilo a que elas já recorrem. Seis são úteis para o brief de modo geral e ficam como notas curtas. Em todos eles, a reclamação que os usuários mais repetem é que o app disse que algo estava disponível e a loja não tinha.
 
+Um agente levantou os produtos e as avaliações em paralelo com a netnografia, antes de as proto-personas existirem. Nada nesta página alimentou as personas, que saem só da clusterização dos posts de compradores. Organizei os produtos por persona depois, e por isso esta página vem depois delas.
+
 ```summary
 Takeaways:
 - Sam: nenhum produto diz a ele qual loja independente perto dali tem um item agora. Ele pergunta no Reddit e no WhatsApp, e acaba recorrendo à Amazon.
 - Jess: apps de entrega e o Peckish da Co-op já resolvem o problema de conseguir coisas de lojas locais, com comissão de 14–35% e uma loja por pedido. O padrão dela continua sendo a Amazon.
+- A Teya já recebe pagamentos com cartão e manda links de pagamento para as lojas que a Jess usaria. Nada nas páginas públicas dela é voltado para quem compra.
 - Ruth: nada foi feito para ela. Diretórios do que ainda está aberto em uma rua não duraram.
 - A reclamação mais repetida, seja qual for o modelo, é ouvir que algo estava disponível quando não estava.
 Call:
@@ -13,6 +16,7 @@ Call:
 - Produtos que não tocam nos problemas das personas ficam na página como notas curtas, porque ainda respondem perguntas do brief (excedente, checkout com várias lojas, quick commerce, vitrines de comerciantes).
 - Um ✓ precisa de um post das páginas de achados ou de personas. Sem post, a marca é ○.
 AI:
+- Um agente capturou as telas principais de oito apps no Mobbin, uma biblioteca de telas de apps. Elas ficam na minha cópia local, fora do repositório público, e aparecem no site com o link da fonte.
 - Um agente de pesquisa escolheu os 17 produtos e coletou avaliações datadas do feed da App Store, do Trustpilot e do Mumsnet. Um agente de escrita buscou de novo as citações truncadas e descartou as que não conseguiu confirmar.
 - Um agente reorganizou a página a partir das proto-personas e escreveu a tabela de personas e os padrões por persona. Cada ✓ indica o post que o sustenta, para que possa ser conferido.
 Trade-offs:
@@ -88,6 +92,11 @@ O Reddit bloqueou as ferramentas de pesquisa, e X, TikTok e Instagram exigem log
 
 **Sam ✓ (etapa 1, saber) · Ruth ○ (etapa 2, encontrar).** Sam usa o Google hoje: u/dy14n19 conferiu se uma confeitaria de Hammersmith ainda estava aberta e não confiou na resposta. Para Ruth é uma opção: o Google poderia avisar que uma loja fechou ou mudou de horário, mas o açougue que ela frequenta toda semana estava fechado no horário anunciado (Valentando), que é a mesma falha.
 
+```screens
+image: ../../../private/benchmarks/google-maps.jpg
+source: https://mobbin.com/apps/google-maps-ios-84a5727c-9a4d-40f6-95ce-aa915413c4dc/c5414d91-2c38-4da8-8d6e-f4dc01be6602/screens
+```
+
 O Google mostra o que as lojas próximas têm "em estoque" no Search, no Shopping e no Maps, e o Business Profile é onde a maioria das pessoas confere horários de funcionamento. O estoque vem do sistema de caixa da loja: a NearSt, uma start-up de Londres, conecta mais de 150 sistemas de ponto de venda ao Google e, desde 2025, aos feeds de estoque da Deliveroo, da Uber Eats e da Just Eat ([Google Merchant Center Help](https://support.google.com/merchants/answer/15609877?hl=en-GB); [Asian Trader](https://www.asiantrader.biz/nearst-tech-connects-uber-eats-deliveroo-just-eat)). É a melhor busca local por item que existe, mas só para lojas cujo caixa tem códigos de produto limpos, o que deixa de fora a maioria das padarias, floriculturas e açougues. Nada é comprado no Google para estoque local: o comprador vai até a loja ou clica para ir ao site dela, e o novo Universal Cart do Google, com várias lojas, foi lançado só nos EUA, em 15 de outubro de 2026 ([Digital Commerce 360](https://www.digitalcommerce360.com/2026/10/16/google-universal-cart-launch-features/)).
 
 ```quote
@@ -115,6 +124,16 @@ status: verified
 ### Instagram, WhatsApp e Facebook
 
 **Sam ○ (etapa 1, saber) · Ruth ○ (etapa 2, encontrar).** Os compradores usam o WhatsApp para compartilhar estoque: na corrida do eclipse, u/jamesshovlin indicou um grupo de reposição mantido por compradores. Esse post fica fora dos clusters de personas, então não conto como Sam usando hoje. Para Ruth, a página da loja no Facebook é onde o horário do dia às vezes aparece; nenhum post a mostra conferindo.
+
+```screens
+image: ../../../private/benchmarks/instagram.jpg
+source: https://mobbin.com/apps/instagram-ios-3aa6c4a6-7200-43f0-81c2-397c22fa1596/c2173e91-816f-4b77-baa2-3579d4ce2b7e/screens
+```
+
+```screens
+image: ../../../private/benchmarks/whatsapp.jpg
+source: https://mobbin.com/apps/whats-app-ios-8738dbc9-e7a8-4fef-91e5-6afd1c9d092b/36ae4720-4bee-4257-85b3-80d5447e899d/screens
+```
 
 Para muitas floriculturas, padarias, açougues e butiques de Londres, o Instagram ou o Facebook é a vitrine, e os pedidos acontecem por mensagem ou telefone, com pagamento na loja, por transferência bancária ou por link de pagamento. Nada nesses canais é estruturado: não há horário, estoque, endereço ou preço confiável, e cada pedido é uma conversa. Eles são gratuitos e pessoais, e servem para compras avulsas e trabalhos sob encomenda. Duas pessoas numa mesma thread do Mumsnet dizem que as lojas publicam o horário do dia só no Facebook, ou não têm nenhuma forma de receber pedidos.
 
@@ -144,6 +163,11 @@ status: verified
 
 **Sam ✓ (etapa 1, saber) · Jess ✓ (etapa 4, levar).** A Amazon é onde os dois acabam recorrendo. Sam: Dbank não encontrou nenhum dos sete que o site de uma loja listava e comprou na Amazon; u/Mediocre_Sprinkles percorreu todas as lojas e foi para casa encomendar. Jess: LividArse compra na Amazon "because it's always there" (porque está sempre lá). A Amazon também tem limites para eles: antes do eclipse, u/WearyChampionship365 descobriu que ninguém conseguia entregar a tempo.
 
+```screens
+image: ../../../private/benchmarks/amazon.jpg
+source: https://mobbin.com/apps/amazon-shopping-ios-f3ecc40c-1f6d-4b81-8f5a-cb67d8271469/c06b306e-d93a-4ff9-b45f-14388ab02e16/screens
+```
+
 A Amazon é a régua com que um app de high street, a rua comercial do bairro, é medido: uma cesta, um pagamento, uma promessa de entrega e devolução fácil. Desde junho de 2026 ela inclui mercearia fresca na entrega no mesmo dia em partes do centro e do leste de Londres ([About Amazon](https://www.aboutamazon.co.uk/news/retail/amazon-customers-can-now-add-fresh-groceries-to-same-day-delivery-orders-in-parts-of-london)). Os avaliadores na App Store elogiam o preço e as devoluções e reclamam da busca quando não sabem exatamente o que querem. Alguns dizem que as promessas de entrega que não se cumprem estão fazendo essas pessoas voltarem à high street.
 
 ```quote
@@ -171,6 +195,11 @@ status: verified
 ### Nextdoor
 
 **Ruth ○ (etapa 2, encontrar).** Ruth fica sabendo das lojas por vizinhos e fóruns locais, que é para o que serve o Nextdoor. Nenhum post do cluster dela o menciona. Ele encontra negócios, não itens, então não responde à pergunta de Sam.
+
+```screens
+image: ../../../private/benchmarks/nextdoor.jpg
+source: https://mobbin.com/apps/nextdoor-ios-def2c342-4fb2-4636-bbcc-a0271fbe2651/aff28b15-291f-4855-96a2-6c142dbe490d/screens
+```
 
 O Nextdoor é uma rede de vizinhança onde as pessoas recomendam negócios locais; o Nextdoor diz que as recomendações são cerca de 30% do seu conteúdo. Em setembro de 2026 lançou o "Local Faves", um hub que classifica negócios próximos pela confiança dos vizinhos, com resumos por IA do que os vizinhos dizem, disponível no Reino Unido ([Nextdoor via Nasdaq](https://www.nasdaq.com/press-release/nextdoor-deepens-its-commitment-local-business-discovery-and-recommendations-2026-09)). Nada pode ser comprado. As avaliações mostram o que as pessoas valorizam: um raio pequeno e verificado. Os donos de negócio têm dificuldade para manter suas páginas atualizadas.
 
@@ -206,6 +235,11 @@ A ShopAppy era uma "virtual high street" (high street virtual) fundada por volta
 
 **Jess ○ (etapa 4, levar) · Ruth ○ (etapa 2, encontrar).** A Deliveroo leva os produtos de uma loja local até Jess fora do horário de trabalho dela, pagos com cartão. Nenhum post do cluster dela a menciona. O único post que menciona, u/Inge_Jones pedindo de um restaurante local "to keep them afloat" (para ajudar a manter o restaurante de pé), fica fora do mapa, mais perto de Ruth.
 
+```screens
+image: ../../../private/benchmarks/deliveroo.jpg
+source: https://mobbin.com/apps/deliveroo-ios-c53d6f39-5c63-417d-a595-2e3fa65e404e/b24076da-f39f-48dd-8dfa-fd3974e046df/screens
+```
+
 A Deliveroo foi muito além dos restaurantes: mercado, dark stores Hop e, desde 2023, "Shopping" não alimentício de parceiros como Boots e B&Q, além do que ela chama de milhares de varejistas independentes. A DoorDash concluiu a compra de £2,9bn em outubro de 2025 ([Business Wire](https://secure.businesswire.com/news/home/20251002060133/en/DoorDash-Completes-Acquisition-of-Deliveroo)). Os compradores veem as opções por loja e categoria, e o posicionamento pago influencia a ordem. Cada pedido é de uma loja, entregue por entregadores da Deliveroo, com comissão informada de 20–35% mais taxas do comprador ([DineOpen](https://www.dineopen.com/blog/deliveroo-vs-just-eat-vs-uber-eats-commission-2026)). O estoque vem de cardápios que a loja mantém, então muitas vezes os itens se revelam indisponíveis só depois do pagamento.
 
 ```quote
@@ -233,6 +267,11 @@ status: verified
 ### Uber Eats
 
 **Jess ○ (etapa 4, levar).** O mesmo papel da Deliveroo para Jess: entrega de lojas próximas, só cartão, fora do horário das lojas. Nenhum post a mostra usando. Os avaliadores esbarram nas duas reclamações de Jess pelo outro lado: horários errados e entrega lenta.
+
+```screens
+image: ../../../private/benchmarks/uber-eats.jpg
+source: https://mobbin.com/apps/uber-eats-ios-647bbce0-2eac-4b6f-a34b-3753263bf409/abf2e266-f49b-44b0-a25f-07a9c7b7bcff/screens
+```
 
 A Uber Eats tem muito estoque de mercado e conveniência no Reino Unido, incluindo a Co-op em mais de 1.300 lojas ([Grocery Gazette](https://www.grocerygazette.co.uk/2025/03/19/co-op-uber-eats-partnership/)). O recurso "bundle a second store" (juntar uma segunda loja), duas lojas próximas por uma taxa de entrega, foi lançado nos EUA em 2023 e não consegui confirmar no Reino Unido ([Uber](https://www.uber.com/us/en/newsroom/multi-store-ordering/)). A Uber Direct aluga seus entregadores para lojas que mantêm a própria vitrine. As avaliações reclamam de preços acima dos da prateleira, de horários de funcionamento que não batem com a realidade e de entregas de mercado lentas.
 
@@ -294,7 +333,7 @@ O Peckish foi lançado em fevereiro de 2025 como um app de entrega e sistema de 
 
 ### Gophr e Stuart
 
-**Jess ○ (etapa 4, levar).** O trecho do entregador por trás de uma entrega local no mesmo dia. Jess nunca vê esse trecho; uma loja ou um app agendaria por ela. Também tem a ver com o prazo de Sam, embora a falha de Sam esteja em saber.
+**Jess ○ (etapa 4, levar).** O trecho do entregador por trás de uma entrega local no mesmo dia. Jess nunca vê esse trecho; uma loja ou um app agendaria por ela. Também tem a ver com o prazo de Sam, embora as tentativas de Sam parem antes, na etapa 1 ou 2.
 
 A Gophr é uma rede de entregas no mesmo dia fundada em Londres que entrega para o Screwfix Sprint e opera o serviço TradePoint Express da B&Q ([London Loves Business](https://londonlovesbusiness.com/bq-to-start-same-day-deliveries/)). A Stuart oferece entregadores por uma API com rastreamento ao vivo ([Stuart](https://stuart.com/courier-service-london/)). A loja agenda e paga por serviço, e o comprador nunca vê o app da empresa de entregas. Redes de material de construção já vendem entrega em 30 a 90 minutos por meio delas para londrinos sem carro.
 
@@ -337,6 +376,21 @@ context: Avaliação de 5 estrelas de um dono de negócio. O provedor de pagamen
 status: verified
 ```
 
+#### A Teya e a Jess
+
+Foi a Teya que propôs este brief, então conferi as páginas públicas dela (novembro de 2026) contra o problema da Jess: ela compraria no comércio local, mas não consegue chegar enquanto as lojas estão abertas, e algumas barracas só aceitam dinheiro.
+
+| O que a Teya faz hoje | O que isso significa para a Jess |
+| --- | --- |
+| Maquininhas de cartão e Tap to Pay no celular ([Teya](https://www.teya.com/en-gb)) | Uma barraca que aceita cartão resolve o problema do só dinheiro (u/rsweb) |
+| Pay by Link: a loja manda um link de pagamento por SMS, chat, e-mail ou QR code, sem precisar de site, e o cliente paga na página de checkout da Teya ([Pay by Link](https://www.teya.com/online-payments/pay-by-link)) | Uma loja poderia receber o pedido da Jess por mensagem e já estar paga quando ela chegar |
+| Plugins para Shopify e WooCommerce e um checkout hospedado, para lojas com site próprio ([Teya](https://www.teya.com/en-gb)) | Só ajuda se a loja tiver loja virtual, uma loja de cada vez |
+| Ferramentas do lado do lojista: conta empresarial, crédito, o app da Teya, depósito de dinheiro em lojas PayPoint ([FF News](https://ffnews.com/newsarticle/paytech/paypoint-and-teya-announce-new-partnership-to-facilitate-cash-deposits/)) | Nada que a Jess veja |
+
+O que não encontrei nas páginas públicas da Teya: um app ou site para quem compra, um jeito de buscar ou navegar entre lojas da Teya, estoque ou horário que o comprador possa conferir, pedido antecipado com retirada fora do horário, entrega, ou uma cesta com várias lojas. Essas são as partes do problema da Jess que continuam em aberto.
+
+*Minha leitura:* a Teya já está no caixa das lojas que a Jess usaria e consegue receber o pagamento antes de ela chegar. A metade que falta é a do comprador.
+
 ## Outros produtos
 
 Nenhum destes responde ao que Sam, Jess ou Ruth precisam agora. Eles tocam em outras perguntas do brief.
@@ -344,6 +398,11 @@ Nenhum destes responde ao que Sam, Jess ou Ruth precisam agora. Eles tocam em ou
 ### Too Good To Go
 
 Excedente de comida: os compradores pagam antes por uma "Surprise Bag" de uma loja próxima e retiram em uma janela definida; não há busca por item, de propósito ([Too Good To Go](https://www.toogoodtogo.co.uk/en-gb/business)). Mostra que as pessoas planejam uma ida em torno de uma janela de retirada em uma padaria pequena, e o que acontece quando o estoque do app está errado.
+
+```screens
+image: ../../../private/benchmarks/too-good-to-go.jpg
+source: https://mobbin.com/apps/too-good-to-go-ios-d544c59a-6284-499f-ba07-92ca14f91002/00967c9c-7821-467b-8c31-7052fcd944b5/screens
+```
 
 ```quote
 text: "Order was cancelled as I was at the till to collect because the store had no surplus, so a completely waisted journey…"

@@ -1,6 +1,6 @@
 # Method
 
-I needed evidence about shoppers that I could gather in hours, for almost nothing, and check line by line. Of the ways to collect it, I used one: a netnography, reading what London shoppers already write in public about their high streets. What people write is mostly attitudinal, so the empathy map and the proto-personas rest on what people say they think and do. Nobody was observed.
+Discover collected data from three sources: desk research on the street, benchmarks of existing products, and posts by shoppers. For shoppers I needed evidence that I could gather in hours, for almost nothing, and check line by line. Of the ways to collect it, I used one: a netnography, reading what London shoppers already write in public about their high streets. What people write is mostly attitudinal, so the empathy map and the proto-personas rest on what people say they think and do. Nobody was observed.
 
 ```summary
 Takeaways:
@@ -23,6 +23,7 @@ Trade-offs:
 | Method | Kind of data | Cost for this take-home | Used |
 | --- | --- | --- | --- |
 | Desk research (reports, statistics, news) | Context about the street itself | Low | Yes, to learn how the high street works ([the high street today](../high-street-landscape.md)) |
+| Benchmarks (product pages, app reviews) | What existing products do, and what their users say | Low | Yes, in parallel with the netnography ([benchmarks](../benchmarks.md)) |
 | Netnography (public posts) | Attitudinal: what people say they think, feel and did | Low: the material already exists | Yes, the only source on shoppers |
 | Interviews | Attitudinal, with follow-up questions | Medium: recruiting, sessions, notes | No |
 | Survey | Attitudinal, at scale | Medium: needs a panel to mean anything | No |

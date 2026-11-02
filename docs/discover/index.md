@@ -6,7 +6,7 @@ Before choosing between findability and transaction, I set out to understand the
 Takeaways:
 - Shoppers can't tell whether a nearby shop has something, or is open, without going. That was the strongest signal.
 - A failed trip usually ends on Amazon, unless online can't arrive in time.
-- Sam, the mission shopper, is the largest and clearest of the three proto-personas (11 of 21 clustered posts). Most failed purchases stopped at the first step, finding out who has the item and whether the shop is open.
+- Sam, the mission shopper, is the largest and clearest of the three proto-personas (11 of 21 clustered posts). The most common stopping point was the first step, finding out who has the item and whether the shop is open (8 of 21 clustered posts).
 Call:
 - Discovery before choosing findability or transaction ([001](../decision-log.md)).
 - Outside-in, because the product doesn't exist yet ([000](../decision-log.md)). Hammersmith as the worked example.
@@ -23,11 +23,12 @@ Trade-offs:
 | Piece of work | Question | Page |
 | --- | --- | --- |
 | Desk research | What is a high street today, and which rules, money and events affect it? I used it to learn the context. | [The high street today](high-street-landscape.md) |
-| Data collection: netnography | What do London shoppers say, in their own words, about using their high street? Attitudinal data, the only source on shoppers. | [Method](netnography/method.md) · [Findings](netnography/findings.md) |
+| Netnography | What do London shoppers say, in their own words, about using their high street? Attitudinal data, the only source on shoppers. | [Method](netnography/method.md) · [Findings](netnography/findings.md) |
 | Empathy map | What does that shopper see, hear, think, say and do, and what hurts? | [Empathy map](netnography/empathy-map.md) |
 | Segmentation | Which differences between shoppers matter for this brief? | [Proposed dimensions](netnography/dimensions.md) |
 | Proto-personas | Which shopping occasions recur, and where do they break? | [The proto-personas](personas/index.md) · [Method](personas/method.md) |
-| Benchmarks | Which products already serve these shoppers, and what do their users say? | [Benchmarks](benchmarks.md) |
+| Benchmarks | Which products already serve these shoppers, and what do their users say? Collected alongside the netnography, sorted by persona afterwards. | [Benchmarks](benchmarks.md) |
+| Conclusion | What is fact, what is assumed and how much I trust it, and what is still unknown? | [Conclusion](conclusion.md) |
 
 Every quote is a short excerpt from a public post, dated between May 2025 and November 2026, with the author's handle and a link. All but one are checked against the live page. The full list is on [Sources](sources.md), and the decisions behind the method are in the [decision log](../decision-log.md).
 
@@ -35,7 +36,7 @@ Every quote is a short excerpt from a public post, dated between May 2025 and No
 
 The most frequent complaint is that you can't tell what a shop has, or whether it's open, without going there. When a need is urgent (eclipse glasses the day before, a fan in a heatwave, flowers on a Sunday evening), Londoners ask strangers on Reddit, phone around, or join WhatsApp groups that post stock counts with timestamps. They trust a neighbour's reply more than Google listings or shop websites.
 
-After a failed trip, people usually buy on Amazon. Those who tried local, paid for parking and came home empty-handed say so in plain terms. The exception is when online can't arrive in time. Then a nearby shop that has the thing wins, at almost any price.
+After a failed trip, most say they buy on Amazon. Those who tried local, paid for parking and came home empty-handed say so in plain terms. The exception is when online can't arrive in time. Then a nearby shop that has the thing wins, at almost any price.
 
 Loyalty to local shops has a limit. Shoppers will pay more at a small business "if it's reasonably convenient", and drop it after a wasted trip or hours that clash with work. The independent butcher becomes the place for anniversaries, and the supermarket gets the weekly shop.
 

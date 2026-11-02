@@ -26,6 +26,9 @@ Source: English Markdown in `docs/`. Target: Brazilian Portuguese in `docs/pt-br
 | netnography | netnografia |
 | empathy map | mapa de empatia |
 | desk research | pesquisa documental |
+| data collection | coleta de dados |
+| survey | survey |
+| attitudinal / behavioural (data) | atitudinal / comportamental ("dados de comportamento" also fine) |
 | benchmark(s) | benchmark(s) |
 | codebook | codebook |
 | coding / to code (qualitative) | etiquetagem / etiquetar ("codificação" only when explaining the research term) |

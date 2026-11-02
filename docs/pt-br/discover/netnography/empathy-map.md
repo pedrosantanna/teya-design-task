@@ -5,7 +5,7 @@ O sujeito é uma composição: um morador de Hammersmith ou do oeste de Londres 
 ```summary
 Takeaways:
 - A dor principal: não saber se a loja tem o item, ou se está aberta, antes de sair de casa.
-- O que as pessoas dizem sobre apoiar o comércio local muitas vezes difere do que fazem.
+- Quem diz que apoia o comércio local muitas vezes conta que compra em outro lugar.
 Call:
 - Usei o mapa de empatia da Strategyzer e liguei cada linha a um post.
 AI:
@@ -40,7 +40,7 @@ Diz e faz:
 - Pergunta a desconhecidos no Reddit onde achar algo quando a busca não dá em nada ([u/grand_web](https://www.reddit.com/r/chiswick/comments/1vlibmn/), Aug 2026)
 - Pede na Amazon depois de uma ida perdida ([u/Mediocre_Sprinkles](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb2z980/), Aug 2025)
 - Paga mais pela entrega quando a Amazon não consegue chegar a tempo ([u/WearyChampionship365](https://www.reddit.com/r/Ealing/comments/1vlc46x/comment/p30rnx7/), Aug 2026)
-- Apoia uma loja favorita pelo Deliveroo em vez de ir até lá ([u/Inge_Jones](https://www.reddit.com/r/Ealing/comments/1x3g7ci/comment/pfbvje4/), Oct 2026)
+- Apoia uma loja favorita pedindo dela pelo Deliveroo ([u/Inge_Jones](https://www.reddit.com/r/Ealing/comments/1x3g7ci/comment/pfbvje4/), Oct 2026)
 - Vai até a high street seguinte quando a do bairro não tem algo ([u/mjfh2](https://www.reddit.com/r/london/comments/1niwnlw/comment/nemvjcy/), Sep 2025)
 Dores:
 - Não saber se o item está lá antes de sair de casa ([u/jamesshovlin](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2tdld2/), Aug 2026)
@@ -62,7 +62,7 @@ Ganhos:
 
 Os quadros discordam em três pontos. Cada leitura abaixo é minha; ninguém nos posts disse isso com todas as letras.
 
-- Quase todo mundo diz que valoriza as lojas independentes, e o dinheiro continua indo para outro lugar. A thread do açougue mostra a compra de rotina indo para o supermercado, com a loja independente reservada para ocasiões especiais ([u/killmetruck](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq967k5/), Jun 2026).
+- Quase todo mundo diz que valoriza as lojas independentes, e muitos contam que gastam o dinheiro em outro lugar. A thread do açougue mostra a compra de rotina indo para o supermercado, com a loja independente reservada para ocasiões especiais ([u/killmetruck](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq967k5/), Jun 2026).
 - As pessoas lamentam lojas que quase não usavam. Uma pessoa lamenta o fechamento de uma oficina de bicicletas no mesmo comentário em que admite ter ido lá uma vez só, porque parecia cara ([u/Username8831](https://www.reddit.com/r/Ealing/comments/1v6423y/comment/oznttbd/), Jul 2026). Outro morador responde ao post do açougue de Kew com "haven't been in over a year and then wonder why shops are shutting" (não vão há mais de um ano e depois se perguntam por que as lojas fecham) ([u/Greg-Normal](https://www.reddit.com/r/london/comments/1niwnlw/comment/neo7ha3/), Sep 2025).
 - As pessoas citam o preço quando explicam por que compram online, mas várias dizem que teriam pagado mais se a loja estivesse aberta ou tivesse estoque ([u/xmastreee](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb31nms/), Aug 2025; [FerrisWheelsandLilacs](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976658), Mumsnet, Dec 2025). Por isso eu leio o esforço de uma ida perdida como o desestímulo maior.
 

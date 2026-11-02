@@ -1,6 +1,6 @@
 # Findings
 
-The clearest thing Londoners say about their high street is that they can't tell whether a shop has what they need, or is even open, without going there. When the need is urgent they ask strangers on Reddit and WhatsApp, and when a trip fails they order online and stop trying.
+The clearest thing Londoners say about their high street is that they can't tell whether a shop has what they need, or is even open, without going there. When the need is urgent they ask strangers on Reddit and WhatsApp, and after a failed trip they say they order online and stop trying.
 
 ```summary
 Takeaways:
@@ -24,7 +24,7 @@ The only way to find out whether a shop has something right now is to ask people
 
 **Evidence: strong.** Many quotes, two networks, mostly West London and London, all from 2025–26.
 
-When the need is specific and has a deadline (eclipse glasses, a portable AC in a heatwave, Sunday-evening flowers), nobody checks a shop's website. People post on Reddit, phone ahead, or join WhatsApp groups that pass round timestamped stock counts. This is the most direct evidence for the brief's "see what's available nearby right now".
+When the need is specific and has a deadline (eclipse glasses, a portable AC in a heatwave, Sunday-evening flowers), nobody mentions checking a shop's website. People post on Reddit, phone ahead, or join WhatsApp groups that pass round timestamped stock counts. This is the most direct evidence for the brief's "see what's available nearby right now".
 
 ```quote
 text: Hard to know stock levels without visiting, unless you can somehow get through on the phone..!

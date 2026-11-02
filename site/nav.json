@@ -34,7 +34,7 @@
           "pt": "Pesquisa documental"
         },
         {
-          "title": "Data collection",
+          "title": "Netnography",
           "children": [
             {
               "id": "netnography-method",
@@ -67,7 +67,7 @@
               "pt": "Dimensões propostas"
             }
           ],
-          "pt": "Coleta de dados"
+          "pt": "Netnografia"
         },
         {
           "title": "Proto-personas",
@@ -98,6 +98,12 @@
           "title": "Benchmarks",
           "src": "docs/discover/benchmarks.md",
           "pt": "Benchmarks"
+        },
+        {
+          "id": "conclusion",
+          "title": "Conclusion",
+          "src": "docs/discover/conclusion.md",
+          "pt": "Conclusão"
         },
         {
           "id": "sources",

@@ -236,6 +236,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* Persona header: portrait, tagline, attributes in columns. */
 .persona { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 0 24px; align-items: start; margin: 12px 0 24px; }
+.screens { margin: 0; }
+.screens img { display: block; width: 100%; height: auto; border-radius: var(--radius); background: #161616; box-shadow: inset 0 0 0 1px var(--border); }
+.screens figcaption { margin-top: var(--s-2); font-size: 13px; color: var(--muted-fg); }
+.screens .screens-missing { display: none; }
+.screens.missing img { display: none; }
+.screens.missing .screens-missing { display: inline; }
 .persona figure { margin: 0; }
 .persona img { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; display: block; background: var(--muted); box-shadow: inset 0 0 0 1px var(--border); }
 .persona-name { font-size: 17px; font-weight: 600; margin: 0 0 2px !important; }
@@ -430,6 +436,7 @@ i.m.unknown { opacity: .45; }
       mapNote: n => `Each dot is one post; posts with the same codes sit side by side. Not on the chart: ${n} posts where nothing broke.`,
       persists: 'persists', defects: 'defects', unknown: 'stance unknown', urgent: 'urgent', notPublished: 'Not published yet',
       loadFail: (src, m) => `Couldn’t load <code>${src}</code> (${m}). Check that the file exists in the repo and is published with the page.`,
+      screensSource: 'Main screens on Mobbin', screensAlt: 'Main app screens, captured from Mobbin', screensMissing: 'Screens are kept locally, not in the public repo.',
       notTranslated: 'This page isn’t translated yet, so it shows in English.' },
     pt: { filter: 'Filtrar páginas', noMatch: 'Nenhuma página com', soon: 'Em breve', onPage: 'Nesta página', prev: '← Anterior', next: 'Próxima →',
       takeaways: 'Principais pontos', call: 'Minha decisão', ai: 'IA nesta etapa', tradeoffs: 'Trade-offs', verified: 'Verificada', archive: 'Via arquivo',
@@ -438,6 +445,7 @@ i.m.unknown { opacity: .45; }
       mapNote: n => `Cada ponto é um post; posts com as mesmas etiquetas ficam lado a lado. Fora do gráfico: ${n} posts em que nada deu errado.`,
       persists: 'continuou', defects: 'desistiu', unknown: 'não aparece', urgent: 'urgente', notPublished: 'Ainda não publicada',
       loadFail: (src, m) => `Não foi possível carregar <code>${src}</code> (${m}).`,
+      screensSource: 'Telas principais no Mobbin', screensAlt: 'Telas principais do app, capturadas no Mobbin', screensMissing: 'As telas ficam só na cópia local, fora do repositório público.',
       notTranslated: 'Esta página ainda não foi traduzida, por isso aparece em inglês.' }
   };
   const t = k => (UI[LANG][k] !== undefined ? UI[LANG][k] : UI.en[k]);
@@ -450,7 +458,7 @@ i.m.unknown { opacity: .45; }
     'Sam, the mission shopper': 'Sam, o comprador em missão', 'Jess, the lapsed local': 'Jess, a local que desistiu', 'Ruth, the regular': 'Ruth, a frequentadora',
     'Nothing broke (not clustered)': 'Nada deu errado (fora dos clusters)',
     'Specific item or shop': 'Item ou loja específica', 'Routine shopping and services': 'Compras de rotina e serviços', 'Discovery and browsing': 'Descoberta e passeio',
-    'No failure': 'Sem falha',
+    'Nothing broke': 'Nada deu errado',
     'findability': 'findability', 'transaction': 'transaction', "the street's offer": 'a oferta da rua'
   };
   const tr = s => (LANG === 'pt' && PT_STR[s]) ? PT_STR[s] : s;
@@ -528,6 +536,14 @@ i.m.unknown { opacity: .45; }
     });
     const sec = (key, title) => parts[key] ? `<section class="${key.replace(/[^a-z]/g, '')}"><h5>${title}</h5><ul>${parts[key].map(i => `<li>${inline(i)}</li>`).join('')}</ul></section>` : '';
     return `<div class="summary">${sec('takeaways', t('takeaways'))}${sec('call', t('call'))}${sec('ai', t('ai'))}${sec('trade-offs', t('tradeoffs'))}</div>`;
+  }
+
+  // ```screens  key: value lines (image, source). Main app screens captured from Mobbin; the image may only exist locally.
+  function screens(src) {
+    const q = {};
+    src.split('\n').forEach(l => { const m = l.match(/^(\w+):\s*(.*)$/); if (m) q[m[1]] = m[2].trim(); });
+    const link = q.source ? `<a href="${esc(q.source)}">${t('screensSource')}</a>` : '';
+    return `<figure class="screens"><img data-src="${esc(q.image || '')}" alt="${t('screensAlt')}" loading="lazy" onerror="this.closest('figure').classList.add('missing')"><figcaption><span class="screens-missing">${t('screensMissing')}</span> ${link}</figcaption></figure>`;
   }
 
   // ```persona  key: value lines (name, tagline, image, credit, credit_url) and "- Label: value | evidence|assumed" attributes.
@@ -623,6 +639,7 @@ i.m.unknown { opacity: .45; }
         if (l === 'summary') return summary(code);
         if (l === 'cluster-map') return clusterMap(code);
         if (l === 'persona') return persona(code);
+        if (l === 'screens') return screens(code);
         return `<pre><code>${esc(code)}</code></pre>`;
       }
     }

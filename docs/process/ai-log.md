@@ -60,6 +60,11 @@ I read the docs and found they still read as AI-written, with punchy headings in
 
 In the same round I found that "point of failure" couldn't be measured as a scale. I replaced it with the purchase stage where the attempt stopped (1 find out to 4 get it, decision 016). The agent re-ran the clustering, and the same posts land in the same three clusters.
 
+I also reframed Discover around how the data was collected (decision 015). The desk research is context, and netnography is the only method used on shoppers, which makes the empathy map and the proto-personas rest on attitudinal data. Agents rewrote the method page and the summaries to say so, and the sidebar now has a Desk research page and a Data collection group. A reviewer agent then read every page in order, in both languages, and fixed the contradictions these changes left behind.
+
+### 12. Screens and Teya
+An agent captured the main screens of eight benchmark apps from Mobbin through my logged-in browser and saved them locally; Just Eat, SumUp and Teya aren't on Mobbin. The images stay outside the public repo because they are third-party screens. The agent also read Teya's public pages and wrote what Teya does and doesn't do for Jess. Last, an agent drafted the Discover conclusion: facts, assumptions with a suggested confidence level under a fixed rule, and open questions. I set the final levels.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.
