@@ -154,6 +154,12 @@ I said the mark is an awning mixed with a dog, mainly a retriever, asked whether
 ### 40. The hybrids in the interface
 I asked for Lido with Indigo and Pastel parade with Indigo to go through the same screen tests as Night bus. The agent reused the four screens in light and dark, giving each hybrid colour the role the matching Night bus colour had (ready, waiting, new or sold out); Lilac and Lavender have no role there.
 
+### 41. Dark mode without the brown, and more names
+I found the brown dark mode badly made next to the three themes and asked for a warmer dark mode that suits them, from a web benchmark. An agent looked at Linear (an LCH base colour, nearly neutral with a slight blue), Material 3 (surfaces tinted by the primary colour) and Slack's aubergine, built three dark surface sets on the same lightness steps, checked contrast, and tried each with the three themes on the chat and requests screens. Its read is Aubergine. I also asked for more names tied to sniffing, tracking or fetching, cute and with no negative second meaning; the agent listed six, left out five for their second meanings, and picked Snuffle. Its first round 7 layout overlapped two blocks; it measured them and re-spaced.
+
+### 42. Snuffle, and a Brand page
+I chose Snuffle as the app's name and asked for a Brand page in Ideation with the naming brainstorm under it. The agent created the page, moved the three name sections and their sources from the identity page to it, recorded decision 035, and renamed the docs site to Snuffle with the mark as its logo. The sidebar only nests two levels, so Naming is a section of the Brand page rather than a page of its own.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.

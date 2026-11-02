@@ -141,3 +141,5 @@ Source: English Markdown in `docs/`. Target: Brazilian Portuguese in `docs/pt-br
 | design system | design system |
 | Where it stands (board area) | Onde está |
 | retriever | retriever (sem tradução; Golden Retriever, Labrador) |
+| brand | brand (sem tradução, para não confundir com marca = mark) |
+| naming | naming |

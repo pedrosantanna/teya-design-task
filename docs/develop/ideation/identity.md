@@ -1,20 +1,21 @@
 # Identity
 
-A first exploration of the shopper app's identity: four concept directions that are British and tied to finding or shopping, three accent palettes, and the palettes applied to the v2 home screens and to Material 3 roles. The product has no name yet. The mark's line is chosen; the palette and the name are open.
+A first exploration of the shopper app's identity: four concept directions that are British and tied to finding or shopping, three accent palettes, and the palettes applied to the v2 home screens and to Material 3 roles. The app is called Snuffle (decision 035, on the [Brand](brand.md) page). The mark is provisional; the accent palette is open.
 
 ```summary
 Takeaways:
 - Four directions: the terrier (a dog that goes into the shops and comes back with the thing), the Irregulars (Holmes's street runners), nipping out (the British quick errand) and the parade (painted fascias and market awnings).
 - The Irregulars match the concept's structure most closely: one concierge the shopper talks to, several agents asking shops behind it. The terrier gives the waiting a face.
 - Three palettes, each built on a complementary pair plus a third colour: Pillar and park (green and red, butter), Awning (cobalt and marmalade, mint), Tiles (teal and rose, ochre). Every tint passes 4.5:1 as text and as a button label in light and dark mode.
-- The mark is now a retriever, a British breed whose job is to bring things back. Retriever names to consider: Nous (the breed's founding dog, and British slang for common sense), Bonnie, Bailey, Buddy, Teddy, Primrose.
+- The mark is now a retriever, a British breed whose job is to bring things back. Retriever names to consider: Nous (the breed's founding dog, and British slang for common sense), Bonnie, Bailey, Buddy, Teddy, Primrose. Sniffing names: Snuffle (the agent's pick), Sniffari, Truffle, Rootle, Boop, Waggy.
 - Several obvious names are taken or crowded (Parade, Fetch, Errand, Legwork), and "Nip" alone is an ethnic slur.
+- Round 7 replaces the brown dark mode: Biscuit grey's dark steps read as muddy brown and sit opposite indigo on the wheel. Aubergine, a warm plum, is the agent's pick; Night sky is cooler, Plum charcoal quieter.
 - Round 6 stresses Night bus: its solid badges glared because Amber, Neon pink and Cyan are light and very saturated; tonal badges (pale fill, dark text of the same hue) pass 7:1 and calm it down. Indigo carries all text and buttons.
 - Round 5 answers whether the saturated palettes work with Biscuit grey: they do, because the grey is almost neutral; the mark's Oat and Brew are the limit. Warm-led sets (Corner shop, Lido) sit best next to it.
 - Round 4 keeps Oat and Brew as the base and adds three warm grey scales, shadcn-style, and four sets of five accents (Tea tin, Shopfront enamel, Greengrocer, Pillar box). Pure black text and white on Brew pass everywhere; the agent suggests Tea tin with Biscuit grey.
 Call:
 - Provisional mark (decision 033): I drew a terrier with an awning for a mouth by hand in Figma from icon tests 1 and 2; it is in the [design system](../design-system/mark.md).
-- Chosen line: the mark follows icon test 3, the parade's awning as a terrier's beard with brows and a moustache of four or five stripes. Shortlisted: palettes A, C, F, I and J. Open: the name and the palette, both my decisions.
+- Chosen line: the mark follows icon test 3, the parade's awning as a terrier's beard with brows and a moustache of four or five stripes. Shortlisted: palettes A, C, F, I and J. Open: the accent palette, my decision. The name is decided: Snuffle.
 - Character-led, multi-colour, and without the generic AI look (no purple gradients, sparkles or glowing orbs).
 AI:
 - I gave the seeds: a sniffer dog, a Sherlock-style investigator, British shopping culture. An agent searched the web for references and name conflicts, checked the Sherlock Holmes copyright and trademark position, built the palettes with a script that computes WCAG contrast and Material 3 tonal palettes, drew the mark sketches in SVG, applied the palettes to the v2 wireframes and captured nine apps from Mobbin.
@@ -31,6 +32,7 @@ Every round stays on the same board, newest at the top, under a "Where it stands
 
 | Round | What it added |
 | --- | --- |
+| 7 | Three dark modes in place of the brown one (Night sky, Aubergine, Plum charcoal), from a benchmark of Linear, Material 3 and Slack, each tried with Night bus, Lido with Indigo and Pastel parade with Indigo |
 | 6 | Night bus derived into ten-step OKLCH ramps per colour, tonal badges in place of solid ones, four screens in light and dark that push the palette, and Indigo in place of the blue in Lido and Pastel parade, each on the same four screens in light and dark |
 | 5 | Biscuit grey as the neutral, pre-decided. Pillar box with three candidates for the fifth colour in place of Slate roof (Duck egg, Bramley and Sea glass, brighter), and six saturated palettes from round 2 on Biscuit grey with the mark |
 | 4 | Oat and Brew from palette I as the base: three warm grey scales in the shadcn style (from Oat and Brew to close to Tailwind stone) and four sets of five accents, each checked with pure black and white |
@@ -74,30 +76,9 @@ The parade's striped awning becomes a terrier's beard: lowered a little, with fo
 
 On the Sherlock Holmes position: Conan Doyle died in 1930, so the stories are out of copyright in the UK, and since 1 January 2023 every story is public domain in the US (Klinger v. Conan Doyle Estate covered the earlier ones). The Conan Doyle Estate says it holds trademark and common-law rights in the name and image of Sherlock Holmes, and in 2020 it sued Netflix over Enola Holmes; the case was settled. I haven't searched the UK IPO register. Any name or image from this direction needs that search first, and the deerstalker, pipe and the name "Sherlock" are left out.
 
-### Name ideas
+### Names
 
-| Direction | Names | What the quick search found |
-| --- | --- | --- |
-| The terrier | Rummage, Fetch, Ferret, Terrier, Snout | Rumage, a UK search engine for second-hand goods, sounds the same. Fetch Rewards and Fetch Pet Insurance (US). eFerret, an eBay alert app. Terrier and Snout not checked |
-| The Irregulars | Wiggins, Irregulars, Legwork, Runners, Footwork | No UK shopping app called Wiggins found. Netflix's The Irregulars (2021). Legwork is used by several companies, one of them an app that pays people to visit local shops. Runners and Footwork not checked |
-| Nipping out | Popround, Nippy, Errand, Back in 5, Nip | Popround: nothing found. Nippy is a UK rapid grocery start-up. Errand is crowded. "Nip" is an ethnic slur against Japanese people. Back in 5 not checked |
-| The parade | Parade, Barrow, Fascia, Awning, Coster | Parade is a UK-founded platform selling for independent skate shops, and a US underwear brand. Barrow is a place name with its own town app. The rest not checked |
-
-### Retriever names
-
-The mark became a retriever, so I looked at what people in the UK call their retrievers. The most common dog names in 2025 were Luna, Bella, Milo, Teddy and Poppy; for Golden Retrievers and Labradors, Bailey, Buddy, Luna, Cooper and Rosie come up most. The breed's own history adds a few: Nous, the yellow retriever Lord Tweedmouth bred from at Guisachan in 1868, and the first litter's puppies, Cowslip, Ada, Primrose and Crocus.
-
-| Name | Where it comes from | What the quick search found |
-| --- | --- | --- |
-| Nous | Lord Tweedmouth's yellow retriever, the breed's founding dog. In British English "nous" also means common sense ("use your nous") | Nous is a London household-bills app (nous.co, founded 2021): a different market, but the same app stores and a UK audience |
-| Bonnie | Scottish for pretty, the breed's home; in the top 10 Golden Retriever names in 2024 | No UK shopping app found. Bonny, a German receipt-rewards app, is close in spelling |
-| Bailey | Top Labrador name in one survey, second for Golden Retrievers in another | No local-shops app found; a crowded word (Baileys liqueur) |
-| Buddy | Top Golden Retriever name in one survey, top male Labrador name in another | No local-shops app found; very generic |
-| Teddy | The UK's most common male dog name in 2024 and 2025 (Agria) | No local-shops app found; very generic |
-| Primrose | One of the first litter's puppies; also a British flower and a London district | Not checked |
-
-These are quick web searches, not trademark searches.
-
+The name brainstorm and the decision (Snuffle) are on the [Brand page](brand.md).
 ## Palettes
 
 Each palette has a tint (the iOS key colour for interactive elements, and the Material 3 primary), a secondary and a tertiary, and four status colours for the Requests list. The light value is used on white and system grouped backgrounds, the dark value on black and #1C1C1E.
@@ -121,16 +102,6 @@ For Material 3, each brand colour seeds its own tonal palette, so secondary and 
 
 ## Sources
 
-- Rover, top dog names 2025: https://www.rover.com/uk/blog/press-release/creative-cosmic-and-controversial-rover-reveals-top-dog-names-2025/
-- Agria, National Dog Survey 2025: https://www.agriapet.co.uk/guides-and-advice/national-dog-survey-2025/
-- Dogs Trust survey (Hello Rayo): https://www.hellorayo.co.uk/greatest-hits/uk/news/most-popular-dog-breed-and-names-dogs-trust
-- Petsure names by breed (Express & Star, 2024): https://www.expressandstar.com/news/local-hubs/birmingham/2024/05/25/revealed-this-years-most-popular-dog-names-according-to-their-breed/
-- Golden Retriever names (The Scotsman): https://www.scotsman.com/lifestyle/family-and-parenting/best-golden-retrievers-names-these-are-the-10-most-popular-puppy-names-for-the-adorable-golden-retriever-breed-3462845
-- Labrador names (The Scotsman): https://www.scotsman.com/lifestyle/family-and-parenting/labrador-retriever-names-2024-here-are-the-10-most-popular-puppy-names-chosen-by-labrador-owners-3462215
-- Golden Retriever Club of America, history: https://grca.org/?p=1831
-- Labrador Retriever (Wikipedia): https://en.wikipedia.org/wiki/Labrador_Retriever
-- Nous (Craft): https://craft.co/nous
-- Bonny (App Store): https://apps.apple.com/us/app/id6496859085
 - shadcn/ui: Theming: https://ui.shadcn.com/docs/theming
 - Tailwind CSS: Colors: https://tailwindcss.com/docs/colors
 - Radix Colors: Understanding the scale: https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale
@@ -157,7 +128,6 @@ For Material 3, each brand colour seeds its own tonal palette, so secondary and 
 - Shop signs (Designing Buildings): https://www.designingbuildings.co.uk/wiki/Shop_signs
 - Medway shopfront advertising guide: https://www.medway.gov.uk/download/downloads/id/2328/shopfront_advertising_guide_2015.pdf
 - Costermonger (Wikipedia): https://en.wikipedia.org/wiki/Costermonger
-- Name checks: Rumage (https://www.cbinsights.com/compare/gumtree-vs-rumage), Fetch Pet Insurance (https://apps.apple.com/app/id925165009), eFerret (https://apps.apple.com/app/eferret/id1658695827), Legwork (https://apps.apple.com/az/app/legwork/id6760600594), The Irregulars cancelled (https://www.spoilertv.com/2021/05/the-irregulars-cancelled-by-netflix.html), Nippy (https://www.seedrs.com/nippy/sections/idea), Delivery by Errand (https://apps.shopify.com/errand), Parade (https://www.jenkemmag.com/home/2019/08/26/parade-world-rethinking-way-buy-skate-goods-online/), Barrow Buzz (https://www.atcm.org/barrowbidlaunchesbarrowbuzz)
 - Apple Human Interface Guidelines, color: https://developer.apple.com/design/human-interface-guidelines/color
 - Material 3, color roles: https://m3.material.io/styles/color/roles
 - WCAG 2.2, contrast (minimum) and non-text contrast: https://www.w3.org/TR/WCAG22/#contrast-minimum

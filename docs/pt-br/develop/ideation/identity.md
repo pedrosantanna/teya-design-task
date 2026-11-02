@@ -1,20 +1,21 @@
 # Identidade
 
-Uma primeira exploração da identidade do app do comprador: quatro direções de conceito britânicas e ligadas a encontrar ou comprar, três paletas de destaque, e as paletas aplicadas às telas iniciais da v2 e aos papéis do Material 3. O produto ainda não tem nome. A linha da marca está escolhida; a paleta e o nome estão em aberto.
+Uma primeira exploração da identidade do app do comprador: quatro direções de conceito britânicas e ligadas a encontrar ou comprar, três paletas de destaque, e as paletas aplicadas às telas iniciais da v2 e aos papéis do Material 3. O app se chama Snuffle (decisão 035, na página de [Brand](brand.md)). A marca é provisória; a paleta de acentos está em aberto.
 
 ```summary
 Takeaways:
 - Quatro direções: o terrier (um cachorro que entra nas lojas e volta com a coisa), os Irregulars (os mensageiros de rua de Holmes), dar uma saidinha (o mandado rápido britânico) e a parade (fachadas pintadas e toldos de feira).
 - Os Irregulars são os mais próximos da estrutura do conceito: um concierge com quem o comprador fala, vários agentes perguntando às lojas por trás. O terrier dá rosto à espera.
 - Três paletas, cada uma construída sobre um par complementar mais uma terceira cor: Pillar and park (verde e vermelho, manteiga), Awning (cobalto e laranja, menta), Tiles (verde-petróleo e rosa, ocre). Todo tint passa 4,5:1 como texto e como rótulo de botão nos modos claro e escuro.
-- A marca agora é um retriever, uma raça britânica cujo trabalho é trazer as coisas de volta. Nomes de retriever a considerar: Nous (o cão que fundou a raça, e gíria britânica para bom senso), Bonnie, Bailey, Buddy, Teddy, Primrose.
+- A marca agora é um retriever, uma raça britânica cujo trabalho é trazer as coisas de volta. Nomes de retriever a considerar: Nous (o cão que fundou a raça, e gíria britânica para bom senso), Bonnie, Bailey, Buddy, Teddy, Primrose. Nomes de farejar: Snuffle (a escolha do agente), Sniffari, Truffle, Rootle, Boop, Waggy.
 - Vários nomes óbvios já existem ou estão concorridos (Parade, Fetch, Errand, Legwork), e "Nip" sozinho é uma ofensa étnica.
+- A rodada 7 substitui o modo escuro marrom: os passos escuros do Cinza biscoito se leem como marrom sujo e ficam do lado oposto ao índigo no círculo. A Berinjela, um roxo quente, é a escolha do agente; o Céu noturno é mais frio, o Carvão ameixa mais discreto.
 - A rodada 6 testa a Night bus: as badges sólidas ofuscavam porque Âmbar, Rosa neon e Ciano são claros e muito saturados; badges tonais (fundo claro, texto escuro do mesmo matiz) passam de 7:1 e acalmam a paleta. O Índigo leva todo o texto e os botões.
 - A rodada 5 responde se as paletas saturadas funcionam com o Cinza biscoito: funcionam, porque o cinza é quase neutro; o limite é o Oat e o Brew da marca. Os conjuntos puxados por matizes quentes (Corner shop, Lido) ficam melhor ao lado dela.
 - A rodada 4 mantém Oat e Brew como base e acrescenta três escalas de cinza quente, no estilo do shadcn, e quatro conjuntos de cinco acentos (Lata de chá, Esmalte de fachada, Quitanda, Caixa de correio). Texto preto puro e branco sobre o Brew passam em todo lugar; o agente sugere Lata de chá com o Cinza biscoito.
 Call:
 - Marca provisória (decisão 033): desenhei à mão no Figma um terrier com um toldo no lugar da boca, a partir dos testes de ícone 1 e 2; ela está no [design system](../design-system/mark.md).
-- Linha escolhida: a marca segue o teste de ícone 3, o toldo da parade como barba de terrier, com sobrancelhas e bigode de quatro ou cinco faixas. Pré-selecionadas: as paletas A, C, F, I e J. Em aberto: o nome e a paleta, as duas decisões minhas.
+- Linha escolhida: a marca segue o teste de ícone 3, o toldo da parade como barba de terrier, com sobrancelhas e bigode de quatro ou cinco faixas. Pré-selecionadas: as paletas A, C, F, I e J. Em aberto: a paleta de acentos, decisão minha. O nome está decidido: Snuffle.
 - Com personagem, multicor e sem a cara genérica de produto de IA (sem gradientes roxos, brilhos ou orbes luminosos).
 AI:
 - Eu dei as sementes: um cachorro farejador, um investigador no estilo Sherlock, a cultura de compras britânica. Um agente buscou na web referências e conflitos de nome, verificou a situação de direito autoral e de marca de Sherlock Holmes, montou as paletas com um script que calcula o contraste WCAG e as paletas tonais do Material 3, desenhou os esboços de marca em SVG, aplicou as paletas aos wireframes da v2 e capturou nove apps do Mobbin.
@@ -31,6 +32,7 @@ Todas as rodadas ficam no mesmo quadro, a mais recente no topo, abaixo de uma á
 
 | Rodada | O que acrescentou |
 | --- | --- |
+| 7 | Três modos escuros no lugar do marrom (Céu noturno, Berinjela, Carvão ameixa), a partir de um benchmark do Linear, do Material 3 e do Slack, cada um testado com a Night bus, a Lido com Índigo e a Pastel parade com Índigo |
 | 6 | A Night bus derivada em escalas de dez passos em OKLCH para cada cor, badges tonais no lugar das sólidas, quatro telas no claro e no escuro que forçam a paleta, e o Índigo no lugar do azul na Lido e na Pastel parade, cada uma nas mesmas quatro telas no claro e no escuro |
 | 5 | O Cinza biscoito como neutro, pré-decidido. A Caixa de correio com três candidatas à quinta cor no lugar da Slate roof (Duck egg, Bramley e Vidro do mar, mais vivos), e seis paletas saturadas da rodada 2 sobre o Cinza biscoito, com a marca |
 | 4 | Oat e Brew da paleta I como base: três escalas de cinza quente no estilo do shadcn (de Oat e Brew até perto do stone do Tailwind) e quatro conjuntos de cinco acentos, cada um testado com preto e branco puros |
@@ -74,30 +76,9 @@ O toldo listrado da parade vira a barba de um terrier: um pouco mais baixo, com 
 
 Sobre Sherlock Holmes: Conan Doyle morreu em 1930, então as histórias estão em domínio público no Reino Unido, e desde 1º de janeiro de 2023 todas estão em domínio público nos EUA (Klinger v. Conan Doyle Estate tratou das anteriores). O espólio de Conan Doyle diz ter direitos de marca e de common law sobre o nome e a imagem de Sherlock Holmes, e em 2020 processou a Netflix por Enola Holmes; o caso terminou em acordo. Não busquei no registro do UK IPO. Qualquer nome ou imagem desta direção precisa dessa busca antes, e o chapéu deerstalker, o cachimbo e o nome "Sherlock" ficam de fora.
 
-### Ideias de nome
+### Nomes
 
-| Direção | Nomes | O que a busca rápida encontrou |
-| --- | --- | --- |
-| O terrier | Rummage, Fetch, Ferret, Terrier, Snout | Rumage, buscador britânico de itens usados, tem o mesmo som. Fetch Rewards e Fetch Pet Insurance (EUA). eFerret, app de alertas do eBay. Terrier e Snout não verificados |
-| Os Irregulars | Wiggins, Irregulars, Legwork, Runners, Footwork | Nenhum app de compras chamado Wiggins no Reino Unido. The Irregulars, da Netflix (2021). Legwork é usado por várias empresas, uma delas um app que paga pessoas para visitar lojas locais. Runners e Footwork não verificados |
-| Dar uma saidinha | Popround, Nippy, Errand, Back in 5, Nip | Popround: nada encontrado. Nippy é uma start-up britânica de entrega rápida de mercado. Errand está concorrido. "Nip" é uma ofensa étnica contra japoneses. Back in 5 não verificado |
-| A parade | Parade, Barrow, Fascia, Awning, Coster | Parade é uma plataforma criada no Reino Unido que vende para skate shops independentes, e uma marca americana de roupa íntima. Barrow é nome de lugar com app da cidade. Os demais não verificados |
-
-### Nomes de retriever
-
-A marca virou um retriever, então olhei como as pessoas no Reino Unido chamam seus retrievers. Os nomes de cachorro mais comuns em 2025 foram Luna, Bella, Milo, Teddy e Poppy; para Golden Retrievers e Labradores, os que mais aparecem são Bailey, Buddy, Luna, Cooper e Rosie. A história da raça acrescenta alguns: Nous, o retriever amarelo a partir do qual Lord Tweedmouth criou a raça em Guisachan em 1868, e os filhotes da primeira ninhada, Cowslip, Ada, Primrose e Crocus.
-
-| Nome | De onde vem | O que a busca rápida encontrou |
-| --- | --- | --- |
-| Nous | O retriever amarelo de Lord Tweedmouth, o cão que fundou a raça. No inglês britânico, "nous" também quer dizer bom senso ("use your nous") | Nous é um app londrino de contas da casa (nous.co, criado em 2021): outro mercado, mas as mesmas lojas de apps e o mesmo público britânico |
-| Bonnie | "Bonita" em escocês, a terra da raça; entre os 10 nomes de Golden Retriever mais comuns em 2024 | Nenhum app de compras britânico encontrado. Bonny, um app alemão de recompensa por notas fiscais, tem grafia parecida |
-| Bailey | Nome de Labrador mais comum numa pesquisa, segundo entre Golden Retrievers em outra | Nenhum app de lojas locais encontrado; palavra muito usada (o licor Baileys) |
-| Buddy | Nome de Golden Retriever mais comum numa pesquisa, nome de Labrador macho mais comum em outra | Nenhum app de lojas locais encontrado; muito genérico |
-| Teddy | O nome de cachorro macho mais comum do Reino Unido em 2024 e 2025 (Agria) | Nenhum app de lojas locais encontrado; muito genérico |
-| Primrose | Um dos filhotes da primeira ninhada; também uma flor britânica e um bairro de Londres | Não verificado |
-
-São buscas rápidas na web, não buscas de marca registrada.
-
+O brainstorm de nomes e a decisão (Snuffle) estão na [página de Brand](brand.md).
 ## Paletas
 
 Cada paleta tem um tint (a cor-chave do iOS para elementos interativos, e a primária do Material 3), uma secundária e uma terciária, e quatro cores de status para a lista de Requests. O valor claro é usado no branco e nos fundos agrupados do sistema, o escuro no preto e no #1C1C1E.
@@ -121,16 +102,6 @@ No Material 3, cada cor da marca gera sua própria paleta tonal, para a secundá
 
 ## Fontes
 
-- Rover, top dog names 2025: https://www.rover.com/uk/blog/press-release/creative-cosmic-and-controversial-rover-reveals-top-dog-names-2025/
-- Agria, National Dog Survey 2025: https://www.agriapet.co.uk/guides-and-advice/national-dog-survey-2025/
-- Dogs Trust survey (Hello Rayo): https://www.hellorayo.co.uk/greatest-hits/uk/news/most-popular-dog-breed-and-names-dogs-trust
-- Petsure names by breed (Express & Star, 2024): https://www.expressandstar.com/news/local-hubs/birmingham/2024/05/25/revealed-this-years-most-popular-dog-names-according-to-their-breed/
-- Golden Retriever names (The Scotsman): https://www.scotsman.com/lifestyle/family-and-parenting/best-golden-retrievers-names-these-are-the-10-most-popular-puppy-names-for-the-adorable-golden-retriever-breed-3462845
-- Labrador names (The Scotsman): https://www.scotsman.com/lifestyle/family-and-parenting/labrador-retriever-names-2024-here-are-the-10-most-popular-puppy-names-chosen-by-labrador-owners-3462215
-- Golden Retriever Club of America, history: https://grca.org/?p=1831
-- Labrador Retriever (Wikipedia): https://en.wikipedia.org/wiki/Labrador_Retriever
-- Nous (Craft): https://craft.co/nous
-- Bonny (App Store): https://apps.apple.com/us/app/id6496859085
 - shadcn/ui: Theming: https://ui.shadcn.com/docs/theming
 - Tailwind CSS: Colors: https://tailwindcss.com/docs/colors
 - Radix Colors: Understanding the scale: https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale
@@ -157,7 +128,6 @@ No Material 3, cada cor da marca gera sua própria paleta tonal, para a secundá
 - Shop signs (Designing Buildings): https://www.designingbuildings.co.uk/wiki/Shop_signs
 - Guia de publicidade em fachadas de Medway: https://www.medway.gov.uk/download/downloads/id/2328/shopfront_advertising_guide_2015.pdf
 - Costermonger (Wikipedia): https://en.wikipedia.org/wiki/Costermonger
-- Verificações de nome: Rumage (https://www.cbinsights.com/compare/gumtree-vs-rumage), Fetch Pet Insurance (https://apps.apple.com/app/id925165009), eFerret (https://apps.apple.com/app/eferret/id1658695827), Legwork (https://apps.apple.com/az/app/legwork/id6760600594), The Irregulars cancelada (https://www.spoilertv.com/2021/05/the-irregulars-cancelled-by-netflix.html), Nippy (https://www.seedrs.com/nippy/sections/idea), Delivery by Errand (https://apps.shopify.com/errand), Parade (https://www.jenkemmag.com/home/2019/08/26/parade-world-rethinking-way-buy-skate-goods-online/), Barrow Buzz (https://www.atcm.org/barrowbidlaunchesbarrowbuzz)
 - Apple Human Interface Guidelines, cor: https://developer.apple.com/design/human-interface-guidelines/color
 - Material 3, papéis de cor: https://m3.material.io/styles/color/roles
 - WCAG 2.2, contraste mínimo e contraste de elementos não textuais: https://www.w3.org/TR/WCAG22/#contrast-minimum

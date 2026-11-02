@@ -230,6 +230,12 @@
               "pt": "Posição das abas"
             },
             {
+              "id": "brand",
+              "title": "Brand",
+              "pt": "Brand",
+              "src": "docs/develop/ideation/brand.md"
+            },
+            {
               "id": "identity",
               "title": "Identity",
               "src": "docs/develop/ideation/identity.md",

@@ -1,4 +1,4 @@
-<title>High Street Docs</title>
+<title>Snuffle Docs</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,10 +67,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   border-bottom: 1px solid var(--border);
 }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; min-width: 0; }
-.brand-mark {
-  width: 24px; height: 24px; border-radius: 6px; background: var(--primary); color: var(--primary-fg);
-  display: grid; place-items: center; font-weight: 600; font-size: 11px; letter-spacing: .01em; flex: none;
-}
+.brand-mark { width: 24px; height: 24px; border-radius: 6px; flex: none; display: block; }
 .brand-name { font-weight: 600; font-size: 14px; white-space: nowrap; }
 .brand-sub { color: var(--muted-fg); font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .brand-sep { color: var(--border-strong); }
@@ -457,8 +454,8 @@ i.m.unknown { opacity: .45; }
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
   </button>
   <a class="brand" href="#introduction">
-    <span class="brand-mark" aria-hidden="true">HS</span>
-    <span class="brand-name">High Street</span>
+    <img class="brand-mark" src="docs/develop/design-system/img/mark-ios-light.svg" alt="" aria-hidden="true">
+    <span class="brand-name">Snuffle</span>
     <span class="brand-sep" aria-hidden="true">/</span>
     <span class="brand-sub">Design take-home, process docs</span>
   </a>
@@ -1005,7 +1002,7 @@ i.m.unknown { opacity: .45; }
       els.content.innerHTML = `<div class="cv-page" data-lang="${LANG}"><div class="cv-board"></div>
         <div class="cv-title"><div><div class="crumbs">${crumbs}</div><h1>${title}</h1></div>${picker}<button type="button" class="cv-about">${esc(t('about'))}</button></div></div>`;
       els.toc.innerHTML = '';
-      document.title = `${L(page)} · High Street Docs`;
+      document.title = `${L(page)} · Snuffle Docs`;
       let cv = null;
       const show = async i => {
         const board = els.content.querySelector('.cv-board');
@@ -1032,7 +1029,7 @@ i.m.unknown { opacity: .45; }
         ${prev ? `<a class="prev" href="#${prev.id}"><span class="dir">${t('prev')}</span><span class="ttl">${esc(L(prev))}</span></a>` : ''}
         ${next ? `<a class="next" href="#${next.id}"><span class="dir">${t('next')}</span><span class="ttl">${esc(L(next))}</span></a>` : ''}
       </nav>`;
-    document.title = `${L(page)} · High Street Docs`;
+    document.title = `${L(page)} · Snuffle Docs`;
     buildToc();
     window.scrollTo(0, 0);
   }

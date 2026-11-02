@@ -274,6 +274,14 @@ The app's neutral is Biscuit grey from round 4 of the identity board: an OKLCH r
 **Why:** warm enough to sit next to the mark without a seam, quiet enough that any accent set can carry the colour.
 **Open:** the accent set. The mark stays in black and white until then.
 
+## 035 · The app is called Snuffle
+**2026-11-02 · Decided**
+
+The shopper app is Snuffle. A dog snuffles when it works the ground with its nose; a snuffle mat hides treats for a dog to find by smell. The docs site now carries the name and the mark.
+
+**Why:** it describes the concierge's job, finding one item across many small shops, in a word that is cute and a little childlike, and it belongs to the retriever in the mark. It came out of three rounds of names (concept directions, retriever names, sniffing and fetching words), with words dropped for conflicts or for a negative second meaning.
+**Open:** a trademark search (UK IPO) and an App Store check; so far only quick web searches were run.
+
 ## Still open
 
 - Repo layout (single app or monorepo): to decide when the build starts and its shape is known.

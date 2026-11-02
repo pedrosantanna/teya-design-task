@@ -154,6 +154,12 @@ Eu disse que a marca é um toldo misturado com um cachorro, principalmente um re
 ### 40. As híbridas na interface
 Pedi que a Lido com Índigo e a Pastel parade com Índigo passassem pelos mesmos testes de tela da Night bus. O agente reaproveitou as quatro telas no claro e no escuro, dando a cada cor da híbrida o papel que a cor correspondente da Night bus tinha (pronto, esperando, novo ou esgotado); o Lilás e a Lavanda ficaram sem papel nelas.
 
+### 41. Modo escuro sem o marrom, e mais nomes
+Achei o modo escuro marrom malfeito ao lado dos três temas e pedi um modo escuro mais quente que combinasse com eles, a partir de um benchmark na web. Um agente olhou o Linear (uma cor base em LCH, quase neutra com um leve azul), o Material 3 (superfícies tingidas pela cor principal) e o aubergine do Slack, montou três conjuntos de superfícies escuras nos mesmos passos de luminosidade, conferiu o contraste e testou cada um com os três temas nas telas de chat e de pedidos. A leitura dele é a Berinjela. Também pedi mais nomes ligados a farejar, rastrear ou buscar, fofos e sem segundo sentido negativo; o agente listou seis, deixou cinco de fora pelo segundo sentido e escolheu Snuffle. O primeiro layout da rodada 7 sobrepôs dois blocos; ele mediu e reespaçou.
+
+### 42. Snuffle, e uma página de Brand
+Escolhi Snuffle como nome do app e pedi uma página de Brand na Ideação com o brainstorm de naming dentro dela. O agente criou a página, levou para ela as três seções de nomes e as fontes delas, que estavam na página de identidade, registrou a decisão 035 e trocou o nome do site da documentação para Snuffle, com a marca como logo. A barra lateral só tem dois níveis, então Naming é uma seção da página de Brand e não uma página própria.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.
