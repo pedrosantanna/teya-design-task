@@ -21,6 +21,6 @@ Trade-offs:
 | Fundação | Situação | Fonte |
 | --- | --- | --- |
 | [Tipografia](typography.md) | Definida (decisões 027, 028, 029) | [Escala tipográfica](../ideation/type-scale.md), rodada 4 |
-| Cor | Neutro pré-decidido: Cinza biscoito (decisão 034). Acentos em aberto: a rodada 5 compara as paletas saturadas, a rodada 6 deriva e testa a Night bus, a rodada 7 testa três modos escuros no lugar do marrom | [Identidade](../ideation/identity.md) |
+| Cor | Neutro pré-decidido: Cinza biscoito (decisão 034). Acentos escolhidos: Pastel parade com Índigo, sobre o Cinza biscoito no claro e no escuro, sem bordas (decisão 036). Em aberto: o croma do Cinza biscoito | [Identidade](../ideation/identity.md) |
 | [Marca](mark.md) | Provisória (decisão 033): um terrier com um toldo no lugar da boca, desenhado à mão no Figma | [Identidade](../ideation/identity.md) |
 | Espaçamento, raio, elevação | Não começado; os wireframes seguem as margens de 16 pt e os alvos de toque de 44 pt da Apple | [Fluxo do app](../ideation/app-flow.md) |

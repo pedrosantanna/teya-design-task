@@ -163,6 +163,9 @@ I chose Snuffle as the app's name and asked for a Brand page in Ideation with th
 ### 43. Every mode side by side, without borders
 I didn't want to drop the round 6 brown dark mode yet and asked to compare everything side by side, light mode included, with no borders on screens or cards. The agent added a borderless option to the screen builder and redrew round 7 with five columns per theme: light, the round 6 brown and the three new darks. Without borders, cards separate from the background by 1.04:1 in light mode, 1.12:1 on the brown and 1.08:1 on the new darks; it noted that a lighter card step would be needed to drop borders.
 
+### 44. Pastel parade with Indigo, and surfaces without borders
+I chose Pastel parade with Indigo on Biscuit grey in both modes, asked to avoid borders, to raise the contrast between surfaces, and to see a less saturated Biscuit grey. The agent moved the light background to L 0.95 under white cards (1.16:1, up from 1.04:1) and lifted the dark card to L 0.235 (1.18:1), then drew home, chat and requests in light and dark for the round 7 surfaces, the new ones and a Biscuit grey at 45% of its chroma. I also asked for the docs logo to be round, like an avatar.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.

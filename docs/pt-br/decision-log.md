@@ -283,6 +283,14 @@ O app do comprador é Snuffle. Um cachorro faz "snuffle" quando trabalha o chão
 **Por quê:** é sonoro, lúdico e remete a procurar e encontrar coisas, que é o trabalho do concierge; vem do retriever da marca. Saiu de três rodadas de nomes (direções de conceito, nomes de retriever, palavras de farejar e buscar), com palavras descartadas por conflito ou por segundo sentido negativo.
 **Em aberto:** uma busca de marca registrada (UK IPO) e uma conferência na App Store; até agora só foram feitas buscas rápidas na web.
 
+## 036 · Pastel parade com Índigo no Cinza biscoito
+**2026-11-02 · Decidido**
+
+Os acentos são a Pastel parade com Índigo: o Índigo para texto, botões e tint, e Pêssego, Pistache, Manteiga e Lavanda como preenchimentos e badges tonais. O neutro é o Cinza biscoito no modo claro e no escuro. Bordas são evitadas: as superfícies se separam pela luminosidade (fundo claro em L 0,95 com cartões brancos, 1,16:1; cartões escuros em L 0,235, 1,18:1), e a borda aparece só onde uma superfície ainda precisar.
+
+**Por quê:** dos três temas testados nas mesmas telas, a Pastel parade com Índigo foi a mais calma, e os preenchimentos claros dela dão badges tonais que funcionam nos dois modos. Na rodada 7, um cartão branco sobre o fundo claro ficava em 1,04:1 sem borda, pouco demais.
+**Em aberto:** se o Cinza biscoito mantém o croma atual ou a versão menos saturada (45%) mostrada na rodada 8.
+
 ## Ainda em aberto
 
 - Estrutura do repo (app único ou monorepo): decidir quando a construção começar e o formato dela estiver claro.

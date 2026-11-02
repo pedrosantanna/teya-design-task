@@ -32,6 +32,7 @@ Todas as rodadas ficam no mesmo quadro, a mais recente no topo, abaixo de uma á
 
 | Rodada | O que acrescentou |
 | --- | --- |
+| 8 | A Pastel parade com Índigo no Cinza biscoito, escolhida (decisão 036), no claro e no escuro sem bordas: superfícies com mais distância de luminosidade, e um Cinza biscoito menos saturado ao lado |
 | 7 | Três modos escuros no lugar do marrom (Céu noturno, Berinjela, Carvão ameixa), a partir de um benchmark do Linear, do Material 3 e do Slack, cada um testado com a Night bus, a Lido com Índigo e a Pastel parade com Índigo, ao lado do modo claro e do marrom da rodada 6, tudo sem bordas |
 | 6 | A Night bus derivada em escalas de dez passos em OKLCH para cada cor, badges tonais no lugar das sólidas, quatro telas no claro e no escuro que forçam a paleta, e o Índigo no lugar do azul na Lido e na Pastel parade, cada uma nas mesmas quatro telas no claro e no escuro |
 | 5 | O Cinza biscoito como neutro, pré-decidido. A Caixa de correio com três candidatas à quinta cor no lugar da Slate roof (Duck egg, Bramley e Vidro do mar, mais vivos), e seis paletas saturadas da rodada 2 sobre o Cinza biscoito, com a marca |

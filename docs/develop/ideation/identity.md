@@ -32,6 +32,7 @@ Every round stays on the same board, newest at the top, under a "Where it stands
 
 | Round | What it added |
 | --- | --- |
+| 8 | Pastel parade with Indigo on Biscuit grey, chosen (decision 036), in light and dark without borders: surfaces with more lightness distance, and a less saturated Biscuit grey beside it |
 | 7 | Three dark modes in place of the brown one (Night sky, Aubergine, Plum charcoal), from a benchmark of Linear, Material 3 and Slack, each tried with Night bus, Lido with Indigo and Pastel parade with Indigo, next to the light mode and the round 6 brown, all without borders |
 | 6 | Night bus derived into ten-step OKLCH ramps per colour, tonal badges in place of solid ones, four screens in light and dark that push the palette, and Indigo in place of the blue in Lido and Pastel parade, each on the same four screens in light and dark |
 | 5 | Biscuit grey as the neutral, pre-decided. Pillar box with three candidates for the fifth colour in place of Slate roof (Duck egg, Bramley and Sea glass, brighter), and six saturated palettes from round 2 on Biscuit grey with the mark |

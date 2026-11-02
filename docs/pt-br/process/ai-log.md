@@ -163,6 +163,9 @@ Escolhi Snuffle como nome do app e pedi uma página de Brand na Ideação com o 
 ### 43. Todos os modos lado a lado, sem bordas
 Eu ainda não queria descartar o modo escuro marrom da rodada 6 e pedi para comparar tudo lado a lado, incluindo o modo claro, sem bordas nas telas nem nos cartões. O agente acrescentou uma opção sem bordas ao gerador de telas e refez a rodada 7 com cinco colunas por tema: claro, o marrom da rodada 6 e os três escuros novos. Sem bordas, os cartões se separam do fundo a 1,04:1 no modo claro, 1,12:1 no marrom e 1,08:1 nos escuros novos; ele anotou que seria preciso um passo de cartão mais claro para tirar as bordas.
 
+### 44. Pastel parade com Índigo, e superfícies sem bordas
+Escolhi a Pastel parade com Índigo sobre o Cinza biscoito nos dois modos, pedi para evitar bordas, aumentar o contraste entre as superfícies e ver um Cinza biscoito menos saturado. O agente levou o fundo claro para L 0,95 sob cartões brancos (1,16:1, antes 1,04:1) e subiu o cartão escuro para L 0,235 (1,18:1), depois desenhou home, chat e pedidos no claro e no escuro com as superfícies da rodada 7, as novas e um Cinza biscoito com 45% do croma. Também pedi que o logo da documentação fosse redondo, como um avatar.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.

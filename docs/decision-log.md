@@ -283,6 +283,14 @@ The shopper app is Snuffle. A dog snuffles when it works the ground with its nos
 **Why:** it sounds good, it is playful, and it is about looking for things and finding them, which is the concierge's job; it comes from the retriever in the mark. It came out of three rounds of names (concept directions, retriever names, sniffing and fetching words), with words dropped for conflicts or for a negative second meaning.
 **Open:** a trademark search (UK IPO) and an App Store check; so far only quick web searches were run.
 
+## 036 · Pastel parade with Indigo on Biscuit grey
+**2026-11-02 · Decided**
+
+The accents are Pastel parade with Indigo: Indigo for text, buttons and the tint, Peach, Pistachio, Butter and Lavender as fills and tonal badges. The neutral is Biscuit grey in both light and dark mode. Borders are avoided: surfaces separate by lightness (light background L 0.95 with white cards, 1.16:1; dark cards at L 0.235, 1.18:1), and a border is used only where a surface still needs it.
+
+**Why:** of the three themes tried on the same screens, Pastel parade with Indigo was the calmest, and its pale fills give tonal badges that read well on both modes. In round 7 a white card on the light background was 1.04:1 without a border, too little.
+**Open:** whether Biscuit grey keeps its current chroma or the less saturated version (45%) shown in round 8.
+
 ## Still open
 
 - Repo layout (single app or monorepo): to decide when the build starts and its shape is known.
