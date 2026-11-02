@@ -140,3 +140,4 @@ Source: English Markdown in `docs/`. Target: Brazilian Portuguese in `docs/pt-br
 | warm grey / accent / tint | cinza quente / acento / tint |
 | design system | design system |
 | Where it stands (board area) | Onde está |
+| retriever | retriever (sem tradução; Golden Retriever, Labrador) |

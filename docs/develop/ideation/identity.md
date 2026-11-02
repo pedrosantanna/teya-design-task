@@ -7,6 +7,7 @@ Takeaways:
 - Four directions: the terrier (a dog that goes into the shops and comes back with the thing), the Irregulars (Holmes's street runners), nipping out (the British quick errand) and the parade (painted fascias and market awnings).
 - The Irregulars match the concept's structure most closely: one concierge the shopper talks to, several agents asking shops behind it. The terrier gives the waiting a face.
 - Three palettes, each built on a complementary pair plus a third colour: Pillar and park (green and red, butter), Awning (cobalt and marmalade, mint), Tiles (teal and rose, ochre). Every tint passes 4.5:1 as text and as a button label in light and dark mode.
+- The mark is now a retriever, a British breed whose job is to bring things back. Retriever names to consider: Nous (the breed's founding dog, and British slang for common sense), Bonnie, Bailey, Buddy, Teddy, Primrose.
 - Several obvious names are taken or crowded (Parade, Fetch, Errand, Legwork), and "Nip" alone is an ethnic slur.
 - Round 6 stresses Night bus: its solid badges glared because Amber, Neon pink and Cyan are light and very saturated; tonal badges (pale fill, dark text of the same hue) pass 7:1 and calm it down. Indigo carries all text and buttons.
 - Round 5 answers whether the saturated palettes work with Biscuit grey: they do, because the grey is almost neutral; the mark's Oat and Brew are the limit. Warm-led sets (Corner shop, Lido) sit best next to it.
@@ -30,7 +31,7 @@ Every round stays on the same board, newest at the top, under a "Where it stands
 
 | Round | What it added |
 | --- | --- |
-| 6 | Night bus derived into ten-step OKLCH ramps per colour, tonal badges in place of solid ones, four screens in light and dark that push the palette, and Indigo in place of the blue in Lido and Pastel parade |
+| 6 | Night bus derived into ten-step OKLCH ramps per colour, tonal badges in place of solid ones, four screens in light and dark that push the palette, and Indigo in place of the blue in Lido and Pastel parade, each on the same four screens in light and dark |
 | 5 | Biscuit grey as the neutral, pre-decided. Pillar box with three candidates for the fifth colour in place of Slate roof (Duck egg, Bramley and Sea glass, brighter), and six saturated palettes from round 2 on Biscuit grey with the mark |
 | 4 | Oat and Brew from palette I as the base: three warm grey scales in the shadcn style (from Oat and Brew to close to Tailwind stone) and four sets of five accents, each checked with pure black and white |
 | 3 | Icon test 3 (brows and moustache) with a four or five-stripe moustache, in palettes A, C, F, I and J |
@@ -82,6 +83,21 @@ On the Sherlock Holmes position: Conan Doyle died in 1930, so the stories are ou
 | Nipping out | Popround, Nippy, Errand, Back in 5, Nip | Popround: nothing found. Nippy is a UK rapid grocery start-up. Errand is crowded. "Nip" is an ethnic slur against Japanese people. Back in 5 not checked |
 | The parade | Parade, Barrow, Fascia, Awning, Coster | Parade is a UK-founded platform selling for independent skate shops, and a US underwear brand. Barrow is a place name with its own town app. The rest not checked |
 
+### Retriever names
+
+The mark became a retriever, so I looked at what people in the UK call their retrievers. The most common dog names in 2025 were Luna, Bella, Milo, Teddy and Poppy; for Golden Retrievers and Labradors, Bailey, Buddy, Luna, Cooper and Rosie come up most. The breed's own history adds a few: Nous, the yellow retriever Lord Tweedmouth bred from at Guisachan in 1868, and the first litter's puppies, Cowslip, Ada, Primrose and Crocus.
+
+| Name | Where it comes from | What the quick search found |
+| --- | --- | --- |
+| Nous | Lord Tweedmouth's yellow retriever, the breed's founding dog. In British English "nous" also means common sense ("use your nous") | Nous is a London household-bills app (nous.co, founded 2021): a different market, but the same app stores and a UK audience |
+| Bonnie | Scottish for pretty, the breed's home; in the top 10 Golden Retriever names in 2024 | No UK shopping app found. Bonny, a German receipt-rewards app, is close in spelling |
+| Bailey | Top Labrador name in one survey, second for Golden Retrievers in another | No local-shops app found; a crowded word (Baileys liqueur) |
+| Buddy | Top Golden Retriever name in one survey, top male Labrador name in another | No local-shops app found; very generic |
+| Teddy | The UK's most common male dog name in 2024 and 2025 (Agria) | No local-shops app found; very generic |
+| Primrose | One of the first litter's puppies; also a British flower and a London district | Not checked |
+
+These are quick web searches, not trademark searches.
+
 ## Palettes
 
 Each palette has a tint (the iOS key colour for interactive elements, and the Material 3 primary), a secondary and a tertiary, and four status colours for the Requests list. The light value is used on white and system grouped backgrounds, the dark value on black and #1C1C1E.
@@ -105,6 +121,16 @@ For Material 3, each brand colour seeds its own tonal palette, so secondary and 
 
 ## Sources
 
+- Rover, top dog names 2025: https://www.rover.com/uk/blog/press-release/creative-cosmic-and-controversial-rover-reveals-top-dog-names-2025/
+- Agria, National Dog Survey 2025: https://www.agriapet.co.uk/guides-and-advice/national-dog-survey-2025/
+- Dogs Trust survey (Hello Rayo): https://www.hellorayo.co.uk/greatest-hits/uk/news/most-popular-dog-breed-and-names-dogs-trust
+- Petsure names by breed (Express & Star, 2024): https://www.expressandstar.com/news/local-hubs/birmingham/2024/05/25/revealed-this-years-most-popular-dog-names-according-to-their-breed/
+- Golden Retriever names (The Scotsman): https://www.scotsman.com/lifestyle/family-and-parenting/best-golden-retrievers-names-these-are-the-10-most-popular-puppy-names-for-the-adorable-golden-retriever-breed-3462845
+- Labrador names (The Scotsman): https://www.scotsman.com/lifestyle/family-and-parenting/labrador-retriever-names-2024-here-are-the-10-most-popular-puppy-names-chosen-by-labrador-owners-3462215
+- Golden Retriever Club of America, history: https://grca.org/?p=1831
+- Labrador Retriever (Wikipedia): https://en.wikipedia.org/wiki/Labrador_Retriever
+- Nous (Craft): https://craft.co/nous
+- Bonny (App Store): https://apps.apple.com/us/app/id6496859085
 - shadcn/ui: Theming: https://ui.shadcn.com/docs/theming
 - Tailwind CSS: Colors: https://tailwindcss.com/docs/colors
 - Radix Colors: Understanding the scale: https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale

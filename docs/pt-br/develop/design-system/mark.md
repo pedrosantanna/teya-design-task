@@ -1,10 +1,10 @@
 # Marca
 
-O ícone do app por enquanto: um terrier cuja boca é o toldo de uma loja. Eu o desenhei à mão no Figma a partir dos testes de ícone do agente e o escolhi como a primeira decisão de identidade. Ele é provisório: a linha está definida, o desenho e as cores não, então ele aparece aqui em preto e branco.
+O ícone do app por enquanto: um retriever cuja boca é o toldo de uma loja. O trabalho de um retriever é sair e trazer algo de volta, que é também o trabalho do concierge, e a raça é britânica: o Golden Retriever foi criado em Guisachan, nas Terras Altas da Escócia, a partir de 1868, e o Labrador foi desenvolvido em propriedades britânicas a partir de cães da Terra Nova. Eu o desenhei à mão no Figma a partir dos testes de ícone do agente e o escolhi como a primeira decisão de identidade. Ele é provisório: a linha está definida, o desenho e as cores não, então ele aparece aqui em preto e branco.
 
 ```summary
 Takeaways:
-- O rosto de um terrier com orelhas dobradas e baixas e dois olhos em ponto. A boca é um toldo listrado, como os que ficam sobre as vitrines, com o nariz apoiado nele.
+- O rosto de um retriever com orelhas dobradas e baixas e dois olhos em ponto. A boca é um toldo listrado, como os que ficam sobre as vitrines, com o nariz apoiado nele.
 - Dois tons: um de mais contraste para o rosto e três das listras, e um de menos contraste para as outras duas. Em preto e branco, são o preto e um cinza médio.
 - O agente reconstruiu meu desenho sobre um eixo de simetria só, centralizou-o oticamente e o aplicou aos formatos de ícone do iOS e do Android: claro, escuro e tingido no iOS, adaptável e temático no Android.
 Call:
@@ -85,4 +85,9 @@ Na versão do Figma, os tons eram Brew #5A3E2B e #AFA085 sobre Oat #E9DCC3. Eles
 
 - Uma versão mais simples para tamanhos abaixo de uns 29 pt.
 - As cores, que seguem a paleta quando eu escolher uma.
-- O nome.
+- O nome. Os nomes de retriever estão na [página de identidade](../ideation/identity.md).
+
+## Fontes
+
+- Golden Retriever Club of America, história da raça: https://grca.org/?p=1831
+- Labrador Retriever (Wikipedia): https://en.wikipedia.org/wiki/Labrador_Retriever

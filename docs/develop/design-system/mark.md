@@ -1,10 +1,10 @@
 # Mark
 
-The app's icon for now: a terrier whose mouth is a shop's awning. I drew it by hand in Figma from the agent's icon tests and chose it as the first identity decision. It is provisional: the line is settled, the drawing and the colours are not, so it is shown here in black and white.
+The app's icon for now: a retriever whose mouth is a shop's awning. A retriever's job is to go out and bring something back, which is the concierge's job too, and the breed is British: the Golden Retriever was bred at Guisachan in the Scottish Highlands from 1868, and the Labrador was developed on British estates from Newfoundland dogs. I drew it by hand in Figma from the agent's icon tests and chose it as the first identity decision. It is provisional: the line is settled, the drawing and the colours are not, so it is shown here in black and white.
 
 ```summary
 Takeaways:
-- A terrier's face with low, folded ears and two dot eyes. Its mouth is a striped awning, the kind over a shopfront, with the nose resting on it.
+- A retriever's face with low, folded ears and two dot eyes. Its mouth is a striped awning, the kind over a shopfront, with the nose resting on it.
 - Two tones: a high-contrast one for the face and three of the stripes, a low-contrast one for the other two. In black and white that is black and a mid grey.
 - The agent rebuilt my drawing on one symmetry axis and centred it optically, then applied it to the iOS and Android icon formats: light, dark and tinted on iOS, adaptive and themed on Android.
 Call:
@@ -85,4 +85,9 @@ In the Figma version the tones were Brew #5A3E2B and #AFA085 on Oat #E9DCC3. The
 
 - A simpler version for sizes below about 29 pt.
 - The colours, which follow the palette once I choose one.
-- The name.
+- The name. Retriever names are on the [identity page](../ideation/identity.md).
+
+## Sources
+
+- Golden Retriever Club of America, history of the breed: https://grca.org/?p=1831
+- Labrador Retriever (Wikipedia): https://en.wikipedia.org/wiki/Labrador_Retriever

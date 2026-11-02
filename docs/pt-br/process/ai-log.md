@@ -148,6 +148,12 @@ Pedi para explorar a Night bus: as badges dela pareciam piores que as da Corner 
 ### 38. O centro ótico da marca
 Percebi que a marca estava alta demais, principalmente na máscara circular do Android, e que o quadro do Figma tinha mais branco embaixo do que em cima. O agente tinha subido o desenho 4 unidades pelo raciocínio de que o toldo o deixa pesado embaixo. Dessa vez ele renderizou deslocamentos de -4 a +9 num círculo, numa base e num círculo escuro, e julgou no olho: as orelhas largas encontram a curva do círculo, então um desenho centralizado parece alto. Ele escolheu 4 unidades abaixo do centro e recortou o quadro por igual, com cantos arredondados.
 
+### 39. Um retriever, e os nomes dele
+Eu disse que a marca é um toldo misturado com um cachorro, principalmente um retriever, perguntei se a raça é britânica e como os retrievers costumam se chamar no Reino Unido, como fonte para o nome do app. Um agente confirmou a história (o Golden Retriever criado em Guisachan, nas Terras Altas da Escócia, a partir de 1868, e o Labrador desenvolvido em propriedades britânicas a partir de cães da Terra Nova), reuniu os nomes de cachorro mais comuns do Reino Unido em pesquisas de 2024 e 2025, inclusive por raça, e encontrou nomes na história da raça: Nous, o cão fundador, e os filhotes da primeira ninhada. Ele fez buscas rápidas na web por conflitos. A página da Marca agora explica o retriever logo no começo.
+
+### 40. As híbridas na interface
+Pedi que a Lido com Índigo e a Pastel parade com Índigo passassem pelos mesmos testes de tela da Night bus. O agente reaproveitou as quatro telas no claro e no escuro, dando a cada cor da híbrida o papel que a cor correspondente da Night bus tinha (pronto, esperando, novo ou esgotado); o Lilás e a Lavanda ficaram sem papel nelas.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.

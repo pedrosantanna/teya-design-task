@@ -148,6 +148,12 @@ I asked to explore Night bus: its badges looked worse than Corner shop's, Pastel
 ### 38. The mark's optical centre
 I noticed the mark sat too high, most visibly in Android's circle mask, and that the Figma board had more white below than above. The agent had moved the glyph up 4 units by reasoning that the awning makes it bottom-heavy. This time it rendered offsets from -4 to +9 in a circle, a tile and a dark circle, and judged them by eye: the wide ears meet the circle's curve, so a centred glyph reads high. It chose 4 units below centre and recropped the board evenly with rounded corners.
 
+### 39. A retriever, and its names
+I said the mark is an awning mixed with a dog, mainly a retriever, asked whether the breed is British and what retrievers are usually called in the UK, as a source for the app's name. An agent confirmed the history (the Golden Retriever bred at Guisachan in the Scottish Highlands from 1868, the Labrador developed on British estates from Newfoundland dogs), gathered the most common UK dog names from 2024 and 2025 surveys, including by breed, and found names in the breed's history: Nous, the founding dog, and the first litter's puppies. It ran quick web searches for conflicts. The Mark page now explains the retriever at the top.
+
+### 40. The hybrids in the interface
+I asked for Lido with Indigo and Pastel parade with Indigo to go through the same screen tests as Night bus. The agent reused the four screens in light and dark, giving each hybrid colour the role the matching Night bus colour had (ready, waiting, new or sold out); Lilac and Lavender have no role there.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.
