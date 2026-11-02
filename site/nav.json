@@ -192,6 +192,29 @@
               "src": "docs/develop/ideation/shop-states.md",
               "canvas": "docs/develop/ideation/shop-states.html",
               "pt": "Estados do pedido na loja"
+            },
+            {
+              "id": "tab-placement",
+              "title": "Tab placement",
+              "src": "docs/develop/ideation/tab-placement.md",
+              "canvas": "docs/develop/ideation/tab-placement.html",
+              "pt": "Posição das abas"
+            },
+            {
+              "id": "identity",
+              "title": "Identity",
+              "src": "docs/develop/ideation/identity.md",
+              "canvas": [
+                {
+                  "version": "v2",
+                  "file": "docs/develop/ideation/identity-v2.html"
+                },
+                {
+                  "version": "v1",
+                  "file": "docs/develop/ideation/identity-v1.html"
+                }
+              ],
+              "pt": "Identidade"
             }
           ]
         }

@@ -4,6 +4,7 @@
 //   <div class="state" id data-x data-y>                   a state node
 //   <div class="note" data-x data-y data-for="id">         a sticky note, with <p lang="en"> and <p lang="pt">
 //   <div class="area" data-x data-y data-w data-h data-title-en data-title-pt>  a section behind other items
+//   <div class="block" id data-x data-y data-w data-title> any other item (palette, logo, image); styles live in the canvas file
 //   <a class="link" data-from="id or selector" data-to="id" data-label-en data-label-pt>  an arrow
 // Items can be selected, not moved. Pan: wheel, space/middle drag, H. Zoom: ctrl/cmd + wheel, pinch.
 (() => {
@@ -45,7 +46,7 @@
     const items = [], links = [];
     [...src.children].forEach(el => {
       if (el.matches('a.link')) { links.push(el); return; }
-      if (!el.matches('.frame, .state, .note, .area')) return;
+      if (!el.matches('.frame, .state, .note, .area, .block')) return;
       el.classList.add('cv-item');
       el.style.left = (+el.dataset.x || 0) + 'px';
       el.style.top = (+el.dataset.y || 0) + 'px';
@@ -54,6 +55,8 @@
         const ttl = el.dataset[lang === 'pt' ? 'titlePt' : 'titleEn'] || el.dataset.titleEn;
         if (ttl) el.insertAdjacentHTML('afterbegin', `<span class="cv-area-title">${ttl}</span>`);
       }
+      if (el.matches('.block') && el.dataset.w) el.style.width = el.dataset.w + 'px';
+      if (el.matches('.block') && el.dataset.title) { if (lang === 'pt' && el.dataset.titlePt) el.dataset.title = el.dataset.titlePt; el.insertAdjacentHTML('afterbegin', `<span class="cv-frame-title">${el.dataset.title}</span>`); }
       if (el.matches('.frame')) {
         const scr = el.querySelector('.ios');
         if (scr && !scr.querySelector('.ios-status') && !scr.classList.contains('no-chrome')) {
@@ -64,6 +67,7 @@
       }
       items.push(el);
     });
+    src.querySelectorAll('img').forEach(img => img.setAttribute('onerror', "this.classList.add('cv-missing');this.removeAttribute('src')"));
     items.sort((a, b) => (a.matches('.area') ? 0 : 1) - (b.matches('.area') ? 0 : 1)).forEach(el => world.appendChild(el));
 
     // A note attached to a screen takes the screen's width and left edge, so notes line up under the frames.
@@ -157,7 +161,7 @@
     // --- Selection and drawer ---------------------------------------------------------
     let selected = new Set();
     const titleOf = el => el.dataset.title || el.querySelector('.state-name, strong')?.textContent || el.textContent.trim().slice(0, 40);
-    const kindOf = el => el.matches('.frame') ? t('kindScreen') : el.matches('.state') ? t('kindState') : el.matches('.note') ? t('kindNote') : t('kindArea');
+    const kindOf = el => el.matches('.frame') ? t('kindScreen') : el.matches('.state') ? t('kindState') : el.matches('.note') ? t('kindNote') : el.matches('.block') ? t('kindBlock') : t('kindArea');
     function select(set) {
       selected = new Set(set);
       items.forEach(el => el.classList.toggle('is-selected', selected.has(el)));

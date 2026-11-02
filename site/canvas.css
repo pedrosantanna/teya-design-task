@@ -55,6 +55,10 @@ body.is-canvas .content { max-width: none; }
 .cv-item.state.end { box-shadow: 0 0 0 4px var(--canvas-bg), 0 0 0 5.5px var(--border-strong), 0 4px 12px rgb(0 0 0 / .04); }
 .cv-item.state.fail { border-style: dashed; }
 
+img.cv-missing { display: block; min-height: 120px; background: repeating-linear-gradient(45deg, var(--muted) 0 8px, transparent 8px 16px); border: 1px dashed var(--border-strong); }
+.block { color: var(--fg); }
+.block img { max-width: 100%; height: auto; }
+
 /* Canvas chrome */
 .cv-title {
   position: absolute; left: 16px; top: 16px; z-index: 3; max-width: min(520px, calc(100% - 32px));
@@ -310,3 +314,19 @@ body.is-canvas .content { max-width: none; }
 .ios-split { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; }
 .ios-split + .ios-split { box-shadow: inset 0 .5px 0 var(--ios-sep); }
 .ios-split .ic { width: 18px; height: 18px; margin-top: 2px; }
+/* Bottom tab bar with a centre action, and a side drawer (tab placement options) */
+.ios-tabbar { position: absolute; left: 0; right: 0; bottom: 0; z-index: 4; display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: start; padding: 8px 24px 34px; background: rgb(249 249 249 / .94); box-shadow: inset 0 .5px 0 var(--ios-sep); }
+.ios-tabbar span { position: relative; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 500; color: var(--ios-label-2); }
+.ios-tabbar span .ic { width: 26px; height: 26px; }
+.ios-tabbar span.on { color: var(--ios-label); }
+.ios-tabbar span.ask { margin-top: -18px; color: var(--ios-label); }
+.ios-tabbar span.ask .ic { width: 56px; height: 56px; padding: 15px; border-radius: 50%; background: var(--ios-label); color: var(--ios-bg); box-shadow: 0 6px 16px rgb(0 0 0 / .2); }
+.ios-tabbar .ios-count { position: absolute; top: -4px; right: 28%; }
+.ios-drawer { position: absolute; left: 0; top: 54px; bottom: 0; z-index: 5; width: 300px; padding: 16px; background: var(--ios-bg); box-shadow: 8px 0 30px rgb(0 0 0 / .14); }
+.ios-drawer .dr { display: flex; flex-direction: column; padding: 10px 12px; border-radius: 12px; font-size: 16px; font-weight: 500; }
+.ios-drawer .dr small { font-size: 13px; font-weight: 400; color: var(--ios-label-2); }
+.ios-drawer .dr.on { background: var(--ios-fill); }
+.ios-tabbar.pill { grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; padding: 10px 20px 34px; }
+.ios-tabbar .askpill { flex-direction: row; justify-content: space-between; gap: 8px; height: 46px; padding: 0 14px 0 16px; border-radius: 23px; background: var(--ios-fill); font-size: 15px; font-weight: 400; color: var(--ios-label-2); white-space: nowrap; }
+.ios-tabbar .askpill .ic { width: 18px; height: 18px; color: var(--ios-label); }
+.ios-tabbar.pill .ios-count { right: -6px; }
