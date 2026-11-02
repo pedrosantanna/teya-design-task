@@ -203,10 +203,18 @@ Cada pedido é um chat com o concierge e reúne o que o comprador pediu de uma v
 ## 026 · Botão de Requests à esquerda da barra de pedido
 **2026-11-02 · Decidido**
 
-A home não tem abas. Um botão redondo de Requests fica à esquerda da barra de pedido, com uma contagem quando um pedido precisa do comprador, e abre Requests como uma folha sobre a rua. Isso substitui as abas Nearby e Requests da v2 do fluxo do app (opção G em Posição das abas).
+A home não tem abas. Um botão redondo de Requests fica à esquerda da barra de pedido, com uma contagem quando um pedido precisa do comprador. Ele abre Requests em tela cheia, crescendo a partir do botão (a transição de zoom no iOS, o container transform no Android), e Requests encolhe de volta para dentro dele na saída. Uma versão anterior abria como uma folha; escolhi tela cheia para a lista ter a tela inteira. Isso substitui as abas Nearby e Requests da v2 do fluxo do app (opção G em Posição das abas).
 
 **Por quê:** mantém a barra de pedido grande, que faz de pedir a entrada principal, e põe Requests sob o polegar. À esquerda, fica longe do botão de enviar durante a digitação.
 **Em aberto:** um ícone de conversa diz menos que um rótulo, então a contagem e uma dica no primeiro uso precisam segurar isso; um terceiro modo pediria outro padrão.
+
+## 027 · Fontes do sistema só como fallback
+**2026-11-02 · Decidido**
+
+As fontes do app funcionam nas duas plataformas. SF Pro (iOS) e Roboto (Android) são só fallback, nunca a fonte escolhida, porque nenhuma existe na outra plataforma. Os testes de tipografia combinam fontes de display e de corpo que vão junto com o app.
+
+**Por quê:** uma fonte de marca precisa ser igual no iOS e no Android.
+**Em aberto:** as fontes próprias precisam ser registradas no Dynamic Type e na escala de fonte do Android, e a licença delas conferida antes do Deliver.
 
 ## Ainda em aberto
 

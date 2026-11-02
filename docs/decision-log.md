@@ -203,10 +203,18 @@ Each request is one chat with the concierge, holding what the shopper asked for 
 ## 026 · Requests button left of the ask bar
 **2026-11-02 · Decided**
 
-The home has no tabs. A round Requests button sits left of the ask bar, with a count when a request needs the shopper, and opens Requests as a sheet over the street. This replaces the Nearby and Requests tabs of app flow v2 (option G in Tab placement).
+The home has no tabs. A round Requests button sits left of the ask bar, with a count when a request needs the shopper. It opens Requests full screen, growing out of the button (the zoom transition on iOS, the container transform on Android), and Requests shrinks back into it on the way out. An earlier version opened it as a sheet; I chose full screen so the list has the whole screen. This replaces the Nearby and Requests tabs of app flow v2 (option G in Tab placement).
 
 **Why:** it keeps the large ask bar that makes asking the main way in, and puts Requests under the thumb. On the left it stays clear of the send button while typing.
 **Open:** a chat icon says less than a label, so the count and a first-run hint have to carry it; a third mode would need another pattern.
+
+## 027 · System fonts only as fallback
+**2026-11-02 · Decided**
+
+The app's typefaces work on both platforms. SF Pro (iOS) and Roboto (Android) are fallback only, never the chosen font, because neither exists on the other platform. Type tests pair display and body fonts that ship with the app.
+
+**Why:** a brand font has to look the same on iOS and Android.
+**Open:** the custom fonts must be registered for Dynamic Type and Android font scaling, and their licence checked before Deliver.
 
 ## Still open
 

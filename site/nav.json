@@ -176,6 +176,10 @@
               "src": "docs/develop/ideation/app-flow.md",
               "canvas": [
                 {
+                  "version": "v4",
+                  "file": "docs/develop/ideation/app-flow-v4.html"
+                },
+                {
                   "version": "v3",
                   "file": "docs/develop/ideation/app-flow-v3.html"
                 },
@@ -210,6 +214,13 @@
               "src": "docs/develop/ideation/identity.md",
               "canvas": "docs/develop/ideation/identity.html",
               "pt": "Identidade"
+            },
+            {
+              "id": "type-scale",
+              "title": "Type scale",
+              "src": "docs/develop/ideation/type-scale.md",
+              "canvas": "docs/develop/ideation/type-scale.html",
+              "pt": "Escala tipográfica"
             }
           ]
         }

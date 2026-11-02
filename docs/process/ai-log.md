@@ -109,6 +109,12 @@ I chose option G with the button on the left (decision 026). The main agent remo
 ### 25. Palettes in Figma for testing
 I wanted to test the ten round-2 palettes by hand in Figma. The agent created a colour variable collection with Light and Dark modes (44 variables, one per colour) in a test file of mine, a swatch component, and a board with the ten palettes bound to those variables. Its first board showed flattened swatches, because it fixed the component's height before letting it hug its content; it fixed that on the component. Figma is only a scratch space here (decision 003); the palettes' source stays on the identity canvas.
 
+### 26. Type scale, and Requests full screen
+I asked for a type scale on Apple's and Material's guidelines, tested on fonts I chose from Fontshare: Satoshi, Chillax, Switzer and Author alone, and Telma, Gambetta and Pally for titles with SF Pro or Excon for the rest. An agent checked each font, measured x-height, figures and weights with fontTools, built the specimens and a conversation screen for each, and scored them for reading a chat; its recommendation is Gambetta for titles and SF Pro for the rest. The fonts stay in a private folder. In the same round I chose to open Requests full screen from the round button, and the agent drew v4 of the app flow with a storyboard of the transition, based on the iOS zoom transition and the Material container transform.
+
+### 27. Type scale, round 2
+I ruled out system fonts as a choice: SF Pro and Roboto are fallback only, because neither exists on the other platform (decision 027). The agent added a second round to the type scale board, pairing Gambetta, Telma and Pally with Switzer and with Satoshi, marked the SF Pro pairs as out and rescored. Gambetta with Switzer now has the best score.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.

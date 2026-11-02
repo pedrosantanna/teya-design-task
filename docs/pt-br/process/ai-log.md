@@ -109,6 +109,12 @@ Escolhi a opção G com o botão à esquerda (decisão 026). O agente principal 
 ### 25. Paletas no Figma para teste
 Eu queria testar à mão no Figma as dez paletas da segunda rodada. O agente criou num arquivo de testes meu uma coleção de variáveis de cor com os modos Light e Dark (44 variáveis, uma por cor), um componente de amostra e um quadro com as dez paletas ligadas a essas variáveis. O primeiro quadro saiu com as amostras achatadas, porque o agente fixou a altura do componente antes de deixá-lo se ajustar ao conteúdo; ele corrigiu isso no componente. Aqui o Figma é só um espaço de rascunho (decisão 003); a fonte das paletas continua sendo o canvas de identidade.
 
+### 26. Escala tipográfica, e Requests em tela cheia
+Pedi uma escala tipográfica a partir das diretrizes da Apple e do Material, testada em fontes que escolhi na Fontshare: Satoshi, Chillax, Switzer e Author sozinhas, e Telma, Gambetta e Pally nos títulos, com SF Pro ou Excon no resto. Um agente conferiu cada fonte, mediu altura-x, números e pesos com o fontTools, montou os espécimes e uma tela de conversa para cada uma e deu notas para leitura de conversa; a recomendação dele é Gambetta nos títulos e SF Pro no resto. As fontes ficam numa pasta privada. Na mesma rodada escolhi abrir Requests em tela cheia a partir do botão redondo, e o agente desenhou a v4 do fluxo do app com um storyboard da transição, a partir da transição de zoom do iOS e do container transform do Material.
+
+### 27. Escala tipográfica, rodada 2
+Tirei as fontes do sistema da escolha: SF Pro e Roboto são só fallback, porque nenhuma existe na outra plataforma (decisão 027). O agente acrescentou uma segunda rodada ao quadro de tipografia, combinando Gambetta, Telma e Pally com Switzer e com Satoshi, marcou os pares com SF Pro como fora e refez as notas. Gambetta com Switzer agora tem a melhor nota.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.
