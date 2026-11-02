@@ -293,23 +293,33 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* Service blueprint */
 .bp-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); }
-.bp { --bp-label: 100px; display: grid; grid-template-columns: var(--bp-label) repeat(var(--bp-n), minmax(120px, 1fr)); min-width: 820px; font-size: 12.5px; line-height: 1.4; }
-.bp-head, .bp-lane, .bp-cell, .bp-line { min-width: 0; }
-.bp-corner, .bp-lane { position: sticky; left: 0; z-index: 2; background: linear-gradient(var(--bg-subtle), var(--bg-subtle)), var(--bg); box-shadow: inset -1px 0 0 var(--border); }
-.bp-head { display: flex; align-items: center; gap: var(--s-2); padding: var(--s-3); font-size: 13px; font-weight: 600; color: var(--fg); border-bottom: 1px solid var(--border-strong); background: var(--bg-subtle); }
-.bp-head b { display: inline-grid; place-items: center; flex: none; width: 20px; height: 20px; border-radius: 50%; background: var(--primary); color: var(--primary-fg); font-size: 11px; font-weight: 600; }
-.bp-corner { border-bottom: 1px solid var(--border-strong); }
-.bp-lane { display: flex; align-items: flex-start; gap: var(--s-2); padding: var(--s-3); font-size: 11.5px; font-weight: 600; letter-spacing: .02em; color: var(--fg-2); border-bottom: 1px solid var(--border); }
-.bp-lane i { flex: none; width: 8px; height: 8px; margin-top: 4px; border-radius: 2px; background: var(--tone); }
-.bp-cell { display: flex; flex-direction: column; gap: var(--s-1); padding: var(--s-2); border-bottom: 1px solid var(--border); position: relative; }
-.bp-card { padding: 6px 8px; border-radius: 6px; border: 1px solid color-mix(in srgb, var(--tone) 35%, transparent); background: color-mix(in srgb, var(--tone) 12%, var(--bg)); color: var(--fg); }
-.bp-card strong { font-weight: 600; }
-.bp-flow .bp-cell:not(:last-child)::after { content: ""; position: absolute; right: -7px; top: 50%; z-index: 1; width: 10px; height: 10px; border-top: 1.5px solid var(--tone); border-right: 1.5px solid var(--tone); transform: translateY(-50%) rotate(45deg); }
-.bp-fail .bp-card { border-style: dashed; }
-.bp-fail .bp-card::before { content: "!"; display: inline-grid; place-items: center; width: 14px; height: 14px; margin-right: 6px; border-radius: 50%; background: var(--tone); color: var(--bg); font-size: 10px; font-weight: 700; vertical-align: 1px; }
-.bp-line { grid-column: 1 / -1; position: relative; height: 22px; border-bottom: 1.5px dashed var(--border-strong); margin-top: -1px; }
-.bp-line span { position: sticky; left: 0; display: inline-block; padding: 4px var(--s-3) 0; font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted-fg); }
+.bp { display: grid; grid-template-columns: 104px repeat(var(--bp-n), minmax(118px, 1fr)); min-width: 820px; font-size: 12.5px; line-height: 1.45; color: var(--fg-2); }
+.bp > * { min-width: 0; }
 .bp-row { display: contents; }
+.bp-corner, .bp-lane { position: sticky; left: 0; z-index: 2; background: var(--bg); box-shadow: inset -1px 0 0 var(--border); }
+.bp-head { position: relative; display: grid; gap: var(--s-2); align-content: start; padding: var(--s-4) var(--s-3) var(--s-3); border-bottom: 1px solid var(--border); }
+.bp-head::before { content: ""; position: absolute; top: calc(var(--s-4) + 11px); left: 0; right: 0; height: 1px; background: var(--border-strong); }
+.bp-head:nth-child(2)::before { left: var(--s-3); }
+.bp-head:last-child::before { right: calc(100% - var(--s-3) - 22px); }
+.bp-num { position: relative; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border-strong); background: var(--bg); color: var(--fg); font-size: 11.5px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.bp-step { font-size: 13px; font-weight: 600; color: var(--fg); line-height: 1.3; }
+.bp-corner { border-bottom: 1px solid var(--border); }
+.bp-lane { display: flex; align-items: baseline; gap: var(--s-2); padding: var(--s-3); font-size: 12.5px; font-weight: 500; color: var(--fg); }
+.bp-lane i { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--tone); transform: translateY(-1px); }
+.bp-cell { display: flex; flex-direction: column; gap: var(--s-1); padding: var(--s-3) var(--s-2); }
+.bp-cell + .bp-cell { box-shadow: inset 1px 0 0 color-mix(in srgb, var(--border) 55%, transparent); }
+.bp-card .bp-cell > div { padding: 7px 9px; border-radius: 6px; background: color-mix(in srgb, var(--tone) 9%, var(--bg)); border: 1px solid color-mix(in srgb, var(--tone) 26%, var(--border)); color: var(--fg); }
+.bp-row + .bp-row > * { border-top: 1px solid var(--border); }
+.bp-text .bp-cell { color: var(--muted-fg); gap: 2px; }
+.bp-agent .bp-cell > div strong { color: var(--tone); font-weight: 600; }
+.bp-agent .bp-cell { gap: var(--s-2); }
+.bp-fail .bp-cell { color: var(--tone); gap: 2px; }
+.bp-fail .bp-cell > div { padding-left: 10px; position: relative; }
+.bp-fail .bp-cell > div::before { content: ""; position: absolute; left: 0; top: .6em; width: 4px; height: 4px; border-radius: 50%; background: currentColor; }
+.bp-fail .bp-lane { color: var(--tone); }
+.bp-line { grid-column: 1 / -1; position: relative; height: 20px; }
+.bp-line::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px dashed var(--border-strong); }
+.bp-line span { position: sticky; left: var(--s-2); display: inline-block; margin-top: 2px; margin-left: var(--s-2); padding: 0 var(--s-2); background: var(--bg); font-size: 11.5px; color: var(--muted-fg); line-height: 16px; }
 .t-muted { --tone: var(--muted-fg); } .t-c1 { --tone: var(--c1); } .t-c2 { --tone: var(--c2); } .t-c3 { --tone: var(--c3); } .t-c4 { --tone: var(--c4); } .t-c5, .t-fail { --tone: var(--c5); }
 
 /* Occasion grid (job x where it broke) */
@@ -561,9 +571,9 @@ i.m.unknown { opacity: .45; }
     const cell = c => `<section class="vpc-cell"><p class="empathy-label">${esc(c.label)}</p><ul>${c.items.map(i => `<li>${inline(i)}</li>`).join('')}</ul></section>`;
     return `<div class="vpc"><div class="vpc-side"><p class="vpc-title">${t('valueMap')}</p>${cells.slice(0, 3).map(cell).join('')}</div><div class="vpc-side"><p class="vpc-title">${t('customerProfile')}</p>${cells.slice(3, 6).map(cell).join('')}</div></div>`;
   }
-  // ```blueprint  Service blueprint. "Steps: a | b | c" first, then one "Lane {tone}: cell | cell | cell" line per lane
-  // (tone: c1…c5, muted or fail; add "flow" for arrows between steps, e.g. "{c1 flow}"), and "--- Label" lines for the
-  // lines between lanes (interaction, visibility). " ; " splits a cell into cards; "-" leaves a cell empty.
+  // ```blueprint  Service blueprint. "Steps: a | b | c" first, then one "Lane {tone style}: cell | cell" line per lane.
+  // tone: c1…c5 or muted; style: card (actors), text (touchpoints, systems), agent ("**Name** does…"), fail (fail points).
+  // "--- Label" lines draw the lines between lanes. " ; " splits a cell into items; "-" leaves it empty.
   function blueprint(src) {
     const rows = []; let steps = [];
     src.split('\n').forEach(line => {
@@ -572,15 +582,16 @@ i.m.unknown { opacity: .45; }
       const i = t.indexOf(':'); if (i < 0) return;
       const head = t.slice(0, i).trim(), cells = t.slice(i + 1).split('|').map(c => c.trim());
       if (!steps.length) { steps = cells; return; }
-      const m = head.match(/^(.*?)\s*\{([^}]*)\}$/), opts = m ? m[2].split(/\s+/) : [];
-      rows.push({ label: m ? m[1] : head, tone: opts.find(o => o !== 'flow') || 'muted', flow: opts.includes('flow'), cells });
+      const m = head.match(/^(.*?)\s*\{([^}]*)\}$/), o = m ? m[2].split(/\s+/) : [];
+      const style = ['card', 'text', 'agent', 'fail'].find(x => o.includes(x)) || 'text';
+      rows.push({ label: m ? m[1] : head, tone: o.find(x => /^(c\d|muted)$/.test(x)) || (style === 'fail' ? 'c5' : 'muted'), style, cells });
     });
-    const head = `<div class="bp-corner"></div>` + steps.map((s, k) => `<div class="bp-head"><b>${k + 1}</b><span>${inline(s)}</span></div>`).join('');
+    const head = `<div class="bp-corner"></div>` + steps.map((s, k) => `<div class="bp-head"><span class="bp-num">${k + 1}</span><span class="bp-step">${inline(s)}</span></div>`).join('');
     const body = rows.map(r => r.line !== undefined
       ? `<div class="bp-line"><span>${esc(r.line)}</span></div>`
-      : `<div class="bp-row t-${r.tone}${r.flow ? ' bp-flow' : ''}${r.tone === 'fail' ? ' bp-fail' : ''}"><div class="bp-lane"><i></i>${esc(r.label)}</div>${steps.map((_, k) => {
+      : `<div class="bp-row t-${r.tone} bp-${r.style}"><div class="bp-lane"><i></i>${esc(r.label)}</div>${steps.map((_, k) => {
           const c = r.cells[k];
-          return `<div class="bp-cell">${!c || c === '-' ? '' : c.split(' ; ').map(x => `<div class="bp-card">${inline(x)}</div>`).join('')}</div>`;
+          return `<div class="bp-cell">${!c || c === '-' ? '' : c.split(' ; ').map(x => `<div>${inline(x)}</div>`).join('')}</div>`;
         }).join('')}</div>`).join('');
     return `<div class="bp-wrap"><div class="bp" style="--bp-n:${steps.length}">${head}${body}</div></div>`;
   }

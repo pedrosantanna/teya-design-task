@@ -20,15 +20,15 @@ Trade-offs:
 
 ```blueprint
 Steps: Ask | Search | Offer | Reserve and pay | Collect or receive | After
-Touchpoint {muted}: App chat ; WhatsApp ; Own AI assistant (MCP) | Same thread | Option cards | Payment sheet | Shop counter ; Courier | Notification
-Shopper {c1 flow}: Says what, where, by when ; Or leaves a request ahead | Waits, or leaves the thread | Compares the options | Picks a shop ; Pays to hold | Shows the code ; Or gets the delivery | Rates the shop ; Keeps a standing request
+Touchpoint {muted text}: App chat ; WhatsApp ; Own AI assistant (MCP) | Same thread | Option cards | Payment sheet | Shop counter ; Courier | Notification
+Shopper {c1 card}: Says what, where, by when ; Or leaves a request ahead | Waits, or leaves the thread | Compares the options | Picks a shop ; Pays to hold | Shows the code ; Or gets the delivery | Rates the shop ; Keeps a standing request
 --- Line of interaction
-Concierge {c3}: Confirms in one line ; Asks only what's missing | "Checking six shops near you" | First answer right away ; Keeps looking | Hold code and end time | Directions ; Reminder before the hold ends | Follows up ; Acts on standing requests
+Concierge {c3 card}: Confirms in one line ; Asks only what's missing | "Checking six shops near you" | First answer right away ; Keeps looking | Hold code and end time | Directions ; Reminder before the hold ends | Follows up ; Acts on standing requests
 --- Line of visibility
-Agents {c4}: **Orchestrator** plans the tasks | **Stock** reads shared tills ; **Matching** picks likely shops ; **Contact** messages each shop | Collects replies ; **Courier** quotes delivery ; Widens the search near the deadline | **Payment** charges ; **Contact** confirms, releases the others | Watches the hold ; **Courier** books the drop | Logs demand ; Matches standing requests
-Shop {c2}: - | Gets the request in its merchant app or WhatsApp | Answers: has it, price, hold, delivery | Puts the item aside | Hands it over | Weekly demand summary
+Agents {c4 agent}: **Orchestrator** plans the tasks | **Stock** reads shared tills ; **Matching** picks likely shops ; **Contact** messages each shop | Collects replies ; **Courier** quotes delivery ; Widens the search near the deadline | **Payment** charges ; **Contact** confirms, releases the others | Watches the hold ; **Courier** books the drop | Logs demand ; Matches standing requests
+Shop {c2 card}: - | Gets the request in its merchant app or WhatsApp | Answers: has it, price, hold, delivery | Puts the item aside | Hands it over | Weekly demand summary
 --- Line of internal interaction
-Systems {muted}: Location ; Saved preferences | Till stock ; Listings and hours | Courier ; Maps | Card, wallet, pay by link | Courier ; Settlement | Demand records
+Systems {muted text}: Location ; Saved preferences | Till stock ; Listings and hours | Courier ; Maps | Card, wallet, pay by link | Courier ; Settlement | Demand records
 Fail points {fail}: Vague request | No answer in time (H1) | A wrong "yes" (A10) | Item already sold | No-show ; Window doesn't fit Jess | Summary not valued (H9)
 ```
 
