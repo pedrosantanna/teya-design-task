@@ -227,7 +227,7 @@ Tudo o que o comprador lê, e a conversa acima de tudo, usa uma sans forte: a Sw
 ## 029 · Gambetta no display, Switzer no resto
 **2026-11-02 · Decidido**
 
-A Gambetta 700 é a fonte de display e a Switzer a fonte de texto, com a especificação em Escala tipográfica, rodada 4. O tracking é definido por fonte e por tamanho: a Gambetta aperta conforme cresce (−0,01 a −0,02 em), a Switzer fica em 0 no texto e abre um pouco abaixo de 15 pt; os títulos em Switzer usam 700–800. A Gambetta aparece só onde a decisão 028 permite, no máximo uma vez por tela e nunca abaixo de 26 pt; o nome de uma loja vai em Gambetta só na página dela (34 pt) e no cartão de pronto para retirar (26 pt).
+A Gambetta 700 é a fonte de display e a Switzer a fonte de texto, com a especificação em Escala tipográfica, rodada 4. O tracking é definido por fonte e por tamanho: a Gambetta aperta conforme cresce (−0,01 a −0,02 em), a Switzer fica em 0 no texto e abre um pouco abaixo de 15 pt; títulos, botões e títulos de navegação em Switzer usam 600, o que os mantém firmes, mas mais leves que a Gambetta 700. A Gambetta aparece só onde a decisão 028 permite, no máximo uma vez por tela e nunca abaixo de 26 pt; o nome de uma loja vai em Gambetta só na página dela (34 pt) e no cartão de pronto para retirar (26 pt).
 
 **Por quê:** uma serifada no display dá aos títulos uma voz editorial britânica; uma sans forte mantém tudo o que o comprador lê legível e consistente no iOS e no Android.
 **Em aberto:** as fontes precisam ser registradas no Dynamic Type e na escala de fonte do Android, e a licença da ITF conferida para embutir no app.

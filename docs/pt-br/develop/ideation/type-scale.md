@@ -4,7 +4,7 @@ Uma escala tipográfica montada a partir dos estilos de texto da Apple, com os p
 
 ```summary
 Takeaways:
-- Decisão 029: Gambetta 700 no display, Switzer no resto, com tracking definido por fonte e por tamanho (rodada 4). Os títulos em Switzer usam 700–800.
+- Decisão 029: Gambetta 700 no display, Switzer no resto, com tracking definido por fonte e por tamanho (rodada 4). Os títulos em Switzer usam 600, para ficarem abaixo da Gambetta no peso visual.
 - Decisão 028: a conversa e tudo o que o comprador lê usam uma sans forte, a Switzer por enquanto. Fonte de display só no splash, na tela de entrada, no título da home e em títulos de destaque de widgets.
 - Nesse papel de display, a Gambetta tem a melhor nota com a Switzer (95 de 100), seguida de Chillax (80), Telma (78), Author e Switzer sozinha (72). A Pally saiu dos testes.
 - A escala são os onze estilos de texto da Apple no tamanho padrão do Dynamic Type, de Large title (34 pt) a Caption 2 (11 pt), cada um ligado ao papel mais próximo do Material 3 para o Android.
@@ -52,10 +52,10 @@ Escolhi a Gambetta para display e a Switzer para todo o resto (decisão 029). O 
 | Splash | Gambetta 700 | 40/46 | −0,02 em |
 | Título de display | Gambetta 700 | 34/40 | −0,015 em |
 | Nome em display | Gambetta 700 | 26/30 | −0,01 em |
-| Title 1 | Switzer 800 | 28/32 | −0,02 em |
-| Title 2 | Switzer 800 | 22/26 | −0,015 em |
-| Title 3 | Switzer 700 | 20/24 | −0,01 em |
-| Headline | Switzer 700 | 17/22 | 0 |
+| Title 1 | Switzer 600 | 28/32 | −0,015 em |
+| Title 2 | Switzer 600 | 22/26 | −0,01 em |
+| Title 3 | Switzer 600 | 20/24 | −0,005 em |
+| Headline | Switzer 600 | 17/22 | 0 |
 | Body | Switzer 400 | 17/24 | 0 |
 | Callout | Switzer 400 | 16/22 | 0 |
 | Subheadline | Switzer 400 | 15/20 | 0 |
@@ -63,7 +63,7 @@ Escolhi a Gambetta para display e a Switzer para todo o resto (decisão 029). O 
 | Caption 1 | Switzer 500 | 12/16 | +0,015 em |
 | Caption 2 | Switzer 500 | 11/14 | +0,02 em |
 
-A entrelinha é uma proporção do tamanho, para acompanhar o Dynamic Type; texto secundário em #5B5B60 ou mais escuro, para contraste de 4,5:1. Os números da Switzer são tabulares no próprio desenho. Um agente de revisão de acabamento conferiu a rodada 4 e as correções dele estão aplicadas: um elemento em Gambetta por tela, quebras de linha equilibradas, tracking da Gambetta mais suave, mais entrelinha no display de duas linhas e piso de 26 pt.
+A entrelinha é uma proporção do tamanho, para acompanhar o Dynamic Type; texto secundário em #5B5B60 ou mais escuro, para contraste de 4,5:1. Os números da Switzer são tabulares no próprio desenho. Os títulos em Switzer começaram em 700–800 e pareciam mais escuros que a Gambetta no display; um agente de tipografia mediu hastes e área de tinta e passou para 600 (o Title 1 em 800 tinha a mesma haste da Gambetta a 34 pt). Um agente de revisão de acabamento conferiu a rodada 4 e as correções dele estão aplicadas: um elemento em Gambetta por tela, quebras de linha equilibradas, tracking da Gambetta mais suave, mais entrelinha no display de duas linhas e piso de 26 pt.
 
 A Gambetta aparece só no splash, no título da tela de entrada, no título de boas-vindas da home, no cabeçalho da página da loja (34 pt) e no cartão de pronto para retirar (26 pt, uma linha). Uma loja em destaque no Nearby fica em Switzer, porque a home já tem o título de boas-vindas em Gambetta. Nunca abaixo de 26 pt, no máximo uma por tela e duas linhas, nunca em caixa-alta ou itálico, e nunca na conversa, em listas, botões, navegação, preços, formulários ou notificações.
 

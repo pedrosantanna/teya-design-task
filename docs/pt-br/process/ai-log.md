@@ -121,6 +121,9 @@ Decidi que a conversa tem uma fonte só, uma sans forte com a Switzer como favor
 ### 29. Gambetta e Switzer refinadas, e o terrier no Figma
 Escolhi a Gambetta no display e a Switzer no resto (decisão 029) e pedi que o espaçamento fosse refinado a partir de fontes confiáveis, não da memória. O agente principal leu as diretrizes de tipografia da Apple (tabela de tracking, tamanhos mínimos, fontes próprias), os tokens de espaçamento entre letras do Material no código do Android e referências sobre tracking em display, e mediu as fontes com o fontTools. A Switzer colada vinha do tracking da SF copiado para o kit de wireframe; o agente definiu o tracking por fonte e por tamanho e deixou os títulos em Switzer mais pesados. Depois, um agente separado de revisão de acabamento conferiu a rodada 4 e encontrou dezesseis problemas, entre eles dois elementos em Gambetta na home, o cinza secundário reprovado no contraste e uma afirmação errada sobre números tabulares; todos foram corrigidos. Em paralelo pedi o ícone do terrier no Figma: o agente colocou como formas editáveis com nome, mais cinco variantes simples de orelha e sobrancelha para eu trabalhar.
 
+### 30. Peso dos títulos em Switzer
+Achei os títulos em Switzer 800 pesados demais ao lado da Gambetta. Um agente de tipografia mediu com o fontTools a espessura das hastes e a área de tinta de cada peso da Switzer contra a Gambetta 700, e comparou lado a lado numa página descartável: o Title 1 em 800 tinha a mesma haste da Gambetta a 34 pt, e 700 e 800 pareciam mais escuros que o display. Ele recomendou 600 para todos os títulos, botões e títulos de navegação, com cerca de metade do tracking negativo; o agente principal aplicou.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.

@@ -4,7 +4,7 @@ A type scale built from Apple's text styles, with the matching Material 3 roles,
 
 ```summary
 Takeaways:
-- Decision 029: Gambetta 700 for display, Switzer for everything else, with tracking set per typeface and size (round 4). Switzer titles are 700–800.
+- Decision 029: Gambetta 700 for display, Switzer for everything else, with tracking set per typeface and size (round 4). Switzer titles are 600, so they stay below Gambetta in colour.
 - Decision 028: the chat and everything the shopper reads use one strong sans, Switzer for now. A display font is only for the splash, the get-started screen, the home title and display titles in widgets.
 - For that display role, Gambetta scores best with Switzer (95 of 100), then Chillax (80), Telma (78), Author and Switzer alone (72). Pally is out of the tests.
 - The scale is Apple's eleven text styles at the default Dynamic Type size, from Large title (34 pt) to Caption 2 (11 pt), each mapped to the closest Material 3 role for Android.
@@ -52,10 +52,10 @@ I chose Gambetta for display and Switzer for everything else (decision 029). Tra
 | Splash | Gambetta 700 | 40/46 | −0.02 em |
 | Display title | Gambetta 700 | 34/40 | −0.015 em |
 | Display name | Gambetta 700 | 26/30 | −0.01 em |
-| Title 1 | Switzer 800 | 28/32 | −0.02 em |
-| Title 2 | Switzer 800 | 22/26 | −0.015 em |
-| Title 3 | Switzer 700 | 20/24 | −0.01 em |
-| Headline | Switzer 700 | 17/22 | 0 |
+| Title 1 | Switzer 600 | 28/32 | −0.015 em |
+| Title 2 | Switzer 600 | 22/26 | −0.01 em |
+| Title 3 | Switzer 600 | 20/24 | −0.005 em |
+| Headline | Switzer 600 | 17/22 | 0 |
 | Body | Switzer 400 | 17/24 | 0 |
 | Callout | Switzer 400 | 16/22 | 0 |
 | Subheadline | Switzer 400 | 15/20 | 0 |
@@ -63,7 +63,7 @@ I chose Gambetta for display and Switzer for everything else (decision 029). Tra
 | Caption 1 | Switzer 500 | 12/16 | +0.015 em |
 | Caption 2 | Switzer 500 | 11/14 | +0.02 em |
 
-Leading is a ratio of the size so it scales with Dynamic Type; secondary text is #5B5B60 or darker for 4.5:1 contrast. Switzer's figures are tabular by design. A craft-review agent checked round 4 and its fixes are applied: one Gambetta element per screen, balanced line breaks, eased Gambetta tracking, more leading for two-line display, and a 26 pt floor.
+Leading is a ratio of the size so it scales with Dynamic Type; secondary text is #5B5B60 or darker for 4.5:1 contrast. Switzer's figures are tabular by design. Switzer titles were 700–800 at first and read darker than the Gambetta display; a typography agent measured stems and ink coverage and set them to 600 (Title 1 at 800 had the same stem as Gambetta at 34 pt). A craft-review agent checked round 4 and its fixes are applied: one Gambetta element per screen, balanced line breaks, eased Gambetta tracking, more leading for two-line display, and a 26 pt floor.
 
 Gambetta appears only on the splash, the get-started headline, the home greeting, the shop page header (34 pt) and the ready-to-collect card (26 pt, one line). A featured shop on Nearby stays in Switzer, because the home already has its greeting in Gambetta. Never below 26 pt, at most one per screen and two lines, never in capitals or italics, and never in the chat, lists, buttons, navigation, prices, forms or notifications.
 

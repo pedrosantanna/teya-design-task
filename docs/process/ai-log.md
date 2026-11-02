@@ -121,6 +121,9 @@ I decided the chat is one font, a strong sans with Switzer as the favourite, and
 ### 29. Gambetta and Switzer, refined, and the terrier in Figma
 I chose Gambetta for display and Switzer for the rest (decision 029) and asked for the spacing to be refined from reliable sources, not memory. The main agent read Apple's typography guidelines (tracking table, minimum sizes, custom fonts), Material's letter-spacing tokens in the Android source and typography references on display tracking, and measured the fonts with fontTools. The cramped Switzer came from Apple's SF tracking copied into the wireframe kit; the agent set tracking per typeface and size and made Switzer titles heavier. A separate craft-review agent then checked round 4 and found sixteen issues, among them two Gambetta elements on the home, secondary grey failing contrast and a false claim about tabular figures; all were fixed. In parallel I asked for the terrier icon in Figma: the agent placed it as editable named shapes, plus five simple ear-and-brow variants for me to work on.
 
+### 30. Switzer title weight
+I found the Switzer titles at 800 too bold next to Gambetta. A typography agent measured stem thickness and ink coverage of each Switzer weight against Gambetta 700 with fontTools and compared them side by side in a throwaway page: Title 1 at 800 had the same stem as Gambetta at 34 pt, and 700 and 800 read darker than the display. It recommended 600 for every title, button and navigation title, with about half the negative tracking; the main agent applied it.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.
