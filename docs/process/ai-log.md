@@ -88,6 +88,9 @@ I decided the concierge works from the shopper's location and deadline, across e
 ### 18. Craft pass on the canvases
 I found the wireframes cramped and text spilling out of the state shapes. The agent traced the spill to a class name the canvas shared with the site's loading message, which removed the side padding, and to pill-shaped start and end states. It gave states a fixed width and padding, marked end states with a ring instead of a pill, spread frames and states further apart so arrow labels fit, lined notes up under their screens, moved the app's spacing to an 8-point rhythm, removed a toast that covered the collection code, and made the "About this canvas" panel wider with the summary stacked.
 
+### 19. App flow v2 and canvas versions
+I found the first home mixed two jobs: browsing the street and following what I had asked for. I asked for one home with two tabs at the top, like Airbnb's, with Requests as a list of chats that holds both searches and purchases. An agent collected chat-list references on Mobbin (Airbnb, Vinted, Depop, WhatsApp, Messenger, ChatGPT, Perplexity) and proposed the row: the item's photo with shop logos, the request in the shopper's words, the last message, one status line, and a button only when the shopper is the blocker. The main agent drew v2, added a screen where the concierge proposes splitting a request, wrote the trade-offs of what one chat should hold (my call, not yet made), and fixed title spacing that the previous pass had made too large and buttons whose labels wrapped. The canvas now keeps versions: it opens on the latest, and v1 stays in the version menu.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.

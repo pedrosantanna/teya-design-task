@@ -192,6 +192,14 @@ The concierge works from the shopper's location and deadline, across every high 
 **Why:** from Blythe Road, six shopping streets are within a 15-minute walk. Tying the shopper to one would hide the others, and a street with few shops would answer most searches with nothing.
 **Open:** how far shoppers will go for each kind of need, which the deadline only approximates. H16 records how often they buy beyond walking distance.
 
+## 025 · One chat per errand
+**2026-11-02 · Decided**
+
+Each request is one chat with the concierge, holding what the shopper asked for in one go. When items need different days or kinds of shop, the concierge proposes splitting them into separate requests and the shopper decides with one tap. Shops appear inside the chat as answers, never as chats of their own, and a purchase stays in the chat it came from. The Requests tab lists the chats with one status per row: the status of the item that needs the shopper soonest.
+
+**Why:** it keeps the shopper's own words as the unit, and splits only where one status per row would stop being true. One chat per product fragments a shopping list; one chat per shop gives the shopper back the work the concierge exists to do.
+**Open:** how often the concierge's split is right, and the tab's name ("Requests" for now).
+
 ## Still open
 
 - Repo layout (single app or monorepo): to decide when the build starts and its shape is known.

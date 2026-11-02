@@ -192,7 +192,14 @@ O concierge trabalha a partir da localização e do prazo do comprador, em todas
 **Por quê:** a partir da Blythe Road, seis ruas comerciais ficam a menos de 15 minutos a pé. Prender o comprador a uma delas esconderia as outras, e uma rua com poucas lojas responderia à maioria das buscas com nada.
 **Em aberto:** até onde os compradores vão para cada tipo de necessidade, o que o prazo só aproxima. A H16 registra com que frequência eles compram além da distância a pé.
 
-## Ainda em aberto
+## 025 · Um chat por tarefa
+**2026-11-02 · Decidido**
+
+Cada pedido é um chat com o concierge e reúne o que o comprador pediu de uma vez. Quando os itens precisam de dias ou tipos de loja diferentes, o concierge propõe separá-los em pedidos distintos e o comprador decide com um toque. As lojas aparecem dentro do chat como respostas, nunca como chats próprios, e uma compra fica no chat de onde veio. A aba Requests lista os chats com um status por linha: o status do item que vai precisar do comprador primeiro.
+
+**Por quê:** a unidade continua sendo as palavras do próprio comprador, e a separação só acontece quando um status por linha deixaria de ser verdade. Um chat por produto fragmenta uma lista de compras; um chat por loja devolve ao comprador o trabalho que o concierge existe para fazer.
+**Em aberto:** com que frequência a sugestão de separar acerta, e o nome da aba ("Requests" por enquanto).
+
 
 - Estrutura do repo (app único ou monorepo): decidir quando a construção começar e o formato dela estiver claro.
 - Stack do protótipo: decidir no Deliver.

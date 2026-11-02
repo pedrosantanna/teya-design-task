@@ -174,7 +174,16 @@
               "id": "app-flow",
               "title": "App flow",
               "src": "docs/develop/ideation/app-flow.md",
-              "canvas": "docs/develop/ideation/app-flow.html",
+              "canvas": [
+                {
+                  "version": "v2",
+                  "file": "docs/develop/ideation/app-flow-v2.html"
+                },
+                {
+                  "version": "v1",
+                  "file": "docs/develop/ideation/app-flow-v1.html"
+                }
+              ],
               "pt": "Fluxo do app"
             },
             {

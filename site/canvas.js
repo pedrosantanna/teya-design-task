@@ -12,6 +12,7 @@
 
   function mount(root, html, opts) {
     const { lang = 'en', icon = () => '', t = k => k, about = '' } = opts || {};
+    root.__canvas?.destroy?.();
     root.innerHTML = `
       <div class="cv-viewport" tabindex="0" aria-label="${t('canvasLabel')}">
         <div class="cv-world"><svg class="cv-links" aria-hidden="true"><defs>
@@ -307,7 +308,7 @@
     let rt = 0;
     const ro = new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => { if (root.isConnected) apply(); }, 50); });
     ro.observe(vp);
-    const api = { showAbout: () => renderDrawer(true), fit: () => fitAll(true), zoomTo: (ids, maxK = 1.5) => { const els = String(ids).split(',').map(i => world.querySelector('#' + i.trim())).filter(Boolean); if (els.length) fitTo(els, false, maxK); } };
+    const api = { destroy: () => { document.removeEventListener('keydown', onKey); document.removeEventListener('keyup', onKeyUp); ro.disconnect(); }, showAbout: () => renderDrawer(true), fit: () => fitAll(true), zoomTo: (ids, maxK = 1.5) => { const els = String(ids).split(',').map(i => world.querySelector('#' + i.trim())).filter(Boolean); if (els.length) fitTo(els, false, maxK); } };
     root.__canvas = api;
     return api;
   }

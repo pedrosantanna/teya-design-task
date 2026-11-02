@@ -88,6 +88,9 @@ Decidi que o concierge trabalha a partir da localização e do prazo do comprado
 ### 18. Passe de acabamento nos canvas
 Achei os wireframes apertados e o texto saindo das formas dos estados. O agente descobriu que o vazamento vinha de um nome de classe que o canvas dividia com a mensagem de carregamento do site, o que tirava o respiro lateral, e dos estados de início e fim em formato de pílula. Ele deu largura fixa e respiro aos estados, marcou os estados finais com um anel em vez da pílula, afastou frames e estados para os rótulos das setas caberem, alinhou as notas embaixo das telas, passou os espaçamentos do app para um ritmo de 8 pontos, tirou um aviso que cobria o código de retirada e deixou o painel "Sobre este canvas" mais largo, com o resumo empilhado.
 
+### 19. Fluxo do app v2 e versões no canvas
+Achei que a primeira home misturava duas tarefas: explorar a rua e acompanhar o que eu tinha pedido. Pedi uma home só, com duas abas no topo, como no Airbnb, e Requests como uma lista de conversas que reúne buscas e compras. Um agente reuniu referências de listas de chat no Mobbin (Airbnb, Vinted, Depop, WhatsApp, Messenger, ChatGPT, Perplexity) e propôs a linha: a foto do item com os logos das lojas, o pedido nas palavras do comprador, a última mensagem, uma linha de status e um botão só quando é o comprador que está segurando o pedido. O agente principal desenhou a v2, acrescentou uma tela em que o concierge propõe separar um pedido, escreveu os trade-offs do que uma conversa deve conter (decisão minha, ainda em aberto) e corrigiu o espaçamento dos títulos, que o passe anterior tinha deixado grande demais, e os botões cujo texto quebrava. O canvas agora guarda versões: abre na mais recente, e a v1 fica no menu de versões.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.

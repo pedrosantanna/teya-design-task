@@ -129,3 +129,8 @@ Source: English Markdown in `docs/`. Target: Brazilian Portuguese in `docs/pt-br
 | prepaid order | pedido pré-pago |
 | Live Activity, Human Interface Guidelines, Material Design | stay in English |
 | interface copy quoted from the wireframes ("Open near you", "Promoted") | stays in English |
+| errand (what the shopper asked in one go) | tarefa |
+| tab (top tabs in the app) / bottom tab bar | aba / barra de abas embaixo |
+| inbox (messaging) / row (in a list) | caixa de mensagens / linha |
+| version menu | menu de versões |
+| interface copy (Nearby, Requests, Errands, Chats, Orders) and version labels (v1, v2) | stay in English |
