@@ -265,6 +265,7 @@ The app's icon is a terrier whose mouth is a shop's awning: low folded ears, two
 **Why:** it joins the two directions I liked most, the terrier that goes into the shops and the parade's awnings, and reads as a face before it reads as a shop.
 **Open:** the final drawing and a simpler version for small sizes, the colours (they follow the palette), and the name.
 **Update, same day:** the dog is a retriever, not a terrier: a British breed whose job is to go out and bring something back, like the concierge. Retriever names are listed on the identity page.
+**Scope:** I stopped the mark at this version. With more time I would develop it further, perhaps another way, but the brand is not the focus of the exercise and the result is good enough to give the app a face.
 
 ## 034 · Biscuit grey as the neutral
 **2026-11-02 · Provisional**

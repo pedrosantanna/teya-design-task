@@ -9,6 +9,7 @@ Takeaways:
 - The agent rebuilt my drawing on one symmetry axis and centred it optically, then applied it to the iOS and Android icon formats: light, dark and tinted on iOS, adaptive and themed on Android.
 Call:
 - Provisional (decision 033). Black and white until the palette is chosen.
+- I stopped here on purpose. With more time I would develop the mark further, perhaps in another direction, but the brand is not the focus of this exercise; I enjoyed it and the result is good enough to give the app a face.
 AI:
 - An agent drew the icon tests in SVG from my seeds (a sniffer dog, British shopping, the parade's awnings). I took the first two into Figma and changed the vectors by hand. The agent exported my version, rebuilt it on one axis and drew the platform applications. Its first optical centre put the glyph too high; I pointed it out and it chose a new one by comparing offsets by eye.
 Trade-offs:
@@ -82,6 +83,7 @@ An adaptive icon is two 108 dp layers. Launchers show the middle 72 dp through t
 In the Figma version the tones were Brew #5A3E2B and #AFA085 on Oat #E9DCC3. They come back when the palette is chosen.
 
 ## Open
+
 
 - A simpler version for sizes below about 29 pt.
 - The colours, which follow the palette once I choose one.

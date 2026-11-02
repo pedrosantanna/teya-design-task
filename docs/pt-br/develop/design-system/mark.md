@@ -9,6 +9,7 @@ Takeaways:
 - O agente reconstruiu meu desenho sobre um eixo de simetria só, centralizou-o oticamente e o aplicou aos formatos de ícone do iOS e do Android: claro, escuro e tingido no iOS, adaptável e temático no Android.
 Call:
 - Provisória (decisão 033). Em preto e branco até a paleta ser escolhida.
+- Parei aqui de propósito. Com mais tempo eu desenvolveria mais a marca, talvez por outro caminho, mas o brand não é o foco deste exercício; achei divertido e o resultado é bom o bastante para dar uma cara ao app.
 AI:
 - Um agente desenhou os testes de ícone em SVG a partir das minhas sementes (um cão farejador, as compras britânicas, os toldos da parade). Levei os dois primeiros para o Figma e mudei os vetores à mão. O agente exportou a minha versão, reconstruiu-a sobre um eixo só e desenhou as aplicações nas plataformas. O primeiro centro ótico deixou o desenho alto demais; eu apontei, e ele escolheu outro comparando deslocamentos no olho.
 Trade-offs:
@@ -82,6 +83,7 @@ Um ícone adaptável tem duas camadas de 108 dp. Os launchers mostram os 72 dp d
 Na versão do Figma, os tons eram Brew #5A3E2B e #AFA085 sobre Oat #E9DCC3. Eles voltam quando a paleta for escolhida.
 
 ## Em aberto
+
 
 - Uma versão mais simples para tamanhos abaixo de uns 29 pt.
 - As cores, que seguem a paleta quando eu escolher uma.

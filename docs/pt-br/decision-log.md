@@ -265,6 +265,7 @@ O ícone do app é um terrier cuja boca é o toldo de uma loja: orelhas dobradas
 **Por quê:** ele junta as duas direções de que eu mais gostei, o terrier que entra nas lojas e os toldos da parade, e se lê como um rosto antes de se ler como uma loja.
 **Em aberto:** o desenho final e uma versão mais simples para tamanhos pequenos, as cores (elas seguem a paleta) e o nome.
 **Atualização, no mesmo dia:** o cachorro é um retriever, não um terrier: uma raça britânica cujo trabalho é sair e trazer algo de volta, como o concierge. Os nomes de retriever estão na página de identidade.
+**Escopo:** parei a marca nesta versão. Com mais tempo eu a desenvolveria mais, talvez de outro jeito, mas o brand não é o foco do exercício e o resultado é bom o bastante para dar uma cara ao app.
 
 ## 034 · Cinza biscoito como neutro
 **2026-11-02 · Provisória**
