@@ -23,7 +23,7 @@ Produtos e serviços:
 - Um concierge a quem perguntar por um item específico perto de um lugar, agora, numa conversa só
 - Respostas na hora de lojas cujo caixa compartilha o estoque
 - Pedidos às lojas prováveis quando não há dados de estoque, enviados ao mesmo tempo
-- Reservar ou pagar para segurar, e depois retirar, na mesma conversa
+- Pagar para segurar, e depois retirar, na mesma conversa
 Aliviadores de dores:
 - Saber antes de sair se uma loja tem o item e está aberta (A1)
 - Uma resposta recente da loja, ou um item separado, onde as listagens podem estar erradas (A2, A10; H5)
@@ -56,7 +56,7 @@ Ganhos:
 Produtos e serviços:
 - Pedir itens do dia a dia ao concierge, no app ou no WhatsApp
 - Pedidos recorrentes que o concierge cumpre ("pão da padaria às sextas")
-- Reservar e pagar na conversa
+- Pagar para segurar na conversa
 - Retirada mais tarde na loja ou num ponto de retirada, ou entrega à noite
 Aliviadores de dores:
 - Pedir de manhã, enquanto a loja está aberta, e retirar depois do trabalho se houver uma opção mais tarde (A6, A7; H6)

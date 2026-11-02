@@ -239,6 +239,7 @@ A shopper can reserve without paying (held until the end of the next opening day
 
 **Why:** UK shops hold paid collection orders for about a week (Argos and Decathlon 7 days, John Lewis 10, Screwfix 21), and unpaid reservations are short (about 2 days) or gone; a hold of a few hours would be shorter than shoppers expect. Sources in the desk research, "How long shops hold an order for collection".
 **Open:** whether small independents accept a week with one unit of stock; H6 tests it.
+**Closed by 032:** whether to keep the unpaid reserve at all. I questioned it: it is there for convenience and for shoppers who pay cash (19.2% of retail transactions in 2024), but the payment then happens outside the app, the shop carries the risk of a no-show, and the desk research found no strong habit behind it (Argos dropped unpaid reservations; the shops that keep them hold for about two days). The alternative is to require payment for every hold. H12 counts which one shoppers choose when both are offered.
 
 ## 031 · Connected shops and asked shops
 **2026-11-02 · Decided**
@@ -247,6 +248,14 @@ There are two kinds of shop. A connected shop shares item-level stock through it
 
 **Why:** the instant answer and the asked answer are different promises; the shopper needs to know which one they are reading.
 **Open:** how many shops on a street are connected (H11).
+
+## 032 · No unpaid reserve
+**2026-11-02 · Decided**
+
+I dropped the unpaid reserve. A shopper who gets a yes either pays and the shop holds the item, or pays and the shop delivers. A shopper who doesn't want to pay goes to the shop without a hold and may find it sold. The concierge says so in its answer.
+
+**Why:** the unpaid reserve was there for convenience and for shoppers who pay cash, but the payment happens outside the app, the shop carries the risk of a no-show on what is often its only unit, and the desk research found no strong habit behind it (Argos dropped unpaid reservations; Beaverbrooks keeps them for 2 days). Two ways are also simpler to explain in one answer.
+**Open:** whether shoppers who would have reserved pay instead or just walk over; H12 now counts how many yeses end in a paid hold. Shoppers who pay cash are a blind spot: none are in the netnography.
 
 ## Still open
 

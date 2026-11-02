@@ -24,7 +24,7 @@ Trade-offs:
 | Concierge agent to shops | The agent sends real requests to about ten shops within 15 minutes' walk of Blythe Road on WhatsApp, or through the POS where the shop's system allows it, and handles their replies | H1, H6, H11 |
 | Shopper app prototype | The shopper side of the blueprint, steps 1 to 5, with the agent's answers coming from the real shops when they reply | H2, H3, H4, H5, H7, H8, H10 |
 | Demand summary | A weekly summary of what nearby shoppers asked for, sent to the shops in the proof of concept | H9 |
-| Payments and paid offers | Every hold can be paid now or at the counter. After four weeks, shops are offered the provider's POS and paid promotion | H12 to H16 |
+| Payments and paid offers | Every hold is paid in the app. After four weeks, shops are offered the provider's POS and paid promotion | H12 to H16 |
 
 The pass marks stay as written in [hypotheses](hypotheses.md).
 

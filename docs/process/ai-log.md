@@ -133,6 +133,9 @@ I asked for the identity and type scale boards to show what was chosen and to gr
 ### 33. Warm greys and accents from Oat and Brew
 I asked to keep Oat and Brew from palette I and explore five accents that work with them, plus warm grey scales in the style of shadcn/ui, and added that pure black and white must work with all of it. An agent read the shadcn/ui, Tailwind, Radix Colors and Material documentation, built three grey ramps in OKLCH that run from Oat's hue to Brew's, and four sets of five accents, checking every pairing with a script. It had to darken Tea teal and Jam so they pass 4.5:1 on Oat, and found that dark-mode tint buttons need black labels. It suggested Tea tin with Biscuit grey; the choice stays open on the board.
 
+### 34. Dropping the unpaid reserve
+I questioned whether reserving without paying was worth keeping and asked whether the research had any strong cultural evidence for it. The agent checked the desk research: cash is 19.2% of retail transactions, but Argos dropped unpaid reservations and nothing in the evidence shows shoppers relying on them. I decided to drop it (decision 032). The agent removed it from Define, the hypotheses (H6 and H12 rewritten), shop states v3 and app flow v6, where the sheet now says that without paying there is no hold. While on the tab placement board it also fixed option D, whose bar was squeezed onto the home indicator by a class name it shared with the small pills.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.

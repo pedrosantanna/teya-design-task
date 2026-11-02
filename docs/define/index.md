@@ -5,7 +5,7 @@ A concierge for the high street that the shopper talks to in one conversation. Y
 ```summary
 Takeaways:
 - The concept answers the strongest pain from Discover, not knowing before leaving home (A1), with a confirmation from the shop itself.
-- It leads with findability. The transaction (reserve, pay, collect or deliver) closes the loop and is where the brief's other problem shows up.
+- It leads with findability. The transaction (pay to hold, collect or deliver) closes the loop and is where the brief's other problem shows up.
 - I chose an agent for four reasons: one conversation for many tasks, waiting handled for the shopper, acting later on their behalf, and reach beyond one app. All four are my hypotheses; Discover has little evidence on them.
 - Everything depends on shops answering quickly. No shopkeeper is in the evidence, so that is the first thing to test.
 Call:
@@ -37,15 +37,16 @@ The [service blueprint](blueprint.md) shows each step across the shopper, the co
 
 Both appear in the same list of answers, labelled by where the answer came from. Most small independents start as asked shops (A14).
 
-## Three ways to get it
+## Ways to get it
 
 | Way | Paid | Held for | Who hands it over |
 | --- | --- | --- | --- |
-| Reserve | No, pay at the shop | Until the end of the next opening day, only if the shop accepts | The shop, at the counter |
 | Pay and hold | Yes, once the shop has set it aside | 7 days by default; the shopper picks a collection day. Shorter for perishables (bakery, butcher, florist), up to 14 days if the shop agrees; one extension of 7 days; automatic refund if nobody collects | The shop, at the counter, or a collection point |
 | Pay and the shop delivers | Yes | Not held: the shop sends it with its own delivery or courier | The shop's delivery; the concierge only follows its status |
 
-The lengths come from how UK shops hold orders for collection ([desk research](../discover/high-street-landscape.md)): a week is the norm for paid orders, unpaid reservations are short. Delivery by the shop is mapped, not designed: the concierge would show "dispatched", "on its way" and "delivered" from the shop's updates (decision 030).
+The lengths come from how UK shops hold orders for collection ([desk research](../discover/high-street-landscape.md)): a week is the norm for paid orders. Delivery by the shop is mapped, not designed: the concierge would show "dispatched", "on its way" and "delivered" from the shop's updates (decision 030).
+
+There is no unpaid reserve (decision 032). A shopper who doesn't want to pay goes without a hold and may find the item sold; the concierge says so. The unpaid reserve was there for convenience and cash, but the payment happened outside the app and the shop carried the no-show risk.
 
 ## Area
 

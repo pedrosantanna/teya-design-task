@@ -24,7 +24,7 @@ Trade-offs:
 | Agente concierge com as lojas | O agente manda pedidos reais a cerca de dez lojas a até 15 minutos a pé da Blythe Road pelo WhatsApp, ou pelo POS quando o sistema da loja permite, e cuida das respostas delas | H1, H6, H11 |
 | Protótipo do app de quem compra | O lado do comprador no blueprint, etapas 1 a 5, com as respostas do agente vindo das lojas de verdade quando elas respondem | H2, H3, H4, H5, H7, H8, H10 |
 | Resumo da demanda | Um resumo semanal do que os compradores próximos pediram, enviado às lojas da prova de conceito | H9 |
-| Pagamentos e ofertas pagas | Toda reserva pode ser paga agora ou no balcão. Depois de quatro semanas, as lojas recebem a oferta do POS do provedor e do destaque pago | H12 a H16 |
+| Pagamentos e ofertas pagas | Toda reserva é paga no app. Depois de quatro semanas, as lojas recebem a oferta do POS do provedor e do destaque pago | H12 a H16 |
 
 Os critérios de aprovação continuam como estão em [hipóteses](hypotheses.md).
 

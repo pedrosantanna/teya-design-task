@@ -5,7 +5,7 @@ Um concierge da high street, a rua comercial do bairro, com quem o comprador fal
 ```summary
 Takeaways:
 - O conceito responde à dor mais forte do Discover, não saber antes de sair de casa (A1), com uma confirmação da própria loja.
-- Ele começa pela findability. A transaction (reservar, pagar, retirar ou receber) fecha o ciclo e é onde aparece o outro problema do brief.
+- Ele começa pela findability. A transaction (pagar para guardar, retirar ou receber) fecha o ciclo e é onde aparece o outro problema do brief.
 - Escolhi um agente por quatro motivos: uma conversa só para várias tarefas, a espera resolvida no lugar do comprador, agir depois em nome dele e alcance além de um app. Os quatro são hipóteses minhas; o Discover tem pouca evidência sobre eles.
 - Tudo depende de as lojas responderem rápido. Nenhum lojista aparece na evidência, então é a primeira coisa a testar.
 Call:
@@ -37,15 +37,16 @@ O [blueprint de serviço](blueprint.md) mostra cada etapa passando pelo comprado
 
 As duas aparecem na mesma lista de respostas, marcadas pela origem da resposta. A maioria das independentes pequenas começa como loja consultada (A14).
 
-## Três formas de levar
+## Formas de levar
 
 | Forma | Pago | Guardado por | Quem entrega |
 | --- | --- | --- | --- |
-| Reservar | Não, paga na loja | Até o fim do próximo dia de funcionamento, só se a loja aceitar | A loja, no balcão |
 | Pagar e guardar | Sim, depois que a loja separa o item | 7 dias no padrão; o comprador escolhe o dia da retirada. Menos para perecíveis (padaria, açougue, floricultura), até 14 dias se a loja aceitar; uma prorrogação de 7 dias; reembolso automático se ninguém retirar | A loja, no balcão, ou um ponto de retirada |
 | Pagar e a loja entregar | Sim | Não fica guardado: a loja envia com a entrega ou o entregador dela | A entrega da loja; o concierge só acompanha o status |
 
-Os prazos vêm de como as lojas do Reino Unido guardam pedidos para retirada ([pesquisa documental](../discover/high-street-landscape.md)): uma semana é o normal para pedidos pagos, e reservas sem pagamento são curtas. A entrega pela loja está mapeada, não desenhada: o concierge mostraria "enviado", "a caminho" e "entregue" a partir das atualizações da loja (decisão 030).
+Os prazos vêm de como as lojas do Reino Unido guardam pedidos para retirada ([pesquisa documental](../discover/high-street-landscape.md)): uma semana é o normal para pedidos pagos. A entrega pela loja está mapeada, não desenhada: o concierge mostraria "enviado", "a caminho" e "entregue" a partir das atualizações da loja (decisão 030).
+
+Não existe reserva sem pagamento (decisão 032). Quem não quer pagar vai sem reserva e pode encontrar o item vendido; o concierge avisa. A reserva sem pagamento existia por comodidade e por causa do dinheiro, mas o pagamento acontecia fora do app e a loja ficava com o risco de a pessoa não aparecer.
 
 ## Área
 

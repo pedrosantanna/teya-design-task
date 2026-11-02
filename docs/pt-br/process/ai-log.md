@@ -133,6 +133,9 @@ Pedi que os quadros de identidade e de escala tipográfica mostrassem o que foi 
 ### 33. Cinzas quentes e acentos a partir de Oat e Brew
 Pedi para manter Oat e Brew, da paleta I, e explorar cinco acentos que funcionem com eles, além de escalas de cinza quente no estilo do shadcn/ui, e acrescentei que preto e branco puros precisam funcionar com tudo isso. Um agente leu a documentação do shadcn/ui, do Tailwind, do Radix Colors e do Material, montou três escalas de cinza em OKLCH que vão do matiz do Oat ao do Brew e quatro conjuntos de cinco acentos, conferindo cada combinação com um script. Ele precisou escurecer o Tea teal e o Jam para passarem de 4,5:1 sobre o Oat, e viu que os botões no tint do modo escuro precisam de rótulo preto. Sugeriu Lata de chá com o Cinza biscoito; a escolha continua em aberto no quadro.
 
+### 34. A reserva sem pagamento sai
+Questionei se valia manter a reserva sem pagamento e perguntei se a pesquisa tinha alguma evidência cultural forte a favor dela. O agente conferiu a pesquisa documental: o dinheiro é 19,2% das transações do varejo, mas a Argos acabou com as reservas sem pagamento e nada na evidência mostra compradores dependendo delas. Decidi tirá-la (decisão 032). O agente a removeu do Define, das hipóteses (H6 e H12 reescritas), dos estados da loja v3 e do fluxo do app v6, onde a folha agora avisa que sem pagar não há reserva. No quadro de posicionamento das abas ele também corrigiu a opção D, cuja barra ficava espremida em cima do indicador do iPhone por um nome de classe que ela dividia com as tags pequenas.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.

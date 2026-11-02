@@ -239,6 +239,7 @@ O comprador pode reservar sem pagar (guardado até o fim do próximo dia de func
 
 **Por quê:** as lojas do Reino Unido guardam pedidos pagos para retirada por cerca de uma semana (Argos e Decathlon 7 dias, John Lewis 10, Screwfix 21), e reservas sem pagamento são curtas (cerca de 2 dias) ou deixaram de existir; uma reserva de poucas horas seria mais curta do que o comprador espera. Fontes na pesquisa documental, "Quanto tempo as lojas guardam um pedido para retirada".
 **Em aberto:** se as independentes pequenas aceitam uma semana com uma unidade em estoque; a H6 testa isso.
+**Fechado pela 032:** se vale manter a reserva sem pagamento. Eu questionei: ela existe por comodidade e para quem paga em dinheiro (19,2% das transações do varejo em 2024), mas aí o pagamento acontece fora do app, a loja fica com o risco de a pessoa não aparecer, e a pesquisa documental não encontrou um hábito forte por trás dela (a Argos acabou com as reservas sem pagamento; as lojas que mantêm guardam por cerca de dois dias). A alternativa é exigir o pagamento em toda reserva. A H12 conta qual das duas os compradores escolhem quando as duas são oferecidas.
 
 ## 031 · Lojas conectadas e lojas consultadas
 **2026-11-02 · Decidido**
@@ -247,6 +248,14 @@ Existem dois tipos de loja. Uma loja conectada compartilha o estoque por item pe
 
 **Por quê:** a resposta na hora e a resposta perguntada são promessas diferentes; o comprador precisa saber qual das duas está lendo.
 **Em aberto:** quantas lojas de uma rua são conectadas (H11).
+
+## 032 · Sem reserva sem pagamento
+**2026-11-02 · Decidido**
+
+Tirei a reserva sem pagamento. Um comprador que recebe um sim paga e a loja guarda o item, ou paga e a loja entrega. Quem não quer pagar vai até a loja sem reserva e pode encontrar o item vendido. O concierge avisa isso na resposta.
+
+**Por quê:** a reserva sem pagamento existia por comodidade e para quem paga em dinheiro, mas o pagamento acontece fora do app, a loja fica com o risco de a pessoa não aparecer, muitas vezes com a única unidade que tem, e a pesquisa documental não encontrou um hábito forte por trás dela (a Argos acabou com as reservas sem pagamento; a Beaverbrooks guarda por 2 dias). Duas formas também são mais simples de explicar numa resposta só.
+**Em aberto:** se quem reservaria passa a pagar ou só vai até a loja; a H12 agora conta quantos sins terminam numa reserva paga. Quem paga em dinheiro é um ponto cego: ninguém assim aparece na netnografia.
 
 ## Ainda em aberto
 

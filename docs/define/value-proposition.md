@@ -23,7 +23,7 @@ Products and services:
 - A concierge you can ask for a specific item near a place, now, in one conversation
 - Instant answers from shops whose till shares stock
 - Requests to likely shops when there's no stock data, sent at the same time
-- Reserve or pay to hold, then collect, in the same conversation
+- Pay to hold, then collect, in the same conversation
 Pain relievers:
 - Know before leaving whether a shop has it and is open (A1)
 - A recent answer from the shop, or an item set aside, where listings may be wrong (A2, A10; H5)
@@ -56,7 +56,7 @@ Gains:
 Products and services:
 - Ask the concierge for routine items, in the app or on WhatsApp
 - Standing requests the concierge acts on ("bread from the bakery on Fridays")
-- Reserve and pay in the conversation
+- Pay to hold in the conversation
 - Later collection at the shop or at a collection point, or evening delivery
 Pain relievers:
 - Ask in the morning, while the shop is open, and collect after work if a later option exists (A6, A7; H6)

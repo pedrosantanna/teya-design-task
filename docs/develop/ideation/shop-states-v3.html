@@ -1,0 +1,193 @@
+<!-- Shop request states v3: no unpaid reserve (decision 032); connected and asked shops, holds in days (decisions 030, 031). Format: see AGENTS.md, canvas pages. -->
+
+<div class="area" data-x="-80" data-y="-440" data-w="1620" data-h="980" data-title-en="Answering" data-title-pt="Respondendo"></div>
+<div class="area" data-x="1580" data-y="-180" data-w="2200" data-h="500" data-title-en="Pay and hold" data-title-pt="Pagar e guardar"></div>
+<div class="area" data-x="1580" data-y="-920" data-w="2200" data-h="240" data-title-en="Pay and the shop delivers (mapped, not designed)" data-title-pt="Pagar e a loja entregar (mapeado, não desenhado)"></div>
+<div class="area" data-x="-80" data-y="600" data-w="3860" data-h="300" data-title-en="When it doesn't" data-title-pt="Quando não dá"></div>
+<div class="area" data-x="-80" data-y="960" data-w="3860" data-h="560" data-title-en="What the shop sees" data-title-pt="O que a loja vê"></div>
+
+<!-- Answering: connected shop -->
+<div class="state start" id="pos" data-x="0" data-y="-320" style="--tone: var(--c4)">
+  <span class="state-name"><i data-icon="smartphone"></i>Stock checked in the POS</span>
+  <p lang="en">Connected shop. The POS shares item-level stock, so nobody is asked.</p>
+  <p lang="pt">Loja conectada. O POS compartilha o estoque por item, então ninguém é perguntado.</p>
+</div>
+<div class="state" id="instock" data-x="420" data-y="-320" style="--tone: var(--c4)">
+  <span class="state-name"><i data-icon="zap"></i>In stock now</span>
+  <p lang="en">Shown at once, labelled as stock data. The shop still sees the request on its POS.</p>
+  <p lang="pt">Aparece na hora, marcado como dado de estoque. A loja ainda vê o pedido no POS.</p>
+</div>
+
+<!-- Answering: asked shop -->
+<div class="state start" id="received" data-x="0" data-y="160" style="--tone: var(--c1)">
+  <span class="state-name"><i data-icon="message-circle"></i>Request received</span>
+  <p lang="en">Asked shop. The concierge asks about one item, for one shopper, with a deadline.</p>
+  <p lang="pt">Loja consultada. O concierge pergunta por um item, para um comprador, com um prazo.</p>
+</div>
+<div class="state" id="seen" data-x="420" data-y="160" style="--tone: var(--c1)">
+  <span class="state-name"><i data-icon="check"></i>Seen</span>
+  <p lang="en">Read receipt, when the shop has them on.</p>
+  <p lang="pt">Confirmação de leitura, quando a loja deixa ativada.</p>
+</div>
+<div class="state" id="answered" data-x="840" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="circle-check"></i>Has it</span>
+  <p lang="en">A clear yes, with a price. A valid answer for H1.</p>
+  <p lang="pt">Um sim claro, com preço. Uma resposta válida para a H1.</p>
+</div>
+<div class="state" id="alt" data-x="840" data-y="-80" style="--tone: var(--c2)">
+  <span class="state-name"><i data-icon="repeat"></i>Something similar</span>
+  <p lang="en">The shop offers an alternative. The shopper decides.</p>
+  <p lang="pt">A loja oferece uma alternativa. O comprador decide.</p>
+</div>
+<div class="state" id="choose" data-x="1260" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="split"></i>Shopper picks a way</span>
+  <p lang="en">Pay and hold, or pay and the shop delivers. Only the ways the shop accepts are offered. No payment, no hold (decision 032).</p>
+  <p lang="pt">Pagar e guardar, ou pagar e a loja entregar. Só aparecem as formas que a loja aceita. Sem pagamento, sem reserva (decisão 032).</p>
+</div>
+
+<!-- Pay and hold -->
+<div class="state" id="hold" data-x="1680" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="hourglass"></i>Hold requested</span>
+  <p lang="en">With the collection day the shopper picked. In a connected shop the POS marks the item at once.</p>
+  <p lang="pt">Com o dia de retirada que o comprador escolheu. Numa loja conectada, o POS marca o item na hora.</p>
+</div>
+<div class="state" id="aside" data-x="2100" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="package"></i>Set aside</span>
+  <p lang="en">The shop confirms. Only now is the shopper charged.</p>
+  <p lang="pt">A loja confirma. Só agora o comprador é cobrado.</p>
+</div>
+<div class="state" id="paid" data-x="2520" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="credit-card"></i>Paid, held 7 days</span>
+  <p lang="en">Held until Mon 9 Nov by default; same or next day for perishables; up to 14 days if the shop agrees.</p>
+  <p lang="pt">Guardado até seg 9 nov no padrão; no mesmo dia ou no seguinte para perecíveis; até 14 dias se a loja aceitar.</p>
+</div>
+<div class="state" id="ready" data-x="2940" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="calendar-check"></i>Collection day</span>
+  <p lang="en">Reminder in the morning of the day the shopper picked.</p>
+  <p lang="pt">Lembrete na manhã do dia que o comprador escolheu.</p>
+</div>
+<div class="state end" id="collected" data-x="3360" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="shopping-bag"></i>Collected</span>
+  <p lang="en">Handed over at the counter for the code, or at a collection point.</p>
+  <p lang="pt">Entregue no balcão pelo código, ou num ponto de retirada.</p>
+</div>
+<div class="state" id="extended" data-x="2940" data-y="-90" style="--tone: var(--c2)">
+  <span class="state-name"><i data-icon="calendar-plus"></i>Extended once</span>
+  <p lang="en">The shopper asks for 7 more days; the shop can say no.</p>
+  <p lang="pt">O comprador pede mais 7 dias; a loja pode recusar.</p>
+</div>
+
+<!-- Pay and the shop delivers -->
+<div class="state" id="dpaid" data-x="1680" data-y="-820" style="--tone: var(--c6)">
+  <span class="state-name"><i data-icon="credit-card"></i>Paid, shop sends it</span>
+  <p lang="en">With the shop's own delivery or courier, at the shop's price.</p>
+  <p lang="pt">Com a entrega ou o entregador da própria loja, ao preço da loja.</p>
+</div>
+<div class="state" id="dispatched" data-x="2100" data-y="-820" style="--tone: var(--c6)">
+  <span class="state-name"><i data-icon="package"></i>Dispatched</span>
+  <p lang="en">The shop says it has left. The concierge only relays it.</p>
+  <p lang="pt">A loja avisa que saiu. O concierge só repassa.</p>
+</div>
+<div class="state" id="onway" data-x="2520" data-y="-820" style="--tone: var(--c6)">
+  <span class="state-name"><i data-icon="truck"></i>On its way</span>
+  <p lang="en">A tracking link, when the courier gives one.</p>
+  <p lang="pt">Um link de rastreio, quando o entregador fornece.</p>
+</div>
+<div class="state end" id="delivered" data-x="2940" data-y="-820" style="--tone: var(--c6)">
+  <span class="state-name"><i data-icon="house"></i>Delivered</span>
+  <p lang="en">Problems go to the shop; the concierge helps the shopper ask.</p>
+  <p lang="pt">Problemas vão para a loja; o concierge ajuda o comprador a perguntar.</p>
+</div>
+
+<!-- When it doesn't -->
+<div class="state end fail" id="noreply" data-x="420" data-y="700" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="clock"></i>No reply in 10 min</span>
+  <p lang="en">The shopper sees the other shops. A late reply still counts as demand.</p>
+  <p lang="pt">O comprador vê as outras lojas. Uma resposta atrasada ainda conta como demanda.</p>
+</div>
+<div class="state end fail" id="doesnt" data-x="840" data-y="700" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="circle-x"></i>Doesn't have it</span>
+  <p lang="en">Also valid for H1. Goes into the weekly demand summary.</p>
+  <p lang="pt">Também vale para a H1. Entra no resumo semanal da demanda.</p>
+</div>
+<div class="state end fail" id="declined" data-x="1680" data-y="700" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="x"></i>Can't hold that long</span>
+  <p lang="en">The shop offers a shorter hold, or the shopper takes the next option.</p>
+  <p lang="pt">A loja oferece um prazo menor, ou o comprador fica com a próxima opção.</p>
+</div>
+<div class="state end fail" id="sold" data-x="2100" data-y="700" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="circle-x"></i>Already sold</span>
+  <p lang="en">Found when putting it aside, or the POS stock was out of date. No charge.</p>
+  <p lang="pt">Descoberto ao separar, ou o estoque do POS estava desatualizado. Sem cobrança.</p>
+</div>
+<div class="state fail" id="expired" data-x="2940" data-y="700" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="hourglass"></i>Hold ended</span>
+  <p lang="en">Reminders the day before and on the last day, then release.</p>
+  <p lang="pt">Lembretes na véspera e no último dia, depois a liberação.</p>
+</div>
+<div class="state end" id="released" data-x="3360" data-y="700" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="repeat"></i>Released and refunded</span>
+  <p lang="en">Automatic refund. The shop can sell the item again.</p>
+  <p lang="pt">Reembolso automático. A loja pode vender o item de novo.</p>
+</div>
+
+<!-- Messages the shop sees (interface copy stays in English) -->
+<div class="note" data-for="instock" data-x="0" data-y="1060">
+  <p><strong>POS notification</strong><br>Someone nearby wants <strong>eclipse glasses</strong> (you have 4). Hold 2 for them? <strong>Hold</strong> · <strong>Not today</strong></p>
+  <p lang="en">A connected shop answers with one tap on the terminal; the stock count comes from the POS.</p>
+  <p lang="pt">Uma loja conectada responde com um toque na maquininha; a contagem vem do POS.</p>
+</div>
+<div class="note" data-for="received" data-x="420" data-y="1060">
+  <p><strong>Concierge</strong><br>Hi Ana, someone 300 m away needs <strong>eclipse glasses</strong> today. Do you have them?<br>Reply <strong>1</strong> Yes · <strong>2</strong> No · <strong>3</strong> Something similar</p>
+  <p lang="en"><span class="tag">Template</span> Pre-approved, because the shop hasn't written in the last 24 hours.</p>
+  <p lang="pt"><span class="tag">Modelo</span> Pré-aprovado, porque a loja não escreveu nas últimas 24 horas.</p>
+</div>
+<div class="note" data-for="hold" data-x="1260" data-y="1060">
+  <p><strong>Concierge</strong><br>They'd like 2 pairs. Can you keep them for code <strong>K7Q2</strong> until <strong>Mon 9 Nov</strong>? They plan to come in today. Reply <strong>done</strong>, or tell me a shorter date.</p>
+  <p lang="en">The shopper isn't charged until the shop replies "done".</p>
+  <p lang="pt">O comprador só é cobrado quando a loja responde "done".</p>
+</div>
+<div class="note" data-for="paid" data-x="1680" data-y="1060">
+  <p><strong>Concierge</strong><br>Paid £14.99 for <strong>K7Q2</strong>. Please keep them until Mon 9 Nov. Reply <strong>collected</strong> when they've picked them up.</p>
+  <p lang="en">The payment lands in the shop's own payment account.</p>
+  <p lang="pt">O pagamento cai na conta de pagamentos da própria loja.</p>
+</div>
+<div class="note" data-for="dispatched" data-x="2100" data-y="1060">
+  <p><strong>Concierge</strong><br>Paid £14.99 + £3.50 delivery for <strong>K7Q2</strong>, to W6 0QA. Reply <strong>sent</strong> when it leaves, with a tracking link if you have one.</p>
+  <p lang="en">Mapped, not designed: the app takes no part in the delivery itself.</p>
+  <p lang="pt">Mapeado, não desenhado: o app não participa da entrega em si.</p>
+</div>
+<div class="note" data-for="expired" data-x="2520" data-y="1060">
+  <p><strong>Concierge</strong><br>The hold for <strong>K7Q2</strong> ended on Mon 9 Nov. You can sell them again; we've refunded the shopper.</p>
+</div>
+<div class="note" data-for="doesnt" data-x="2940" data-y="1060">
+  <p><strong>Concierge</strong><br>Thanks, noted. 3 people near you asked for this this week; you'll see it in Monday's summary.</p>
+  <p lang="en">The demand signal (H9) starts with the first "no".</p>
+  <p lang="pt">O sinal de demanda (H9) começa no primeiro "não".</p>
+</div>
+
+<!-- Transitions: what the shop or the shopper does -->
+<a class="link" data-from="pos" data-to="instock" data-label-en="has stock" data-label-pt="tem estoque"></a>
+<a class="link" data-from="instock" data-to="choose" data-label-en="shopper sees it" data-label-pt="o comprador vê"></a>
+<a class="link" data-from="received" data-to="seen" data-label-en="opens chat" data-label-pt="abre a conversa"></a>
+<a class="link" data-from="seen" data-to="answered" data-label-en="replies 1 + price" data-label-pt="responde 1 + preço"></a>
+<a class="link alt" data-from="seen" data-to="alt" data-label-en="replies 3" data-label-pt="responde 3"></a>
+<a class="link" data-from="answered" data-to="choose"></a>
+<a class="link alt" data-from="alt" data-to="choose" data-label-en="shopper accepts" data-label-pt="o comprador aceita"></a>
+<a class="link" data-from="choose" data-to="hold" data-label-en="pay and hold" data-label-pt="pagar e guardar"></a>
+<a class="link" data-from="hold" data-to="aside" data-label-en="replies done" data-label-pt="responde done"></a>
+<a class="link" data-from="aside" data-to="paid" data-label-en="shopper pays" data-label-pt="o comprador paga"></a>
+<a class="link" data-from="paid" data-to="ready"></a>
+<a class="link" data-from="ready" data-to="collected" data-label-en="replies collected" data-label-pt="responde collected"></a>
+<a class="link alt" data-from="paid" data-to="extended" data-label-en="shopper asks" data-label-pt="o comprador pede"></a>
+<a class="link alt" data-from="extended" data-to="ready"></a>
+<a class="link" data-from="choose" data-to="dpaid" data-label-en="shop delivers" data-label-pt="a loja entrega"></a>
+<a class="link alt" data-from="dpaid" data-to="dispatched" data-label-en="replies sent" data-label-pt="responde sent"></a>
+<a class="link alt" data-from="dispatched" data-to="onway"></a>
+<a class="link alt" data-from="onway" data-to="delivered"></a>
+<a class="link" data-from="received" data-to="noreply" data-label-en="10 min, no reply" data-label-pt="10 min sem resposta"></a>
+<a class="link" data-from="seen" data-to="doesnt" data-label-en="replies 2" data-label-pt="responde 2"></a>
+<a class="link" data-from="hold" data-to="declined" data-label-en="replies no" data-label-pt="responde não"></a>
+<a class="link" data-from="aside" data-to="sold" data-label-en="replies sold" data-label-pt="responde sold"></a>
+<a class="link" data-from="ready" data-to="expired" data-label-en="nobody comes" data-label-pt="ninguém vem"></a>
+<a class="link" data-from="expired" data-to="released" data-label-en="after reminders" data-label-pt="depois dos lembretes"></a>
