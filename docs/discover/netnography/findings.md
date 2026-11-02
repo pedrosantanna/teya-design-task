@@ -1,11 +1,11 @@
 # Findings
 
-The clearest thing Londoners say about their high street is that they can't tell whether a shop has what they need, or is even open, without going there. When the need is urgent they ask strangers on Reddit and WhatsApp, and after a failed trip they say they order online and stop trying.
+The clearest thing Londoners say about their high street is that they can't tell whether a shop has what they need, or is even open, without going there. When the need is urgent they ask strangers on Reddit and WhatsApp, and some describe ordering online after a failed trip.
 
 ```summary
 Takeaways:
 - Not knowing what's in stock, or what's open, is the strongest theme.
-- Shoppers say they'll pay more to buy local, and pull back after one wasted trip.
+- Shoppers say they'll pay more to buy local if it's convenient. After a wasted trip, some go elsewhere and some keep going back.
 - On X and TikTok the high street is a place to discover, with little practical talk.
 Call:
 - I ranked the themes by strength of evidence: number of quotes, networks, recency and how specific to West London. Usefulness to the brief didn't affect the order.
@@ -124,11 +124,11 @@ status: verified
 
 ## 3. Failed trips and urgent needs
 
-A failed trip usually ends at Amazon, but an urgent need can beat online too.
+A failed trip can end with an order on Amazon, and an urgent need can beat online too.
 
-**Evidence: strong overall.** The "failed trip" half is mostly UK-wide; the "online fails too" half is London.
+**Evidence: strong overall.** The "failed trip" half rests on two posts, one UK-wide on Reddit and one on Mumsnet; the "online fails too" half is London.
 
-The usual story runs: try local, find nothing or find it shut, pay for parking, order online. London's urgent cases run the other way. When nobody can deliver in time, a shop nearby with the thing on the shelf is the only option, and people will pay a premium for it.
+One story runs: try local, find nothing, pay for parking, order online. London's urgent cases run the other way. When nobody can deliver in time, a shop nearby with the thing on the shelf is the only option, and people will pay a premium for it.
 
 ```quote
 text: Walked around every shop that might possibly have what I need and left empty handed… Have to go home and buy it all off Amazon
@@ -176,11 +176,11 @@ status: verified
 
 ## 4. Loyalty to local
 
-Loyalty to local shops holds until the first wasted trip.
+Loyalty to local shops depends on convenience, and a wasted trip doesn't always end it.
 
 **Evidence: moderate to strong.** Reddit and Mumsnet, London and UK-wide.
 
-Many shoppers say they will pay more to buy locally, and some do. They pull back fast after a wasted trip. The independent ends up as the treat, and the supermarket or Amazon covers the routine.
+Several shoppers say they will pay more to buy locally if it's convenient, and some do. After a wasted trip the posts go both ways: some order online, and Valentando kept buying from a weekly butcher found shut during its advertised hours (theme 2). For u/killmetruck the independent butcher is for anniversaries and the supermarket covers the week.
 
 ```quote
 text: If you sell something I want and it's reasonably convenient, I will pay more… But I won't be jumping through hoops…
@@ -396,7 +396,7 @@ Paying and getting there cause small frictions, and the evidence on the bridge i
 
 **Evidence: weak to moderate.** The Hammersmith Bridge evidence points both ways.
 
-Cash-only stalls are still common in London while many shoppers carry no cash. On Hammersmith Bridge, posters disagree about whether its closure hurt local trade, and nobody describes it changing where they shop on King Street.
+One post shows the cash friction: u/rsweb carries no cash, so cash-only stalls don't work for them. I found no count of how many London stalls take cash only. On Hammersmith Bridge, posters disagree about whether its closure hurt local trade, and nobody describes it changing where they shop on King Street.
 
 ```quote
 text: I don't carry cash, and I don't plan to change that 🤷
@@ -440,6 +440,8 @@ Both networks treat the high street as somewhere to discover places.
 Neither network carries much of the practical talk Reddit does. On X, "high street" in London mostly appears in arguments about national decline, which were read but not quoted, and in council posts promoting independents. The one King Street post from a shopper calls a walk along it depressing.
 
 TikTok treats the high street as discovery. Videos pin a place with 📍, call it a steal or a hidden find, and offer it as an alternative to Oxford Street. Around Hammersmith the results are food, charity-shop hauls, bargain shops, a florist stall and a flea market, and many are made by the shops themselves. That fits the browse end of the [first dimension](dimensions.md): people find places through content, without searching for an item.
+
+The TikTok quotes below are captions by creators, shops and one market organiser. They are commercial or promotional content, which the method excludes as shopper evidence. I show them as a stated exception, to illustrate what the network carries, and none of them counts as a shopper report or feeds the personas.
 
 One small, new signal: shoppers on X asking the platform's AI chatbot which shop has an item in stock. It turned up once, in the post below, so I'm keeping it as something to watch and haven't counted it as a finding.
 
@@ -527,7 +529,7 @@ network: TikTok
 date: 2026-09-26
 url: https://www.tiktok.com/@hackneyfleamarket/video/7689755751471959318
 tags: cash-card, discovery
-context: A market under the Hammersmith Flyover; organisers flag card payments up front.
+context: Written by the market organiser, so a commercial message, not a shopper report. A market under the Hammersmith Flyover; organisers flag card payments up front.
 status: verified
 ```
 
@@ -535,7 +537,7 @@ status: verified
 
 - The posts can't say how often any of this happens. People chose to write them, so they show what annoys people enough to post.
 - Older and offline shoppers barely appear on Reddit or Mumsnet.
-- Shop-owner posts were excluded, so why hours and stock are the way they are is still a guess.
+- Shop-owner posts were excluded as shopper evidence (the promotional TikTok captions in theme 10 are a marked exception), so why hours and stock are the way they are is still a guess.
 - Nobody was asked whether they would use an app for this. The pull towards live stock and reliable hours is my reading of unprompted complaints.
 - Only TikTok captions were collected, so what viewers say back is missing.
 

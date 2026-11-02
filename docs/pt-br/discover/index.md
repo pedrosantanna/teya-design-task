@@ -5,8 +5,8 @@ Antes de escolher entre findability e transaction, eu me propus a entender a hig
 ```summary
 Takeaways:
 - Quem compra não consegue saber se uma loja próxima tem algo, ou se está aberta, sem ir até lá. Esse foi o sinal mais forte.
-- Uma ida frustrada costuma terminar na Amazon, a menos que a compra online não chegue a tempo.
-- Sam, o comprador em missão, é a maior e mais clara das três proto-personas (11 de 21 posts clusterizados). O ponto de parada mais comum foi a primeira etapa: saber quem tem o item e se a loja está aberta (8 de 21 posts clusterizados).
+- Em dois posts, uma ida frustrada terminou num pedido na Amazon. Quando o online não conseguia chegar a tempo, uma loja próxima ganhou.
+- Sam, o comprador em missão, é a maior e mais clara das três proto-personas (11 de 20 posts clusterizados). O ponto de parada mais comum foi a primeira etapa: saber quem tem o item e se a loja está aberta (8 de 20 posts clusterizados).
 Call:
 - Descoberta antes de escolher findability ou transaction ([001](../decision-log.md)).
 - De fora para dentro, porque o produto ainda não existe ([000](../decision-log.md)). Hammersmith como exemplo trabalhado.
@@ -36,9 +36,9 @@ Cada citação é um trecho curto de um post público, datado entre maio de 2025
 
 A reclamação mais frequente é que não dá para saber o que uma loja tem, ou se está aberta, sem ir até lá. Quando a necessidade é urgente (óculos para eclipse na véspera, um ventilador numa onda de calor, flores num domingo à noite), os londrinos perguntam a desconhecidos no Reddit, ligam para várias lojas ou entram em grupos de WhatsApp que postam contagens de estoque com horário. Eles confiam mais na resposta de um vizinho do que em listagens do Google ou sites das lojas.
 
-Depois de uma ida frustrada, a maioria diz que compra na Amazon. Quem tentou o comércio local, pagou estacionamento e voltou de mãos vazias diz isso sem rodeios. A exceção é quando a compra online não chega a tempo. Aí uma loja próxima que tem o item ganha, a quase qualquer preço.
+Dois posts descrevem uma ida frustrada que terminou num pedido na Amazon, um deles depois de pagar estacionamento e voltar de mãos vazias. Quando a compra online não chega a tempo, os posts vão no sentido contrário, e uma loja próxima que tem o item ganha, a quase qualquer preço.
 
-A lealdade ao comércio local tem limite. Compradores pagam mais num pequeno negócio "if it's reasonably convenient" (se for razoavelmente conveniente), e o abandonam depois de uma ida perdida ou de horários que conflitam com o trabalho. O açougue independente vira o lugar dos aniversários de casamento, e o supermercado fica com as compras da semana.
+A lealdade ao comércio local depende da conveniência. Uma pessoa paga mais num pequeno negócio se for "reasonably convenient" (razoavelmente conveniente). Outra deixa o açougue independente, aberto só em horário comercial, para os aniversários de casamento, e o supermercado fica com as compras da semana. Depois de uma ida perdida, alguns posts terminam no online, e uma frequentadora continuou comprando num açougue que encontrou fechado no horário anunciado.
 
 Os moradores tratam a King Street como uma rua de resolver coisas e mandam visitantes para a Chiswick High Road. Um produto ancorado aqui precisa ajudar as pessoas a resolver tarefas antes de poder ser um lugar para passear.
 
@@ -56,7 +56,7 @@ Entre apps de delivery, apps de sobras de comida e ferramentas de busca de estoq
 
 A evidência sustenta as duas opções, e a escolha entre elas é a primeira decisão da próxima fase.
 
-- **A favor de findability:** a dor mais forte e mais repetida é não saber se uma loja próxima tem o item e está aberta. Lojas pequenas não têm um catálogo de produtos para buscar, então o que quer que responda "está lá?" precisa vir de algo que a loja já faz, como confirmar uma reserva ou o que passa pelo caixa.
+- **A favor de findability:** a dor mais forte e mais repetida é não saber se uma loja próxima tem o item e está aberta. Suponho que a maioria das lojas pequenas não mantém um catálogo por item que uma busca consiga ler (não encontrei número nem a favor nem contra), então o que quer que responda "está lá?" precisa vir de algo que a loja já faz, como confirmar uma reserva ou o que passa pelo caixa.
 - **A favor de transaction:** o checkout com várias lojas está chegando pelas grandes plataformas, mas sem a metade local: retirar em várias lojas, ou um só entregador fazendo a ronda. Ninguém ocupou essa metade ainda.
 - **Como cada um restringe o outro:** quem compra só monta uma cesta com várias lojas se antes confiar que os itens estão lá. Uma promessa de disponibilidade só vale algo se a loja guardar o item quando o comprador decidir comprar.
 

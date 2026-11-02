@@ -57,7 +57,7 @@ status: verified
 
 ## Etapa da compra (saber → levar)
 
-Comprar algo numa loja do bairro passa por quatro etapas, nessa ordem, e cada post recebe a etapa em que parou:
+Eu ordenei as quatro etapas por que passa uma compra numa loja do bairro. A ordem é uma escolha analítica minha. Cada post fica na etapa onde está o problema dele:
 
 | Etapa | Parou porque | Aponta para |
 | --- | --- | --- |
@@ -66,7 +66,7 @@ Comprar algo numa loja do bairro passa por quatro etapas, nessa ordem, e cada po
 | 3 · Aceitar | Preço ou qualidade não valiam a pena | A oferta da rua |
 | 4 · Levar | Não conseguiu pagar, retirar ou receber num horário possível: horário, só dinheiro, entrega lenta | Transaction |
 
-Quanto maior a etapa, mais longe o comprador chegou antes de dar errado. As etapas 2 e 3 dependem do que a rua vende, e um app pode mostrar isso, mas não mudar. As pontuações estão na página de [método das personas](../personas/method.md).
+A etapa de um post mostra onde está o problema dele. Ela não mostra que o comprador passou pelas etapas anteriores: quem sabe que uma loja fecha durante o seu horário de trabalho pode parar antes mesmo de verificar estoque ou preço. As etapas 2 e 3 dependem do que a rua vende, e um app pode mostrar isso, mas não mudar. As pontuações estão na página de [método das personas](../personas/method.md).
 
 ```quote
 text: Hard to know stock levels without visiting, unless you can somehow get through on the phone..!

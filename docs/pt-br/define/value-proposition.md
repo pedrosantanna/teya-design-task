@@ -5,11 +5,11 @@ Dois canvas de proposta de valor da Strategyzer, um para o Sam e outro para a Je
 ```summary
 Takeaways:
 - Para o Sam, o encaixe é bom no papel: a dor principal dele é não saber, e o conceito responde com uma confirmação da loja.
-- Para a Jess, o encaixe é parcial: reservar e pagar antes resolve o problema do horário só se as lojas segurarem os itens e oferecerem uma janela de retirada que ela consiga cumprir.
+- Para a Jess, o encaixe é parcial: reservar e pagar antes resolve o problema do horário só se existir uma forma de retirar depois do trabalho: uma loja que segura um item pago até um horário mais tarde, um ponto de retirada que fica aberto até mais tarde, ou entrega à noite. Nenhuma foi testada (H6).
 - Os dois canvas se apoiam em evidência atitudinal e num lado da loja que não foi testado.
 Call:
 - Um canvas por proto-persona, porque o canvas da Strategyzer funciona por segmento de cliente e os dois têm tarefas diferentes.
-- A Ruth não tem canvas. O conceito não a atende (A13).
+- A Ruth não tem canvas. Deixei-a fora do escopo. O canal que ela preferiria e até que ponto adotaria uma ferramenta digital são perguntas em aberto (A13).
 AI:
 - Um agente preencheu os dois canvas a partir do mapa de empatia, das páginas de persona e do conceito, e marcou cada item com a suposição por trás. Eu revisei o encaixe, e os canvas foram atualizados quando acrescentei os motivos para um agente.
 Trade-offs:
@@ -26,12 +26,12 @@ Produtos e serviços:
 - Reservar ou pagar para segurar, e depois retirar, na mesma conversa
 Aliviadores de dores:
 - Saber antes de sair se uma loja tem o item e está aberta (A1)
-- A resposta vem da própria loja, e não de uma listagem que pode estar errada (A2, A10)
+- Uma resposta recente da loja, ou um item separado, onde as listagens podem estar erradas (A2, A10; H5)
 - Um pedido chega a várias lojas, sem precisar ligar para cada uma
 - O concierge continua procurando e manda atualizações enquanto as lojas respondem
 Criadores de ganhos:
 - Levar hoje, perto, quando o online não chega a tempo (A4)
-- Com o item seguro, a ida não tem como ser perdida
+- Com o item seguro, o risco de uma ida perdida diminui
 - Como chegar, preço e horário de fechamento na mesma resposta
 Tarefas:
 - Descobrir qual loja perto tem um item específico, antes de ir
@@ -48,7 +48,7 @@ Ganhos:
 - Não recorrer à Amazon
 ```
 
-**Encaixe.** O conceito responde diretamente às três dores, e o concierge pergunta a várias lojas de uma vez onde o Sam ligaria para uma por uma. O ponto fraco é o tempo: a resposta do concierge precisa chegar antes do momento em que o Sam começaria a ligar para as lojas ou desistiria (risco descrito no [conceito](index.md)). O ganho "não recorrer à Amazon" é atitudinal; o Sam pode dizer isso e ainda assim escolher a Amazon.
+**Encaixe.** O conceito responde diretamente às três primeiras dores, e o concierge pergunta a várias lojas de uma vez onde o Sam ligaria para uma por uma. A quarta, perguntar a desconhecidos e esperar, vira perguntar às lojas e esperar menos, se as lojas responderem rápido (H1). O ponto fraco é o tempo: a resposta do concierge precisa chegar antes do momento em que o Sam começaria a ligar para as lojas ou desistiria (risco descrito no [conceito](index.md)). O ganho "não recorrer à Amazon" é atitudinal; o Sam pode dizer isso e ainda assim escolher a Amazon.
 
 ## Jess, a local que desistiu
 
@@ -57,9 +57,9 @@ Produtos e serviços:
 - Pedir itens do dia a dia ao concierge, no app ou no WhatsApp
 - Pedidos recorrentes que o concierge cumpre ("pão da padaria às sextas")
 - Reservar e pagar na conversa
-- Retirada numa janela combinada, ou entrega
+- Retirada mais tarde na loja ou num ponto de retirada, ou entrega à noite
 Aliviadores de dores:
-- Pedir de manhã, enquanto a loja está aberta, e retirar depois (A6, A7)
+- Pedir de manhã, enquanto a loja está aberta, e retirar depois do trabalho se houver uma opção mais tarde (A6, A7; H6)
 - Pagamento com cartão e carteira digital, sem precisar de dinheiro vivo (A11)
 - Entrega para quando ela não consegue ir
 Criadores de ganhos:
@@ -80,9 +80,9 @@ Ganhos:
 - Não cair por padrão na Amazon ou no supermercado
 ```
 
-**Encaixe.** Parcial. Pedir de manhã e deixar pedidos recorrentes cabem na semana dela, mas o conceito alivia a dor do horário só se as lojas segurarem os itens até ela poder ir, ou se um ponto de retirada ficar aberto depois do expediente. Nenhuma das duas coisas aparece na evidência. A entrega ajuda, mas custa à loja de 14% a 35% pelos apps de hoje (F9), e o conceito ainda não resolve uma cesta com várias lojas.
+**Encaixe.** Parcial. Pedir de manhã e deixar pedidos recorrentes cabem na semana dela. O conceito alivia a dor do horário só se existir na rua dela uma de três opções: uma loja que segura um item pago até uma retirada combinada mais tarde e fecha tarde o bastante, um ponto de retirada que fica aberto depois do expediente (uma loja que abre até mais tarde ou um armário), ou entrega à noite. Nenhuma aparece na evidência, e as três fazem parte da H6 (veja o [blueprint](blueprint.md)). A entrega ajuda, mas custa à loja de 14% a 35% pelos apps de hoje (F9), e o conceito ainda não resolve uma cesta com várias lojas.
 
 ## O que os canvas deixam de fora
 
 - **O lojista.** Um canvas de proposta de valor para as lojas (sinal de demanda, vendas vindas de pedidos, nenhum trabalho de catálogo) precisaria antes de evidência de lojistas. Perguntas em aberto 1 a 6 da [conclusão](../discover/conclusion.md).
-- **A Ruth.** Sem encaixe, por escolha.
+- **A Ruth.** Fora do escopo por escolha minha. O canal que ela preferiria e a adoção digital dela continuam em aberto (A13).

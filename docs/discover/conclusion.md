@@ -5,7 +5,7 @@ Discover ends with three lists: facts from the desk research and the benchmarks,
 ```summary
 Takeaways:
 - Ten facts that limit or shape any product here, each with a source.
-- Thirteen assumptions about shoppers, each with a suggested confidence level and the evidence behind it.
+- Fourteen assumptions, most of them about shoppers, each with a suggested confidence level and the evidence behind it.
 - Eight open questions, six of them about shopkeepers, who are missing from the material.
 Call:
 - I separated facts from assumptions because the shopper evidence is attitudinal and small. Anything about how shoppers behave stays an assumption until it is tested.
@@ -13,7 +13,7 @@ Call:
 AI:
 - An agent drafted the three lists from the Discover pages and suggested a level for each assumption using the rule below. I review and set the final levels.
 Trade-offs:
-- The levels are judgements on a small base (42 netnography quotes, 21 clustered posts). They rank the assumptions against each other; they don't measure them.
+- The levels are judgements on a small base (42 netnography quotes, 20 clustered posts). They rank the assumptions against each other; they don't measure them.
 ```
 
 ## Facts
@@ -28,8 +28,8 @@ Published figures, rules and product facts, checked in two or more places where 
 | F4 | Independents were 84.1% of store closures in 2024 | The shops the product depends on are the ones closing most | Centre for Retail Research |
 | F5 | Cash was 8% of UK payments in 2025 but 19.2% of retail transactions in 2024; 65% of adults have a mobile wallet, 29% of over-65s | Card and wallet payment can be assumed for most shoppers, with older shoppers the exception | UK Finance; BRC |
 | F6 | No law makes a shop accept cash or cards | Payment method stays the shop's choice | Government statement, July 2025 |
-| F7 | Anything selling for a shop online must show the all-in price, name the seller, carry the shop's cancellation terms (14 days, including click and collect) and give allergen data for food. Goods stay at the shop's risk until the customer has them | A multi-shop basket carries each shop's legal duties, not one set | Consumer Contracts Regulations 2013; Consumer Rights Act 2015; DMCC Act 2024 |
-| F8 | Item-level "in stock nearby" exists (Google with NearSt) only for shops whose tills hold clean product codes | Most bakers, florists and butchers have no catalogue a product could read | Google Merchant Center; NearSt |
+| F7 | Anything selling for a shop online must show the all-in price, name the seller, carry the shop's cancellation terms and give allergen data for food. Goods paid for at a distance, including click and collect, carry a 14-day right to cancel, except perishable goods (food, flowers) and personalised or made-to-order items, which covers much of what bakers, butchers and florists sell. Goods stay at the shop's risk until the customer has them. As I read the rules, a reservation paid for at the counter is a purchase made in the shop, so the distance-selling duties apply only when the shopper pays in the app | A multi-shop basket carries each shop's legal duties, not one set, and whether the shopper pays in the app or at the counter changes which duties apply | Consumer Contracts Regulations 2013; Consumer Rights Act 2015; DMCC Act 2024; GOV.UK |
+| F8 | Google shows item-level "in stock nearby" for shops that give it item data: from the products on their website, from a feed uploaded by hand or through an API, or from the till through a partner such as NearSt. I found no figure for how many small independents do | Any of these routes needs item data the shop already keeps. How many bakers, florists and butchers have it is my assumption (A14), not a fact | Google Merchant Center Help; Asian Trader |
 | F9 | Delivery apps take one shop per order, at a reported 14–35% commission plus shopper fees | Local delivery exists but is expensive for the shop and limited to one shop | Benchmarks |
 | F10 | Multi-shop checkout exists (Shop app, up to 15 shops since October 2026; Google's Universal Cart, US only) but with postal delivery, not local collection | One basket across shops is solved online; the local half is open | Shopify; Digital Commerce 360 |
 
@@ -53,19 +53,20 @@ The level is an agent's suggestion under the rule above, for me to review. Perso
 
 | # | Assumption | Evidence | Suggested level |
 | --- | --- | --- | --- |
-| A1 | Shoppers can't find out whether a nearby independent has an item, or is open, without going or asking someone | 8 of 21 clustered posts stopped at step 1; Reddit, Mumsnet and X; no product answers it for independents (F8) | High |
+| A1 | Shoppers can't find out whether a nearby independent has an item, or is open, without going or asking someone | 8 of 20 clustered posts stopped at step 1; Reddit, Mumsnet and X. Google shows item-level stock only for shops that give it item data, and no post shows a shopper finding stock that way (F8) | High |
 | A2 | Opening hours listed online for independents are often wrong | Several posts in one Mumsnet thread and on Reddit; Google Maps and Uber Eats reviews | Medium |
-| A3 | A wasted trip ends with buying online, mostly on Amazon | Posts on Reddit and Mumsnet; online share is rising (F2) | High |
+| A3 | A wasted trip can end with buying online, on Amazon in the posts that say where | Two posts show it: u/Mediocre_Sprinkles (Reddit) and Dbank (Mumsnet), both on Amazon. LividArse (Mumsnet) names Amazon as a habit, with no single trip. Against it, online couldn't deliver in time in the urgent cases (u/Miraclefish, u/WearyChampionship365), and Valentando kept going back to the shop. The rising online share (F2) doesn't show why people buy online, so I don't count it | Low |
 | A4 | When the need is urgent, a nearby shop that has the item beats online | Eclipse glasses, a fan in a heatwave, flowers on a Sunday, mostly Reddit in two weeks of August 2026 | Medium |
 | A5 | A shop confirming "it's here, I'll hold it" would be enough for Sam to make the trip | Inferred from A1 and A4; nobody was asked | Low |
-| A6 | People at work during shop hours give up on local shops because of the hours | 5 of Jess's 6 posts stopped at step 4; mostly Mumsnet and r/london | Medium |
+| A6 | People at work during shop hours give up on local shops because of the hours | 2 of Jess's 6 posts show hours clashing with work: LividArse (Mumsnet; a busy job and a commute, a local restaurant rarely open, so McDonald's and Amazon) and u/killmetruck (Reddit; a butcher open office hours only, and double the price). Her other three posts at step 4 are about convenience in general, cash and delivery time. Agix says it about other people, and the codebook leaves that post out | Low |
 | A7 | Collection after hours, or delivery, would bring Jess back to local shops | Inferred from A6; no post shows her using a delivery app | Low |
-| A8 | Loyalty to local shops holds while they are reasonably convenient, and one wasted trip breaks it | Posts on Reddit and Mumsnet; the empathy map's "saying and doing" gap | Medium |
+| A8 | Loyalty to local shops depends on convenience. After a wasted trip, some shoppers move to online or a chain and others keep going back | Conditional loyalty: FerrisWheelsandLilacs (Mumsnet, a stated rule), u/killmetruck (Reddit), LividArse (Mumsnet). Moved away after a wasted trip: u/Mediocre_Sprinkles, Dbank. Kept going back: Valentando, whose weekly butcher was shut during its advertised hours, and u/moanyjoany | Medium |
 | A9 | Collection should be the default and delivery the option | Walking figures (F1, from 2017) and parking complaints; no post compares the two | Low |
 | A10 | Wrong availability costs more trust than no information | The most repeated complaint across delivery, surplus-food and stock apps; Dbank's failed trip | Medium |
 | A11 | Taking cards removes a real friction for some shoppers | One post on cash-only stalls (u/rsweb); cash falling to 8% of payments (F5) | Medium |
 | A12 | Small shops could say what they have with almost no extra work | No evidence from shopkeepers; nobody was asked | Low |
-| A13 | Regulars like Ruth hear about closures offline and wouldn't adopt an app | Four posts and London polling on age; she is the one who doesn't post | Low |
+| A13 | Regulars like Ruth hear about closures offline and wouldn't adopt an app | Three posts in her cluster, all online, and London polling on age. No post shows where she hears about closures or whether she'd use an app, so both stay open | Low |
+| A14 | Few small independent bakers, florists and butchers keep item-level stock data online or in their till | No count found. The closest figure is old and covers all sectors: in 2019, fewer than 10% of UK micro-businesses sold online. Their stock changes daily and often has no product codes | Low |
 
 ## Open questions
 

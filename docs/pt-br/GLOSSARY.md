@@ -102,3 +102,12 @@ Source: English Markdown in `docs/`. Target: Brazilian Portuguese in `docs/pt-br
 | standing request / request left ahead of time | pedido recorrente / pedido deixado com antecedência |
 | orchestrator / stock agent / matching agent / contact agent / payment agent / courier agent | orquestrador / agente de estoque / agente de seleção de lojas / agente de contato / agente de pagamento / agente de entrega |
 | Position on the brief (decision-log label) | Posição no brief |
+| collection point / locker / evening delivery | ponto de retirada / armário / entrega à noite |
+| later collection (slot) / after work | retirada mais tarde (horário) / depois do trabalho |
+| one-off alert ("tell me when it's back") / recurring order ("bread every Friday") | aviso pontual ("me avisa quando voltar") / pedido recorrente ("pão toda sexta") |
+| reported stock / recent confirmation / item set aside | estoque informado / confirmação recente / item separado |
+| set aside (an item) | separar (um item) |
+| stated choice / behaviour (test result) | escolha declarada / comportamento ("Declarado:" / "Comportamento:" in pass marks) |
+| exploratory (hypothesis) | exploratória |
+| search resolved / valid answer | busca resolvida / resposta válida |
+| charge / authorise / capture / refund | cobrar / autorizar / capturar / estornar (estorno) |

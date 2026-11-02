@@ -1,12 +1,12 @@
 # Proto-personas
 
-I plotted 21 tagged posts on two dimensions, need urgency and purchase stage, and let clusters form. There are three clusters, and each one became a proto-persona.
+I plotted 20 tagged posts on two dimensions, need urgency and purchase stage, and let clusters form. Three clusters scored best with the settings I chose, and each one became a proto-persona.
 
 ```summary
 Takeaways:
 - Sam (11 posts) needs a specific thing, often by a deadline, and can't find out who has it. He sits on the findability side.
 - Jess (6 posts) mostly does routine shopping, and it breaks when she tries to get the thing: hours, cash, delivery time. She gives up on local shops. Transaction side.
-- Ruth (4 posts) keeps shopping locally while her shops close. She has the least evidence.
+- Ruth (3 posts) keeps shopping locally while her shops close. She has the least evidence.
 Call:
 - Cluster the posts on two dimensions that speak to the brief, and define the personas from the clusters.
 - Call them proto-personas, because nobody was interviewed ([000](../../decision-log.md)).
@@ -23,7 +23,7 @@ Trade-offs:
 | Dimension | What it measures | Why I chose it |
 | --- | --- | --- |
 | **Need urgency** · browsing → needs it now | How specific and time-bound the shopper's need was: browsing, routine shopping, a specific item, or a specific item with a deadline. | It separates the occasions the netnography kept showing, from a casual wander to a same-day hunt. Each occasion asks something different of a product. |
-| **Purchase stage** · find out → get it | The step of buying where the attempt stopped, in order: 1 find out (who has it, whether it's open), 2 find it in the shop, 3 accept the price and quality, 4 get it (pay, collect or receive it at a time that works). Each post gets the number of its step. | It maps straight onto the brief. Stopping at step 1 is a findability problem, stopping at step 4 is a transaction problem, and steps 2 and 3 are the street's own offer. |
+| **Purchase stage** · find out → get it | The step of buying where the post's problem sits, in an order I chose: 1 find out (who has it, whether it's open), 2 find it in the shop, 3 accept the price and quality, 4 get it (pay, collect or receive it at a time that works). Each post gets the number of its step, which doesn't show that the shopper went through the earlier ones. | It maps straight onto the brief. Stopping at step 1 is a findability problem, stopping at step 4 is a transaction problem, and steps 2 and 3 are the street's own offer. |
 
 Both are scored from tags that two agents applied separately. They agreed on 89–96% of those tags. More in [proposed dimensions](../netnography/dimensions.md).
 
@@ -31,7 +31,7 @@ Both are scored from tags that two agents applied separately. They agreed on 89�
 
 <!-- generated:chart -->
 ```cluster-map
-{"x": {"label": "Need urgency", "ticks": [[1, "Discovery"], [4, "Routine"], [7, "Specific item"], [10, "Specific + deadline"]], "min": "Browsing", "max": "Needs it now"}, "y": {"label": "Purchase stage", "ticks": [[10, "1 · Find out"], [6.7, "2 · Find it"], [3.3, "3 · Accept it"], [0, "4 · Get it"]], "min": "Get it · transaction", "max": "Find out · findability"}, "names": {"mission": "Sam, the mission shopper", "lapsed": "Jess, the lapsed local", "regular": "Ruth, the regular"}, "centres": {"mission": {"x": 9.2, "y": 8.8, "n": 11}, "lapsed": {"x": 5.5, "y": 0.5, "n": 6}, "regular": {"x": 3.2, "y": 7.5, "n": 4}}, "points": [{"x": 10, "y": 10, "c": "mission", "s": "unknown", "h": "u/jamesshovlin"}, {"x": 10, "y": 10, "c": "mission", "s": "unknown", "h": "u/akat224"}, {"x": 10, "y": 6.7, "c": "mission", "s": "persists", "h": "u/moanyjoany"}, {"x": 7, "y": 10, "c": "mission", "s": "defects", "h": "Dbank"}, {"x": 7, "y": 10, "c": "mission", "s": "unknown", "h": "u/dy14n19"}, {"x": 4, "y": 10, "c": "regular", "s": "persists", "h": "Valentando"}, {"x": 10, "y": 6.7, "c": "mission", "s": "defects", "h": "u/Mediocre_Sprinkles"}, {"x": 4, "y": 0, "c": "lapsed", "s": "defects", "h": "LividArse"}, {"x": 10, "y": 0, "c": "lapsed", "s": "unknown", "h": "u/WearyChampionship365"}, {"x": 10, "y": 6.7, "c": "mission", "s": "unknown", "h": "u/Miraclefish"}, {"x": 4, "y": 0, "c": "lapsed", "s": "unknown", "h": "FerrisWheelsandLilacs"}, {"x": 10, "y": 6.7, "c": "mission", "s": "unknown", "h": "u/xmastreee"}, {"x": 4, "y": 0, "c": "lapsed", "s": "defects", "h": "u/killmetruck"}, {"x": 4, "y": 6.7, "c": "regular", "s": "persists", "h": "u/mjfh2"}, {"x": 4, "y": 6.7, "c": "regular", "s": "unknown", "h": "u/Aggravating-Desk4004"}, {"x": 4, "y": 0, "c": "lapsed", "s": "unknown", "h": "u/rsweb"}, {"x": 1, "y": 6.7, "c": "regular", "s": "unknown", "h": "@London_W4"}, {"x": 7, "y": 10, "c": "mission", "s": "unknown", "h": "@Jojo_agboola"}, {"x": 10, "y": 10, "c": "mission", "s": "unknown", "h": "u/grand_web"}, {"x": 10, "y": 10, "c": "mission", "s": "unknown", "h": "u/claudiav2603"}, {"x": 7, "y": 3.3, "c": "lapsed", "s": "defects", "h": "u/Username8831"}], "worked": ["u/jamesshovlin", "u/Inge_Jones", "u/Vermathorax", "u/rising_then_falling", "u/Peppy_Tomato", "Kenjenny"]}
+{"x": {"label": "Need urgency", "ticks": [[1, "Discovery"], [4, "Routine"], [7, "Specific item"], [10, "Specific + deadline"]], "min": "Browsing", "max": "Needs it now"}, "y": {"label": "Purchase stage", "ticks": [[10, "1 · Find out"], [6.7, "2 · Find it"], [3.3, "3 · Accept it"], [0, "4 · Get it"]], "min": "Get it · transaction", "max": "Find out · findability"}, "names": {"mission": "Sam, the mission shopper", "lapsed": "Jess, the lapsed local", "regular": "Ruth, the regular"}, "centres": {"mission": {"x": 9.2, "y": 8.8, "n": 11}, "lapsed": {"x": 5.5, "y": 0.5, "n": 6}, "regular": {"x": 4.0, "y": 7.8, "n": 3}}, "points": [{"x": 10, "y": 10, "c": "mission", "s": "unknown", "h": "u/jamesshovlin"}, {"x": 10, "y": 10, "c": "mission", "s": "unknown", "h": "u/akat224"}, {"x": 10, "y": 6.7, "c": "mission", "s": "persists", "h": "u/moanyjoany"}, {"x": 7, "y": 10, "c": "mission", "s": "defects", "h": "Dbank"}, {"x": 7, "y": 10, "c": "mission", "s": "unknown", "h": "u/dy14n19"}, {"x": 4, "y": 10, "c": "regular", "s": "persists", "h": "Valentando"}, {"x": 10, "y": 6.7, "c": "mission", "s": "defects", "h": "u/Mediocre_Sprinkles"}, {"x": 4, "y": 0, "c": "lapsed", "s": "defects", "h": "LividArse"}, {"x": 10, "y": 0, "c": "lapsed", "s": "unknown", "h": "u/WearyChampionship365"}, {"x": 10, "y": 6.7, "c": "mission", "s": "unknown", "h": "u/Miraclefish"}, {"x": 4, "y": 0, "c": "lapsed", "s": "unknown", "h": "FerrisWheelsandLilacs"}, {"x": 10, "y": 6.7, "c": "mission", "s": "unknown", "h": "u/xmastreee"}, {"x": 4, "y": 0, "c": "lapsed", "s": "defects", "h": "u/killmetruck"}, {"x": 4, "y": 6.7, "c": "regular", "s": "persists", "h": "u/mjfh2"}, {"x": 4, "y": 6.7, "c": "regular", "s": "unknown", "h": "u/Aggravating-Desk4004"}, {"x": 4, "y": 0, "c": "lapsed", "s": "unknown", "h": "u/rsweb"}, {"x": 7, "y": 10, "c": "mission", "s": "unknown", "h": "@Jojo_agboola"}, {"x": 10, "y": 10, "c": "mission", "s": "unknown", "h": "u/grand_web"}, {"x": 10, "y": 10, "c": "mission", "s": "unknown", "h": "u/claudiav2603"}, {"x": 7, "y": 3.3, "c": "lapsed", "s": "defects", "h": "u/Username8831"}], "worked": ["u/jamesshovlin", "u/Inge_Jones", "u/Vermathorax", "u/rising_then_falling", "u/Peppy_Tomato", "Kenjenny"]}
 ```
 <!-- /generated:chart -->
 
@@ -40,7 +40,7 @@ Both are scored from tags that two agents applied separately. They agreed on 89�
 | --- | --- | --- | --- | --- | --- | --- |
 | Sam, the mission shopper | 11 | 11 | 9.2, 8.8 | West London 4, London 3, UK-wide 3, X/TikTok 1 | information 7, availability 4 | unknown 8, defects 2, persists 1 |
 | Jess, the lapsed local | 6 | 6 | 5.5, 0.5 | UK-wide 3, West London 2, London 1 | access 5, value 1 | defects 3, unknown 3 |
-| Ruth, the regular | 4 | 4 | 3.2, 7.5 | UK-wide 1, London 1, West London 1, X/TikTok 1 | availability 3, information 1 | persists 2, unknown 2 |
+| Ruth, the regular | 3 | 3 | 4.0, 7.8 | UK-wide 1, London 1, West London 1 | availability 2, information 1 | persists 2, unknown 1 |
 | Nothing broke (not clustered) | 6 | 6 | – | London 3, UK-wide 2, West London 1 | none 6 | unknown 4, persists 1, defects 1 |
 <!-- /generated:groups -->
 

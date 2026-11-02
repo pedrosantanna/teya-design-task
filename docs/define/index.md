@@ -16,7 +16,7 @@ AI:
 - I wrote the concept and the reasons for an agent. An agent checked each part against the Discover evidence and wrote the trade-offs and risks below.
 Trade-offs:
 - A concierge answer takes minutes, an instant answer needs till data that most independents don't have (F8). The concept accepts the wait, keeps the shopper informed during it, and uses till data as a shortcut where it exists.
-- Ruth is not served: she doesn't post, and probably wouldn't use an app (A13). A WhatsApp channel is the closest the concept gets to her.
+- Ruth is not served. Leaving her out is my scope choice: the concept follows Sam's and Jess's needs. Her persona came from three online posts, so which channel she'd prefer and how far she'd take up a digital tool are open questions (A13). A WhatsApp channel is the closest the concept gets to her.
 ```
 
 ## How it works
@@ -25,7 +25,7 @@ Trade-offs:
 2. **Instant answer where possible.** If a nearby shop's till shares item-level stock, the concierge answers at once with the shop, price and opening hours.
 3. **Concierge where not.** Otherwise it says it can't see stock and asks the likely shops at the same time. While it waits, it keeps the shopper posted, widens the search if the deadline gets close, and checks delivery.
 4. **Choose and pay.** The shopper picks a shop and reserves, pays to hold, or orders delivery, without leaving the conversation.
-5. **Collect or receive.** Collection at the shop, inside a window the shop has agreed to, or delivery.
+5. **Collect or receive.** Collection at the shop, inside a window the shop has agreed to, or delivery. For a shopper who works shop hours, paying ahead helps only with a way to collect after work: a later slot at a shop that closes late enough, a collection point on the street that stays open (a late-opening shop or a locker), or evening delivery. All three are assumptions, tested in H6.
 6. **After.** The concierge follows up and keeps standing requests open. Every request becomes a signal for shops nearby: what people around them are looking for, including what they didn't have.
 
 The [service blueprint](blueprint.md) shows each step across the shopper, the concierge, the agents behind it and the shop.
@@ -44,10 +44,10 @@ An agent is my main hypothesis for this product. It is several agents coordinate
 | Part of the concept | Evidence from Discover | Strength |
 | --- | --- | --- |
 | Asking before going out | A1 (High): people can't find out without going, and ask strangers on Reddit and WhatsApp today | Strong |
-| A confirmation from the shop itself | A10 (Medium): wrong availability is the most repeated complaint, so a human answer from the shop beats a listed figure | Medium |
+| Reliable information on availability | A10 (Medium): wrong availability is the most repeated complaint, so shoppers need information they can rely on. Whether a shop's answer beats reported stock is H5 | Medium |
 | Speed for urgent needs | A4 (Medium): when it's urgent, a nearby shop beats online, if the answer arrives in time | Medium |
 | Asking several shops at once | Indirect: wasted trips and phoning around in Sam's posts (A1). Nothing on whether shoppers accept the wait | Weak |
-| Reserve and collect outside hours | A6 (Medium) says hours drive Jess away; A7 (Low) that this would bring her back is untested | Weak |
+| Reserve and collect outside hours | A6 (Low): two of Jess's posts show shop hours clashing with work; A7 (Low) that this would bring her back is untested | Weak |
 | An agent as the main way in | One post: a shopper asked an AI chatbot on X which shop had an item (@Jojo_agboola). Nothing else | Weak |
 | One conversation for many tasks | No evidence. My hypothesis | None |
 | Requests left ahead of time | No evidence | None |
@@ -56,11 +56,17 @@ An agent is my main hypothesis for this product. It is several agents coordinate
 | Demand signal as value for shops | No evidence | None |
 | Payment in the conversation | F5 and F6: cards and wallets for most shoppers; payment links already exist without a website (benchmarks) | Strong for feasibility |
 
+## Kinds of availability
+
+The concept works with three kinds of availability. Reported stock comes from a till or a listing: it can be instant, and it is only as good as the shop's records. A recent confirmation is a shopkeeper saying yes a few minutes ago. An item set aside is held for the shopper, so it can't sell before they arrive. The instant till path gives reported stock, a different kind of certainty from a hold, so the concierge can still offer a hold after a till answer. Whether shoppers trust a confirmation more than reported stock is H5.
+
 ## Assumptions this concept adds
 
 The brief asks for what's missing to be assumed and written down.
 
 - **Merchant side.** Shops receive requests in a tool they already open during the day and answer in under ten minutes while open. They accept holding an item for a few hours.
+- **Hold and payment.** The shop confirms it has set the item aside before the shopper is charged. The full amount is taken then and refunded if the hold lapses; authorising at the hold and capturing at collection is the alternative I left open.
+- **After work.** Shoppers who work shop hours collect through a later slot at a shop that closes late enough, a collection point on the street, or evening delivery. Who hands over, where and when is in the [blueprint](blueprint.md).
 - **Agents.** Separate agents for stock, shop matching, shop contact, payment and couriers work behind one concierge. When stock is unknown, the concierge asks the shop and never guesses.
 - **Who to ask.** The matching agent knows which nearby shops sell which kinds of things (from public listings and categories), even without stock data.
 - **Data.** Till data with item detail exists for a minority of shops and is used where it does; everything else is a question to the shop.

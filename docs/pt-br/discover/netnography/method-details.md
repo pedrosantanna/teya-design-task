@@ -58,7 +58,7 @@ Usei a versão de seis quadros do *Business Model Generation* de Osterwalder e P
 
 **Incluído:** posts datados de 1º de maio de 2025 a 1º de novembro de 2026 pela data da plataforma; públicos e legíveis sem login; com voz de comprador em primeira pessoa ou observação direta de compras locais; com handle e URL que pudessem ser conferidos.
 
-**Excluído:** promoção feita por lojistas, posts de notícia sem voz de comprador, conteúdo apagado, qualquer coisa sem data ou anterior à janela (várias threads fortes do Mumsnet sobre Hammersmith e Chiswick de 2019 a 2024 caíram por isso) e avaliações de restaurante, a menos que tocassem em apoiar o comércio local ou em entrega.
+**Excluído:** promoção feita por lojistas, posts de notícia sem voz de comprador, conteúdo apagado, qualquer coisa sem data ou anterior à janela (várias threads fortes do Mumsnet sobre Hammersmith e Chiswick de 2019 a 2024 caíram por isso) e avaliações de restaurante, a menos que tocassem em apoiar o comércio local ou em entrega. Uma exceção declarada: o tema 10 dos [achados](findings.md) mostra legendas do TikTok escritas por criadores, lojas e um organizador de mercado, para ilustrar o que essa rede carrega. Elas estão marcadas como conteúdo promocional e não contam como evidência de comprador.
 
 **Geografia.** Cada citação tem o rótulo oeste de Londres, Londres toda ou Reino Unido todo. As citações de escala nacional ficaram limitadas a cerca de um sexto do conjunto e só serviram para reforçar algo que os dados de Londres já mostravam.
 

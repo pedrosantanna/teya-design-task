@@ -4,7 +4,7 @@ An agent coded the posts, and a script scored them on two dimensions and cluster
 
 ```summary
 Takeaways:
-- Three clusters fit the data best (mean silhouette 0.57, against 0.46–0.56 for 2, 4 or 5).
+- Three clusters scored best in the configuration I chose, both dimensions weighted equally and 2 to 5 clusters (mean silhouette 0.55, against 0.54 for the others). Other weights give other numbers.
 - The two coders agreed on 89–96% of the codes behind both dimensions.
 Call:
 - Two dimensions that map onto the brief: need urgency and purchase stage.
@@ -29,7 +29,7 @@ A second agent tags every post blind, without seeing the first tags. Three writt
 
 ### 3. Score
 
-Each post is scored on the two [dimensions](../netnography/dimensions.md), need urgency and purchase stage. Both run from 0 to 10, so the clustering weighs them equally. The four purchase stages are in buying order and equally spaced.
+Each post is scored on the two [dimensions](../netnography/dimensions.md), need urgency and purchase stage. Both run from 0 to 10, so the clustering weighs them equally. I put the four purchase stages in the order a purchase passes through them and spaced them equally. A post's stage is where its problem sits; it doesn't show that the shopper went through the earlier stages.
 
 | Need urgency | Score | Purchase stage where it stopped | Score |
 | --- | --- | --- | --- |
@@ -45,10 +45,10 @@ A script runs k-means on the two scores for 2 to 5 clusters and keeps the number
 <!-- generated:silhouette -->
 | Clusters (k) | Mean silhouette |
 | --- | --- |
-| 2 | 0.51 |
-| 3 | 0.57 ← chosen |
-| 4 | 0.56 |
-| 5 | 0.46 |
+| 2 | 0.54 |
+| 3 | 0.55 ← chosen |
+| 4 | 0.54 |
+| 5 | 0.54 |
 <!-- /generated:silhouette -->
 
 ### 5. Name
@@ -61,8 +61,9 @@ Lewrick, Link and Leifer's persona/user profile ([*The Design Thinking Playbook*
 
 ## Limits
 
-- The clusters are small: 11, 6 and 4 posts. Ruth needs testing most.
-- Codes are categories, so many posts land on the same point. The map draws them side by side.
+- The clusters are small: 11, 6 and 3 posts. Ruth needs testing most.
+- Codes are categories, so many posts land on the same point: the 20 clustered posts sit at 8 distinct positions. The map draws them side by side.
+- Three clusters is the best result for one configuration, equal weights and k from 2 to 5. With the stage axis at half weight, four clusters score best; at double weight, five do. I haven't shown that three holds under other weights. Details in [method in detail](method-details.md).
 - Both coders are AI models. Agreement between two models is weaker evidence than agreement between two people.
 - Older and offline shoppers hardly appear in the data. Ruth is the most exposed: the behaviour in her cluster (routine, loyal, watching shops close) may belong mostly to people who don't post on Reddit. That's why her age comes from desk research (a 2018 GLA/YouGov poll) and why she is the first persona to test.
 

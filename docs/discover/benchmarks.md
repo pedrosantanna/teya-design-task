@@ -6,8 +6,8 @@ An agent collected the products and reviews in parallel with the netnography, be
 
 ```summary
 Takeaways:
-- Sam: no product tells him which nearby independent has an item right now. He asks people on Reddit and WhatsApp, and falls back on Amazon.
-- Jess: delivery apps and Co-op's Peckish already solve getting things from local shops, at 14–35% commission and one shop per order. Her default is still Amazon.
+- Sam: Google shows nearby stock only for shops that give it item data, and no post shows him finding stock that way. He asks people on Reddit and WhatsApp, and in two posts falls back on Amazon.
+- Jess: delivery apps and Co-op's Peckish already solve getting things from local shops, at 14–35% commission and one shop per order. One of her posts names Amazon as the fallback.
 - Teya already takes card payments and sends payment links for the shops Jess would use. Nothing on its public pages faces the shopper.
 - Ruth: nothing is built for her. Directories of what's still open on a street haven't lasted.
 - The most repeated complaint, whatever the model, is being told something was available when it wasn't.
@@ -68,7 +68,7 @@ Reddit refused the research tools, and X, TikTok and Instagram need a login, so 
 
 | Product | Category | How people find things | How the purchase resolves | Who pays | UK status |
 | --- | --- | --- | --- | --- | --- |
-| Google local listings + NearSt | Local stock discovery | Item-level "in stock nearby" on Search and Maps, fed from the shop's till system | No purchase; the shopper walks in or clicks out. Google's multi-shop Universal Cart is US-only | Free listings; shops pay NearSt; Google sells local inventory ads | Live; NearSt is London-based |
+| Google local listings + NearSt | Local stock discovery | Item-level "in stock nearby" on Search and Maps, fed from the shop's website, a feed or its till (through partners such as NearSt) | No purchase; the shopper walks in or clicks out. Google's multi-shop Universal Cart is US-only | Free listings; shops pay NearSt; Google sells local inventory ads | Live; NearSt is London-based |
 | Instagram / WhatsApp / Facebook | Where small shops already sell | Follow and scroll; no reliable hours or stock | A conversation, then bank transfer, payment link or pay in store | Free to the shop | Everywhere |
 | Amazon | The default alternative | Huge search | One basket across many sellers; same-day fresh groceries in parts of London since June 2026 | Seller fees; Prime subscription | Live |
 | Nextdoor | Neighbourhood network | Neighbour recommendations and a "Local Faves" hub, by business not item | None; contact the business | Advertisers | Live |
@@ -97,7 +97,7 @@ image: ../../private/benchmarks/google-maps.jpg
 source: https://mobbin.com/apps/google-maps-ios-84a5727c-9a4d-40f6-95ce-aa915413c4dc/c5414d91-2c38-4da8-8d6e-f4dc01be6602/screens
 ```
 
-Google shows what nearby shops have "in stock" on Search, Shopping and Maps, and its Business Profile is where most people check opening hours. The stock comes from the shop's till system: NearSt, a London start-up, connects more than 150 point-of-sale systems to Google and, since 2025, to the stock feeds of Deliveroo, Uber Eats and Just Eat ([Google Merchant Center Help](https://support.google.com/merchants/answer/15609877?hl=en-GB); [Asian Trader](https://www.asiantrader.biz/nearst-tech-connects-uber-eats-deliveroo-just-eat)). It is the best item-level local search there is, but only for shops whose tills hold clean product codes, which leaves out most bakers, florists and butchers. Nothing is bought on Google for local stock: the shopper walks in or clicks out, and Google's new multi-shop Universal Cart launched in the US only, on 15 October 2026 ([Digital Commerce 360](https://www.digitalcommerce360.com/2026/10/16/google-universal-cart-launch-features/)).
+Google shows what nearby shops have "in stock" on Search, Shopping and Maps, and its Business Profile is where most people check opening hours. Google gets a shop's stock in three ways. It can mark the products a shop already lists online as available in store, using the shop's website and location details; the shop can upload a local inventory feed by hand or through an API ([Google Merchant Center Help](https://support.google.com/merchants/answer/15609877?hl=en-GB)); or a partner can send it from the till. NearSt, a London start-up, is one such partner: it connects more than 150 point-of-sale systems to Google and, since 2025, to the stock feeds of Deliveroo, Uber Eats and Just Eat ([Asian Trader](https://www.asiantrader.biz/nearst-tech-connects-uber-eats-deliveroo-just-eat)). Every route needs item-level data that the shop already keeps online or in its till. I found no figure for how many small independents have it. My assumption is that few bakers, florists and butchers do, because their stock changes daily and often has no product codes; the closest figure is from 2019 and covers all sectors ([the high street today](high-street-landscape.md)). Nothing is bought on Google for local stock: the shopper walks in or clicks out, and Google's new multi-shop Universal Cart launched in the US only, on 15 October 2026 ([Digital Commerce 360](https://www.digitalcommerce360.com/2026/10/16/google-universal-cart-launch-features/)).
 
 ```quote
 text: "the opening times listed on Google have no basis in reality."
@@ -161,7 +161,7 @@ status: verified
 
 ### Amazon
 
-**Sam ✓ (step 1, find out) · Jess ✓ (step 4, get it).** Amazon is where both fall back. Sam: Dbank found none of the seven a shop's website listed and bought on Amazon; u/Mediocre_Sprinkles walked every shop and went home to order. Jess: LividArse shops on Amazon "because it's always there". It has limits for them too: before the eclipse u/WearyChampionship365 found nobody could deliver in time.
+**Sam ✓ (step 1, find out) · Jess ✓ (step 4, get it).** Some of their posts end on Amazon. Sam: Dbank found none of the seven a shop's website listed and bought on Amazon; u/Mediocre_Sprinkles walked every shop and went home to order. Jess: LividArse shops on Amazon "because it's always there". It has limits for them too: before the eclipse u/WearyChampionship365 found nobody could deliver in time.
 
 ```screens
 image: ../../private/benchmarks/amazon.jpg
@@ -496,12 +496,12 @@ status: verified
 
 **Sam: stops at step 1, find out.**
 
-1. No product answers "who has it, right now" for an independent. Google with NearSt is the only item-level local search, and it needs clean product codes from a till, which most bakers, florists and butchers don't have. So Sam asks people: Reddit, a WhatsApp restock group, an AI chatbot.
+1. Item-level "who has it, right now" exists only where a shop gives Google item data, from its website, a feed or its till (through NearSt). I found no figure for how many independents do, and I assume few bakers, florists and butchers do. No post shows Sam finding stock that way. He asks people: Reddit, a WhatsApp restock group, an AI chatbot.
 2. Wrong availability is the most common complaint, whatever the model. Deliveroo shoppers pay and then hear items are out of stock (Anthony Tindall), Too Good To Go shoppers reach the till and there's no surplus (Montymoo2), and Hive takes orders for books it doesn't have (customer). Opening hours fail the same way on Google (zingally) and Uber Eats (Udohulk). For Sam, a product that claims stock and is wrong costs him the trip and the deadline (Dbank).
 
 **Jess: stops at step 4, get it.**
 
-3. Delivery from local shops already exists, one shop at a time and at a price. Deliveroo, Uber Eats, Just Eat and Peckish deliver out of hours and take cards, at 14–35% commission plus fees. Jess still goes to Amazon. No post in her cluster mentions a delivery app.
+3. Delivery from local shops already exists, one shop at a time and at a price. Deliveroo, Uber Eats, Just Eat and Peckish deliver out of hours and take cards, at 14–35% commission plus fees. The one post in Jess's cluster that names a fallback names Amazon. No post in her cluster mentions a delivery app.
 4. Amazon's promise is the bar, and it is slipping. Some Amazon users say same-day delivery doesn't arrive and they would rather go to the high street (gidfles). Delivery from a nearby shop has to beat walking there (Jim Rickety). Gophr shows the courier leg already works in an hour for car-free Londoners (Barry Griffiths).
 
 **Ruth: stops at step 2, find it.**

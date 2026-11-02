@@ -4,7 +4,7 @@ Um agente etiquetou os posts, e um script deu as pontuações nas duas dimensõe
 
 ```summary
 Takeaways:
-- Três clusters se ajustam melhor aos dados (silhueta média 0,57, contra 0,46–0,56 para 2, 4 ou 5).
+- Três clusters tiveram o melhor resultado na configuração que escolhi, com as duas dimensões de mesmo peso e de 2 a 5 clusters (silhueta média 0,55, contra 0,54 dos outros). Outros pesos dão outros números.
 - Os dois etiquetadores concordaram em 89–96% dos códigos por trás das duas dimensões.
 Call:
 - Duas dimensões que se ligam ao brief: urgência da necessidade e etapa da compra.
@@ -29,7 +29,7 @@ Um segundo agente etiqueta cada post às cegas, sem ver as primeiras etiquetas. 
 
 ### 3. Pontuar
 
-Cada post é pontuado nas duas [dimensões](../netnography/dimensions.md), urgência da necessidade e etapa da compra. As duas vão de 0 a 10, então a clusterização dá o mesmo peso às duas. As quatro etapas seguem a ordem da compra, com espaços iguais entre elas.
+Cada post é pontuado nas duas [dimensões](../netnography/dimensions.md), urgência da necessidade e etapa da compra. As duas vão de 0 a 10, então a clusterização dá o mesmo peso às duas. Eu pus as quatro etapas na ordem por que passa uma compra, com espaços iguais entre elas. A etapa de um post é onde está o problema dele; ela não mostra que o comprador passou pelas etapas anteriores.
 
 | Urgência da necessidade | Pontuação | Etapa da compra em que parou | Pontuação |
 | --- | --- | --- | --- |
@@ -45,10 +45,10 @@ Um script roda k-means sobre as duas pontuações para 2 a 5 clusters e fica com
 <!-- generated:silhouette -->
 | Clusters (k) | Silhouette médio |
 | --- | --- |
-| 2 | 0.51 |
-| 3 | 0.57 ← escolhido |
-| 4 | 0.56 |
-| 5 | 0.46 |
+| 2 | 0.54 |
+| 3 | 0.55 ← escolhido |
+| 4 | 0.54 |
+| 5 | 0.54 |
 <!-- /generated:silhouette -->
 
 ### 5. Nomear
@@ -61,8 +61,9 @@ O perfil de persona/usuário de Lewrick, Link e Leifer ([*The Design Thinking Pl
 
 ## Limites
 
-- Os clusters são pequenos: 11, 6 e 4 posts. Ruth é a que mais precisa de teste.
-- As etiquetas são categorias, então muitos posts caem no mesmo ponto. O mapa desenha esses posts lado a lado.
+- Os clusters são pequenos: 11, 6 e 3 posts. Ruth é a que mais precisa de teste.
+- As etiquetas são categorias, então muitos posts caem no mesmo ponto: os 20 posts clusterizados ficam em 8 posições distintas. O mapa desenha esses posts lado a lado.
+- Três clusters é o melhor resultado para uma configuração, pesos iguais e k de 2 a 5. Com o eixo da etapa com metade do peso, quatro clusters têm o melhor resultado; com o dobro, cinco. Não mostrei que três se mantém com outros pesos. Detalhes em [método em detalhe](method-details.md).
 - Os dois etiquetadores são modelos de IA. A concordância entre dois modelos é uma evidência mais fraca do que a concordância entre duas pessoas.
 - Compradores mais velhos e offline quase não aparecem nos dados. Ruth é a mais exposta a isso: o comportamento do cluster dela (rotina, lealdade, ver as lojas fecharem) pode pertencer sobretudo a pessoas que não postam no Reddit. Por isso a idade dela vem de pesquisa documental (uma pesquisa GLA/YouGov de 2018), e ela é a primeira persona a testar.
 

@@ -14,7 +14,7 @@ AI:
 - A research agent searched, collected and tagged the posts. A script checked each Reddit quote against pages I saved.
 - An agent ran the X and TikTok pass through my browser.
 Trade-offs:
-- What people say and what they do drift apart, and the posts already show it (people praise local shops and buy on Amazon).
+- What people say and what they do drift apart, and the posts already show it (in one Mumsnet thread, posters praise local shops and one says they end up shopping on Amazon).
 - Reddit skews young and Mumsnet towards mothers. Reddit came through an archive, and TikTok gave captions only.
 ```
 
@@ -37,7 +37,7 @@ People have already written a lot about their high streets, and every claim stay
 
 ## Attitudinal data
 
-A post tells me what someone noticed, how they felt and what they say they did next. That is enough to see which problems people care about and the words they use for them. It doesn't tell me how often the problem happens, what the people who never post think, or whether they would behave as they say. The posts already show that gap: people say they want to support local shops, and in the same thread say they buy on Amazon.
+A post tells me what someone noticed, how they felt and what they say they did next. That is enough to see which problems people care about and the words they use for them. It doesn't tell me how often the problem happens, what the people who never post think, or whether they would behave as they say. The posts already show that gap: in one Mumsnet thread, posters say they want to support local shops, and one of them says they end up shopping on Amazon.
 
 So the [empathy map](empathy-map.md) and the [proto-personas](../personas/index.md) describe how shoppers talk about the high street. They are a starting hypothesis about behaviour, still to be tested.
 
@@ -50,7 +50,7 @@ On an established product I'd add behavioural data next: watching people on the 
 1. **Question.** How do West London shoppers choose between local shops, chains and online, and where does finding something nearby break down?
 2. **Sources.** Reddit and Mumsnet first, then X and TikTok, chosen with Kozinets' site criteria ([decision 009](../../decision-log.md)).
 3. **Collection.** A research agent searched and saved public posts from May 2025 to November 2026, each with handle, date and link. Reddit blocked the tools, so the agent read it through Arctic Shift, a public research archive. I saved the matching live pages by hand so a script could check every quote.
-4. **Tagging.** The agent gave each quote one to three labels from a list of 14, such as "stock-visibility" or "opening-hours", and grouped them into themes. Researchers call this coding; it has nothing to do with programming. An agent added a tenth theme from a short X and TikTok pass through my browser.
+4. **Tagging.** The agent gave each quote one to three labels from a list of 14, such as "stock-visibility" or "opening-hours", and grouped them into themes. Researchers call this coding; it has nothing to do with programming. An agent added a tenth theme from a short X and TikTok pass through my browser. That theme shows some promotional TikTok captions as a marked exception to the exclusion of promotional content.
 5. **Output.** [Findings](findings.md), an [empathy map](empathy-map.md) in the Strategyzer format, and two [proposed dimensions](dimensions.md).
 
 The framework, search terms, ethics and tag list are in [method in detail](method-details.md). Every step, including what went wrong, is in [how AI was used](../../process/ai-log.md).

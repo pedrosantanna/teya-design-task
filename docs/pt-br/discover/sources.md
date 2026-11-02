@@ -1,6 +1,6 @@
 # Fontes
 
-Todas as citações e todos os links usados na documentação, num só lugar. 72 citações (71 conferidas na fonte original) e 158 outras fontes. Esta página é gerada a partir das outras pelo `scripts/build_sources.py`.
+Todas as citações e todos os links usados na documentação, num só lugar. 72 citações (71 conferidas na fonte original) e 161 outras fontes. Esta página é gerada a partir das outras pelo `scripts/build_sources.py`.
 
 ## Citações por rede
 
@@ -114,6 +114,8 @@ Status **verified** quer dizer que texto, autor e data foram conferidos na pági
 | [Benchmarks](benchmarks.md) | [Stuart](https://stuart.com/courier-service-london/) |
 | [Benchmarks](benchmarks.md) | [Square](https://squareup.com/gb/en/online-store) |
 | [Benchmarks](benchmarks.md) | [Teya Pay by Link](https://www.teya.com/online-payments/pay-by-link) |
+| [Benchmarks](benchmarks.md) | [Teya](https://www.teya.com/en-gb) |
+| [Benchmarks](benchmarks.md) | [FF News](https://ffnews.com/newsarticle/paytech/paypoint-and-teya-announce-new-partnership-to-facilitate-cash-deposits/) |
 | [Benchmarks](benchmarks.md) | [Too Good To Go](https://www.toogoodtogo.co.uk/en-gb/business) |
 | [Benchmarks](benchmarks.md) | [The Grocer](https://www.thegrocer.co.uk/news/tescos-olio-food-waste-partnership-hits-100-million-meals/723887.article) |
 | [Benchmarks](benchmarks.md) | [Shopifreaks](https://www.shopifreaks.com/shopify-launches-universal-checkout-in-the-shop-app-letting-shoppers-buy-from-multiple-brands-with-one-cart-and-one-checkout/) |
@@ -170,6 +172,7 @@ Status **verified** quer dizer que texto, autor e data foram conferidos na pági
 | [A high street hoje](high-street-landscape.md) | [STV](https://news.stv.tv/scotland/nearly-100-lloyds-halifax-and-bank-of-scotland-branches-to-close) |
 | [A high street hoje](high-street-landscape.md) | [Irish News/PA](https://www.irishnews.com/news/uk/bank-of-england-will-monitor-cash-acceptance-on-ongoing-basis-ABTIVRHVDBJ6PO223QXJDCMXTQ/) |
 | [A high street hoje](high-street-landscape.md) | [SI 2013/3134](https://www.legislation.gov.uk/uksi/2013/3134/contents) |
+| [A high street hoje](high-street-landscape.md) | [GOV.UK](https://www.gov.uk/accepting-returns-and-giving-refunds) |
 | [A high street hoje](high-street-landscape.md) | [Consumer Rights Act 2015](https://www.legislation.gov.uk/ukpga/2015/15/contents) |
 | [A high street hoje](high-street-landscape.md) | [CMS](https://cms.law/en/gbr/legal-updates/the-dmcc-act-consumer-elements-come-into-force-from-6-april-2025) |
 | [A high street hoje](high-street-landscape.md) | [FSA](https://www.food.gov.uk/business-industry/guidancenotes/food-sold-online) |

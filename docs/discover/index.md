@@ -5,8 +5,8 @@ Before choosing between findability and transaction, I set out to understand the
 ```summary
 Takeaways:
 - Shoppers can't tell whether a nearby shop has something, or is open, without going. That was the strongest signal.
-- A failed trip usually ends on Amazon, unless online can't arrive in time.
-- Sam, the mission shopper, is the largest and clearest of the three proto-personas (11 of 21 clustered posts). The most common stopping point was the first step, finding out who has the item and whether the shop is open (8 of 21 clustered posts).
+- In two posts a failed trip ended with an order on Amazon. When online couldn't arrive in time, a nearby shop won.
+- Sam, the mission shopper, is the largest and clearest of the three proto-personas (11 of 20 clustered posts). The most common stopping point was the first step, finding out who has the item and whether the shop is open (8 of 20 clustered posts).
 Call:
 - Discovery before choosing findability or transaction ([001](../decision-log.md)).
 - Outside-in, because the product doesn't exist yet ([000](../decision-log.md)). Hammersmith as the worked example.
@@ -36,9 +36,9 @@ Every quote is a short excerpt from a public post, dated between May 2025 and No
 
 The most frequent complaint is that you can't tell what a shop has, or whether it's open, without going there. When a need is urgent (eclipse glasses the day before, a fan in a heatwave, flowers on a Sunday evening), Londoners ask strangers on Reddit, phone around, or join WhatsApp groups that post stock counts with timestamps. They trust a neighbour's reply more than Google listings or shop websites.
 
-After a failed trip, most say they buy on Amazon. Those who tried local, paid for parking and came home empty-handed say so in plain terms. The exception is when online can't arrive in time. Then a nearby shop that has the thing wins, at almost any price.
+Two posts describe a failed trip that ended with an order on Amazon, one of them after paying for parking and coming home empty-handed. When online can't arrive in time, the posts go the other way, and a nearby shop that has the thing wins at almost any price.
 
-Loyalty to local shops has a limit. Shoppers will pay more at a small business "if it's reasonably convenient", and drop it after a wasted trip or hours that clash with work. The independent butcher becomes the place for anniversaries, and the supermarket gets the weekly shop.
+Loyalty to local shops depends on convenience. One shopper will pay more at a small business if it's "reasonably convenient". Another keeps the independent butcher, open office hours only, for anniversaries, and the supermarket gets the weekly shop. After a wasted trip, some posts end online, and one regular kept buying from a butcher found shut during its advertised hours.
 
 Locals treat King Street as a street for errands and send visitors to Chiswick High Road instead. A product anchored here has to help people get things done before it can be a place to browse.
 
@@ -56,7 +56,7 @@ Across delivery apps, surplus-food apps and stock-search tools, the complaint us
 
 The evidence supports both, and choosing between them is the first decision of the next phase.
 
-- **For findability:** the strongest and most repeated pain is not knowing whether a nearby shop has the thing and is open. Small shops have no product catalogue to search, so whatever answers "is it there?" has to come from something the shop already does, such as confirming a hold or what passes through its till.
+- **For findability:** the strongest and most repeated pain is not knowing whether a nearby shop has the thing and is open. I assume most small shops keep no item-level catalogue that a search could read (I found no figure either way), so whatever answers "is it there?" has to come from something the shop already does, such as confirming a hold or what passes through its till.
 - **For transaction:** multi-shop checkout is arriving from big platforms, but without the local half: collecting from several shops, or one courier doing the rounds. Nobody has claimed that half yet.
 - **How each constrains the other:** a shopper can only build a basket across shops if they first trust that the items are there. A promise of availability is only worth something if the shop holds the item once the shopper commits.
 

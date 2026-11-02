@@ -57,7 +57,7 @@ status: verified
 
 ## Purchase stage (find out → get it)
 
-Buying something from a local shop goes through four steps in order, and each post is scored by the step where it stopped:
+I ordered the four steps a purchase from a local shop passes through. The order is an analytical choice of mine. Each post is placed at the step where its problem sits:
 
 | Step | Stopped because | Points to |
 | --- | --- | --- |
@@ -66,7 +66,7 @@ Buying something from a local shop goes through four steps in order, and each po
 | 3 · Accept it | Price or quality wasn't worth it | The street's offer |
 | 4 · Get it | Couldn't pay, collect or receive it at a time that works: hours, cash only, slow delivery | Transaction |
 
-A higher step means the shopper got further before it broke. Steps 2 and 3 depend on what the street sells, which an app can show but can't change. The scores are on the [persona method](../personas/method.md) page.
+A post's step shows where its problem sits. It doesn't show that the shopper went through the earlier steps: someone who knows a shop closes during their working hours can stop before ever checking stock or price. Steps 2 and 3 depend on what the street sells, which an app can show but can't change. The scores are on the [persona method](../personas/method.md) page.
 
 ```quote
 text: Hard to know stock levels without visiting, unless you can somehow get through on the phone..!

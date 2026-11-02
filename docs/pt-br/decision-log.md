@@ -95,10 +95,10 @@ Os posts pertencem a quem os escreveu. Eu limito as citações à frase que carr
 ## 012 · Método das proto-personas
 **2026-11-01 · Decidido**
 
-Os posts da netnografia são etiquetados, pontuados em duas dimensões (urgência da necessidade e etapa da compra) e clusterizados com k-means. Cada cluster vira uma proto-persona, descrita com os campos de persona de Lewrick, Link e Leifer. Um segundo agente etiqueta cada post às cegas, para que as pontuações possam ser conferidas. Os dados sustentam três clusters.
+Os posts da netnografia são etiquetados, pontuados em duas dimensões (urgência da necessidade e etapa da compra) e clusterizados com k-means. Cada cluster vira uma proto-persona, descrita com os campos de persona de Lewrick, Link e Leifer. Um segundo agente etiqueta cada post às cegas, para que as pontuações possam ser conferidas. Três clusters tiveram a melhor silhueta média na configuração que escolhi: as duas dimensões com o mesmo peso, k de 2 a 5. Não mostrei que isso se mantém com outros pesos. Depois da decisão 019, com o eixo da etapa com metade do peso, três clusters continuam com o melhor resultado, e com o dobro, cinco.
 
 **Por quê:** eu queria que as personas saíssem dos dados, e que as dimensões conversassem com a escolha do brief entre findability e transaction.
-**Trade-off:** três grupos pequenos (11, 6 e 4 posts), cada um rastreável até seus posts. São proto-personas porque ninguém foi entrevistado.
+**Trade-off:** três grupos pequenos (11, 6 e 3 posts depois da decisão 019), cada um rastreável até seus posts. São proto-personas porque ninguém foi entrevistado.
 **Nomes, gênero, idade:** nomes e gêneros são rótulos que eu escolhi para equilibrar o conjunto (duas mulheres, um homem). A idade fica de fora a menos que outra fonte a sustente. O "provavelmente 50 anos ou mais" da Ruth vem de pesquisas de opinião em Londres, porque os posts não falam pelos compradores mais velhos.
 
 ## 013 · Quem fez o quê
@@ -143,6 +143,14 @@ Fiz do concierge um agente, montado como vários agentes por trás de uma conver
 
 **Por quê:** as lojas demoram e são difíceis de alcançar, e o trabalho de quem compra (achar, segurar, pagar, retirar) tem várias etapas. Uma conversa que corre atrás das lojas por ele combina mais com isso do que uma tela por etapa.
 **Em aberto:** essa é minha principal hipótese de produto, e o Discover tem pouca evidência sobre ela. H3 (perguntar ganha de explorar), H4 (o comprador aceita a espera), H8 (pedidos deixados com antecedência) e H10 (canais) testam isso. Se H3 ou H4 falhar, explorar lojas e categorias vira a tela principal.
+
+## 019 · @London_W4 fora dos clusters
+**2026-11-02 · Decidido**
+
+Uma revisão externa mostrou que o post de @London_W4 é uma caminhada pela King Street e uma impressão sobre ela, sem nenhuma compra de quem postou, então não atende ao codebook. Tirei o post e rodei a clusterização de novo.
+
+**Efeito:** três clusters continuam com o melhor resultado (silhueta média 0,55, contra 0,54 para dois, quatro e cinco). Sam e Jess mantêm seus posts; a Ruth passa de quatro posts para três, todos de compras de rotina. São 20 posts clusterizados em vez de 21.
+**Em aberto:** a Ruth agora se apoia em três posts, o que a deixa ainda mais claramente como a persona com menos evidência.
 
 ## Ainda em aberto
 

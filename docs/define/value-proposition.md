@@ -5,11 +5,11 @@ Two Strategyzer value proposition canvases, one for Sam and one for Jess. The cu
 ```summary
 Takeaways:
 - For Sam the fit is good on paper: his main pain is not knowing, and the concept answers it with a confirmation from the shop.
-- For Jess the fit is partial: reserving and paying ahead relieves the hours problem only if shops hold items and offer a collection window she can make.
+- For Jess the fit is partial: reserving and paying ahead relieves the hours problem only if a way to collect after work exists: a shop that holds a paid item to a later slot, a collection point that stays open late, or evening delivery. None is tested (H6).
 - Both canvases rest on attitudinal evidence and on a merchant side that hasn't been tested.
 Call:
 - One canvas per proto-persona, because Strategyzer's canvas works per customer segment and the two have different jobs.
-- Ruth has no canvas. The concept doesn't serve her (A13).
+- Ruth has no canvas. I left her out of scope. Her preferred channel and how far she'd take up a digital tool are open questions (A13).
 AI:
 - An agent filled both canvases from the empathy map, persona pages and concept, and marked each item with the assumption behind it. I reviewed the fit, and the canvases were updated when I added the reasons for an agent.
 Trade-offs:
@@ -26,12 +26,12 @@ Products and services:
 - Reserve or pay to hold, then collect, in the same conversation
 Pain relievers:
 - Know before leaving whether a shop has it and is open (A1)
-- The answer comes from the shop itself, not a listing that may be wrong (A2, A10)
+- A recent answer from the shop, or an item set aside, where listings may be wrong (A2, A10; H5)
 - One request reaches several shops, so no phoning around
 - The concierge keeps looking and posts updates while shops answer
 Gain creators:
 - Get it today, nearby, when online can't arrive in time (A4)
-- A hold means the trip can't be wasted
+- A hold reduces the risk of a wasted trip
 - Directions, price and closing time in the same answer
 Jobs:
 - Find which nearby shop has a specific item, before going
@@ -48,7 +48,7 @@ Gains:
 - Not falling back on Amazon
 ```
 
-**Fit.** The concept answers all three pains directly, and the concierge asks several shops at once where Sam would phone them one by one. The weak link is time: a concierge answer has to arrive faster than Sam would otherwise phone around or give up (risk in the [concept](index.md)). The gain "not falling back on Amazon" is attitudinal; Sam may say it and still choose Amazon.
+**Fit.** The concept answers the first three pains directly, and the concierge asks several shops at once where Sam would phone them one by one. The fourth, asking strangers and waiting, becomes asking shops and waiting less, if shops answer quickly (H1). The weak link is time: a concierge answer has to arrive faster than Sam would otherwise phone around or give up (risk in the [concept](index.md)). The gain "not falling back on Amazon" is attitudinal; Sam may say it and still choose Amazon.
 
 ## Jess, the lapsed local
 
@@ -57,9 +57,9 @@ Products and services:
 - Ask the concierge for routine items, in the app or on WhatsApp
 - Standing requests the concierge acts on ("bread from the bakery on Fridays")
 - Reserve and pay in the conversation
-- Collection in an agreed window, or delivery
+- Later collection at the shop or at a collection point, or evening delivery
 Pain relievers:
-- Ask in the morning, while the shop is open, and collect later (A6, A7)
+- Ask in the morning, while the shop is open, and collect after work if a later option exists (A6, A7; H6)
 - Card and wallet payment, no cash needed (A11)
 - Delivery for when she can't get there
 Gain creators:
@@ -80,9 +80,9 @@ Gains:
 - Not defaulting to Amazon or the supermarket
 ```
 
-**Fit.** Partial. Asking in the morning and leaving standing requests fit her week, but the concept relieves the hours pain only if shops hold items until she can come, or a collection point stays open after work. Neither is in the evidence. Delivery helps but costs the shop 14–35% through today's apps (F9), and the concept doesn't solve a basket across shops yet.
+**Fit.** Partial. Asking in the morning and leaving standing requests fit her week. The concept relieves the hours pain only if one of three options exists on her street: a shop that holds a paid item to an agreed later collection and closes late enough, a collection point that stays open after work (a late-opening shop or a locker), or evening delivery. None is in the evidence, and all three are part of H6 (see the [blueprint](blueprint.md)). Delivery helps but costs the shop 14–35% through today's apps (F9), and the concept doesn't solve a basket across shops yet.
 
 ## What the canvases leave out
 
 - **The shopkeeper.** A value proposition canvas for shops (demand signal, sales from requests, no catalogue work) would need shopkeeper evidence first. Open questions 1 to 6 in the [conclusion](../discover/conclusion.md).
-- **Ruth.** No fit, by choice.
+- **Ruth.** Left out of scope by my choice. Her preferred channel and digital adoption stay open (A13).

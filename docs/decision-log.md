@@ -95,10 +95,10 @@ Posts belong to the people who wrote them. I keep quotes to the phrase that carr
 ## 012 · Proto-persona method
 **2026-11-01 · Decided**
 
-Posts from the netnography are coded, scored on two dimensions (need urgency and purchase stage) and clustered with k-means. Each cluster becomes a proto-persona, described with Lewrick, Link and Leifer's persona fields. A second agent codes every post blind, so the scores can be checked. The data supports three clusters.
+Posts from the netnography are coded, scored on two dimensions (need urgency and purchase stage) and clustered with k-means. Each cluster becomes a proto-persona, described with Lewrick, Link and Leifer's persona fields. A second agent codes every post blind, so the scores can be checked. Three clusters had the best mean silhouette in the configuration I chose: both dimensions weighted equally, k from 2 to 5. I haven't shown that this holds under other weights. After decision 019, three still score best at half weight on the stage axis, and five at double weight.
 
 **Why:** I wanted the personas to come out of the data, and the dimensions to speak to the brief's choice between findability and transaction.
-**Trade-off:** three thin groups (11, 6 and 4 posts), each one traceable to its posts. They are proto-personas because nobody was interviewed.
+**Trade-off:** three thin groups (11, 6 and 3 posts after decision 019), each one traceable to its posts. They are proto-personas because nobody was interviewed.
 **Names, gender, age:** names and genders are labels I chose to balance the set (two women, one man). Age is left out unless another source supports it. Ruth's "probably 50 or over" comes from London polling, because the posts can't speak for older shoppers.
 
 ## 013 · Who did what
@@ -143,6 +143,14 @@ I made the concierge an agent, built as several agents behind one conversation. 
 
 **Why:** shops are slow and hard to reach, and the shopper's job (find it, hold it, pay, collect) has several steps. One conversation that does the chasing fits that better than a screen per step.
 **Open:** this is my main product hypothesis and Discover has little evidence on it. H3 (asking beats browsing), H4 (shoppers accept the wait), H8 (requests left ahead) and H10 (channels) test it. If H3 or H4 fails, browsing becomes the main screen.
+
+## 019 · @London_W4 removed from the clusters
+**2026-11-02 · Decided**
+
+An external review found that the post from @London_W4 is a walk along King Street and an impression of it, with no purchase of the poster's own, so it doesn't meet the codebook. I removed it and re-ran the clustering.
+
+**Effect:** three clusters still score best (mean silhouette 0.55, against 0.54 for two, four and five). Sam and Jess keep their posts; Ruth goes from four posts to three, all routine shopping. 20 posts are clustered instead of 21.
+**Open:** Ruth now rests on three posts, which makes her the least supported persona by a wider margin.
 
 ## Still open
 

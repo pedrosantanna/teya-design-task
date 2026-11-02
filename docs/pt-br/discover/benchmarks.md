@@ -6,8 +6,8 @@ Um agente levantou os produtos e as avaliações em paralelo com a netnografia, 
 
 ```summary
 Takeaways:
-- Sam: nenhum produto diz a ele qual loja independente perto dali tem um item agora. Ele pergunta no Reddit e no WhatsApp, e acaba recorrendo à Amazon.
-- Jess: apps de entrega e o Peckish da Co-op já resolvem o problema de conseguir coisas de lojas locais, com comissão de 14–35% e uma loja por pedido. O padrão dela continua sendo a Amazon.
+- Sam: o Google mostra estoque por perto só para lojas que lhe dão dados por item, e nenhum post o mostra achando estoque assim. Ele pergunta no Reddit e no WhatsApp, e em dois posts acaba recorrendo à Amazon.
+- Jess: apps de entrega e o Peckish da Co-op já resolvem o problema de conseguir coisas de lojas locais, com comissão de 14–35% e uma loja por pedido. Um dos posts dela cita a Amazon como alternativa.
 - A Teya já recebe pagamentos com cartão e manda links de pagamento para as lojas que a Jess usaria. Nada nas páginas públicas dela é voltado para quem compra.
 - Ruth: nada foi feito para ela. Diretórios do que ainda está aberto em uma rua não duraram.
 - A reclamação mais repetida, seja qual for o modelo, é ouvir que algo estava disponível quando não estava.
@@ -68,7 +68,7 @@ O Reddit bloqueou as ferramentas de pesquisa, e X, TikTok e Instagram exigem log
 
 | Produto | Categoria | Como as pessoas encontram as coisas | Como a compra se resolve | Quem paga | Situação no Reino Unido |
 | --- | --- | --- | --- | --- | --- |
-| Google local listings + NearSt | Descoberta de estoque local | "Em estoque perto de você" por item no Search e no Maps, alimentado pelo sistema de caixa da loja | Sem compra; o comprador vai até a loja ou clica para ir ao site dela. O Universal Cart do Google, com várias lojas, é só nos EUA | Listagens gratuitas; as lojas pagam a NearSt; o Google vende anúncios de estoque local | Ativo; a NearSt é de Londres |
+| Google local listings + NearSt | Descoberta de estoque local | "Em estoque perto de você" por item no Search e no Maps, alimentado pelo site da loja, por um feed ou pelo caixa (por meio de parceiros como a NearSt) | Sem compra; o comprador vai até a loja ou clica para ir ao site dela. O Universal Cart do Google, com várias lojas, é só nos EUA | Listagens gratuitas; as lojas pagam a NearSt; o Google vende anúncios de estoque local | Ativo; a NearSt é de Londres |
 | Instagram / WhatsApp / Facebook | Onde as lojas pequenas já vendem | Seguir e rolar a tela; sem horário ou estoque confiável | Uma conversa, depois transferência bancária, link de pagamento ou pagamento na loja | Gratuito para a loja | Em todo lugar |
 | Amazon | A alternativa padrão | Busca enorme | Uma cesta com muitos vendedores; mercearia fresca com entrega no mesmo dia em partes de Londres desde junho de 2026 | Taxas dos vendedores; assinatura Prime | Ativo |
 | Nextdoor | Rede de vizinhança | Recomendações de vizinhos e um hub "Local Faves", por negócio e não por item | Nenhuma; contato com o negócio | Anunciantes | Ativo |
@@ -97,7 +97,7 @@ image: ../../../private/benchmarks/google-maps.jpg
 source: https://mobbin.com/apps/google-maps-ios-84a5727c-9a4d-40f6-95ce-aa915413c4dc/c5414d91-2c38-4da8-8d6e-f4dc01be6602/screens
 ```
 
-O Google mostra o que as lojas próximas têm "em estoque" no Search, no Shopping e no Maps, e o Business Profile é onde a maioria das pessoas confere horários de funcionamento. O estoque vem do sistema de caixa da loja: a NearSt, uma start-up de Londres, conecta mais de 150 sistemas de ponto de venda ao Google e, desde 2025, aos feeds de estoque da Deliveroo, da Uber Eats e da Just Eat ([Google Merchant Center Help](https://support.google.com/merchants/answer/15609877?hl=en-GB); [Asian Trader](https://www.asiantrader.biz/nearst-tech-connects-uber-eats-deliveroo-just-eat)). É a melhor busca local por item que existe, mas só para lojas cujo caixa tem códigos de produto limpos, o que deixa de fora a maioria das padarias, floriculturas e açougues. Nada é comprado no Google para estoque local: o comprador vai até a loja ou clica para ir ao site dela, e o novo Universal Cart do Google, com várias lojas, foi lançado só nos EUA, em 15 de outubro de 2026 ([Digital Commerce 360](https://www.digitalcommerce360.com/2026/10/16/google-universal-cart-launch-features/)).
+O Google mostra o que as lojas próximas têm "em estoque" no Search, no Shopping e no Maps, e o Business Profile é onde a maioria das pessoas confere horários de funcionamento. O Google obtém o estoque de uma loja de três jeitos. Pode marcar como disponíveis na loja física os produtos que a loja já lista online, usando o site e os dados de localização dela; a loja pode enviar um feed de estoque local à mão ou por API ([Google Merchant Center Help](https://support.google.com/merchants/answer/15609877?hl=en-GB)); ou um parceiro pode enviá-lo a partir do caixa. A NearSt, uma start-up de Londres, é um desses parceiros: conecta mais de 150 sistemas de ponto de venda ao Google e, desde 2025, aos feeds de estoque da Deliveroo, da Uber Eats e da Just Eat ([Asian Trader](https://www.asiantrader.biz/nearst-tech-connects-uber-eats-deliveroo-just-eat)). Todos os caminhos dependem de dados por item que a loja já mantém online ou no caixa. Não encontrei nenhum número sobre quantas lojas independentes pequenas têm esses dados. Minha suposição é que poucas padarias, floriculturas e açougues têm, porque o estoque delas muda todo dia e muitas vezes não tem códigos de produto; o número mais próximo é de 2019 e cobre todos os setores ([a high street hoje](high-street-landscape.md)). Nada é comprado no Google para estoque local: o comprador vai até a loja ou clica para ir ao site dela, e o novo Universal Cart do Google, com várias lojas, foi lançado só nos EUA, em 15 de outubro de 2026 ([Digital Commerce 360](https://www.digitalcommerce360.com/2026/10/16/google-universal-cart-launch-features/)).
 
 ```quote
 text: "the opening times listed on Google have no basis in reality."
@@ -161,7 +161,7 @@ status: verified
 
 ### Amazon
 
-**Sam ✓ (etapa 1, saber) · Jess ✓ (etapa 4, levar).** A Amazon é onde os dois acabam recorrendo. Sam: Dbank não encontrou nenhum dos sete que o site de uma loja listava e comprou na Amazon; u/Mediocre_Sprinkles percorreu todas as lojas e foi para casa encomendar. Jess: LividArse compra na Amazon "because it's always there" (porque está sempre lá). A Amazon também tem limites para eles: antes do eclipse, u/WearyChampionship365 descobriu que ninguém conseguia entregar a tempo.
+**Sam ✓ (etapa 1, saber) · Jess ✓ (etapa 4, levar).** Alguns posts dos dois terminam na Amazon. Sam: Dbank não encontrou nenhum dos sete que o site de uma loja listava e comprou na Amazon; u/Mediocre_Sprinkles percorreu todas as lojas e foi para casa encomendar. Jess: LividArse compra na Amazon "because it's always there" (porque está sempre lá). A Amazon também tem limites para eles: antes do eclipse, u/WearyChampionship365 descobriu que ninguém conseguia entregar a tempo.
 
 ```screens
 image: ../../../private/benchmarks/amazon.jpg
@@ -496,12 +496,12 @@ status: verified
 
 **Sam: para na etapa 1, saber.**
 
-1. Nenhum produto responde "quem tem isso agora" para uma loja independente. O Google com a NearSt é a única busca local por item, e depende de códigos de produto limpos vindos do caixa, que a maioria das padarias, floriculturas e açougues não tem. Então Sam pergunta a pessoas: Reddit, um grupo de reposição no WhatsApp, um chatbot de IA.
+1. O "quem tem isso agora" por item só existe onde a loja dá dados por item ao Google, pelo site, por um feed ou pelo caixa (por meio da NearSt). Não encontrei nenhum número sobre quantas independentes fazem isso, e suponho que poucas padarias, floriculturas e açougues façam. Nenhum post mostra Sam achando estoque assim. Ele pergunta a pessoas: Reddit, um grupo de reposição no WhatsApp, um chatbot de IA.
 2. Disponibilidade errada é a reclamação mais comum, seja qual for o modelo. Compradores da Deliveroo pagam e depois ficam sabendo que os itens estão em falta (Anthony Tindall), compradores do Too Good To Go chegam ao caixa e não há excedente (Montymoo2), e a Hive aceita pedidos de livros que não tem (customer). Os horários de funcionamento falham do mesmo jeito no Google (zingally) e na Uber Eats (Udohulk). Para Sam, um produto que anuncia estoque e erra custa a ida e o prazo (Dbank).
 
 **Jess: para na etapa 4, levar.**
 
-3. A entrega a partir de lojas locais já existe, uma loja por vez e com um custo. Deliveroo, Uber Eats, Just Eat e Peckish entregam fora do horário e aceitam cartão, com comissão de 14–35% mais taxas. Jess continua indo à Amazon. Nenhum post do cluster dela menciona um app de entrega.
+3. A entrega a partir de lojas locais já existe, uma loja por vez e com um custo. Deliveroo, Uber Eats, Just Eat e Peckish entregam fora do horário e aceitam cartão, com comissão de 14–35% mais taxas. O único post do cluster da Jess que cita uma alternativa cita a Amazon. Nenhum post do cluster dela menciona um app de entrega.
 4. A promessa da Amazon é a régua, e ela está falhando. Alguns usuários da Amazon dizem que a entrega no mesmo dia não chega e que preferem ir à high street (gidfles). A entrega a partir de uma loja próxima precisa ser melhor do que ir a pé até lá (Jim Rickety). A Gophr mostra que o trecho do entregador já funciona em uma hora para londrinos sem carro (Barry Griffiths).
 
 **Ruth: para na etapa 2, encontrar.**

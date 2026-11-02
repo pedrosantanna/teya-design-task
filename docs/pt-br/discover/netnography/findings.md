@@ -1,11 +1,11 @@
 # Achados
 
-O que os londrinos dizem com mais clareza sobre a high street, a rua comercial do bairro, é que não conseguem saber se uma loja tem o que precisam, ou se está aberta, sem ir até lá. Quando a necessidade é urgente, perguntam a desconhecidos no Reddit e no WhatsApp, e depois de uma ida frustrada dizem que pedem online e param de tentar.
+O que os londrinos dizem com mais clareza sobre a high street, a rua comercial do bairro, é que não conseguem saber se uma loja tem o que precisam, ou se está aberta, sem ir até lá. Quando a necessidade é urgente, perguntam a desconhecidos no Reddit e no WhatsApp, e alguns contam que pediram online depois de uma ida frustrada.
 
 ```summary
 Takeaways:
 - Não saber o que tem em estoque, ou o que está aberto, é o tema mais forte.
-- Os compradores dizem que pagam mais para comprar no comércio local, e recuam depois de uma ida perdida.
+- Os compradores dizem que pagam mais para comprar no comércio local se for conveniente. Depois de uma ida perdida, alguns vão para outro lugar e outros continuam voltando.
 - No X e no TikTok a high street é um lugar para descobrir, com pouca conversa prática.
 Call:
 - Ordenei os temas pela força da evidência: número de citações, redes, quão recentes e quão específicas do oeste de Londres. A utilidade para o brief não entrou na ordem.
@@ -124,11 +124,11 @@ status: verified
 
 ## 3. Idas perdidas e necessidades urgentes
 
-Uma ida perdida costuma terminar na Amazon, mas uma necessidade urgente também pode vencer o online.
+Uma ida perdida pode terminar num pedido na Amazon, e uma necessidade urgente também pode vencer o online.
 
-**Evidência: forte no conjunto.** A metade da "ida perdida" é quase toda de escala nacional; a metade do "o online também falha" é de Londres.
+**Evidência: forte no conjunto.** A metade da "ida perdida" se apoia em dois posts, um de escala nacional no Reddit e um no Mumsnet; a metade do "o online também falha" é de Londres.
 
-A história de sempre é assim: tentar o comércio local, não achar nada ou achar fechado, pagar estacionamento, pedir online. Os casos urgentes de Londres vão no sentido contrário. Quando ninguém consegue entregar a tempo, uma loja por perto com o item na prateleira é a única opção, e as pessoas pagam mais por isso.
+Uma das histórias é assim: tentar o comércio local, não achar nada, pagar estacionamento, pedir online. Os casos urgentes de Londres vão no sentido contrário. Quando ninguém consegue entregar a tempo, uma loja por perto com o item na prateleira é a única opção, e as pessoas pagam mais por isso.
 
 ```quote
 text: Walked around every shop that might possibly have what I need and left empty handed… Have to go home and buy it all off Amazon
@@ -176,11 +176,11 @@ status: verified
 
 ## 4. Lealdade ao comércio local
 
-A lealdade às lojas do bairro dura até a primeira ida perdida.
+A lealdade às lojas do bairro depende da conveniência, e uma ida perdida nem sempre acaba com ela.
 
 **Evidência: moderada a forte.** Reddit e Mumsnet, Londres e escala nacional.
 
-Muitos compradores dizem que pagam mais para comprar no comércio local, e alguns pagam. Recuam rápido depois de uma ida perdida. A loja independente acaba virando um agrado ocasional, e o supermercado ou a Amazon cobrem a rotina.
+Vários compradores dizem que pagam mais para comprar no comércio local se for conveniente, e alguns pagam. Depois de uma ida perdida, os posts vão para os dois lados: alguns pedem online, e Valentando continuou comprando num açougue semanal que encontrou fechado no horário anunciado (tema 2). Para u/killmetruck, o açougue independente é para aniversários de casamento, e o supermercado cobre a semana.
 
 ```quote
 text: If you sell something I want and it's reasonably convenient, I will pay more… But I won't be jumping through hoops…
@@ -396,7 +396,7 @@ Pagar e chegar até a loja geram pequenos atritos, e a evidência sobre a ponte 
 
 **Evidência: fraca a moderada.** A evidência sobre a Hammersmith Bridge aponta para os dois lados.
 
-Barracas que só aceitam dinheiro ainda são comuns em Londres, enquanto muitos compradores não andam com dinheiro. Sobre a Hammersmith Bridge, quem posta discorda se o fechamento prejudicou o comércio local, e ninguém conta ter mudado onde compra na King Street por causa dela.
+Um post mostra o atrito do dinheiro vivo: u/rsweb não anda com dinheiro, então barracas que só aceitam dinheiro não servem para essa pessoa. Não encontrei nenhuma contagem de quantas barracas em Londres só aceitam dinheiro. Sobre a Hammersmith Bridge, quem posta discorda se o fechamento prejudicou o comércio local, e ninguém conta ter mudado onde compra na King Street por causa dela.
 
 ```quote
 text: I don't carry cash, and I don't plan to change that 🤷
@@ -440,6 +440,8 @@ As duas redes tratam a high street como um lugar de descobertas.
 Nenhuma das duas redes tem muito da conversa prática que o Reddit tem. No X, "high street" em Londres aparece sobretudo em discussões sobre declínio nacional, que foram lidas mas não citadas, e em posts de prefeituras promovendo lojas independentes. O único post de comprador sobre a King Street chama de deprimente uma caminhada por ela.
 
 O TikTok trata a high street como descoberta. Os vídeos marcam um lugar com 📍, chamam de pechincha ou de achado escondido e o oferecem como alternativa à Oxford Street. Em volta de Hammersmith os resultados são comida, compras em brechós beneficentes, lojas de pechinchas, uma barraca de flores e um mercado de pulgas, e muitos são feitos pelas próprias lojas. Isso se encaixa na ponta passeando da [primeira dimensão](dimensions.md): as pessoas descobrem lugares por meio de conteúdo, sem buscar um item.
+
+As citações do TikTok abaixo são legendas de criadores, de lojas e de um organizador de mercado. São conteúdo comercial ou promocional, que o método exclui como evidência de comprador. Eu as mostro como exceção declarada, para ilustrar o que essa rede carrega, e nenhuma conta como relato de comprador nem alimenta as personas.
 
 Um sinal pequeno e novo: compradores no X perguntando ao chatbot de IA da plataforma qual loja tem um item em estoque. Apareceu uma vez, no post abaixo, então guardo como algo para acompanhar e não contei como achado.
 
@@ -527,7 +529,7 @@ network: TikTok
 date: 2026-09-26
 url: https://www.tiktok.com/@hackneyfleamarket/video/7689755751471959318
 tags: cash-card, discovery
-context: Um mercado embaixo do Hammersmith Flyover; os organizadores avisam logo de cara que aceitam cartão.
+context: Escrito pelo organizador do mercado, então uma mensagem comercial, não um relato de comprador. Um mercado embaixo do Hammersmith Flyover; os organizadores avisam logo de cara que aceitam cartão.
 status: verified
 ```
 
@@ -535,7 +537,7 @@ status: verified
 
 - Os posts não dizem com que frequência nada disso acontece. As pessoas escolheram escrevê-los, então mostram o que incomoda alguém a ponto de postar.
 - Compradores mais velhos e offline quase não aparecem no Reddit nem no Mumsnet.
-- Posts de donos de loja foram excluídos, então o porquê dos horários e do estoque continua sendo um palpite.
+- Posts de donos de loja foram excluídos como evidência de comprador (as legendas promocionais do TikTok no tema 10 são uma exceção marcada), então o porquê dos horários e do estoque continua sendo um palpite.
 - Ninguém foi consultado sobre usar um app para isso. A atração por estoque ao vivo e horários confiáveis é a minha leitura de reclamações espontâneas.
 - Só as legendas do TikTok foram coletadas, então falta o que os espectadores respondem.
 

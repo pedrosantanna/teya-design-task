@@ -58,7 +58,7 @@ I used the six-box version from Osterwalder and Pigneur's *Business Model Genera
 
 **Included:** posts dated 1 May 2025 to 1 November 2026 by platform timestamp; public and readable without logging in; a first-person shopper voice or a direct observation of local shopping; a handle and URL that could be checked.
 
-**Excluded:** shop-owner promotion, news posts with no shopper voice, deleted content, anything undated or older than the window (several strong Mumsnet threads about Hammersmith and Chiswick from 2019 to 2024 were dropped for this), and restaurant reviews unless they touch on supporting local or delivery.
+**Excluded:** shop-owner promotion, news posts with no shopper voice, deleted content, anything undated or older than the window (several strong Mumsnet threads about Hammersmith and Chiswick from 2019 to 2024 were dropped for this), and restaurant reviews unless they touch on supporting local or delivery. One stated exception: theme 10 of the [findings](findings.md) shows TikTok captions written by creators, shops and a market organiser, to illustrate what that network carries. They are labelled as promotional content and don't count as shopper evidence.
 
 **Geography.** Each quote is labelled West London, London-wide or UK-wide. UK-wide quotes were capped at about a sixth of the set and only used to sharpen something the London data already showed.
 
