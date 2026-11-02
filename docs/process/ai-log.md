@@ -124,6 +124,15 @@ I chose Gambetta for display and Switzer for the rest (decision 029) and asked f
 ### 30. Switzer title weight
 I found the Switzer titles at 800 too bold next to Gambetta. A typography agent measured stem thickness and ink coverage of each Switzer weight against Gambetta 700 with fontTools and compared them side by side in a throwaway page: Title 1 at 800 had the same stem as Gambetta at 34 pt, and 700 and 800 read darker than the display. It recommended 600 for every title, button and navigation title, with about half the negative tracking; the main agent applied it.
 
+### 31. How long a hold lasts, and the two kinds of shop
+I said that a paid item shouldn't be held for only a few hours, asked for desk research on how UK shops hold orders, and separated the shop whose POS shares stock from the shop the concierge has to ask. An agent read the collection policies of Argos, Decathlon, John Lewis, Screwfix, Smyths, Beaverbrooks and Aesop and the Consumer Rights Act, and added them to the desk research. I set three ways to get an item and their lengths (decision 030) and the two kinds of shop (decision 031). The agent then drew shop states v2 and app flow v5 with dates instead of "until 4pm"; it found no published policy from small independents, so their week is an assumption tested by H6.
+
+### 32. Board status and the design system
+I asked for the identity and type scale boards to show what was chosen and to group each round. The agent added a "Where it stands" area at the top of each board, round numbers on every area, and green outlines and badges for chosen and shortlisted items; I checked the notes against what I had said during the rounds. It then opened a Design system section outside Ideation with an overview and a typography page built from the round 4 spec, with specimens that render in the chosen fonts. Colour stays out until I choose a palette.
+
+### 33. Warm greys and accents from Oat and Brew
+I asked to keep Oat and Brew from palette I and explore five accents that work with them, plus warm grey scales in the style of shadcn/ui, and added that pure black and white must work with all of it. An agent read the shadcn/ui, Tailwind, Radix Colors and Material documentation, built three grey ramps in OKLCH that run from Oat's hue to Brew's, and four sets of five accents, checking every pairing with a script. It had to darken Tea teal and Jam so they pass 4.5:1 on Oat, and found that dark-mode tint buttons need black labels. It suggested Tea tin with Biscuit grey; the choice stays open on the board.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.

@@ -1,6 +1,6 @@
 # Identidade
 
-Uma primeira exploração da identidade do app do comprador: quatro direções de conceito britânicas e ligadas a encontrar ou comprar, três paletas de destaque, e as paletas aplicadas às telas iniciais da v2 e aos papéis do Material 3. O produto ainda não tem nome, e nada nesta página está escolhido.
+Uma primeira exploração da identidade do app do comprador: quatro direções de conceito britânicas e ligadas a encontrar ou comprar, três paletas de destaque, e as paletas aplicadas às telas iniciais da v2 e aos papéis do Material 3. O produto ainda não tem nome. A linha da marca está escolhida; a paleta e o nome estão em aberto.
 
 ```summary
 Takeaways:
@@ -8,12 +8,14 @@ Takeaways:
 - Os Irregulars são os mais próximos da estrutura do conceito: um concierge com quem o comprador fala, vários agentes perguntando às lojas por trás. O terrier dá rosto à espera.
 - Três paletas, cada uma construída sobre um par complementar mais uma terceira cor: Pillar and park (verde e vermelho, manteiga), Awning (cobalto e laranja, menta), Tiles (verde-petróleo e rosa, ocre). Todo tint passa 4,5:1 como texto e como rótulo de botão nos modos claro e escuro.
 - Vários nomes óbvios já existem ou estão concorridos (Parade, Fetch, Errand, Legwork), e "Nip" sozinho é uma ofensa étnica.
+- A rodada 4 mantém Oat e Brew como base e acrescenta três escalas de cinza quente, no estilo do shadcn, e quatro conjuntos de cinco acentos (Lata de chá, Esmalte de fachada, Quitanda, Caixa de correio). Texto preto puro e branco sobre o Brew passam em todo lugar; o agente sugere Lata de chá com o Cinza biscoito.
 Call:
-- Ainda não decidi. A direção, o nome e a paleta são decisões minhas; esta página é o material para elas.
+- Escolhido: a marca segue o teste de ícone 3, o toldo da parade como barba de terrier, com sobrancelhas e bigode de quatro ou cinco faixas. Pré-selecionadas: as paletas A, C, F, I e J. Em aberto: o nome e a paleta, as duas decisões minhas.
 - Com personagem, multicor e sem a cara genérica de produto de IA (sem gradientes roxos, brilhos ou orbes luminosos).
 AI:
 - Eu dei as sementes: um cachorro farejador, um investigador no estilo Sherlock, a cultura de compras britânica. Um agente buscou na web referências e conflitos de nome, verificou a situação de direito autoral e de marca de Sherlock Holmes, montou as paletas com um script que calcula o contraste WCAG e as paletas tonais do Material 3, desenhou os esboços de marca em SVG, aplicou as paletas aos wireframes da v2 e capturou nove apps do Mobbin.
 - As verificações de nome são buscas rápidas na web, não buscas de marca registrada. Nomes marcados como "não verificado" não foram buscados.
+- Na rodada 4, um agente leu a documentação do shadcn/ui, do Tailwind, do Radix Colors e do Material sobre neutros, montou as escalas de cinza em OKLCH com um script e conferiu o contraste WCAG de cada combinação, incluindo preto e branco puros. Ele escureceu um pouco o Tea teal e o Jam para passarem sobre o Oat.
 Trade-offs:
 - Cada paleta tem uma cor secundária e uma terciária que falham como texto no branco (Butter, Marmalade, Mint, Rose, Ochre). Elas ficam para preenchimentos, selos e pontos de status; texto nesses matizes usa o tom mais escuro do Material 3.
 - Mostrar todas as paletas nas mesmas duas telas facilita a comparação, e esconde como cada uma mudaria layout, tipografia ou ilustração.
@@ -21,10 +23,11 @@ Trade-offs:
 
 ## Rodadas
 
-Todas as rodadas ficam no mesmo quadro, a mais recente no topo.
+Todas as rodadas ficam no mesmo quadro, a mais recente no topo, abaixo de uma área "Onde está" com o que foi escolhido, pré-selecionado, descartado e o que está em aberto. Os itens escolhidos têm contorno verde; os pré-selecionados, um selo verde.
 
 | Rodada | O que acrescentou |
 | --- | --- |
+| 4 | Oat e Brew da paleta I como base: três escalas de cinza quente no estilo do shadcn (de Oat e Brew até perto do stone do Tailwind) e quatro conjuntos de cinco acentos, cada um testado com preto e branco puros |
 | 3 | Teste de ícone 3 (sobrancelhas e bigode) com bigode de quatro ou cinco listras, nas paletas A, C, F, I e J |
 | 2 | Mais dez paletas de quatro ou cinco cores, e seis testes de ícone em que o toldo da parade vira a barba de um terrier |
 | 1 | Quatro direções de conceito, três paletas, aplicações na home da v2, referências |
@@ -97,6 +100,16 @@ No Material 3, cada cor da marca gera sua própria paleta tonal, para a secundá
 
 ## Fontes
 
+- shadcn/ui: Theming: https://ui.shadcn.com/docs/theming
+- Tailwind CSS: Colors: https://tailwindcss.com/docs/colors
+- Radix Colors: Understanding the scale: https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale
+- Radix Colors: Composing a palette: https://www.radix-ui.com/colors/docs/palette-composition/composing-a-palette
+- Evil Martians: OKLCH in CSS, why we moved from RGB and HSL: https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl
+- Evil Martians: Harmony palette (GitHub): https://github.com/evilmartians/harmony
+- tweakcn (GitHub): https://github.com/jnsahaj/tweakcn
+- Material Color Utilities (GitHub): https://github.com/material-foundation/material-color-utilities
+- WCAG 2.2 Understanding 1.4.3 Contrast (Minimum): https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html
+- WCAG 2.2 Understanding 1.4.11 Non-text Contrast: https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html
 - Etymonline, "terrier": https://www.etymonline.com/word/terrier
 - Merriam-Webster, "terrier": https://www.merriam-webster.com/dictionary/terrier
 - Staffordshire Bull Terrier (Wikipedia): https://en.wikipedia.org/wiki/Staffordshire_Bull_Terrier

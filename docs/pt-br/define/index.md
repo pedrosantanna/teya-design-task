@@ -30,6 +30,23 @@ Trade-offs:
 
 O [blueprint de serviço](blueprint.md) mostra cada etapa passando pelo comprador, pelo concierge, pelos agentes por trás dele e pela loja.
 
+## Dois tipos de loja
+
+- **Lojas conectadas.** O POS da loja compartilha o estoque por item. O concierge responde na hora ("In stock now"), e a reserva é feita no POS, que marca o item como separado.
+- **Lojas consultadas.** Sem dados de estoque. O concierge pergunta à loja pelo WhatsApp, ou pelas mensagens do POS quando ele tem, e a loja responde do jeito dela. A reserva é confirmada pela resposta da loja.
+
+As duas aparecem na mesma lista de respostas, marcadas pela origem da resposta. A maioria das independentes pequenas começa como loja consultada (A14).
+
+## Três formas de levar
+
+| Forma | Pago | Guardado por | Quem entrega |
+| --- | --- | --- | --- |
+| Reservar | Não, paga na loja | Até o fim do próximo dia de funcionamento, só se a loja aceitar | A loja, no balcão |
+| Pagar e guardar | Sim, depois que a loja separa o item | 7 dias no padrão; o comprador escolhe o dia da retirada. Menos para perecíveis (padaria, açougue, floricultura), até 14 dias se a loja aceitar; uma prorrogação de 7 dias; reembolso automático se ninguém retirar | A loja, no balcão, ou um ponto de retirada |
+| Pagar e a loja entregar | Sim | Não fica guardado: a loja envia com a entrega ou o entregador dela | A entrega da loja; o concierge só acompanha o status |
+
+Os prazos vêm de como as lojas do Reino Unido guardam pedidos para retirada ([pesquisa documental](../discover/high-street-landscape.md)): uma semana é o normal para pedidos pagos, e reservas sem pagamento são curtas. A entrega pela loja está mapeada, não desenhada: o concierge mostraria "enviado", "a caminho" e "entregue" a partir das atualizações da loja (decisão 030).
+
 ## Área
 
 O concierge trabalha a partir de onde o comprador está, ou vai estar, e procura até onde ele consegue chegar antes do prazo. As high streets, as ruas comerciais do bairro, agrupam lojas para explorar e para o destaque pago; elas não limitam a busca. Uma loja entra no escopo se é pequena, independente e está ao alcance, numa high street ou numa fileira de lojas. A maioria das pequenas lojas independentes fica em high streets, então na prática as duas coisas quase sempre coincidem.
@@ -79,7 +96,7 @@ O conceito trabalha com três tipos de disponibilidade. O estoque informado vem 
 
 O brief pede que o que falta seja suposto e registrado.
 
-- **Lado da loja.** As lojas recebem os pedidos numa ferramenta que já abrem durante o dia e respondem em menos de dez minutos enquanto estão abertas. Elas aceitam segurar um item por algumas horas.
+- **Lado da loja.** As lojas recebem os pedidos numa ferramenta que já abrem durante o dia e respondem em menos de dez minutos enquanto estão abertas. Elas aceitam guardar um item pago por cerca de uma semana, menos para perecíveis (decisão 030).
 - **Reserva e pagamento.** A loja confirma que separou o item antes de o comprador ser cobrado. O valor inteiro é cobrado nesse momento e estornado se a reserva expirar; autorizar na reserva e capturar na retirada é a alternativa que deixei em aberto.
 - **Depois do trabalho.** Quem trabalha no horário das lojas retira num horário mais tarde numa loja que fecha tarde o bastante, num ponto de retirada na rua, ou recebe uma entrega à noite. Quem entrega, onde e quando está no [blueprint](blueprint.md).
 - **Agentes.** Agentes separados para estoque, seleção de lojas, contato com as lojas, pagamento e entrega trabalham por trás de um concierge só. Quando o estoque é desconhecido, o concierge pergunta à loja e nunca chuta.

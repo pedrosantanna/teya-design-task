@@ -12,6 +12,7 @@ Takeaways:
 - System fonts are fallback only (decision 027), so the round 1 pairs with SF Pro are out. Round 2 pairs Gambetta and Telma with Switzer and with Satoshi.
 - Switzer is the best single font (89), with the highest x-height and tabular figures by default. Chillax and Author score lowest for reading a chat: lower legibility at small sizes and proportional figures only.
 Call:
+- The board opens with "Where it stands": what is chosen, how it narrowed and what is open. Round 4 is outlined in green as the chosen spec, and the design system page takes its values from there.
 - No uppercase labels above headings; sentence case everywhere, with emphasis from size and weight.
 - A display font is only for titles of 20 pt and up. Body, prices and times stay in a body font with tabular figures.
 - Fonts I named: Satoshi, Chillax, Switzer and Author alone; Telma and Gambetta as display fonts, first with SF Pro and Excon, then with Switzer and Satoshi; Pally was tested and dropped.

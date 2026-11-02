@@ -124,6 +124,15 @@ Escolhi a Gambetta no display e a Switzer no resto (decisão 029) e pedi que o e
 ### 30. Peso dos títulos em Switzer
 Achei os títulos em Switzer 800 pesados demais ao lado da Gambetta. Um agente de tipografia mediu com o fontTools a espessura das hastes e a área de tinta de cada peso da Switzer contra a Gambetta 700, e comparou lado a lado numa página descartável: o Title 1 em 800 tinha a mesma haste da Gambetta a 34 pt, e 700 e 800 pareciam mais escuros que o display. Ele recomendou 600 para todos os títulos, botões e títulos de navegação, com cerca de metade do tracking negativo; o agente principal aplicou.
 
+### 31. Quanto dura uma reserva, e os dois tipos de loja
+Eu disse que um item pago não deveria ficar guardado só por algumas horas, pedi uma pesquisa documental sobre como as lojas do Reino Unido guardam pedidos e separei a loja cujo POS compartilha o estoque da loja que o concierge precisa consultar. Um agente leu as políticas de retirada de Argos, Decathlon, John Lewis, Screwfix, Smyths, Beaverbrooks e Aesop e o Consumer Rights Act, e acrescentou isso à pesquisa documental. Eu defini três formas de levar um item e os prazos de cada uma (decisão 030) e os dois tipos de loja (decisão 031). Depois o agente desenhou os estados da loja v2 e o fluxo do app v5 com datas no lugar de "até as 16h"; ele não achou nenhuma política publicada de independentes pequenas, então a semana delas é uma suposição testada pela H6.
+
+### 32. Situação dos quadros e o design system
+Pedi que os quadros de identidade e de escala tipográfica mostrassem o que foi escolhido e agrupassem cada rodada. O agente acrescentou uma área "Onde está" no topo de cada quadro, o número da rodada em cada área, e contornos e selos verdes para os itens escolhidos e pré-selecionados; conferi as notas com o que eu tinha dito durante as rodadas. Depois ele abriu uma seção de Design system fora da Ideação, com uma visão geral e uma página de tipografia feita a partir da especificação da rodada 4, com amostras nas fontes escolhidas. A cor fica de fora até eu escolher uma paleta.
+
+### 33. Cinzas quentes e acentos a partir de Oat e Brew
+Pedi para manter Oat e Brew, da paleta I, e explorar cinco acentos que funcionem com eles, além de escalas de cinza quente no estilo do shadcn/ui, e acrescentei que preto e branco puros precisam funcionar com tudo isso. Um agente leu a documentação do shadcn/ui, do Tailwind, do Radix Colors e do Material, montou três escalas de cinza em OKLCH que vão do matiz do Oat ao do Brew e quatro conjuntos de cinco acentos, conferindo cada combinação com um script. Ele precisou escurecer o Tea teal e o Jam para passarem de 4,5:1 sobre o Oat, e viu que os botões no tint do modo escuro precisam de rótulo preto. Sugeriu Lata de chá com o Cinza biscoito; a escolha continua em aberto no quadro.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.

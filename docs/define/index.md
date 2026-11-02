@@ -30,6 +30,23 @@ Trade-offs:
 
 The [service blueprint](blueprint.md) shows each step across the shopper, the concierge, the agents behind it and the shop.
 
+## Two kinds of shop
+
+- **Connected shops.** The shop's POS shares item-level stock. The concierge answers at once ("In stock now"), and a hold is placed in the POS, which marks the item as set aside.
+- **Asked shops.** No stock data. The concierge asks the shop on WhatsApp, or through the POS's messages where it has them, and the shop replies in its own words. A hold is confirmed by the shop's reply.
+
+Both appear in the same list of answers, labelled by where the answer came from. Most small independents start as asked shops (A14).
+
+## Three ways to get it
+
+| Way | Paid | Held for | Who hands it over |
+| --- | --- | --- | --- |
+| Reserve | No, pay at the shop | Until the end of the next opening day, only if the shop accepts | The shop, at the counter |
+| Pay and hold | Yes, once the shop has set it aside | 7 days by default; the shopper picks a collection day. Shorter for perishables (bakery, butcher, florist), up to 14 days if the shop agrees; one extension of 7 days; automatic refund if nobody collects | The shop, at the counter, or a collection point |
+| Pay and the shop delivers | Yes | Not held: the shop sends it with its own delivery or courier | The shop's delivery; the concierge only follows its status |
+
+The lengths come from how UK shops hold orders for collection ([desk research](../discover/high-street-landscape.md)): a week is the norm for paid orders, unpaid reservations are short. Delivery by the shop is mapped, not designed: the concierge would show "dispatched", "on its way" and "delivered" from the shop's updates (decision 030).
+
 ## Area
 
 The concierge works from where the shopper is, or will be, and looks as far as they can get before their deadline. High streets group shops for browsing and promotion; they don't limit the search. A shop is in scope if it's small, independent and within reach, whether it sits on a high street or on a short parade of shops. Most small independents are on high streets, so in practice the two mostly overlap.
@@ -79,7 +96,7 @@ The concept works with three kinds of availability. Reported stock comes from a 
 
 The brief asks for what's missing to be assumed and written down.
 
-- **Merchant side.** Shops receive requests in a tool they already open during the day and answer in under ten minutes while open. They accept holding an item for a few hours.
+- **Merchant side.** Shops receive requests in a tool they already open during the day and answer in under ten minutes while open. They accept holding a paid item for about a week, less for perishables (decision 030).
 - **Hold and payment.** The shop confirms it has set the item aside before the shopper is charged. The full amount is taken then and refunded if the hold lapses; authorising at the hold and capturing at collection is the alternative I left open.
 - **After work.** Shoppers who work shop hours collect through a later slot at a shop that closes late enough, a collection point on the street, or evening delivery. Who hands over, where and when is in the [blueprint](blueprint.md).
 - **Agents.** Separate agents for stock, shop matching, shop contact, payment and couriers work behind one concierge. When stock is unknown, the concierge asks the shop and never guesses.

@@ -1,0 +1,25 @@
+# Design system
+
+The foundations of the shopper app, written as the reference the screens are built from. Only what is decided goes here; explorations stay in Ideation until I choose, and each foundation links back to the board it came from.
+
+```summary
+Takeaways:
+- Typography is defined: Gambetta 700 for display in four places, Switzer for everything the shopper reads, on Apple's text styles with the matching Material 3 roles.
+- Colour is still in exploration: five palettes are shortlisted and a warm neutral scale built from Oat and Brew is being tested on the identity board.
+Call:
+- A foundation enters the design system when a decision in the log backs it. Values come from the last round of the ideation board, never retyped from memory.
+- iOS first and Material 3 alongside, as in decision 021.
+AI:
+- An agent moved the round 4 type spec from the ideation board into these pages. I chose the fonts and the rules in decisions 027 to 029.
+Trade-offs:
+- Starting with typography alone leaves the screens without colour tokens for now, so prototypes stay greyscale until a palette is chosen.
+```
+
+## Foundations
+
+| Foundation | Status | Source |
+| --- | --- | --- |
+| [Typography](typography.md) | Defined (decisions 027, 028, 029) | [Type scale](../ideation/type-scale.md), round 4 |
+| Colour | Exploring: shortlist of five palettes, warm neutrals from Oat and Brew | [Identity](../ideation/identity.md) |
+| Icon and mark | Line chosen (icon test 3), variant open | [Identity](../ideation/identity.md) |
+| Spacing, radius, elevation | Not started; the wireframes follow Apple's 16 pt margins and 44 pt touch targets | [App flow](../ideation/app-flow.md) |

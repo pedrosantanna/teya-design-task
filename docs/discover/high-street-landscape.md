@@ -127,6 +127,27 @@ There is no current figure for the mix of chains and independents in Hammersmith
 
 **Why it matters.** Anything that sells on a shop's behalf has to show the all-in price, say who the seller is, carry each shop's cancellation terms and hold allergen data for food.
 
+
+### How long shops hold an order for collection
+
+**What it is.** How long UK shops keep an item for a shopper to collect, paid or not. I added this while defining holds in Develop (decision 030).
+
+**How it works.** Paid orders for collection are held for about a week as standard, longer in some trades, and refunded automatically if nobody collects. Reserving without paying exists but is shorter, and some chains have dropped it.
+
+| Shop | Paid or reserved | Held for |
+| --- | --- | --- |
+| Argos | Paid; no unpaid reservations any more | 7 days, extendable once by 7 ([Argos](https://help.argos.co.uk/help/delivery-and-collection/what-happens-if-my-collection-window-expires); [Argos](https://help.argos.co.uk/help/ordering/can-i-reserve-an-item)) |
+| Decathlon | Paid | 7 days; 2 days for one-hour orders ([Decathlon](https://custhelp-sprinklr.decathlon.co.uk/articles/my-order/how-long-do-you-hold-click-and-collect-orders/698c644d6873450e473e2e7d)) |
+| John Lewis | Paid | 10 days at the collection point ([John Lewis](https://www.johnlewis.com/customer-services/delivery-information/click-and-collect)) |
+| Screwfix | Paid | 21 days ([Screwfix](https://www.vip.screwfix.com/help/clickandcollect)) |
+| Smyths Toys | Paid | 2 days, with a £2 fee if not collected ([Smyths](https://www.smythstoys.com/uk/en-gb/click-and-collect)) |
+| Beaverbrooks | Reserved, pay on collection | 2 days ([Beaverbrooks](https://beaverbrooks.co.uk/info/delivery/store-delivery)) |
+| Aesop | Reserved online, pay in shop | 7 days ([Aesop](https://www.aesop.co.uk/customer-service/click-and-collect-terms-and-conditions.html)) |
+
+The item stays at the shop's risk until the shopper has it (Consumer Rights Act 2015, [section 29](https://www.legislation.gov.uk/ukpga/2015/15/section/29)). These are chains; I found no published policy from a small independent, which makes the hold length an assumption for them.
+
+**Why it matters.** A paid hold of hours is shorter than shoppers are used to; a week is the norm, with an automatic refund at the end. An unpaid reservation is familiar but short.
+
 ## Figures
 
 | Metric | Figure | Period | Source |

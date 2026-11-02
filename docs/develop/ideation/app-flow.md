@@ -24,7 +24,8 @@ Trade-offs:
 
 | Version | What changed | Why |
 | --- | --- | --- |
-| v4 (current) | Requests opens full screen, growing out of the round button, with a storyboard of the transition | A sheet left the list half a screen; the transition keeps the link to the button it came from |
+| v5 (current) | The shop details sheet offers three ways to get the item (pay and they keep it 7 days, reserve and pay in the shop, the shop delivers) and a collection day; holds show dates; a connected shop answers "in stock now" from its till | A hold of a few hours was shorter than UK shops keep paid orders (decisions 030 and 031) |
+| v4 | Requests opens full screen, growing out of the round button, with a storyboard of the transition | A sheet left the list half a screen; the transition keeps the link to the button it came from |
 | v3 | No tabs: a round Requests button left of the ask bar opens Requests as a sheet over the street (decision 026) | I compared seven placements for the switch and chose the one that keeps the large ask bar |
 | v2 | Home and the scrolled home became one screen with Nearby and Requests tabs at the top. The open request and recent orders left the home for the Requests tab, a list of chats with a status per row. A screen where the concierge proposes splitting a request in two. Title spacing tightened, button labels kept on one line | I found the home mixed two jobs, browsing the street and following what I asked for, and the request card and recent orders read as one-off modules |
 | v1 | First flow from the blueprint: Granola-style home, chat, holds, payment, failure paths, other paths | First pass after the Mobbin references |

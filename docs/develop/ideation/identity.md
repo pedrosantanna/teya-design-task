@@ -1,6 +1,6 @@
 # Identity
 
-A first exploration of the shopper app's identity: four concept directions that are British and tied to finding or shopping, three accent palettes, and the palettes applied to the v2 home screens and to Material 3 roles. The product has no name yet, and nothing on this page is chosen.
+A first exploration of the shopper app's identity: four concept directions that are British and tied to finding or shopping, three accent palettes, and the palettes applied to the v2 home screens and to Material 3 roles. The product has no name yet. The mark's line is chosen; the palette and the name are open.
 
 ```summary
 Takeaways:
@@ -8,12 +8,14 @@ Takeaways:
 - The Irregulars match the concept's structure most closely: one concierge the shopper talks to, several agents asking shops behind it. The terrier gives the waiting a face.
 - Three palettes, each built on a complementary pair plus a third colour: Pillar and park (green and red, butter), Awning (cobalt and marmalade, mint), Tiles (teal and rose, ochre). Every tint passes 4.5:1 as text and as a button label in light and dark mode.
 - Several obvious names are taken or crowded (Parade, Fetch, Errand, Legwork), and "Nip" alone is an ethnic slur.
+- Round 4 keeps Oat and Brew as the base and adds three warm grey scales, shadcn-style, and four sets of five accents (Tea tin, Shopfront enamel, Greengrocer, Pillar box). Pure black text and white on Brew pass everywhere; the agent suggests Tea tin with Biscuit grey.
 Call:
-- Not made yet. The direction, the name and the palette are my decisions; this page is the material for them.
+- Chosen: the mark follows icon test 3, the parade's awning as a terrier's beard with brows and a moustache of four or five stripes. Shortlisted: palettes A, C, F, I and J. Open: the name and the palette, both my decisions.
 - Character-led, multi-colour, and without the generic AI look (no purple gradients, sparkles or glowing orbs).
 AI:
 - I gave the seeds: a sniffer dog, a Sherlock-style investigator, British shopping culture. An agent searched the web for references and name conflicts, checked the Sherlock Holmes copyright and trademark position, built the palettes with a script that computes WCAG contrast and Material 3 tonal palettes, drew the mark sketches in SVG, applied the palettes to the v2 wireframes and captured nine apps from Mobbin.
 - The name checks are quick web searches, not trademark searches. Names marked "not checked" were not searched at all.
+- In round 4 an agent read the shadcn/ui, Tailwind, Radix Colors and Material documentation on neutrals, built the grey ramps in OKLCH with a script, and checked every pairing for WCAG contrast, including pure black and white. It darkened Tea teal and Jam slightly so they pass on Oat.
 Trade-offs:
 - Each palette has a secondary and tertiary colour that fail as text on white (Butter, Marmalade, Mint, Rose, Ochre). They are kept for fills, badges and status dots; text in those hues uses the darker Material 3 tone.
 - Showing every palette on the same two screens makes them easy to compare, and hides how each would change layout, type or illustration.
@@ -21,10 +23,11 @@ Trade-offs:
 
 ## Rounds
 
-Every round stays on the same board, newest at the top.
+Every round stays on the same board, newest at the top, under a "Where it stands" area with what is chosen, shortlisted, dropped and open. Chosen items have a green outline; shortlisted ones a green badge.
 
 | Round | What it added |
 | --- | --- |
+| 4 | Oat and Brew from palette I as the base: three warm grey scales in the shadcn style (from Oat and Brew to close to Tailwind stone) and four sets of five accents, each checked with pure black and white |
 | 3 | Icon test 3 (brows and moustache) with a four or five-stripe moustache, in palettes A, C, F, I and J |
 | 2 | Ten more palettes of four or five colours, and six icon tests where the parade's awning becomes a terrier's beard |
 | 1 | Four concept directions, three palettes, applications on the v2 home, references |
@@ -97,6 +100,16 @@ For Material 3, each brand colour seeds its own tonal palette, so secondary and 
 
 ## Sources
 
+- shadcn/ui: Theming: https://ui.shadcn.com/docs/theming
+- Tailwind CSS: Colors: https://tailwindcss.com/docs/colors
+- Radix Colors: Understanding the scale: https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale
+- Radix Colors: Composing a palette: https://www.radix-ui.com/colors/docs/palette-composition/composing-a-palette
+- Evil Martians: OKLCH in CSS, why we moved from RGB and HSL: https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl
+- Evil Martians: Harmony palette (GitHub): https://github.com/evilmartians/harmony
+- tweakcn (GitHub): https://github.com/jnsahaj/tweakcn
+- Material Color Utilities (GitHub): https://github.com/material-foundation/material-color-utilities
+- WCAG 2.2 Understanding 1.4.3 Contrast (Minimum): https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html
+- WCAG 2.2 Understanding 1.4.11 Non-text Contrast: https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html
 - Etymonline, "terrier": https://www.etymonline.com/word/terrier
 - Merriam-Webster, "terrier": https://www.merriam-webster.com/dictionary/terrier
 - Staffordshire Bull Terrier (Wikipedia): https://en.wikipedia.org/wiki/Staffordshire_Bull_Terrier

@@ -176,6 +176,10 @@
               "src": "docs/develop/ideation/app-flow.md",
               "canvas": [
                 {
+                  "version": "v5",
+                  "file": "docs/develop/ideation/app-flow-v5.html"
+                },
+                {
                   "version": "v4",
                   "file": "docs/develop/ideation/app-flow-v4.html"
                 },
@@ -198,7 +202,16 @@
               "id": "shop-states",
               "title": "Shop request states",
               "src": "docs/develop/ideation/shop-states.md",
-              "canvas": "docs/develop/ideation/shop-states.html",
+              "canvas": [
+                {
+                  "version": "v2",
+                  "file": "docs/develop/ideation/shop-states-v2.html"
+                },
+                {
+                  "version": "v1",
+                  "file": "docs/develop/ideation/shop-states-v1.html"
+                }
+              ],
               "pt": "Estados do pedido na loja"
             },
             {
@@ -221,6 +234,24 @@
               "src": "docs/develop/ideation/type-scale.md",
               "canvas": "docs/develop/ideation/type-scale.html",
               "pt": "Escala tipográfica"
+            }
+          ]
+        },
+        {
+          "title": "Design system",
+          "pt": "Design system",
+          "children": [
+            {
+              "id": "design-system",
+              "title": "Overview",
+              "src": "docs/develop/design-system/index.md",
+              "pt": "Visão geral"
+            },
+            {
+              "id": "typography",
+              "title": "Typography",
+              "src": "docs/develop/design-system/typography.md",
+              "pt": "Tipografia"
             }
           ]
         }

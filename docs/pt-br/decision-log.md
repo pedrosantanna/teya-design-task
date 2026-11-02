@@ -232,6 +232,22 @@ A Gambetta 700 é a fonte de display e a Switzer a fonte de texto, com a especif
 **Por quê:** uma serifada no display dá aos títulos uma voz editorial britânica; uma sans forte mantém tudo o que o comprador lê legível e consistente no iOS e no Android.
 **Em aberto:** as fontes precisam ser registradas no Dynamic Type e na escala de fonte do Android, e a licença da ITF conferida para embutir no app.
 
+## 030 · Três formas de levar um item, e quanto dura uma reserva
+**2026-11-02 · Decidido**
+
+O comprador pode reservar sem pagar (guardado até o fim do próximo dia de funcionamento, só onde a loja aceitar), pagar e a loja guardar (7 dias no padrão, com um dia de retirada escolhido pelo comprador, menos para perecíveis, até 14 dias se a loja aceitar, uma prorrogação de 7 dias, reembolso automático se ninguém retirar), ou pagar e a loja entregar com o próprio serviço. A entrega pela loja fica fora do app; o concierge só acompanha o status, e esse fluxo está mapeado, não desenhado.
+
+**Por quê:** as lojas do Reino Unido guardam pedidos pagos para retirada por cerca de uma semana (Argos e Decathlon 7 dias, John Lewis 10, Screwfix 21), e reservas sem pagamento são curtas (cerca de 2 dias) ou deixaram de existir; uma reserva de poucas horas seria mais curta do que o comprador espera. Fontes na pesquisa documental, "Quanto tempo as lojas guardam um pedido para retirada".
+**Em aberto:** se as independentes pequenas aceitam uma semana com uma unidade em estoque; a H6 testa isso.
+
+## 031 · Lojas conectadas e lojas consultadas
+**2026-11-02 · Decidido**
+
+Existem dois tipos de loja. Uma loja conectada compartilha o estoque por item pelo POS: o concierge responde na hora e faz a reserva no POS. Uma loja consultada não tem dados de estoque: o concierge pergunta pelo WhatsApp ou pelas mensagens do POS, e a reserva é confirmada pela resposta dela. As duas aparecem nas mesmas respostas, marcadas pela origem da resposta.
+
+**Por quê:** a resposta na hora e a resposta perguntada são promessas diferentes; o comprador precisa saber qual das duas está lendo.
+**Em aberto:** quantas lojas de uma rua são conectadas (H11).
+
 ## Ainda em aberto
 
 - Estrutura do repo (app único ou monorepo): decidir quando a construção começar e o formato dela estiver claro.

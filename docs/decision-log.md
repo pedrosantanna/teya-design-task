@@ -232,6 +232,22 @@ Gambetta 700 is the display face and Switzer the text face, with the type spec i
 **Why:** a serif display gives titles a British editorial voice; one strong sans keeps everything the shopper reads legible and consistent on iOS and Android.
 **Open:** the fonts must be registered for Dynamic Type and Android font scaling, and the ITF licence checked for embedding.
 
+## 030 · Three ways to get an item, and how long a hold lasts
+**2026-11-02 · Decided**
+
+A shopper can reserve without paying (held until the end of the next opening day, only where the shop accepts), pay and have the shop hold it (7 days by default, with a collection day the shopper picks, shorter for perishables, up to 14 days if the shop agrees, one 7-day extension, automatic refund if nobody collects), or pay and have the shop deliver with its own service. Delivery by the shop is outside the app; the concierge only follows its status, and that flow is mapped, not designed.
+
+**Why:** UK shops hold paid collection orders for about a week (Argos and Decathlon 7 days, John Lewis 10, Screwfix 21), and unpaid reservations are short (about 2 days) or gone; a hold of a few hours would be shorter than shoppers expect. Sources in the desk research, "How long shops hold an order for collection".
+**Open:** whether small independents accept a week with one unit of stock; H6 tests it.
+
+## 031 · Connected shops and asked shops
+**2026-11-02 · Decided**
+
+There are two kinds of shop. A connected shop shares item-level stock through its POS: the concierge answers at once and places the hold in the POS. An asked shop has no stock data: the concierge asks it on WhatsApp or through POS messages and the hold is confirmed by its reply. Both appear in the same answers, labelled by where the answer came from.
+
+**Why:** the instant answer and the asked answer are different promises; the shopper needs to know which one they are reading.
+**Open:** how many shops on a street are connected (H11).
+
 ## Still open
 
 - Repo layout (single app or monorepo): to decide when the build starts and its shape is known.

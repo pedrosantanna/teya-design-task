@@ -127,6 +127,27 @@ Não há número atual para a proporção entre redes e independentes em Hammers
 
 **Por que importa.** Qualquer serviço que venda em nome de uma loja precisa mostrar o preço final, dizer quem é o vendedor, trazer as condições de cancelamento de cada loja e guardar os dados de alergênicos dos alimentos.
 
+
+### Quanto tempo as lojas guardam um pedido para retirada
+
+**O que é.** Quanto tempo as lojas do Reino Unido guardam um item para o comprador retirar, pago ou não. Acrescentei isto ao definir as reservas na Develop (decisão 030).
+
+**Como funciona.** Pedidos pagos para retirada ficam guardados por cerca de uma semana no padrão, mais em alguns ramos, e são reembolsados automaticamente se ninguém retirar. Reservar sem pagar existe, mas é mais curto, e algumas redes deixaram de oferecer.
+
+| Loja | Pago ou reservado | Guarda por |
+| --- | --- | --- |
+| Argos | Pago; não faz mais reserva sem pagar | 7 dias, prorrogáveis uma vez por 7 ([Argos](https://help.argos.co.uk/help/delivery-and-collection/what-happens-if-my-collection-window-expires); [Argos](https://help.argos.co.uk/help/ordering/can-i-reserve-an-item)) |
+| Decathlon | Pago | 7 dias; 2 dias para pedidos de uma hora ([Decathlon](https://custhelp-sprinklr.decathlon.co.uk/articles/my-order/how-long-do-you-hold-click-and-collect-orders/698c644d6873450e473e2e7d)) |
+| John Lewis | Pago | 10 dias no ponto de retirada ([John Lewis](https://www.johnlewis.com/customer-services/delivery-information/click-and-collect)) |
+| Screwfix | Pago | 21 dias ([Screwfix](https://www.vip.screwfix.com/help/clickandcollect)) |
+| Smyths Toys | Pago | 2 dias, com taxa de £2 se não retirar ([Smyths](https://www.smythstoys.com/uk/en-gb/click-and-collect)) |
+| Beaverbrooks | Reservado, paga na retirada | 2 dias ([Beaverbrooks](https://beaverbrooks.co.uk/info/delivery/store-delivery)) |
+| Aesop | Reservado online, paga na loja | 7 dias ([Aesop](https://www.aesop.co.uk/customer-service/click-and-collect-terms-and-conditions.html)) |
+
+O item fica sob risco da loja até o comprador ter o item em mãos (Consumer Rights Act 2015, [seção 29](https://www.legislation.gov.uk/ukpga/2015/15/section/29)). São redes; não encontrei política publicada de uma loja independente pequena, então o prazo para elas é uma suposição.
+
+**Por que importa.** Uma reserva paga de poucas horas é mais curta do que o comprador está acostumado; uma semana é o normal, com reembolso automático no fim. Reservar sem pagar é conhecido, mas curto.
+
 ## Números
 
 | Métrica | Valor | Período | Fonte |

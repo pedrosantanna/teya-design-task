@@ -134,3 +134,9 @@ Source: English Markdown in `docs/`. Target: Brazilian Portuguese in `docs/pt-br
 | inbox (messaging) / row (in a list) | caixa de mensagens / linha |
 | version menu | menu de versões |
 | interface copy (Nearby, Requests, Errands, Chats, Orders) and version labels (v1, v2) | stay in English |
+| connected shop / asked shop | loja conectada / loja consultada |
+| hold (paid) / reserve (unpaid) | reserva paga, "guardar" / reservar sem pagar |
+| collection day | dia de retirada |
+| warm grey / accent / tint | cinza quente / acento / tint |
+| design system | design system |
+| Where it stands (board area) | Onde está |

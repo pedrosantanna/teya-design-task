@@ -12,6 +12,7 @@ Takeaways:
 - Fontes do sistema são só fallback (decisão 027), então os pares da rodada 1 com SF Pro estão fora. A rodada 2 combina Gambetta e Telma com a Switzer e com a Satoshi.
 - A Switzer é a melhor fonte única (89), com a maior altura-x e números tabulares por padrão. Chillax e Author têm as notas mais baixas para ler uma conversa: legibilidade menor em tamanhos pequenos e só números proporcionais.
 Call:
+- O quadro começa com "Onde está": o que foi escolhido, como afunilou e o que está em aberto. A rodada 4 tem contorno verde como a especificação escolhida, e a página do design system tira os valores dela.
 - Nada de rótulos em caixa-alta acima de títulos; só a primeira letra maiúscula, sempre, com a ênfase vindo de tamanho e peso.
 - Fonte de display só em títulos de 20 pt para cima. Corpo, preços e horários ficam numa fonte de corpo com números tabulares.
 - Fontes que escolhi: Satoshi, Chillax, Switzer e Author sozinhas; Telma e Gambetta como fontes de display, primeiro com SF Pro e Excon, depois com Switzer e Satoshi; a Pally foi testada e descartada.

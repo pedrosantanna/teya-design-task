@@ -335,3 +335,12 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .ios-fab { position: relative; flex: none; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--ios-bg); box-shadow: 0 0 0 1px var(--ios-sep), 0 6px 20px rgb(0 0 0 / .10); }
 .ios-fab .ic { width: 22px; height: 22px; }
 .ios-fab .ios-count { position: absolute; top: -2px; right: -2px; box-shadow: 0 0 0 2px var(--ios-bg); }
+
+/* Where an exploration stands: a chosen item, a shortlisted one, a dropped one */
+.cv-item.chosen:not(.area) { outline: calc(3px * var(--inv)) solid var(--c3); outline-offset: calc(10px * var(--inv)); border-radius: 20px; }
+.area.chosen { border: 2px solid var(--c3); background: color-mix(in srgb, var(--c3) 6%, transparent); }
+.area.dropped { opacity: .55; }
+.cv-badge { position: absolute; right: 0; bottom: 100%; margin-bottom: 12px; display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 999px; font-size: 15px; font-weight: 600; white-space: nowrap; background: var(--c3); color: var(--bg); }
+.area > .cv-badge { bottom: auto; top: 22px; right: 28px; margin: 0; font-size: 18px; padding: 6px 16px; }
+.cv-badge.short { background: var(--bg); color: var(--fg); box-shadow: inset 0 0 0 2px var(--c3); }
+.cv-badge.dropped { background: var(--muted); color: var(--muted-fg); }
