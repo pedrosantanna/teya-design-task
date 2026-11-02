@@ -79,3 +79,21 @@ Source: English Markdown in `docs/`. Target: Brazilian Portuguese in `docs/pt-br
 | Numbers | decimal comma (13,2%) |
 | code (noun, a qualitative tag) | etiqueta ("código" only for the research term) |
 | dates inside citations ("Aug 2026") | stay in English, as part of the citation |
+
+## Terms settled in Define
+| English | PT-BR |
+| --- | --- |
+| concierge (the agent's role) | concierge |
+| value proposition canvas / value map / customer profile | canvas de proposta de valor / mapa de valor / perfil do cliente |
+| Products and services / Pain relievers / Gain creators / Jobs / Pains / Gains (canvas labels) | Produtos e serviços / Aliviadores de dores / Criadores de ganhos / Tarefas / Dores / Ganhos |
+| fit | encaixe |
+| hypothesis / pass mark / "Pass if" | hipótese / critério de aprovação / "Passa se" |
+| "We believe that…" (hypothesis column) | "Acredito que…" |
+| hold (an item) / no-show | segurar (um item) / falta (o comprador não aparece) |
+| browse / ask (the agent) | explorar / perguntar (ao agente) |
+| instant answer | resposta na hora |
+| till / till data | caixa / dados de caixa |
+| collection window | janela de retirada |
+| cold start | partida a frio |
+| merchant side | lado da loja |
+| Position on the brief (decision-log label) | Posição no brief |

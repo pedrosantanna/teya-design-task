@@ -65,6 +65,9 @@ I also reframed Discover around how the data was collected (decision 015). The d
 ### 12. Screens and Teya
 An agent captured the main screens of eight benchmark apps from Mobbin through my logged-in browser and saved them locally; Just Eat, SumUp and Teya aren't on Mobbin. The images stay outside the public repo because they are third-party screens. The agent also read Teya's public pages and wrote what Teya does and doesn't do for Jess. Last, an agent drafted the Discover conclusion: facts, assumptions with a suggested confidence level under a fixed rule, and open questions. I set the final levels.
 
+### 13. Define: concept, canvases and hypotheses
+I wrote the concept: an agent that works as a concierge for the high street. An agent checked each part against the Discover evidence, filled a value proposition canvas for Sam and for Jess from the empathy map and persona pages, and drafted eight hypotheses with tests and pass marks. I trimmed the open questions in the conclusion first: the choice of shopper was a decision, not a question, and I added questions about how shopkeepers work.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.

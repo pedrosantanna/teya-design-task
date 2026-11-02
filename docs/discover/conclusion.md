@@ -6,7 +6,7 @@ Discover ends with three lists: facts from the desk research and the benchmarks,
 Takeaways:
 - Ten facts that limit or shape any product here, each with a source.
 - Thirteen assumptions about shoppers, each with a suggested confidence level and the evidence behind it.
-- Eight open questions that no material collected so far can answer.
+- Eight open questions, six of them about shopkeepers, who are missing from the material.
 Call:
 - I separated facts from assumptions because the shopper evidence is attitudinal and small. Anything about how shoppers behave stays an assumption until it is tested.
 - Confidence follows a fixed rule, so I can review each level and change it with a reason.
@@ -69,15 +69,22 @@ The level is an agent's suggestion under the rule above, for me to review. Perso
 
 ## Open questions
 
-1. Which shopper and which problem: Sam with findability, or Jess with transaction?
-2. How would a shop with no product codes tell the product what it has, and how much work would a shopkeeper accept?
-3. Do shoppers do what they say? The posts show the gap between supporting local and buying online, and nothing here measures behaviour.
-4. How often do these needs happen? Posts show that a problem exists, not how common it is.
-5. Who pays: the shop through a commission, the shopper through a fee, or the payment provider as part of what it already sells?
-6. Can anything a shop already does, such as taking a payment link or confirming a message, stand in for live stock?
-7. What would the Hammersmith BID or a similar body need to see to bring its shops in?
-8. What do shopkeepers want? No shopkeeper is in this material.
+Questions the material collected so far can't answer. The ones about shopkeepers matter most, because no shopkeeper is in this material.
+
+### Shopkeepers
+
+1. What do shopkeepers want from a product like this, and what would make them say no?
+2. How does a shopkeeper's day run: who answers the phone and messages, and how quickly, while serving customers?
+3. How connected is the shop: a till with product codes, a web store, Instagram or WhatsApp, a Google profile kept up to date?
+4. How does the shop know what it has today: the till, a spreadsheet, memory?
+5. Would a shopkeeper answer a request about stock within minutes, in which channel, and hold the item for how long?
+6. How would a shop with no product codes say what it has, and how much work would it accept? Can something it already does, such as confirming a message or sending a payment link, stand in for live stock?
+
+### Shoppers
+
+7. Do shoppers do what they say? The posts show a gap between supporting local shops and buying online, and nothing here measures behaviour.
+8. How many shoppers hit these problems, and how often? The posts show that the problems exist, not how common they are. Sizing them needs a survey or search data.
 
 ## From assumptions to hypotheses
 
-Define picks the shopper and turns the assumptions that matter most for that choice into hypotheses with a test. For Sam that starts with A5; for Jess with A7. Both are Low today, and both decide whether the product is worth building.
+Define starts from a concept for shoppers and turns the assumptions it depends on into hypotheses with a test. See [Define](../define/index.md).

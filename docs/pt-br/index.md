@@ -14,8 +14,8 @@ A documentação segue a ordem do trabalho. Cada fase começa quando a anterior 
 
 | Fase | Pergunta que responde | Status |
 | --- | --- | --- |
-| Discover | O que é uma high street hoje, quem compra nela e o que essas pessoas dizem sobre ela? | Em andamento |
-| Define | Findability ou transaction, para qual comprador, com quais premissas? | Não iniciada |
+| Discover | O que é uma high street hoje, quem compra nela e o que essas pessoas dizem sobre ela? | Concluída |
+| Define | Findability ou transaction, para qual comprador, com quais premissas? | Em andamento |
 | Develop | Como fica a jornada, e qual conceito se sustenta? | Não iniciada |
 | Deliver | O protótipo, as telas refinadas e, se valer a pena construir, um app funcionando | Não iniciada |
 

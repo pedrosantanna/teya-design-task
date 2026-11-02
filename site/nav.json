@@ -116,10 +116,27 @@
     },
     {
       "title": "Define",
-      "disabled": true,
-      "note": "Problem focus and the shopper",
       "pt": "Define",
-      "note_pt": "Foco do problema e o comprador"
+      "items": [
+        {
+          "id": "define",
+          "title": "Concept",
+          "src": "docs/define/index.md",
+          "pt": "Conceito"
+        },
+        {
+          "id": "value-proposition",
+          "title": "Value proposition",
+          "src": "docs/define/value-proposition.md",
+          "pt": "Proposta de valor"
+        },
+        {
+          "id": "hypotheses",
+          "title": "Hypotheses",
+          "src": "docs/define/hypotheses.md",
+          "pt": "Hipóteses"
+        }
+      ]
     },
     {
       "title": "Develop",

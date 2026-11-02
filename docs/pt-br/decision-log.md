@@ -127,6 +127,15 @@ A segunda dimensão era "ponto de falha", com quatro categorias (não conseguiu 
 
 **Efeito:** os mesmos posts caem nos mesmos três clusters. A silhueta média passou de 0,55 para 0,57.
 
+## 017 · Conceito de um agente concierge para a high street
+**2026-11-02 · Decidido**
+
+Depois do Discover, escolhi um conceito só para o Sam e a Jess: um app para quem compra cuja entrada principal é um agente. Ele responde a partir do caixa da loja quando o estoque é compartilhado e, quando não é, pergunta às lojas prováveis; depois deixa o comprador reservar, pagar, retirar ou receber em casa. A exploração clássica por loja e categoria fica como segunda entrada. A entrega cobre o lado de quem compra; o lado da loja é suposto.
+
+**Por quê:** a dor mais forte é não saber antes de sair de casa (A1), e uma confirmação da loja é a resposta mais direta a ela sem um catálogo que a maioria das lojas não tem (F8).
+**Posição no brief:** findability primeiro. A transaction é a etapa que fecha o ciclo, e é nela que aparecem as restrições do outro problema.
+**Em aberto:** se as lojas respondem rápido o bastante (H1) decide se o concierge funciona. Isso é testado à mão antes de qualquer construção.
+
 ## Ainda em aberto
 
 - Estrutura do repo (app único ou monorepo): decidir quando a construção começar e o formato dela estiver claro.

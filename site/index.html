@@ -199,6 +199,14 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .quote-grid .quote-card { margin: 0; }
 
 /* Empathy map (Strategyzer canvas order): six equal cells, hairline gutters. */
+.vpc { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); align-items: start; }
+.vpc-side { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; align-content: start; }
+.vpc-title { margin: 0; padding: 10px 20px; background: var(--bg-subtle); font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--muted-fg); }
+.vpc-cell { padding: 16px 20px; background: var(--bg); min-width: 0; }
+.vpc-cell ul { margin: 0; padding: 0; list-style: none; font-size: 14px; line-height: 1.55; color: var(--fg-2); }
+.vpc-cell li { position: relative; margin: 0; padding: 0 0 0 14px; max-width: none; }
+.vpc-cell li + li { margin-top: 8px; }
+.vpc-cell li::before { content: ""; position: absolute; left: 0; top: .68em; width: 5px; height: 1px; background: var(--muted-fg); }
 .empathy { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: 12px 0 28px; }
 .empathy-cell { padding: 18px 20px 16px; background: var(--bg); min-width: 0; }
 .empathy-cell.pains, .empathy-cell.gains { background: var(--bg-subtle); }
@@ -344,6 +352,7 @@ i.m.unknown { opacity: .45; }
   .page-lede { font-size: 16.5px; }
   .prose h2 { font-size: 21px; margin-top: 44px; }
   .empathy { grid-template-columns: minmax(0, 1fr); }
+  .vpc { grid-template-columns: minmax(0, 1fr); }
   .pager { grid-template-columns: minmax(0, 1fr); margin-top: 56px; }
   .pager .next { grid-column: 1; }
 }
@@ -436,7 +445,7 @@ i.m.unknown { opacity: .45; }
       mapNote: n => `Each dot is one post; posts with the same codes sit side by side. Not on the chart: ${n} posts where nothing broke.`,
       persists: 'persists', defects: 'defects', unknown: 'stance unknown', urgent: 'urgent', notPublished: 'Not published yet',
       loadFail: (src, m) => `Couldn’t load <code>${src}</code> (${m}). Check that the file exists in the repo and is published with the page.`,
-      screensSource: 'Main screens on Mobbin', screensAlt: 'Main app screens, captured from Mobbin', screensMissing: 'Screens are kept locally, not in the public repo.',
+      valueMap: 'Value map', customerProfile: 'Customer profile', screensSource: 'Main screens on Mobbin', screensAlt: 'Main app screens, captured from Mobbin', screensMissing: 'Screens are kept locally, not in the public repo.',
       notTranslated: 'This page isn’t translated yet, so it shows in English.' },
     pt: { filter: 'Filtrar páginas', noMatch: 'Nenhuma página com', soon: 'Em breve', onPage: 'Nesta página', prev: '← Anterior', next: 'Próxima →',
       takeaways: 'Principais pontos', call: 'Minha decisão', ai: 'IA nesta etapa', tradeoffs: 'Trade-offs', verified: 'Verificada', archive: 'Via arquivo',
@@ -445,7 +454,7 @@ i.m.unknown { opacity: .45; }
       mapNote: n => `Cada ponto é um post; posts com as mesmas etiquetas ficam lado a lado. Fora do gráfico: ${n} posts em que nada deu errado.`,
       persists: 'continuou', defects: 'desistiu', unknown: 'não aparece', urgent: 'urgente', notPublished: 'Ainda não publicada',
       loadFail: (src, m) => `Não foi possível carregar <code>${src}</code> (${m}).`,
-      screensSource: 'Telas principais no Mobbin', screensAlt: 'Telas principais do app, capturadas no Mobbin', screensMissing: 'As telas ficam só na cópia local, fora do repositório público.',
+      valueMap: 'Mapa de valor', customerProfile: 'Perfil do cliente', screensSource: 'Telas principais no Mobbin', screensAlt: 'Telas principais do app, capturadas no Mobbin', screensMissing: 'As telas ficam só na cópia local, fora do repositório público.',
       notTranslated: 'Esta página ainda não foi traduzida, por isso aparece em inglês.' }
   };
   const t = k => (UI[LANG][k] !== undefined ? UI[LANG][k] : UI.en[k]);
@@ -518,6 +527,18 @@ i.m.unknown { opacity: .45; }
       const k = EMPATHY_CLASS[slug(c.label)] || slug(c.label);
       return `<section class="empathy-cell ${k}"><p class="empathy-label">${esc(c.label)}</p><ul>${c.items.map(i => `<li>${inline(i)}</li>`).join('')}</ul></section>`;
     }).join('')}</div>`;
+  }
+  // ```value-proposition  Strategyzer value proposition canvas. Six "Label:" lines, each followed by "- " bullets:
+  // the first three form the value map (products, pain relievers, gain creators), the last three the customer profile (jobs, pains, gains).
+  function valueProposition(src) {
+    const cells = []; let cur = null;
+    src.split('\n').forEach(line => {
+      const t = line.trim(); if (!t) return;
+      if (t.startsWith('- ')) { if (cur) cur.items.push(t.slice(2)); }
+      else if (t.endsWith(':')) { cur = { label: t.slice(0, -1), items: [] }; cells.push(cur); }
+    });
+    const cell = c => `<section class="vpc-cell"><p class="empathy-label">${esc(c.label)}</p><ul>${c.items.map(i => `<li>${inline(i)}</li>`).join('')}</ul></section>`;
+    return `<div class="vpc"><div class="vpc-side"><p class="vpc-title">${t('valueMap')}</p>${cells.slice(0, 3).map(cell).join('')}</div><div class="vpc-side"><p class="vpc-title">${t('customerProfile')}</p>${cells.slice(3, 6).map(cell).join('')}</div></div>`;
   }
   function timeline(src) {
     const items = src.split('\n').map(l => l.trim()).filter(l => l.startsWith('- ')).map(l => {
@@ -634,6 +655,7 @@ i.m.unknown { opacity: .45; }
         const l = (lang || '').trim();
         if (l === 'quote') return quoteCard(code);
         if (l === 'empathy-map') return empathyMap(code);
+        if (l === 'value-proposition') return valueProposition(code);
         if (l === 'timeline') return timeline(code);
         if (l === 'occasion-grid') return occasionGrid(code);
         if (l === 'summary') return summary(code);

@@ -6,7 +6,7 @@ O Discover termina com três listas: fatos da pesquisa documental e dos benchmar
 Takeaways:
 - Dez fatos que limitam ou moldam qualquer produto aqui, cada um com fonte.
 - Treze suposições sobre compradores, cada uma com um nível de confiança sugerido e a evidência por trás.
-- Oito perguntas em aberto que nada do material coletado consegue responder.
+- Oito perguntas em aberto, seis delas sobre lojistas, que não aparecem no material.
 Call:
 - Separei fatos de suposições porque a evidência sobre compradores é atitudinal e pequena. Tudo sobre como os compradores se comportam continua suposição até ser testado.
 - A confiança segue uma regra fixa, para eu poder revisar cada nível e mudá-lo com um motivo.
@@ -69,15 +69,22 @@ O nível é uma sugestão do agente pela regra acima, para eu revisar. As págin
 
 ## Perguntas em aberto
 
-1. Qual comprador e qual problema: Sam com findability, ou Jess com transaction?
-2. Como uma loja sem códigos de produto diria ao produto o que tem, e quanto trabalho um lojista aceitaria?
-3. Os compradores fazem o que dizem? Os posts mostram a distância entre apoiar o comércio local e comprar online, e nada aqui mede comportamento.
-4. Com que frequência essas necessidades aparecem? Os posts mostram que o problema existe, não o quanto é comum.
-5. Quem paga: a loja por comissão, o comprador por taxa, ou o provedor de pagamento como parte do que já vende?
-6. Algo que a loja já faz, como mandar um link de pagamento ou confirmar uma mensagem, pode substituir o estoque ao vivo?
-7. O que o BID de Hammersmith ou uma entidade parecida precisaria ver para trazer as lojas dele?
-8. O que os lojistas querem? Nenhum lojista aparece neste material.
+Perguntas que o material coletado até aqui não consegue responder. As que tratam de lojistas pesam mais, porque nenhum lojista aparece neste material.
+
+### Lojistas
+
+1. O que os lojistas querem de um produto como este, e o que os faria dizer não?
+2. Como é o dia de um lojista: quem atende o telefone e as mensagens, e com que rapidez, enquanto atende os clientes?
+3. Quão conectada é a loja: um caixa com códigos de produto, uma loja virtual, Instagram ou WhatsApp, um perfil do Google atualizado?
+4. Como a loja sabe o que tem hoje: pelo caixa, por uma planilha, de memória?
+5. Um lojista responderia a um pedido sobre estoque em minutos, por qual canal, e seguraria o item por quanto tempo?
+6. Como uma loja sem códigos de produto diria o que tem, e quanto trabalho aceitaria? Algo que ela já faz, como confirmar uma mensagem ou mandar um link de pagamento, pode substituir o estoque ao vivo?
+
+### Compradores
+
+7. Os compradores fazem o que dizem? Os posts mostram a distância entre apoiar o comércio local e comprar online, e nada aqui mede comportamento.
+8. Quantos compradores esbarram nesses problemas, e com que frequência? Os posts mostram que os problemas existem, não o quanto são comuns. Para dimensioná-los é preciso um survey ou dados de busca.
 
 ## De suposições a hipóteses
 
-Na etapa Define escolho o comprador e transformo as suposições que mais pesam nessa escolha em hipóteses com um teste. Para o Sam, isso começa por A5; para a Jess, por A7. As duas estão em Baixo hoje, e as duas decidem se vale a pena construir o produto.
+A etapa Define parte de um conceito para quem compra e transforma as suposições de que ele depende em hipóteses com um teste. Veja [Define](../define/index.md).

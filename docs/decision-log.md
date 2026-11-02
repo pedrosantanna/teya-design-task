@@ -127,6 +127,15 @@ The second dimension used to be "point of failure", with four categories (couldn
 
 **Effect:** the same posts land in the same three clusters. Mean silhouette went from 0.55 to 0.57.
 
+## 017 · Concierge agent concept for the high street
+**2026-11-02 · Decided**
+
+After Discover I chose one concept for both Sam and Jess: a shopper app whose main way in is an agent. It answers from a shop's till where stock is shared and otherwise asks likely shops, then lets the shopper reserve, pay, collect or get delivery. Classic browsing by shop and category stays as a second way in. The delivery covers the shopper's side; the merchant side is assumed.
+
+**Why:** the strongest pain is not knowing before leaving home (A1), and a confirmation from the shop is the most direct answer to it without a catalogue most shops don't have (F8).
+**Position on the brief:** findability first. The transaction is the step that closes the loop, and it is where the constraints of the other problem show up.
+**Open:** whether shops answer fast enough (H1) decides whether the concierge works. It is tested by hand before anything is built.
+
 ## Still open
 
 - Repo layout (single app or monorepo): to decide when the build starts and its shape is known.

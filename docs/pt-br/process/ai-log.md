@@ -65,6 +65,9 @@ Também reorganizei o Discover pela forma como os dados foram coletados (decisã
 ### 12. Telas e Teya
 Um agente capturou as telas principais de oito apps dos benchmarks no Mobbin, pelo meu navegador logado, e salvou as imagens localmente. Just Eat, SumUp e Teya não estão no Mobbin. As imagens ficam fora do repositório público porque são telas de terceiros. O agente também leu as páginas públicas da Teya e escreveu o que a Teya faz e não faz pela Jess. Por fim, um agente montou a conclusão do Discover: fatos, suposições com nível de confiança sugerido por uma regra fixa e perguntas em aberto. Eu defino os níveis finais.
 
+### 13. Define: conceito, canvas e hipóteses
+Eu escrevi o conceito: um agente que funciona como concierge da high street. Um agente conferiu cada parte com a evidência do Discover, preencheu um canvas de proposta de valor para o Sam e outro para a Jess a partir do mapa de empatia e das páginas de persona, e rascunhou oito hipóteses com testes e critérios de aprovação. Antes, enxuguei as perguntas em aberto da conclusão: tirei a escolha do comprador, que era uma decisão minha, e acrescentei perguntas sobre como os lojistas trabalham.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.
