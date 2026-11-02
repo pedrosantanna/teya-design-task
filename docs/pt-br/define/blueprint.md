@@ -19,17 +19,17 @@ Trade-offs:
 ## Blueprint
 
 ```blueprint
-Steps: 1 · Pedir | 2 · Buscar | 3 · Oferecer | 4 · Reservar e pagar | 5 · Retirar ou receber | 6 · Depois
-Ponto de contato: Chat do concierge no app ; Ou WhatsApp, ou o assistente de IA do próprio comprador | Mesma conversa | Mesma conversa, com cartões de opção | Mesma conversa ; Tela de pagamento | Balcão da loja ; Entregador na porta | Mesma conversa ; Notificação
-Comprador: Diz do que precisa, onde e até quando ; Ou deixa um pedido com antecedência ("me avisa quando tiverem") | Espera, ou sai da conversa e recebe uma mensagem depois | Compara as opções conforme chegam | Escolhe uma ; Reserva, ou paga para segurar | Vai até a loja e mostra o código ; Ou recebe a entrega | Avalia a loja ; Mantém um pedido recorrente
+Steps: Pedir | Buscar | Ofertas | Reservar e pagar | Retirar ou receber | Depois
+Ponto de contato {muted}: Chat no app ; WhatsApp ; Assistente de AI próprio (MCP) | Mesma conversa | Cartões de opções | Tela de pagamento | Balcão da loja ; Entregador | Notificação
+Comprador {c1 flow}: Diz o quê, onde e até quando ; Ou deixa um pedido antes | Espera, ou sai da conversa | Compara as opções | Escolhe uma loja ; Paga para segurar | Mostra o código ; Ou recebe a entrega | Avalia a loja ; Mantém um pedido recorrente
 --- Linha de interação
-Concierge: Confirma o pedido numa linha ; Pergunta só o que falta (tamanho, orçamento, prazo) | "Estou consultando seis lojas perto de você. Te aviso conforme elas responderem." | Mostra a primeira resposta assim que chega ; Continua procurando enquanto outras estão pendentes ; Preço, distância, horário de fechamento, tempo de reserva, entrega | Confirma a reserva com um código e um horário-limite | Como chegar ; Lembrete antes de a reserva acabar ; Acompanhamento da entrega | Pergunta como foi ; Age depois sobre os pedidos recorrentes
+Concierge {c3}: Confirma em uma linha ; Pergunta só o que falta | "Consultando seis lojas perto de você" | Primeira resposta na hora ; Continua procurando | Código e prazo da reserva | Como chegar ; Aviso antes de a reserva acabar | Pergunta como foi ; Executa pedidos recorrentes
 --- Linha de visibilidade
-Agentes: O orquestrador lê o item, o lugar e o prazo, e planeja as tarefas | O agente de estoque lê os dados de caixa onde a loja compartilha ; O agente de seleção de lojas escolhe as lojas prováveis por listagens e categorias ; O agente de contato manda um pedido por loja | Reúne as respostas e descarta as vencidas ; Pede uma cotação de entrega ao agente de entrega ; Amplia a busca quando o prazo aperta | O agente de pagamento recebe o pagamento ; O agente de contato confirma com a loja escolhida e libera as outras | Acompanha a janela de reserva, estende ou cancela ; Chama o entregador | Registra o pedido como demanda ; Cruza os pedidos recorrentes com novas respostas ou estoque
-Loja: - | Recebe o pedido na ferramenta que já usa (app de lojista ou WhatsApp) | Responde com um toque ou uma mensagem curta: tem, preço, segura até, entrega | Separa o item com o código | Passa o item ao comprador e marca como retirado | Recebe um resumo semanal do que as pessoas por perto pediram, inclusive o que ela não tinha
+Agentes {c4}: **Orquestrador** planeja as tarefas | **Estoque** lê os caixas compartilhados ; **Seleção** escolhe as lojas prováveis ; **Contato** manda mensagem a cada loja | Reúne as respostas ; **Entrega** cota o frete ; Amplia a busca perto do prazo | **Pagamento** cobra ; **Contato** confirma e libera as outras | Acompanha a reserva ; **Entrega** agenda a corrida | Registra a demanda ; Cruza pedidos recorrentes
+Loja {c2}: - | Recebe o pedido no app da maquininha ou no WhatsApp | Responde: tem, preço, reserva, entrega | Separa o item | Passa o item ao comprador | Resumo semanal da demanda
 --- Linha de interação interna
-Sistemas: Localização ; Preferências e forma de pagamento salvas | Estoque do caixa, onde compartilhado ; Listagens públicas e horários de funcionamento ; Mensagens para as lojas | Cotações de entrega ; Mapas | Provedor de pagamento: cartão, carteira digital, link de pagamento | Entregador ; Repasse do pagamento à loja | Registros de demanda por rua
-Pontos de falha: Pedido vago ; Canal sem localização | Nenhuma loja responde a tempo (H1) ; Pedidos demais por loja | Uma loja diz que tem e não tem (A10) | O pagamento falha ; O item já foi vendido | Falta ; A janela de retirada não cabe (Jess) | As lojas não dão valor ao resumo (H9)
+Sistemas {muted}: Localização ; Preferências salvas | Estoque do caixa ; Perfis e horários | Entregador ; Mapas | Cartão, carteira, link de pagamento | Entregador ; Repasse | Registro da demanda
+Pontos de falha {fail}: Pedido vago | Nenhuma resposta a tempo (H1) | Um "tem" errado (A10) | Item já vendido | Comprador não aparece ; Janela não serve para a Jess | Resumo sem valor (H9)
 ```
 
 ## Versão da Jess

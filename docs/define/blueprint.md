@@ -19,17 +19,17 @@ Trade-offs:
 ## Blueprint
 
 ```blueprint
-Steps: 1 · Ask | 2 · Search | 3 · Offer | 4 · Reserve and pay | 5 · Collect or receive | 6 · After
-Touchpoint: Concierge chat in the app ; Or WhatsApp, or the shopper's own AI assistant | Same thread | Same thread, with option cards | Same thread ; Payment sheet | Shop counter ; Courier at the door | Same thread ; Notification
-Shopper: Says what they need, where and by when ; Or sets a request ahead of time ("let me know when they have it") | Waits, or leaves the thread and gets a message later | Compares the options as they arrive | Picks one ; Reserves, or pays to hold | Walks to the shop and shows the code ; Or receives the delivery | Rates the shop ; Keeps a standing request
+Steps: Ask | Search | Offer | Reserve and pay | Collect or receive | After
+Touchpoint {muted}: App chat ; WhatsApp ; Own AI assistant (MCP) | Same thread | Option cards | Payment sheet | Shop counter ; Courier | Notification
+Shopper {c1 flow}: Says what, where, by when ; Or leaves a request ahead | Waits, or leaves the thread | Compares the options | Picks a shop ; Pays to hold | Shows the code ; Or gets the delivery | Rates the shop ; Keeps a standing request
 --- Line of interaction
-Concierge: Confirms the request in one line ; Asks only what's missing (size, budget, deadline) | "Checking six shops near you. I'll message you as they answer." | Shows the first answer as soon as it arrives ; Keeps looking while others are pending ; Price, distance, closing time, hold time, delivery | Confirms the hold with a code and an end time | Directions ; Reminder before the hold ends ; Delivery tracking | Asks how it went ; Acts on standing requests later
+Concierge {c3}: Confirms in one line ; Asks only what's missing | "Checking six shops near you" | First answer right away ; Keeps looking | Hold code and end time | Directions ; Reminder before the hold ends | Follows up ; Acts on standing requests
 --- Line of visibility
-Agents: The orchestrator reads item, place and deadline, and plans the tasks | Stock agent reads till data where a shop shares it ; Matching agent picks likely shops from listings and categories ; Contact agent sends one request per shop | Collects replies and drops stale ones ; Asks the courier agent for a delivery quote ; Widens the search when the deadline gets close | Payment agent takes payment ; Contact agent confirms to the chosen shop and releases the others | Watches the hold window, extends or cancels ; Books the courier | Logs the request as demand ; Matches standing requests with new answers or stock
-Shop: - | Gets the request in the tool it already uses (merchant app or WhatsApp) | Answers in a tap or a short message: has it, price, hold until, can deliver | Puts the item aside with the code | Hands it over and marks it collected | Gets a weekly summary of what people nearby asked for, including what it didn't have
+Agents {c4}: **Orchestrator** plans the tasks | **Stock** reads shared tills ; **Matching** picks likely shops ; **Contact** messages each shop | Collects replies ; **Courier** quotes delivery ; Widens the search near the deadline | **Payment** charges ; **Contact** confirms, releases the others | Watches the hold ; **Courier** books the drop | Logs demand ; Matches standing requests
+Shop {c2}: - | Gets the request in its merchant app or WhatsApp | Answers: has it, price, hold, delivery | Puts the item aside | Hands it over | Weekly demand summary
 --- Line of internal interaction
-Systems: Location ; Saved preferences and payment method | Till stock where shared ; Public listings and opening hours ; Shop messaging | Courier quotes ; Maps | Payment provider: card, wallet, pay by link | Courier ; Payment settlement to the shop | Demand records per street
-Fail points: Vague request ; Channel without a location | No shop answers in time (H1) ; Too many requests per shop | A shop says yes and doesn't have it (A10) | Payment fails ; Item already sold | No-show ; Collection window doesn't fit (Jess) | Shops don't value the summary (H9)
+Systems {muted}: Location ; Saved preferences | Till stock ; Listings and hours | Courier ; Maps | Card, wallet, pay by link | Courier ; Settlement | Demand records
+Fail points {fail}: Vague request | No answer in time (H1) | A wrong "yes" (A10) | Item already sold | No-show ; Window doesn't fit Jess | Summary not valued (H9)
 ```
 
 ## Jess's version

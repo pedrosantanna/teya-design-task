@@ -291,19 +291,28 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .cmap-foot .enc { color: var(--muted-fg); }
 .cmap-note { font-size: 13px; color: var(--muted-fg); margin: 8px 0 0; }
 
+/* Service blueprint */
+.bp-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); }
+.bp { --bp-label: 100px; display: grid; grid-template-columns: var(--bp-label) repeat(var(--bp-n), minmax(120px, 1fr)); min-width: 820px; font-size: 12.5px; line-height: 1.4; }
+.bp-head, .bp-lane, .bp-cell, .bp-line { min-width: 0; }
+.bp-corner, .bp-lane { position: sticky; left: 0; z-index: 2; background: linear-gradient(var(--bg-subtle), var(--bg-subtle)), var(--bg); box-shadow: inset -1px 0 0 var(--border); }
+.bp-head { display: flex; align-items: center; gap: var(--s-2); padding: var(--s-3); font-size: 13px; font-weight: 600; color: var(--fg); border-bottom: 1px solid var(--border-strong); background: var(--bg-subtle); }
+.bp-head b { display: inline-grid; place-items: center; flex: none; width: 20px; height: 20px; border-radius: 50%; background: var(--primary); color: var(--primary-fg); font-size: 11px; font-weight: 600; }
+.bp-corner { border-bottom: 1px solid var(--border-strong); }
+.bp-lane { display: flex; align-items: flex-start; gap: var(--s-2); padding: var(--s-3); font-size: 11.5px; font-weight: 600; letter-spacing: .02em; color: var(--fg-2); border-bottom: 1px solid var(--border); }
+.bp-lane i { flex: none; width: 8px; height: 8px; margin-top: 4px; border-radius: 2px; background: var(--tone); }
+.bp-cell { display: flex; flex-direction: column; gap: var(--s-1); padding: var(--s-2); border-bottom: 1px solid var(--border); position: relative; }
+.bp-card { padding: 6px 8px; border-radius: 6px; border: 1px solid color-mix(in srgb, var(--tone) 35%, transparent); background: color-mix(in srgb, var(--tone) 12%, var(--bg)); color: var(--fg); }
+.bp-card strong { font-weight: 600; }
+.bp-flow .bp-cell:not(:last-child)::after { content: ""; position: absolute; right: -7px; top: 50%; z-index: 1; width: 10px; height: 10px; border-top: 1.5px solid var(--tone); border-right: 1.5px solid var(--tone); transform: translateY(-50%) rotate(45deg); }
+.bp-fail .bp-card { border-style: dashed; }
+.bp-fail .bp-card::before { content: "!"; display: inline-grid; place-items: center; width: 14px; height: 14px; margin-right: 6px; border-radius: 50%; background: var(--tone); color: var(--bg); font-size: 10px; font-weight: 700; vertical-align: 1px; }
+.bp-line { grid-column: 1 / -1; position: relative; height: 22px; border-bottom: 1.5px dashed var(--border-strong); margin-top: -1px; }
+.bp-line span { position: sticky; left: 0; display: inline-block; padding: 4px var(--s-3) 0; font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted-fg); }
+.bp-row { display: contents; }
+.t-muted { --tone: var(--muted-fg); } .t-c1 { --tone: var(--c1); } .t-c2 { --tone: var(--c2); } .t-c3 { --tone: var(--c3); } .t-c4 { --tone: var(--c4); } .t-c5, .t-fail { --tone: var(--c5); }
+
 /* Occasion grid (job x where it broke) */
-.bp-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); }
-.prose table.bp { min-width: 1080px; font-size: 13px; line-height: 1.45; table-layout: fixed; }
-.prose table.bp th, .prose table.bp td { padding: var(--s-3); border-bottom: 1px solid var(--border); vertical-align: top; }
-.prose table.bp td + td, .prose table.bp th + th, .prose table.bp th + td { border-left: 1px solid var(--border); }
-.prose table.bp thead th { background: var(--bg-subtle); color: var(--fg); font-weight: 600; border-bottom-color: var(--border-strong); }
-.prose table.bp thead th:first-child, .prose table.bp tbody th { width: 128px; position: sticky; left: 0; z-index: 1; box-shadow: inset -1px 0 0 var(--border); }
-.prose table.bp tbody th, .prose table.bp thead th:first-child { background: linear-gradient(var(--bg-subtle), var(--bg-subtle)), var(--bg); }
-.prose table.bp tbody th { font-size: 12px; font-weight: 600; letter-spacing: .02em; color: var(--muted-fg); text-align: left; }
-.prose table.bp td p { margin: 0; max-width: none; color: var(--fg-2); }
-.prose table.bp td p + p { margin-top: var(--s-2); }
-.prose table.bp tr.bp-line td { padding: 0; height: 0; border-bottom: 1px dashed var(--border-strong); position: relative; }
-.prose table.bp tr.bp-line span { position: sticky; left: 0; display: inline-block; padding: var(--s-1) var(--s-3); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted-fg); }
 .ogrid-wrap { overflow-x: auto; margin: 12px 0 8px; }
 .ogrid { border-collapse: collapse; width: 100%; min-width: 600px; font-size: 13.5px; }
 .ogrid th, .ogrid td { border-bottom: 1px solid var(--border); padding: 12px 14px 12px 0; vertical-align: top; text-align: left; }
@@ -552,23 +561,28 @@ i.m.unknown { opacity: .45; }
     const cell = c => `<section class="vpc-cell"><p class="empathy-label">${esc(c.label)}</p><ul>${c.items.map(i => `<li>${inline(i)}</li>`).join('')}</ul></section>`;
     return `<div class="vpc"><div class="vpc-side"><p class="vpc-title">${t('valueMap')}</p>${cells.slice(0, 3).map(cell).join('')}</div><div class="vpc-side"><p class="vpc-title">${t('customerProfile')}</p>${cells.slice(3, 6).map(cell).join('')}</div></div>`;
   }
-  // ```blueprint  Service blueprint. "Steps: a | b | c" first, then one "Lane: cell | cell | cell" line per lane,
-  // and "--- Label" lines for the lines between lanes (interaction, visibility). " ; " splits a cell into items.
+  // ```blueprint  Service blueprint. "Steps: a | b | c" first, then one "Lane {tone}: cell | cell | cell" line per lane
+  // (tone: c1…c5, muted or fail; add "flow" for arrows between steps, e.g. "{c1 flow}"), and "--- Label" lines for the
+  // lines between lanes (interaction, visibility). " ; " splits a cell into cards; "-" leaves a cell empty.
   function blueprint(src) {
     const rows = []; let steps = [];
     src.split('\n').forEach(line => {
       const t = line.trim(); if (!t) return;
       if (t.startsWith('---')) { rows.push({ line: t.replace(/^-+\s*/, '') }); return; }
       const i = t.indexOf(':'); if (i < 0) return;
-      const label = t.slice(0, i).trim(), cells = t.slice(i + 1).split('|').map(c => c.trim());
-      if (!steps.length) steps = cells; else rows.push({ label, cells });
+      const head = t.slice(0, i).trim(), cells = t.slice(i + 1).split('|').map(c => c.trim());
+      if (!steps.length) { steps = cells; return; }
+      const m = head.match(/^(.*?)\s*\{([^}]*)\}$/), opts = m ? m[2].split(/\s+/) : [];
+      rows.push({ label: m ? m[1] : head, tone: opts.find(o => o !== 'flow') || 'muted', flow: opts.includes('flow'), cells });
     });
-    const n = steps.length;
-    const cell = c => !c || c === '-' ? '<td class="bp-empty"></td>' : `<td>${c.split(' ; ').map(x => `<p>${inline(x)}</p>`).join('')}</td>`;
+    const head = `<div class="bp-corner"></div>` + steps.map((s, k) => `<div class="bp-head"><b>${k + 1}</b><span>${inline(s)}</span></div>`).join('');
     const body = rows.map(r => r.line !== undefined
-      ? `<tr class="bp-line"><td colspan="${n + 1}"><span>${esc(r.line)}</span></td></tr>`
-      : `<tr><th scope="row">${esc(r.label)}</th>${Array.from({ length: n }, (_, k) => cell(r.cells[k])).join('')}</tr>`).join('');
-    return `<div class="bp-wrap"><table class="bp"><thead><tr><th></th>${steps.map(s => `<th scope="col">${inline(s)}</th>`).join('')}</tr></thead><tbody>${body}</tbody></table></div>`;
+      ? `<div class="bp-line"><span>${esc(r.line)}</span></div>`
+      : `<div class="bp-row t-${r.tone}${r.flow ? ' bp-flow' : ''}${r.tone === 'fail' ? ' bp-fail' : ''}"><div class="bp-lane"><i></i>${esc(r.label)}</div>${steps.map((_, k) => {
+          const c = r.cells[k];
+          return `<div class="bp-cell">${!c || c === '-' ? '' : c.split(' ; ').map(x => `<div class="bp-card">${inline(x)}</div>`).join('')}</div>`;
+        }).join('')}</div>`).join('');
+    return `<div class="bp-wrap"><div class="bp" style="--bp-n:${steps.length}">${head}${body}</div></div>`;
   }
   function timeline(src) {
     const items = src.split('\n').map(l => l.trim()).filter(l => l.startsWith('- ')).map(l => {
@@ -801,7 +815,7 @@ i.m.unknown { opacity: .45; }
       if (cols <= 3 && !emptyHead && t.rows.length <= 8) t.classList.add('fit');
     });
     tmp.querySelectorAll('table').forEach(t => {
-      if (t.classList.contains('ogrid') || t.classList.contains('bp')) return;
+      if (t.classList.contains('ogrid')) return;
       const w = document.createElement('div'); w.className = 'table-wrap'; t.replaceWith(w); w.appendChild(t);
       const heads = [...t.querySelectorAll('thead th')];
       if (heads.length && heads.every(th => !th.textContent.trim())) t.classList.add('kv');
