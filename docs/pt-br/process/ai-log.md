@@ -97,6 +97,9 @@ Dois agentes trabalharam em paralelo, cada um na sua aba do navegador no Mobbin.
 ### 21. Identidade v2: mais paletas e o ícone terrier com toldo
 Não encontrei a paleta na primeira rodada e pedi mais, com quatro ou cinco cores por conjunto. O agente principal escreveu dez paletas em torno de pares complementares e um script que confere o contraste de cada tint sobre branco e sobre o fundo do modo escuro, e clareia o tint para o modo escuro. Também pedi um teste de ícone: o toldo da parade como barba de um terrier, mais baixo, com orelhas dobradas, olhos e nariz. O agente desenhou seis variantes em SVG. Os primeiros rascunhos tinham listras brancas que pareciam dentes, o mesmo problema do terrier da v1; ele subiu o toldo para logo abaixo do nariz e coloriu as listras. O canvas de identidade agora também tem versões.
 
+### 22. Identidade v3: uma linha de ícone em cinco paletas
+Escolhi o teste de ícone 3 (sobrancelhas e bigode) e cinco paletas (A, C, F, I, J). O agente principal redesenhou o bigode com quatro e cinco listras e aplicou nas cinco paletas, sobre o tint, num fundo claro e num fundo escuro, e em tamanhos pequenos. O zoom mínimo do canvas caiu para 4%, porque o quadro de identidade ficou mais alto do que o ajuste à tela conseguia mostrar.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.

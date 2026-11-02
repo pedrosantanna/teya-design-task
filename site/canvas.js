@@ -8,7 +8,7 @@
 //   <a class="link" data-from="id or selector" data-to="id" data-label-en data-label-pt>  an arrow
 // Items can be selected, not moved. Pan: wheel, space/middle drag, H. Zoom: ctrl/cmd + wheel, pinch.
 (() => {
-  const MIN = 0.1, MAX = 4, PAD = 64;
+  const MIN = 0.04, MAX = 4, PAD = 64;
   const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function mount(root, html, opts) {

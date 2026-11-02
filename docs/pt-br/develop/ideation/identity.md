@@ -23,7 +23,8 @@ Trade-offs:
 
 | Versão | O que mudou |
 | --- | --- |
-| v2 (atual) | Mais dez paletas de quatro ou cinco cores, e seis testes de ícone em que o toldo da parade vira a barba de um terrier |
+| v3 (atual) | Teste de ícone 3 (sobrancelhas e bigode) com bigode de quatro ou cinco listras, nas paletas A, C, F, I e J |
+| v2 | Mais dez paletas de quatro ou cinco cores, e seis testes de ícone em que o toldo da parade vira a barba de um terrier |
 | v1 | Quatro direções de conceito, três paletas, aplicações na home da v2, referências |
 
 ## Paletas, segunda rodada
@@ -42,6 +43,10 @@ Não encontrei a paleta nas três primeiras. Estas dez trabalham com mais cores 
 | H · Night bus | 4 | Indigo #3D35B8, Amber #FFB000, Neon pink #FF5FA2, Cyan #3FD0E0 | #3D35B8 (8,75:1) / #807AD9 (4,62:1) |
 | I · Tea and biscuits | 5 | Tea teal #0F6E6E, Jam #C8325A, Custard #F7C948, Oat #E9DCC3, Brew #5A3E2B | #0F6E6E (6,04:1) / #149292 (4,5:1) |
 | J · Pastel parade | 5 | Ink blue #2442A8, Peach #FFB59E, Pistachio #C9EBA2, Lavender #CDBDFF, Butter #FFE7A0 | #2442A8 (8,68:1) / #647FDE (4,56:1) |
+
+## Teste de ícone 3, explorado
+
+Escolhi a linha do teste de ícone 3, sobrancelhas e bigode, e pedi um bigode mais largo, com quatro ou cinco listras, nas paletas Lido (A), Pick and mix (C), Flower show (F), Tea and biscuits (I) e Pastel parade (J). Cada paleta mostra o ícone sobre o tint, num fundo claro e num fundo escuro, e depois em 60 e 29 pontos.
 
 ## Testes de ícone
 

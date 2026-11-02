@@ -97,6 +97,9 @@ Two agents worked in parallel, each in its own browser tab on Mobbin. One collec
 ### 21. Identity v2: more palettes and the terrier-awning icon
 I didn't find the palette in the first round and asked for more, with four or five colours per set. The main agent wrote ten palettes around complementary pairs and a script that checks each tint's contrast on white and on the dark-mode background and lightens it for dark mode. I also asked for an icon test: the parade's awning as a terrier's beard, lowered, with folded ears, eyes and a nose. The agent drew six variants in SVG. The first drafts had white stripes that read as teeth, the same problem as the v1 terrier; it moved the awning up under the nose and coloured the stripes. The identity canvas now has versions too.
 
+### 22. Identity v3: one icon line in five palettes
+I picked icon test 3 (brows and a moustache) and five palettes (A, C, F, I, J). The main agent redrew the moustache with four and five stripes and rendered each in the five palettes, on the tint, a light tile and a dark tile, and at small sizes. The canvas's minimum zoom went down to 4%, because the identity board had grown taller than the fit could show.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.

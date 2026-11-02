@@ -206,6 +206,10 @@
               "src": "docs/develop/ideation/identity.md",
               "canvas": [
                 {
+                  "version": "v3",
+                  "file": "docs/develop/ideation/identity-v3.html"
+                },
+                {
                   "version": "v2",
                   "file": "docs/develop/ideation/identity-v2.html"
                 },
