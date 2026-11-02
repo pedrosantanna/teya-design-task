@@ -32,10 +32,9 @@ Source: English Markdown in `docs/`. Target: Brazilian Portuguese in `docs/pt-br
 | tag(s) | etiqueta(s) |
 | cluster / clustering | cluster / clusterização |
 | need urgency | urgência da necessidade |
-| point of failure | ponto de falha |
+| purchase stage | etapa da compra |
 | browsing ↔ needs it now | passeando ↔ precisa agora |
-| knowing ↔ getting | saber ↔ conseguir |
-| couldn't find out / wasn't there / not worth it / couldn't get it | não conseguiu saber / não estava lá / não valeu a pena / não conseguiu pegar |
+| find out → find it → accept it → get it | saber → encontrar → aceitar → levar |
 | mission shopper | comprador em missão |
 | lapsed local | local que desistiu |
 | the regular | a frequentadora |

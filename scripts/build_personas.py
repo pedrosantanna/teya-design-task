@@ -9,7 +9,10 @@ Inputs (docs/discover/personas/):
 
 Each post with a failure gets two scores:
   need   = discovery 1, routine 4, specific 7, plus 3 if urgent      (0 browse .. 10 mission)
-  breaks = information 9, availability 6, value 4, access 1        (10 findability .. 0 transaction)
+  stage  = the step of the purchase where it stopped, in order:
+           1 find out (information) 10, 2 find it (availability) 6.7,
+           3 accept it (value) 3.3, 4 get it (access) 0          (10 findability .. 0 transaction)
+           Equal steps, on the same 0-10 range as need, so k-means weighs both axes alike.
 Posts where nothing broke are listed beside the chart, not clustered.
 Clusters: k-means on (need, breaks), k from 2 to 5, keeping the k with the
 best mean silhouette. Clusters are named by fixed rules on their centres:
@@ -32,14 +35,14 @@ PT_PAGES = [PT_DIR / "index.md", PT_DIR / "method.md", PT_DIR / "method-details.
 PT_TERMS = [
     ("Sam, the mission shopper", "Sam, o comprador em missão"), ("Jess, the lapsed local", "Jess, a local que desistiu"),
     ("Ruth, the regular", "Ruth, a frequentadora"), ("Nothing broke (not clustered)", "Nada deu errado (fora dos clusters)"),
-    ("| Group |", "| Grupo |"), ("| Posts |", "| Posts |"), ("| People |", "| Pessoas |"), ("Centre (urgency, failure)", "Centro (urgência, falha)"),
-    ("| Sources |", "| Fontes |"), ("| Where it broke |", "| Onde deu errado |"), ("| What they did next |", "| O que fizeram depois |"),
-    ("| Where it broke | Posts | Points to |", "| Onde deu errado | Posts | Aponta para |"), ("| Information |", "| Informação |"),
-    ("| Access |", "| Acesso |"), ("| Availability |", "| Disponibilidade |"), ("| Value |", "| Valor |"), ("| No failure |", "| Sem falha |"),
+    ("| Group |", "| Grupo |"), ("| Posts |", "| Posts |"), ("| People |", "| Pessoas |"), ("Centre (urgency, stage)", "Centro (urgência, etapa)"),
+    ("| Sources |", "| Fontes |"), ("| Where it stopped |", "| Onde parou |"), ("| What they did next |", "| O que fizeram depois |"),
+    ("| Where it stopped | Posts | Points to |", "| Onde parou | Posts | Aponta para |"), ("| 1 · Find out |", "| 1 · Saber |"),
+    ("| 4 · Get it |", "| 4 · Levar |"), ("| 2 · Find it |", "| 2 · Encontrar |"), ("| 3 · Accept it |", "| 3 · Aceitar |"), ("| No failure |", "| Sem falha |"),
     ("| findability |", "| findability |"), ("| transaction |", "| transaction |"), ("| the street's offer |", "| a oferta da rua |"), ("| nothing to fix |", "| nada a resolver |"),
     ("| Field | Posts compared | Agreement | Cohen's kappa |", "| Campo | Posts comparados | Concordância | Kappa de Cohen |"),
     ("| Clusters (k) | Mean silhouette |", "| Clusters (k) | Silhouette médio |"), ("← chosen", "← escolhido"),
-    ("| Post | Date | Job | Urgent | Failure | Stance | Urgency | Failure score | Group | Why |", "| Post | Data | Tarefa | Urgente | Falha | Atitude | Urgência | Nota de falha | Grupo | Por quê |"),
+    ("| Post | Date | Job | Urgent | Failure | Stance | Urgency | Stage score | Group | Why |", "| Post | Data | Tarefa | Urgente | Falha | Atitude | Urgência | Nota da etapa | Grupo | Por quê |"),
     ("| Post | Settled as | Why |", "| Post | Resolvido como | Por quê |"), ("| Post | Why it was left out |", "| Post | Por que ficou de fora |"),
     ("West London", "West London"), ("UK-wide", "Reino Unido"), ("excluded", "excluído"),
 ]
@@ -53,10 +56,10 @@ def to_pt(text):
 
 JOBS = [("specific", "Specific item or shop"), ("routine", "Routine shopping and services"), ("discovery", "Discovery and browsing")]
 FAILURES = [
-    ("information", "Information", "findability"),
-    ("access", "Access", "transaction"),
-    ("availability", "Availability", "the street's offer"),
-    ("value", "Value", "the street's offer"),
+    ("information", "1 · Find out", "findability"),
+    ("availability", "2 · Find it", "the street's offer"),
+    ("value", "3 · Accept it", "the street's offer"),
+    ("access", "4 · Get it", "transaction"),
     ("none", "No failure", ""),
 ]
 GROUPS = {
@@ -69,7 +72,7 @@ FIELDS = ("include", "job", "urgent", "failure", "stance")
 
 
 NEED = {"discovery": 1, "routine": 4, "specific": 7}
-BREAKS = {"information": 9, "availability": 6, "value": 4, "access": 1}
+BREAKS = {"information": 10, "availability": 6.7, "value": 3.3, "access": 0}
 NAMES = {"mission": "Sam, the mission shopper", "lapsed": "Jess, the lapsed local", "regular": "Ruth, the regular"}
 
 
@@ -175,7 +178,7 @@ def main():
 
     chart = {
         "x": {"label": "Need urgency", "ticks": [[1, "Discovery"], [4, "Routine"], [7, "Specific item"], [10, "Specific + deadline"]], "min": "Browsing", "max": "Needs it now"},
-        "y": {"label": "Point of failure", "ticks": [[9, "Couldn't find out"], [6, "Wasn't there"], [4, "Not worth it"], [1, "Couldn't get it"]], "min": "Getting · transaction", "max": "Knowing · findability"},
+        "y": {"label": "Purchase stage", "ticks": [[10, "1 · Find out"], [6.7, "2 · Find it"], [3.3, "3 · Accept it"], [0, "4 · Get it"]], "min": "Get it · transaction", "max": "Find out · findability"},
         "names": {k: NAMES.get(k, k) for k in centres},
         "centres": centres,
         "points": [{"x": p["x"], "y": p["y"], "c": p["cluster"], "s": p["stance"], "h": p["handle"]} for p in pts],
@@ -200,7 +203,7 @@ def main():
     grid_md = "```occasion-grid\n" + json.dumps(grid, ensure_ascii=False) + "\n```"
 
     # Group summary with source mix.
-    rows = ["| Group | Posts | People | Centre (urgency, failure) | Sources | Where it broke | What they did next |", "| --- | --- | --- | --- | --- | --- | --- |"]
+    rows = ["| Group | Posts | People | Centre (urgency, stage) | Sources | Where it stopped | What they did next |", "| --- | --- | --- | --- | --- | --- | --- |"]
     for gid, name in GROUPS.items():
         mine = [p for p in posts if p["group"] == gid]
         if not mine:
@@ -217,13 +220,13 @@ def main():
 
     # Failure totals, the part that speaks to the brief.
     total = Counter(p["failure"] for p in posts)
-    fail_rows = ["| Where it broke | Posts | Points to |", "| --- | --- | --- |"]
+    fail_rows = ["| Where it stopped | Posts | Points to |", "| --- | --- | --- |"]
     for f, label, maps in FAILURES:
         fail_rows.append(f"| {label} | {total.get(f, 0)} | {maps or 'nothing to fix'} |")
     failures_md = "\n".join(fail_rows)
 
     # Per-post coding table.
-    table = ["| Post | Date | Job | Urgent | Failure | Stance | Urgency | Failure score | Group | Why |", "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
+    table = ["| Post | Date | Job | Urgent | Failure | Stance | Urgency | Stage score | Group | Why |", "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
     for p in sorted(posts, key=lambda p: (list(GROUPS).index(p["group"]), p["job"], p["failure"])):
         table.append(f"| [{p['handle']}]({p['url']}) | {p['date']} | {p['job']} | {p['urgent']} | {p['failure']} | {p['stance']} | {p.get('x', '–')} | {p.get('y', '–')} | {GROUPS[p['group']].split(',')[0]} | {p['rationale']} |")
     excluded = ["| Post | Why it was left out |", "| --- | --- |"]

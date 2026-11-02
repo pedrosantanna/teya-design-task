@@ -1,14 +1,14 @@
 # The brief
 
-A take-home from Teya Design. It is a made-up brief, not a live Teya project. This page restates it so everything that follows can be checked against it.
+A take-home from Teya Design. The brief is made up; there is no live Teya project behind it. I restate it here so everything that follows can be checked against it.
 
 ## The problem
 
 Every high street has dozens of small businesses on it: a bakery, a hardware shop, a florist, a record store, a butcher. Almost none of them can be found or shopped from one place.
 
-Imagine an app, mobile or web, that brings them together. A shopper opens it and sees at a glance what is actually available near them right now. They find what they need, buy it, and choose to collect it or have it delivered.
+Imagine an app, mobile or web, that brings them together. A shopper opens it and sees at a glance what is available near them right now. They find what they need, buy it, and choose to collect it or have it delivered.
 
-## Two hard problems, pick one
+## The two problems
 
 - **Findability.** How does someone find something worth buying across hundreds of tiny, badly catalogued merchants? Browsing, search, or something else?
 - **Transaction.** How does one basket across several independent shops resolve into a single purchase, with pickup and delivery in the mix?
@@ -17,7 +17,7 @@ The brief asks for a clear position on one of them, and for evidence that the ot
 
 I define the shopper and the scope. Anything missing (data, merchant behaviour, logistics, business model) gets assumed, and the assumption gets written down.
 
-## What gets delivered
+## Deliverables
 
 1. **A prototype.** A few key steps of one journey, enough to click through and feel the idea. One or two screens taken to real polish; the rest can stay rough.
 2. **A recording of 5 to 20 minutes**, screen shared and narrated:
@@ -29,5 +29,5 @@ I define the shopper and the scope. Anything missing (data, merchant behaviour, 
 
 - A few honest hours, not a polished weekend.
 - No slides.
-- Any AI tooling is fair game, shown as it really went, failures included.
+- Any AI tooling is fair game, shown as it went, failures included.
 - Own design system or none.

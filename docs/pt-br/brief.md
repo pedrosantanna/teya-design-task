@@ -1,14 +1,14 @@
 # O brief
 
-Um take-home da Teya Design. É um brief fictício, não um projeto real da Teya. Esta página o reescreve para que tudo o que vem depois possa ser conferido contra ele.
+Um take-home da Teya Design. O brief é fictício; não há um projeto real da Teya por trás dele. Eu o reescrevo aqui para que tudo o que vem depois possa ser conferido com ele.
 
 ## O problema
 
 Toda high street, a rua comercial do bairro, tem dezenas de pequenos negócios: uma padaria, uma loja de ferragens, uma floricultura, uma loja de discos, um açougue. Quase nenhum deles pode ser encontrado ou comprado a partir de um só lugar.
 
-Imagine um app, mobile ou web, que reúna esses negócios. Quem compra abre o app e vê de relance o que está de fato disponível por perto agora. Encontra o que precisa, compra e escolhe retirar na loja ou receber em casa.
+Imagine um app, mobile ou web, que reúna esses negócios. Quem compra abre o app e vê de relance o que está disponível por perto agora. Encontra o que precisa, compra e escolhe retirar na loja ou receber em casa.
 
-## Dois problemas difíceis, escolha um
+## Os dois problemas
 
 - **Findability.** Como alguém encontra algo que vale a pena comprar entre centenas de comerciantes minúsculos e mal catalogados? Navegação, busca ou outra coisa?
 - **Transaction.** Como uma cesta com itens de várias lojas independentes se resolve numa única compra, levando em conta retirada e entrega?
@@ -17,7 +17,7 @@ O brief pede uma posição clara sobre um deles, e evidência de que as restriç
 
 Eu defino o comprador e o escopo. O que faltar (dados, comportamento dos comerciantes, logística, modelo de negócio) é assumido, e a premissa fica registrada por escrito.
 
-## O que é entregue
+## Entregáveis
 
 1. **Um protótipo.** Algumas etapas-chave de uma jornada, o suficiente para clicar e sentir a ideia. Uma ou duas telas com acabamento real; o resto pode ficar rústico.
 2. **Uma gravação de 5 a 20 minutos**, com tela compartilhada e narração:
@@ -29,5 +29,5 @@ Eu defino o comprador e o escopo. O que faltar (dados, comportamento dos comerci
 
 - Algumas horas honestas, não um fim de semana de polimento.
 - Sem slides.
-- Qualquer ferramenta de IA vale, mostrada como de fato foi, falhas incluídas.
+- Qualquer ferramenta de IA vale, mostrada como foi, falhas incluídas.
 - Design system próprio ou nenhum.

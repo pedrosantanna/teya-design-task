@@ -5,20 +5,22 @@ The clearest thing Londoners say about their high street is that they can't tell
 ```summary
 Takeaways:
 - Not knowing what's in stock, or what's open, is the strongest theme.
-- Loyalty to local is real but stops at the first wasted trip.
+- Shoppers say they'll pay more to buy local, and pull back after one wasted trip.
 - On X and TikTok the high street is a place to discover, with little practical talk.
 Call:
-- I ranked the themes by strength of evidence (number of quotes, networks, recency, how specific to West London), not by how useful they are to the brief.
+- I ranked the themes by strength of evidence: number of quotes, networks, recency and how specific to West London. Usefulness to the brief didn't affect the order.
 - Quotes stay short and linked, and interpretation is labelled as mine.
 AI:
 - The research agent tagged the quotes with 14 codes and grouped them into themes. A writing agent picked about 40 quotes and wrote each theme.
 Trade-offs:
-- Themes come from posts people chose to write, so strength means "repeated", not "common".
+- Themes come from posts people chose to write. Strength measures how often a theme repeats in the posts and says nothing about how common it is in daily life.
 ```
 
-Ten themes came out of the coding, ordered here from strongest evidence to weakest. The [method](method.md) page explains how quotes were chosen and what `verified` and `archive` mean.
+The coding produced ten themes, numbered from the strongest evidence to the weakest. How quotes were chosen and what `verified` and `archive` mean is in [method](method.md).
 
-## 1. "Is it in stock right now?" has no answer except asking people
+## 1. Stock
+
+The only way to find out whether a shop has something right now is to ask people.
 
 **Evidence: strong.** Many quotes, two networks, mostly West London and London, all from 2025–26.
 
@@ -79,7 +81,9 @@ context: The website said yes, the shop said no. Ended up buying from Amazon.
 status: verified
 ```
 
-## 2. Opening hours are a trust problem
+## 2. Opening hours
+
+Shoppers don't trust the opening hours they find online.
 
 **Evidence: strong.** West London Reddit plus a 649-reply Mumsnet thread.
 
@@ -118,7 +122,9 @@ context: About a butcher they buy from every week.
 status: verified
 ```
 
-## 3. A failed trip ends at Amazon, but urgent needs beat online too
+## 3. Failed trips and urgent needs
+
+A failed trip usually ends at Amazon, but an urgent need can beat online too.
 
 **Evidence: strong overall.** The "failed trip" half is mostly UK-wide; the "online fails too" half is London.
 
@@ -168,7 +174,9 @@ context: Top reply in the heatwave portable-AC thread.
 status: verified
 ```
 
-## 4. Loyalty to local is real, and conditional
+## 4. Loyalty to local
+
+Loyalty to local shops holds until the first wasted trip.
 
 **Evidence: moderate to strong.** Reddit and Mumsnet, London and UK-wide.
 
@@ -220,9 +228,11 @@ status: verified
 
 ## 5. King Street versus Chiswick
 
+Locals send visitors away from King Street and towards Chiswick High Road.
+
 **Evidence: strong for West London.** Reddit only.
 
-Locals send visitors away from King Street and towards Chiswick High Road. King Street's assets, its charity shops and markets, are described as being for locals. My interpretation: a product anchored on Hammersmith has to work for everyday errands before it can work for browsing.
+King Street's assets, its charity shops and markets, are described as being for locals. My interpretation: a product anchored on Hammersmith has to work for everyday errands before it can work for browsing.
 
 ```quote
 text: King Street isn't great for window shopping, it's mainly takeaways, slot casinos, tk maxx and other cheap chains. The shops in Chiswick are nicer…
@@ -257,11 +267,13 @@ context: "Best high street in London?" Chiswick was the top West London answer.
 status: verified
 ```
 
-## 6. Losing the practical shops
+## 6. Closures
+
+West London is losing its practical shops, and people travel further for the basics.
 
 **Evidence: strong.** Many specific West London closures, 2025–26.
 
-Threads mourn named practical shops: Kew's butcher, Northfields' butchers and fishmonger, Ealing's century-old City Radio Stores. What replaces them is upmarket or a chain, and people travel further for the basics.
+Threads mourn named practical shops: Kew's butcher, Northfields' butchers and fishmonger, Ealing's century-old City Radio Stores. What replaces them is upmarket or a chain.
 
 ```quote
 text: If somewhere minted like Kew can't support a proper butcher, where can?
@@ -307,7 +319,9 @@ context: The former owner's son, on City Radio Stores closing.
 status: verified
 ```
 
-## 7. Chains versus independents is a practical call
+## 7. Chains and independents
+
+People choose between chains and independents on practical grounds.
 
 **Evidence: moderate.** London Reddit.
 
@@ -346,7 +360,9 @@ context: Kew butcher thread.
 status: verified
 ```
 
-## 8. Collection and delivery are about control
+## 8. Collection and delivery
+
+People use collection and delivery to stay in control of timing.
 
 **Evidence: moderate.** Fewer quotes, spread across Reddit.
 
@@ -374,7 +390,9 @@ context: Thread on the Ealing Broadway post office closing. Links to the thread 
 status: verified
 ```
 
-## 9. Small frictions: cash, parking, the bridge
+## 9. Cash, parking and the bridge
+
+Paying and getting there cause small frictions, and the evidence on the bridge is mixed.
 
 **Evidence: weak to moderate.** The Hammersmith Bridge evidence points both ways.
 
@@ -413,7 +431,9 @@ context: On plans to reopen the bridge to cars being dropped.
 status: verified
 ```
 
-## 10. On X and TikTok the high street is a place to discover
+## 10. X and TikTok
+
+Both networks treat the high street as somewhere to discover places.
 
 **Evidence: moderate for TikTok, weak for X.** Read live on 1 November 2026.
 
@@ -421,7 +441,7 @@ Neither network carries much of the practical talk Reddit does. On X, "high stre
 
 TikTok treats the high street as discovery. Videos pin a place with 📍, call it a steal or a hidden find, and offer it as an alternative to Oxford Street. Around Hammersmith the results are food, charity-shop hauls, bargain shops, a florist stall and a flea market, and many are made by the shops themselves. That fits the browse end of the [first dimension](dimensions.md): people find places through content, without searching for an item.
 
-One small, new signal: shoppers on X asking the platform's AI chatbot which shop has an item in stock. It turned up once, in the post below, so it is a note to watch, not a finding.
+One small, new signal: shoppers on X asking the platform's AI chatbot which shop has an item in stock. It turned up once, in the post below, so I'm keeping it as something to watch and haven't counted it as a finding.
 
 ```quote
 text: Just walked the length of King Street in Hammersmith. Blimey, that was a thoroughly depressing experience.
@@ -511,12 +531,12 @@ context: A market under the Hammersmith Flyover; organisers flag card payments u
 status: verified
 ```
 
-## What this does not tell us
+## Limits
 
-- **How often any of this happens.** These are posts people chose to write. They show what annoys people enough to post, and say nothing about frequency.
-- **What older and offline shoppers think.** They barely appear on Reddit or Mumsnet.
-- **Anything from shopkeepers.** Shop-owner posts were excluded, so why hours and stock are the way they are is still a guess.
-- **Whether people would use an app for this.** Nobody was asked. The pull towards live stock and reliable hours is my reading of unprompted complaints.
-- **What TikTok viewers say back.** Only captions were collected.
+- The posts can't say how often any of this happens. People chose to write them, so they show what annoys people enough to post.
+- Older and offline shoppers barely appear on Reddit or Mumsnet.
+- Shop-owner posts were excluded, so why hours and stock are the way they are is still a guess.
+- Nobody was asked whether they would use an app for this. The pull towards live stock and reliable hours is my reading of unprompted complaints.
+- Only TikTok captions were collected, so what viewers say back is missing.
 
 These themes feed the [empathy map](empathy-map.md) and the [proposed dimensions](dimensions.md).

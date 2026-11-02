@@ -443,14 +443,14 @@ i.m.unknown { opacity: .45; }
   const t = k => (UI[LANG][k] !== undefined ? UI[LANG][k] : UI.en[k]);
   // Labels that come from generated data (chart JSON) and are written in English.
   const PT_STR = {
-    'Need urgency': 'Urgência da necessidade', 'Point of failure': 'Ponto de falha', 'Browsing': 'Passeando', 'Needs it now': 'Precisa agora',
-    'Knowing · findability': 'Saber · findability', 'Getting · transaction': 'Conseguir · transaction',
+    'Need urgency': 'Urgência da necessidade', 'Purchase stage': 'Etapa da compra', 'Browsing': 'Passeando', 'Needs it now': 'Precisa agora',
+    'Find out · findability': 'Saber · findability', 'Get it · transaction': 'Levar · transaction',
     'Discovery': 'Descoberta', 'Routine': 'Rotina', 'Specific item': 'Item específico', 'Specific + deadline': 'Específico + prazo',
-    "Couldn't find out": 'Não conseguiu saber', "Wasn't there": 'Não estava lá', 'Not worth it': 'Não valeu a pena', "Couldn't get it": 'Não conseguiu pegar',
+    '1 · Find out': '1 · Saber', '2 · Find it': '2 · Encontrar', '3 · Accept it': '3 · Aceitar', '4 · Get it': '4 · Levar',
     'Sam, the mission shopper': 'Sam, o comprador em missão', 'Jess, the lapsed local': 'Jess, a local que desistiu', 'Ruth, the regular': 'Ruth, a frequentadora',
     'Nothing broke (not clustered)': 'Nada deu errado (fora dos clusters)',
-    'Specific item or shop': 'Item ou loja específica', 'Routine shopping and services': 'Compras de rotina e serviços', 'Discovery and browsing': 'Descoberta e navegação',
-    'Information': 'Informação', 'Access': 'Acesso', 'Availability': 'Disponibilidade', 'Value': 'Valor', 'No failure': 'Sem falha',
+    'Specific item or shop': 'Item ou loja específica', 'Routine shopping and services': 'Compras de rotina e serviços', 'Discovery and browsing': 'Descoberta e passeio',
+    'No failure': 'Sem falha',
     'findability': 'findability', 'transaction': 'transaction', "the street's offer": 'a oferta da rua'
   };
   const tr = s => (LANG === 'pt' && PT_STR[s]) ? PT_STR[s] : s;
@@ -552,8 +552,8 @@ i.m.unknown { opacity: .45; }
   function clusterMap(src) {
     let d;
     try { d = JSON.parse(src); } catch (e) { return `<pre><code>${esc(src)}</code></pre>`; }
-    const W = 680, H = 440, Lm = 128, R = 24, T = 24, B = 52;
-    const sx = v => Lm + (v / 10.5) * (W - Lm - R), sy = v => T + (1 - v / 10) * (H - T - B);
+    const W = 680, H = 452, Lm = 128, R = 24, T = 36, B = 52;
+    const sx = v => Lm + (v / 10.5) * (W - Lm - R), sy = v => T + (1 - (v + 0.8) / 11.6) * (H - T - B);
     const ids = Object.keys(d.names);
     const col = c => `var(--c${ids.indexOf(c) + 1})`;
     // Posts with the same codes share a coordinate; lay them out in a small grid around it.
@@ -566,11 +566,11 @@ i.m.unknown { opacity: .45; }
       placed.push({ ...p, cx: sx(p.x) - w / 2 + c * off, cy: sy(p.y) - h / 2 + r * off });
     }));
     let g = '';
-    d.x.ticks.forEach(([v, lab]) => g += `<line class="gl" x1="${sx(v)}" x2="${sx(v)}" y1="${sy(10)}" y2="${sy(0)}"/><text class="tk" x="${sx(v)}" y="${sy(0) + 18}" text-anchor="middle">${esc(tr(lab))}</text>`);
+    d.x.ticks.forEach(([v, lab]) => g += `<line class="gl" x1="${sx(v)}" x2="${sx(v)}" y1="${sy(10.8)}" y2="${sy(-0.8)}"/><text class="tk" x="${sx(v)}" y="${sy(-0.8) + 18}" text-anchor="middle">${esc(tr(lab))}</text>`);
     d.y.ticks.forEach(([v, lab]) => g += `<line class="gl" x1="${sx(0)}" x2="${sx(10.5)}" y1="${sy(v)}" y2="${sy(v)}"/><text class="tk" x="${Lm - 10}" y="${sy(v) + 4}" text-anchor="end">${esc(tr(lab))}</text>`);
-    g += `<line class="base" x1="${sx(0)}" x2="${sx(10.5)}" y1="${sy(0)}" y2="${sy(0)}"/><line class="base" x1="${sx(0)}" x2="${sx(0)}" y1="${sy(10)}" y2="${sy(0)}"/>`;
+    g += `<line class="base" x1="${sx(0)}" x2="${sx(10.5)}" y1="${sy(-0.8)}" y2="${sy(-0.8)}"/><line class="base" x1="${sx(0)}" x2="${sx(0)}" y1="${sy(10.8)}" y2="${sy(-0.8)}"/>`;
     g += `<text class="ax" x="${sx(0)}" y="${H - 6}">← ${esc(tr(d.x.min))}</text><text class="ax" x="${sx(10.5)}" y="${H - 6}" text-anchor="end">${esc(tr(d.x.max))} →</text>`;
-    g += `<text class="ax" x="8" y="${sy(10) + 4}">↑ ${esc(tr(d.y.max))}</text><text class="ax" x="8" y="${sy(0)}">↓ ${esc(tr(d.y.min))}</text>`;
+    g += `<text class="ax" x="8" y="${T - 14}">↑ ${esc(tr(d.y.max))}</text><text class="ax" x="8" y="${sy(-0.8) + 18}">↓ ${esc(tr(d.y.min))}</text>`;
     // A soft zone around each cluster: the box around its points, padded.
     ids.forEach(c => {
       const mine = placed.filter(p => p.c === c); if (!mine.length) return;

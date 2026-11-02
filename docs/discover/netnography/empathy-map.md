@@ -1,17 +1,18 @@
 # Empathy map
 
-The subject is a composite: a Hammersmith or West London resident who would like to use the local high street but runs on a tight weekday schedule. Each line names the post it came from. Most of those posts are quoted on the [findings](findings.md) page; the rest were read during the netnography but not quoted.
+The subject is a composite: a Hammersmith or West London resident who would like to use the local high street but runs on a tight weekday schedule. Each line links the post it came from. Most of those posts are quoted in the [findings](findings.md), and the rest were read during the netnography without being quoted.
 
 ```summary
 Takeaways:
 - The main pain: not knowing whether the shop has it, or is open, before leaving home.
 - What people say about supporting local often differs from what they do.
 Call:
-- Use the Strategyzer empathy map, so each box points back to real posts.
+- I used the Strategyzer empathy map and tied every line to a post.
 AI:
 - A writing agent filled each box from the coded quotes, with a pointer to the source.
 Trade-offs:
-- It's a composite of many voices, not one person, and it inherits the netnography's gaps.
+- It rests on attitudinal data: what people say they see, think and do, taken from posts. Nobody was observed.
+- It pools many voices into one composite and inherits the netnography's gaps.
 ```
 
 ```empathy-map
@@ -57,14 +58,14 @@ Gains:
 - A high street with a "mix of chain and local options" to be proud of ([u/JollyExPat](https://www.reddit.com/r/london/comments/1tatyc0/comment/olc54ib/), May 2026)
 ```
 
-## Where saying and doing diverge
+## Saying and doing
 
-The map is most useful where the boxes disagree. These are my interpretations of the posts, not things anyone said outright.
+The boxes disagree in three places. Each reading below is mine; nobody in the posts said it outright.
 
-- **"Support local" versus where the money goes.** Almost everyone says they value independents. The butcher thread shows the routine shop going to the supermarket, with the independent kept for special occasions ([u/killmetruck](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq967k5/), Jun 2026).
-- **Mourning shops they rarely used.** A poster regrets a bike workshop closing in the same comment where they admit going once because it seemed expensive ([u/Username8831](https://www.reddit.com/r/Ealing/comments/1v6423y/comment/oznttbd/), Jul 2026). Another local replies to the Kew butcher post with "haven't been in over a year and then wonder why shops are shutting" ([u/Greg-Normal](https://www.reddit.com/r/london/comments/1niwnlw/comment/neo7ha3/), Sep 2025).
-- **Price as the stated reason, effort as the real one.** People name price when they explain shopping online, yet several say they would have paid the premium if the shop had been open or had stock ([u/xmastreee](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb31nms/), Aug 2025; [FerrisWheelsandLilacs](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976658), Mumsnet, Dec 2025). That makes me read the wasted trip as the bigger deterrent.
+- Almost everyone says they value independents, and the money still goes elsewhere. The butcher thread shows the routine shop going to the supermarket, with the independent kept for special occasions ([u/killmetruck](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq967k5/), Jun 2026).
+- People mourn shops they rarely used. A poster regrets a bike workshop closing in the same comment where they admit going once because it seemed expensive ([u/Username8831](https://www.reddit.com/r/Ealing/comments/1v6423y/comment/oznttbd/), Jul 2026). Another local replies to the Kew butcher post with "haven't been in over a year and then wonder why shops are shutting" ([u/Greg-Normal](https://www.reddit.com/r/london/comments/1niwnlw/comment/neo7ha3/), Sep 2025).
+- People name price when they explain shopping online, yet several say they would have paid the premium if the shop had been open or had stock ([u/xmastreee](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb31nms/), Aug 2025; [FerrisWheelsandLilacs](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976658), Mumsnet, Dec 2025). That makes me read the effort of a wasted trip as the bigger deterrent.
 
-## A composite, not a persona
+## Composite
 
-This map pools posts from dozens of different people across Reddit, Mumsnet and TikTok. Nobody in it is a single real person, and it carries the same skews as the data: younger, online, and quick to complain (see [method](method.md)). It is input for defining the shopper in Define, alongside the [proposed dimensions](dimensions.md), and should be checked with real shoppers before it shapes decisions.
+The map pools posts from dozens of different people across Reddit, Mumsnet and TikTok, so nobody in it is a single person. It carries the same skews as the data: younger, online and quick to complain (see [method](method.md)). It is input for defining the shopper in Define, alongside the [proposed dimensions](dimensions.md), and needs checking with shoppers before it shapes decisions.

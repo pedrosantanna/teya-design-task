@@ -5,20 +5,22 @@ O que os londrinos dizem com mais clareza sobre a high street, a rua comercial d
 ```summary
 Takeaways:
 - Não saber o que tem em estoque, ou o que está aberto, é o tema mais forte.
-- A lealdade ao comércio local é real, mas acaba na primeira ida perdida.
+- Os compradores dizem que pagam mais para comprar no comércio local, e recuam depois de uma ida perdida.
 - No X e no TikTok a high street é um lugar para descobrir, com pouca conversa prática.
 Call:
-- Ordenei os temas pela força da evidência (número de citações, redes, quão recentes, quão específicas do oeste de Londres), não por quão úteis são para o brief.
+- Ordenei os temas pela força da evidência: número de citações, redes, quão recentes e quão específicas do oeste de Londres. A utilidade para o brief não entrou na ordem.
 - As citações ficam curtas e com link, e a interpretação vem marcada como minha.
 AI:
 - O agente de pesquisa etiquetou as citações com 14 códigos e as agrupou em temas. Um agente de escrita escolheu cerca de 40 citações e escreveu cada tema.
 Trade-offs:
-- Os temas vêm de posts que as pessoas escolheram escrever, então força quer dizer "repetido", não "comum".
+- Os temas vêm de posts que as pessoas escolheram escrever. A força mede quantas vezes um tema se repete nos posts e não diz nada sobre quão comum ele é no dia a dia.
 ```
 
-Dez temas saíram da etiquetagem, ordenados aqui da evidência mais forte para a mais fraca. A página de [método](method.md) explica como as citações foram escolhidas e o que `verified` e `archive` significam.
+A etiquetagem produziu dez temas, numerados da evidência mais forte para a mais fraca. Como as citações foram escolhidas e o que `verified` e `archive` significam está em [método](method.md).
 
-## 1. "Is it in stock right now?" (tem em estoque agora?) não tem resposta, a não ser perguntando às pessoas
+## 1. Estoque
+
+O único jeito de saber se uma loja tem algo agora é perguntar a alguém.
 
 **Evidência: forte.** Muitas citações, duas redes, a maioria do oeste de Londres e de Londres, todas de 2025–26.
 
@@ -79,7 +81,9 @@ context: O site dizia que sim, a loja disse que não. Acabou comprando na Amazon
 status: verified
 ```
 
-## 2. Horário de funcionamento é um problema de confiança
+## 2. Horário de funcionamento
+
+Os compradores não confiam nos horários que encontram online.
 
 **Evidência: forte.** Reddit do oeste de Londres mais uma thread do Mumsnet com 649 respostas.
 
@@ -118,7 +122,9 @@ context: Sobre um açougue onde a pessoa compra toda semana.
 status: verified
 ```
 
-## 3. Uma ida perdida termina na Amazon, mas a necessidade urgente também vence o online
+## 3. Idas perdidas e necessidades urgentes
+
+Uma ida perdida costuma terminar na Amazon, mas uma necessidade urgente também pode vencer o online.
 
 **Evidência: forte no conjunto.** A metade da "ida perdida" é quase toda de escala nacional; a metade do "o online também falha" é de Londres.
 
@@ -168,7 +174,9 @@ context: Resposta mais votada na thread do ar-condicionado portátil durante a o
 status: verified
 ```
 
-## 4. A lealdade ao comércio local é real, e tem condições
+## 4. Lealdade ao comércio local
+
+A lealdade às lojas do bairro dura até a primeira ida perdida.
 
 **Evidência: moderada a forte.** Reddit e Mumsnet, Londres e escala nacional.
 
@@ -220,9 +228,11 @@ status: verified
 
 ## 5. King Street versus Chiswick
 
+Os moradores mandam os visitantes para longe da King Street e na direção da Chiswick High Road.
+
 **Evidência: forte para o oeste de Londres.** Só Reddit.
 
-Os moradores mandam os visitantes para longe da King Street e na direção da Chiswick High Road. Os pontos fortes da King Street, os brechós beneficentes e as feiras, são descritos como coisa para quem mora ali. Minha interpretação: um produto ancorado em Hammersmith precisa funcionar para as tarefas do dia a dia antes de funcionar para passear e olhar vitrines.
+Os pontos fortes da King Street, os brechós beneficentes e as feiras, são descritos como coisa para quem mora ali. Minha interpretação: um produto ancorado em Hammersmith precisa funcionar para as tarefas do dia a dia antes de funcionar para passear e olhar vitrines.
 
 ```quote
 text: King Street isn't great for window shopping, it's mainly takeaways, slot casinos, tk maxx and other cheap chains. The shops in Chiswick are nicer…
@@ -257,11 +267,13 @@ context: "Melhor high street de Londres?" Chiswick foi a resposta mais votada do
 status: verified
 ```
 
-## 6. Perdendo as lojas práticas
+## 6. Fechamentos
+
+O oeste de Londres está perdendo as lojas práticas, e as pessoas vão mais longe para comprar o básico.
 
 **Evidência: forte.** Muitos fechamentos específicos no oeste de Londres, 2025–26.
 
-As threads lamentam lojas práticas com nome: o açougue de Kew, os açougues e a peixaria de Northfields, a centenária City Radio Stores de Ealing. O que entra no lugar é sofisticado ou é uma rede, e as pessoas se deslocam mais para comprar o básico.
+As threads lamentam lojas práticas com nome: o açougue de Kew, os açougues e a peixaria de Northfields, a centenária City Radio Stores de Ealing. O que entra no lugar é sofisticado ou é uma rede.
 
 ```quote
 text: If somewhere minted like Kew can't support a proper butcher, where can?
@@ -307,7 +319,9 @@ context: O filho do antigo dono, sobre o fechamento da City Radio Stores.
 status: verified
 ```
 
-## 7. Escolher entre redes e lojas independentes é uma decisão prática
+## 7. Redes e lojas independentes
+
+As pessoas escolhem entre redes e lojas independentes por motivos práticos.
 
 **Evidência: moderada.** Reddit de Londres.
 
@@ -346,7 +360,9 @@ context: Thread do açougue de Kew.
 status: verified
 ```
 
-## 8. Retirada e entrega são questão de controle
+## 8. Retirada e entrega
+
+As pessoas usam a retirada e a entrega para controlar o horário.
 
 **Evidência: moderada.** Menos citações, espalhadas pelo Reddit.
 
@@ -374,7 +390,9 @@ context: Thread sobre o fechamento da agência dos correios de Ealing Broadway. 
 status: verified
 ```
 
-## 9. Pequenos atritos, dinheiro, estacionamento e a ponte
+## 9. Dinheiro, estacionamento e a ponte
+
+Pagar e chegar até a loja geram pequenos atritos, e a evidência sobre a ponte é dividida.
 
 **Evidência: fraca a moderada.** A evidência sobre a Hammersmith Bridge aponta para os dois lados.
 
@@ -413,7 +431,9 @@ context: Sobre o abandono dos planos de reabrir a ponte para carros.
 status: verified
 ```
 
-## 10. No X e no TikTok a high street é um lugar para descobrir
+## 10. X e TikTok
+
+As duas redes tratam a high street como um lugar de descobertas.
 
 **Evidência: moderada para o TikTok, fraca para o X.** Lido ao vivo em 1º de novembro de 2026.
 
@@ -421,7 +441,7 @@ Nenhuma das duas redes tem muito da conversa prática que o Reddit tem. No X, "h
 
 O TikTok trata a high street como descoberta. Os vídeos marcam um lugar com 📍, chamam de pechincha ou de achado escondido e o oferecem como alternativa à Oxford Street. Em volta de Hammersmith os resultados são comida, compras em brechós beneficentes, lojas de pechinchas, uma barraca de flores e um mercado de pulgas, e muitos são feitos pelas próprias lojas. Isso se encaixa na ponta passeando da [primeira dimensão](dimensions.md): as pessoas descobrem lugares por meio de conteúdo, sem buscar um item.
 
-Um sinal pequeno e novo: compradores no X perguntando ao chatbot de IA da plataforma qual loja tem um item em estoque. Apareceu uma vez, no post abaixo, então é algo para acompanhar, não um achado.
+Um sinal pequeno e novo: compradores no X perguntando ao chatbot de IA da plataforma qual loja tem um item em estoque. Apareceu uma vez, no post abaixo, então guardo como algo para acompanhar e não contei como achado.
 
 ```quote
 text: Just walked the length of King Street in Hammersmith. Blimey, that was a thoroughly depressing experience.
@@ -511,12 +531,12 @@ context: Um mercado embaixo do Hammersmith Flyover; os organizadores avisam logo
 status: verified
 ```
 
-## O que isto não mostra
+## Limites
 
-- **Com que frequência qualquer uma dessas coisas acontece.** São posts que as pessoas escolheram escrever. Mostram o que incomoda as pessoas a ponto de postarem, e não dizem nada sobre frequência.
-- **O que pensam os compradores mais velhos e offline.** Eles quase não aparecem no Reddit nem no Mumsnet.
-- **Qualquer coisa vinda dos lojistas.** Posts de donos de loja foram excluídos, então o porquê dos horários e do estoque continua sendo um palpite.
-- **Se as pessoas usariam um app para isso.** Ninguém foi consultado. A atração por estoque ao vivo e horários confiáveis é a minha leitura de reclamações espontâneas.
-- **O que os espectadores do TikTok respondem.** Só as legendas foram coletadas.
+- Os posts não dizem com que frequência nada disso acontece. As pessoas escolheram escrevê-los, então mostram o que incomoda alguém a ponto de postar.
+- Compradores mais velhos e offline quase não aparecem no Reddit nem no Mumsnet.
+- Posts de donos de loja foram excluídos, então o porquê dos horários e do estoque continua sendo um palpite.
+- Ninguém foi consultado sobre usar um app para isso. A atração por estoque ao vivo e horários confiáveis é a minha leitura de reclamações espontâneas.
+- Só as legendas do TikTok foram coletadas, então falta o que os espectadores respondem.
 
 Esses temas alimentam o [mapa de empatia](empathy-map.md) e as [dimensões propostas](dimensions.md).

@@ -1,6 +1,6 @@
 # A high street hoje
 
-Para a maioria dos britânicos, a high street, a rua comercial do bairro, é a rua principal da cidade ou da vizinhança: lojas, cafés, uma agência dos correios e um pub a uma caminhada de casa, muitas vezes com apartamentos em cima. Em 2026 ela tem menos lojas e mais cafés e serviços do que dez anos atrás, e o fluxo de pedestres continua caindo, mas os imóveis vazios voltaram a ser alugados e o último Orçamento reduziu as business rates (imposto sobre imóveis comerciais) das menores lojas.
+Pesquisa documental: relatórios, estatísticas oficiais e notícias, lidos para entender como a high street funciona antes de olhar para os compradores. Para a maioria dos britânicos, a high street, a rua comercial do bairro, é a rua principal da cidade ou da vizinhança: lojas, cafés, uma agência dos correios e um pub a uma caminhada de casa, muitas vezes com apartamentos em cima. Em 2026 ela tem menos lojas e mais cafés e serviços do que dez anos atrás, e o fluxo de pedestres continua caindo, mas os imóveis vazios voltaram a ser alugados e o último Orçamento reduziu as business rates (imposto sobre imóveis comerciais) das menores lojas.
 
 ```summary
 Takeaways:
@@ -17,13 +17,13 @@ Trade-offs:
 - Alguns números vêm de fontes secundárias, e não há dado recente de vacância para Hammersmith especificamente.
 ```
 
-## O que é uma high street
+## Definição e história
 
 O Office for National Statistics considera high street qualquer aglomerado de 15 ou mais endereços de varejo em um raio de 150 metros. Por esse critério, a Grã-Bretanha tinha 6.969 delas em 2019, e Londres tinha o maior número, 1.204 ([ONS, 2019](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/articles/highstreetsingreatbritain/2019-06-06)). Hoje elas são tanto lugar de morar quanto de comprar: mais da metade dos endereços nas high streets centrais da Grã-Bretanha são residências, cerca de um terço são lojas e cerca de um em cada dez são escritórios ([ONS, março de 2026](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/highstreetsandretailareasingreatbritain/march2026)).
 
 A Historic England situa o início do declínio nos anos 1980, quando as compras de carro fora da cidade tiraram movimento dos centros ([Historic England](https://cms.historicengland.org.uk/whats-new/features/historic-high-streets-quiz)). Em 2004 e 2005 a New Economics Foundation cunhou "clone town" (cidade clone) para high streets tomadas pelas mesmas redes, e contou 13 de 27 high streets de Londres como clones ([Londonist, 2005](https://londonist.com/2005/06/attack_of_the_c)). É desse debate que vem a ideia da high street como marca de identidade local. Depois da crise de 2008, a [Portas Review](https://www.gov.uk/government/publications/the-portas-review-the-future-of-our-high-streets) (2011) defendeu que as high streets virassem lugares para "shopping, learning, socialising and having fun" (comprar, aprender, conviver e se divertir). As revisões de Bill Grimsey (2013, 2018, 2020) foram além e disseram que a nostalgia não as salvaria ([Retail Tech Innovation Hub, 2018](https://retailtechinnovationhub.com/home/2018/7/4/grimsey-review-2-nostalgia-wont-save-the-high-street)).
 
-O lado social pode ser medido. Em um estudo de 2017 sobre high streets de Londres, 45% dos frequentadores disseram que o principal motivo de estar ali não era fazer compras, 63% chegaram a pé, e quase 40% dos pequenos negócios entrevistados faziam algo de cunho social, como ficar de olho em clientes mais velhos ([GLA / LSE Cities, *High Streets for All*](https://www.lse.ac.uk/asset-library/information/high-streets-for-all-report-web-final.pdf)).
+Um estudo de 2017 sobre high streets de Londres mediu o uso social delas: 45% dos frequentadores disseram que o principal motivo de estar ali não era fazer compras, 63% chegaram a pé, e quase 40% dos pequenos negócios entrevistados faziam algo de cunho social, como ficar de olho em clientes mais velhos ([GLA / LSE Cities, *High Streets for All*](https://www.lse.ac.uk/asset-library/information/high-streets-for-all-report-web-final.pdf)).
 
 ## Londres e Hammersmith
 
@@ -37,15 +37,15 @@ Londres depende das suas high streets mais do que o resto do país. A GLA diz qu
 
 **A Hammersmith Bridge** está fechada para veículos motorizados desde 2019 e foi reaberta para ciclistas e pedestres em abril de 2025 ([Time Out](https://www.timeout.com/london/news/hammersmith-bridge-has-finally-reopened-to-cyclists-after-a-3-million-project-042225)). No fim de junho de 2026 a prefeitura recomendou um "phased repair" (reparo em etapas) que a mantém aberta para quem anda a pé ou de bicicleta, e reportagens disseram que os carros talvez nunca voltem ([Wandsworth Council](https://www.wandsworth.gov.uk/news/news-june-2026/wandsworths-deep-disappointment-at-hammersmith-bridge-latest/); [ITV](https://www.itv.com/news/london/2026-07-01/hammersmith-bridge-may-never-reopen-to-cars-because-of-lack-of-money-for-repairs); r/london: ["Plans to reopen Hammersmith Bridge to cars and buses axed over £300m cost"](https://www.reddit.com/r/london/comments/1uke914/plans_to_reopen_hammersmith_bridge_to_cars_and/) (planos de reabrir a ponte para carros e ônibus cancelados pelo custo de £300m)). Wandsworth disse que a decisão iria "do further harm to residents and businesses" (prejudicar ainda mais moradores e negócios). As pesquisas que afirmam que 70–75% dos negócios locais foram prejudicados vêm de ativistas, e não foi encontrado nenhum estudo independente.
 
-**Os vizinhos** têm perfis diferentes:
+Três ruas vizinhas têm, cada uma, um perfil diferente:
 
 - **Shepherd's Bush** tem o seu mercado entre a Goldhawk Road e a Uxbridge Road, em reforma pela Yoo Capital, e o Westfield London ali perto. Em novembro de 2025 a prefeitura rejeitou um pedido da comunidade para registrar o mercado como Asset of Community Value ([Thames Gazette/LDRS](https://thamesgazette.azurewebsites.net/breaking-news/shepherds-bush-market-redevelopment-moves-forward-after-acv-bid-rejected)).
 - **Askew Road** (W12) é descrita pela prefeitura como uma ligação entre Hammersmith e Shepherd's Bush com uma "vibrant and diverse mix of independent businesses" (mistura vibrante e diversa de negócios independentes) e uma nova associação de comerciantes ([LBHF](https://lbhf.gov.uk/business/business-connects/business-events-and-networking/business-associations-hf/askew-road-business-association)).
 - **Chiswick High Road**, do outro lado da divisa, em Hounslow, tem uma longa história local de lojas independentes fechando por causa de aluguéis e impostos. A contagem mais recente encontrada, de uma força-tarefa de comerciantes de 2018, era de cerca de 20 lojas vazias ([ChiswickW4](https://www.chiswickw4.com/info/contaskforcereport001.htm)).
 
-**Redes e independentes.** Não há número atual para a composição de Hammersmith. A página dos centros comerciais da prefeitura chegou a informar 31,9% de varejo independente e 9,8% de vacância, mas trazia dados de aluguel de 2013 e hoje retorna 404 ([LBHF](https://www.lbhf.gov.uk/business/business-connects/thinking-moving-hf/our-town-centres)). O que se vê hoje é uma King Street dominada por redes, com as independentes mais visíveis na Askew Road, no Shepherd's Bush Market e nas ruas laterais.
+Não há número atual para a proporção entre redes e independentes em Hammersmith. A página dos centros comerciais da prefeitura chegou a informar 31,9% de varejo independente e 9,8% de vacância, mas trazia dados de aluguel de 2013 e hoje retorna 404 ([LBHF](https://www.lbhf.gov.uk/business/business-connects/thinking-moving-hf/our-town-centres)). O que se vê hoje é uma King Street dominada por redes, com as independentes mais visíveis na Askew Road, no Shepherd's Bush Market e nas ruas laterais.
 
-## As regras que a moldam
+## Regulação
 
 ### Business rates
 
@@ -127,7 +127,7 @@ Londres depende das suas high streets mais do que o resto do país. A GLA diz qu
 
 **Por que importa.** Qualquer serviço que venda em nome de uma loja precisa mostrar o preço final, dizer quem é o vendedor, trazer as condições de cancelamento de cada loja e guardar os dados de alergênicos dos alimentos.
 
-## Os números
+## Números
 
 | Métrica | Valor | Período | Fonte |
 | --- | --- | --- | --- |
@@ -172,7 +172,7 @@ Londres depende das suas high streets mais do que o resto do país. A GLA diz qu
 - 2026-10-28 — O primeiro Orçamento de Healey eleva o limite de isenção do small business rate relief para varejo, hospitalidade e lazer de £12.000 para £18.000. [Fonte](https://www.talkingretail.com/news/industry-news/budget-reaction-business-rates-threshold-rise-a-major-win-for-local-shops-28-10-2026/)
 ```
 
-## Como os pequenos comerciantes recebem
+## Pagamentos dos comerciantes
 
 A maioria das lojas pequenas aceita cartão em uma maquininha ou em um leitor ligado ao celular. Em 2025, 64% de todos os pagamentos no Reino Unido foram com cartão e 39% por aproximação, e 65% dos adultos tinham carteira digital ([UK Finance](https://www.ukfinance.org.uk/news-and-insight/press-release/digital-payments-continue-grow-mobile-wallets-become-more-popular)). O dinheiro vivo ainda pesa mais nas lojas do que em outros lugares: foi 19,2% das transações do varejo em 2024, contra 8% de todos os pagamentos, e cerca de 1,4 milhão de adultos usam principalmente dinheiro vivo ([BRC](https://brc.org.uk/news-and-events/news/corporate-affairs/2025/ungated/high-interest-rates-push-shoppers-from-credit-to-debit-cards/); UK Finance).
 
@@ -184,25 +184,25 @@ A maioria das lojas pequenas aceita cartão em uma maquininha ou em um leitor li
 | Square | 1,75% presencial; online 1,4% + 25p para cartões do Reino Unido (números de terceiros) | [MobileTransaction](https://mobiletransaction.org/square-vs-izettle-vs-sumup) |
 | Dojo | Planos com contrato; os números de terceiros variam e não foram confirmados pela Dojo | [ExpertMarket](https://www.expertmarket.com/uk/merchant-accounts/dojo-review?p=29692) |
 
-O que as fontes públicas dizem sobre as dificuldades dos comerciantes:
+Problemas que os comerciantes apontam em fontes públicas:
 
-- **Taxas e falta de transparência.** Os varejistas pagaram £1,48bn em taxas de cartão em 2024 ([BRC](https://brc.org.uk/news-and-events/news/corporate-affairs/2025/ungated/high-interest-rates-push-shoppers-from-credit-to-debit-cards/)). O Payment Systems Regulator concluiu que as taxas de bandeira e de processamento da Visa e da Mastercard subiram mais de 25% em termos reais entre 2017 e 2023 e que a informação sobre taxas é confusa ([PSR](https://www.psr.org.uk/news-and-updates/latest-news/news/psr-finds-market-isn-t-working-well-for-card-scheme-and-processing-services/)).
-- **Fluxo de caixa.** 45% das pequenas empresas disseram que os atrasos de pagamento aumentaram em relação ao ano anterior ([Fintech Times, pesquisa GoCardless/FSB](https://thefintechtimes.com/gocardless-report-highlights-the-domino-effect-of-late-payments-and-calls-for-change/)). Todos os provedores de maquininha acima vendem liquidação no dia seguinte.
-- **Depositar dinheiro vivo.** O fechamento de agências dificulta depositar o que a loja recebe, e é por isso que as regras da FCA cobrem depósitos de empresas ([FCA](https://www.fca.org.uk/news/press-releases/new-fca-rules-protect-access-cash-already-having-impact)).
-- **Vender online.** O número mais recente encontrado é antigo: em 2019, menos de 10% das microempresas do Reino Unido vendiam online ([Economics Observatory](https://economicsobservatory.com/update-are-small-businesses-ready-to-compete-as-consumers-move-online)).
-- **Custos além dos pagamentos.** As reações do BRC e da Bira ao Orçamento de outubro de 2026 colocam salários, a contribuição previdenciária patronal (National Insurance) e energia à frente do imposto ([BRC](https://brc.org.uk/news-and-events/news/corporate-affairs/2026/ungated/no-breathing-space-for-retail-as-budget-keeps-costs-climbing/); [Talking Retail](https://www.talkingretail.com/news/industry-news/budget-reaction-business-rates-threshold-rise-a-major-win-for-local-shops-28-10-2026/)).
+- Os varejistas pagaram £1,48bn em taxas de cartão em 2024 ([BRC](https://brc.org.uk/news-and-events/news/corporate-affairs/2025/ungated/high-interest-rates-push-shoppers-from-credit-to-debit-cards/)). O Payment Systems Regulator concluiu que as taxas de bandeira e de processamento da Visa e da Mastercard subiram mais de 25% em termos reais entre 2017 e 2023 e que a informação sobre taxas é confusa ([PSR](https://www.psr.org.uk/news-and-updates/latest-news/news/psr-finds-market-isn-t-working-well-for-card-scheme-and-processing-services/)).
+- No fluxo de caixa, 45% das pequenas empresas disseram que os atrasos de pagamento aumentaram em relação ao ano anterior ([Fintech Times, pesquisa GoCardless/FSB](https://thefintechtimes.com/gocardless-report-highlights-the-domino-effect-of-late-payments-and-calls-for-change/)). Todos os provedores de maquininha acima vendem liquidação no dia seguinte.
+- O fechamento de agências dificulta depositar o que a loja recebe, e é por isso que as regras da FCA cobrem depósitos de empresas ([FCA](https://www.fca.org.uk/news/press-releases/new-fca-rules-protect-access-cash-already-having-impact)).
+- Poucas vendem online, mas o número mais recente encontrado é antigo: em 2019, menos de 10% das microempresas do Reino Unido vendiam online ([Economics Observatory](https://economicsobservatory.com/update-are-small-businesses-ready-to-compete-as-consumers-move-online)).
+- Nas reações ao Orçamento de outubro de 2026, o BRC e a Bira colocam salários, a contribuição previdenciária patronal (National Insurance) e energia à frente do imposto ([BRC](https://brc.org.uk/news-and-events/news/corporate-affairs/2026/ungated/no-breathing-space-for-retail-as-budget-keeps-costs-climbing/); [Talking Retail](https://www.talkingretail.com/news/industry-news/budget-reaction-business-rates-threshold-rise-a-major-win-for-local-shops-28-10-2026/)).
 
-## O que isso significa para o brief
+## Implicações para o brief
 
-*Interpretação. Cada ponto é a minha leitura das evidências acima, não um fato com fonte.*
+*Minha leitura das evidências acima. Estes pontos não têm fonte própria.*
 
-- **O comprador provavelmente está a pé, então a retirada pode importar mais do que a entrega.** 90% dos londrinos moram a até dez minutos de uma high street e 63% dos frequentadores vão a pé até a sua. Com a Hammersmith Bridge fechada para carros, quem vem do sul do rio chega a pé ou de bicicleta, ou precisa de entrega.
-- **"O que está disponível" precisa cobrir mais do que o estoque das lojas.** Os empregos no varejo nas high streets centrais caíram 19% enquanto alimentação e hospedagem subiram 18%, e a Use Class E deixa uma loja virar café ou clínica da noite para o dia. Itens de alimentação também trazem as regras de alergênicos.
-- **Os dados de disponibilidade precisam custar quase nada ao comerciante.** Poucas microempresas vendiam online na última medição, e as pressões delas são salários, energia, taxas de cartão e fluxo de caixa. Dados que a loja já produz, como os registros do caixa e dos pagamentos, são uma fonte mais realista do que um catálogo que alguém precisa digitar.
-- **A rua já tem quem a organize.** O Hammersmith BID mantém um cartão de fidelidade, uma rede de segurança, eventos para 90.000 pessoas e uma loja de produtores, e conhece cada negócio da King Street. Trabalhar com ele seria mais fácil do que recriá-lo.
-- **O preço mostrado tem que ser o preço pago.** As regras contra drip pricing e o direito de cancelamento em 14 dias valem para tudo o que é comprado à distância, incluindo click & collect, então taxas, o nome do vendedor e as condições de cada loja precisam estar na tela antes do pagamento.
-- **Dinheiro vivo e carteira digital vão coexistir.** O dinheiro vivo é um quinto das transações do varejo, mas a maioria dos adultos tem carteira digital. Reservar no app e pagar no balcão atenderia os dois grupos.
-- **As políticas públicas estão a favor das independentes, as visitas não.** Impostos menores para as menores lojas e os leilões de aluguel devem ajudar os pequenos ocupantes, mas o fluxo de pedestres nas high streets caiu 3% em setembro de 2026. Levar as pessoas à loja, ou a loja às pessoas, é a lacuna.
+- O comprador provavelmente está a pé, então a retirada pode pesar mais do que a entrega. 90% dos londrinos moram a até dez minutos de uma high street e 63% dos frequentadores vão a pé até a sua. Com a Hammersmith Bridge fechada para carros, quem vem do sul do rio chega a pé ou de bicicleta, ou precisa de entrega.
+- "O que está disponível" precisa cobrir mais do que o estoque das lojas. Os empregos no varejo nas high streets centrais caíram 19% enquanto alimentação e hospedagem subiram 18%, e a Use Class E deixa uma loja virar café ou clínica da noite para o dia. Itens de alimentação também trazem as regras de alergênicos.
+- Os dados de disponibilidade precisam custar quase nada ao comerciante. Poucas microempresas vendiam online na última medição, e as pressões delas são salários, energia, taxas de cartão e fluxo de caixa. Dados que a loja já produz, como os registros do caixa e dos pagamentos, são uma fonte mais realista do que um catálogo que alguém precisa digitar.
+- A rua já tem quem a organize. O Hammersmith BID mantém um cartão de fidelidade, uma rede de segurança, eventos para 90.000 pessoas e uma loja de produtores, e conhece cada negócio da King Street. Trabalhar com ele seria mais fácil do que recriá-lo.
+- O preço mostrado tem que ser o preço pago. As regras contra drip pricing e o direito de cancelamento em 14 dias valem para tudo o que é comprado à distância, incluindo click & collect, então taxas, o nome do vendedor e as condições de cada loja precisam estar na tela antes do pagamento.
+- Os compradores vão pagar tanto com dinheiro vivo quanto com carteira digital. O dinheiro vivo é um quinto das transações do varejo, mas a maioria dos adultos tem carteira digital. Reservar no app e pagar no balcão atenderia os dois grupos.
+- As políticas públicas favorecem as independentes enquanto as visitas continuam caindo. Impostos menores para as menores lojas e os leilões de aluguel devem ajudar os pequenos ocupantes, mas o fluxo de pedestres nas high streets caiu 3% em setembro de 2026. Falta um jeito de levar as pessoas à loja, ou a loja às pessoas.
 
 ## Não confirmado
 

@@ -1,17 +1,18 @@
 # Mapa de empatia
 
-O sujeito é uma composição: um morador de Hammersmith ou do oeste de Londres que gostaria de usar a high street, a rua comercial do bairro, mas vive com uma agenda apertada durante a semana. Cada linha indica o post de onde veio. A maioria desses posts está citada na página de [achados](findings.md); os demais foram lidos durante a netnografia, mas não citados.
+O sujeito é uma composição: um morador de Hammersmith ou do oeste de Londres que gostaria de usar a high street, a rua comercial do bairro, mas vive com uma agenda apertada durante a semana. Cada linha tem o link do post de onde veio. A maioria desses posts está citada nos [achados](findings.md), e os demais foram lidos durante a netnografia sem entrar como citação.
 
 ```summary
 Takeaways:
 - A dor principal: não saber se a loja tem o item, ou se está aberta, antes de sair de casa.
 - O que as pessoas dizem sobre apoiar o comércio local muitas vezes difere do que fazem.
 Call:
-- Usar o mapa de empatia da Strategyzer, para que cada quadro aponte de volta para posts reais.
+- Usei o mapa de empatia da Strategyzer e liguei cada linha a um post.
 AI:
 - Um agente de escrita preencheu cada quadro a partir das citações etiquetadas, com um ponteiro para a fonte.
 Trade-offs:
-- É uma composição de muitas vozes, não uma pessoa, e herda as lacunas da netnografia.
+- Ele se apoia em dados atitudinais: o que as pessoas dizem que veem, pensam e fazem, tirado de posts. Ninguém foi observado.
+- Junta muitas vozes numa composição só e herda as lacunas da netnografia.
 ```
 
 ```empathy-map
@@ -57,14 +58,14 @@ Ganhos:
 - Uma high street com um "mix of chain and local options" (mistura de redes e opções locais) de que se orgulhar ([u/JollyExPat](https://www.reddit.com/r/london/comments/1tatyc0/comment/olc54ib/), May 2026)
 ```
 
-## Onde dizer e fazer se separam
+## Dizer e fazer
 
-O mapa é mais útil onde os quadros discordam. Estas são interpretações minhas dos posts, não coisas que alguém disse com todas as letras.
+Os quadros discordam em três pontos. Cada leitura abaixo é minha; ninguém nos posts disse isso com todas as letras.
 
-- **"Support local" (apoiar o comércio local) versus o destino do dinheiro.** Quase todo mundo diz que valoriza as lojas independentes. A thread do açougue mostra a compra de rotina indo para o supermercado, com a loja independente reservada para ocasiões especiais ([u/killmetruck](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq967k5/), Jun 2026).
-- **Luto por lojas que quase não usavam.** Uma pessoa lamenta o fechamento de uma oficina de bicicletas no mesmo comentário em que admite ter ido lá uma vez só, porque parecia cara ([u/Username8831](https://www.reddit.com/r/Ealing/comments/1v6423y/comment/oznttbd/), Jul 2026). Outro morador responde ao post do açougue de Kew com "haven't been in over a year and then wonder why shops are shutting" (não vão há mais de um ano e depois se perguntam por que as lojas fecham) ([u/Greg-Normal](https://www.reddit.com/r/london/comments/1niwnlw/comment/neo7ha3/), Sep 2025).
-- **Preço como motivo declarado, esforço como o motivo real.** As pessoas citam o preço quando explicam por que compram online, mas várias dizem que teriam pagado mais se a loja estivesse aberta ou tivesse estoque ([u/xmastreee](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb31nms/), Aug 2025; [FerrisWheelsandLilacs](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976658), Mumsnet, Dec 2025). Por isso eu leio a ida perdida como o desestímulo maior.
+- Quase todo mundo diz que valoriza as lojas independentes, e o dinheiro continua indo para outro lugar. A thread do açougue mostra a compra de rotina indo para o supermercado, com a loja independente reservada para ocasiões especiais ([u/killmetruck](https://www.reddit.com/r/london/comments/1tz5j3p/comment/oq967k5/), Jun 2026).
+- As pessoas lamentam lojas que quase não usavam. Uma pessoa lamenta o fechamento de uma oficina de bicicletas no mesmo comentário em que admite ter ido lá uma vez só, porque parecia cara ([u/Username8831](https://www.reddit.com/r/Ealing/comments/1v6423y/comment/oznttbd/), Jul 2026). Outro morador responde ao post do açougue de Kew com "haven't been in over a year and then wonder why shops are shutting" (não vão há mais de um ano e depois se perguntam por que as lojas fecham) ([u/Greg-Normal](https://www.reddit.com/r/london/comments/1niwnlw/comment/neo7ha3/), Sep 2025).
+- As pessoas citam o preço quando explicam por que compram online, mas várias dizem que teriam pagado mais se a loja estivesse aberta ou tivesse estoque ([u/xmastreee](https://www.reddit.com/r/CasualUK/comments/1n23ixq/comment/nb31nms/), Aug 2025; [FerrisWheelsandLilacs](https://www.mumsnet.com/talk/am_i_being_unreasonable/5455037-to-think-some-independent-shops-really-arent-helping-themselves?reply=148976658), Mumsnet, Dec 2025). Por isso eu leio o esforço de uma ida perdida como o desestímulo maior.
 
-## Uma composição, não uma persona
+## Composição
 
-Este mapa junta posts de dezenas de pessoas diferentes no Reddit, no Mumsnet e no TikTok. Ninguém nele é uma pessoa real única, e ele carrega os mesmos vieses dos dados: gente mais jovem, conectada e rápida para reclamar (veja o [método](method.md)). É insumo para definir o comprador no Define, junto com as [dimensões propostas](dimensions.md), e precisa ser conferido com compradores reais antes de orientar decisões.
+O mapa junta posts de dezenas de pessoas diferentes no Reddit, no Mumsnet e no TikTok, então ninguém nele é uma pessoa só. Ele carrega os mesmos vieses dos dados: gente mais jovem, conectada e rápida para reclamar (veja o [método](method.md)). É insumo para definir o comprador no Define, junto com as [dimensões propostas](dimensions.md), e precisa ser conferido com compradores antes de orientar decisões.

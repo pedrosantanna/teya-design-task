@@ -1,6 +1,6 @@
 # Benchmarks
 
-Comparei dezessete produtos que um comprador em Londres pode usar hoje, ou que fracassaram recentemente de um jeito que ensina alguma coisa, e organizei todos pela relação com as três [proto-personas](personas/index.md). Onze tocam no que Sam, Jess ou Ruth realmente enfrentam, ou são aquilo a que elas já recorrem. Seis são úteis para o brief de modo geral e ficam como notas curtas. Em todos eles, a reclamação que os usuários mais repetem é que o app disse que algo estava disponível e a loja não tinha.
+Comparei dezessete produtos que um comprador em Londres pode usar hoje, ou que fracassaram recentemente de um jeito que ensina alguma coisa, e organizei todos pela relação com as três [proto-personas](personas/index.md). Onze tocam no que Sam, Jess ou Ruth enfrentam, ou são aquilo a que elas já recorrem. Seis são úteis para o brief de modo geral e ficam como notas curtas. Em todos eles, a reclamação que os usuários mais repetem é que o app disse que algo estava disponível e a loja não tinha.
 
 ```summary
 Takeaways:
@@ -24,7 +24,7 @@ Trade-offs:
 
 ✓ a persona usa hoje, com um post como evidência. ○ resolve o problema da persona, mas nenhum post mostra a persona usando. – não tem relação com o problema dela.
 
-| Produto | Sam (saber) | Jess (conseguir) | Ruth (não estava lá) | Evidência do ✓ |
+| Produto | Sam (1 · saber) | Jess (4 · levar) | Ruth (2 · encontrar) | Evidência do ✓ |
 | --- | --- | --- | --- | --- |
 | Google local listings + NearSt | ✓ | – | ○ | Sam: u/dy14n19 confere no Google o horário de uma confeitaria e não confia na informação |
 | Instagram / WhatsApp / Facebook | ○ | – | ○ | |
@@ -44,13 +44,13 @@ Trade-offs:
 | Zapp / Zoom by Ocado | – | – | – | |
 | Square Online / SumUp / Teya | – | ○ | – | |
 
-**O que as personas usam e não é um produto desta lista.** Sam pergunta no Reddit (u/akat224, u/grand_web, u/claudiav2603), liga antes (u/jamesshovlin), confere o site de uma rede antes de retirar (Dbank) e, uma vez, pergunta ao chatbot de IA do X qual loja tem um item (@Jojo_agboola). Jess usa o supermercado para as compras da semana (u/killmetruck). Ruth compra alguma coisa na banca de jornal que tem um balcão dos correios (u/Aggravating-Desk4004). A evidência está nos [achados](netnography/findings.md) e na [página de personas](personas/index.md).
+Fora desses produtos, Sam pergunta no Reddit (u/akat224, u/grand_web, u/claudiav2603), liga antes (u/jamesshovlin), confere o site de uma rede antes de retirar (Dbank) e, uma vez, pergunta ao chatbot de IA do X qual loja tem um item (@Jojo_agboola). Jess usa o supermercado para as compras da semana (u/killmetruck). Ruth compra alguma coisa na banca de jornal que tem um balcão dos correios (u/Aggravating-Desk4004). A evidência está nos [achados](netnography/findings.md) e na [página de personas](personas/index.md).
 
-## Como escolhi e escutei
+## Seleção e fontes
 
-**Produtos.** Comecei pelo brief e mantive todo produto que atende alguém tentando comprar de uma loja próxima, mais dois fracassos recentes (ShopAppy e as start-ups de quick commerce). Acrescentei o Peckish da Co-op e a Hive, e deixei de fora a Faire porque ela vende no atacado para lojas, não para compradores.
+Comecei pelo brief e mantive todo produto que atende alguém tentando comprar de uma loja próxima, mais dois fracassos recentes (ShopAppy e as start-ups de quick commerce). Acrescentei o Peckish da Co-op e a Hive, e deixei de fora a Faire porque ela vende no atacado para lojas.
 
-**Percepção.** As citações vêm de três fontes que podem ser lidas sem conta:
+As citações vêm de três fontes que podem ser lidas sem conta:
 
 - **Avaliações da App Store do Reino Unido**, coletadas do feed público de avaliações da Apple, que traz autor, data e texto completo. As avaliações da App Store não têm link permanente, então cada card leva à página de avaliações do app no Reino Unido e o contexto traz o id da avaliação na Apple.
 - **Trustpilot UK**, lido na página própria de cada avaliação.
@@ -58,7 +58,7 @@ Trade-offs:
 
 Todas as citações têm data entre 1º de maio de 2025 e 1º de novembro de 2026 e foram conferidas na fonte. As citações foram cortadas até as palavras essenciais, com "…" onde houve corte.
 
-**Lacunas.** O Reddit bloqueou as ferramentas de pesquisa, e X, TikTok e Instagram exigem login, então esta página não tem citações dessas redes; a [netnografia](netnography/method.md) cobre o Reddit à parte. As vozes da App Store e do Mumsnet tendem a ser mais velhas e mais propensas a reclamar do que as do r/london. As avaliações da App Store são de todo o Reino Unido, não só de Londres. NearSt, Peckish e ShopAppy não têm avaliações de consumidores no período, e nenhuma avaliação da Teya que encontrei menciona vendas online.
+O Reddit bloqueou as ferramentas de pesquisa, e X, TikTok e Instagram exigem login, então esta página não tem citações dessas redes; a [netnografia](netnography/method.md) cobre o Reddit à parte. As vozes da App Store e do Mumsnet tendem a ser mais velhas e mais propensas a reclamar do que as do r/london. As avaliações da App Store cobrem todo o Reino Unido. NearSt, Peckish e ShopAppy não têm avaliações de consumidores no período, e nenhuma avaliação da Teya que encontrei menciona vendas online.
 
 ## Comparação
 
@@ -82,13 +82,11 @@ Todas as citações têm data entre 1º de maio de 2025 e 1º de novembro de 202
 | Zapp / Zoom by Ocado | Quick commerce | Um catálogo curto e selecionado | Estoque e entregadores próprios, 20–60 minutos | Taxas do comprador e margem | Zoom em poucas áreas de cobertura; situação da Zapp incerta; Getir e Gorillas saíram em 2024 |
 | Square Online / SumUp / Teya | Vitrines e pagamentos para comerciantes | Só o site próprio da loja | Uma loja; retirada ou entrega local feita pela loja | A loja paga taxas de processamento | Ativo |
 
-## Diretamente relevantes para as personas
-
-Cada produto indica qual persona toca, qual parte do problema dela, e se ela usa hoje.
+## Produtos ligados às personas
 
 ### Google local listings e NearSt
 
-**Sam ✓ (saber) · Ruth ○ (não estava lá).** Sam usa o Google hoje: u/dy14n19 conferiu se uma confeitaria de Hammersmith ainda estava aberta e não confiou na resposta. Para Ruth é uma opção: o Google poderia avisar que uma loja fechou ou mudou de horário, mas o açougue que ela frequenta toda semana estava fechado no horário anunciado (Valentando), que é a mesma falha.
+**Sam ✓ (etapa 1, saber) · Ruth ○ (etapa 2, encontrar).** Sam usa o Google hoje: u/dy14n19 conferiu se uma confeitaria de Hammersmith ainda estava aberta e não confiou na resposta. Para Ruth é uma opção: o Google poderia avisar que uma loja fechou ou mudou de horário, mas o açougue que ela frequenta toda semana estava fechado no horário anunciado (Valentando), que é a mesma falha.
 
 O Google mostra o que as lojas próximas têm "em estoque" no Search, no Shopping e no Maps, e o Business Profile é onde a maioria das pessoas confere horários de funcionamento. O estoque vem do sistema de caixa da loja: a NearSt, uma start-up de Londres, conecta mais de 150 sistemas de ponto de venda ao Google e, desde 2025, aos feeds de estoque da Deliveroo, da Uber Eats e da Just Eat ([Google Merchant Center Help](https://support.google.com/merchants/answer/15609877?hl=en-GB); [Asian Trader](https://www.asiantrader.biz/nearst-tech-connects-uber-eats-deliveroo-just-eat)). É a melhor busca local por item que existe, mas só para lojas cujo caixa tem códigos de produto limpos, o que deixa de fora a maioria das padarias, floriculturas e açougues. Nada é comprado no Google para estoque local: o comprador vai até a loja ou clica para ir ao site dela, e o novo Universal Cart do Google, com várias lojas, foi lançado só nos EUA, em 15 de outubro de 2026 ([Digital Commerce 360](https://www.digitalcommerce360.com/2026/10/16/google-universal-cart-launch-features/)).
 
@@ -116,9 +114,9 @@ status: verified
 
 ### Instagram, WhatsApp e Facebook
 
-**Sam ○ (saber) · Ruth ○ (não estava lá).** Os compradores usam o WhatsApp para compartilhar estoque: na corrida do eclipse, u/jamesshovlin indicou um grupo de reposição mantido por compradores. Esse post fica fora dos clusters de personas, então não conto como Sam usando hoje. Para Ruth, a página da loja no Facebook é onde o horário do dia às vezes aparece; nenhum post a mostra conferindo.
+**Sam ○ (etapa 1, saber) · Ruth ○ (etapa 2, encontrar).** Os compradores usam o WhatsApp para compartilhar estoque: na corrida do eclipse, u/jamesshovlin indicou um grupo de reposição mantido por compradores. Esse post fica fora dos clusters de personas, então não conto como Sam usando hoje. Para Ruth, a página da loja no Facebook é onde o horário do dia às vezes aparece; nenhum post a mostra conferindo.
 
-Para muitas floriculturas, padarias, açougues e butiques de Londres, o Instagram ou o Facebook é a vitrine, e os pedidos acontecem por mensagem ou telefone, com pagamento na loja, por transferência bancária ou por link de pagamento. Nada nesses canais é estruturado: não há horário, estoque, endereço ou preço confiável, e cada pedido é uma conversa. Eles são gratuitos, pessoais e servem para compras avulsas e trabalhos sob encomenda. Quem posta no Mumsnet diz que as lojas publicam o horário do dia só no Facebook, ou não têm nenhuma forma de receber pedidos.
+Para muitas floriculturas, padarias, açougues e butiques de Londres, o Instagram ou o Facebook é a vitrine, e os pedidos acontecem por mensagem ou telefone, com pagamento na loja, por transferência bancária ou por link de pagamento. Nada nesses canais é estruturado: não há horário, estoque, endereço ou preço confiável, e cada pedido é uma conversa. Eles são gratuitos e pessoais, e servem para compras avulsas e trabalhos sob encomenda. Duas pessoas numa mesma thread do Mumsnet dizem que as lojas publicam o horário do dia só no Facebook, ou não têm nenhuma forma de receber pedidos.
 
 ```quote
 text: "He is a bookshop with no website, so I can't order books from him at home."
@@ -144,9 +142,9 @@ status: verified
 
 ### Amazon
 
-**Sam ✓ (saber) · Jess ✓ (conseguir).** A Amazon é onde os dois acabam recorrendo. Sam: Dbank não encontrou nenhum dos sete que o site de uma loja listava e comprou na Amazon; u/Mediocre_Sprinkles percorreu todas as lojas e foi para casa encomendar. Jess: LividArse compra na Amazon "because it's always there" (porque está sempre lá). A Amazon também tem limites para eles: antes do eclipse, u/WearyChampionship365 descobriu que ninguém conseguia entregar a tempo.
+**Sam ✓ (etapa 1, saber) · Jess ✓ (etapa 4, levar).** A Amazon é onde os dois acabam recorrendo. Sam: Dbank não encontrou nenhum dos sete que o site de uma loja listava e comprou na Amazon; u/Mediocre_Sprinkles percorreu todas as lojas e foi para casa encomendar. Jess: LividArse compra na Amazon "because it's always there" (porque está sempre lá). A Amazon também tem limites para eles: antes do eclipse, u/WearyChampionship365 descobriu que ninguém conseguia entregar a tempo.
 
-A Amazon é a régua com que um app de high street, a rua comercial do bairro, é medido: uma cesta, um pagamento, uma promessa de entrega e devolução fácil. Desde junho de 2026 ela inclui mercearia fresca na entrega no mesmo dia em partes do centro e do leste de Londres ([About Amazon](https://www.aboutamazon.co.uk/news/retail/amazon-customers-can-now-add-fresh-groceries-to-same-day-delivery-orders-in-parts-of-london)). Os usuários elogiam o preço e as devoluções e reclamam da busca quando não sabem exatamente o que querem. Alguns dizem que as promessas de entrega que não se cumprem estão fazendo essas pessoas voltarem à high street.
+A Amazon é a régua com que um app de high street, a rua comercial do bairro, é medido: uma cesta, um pagamento, uma promessa de entrega e devolução fácil. Desde junho de 2026 ela inclui mercearia fresca na entrega no mesmo dia em partes do centro e do leste de Londres ([About Amazon](https://www.aboutamazon.co.uk/news/retail/amazon-customers-can-now-add-fresh-groceries-to-same-day-delivery-orders-in-parts-of-london)). Os avaliadores na App Store elogiam o preço e as devoluções e reclamam da busca quando não sabem exatamente o que querem. Alguns dizem que as promessas de entrega que não se cumprem estão fazendo essas pessoas voltarem à high street.
 
 ```quote
 text: "I'd rather go to towns high streets now because even on prime and even when you pay same day delivery it still doesn't arrive."
@@ -172,7 +170,7 @@ status: verified
 
 ### Nextdoor
 
-**Ruth ○ (não estava lá).** Ruth fica sabendo das lojas por vizinhos e fóruns locais, que é para o que serve o Nextdoor. Nenhum post do cluster dela o menciona. Ele encontra negócios, não itens, então não responde à pergunta de Sam.
+**Ruth ○ (etapa 2, encontrar).** Ruth fica sabendo das lojas por vizinhos e fóruns locais, que é para o que serve o Nextdoor. Nenhum post do cluster dela o menciona. Ele encontra negócios, não itens, então não responde à pergunta de Sam.
 
 O Nextdoor é uma rede de vizinhança onde as pessoas recomendam negócios locais; o Nextdoor diz que as recomendações são cerca de 30% do seu conteúdo. Em setembro de 2026 lançou o "Local Faves", um hub que classifica negócios próximos pela confiança dos vizinhos, com resumos por IA do que os vizinhos dizem, disponível no Reino Unido ([Nextdoor via Nasdaq](https://www.nasdaq.com/press-release/nextdoor-deepens-its-commitment-local-business-discovery-and-recommendations-2026-09)). Nada pode ser comprado. As avaliações mostram o que as pessoas valorizam: um raio pequeno e verificado. Os donos de negócio têm dificuldade para manter suas páginas atualizadas.
 
@@ -200,15 +198,15 @@ status: verified
 
 ### ShopAppy e apps de BID
 
-**Jess ○ (conseguir) · Ruth ○ (não estava lá).** A ShopAppy oferecia o que falta para Jess, click and collect (compra online, retirada na loja) e pagamento na retirada em lojas independentes, e uma lista de quais lojas uma cidade ainda tem, que é a pergunta de Ruth. Nenhuma das duas pode usar: ela fechou em 2023.
+**Jess ○ (etapa 4, levar) · Ruth ○ (etapa 2, encontrar).** A ShopAppy oferecia o que falta para Jess, click and collect (compra online, retirada na loja) e pagamento na retirada em lojas independentes, e uma lista de quais lojas uma cidade ainda tem, que é a pergunta de Ruth. Nenhuma das duas pode usar: ela fechou em 2023.
 
 A ShopAppy era uma "virtual high street" (high street virtual) fundada por volta de 2016: cada cidade ganhava um diretório de lojas independentes com click & collect, entregadores, pagamento na retirada e pontos de coleta, muitas vezes pago pelas prefeituras (Kingston e Enfield, em Londres, entre elas). Chegou a mais de 120 cidades, encerrou as atividades em outubro de 2023, e a empresa foi dissolvida em fevereiro de 2025 ([Companies House](https://find-and-update.company-information.service.gov.uk/company/10285855)). O relato que está hoje no antigo domínio diz que o custo de manter uma plataforma para milhares de microcomerciantes superou a receita, e que a maioria das lojas pequenas não conseguia manter estoque em tempo real, pagamentos online e envio ([ShopAppy story](https://shopappy.com/the-shopappy-story)). Os apps de BID (associação de negócios do bairro) de hoje são programas de fidelidade e desconto, como o Love Leam em Leamington ([BID Leamington](https://bidleamington.com/love-leam-app-launches/)), e não encontrei nenhum app de BID em Londres que busque estoque ou receba pedidos. Não há avaliações no período.
 
 ### Deliveroo
 
-**Jess ○ (conseguir) · Ruth ○ (não estava lá).** A Deliveroo leva os produtos de uma loja local até Jess fora do horário de trabalho dela, pagos com cartão. Nenhum post do cluster dela a menciona. O único post que menciona, u/Inge_Jones pedindo de um restaurante local "to keep them afloat" (para ajudar a manter o restaurante de pé), fica fora do mapa, mais perto de Ruth.
+**Jess ○ (etapa 4, levar) · Ruth ○ (etapa 2, encontrar).** A Deliveroo leva os produtos de uma loja local até Jess fora do horário de trabalho dela, pagos com cartão. Nenhum post do cluster dela a menciona. O único post que menciona, u/Inge_Jones pedindo de um restaurante local "to keep them afloat" (para ajudar a manter o restaurante de pé), fica fora do mapa, mais perto de Ruth.
 
-A Deliveroo foi muito além dos restaurantes: mercado, dark stores Hop e, desde 2023, "Shopping" não alimentício de parceiros como Boots e B&Q, além do que ela chama de milhares de varejistas independentes. A DoorDash concluiu a compra de £2,9bn em outubro de 2025 ([Business Wire](https://secure.businesswire.com/news/home/20251002060133/en/DoorDash-Completes-Acquisition-of-Deliveroo)). Os compradores navegam por loja e categoria, e o posicionamento pago influencia a ordem. Cada pedido é de uma loja, entregue por entregadores da Deliveroo, com comissão informada de 20–35% mais taxas do comprador ([DineOpen](https://www.dineopen.com/blog/deliveroo-vs-just-eat-vs-uber-eats-commission-2026)). O estoque vem de cardápios que a loja mantém, então muitas vezes os itens se revelam indisponíveis só depois do pagamento.
+A Deliveroo foi muito além dos restaurantes: mercado, dark stores Hop e, desde 2023, "Shopping" não alimentício de parceiros como Boots e B&Q, além do que ela chama de milhares de varejistas independentes. A DoorDash concluiu a compra de £2,9bn em outubro de 2025 ([Business Wire](https://secure.businesswire.com/news/home/20251002060133/en/DoorDash-Completes-Acquisition-of-Deliveroo)). Os compradores veem as opções por loja e categoria, e o posicionamento pago influencia a ordem. Cada pedido é de uma loja, entregue por entregadores da Deliveroo, com comissão informada de 20–35% mais taxas do comprador ([DineOpen](https://www.dineopen.com/blog/deliveroo-vs-just-eat-vs-uber-eats-commission-2026)). O estoque vem de cardápios que a loja mantém, então muitas vezes os itens se revelam indisponíveis só depois do pagamento.
 
 ```quote
 text: "Wanted paint for a current project but only toiletries turned up. Puzzled how this shop has no paint in? ( white paint!)"
@@ -234,7 +232,7 @@ status: verified
 
 ### Uber Eats
 
-**Jess ○ (conseguir).** O mesmo papel da Deliveroo para Jess: entrega de lojas próximas, só cartão, fora do horário das lojas. Nenhum post a mostra usando. Os avaliadores esbarram nas duas reclamações de Jess pelo outro lado: horários errados e entrega lenta.
+**Jess ○ (etapa 4, levar).** O mesmo papel da Deliveroo para Jess: entrega de lojas próximas, só cartão, fora do horário das lojas. Nenhum post a mostra usando. Os avaliadores esbarram nas duas reclamações de Jess pelo outro lado: horários errados e entrega lenta.
 
 A Uber Eats tem muito estoque de mercado e conveniência no Reino Unido, incluindo a Co-op em mais de 1.300 lojas ([Grocery Gazette](https://www.grocerygazette.co.uk/2025/03/19/co-op-uber-eats-partnership/)). O recurso "bundle a second store" (juntar uma segunda loja), duas lojas próximas por uma taxa de entrega, foi lançado nos EUA em 2023 e não consegui confirmar no Reino Unido ([Uber](https://www.uber.com/us/en/newsroom/multi-store-ordering/)). A Uber Direct aluga seus entregadores para lojas que mantêm a própria vitrine. As avaliações reclamam de preços acima dos da prateleira, de horários de funcionamento que não batem com a realidade e de entregas de mercado lentas.
 
@@ -262,7 +260,7 @@ status: verified
 
 ### Just Eat
 
-**Jess ○ (conseguir).** Uma opção que Jess não usa, com a menor comissão anunciada entre as três grandes. Os usuários já sentem a culpa que o cluster de Jess mostra por não comprar no comércio local.
+**Jess ○ (etapa 4, levar).** Jess não usa. Os usuários já sentem a culpa por não comprar no comércio local que aparece no cluster de Jess.
 
 A Just Eat, da Prosus desde outubro de 2025, tem uma seção "Shops" para conveniência e mercado e faz as entregas do Peckish ([RetailDetail](https://www.retaildetail.eu/news/food/acquisition-of-just-eat-takeaway-completed-the-hard-work-is-just-beginning/)). A comissão informada, cerca de 14% quando a loja entrega, é a menor taxa anunciada entre as três grandes. Cada pedido é de uma loja, e os grandes podem ser divididos entre dois entregadores, o que confunde os avaliadores. Os usuários sabem que as taxas prejudicam as lojas locais, e alguns pedem mais varejo não alimentício.
 
@@ -290,13 +288,13 @@ status: verified
 
 ### Co-op Peckish
 
-**Jess ○ (conseguir).** O Peckish permite que uma loja de conveniência independente entregue com os próprios preços. Isso atende às compras de rotina de Jess, não a uma ida especial. Nenhum post a mostra usando.
+**Jess ○ (etapa 4, levar).** O Peckish permite que uma loja de conveniência independente entregue com os próprios preços. Isso combina mais com as compras de rotina de Jess do que com uma ida especial. Nenhum post a mostra usando.
 
-O Peckish foi lançado em fevereiro de 2025 como um app de entrega e sistema de pedidos que qualquer loja de conveniência independente pode usar, vendendo com os próprios preços ([The Grocer](https://www.thegrocer.co.uk/news/co-op-launches-rapid-grocery-delivery-app-for-independents-called-peckish/701536.article)). A própria loja entrega, ou a Co-op repassa o pedido para a Uber Direct ou a Just Eat, por uma comissão informada de um dígito, ou cerca de metade da taxa dos agregadores. Não encontrei navegação compartilhada entre lojas nem listagem na App Store do Reino Unido com esse nome, e não há avaliações de consumidores no período. Ele importa porque uma grande empresa estabelecida está apostando que as independentes precisam mais de infraestrutura barata do que de mais um marketplace.
+O Peckish foi lançado em fevereiro de 2025 como um app de entrega e sistema de pedidos que qualquer loja de conveniência independente pode usar, vendendo com os próprios preços ([The Grocer](https://www.thegrocer.co.uk/news/co-op-launches-rapid-grocery-delivery-app-for-independents-called-peckish/701536.article)). A própria loja entrega, ou a Co-op repassa o pedido para a Uber Direct ou a Just Eat, por uma comissão informada de um dígito, ou cerca de metade da taxa dos agregadores. Não encontrei navegação compartilhada entre lojas nem listagem na App Store do Reino Unido com esse nome, e não há avaliações de consumidores no período. Uma grande empresa estabelecida está apostando que as independentes precisam mais de infraestrutura barata do que de mais um marketplace.
 
 ### Gophr e Stuart
 
-**Jess ○ (conseguir).** O trecho do entregador por trás de uma entrega local no mesmo dia. Jess nunca vê esse trecho; uma loja ou um app agendaria por ela. Também tem a ver com o prazo de Sam, embora a falha de Sam seja saber, não a entrega.
+**Jess ○ (etapa 4, levar).** O trecho do entregador por trás de uma entrega local no mesmo dia. Jess nunca vê esse trecho; uma loja ou um app agendaria por ela. Também tem a ver com o prazo de Sam, embora a falha de Sam esteja em saber.
 
 A Gophr é uma rede de entregas no mesmo dia fundada em Londres que entrega para o Screwfix Sprint e opera o serviço TradePoint Express da B&Q ([London Loves Business](https://londonlovesbusiness.com/bq-to-start-same-day-deliveries/)). A Stuart oferece entregadores por uma API com rastreamento ao vivo ([Stuart](https://stuart.com/courier-service-london/)). A loja agenda e paga por serviço, e o comprador nunca vê o app da empresa de entregas. Redes de material de construção já vendem entrega em 30 a 90 minutos por meio delas para londrinos sem carro.
 
@@ -324,7 +322,7 @@ status: verified
 
 ### Square Online, SumUp e Teya
 
-**Jess ○ (conseguir).** Leitores de cartão resolvem diretamente um dos atritos de Jess: barracas que só aceitam dinheiro quando ela não tem dinheiro vivo (u/rsweb). Nenhum post a mostra escolhendo uma loja por aceitar cartão.
+**Jess ○ (etapa 4, levar).** Leitores de cartão resolvem diretamente um dos atritos de Jess: barracas que só aceitam dinheiro quando ela não tem dinheiro vivo (u/rsweb). Nenhum post a mostra escolhendo uma loja por aceitar cartão.
 
 As empresas de pagamento com cartão que as lojas pequenas já usam, cada uma com um jeito de vender pelo site próprio da loja ([Square](https://squareup.com/gb/en/online-store)). A Teya, a empresa que definiu este brief, lista publicamente maquininhas de cartão, uma conta empresarial, links de pagamento e plugins para Shopify e WooCommerce ([Teya Pay by Link](https://www.teya.com/online-payments/pay-by-link)). Cada loja é uma ilha, sem navegação entre lojas; as vendas de uma loja e, em alguns casos, os dados de estoque dela já passam por essas empresas.
 
@@ -339,9 +337,9 @@ context: Avaliação de 5 estrelas de um dono de negócio. O provedor de pagamen
 status: verified
 ```
 
-## Relacionados, mas fora dos problemas das personas
+## Outros produtos
 
-Úteis para o brief de modo geral. Nenhum responde ao que Sam, Jess ou Ruth precisam agora.
+Nenhum destes responde ao que Sam, Jess ou Ruth precisam agora. Eles tocam em outras perguntas do brief.
 
 ### Too Good To Go
 
@@ -405,7 +403,7 @@ status: verified
 
 ### Bookshop.org e Hive
 
-Livros vendidos online com uma parte repassada a livrarias independentes; a Bookshop.org tinha pago mais de £4m às independentes até janeiro de 2025 ([The Bookseller](https://www.thebookseller.com/news/bookshoporg-surpasses-4m-profit-for-indie-bookshops)). Os ISBNs facilitam um catálogo único e limpo, mas o livro sai de um depósito, não da prateleira local.
+Livros vendidos online com uma parte repassada a livrarias independentes; a Bookshop.org tinha pago mais de £4m às independentes até janeiro de 2025 ([The Bookseller](https://www.thebookseller.com/news/bookshoporg-surpasses-4m-profit-for-indie-bookshops)). Os ISBNs facilitam um catálogo único e limpo, mas o livro sai de um depósito central.
 
 ```quote
 text: "Hive shouldn't advertise items as in stock when they aren't and shouldn't accept orders for items they don't have."
@@ -433,35 +431,35 @@ context: Avaliação de 5 estrelas, id da avaliação na Apple 14644783903.
 status: verified
 ```
 
-## Padrões entre os produtos
+## Padrões
 
-*Interpretação. Tirada das avaliações acima e dos posts das personas; as contagens são pequenas.*
+*Minha leitura das avaliações acima e dos posts das personas. As contagens são pequenas.*
 
-**Sam, saber.**
+**Sam: para na etapa 1, saber.**
 
-1. **Nenhum produto responde "quem tem isso agora" para uma loja independente.** O Google com a NearSt é a única busca local por item, e depende de códigos de produto limpos vindos do caixa, que a maioria das padarias, floriculturas e açougues não tem. Então Sam pergunta a pessoas: Reddit, um grupo de reposição no WhatsApp, um chatbot de IA.
-2. **Disponibilidade errada é a reclamação mais comum, seja qual for o modelo.** Compradores da Deliveroo pagam e depois ficam sabendo que os itens estão em falta (Anthony Tindall), compradores do Too Good To Go chegam ao caixa e não há excedente (Montymoo2), e a Hive aceita pedidos de livros que não tem (customer). Os horários de funcionamento falham do mesmo jeito no Google (zingally) e na Uber Eats (Udohulk). Para Sam, um produto que anuncia estoque e erra custa a ida e o prazo (Dbank).
+1. Nenhum produto responde "quem tem isso agora" para uma loja independente. O Google com a NearSt é a única busca local por item, e depende de códigos de produto limpos vindos do caixa, que a maioria das padarias, floriculturas e açougues não tem. Então Sam pergunta a pessoas: Reddit, um grupo de reposição no WhatsApp, um chatbot de IA.
+2. Disponibilidade errada é a reclamação mais comum, seja qual for o modelo. Compradores da Deliveroo pagam e depois ficam sabendo que os itens estão em falta (Anthony Tindall), compradores do Too Good To Go chegam ao caixa e não há excedente (Montymoo2), e a Hive aceita pedidos de livros que não tem (customer). Os horários de funcionamento falham do mesmo jeito no Google (zingally) e na Uber Eats (Udohulk). Para Sam, um produto que anuncia estoque e erra custa a ida e o prazo (Dbank).
 
-**Jess, conseguir.**
+**Jess: para na etapa 4, levar.**
 
-3. **Conseguir coisas de lojas locais já existe, uma loja por vez e com um custo.** Deliveroo, Uber Eats, Just Eat e Peckish entregam fora do horário e aceitam cartão, com comissão de 14–35% mais taxas. Jess continua indo à Amazon. Nenhum post do cluster dela menciona um app de entrega.
-4. **A promessa da Amazon é a régua, e ela está falhando.** Alguns usuários da Amazon dizem que a entrega no mesmo dia não chega e que preferem ir à high street (gidfles). A entrega a partir de uma loja próxima precisa ser melhor do que ir a pé até lá (Jim Rickety). A Gophr mostra que o trecho do entregador já funciona em uma hora para londrinos sem carro (Barry Griffiths).
+3. A entrega a partir de lojas locais já existe, uma loja por vez e com um custo. Deliveroo, Uber Eats, Just Eat e Peckish entregam fora do horário e aceitam cartão, com comissão de 14–35% mais taxas. Jess continua indo à Amazon. Nenhum post do cluster dela menciona um app de entrega.
+4. A promessa da Amazon é a régua, e ela está falhando. Alguns usuários da Amazon dizem que a entrega no mesmo dia não chega e que preferem ir à high street (gidfles). A entrega a partir de uma loja próxima precisa ser melhor do que ir a pé até lá (Jim Rickety). A Gophr mostra que o trecho do entregador já funciona em uma hora para londrinos sem carro (Barry Griffiths).
 
-**Ruth, não estava lá.**
+**Ruth: para na etapa 2, encontrar.**
 
-5. **Nada foi feito para ela.** A pergunta dela é quais lojas ainda estão aqui e abertas. Os diretórios que respondiam a isso não duraram: a ShopAppy fechou, os apps de BID viraram cartões de fidelidade, e os usuários do Nextdoor reclamam quando o raio aumenta (Dj wade mister).
-6. **A informação em que ela confia fica desatualizada.** Os horários ficam no Facebook (BeansAndNoodles), os horários do Google estão errados (zingally), e os donos têm dificuldade para editar os perfis que já têm (AppleG69). O açougue que ela frequenta toda semana fechado no horário anunciado (Valentando) é a mesma falha.
+5. Nada foi feito para ela. A pergunta dela é quais lojas ainda estão aqui e abertas. Os diretórios que respondiam a isso não duraram: a ShopAppy fechou, os apps de BID viraram cartões de fidelidade, e os usuários do Nextdoor reclamam quando o raio aumenta (Dj wade mister).
+6. A informação em que ela confia fica desatualizada. Os horários ficam no Facebook (BeansAndNoodles), os horários do Google estão errados (zingally), e os donos têm dificuldade para editar os perfis que já têm (AppleG69). O açougue que ela frequenta toda semana fechado no horário anunciado (Valentando) é a mesma falha.
 
 **No brief como um todo.**
 
-7. **Uma cesta com muitos vendedores existe, mas só com entrega pelo correio.** Amazon e Etsy juntam vendedores em uma cesta; o checkout universal do Shop app e o Universal Cart do Google chegaram em outubro de 2026. Nenhum combina várias lojas locais com retirada ou com uma única entrega local.
-8. **"Apoiar o comércio local" atrai as pessoas, e uma experiência ruim afasta.** Os compradores citam isso como motivo para comprar (Grotty75) e se sentem culpados pelas taxas que as lojas pagam (Mykul1982). A falha de "em estoque" da Hive atingiu exatamente esses compradores.
+7. Uma cesta com muitos vendedores existe, mas só com entrega pelo correio. Amazon e Etsy juntam vendedores em uma cesta; o checkout universal do Shop app e o Universal Cart do Google chegaram em outubro de 2026. Nenhum combina várias lojas locais com retirada ou com uma única entrega local.
+8. "Apoiar o comércio local" atrai as pessoas, e uma experiência ruim afasta. Os compradores citam isso como motivo para comprar (Grotty75) e se sentem culpados pelas taxas que as lojas pagam (Mykul1982). A falha de "em estoque" da Hive atingiu exatamente esses compradores.
 
 ## Espaço em aberto
 
-*Interpretação. Decorrem dos padrões acima; nenhum é um produto que encontrei.*
+*Ideias que decorrem dos padrões acima. Não encontrei nenhum produto que faça qualquer uma delas.*
 
-- **Para Sam: disponibilidade como uma promessa que a loja confirma.** Ele já pergunta às pessoas quem tem. A mesma pergunta poderia ir para as lojas próximas, e a loja que tem aceita e separa o item, então ele vê "já está separado" antes de sair. Isso responde à reclamação mais comum sem pedir um catálogo às lojas.
-- **Para Jess: conseguir as coisas da rua no horário dela.** Retirada depois que a loja fecha, pagamento com cartão, ou uma única corrida de entregador por várias lojas da mesma rua, com cada loja continuando a ser a vendedora. As peças de checkout existem (Shop app, Etsy) e as peças de entrega existem (Gophr, Uber Direct); ninguém as juntou para uma high street, com preço pensado para competir com a entrega no mesmo dia da Amazon.
-- **Para Ruth: o que ainda está aqui e aberto, mantido atualizado sem trabalho do dono.** Os registros de caixa e de pagamento com cartão já passam por provedores como Square, SumUp e Teya, e poderiam alimentar horários de funcionamento e um "aberto hoje" sem nova tarefa administrativa.
-- **Sem ligação com uma persona: "o que há de novo na sua rua hoje" para lojas sem códigos de produto.** A fornada do dia, as flores da semana. Usuários da Amazon dizem que a busca falha quando não sabem o que querem (KJCM98...3), e a surpresa funciona para o Too Good To Go. Isso fica na ponta passeando, onde nenhum dos três clusters está.
+- **Sam.** A disponibilidade poderia ser uma promessa que a loja confirma. Ele já pergunta às pessoas quem tem. A mesma pergunta poderia ir para as lojas próximas, e a loja que tem aceita e separa o item, então ele vê "já está separado" antes de sair. Isso responde à reclamação mais comum sem pedir um catálogo às lojas.
+- **Jess.** Ela poderia conseguir as coisas da rua no horário dela: retirada depois que a loja fecha, pagamento com cartão, ou uma única corrida de entregador por várias lojas da mesma rua, com cada loja continuando a ser a vendedora. As peças de checkout existem (Shop app, Etsy) e as peças de entrega existem (Gophr, Uber Direct); ninguém as juntou para uma high street, com preço pensado para competir com a entrega no mesmo dia da Amazon.
+- **Ruth.** Ela precisa saber o que ainda está aqui e aberto, mantido atualizado sem trabalho do dono. Os registros de caixa e de pagamento com cartão já passam por provedores como Square, SumUp e Teya, e poderiam alimentar horários de funcionamento e um "aberto hoje" sem nova tarefa administrativa.
+- **Sem persona.** Lojas sem códigos de produto poderiam mostrar "o que há de novo na sua rua hoje": a fornada do dia, as flores da semana. Usuários da Amazon dizem que a busca falha quando não sabem o que querem (KJCM98...3), e a surpresa funciona para o Too Good To Go. Isso fica na ponta passeando, onde nenhum dos três clusters está.

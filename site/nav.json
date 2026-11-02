@@ -29,12 +29,12 @@
         },
         {
           "id": "landscape",
-          "title": "The high street today",
+          "title": "Desk research",
           "src": "docs/discover/high-street-landscape.md",
-          "pt": "A high street hoje"
+          "pt": "Pesquisa documental"
         },
         {
-          "title": "Netnography",
+          "title": "Data collection",
           "children": [
             {
               "id": "netnography-method",
@@ -67,7 +67,7 @@
               "pt": "Dimensões propostas"
             }
           ],
-          "pt": "Netnografia"
+          "pt": "Coleta de dados"
         },
         {
           "title": "Proto-personas",

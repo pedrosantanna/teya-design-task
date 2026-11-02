@@ -1,6 +1,6 @@
 # The high street today
 
-For most British people the high street is the main street of their town or neighbourhood: shops, cafés, a post office and a pub within walking distance of home, often with flats above them. In 2026 it has fewer shops and more cafés and services than it did ten years ago, and footfall is still falling, but empty units are being let again and the latest Budget cut business rates for the smallest shops.
+Desk research: reports, official statistics and news, read to learn how the high street works before looking at shoppers. For most British people the high street is the main street of their town or neighbourhood: shops, cafés, a post office and a pub within walking distance of home, often with flats above them. In 2026 it has fewer shops and more cafés and services than it did ten years ago, and footfall is still falling, but empty units are being let again and the latest Budget cut business rates for the smallest shops.
 
 ```summary
 Takeaways:
@@ -17,13 +17,13 @@ Trade-offs:
 - Some figures come from secondary sources, and there is no recent vacancy data for Hammersmith itself.
 ```
 
-## What a high street means
+## Definition and history
 
 The Office for National Statistics counts a high street as any cluster of 15 or more retail addresses within 150 metres. By that measure Britain had 6,969 of them in 2019, and London had the most, 1,204 ([ONS, 2019](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/articles/highstreetsingreatbritain/2019-06-06)). Today they are as much places to live as places to shop: more than half the addresses on Britain's central high streets are homes, about a third are shops and about one in ten are offices ([ONS, March 2026](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/highstreetsandretailareasingreatbritain/march2026)).
 
 Historic England dates the decline to the 1980s, when car-based out-of-town shopping took trade away from town centres ([Historic England](https://cms.historicengland.org.uk/whats-new/features/historic-high-streets-quiz)). In 2004 and 2005 the New Economics Foundation coined "clone town" for high streets filled with the same chains, and counted 13 of 27 London high streets as clones ([Londonist, 2005](https://londonist.com/2005/06/attack_of_the_c)). That debate is where the idea of the high street as a mark of local identity comes from. After the 2008 crash, the [Portas Review](https://www.gov.uk/government/publications/the-portas-review-the-future-of-our-high-streets) (2011) argued that high streets should become places for "shopping, learning, socialising and having fun". Bill Grimsey's reviews (2013, 2018, 2020) went further and said nostalgia would not save them ([Retail Tech Innovation Hub, 2018](https://retailtechinnovationhub.com/home/2018/7/4/grimsey-review-2-nostalgia-wont-save-the-high-street)).
 
-The social side is measurable. In a 2017 study of London high streets, 45% of users said their main reason for being there was not shopping, 63% walked there, and almost 40% of the small businesses interviewed did something social, such as keeping an eye on older customers ([GLA / LSE Cities, *High Streets for All*](https://www.lse.ac.uk/asset-library/information/high-streets-for-all-report-web-final.pdf)).
+A 2017 study of London high streets measured their social use: 45% of users said their main reason for being there was not shopping, 63% walked there, and almost 40% of the small businesses interviewed did something social, such as keeping an eye on older customers ([GLA / LSE Cities, *High Streets for All*](https://www.lse.ac.uk/asset-library/information/high-streets-for-all-report-web-final.pdf)).
 
 ## London and Hammersmith
 
@@ -37,15 +37,15 @@ London leans on its high streets more than the rest of the country. The GLA says
 
 **Hammersmith Bridge** has been closed to motor traffic since 2019 and reopened to cyclists and pedestrians in April 2025 ([Time Out](https://www.timeout.com/london/news/hammersmith-bridge-has-finally-reopened-to-cyclists-after-a-3-million-project-042225)). At the end of June 2026 the council recommended a "phased repair" that keeps it open for people on foot and bike, and reports said cars might never return ([Wandsworth Council](https://www.wandsworth.gov.uk/news/news-june-2026/wandsworths-deep-disappointment-at-hammersmith-bridge-latest/); [ITV](https://www.itv.com/news/london/2026-07-01/hammersmith-bridge-may-never-reopen-to-cars-because-of-lack-of-money-for-repairs); r/london: ["Plans to reopen Hammersmith Bridge to cars and buses axed over £300m cost"](https://www.reddit.com/r/london/comments/1uke914/plans_to_reopen_hammersmith_bridge_to_cars_and/)). Wandsworth said the decision would "do further harm to residents and businesses". Surveys claiming that 70–75% of local businesses were hurt come from campaigners, and no independent study was found.
 
-**The neighbours** are different in character:
+Three neighbouring streets each have a different character:
 
 - **Shepherd's Bush** has its market between Goldhawk Road and Uxbridge Road, under redevelopment by Yoo Capital, and Westfield London nearby. In November 2025 the council rejected a community bid to list the market as an Asset of Community Value ([Thames Gazette/LDRS](https://thamesgazette.azurewebsites.net/breaking-news/shepherds-bush-market-redevelopment-moves-forward-after-acv-bid-rejected)).
 - **Askew Road** (W12) is described by the council as a link between Hammersmith and Shepherd's Bush with a "vibrant and diverse mix of independent businesses" and a new traders' association ([LBHF](https://lbhf.gov.uk/business/business-connects/business-events-and-networking/business-associations-hf/askew-road-business-association)).
 - **Chiswick High Road**, over the border in Hounslow, has a long local story of independents closing over rents and rates. The latest count found, from a 2018 traders' task force, was about 20 empty shops ([ChiswickW4](https://www.chiswickw4.com/info/contaskforcereport001.htm)).
 
-**Chains and independents.** There is no current figure for Hammersmith's mix. The council's town-centre page once gave 31.9% independent retail and 9.8% vacancy, but it carried 2013 rent data and now returns a 404 ([LBHF](https://www.lbhf.gov.uk/business/business-connects/thinking-moving-hf/our-town-centres)). What can be seen today is a chain-heavy King Street, with independents more visible on Askew Road, in Shepherd's Bush Market and on side streets.
+There is no current figure for the mix of chains and independents in Hammersmith. The council's town-centre page once gave 31.9% independent retail and 9.8% vacancy, but it carried 2013 rent data and now returns a 404 ([LBHF](https://www.lbhf.gov.uk/business/business-connects/thinking-moving-hf/our-town-centres)). What can be seen today is a chain-heavy King Street, with independents more visible on Askew Road, in Shepherd's Bush Market and on side streets.
 
-## The rules that shape it
+## Regulation
 
 ### Business rates
 
@@ -127,7 +127,7 @@ London leans on its high streets more than the rest of the country. The GLA says
 
 **Why it matters.** Anything that sells on a shop's behalf has to show the all-in price, say who the seller is, carry each shop's cancellation terms and hold allergen data for food.
 
-## The numbers
+## Figures
 
 | Metric | Figure | Period | Source |
 | --- | --- | --- | --- |
@@ -172,7 +172,7 @@ London leans on its high streets more than the rest of the country. The GLA says
 - 2026-10-28 — Healey's first Budget raises the small business rate relief threshold for retail, hospitality and leisure from £12,000 to £18,000. [Source](https://www.talkingretail.com/news/industry-news/budget-reaction-business-rates-threshold-rise-a-major-win-for-local-shops-28-10-2026/)
 ```
 
-## How small merchants get paid
+## Merchant payments
 
 Most small shops take cards on a terminal or a phone reader. In 2025, 64% of all UK payments were by card and 39% were contactless, and 65% of adults had a mobile wallet ([UK Finance](https://www.ukfinance.org.uk/news-and-insight/press-release/digital-payments-continue-grow-mobile-wallets-become-more-popular)). Cash still matters more in shops than elsewhere: it was 19.2% of retail transactions in 2024, against 8% of all payments, and about 1.4 million adults mainly use cash ([BRC](https://brc.org.uk/news-and-events/news/corporate-affairs/2025/ungated/high-interest-rates-push-shoppers-from-credit-to-debit-cards/); UK Finance).
 
@@ -184,25 +184,25 @@ Most small shops take cards on a terminal or a phone reader. In 2025, 64% of all
 | Square | 1.75% in person; online 1.4% + 25p for UK cards (third-party figures) | [MobileTransaction](https://mobiletransaction.org/square-vs-izettle-vs-sumup) |
 | Dojo | Contract plans; third-party figures vary and were not confirmed from Dojo | [ExpertMarket](https://www.expertmarket.com/uk/merchant-accounts/dojo-review?p=29692) |
 
-What public sources say merchants struggle with:
+Problems merchants raise in public sources:
 
-- **Fees and opacity.** Retailers paid £1.48bn in card fees in 2024 ([BRC](https://brc.org.uk/news-and-events/news/corporate-affairs/2025/ungated/high-interest-rates-push-shoppers-from-credit-to-debit-cards/)). The Payment Systems Regulator found Visa and Mastercard scheme and processing fees rose more than 25% in real terms between 2017 and 2023 and that fee information is confusing ([PSR](https://www.psr.org.uk/news-and-updates/latest-news/news/psr-finds-market-isn-t-working-well-for-card-scheme-and-processing-services/)).
-- **Cash flow.** 45% of small firms said late payments had increased on a year earlier ([Fintech Times, GoCardless/FSB survey](https://thefintechtimes.com/gocardless-report-highlights-the-domino-effect-of-late-payments-and-calls-for-change/)). Every terminal provider above sells next-day settlement.
-- **Banking cash.** Branch closures make it harder to deposit takings, which is why the FCA rules cover business deposits ([FCA](https://www.fca.org.uk/news/press-releases/new-fca-rules-protect-access-cash-already-having-impact)).
-- **Selling online.** The latest figure found is old: in 2019, fewer than 10% of UK micro-businesses sold online ([Economics Observatory](https://economicsobservatory.com/update-are-small-businesses-ready-to-compete-as-consumers-move-online)).
-- **Costs beyond payments.** Reactions to the October 2026 Budget from the BRC and Bira put wages, employer National Insurance and energy ahead of rates ([BRC](https://brc.org.uk/news-and-events/news/corporate-affairs/2026/ungated/no-breathing-space-for-retail-as-budget-keeps-costs-climbing/); [Talking Retail](https://www.talkingretail.com/news/industry-news/budget-reaction-business-rates-threshold-rise-a-major-win-for-local-shops-28-10-2026/)).
+- Retailers paid £1.48bn in card fees in 2024 ([BRC](https://brc.org.uk/news-and-events/news/corporate-affairs/2025/ungated/high-interest-rates-push-shoppers-from-credit-to-debit-cards/)). The Payment Systems Regulator found Visa and Mastercard scheme and processing fees rose more than 25% in real terms between 2017 and 2023 and that fee information is confusing ([PSR](https://www.psr.org.uk/news-and-updates/latest-news/news/psr-finds-market-isn-t-working-well-for-card-scheme-and-processing-services/)).
+- On cash flow, 45% of small firms said late payments had increased on a year earlier ([Fintech Times, GoCardless/FSB survey](https://thefintechtimes.com/gocardless-report-highlights-the-domino-effect-of-late-payments-and-calls-for-change/)). Every terminal provider above sells next-day settlement.
+- Branch closures make it harder to deposit takings, which is why the FCA rules cover business deposits ([FCA](https://www.fca.org.uk/news/press-releases/new-fca-rules-protect-access-cash-already-having-impact)).
+- Few sell online, though the latest figure found is old: in 2019, fewer than 10% of UK micro-businesses sold online ([Economics Observatory](https://economicsobservatory.com/update-are-small-businesses-ready-to-compete-as-consumers-move-online)).
+- In their reactions to the October 2026 Budget, the BRC and Bira put wages, employer National Insurance and energy ahead of rates ([BRC](https://brc.org.uk/news-and-events/news/corporate-affairs/2026/ungated/no-breathing-space-for-retail-as-budget-keeps-costs-climbing/); [Talking Retail](https://www.talkingretail.com/news/industry-news/budget-reaction-business-rates-threshold-rise-a-major-win-for-local-shops-28-10-2026/)).
 
-## What this means for the brief
+## Implications for the brief
 
-*Interpretation. Each point is my reading of the evidence above, not a sourced fact.*
+*My reading of the evidence above. These points have no sources of their own.*
 
-- **The shopper is probably on foot, so collection may matter more than delivery.** 90% of Londoners live within ten minutes of a high street and 63% of users walk to theirs. With Hammersmith Bridge closed to cars, shoppers from south of the river arrive on foot or by bike, or need delivery.
-- **"What's available" has to cover more than shop stock.** Retail jobs on central high streets fell 19% while food and accommodation rose 18%, and Use Class E lets a shop become a café or clinic overnight. Food items also bring allergen rules with them.
-- **Availability data has to cost the merchant almost nothing.** Few micro-businesses sold online when last measured, and their pressures are wages, energy, card fees and cash flow. Data the shop already produces, such as till and payment records, is a more realistic source than a catalogue someone has to type in.
-- **The street already has an organiser.** Hammersmith BID runs a loyalty card, a safety network, events for 90,000 people and a makers' shop, and it knows every business on King Street. Working with it would be easier than recreating it.
-- **The price shown has to be the price paid.** Drip-pricing rules and the 14-day cancellation right apply to anything bought at a distance, including click & collect, so fees, the seller's name and each shop's terms belong on screen before payment.
-- **Cash and wallets will both be in play.** Cash is a fifth of retail transactions but most adults have a mobile wallet. Reserving in the app and paying at the counter would serve both groups.
-- **Policy is moving in independents' favour, but visits are not.** Lower rates for the smallest shops and rental auctions should help small occupiers, yet high street footfall fell 3% in September 2026. Bringing people to the shop, or the shop to people, is the gap.
+- The shopper is probably on foot, so collection may matter more than delivery. 90% of Londoners live within ten minutes of a high street and 63% of users walk to theirs. With Hammersmith Bridge closed to cars, shoppers from south of the river arrive on foot or by bike, or need delivery.
+- "What's available" has to cover more than shop stock. Retail jobs on central high streets fell 19% while food and accommodation rose 18%, and Use Class E lets a shop become a café or clinic overnight. Food items also bring allergen rules with them.
+- Availability data has to cost the merchant almost nothing. Few micro-businesses sold online when last measured, and their pressures are wages, energy, card fees and cash flow. Data the shop already produces, such as till and payment records, is a more realistic source than a catalogue someone has to type in.
+- The street already has an organiser. Hammersmith BID runs a loyalty card, a safety network, events for 90,000 people and a makers' shop, and it knows every business on King Street. Working with it would be easier than recreating it.
+- The price shown has to be the price paid. Drip-pricing rules and the 14-day cancellation right apply to anything bought at a distance, including click & collect, so fees, the seller's name and each shop's terms belong on screen before payment.
+- Shoppers will pay with both cash and wallets. Cash is a fifth of retail transactions but most adults have a mobile wallet. Reserving in the app and paying at the counter would serve both groups.
+- Policy is moving in independents' favour while visits keep falling. Lower rates for the smallest shops and rental auctions should help small occupiers, yet high street footfall fell 3% in September 2026. What's missing is a way to bring people to the shop, or the shop to people.
 
 ## Not confirmed
 
