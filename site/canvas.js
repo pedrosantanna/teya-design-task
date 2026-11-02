@@ -65,6 +65,12 @@
     });
     items.sort((a, b) => (a.matches('.area') ? 0 : 1) - (b.matches('.area') ? 0 : 1)).forEach(el => world.appendChild(el));
 
+    // A note attached to a screen takes the screen's width and left edge, so notes line up under the frames.
+    items.filter(n => n.matches('.note') && n.dataset.for && !n.dataset.free).forEach(n => {
+      const f = items.find(i => i.id === n.dataset.for && i.matches('.frame'));
+      if (f) { n.style.left = f.style.left; n.style.width = '393px'; }
+    });
+
     // --- View transform -----------------------------------------------------------
     let x = 0, y = 0, k = 1, anim = 0;
     function apply() {
@@ -160,6 +166,7 @@
     function renderDrawer(aboutOnly) {
       const body = drawer.querySelector('.cv-drawer-body'), head = drawer.querySelector('.cv-drawer-title');
       const sel = [...selected].filter(el => !el.matches('.area'));
+      drawer.classList.toggle('is-about', !!aboutOnly);
       if (aboutOnly) { head.textContent = t('about'); body.innerHTML = about; drawer.hidden = false; return; }
       if (!sel.length) { drawer.hidden = true; return; }
       if (sel.length > 1) {
@@ -300,7 +307,9 @@
     let rt = 0;
     const ro = new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => { if (root.isConnected) apply(); }, 50); });
     ro.observe(vp);
-    return { showAbout: () => renderDrawer(true), fit: () => fitAll(true) };
+    const api = { showAbout: () => renderDrawer(true), fit: () => fitAll(true), zoomTo: (ids, maxK = 1.5) => { const els = String(ids).split(',').map(i => world.querySelector('#' + i.trim())).filter(Boolean); if (els.length) fitTo(els, false, maxK); } };
+    root.__canvas = api;
+    return api;
   }
 
   window.HSCanvas = { mount };

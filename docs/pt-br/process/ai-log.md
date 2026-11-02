@@ -85,6 +85,9 @@ Para a Develop, um agente reuniu 14 referências de home no Mobbin (Granola, Sho
 ### 17. A área do comprador
 Decidi que o concierge trabalha a partir da localização e do prazo do comprador, em todas as high streets ao alcance, em vez de uma high street só (decisão 024). Um agente mediu no OpenStreetMap rotas a pé da Blythe Road até as ruas comerciais em volta e as agrupou em anéis: seis ruas a até 15 minutos. Ele também verificou se a GLA define uma high street por um número mínimo de lojas; as fontes que encontrou não dão número nenhum, então os docs não usam um. A prova de conceito passou para cerca de dez lojas no anel de 15 minutos, e os wireframes agora mostram a rua de cada loja. O agente trocou as redes que tinha usado nos primeiros wireframes (uma rede de papelarias, uma de farmácias e uma de óticas) por lojas independentes inventadas, porque o produto é para lojas independentes.
 
+### 18. Passe de acabamento nos canvas
+Achei os wireframes apertados e o texto saindo das formas dos estados. O agente descobriu que o vazamento vinha de um nome de classe que o canvas dividia com a mensagem de carregamento do site, o que tirava o respiro lateral, e dos estados de início e fim em formato de pílula. Ele deu largura fixa e respiro aos estados, marcou os estados finais com um anel em vez da pílula, afastou frames e estados para os rótulos das setas caberem, alinhou as notas embaixo das telas, passou os espaçamentos do app para um ritmo de 8 pontos, tirou um aviso que cobria o código de retirada e deixou o painel "Sobre este canvas" mais largo, com o resumo empilhado.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.

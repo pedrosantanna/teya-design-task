@@ -85,6 +85,9 @@ For Develop, an agent collected 14 home-screen references from Mobbin (Granola, 
 ### 17. The shopper's area
 I decided the concierge works from the shopper's location and deadline, across every high street within reach, instead of one high street (decision 024). An agent measured walking routes on OpenStreetMap from Blythe Road to the shopping streets around it and grouped them in rings: six streets within 15 minutes. It also checked whether the GLA defines a high street by a minimum number of shops; the sources it found give no number, so the docs don't use one. The proof of concept moved to about ten shops in the 15-minute ring, and the wireframes now show the street of each shop. The agent replaced the chains it had used in the first wireframes (a stationery chain, a pharmacy chain, an optician chain) with made-up independents, because the product is for independents.
 
+### 18. Craft pass on the canvases
+I found the wireframes cramped and text spilling out of the state shapes. The agent traced the spill to a class name the canvas shared with the site's loading message, which removed the side padding, and to pill-shaped start and end states. It gave states a fixed width and padding, marked end states with a ring instead of a pill, spread frames and states further apart so arrow labels fit, lined notes up under their screens, moved the app's spacing to an 8-point rhythm, removed a toast that covered the collection code, and made the "About this canvas" panel wider with the summary stacked.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.
