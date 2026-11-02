@@ -115,6 +115,12 @@ Pedi uma escala tipográfica a partir das diretrizes da Apple e do Material, tes
 ### 27. Escala tipográfica, rodada 2
 Tirei as fontes do sistema da escolha: SF Pro e Roboto são só fallback, porque nenhuma existe na outra plataforma (decisão 027). O agente acrescentou uma segunda rodada ao quadro de tipografia, combinando Gambetta, Telma e Pally com Switzer e com Satoshi, marcou os pares com SF Pro como fora e refez as notas. Gambetta com Switzer agora tem a melhor nota.
 
+### 28. Escala tipográfica, rodada 3
+Decidi que a conversa tem uma fonte só, uma sans forte com a Switzer como favorita, e fonte de display só no splash, na tela de entrada, no título da home e em títulos de widget (decisão 028). Também tirei a Pally. O agente removeu a Pally de todos os testes, acrescentou uma terceira rodada com essas quatro telas para cinco opções (Switzer sozinha, e Gambetta, Telma, Chillax ou Author no display) e deu notas para o papel de display; a Gambetta lidera. As rodadas 1 e 2 tinham posto fonte de display na conversa, o que o agente não deveria ter feito.
+
+### 29. Gambetta e Switzer refinadas, e o terrier no Figma
+Escolhi a Gambetta no display e a Switzer no resto (decisão 029) e pedi que o espaçamento fosse refinado a partir de fontes confiáveis, não da memória. O agente principal leu as diretrizes de tipografia da Apple (tabela de tracking, tamanhos mínimos, fontes próprias), os tokens de espaçamento entre letras do Material no código do Android e referências sobre tracking em display, e mediu as fontes com o fontTools. A Switzer colada vinha do tracking da SF copiado para o kit de wireframe; o agente definiu o tracking por fonte e por tamanho e deixou os títulos em Switzer mais pesados. Depois, um agente separado de revisão de acabamento conferiu a rodada 4 e encontrou dezesseis problemas, entre eles dois elementos em Gambetta na home, o cinza secundário reprovado no contraste e uma afirmação errada sobre números tabulares; todos foram corrigidos. Em paralelo pedi o ícone do terrier no Figma: o agente colocou como formas editáveis com nome, mais cinco variantes simples de orelha e sobrancelha para eu trabalhar.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.

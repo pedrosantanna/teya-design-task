@@ -115,6 +115,12 @@ I asked for a type scale on Apple's and Material's guidelines, tested on fonts I
 ### 27. Type scale, round 2
 I ruled out system fonts as a choice: SF Pro and Roboto are fallback only, because neither exists on the other platform (decision 027). The agent added a second round to the type scale board, pairing Gambetta, Telma and Pally with Switzer and with Satoshi, marked the SF Pro pairs as out and rescored. Gambetta with Switzer now has the best score.
 
+### 28. Type scale, round 3
+I decided the chat is one font, a strong sans with Switzer as the favourite, and a display font only on the splash, the get-started screen, the home title and widget titles (decision 028). I also dropped Pally. The agent removed Pally from every test, added a third round with those four screens for five options (Switzer alone, and Gambetta, Telma, Chillax or Author for display) and scored the display role; Gambetta leads. Rounds 1 and 2 had put display fonts in the chat, which the agent should not have done.
+
+### 29. Gambetta and Switzer, refined, and the terrier in Figma
+I chose Gambetta for display and Switzer for the rest (decision 029) and asked for the spacing to be refined from reliable sources, not memory. The main agent read Apple's typography guidelines (tracking table, minimum sizes, custom fonts), Material's letter-spacing tokens in the Android source and typography references on display tracking, and measured the fonts with fontTools. The cramped Switzer came from Apple's SF tracking copied into the wireframe kit; the agent set tracking per typeface and size and made Switzer titles heavier. A separate craft-review agent then checked round 4 and found sixteen issues, among them two Gambetta elements on the home, secondary grey failing contrast and a false claim about tabular figures; all were fixed. In parallel I asked for the terrier icon in Figma: the agent placed it as editable named shapes, plus five simple ear-and-brow variants for me to work on.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.

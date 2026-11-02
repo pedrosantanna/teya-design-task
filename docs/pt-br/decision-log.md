@@ -216,6 +216,22 @@ As fontes do app funcionam nas duas plataformas. SF Pro (iOS) e Roboto (Android)
 **Por quê:** uma fonte de marca precisa ser igual no iOS e no Android.
 **Em aberto:** as fontes próprias precisam ser registradas no Dynamic Type e na escala de fonte do Android, e a licença delas conferida antes do Deliver.
 
+## 028 · Uma sans para leitura, display só onde aparece
+**2026-11-02 · Decidido**
+
+Tudo o que o comprador lê, e a conversa acima de tudo, usa uma sans forte: a Switzer é a favorita por enquanto. Uma fonte de display, se houver, aparece só no splash, na tela de entrada, no título da home e em títulos de destaque de widgets, como o nome de uma loja num cartão. A conversa nunca mistura duas fontes. A Pally saiu dos testes.
+
+**Por quê:** uma conversa é lida em tamanhos pequenos e rápido; uma segunda fonte ali acrescenta ruído sem acrescentar voz.
+**Em aberto:** qual fonte de display, se houver. A Gambetta tem a melhor nota com a Switzer na rodada 3; a Switzer sozinha continua sendo uma opção.
+
+## 029 · Gambetta no display, Switzer no resto
+**2026-11-02 · Decidido**
+
+A Gambetta 700 é a fonte de display e a Switzer a fonte de texto, com a especificação em Escala tipográfica, rodada 4. O tracking é definido por fonte e por tamanho: a Gambetta aperta conforme cresce (−0,01 a −0,02 em), a Switzer fica em 0 no texto e abre um pouco abaixo de 15 pt; os títulos em Switzer usam 700–800. A Gambetta aparece só onde a decisão 028 permite, no máximo uma vez por tela e nunca abaixo de 26 pt; o nome de uma loja vai em Gambetta só na página dela (34 pt) e no cartão de pronto para retirar (26 pt).
+
+**Por quê:** uma serifada no display dá aos títulos uma voz editorial britânica; uma sans forte mantém tudo o que o comprador lê legível e consistente no iOS e no Android.
+**Em aberto:** as fontes precisam ser registradas no Dynamic Type e na escala de fonte do Android, e a licença da ITF conferida para embutir no app.
+
 ## Ainda em aberto
 
 - Estrutura do repo (app único ou monorepo): decidir quando a construção começar e o formato dela estiver claro.

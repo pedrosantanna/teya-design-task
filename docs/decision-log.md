@@ -216,6 +216,22 @@ The app's typefaces work on both platforms. SF Pro (iOS) and Roboto (Android) ar
 **Why:** a brand font has to look the same on iOS and Android.
 **Open:** the custom fonts must be registered for Dynamic Type and Android font scaling, and their licence checked before Deliver.
 
+## 028 · One sans for reading, display only where it shows
+**2026-11-02 · Decided**
+
+Everything the shopper reads, and the chat above all, uses one strong sans: Switzer is the favourite for now. A display font, if there is one, appears only on the splash, the get-started screen, the home title and display titles in widgets, such as a shop's name on a card. The chat never mixes two fonts. Pally is out of the tests.
+
+**Why:** a conversation is read in small sizes and fast; a second font there adds noise without adding voice.
+**Open:** which display font, if any. Gambetta scores best with Switzer in round 3; Switzer alone is still an option.
+
+## 029 · Gambetta for display, Switzer for everything else
+**2026-11-02 · Decided**
+
+Gambetta 700 is the display face and Switzer the text face, with the type spec in Type scale, round 4. Tracking is set per typeface and size: Gambetta tightens as it grows (−0.01 to −0.02 em), Switzer stays at 0 for text and opens slightly below 15 pt; Switzer titles are 700–800. Gambetta appears only where decision 028 allows, at most once per screen and never below 26 pt; a shop's name is in Gambetta only on its shop page (34 pt) and on the ready-to-collect card (26 pt).
+
+**Why:** a serif display gives titles a British editorial voice; one strong sans keeps everything the shopper reads legible and consistent on iOS and Android.
+**Open:** the fonts must be registered for Dynamic Type and Android font scaling, and the ITF licence checked for embedding.
+
 ## Still open
 
 - Repo layout (single app or monorepo): to decide when the build starts and its shape is known.
