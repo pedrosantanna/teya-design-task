@@ -253,6 +253,11 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 @font-face { font-family: 'Switzer'; src: url('private/fonts/switzer-500.woff2') format('woff2'); font-weight: 500; font-display: swap; }
 @font-face { font-family: 'Switzer'; src: url('private/fonts/switzer-600.woff2') format('woff2'); font-weight: 600; font-display: swap; }
 @font-face { font-family: 'Gambetta'; src: url('private/fonts/gambetta-700.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+.marks { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--s-5); margin: var(--s-4) 0 var(--s-6); }
+.marks figure { margin: 0; display: grid; gap: var(--s-2); justify-items: start; }
+.marks img { display: block; max-width: 100%; height: auto; }
+.marks figcaption { max-width: 24ch; font-size: 13px; line-height: 1.4; color: var(--muted-fg); }
+.marks.wide figcaption { max-width: 70ch; }
 .tfaces { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--s-4); margin: var(--s-4) 0 var(--s-6); }
 .tface { margin: 0; padding: var(--s-5); border: 1px solid var(--border); border-radius: var(--radius); }
 .tface-aa { font-size: 64px; line-height: 1; color: var(--fg); }

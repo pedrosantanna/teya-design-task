@@ -8,6 +8,7 @@ Takeaways:
 - Os Irregulars são os mais próximos da estrutura do conceito: um concierge com quem o comprador fala, vários agentes perguntando às lojas por trás. O terrier dá rosto à espera.
 - Três paletas, cada uma construída sobre um par complementar mais uma terceira cor: Pillar and park (verde e vermelho, manteiga), Awning (cobalto e laranja, menta), Tiles (verde-petróleo e rosa, ocre). Todo tint passa 4,5:1 como texto e como rótulo de botão nos modos claro e escuro.
 - Vários nomes óbvios já existem ou estão concorridos (Parade, Fetch, Errand, Legwork), e "Nip" sozinho é uma ofensa étnica.
+- A rodada 5 responde se as paletas saturadas funcionam com o Cinza biscoito: funcionam, porque o cinza é quase neutro; o limite é o Oat e o Brew da marca. Os conjuntos puxados por matizes quentes (Corner shop, Lido) ficam melhor ao lado dela.
 - A rodada 4 mantém Oat e Brew como base e acrescenta três escalas de cinza quente, no estilo do shadcn, e quatro conjuntos de cinco acentos (Lata de chá, Esmalte de fachada, Quitanda, Caixa de correio). Texto preto puro e branco sobre o Brew passam em todo lugar; o agente sugere Lata de chá com o Cinza biscoito.
 Call:
 - Marca provisória (decisão 033): desenhei à mão no Figma um terrier com um toldo no lugar da boca, a partir dos testes de ícone 1 e 2; ela está no [design system](../design-system/mark.md).
@@ -28,6 +29,7 @@ Todas as rodadas ficam no mesmo quadro, a mais recente no topo, abaixo de uma á
 
 | Rodada | O que acrescentou |
 | --- | --- |
+| 5 | O Cinza biscoito como neutro, pré-decidido. A Caixa de correio com três candidatas à quinta cor no lugar da Slate roof (Duck egg, Bramley e Vidro do mar, mais vivos), e seis paletas saturadas da rodada 2 sobre o Cinza biscoito, com a marca |
 | 4 | Oat e Brew da paleta I como base: três escalas de cinza quente no estilo do shadcn (de Oat e Brew até perto do stone do Tailwind) e quatro conjuntos de cinco acentos, cada um testado com preto e branco puros |
 | 3 | Teste de ícone 3 (sobrancelhas e bigode) com bigode de quatro ou cinco listras, nas paletas A, C, F, I e J |
 | 2 | Mais dez paletas de quatro ou cinco cores, e seis testes de ícone em que o toldo da parade vira a barba de um terrier |

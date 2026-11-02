@@ -265,6 +265,14 @@ O ícone do app é um terrier cuja boca é o toldo de uma loja: orelhas dobradas
 **Por quê:** ele junta as duas direções de que eu mais gostei, o terrier que entra nas lojas e os toldos da parade, e se lê como um rosto antes de se ler como uma loja.
 **Em aberto:** o desenho final e uma versão mais simples para tamanhos pequenos, as cores (elas seguem a paleta) e o nome.
 
+## 034 · Cinza biscoito como neutro
+**2026-11-02 · Provisória**
+
+O neutro do app é o Cinza biscoito, da rodada 4 do quadro de identidade: uma escala em OKLCH que vai do matiz do Oat ao do Brew com cerca de 60% do croma deles, com fundo #FCFAF6, borda #E0DCD5, texto secundário #5B5249 e texto principal #0E0A08. Texto preto puro e branco sobre escuro passam com ele. Os acentos não estão escolhidos. A Caixa de correio foi minha primeira pista; não gostei da Slate roof dela e pedi uma quinta cor mais clara e mais saturada, depois achei as outras paletas melhores que a Caixa de correio. A rodada 5 mostra a Caixa de correio com três candidatas e seis paletas saturadas da rodada 2 sobre o Cinza biscoito.
+
+**Por quê:** quente o bastante para ficar ao lado da marca sem emenda, discreto o bastante para qualquer conjunto de acentos levar a cor.
+**Em aberto:** o conjunto de acentos. A marca fica em preto e branco até lá.
+
 ## Ainda em aberto
 
 - Estrutura do repo (app único ou monorepo): decidir quando a construção começar e o formato dela estiver claro.

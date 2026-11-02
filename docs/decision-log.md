@@ -265,6 +265,14 @@ The app's icon is a terrier whose mouth is a shop's awning: low folded ears, two
 **Why:** it joins the two directions I liked most, the terrier that goes into the shops and the parade's awnings, and reads as a face before it reads as a shop.
 **Open:** the final drawing and a simpler version for small sizes, the colours (they follow the palette), and the name.
 
+## 034 · Biscuit grey as the neutral
+**2026-11-02 · Provisional**
+
+The app's neutral is Biscuit grey from round 4 of the identity board: an OKLCH ramp that runs from Oat's hue to Brew's at about 60% of their chroma, with background #FCFAF6, border #E0DCD5, muted text #5B5249 and foreground #0E0A08. Pure black text and white on dark both pass with it. The accents are not chosen. Pillar box was my first lead; I didn't like its Slate roof and asked for a lighter, more saturated fifth colour, then found the other palettes better than Pillar box. Round 5 shows Pillar box with three candidates and six saturated palettes from round 2 on Biscuit grey.
+
+**Why:** warm enough to sit next to the mark without a seam, quiet enough that any accent set can carry the colour.
+**Open:** the accent set. The mark stays in black and white until then.
+
 ## Still open
 
 - Repo layout (single app or monorepo): to decide when the build starts and its shape is known.

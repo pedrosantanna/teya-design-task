@@ -139,6 +139,9 @@ I questioned whether reserving without paying was worth keeping and asked whethe
 ### 35. A provisional mark
 I took the agent's first two icon tests into Figma and adjusted the vectors by hand: lower ears, two eyes in place of the brows, the awning under the nose, and two tones. I chose the fourth version on my Figma board and asked for it to be registered as the first identity decision. The agent exported the SVG from Figma unchanged, recorded decision 033 and added a Mark page to the design system and the mark to the identity board's "Where it stands".
 
+### 36. Round 5 of colour and the mark on the platforms
+I pre-decided Biscuit grey and asked whether the saturated palettes from round 2 would work with it, and for a fifth colour to replace Slate roof in Pillar box; midway I said the other palettes looked better than Pillar box. An agent placed three candidates by OKLCH hue (it picked Duck egg, the only one in a hue the other four lack) and drew the six saturated palettes on Biscuit grey with the mark, with contrast for each colour; its read was that the grey fits all of them and the mark's Oat and Brew are the real limit. I also asked for my hand adjustments in Figma to be documented and for the mark to be refined on an icon grid in black and white. The agent added my Figma board to the Mark page, rebuilt the drawing on one axis (it had three slightly different centres), centred it optically, and drew the iOS light, dark and tinted icons and the Android adaptive and themed icons. Its first black glyph vanished on the site's dark theme, so it gave it a white ground.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.

@@ -139,6 +139,9 @@ Questionei se valia manter a reserva sem pagamento e perguntei se a pesquisa tin
 ### 35. Uma marca provisória
 Levei os dois primeiros testes de ícone do agente para o Figma e ajustei os vetores à mão: orelhas mais baixas, dois olhos no lugar das sobrancelhas, o toldo embaixo do nariz, e dois tons. Escolhi a quarta versão do meu quadro no Figma e pedi que ela fosse registrada como a primeira decisão de identidade. O agente exportou o SVG do Figma sem alterações, registrou a decisão 033 e acrescentou uma página de Marca ao design system e a marca ao "Onde está" do quadro de identidade.
 
+### 36. Rodada 5 de cor e a marca nas plataformas
+Pré-decidi o Cinza biscoito e perguntei se as paletas saturadas da rodada 2 funcionariam com ele, e pedi uma quinta cor para substituir a Slate roof na Caixa de correio; no meio do caminho, eu disse que as outras paletas pareciam melhores que a Caixa de correio. Um agente posicionou três candidatas pelo matiz em OKLCH (escolheu o Duck egg, o único num matiz que as outras quatro não têm) e desenhou as seis paletas saturadas sobre o Cinza biscoito com a marca, com o contraste de cada cor; a leitura dele foi que o cinza combina com todas e que o limite de verdade é o Oat e o Brew da marca. Também pedi que meus ajustes à mão no Figma fossem documentados e que a marca fosse refinada num grid de ícone em preto e branco. O agente acrescentou meu quadro do Figma à página da Marca, reconstruiu o desenho sobre um eixo só (ele tinha três centros um pouco diferentes), centralizou-o oticamente e desenhou os ícones claro, escuro e tingido do iOS e os ícones adaptável e temático do Android. O primeiro desenho preto sumia no tema escuro do site, então ele ganhou um fundo branco.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.
