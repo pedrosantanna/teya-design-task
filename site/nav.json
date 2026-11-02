@@ -131,6 +131,12 @@
           "pt": "Proposta de valor"
         },
         {
+          "id": "blueprint",
+          "title": "Service blueprint",
+          "src": "docs/define/blueprint.md",
+          "pt": "Blueprint de serviço"
+        },
+        {
           "id": "hypotheses",
           "title": "Hypotheses",
           "src": "docs/define/hypotheses.md",

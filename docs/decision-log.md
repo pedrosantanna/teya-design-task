@@ -136,6 +136,14 @@ After Discover I chose one concept for both Sam and Jess: a shopper app whose ma
 **Position on the brief:** findability first. The transaction is the step that closes the loop, and it is where the constraints of the other problem show up.
 **Open:** whether shops answer fast enough (H1) decides whether the concierge works. It is tested by hand before anything is built.
 
+## 018 · Why the concierge is an agent
+**2026-11-02 · Decided**
+
+I made the concierge an agent, built as several agents behind one conversation. I expect four things from it: one interface for many tasks, waiting on shops handled for the shopper, requests it acts on later, and reach beyond one app (WhatsApp, or the shopper's own assistant through MCP). The prototype is the app, where the concierge gets an interface built for this one job.
+
+**Why:** shops are slow and hard to reach, and the shopper's job (find it, hold it, pay, collect) has several steps. One conversation that does the chasing fits that better than a screen per step.
+**Open:** this is my main product hypothesis and Discover has little evidence on it. H3 (asking beats browsing), H4 (shoppers accept the wait), H8 (requests left ahead) and H10 (channels) test it. If H3 or H4 fails, browsing becomes the main screen.
+
 ## Still open
 
 - Repo layout (single app or monorepo): to decide when the build starts and its shape is known.

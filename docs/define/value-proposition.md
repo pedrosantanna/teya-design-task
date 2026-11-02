@@ -11,7 +11,7 @@ Call:
 - One canvas per proto-persona, because Strategyzer's canvas works per customer segment and the two have different jobs.
 - Ruth has no canvas. The concept doesn't serve her (A13).
 AI:
-- An agent filled both canvases from the empathy map, persona pages and concept, and marked each item with the assumption behind it. I reviewed the fit.
+- An agent filled both canvases from the empathy map, persona pages and concept, and marked each item with the assumption behind it. I reviewed the fit, and the canvases were updated when I added the reasons for an agent.
 Trade-offs:
 - The canvas shows intended fit. Whether shoppers value it is a hypothesis.
 ```
@@ -20,14 +20,15 @@ Trade-offs:
 
 ```value-proposition
 Products and services:
-- An agent you can ask for a specific item near a place, now
+- A concierge you can ask for a specific item near a place, now, in one conversation
 - Instant answers from shops whose till shares stock
-- A concierge that asks likely shops when there's no stock data
-- Reserve or pay to hold, then collect
+- Requests to likely shops when there's no stock data, sent at the same time
+- Reserve or pay to hold, then collect, in the same conversation
 Pain relievers:
 - Know before leaving whether a shop has it and is open (A1)
 - The answer comes from the shop itself, not a listing that may be wrong (A2, A10)
 - One request reaches several shops, so no phoning around
+- The concierge keeps looking and posts updates while shops answer
 Gain creators:
 - Get it today, nearby, when online can't arrive in time (A4)
 - A hold means the trip can't be wasted
@@ -47,22 +48,24 @@ Gains:
 - Not falling back on Amazon
 ```
 
-**Fit.** The concept answers all three pains directly. The weak link is time: a concierge answer has to arrive faster than Sam would otherwise phone around or give up (risk in the [concept](index.md)). The gain "not falling back on Amazon" is attitudinal; Sam may say it and still choose Amazon.
+**Fit.** The concept answers all three pains directly, and the concierge asks several shops at once where Sam would phone them one by one. The weak link is time: a concierge answer has to arrive faster than Sam would otherwise phone around or give up (risk in the [concept](index.md)). The gain "not falling back on Amazon" is attitudinal; Sam may say it and still choose Amazon.
 
 ## Jess, the lapsed local
 
 ```value-proposition
 Products and services:
-- Browse nearby shops and ask the agent for routine items
-- Reserve and pay in the app
+- Ask the concierge for routine items, in the app or on WhatsApp
+- Standing requests the concierge acts on ("bread from the bakery on Fridays")
+- Reserve and pay in the conversation
 - Collection in an agreed window, or delivery
 Pain relievers:
-- Order and pay while the shop is open, collect later (A6, A7)
+- Ask in the morning, while the shop is open, and collect later (A6, A7)
 - Card and wallet payment, no cash needed (A11)
 - Delivery for when she can't get there
 Gain creators:
 - Use local shops again without changing her week
-- One app for several shops on her street
+- One conversation for several shops on her street
+- Set it once and the concierge handles it
 Jobs:
 - Do routine shopping around work hours
 - Buy from local shops she would rather support
@@ -77,7 +80,7 @@ Gains:
 - Not defaulting to Amazon or the supermarket
 ```
 
-**Fit.** Partial. The concept relieves the hours pain only if shops hold items until she can come, or a collection point stays open after work. Neither is in the evidence. Delivery helps but costs the shop 14–35% through today's apps (F9), and the concept doesn't solve a basket across shops yet.
+**Fit.** Partial. Asking in the morning and leaving standing requests fit her week, but the concept relieves the hours pain only if shops hold items until she can come, or a collection point stays open after work. Neither is in the evidence. Delivery helps but costs the shop 14–35% through today's apps (F9), and the concept doesn't solve a basket across shops yet.
 
 ## What the canvases leave out
 

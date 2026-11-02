@@ -136,6 +136,14 @@ Depois do Discover, escolhi um conceito só para o Sam e a Jess: um app para que
 **Posição no brief:** findability primeiro. A transaction é a etapa que fecha o ciclo, e é nela que aparecem as restrições do outro problema.
 **Em aberto:** se as lojas respondem rápido o bastante (H1) decide se o concierge funciona. Isso é testado à mão antes de qualquer construção.
 
+## 018 · Por que o concierge é um agente
+**2026-11-02 · Decidido**
+
+Fiz do concierge um agente, montado como vários agentes por trás de uma conversa só. Espero quatro coisas dele: uma interface para muitas tarefas, a espera pelas lojas resolvida para quem compra, pedidos que ele executa depois e alcance além de um app (WhatsApp, ou o assistente de AI do próprio comprador via MCP). O protótipo é o app, onde o concierge ganha uma interface feita só para esse trabalho.
+
+**Por quê:** as lojas demoram e são difíceis de alcançar, e o trabalho de quem compra (achar, segurar, pagar, retirar) tem várias etapas. Uma conversa que corre atrás das lojas por ele combina mais com isso do que uma tela por etapa.
+**Em aberto:** essa é minha principal hipótese de produto, e o Discover tem pouca evidência sobre ela. H3 (perguntar ganha de explorar), H4 (o comprador aceita a espera), H8 (pedidos deixados com antecedência) e H10 (canais) testam isso. Se H3 ou H4 falhar, explorar lojas e categorias vira a tela principal.
+
 ## Ainda em aberto
 
 - Estrutura do repo (app único ou monorepo): decidir quando a construção começar e o formato dela estiver claro.

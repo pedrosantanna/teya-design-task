@@ -68,6 +68,9 @@ Um agente capturou as telas principais de oito apps dos benchmarks no Mobbin, pe
 ### 13. Define: conceito, canvas e hipóteses
 Eu escrevi o conceito: um agente que funciona como concierge da high street. Um agente conferiu cada parte com a evidência do Discover, preencheu um canvas de proposta de valor para o Sam e outro para a Jess a partir do mapa de empatia e das páginas de persona, e rascunhou oito hipóteses com testes e critérios de aprovação. Antes, enxuguei as perguntas em aberto da conclusão: tirei a escolha do comprador, que era uma decisão minha, e acrescentei perguntas sobre como os lojistas trabalham.
 
+### 14. Por que um agente, e o blueprint de serviço
+Escrevi por que o concierge é um agente: vários agentes por trás de uma conversa só, que cuida da espera pelas lojas, executa pedidos depois e pode viver fora do app (decisão 018). Um agente revisou as páginas da Define a partir disso: o conceito, os dois canvas e as hipóteses, que passaram de oito para onze. Eu acrescentei as quatro sobre o agente, e o teste feito à mão passou para o WhatsApp, comigo no papel de concierge. O agente também rascunhou um blueprint de serviço com o comprador, o concierge, os agentes por trás dele e a loja, e criou um bloco de blueprint para o site. Eu defini as etapas e quais agentes ficam por trás do concierge.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.

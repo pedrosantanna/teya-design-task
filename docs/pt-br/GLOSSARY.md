@@ -96,4 +96,9 @@ Source: English Markdown in `docs/`. Target: Brazilian Portuguese in `docs/pt-br
 | collection window | janela de retirada |
 | cold start | partida a frio |
 | merchant side | lado da loja |
+| service blueprint / lane / touchpoint | blueprint de serviço / raia / ponto de contato |
+| line of interaction / line of visibility / line of internal interaction | linha de interação / linha de visibilidade / linha de interação interna |
+| fail point | ponto de falha |
+| standing request / request left ahead of time | pedido recorrente / pedido deixado com antecedência |
+| orchestrator / stock agent / matching agent / contact agent / payment agent / courier agent | orquestrador / agente de estoque / agente de seleção de lojas / agente de contato / agente de pagamento / agente de entrega |
 | Position on the brief (decision-log label) | Posição no brief |

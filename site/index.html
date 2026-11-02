@@ -292,6 +292,18 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .cmap-note { font-size: 13px; color: var(--muted-fg); margin: 8px 0 0; }
 
 /* Occasion grid (job x where it broke) */
+.bp-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); }
+.prose table.bp { min-width: 1080px; font-size: 13px; line-height: 1.45; table-layout: fixed; }
+.prose table.bp th, .prose table.bp td { padding: var(--s-3); border-bottom: 1px solid var(--border); vertical-align: top; }
+.prose table.bp td + td, .prose table.bp th + th, .prose table.bp th + td { border-left: 1px solid var(--border); }
+.prose table.bp thead th { background: var(--bg-subtle); color: var(--fg); font-weight: 600; border-bottom-color: var(--border-strong); }
+.prose table.bp thead th:first-child, .prose table.bp tbody th { width: 128px; position: sticky; left: 0; z-index: 1; box-shadow: inset -1px 0 0 var(--border); }
+.prose table.bp tbody th, .prose table.bp thead th:first-child { background: linear-gradient(var(--bg-subtle), var(--bg-subtle)), var(--bg); }
+.prose table.bp tbody th { font-size: 12px; font-weight: 600; letter-spacing: .02em; color: var(--muted-fg); text-align: left; }
+.prose table.bp td p { margin: 0; max-width: none; color: var(--fg-2); }
+.prose table.bp td p + p { margin-top: var(--s-2); }
+.prose table.bp tr.bp-line td { padding: 0; height: 0; border-bottom: 1px dashed var(--border-strong); position: relative; }
+.prose table.bp tr.bp-line span { position: sticky; left: 0; display: inline-block; padding: var(--s-1) var(--s-3); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted-fg); }
 .ogrid-wrap { overflow-x: auto; margin: 12px 0 8px; }
 .ogrid { border-collapse: collapse; width: 100%; min-width: 600px; font-size: 13.5px; }
 .ogrid th, .ogrid td { border-bottom: 1px solid var(--border); padding: 12px 14px 12px 0; vertical-align: top; text-align: left; }
@@ -540,6 +552,24 @@ i.m.unknown { opacity: .45; }
     const cell = c => `<section class="vpc-cell"><p class="empathy-label">${esc(c.label)}</p><ul>${c.items.map(i => `<li>${inline(i)}</li>`).join('')}</ul></section>`;
     return `<div class="vpc"><div class="vpc-side"><p class="vpc-title">${t('valueMap')}</p>${cells.slice(0, 3).map(cell).join('')}</div><div class="vpc-side"><p class="vpc-title">${t('customerProfile')}</p>${cells.slice(3, 6).map(cell).join('')}</div></div>`;
   }
+  // ```blueprint  Service blueprint. "Steps: a | b | c" first, then one "Lane: cell | cell | cell" line per lane,
+  // and "--- Label" lines for the lines between lanes (interaction, visibility). " ; " splits a cell into items.
+  function blueprint(src) {
+    const rows = []; let steps = [];
+    src.split('\n').forEach(line => {
+      const t = line.trim(); if (!t) return;
+      if (t.startsWith('---')) { rows.push({ line: t.replace(/^-+\s*/, '') }); return; }
+      const i = t.indexOf(':'); if (i < 0) return;
+      const label = t.slice(0, i).trim(), cells = t.slice(i + 1).split('|').map(c => c.trim());
+      if (!steps.length) steps = cells; else rows.push({ label, cells });
+    });
+    const n = steps.length;
+    const cell = c => !c || c === '-' ? '<td class="bp-empty"></td>' : `<td>${c.split(' ; ').map(x => `<p>${inline(x)}</p>`).join('')}</td>`;
+    const body = rows.map(r => r.line !== undefined
+      ? `<tr class="bp-line"><td colspan="${n + 1}"><span>${esc(r.line)}</span></td></tr>`
+      : `<tr><th scope="row">${esc(r.label)}</th>${Array.from({ length: n }, (_, k) => cell(r.cells[k])).join('')}</tr>`).join('');
+    return `<div class="bp-wrap"><table class="bp"><thead><tr><th></th>${steps.map(s => `<th scope="col">${inline(s)}</th>`).join('')}</tr></thead><tbody>${body}</tbody></table></div>`;
+  }
   function timeline(src) {
     const items = src.split('\n').map(l => l.trim()).filter(l => l.startsWith('- ')).map(l => {
       const m = l.slice(2).match(/^(\d{4}-\d{2}(?:-\d{2})?)\s*[—–-]\s*(.*)$/);
@@ -656,6 +686,7 @@ i.m.unknown { opacity: .45; }
         if (l === 'quote') return quoteCard(code);
         if (l === 'empathy-map') return empathyMap(code);
         if (l === 'value-proposition') return valueProposition(code);
+        if (l === 'blueprint') return blueprint(code);
         if (l === 'timeline') return timeline(code);
         if (l === 'occasion-grid') return occasionGrid(code);
         if (l === 'summary') return summary(code);
@@ -770,7 +801,7 @@ i.m.unknown { opacity: .45; }
       if (cols <= 3 && !emptyHead && t.rows.length <= 8) t.classList.add('fit');
     });
     tmp.querySelectorAll('table').forEach(t => {
-      if (t.classList.contains('ogrid')) return;
+      if (t.classList.contains('ogrid') || t.classList.contains('bp')) return;
       const w = document.createElement('div'); w.className = 'table-wrap'; t.replaceWith(w); w.appendChild(t);
       const heads = [...t.querySelectorAll('thead th')];
       if (heads.length && heads.every(th => !th.textContent.trim())) t.classList.add('kv');
