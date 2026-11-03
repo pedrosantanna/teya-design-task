@@ -29,8 +29,8 @@ export default function RootLayout() {
       <StatusBar style={theme.scheme === 'dark' ? 'light' : 'dark'} />
       {/* A plain object: react-navigation's views don't take Unistyles styles on the web, so a theme switch has to re-render it. */}
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: theme.color.background } }}>
-        {/* The shop page is presented over what opened it and closes back to it (v7 "Shop page"). */}
-        <Stack.Screen name="shops/[id]" options={{ presentation: 'fullScreenModal', animation: 'slide_from_bottom' }} />
+        {/* The shop page is the shop's detail: a normal push with Back and the back gesture (v7 "Shop page"). */}
+        <Stack.Screen name="shops/[id]" options={{ gestureEnabled: true }} />
       </Stack>
       <SimulatedNotification />
     </DesignSystemRoot>

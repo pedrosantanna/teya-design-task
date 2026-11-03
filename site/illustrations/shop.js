@@ -1,8 +1,10 @@
 // A small shop with a classic British shopfront, in two variants:
 // - "Shop": the classic order from the top down: cornice, fascia sign, the awning's roller box under the fascia,
 //   then the striped awning over the window. Pilasters frame the front and a stall riser sits under the window.
-// - "Shop, no sign": no fascia; the roller box takes its place, so the awning sits higher and is the shop's sign.
-// Both share one block with a roof slab and a chimney, a door with a step, a side window and a pot plant.
+// - "Shop, no sign": no fascia; a lower block with the roller box right under the roof slab, so the awning is the
+//   shop's sign. Its awning is shorter and steeper and the door and window are lower, so in the isometric view the
+//   valance ends at the door's head and frames the door instead of covering it.
+// Both share a roof slab and a chimney, a door with a step, a side window and a pot plant.
 // The awning has seven stripes sloping down from the roller box and a shallow scalloped valance.
 // Idle: the valance flaps sway a little.
 import kit from './kit.js';
@@ -14,7 +16,7 @@ function make({ id, name, sign }) {
     build(THREE, P) {
       const k = kit(THREE);
       const g = new THREE.Group();
-      const W = 2, H = 1.7, D = 1.6, F = D / 2; // F: front face (z)
+      const W = 2, H = sign ? 1.7 : 1.62, D = 1.6, F = D / 2; // F: front face (z)
       const white = P.biscuit.card, glass = P.lavender[300], ink = P.indigo[800], stripe = P.peach[300];
 
       const body = k.block(W, H, D, P.butter[100], [0, 0, 0]);
@@ -24,7 +26,7 @@ function make({ id, name, sign }) {
       ]);
 
       // Shopfront frame: two pilasters up to the fascia (or to the roller box when there is no sign).
-      const top = sign ? 1.2 : 1.42, pw = 0.12, pd = 0.04;
+      const top = sign ? 1.2 : H - 0.02, pw = 0.12, pd = 0.04;
       const pilasters = k.group([-1, 1].map(s =>
         k.block(pw, top, pd, white, [s * (W / 2 - pw / 2), 0, F + pd / 2], { part: 'pilasters' })));
 
@@ -37,7 +39,7 @@ function make({ id, name, sign }) {
       ]) : null;
 
       // Awning: a roller box against the wall, then stripes hinged under it; each stripe ends in a scalloped flap.
-      const N = 7, aw = W - 2 * pw - 0.04, sw = aw / N, L = sign ? 0.58 : 0.62, tilt = 0.42, th = 0.03;
+      const N = 7, aw = W - 2 * pw - 0.04, sw = aw / N, L = sign ? 0.58 : 0.36, tilt = sign ? 0.42 : 0.7, th = 0.03;
       const hingeY = top - 0.08;
       const awning = k.group([k.block(aw + 0.04, 0.08, 0.09, ink, [0, hingeY, F + 0.045], { part: 'roller' })]);
       const blade = new THREE.Group();
@@ -60,21 +62,21 @@ function make({ id, name, sign }) {
       }
 
       // Window over a stall riser; the door with a glazed panel and a step.
-      const wy = 0.32, wh = (sign ? 1.08 : 1.2) - wy;
+      const wy = sign ? 0.32 : 0.24, wh = (sign ? 1.08 : 0.84) - wy;
       const shopWindow = k.group([
         k.block(0.94, wy, 0.06, P.butter[300], [0.36, 0, F + 0.03]),
         k.block(0.94, wh, 0.05, white, [0.36, wy, F + 0.025]),
         k.block(0.8, wh - 0.14, 0.02, glass, [0.36, wy + 0.07, F + 0.06]),
       ]);
-      const dh = sign ? 0.98 : 1.06;
+      const dh = sign ? 0.98 : 0.74;
       const door = k.group([
         k.block(0.5, dh, 0.05, P.indigo[600], [-0.5, 0.06, F + 0.025]),
-        k.block(0.28, 0.34, 0.02, glass, [-0.5, 0.06 + dh - 0.48, F + 0.06]),
+        k.block(0.28, sign ? 0.34 : 0.28, 0.02, glass, [-0.5, 0.06 + dh - (sign ? 0.48 : 0.38), F + 0.06]),
       ]);
       const step = k.block(0.66, 0.06, 0.22, white, [-0.5, 0, F + 0.11]);
       const sideWindow = k.group([
-        k.block(0.05, 0.52, 0.52, white, [W / 2 + 0.025, 0.86, -0.3]),
-        k.block(0.02, 0.38, 0.38, glass, [W / 2 + 0.06, 0.93, -0.3]),
+        k.block(0.05, 0.52, 0.52, white, [W / 2 + 0.025, sign ? 0.86 : 0.7, -0.3]),
+        k.block(0.02, 0.38, 0.38, glass, [W / 2 + 0.06, sign ? 0.93 : 0.77, -0.3]),
       ]);
       const plant = k.group([
         k.cyl(0.11, 0.085, 0.2, P.peach[500], [0.86, 0.1, F + 0.26]),

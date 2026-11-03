@@ -18,6 +18,7 @@ import Animated, {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
+import { FloatingSurface } from '../../internal/FloatingSurface';
 import { usePress } from '../../internal/usePress';
 import { CloseButton } from '../CloseButton/CloseButton';
 import { Icon, type PlatformIconName } from '../Icon/Icon';
@@ -60,7 +61,8 @@ export type NavBarProps = {
    *  inline: always inline. reveal: no title until the content scrolls `revealAt` points. */
   mode?: 'large' | 'inline' | 'reveal';
   scroll?: NavBarScroll;
-  /** back: the chevron with the previous title on iOS ("Requests"), the arrow on Android. close: Close on the left. */
+  /** back: the chevron with the previous title on iOS ("Requests"), the arrow on Android; in reveal mode a glass
+   *  circle over the map until the bar's fill shows. close: Close on the left. */
   leading?: 'back' | 'close' | 'none';
   backLabel?: string;
   onLeading?: () => void;
@@ -149,15 +151,37 @@ export const NavBar = memo(function NavBar({
     return { opacity: o, transform: [{ translateY: o < 0.01 ? -total : 0 }] };
   });
 
+  // Reveal mode sits over the map or a photo: Back starts as a glass circle and becomes the plain Back with the
+  // previous title once the bar's fill shows.
+  const mediaStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(scrollY.get(), [backgroundAt - theme.space[2], backgroundAt], [1, 0], Extrapolation.CLAMP),
+  }));
+  const backContent = (
+    <>
+      <Icon icon="back" size="nav" color={ios ? 'tint' : 'foreground'} />
+      {ios && backLabel ? (
+        <Text variant="body" color="tint" numberOfLines={1}>
+          {backLabel}
+        </Text>
+      ) : null}
+    </>
+  );
+
   const leadingNode =
-    leading === 'back' ? (
+    leading === 'back' && mode === 'reveal' ? (
       <Pressable accessibilityRole="button" accessibilityLabel={backLabel ? `Back to ${backLabel}` : 'Back'} onPress={onLeading} style={styles.back}>
-        <Icon icon="back" size="nav" color={ios ? 'tint' : 'foreground'} />
-        {ios && backLabel ? (
-          <Text variant="body" color="tint" numberOfLines={1}>
-            {backLabel}
-          </Text>
-        ) : null}
+        <Animated.View style={[styles.back, backgroundStyle]} pointerEvents="none">
+          {backContent}
+        </Animated.View>
+        <Animated.View style={[styles.mediaBack, mediaStyle]} pointerEvents="none">
+          <FloatingSurface interactive style={styles.circle}>
+            <Icon icon="back" size="subheadline" weight="strong" color="foreground" />
+          </FloatingSurface>
+        </Animated.View>
+      </Pressable>
+    ) : leading === 'back' ? (
+      <Pressable accessibilityRole="button" accessibilityLabel={backLabel ? `Back to ${backLabel}` : 'Back'} onPress={onLeading} style={styles.back}>
+        {backContent}
       </Pressable>
     ) : leading === 'close' ? (
       <View style={styles.closeSlot}>
@@ -251,6 +275,8 @@ const styles = StyleSheet.create((theme) => ({
   trailing: { justifyContent: 'flex-end' },
   titleSlot: (ios: boolean) => (ios ? { flex: 2 } : { flex: 1, paddingHorizontal: theme.space[2] }),
   back: { flexDirection: 'row', alignItems: 'center', minHeight: theme.hit.min, minWidth: theme.hit.min, gap: theme.space[1] },
+  mediaBack: { position: 'absolute', top: 0, left: 0, width: theme.hit.min, height: theme.hit.min, alignItems: 'center', justifyContent: 'center' },
+  circle: { width: theme.size.close, height: theme.size.close, borderRadius: theme.radius.full, alignItems: 'center', justifyContent: 'center' },
   closeSlot: { minWidth: theme.hit.min, minHeight: theme.hit.min, alignItems: 'center', justifyContent: 'center' },
   barButton: { width: theme.hit.min, height: theme.hit.min, alignItems: 'center', justifyContent: 'center' },
   large: { paddingTop: theme.space[2], transformOrigin: 'left' },

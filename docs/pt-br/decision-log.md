@@ -318,6 +318,7 @@ O app tem quatro objetos: pedido, loja, resposta e compra. O Snuffle é a voz qu
 
 **Por quê:** depois da v7, as telas usavam várias palavras para a mesma coisa (quatro nomes para um pedido aberto, três para uma compra esperando a loja) e termos de pagamento na conversa. Um modelo definido antes de mais telas segue o conselho de Johnson e Henderson de projetar primeiro o que vai ser projetado, e o ponto de Norman de que o comprador só aprende o modelo pelas telas.
 **Suposição:** "request" faz sentido para os compradores, que escrevem perguntas, não pedidos; o teste do protótipo pode dizer.
+**Atualização, apresentação:** a forma de detalhe de um objeto é empurrada e sai com Voltar; uma tarefa é uma sheet e sai com Fechar. A página da loja, que eu tinha desenhado com um botão de fechar, passa a ser um push com Voltar, porque é o detalhe da loja e o comprador continua navegando a partir dela. A regra está na página Modelo conceitual e a revisão de telas confere.
 
 ## 040 · Forma, materiais e movimento
 **2026-11-03 · Provisório**

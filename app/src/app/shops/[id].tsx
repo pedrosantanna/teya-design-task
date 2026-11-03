@@ -1,5 +1,5 @@
-// The shop page (openspec/specs/shop-page, app flow v7 "Shop page" and its "Scroll" storyboard): presented
-// over what opened it, with the map, up to three photos, and one card for the name, status, actions and what
+// The shop page (openspec/specs/shop-page, app flow v7 "Shop page" and its "Scroll" storyboard): the shop's
+// detail, pushed from Nearby with Back, with the map, up to three photos, and one card for the name, status, actions and what
 // people asked the shop about recently. Call and Directions are simulated in sheets; nothing leaves the app.
 import BubbleChatIcon from '@hugeicons/core-free-icons/BubbleChatIcon';
 import Call02Icon from '@hugeicons/core-free-icons/Call02Icon';
@@ -53,7 +53,7 @@ export default function ShopPage() {
   const shop = shopById(content, id ?? '') ?? shopById(content, 'rossis') ?? content.shops[0];
   const index = content.shops.indexOf(shop);
 
-  const close = () => (router.canGoBack() ? router.back() : router.replace('/'));
+  const back = () => (router.canGoBack() ? router.back() : router.replace('/'));
   const ask = () => {
     if (router.canGoBack()) router.back();
     set({ draft: { shopId: shop.id } });
@@ -72,7 +72,8 @@ export default function ShopPage() {
         status={status}
         photos={photos}
         mapLoading={loading}
-        onClose={close}
+        onBack={back}
+        backLabel="Nearby"
         actions={
           <View style={styles.actions}>
             <Button label={askLabel(shop.name)} size="compact" icon={BubbleChatIcon} onPress={ask} />

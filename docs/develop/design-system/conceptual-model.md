@@ -112,6 +112,7 @@ Labels agree with the item: "has it" for one thing, "has them" for several. Shop
 | Rows while asking | On the asking list every answer is a compact row, since the list shows progress; full answer cards appear in the chat |
 | Items have no page | An item appears inside a request, an answer, an order, or on a shop page |
 | Orders live in their request | Requests is the only list; there is no separate list of orders |
+| Detail is pushed, tasks are sheets | An object's detail form (shop page, request chat, receipt) is pushed and exits with Back; a task (the details sheet where the shopper buys, paying, extending, the account) is a sheet and exits with Close; the enlarged collection code is a modal with Close |
 
 ## Decided points
 

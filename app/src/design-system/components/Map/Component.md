@@ -8,6 +8,7 @@ A static, stylised map standing in for Apple Maps and Google Maps until a map SD
 | --- | --- | --- | --- |
 | `loading` | boolean | `false` | Map ground alone |
 | `pin` | boolean | `true` | One pin in Primary at the centre |
+| `extent` | `{ width, height, pinY }` | none | For a tall view such as the shop page's full-screen background: the streets keep the scale of a box as wide as the view and repeat, mirrored, down its height; the pin sits `pinY` points from the top |
 
 Fills its container: Map ground (Butter 50 / Butter 900), a made-up street grid and blocks in Muted, the pin in Primary (Indigo 800 / Indigo 300). No gestures, no labels.
 

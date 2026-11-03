@@ -9,7 +9,7 @@ The navigation bar. Spec: Nav bar on `docs/develop/design-system/components.md`.
 | `title` | string | required | Inline title in Headline, one line |
 | `mode` | `'large'`, `'inline'`, `'reveal'` | `'inline'` | Large: put `<LargeTitle>` at the top of the content; the inline title fades in as it scrolls away. Reveal: no title until `revealAt` points (shop page) |
 | `scroll` | `NavBarScroll` | none | From `useNavBarScroll()`; pass its `onScroll` to an `Animated.ScrollView` or `Animated.FlatList` |
-| `leading` | `'back'`, `'close'`, `'none'` | `'none'` | Back with the previous title on iOS ("Requests"), the arrow on Android. Close over the map uses the glass button |
+| `leading` | `'back'`, `'close'`, `'none'` | `'none'` | Back with the previous title on iOS ("Requests"), the arrow on Android. Close over the map uses the glass button. In reveal mode Back starts as a glass circle over the map and becomes the plain Back with `backLabel` once the bar fills (shop page) |
 | `backLabel` | string | none | |
 | `trailing` | `NavAction[]` | `[]` | Icon buttons at `hit.min`, icons 22 |
 | `hideOnScroll` | boolean | `false` | Needs `useNavBarScroll(true, hideAfter)`; past `hideAfter` points it hides while the content scrolls up and returns on a scroll down, with `spring.smooth` (a fade with `spring.fade` under Reduce Motion) |

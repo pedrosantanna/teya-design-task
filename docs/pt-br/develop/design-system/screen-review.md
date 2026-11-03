@@ -1,10 +1,10 @@
 # Revisão de telas
 
-As dezessete verificações por que passa toda tela, seja wireframe ou protótipo. Um agente as aplica em todas as telas, olhando a tela renderizada, e relata o que falha, tela por tela. As verificações cobrem agrupamento e hierarquia, o modelo conceitual e suas palavras, os tokens das outras páginas do design system e as diretrizes da Apple primeiro, depois as do Material.
+As 18 verificações por que passa toda tela, seja wireframe ou protótipo. Um agente as aplica em todas as telas, olhando a tela renderizada, e relata o que falha, tela por tela. As verificações cobrem agrupamento e hierarquia, o modelo conceitual e suas palavras, os tokens das outras páginas do design system e as diretrizes da Apple primeiro, depois as do Material.
 
 ```summary
 Takeaways:
-- Dezessete verificações sob cinco títulos: Gestalt, hierarquia, arquitetura da informação, modelo e palavras, acessibilidade.
+- Dezoito verificações sob cinco títulos: Gestalt, hierarquia, arquitetura da informação, modelo e palavras, acessibilidade.
 - Cada verificação tem um critério que dá para medir na tela: um espaço em tokens, uma contagem de tamanhos ou ações, uma palavra da tabela de Palavras.
 - O agente revisa a tela renderizada, não o código, e relata as falhas por tela, para eu corrigir ou registrar por que uma fica.
 Call:
@@ -41,22 +41,23 @@ Trade-offs:
 | --- | --- | --- |
 | 10 | Revelação progressiva | O detalhe fica no máximo dois níveis abaixo (cartão, depois sheet ou página); preço e status ficam no primeiro nível |
 | 11 | Findability | O comprador sabe onde está (o título da barra de navegação, ou o título grande de Nearby na home, que não tem abas), e toda lista pode ser filtrada pelos estados que mostra |
+| 12 | A saída combina com a apresentação | Uma tela empurrada (o detalhe de um objeto: página da loja, recibo) sai com Voltar e o gesto da borda; uma sheet ou modal (uma tarefa: comprar, pagar, estender, a conta; o código ampliado) sai com Fechar ou Cancelar. Nunca Fechar numa tela empurrada nem Voltar numa sheet |
 
 ## Modelo e palavras
 
 | # | Verificação | Passa quando |
 | --- | --- | --- |
-| 12 | Rótulos | Toda palavra vem da tabela de Palavras do [modelo conceitual](conceptual-model.md); nenhum sinônimo evitado |
-| 13 | Rótulos de status | Um rótulo de status por cartão ou linha, exatamente como na tabela de estados |
+| 13 | Rótulos | Toda palavra vem da tabela de Palavras do [modelo conceitual](conceptual-model.md); nenhum sinônimo evitado |
+| 14 | Rótulos de status | Um rótulo de status por cartão ou linha, exatamente como na tabela de estados |
 
 ## Acessibilidade
 
 | # | Verificação | Passa quando |
 | --- | --- | --- |
-| 14 | Tamanho dos alvos | Todo alvo tem pelo menos 44 pt (48 dp), com pelo menos 8 entre alvos |
-| 15 | Áreas seguras | Nada importante sob a Dynamic Island, o indicador de início ou a barra de pedido; o último item fica a 48 da barra de pedido |
-| 16 | Extensão da rolagem | O conteúdo não rola além do último item mais do que o espaço livre da barra de pedido |
-| 17 | Cor e imagens | A cor nunca é o único sinal; toda imagem tem rótulo ou fica oculta |
+| 15 | Tamanho dos alvos | Todo alvo tem pelo menos 44 pt (48 dp), com pelo menos 8 entre alvos |
+| 16 | Áreas seguras | Nada importante sob a Dynamic Island, o indicador de início ou a barra de pedido; o último item fica a 48 da barra de pedido |
+| 17 | Extensão da rolagem | O conteúdo não rola além do último item mais do que o espaço livre da barra de pedido |
+| 18 | Cor e imagens | A cor nunca é o único sinal; toda imagem tem rótulo ou fica oculta |
 
 Os relatos citam as verificações pelo número. Os tokens estão em [Espaçamento e layout](spacing.md), [Tags](tags.md), [Imagens e ícones](imagery.md), [Forma e materiais](shape.md) e [Cor](colour.md).
 

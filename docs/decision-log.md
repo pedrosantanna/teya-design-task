@@ -318,6 +318,7 @@ The app has four objects: request, shop, answer and order. Snuffle is the voice 
 
 **Why:** after v7 the screens used several words for one thing (four names for a request left open, three for an order waiting for the shop) and payment terms in the chat. A model set before more screens follows Johnson and Henderson's advice to design what to design first, and Norman's point that the shopper only learns the model from the screens.
 **Assumption:** "request" reads for shoppers, who write questions, not requests; the prototype test can tell.
+**Update, presentation:** an object's detail form is pushed and exits with Back; a task is a sheet and exits with Close. The shop page, which I had sketched with a Close button, is therefore a push with Back, since it is the shop's detail and the shopper keeps navigating from it. The rule is on the Conceptual model page and the screen review checks it.
 
 ## 040 · Shape, materials and motion
 **2026-11-03 · Provisional**

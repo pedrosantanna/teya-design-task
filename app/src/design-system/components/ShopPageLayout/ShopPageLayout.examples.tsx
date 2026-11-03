@@ -20,7 +20,8 @@ export function ShopPageLayoutExamples() {
           { uri: photo('rossis-bakery-front'), label: "Rossi's Bakery shopfront, Blythe Road", credit: 'Photo: Clara Lilley, Unsplash' },
           { uri: photo('rossis-bakery-interior'), label: "Rossi's Bakery inside, Blythe Road", credit: 'Photo: Arlind Photography, Unsplash' },
         ]}
-        onClose={noop}
+        onBack={noop}
+        backLabel="Nearby"
         actions={<Button label="Ask Rossi's" size="compact" />}
       >
         <Text variant="footnote" color="mutedForeground">

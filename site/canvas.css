@@ -273,7 +273,7 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .ios-map .pin { position: absolute; left: 52%; top: 30%; z-index: 1; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--ios-label); color: var(--ios-bg); }
 .ios-map .pin .ic { width: 16px; height: 16px; }
 /* Shop page: a fixed map behind the top, photos sliding over it, one content card (radius.card) */
-.ios-shopmap { position: absolute; left: 0; right: 0; top: 0; height: 380px; background: #F9F7F0; overflow: hidden; }
+.ios-shopmap { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background: #F9F7F0; overflow: hidden; }
 .ios-shopmap .st { position: absolute; left: -30%; width: 160%; height: 14px; background: #fff; box-shadow: 0 0 0 1px #E4DAC0; }
 .ios-shopmap .st.sm { height: 8px; }
 .ios-shopmap .pin { position: absolute; z-index: 1; display: grid; place-items: center; width: 36px; height: 36px; margin: -44px 0 0 -18px; border-radius: 50%; background: var(--ios-label); color: var(--ios-bg); box-shadow: 0 2px 8px rgb(0 0 0 / .2); }
@@ -283,7 +283,7 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .ios-glass-btn .ic { width: 20px; height: 20px; }
 .ios-carousel { position: absolute; z-index: 2; left: 0; right: 0; top: 108px; height: 220px; }
 .ios-carousel .img { position: absolute; top: 0; width: 300px; height: 220px; border-radius: 28px; box-shadow: 0 4px 16px rgb(0 0 0 / .14); }
-.ios-shopcard { position: absolute; z-index: 3; left: 0; right: 0; top: 352px; bottom: 0; display: flex; flex-direction: column; gap: 16px; padding-top: 22px; border-radius: 28px 28px 0 0; background: var(--ios-bg); box-shadow: 0 -2px 16px rgb(0 0 0 / .08); }
+.ios-shopcard { position: absolute; z-index: 3; left: 16px; right: 16px; top: 352px; bottom: 0; display: flex; flex-direction: column; gap: 16px; padding-top: 22px; border-radius: 28px 28px 0 0; background: var(--ios-bg); box-shadow: 0 -2px 16px rgb(0 0 0 / .08); }
 .ios-code { text-align: center; padding: 20px 16px; border-radius: 18px; background: var(--ios-fill); }
 .ios-code .big { font-size: 44px; font-weight: 700; letter-spacing: 6px; font-variant-numeric: tabular-nums; }
 .ios-qr { width: 132px; height: 132px; margin: 4px auto 10px; border-radius: 10px; background: conic-gradient(var(--ios-label) 25%, transparent 0 50%, var(--ios-label) 0 75%, transparent 0) 0 0 / 22px 22px; opacity: .85; }

@@ -112,6 +112,7 @@ Os rótulos concordam com o item: "has it" para uma coisa, "has them" para vári
 | Linhas enquanto pergunta | Na lista de lojas perguntadas, toda resposta é uma linha compacta, porque a lista mostra o progresso; os cartões de resposta completos aparecem na conversa |
 | Item não tem página | Um item aparece dentro de um pedido, de uma resposta, de uma compra ou na página de uma loja |
 | A compra fica no pedido | Requests é a única lista; não existe uma lista separada de compras |
+| Detalhe é empurrado, tarefa é sheet | A forma de detalhe de um objeto (página da loja, conversa do pedido, recibo) é empurrada e sai com Voltar; uma tarefa (a folha de detalhes onde o comprador compra, pagar, estender, a conta) é uma sheet e sai com Fechar; o código de retirada ampliado é um modal com Fechar |
 
 ## Pontos decididos
 

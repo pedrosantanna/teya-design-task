@@ -1,10 +1,10 @@
 # Screen review
 
-The seventeen checks every screen goes through, wireframe or prototype. An agent runs them on every screen, looking at it rendered, and reports what breaks, screen by screen. The checks cover grouping and hierarchy, the conceptual model and its words, the tokens on the other design-system pages and Apple's guidelines first, then Material's.
+The eighteen checks every screen goes through, wireframe or prototype. An agent runs them on every screen, looking at it rendered, and reports what breaks, screen by screen. The checks cover grouping and hierarchy, the conceptual model and its words, the tokens on the other design-system pages and Apple's guidelines first, then Material's.
 
 ```summary
 Takeaways:
-- Seventeen checks under five headings: Gestalt, hierarchy, information architecture, model and words, accessibility.
+- Eighteen checks under five headings: Gestalt, hierarchy, information architecture, model and words, accessibility.
 - Each check has a pass mark that can be measured on the screen: a gap in tokens, a count of sizes or actions, a word from the Words table.
 - The agent reviews the rendered screen, not the code, and reports breaks by screen so I can fix them or log why one stays.
 Call:
@@ -41,22 +41,23 @@ Trade-offs:
 | --- | --- | --- |
 | 10 | Progressive disclosure | Detail is at most two levels down (card, then sheet or page); price and status are on the first level |
 | 11 | Findability | The shopper can tell where they are (the nav title, or the Nearby large title on the home, which has no tabs), and every list can be filtered by the states it shows |
+| 12 | Exit matches presentation | A pushed screen (an object's detail: shop page, receipt) exits with Back and the edge swipe; a sheet or modal (a task: buying, paying, extending, the account; the enlarged code) exits with Close or Cancel. Never Close on a pushed screen or Back on a sheet |
 
 ## Model and words
 
 | # | Check | Passes when |
 | --- | --- | --- |
-| 12 | Labelling | Every word comes from the Words table in the [conceptual model](conceptual-model.md); no avoided synonym |
-| 13 | Status labels | One status label per card or row, matching the state table exactly |
+| 13 | Labelling | Every word comes from the Words table in the [conceptual model](conceptual-model.md); no avoided synonym |
+| 14 | Status labels | One status label per card or row, matching the state table exactly |
 
 ## Accessibility
 
 | # | Check | Passes when |
 | --- | --- | --- |
-| 14 | Target size | Every target is at least 44 pt (48 dp), with at least 8 between targets |
-| 15 | Safe areas | Nothing important under the Dynamic Island, the home indicator or the ask bar; the last item clears the ask bar by 48 |
-| 16 | Scroll extent | Content can't scroll past its last item by more than the ask-bar clearance |
-| 17 | Colour and images | Colour is never the only signal; every image is labelled or hidden |
+| 15 | Target size | Every target is at least 44 pt (48 dp), with at least 8 between targets |
+| 16 | Safe areas | Nothing important under the Dynamic Island, the home indicator or the ask bar; the last item clears the ask bar by 48 |
+| 17 | Scroll extent | Content can't scroll past its last item by more than the ask-bar clearance |
+| 18 | Colour and images | Colour is never the only signal; every image is labelled or hidden |
 
 Reports cite checks by number. Tokens are on [Spacing and layout](spacing.md), [Tags](tags.md), [Imagery and icons](imagery.md), [Shape and materials](shape.md) and [Colour](colour.md).
 
