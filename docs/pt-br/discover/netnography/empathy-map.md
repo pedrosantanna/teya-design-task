@@ -7,7 +7,8 @@ Takeaways:
 - A dor principal: não saber se a loja tem o item, ou se está aberta, antes de sair de casa.
 - Quem diz que apoia o comércio local muitas vezes conta que compra em outro lugar.
 Call:
-- Usei o mapa de empatia da Strategyzer e liguei cada linha a um post.
+- Escolhi o mapa de empatia da Strategyzer como parte do método de descoberta (decisão 006) e pedi que cada linha fosse ligada a um post.
+- Tratei o mapa como atitudinal: ele se apoia em posts públicos, o único método que usei com compradores (decisão 015).
 AI:
 - Um agente de escrita preencheu cada quadro a partir das citações etiquetadas, com um ponteiro para a fonte.
 Trade-offs:

@@ -4,27 +4,28 @@ The shopper app's main flow as wireframes, from the home screen to collecting th
 
 ```summary
 Takeaways:
-- The concierge in these screens is the agent itself: the app is one way to reach it, next to WhatsApp and MCP. Chat bubbles marked Concierge are the agent's replies.
-- One home with two tabs at the top (v2): Nearby for the street, Requests for everything the shopper asked for. The large bar at the bottom starts a new request from either tab, like Granola's; there is no bottom tab bar.
-- Each request is a chat with the concierge, and the Requests tab lists them like a messaging inbox, with a status per row.
-- After a request, the shopper can leave. Shop replies arrive as notifications and a Live Activity, and each answer appears in the chat as it comes in.
-- The hold is confirmed by the shop before Apple Pay appears, so the payment only happens for an item that is really set aside.
+- The agent the shopper talks to is called Snuffle in the interface and has the mark as its avatar. It is the same agent that answers on WhatsApp and MCP.
+- The home is the street with a large ask bar at the bottom, like Granola's. A round button left of the bar opens Requests full screen, a list of chats with a status per row (decision 026). There is no tab bar.
+- After asking, the shopper can leave. Shop replies arrive as notifications and a Live Activity, and each answer appears in the chat as it comes in.
+- The shopper buys: Apple Pay authorises the amount, and an asked shop's yes takes it. A connected shop's sale is immediate. Each shop sets its collection window, shown before Buy, and an order nobody collects is refunded in full (decision 037).
 Call:
-- Native iOS patterns first (decision 021): large titles, sheets, Apple Pay, Live Activities.
-- Nearby tab, top to bottom: promoted shops open now, new nearby with a filter by street, shops by kind. Open requests and past orders moved to the Requests tab in v2.
-- The canvas keeps every version. It opens on the latest; earlier versions stay in the version menu.
+- I set the direction: native iOS first, Apple's guidelines before Material, Apple wins where they differ (decision 021). Hence large titles, page sheets, Apple Pay and Live Activities.
+- I set the structure (the composer bar at the bottom, the avatar menu, the screens in the flow) and chose a round Requests button left of the ask bar that opens Requests full screen (decision 026).
+- I asked for Hold to be dropped because it read as a free reservation and left the shopper unsure whether they had bought anything, and chose Buy (decision 037).
+- I asked to version this canvas: it opens on the latest, and earlier versions stay in the version menu.
 AI:
-- An agent looked at well-crafted home screens on Mobbin (Granola, Shop, Deliveroo, Uber Eats, Wolt, Too Good To Go, Airbnb, ChatGPT, Perplexity) and proposed the module order. For v2, another agent looked at chat lists (Airbnb, Vinted, Depop, WhatsApp, Messenger, ChatGPT, Perplexity) and proposed the row anatomy for Requests. Another agent drew the wireframes from the blueprint. I set the structure: the bottom composer, the avatar menu and the screens in the flow.
+- An agent looked at home screens on Mobbin (Granola, Shop, Deliveroo, Uber Eats, Wolt, Too Good To Go, Airbnb, ChatGPT, Perplexity) and proposed the module order. Another looked at chat lists for the Requests rows. Agents drew the wireframes from the blueprint. In v7 one agent reviewed the flow for missing cases, another did a craft pass, and a third applied Buy and the review's gaps. I set the structure, chose Buy over Hold and which gaps to close.
 Trade-offs:
-- Putting the concierge in a bottom bar leaves no room for a bottom tab bar, so the two tabs sit at the top and settings live behind the avatar menu.
-- Wireframes in the docs site are quick to change and easy to link to the blueprint, but they don't run on a phone.
+- Putting the ask bar at the bottom leaves no room for a tab bar, so Requests sits behind a button and settings behind the avatar.
+- Charging only on the shop's yes means the shopper waits a few minutes at an asked shop before the purchase is final.
 ```
 
 ## Versions
 
 | Version | What changed | Why |
 | --- | --- | --- |
-| v6 (current) | The shop details sheet offers two ways (pay and they keep it 7 days, the shop delivers); the concierge says that without paying there is no hold | The unpaid reserve put the payment outside the app and the no-show risk on the shop (decision 032) |
+| v7 (current) | Buy replaces Hold: Apple Pay authorises, the shop's yes takes the payment, a connected shop's sale is immediate; the collection window and refund show before Buy. New screens: no shop has it, the shop didn't confirm in time, the day-before reminder with an extension, the shop's own delivery. The agent is Snuffle with the mark as avatar. Actions on failure screens moved to the bottom, sheets became page sheets, times and prices agree across screens, arrows route around the screens | An agent's review found missing cases and arrows that skipped steps; I dropped Hold (decision 037) and asked for the craft fixes |
+| v6 | The shop details sheet offers two ways (pay and they keep it 7 days, the shop delivers); the concierge says that without paying there is no hold | The unpaid reserve put the payment outside the app and the no-show risk on the shop (decision 032) |
 | v5 | The shop details sheet offers three ways to get the item (pay and they keep it 7 days, reserve and pay in the shop, the shop delivers) and a collection day; holds show dates; a connected shop answers "in stock now" from its till | A hold of a few hours was shorter than UK shops keep paid orders (decisions 030 and 031) |
 | v4 | Requests opens full screen, growing out of the round button, with a storyboard of the transition | A sheet left the list half a screen; the transition keeps the link to the button it came from |
 | v3 | No tabs: a round Requests button left of the ask bar opens Requests as a sheet over the street (decision 026) | I compared seven placements for the switch and chose the one that keeps the large ask bar |

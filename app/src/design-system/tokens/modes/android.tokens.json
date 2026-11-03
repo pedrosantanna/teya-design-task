@@ -1,0 +1,111 @@
+{
+  "$description": "Platform values, android (spacing.md, motion.md, components.md).",
+  "margin": {
+    "screen": {
+      "$type": "dimension",
+      "compact": {
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        },
+        "$description": "16 dp on Android"
+      },
+      "regular": {
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        },
+        "$description": "16 dp on Android"
+      }
+    }
+  },
+  "hit": {
+    "min": {
+      "$type": "dimension",
+      "$value": {
+        "value": 48,
+        "unit": "px"
+      },
+      "$description": "48 dp"
+    }
+  },
+  "color": {
+    "$type": "color",
+    "destructive": {
+      "light": {
+        "$value": "{color.semantic.destructiveLight}"
+      },
+      "dark": {
+        "$value": "{color.semantic.destructiveDark}"
+      }
+    }
+  },
+  "spring": {
+    "press": {
+      "$description": "Press: scale to 0.97 and darken the fill. Material 3 1 / 3800.",
+      "dampingRatio": {
+        "$type": "number",
+        "$value": 1
+      },
+      "stiffness": {
+        "$type": "number",
+        "$value": 3800
+      }
+    },
+    "snappy": {
+      "$description": "Release, chip selection, switches, the shopper's bubble appearing. Material 3 0.9 / 1400.",
+      "dampingRatio": {
+        "$type": "number",
+        "$value": 0.9
+      },
+      "stiffness": {
+        "$type": "number",
+        "$value": 1400
+      }
+    },
+    "smooth": {
+      "$description": "Navigation push, custom sheets, list changes. Material 3 0.9 / 700.",
+      "dampingRatio": {
+        "$type": "number",
+        "$value": 0.9
+      },
+      "stiffness": {
+        "$type": "number",
+        "$value": 700
+      }
+    },
+    "arrive": {
+      "$description": "An answer card entering the chat. Material 3 0.8 / 380.",
+      "dampingRatio": {
+        "$type": "number",
+        "$value": 0.8
+      },
+      "stiffness": {
+        "$type": "number",
+        "$value": 380
+      }
+    },
+    "fade": {
+      "$description": "Opacity and colour, skeleton to content. Material 3 1 / 1600.",
+      "dampingRatio": {
+        "$type": "number",
+        "$value": 1
+      },
+      "stiffness": {
+        "$type": "number",
+        "$value": 1600
+      }
+    },
+    "status": {
+      "$description": "An order's status changing. Material 3 1 / 800.",
+      "dampingRatio": {
+        "$type": "number",
+        "$value": 1
+      },
+      "stiffness": {
+        "$type": "number",
+        "$value": 800
+      }
+    }
+  }
+}

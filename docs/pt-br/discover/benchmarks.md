@@ -13,8 +13,8 @@ Takeaways:
 - A reclamação mais repetida, seja qual for o modelo, é ouvir que algo estava disponível quando não estava.
 Call:
 - Reorganizei os benchmarks em torno de Sam, Jess e Ruth. Na etapa Define vou escolher um problema para um comprador, e uma lista agrupada por categoria de produto não mostrava de quem é o problema que cada produto toca.
-- Produtos que não tocam nos problemas das personas ficam na página como notas curtas, porque ainda respondem perguntas do brief (excedente, checkout com várias lojas, quick commerce, vitrines de comerciantes).
-- Um ✓ precisa de um post das páginas de achados ou de personas. Sem post, a marca é ○.
+- Mantive os produtos que não tocam nos problemas das personas como notas curtas, porque ainda respondem perguntas do brief (excedente, checkout com várias lojas, quick commerce, vitrines de comerciantes).
+- Defini a regra do ✓: ele precisa de um post das páginas de achados ou de personas. Sem post, a marca é ○.
 AI:
 - Um agente capturou as telas principais de oito apps no Mobbin, uma biblioteca de telas de apps. Elas ficam na minha cópia local, fora do repositório público, e aparecem no site com o link da fonte.
 - Um agente de pesquisa escolheu os 17 produtos e coletou avaliações datadas do feed da App Store, do Trustpilot e do Mumsnet. Um agente de escrita buscou de novo as citações truncadas e descartou as que não conseguiu confirmar.

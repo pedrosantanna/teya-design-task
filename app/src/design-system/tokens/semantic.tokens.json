@@ -1,0 +1,672 @@
+{
+  "$description": "Snuffle semantic tokens shared by every theme (DTCG 2025.10). Colour roles, screen margin, hit area and springs live in modes/*.tokens.json and are combined by resolver.json.",
+  "space": {
+    "1": {
+      "$type": "dimension",
+      "$value": "{dimension.space.1}"
+    },
+    "2": {
+      "$type": "dimension",
+      "$value": "{dimension.space.2}"
+    },
+    "3": {
+      "$type": "dimension",
+      "$value": "{dimension.space.3}"
+    },
+    "4": {
+      "$type": "dimension",
+      "$value": "{dimension.space.4}"
+    },
+    "5": {
+      "$type": "dimension",
+      "$value": "{dimension.space.5}"
+    },
+    "6": {
+      "$type": "dimension",
+      "$value": "{dimension.space.6}"
+    },
+    "7": {
+      "$type": "dimension",
+      "$value": "{dimension.space.7}"
+    },
+    "8": {
+      "$type": "dimension",
+      "$value": "{dimension.space.8}"
+    }
+  },
+  "gap": {
+    "$type": "dimension",
+    "inside": {
+      "$value": "{dimension.space.2}",
+      "$description": "Items within one group: 4–8. Use space.1 for icon to label and title to meta line."
+    },
+    "block": {
+      "$value": "{dimension.space.3}",
+      "$description": "Blocks within a card"
+    },
+    "section": {
+      "$value": "{dimension.space.7}",
+      "$description": "Sections on a screen"
+    }
+  },
+  "inset": {
+    "$type": "dimension",
+    "card": {
+      "$value": "{dimension.space.4}",
+      "$description": "radius.card 28 minus 16 holds content at radius.inner 12"
+    },
+    "sheet": {
+      "$value": "{dimension.space.6}",
+      "$description": "Sheet padding"
+    },
+    "bubble": {
+      "vertical": {
+        "$value": {
+          "value": 10,
+          "unit": "px"
+        },
+        "$description": "Chat bubbles; off the 4-pt grid on purpose (spacing.md)"
+      },
+      "horizontal": {
+        "$value": {
+          "value": 14,
+          "unit": "px"
+        },
+        "$description": "Chat bubbles; off the 4-pt grid on purpose (spacing.md)"
+      }
+    }
+  },
+  "clearance": {
+    "askBar": {
+      "$type": "dimension",
+      "$value": "{dimension.space.8}",
+      "$description": "Bottom clearance above the ask bar only"
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "none": {
+      "$value": "{dimension.radius.none}"
+    },
+    "inner": {
+      "$value": "{dimension.radius.inner}"
+    },
+    "bubble": {
+      "$value": "{dimension.radius.bubble}"
+    },
+    "card": {
+      "$value": "{dimension.radius.card}"
+    },
+    "sheet": {
+      "$value": "{dimension.radius.sheet}"
+    },
+    "full": {
+      "$value": "{dimension.radius.full}"
+    }
+  },
+  "size": {
+    "$type": "dimension",
+    "button": {
+      "large": {
+        "$value": {
+          "value": 50,
+          "unit": "px"
+        },
+        "$description": "Large button height (components.md)"
+      },
+      "compact": {
+        "$value": {
+          "value": 36,
+          "unit": "px"
+        },
+        "$description": "Compact button height (components.md)"
+      }
+    },
+    "chip": {
+      "$value": {
+        "value": 32,
+        "unit": "px"
+      },
+      "$description": "Filter and suggestion chip height (tags.md)"
+    },
+    "badge": {
+      "$value": {
+        "value": 20,
+        "unit": "px"
+      },
+      "$description": "Badge height (tags.md)"
+    },
+    "count": {
+      "$value": {
+        "value": 18,
+        "unit": "px"
+      },
+      "$description": "Count minimum diameter (tags.md)"
+    },
+    "avatar": {
+      "mark": {
+        "$value": {
+          "value": 28,
+          "unit": "px"
+        },
+        "$description": "Snuffle mark beside a bubble group"
+      },
+      "shop": {
+        "$value": {
+          "value": 40,
+          "unit": "px"
+        },
+        "$description": "Shop row logo or monogram"
+      },
+      "shopOnRow": {
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        },
+        "$description": "Shop logos on a request row"
+      }
+    },
+    "thumb": {
+      "request": {
+        "$value": {
+          "value": 56,
+          "unit": "px"
+        },
+        "$description": "Item photo on a request row"
+      },
+      "answer": {
+        "$value": {
+          "value": 40,
+          "unit": "px"
+        },
+        "$description": "Shop thumbnail in an answer card (imagery.md)"
+      }
+    },
+    "icon": {
+      "nav": {
+        "$value": {
+          "value": 22,
+          "unit": "px"
+        },
+        "$description": "Nav and toolbar icons (imagery.md)"
+      },
+      "bar": {
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        },
+        "$description": "Icon on the Requests button and in the ask bar (imagery.md)"
+      }
+    },
+    "close": {
+      "$value": {
+        "value": 30,
+        "unit": "px"
+      },
+      "$description": "Close button circle; the hit area is hit.min (components.md)"
+    },
+    "field": {
+      "$value": {
+        "value": 50,
+        "unit": "px"
+      },
+      "$description": "Ask bar and composer height, matching a large button (components.md)"
+    },
+    "dot": {
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      },
+      "$description": "Typing indicator dot and step marker inner dot"
+    },
+    "step": {
+      "$value": {
+        "value": 20,
+        "unit": "px"
+      },
+      "$description": "Step marker on an order card"
+    }
+  },
+  "type": {
+    "splash": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.gambetta}",
+        "fontWeight": "{font.weight.bold}",
+        "fontSize": {
+          "value": 40,
+          "unit": "px"
+        },
+        "lineHeight": 1.15,
+        "letterSpacing": {
+          "value": -0.8,
+          "unit": "px"
+        }
+      },
+      "$description": "40/46, -0.02 em. Material 3: Display medium. Splash only",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 46,
+          "trackingEm": -0.02,
+          "material3": "Display medium"
+        }
+      }
+    },
+    "displayTitle": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.gambetta}",
+        "fontWeight": "{font.weight.bold}",
+        "fontSize": {
+          "value": 34,
+          "unit": "px"
+        },
+        "lineHeight": 1.1765,
+        "letterSpacing": {
+          "value": -0.51,
+          "unit": "px"
+        }
+      },
+      "$description": "34/40, -0.015 em. Material 3: Display small. Get started, home greeting, shop page header",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 40,
+          "trackingEm": -0.015,
+          "material3": "Display small"
+        }
+      }
+    },
+    "displayName": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.gambetta}",
+        "fontWeight": "{font.weight.bold}",
+        "fontSize": {
+          "value": 26,
+          "unit": "px"
+        },
+        "lineHeight": 1.1538,
+        "letterSpacing": {
+          "value": -0.26,
+          "unit": "px"
+        }
+      },
+      "$description": "26/30, -0.01 em. Material 3: Headline small. Ready-to-collect card, one line",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 30,
+          "trackingEm": -0.01,
+          "material3": "Headline small"
+        }
+      }
+    },
+    "title1": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.switzer}",
+        "fontWeight": "{font.weight.semibold}",
+        "fontSize": {
+          "value": 28,
+          "unit": "px"
+        },
+        "lineHeight": 1.1429,
+        "letterSpacing": {
+          "value": -0.42,
+          "unit": "px"
+        }
+      },
+      "$description": "28/32, -0.015 em. Material 3: Headline medium. Screen titles",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 32,
+          "trackingEm": -0.015,
+          "material3": "Headline medium"
+        }
+      }
+    },
+    "title2": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.switzer}",
+        "fontWeight": "{font.weight.semibold}",
+        "fontSize": {
+          "value": 22,
+          "unit": "px"
+        },
+        "lineHeight": 1.1818,
+        "letterSpacing": {
+          "value": -0.22,
+          "unit": "px"
+        }
+      },
+      "$description": "22/26, -0.01 em. Material 3: Title large. Large section titles",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 26,
+          "trackingEm": -0.01,
+          "material3": "Title large"
+        }
+      }
+    },
+    "title3": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.switzer}",
+        "fontWeight": "{font.weight.semibold}",
+        "fontSize": {
+          "value": 20,
+          "unit": "px"
+        },
+        "lineHeight": 1.2,
+        "letterSpacing": {
+          "value": -0.1,
+          "unit": "px"
+        }
+      },
+      "$description": "20/24, -0.005 em. Material 3: Title large. Section titles",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 24,
+          "trackingEm": -0.005,
+          "material3": "Title large"
+        }
+      }
+    },
+    "headline": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.switzer}",
+        "fontWeight": "{font.weight.semibold}",
+        "fontSize": {
+          "value": 17,
+          "unit": "px"
+        },
+        "lineHeight": 1.2941,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "17/22, 0 em. Material 3: Title medium. Row titles, shop names in lists",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 22,
+          "trackingEm": 0,
+          "material3": "Title medium"
+        }
+      }
+    },
+    "body": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.switzer}",
+        "fontWeight": "{font.weight.regular}",
+        "fontSize": {
+          "value": 17,
+          "unit": "px"
+        },
+        "lineHeight": 1.4118,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "17/24, 0 em. Material 3: Body large. Chat bubbles, descriptions",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 24,
+          "trackingEm": 0,
+          "material3": "Body large"
+        }
+      }
+    },
+    "callout": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.switzer}",
+        "fontWeight": "{font.weight.regular}",
+        "fontSize": {
+          "value": 16,
+          "unit": "px"
+        },
+        "lineHeight": 1.375,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "16/22, 0 em. Material 3: Body large. Composer, inputs",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 22,
+          "trackingEm": 0,
+          "material3": "Body large"
+        }
+      }
+    },
+    "subheadline": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.switzer}",
+        "fontWeight": "{font.weight.regular}",
+        "fontSize": {
+          "value": 15,
+          "unit": "px"
+        },
+        "lineHeight": 1.3333,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "15/20, 0 em. Material 3: Body medium. Previews, secondary lines",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 20,
+          "trackingEm": 0,
+          "material3": "Body medium"
+        }
+      }
+    },
+    "subheadlineStrong": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.switzer}",
+        "fontWeight": "{font.weight.semibold}",
+        "fontSize": {
+          "value": 15,
+          "unit": "px"
+        },
+        "lineHeight": 1.3333,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "15/20, 0 em. Material 3: Body medium. Compact button label: Subheadline at 600 (components.md)",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 20,
+          "trackingEm": 0,
+          "material3": "Body medium"
+        }
+      }
+    },
+    "footnote": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.switzer}",
+        "fontWeight": "{font.weight.regular}",
+        "fontSize": {
+          "value": 13,
+          "unit": "px"
+        },
+        "lineHeight": 1.3846,
+        "letterSpacing": {
+          "value": 0.13,
+          "unit": "px"
+        }
+      },
+      "$description": "13/18, 0.01 em. Material 3: Body small. Meta: street, walk time",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 18,
+          "trackingEm": 0.01,
+          "material3": "Body small"
+        }
+      }
+    },
+    "caption1": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.switzer}",
+        "fontWeight": "{font.weight.medium}",
+        "fontSize": {
+          "value": 12,
+          "unit": "px"
+        },
+        "lineHeight": 1.3333,
+        "letterSpacing": {
+          "value": 0.18,
+          "unit": "px"
+        }
+      },
+      "$description": "12/16, 0.015 em. Material 3: Label medium. Timestamps, status",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 16,
+          "trackingEm": 0.015,
+          "material3": "Label medium"
+        }
+      }
+    },
+    "caption2": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.switzer}",
+        "fontWeight": "{font.weight.medium}",
+        "fontSize": {
+          "value": 11,
+          "unit": "px"
+        },
+        "lineHeight": 1.2727,
+        "letterSpacing": {
+          "value": 0.22,
+          "unit": "px"
+        }
+      },
+      "$description": "11/14, 0.02 em. Material 3: Label small. Badges; the floor",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 14,
+          "trackingEm": 0.02,
+          "material3": "Label small"
+        }
+      }
+    },
+    "code": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.switzer}",
+        "fontWeight": "{font.weight.semibold}",
+        "fontSize": {
+          "value": 48,
+          "unit": "px"
+        },
+        "lineHeight": 1.0833,
+        "letterSpacing": {
+          "value": 5.76,
+          "unit": "px"
+        }
+      },
+      "$description": "48/52, +0.12 em. The collection code (typography.md, Collection code)",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 52,
+          "trackingEm": 0.12,
+          "material3": "Display medium"
+        }
+      }
+    },
+    "clock": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.systemRounded}",
+        "fontWeight": "{font.weight.semibold}",
+        "fontSize": {
+          "value": 88,
+          "unit": "px"
+        },
+        "lineHeight": 1.0,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "88/88. The simulated lock-screen clock, in the phone's rounded system face (system chrome, not app type)",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 88,
+          "trackingEm": 0,
+          "material3": "Display large"
+        }
+      }
+    }
+  },
+  "state": {
+    "$type": "number",
+    "pressedScale": {
+      "$value": 0.97,
+      "$description": "Press: scale (states.md)"
+    },
+    "pressedLayer": {
+      "$value": 0.1,
+      "$description": "State layer of the content colour over the fill (states.md, Material 3)"
+    },
+    "disabledContent": {
+      "$value": 0.38,
+      "$description": "Disabled content opacity (states.md, Material 3)"
+    },
+    "disabledContainer": {
+      "$value": 0.12,
+      "$description": "Disabled container opacity (states.md, Material 3)"
+    },
+    "scrim": {
+      "$value": 0.4,
+      "$description": "Scrim of black behind modals (states.md)"
+    }
+  },
+  "layout": {
+    "$description": "Grid fractions from spacing.md (Grid and layout tokens). Widths are computed from the content width.",
+    "bubbleMax": {
+      "$type": "number",
+      "$value": 0.78,
+      "$description": "Bubble max width: 78% of content width"
+    },
+    "tileLarge": {
+      "$type": "number",
+      "$value": 0.78,
+      "$description": "tile.large = 0.78 x content width"
+    },
+    "tileMediumDivisor": {
+      "$type": "number",
+      "$value": 2.3,
+      "$description": "tile.medium = (content - gutter) / 2.3"
+    },
+    "gutter": {
+      "$type": "dimension",
+      "$value": "{dimension.space.3}",
+      "$description": "Carousel and grid gutter"
+    },
+    "sheetMediumDetent": {
+      "$type": "number",
+      "$value": 0.5,
+      "$description": "Medium sheet detent, as a fraction of the screen height"
+    },
+    "sheetLargeDetent": {
+      "$type": "number",
+      "$value": 0.92,
+      "$description": "Large sheet detent, as a fraction of the screen height"
+    }
+  }
+}

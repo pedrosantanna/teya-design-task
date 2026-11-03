@@ -7,8 +7,8 @@ Takeaways:
 - The shopper app is a native iOS app, designed from Apple's Human Interface Guidelines first and Material Design second (decision 021).
 - The shop side has no interface. Its states are drawn so they can be shown to shopkeepers and built on WhatsApp or a POS.
 Call:
-- Wireframes are black and white on Apple's iOS kit. Brand and visual design come after the flow holds up.
-- Interface copy stays in English in both languages of these docs, because the app is for London (decision 022).
+- I set the structure of the app and the flows, and kept the wireframes black and white on Apple's iOS kit. Brand and visual design come after the flow holds up.
+- I chose to do ideation on canvases, with interface copy in English in both languages of these docs, because the app is for London (decision 022).
 AI:
 - Agents researched references on Mobbin, built the canvas and drew the wireframes. I set the structure of the app and the flows.
 Trade-offs:

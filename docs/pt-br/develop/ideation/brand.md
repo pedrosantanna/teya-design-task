@@ -7,7 +7,8 @@ Takeaways:
 - Snuffle é sonoro, lúdico e remete a procurar coisas; vem de um cachorro farejando com o nariz no chão. Combina com a marca, um retriever com um toldo no lugar da boca, e com o trabalho do concierge de achar uma coisa entre muitas lojas pequenas.
 - O agente e eu fizemos um brainstorm de nomes; pedi que ele pesquisasse nomes de retriever e palavras de farejar e buscar.
 Call:
-- O app é Snuffle (decisão 035). O site da documentação leva o nome e a marca.
+- Pedi nomes ligados a farejar, rastrear ou buscar, fofos e sem segundo sentido negativo, e escolhi Snuffle (decisão 035).
+- Pedi esta página de Brand com o naming dentro dela, em dois parágrafos com meus motivos. O site da documentação leva o nome e a marca.
 AI:
 - Um agente pesquisou as duas linhas e fez buscas rápidas de conflito. Eu defini a linha (fofo, infantil, sobre farejar ou buscar) e escolhi Snuffle.
 Trade-offs:

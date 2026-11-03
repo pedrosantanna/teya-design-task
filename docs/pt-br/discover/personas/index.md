@@ -8,8 +8,8 @@ Takeaways:
 - Jess (6 posts) faz quase sempre compras de rotina, que travam na hora de conseguir a coisa: horário, dinheiro vivo, prazo de entrega. Ela desiste do comércio local. Lado da transaction.
 - Ruth (3 posts) continua comprando no comércio local enquanto as lojas dela fecham. É a que tem menos evidência.
 Call:
-- Fazer a clusterização dos posts em duas dimensões que dialogam com o brief, e definir as personas a partir dos clusters.
-- Chamá-las de proto-personas, porque ninguém foi entrevistado ([000](../../decision-log.md)).
+- Defini o método: etiquetar os posts, pontuá-los em duas dimensões que dialogam com o brief, fazer a clusterização e definir as personas a partir dos clusters.
+- Chamei-as de proto-personas, porque ninguém foi entrevistado ([000](../../decision-log.md)).
 AI:
 - Dois agentes etiquetaram cada post separadamente, a partir de uma lista fixa de etiquetas. Um script pontuou as duas dimensões e rodou a clusterização.
 - Eu escolhi as dimensões e conferi os clusters com as citações.

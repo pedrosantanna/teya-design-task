@@ -7,8 +7,9 @@ Takeaways:
 - Three clusters scored best in the configuration I chose, both dimensions weighted equally and 2 to 5 clusters (mean silhouette 0.55, against 0.54 for the others). Other weights give other numbers.
 - The two coders agreed on 89–96% of the codes behind both dimensions.
 Call:
-- Two dimensions that map onto the brief: need urgency and purchase stage.
-- Lewrick, Link and Leifer's persona fields to describe each cluster.
+- I set two dimensions that map onto the brief: need urgency and purchase stage.
+- I chose Lewrick, Link and Leifer's persona fields to describe each cluster, with a second agent coding every post blind so the scores can be checked (decision 012).
+- After the external review I removed the post from @London_W4, which didn't meet the codebook (decision 019).
 AI:
 - An agent wrote the codebook and tagged 44 posts. A second agent tagged them blind.
 - A script turned the codes into scores, ran the clustering and drew the map.

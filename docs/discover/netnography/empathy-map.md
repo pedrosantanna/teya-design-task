@@ -7,7 +7,8 @@ Takeaways:
 - The main pain: not knowing whether the shop has it, or is open, before leaving home.
 - People who say they support local often describe buying elsewhere.
 Call:
-- I used the Strategyzer empathy map and tied every line to a post.
+- I chose the Strategyzer empathy map as part of the discovery method (decision 006) and had every line tied to a post.
+- I treated it as attitudinal: it rests on public posts, the only method I used on shoppers (decision 015).
 AI:
 - A writing agent filled each box from the coded quotes, with a pointer to the source.
 Trade-offs:

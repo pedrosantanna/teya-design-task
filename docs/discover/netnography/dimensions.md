@@ -8,7 +8,8 @@ Takeaways:
 - Purchase stage: the step of buying where the attempt stopped, from 1 find out (findability) to 4 get it (transaction).
 - What people did next (kept going, or gave up) is drawn as the style of each point.
 Call:
-- I picked need urgency and purchase stage from the candidates, because the second maps straight onto findability versus transaction and both can be coded from what people wrote.
+- I asked for two dimensions that map onto the brief, and picked need urgency and purchase stage from the candidates: the second maps straight onto findability versus transaction, and both can be coded from what people wrote.
+- I replaced "point of failure" with purchase stage when I found it couldn't be measured as a scale (decision 016).
 - I kept "what people did next" off the axes, because most posts don't show it.
 AI:
 - The research agent proposed candidate axes from its coding. A reviewer agent tested them against the brief. Two agents coded every post on both axes.

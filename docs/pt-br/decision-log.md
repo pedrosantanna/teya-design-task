@@ -227,7 +227,7 @@ Tudo o que o comprador lê, e a conversa acima de tudo, usa uma sans forte: a Sw
 ## 029 · Gambetta no display, Switzer no resto
 **2026-11-02 · Decidido**
 
-A Gambetta 700 é a fonte de display e a Switzer a fonte de texto, com a especificação em Escala tipográfica, rodada 4. O tracking é definido por fonte e por tamanho: a Gambetta aperta conforme cresce (−0,01 a −0,02 em), a Switzer fica em 0 no texto e abre um pouco abaixo de 15 pt; títulos, botões e títulos de navegação em Switzer usam 600, o que os mantém firmes, mas mais leves que a Gambetta 700. A Gambetta aparece só onde a decisão 028 permite, no máximo uma vez por tela e nunca abaixo de 26 pt; o nome de uma loja vai em Gambetta só na página dela (34 pt) e no cartão de pronto para retirar (26 pt).
+A Gambetta 700 é a fonte de display e a Switzer a fonte de texto, com a especificação em Escala tipográfica, rodada 4. O tracking é definido por fonte e por tamanho: a Gambetta aperta conforme cresce (−0,01 a −0,02 em), a Switzer fica em 0 no texto e abre um pouco abaixo de 15 pt; títulos, botões e títulos de navegação em Switzer usam 600, o que os mantém firmes, mas mais leves que a Gambetta 700. A Gambetta aparece só onde a decisão 028 permite, no máximo uma vez por tela e nunca abaixo de 26 pt; o nome de uma loja vai em Gambetta só na página dela (34 pt) e dentro do cartão de compra quando ela está pronta para retirar (26 pt), que é o mesmo cartão de compra, não um segundo desenho.
 
 **Por quê:** uma serifada no display dá aos títulos uma voz editorial britânica; uma sans forte mantém tudo o que o comprador lê legível e consistente no iOS e no Android.
 **Em aberto:** as fontes precisam ser registradas no Dynamic Type e na escala de fonte do Android, e a licença da ITF conferida para embutir no app.
@@ -274,6 +274,7 @@ O neutro do app é o Cinza biscoito, da rodada 4 do quadro de identidade: uma es
 
 **Por quê:** quente o bastante para ficar ao lado da marca sem emenda, discreto o bastante para qualquer conjunto de acentos levar a cor.
 **Em aberto:** o conjunto de acentos. A marca fica em preto e branco até lá.
+**Substituído:** os valores de fundo, borda e texto acima foram trocados nas rodadas 8 e 9; os atuais estão na página [Cor](develop/design-system/colour.md) (fundo claro #F4F1ED, L 0,96).
 
 ## 035 · O app se chama Snuffle
 **2026-11-02 · Decidido**
@@ -290,9 +291,73 @@ Os acentos são a Pastel parade com Índigo: o Índigo para texto, botões e tin
 
 **Por quê:** dos três temas testados nas mesmas telas, a Pastel parade com Índigo foi a mais calma, e os preenchimentos claros dela dão badges tonais que funcionam nos dois modos. Na rodada 7, um cartão branco sobre o fundo claro ficava em 1,04:1 sem borda, pouco demais.
 **Atualização, rodada 9:** o fundo claro passa para L 0,96 e mantém o croma da rodada 8 (#F4F1ED), com superfícies secundárias em L 0,915; os cartões continuam brancos e se destacam a 1,13:1. O fundo da rodada 8 parecia um pouco escuro. As versões mais saturadas (×1,8 e ×2,5) e a menos saturada (45%) foram descartadas. O modo escuro não muda: mantém as superfícies da rodada 8, já que o croma não mudou.
+**Substituído:** o fundo em L 0,95 e o passo de 1,16:1 do cartão no primeiro parágrafo foram trocados pela rodada 9: L 0,96 (#F4F1ED) e 1,13:1, como na página [Cor](develop/design-system/colour.md).
+
+## 037 · Comprar, depois retirar
+**2026-11-03 · Decidido**
+
+A ação do comprador é Buy (comprar), não Hold (reservar). "Hold" pode ser lido como reserva grátis ou como um passo antes da compra, e deixa o comprador sem saber se já comprou. O comprador toca em Buy e paga uma vez com Apple Pay. Numa loja conectada, o pagamento é cobrado na hora, porque o POS tem o estoque. Numa loja consultada, o valor só é autorizado e é cobrado quando a loja responde que separou o item; se a loja não confirma em poucos minutos, a autorização cai e o comprador é avisado. Cada loja define por quanto tempo guarda um item comprado: 7 dias por padrão, ou 14 ou 30, e o mesmo dia ou o seguinte para perecíveis; vale uma extensão do mesmo tamanho. Comprar não é reservar: o item é do comprador assim que a loja confirma. Se ninguém retira até o fim do prazo, o pedido é cancelado e o comprador recebe o reembolso integral automaticamente, como fazem as grandes redes, e a loja volta a vender o item. O comprador vê a data antes de tocar em Buy ("Collect by Mon 9 Nov · full refund if you don't") e de novo no recibo; a conversa não oferece o prazo como motivo para comprar.
+
+**Por quê:** no Reino Unido não há prazo legal mínimo para retirar um pedido pago. Os termos da própria loja definem o prazo, e a Torts (Interference with Goods) Act 1977 só regula o que a loja pode fazer com itens deixados depois de um aviso. As redes guardam pedidos pagos de click-and-collect por cerca de uma semana e depois cancelam e devolvem o valor integral, sem taxa: a Argos cancela depois de 7 dias (com uma extensão de 7) e reembolsa em até 5 dias úteis; a John Lewis devolve o pedido ao depósito depois de 7 dias e reembolsa a conta; a IKEA cancela a retirada perdida e reembolsa em até 14 dias. A Screwfix guarda por 21 dias e depois devolve ao estoque. Uniqlo e Decathlon guardam por 7 dias, a Boots por 14. Lavanderias guardam peças por 60 a 90 dias, mas guardam bens do próprio cliente, muitas vezes com valor ainda a pagar, o que é outro caso. Eu tinha pedido de 30 a 90 dias; escolhi o padrão como prazo inicial e deixei a loja ir além, porque um prazo longo tira da prateleira a única unidade de uma loja pequena e só a loja sabe quanto pode esperar.
+**Suposição:** o comprador entende "Buy" com uma data de retirada melhor que "Hold"; a prova de conceito pode contar as dúvidas sobre isso.
+**Mudanças:** a H12 agora conta quantos sins terminam numa compra. A decisão 032 continua valendo: ainda não há reserva sem pagamento.
+**Fontes:** Argos, "What happens if my collection window expires" (https://help.argos.co.uk/help/delivery-and-collection/what-happens-if-my-collection-window-expires); FAQ da Uniqlo UK (https://faq-uk.uniqlo.com/articles/en_US/FAQ/How-long-do-I-have-to-collect-my-Click-Collect-order-UK); Decathlon UK (https://custhelp-sprinklr.decathlon.co.uk/articles/my-order/how-long-do-you-hold-click-and-collect-orders/698c644d6873450e473e2e7d); John Lewis, click and collect (https://au.johnlewis.com/customer-services/delivery-information/click-and-collect); FAQ de click and collect da Screwfix (https://www.screwfix.ie/help/faq/clickandcollect-faq); Torts (Interference with Goods) Act 1977, itens não retirados (https://legislation.gov.uk/ukpga/1977/32/crossheading/uncollected-goods).
+
+## 038 · O protótipo é um app em Expo
+**2026-11-03 · Decidido**
+
+O protótipo é feito com Expo (React Native): um código só, que roda como app de iOS para o vídeo e como build web dentro destes docs, para quem avalia poder navegar. O conteúdo é simulado. Um switch no topo troca a interface entre iOS (o padrão) e Android, e o menu do avatar troca entre Sam e Jess. O código segue boas práticas de código limpo e de performance, e uma checagem de performance roda em cada build: Lighthouse no build web e uma checagem de frames por segundo e tempo de abertura no app.
+
+**Por quê:** a decisão 021 define o app como nativo e iOS primeiro; o Expo dá um app de verdade no celular e um build web do mesmo código, o que um protótipo só web ou em SwiftUI não daria.
+**Em aberto:** se o build web carrega dentro do iframe do artifact; é a primeira coisa a testar. O que só existe no iOS (a folha do Apple Pay, as notificações na tela bloqueada, as Live Activities) é desenhado como tela simulada, para os dois builds ficarem iguais.
+
+## 039 · Um modelo conceitual para o app
+**2026-11-03 · Decidido**
+
+O app tem quatro objetos: pedido, loja, resposta e compra. O Snuffle é a voz que fala com o comprador, não um objeto, e um item nunca ganha página própria: lojas pequenas não têm catálogo, então um item é texto e quantidade dentro de um pedido, de uma resposta ou de uma compra. Cada objeto tem uma forma de cartão e uma de detalhe, cada ação um verbo e cada estado um rótulo usado em todo lugar. Um pedido que fica aberto é "Keep looking", a resposta de uma loja é uma "answer", e as lojas aparecem como tiles com foto em Nearby e como linhas nas outras listas. O modelo está na página Modelo conceitual do design system, e toda tela é conferida contra ele.
+
+**Por quê:** depois da v7, as telas usavam várias palavras para a mesma coisa (quatro nomes para um pedido aberto, três para uma compra esperando a loja) e termos de pagamento na conversa. Um modelo definido antes de mais telas segue o conselho de Johnson e Henderson de projetar primeiro o que vai ser projetado, e o ponto de Norman de que o comprador só aprende o modelo pelas telas.
+**Suposição:** "request" faz sentido para os compradores, que escrevem perguntas, não pedidos; o teste do protótipo pode dizer.
+
+## 040 · Forma, materiais e movimento
+**2026-11-03 · Provisório**
+
+Os cantos usam seis raios tirados da escala de forma do Material 3 (0, 12, 20, 28, 32 e uma cápsula), concêntricos quando aninhados e contínuos no iOS. Controles são cápsulas e contêineres têm raio fixo. O Liquid Glass fica só no que flutua sobre o conteúdo e age: a barra de pedido, o botão redondo de Requests, as sheets e botões sobre uma foto ou o mapa; cartões, balões e tiles continuam sólidos. O movimento usa seis molas com valores para iOS e Material 3; o retorno começa no toque, toda animação pode ser interrompida e o Reduzir Movimento troca o deslocamento por um fade. Os valores estão nas páginas Forma e materiais e Movimento do design system.
+
+**Por quê:** pedi cantos mais arredondados, poucos raios e um movimento com sensação premium e resposta rápida. O sistema de design da Apple de 2025 tem formas fixas, cápsulas e concêntricas, mas não publica uma escala de tokens, então os valores vêm da escala do Material, o que deixa o Android exato. As molas seguem a orientação da Apple na WWDC 2023 e os tokens de movimento do Material 3.
+**Em aberto:** os valores são ajustados num celular, no protótipo; os valores de forma do Material foram lidos num espelho da documentação do Android e ainda precisam ser conferidos em m3.material.io.
+
+## 041 · Espaçamento, layout, tags, imagens e uma revisão de telas
+**2026-11-03 · Provisório**
+
+O design system ganha mais quatro fundamentos: espaçamento numa base de 4 pt com intervalos nomeados e um grid de coluna única para celular, cinco tipos de tag (chip de filtro, chip de sugestão, rótulo de status, badge, contador) e regras para fotos, placeholders e símbolos. Uma checklist de quinze itens transforma princípios de Gestalt, hierarquia visual e arquitetura de informação em verificações, e um agente `screen-reviewer` a aplica, junto com o modelo conceitual e os tokens, em toda tela antes de ela ser publicada, nos canvas agora e no protótipo depois. Os esboços feitos à mão ficam no repositório e aparecem ao lado da tela que inspiraram.
+
+**Por quê:** pedi que o design system cobrisse tags, imagens, espaçamento e grid do mesmo jeito que forma e movimento, partindo do iOS e abrindo para o Material, e que toda tela fosse conferida contra Gestalt e arquitetura de informação, visualmente, por um agente no fluxo de trabalho. Proximidade e região comum explicam quase tudo o que faz uma tela parecer agrupada, então a escala de espaçamento foi montada em torno delas.
+**Em aberto:** as margens e os tamanhos de badge do Material e as margens de 16/20 pt do iPhone no iOS 26 ainda precisam ser confirmados; as larguras dos tiles são propostas a conferir no tamanho real.
+
+## 042 · HugeIcons e um estilo de ilustração 3D
+**2026-11-03 · Decidido**
+
+Todo ícone do app vem do HugeIcons (Stroke Rounded, conjunto gratuito), não do SF Symbols nem do Material Symbols. Onde uma plataforma tem forma própria, como compartilhar, voltar ou mais, o app usa o glifo do HugeIcons que combina com aquela plataforma. O Getting Started, a splash e os ícones grandes usam ilustrações 3D modeladas em código a partir de formas simples: só cores da paleta, contornos escuros finos como num desenho técnico e sombras sólidas em preto ou num tom mais escuro da paleta, sem desfoque nem degradê. Um visualizador na página Ilustrações do design system mostra os objetos e me deixa ajustar câmera, contornos e sombras.
+
+**Por quê:** eu queria uma família de ícones só, com traço arredondado que combina com as cápsulas, nas duas plataformas, e ilustrações que dessem ao app uma cara própria, sem fotos nem banco de imagens. Dei ao agente imagens de referência (isométricas, com contorno, sombras sólidas e chapadas) e pedi uma versão mais simples desse visual.
+**Em aberto:** os objetos até agora são uma loja, uma cesta, uma moto com entregador e uma caixa de entrega; a animação é uma primeira versão.
+
+## 043 · Componentes, estados, plataformas e conteúdo
+**2026-11-03 · Provisório**
+
+O design system ganha especificações para cada componente que as telas usam (anatomia, tokens, estados, formas no iOS e no Android, acessibilidade), estados de interação e elevação, estados vazios, de carregamento e de erro, um mapa de iOS e Android que o switch do protótipo segue, cores semânticas (borda, separador, destrutivo, aviso, sucesso, scrim, desabilitado) e regras de conteúdo: a voz do Snuffle em inglês britânico, formatos do Reino Unido e horários em 12 horas. Treze incoerências entre páginas foram corrigidas junto.
+
+**Por quê:** uma revisão de design contra as telas da v7 achou tokens sem componentes e páginas que se contradiziam. Pedi que o design system ficasse completo o bastante para construir o protótipo antes de qualquer código.
+**Em aberto:** o vermelho destrutivo e as constantes de haptic do Android ainda precisam ser conferidos no protótipo; as telas da v7 ainda mostram horários em 24 horas.
+
+## 044 · OpenSpec e um app Expo só, sem monorepo
+**2026-11-03 · Decidido**
+
+O protótipo é um app Expo só, em `app/`, sem monorepo nem Turborepo: um projeto já gera iOS, Android e web. O trabalho é guiado por specs com o OpenSpec: um PRD curto em `openspec/project.md`, specs vivas por capacidade em `openspec/specs/` e uma proposta de mudança por feature em `openspec/changes/`, fundida nas specs quando termina; as tarefas podem virar issues no GitHub. O design system é código que os agentes precisam seguir: arquivos de tokens no formato DTCG 2025.10 geram quatro temas tipados (iOS e Android, claro e escuro) pelo Unistyles 3, os componentes só aceitam nomes de token, e lint, checagem de tipos e checagem de divergência dos tokens rodam a cada edição de um agente e quando ele para, por hooks do Claude Code.
+
+**Por quê:** pedi um desenvolvimento guiado por specs leve e não escrito em pedra, com um PRD e features e issues que possam crescer a partir dele, e que o design system funcionasse como harness para agentes de código. O OpenSpec é a opção atual mais leve e mantém as specs vivas; o GitHub Spec Kit e o Kiro são mais pesados. Um monorepo só ajudaria com vários pacotes, e há um.
+**Em aberto:** os builds de desenvolvimento de iOS e Android e as checagens de Lighthouse e de frame rate ainda não rodaram; as fontes ainda não estão embutidas no app.
 
 ## Ainda em aberto
 
-- Estrutura do repo (app único ou monorepo): decidir quando a construção começar e o formato dela estiver claro.
-- Stack do protótipo: decidir no Deliver.
-- Fluxo guiado por specs: se vale escrever specs antes de construir, e quão leves elas devem ser.

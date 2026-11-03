@@ -8,7 +8,8 @@ Takeaways:
 - Os dados são atitudinais. Mostram o que importa às pessoas e como elas contam a própria história. Não mostram com que frequência as coisas acontecem nem o que as pessoas fazem.
 - O mapa de empatia e as proto-personas herdam esse limite.
 Call:
-- Só netnografia. É um take-home, e ela era o jeito mais rápido e barato de ter evidências rastreáveis.
+- Escolhi a netnografia como único método com compradores (decisão 015). É um take-home, e ela era o jeito mais rápido e barato de ter evidências rastreáveis.
+- Escolhi as redes, salvei as páginas do Reddit que as ferramentas não alcançavam e entrei no X e no TikTok para uma passada só de leitura (decisões 009 e 010).
 - Num produto 0 a 1, eu não acrescentaria mais rodadas de pesquisa antes de agir. Transformaria isto rápido numa hipótese e testaria com pessoas, que é de onde viriam os dados de comportamento.
 AI:
 - Um agente de pesquisa buscou, coletou e etiquetou os posts. Um script conferiu cada citação do Reddit com páginas que eu salvei.

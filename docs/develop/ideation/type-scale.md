@@ -12,11 +12,10 @@ Takeaways:
 - System fonts are fallback only (decision 027), so the round 1 pairs with SF Pro are out. Round 2 pairs Gambetta and Telma with Switzer and with Satoshi.
 - Switzer is the best single font (89), with the highest x-height and tabular figures by default. Chillax and Author score lowest for reading a chat: lower legibility at small sizes and proportional figures only.
 Call:
-- The board opens with "Where it stands": what is chosen, how it narrowed and what is open. Round 4 is outlined in green as the chosen spec, and the design system page takes its values from there.
-- No uppercase labels above headings; sentence case everywhere, with emphasis from size and weight.
-- A display font is only for titles of 20 pt and up. Body, prices and times stay in a body font with tabular figures.
-- Fonts I named: Satoshi, Chillax, Switzer and Author alone; Telma and Gambetta as display fonts, first with SF Pro and Excon, then with Switzer and Satoshi; Pally was tested and dropped.
-- SF Pro and Roboto are fallback only, never the chosen font, because neither exists on the other platform (decision 027).
+- I named the fonts to test: Satoshi, Chillax, Switzer and Author alone; Telma and Gambetta as display fonts, first with SF Pro and Excon, then with Switzer and Satoshi. I dropped Pally after testing it.
+- I ruled out SF Pro and Roboto as a choice, because neither exists on the other platform (decision 027). A display font is only for titles of 20 pt and up; body, prices and times stay in a body font with tabular figures.
+- I chose sentence case everywhere and no uppercase labels above headings; emphasis comes from size and weight.
+- I asked for the board to show what was chosen and to group each round. It opens with "Where it stands", and round 4 is outlined in green as the chosen spec the design system page takes its values from.
 AI:
 - An agent checked each font on Fontshare, measured x-height, figures and weights with fontTools, built the scale and the specimens, and scored the options for a conversation screen. The scores are its judgement on the stated criteria.
 Trade-offs:

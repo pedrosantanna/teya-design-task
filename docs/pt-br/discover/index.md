@@ -8,8 +8,9 @@ Takeaways:
 - Em dois posts, uma ida frustrada terminou num pedido na Amazon. Quando o online não conseguia chegar a tempo, uma loja próxima ganhou.
 - Sam, o comprador em missão, é a maior e mais clara das três proto-personas (11 de 20 posts clusterizados). O ponto de parada mais comum foi a primeira etapa: saber quem tem o item e se a loja está aberta (8 de 20 posts clusterizados).
 Call:
-- Descoberta antes de escolher findability ou transaction ([001](../decision-log.md)).
-- De fora para dentro, porque o produto ainda não existe ([000](../decision-log.md)). Hammersmith como exemplo trabalhado.
+- Deixei a escolha entre findability e transaction para depois da descoberta, para que a posição viesse da evidência ([001](../decision-log.md)).
+- Trabalhei de fora para dentro, porque o produto ainda não existe ([000](../decision-log.md)), e escolhi Hammersmith como exemplo trabalhado.
+- Escrevi um brief para cada um dos três agentes de pesquisa (netnografia, benchmarks, pesquisa documental), com uma janela de 18 meses e evidência literal e com link.
 AI:
 - Três agentes de pesquisa trabalharam em paralelo, depois dois agentes de escrita, um revisor e um segundo etiquetador às cegas.
 - Eu escolhi as fontes, salvei as páginas do Reddit que as ferramentas não alcançavam e questionei o método. [Log completo](../process/ai-log.md).

@@ -8,8 +8,9 @@ Takeaways:
 - Os compradores dizem que pagam mais para comprar no comércio local se for conveniente. Depois de uma ida perdida, alguns vão para outro lugar e outros continuam voltando.
 - No X e no TikTok a high street é um lugar para descobrir, com pouca conversa prática.
 Call:
+- Defini as regras de evidência em todos os briefs de pesquisa: citações literais com perfil, rede, data e link, dos últimos 18 meses e só de posts públicos.
 - Ordenei os temas pela força da evidência: número de citações, redes, quão recentes e quão específicas do oeste de Londres. A utilidade para o brief não entrou na ordem.
-- As citações ficam curtas e com link, e a interpretação vem marcada como minha.
+- Mantive as citações curtas e com link (decisão 011), com a interpretação marcada como minha.
 AI:
 - O agente de pesquisa etiquetou as citações com 14 códigos e as agrupou em temas. Um agente de escrita escolheu cerca de 40 citações e escreveu cada tema.
 Trade-offs:

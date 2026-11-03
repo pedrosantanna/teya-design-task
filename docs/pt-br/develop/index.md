@@ -7,8 +7,8 @@ Takeaways:
 - O app de quem compra é um app nativo de iOS, desenhado primeiro a partir das Human Interface Guidelines da Apple e depois do Material Design (decisão 021).
 - O lado da loja não tem interface. Os estados dele são desenhados para que possam ser mostrados aos lojistas e construídos no WhatsApp ou num POS.
 Call:
-- Os wireframes são em preto e branco, sobre o kit de iOS da Apple. Marca e design visual vêm depois que o fluxo se sustentar.
-- O texto da interface fica em inglês nos dois idiomas desta documentação, porque o app é para Londres (decisão 022).
+- Defini a estrutura do app e dos fluxos, e mantive os wireframes em preto e branco, sobre o kit de iOS da Apple. Marca e design visual vêm depois que o fluxo se sustentar.
+- Escolhi fazer a ideação em canvas, com o texto da interface em inglês nos dois idiomas desta documentação, porque o app é para Londres (decisão 022).
 AI:
 - Agentes pesquisaram referências no Mobbin, construíram o canvas e desenharam os wireframes. Eu defini a estrutura do app e os fluxos.
 Trade-offs:

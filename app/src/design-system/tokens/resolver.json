@@ -1,0 +1,38 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/resolver.json",
+  "name": "Snuffle themes",
+  "version": "2025.10",
+  "description": "Combines the token files into the four themes of the prototype: platform (iOS, Android) x scheme (light, dark). Later sources override earlier ones. scripts/build-tokens.mjs reads this file and writes src/design-system/theme/theme.generated.ts.",
+  "sets": {
+    "foundation": {
+      "description": "Primitives and the semantic tokens every theme shares.",
+      "sources": [
+        { "$ref": "primitives.tokens.json" },
+        { "$ref": "semantic.tokens.json" }
+      ]
+    }
+  },
+  "modifiers": {
+    "platform": {
+      "description": "iOS is the default (decision 021); Android follows Material 3 where the values differ.",
+      "contexts": {
+        "ios": [{ "$ref": "modes/ios.tokens.json" }],
+        "android": [{ "$ref": "modes/android.tokens.json" }]
+      },
+      "default": "ios"
+    },
+    "scheme": {
+      "description": "Light and dark colour roles on Biscuit grey with Pastel parade and Indigo (decision 036).",
+      "contexts": {
+        "light": [{ "$ref": "modes/light.tokens.json" }],
+        "dark": [{ "$ref": "modes/dark.tokens.json" }]
+      },
+      "default": "light"
+    }
+  },
+  "resolutionOrder": [
+    { "$ref": "#/sets/foundation" },
+    { "$ref": "#/modifiers/platform" },
+    { "$ref": "#/modifiers/scheme" }
+  ]
+}

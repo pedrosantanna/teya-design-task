@@ -1,6 +1,6 @@
 # Marca
 
-O ícone do app por enquanto: um retriever cuja boca é o toldo de uma loja. O trabalho de um retriever é sair e trazer algo de volta, que é também o trabalho do concierge, e a raça é britânica: o Golden Retriever foi criado em Guisachan, nas Terras Altas da Escócia, a partir de 1868, e o Labrador foi desenvolvido em propriedades britânicas a partir de cães da Terra Nova. Eu o desenhei à mão no Figma a partir dos testes de ícone do agente e o escolhi como a primeira decisão de identidade. Ele é provisório: a linha está definida, o desenho e as cores não, então ele aparece aqui em preto e branco.
+O ícone do app por enquanto: um retriever cuja boca é o toldo de uma loja. O trabalho de um retriever é sair e trazer algo de volta, que é também o trabalho do Snuffle, e a raça é britânica: o Golden Retriever foi criado em Guisachan, nas Terras Altas da Escócia, a partir de 1868, e o Labrador foi desenvolvido em propriedades britânicas a partir de cães da Terra Nova. Eu o desenhei à mão no Figma a partir dos testes de ícone do agente e o escolhi como a primeira decisão de identidade. Ele é provisório: a linha está definida, o desenho e as cores não, então ele aparece aqui em preto e branco.
 
 ```summary
 Takeaways:
@@ -8,7 +8,8 @@ Takeaways:
 - Dois tons: um de mais contraste para o rosto e três das listras, e um de menos contraste para as outras duas. Em preto e branco, são o preto e um cinza médio.
 - O agente reconstruiu meu desenho sobre um eixo de simetria só, centralizou-o oticamente e o aplicou aos formatos de ícone do iOS e do Android: claro, escuro e tingido no iOS, adaptável e temático no Android.
 Call:
-- Provisória (decisão 033). Em preto e branco até a paleta ser escolhida.
+- Levei os dois primeiros testes de ícone do agente para o Figma, ajustei os vetores à mão e escolhi a quarta versão como marca provisória (decisão 033).
+- Pedi que ela fosse refinada numa grade de ícone, em preto e branco até a paleta ser escolhida, e apontei quando ficou alta demais.
 - Parei aqui de propósito. Com mais tempo eu desenvolveria mais a marca, talvez por outro caminho, mas o brand não é o foco deste exercício; achei divertido e o resultado é bom o bastante para dar uma cara ao app.
 AI:
 - Um agente desenhou os testes de ícone em SVG a partir das minhas sementes (um cão farejador, as compras britânicas, os toldos da parade). Levei os dois primeiros para o Figma e mudei os vetores à mão. O agente exportou a minha versão, reconstruiu-a sobre um eixo só e desenhou as aplicações nas plataformas. O primeiro centro ótico deixou o desenho alto demais; eu apontei, e ele escolheu outro comparando deslocamentos no olho.

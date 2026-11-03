@@ -8,7 +8,8 @@ Takeaways:
 - Etapa da compra: o passo da compra em que a tentativa parou, de 1 saber (findability) a 4 levar (transaction).
 - O que as pessoas fizeram depois (continuaram ou desistiram) aparece como o estilo de cada ponto.
 Call:
-- Escolhi urgência da necessidade e etapa da compra entre as candidatas, porque a segunda se traduz direto em findability versus transaction e as duas podem ser etiquetadas a partir do que as pessoas escreveram.
+- Pedi duas dimensões que se ligassem ao brief e escolhi urgência da necessidade e etapa da compra entre as candidatas: a segunda se traduz direto em findability versus transaction, e as duas podem ser etiquetadas a partir do que as pessoas escreveram.
+- Troquei "ponto de falha" por etapa da compra quando vi que não dava para medir aquilo como escala (decisão 016).
 - Deixei "o que as pessoas fizeram depois" fora dos eixos, porque a maioria dos posts não mostra isso.
 AI:
 - O agente de pesquisa propôs eixos candidatos a partir da etiquetagem. Um agente revisor confrontou os eixos com o brief. Dois agentes etiquetaram cada post nos dois eixos.

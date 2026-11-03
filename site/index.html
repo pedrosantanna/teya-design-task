@@ -4,8 +4,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
-<link rel="stylesheet" href="site/canvas.css?v=12">
-<script src="site/canvas.js?v=9"></script>
+<link rel="stylesheet" href="site/canvas.css?v=14">
+<script src="site/canvas.js?v=11"></script>
+<link rel="stylesheet" href="site/viewer3d.css?v=3">
+<script src="site/viewer3d.js?v=3"></script>
 <style>
 /* Docs shell in the shadcn/ui idiom: neutral zinc tokens, hierarchy from weight and space, borders only where they separate. */
 :root {
@@ -80,6 +82,14 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .seg button:hover { color: var(--fg); }
 .seg button[aria-checked="true"] { background: var(--muted); color: var(--fg); box-shadow: inset 0 0 0 1px var(--border); }
 .lang-note { font-size: 13px; color: var(--muted-fg); border-left: 2px solid var(--border); padding: 2px 0 2px 12px; margin: 0 0 var(--s-5); }
+.side-btn { display: grid; place-items: center; flex: none; width: 32px; height: 32px; margin-left: -6px; padding: 0; border: 0; border-radius: var(--radius); background: transparent; color: var(--muted-fg); cursor: pointer; }
+.side-btn:hover { background: var(--muted); color: var(--fg); }
+.side-btn svg { width: 16px; height: 16px; }
+/* Collapsed sidebar (wide screens): the content takes the full width; the toggle stays in the top bar. */
+@media (min-width: 861px) {
+  body.nav-collapsed .shell { grid-template-columns: minmax(0, 1fr); }
+  body.nav-collapsed .sidebar { display: none; }
+}
 .menu-btn {
   display: none; width: 36px; height: 36px; border: 1px solid var(--border); border-radius: var(--radius);
   background: var(--bg); color: var(--fg); cursor: pointer; place-items: center; flex: none;
@@ -256,6 +266,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .marks figcaption { max-width: 24ch; font-size: 13px; line-height: 1.4; color: var(--muted-fg); }
 .marks.wide figcaption { max-width: 70ch; }
 .marks.wide img { border-radius: 14px; }
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: var(--s-3); margin: var(--s-3) 0 var(--s-5); }
+.swatch { margin: 0; display: grid; gap: var(--s-1); }
+.swatch i { display: block; height: 56px; border-radius: 10px; box-shadow: inset 0 0 0 1px rgba(127,127,127,.25); }
+.swatch figcaption { display: flex; flex-direction: column; font-size: 12.5px; line-height: 1.35; color: var(--muted-fg); }
+.swatch figcaption b { font-size: 13px; font-weight: 600; color: var(--fg); }
+.swatch code { font-size: 12px; background: none; padding: 0; }
 .tfaces { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--s-4); margin: var(--s-4) 0 var(--s-6); }
 .tface { margin: 0; padding: var(--s-5); border: 1px solid var(--border); border-radius: var(--radius); }
 .tface-aa { font-size: 64px; line-height: 1; color: var(--fg); }
@@ -399,6 +415,7 @@ i.m.unknown { opacity: .45; }
 @media (max-width: 860px) {
   .shell { grid-template-columns: minmax(0, 1fr); }
   .menu-btn { display: grid; }
+  .side-btn { display: none; }
   .brand-sub, .brand-sep { display: none; }
   .sidebar {
     position: fixed; z-index: 30; left: 0; top: calc(var(--header-h) + env(safe-area-inset-top, 0px)); bottom: 0;
@@ -447,9 +464,14 @@ i.m.unknown { opacity: .45; }
 .prose h4 { font-size: 13px; font-weight: 600; letter-spacing: .01em; color: var(--muted-fg); }
 .summary { margin-bottom: var(--s-6) !important; }
 .prose table.fit { width: auto; min-width: min(100%, 24rem); }
+.embed-frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: var(--canvas-bg); }
+.embed-about { position: absolute; top: 96px; left: 16px; width: min(420px, calc(100% - 32px)); max-height: calc(100% - 120px); overflow: auto; padding: var(--s-4); background: var(--bg); border: 1px solid var(--border); border-radius: 14px; z-index: 5; }
 </style>
 
 <header class="topbar">
+  <button type="button" class="side-btn" id="side-btn" aria-controls="sidebar" aria-expanded="true" aria-keyshortcuts="Meta+Backslash Control+Backslash">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
+  </button>
   <button class="menu-btn" id="menu-btn" aria-label="Open navigation" aria-expanded="false">
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
   </button>
@@ -492,7 +514,7 @@ i.m.unknown { opacity: .45; }
   // Served from the repo root in dev (site/serve.py) and from the artifact root when published,
   // so every content path is the repo-relative path, e.g. docs/discover/index.md.
   const $ = (s, el = document) => el.querySelector(s);
-  const els = { nav: $('#nav'), content: $('#content'), toc: $('#toc'), search: $('#search'), sidebar: $('#sidebar'), scrim: $('#scrim'), menu: $('#menu-btn') };
+  const els = { nav: $('#nav'), content: $('#content'), toc: $('#toc'), search: $('#search'), sidebar: $('#sidebar'), scrim: $('#scrim'), menu: $('#menu-btn'), side: $('#side-btn') };
 
   // --- Language and theme (per-viewer, remembered when storage is available) ----
   const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
@@ -503,7 +525,7 @@ i.m.unknown { opacity: .45; }
       verifiedTip: 'Checked against the live source', archiveTip: 'Collected from a public archive; not yet checked against the live source', source: 'Source ↗',
       photoFor: 'Photo standing in for', kept: 'kept going', gaveUp: 'gave up on local', notShown: 'not shown',
       mapNote: n => `Each dot is one post; posts with the same codes sit side by side. Not on the chart: ${n} posts where nothing broke.`,
-      persists: 'persists', defects: 'defects', unknown: 'stance unknown', urgent: 'urgent', canvasLabel: 'Canvas. Scroll to pan, ⌘ or Ctrl and scroll to zoom.', canvasTools: 'Tools', toolSelect: 'Select', toolHand: 'Hand', zoom: 'Zoom', zoomIn: 'Zoom in', zoomOut: 'Zoom out', zoom100: 'Zoom to 100%', zoomFit: 'Zoom to fit', inspect: 'Inspect', close: 'Close', about: 'About this canvas', selectedN: n => `${n} selected`, kindScreen: 'Screen', kindState: 'State', kindNote: 'Note', kindArea: 'Section', kindBlock: 'Item', notes: 'Notes', linksIn: 'Comes from', linksOut: 'Goes to', canvasFail: 'Couldn’t load the canvas.', version: 'Version', current: 'current', notPublished: 'Not published yet',
+      persists: 'persists', defects: 'defects', unknown: 'stance unknown', urgent: 'urgent', openAlone: 'Open on its own', canvasLabel: 'Canvas. Scroll to pan, ⌘ or Ctrl and scroll to zoom.', canvasTools: 'Tools', toolSelect: 'Select', toolHand: 'Hand', zoom: 'Zoom', zoomIn: 'Zoom in', zoomOut: 'Zoom out', zoom100: 'Zoom to 100%', zoomFit: 'Zoom to fit', inspect: 'Inspect', close: 'Close', about: 'About this canvas', selectedN: n => `${n} selected`, kindScreen: 'Screen', kindState: 'State', kindNote: 'Note', kindArea: 'Section', kindBlock: 'Item', notes: 'Notes', linksIn: 'Comes from', linksOut: 'Goes to', canvasFail: 'Couldn’t load the canvas.', version: 'Version', current: 'current', notPublished: 'Not published yet', camera: 'Camera', isometric: 'Isometric', orthographic: 'Orthographic', perspective: 'Perspective', outlines: 'Outlines', shadows: 'Shadows', grid: 'Grid', autoRotate: 'Auto-rotate', background: 'Background', bgCanvas: 'Canvas', replayEntry: 'Replay entry', fps: 'FPS', viewerAbout: 'About these illustrations', viewerLabel: '3D illustration. Drag to use the selected tool, right-drag to pan, scroll to zoom.', viewerSettings: 'View settings', viewerGallery: 'Illustrations', viewerFail: 'Couldn’t load the 3D viewer.', viewerObjects: 'Objects', viewerTools: 'View tools', viewerDisplay: 'Display', viewerPerf: 'Performance', tool_orbit: 'Orbit', tool_pan: 'Pan', tool_zoom: 'Zoom', resetView: 'Reset view', light: 'Light', lightAngle: 'Angle', lightHeight: 'Height', frameTime: 'Frame time', hideNav: 'Hide sidebar', showNav: 'Show sidebar', isoShort: 'Iso', orthoShort: 'Ortho', perspShort: 'Persp', hidePanel: 'Hide panel', showObjects: 'Show objects', showSettings: 'Show settings',
       loadFail: (src, m) => `Couldn’t load <code>${src}</code> (${m}). Check that the file exists in the repo and is published with the page.`,
       valueMap: 'Value map', customerProfile: 'Customer profile', screensSource: 'Main screens on Mobbin', screensAlt: 'Main app screens, captured from Mobbin', screensMissing: 'Screens are kept locally, not in the public repo.',
       notTranslated: 'This page isn’t translated yet, so it shows in English.' },
@@ -512,7 +534,7 @@ i.m.unknown { opacity: .45; }
       verifiedTip: 'Conferida na fonte original', archiveTip: 'Coletada de um arquivo público; ainda não conferida na fonte original', source: 'Fonte ↗',
       photoFor: 'Foto que representa', kept: 'continuou', gaveUp: 'desistiu do comércio local', notShown: 'não aparece',
       mapNote: n => `Cada ponto é um post; posts com as mesmas etiquetas ficam lado a lado. Fora do gráfico: ${n} posts em que nada deu errado.`,
-      persists: 'continuou', defects: 'desistiu', unknown: 'não aparece', urgent: 'urgente', canvasLabel: 'Canvas. Role para mover, ⌘ ou Ctrl e role para dar zoom.', canvasTools: 'Ferramentas', toolSelect: 'Selecionar', toolHand: 'Mão', zoom: 'Zoom', zoomIn: 'Aproximar', zoomOut: 'Afastar', zoom100: 'Zoom em 100%', zoomFit: 'Ajustar à tela', inspect: 'Inspecionar', close: 'Fechar', about: 'Sobre este canvas', selectedN: n => `${n} selecionados`, kindScreen: 'Tela', kindState: 'Estado', kindNote: 'Nota', kindArea: 'Seção', kindBlock: 'Item', notes: 'Notas', linksIn: 'Vem de', linksOut: 'Vai para', canvasFail: 'Não foi possível carregar o canvas.', version: 'Versão', current: 'atual', notPublished: 'Ainda não publicada',
+      persists: 'continuou', defects: 'desistiu', unknown: 'não aparece', urgent: 'urgente', openAlone: 'Abrir sozinho', canvasLabel: 'Canvas. Role para mover, ⌘ ou Ctrl e role para dar zoom.', canvasTools: 'Ferramentas', toolSelect: 'Selecionar', toolHand: 'Mão', zoom: 'Zoom', zoomIn: 'Aproximar', zoomOut: 'Afastar', zoom100: 'Zoom em 100%', zoomFit: 'Ajustar à tela', inspect: 'Inspecionar', close: 'Fechar', about: 'Sobre este canvas', selectedN: n => `${n} selecionados`, kindScreen: 'Tela', kindState: 'Estado', kindNote: 'Nota', kindArea: 'Seção', kindBlock: 'Item', notes: 'Notas', linksIn: 'Vem de', linksOut: 'Vai para', canvasFail: 'Não foi possível carregar o canvas.', version: 'Versão', current: 'atual', notPublished: 'Ainda não publicada', camera: 'Câmera', isometric: 'Isométrica', orthographic: 'Ortográfica', perspective: 'Perspectiva', outlines: 'Contornos', shadows: 'Sombras', grid: 'Grade', autoRotate: 'Girar sozinho', background: 'Fundo', bgCanvas: 'Canvas', replayEntry: 'Repetir entrada', fps: 'FPS', viewerAbout: 'Sobre estas ilustrações', viewerLabel: 'Ilustração 3D. Arraste para usar a ferramenta escolhida, arraste com o botão direito para mover, role para dar zoom.', viewerSettings: 'Ajustes de visualização', viewerGallery: 'Ilustrações', viewerFail: 'Não foi possível carregar o visualizador 3D.', viewerObjects: 'Objetos', viewerTools: 'Ferramentas de visualização', viewerDisplay: 'Exibição', viewerPerf: 'Desempenho', tool_orbit: 'Orbitar', tool_pan: 'Mover', tool_zoom: 'Zoom', resetView: 'Redefinir vista', light: 'Luz', lightAngle: 'Ângulo', lightHeight: 'Altura', frameTime: 'Tempo por quadro', hideNav: 'Ocultar barra lateral', showNav: 'Mostrar barra lateral', isoShort: 'Iso', orthoShort: 'Orto', perspShort: 'Persp', hidePanel: 'Ocultar painel', showObjects: 'Mostrar objetos', showSettings: 'Mostrar ajustes',
       loadFail: (src, m) => `Não foi possível carregar <code>${src}</code> (${m}).`,
       valueMap: 'Mapa de valor', customerProfile: 'Perfil do cliente', screensSource: 'Telas principais no Mobbin', screensAlt: 'Telas principais do app, capturadas no Mobbin', screensMissing: 'As telas ficam só na cópia local, fora do repositório público.',
       notTranslated: 'Esta página ainda não foi traduzida, por isso aparece em inglês.' }
@@ -710,6 +732,14 @@ i.m.unknown { opacity: .45; }
     });
     return `<div class="tscale">${rows.join('')}</div>`;
   }
+  // ```swatches  one colour per line: "Name | #HEX | note".
+  function swatches(src) {
+    const cells = src.split('\n').map(l => l.trim()).filter(l => l && l.includes('|')).map(l => {
+      const [name, hex, note] = l.split('|').map(x => x.trim());
+      return `<figure class="swatch"><i style="background:${esc(hex)}"></i><figcaption><b>${esc(name)}</b><code>${esc(hex)}</code>${note ? `<span>${inline(note)}</span>` : ''}</figcaption></figure>`;
+    });
+    return `<div class="swatches">${cells.join('')}</div>`;
+  }
   // ```typefaces  one family per line: "Family | weights | role | sample text".
   function typefaces(src) {
     const cards = src.split('\n').map(l => l.trim()).filter(l => l && l.includes('|')).map(l => {
@@ -837,6 +867,7 @@ i.m.unknown { opacity: .45; }
         if (l === 'screens') return screens(code);
         if (l === 'type-scale') return typeScale(code);
         if (l === 'typefaces') return typefaces(code);
+        if (l === 'swatches') return swatches(code);
         return `<pre><code>${esc(code)}</code></pre>`;
       }
     }
@@ -994,7 +1025,30 @@ i.m.unknown { opacity: .45; }
     const prev = PAGES[idx - 1], next = PAGES[idx + 1];
     const crumbs = [L(page.sec), page.grp ? L(page.grp) : ''].filter(Boolean).map(esc).join('<span aria-hidden="true">›</span>');
 
-    document.body.classList.toggle('is-canvas', !!page.canvas);
+    document.body.classList.toggle('is-canvas', !!(page.canvas || page.viewer || page.embed));
+    if (page.embed) {
+      // An embed page shows a built app (the prototype's web export) in a full-height frame; the summary opens from About.
+      els.content.innerHTML = `<div class="cv-page" data-lang="${LANG}"><div class="cv-board"><iframe class="embed-frame" src="${esc(page.embed)}" title="${esc(L(page))}" allow="clipboard-write; fullscreen"></iframe></div>
+        <div class="cv-title"><div><div class="crumbs">${crumbs}</div><h1>${title}</h1></div><a class="cv-about" href="${esc(page.embed)}" target="_blank" rel="noopener">${esc(t('openAlone'))}</a><button type="button" class="cv-about embed-about-btn">${esc(t('about'))}</button></div>
+        <aside class="embed-about prose" hidden>${lede ? `<p>${lede}</p>` : ''}${tmp.innerHTML}</aside></div>`;
+      els.toc.innerHTML = '';
+      document.title = `${L(page)} · Snuffle Docs`;
+      const box = els.content.querySelector('.embed-about');
+      els.content.querySelector('.embed-about-btn').addEventListener('click', () => { box.hidden = !box.hidden; });
+      return;
+    }
+    if (page.viewer) {
+      // A viewer page shows the 3D illustrations (site/viewer3d.js); the Markdown summary opens from About.
+      els.content.innerHTML = `<div class="cv-page" data-lang="${LANG}"><div class="cv-board"></div>
+        <div class="cv-title"><div><div class="crumbs">${crumbs}</div><h1>${title}</h1></div><button type="button" class="cv-about">${esc(t('viewerAbout'))}</button></div></div>`;
+      els.toc.innerHTML = '';
+      document.title = `${L(page)} · Snuffle Docs`;
+      const board = els.content.querySelector('.cv-board');
+      if (!window.HSViewer3D) { board.innerHTML = `<p class="state">${esc(t('viewerFail'))}</p>`; return; }
+      const v = window.HSViewer3D.mount(board, { lang: LANG, t, icon, modelsUrl: page.viewer, about: `<div class="prose">${lede ? `<p>${lede}</p>` : ''}${tmp.innerHTML}</div>` });
+      els.content.querySelector('.cv-about').addEventListener('click', () => v.showAbout());
+      return;
+    }
     if (page.canvas) {
       // A canvas page can carry versions, newest first; the newest opens and earlier ones stay one click away.
       const versions = Array.isArray(page.canvas) ? page.canvas : [{ file: page.canvas }];
@@ -1054,16 +1108,38 @@ i.m.unknown { opacity: .45; }
   function openNav() { document.body.classList.add('nav-open'); els.scrim.hidden = false; els.menu.setAttribute('aria-expanded', 'true'); }
   function closeNav() { document.body.classList.remove('nav-open'); els.scrim.hidden = true; els.menu.setAttribute('aria-expanded', 'false'); }
   els.menu.addEventListener('click', () => document.body.classList.contains('nav-open') ? closeNav() : openNav());
+  // --- Collapsible sidebar on wide screens (toggle at the top left, ⌘\ or Ctrl+\), remembered per viewer ---
+  const MAC = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+  let NAV_COLLAPSED = store.get('hs-nav') === 'collapsed';
+  function applyNavCollapse() {
+    document.body.classList.toggle('nav-collapsed', NAV_COLLAPSED);
+    const label = t(NAV_COLLAPSED ? 'showNav' : 'hideNav');
+    els.side.setAttribute('aria-expanded', String(!NAV_COLLAPSED));
+    els.side.setAttribute('aria-label', label);
+    els.side.title = `${label} (${MAC ? '⌘\\' : 'Ctrl+\\'})`;
+  }
+  function toggleNavCollapse() {
+    const inside = els.sidebar.contains(document.activeElement);
+    NAV_COLLAPSED = !NAV_COLLAPSED; store.set('hs-nav', NAV_COLLAPSED ? 'collapsed' : 'open'); applyNavCollapse();
+    if (NAV_COLLAPSED && inside) els.side.focus(); // focus never stays on a hidden link
+  }
+  els.side.addEventListener('click', toggleNavCollapse);
+  applyNavCollapse();
   els.scrim.addEventListener('click', closeNav);
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeNav();
+    if ((e.metaKey || e.ctrlKey) && !e.altKey && !e.shiftKey && (e.code === 'Backslash' || e.key === '\\')) {
+      e.preventDefault();
+      if (matchMedia('(max-width: 860px)').matches) { document.body.classList.contains('nav-open') ? closeNav() : openNav(); }
+      else toggleNavCollapse();
+    }
     if (e.key === '/' && document.activeElement !== els.search) { e.preventDefault(); els.search.focus(); }
   });
   els.search.addEventListener('input', () => renderNav(els.search.value));
   document.querySelectorAll('#theme-seg button').forEach(b => b.addEventListener('click', () => { MODE = b.dataset.mode; store.set('hs-theme', MODE); applyMode(); }));
   document.querySelectorAll('#lang-seg button').forEach(b => b.addEventListener('click', () => {
     if (b.dataset.lang === LANG) return;
-    LANG = b.dataset.lang; store.set('hs-lang', LANG); applyLangUI(); renderNav(els.search.value); render();
+    LANG = b.dataset.lang; store.set('hs-lang', LANG); applyLangUI(); applyNavCollapse(); renderNav(els.search.value); render();
   }));
   applyLangUI();
 

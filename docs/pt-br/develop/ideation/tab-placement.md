@@ -9,7 +9,8 @@ Takeaways:
 - A recomendação de um agente a partir das referências, antes de a G existir: a D, a barra inferior com Nearby e Requests dos lados da pílula de pedido. É a única opção que vai bem ao mesmo tempo em encontrar Requests, alcance do polegar e convenções das plataformas, e tem espaço para um terceiro modo. A alternativa, se a barra de pedido grande e sempre aberta precisar ficar, é a B com uma contagem no segmento Requests.
 - As opções trocam a visibilidade de Requests pelo espaço que a barra de pedido precisa embaixo.
 Call:
-- Decidido: a G com o botão à esquerda (decisão 026), já na v3 do fluxo do app. Meus critérios: se o comprador encontra Requests, alcance com uma mão, disputa com a barra de pedido, espaço para um terceiro modo e convenções do iOS e do Android.
+- Pedi um teste com Requests como um botão redondo ao lado da barra de pedido, como na barra do Granola, junto das seis posições já desenhadas.
+- Escolhi a G com o botão à esquerda (decisão 026), já na v3 do fluxo do app. Meus critérios: se o comprador encontra Requests, alcance com uma mão, disputa com a barra de pedido, espaço para um terceiro modo e convenções do iOS e do Android.
 AI:
 - Um agente reuniu referências de posição no Mobbin. O agente principal desenhou as seis opções na home da v2 e escreveu a comparação.
 Trade-offs:

@@ -7,7 +7,8 @@ Takeaways:
 - Snuffle sounds good, is playful and is about looking for things; it comes from a dog sniffing with its nose down. It matches the mark, a retriever with an awning for a mouth, and the concierge's job of finding one thing among many small shops.
 - The agent and I brainstormed names; I asked it to research retriever names and words for sniffing and fetching.
 Call:
-- The app is Snuffle (decision 035). The docs site carries the name and the mark.
+- I asked for names tied to sniffing, tracking or fetching, cute and with no negative second meaning, and chose Snuffle (decision 035).
+- I asked for this Brand page with the naming under it, written as two paragraphs with my reasons. The docs site carries the name and the mark.
 AI:
 - An agent researched the two lines and ran quick conflict checks. I set the line (cute, childlike, about sniffing or fetching) and chose Snuffle.
 Trade-offs:

@@ -1,0 +1,109 @@
+{
+  "$description": "Colour roles, light mode (colour.md, Roles).",
+  "color": {
+    "$type": "color",
+    "background": {
+      "$value": "{color.biscuit.960}"
+    },
+    "card": {
+      "$value": "{color.biscuit.1000}"
+    },
+    "muted": {
+      "$value": "{color.biscuit.915}",
+      "$description": "Chips and Snuffle bubbles"
+    },
+    "mutedForeground": {
+      "$value": "{color.biscuit.445}",
+      "$description": "Secondary text"
+    },
+    "foreground": {
+      "$value": "{color.biscuit.150}"
+    },
+    "primary": {
+      "$value": "{color.indigo.800}",
+      "$description": "Buttons, the send button, the shopper's bubbles"
+    },
+    "onPrimary": {
+      "$value": "{color.white}"
+    },
+    "tint": {
+      "$value": "{color.indigo.800}",
+      "$description": "Selected tab, links, icons that act"
+    },
+    "chipSelected": {
+      "$value": "{color.indigo.100}"
+    },
+    "onChipSelected": {
+      "$value": "{color.indigo.800}"
+    },
+    "badge": {
+      "promoted": {
+        "fill": {
+          "$value": "{color.pistachio.100}"
+        },
+        "text": {
+          "$value": "{color.pistachio.800}"
+        },
+        "dot": {
+          "$value": "{color.pistachio.500}"
+        }
+      },
+      "new": {
+        "fill": {
+          "$value": "{color.peach.100}"
+        },
+        "text": {
+          "$value": "{color.peach.800}"
+        },
+        "dot": {
+          "$value": "{color.peach.500}"
+        }
+      },
+      "delivers": {
+        "fill": {
+          "$value": "{color.butter.100}"
+        },
+        "text": {
+          "$value": "{color.butter.800}"
+        },
+        "dot": {
+          "$value": "{color.butter.500}"
+        }
+      }
+    },
+    "mapGround": {
+      "$value": "{color.butter.50}"
+    },
+    "scrim": {
+      "$value": "{color.black}"
+    },
+    "onDestructive": {
+      "$value": "{color.white}",
+      "$description": "Label on a destructive fill"
+    },
+    "warning": {
+      "$value": "{color.butter.700}",
+      "$description": "Warning icon on \"not charged\" endings (colour.md)"
+    },
+    "success": {
+      "$value": "{color.pistachio.700}",
+      "$description": "Check icon on Ready, Paid and Collected (colour.md)"
+    },
+    "border": {
+      "$value": "{color.biscuit.860}",
+      "$description": "A card on a busy area, text fields"
+    },
+    "separator": {
+      "$value": "{color.biscuit.890}",
+      "$description": "1 px lines between rows, inset to the text"
+    },
+    "codeSurface": {
+      "$value": "{color.white}",
+      "$description": "QR code background: white in both modes (components.md, Collection code)"
+    },
+    "codeInk": {
+      "$value": "{color.black}",
+      "$description": "QR code modules"
+    }
+  }
+}

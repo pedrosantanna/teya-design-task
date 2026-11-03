@@ -9,9 +9,9 @@ Takeaways:
 - Escolhi um agente por quatro motivos: uma conversa só para várias tarefas, a espera resolvida no lugar do comprador, agir depois em nome dele e alcance além de um app. Os quatro são hipóteses minhas; o Discover tem pouca evidência sobre eles.
 - Tudo depende de as lojas responderem rápido. Nenhum lojista aparece na evidência, então é a primeira coisa a testar.
 Call:
-- Escolhi este conceito depois do Discover. Ele atende a busca urgente do Sam e a necessidade da Jess de comprar fora do horário das lojas com um fluxo só.
-- O protótipo é o app, onde o concierge pode ser a versão mais focada de si mesmo. WhatsApp e outros assistentes são canais para depois.
-- Esta entrega cobre só o lado de quem compra. Como uma loja recebe e responde um pedido é suposição, por exemplo pelo app de lojista do provedor de pagamento ou pelo WhatsApp.
+- Escrevi o conceito depois do Discover e o escolhi porque um fluxo só atende a busca urgente do Sam e a necessidade da Jess de comprar fora do horário das lojas (decisão 017).
+- Fiz do concierge um agente e escolhi o app como protótipo, onde o concierge pode ser a versão mais focada de si mesmo. WhatsApp e outros assistentes são canais para depois (decisão 018).
+- Limitei esta entrega ao lado de quem compra. Como uma loja recebe e responde um pedido é suposição, por exemplo pelo app de lojista do provedor de pagamento ou pelo WhatsApp.
 AI:
 - Eu escrevi o conceito e os motivos para um agente. Um agente conferiu cada parte com a evidência do Discover e escreveu os trade-offs e os riscos abaixo.
 Trade-offs:

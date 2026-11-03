@@ -1,0 +1,982 @@
+{
+  "$description": "Snuffle primitive tokens (DTCG 2025.10). Values copied from docs/develop/design-system: colour.md, spacing.md, shape.md, motion.md, typography.md. Do not use these directly in components; use semantic tokens.",
+  "color": {
+    "$type": "color",
+    "white": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          1,
+          1
+        ],
+        "hex": "#FFFFFF"
+      }
+    },
+    "black": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0,
+          0,
+          0
+        ],
+        "hex": "#000000"
+      }
+    },
+    "biscuit": {
+      "150": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0627,
+            0.0392,
+            0.0235
+          ],
+          "hex": "#100A06"
+        },
+        "$description": "L 0.15, light foreground and dark background"
+      },
+      "235": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1373,
+            0.1137,
+            0.0941
+          ],
+          "hex": "#231D18"
+        },
+        "$description": "L 0.235, dark card"
+      },
+      "265": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1686,
+            0.1412,
+            0.1255
+          ],
+          "hex": "#2B2420"
+        },
+        "$description": "L 0.265, dark map ground (between Card and Muted)"
+      },
+      "300": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2,
+            0.1725,
+            0.1529
+          ],
+          "hex": "#332C27"
+        },
+        "$description": "L 0.30, dark muted"
+      },
+      "320": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2196,
+            0.1922,
+            0.1725
+          ],
+          "hex": "#38312C"
+        },
+        "$description": "L 0.32, dark separator"
+      },
+      "360": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2627,
+            0.2353,
+            0.2118
+          ],
+          "hex": "#433C36"
+        },
+        "$description": "L 0.36, dark border"
+      },
+      "445": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.349,
+            0.3255,
+            0.302
+          ],
+          "hex": "#59534D"
+        },
+        "$description": "L 0.445, light muted foreground"
+      },
+      "740": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6941,
+            0.6667,
+            0.6235
+          ],
+          "hex": "#B1AA9F"
+        },
+        "$description": "L 0.74, dark muted foreground"
+      },
+      "860": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8314,
+            0.8157,
+            0.7961
+          ],
+          "hex": "#D4D0CB"
+        },
+        "$description": "L 0.86, light border"
+      },
+      "890": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8706,
+            0.8549,
+            0.8353
+          ],
+          "hex": "#DEDAD5"
+        },
+        "$description": "L 0.89, light separator"
+      },
+      "915": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.898,
+            0.8863,
+            0.8706
+          ],
+          "hex": "#E5E2DE"
+        },
+        "$description": "L 0.915, light muted"
+      },
+      "960": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9569,
+            0.9451,
+            0.9294
+          ],
+          "hex": "#F4F1ED"
+        },
+        "$description": "L 0.96, light background"
+      },
+      "985": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9882,
+            0.9804,
+            0.9647
+          ],
+          "hex": "#FCFAF6"
+        },
+        "$description": "L 0.985, dark foreground"
+      },
+      "1000": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ],
+          "hex": "#FFFFFF"
+        },
+        "$description": "L 1.00, light card"
+      },
+      "$description": "Biscuit grey neutral. Keys are OKLCH lightness x 1000 (colour.md, Surfaces)."
+    },
+    "indigo": {
+      "50": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9569,
+            0.9647,
+            1
+          ],
+          "hex": "#F4F6FF"
+        }
+      },
+      "100": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9098,
+            0.9255,
+            1
+          ],
+          "hex": "#E8ECFF"
+        }
+      },
+      "200": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8196,
+            0.8471,
+            1
+          ],
+          "hex": "#D1D8FF"
+        }
+      },
+      "300": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7098,
+            0.749,
+            1
+          ],
+          "hex": "#B5BFFF"
+        }
+      },
+      "400": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5882,
+            0.6353,
+            1
+          ],
+          "hex": "#96A2FF"
+        }
+      },
+      "500": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4745,
+            0.5098,
+            1
+          ],
+          "hex": "#7982FF"
+        }
+      },
+      "600": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3725,
+            0.3882,
+            0.9098
+          ],
+          "hex": "#5F63E8"
+        }
+      },
+      "700": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2863,
+            0.2902,
+            0.7529
+          ],
+          "hex": "#494AC0"
+        }
+      },
+      "800": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2392,
+            0.2078,
+            0.7216
+          ],
+          "hex": "#3D35B8"
+        },
+        "$description": "base"
+      },
+      "900": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1333,
+            0.1294,
+            0.4118
+          ],
+          "hex": "#222169"
+        }
+      }
+    },
+    "peach": {
+      "50": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9922,
+            0.9608,
+            0.949
+          ],
+          "hex": "#FDF5F2"
+        }
+      },
+      "100": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9765,
+            0.9137,
+            0.8941
+          ],
+          "hex": "#F9E9E4"
+        }
+      },
+      "200": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.949,
+            0.8275,
+            0.7882
+          ],
+          "hex": "#F2D3C9"
+        }
+      },
+      "300": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.7098,
+            0.6196
+          ],
+          "hex": "#FFB59E"
+        },
+        "$description": "base"
+      },
+      "400": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8392,
+            0.6078,
+            0.5333
+          ],
+          "hex": "#D69B88"
+        }
+      },
+      "500": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7569,
+            0.498,
+            0.4196
+          ],
+          "hex": "#C17F6B"
+        }
+      },
+      "600": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.651,
+            0.3882,
+            0.3059
+          ],
+          "hex": "#A6634E"
+        }
+      },
+      "700": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5255,
+            0.2941,
+            0.2235
+          ],
+          "hex": "#864B39"
+        }
+      },
+      "800": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4,
+            0.2118,
+            0.1529
+          ],
+          "hex": "#663627"
+        }
+      },
+      "900": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2745,
+            0.1373,
+            0.0941
+          ],
+          "hex": "#462318"
+        }
+      }
+    },
+    "pistachio": {
+      "50": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9608,
+            0.9725,
+            0.9451
+          ],
+          "hex": "#F5F8F1"
+        }
+      },
+      "100": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9137,
+            0.9412,
+            0.8824
+          ],
+          "hex": "#E9F0E1"
+        }
+      },
+      "200": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7882,
+            0.9216,
+            0.6353
+          ],
+          "hex": "#C9EBA2"
+        },
+        "$description": "base"
+      },
+      "300": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7216,
+            0.8039,
+            0.6314
+          ],
+          "hex": "#B8CDA1"
+        }
+      },
+      "400": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6078,
+            0.7098,
+            0.4863
+          ],
+          "hex": "#9BB57C"
+        }
+      },
+      "500": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.502,
+            0.6196,
+            0.3608
+          ],
+          "hex": "#809E5C"
+        }
+      },
+      "600": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3961,
+            0.5137,
+            0.2431
+          ],
+          "hex": "#65833E"
+        }
+      },
+      "700": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.302,
+            0.4078,
+            0.1647
+          ],
+          "hex": "#4D682A"
+        }
+      },
+      "800": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2196,
+            0.302,
+            0.102
+          ],
+          "hex": "#384D1A"
+        }
+      },
+      "900": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1412,
+            0.2039,
+            0.0549
+          ],
+          "hex": "#24340E"
+        }
+      }
+    },
+    "butter": {
+      "50": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9765,
+            0.9686,
+            0.9412
+          ],
+          "hex": "#F9F7F0"
+        }
+      },
+      "100": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.9059,
+            0.6275
+          ],
+          "hex": "#FFE7A0"
+        },
+        "$description": "base"
+      },
+      "200": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8941,
+            0.8549,
+            0.7529
+          ],
+          "hex": "#E4DAC0"
+        }
+      },
+      "300": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8235,
+            0.7686,
+            0.6039
+          ],
+          "hex": "#D2C49A"
+        }
+      },
+      "400": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7373,
+            0.6667,
+            0.451
+          ],
+          "hex": "#BCAA73"
+        }
+      },
+      "500": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.651,
+            0.5647,
+            0.3137
+          ],
+          "hex": "#A69050"
+        }
+      },
+      "600": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5451,
+            0.4588,
+            0.1843
+          ],
+          "hex": "#8B752F"
+        }
+      },
+      "700": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4353,
+            0.3608,
+            0.102
+          ],
+          "hex": "#6F5C1A"
+        }
+      },
+      "800": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3255,
+            0.2627,
+            0.051
+          ],
+          "hex": "#53430D"
+        }
+      },
+      "900": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2196,
+            0.1725,
+            0.0157
+          ],
+          "hex": "#382C04"
+        }
+      }
+    },
+    "lavender": {
+      "50": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9686,
+            0.9647,
+            0.9922
+          ],
+          "hex": "#F7F6FD"
+        }
+      },
+      "100": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9294,
+            0.9216,
+            0.9725
+          ],
+          "hex": "#EDEBF8"
+        }
+      },
+      "200": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8627,
+            0.8392,
+            0.9451
+          ],
+          "hex": "#DCD6F1"
+        }
+      },
+      "300": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8039,
+            0.7412,
+            1
+          ],
+          "hex": "#CDBDFF"
+        },
+        "$description": "base"
+      },
+      "400": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6824,
+            0.6353,
+            0.8392
+          ],
+          "hex": "#AEA2D6"
+        }
+      },
+      "500": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5882,
+            0.5294,
+            0.7647
+          ],
+          "hex": "#9687C3"
+        }
+      },
+      "600": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4863,
+            0.4235,
+            0.6588
+          ],
+          "hex": "#7C6CA8"
+        }
+      },
+      "700": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3843,
+            0.3255,
+            0.5333
+          ],
+          "hex": "#625388"
+        }
+      },
+      "800": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2824,
+            0.2353,
+            0.4039
+          ],
+          "hex": "#483C67"
+        }
+      },
+      "900": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1882,
+            0.1529,
+            0.2784
+          ],
+          "hex": "#302747"
+        }
+      }
+    },
+    "system": {
+      "$description": "Platform system colours. Not on the Colour page: the Components page says red has no palette token yet. Provisional.",
+      "redIosLight": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.2314,
+            0.1882
+          ],
+          "hex": "#FF3B30"
+        },
+        "$description": "iOS systemRed, light"
+      },
+      "redIosDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.2706,
+            0.2275
+          ],
+          "hex": "#FF453A"
+        },
+        "$description": "iOS systemRed, dark"
+      },
+      "redAndroidLight": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.702,
+            0.149,
+            0.1176
+          ],
+          "hex": "#B3261E"
+        },
+        "$description": "Material 3 baseline error, light"
+      },
+      "redAndroidDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.949,
+            0.7216,
+            0.7098
+          ],
+          "hex": "#F2B8B5"
+        },
+        "$description": "Material 3 baseline error, dark"
+      }
+    },
+    "semantic": {
+      "$description": "Semantic colours from colour.md, Semantic roles.",
+      "destructiveLight": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7294,
+            0.1686,
+            0.1569
+          ],
+          "hex": "#BA2B28"
+        },
+        "$description": "iOS red moved in OKLCH to L 0.52, hue 27; white label 6.06:1 (colour.md)"
+      },
+      "destructiveDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9412,
+            0.498,
+            0.4667
+          ],
+          "hex": "#F07F77"
+        },
+        "$description": "Light fill with a black label in dark mode (colour.md)"
+      }
+    }
+  },
+  "dimension": {
+    "$type": "dimension",
+    "space": {
+      "1": {
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        }
+      },
+      "2": {
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        }
+      },
+      "3": {
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        }
+      },
+      "4": {
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        }
+      },
+      "5": {
+        "$value": {
+          "value": 20,
+          "unit": "px"
+        }
+      },
+      "6": {
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        }
+      },
+      "7": {
+        "$value": {
+          "value": 32,
+          "unit": "px"
+        }
+      },
+      "8": {
+        "$value": {
+          "value": 48,
+          "unit": "px"
+        }
+      }
+    },
+    "radius": {
+      "none": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "inner": {
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        }
+      },
+      "bubble": {
+        "$value": {
+          "value": 20,
+          "unit": "px"
+        }
+      },
+      "card": {
+        "$value": {
+          "value": 28,
+          "unit": "px"
+        }
+      },
+      "sheet": {
+        "$value": {
+          "value": 32,
+          "unit": "px"
+        }
+      },
+      "full": {
+        "$value": {
+          "value": 9999,
+          "unit": "px"
+        },
+        "$description": "Capsule: half the height. 9999 is clamped by the renderer."
+      }
+    }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "gambetta": {
+        "$value": [
+          "Gambetta",
+          "Georgia",
+          "serif"
+        ],
+        "$description": "Display. Fallback only if the font fails to load (decision 027)."
+      },
+      "switzer": {
+        "$value": [
+          "Switzer",
+          "-apple-system",
+          "system-ui",
+          "Roboto",
+          "sans-serif"
+        ],
+        "$description": "Text. SF Pro on iOS and Roboto on Android are fallback only (decision 027)."
+      },
+      "systemRounded": {
+        "$value": [
+          "ui-rounded",
+          "SF Pro Rounded",
+          "system-ui",
+          "Roboto",
+          "sans-serif"
+        ],
+        "$description": "The phone's own rounded face, for simulated system chrome only (the lock-screen clock); never app text."
+      }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "regular": {
+        "$value": 400
+      },
+      "medium": {
+        "$value": 500
+      },
+      "semibold": {
+        "$value": 600
+      },
+      "bold": {
+        "$value": 700
+      }
+    }
+  }
+}

@@ -13,8 +13,8 @@ Takeaways:
 - The most repeated complaint, whatever the model, is being told something was available when it wasn't.
 Call:
 - I re-sorted the benchmarks around Sam, Jess and Ruth. Define will choose a problem for a shopper, and a list grouped by product category didn't show whose problem each product touches.
-- Products that don't touch the personas' problems stay on the page as short notes, because they still answer questions in the brief (surplus, multi-shop checkout, quick commerce, merchant storefronts).
-- A ✓ needs a post from the findings or persona pages. Without one, the mark is ○.
+- I kept products that don't touch the personas' problems as short notes, because they still answer questions in the brief (surplus, multi-shop checkout, quick commerce, merchant storefronts).
+- I set the rule for a ✓: it needs a post from the findings or persona pages. Without one, the mark is ○.
 AI:
 - An agent captured the main screens of eight apps from Mobbin, an app-screen library. They stay in my local copy, outside the public repo, and show on the site with a link to the source.
 - A research agent chose the 17 products and pulled dated reviews from the App Store feed, Trustpilot and Mumsnet. A writing agent re-fetched truncated quotes and dropped the ones it couldn't confirm.

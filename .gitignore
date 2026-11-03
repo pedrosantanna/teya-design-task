@@ -7,3 +7,13 @@ node_modules/
 .claude/settings.local.json
 private/
 __pycache__/
+
+# Expo app
+app/node_modules/
+app/dist/
+.expo/
+app/.expo/
+app/web-build/
+
+# Local link to the prototype web build (published as app-web/)
+/app-web

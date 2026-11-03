@@ -9,8 +9,9 @@ Takeaways:
 - Most fail points sit where the concierge waits on a shop: no answer in time, a wrong yes, a hold that nobody collects.
 - The shop sets the item aside before the shopper pays. For Jess, collection after work needs a later slot, a collection point or evening delivery, all untested.
 Call:
-- I drew one blueprint for the core flow and listed how Jess's version differs, instead of a second blueprint.
-- The shop lane is assumed. No shopkeeper has been asked yet (H1, H6 in the [hypotheses](hypotheses.md)).
+- I set the steps and which agents sit behind the concierge. The first drawing was too noisy, so I asked for a second pass with cards only for the three lanes that act.
+- I chose one blueprint for the core flow, with the ways Jess's version differs listed, instead of a second blueprint.
+- I kept the shop lane as an assumption, since no shopkeeper has been asked yet (H1, H6 in the [hypotheses](hypotheses.md)).
 AI:
 - An agent drafted the lanes and cells from the [concept](index.md) and the risks. I set the steps and which agents sit behind the concierge.
 Trade-offs:

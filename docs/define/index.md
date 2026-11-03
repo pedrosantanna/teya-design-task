@@ -9,9 +9,9 @@ Takeaways:
 - I chose an agent for four reasons: one conversation for many tasks, waiting handled for the shopper, acting later on their behalf, and reach beyond one app. All four are my hypotheses; Discover has little evidence on them.
 - Everything depends on shops answering quickly. No shopkeeper is in the evidence, so that is the first thing to test.
 Call:
-- I chose this concept after Discover. It serves Sam's urgent search and Jess's need to buy outside shop hours with one flow.
-- The prototype is the app, where the concierge can be the most focused version of itself. WhatsApp and other assistants are later channels.
-- This delivery covers the shopper's side only. How a shop receives and answers a request is assumed, for example through the payment provider's merchant app or WhatsApp.
+- I wrote the concept after Discover and chose it because one flow serves Sam's urgent search and Jess's need to buy outside shop hours (decision 017).
+- I made the concierge an agent and chose the app as the prototype, where the concierge can be the most focused version of itself. WhatsApp and other assistants are later channels (decision 018).
+- I limited this delivery to the shopper's side. How a shop receives and answers a request is assumed, for example through the payment provider's merchant app or WhatsApp.
 AI:
 - I wrote the concept and the reasons for an agent. An agent checked each part against the Discover evidence and wrote the trade-offs and risks below.
 Trade-offs:

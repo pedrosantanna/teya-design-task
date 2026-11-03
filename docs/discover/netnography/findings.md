@@ -8,8 +8,9 @@ Takeaways:
 - Shoppers say they'll pay more to buy local if it's convenient. After a wasted trip, some go elsewhere and some keep going back.
 - On X and TikTok the high street is a place to discover, with little practical talk.
 Call:
+- I set the evidence rules in every research brief: verbatim quotes with handle, network, date and link, from the last 18 months and public posts only.
 - I ranked the themes by strength of evidence: number of quotes, networks, recency and how specific to West London. Usefulness to the brief didn't affect the order.
-- Quotes stay short and linked, and interpretation is labelled as mine.
+- I kept quotes short and linked (decision 011), with interpretation labelled as mine.
 AI:
 - The research agent tagged the quotes with 14 codes and grouped them into themes. A writing agent picked about 40 quotes and wrote each theme.
 Trade-offs:

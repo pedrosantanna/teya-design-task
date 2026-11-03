@@ -1,0 +1,129 @@
+{
+  "$description": "Platform values, ios (spacing.md, motion.md, components.md).",
+  "margin": {
+    "screen": {
+      "$type": "dimension",
+      "compact": {
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        },
+        "$description": "Below 414 pt wide"
+      },
+      "regular": {
+        "$value": {
+          "value": 20,
+          "unit": "px"
+        },
+        "$description": "414 pt and up"
+      }
+    }
+  },
+  "hit": {
+    "min": {
+      "$type": "dimension",
+      "$value": {
+        "value": 44,
+        "unit": "px"
+      },
+      "$description": "44 pt"
+    }
+  },
+  "color": {
+    "$type": "color",
+    "destructive": {
+      "light": {
+        "$value": "{color.semantic.destructiveLight}"
+      },
+      "dark": {
+        "$value": "{color.semantic.destructiveDark}"
+      }
+    }
+  },
+  "spring": {
+    "press": {
+      "$description": "Press: scale to 0.97 and darken the fill. iOS 0.2 s, bounce 0.",
+      "duration": {
+        "$type": "duration",
+        "$value": {
+          "value": 200,
+          "unit": "ms"
+        }
+      },
+      "bounce": {
+        "$type": "number",
+        "$value": 0
+      }
+    },
+    "snappy": {
+      "$description": "Release, chip selection, switches, the shopper's bubble appearing. iOS 0.3 s, bounce 0.15.",
+      "duration": {
+        "$type": "duration",
+        "$value": {
+          "value": 300,
+          "unit": "ms"
+        }
+      },
+      "bounce": {
+        "$type": "number",
+        "$value": 0.15
+      }
+    },
+    "smooth": {
+      "$description": "Navigation push, custom sheets, list changes. iOS 0.45 s, bounce 0.",
+      "duration": {
+        "$type": "duration",
+        "$value": {
+          "value": 450,
+          "unit": "ms"
+        }
+      },
+      "bounce": {
+        "$type": "number",
+        "$value": 0
+      }
+    },
+    "arrive": {
+      "$description": "An answer card entering the chat. iOS 0.5 s, bounce 0.2.",
+      "duration": {
+        "$type": "duration",
+        "$value": {
+          "value": 500,
+          "unit": "ms"
+        }
+      },
+      "bounce": {
+        "$type": "number",
+        "$value": 0.2
+      }
+    },
+    "fade": {
+      "$description": "Opacity and colour, skeleton to content. iOS 0.25 s, bounce 0.",
+      "duration": {
+        "$type": "duration",
+        "$value": {
+          "value": 250,
+          "unit": "ms"
+        }
+      },
+      "bounce": {
+        "$type": "number",
+        "$value": 0
+      }
+    },
+    "status": {
+      "$description": "An order's status changing. iOS 0.6 s, bounce 0.",
+      "duration": {
+        "$type": "duration",
+        "$value": {
+          "value": 600,
+          "unit": "ms"
+        }
+      },
+      "bounce": {
+        "$type": "number",
+        "$value": 0
+      }
+    }
+  }
+}

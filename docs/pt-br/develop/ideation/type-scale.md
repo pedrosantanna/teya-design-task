@@ -12,11 +12,10 @@ Takeaways:
 - Fontes do sistema são só fallback (decisão 027), então os pares da rodada 1 com SF Pro estão fora. A rodada 2 combina Gambetta e Telma com a Switzer e com a Satoshi.
 - A Switzer é a melhor fonte única (89), com a maior altura-x e números tabulares por padrão. Chillax e Author têm as notas mais baixas para ler uma conversa: legibilidade menor em tamanhos pequenos e só números proporcionais.
 Call:
-- O quadro começa com "Onde está": o que foi escolhido, como afunilou e o que está em aberto. A rodada 4 tem contorno verde como a especificação escolhida, e a página do design system tira os valores dela.
-- Nada de rótulos em caixa-alta acima de títulos; só a primeira letra maiúscula, sempre, com a ênfase vindo de tamanho e peso.
-- Fonte de display só em títulos de 20 pt para cima. Corpo, preços e horários ficam numa fonte de corpo com números tabulares.
-- Fontes que escolhi: Satoshi, Chillax, Switzer e Author sozinhas; Telma e Gambetta como fontes de display, primeiro com SF Pro e Excon, depois com Switzer e Satoshi; a Pally foi testada e descartada.
-- SF Pro e Roboto são só fallback, nunca a fonte escolhida, porque nenhuma existe na outra plataforma (decisão 027).
+- Indiquei as fontes a testar: Satoshi, Chillax, Switzer e Author sozinhas; Telma e Gambetta como fontes de display, primeiro com SF Pro e Excon, depois com Switzer e Satoshi. Descartei a Pally depois de testá-la.
+- Descartei SF Pro e Roboto como escolha, porque nenhuma existe na outra plataforma (decisão 027). Fonte de display só em títulos de 20 pt para cima; corpo, preços e horários ficam numa fonte de corpo com números tabulares.
+- Escolhi só a primeira letra maiúscula, sempre, e nada de rótulos em caixa-alta acima de títulos; a ênfase vem de tamanho e peso.
+- Pedi que o quadro mostrasse o que foi escolhido e agrupasse cada rodada. Ele começa com "Onde está", e a rodada 4 tem contorno verde como a especificação escolhida, de onde a página do design system tira os valores.
 AI:
 - Um agente conferiu cada fonte na Fontshare, mediu altura-x, números e pesos com o fontTools, montou a escala e os espécimes e deu notas às opções para uma tela de conversa. As notas são o julgamento dele pelos critérios descritos.
 Trade-offs:

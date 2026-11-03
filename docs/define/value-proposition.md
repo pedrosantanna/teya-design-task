@@ -8,8 +8,8 @@ Takeaways:
 - For Jess the fit is partial: reserving and paying ahead relieves the hours problem only if a way to collect after work exists: a shop that holds a paid item to a later slot, a collection point that stays open late, or evening delivery. None is tested (H6).
 - Both canvases rest on attitudinal evidence and on a merchant side that hasn't been tested.
 Call:
-- One canvas per proto-persona, because Strategyzer's canvas works per customer segment and the two have different jobs.
-- Ruth has no canvas. I left her out of scope. Her preferred channel and how far she'd take up a digital tool are open questions (A13).
+- I chose one canvas per proto-persona, because Strategyzer's canvas works per customer segment and the two have different jobs.
+- I left Ruth out of scope, so she has no canvas. Her preferred channel and how far she'd take up a digital tool are open questions (A13).
 AI:
 - An agent filled both canvases from the empathy map, persona pages and concept, and marked each item with the assumption behind it. I reviewed the fit, and the canvases were updated when I added the reasons for an agent.
 Trade-offs:

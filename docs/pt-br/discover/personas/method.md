@@ -7,8 +7,9 @@ Takeaways:
 - Três clusters tiveram o melhor resultado na configuração que escolhi, com as duas dimensões de mesmo peso e de 2 a 5 clusters (silhueta média 0,55, contra 0,54 dos outros). Outros pesos dão outros números.
 - Os dois etiquetadores concordaram em 89–96% dos códigos por trás das duas dimensões.
 Call:
-- Duas dimensões que se ligam ao brief: urgência da necessidade e etapa da compra.
-- Os campos de persona de Lewrick, Link e Leifer para descrever cada cluster.
+- Defini duas dimensões que se ligam ao brief: urgência da necessidade e etapa da compra.
+- Escolhi os campos de persona de Lewrick, Link e Leifer para descrever cada cluster, com um segundo agente etiquetando cada post às cegas para que as pontuações possam ser conferidas (decisão 012).
+- Depois da revisão externa, tirei o post de @London_W4, que não atendia ao codebook (decisão 019).
 AI:
 - Um agente escreveu o codebook e etiquetou 44 posts. Um segundo agente etiquetou às cegas.
 - Um script transformou os códigos em pontuações, rodou a clusterização e desenhou o mapa.

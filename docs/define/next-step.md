@@ -8,8 +8,8 @@ Takeaways:
 - Inviting shops to the proof of concept is also discovery: how they answer, when, on which channel and with how much effort.
 - The shops can bring the first shoppers, which I treat as an assumption about acquisition.
 Call:
-- Build a proof of concept instead of interviewing shopkeepers first. An agent prototype takes days, and what shops do with a real request says more than what they'd say in an interview.
-- Design craft goes into the shopper app, native and iOS first. The shop side stays as a set of states for WhatsApp or the shop's POS.
+- I decided to build a proof of concept instead of interviewing shopkeepers first (decision 020). An agent prototype takes days, and what shops do with a real request says more than what they'd say in an interview.
+- I put the design craft into the shopper app, native and iOS first (decision 021). The shop side stays as a set of states for WhatsApp or the shop's POS.
 AI:
 - I made the decision. An agent wrote this page from my notes and mapped each hypothesis to the part of the proof of concept that tests it.
 Trade-offs:

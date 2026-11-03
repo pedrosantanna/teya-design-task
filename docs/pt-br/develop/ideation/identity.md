@@ -15,9 +15,10 @@ Takeaways:
 - A rodada 5 responde se as paletas saturadas funcionam com o Cinza biscoito: funcionam, porque o cinza é quase neutro; o limite é o Oat e o Brew da marca. Os conjuntos puxados por matizes quentes (Corner shop, Lido) ficam melhor ao lado dela.
 - A rodada 4 mantém Oat e Brew como base e acrescenta três escalas de cinza quente, no estilo do shadcn, e quatro conjuntos de cinco acentos (Lata de chá, Esmalte de fachada, Quitanda, Caixa de correio). Texto preto puro e branco sobre o Brew passam em todo lugar; o agente sugere Lata de chá com o Cinza biscoito.
 Call:
-- Marca provisória (decisão 033): desenhei à mão no Figma um terrier com um toldo no lugar da boca, a partir dos testes de ícone 1 e 2; ela está no [design system](../design-system/mark.md).
-- Linha escolhida: a marca segue o teste de ícone 3, o toldo da parade como barba de terrier, com sobrancelhas e bigode de quatro ou cinco faixas. Pré-selecionadas: as paletas A, C, F, I e J. Acentos escolhidos: Pastel parade com Índigo (decisão 036). Fundo claro: L 0,96 com o croma da rodada 8 (rodada 9); modo escuro como na rodada 8. O nome está decidido: Snuffle.
-- Com personagem, multicor e sem a cara genérica de produto de IA (sem gradientes roxos, brilhos ou orbes luminosos).
+- Dei as sementes (um cão farejador, um investigador no estilo Sherlock, a cultura de compras britânica) e defini a linha: com personagem, multicor e sem a cara genérica de produto de IA (sem gradientes roxos, brilhos ou orbes luminosos).
+- Pedi mais paletas e um teste de ícone com o toldo da parade como barba de terrier, depois escolhi o teste de ícone 3 e pré-selecionei as paletas A, C, F, I e J.
+- Redesenhei à mão no Figma os testes de ícone 1 e 2 como marca provisória (decisão 033); ela está no [design system](../design-system/mark.md).
+- Pedi para comparar os híbridos e os modos escuros lado a lado em telas, sem bordas, e escolhi Pastel parade com Índigo (decisão 036) e um fundo claro em L 0,96 com o croma da rodada 8 (rodada 9); modo escuro como na rodada 8. O nome está decidido: Snuffle.
 AI:
 - Eu dei as sementes: um cachorro farejador, um investigador no estilo Sherlock, a cultura de compras britânica. Um agente buscou na web referências e conflitos de nome, verificou a situação de direito autoral e de marca de Sherlock Holmes, montou as paletas com um script que calcula o contraste WCAG e as paletas tonais do Material 3, desenhou os esboços de marca em SVG, aplicou as paletas aos wireframes da v2 e capturou nove apps do Mobbin.
 - As verificações de nome são buscas rápidas na web, não buscas de marca registrada. Nomes marcados como "não verificado" não foram buscados.

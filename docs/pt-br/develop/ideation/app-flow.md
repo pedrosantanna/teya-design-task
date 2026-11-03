@@ -4,27 +4,28 @@ O fluxo principal do app de quem compra em wireframes, da tela inicial até a re
 
 ```summary
 Takeaways:
-- O concierge destas telas é o próprio agente: o app é uma das formas de chegar a ele, ao lado do WhatsApp e do MCP. Os balões de chat marcados como Concierge são as respostas do agente.
-- Uma tela inicial com duas abas no topo (v2): Nearby para a rua, Requests para tudo o que o comprador pediu. A barra de pedido grande embaixo começa um pedido novo a partir de qualquer uma das abas, como no Granola; não há barra de abas embaixo.
-- Cada pedido é um chat com o concierge, e a aba Requests lista os pedidos como uma caixa de mensagens, com um status em cada linha.
-- Depois de fazer um pedido, o comprador pode sair do app. As respostas das lojas chegam como notificações e numa Live Activity, e cada resposta aparece no chat assim que chega.
-- A loja confirma a reserva antes de o Apple Pay aparecer, então o pagamento só acontece para um item que foi mesmo separado.
+- O agente com quem o comprador conversa se chama Snuffle na interface e tem a marca como avatar. É o mesmo agente que responde no WhatsApp e por MCP.
+- A home é a rua, com uma barra grande de pedido embaixo, como a do Granola. Um botão redondo à esquerda da barra abre Requests em tela cheia, uma lista de conversas com um status por linha (decisão 026). Não há tab bar.
+- Depois de pedir, o comprador pode sair do app. As respostas das lojas chegam por notificação e por Live Activity, e cada resposta aparece na conversa assim que chega.
+- O comprador compra: o Apple Pay autoriza o valor, e o sim de uma loja consultada faz a cobrança. Numa loja conectada, a venda é na hora. Cada loja define a janela de retirada, que aparece antes do Buy, e um pedido que ninguém retira é reembolsado integralmente (decisão 037).
 Call:
-- Padrões nativos de iOS primeiro (decisão 021): títulos grandes, sheets, Apple Pay, Live Activities.
-- Aba Nearby, de cima para baixo: lojas em destaque abertas agora, novidades por perto com filtro por rua, lojas por tipo. Os pedidos em andamento e as compras anteriores foram para a aba Requests na v2.
-- O canvas guarda todas as versões. Ele abre na mais recente; as anteriores ficam no menu de versões.
+- Defini a direção: iOS nativo primeiro, as diretrizes da Apple antes do Material, e a Apple vence onde as duas divergem (decisão 021). Daí os títulos grandes, page sheets, Apple Pay e Live Activities.
+- Defini a estrutura (a barra de pedido embaixo, o menu do avatar, as telas do fluxo) e escolhi um botão redondo de Requests à esquerda da barra de pedido, que abre Requests em tela cheia (decisão 026).
+- Pedi para tirar o Hold porque ele podia ser lido como reserva grátis e deixava o comprador sem saber se tinha comprado, e escolhi Buy (decisão 037).
+- Pedi versões neste canvas: ele abre na mais recente, e as anteriores ficam no menu de versões.
 AI:
-- Um agente analisou telas iniciais bem resolvidas no Mobbin (Granola, Shop, Deliveroo, Uber Eats, Wolt, Too Good To Go, Airbnb, ChatGPT, Perplexity) e propôs a ordem dos módulos. Para a v2, outro agente analisou listas de chats (Airbnb, Vinted, Depop, WhatsApp, Messenger, ChatGPT, Perplexity) e propôs a anatomia das linhas da aba Requests. Outro agente desenhou os wireframes a partir do blueprint. Eu defini a estrutura: a barra de pedido embaixo, o menu do avatar e as telas do fluxo.
+- Um agente olhou telas de home no Mobbin (Granola, Shop, Deliveroo, Uber Eats, Wolt, Too Good To Go, Airbnb, ChatGPT, Perplexity) e propôs a ordem dos módulos. Outro olhou listas de conversa para as linhas de Requests. Agentes desenharam os wireframes a partir do blueprint. Na v7, um agente revisou o fluxo atrás de casos faltando, outro fez uma passada de craft e um terceiro aplicou o Buy e as lacunas da revisão. Eu defini a estrutura, escolhi Buy no lugar de Hold e quais lacunas fechar.
 Trade-offs:
-- Colocar o concierge numa barra embaixo não deixa espaço para uma barra de abas embaixo, então as duas abas ficam no topo e os ajustes ficam atrás do menu do avatar.
-- Wireframes no site da documentação são rápidos de mudar e fáceis de ligar ao blueprint, mas não rodam num celular.
+- Com a barra de pedido embaixo, não sobra espaço para uma tab bar, então Requests fica atrás de um botão e os ajustes atrás do avatar.
+- Cobrar só no sim da loja faz o comprador esperar alguns minutos numa loja consultada até a compra ficar fechada.
 ```
 
 ## Versões
 
 | Versão | O que mudou | Por quê |
 | --- | --- | --- |
-| v6 (atual) | A folha da loja oferece duas formas (pagar e a loja guarda 7 dias, a loja entrega); o concierge avisa que sem pagar não há reserva | A reserva sem pagamento deixava o pagamento fora do app e o risco de a pessoa não aparecer com a loja (decisão 032) |
+| v7 (atual) | Buy substitui Hold: o Apple Pay autoriza, o sim da loja faz a cobrança e, numa loja conectada, a venda é na hora; a janela de retirada e o reembolso aparecem antes do Buy. Telas novas: nenhuma loja tem, a loja não confirmou a tempo, o lembrete na véspera com extensão, a entrega da própria loja. O agente é o Snuffle, com a marca como avatar. As ações das telas de erro foram para baixo, as sheets viraram page sheets, horários e preços batem entre as telas, as setas contornam as telas | A revisão de um agente achou casos faltando e setas que pulavam etapas; eu tirei o Hold (decisão 037) e pedi as correções de craft |
+| v6 | A folha da loja oferece duas formas (pagar e a loja guarda 7 dias, a loja entrega); o concierge avisa que sem pagar não há reserva | A reserva sem pagamento deixava o pagamento fora do app e o risco de a pessoa não aparecer com a loja (decisão 032) |
 | v5 | A folha da loja oferece três formas de levar o item (pagar e a loja guarda 7 dias, reservar e pagar na loja, a loja entrega) e um dia de retirada; as reservas mostram datas; uma loja conectada responde "in stock now" a partir do caixa | Uma reserva de poucas horas era mais curta do que as lojas do Reino Unido guardam pedidos pagos (decisões 030 e 031) |
 | v4 | Requests abre em tela cheia, crescendo a partir do botão redondo, com um storyboard da transição | Uma folha deixava a lista com meia tela; a transição mantém a ligação com o botão de onde veio |
 | v3 | Sem abas: um botão redondo de Requests à esquerda da barra de pedido abre Requests como uma folha sobre a rua (decisão 026) | Comparei sete posições para a troca e escolhi a que mantém a barra de pedido grande |

@@ -8,6 +8,7 @@ Takeaways:
 - As high streets estão trocando lojas por alimentação e serviços.
 - Lojas pequenas pagam business rates menores desde abril de 2026. O dinheiro vivo é 8% dos pagamentos, mas cerca de um quinto das transações do varejo.
 Call:
+- Passei a um agente de pesquisa documental um brief sobre a high street (história, regulação, dados e notícias recentes), com uma janela de 18 meses (decisão 006).
 - Ampliei a pesquisa documental para além do número de lojas, incluindo regras e dados de pagamento (business rates, direito do consumidor no click and collect (compra online, retirada na loja), acesso a dinheiro vivo), porque eles limitam o que qualquer app poderia pedir a uma loja ou prometer a um comprador.
 - Escolhi Hammersmith como exemplo trabalhado, para que as afirmações possam ser conferidas em uma rua real, no seu BID (associação de negócios do bairro) e nos seus vizinhos.
 AI:

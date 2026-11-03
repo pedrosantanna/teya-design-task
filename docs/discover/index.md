@@ -8,8 +8,9 @@ Takeaways:
 - In two posts a failed trip ended with an order on Amazon. When online couldn't arrive in time, a nearby shop won.
 - Sam, the mission shopper, is the largest and clearest of the three proto-personas (11 of 20 clustered posts). The most common stopping point was the first step, finding out who has the item and whether the shop is open (8 of 20 clustered posts).
 Call:
-- Discovery before choosing findability or transaction ([001](../decision-log.md)).
-- Outside-in, because the product doesn't exist yet ([000](../decision-log.md)). Hammersmith as the worked example.
+- I put off the choice between findability and transaction until after discovery, so the position would come from evidence ([001](../decision-log.md)).
+- I worked outside-in, because the product doesn't exist yet ([000](../decision-log.md)), and chose Hammersmith as the worked example.
+- I wrote a brief for each of three research agents (netnography, benchmarks, desk review), with an 18-month window and verbatim, linked evidence.
 AI:
 - Three research agents worked in parallel, then two writing agents, a reviewer and a blind second coder.
 - I chose the sources, saved the Reddit pages the tools couldn't reach, and challenged the method. [Full log](../process/ai-log.md).

@@ -227,7 +227,7 @@ Everything the shopper reads, and the chat above all, uses one strong sans: Swit
 ## 029 · Gambetta for display, Switzer for everything else
 **2026-11-02 · Decided**
 
-Gambetta 700 is the display face and Switzer the text face, with the type spec in Type scale, round 4. Tracking is set per typeface and size: Gambetta tightens as it grows (−0.01 to −0.02 em), Switzer stays at 0 for text and opens slightly below 15 pt; Switzer titles, buttons and navigation titles are 600, which keeps them firm but lighter in colour than Gambetta 700. Gambetta appears only where decision 028 allows, at most once per screen and never below 26 pt; a shop's name is in Gambetta only on its shop page (34 pt) and on the ready-to-collect card (26 pt).
+Gambetta 700 is the display face and Switzer the text face, with the type spec in Type scale, round 4. Tracking is set per typeface and size: Gambetta tightens as it grows (−0.01 to −0.02 em), Switzer stays at 0 for text and opens slightly below 15 pt; Switzer titles, buttons and navigation titles are 600, which keeps them firm but lighter in colour than Gambetta 700. Gambetta appears only where decision 028 allows, at most once per screen and never below 26 pt; a shop's name is in Gambetta only on its shop page (34 pt) and inside the order card when it is ready to collect (26 pt), which is the same order card, not a second design.
 
 **Why:** a serif display gives titles a British editorial voice; one strong sans keeps everything the shopper reads legible and consistent on iOS and Android.
 **Open:** the fonts must be registered for Dynamic Type and Android font scaling, and the ITF licence checked for embedding.
@@ -274,6 +274,7 @@ The app's neutral is Biscuit grey from round 4 of the identity board: an OKLCH r
 
 **Why:** warm enough to sit next to the mark without a seam, quiet enough that any accent set can carry the colour.
 **Open:** the accent set. The mark stays in black and white until then.
+**Superseded:** the background, border and text values above were replaced in rounds 8 and 9; the current ones are on the [Colour](develop/design-system/colour.md) page (light background #F4F1ED, L 0.96).
 
 ## 035 · The app is called Snuffle
 **2026-11-02 · Decided**
@@ -290,9 +291,73 @@ The accents are Pastel parade with Indigo: Indigo for text, buttons and the tint
 
 **Why:** of the three themes tried on the same screens, Pastel parade with Indigo was the calmest, and its pale fills give tonal badges that read well on both modes. In round 7 a white card on the light background was 1.04:1 without a border, too little.
 **Update, round 9:** the light background moves to L 0.96 and keeps round 8's chroma (#F4F1ED), with muted surfaces at L 0.915; cards stay white and stand out at 1.13:1. Round 8's background read a little dark. The more saturated versions (×1.8 and ×2.5) and the less saturated one (45%) are dropped. Dark mode is unchanged: it keeps round 8's surfaces, since its chroma didn't change.
+**Superseded:** the L 0.95 background and the 1.16:1 card step in the first paragraph are replaced by round 9: L 0.96 (#F4F1ED) and 1.13:1, as on the [Colour](develop/design-system/colour.md) page.
+
+## 037 · Buy, then collect
+**2026-11-03 · Decided**
+
+The shopper's action is Buy, not Hold. "Hold" could read as a free reservation or as a step before buying, and leaves the shopper unsure whether they have bought anything. The shopper taps Buy and pays once with Apple Pay. At a connected shop the payment is taken at once, because the POS has the stock. At an asked shop the amount is only authorised and is taken when the shop replies that it has set the item aside; if the shop doesn't confirm within a few minutes, the authorisation lapses and the shopper is told. Each shop sets how long it keeps a bought item: 7 days by default, or 14 or 30, and the same day or the next for perishables; one extension of the same length is allowed. Buying is not reserving: the shopper owns the item once the shop confirms. If nobody collects by the end of the window, the order is cancelled and the shopper gets a full refund automatically, as the big chains do, and the shop puts the item back on sale. The shopper sees the date before tapping Buy ("Collect by Mon 9 Nov · full refund if you don't") and again on the receipt; the chat doesn't offer the window as a reason to buy.
+
+**Why:** UK shops have no legal minimum for collecting a paid order. The shop's own terms set it, and the Torts (Interference with Goods) Act 1977 only governs what a shop may do with goods left after notice. Chains keep paid click-and-collect orders for about a week and then cancel and refund in full, with no fee: Argos cancels after 7 days (one 7-day extension) and refunds within 5 working days; John Lewis returns the order to its warehouse after 7 days and refunds the account; IKEA cancels a missed collection and refunds within 14 days. Screwfix keeps orders for 21 days and then puts them back to stock. Uniqlo and Decathlon keep orders for 7 days, Boots for 14. Dry cleaners keep items for 60 to 90 days, but they hold a customer's own goods, often with money still owed, which is a different case. I had asked for 30 to 90 days; I chose the norm as the default and let the shop go longer, since a long window keeps a small shop's only unit off the shelf and only the shop knows what it can spare.
+**Assumption:** shoppers read "Buy" plus a collection date as clearer than "Hold"; the proof of concept can count questions about it.
+**Changes:** H12 now counts how many yeses end in a purchase. Decision 032 stands: there is still no unpaid reserve.
+**Sources:** Argos, "What happens if my collection window expires" (https://help.argos.co.uk/help/delivery-and-collection/what-happens-if-my-collection-window-expires); Uniqlo UK FAQ (https://faq-uk.uniqlo.com/articles/en_US/FAQ/How-long-do-I-have-to-collect-my-Click-Collect-order-UK); Decathlon UK (https://custhelp-sprinklr.decathlon.co.uk/articles/my-order/how-long-do-you-hold-click-and-collect-orders/698c644d6873450e473e2e7d); John Lewis, click and collect (https://au.johnlewis.com/customer-services/delivery-information/click-and-collect); Screwfix, click and collect FAQ (https://www.screwfix.ie/help/faq/clickandcollect-faq); Torts (Interference with Goods) Act 1977, uncollected goods (https://legislation.gov.uk/ukpga/1977/32/crossheading/uncollected-goods).
+
+## 038 · The prototype is an Expo app
+**2026-11-03 · Decided**
+
+The prototype is built with Expo (React Native): one codebase that runs as an iOS app for the recorded walkthrough and as a web build embedded in these docs, so a reviewer can click through it. Content is mocked. A switch at the top flips the interface between iOS (the default) and Android, and the avatar menu switches between Sam and Jess. Code follows clean-code and performance practice, and a performance check runs on every build: Lighthouse for the web build and a frame-rate and start-time check for the app.
+
+**Why:** decision 021 makes the app native and iOS first; Expo gives a real app on a phone and a web build from the same code, which a plain web prototype or SwiftUI would not.
+**Open:** whether the web build loads inside the artifact's iframe; that is the first thing to test. iOS-only surfaces (the Apple Pay sheet, lock-screen notifications, Live Activities) are drawn as simulated screens so both builds match.
+
+## 039 · A conceptual model for the app
+**2026-11-03 · Decided**
+
+The app has four objects: request, shop, answer and order. Snuffle is the voice that talks to the shopper, not an object, and an item never gets a page of its own: small shops have no catalogue, so an item is text and a quantity inside a request, an answer or an order. Each object has one card and one detail form, each action one verb, and each state one label used everywhere. A request left open is "Keep looking", a shop's reply is an "answer", and shops show as photo tiles on Nearby and as rows elsewhere. The model is on the design system's Conceptual model page, and every screen is checked against it.
+
+**Why:** after v7 the screens used several words for one thing (four names for a request left open, three for an order waiting for the shop) and payment terms in the chat. A model set before more screens follows Johnson and Henderson's advice to design what to design first, and Norman's point that the shopper only learns the model from the screens.
+**Assumption:** "request" reads for shoppers, who write questions, not requests; the prototype test can tell.
+
+## 040 · Shape, materials and motion
+**2026-11-03 · Provisional**
+
+Corners use six radii taken from Material 3's shape scale (0, 12, 20, 28, 32 and a capsule), concentric when nested and continuous on iOS. Controls are capsules and containers have fixed radii. Liquid Glass is used only for what floats above the content and acts: the ask bar, the round Requests button, sheets and buttons over a photo or the map; cards, bubbles and tiles stay solid. Motion uses six springs with iOS and Material 3 values; feedback starts at touch-down, every animation can be interrupted, and Reduce Motion swaps movement for a fade. The values are on the design system's Shape and materials and Motion pages.
+
+**Why:** I asked for rounder corners, a small set of radii and motion that feels premium and quick to respond. Apple's 2025 design system names fixed, capsule and concentric shapes but publishes no token scale, so the values come from Material's scale, which keeps Android exact. Springs follow Apple's WWDC 2023 guidance and Material 3's motion tokens.
+**Open:** the values are tuned on a phone in the prototype; the Material shape values were read from a mirror of the Android docs and are still to check against m3.material.io.
+
+## 041 · Spacing, layout, tags, imagery and a screen review
+**2026-11-03 · Provisional**
+
+The design system gets four more foundations: spacing on a 4-pt base with named gaps and a single-column phone grid, five kinds of tag (filter chip, suggestion chip, status label, badge, count), and rules for photos, placeholders and symbols. A fifteen-item checklist turns Gestalt principles, visual hierarchy and information architecture into checks, and a `screen-reviewer` agent runs it, with the conceptual model and the tokens, on every screen before it is published, on the canvases now and in the prototype later. Hand-drawn sketches are kept in the repo and shown beside the screen they shaped.
+
+**Why:** I asked for the design system to cover tags, imagery, spacing and grid the same way as shape and motion, starting from iOS and widening to Material, and for every screen to be checked against Gestalt and information architecture, visually, by an agent in the workflow. Proximity and common region explain most of what makes a screen read as grouped, so the spacing scale is built around them.
+**Open:** Material's margins and badge sizes and the 16/20 pt iPhone margins on iOS 26 are still to confirm; the tile widths are proposals to check at real size.
+
+## 042 · HugeIcons and a 3D illustration style
+**2026-11-03 · Decided**
+
+Every icon in the app comes from HugeIcons (Stroke Rounded, free set), not from SF Symbols or Material Symbols. Where a platform has its own form, such as share, back or more, the app uses the HugeIcons glyph that matches that platform. Getting Started, the splash and large icons use 3D illustrations modelled in code from simple shapes: palette colours only, thin dark outlines like a technical drawing, and solid shadows in black or a darker palette tone, with no blur or gradient. A viewer on the design system's Illustrations page shows the objects and lets me tune camera, outlines and shadows.
+
+**Why:** I wanted one icon family with a rounded stroke that matches the capsule shapes, on both platforms, and illustrations that give the app a character of its own without photos or stock art. I gave the agent reference images (isometric, outlined, flat solid shadows) and asked for a simpler version of that look.
+**Open:** the objects so far are a shop, a basket, a scooter with a rider and a delivery box; their animation is a first pass.
+
+## 043 · Components, states, platforms and content
+**2026-11-03 · Provisional**
+
+The design system gets specs for every component the screens use (anatomy, tokens, states, iOS and Android forms, accessibility), interaction states and elevation, empty, loading and error states, an iOS and Android map that the prototype's switch follows, semantic colours (border, separator, destructive, warning, success, scrim, disabled) and content rules: Snuffle's voice in British English, UK formats and 12-hour times. Thirteen inconsistencies between pages were fixed at the same time.
+
+**Why:** a design review against the v7 screens found tokens without components, and pages that contradicted each other. I asked for the design system to be complete enough to build the prototype from before any code.
+**Open:** the destructive red and the Android haptic constants are to check in the prototype; v7's frames still show 24-hour times.
+
+## 044 · OpenSpec and one Expo app, no monorepo
+**2026-11-03 · Decided**
+
+The prototype is one Expo app in `app/`, with no monorepo or Turborepo: one project already builds iOS, Android and web. Work is spec-driven with OpenSpec: a short PRD in `openspec/project.md`, living capability specs in `openspec/specs/` and one change proposal per feature in `openspec/changes/`, archived into the specs when done; tasks can become GitHub issues. The design system is code the agents must follow: DTCG 2025.10 token files generate four typed themes (iOS and Android, light and dark) through Unistyles 3, components take token names only, and lint, type checks and a token-drift check run on every agent edit and when an agent stops, through Claude Code hooks.
+
+**Why:** I asked for spec-driven development that is light and not set in stone, with a PRD and features and issues that can grow from it, and for the design system to work as a harness for coding agents. OpenSpec is the lightest current option and keeps specs living; GitHub Spec Kit and Kiro are heavier. A monorepo would only help with several packages, and there is one.
+**Open:** iOS and Android dev builds, and the Lighthouse and frame-rate checks, have not run yet; the fonts are not bundled in the app yet.
 
 ## Still open
 
-- Repo layout (single app or monorepo): to decide when the build starts and its shape is known.
-- Prototype stack: to decide in Deliver.
-- Spec-driven workflow: whether to write specs before building, and how light they should be.

@@ -8,6 +8,7 @@ Takeaways:
 - High streets are shifting from shops to food and services.
 - Small shops pay lower business rates from April 2026. Cash is 8% of payments but about a fifth of retail transactions.
 Call:
+- I briefed a desk-research agent on the high street (history, regulation, data and recent news), with an 18-month window (decision 006).
 - I widened the desk research beyond shop numbers to the rules and payment facts (business rates, consumer law for click and collect, cash access) because they limit what any app could ask of a shop or promise a shopper.
 - I made Hammersmith the worked example, so the claims can be checked against one real street, its BID and its neighbours.
 AI:

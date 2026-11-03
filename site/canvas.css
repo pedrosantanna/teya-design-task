@@ -156,8 +156,9 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .ios-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex: none; filter: grayscale(1); background: var(--ios-fill-2); }
 .ios-avatar.lg { width: 64px; height: 64px; }
 .ios-large-title { flex: none; margin: 0; padding: 2px 16px 8px; font-size: 34px; line-height: 41px; font-weight: 700; letter-spacing: .37px; }
-.ios-body { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 22px; padding: 8px 0 24px; }
+.ios-body { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 32px; padding: 8px 0 24px; }
 .ios-body.tight { gap: 12px; }
+.ios-large-title + .ios-body { padding-top: 0; } /* the large title's own 8 is the gap to the first section */
 .ios-pad { padding: 0 16px; }
 .ios-h { display: flex; align-items: baseline; justify-content: space-between; padding: 0 16px; margin-bottom: 8px; font-size: 20px; line-height: 25px; font-weight: 700; letter-spacing: .38px; }
 .ios-h small { font-size: 15px; font-weight: 400; color: var(--ios-label-2); letter-spacing: -.24px; }
@@ -200,6 +201,11 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .ios-btn { display: flex; align-items: center; justify-content: center; gap: 8px; min-width: 0; height: 50px; padding: 0 16px; border-radius: 14px; background: var(--ios-label); color: var(--ios-bg); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ios-btn.tinted { background: var(--ios-fill); color: var(--ios-label); }
 .ios-btn.plain { background: none; color: var(--ios-label); height: 44px; }
+.ios-btn.destructive { background: none; color: #d70015; height: 44px; } /* iOS destructive: system red, accessible variant */
+.ios-btn.capsule { flex: none; height: 44px; padding: 0 14px; border-radius: 22px; font-size: 15px; }
+.ios-close { position: relative; flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--ios-fill); }
+.ios-close::after { content: ""; position: absolute; inset: -7px; } /* 44 pt hit area */
+.ios-close .ic { width: 16px; height: 16px; }
 .ios-btn.sm { flex: none; height: 32px; padding: 0 14px; border-radius: 16px; font-size: 15px; display: inline-flex; }
 .ios-btn .ic { width: 18px; height: 18px; }
 .ios-seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; margin: 0 16px; padding: 2px; border-radius: 9px; background: var(--ios-fill); font-size: 13px; font-weight: 500; text-align: center; }
@@ -218,6 +224,8 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .ios-composer-wrap .ios-chips { padding: 0 4px 10px; }
 /* Chat */
 .ios-chat { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 12px; padding: 12px 16px 150px; }
+/* chat rhythm: 12 between items from the same sender, 20 when the sender changes (shopper vs Snuffle and the cards it presents) */
+.ios-chat > .me + :not(.me), .ios-chat > :not(.me) + .me { margin-top: 8px; }
 .ios-bubble { max-width: 78%; padding: 9px 14px; border-radius: 20px; font-size: 17px; line-height: 22px; }
 .ios-bubble.me { align-self: flex-end; background: var(--ios-label); color: var(--ios-bg); border-bottom-right-radius: 6px; }
 .ios-bubble.agent { align-self: flex-start; background: var(--ios-fill); border-bottom-left-radius: 6px; }
@@ -228,18 +236,28 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .ios-status-list .st { display: flex; align-items: center; gap: 5px; font-size: 13px; color: var(--ios-label-2); }
 .ios-status-list .st.ok { color: var(--ios-label); font-weight: 600; }
 .ios-status-list .st .ic { width: 14px; height: 14px; }
-.ios-option { align-self: stretch; border-radius: 18px; box-shadow: inset 0 0 0 1px var(--ios-sep); padding: 14px 16px; }
+.ios-option { align-self: stretch; border-radius: 18px; box-shadow: inset 0 0 0 1px var(--ios-sep); padding: 16px; }
 .ios-option .row { display: flex; align-items: center; gap: 10px; }
 .ios-option .name { font-weight: 600; }
 .ios-option .price { margin-left: auto; font-weight: 600; }
-.ios-option .facts { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 10px; font-size: 13px; color: var(--ios-label-2); }
+.ios-option .facts { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 8px; font-size: 13px; color: var(--ios-label-2); }
 .ios-option .facts span { display: inline-flex; align-items: center; gap: 4px; } .ios-option .facts .ic { width: 13px; height: 13px; }
-.ios-option .acts { display: flex; gap: 8px; margin-top: 12px; } .ios-option .acts .ios-btn { flex: 1; height: 38px; border-radius: 12px; font-size: 15px; }
+.ios-option .acts { display: flex; gap: 8px; margin-top: 12px; } .ios-option .acts .ios-btn { flex: 1; height: 44px; border-radius: 12px; font-size: 15px; }
+/* Order card in the chat: filled, led by the order's status label (conceptual model) */
+.ios-order { align-self: stretch; border-radius: 18px; background: var(--ios-fill); padding: 16px; }
+.ios-order .lbl .ic { width: 16px; height: 16px; vertical-align: -2px; margin-right: 4px; }
+.ios-order .row { display: flex; align-items: center; gap: 10px; }
+.ios-order .grow { flex: 1; min-width: 0; }
+.ios-order .lbl { font-weight: 600; }
+.ios-order .price { margin-left: auto; font-weight: 600; }
+.ios-order .ios-steps { padding: 14px 0 0; margin-top: 14px; box-shadow: inset 0 .5px 0 var(--ios-sep); }
+.ios-order .ios-steps .dot { background: var(--ios-bg); }
+.ios-order .ios-steps .dot.on { background: var(--ios-label); }
 .ios-typing { align-self: flex-start; display: flex; gap: 4px; padding: 12px 14px; border-radius: 20px; background: var(--ios-fill); }
 .ios-typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--ios-label-3); }
 /* Sheets and overlays */
 .ios-dim { position: absolute; inset: 0; z-index: 6; background: rgb(0 0 0 / .22); }
-.ios-sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 7; padding: 8px 0 44px; border-radius: 38px 38px 0 0; background: var(--ios-bg); display: flex; flex-direction: column; gap: 20px; }
+.ios-sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 7; padding: 8px 0 44px; border-radius: 38px 38px 0 0; background: var(--ios-bg); display: flex; flex-direction: column; gap: 24px; }
 .ios-sheet.float { left: 8px; right: 8px; bottom: 8px; border-radius: 40px; }
 .ios-grabber { width: 36px; height: 5px; margin: 0 auto; border-radius: 3px; background: var(--ios-label-3); }
 .ios-sheet-head { display: flex; align-items: center; justify-content: space-between; min-height: 30px; padding: 0 16px 0 20px; font-size: 17px; line-height: 22px; font-weight: 600; letter-spacing: -.41px; }
@@ -254,6 +272,18 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .ios-map::after { content: ""; position: absolute; left: 0; right: 0; top: 46%; height: 10px; background: var(--ios-bg); transform: rotate(-8deg); }
 .ios-map .pin { position: absolute; left: 52%; top: 30%; z-index: 1; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--ios-label); color: var(--ios-bg); }
 .ios-map .pin .ic { width: 16px; height: 16px; }
+/* Shop page: a fixed map behind the top, photos sliding over it, one content card (radius.card) */
+.ios-shopmap { position: absolute; left: 0; right: 0; top: 0; height: 380px; background: #F9F7F0; overflow: hidden; }
+.ios-shopmap .st { position: absolute; left: -30%; width: 160%; height: 14px; background: #fff; box-shadow: 0 0 0 1px #E4DAC0; }
+.ios-shopmap .st.sm { height: 8px; }
+.ios-shopmap .pin { position: absolute; z-index: 1; display: grid; place-items: center; width: 36px; height: 36px; margin: -44px 0 0 -18px; border-radius: 50%; background: var(--ios-label); color: var(--ios-bg); box-shadow: 0 2px 8px rgb(0 0 0 / .2); }
+.ios-shopmap .pin::after { content: ""; position: absolute; left: 50%; bottom: -7px; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--ios-label); border-bottom: 0; }
+.ios-shopmap .pin .ic { width: 18px; height: 18px; }
+.ios-glass-btn { position: absolute; z-index: 4; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 22px; background: rgb(255 255 255 / .72); backdrop-filter: blur(12px); box-shadow: 0 0 0 .5px rgb(0 0 0 / .1), 0 2px 10px rgb(0 0 0 / .12); }
+.ios-glass-btn .ic { width: 20px; height: 20px; }
+.ios-carousel { position: absolute; z-index: 2; left: 0; right: 0; top: 108px; height: 220px; }
+.ios-carousel .img { position: absolute; top: 0; width: 300px; height: 220px; border-radius: 28px; box-shadow: 0 4px 16px rgb(0 0 0 / .14); }
+.ios-shopcard { position: absolute; z-index: 3; left: 0; right: 0; top: 352px; bottom: 0; display: flex; flex-direction: column; gap: 16px; padding-top: 22px; border-radius: 28px 28px 0 0; background: var(--ios-bg); box-shadow: 0 -2px 16px rgb(0 0 0 / .08); }
 .ios-code { text-align: center; padding: 20px 16px; border-radius: 18px; background: var(--ios-fill); }
 .ios-code .big { font-size: 44px; font-weight: 700; letter-spacing: 6px; font-variant-numeric: tabular-nums; }
 .ios-qr { width: 132px; height: 132px; margin: 4px auto 10px; border-radius: 10px; background: conic-gradient(var(--ios-label) 25%, transparent 0 50%, var(--ios-label) 0 75%, transparent 0) 0 0 / 22px 22px; opacity: .85; }
@@ -299,7 +329,7 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .ios-req.unread .p { color: var(--ios-label); }
 .ios-req .st { align-self: stretch; display: flex; align-items: center; gap: 6px; white-space: nowrap; overflow: hidden; font-size: 13px; line-height: 18px; color: var(--ios-label-2); letter-spacing: -.08px; }
 .ios-req .d { flex: none; width: 8px; height: 8px; border-radius: 50%; }
-.ios-req .d.search { box-shadow: inset 0 0 0 1.5px var(--ios-label); }
+.ios-req .d.search { width: 8px; height: 8px; border: 0; border-radius: 50%; background: none; box-shadow: inset 0 0 0 1.5px var(--ios-label); } /* hardened: the docs site has a global .search rule */
 .ios-req .d.needs { background: var(--ios-label); }
 .ios-req .d.prog { background: #8e8e93; }
 .ios-req .d.done { background: var(--ios-fill-2); }
@@ -335,6 +365,32 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .ios-fab { position: relative; flex: none; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--ios-bg); box-shadow: 0 0 0 1px var(--ios-sep), 0 6px 20px rgb(0 0 0 / .10); }
 .ios-fab .ic { width: 22px; height: 22px; }
 .ios-fab .ios-count { position: absolute; top: -2px; right: -2px; box-shadow: 0 0 0 2px var(--ios-bg); }
+/* Snuffle, the agent: the app mark as a small round avatar, and a sender group in the chat */
+.ios-snuffle { flex: none; width: 28px; height: 28px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 .5px var(--ios-sep); }
+.ios-snuffle.xs { width: 16px; height: 16px; margin-right: 4px; vertical-align: -3px; }
+.ios-from { align-self: stretch; display: grid; grid-template-columns: 28px minmax(0, 1fr); column-gap: 8px; row-gap: 4px; align-items: start; }
+.ios-from > .who { grid-column: 2; padding-left: 14px; font-size: 13px; line-height: 18px; color: var(--ios-label-2); letter-spacing: -.08px; }
+.ios-from > .ios-snuffle { grid-column: 1; margin-top: 6px; }
+.ios-from > .msgs { grid-column: 2; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.ios-from .ios-bubble { max-width: 90%; }
+.ios-from .ios-chips { padding: 0; }
+/* Actions pinned to the bottom, where the composer would be, on screens with no input */
+.ios-actions { position: absolute; left: 0; right: 0; bottom: 0; z-index: 4; display: flex; flex-direction: column; gap: 8px; padding: 24px 16px 34px; background: linear-gradient(to bottom, transparent, var(--ios-bg) 24px); }
+/* Page sheet: the presenting screen pushed back and dimmed, the sheet 12pt below its top edge */
+.ios.presenting { background: #000; }
+.ios > .ios-status { z-index: 2; } /* above full-bleed images such as the shop header */
+.ios.presenting > .ios-status { color: #fff; }
+.ios-behind { position: absolute; left: 0; right: 0; top: 0; height: 100%; z-index: 1; display: flex; flex-direction: column; overflow: hidden; border-radius: 38px; padding-top: 54px; background: var(--ios-bg); color: var(--ios-label); transform: translateY(50px) scale(.92); transform-origin: 50% 0; }
+.ios-behind::after { content: ""; position: absolute; inset: 0; background: rgb(0 0 0 / .18); }
+.ios-sheet.page { top: 62px; z-index: 3; }
+.ios-sheet-head .end { font-weight: 600; }
+/* Switch and section label */
+.ios-switch { flex: none; position: relative; width: 51px; height: 31px; border-radius: 16px; background: var(--ios-fill-2); }
+.ios-switch::after { content: ""; position: absolute; left: 2px; top: 2px; width: 27px; height: 27px; border-radius: 50%; background: #fff; box-shadow: 0 2px 6px rgb(0 0 0 / .18); }
+.ios-switch.on { background: var(--ios-label); } .ios-switch.on::after { left: 22px; }
+.ios-section { padding: 0 16px; font-size: 15px; line-height: 20px; font-weight: 600; color: var(--ios-label-2); letter-spacing: -.24px; }
+.ios-notif img.app { padding: 0; background: #fff; }
+.ios-live .ios-snuffle { width: 32px; height: 32px; }
 
 /* Where an exploration stands: a chosen item, a shortlisted one, a dropped one */
 .cv-item.chosen:not(.area) { outline: calc(3px * var(--inv)) solid var(--c3); outline-offset: calc(10px * var(--inv)); border-radius: 20px; }
@@ -344,3 +400,11 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .area > .cv-badge { bottom: auto; top: 22px; right: 28px; margin: 0; font-size: 18px; padding: 6px 16px; }
 .cv-badge.short { background: var(--bg); color: var(--fg); box-shadow: inset 0 0 0 2px var(--c3); }
 .cv-badge.dropped { background: var(--muted); color: var(--muted-fg); }
+/* System alert (a permission prompt): centred, 270pt wide, two buttons side by side */
+.ios-alert { position: absolute; left: 50%; top: 50%; z-index: 8; width: 270px; transform: translate(-50%, -50%); border-radius: 14px; background: rgb(242 242 242 / .97); color: #000; text-align: center; overflow: hidden; box-shadow: 0 10px 40px rgb(0 0 0 / .18); }
+.ios-alert .body { padding: 19px 16px 15px; }
+.ios-alert .t { font-size: 17px; line-height: 22px; font-weight: 600; letter-spacing: -.41px; }
+.ios-alert .m { margin-top: 2px; font-size: 13px; line-height: 18px; letter-spacing: -.08px; }
+.ios-alert .btns { display: grid; grid-template-columns: 1fr 1fr; box-shadow: inset 0 .5px 0 #3c3c435c; }
+.ios-alert .btns span { display: grid; place-items: center; height: 44px; font-size: 17px; letter-spacing: -.41px; }
+.ios-alert .btns span + span { font-weight: 600; box-shadow: inset .5px 0 0 #3c3c435c; }

@@ -8,7 +8,8 @@ Takeaways:
 - The data is attitudinal. It shows what people care about and how they tell their own story. It can't show how often things happen or what people do.
 - The empathy map and the proto-personas inherit that limit.
 Call:
-- Netnography only. It's a take-home, and it was the fastest and cheapest way to get evidence I could trace.
+- I chose netnography as the only method on shoppers (decision 015). It's a take-home, and it was the fastest and cheapest way to get evidence I could trace.
+- I chose the networks, saved the Reddit pages the tools couldn't reach, and logged in to X and TikTok for a read-only pass (decisions 009 and 010).
 - On a 0-to-1 product I wouldn't add more rounds of research before acting. I'd turn this into a hypothesis quickly and test it with people, which is where behavioural data would come from.
 AI:
 - A research agent searched, collected and tagged the posts. A script checked each Reddit quote against pages I saved.

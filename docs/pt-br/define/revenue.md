@@ -9,8 +9,9 @@ Takeaways:
 - O destaque pago é a terceira fonte: posição paga na tela inicial e alcance além da rua da própria loja.
 - Para um provedor de POS, o app agrega valor à rede inteira: mais compradores para as lojas que já usam o seu POS, o que faz o POS valer a pena de manter.
 Call:
-- Nenhuma comissão sobre a venda em si. Os apps de delivery cobram 14–35% (F9), e é desse custo que as lojas independentes reclamam. A receita vem do pagamento e do destaque pago, que a loja pode desligar.
-- O cenário é um provedor de pagamento com POS. Um app independente precisaria de comissão, e escolhi não explorar esse caminho.
+- Defini o cenário: um provedor de pagamento com POS próprio (decisão 023). Um app independente precisaria de comissão, e escolhi não explorar esse caminho.
+- Descartei comissão sobre a venda. Os apps de delivery cobram 14–35% (F9), e é desse custo que as lojas independentes reclamam. A receita vem do pagamento e do destaque pago, que a loja pode desligar.
+- Deixei por enquanto fora das hipóteses as duas fontes extras que o agente sugeriu.
 AI:
 - Eu defini as fontes de receita e o cenário de rede. Um agente as escreveu como hipóteses com testes na prova de conceito e sugeriu mais duas fontes, listadas no fim.
 Trade-offs:

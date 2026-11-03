@@ -8,8 +8,8 @@ Takeaways:
 - Jess (6 posts) mostly does routine shopping, and it breaks when she tries to get the thing: hours, cash, delivery time. She gives up on local shops. Transaction side.
 - Ruth (3 posts) keeps shopping locally while her shops close. She has the least evidence.
 Call:
-- Cluster the posts on two dimensions that speak to the brief, and define the personas from the clusters.
-- Call them proto-personas, because nobody was interviewed ([000](../../decision-log.md)).
+- I set the method: code the posts, score them on two dimensions that speak to the brief, cluster them, and define the personas from the clusters.
+- I called them proto-personas, because nobody was interviewed ([000](../../decision-log.md)).
 AI:
 - Two agents tagged every post separately, from a fixed list of labels. A script scored both dimensions and ran the clustering.
 - I chose the dimensions and checked the clusters against the quotes.

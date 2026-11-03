@@ -8,8 +8,8 @@ Takeaways:
 - Convidar as lojas para a prova de conceito também é descoberta: como elas respondem, quando, por qual canal e com quanto esforço.
 - As lojas podem trazer os primeiros compradores, o que trato como uma suposição sobre aquisição.
 Call:
-- Construir uma prova de conceito em vez de entrevistar lojistas primeiro. Um protótipo do agente leva dias, e o que as lojas fazem com um pedido real diz mais do que o que diriam numa entrevista.
-- O cuidado de design vai para o app de quem compra, nativo e com iOS primeiro. O lado da loja fica como um conjunto de estados para o WhatsApp ou o POS da loja.
+- Decidi construir uma prova de conceito em vez de entrevistar lojistas primeiro (decisão 020). Um protótipo do agente leva dias, e o que as lojas fazem com um pedido real diz mais do que o que diriam numa entrevista.
+- Pus o cuidado de design no app de quem compra, nativo e com iOS primeiro (decisão 021). O lado da loja fica como um conjunto de estados para o WhatsApp ou o POS da loja.
 AI:
 - Eu tomei a decisão. Um agente escreveu esta página a partir das minhas notas e ligou cada hipótese à parte da prova de conceito que a testa.
 Trade-offs:

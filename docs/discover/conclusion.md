@@ -9,7 +9,8 @@ Takeaways:
 - Eight open questions, six of them about shopkeepers, who are missing from the material.
 Call:
 - I separated facts from assumptions because the shopper evidence is attitudinal and small. Anything about how shoppers behave stays an assumption until it is tested.
-- Confidence follows a fixed rule, so I can review each level and change it with a reason.
+- I set confidence by a fixed rule, so I can review each level and change it with a reason. The agent suggests a level; I set the final one.
+- I trimmed the open questions: the choice of shopper was a decision, so it left the list, and I added questions about how shopkeepers work.
 AI:
 - An agent drafted the three lists from the Discover pages and suggested a level for each assumption using the rule below. I review and set the final levels.
 Trade-offs:

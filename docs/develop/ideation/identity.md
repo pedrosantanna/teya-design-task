@@ -15,9 +15,10 @@ Takeaways:
 - Round 5 answers whether the saturated palettes work with Biscuit grey: they do, because the grey is almost neutral; the mark's Oat and Brew are the limit. Warm-led sets (Corner shop, Lido) sit best next to it.
 - Round 4 keeps Oat and Brew as the base and adds three warm grey scales, shadcn-style, and four sets of five accents (Tea tin, Shopfront enamel, Greengrocer, Pillar box). Pure black text and white on Brew pass everywhere; the agent suggests Tea tin with Biscuit grey.
 Call:
-- Provisional mark (decision 033): I drew a terrier with an awning for a mouth by hand in Figma from icon tests 1 and 2; it is in the [design system](../design-system/mark.md).
-- Chosen line: the mark follows icon test 3, the parade's awning as a terrier's beard with brows and a moustache of four or five stripes. Shortlisted: palettes A, C, F, I and J. Accents chosen: Pastel parade with Indigo (decision 036). Light background: L 0.96 at round 8's chroma (round 9); dark mode as in round 8. The name is decided: Snuffle.
-- Character-led, multi-colour, and without the generic AI look (no purple gradients, sparkles or glowing orbs).
+- I gave the seeds (a sniffer dog, a Sherlock-style investigator, British shopping culture) and set the line: character-led, multi-colour, and without the generic AI look (no purple gradients, sparkles or glowing orbs).
+- I asked for more palettes and an icon test with the parade's awning as a terrier's beard, then picked icon test 3 and shortlisted palettes A, C, F, I and J.
+- I redrew icon tests 1 and 2 by hand in Figma as the provisional mark (decision 033); it is in the [design system](../design-system/mark.md).
+- I asked to compare the hybrids and dark modes side by side on screens, without borders, and chose Pastel parade with Indigo (decision 036) and a light background at L 0.96 with round 8's chroma (round 9); dark mode as in round 8. The name is decided: Snuffle.
 AI:
 - I gave the seeds: a sniffer dog, a Sherlock-style investigator, British shopping culture. An agent searched the web for references and name conflicts, checked the Sherlock Holmes copyright and trademark position, built the palettes with a script that computes WCAG contrast and Material 3 tonal palettes, drew the mark sketches in SVG, applied the palettes to the v2 wireframes and captured nine apps from Mobbin.
 - The name checks are quick web searches, not trademark searches. Names marked "not checked" were not searched at all.

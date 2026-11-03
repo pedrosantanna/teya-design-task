@@ -176,6 +176,10 @@
               "src": "docs/develop/ideation/app-flow.md",
               "canvas": [
                 {
+                  "version": "v7",
+                  "file": "docs/develop/ideation/app-flow-v7.html"
+                },
+                {
                   "version": "v6",
                   "file": "docs/develop/ideation/app-flow-v6.html"
                 },
@@ -207,6 +211,10 @@
               "title": "Shop request states",
               "src": "docs/develop/ideation/shop-states.md",
               "canvas": [
+                {
+                  "version": "v4",
+                  "file": "docs/develop/ideation/shop-states-v4.html"
+                },
                 {
                   "version": "v3",
                   "file": "docs/develop/ideation/shop-states-v3.html"
@@ -262,10 +270,89 @@
               "pt": "Visão geral"
             },
             {
+              "id": "conceptual-model",
+              "title": "Conceptual model",
+              "src": "docs/develop/design-system/conceptual-model.md",
+              "pt": "Modelo conceitual"
+            },
+            {
+              "id": "components",
+              "title": "Components",
+              "src": "docs/develop/design-system/components.md",
+              "pt": "Componentes"
+            },
+            {
+              "id": "states",
+              "title": "States and elevation",
+              "src": "docs/develop/design-system/states.md",
+              "pt": "Estados e elevação"
+            },
+            {
+              "id": "platforms",
+              "title": "iOS and Android",
+              "src": "docs/develop/design-system/platforms.md",
+              "pt": "iOS e Android"
+            },
+            {
+              "id": "content",
+              "title": "Content and voice",
+              "src": "docs/develop/design-system/content.md",
+              "pt": "Conteúdo e voz"
+            },
+            {
               "id": "typography",
               "title": "Typography",
               "src": "docs/develop/design-system/typography.md",
               "pt": "Tipografia"
+            },
+            {
+              "id": "colour",
+              "title": "Colour",
+              "src": "docs/develop/design-system/colour.md",
+              "pt": "Cor"
+            },
+            {
+              "id": "shape",
+              "title": "Shape and materials",
+              "src": "docs/develop/design-system/shape.md",
+              "pt": "Forma e materiais"
+            },
+            {
+              "id": "motion",
+              "title": "Motion",
+              "src": "docs/develop/design-system/motion.md",
+              "pt": "Movimento"
+            },
+            {
+              "id": "spacing",
+              "title": "Spacing and layout",
+              "src": "docs/develop/design-system/spacing.md",
+              "pt": "Espaçamento e layout"
+            },
+            {
+              "id": "tags",
+              "title": "Tags",
+              "src": "docs/develop/design-system/tags.md",
+              "pt": "Tags"
+            },
+            {
+              "id": "imagery",
+              "title": "Imagery and icons",
+              "src": "docs/develop/design-system/imagery.md",
+              "pt": "Imagens e ícones"
+            },
+            {
+              "id": "illustrations",
+              "title": "Illustrations",
+              "pt": "Ilustrações",
+              "src": "docs/develop/design-system/illustrations.md",
+              "viewer": "site/illustrations/index.js"
+            },
+            {
+              "id": "screen-review",
+              "title": "Screen review",
+              "src": "docs/develop/design-system/screen-review.md",
+              "pt": "Revisão de telas"
             },
             {
               "id": "mark",
@@ -279,10 +366,16 @@
     },
     {
       "title": "Deliver",
-      "disabled": true,
-      "note": "Prototype and app",
       "pt": "Deliver",
-      "note_pt": "Protótipo e app"
+      "items": [
+        {
+          "id": "prototype",
+          "title": "Prototype",
+          "pt": "Protótipo",
+          "src": "docs/deliver/prototype.md",
+          "embed": "app-web/index.html"
+        }
+      ]
     },
     {
       "title": "Process",

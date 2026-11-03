@@ -9,8 +9,9 @@ Takeaways:
 - Promotion is the third source: paid placement on the home screen, and reach beyond a shop's own street.
 - For a POS provider, the app adds value to the whole network: more shoppers for the shops that already use its POS, which makes the POS worth keeping.
 Call:
-- No commission on the sale itself. Delivery apps take 14–35% (F9), and that's the cost independents complain about. Revenue comes from the payment and from promotion, which a shop can switch off.
-- The scenario is a payment provider with a POS. A standalone app would need a commission, which I chose not to explore.
+- I set the scenario: a payment provider with its own POS (decision 023). A standalone app would need a commission, which I chose not to explore.
+- I ruled out a commission on the sale. Delivery apps take 14–35% (F9), and that's the cost independents complain about. Revenue comes from the payment and from promotion, which a shop can switch off.
+- I kept the two extra sources the agent suggested out of the hypotheses for now.
 AI:
 - I set the revenue sources and the network scenario. An agent wrote them as hypotheses with tests in the proof of concept, and suggested two more sources, listed at the end.
 Trade-offs:

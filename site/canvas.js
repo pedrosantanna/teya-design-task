@@ -122,13 +122,138 @@
       const r = el.getBoundingClientRect(), v = vp.getBoundingClientRect();
       return { x: (r.left - v.left - x) / k, y: (r.top - v.top - y) / k, w: r.width / k, h: r.height / k };
     }
+    // Links are routed as rounded elbows on a grid that keeps clear of every frame, note,
+    // state and title, so a line never runs over the content and its label sits in open space.
+    const GRID = 12, CLEAR = 18, TURN = 8, SHARED = 4, REACH = 720;
+    const DIRS = [[1, 0], [0, 1], [-1, 0], [0, -1]];
+    function obstacleRects() {
+      const rs = items.filter(el => !el.matches('.area')).map(el => {
+        const r = box(el), t = el.querySelector(':scope > .cv-frame-title');
+        return t ? { x: r.x, y: r.y - t.offsetHeight - 10, w: Math.max(r.w, t.offsetWidth), h: r.h + t.offsetHeight + 10, el } : { ...r, el };
+      });
+      world.querySelectorAll('.cv-area-title').forEach(t => { const a = box(t.parentElement); rs.push({ x: a.x + t.offsetLeft, y: a.y + t.offsetTop, w: t.offsetWidth, h: t.offsetHeight }); });
+      return rs;
+    }
+    function route(src, anchor, dst, rects, used) {
+      // Search window around both ends, in grid cells.
+      const s = box(src), d = box(dst);
+      const X0 = Math.min(s.x, d.x) - REACH, Y0 = Math.min(s.y, d.y) - REACH;
+      const W = Math.ceil((Math.max(s.x + s.w, d.x + d.w) + REACH - X0) / GRID), H = Math.ceil((Math.max(s.y + s.h, d.y + d.h) + REACH - Y0) / GRID);
+      const cx = v => Math.floor((v - X0) / GRID), cy = v => Math.floor((v - Y0) / GRID);
+      const px = c => X0 + (c + .5) * GRID, py = c => Y0 + (c + .5) * GRID;
+      const blocked = new Uint8Array(W * H);
+      rects.forEach(r => {
+        for (let j = Math.max(0, cy(r.y - CLEAR)); j <= Math.min(H - 1, cy(r.y + r.h + CLEAR)); j++)
+          for (let i = Math.max(0, cx(r.x - CLEAR)); i <= Math.min(W - 1, cx(r.x + r.w + CLEAR)); i++) blocked[j * W + i] = 1;
+      });
+      // Starts: just outside each side of the source, level with the anchor; ends: just outside each side of the target.
+      const ring = (r, out) => [
+        [cx(r.x + r.w + CLEAR) + 1, null, 0], [null, cy(r.y + r.h + CLEAR) + 1, 1],
+        [cx(r.x - CLEAR) - 1, null, 2], [null, cy(r.y - CLEAR) - 1, 3]
+      ].map(([i, j, dir]) => ({ i, j, dir: out ? dir : (dir + 2) % 4 }));
+      const ac = { x: anchor.x + anchor.w / 2, y: anchor.y + anchor.h / 2 };
+      const starts = ring(s, true).map(o => ({ ...o, i: o.i ?? cx(ac.x), j: o.j ?? cy(ac.y) }))
+        .filter(o => o.i >= 0 && o.j >= 0 && o.i < W && o.j < H && !blocked[o.j * W + o.i]);
+      const ends = ring(d, false);
+      const goal = new Int8Array(W * H).fill(-1);
+      ends.forEach(e => {
+        const along = e.i === null ? [cx(d.x + 24), cx(d.x + d.w - 24)] : [cy(d.y + 24), cy(d.y + d.h - 24)];
+        for (let k2 = along[0]; k2 <= along[1]; k2++) {
+          const i = e.i ?? k2, j = e.j ?? k2;
+          if (i >= 0 && j >= 0 && i < W && j < H) goal[j * W + i] = e.dir;
+        }
+      });
+      const tcx = cx(d.x + d.w / 2), tcy = cy(d.y + d.h / 2);
+      const h = (i, j) => Math.abs(i - tcx) + Math.abs(j - tcy) - (d.w + d.h) / 2 / GRID;
+      // A* over (cell, heading), with a cost for each turn and for cells another link already uses.
+      const N = W * H * 4, g = new Float32Array(N).fill(Infinity), prev = new Int32Array(N).fill(-1);
+      const heap = [], push = (f, n) => { heap.push([f, n]); let c = heap.length - 1; while (c) { const p = (c - 1) >> 1; if (heap[p][0] <= heap[c][0]) break; [heap[p], heap[c]] = [heap[c], heap[p]]; c = p; } };
+      const pop = () => { const top = heap[0], last = heap.pop(); if (heap.length) { heap[0] = last; let c = 0; for (;;) { const l = 2 * c + 1, r = l + 1; let m = c; if (l < heap.length && heap[l][0] < heap[m][0]) m = l; if (r < heap.length && heap[r][0] < heap[m][0]) m = r; if (m === c) break; [heap[m], heap[c]] = [heap[c], heap[m]]; c = m; } } return top; };
+      const toward = o => (o.dir === 0 && tcx > o.i) || (o.dir === 2 && tcx < o.i) || (o.dir === 1 && tcy > o.j) || (o.dir === 3 && tcy < o.j) ? 0 : TURN * 2;
+      starts.forEach(o => { const n = (o.j * W + o.i) * 4 + o.dir; g[n] = toward(o); push(g[n] + h(o.i, o.j), n); });
+      let found = -1;
+      while (heap.length) {
+        const [f, n] = pop(), dir = n & 3, cell = n >> 2, i = cell % W, j = (cell / W) | 0;
+        if (f - h(i, j) > g[n] + 1e-6) continue;
+        if (goal[cell] === dir) { found = n; break; }
+        for (let nd = 0; nd < 4; nd++) {
+          if (nd === (dir + 2) % 4) continue;
+          const ni = i + DIRS[nd][0], nj = j + DIRS[nd][1];
+          if (ni < 0 || nj < 0 || ni >= W || nj >= H) continue;
+          const nc = nj * W + ni;
+          if (blocked[nc]) continue;
+          const key = Math.round(px(ni)) + ',' + Math.round(py(nj));
+          const cost = g[n] + 1 + (nd !== dir ? TURN : 0) + (used.has(key) ? SHARED : 0), m = nc * 4 + nd;
+          if (cost < g[m]) { g[m] = cost; prev[m] = n; push(cost + h(ni, nj), m); }
+        }
+      }
+      if (found < 0) return null;
+      const cells = [];
+      for (let n = found; n >= 0; n = prev[n]) cells.unshift(n);
+      const pts = cells.map(n => [px((n >> 2) % W), py(((n >> 2) / W) | 0)]);
+      pts.forEach(p => used.add(Math.round(p[0]) + ',' + Math.round(p[1])));
+      // Close both ends onto the edges of the source and the target.
+      const first = pts[0], d0 = DIRS[cells[0] & 3], last = pts[pts.length - 1], d1 = DIRS[cells[cells.length - 1] & 3];
+      const edge = (p, dv, r, sign) => dv[0] ? [dv[0] * sign > 0 ? r.x + r.w : r.x, p[1]] : [p[0], dv[1] * sign > 0 ? r.y + r.h : r.y];
+      pts.unshift(edge(first, d0, s, 1));
+      pts.push(edge(last, d1, d, -1));
+      // Keep only the corners.
+      return pts.filter((p, n) => n === 0 || n === pts.length - 1 || (pts[n - 1][0] !== pts[n + 1][0] && pts[n - 1][1] !== pts[n + 1][1]));
+    }
+    function elbow(pts, r = 20) {
+      let dPath = `M${pts[0]}`;
+      for (let n = 1; n < pts.length - 1; n++) {
+        const [a, b, c] = [pts[n - 1], pts[n], pts[n + 1]];
+        const l0 = Math.hypot(b[0] - a[0], b[1] - a[1]), l1 = Math.hypot(c[0] - b[0], c[1] - b[1]), rr = Math.min(r, l0 / 2, l1 / 2);
+        const p = [b[0] - (b[0] - a[0]) / l0 * rr, b[1] - (b[1] - a[1]) / l0 * rr], q = [b[0] + (c[0] - b[0]) / l1 * rr, b[1] + (c[1] - b[1]) / l1 * rr];
+        dPath += ` L${p} Q${b} ${q}`;
+      }
+      return dPath + ` L${pts[pts.length - 1]}`;
+    }
+    const overlaps = (a, b) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+    // Places a label on the longest open stretch of its line, clear of content and of other labels.
+    function placeLabel(el, pts, rects, placed) {
+      const w = el.offsetWidth, hgt = el.offsetHeight, spots = [];
+      for (let n = 1; n < pts.length; n++) {
+        const [a, b] = [pts[n - 1], pts[n]], len = Math.hypot(b[0] - a[0], b[1] - a[1]);
+        for (let t = 0; t <= len; t += 8) spots.push({ x: a[0] + (b[0] - a[0]) * t / len, y: a[1] + (b[1] - a[1]) * t / len, room: Math.min(t, len - t), horiz: a[1] === b[1] });
+      }
+      spots.sort((p, q) => (q.horiz - p.horiz) * 400 + q.room - p.room);
+      const free = spots.find(p => { const r = { x: p.x - w / 2 - 6, y: p.y - hgt / 2 - 6, w: w + 12, h: hgt + 12 }; return !rects.some(o => overlaps(r, o)) && !placed.some(o => overlaps(r, o)); }) || spots[0];
+      if (!free) return;
+      el.style.left = free.x + 'px'; el.style.top = free.y + 'px';
+      placed.push({ x: free.x - w / 2, y: free.y - hgt / 2, w, h: hgt });
+    }
     function drawLinks() {
       svg.querySelectorAll('path.cv-link').forEach(p => p.remove());
       world.querySelectorAll('.cv-link-label').forEach(l => l.remove());
+      const rects = obstacleRects(), used = new Set(), placed = [];
       links.forEach(l => {
         const from = l.dataset.from.match(/^[\w-]+$/) ? world.querySelector('#' + l.dataset.from) : world.querySelector(l.dataset.from);
         const to = world.querySelector('#' + l.dataset.to);
         if (!from || !to) { console.warn('canvas link not found', l.dataset.from, l.dataset.to); return; }
+        const srcItem = from.closest('.cv-item') || from;
+        const pts = route(srcItem, worldRect(from), to, rects, used);
+        if (pts) {
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path.setAttribute('d', elbow(pts));
+          path.setAttribute('class', 'cv-link' + (l.classList.contains('alt') ? ' alt' : ''));
+          path.setAttribute('marker-end', 'url(#cv-arrow)');
+          path.dataset.from = srcItem.id || ''; path.dataset.to = to.id;
+          svg.appendChild(path);
+          const label = l.dataset[lang === 'pt' ? 'labelPt' : 'labelEn'] || l.dataset.labelEn;
+          if (label) {
+            world.insertAdjacentHTML('beforeend', `<span class="cv-link-label">${label}</span>`);
+            placeLabel(world.lastElementChild, pts, rects, placed);
+          }
+          return;
+        }
+        drawCurve(l, from, to);
+      });
+    }
+    // Fallback when no clear route exists: the earlier bézier from edge to edge.
+    function drawCurve(l, from, to) {
+      {
         const a = worldRect(from), b = worldRect(to);
         const acx = a.x + a.w / 2, acy = a.y + a.h / 2, bcx = b.x + b.w / 2, bcy = b.y + b.h / 2;
         const horiz = b.x > a.x + a.w || b.x + b.w < a.x;
@@ -155,7 +280,7 @@
           const m = [0.125 * p0[0] + 0.375 * c0[0] + 0.375 * c1[0] + 0.125 * p1[0], 0.125 * p0[1] + 0.375 * c0[1] + 0.375 * c1[1] + 0.125 * p1[1]];
           world.insertAdjacentHTML('beforeend', `<span class="cv-link-label" style="left:${m[0]}px;top:${m[1]}px">${label}</span>`);
         }
-      });
+      }
     }
 
     // --- Selection and drawer ---------------------------------------------------------

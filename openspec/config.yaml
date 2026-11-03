@@ -1,0 +1,46 @@
+schema: spec-driven
+
+context: |
+  Read openspec/project.md first: it is the PRD (problem, position, shoppers, scope, success, assumptions).
+  The app is one Expo app in app/ for iOS, Android and web. Screens follow docs/develop/design-system/
+  (conceptual model words and status labels are exact) and app/src/design-system/AGENTS.md.
+  Main specs describe the product's behaviour as designed; change deltas add how the prototype simulates
+  and presents it (mock shops, timers, platform forms, motion). Interface copy is English.
+  Write artifacts in plain English; the author's choices are "I", agents are "the agent".
+  The repo is public: nothing about the role, the company or interviews.
+
+rules:
+  tasks:
+    - Every task that touches app/ ends with `npm run check` passing in app/.
+    - Screen tasks include checking the screen in all four themes on the web build.
+
+# Project context (optional)
+# Add only constraints that should guide OpenSpec artifacts and workflows.
+# Include constraints an agent cannot infer by reading the code.
+# Keep general project documentation and discoverable codebase facts out.
+# Example:
+#   context: |
+#     Designs and tasks must cover Windows, macOS, and Linux
+#     Write all artifacts in Spanish
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always state what is out of scope
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
+
+# Per-operation guidance (optional)
+# Add advisory guidance for how apply and archive work should be conducted.
+# This is separate from artifact rules above.
+# Example:
+#   operations:
+#     apply:
+#       guidance:
+#         - Keep test summaries concise
+#     archive:
+#       guidance:
+#         - Summarize the archive outcome before finishing

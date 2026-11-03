@@ -9,7 +9,8 @@ Takeaways:
 - An agent's recommendation from the references, before G existed: D, the bottom bar with Nearby and Requests at the sides of the ask pill. It is the only option high on finding Requests, thumb reach and platform conventions together, and it has room for a third mode. The fallback, if the large always-open ask bar must stay, is B with a count on the Requests segment.
 - The options trade visibility of Requests against the space the composer needs at the bottom.
 Call:
-- Decided: G with the button on the left (decision 026), now in app flow v3. My criteria: whether a shopper finds Requests, one-thumb reach, competition with the composer, room for a third mode, and platform conventions on iOS and Android.
+- I asked for a test where Requests is a round button beside the ask bar, as on Granola's bar, next to the six placements already drawn.
+- I chose G with the button on the left (decision 026), now in app flow v3. My criteria: whether a shopper finds Requests, one-thumb reach, competition with the composer, room for a third mode, and platform conventions on iOS and Android.
 AI:
 - An agent collected placement references on Mobbin. The main agent drew the six options on the v2 home and wrote the comparison.
 Trade-offs:

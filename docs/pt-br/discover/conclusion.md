@@ -9,7 +9,8 @@ Takeaways:
 - Oito perguntas em aberto, seis delas sobre lojistas, que não aparecem no material.
 Call:
 - Separei fatos de suposições porque a evidência sobre compradores é atitudinal e pequena. Tudo sobre como os compradores se comportam continua suposição até ser testado.
-- A confiança segue uma regra fixa, para eu poder revisar cada nível e mudá-lo com um motivo.
+- Defini a confiança por uma regra fixa, para eu poder revisar cada nível e mudá-lo com um motivo. O agente sugere um nível; eu defino o final.
+- Enxuguei as perguntas em aberto: a escolha do comprador era uma decisão, então saiu da lista, e acrescentei perguntas sobre como os lojistas trabalham.
 AI:
 - Um agente montou as três listas a partir das páginas do Discover e sugeriu um nível para cada suposição usando a regra abaixo. Eu reviso e defino os níveis finais.
 Trade-offs:

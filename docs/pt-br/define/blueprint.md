@@ -9,8 +9,9 @@ Takeaways:
 - A maioria dos pontos de falha está onde o concierge espera por uma loja: nenhuma resposta a tempo, um "tem" errado, um item seguro que ninguém retira.
 - A loja separa o item antes de o comprador pagar. Para a Jess, retirar depois do trabalho depende de um horário mais tarde, de um ponto de retirada ou de entrega à noite, e nada disso foi testado.
 Call:
-- Desenhei um blueprint para o fluxo principal e listei como a versão da Jess é diferente, em vez de fazer um segundo blueprint.
-- A raia da loja é suposição. Nenhum lojista foi consultado ainda (H1 e H6 nas [hipóteses](hypotheses.md)).
+- Defini as etapas e quais agentes ficam por trás do concierge. O primeiro desenho saiu poluído, então pedi uma segunda passada com cards só para as três raias que agem.
+- Escolhi um blueprint para o fluxo principal, com a lista do que muda na versão da Jess, em vez de um segundo blueprint.
+- Mantive a raia da loja como suposição, porque nenhum lojista foi consultado ainda (H1 e H6 nas [hipóteses](hypotheses.md)).
 AI:
 - Um agente rascunhou as raias e as células a partir do [conceito](index.md) e dos riscos. Eu defini as etapas e quais agentes ficam por trás do concierge.
 Trade-offs:

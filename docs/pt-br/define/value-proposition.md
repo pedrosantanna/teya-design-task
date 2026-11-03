@@ -8,8 +8,8 @@ Takeaways:
 - Para a Jess, o encaixe é parcial: reservar e pagar antes resolve o problema do horário só se existir uma forma de retirar depois do trabalho: uma loja que segura um item pago até um horário mais tarde, um ponto de retirada que fica aberto até mais tarde, ou entrega à noite. Nenhuma foi testada (H6).
 - Os dois canvas se apoiam em evidência atitudinal e num lado da loja que não foi testado.
 Call:
-- Um canvas por proto-persona, porque o canvas da Strategyzer funciona por segmento de cliente e os dois têm tarefas diferentes.
-- A Ruth não tem canvas. Deixei-a fora do escopo. O canal que ela preferiria e até que ponto adotaria uma ferramenta digital são perguntas em aberto (A13).
+- Escolhi um canvas por proto-persona, porque o canvas da Strategyzer funciona por segmento de cliente e os dois têm tarefas diferentes.
+- Deixei a Ruth fora do escopo, então ela não tem canvas. O canal que ela preferiria e até que ponto adotaria uma ferramenta digital são perguntas em aberto (A13).
 AI:
 - Um agente preencheu os dois canvas a partir do mapa de empatia, das páginas de persona e do conceito, e marcou cada item com a suposição por trás. Eu revisei o encaixe, e os canvas foram atualizados quando acrescentei os motivos para um agente.
 Trade-offs:
