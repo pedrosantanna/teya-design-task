@@ -10,12 +10,12 @@ import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 import { useShallow } from 'zustand/react/shallow';
 
-import { imageCredit, imageUrl, images, type ImageKey } from '@/content/images';
+import { imageCredit, imageSource, images, type ImageKey } from '@/content/images';
 import { Button, ListRow, Map, Sheet, ShopPageLayout, Skeleton, Text, type ShopPhoto } from '@/design-system';
 import { pastAnswerLabel, price, shopById, shopHoursLabel, useAppActions, useAppStore, useContent, type Shop } from '@/store';
 
 const MAX_PHOTOS = 3;
-// Photo width requested from Unsplash: the photos are tile.large wide, about 300 pt on a phone.
+// Photo width if a photo is not bundled (then it comes from Unsplash): tile.large wide, about 300 pt on a phone.
 const PHOTO_WIDTH = 320;
 // Collection window for a bought item (decision 037, H6).
 const KEEPS_ITEMS = '7 days to collect';
@@ -27,7 +27,7 @@ function shopPhotos(shop: Shop): ShopPhoto[] {
     (k) => k !== shop.image && images[k].for === subject && (images[k].kind === 'shopfront' || images[k].kind === 'interior'),
   );
   return [shop.image, ...keys].slice(0, MAX_PHOTOS).map((key) => ({
-    uri: imageUrl(key, PHOTO_WIDTH),
+    source: imageSource(key, PHOTO_WIDTH),
     label: `${shop.name} ${images[key].kind === 'interior' ? 'inside' : 'shopfront'}, ${shop.street}`,
     credit: imageCredit(key),
   }));
@@ -128,8 +128,8 @@ export default function ShopPage() {
             </View>
 
             <View style={styles.credits}>
-              {photos.map((p) => (
-                <Text key={p.uri} variant="caption1" color="mutedForeground">
+              {photos.map((p, i) => (
+                <Text key={`${i}-${p.label}`} variant="caption1" color="mutedForeground">
                   {p.credit}
                 </Text>
               ))}

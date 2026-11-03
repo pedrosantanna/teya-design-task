@@ -6,7 +6,7 @@ import { memo } from 'react';
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
-import { IMAGE_FILL } from '../../internal/media';
+import { IMAGE_FILL, photoSource, type PhotoSource } from '../../internal/media';
 import { PressableCard, spoken, type CardAction } from '../../internal/PressableCard';
 import { cornerCurve } from '../../theme';
 import { Button } from '../Button/Button';
@@ -30,7 +30,7 @@ export type AnswerCardProps = {
   /** "Collect by Mon 9 Nov" */
   collectBy: string;
   /** The answering shop's photo (never an item photo). */
-  image?: string;
+  image?: PhotoSource;
   /** buy: Buy (or `buyLabel`). showMe: Show me with No thanks. none: no action row. */
   action?: AnswerAction;
   buyLabel?: string;
@@ -84,7 +84,7 @@ export const AnswerCard = memo(function AnswerCard({
     >
       <View style={styles.head}>
         <View style={styles.thumb}>
-          {image ? <Image source={{ uri: image }} style={IMAGE_FILL} contentFit="cover" accessible={false} /> : null}
+          {image ? <Image source={photoSource(image)} style={IMAGE_FILL} contentFit="cover" accessible={false} /> : null}
         </View>
         <View style={styles.title}>
           <Text variant="headline" numberOfLines={1}>

@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
-import { images } from '../../../content/images';
+import { imageSource, type ImageKey } from '../../../content/images';
 import { Button } from '../Button/Button';
 import { AnswerCard } from './AnswerCard';
 
-const photo = (key: keyof typeof images) => `${images[key].image}?w=160&q=80&auto=format`;
+const photo = (key: ImageKey) => imageSource(key, 80);
 const noop = () => undefined;
 
 // Best answer (filled Buy), a till answer (tonal Buy 1), something similar (Show me / No thanks), no action.

@@ -7,7 +7,7 @@ import { scheduleOnRN } from 'react-native-worklets';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { haptic } from '../../internal/haptics';
-import { IMAGE_FILL } from '../../internal/media';
+import { IMAGE_FILL, photoSource, type PhotoSource } from '../../internal/media';
 import { spoken } from '../../internal/PressableCard';
 import { ShopPlaceholder } from '../../internal/ShopPlaceholder';
 import { usePress } from '../../internal/usePress';
@@ -27,9 +27,9 @@ export type RequestRowProps = {
   status: string;
   tone?: StatusTone;
   /** The request placeholder or the answering shop's photo. */
-  image?: string;
+  image?: PhotoSource;
   /** Logos of the shops in the request, at most three. */
-  shopLogos?: string[];
+  shopLogos?: PhotoSource[];
   /** Unread answers. */
   unread?: number;
   /** Only when the request needs the shopper: "Buy at Rossi's". */
@@ -86,6 +86,8 @@ export const RequestRow = memo(function RequestRow({
     });
 
   const rowStyle = useAnimatedStyle(() => ({ transform: [{ translateX: offset.get() }] }));
+  // The action shows only while the row is moved: at rest its red edge bled past the row's antialiased edges on the web.
+  const trailingStyle = useAnimatedStyle(() => ({ opacity: offset.get() < 0 ? 1 : 0 }));
 
   const label = spoken(name, status, preview, time, unread > 0 ? `${unread} new` : undefined);
   const actions = [
@@ -100,13 +102,13 @@ export const RequestRow = memo(function RequestRow({
   return (
     <View style={styles.clip}>
       {onClose ? (
-        <View style={styles.trailing(actionWidth)} importantForAccessibility="no-hide-descendants" accessibilityElementsHidden>
+        <Animated.View style={[styles.trailing(actionWidth), trailingStyle]} importantForAccessibility="no-hide-descendants" accessibilityElementsHidden>
           <Pressable onPress={close} style={styles.closeAction}>
             <Text variant="subheadlineStrong" color="onDestructive">
               Close
             </Text>
           </Pressable>
-        </View>
+        </Animated.View>
       ) : null}
       <GestureDetector gesture={pan}>
         <Animated.View style={[styles.surface, rowStyle]}>
@@ -125,13 +127,13 @@ export const RequestRow = memo(function RequestRow({
             <Animated.View pointerEvents="none" style={[styles.layer, press.layerStyle]} />
             <View>
               <View style={styles.thumb}>
-                {image ? <Image source={{ uri: image }} style={IMAGE_FILL} contentFit="cover" accessible={false} /> : <ShopPlaceholder name={name} tone="new" />}
+                {image ? <Image source={photoSource(image)} style={IMAGE_FILL} contentFit="cover" accessible={false} /> : <ShopPlaceholder name={name} tone="new" />}
               </View>
               {shopLogos.length > 0 ? (
                 <View style={styles.logos}>
-                  {shopLogos.slice(0, 3).map((uri) => (
-                    <View key={uri} style={styles.logo}>
-                      <Image source={{ uri }} style={IMAGE_FILL} contentFit="cover" accessible={false} />
+                  {shopLogos.slice(0, 3).map((logo, i) => (
+                    <View key={i} style={styles.logo}>
+                      <Image source={photoSource(logo)} style={IMAGE_FILL} contentFit="cover" accessible={false} />
                     </View>
                   ))}
                 </View>

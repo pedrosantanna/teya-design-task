@@ -1,9 +1,9 @@
 import { View } from 'react-native';
 
-import { images } from '../../../content/images';
+import { imageSource, type ImageKey } from '../../../content/images';
 import { RequestRow } from './RequestRow';
 
-const photo = (key: keyof typeof images, w: number) => `${images[key].image}?w=${w}&q=80&auto=format`;
+const photo = (key: ImageKey, w: number) => imageSource(key, w / 2);
 const noop = () => undefined;
 
 // Needs you (with a button and unread count), looking, waiting. Swipe left on iOS or long-press on Android for Close.

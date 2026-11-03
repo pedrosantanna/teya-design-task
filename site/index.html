@@ -625,11 +625,19 @@ i.m.unknown { opacity: .45; }
   const EMPATHY_CLASS = { 'vê': 'see', 'ouve': 'hear', 'pensa-e-sente': 'think-and-feel', 'diz-e-faz': 'say-and-do', 'dores': 'pains', 'ganhos': 'gains' };
 
   let MODE = ['light', 'dark'].includes(store.get('hs-theme')) ? store.get('hs-theme') : 'system';
+  // The docs' light or dark as shown now: the reader's choice, else the device's.
+  const docsScheme = () => MODE === 'system' ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : MODE;
+  // An embedded prototype (page.embed) follows the docs' theme: it starts from `?scheme=` and gets a message on each switch.
+  function postScheme() {
+    document.querySelectorAll('iframe.embed-frame').forEach(f => { try { f.contentWindow?.postMessage({ type: 'snuffle:scheme', scheme: docsScheme() }, '*'); } catch (e) {} });
+  }
   function applyMode() {
     if (MODE === 'system') document.documentElement.removeAttribute('data-theme');
     else document.documentElement.setAttribute('data-theme', MODE);
     document.querySelectorAll('#theme-seg button').forEach(b => b.setAttribute('aria-checked', String(b.dataset.mode === MODE)));
+    postScheme();
   }
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { if (MODE === 'system') postScheme(); });
   function applyLangUI() {
     document.documentElement.lang = LANG === 'pt' ? 'pt-BR' : 'en';
     document.querySelectorAll('#lang-seg button').forEach(b => b.setAttribute('aria-checked', String(b.dataset.lang === LANG)));
@@ -1028,11 +1036,12 @@ i.m.unknown { opacity: .45; }
     document.body.classList.toggle('is-canvas', !!(page.canvas || page.viewer || page.embed));
     if (page.embed) {
       // An embed page shows a built app (the prototype's web export) in a full-height frame; the summary opens from About.
-      els.content.innerHTML = `<div class="cv-page" data-lang="${LANG}"><div class="cv-board"><iframe class="embed-frame" src="${esc(page.embed)}" title="${esc(L(page))}" allow="clipboard-write; fullscreen"></iframe></div>
+      els.content.innerHTML = `<div class="cv-page" data-lang="${LANG}"><div class="cv-board"><iframe class="embed-frame" src="${esc(page.embed + (page.embed.includes('?') ? '&' : '?') + 'scheme=' + docsScheme())}" title="${esc(L(page))}" allow="clipboard-write; fullscreen"></iframe></div>
         <div class="cv-title"><div><div class="crumbs">${crumbs}</div><h1>${title}</h1></div><a class="cv-about" href="${esc(page.embed)}" target="_blank" rel="noopener">${esc(t('openAlone'))}</a><button type="button" class="cv-about embed-about-btn">${esc(t('about'))}</button></div>
         <aside class="embed-about prose" hidden>${lede ? `<p>${lede}</p>` : ''}${tmp.innerHTML}</aside></div>`;
       els.toc.innerHTML = '';
       document.title = `${L(page)} · Snuffle Docs`;
+      els.content.querySelector('iframe.embed-frame').addEventListener('load', postScheme);
       const box = els.content.querySelector('.embed-about');
       els.content.querySelector('.embed-about-btn').addEventListener('click', () => { box.hidden = !box.hidden; });
       return;

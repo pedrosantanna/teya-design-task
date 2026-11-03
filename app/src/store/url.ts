@@ -12,6 +12,8 @@ export type UrlState = {
   persona?: Persona;
   platform?: PlatformName;
   scheme?: Scheme;
+  /** The embedding page's light or dark (the docs site), when the build runs in an iframe. */
+  hostScheme?: 'light' | 'dark';
   set?: ContentSet;
 };
 
@@ -29,12 +31,27 @@ export function startParams(): URLSearchParams {
   return new URLSearchParams(initialSearch);
 }
 
+/** True when the web build runs inside another page (the docs site's iframe). */
+export function isEmbedded(): boolean {
+  if (Platform.OS !== 'web' || typeof window === 'undefined') return false;
+  try {
+    return window.parent !== window;
+  } catch {
+    return true;
+  }
+}
+
 export function readUrlState(params: URLSearchParams = startParams()): UrlState {
+  const scheme = oneOf(params.get('scheme'), ['light', 'dark', 'system'] as const);
+  // Inside the docs site, `scheme` is the docs' own theme: the app's "System" follows it, and the debugger can
+  // still pick Light or Dark over it. Opened on its own, `scheme` is the debugger's choice, as in a shared link.
+  const embedded = isEmbedded();
   return {
     step: stepById(params.get('step'))?.id,
     persona: oneOf(params.get('persona'), ['sam', 'jess'] as const),
     platform: oneOf(params.get('os') ?? params.get('platform'), ['ios', 'android'] as const),
-    scheme: oneOf(params.get('scheme'), ['light', 'dark', 'system'] as const),
+    scheme: embedded ? undefined : scheme,
+    hostScheme: embedded && scheme !== 'system' ? scheme : undefined,
     set: oneOf(params.get('set'), ['default', 'empty', 'longNames', 'manyAnswers'] as const),
   };
 }
@@ -56,7 +73,7 @@ export function basePath(): string {
 }
 
 /** A link that opens the web build in the given state. Keeps `frame` and `debug` from the current URL. */
-export function shareUrl(state: Required<Omit<UrlState, 'set'>> & { set: ContentSet }): string {
+export function shareUrl(state: Required<Omit<UrlState, 'set' | 'hostScheme'>> & { set: ContentSet }): string {
   if (Platform.OS !== 'web' || typeof window === 'undefined') return '';
   const params = new URLSearchParams();
   params.set('step', state.step);

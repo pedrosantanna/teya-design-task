@@ -1,6 +1,7 @@
-// Mock content images from Unsplash, with credits. URLs are kept as found; add Unsplash size params
-// (`?w=…&q=80&auto=format`) where an image is drawn, through `imageUrl`.
-// Unsplash licence: free to use; credit the photographer and Unsplash where the image appears.
+// Mock content images from Unsplash, with credits. URLs and photo pages are kept as found. The images the
+// app draws are bundled (assets/images/content/<key>.jpg, downloaded at 800 px for shops, 400 px for products)
+// so they load inside the docs site, whose host blocks external images; `imageSource` returns them.
+// Unsplash licence: free to use, including copying and bundling; credit the photographer and Unsplash where the image appears.
 
 export type ImageSubject = 'shop' | 'product' | 'category';
 export type ImageKind = 'shopfront' | 'interior' | 'product' | 'category';
@@ -91,10 +92,43 @@ export const images = {
 
 export type ImageKey = keyof typeof images;
 
-/** A sized Unsplash URL for drawing the image at `width` points (doubled for retina). */
-export function imageUrl(key: ImageKey, width: number): string {
-  const scale = 2;
-  return `${images[key].image}?w=${Math.round(width * scale)}&q=80&auto=format&fit=crop`;
+// Bundled copies of the images the app draws (the seed's shops and products, the shop pages' extra photos and the
+// design-system examples). Metro needs each path written out.
+const bundled: Partial<Record<ImageKey, number>> = {
+  'birthday-cake': require('../../assets/images/content/birthday-cake.jpg'),
+  'broadway-chemist-counter': require('../../assets/images/content/broadway-chemist-counter.jpg'),
+  'broadway-chemist-front': require('../../assets/images/content/broadway-chemist-front.jpg'),
+  'broadway-chemist-interior': require('../../assets/images/content/broadway-chemist-interior.jpg'),
+  'brook-green-toys-front': require('../../assets/images/content/brook-green-toys-front.jpg'),
+  'brook-green-toys-front-alt': require('../../assets/images/content/brook-green-toys-front-alt.jpg'),
+  'brook-green-toys-interior': require('../../assets/images/content/brook-green-toys-interior.jpg'),
+  'brook-hardware-front': require('../../assets/images/content/brook-hardware-front.jpg'),
+  'brook-hardware-interior': require('../../assets/images/content/brook-hardware-interior.jpg'),
+  'corner-shop-front': require('../../assets/images/content/corner-shop-front.jpg'),
+  'corner-shop-interior': require('../../assets/images/content/corner-shop-interior.jpg'),
+  'desk-fan': require('../../assets/images/content/desk-fan.jpg'),
+  'desk-fan-alt': require('../../assets/images/content/desk-fan-alt.jpg'),
+  'eclipse-glasses': require('../../assets/images/content/eclipse-glasses.jpg'),
+  'flowers-bouquet': require('../../assets/images/content/flowers-bouquet.jpg'),
+  'halo-florist-front': require('../../assets/images/content/halo-florist-front.jpg'),
+  'halo-florist-front-alt': require('../../assets/images/content/halo-florist-front-alt.jpg'),
+  'halo-florist-interior': require('../../assets/images/content/halo-florist-interior.jpg'),
+  'olympia-cameras-front': require('../../assets/images/content/olympia-cameras-front.jpg'),
+  'olympia-cameras-interior': require('../../assets/images/content/olympia-cameras-interior.jpg'),
+  'olympia-cameras-interior-alt': require('../../assets/images/content/olympia-cameras-interior-alt.jpg'),
+  'paper-co-front': require('../../assets/images/content/paper-co-front.jpg'),
+  'paper-co-front-alt': require('../../assets/images/content/paper-co-front-alt.jpg'),
+  'paper-co-interior': require('../../assets/images/content/paper-co-interior.jpg'),
+  'picture-hooks': require('../../assets/images/content/picture-hooks.jpg'),
+  'rossis-bakery-front': require('../../assets/images/content/rossis-bakery-front.jpg'),
+  'rossis-bakery-front-alt': require('../../assets/images/content/rossis-bakery-front-alt.jpg'),
+  'rossis-bakery-interior': require('../../assets/images/content/rossis-bakery-interior.jpg'),
+  'sourdough-loaf': require('../../assets/images/content/sourdough-loaf.jpg'),
+};
+
+/** The image to draw for `key`: the bundled copy, or the Unsplash URL at `width` points if it isn't bundled. */
+export function imageSource(key: ImageKey, width: number): number | string {
+  return bundled[key] ?? `${images[key].image}?w=${Math.round(width * 2)}&q=75&fm=jpg`;
 }
 
 /** The credit line for an image, as Unsplash asks for it. */

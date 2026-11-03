@@ -17,9 +17,10 @@ import {
   screenMargin,
   useNavBarHeight,
   useNavBarScroll,
+  type PhotoSource,
   type StatusTone,
 } from '@/design-system';
-import { imageUrl } from '@/content/images';
+import { imageSource } from '@/content/images';
 import { requestFilter, shopById, sim, twelveHour, useActiveRequestRow, useApp, useContent, useSim } from '@/store';
 
 type Filter = 'All' | 'Needs you' | 'Looking' | 'Waiting' | 'Done';
@@ -40,8 +41,8 @@ type Row = {
   status: string;
   tone: StatusTone;
   filter: Exclude<Filter, 'All'>;
-  image: string;
-  logos: string[];
+  image: PhotoSource;
+  logos: PhotoSource[];
   unread: number;
   action?: string;
 };
@@ -72,7 +73,7 @@ export default function Requests() {
       .filter((o) => answers[o.shopId] && answers[o.shopId] !== 'asked' && answers[o.shopId] !== 'seen' && answers[o.shopId] !== 'doesntHave')
       .slice(0, 3)
       .map((o) => shopById(content, o.shopId))
-      .flatMap((s) => (s ? [imageUrl(s.image, 24)] : []));
+      .flatMap((s) => (s ? [imageSource(s.image, 24)] : []));
     rows.push({
       id: content.active.id,
       name: content.active.title,
@@ -81,7 +82,7 @@ export default function Requests() {
       status: active.status,
       tone: active.tone,
       filter: requestFilter(request === 'none' ? 'asking' : request, order),
-      image: imageUrl(content.active.image, 56),
+      image: imageSource(content.active.image, 56),
       logos,
       unread: active.unread,
     });
@@ -95,7 +96,7 @@ export default function Requests() {
       status: r.label,
       tone: r.state === 'needsYou' ? 'needsYou' : r.state === 'collected' ? 'success' : 'default',
       filter: r.state === 'collected' ? 'Done' : requestFilter(r.state, 'none'),
-      image: imageUrl(r.image, 56),
+      image: imageSource(r.image, 56),
       logos: [],
       unread: r.state === 'needsYou' ? 1 : 0,
       action: r.action,

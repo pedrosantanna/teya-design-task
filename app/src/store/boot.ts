@@ -7,6 +7,6 @@ import { readUrlState } from './url';
 
 const url = readUrlState();
 const platform = url.platform ?? (Platform.OS === 'android' ? 'android' : 'ios');
-const scheme = url.scheme && url.scheme !== 'system' ? url.scheme : Appearance.getColorScheme() === 'dark' ? 'dark' : 'light';
+const scheme = url.scheme && url.scheme !== 'system' ? url.scheme : (url.hostScheme ?? (Appearance.getColorScheme() === 'dark' ? 'dark' : 'light'));
 
 (globalThis as { __snuffleInitialTheme?: string }).__snuffleInitialTheme = `${platform}${scheme === 'dark' ? 'Dark' : 'Light'}`;

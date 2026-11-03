@@ -43,6 +43,7 @@ export { SegmentedControlExamples } from './components/SegmentedControl/Segmente
 export { Sheet, SheetProvider, type SheetDetent, type SheetProps } from './components/Sheet/Sheet';
 export { SheetExamples } from './components/Sheet/Sheet.examples';
 export { ShopPageLayout, type ShopPageLayoutProps, type ShopPhoto } from './components/ShopPageLayout/ShopPageLayout';
+export type { PhotoSource } from './internal/media';
 export { ShopPageLayoutExamples } from './components/ShopPageLayout/ShopPageLayout.examples';
 export { ShopRow, type RowPosition, type ShopRowProps } from './components/ShopRow/ShopRow';
 export { ShopRowExamples } from './components/ShopRow/ShopRow.examples';

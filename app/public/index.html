@@ -35,7 +35,8 @@
         flex: 1;
       }
     </style>
-    <!-- The docs canvas background (site/canvas.css), shown around the phone frame. -->
+    <!-- The docs canvas background (site/canvas.css), shown around the phone frame. It follows the app's scheme
+         (`data-scheme`, set by src/store/theme-sync.ts), and the device's until the app has started. -->
     <style id="frame-page">
       body {
         margin: 0;
@@ -44,10 +45,14 @@
         background-size: 24px 24px;
       }
       @media (prefers-color-scheme: dark) {
-        body {
+        html:not([data-scheme]) body {
           background-color: #0d0d10;
           background-image: radial-gradient(circle, #2c2c31 1px, transparent 1.3px);
         }
+      }
+      html[data-scheme="dark"] body {
+        background-color: #0d0d10;
+        background-image: radial-gradient(circle, #2c2c31 1px, transparent 1.3px);
       }
     </style>
   </head>

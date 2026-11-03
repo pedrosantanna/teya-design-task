@@ -1,7 +1,7 @@
 import { router, Stack, useRootNavigationState } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, type ReactNode } from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -14,6 +14,10 @@ import { hrefFor, openActiveChat, readUrlState, sim, startThemeSync, useAppStore
 
 // Platform and scheme in the store drive the Unistyles theme from here on.
 startThemeSync();
+
+// The state debugger is a prototype tool for the web build only (it runs inside the docs site). Native builds
+// never mount it, its toggle or its gesture; the store's defaults apply there.
+const WEB = Platform.OS === 'web';
 
 // Third-party view: wrapped so Unistyles styles reach it on the web too.
 const RootView = withUnistyles(GestureHandlerRootView);
@@ -41,16 +45,20 @@ export default function RootLayout() {
       <SafeAreaProvider>
         {/* Keyboard tracking for the chat's composer (a no-op on the web; edge-to-edge on Android). */}
         <KeyboardProvider>
-        <DebugGestureArea>
-          <View style={styles.row}>
-            <Stage framed={framed} device={device}>
-              {app}
-            </Stage>
-            {docked ? <DebugPanel docked /> : null}
-          </View>
-          {docked ? null : <DebugPanel />}
-          <DebugToggle />
-        </DebugGestureArea>
+        {WEB ? (
+          <DebugGestureArea>
+            <View style={styles.row}>
+              <Stage framed={framed} device={device}>
+                {app}
+              </Stage>
+              {docked ? <DebugPanel docked /> : null}
+            </View>
+            {docked ? null : <DebugPanel />}
+            <DebugToggle />
+          </DebugGestureArea>
+        ) : (
+          <View style={styles.fill}>{app}</View>
+        )}
         </KeyboardProvider>
       </SafeAreaProvider>
     </RootView>

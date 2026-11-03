@@ -12,7 +12,7 @@ import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-cont
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { useShallow } from 'zustand/react/shallow';
 
-import { imageCredit, imageUrl } from '@/content/images';
+import { imageCredit, imageSource } from '@/content/images';
 import { personaPhotos } from '@/content/personas';
 import {
   Avatar,
@@ -164,7 +164,7 @@ export default function Nearby() {
                         id={shop.id}
                         name={shop.name}
                         meta={tileMeta(shopHours, shop)}
-                        image={imageUrl(shop.image, tileWidth(theme, contentWidth, 'large'))}
+                        image={imageSource(shop.image, tileWidth(theme, contentWidth, 'large'))}
                         credit={imageCredit(shop.image)}
                         badges={tileBadges(shop)}
                         contentWidth={contentWidth}
@@ -195,7 +195,7 @@ export default function Nearby() {
                         size="medium"
                         name={shop.name}
                         meta={tileMeta(shopHours, shop)}
-                        image={imageUrl(shop.image, tileWidth(theme, contentWidth, 'medium'))}
+                        image={imageSource(shop.image, tileWidth(theme, contentWidth, 'medium'))}
                         credit={imageCredit(shop.image)}
                         badges={tileBadges(shop)}
                         contentWidth={contentWidth}

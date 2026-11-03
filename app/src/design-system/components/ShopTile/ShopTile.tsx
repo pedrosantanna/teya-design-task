@@ -5,7 +5,7 @@ import Animated from 'react-native-reanimated';
 import { useSafeAreaFrame } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { IMAGE_FILL } from '../../internal/media';
+import { IMAGE_FILL, photoSource, type PhotoSource } from '../../internal/media';
 import { spoken } from '../../internal/PressableCard';
 import { ShopPlaceholder } from '../../internal/ShopPlaceholder';
 import { usePress } from '../../internal/usePress';
@@ -28,7 +28,7 @@ export type ShopTileProps = {
   name: string;
   /** "Open till 6pm · 2 min walk", "Closed · opens 9am" */
   meta: string;
-  image?: string;
+  image?: PhotoSource;
   /** At most two; Promoted always shows. */
   badges?: BadgeName[];
   size?: ShopTileSize;
@@ -40,7 +40,7 @@ export type ShopTileProps = {
 };
 
 export const ShopTile = memo(function ShopTile({ id, name, meta, image, badges = [], size = 'large', contentWidth, credit, onPress }: ShopTileProps) {
-  const [failed, setFailed] = useState<string | null>(null);
+  const [failed, setFailed] = useState<PhotoSource | null>(null);
   const { theme } = useUnistyles();
   const frame = useSafeAreaFrame();
   const press = usePress();
@@ -62,7 +62,7 @@ export const ShopTile = memo(function ShopTile({ id, name, meta, image, badges =
         <View style={styles.photo}>
           {image && failed !== image ? (
             <Image
-              source={{ uri: image }}
+              source={photoSource(image)}
               style={IMAGE_FILL}
               contentFit="cover"
               transition={PHOTO_FADE_MS}

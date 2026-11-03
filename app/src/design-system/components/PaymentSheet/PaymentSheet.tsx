@@ -82,7 +82,10 @@ export const PaymentSheet = memo(function PaymentSheet({
   return (
     <Portal>
       <View style={styles.overlay} accessibilityViewIsModal>
-        <Animated.View entering={withSpringToken(new FadeIn(), theme.spring.fade)} exiting={withSpringToken(new FadeOut(), theme.spring.fade)} style={styles.scrim}>
+        {/* The fade animates the wrapper's opacity to 1, so the scrim's own 40% sits on a view inside it (on iOS the
+            entering animation replaced it and the screen went black). */}
+        <Animated.View entering={withSpringToken(new FadeIn(), theme.spring.fade)} exiting={withSpringToken(new FadeOut(), theme.spring.fade)} style={StyleSheet.absoluteFill}>
+          <View style={styles.scrim} />
           <Pressable accessibilityRole="button" accessibilityLabel="Cancel payment" disabled={busy} onPress={onCancel} style={StyleSheet.absoluteFill} />
         </Animated.View>
         <Animated.View

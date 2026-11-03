@@ -10,7 +10,7 @@ import Animated, { Extrapolation, interpolate, useAnimatedStyle, useReducedMotio
 import { useSafeAreaFrame } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { IMAGE_FILL } from '../../internal/media';
+import { IMAGE_FILL, photoSource, type PhotoSource } from '../../internal/media';
 import { ShopPlaceholder } from '../../internal/ShopPlaceholder';
 import { cornerCurve, screenMargin } from '../../theme';
 import { Map } from '../Map/Map';
@@ -24,7 +24,8 @@ const PHOTO_RATIO = 3 / 2;
 const MAX_PHOTOS = 3;
 
 export type ShopPhoto = {
-  uri: string;
+  /** A bundled image or a URL. */
+  source: PhotoSource;
   /** "Rossi's Bakery shopfront, Blythe Road" */
   label: string;
   /** "Photo: Clara Lilley, Unsplash" */
@@ -129,8 +130,8 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
                 contentContainerStyle={styles.rail(lead, margin)}
                 accessibilityLabel={`${name} photos`}
               >
-                {shown.map((photo) => (
-                  <Photo key={photo.uri} photo={photo} name={name} width={photoW} height={photoH} />
+                {shown.map((photo, i) => (
+                  <Photo key={`${i}-${photo.label}`} photo={photo} name={name} width={photoW} height={photoH} />
                 ))}
               </ScrollView>
             </Animated.View>
@@ -183,7 +184,7 @@ function Photo({ photo, name, width, height }: { photo: ShopPhoto; name: string;
       {failed ? (
         <ShopPlaceholder name={name} />
       ) : (
-        <Image source={{ uri: photo.uri }} style={IMAGE_FILL} contentFit="cover" transition={PHOTO_FADE_MS} accessible={false} onError={() => setFailed(true)} />
+        <Image source={photoSource(photo.source)} style={IMAGE_FILL} contentFit="cover" transition={PHOTO_FADE_MS} accessible={false} onError={() => setFailed(true)} />
       )}
     </View>
   );

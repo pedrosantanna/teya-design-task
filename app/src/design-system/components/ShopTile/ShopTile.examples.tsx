@@ -1,10 +1,10 @@
 import { ScrollView, View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
-import { images } from '../../../content/images';
+import { imageSource, type ImageKey } from '../../../content/images';
 import { ShopTile } from './ShopTile';
 
-const photo = (key: keyof typeof images) => `${images[key].image}?w=640&q=80&auto=format`;
+const photo = (key: ImageKey) => imageSource(key, 320);
 
 // Large and medium tiles, badges, a closed shop and the no-photo placeholder.
 export function ShopTileExamples() {

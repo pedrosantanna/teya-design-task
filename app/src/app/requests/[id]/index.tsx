@@ -36,7 +36,7 @@ import {
   type AnswerRowKind,
   type ChatSender,
 } from '@/design-system';
-import { imageUrl } from '@/content/images';
+import { imageSource } from '@/content/images';
 import {
   answerCardText,
   answerLabel,
@@ -320,7 +320,7 @@ function Answer({ shopId, best, animateIn, onDismiss }: { shopId: string; best: 
         price={t.price}
         walk={t.walk}
         collectBy={t.collectBy}
-        image={t.shop ? imageUrl(t.shop.image, 40) : undefined}
+        image={t.shop ? imageSource(t.shop.image, 40) : undefined}
         action={t.similar ? 'showMe' : 'buy'}
         buyLabel={t.buyLabel}
         best={best}
