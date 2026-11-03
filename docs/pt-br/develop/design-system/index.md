@@ -6,7 +6,7 @@ As fundações do app do comprador, escritas como a referência a partir da qual
 Takeaways:
 - A tipografia está definida: Gambetta 700 no display em quatro lugares, Switzer em tudo o que o comprador lê, sobre os estilos de texto da Apple com os papéis correspondentes do Material 3.
 - A marca é provisória: um terrier cuja boca é o toldo de uma loja, em dois tons.
-- A cor está meio decidida: o Cinza biscoito é o neutro (decisão 034); o conjunto de acentos está em aberto e é comparado na rodada 5 do quadro de identidade.
+- A cor está quase toda decidida: o Cinza biscoito é o neutro e os acentos são a Pastel parade com Índigo (decisões 034 e 036); o fundo claro é L 0,96 com o croma da rodada 8 (#F4F1ED, rodada 9), e o modo escuro mantém as superfícies da rodada 8.
 Call:
 - Uma fundação entra no design system quando uma decisão do registro a sustenta. Os valores vêm da última rodada do quadro de ideação, nunca redigitados de memória.
 - iOS primeiro e Material 3 ao lado, como na decisão 021.
@@ -21,6 +21,6 @@ Trade-offs:
 | Fundação | Situação | Fonte |
 | --- | --- | --- |
 | [Tipografia](typography.md) | Definida (decisões 027, 028, 029) | [Escala tipográfica](../ideation/type-scale.md), rodada 4 |
-| Cor | Neutro pré-decidido: Cinza biscoito (decisão 034). Acentos escolhidos: Pastel parade com Índigo, sobre o Cinza biscoito no claro e no escuro, sem bordas (decisão 036). Em aberto: o croma do Cinza biscoito | [Identidade](../ideation/identity.md) |
+| Cor | Neutro pré-decidido: Cinza biscoito (decisão 034). Acentos escolhidos: Pastel parade com Índigo, sobre o Cinza biscoito no claro e no escuro, sem bordas (decisão 036). Fundo claro L 0,96 com o croma da rodada 8, #F4F1ED (rodada 9); escuro como na rodada 8 | [Identidade](../ideation/identity.md) |
 | [Marca](mark.md) | Provisória (decisão 033): um terrier com um toldo no lugar da boca, desenhado à mão no Figma | [Identidade](../ideation/identity.md) |
 | Espaçamento, raio, elevação | Não começado; os wireframes seguem as margens de 16 pt e os alvos de toque de 44 pt da Apple | [Fluxo do app](../ideation/app-flow.md) |

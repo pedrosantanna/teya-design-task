@@ -165,6 +165,8 @@ I didn't want to drop the round 6 brown dark mode yet and asked to compare every
 
 ### 44. Pastel parade with Indigo, and surfaces without borders
 I chose Pastel parade with Indigo on Biscuit grey in both modes, asked to avoid borders, to raise the contrast between surfaces, and to see a less saturated Biscuit grey. The agent moved the light background to L 0.95 under white cards (1.16:1, up from 1.04:1) and lifted the dark card to L 0.235 (1.18:1), then drew home, chat and requests in light and dark for the round 7 surfaces, the new ones and a Biscuit grey at 45% of its chroma. I also asked for the docs logo to be round, like an avatar.
+### 45. More colour in light mode
+In round 8 the light theme with more contrast had lost some colour, and I thought the background might have gone too dark. I asked for the same contrast with Biscuit grey a little more saturated. The agent drew round 9 as a grid: the background at L 0.95 and L 0.96, each with round 8's chroma, ×1.8 and ×2.5, cards white and chips 0.045 below the background. Cards stand out at 1.16:1 and 1.13:1. It suggested L 0.96 at ×1.8 (#F5F1EA) and noted that ×2.5 starts to read as cream. I chose L 0.96 at ×1.8, then changed my mind and kept round 8's chroma at L 0.96 (#F4F1ED). I asked what that changes in dark mode: nothing, since the dark surfaces only depend on the chroma, which stayed. The agent recorded it in decision 036.
 
 ## AI failures
 

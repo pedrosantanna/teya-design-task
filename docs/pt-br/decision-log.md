@@ -289,7 +289,7 @@ O app do comprador é Snuffle. Um cachorro faz "snuffle" quando trabalha o chão
 Os acentos são a Pastel parade com Índigo: o Índigo para texto, botões e tint, e Pêssego, Pistache, Manteiga e Lavanda como preenchimentos e badges tonais. O neutro é o Cinza biscoito no modo claro e no escuro. Bordas são evitadas: as superfícies se separam pela luminosidade (fundo claro em L 0,95 com cartões brancos, 1,16:1; cartões escuros em L 0,235, 1,18:1), e a borda aparece só onde uma superfície ainda precisar.
 
 **Por quê:** dos três temas testados nas mesmas telas, a Pastel parade com Índigo foi a mais calma, e os preenchimentos claros dela dão badges tonais que funcionam nos dois modos. Na rodada 7, um cartão branco sobre o fundo claro ficava em 1,04:1 sem borda, pouco demais.
-**Em aberto:** se o Cinza biscoito mantém o croma atual ou a versão menos saturada (45%) mostrada na rodada 8.
+**Atualização, rodada 9:** o fundo claro passa para L 0,96 e mantém o croma da rodada 8 (#F4F1ED), com superfícies secundárias em L 0,915; os cartões continuam brancos e se destacam a 1,13:1. O fundo da rodada 8 parecia um pouco escuro. As versões mais saturadas (×1,8 e ×2,5) e a menos saturada (45%) foram descartadas. O modo escuro não muda: mantém as superfícies da rodada 8, já que o croma não mudou.
 
 ## Ainda em aberto
 

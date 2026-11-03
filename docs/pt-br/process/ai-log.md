@@ -165,6 +165,8 @@ Eu ainda não queria descartar o modo escuro marrom da rodada 6 e pedi para comp
 
 ### 44. Pastel parade com Índigo, e superfícies sem bordas
 Escolhi a Pastel parade com Índigo sobre o Cinza biscoito nos dois modos, pedi para evitar bordas, aumentar o contraste entre as superfícies e ver um Cinza biscoito menos saturado. O agente levou o fundo claro para L 0,95 sob cartões brancos (1,16:1, antes 1,04:1) e subiu o cartão escuro para L 0,235 (1,18:1), depois desenhou home, chat e pedidos no claro e no escuro com as superfícies da rodada 7, as novas e um Cinza biscoito com 45% do croma. Também pedi que o logo da documentação fosse redondo, como um avatar.
+### 45. Mais cor no modo claro
+Na rodada 8, o tema claro com mais contraste tinha perdido um pouco de cor, e achei que o fundo talvez tivesse escurecido demais. Pedi o mesmo contraste com o Cinza biscoito um pouco mais saturado. O agente desenhou a rodada 9 como uma grade: o fundo em L 0,95 e L 0,96, cada um com o croma da rodada 8, ×1,8 e ×2,5, cartões brancos e chips 0,045 abaixo do fundo. Os cartões se destacam a 1,16:1 e 1,13:1. Ele sugeriu L 0,96 com ×1,8 (#F5F1EA) e anotou que com ×2,5 começa a parecer creme. Escolhi L 0,96 com ×1,8, depois mudei de ideia e mantive o croma da rodada 8 em L 0,96 (#F4F1ED). Perguntei o que isso muda no modo escuro: nada, porque as superfícies escuras só dependem do croma, que ficou igual. O agente registrou isso na decisão 036.
 
 ## Falhas da IA
 
