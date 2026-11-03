@@ -7,7 +7,7 @@ export const iosLight = {
   platform: "ios",
   scheme: "light",
   color: {
-    background: "#F4F1ED",
+    background: "#EEE9E2",
     card: "#FFFFFF",
     muted: "#E5E2DE",
     mutedForeground: "#59534D",
@@ -17,6 +17,9 @@ export const iosLight = {
     tint: "#3D35B8",
     chipSelected: "#E8ECFF",
     onChipSelected: "#3D35B8",
+    chipSelectedEdge: "#D1D8FF",
+    filterSelected: "#100A06",
+    onFilterSelected: "#FCFAF6",
     badge: {
       promoted: {
         fill: "#E9F0E1",
@@ -43,6 +46,45 @@ export const iosLight = {
     separator: "#DEDAD5",
     codeSurface: "#FFFFFF",
     codeInk: "#000000",
+    shop: {
+      accent: {
+        peach: {
+          wash: "#F9E9E4",
+          tile: "#FEC5B2",
+          ink: "#663627"
+        },
+        pistachio: {
+          wash: "#E9F0E1",
+          tile: "#C5DEAE",
+          ink: "#384D1A"
+        },
+        butter: {
+          wash: "#FFE7A0",
+          tile: "#E7D48F",
+          ink: "#53430D"
+        },
+        lavender: {
+          wash: "#EDEBF8",
+          tile: "#D7CCFE",
+          ink: "#483C67"
+        }
+      }
+    },
+    snuffle: {
+      bubble: "#D7CCFE",
+      dot: "#9687C3"
+    },
+    chat: {
+      ground: "#FFFFFF",
+      fill: "#EEE9E2",
+      edge: "#DEDAD5"
+    },
+    sheet: "#EEE9E2",
+    count: "#3D35B8",
+    onCount: "#FFFFFF",
+    glassEdge: "#100A06",
+    glassShine: "#FFFFFF",
+    shadow: "#100A06",
     destructive: "#BA2B28"
   },
   space: {
@@ -58,7 +100,10 @@ export const iosLight = {
   gap: {
     inside: 8,
     block: 12,
-    section: 32
+    section: 32,
+    title: 16,
+    aboveTitle: 24,
+    heading: 12
   },
   inset: {
     card: 16,
@@ -95,7 +140,7 @@ export const iosLight = {
     avatar: {
       mark: 28,
       shop: 40,
-      shopOnRow: 24
+      shopOnRow: 20
     },
     thumb: {
       request: 56,
@@ -106,9 +151,22 @@ export const iosLight = {
       bar: 24
     },
     close: 30,
-    field: 50,
+    field: 48,
     dot: 8,
-    step: 20
+    step: 20,
+    category: {
+      width: 120,
+      height: 164,
+      art: 120
+    },
+    askBar: {
+      leading: 16,
+      trailing: 14,
+      gap: 10,
+      mic: 20,
+      ring: 2
+    },
+    peek: 80
   },
   layout: {
     bubbleMax: 0.78,
@@ -127,13 +185,21 @@ export const iosLight = {
       lineHeight: 46,
       letterSpacing: -0.8
     },
+    displayLarge: {
+      fontFamily: "Gambetta",
+      fontFamilyWeb: "Gambetta, Georgia, serif",
+      fontWeight: "700",
+      fontSize: 48,
+      lineHeight: 52,
+      letterSpacing: -0.96
+    },
     displayTitle: {
       fontFamily: "Gambetta",
       fontFamilyWeb: "Gambetta, Georgia, serif",
       fontWeight: "700",
-      fontSize: 34,
-      lineHeight: 40,
-      letterSpacing: -0.51
+      fontSize: 40,
+      lineHeight: 44,
+      letterSpacing: -0.6
     },
     displayName: {
       fontFamily: "Gambetta",
@@ -142,6 +208,14 @@ export const iosLight = {
       fontSize: 26,
       lineHeight: 30,
       letterSpacing: -0.26
+    },
+    sectionTitle: {
+      fontFamily: "Gambetta",
+      fontFamilyWeb: "Gambetta, Georgia, serif",
+      fontWeight: "700",
+      fontSize: 22,
+      lineHeight: 28,
+      letterSpacing: -0.22
     },
     title1: {
       fontFamily: "Switzer",
@@ -223,6 +297,14 @@ export const iosLight = {
       lineHeight: 16,
       letterSpacing: 0.18
     },
+    caption1Strong: {
+      fontFamily: "Switzer",
+      fontFamilyWeb: "Switzer, -apple-system, system-ui, Roboto, sans-serif",
+      fontWeight: "600",
+      fontSize: 12,
+      lineHeight: 16,
+      letterSpacing: 0.18
+    },
     caption2: {
       fontFamily: "Switzer",
       fontFamilyWeb: "Switzer, -apple-system, system-ui, Roboto, sans-serif",
@@ -253,7 +335,18 @@ export const iosLight = {
     pressedLayer: 0.1,
     disabledContent: 0.38,
     disabledContainer: 0.12,
-    scrim: 0.4
+    scrim: 0.4,
+    glassFill: 0.55,
+    glassHighlight: 0.6,
+    glassShadow: 0.1,
+    glassBlur: 20,
+    glassSaturate: 1.6,
+    glassEdge: 0.06,
+    glassShadowY: 6,
+    glassShadowBlur: 20,
+    cardShadow: 0.04,
+    cardShadowFar: 0.05,
+    glassRim: 0.5
   },
   spring: {
     press: {
@@ -289,8 +382,8 @@ export const iosDark = {
   scheme: "dark",
   color: {
     background: "#100A06",
-    card: "#231D18",
-    muted: "#332C27",
+    card: "#2B2420",
+    muted: "#38312C",
     mutedForeground: "#B1AA9F",
     foreground: "#FCFAF6",
     primary: "#B5BFFF",
@@ -298,21 +391,24 @@ export const iosDark = {
     tint: "#B5BFFF",
     chipSelected: "#222169",
     onChipSelected: "#D1D8FF",
+    chipSelectedEdge: "#3D35B8",
+    filterSelected: "#FCFAF6",
+    onFilterSelected: "#100A06",
     badge: {
       promoted: {
-        fill: "#24340E",
-        text: "#C9EBA2",
-        dot: "#9BB57C"
+        fill: "#E9F0E1",
+        text: "#384D1A",
+        dot: "#809E5C"
       },
       new: {
-        fill: "#462318",
-        text: "#F2D3C9",
-        dot: "#D69B88"
+        fill: "#F9E9E4",
+        text: "#663627",
+        dot: "#C17F6B"
       },
       delivers: {
-        fill: "#382C04",
-        text: "#E4DAC0",
-        dot: "#BCAA73"
+        fill: "#FFE7A0",
+        text: "#53430D",
+        dot: "#A69050"
       }
     },
     mapGround: "#2B2420",
@@ -324,6 +420,45 @@ export const iosDark = {
     separator: "#38312C",
     codeSurface: "#FFFFFF",
     codeInk: "#000000",
+    shop: {
+      accent: {
+        peach: {
+          wash: "#462318",
+          tile: "#602C1C",
+          ink: "#F2D3C9"
+        },
+        pistachio: {
+          wash: "#24340E",
+          tile: "#2A4618",
+          ink: "#C9EBA2"
+        },
+        butter: {
+          wash: "#382C04",
+          tile: "#4C3B01",
+          ink: "#E4DAC0"
+        },
+        lavender: {
+          wash: "#302747",
+          tile: "#3F3659",
+          ink: "#DCD6F1"
+        }
+      }
+    },
+    snuffle: {
+      bubble: "#302747",
+      dot: "#AEA2D6"
+    },
+    chat: {
+      ground: "#100A06",
+      fill: "#2B2420",
+      edge: "#2B2420"
+    },
+    sheet: "#1C1612",
+    count: "#3D35B8",
+    onCount: "#FFFFFF",
+    glassEdge: "#100A06",
+    glassShine: "#FFFFFF",
+    shadow: "#100A06",
     destructive: "#F07F77"
   },
   space: {
@@ -339,7 +474,10 @@ export const iosDark = {
   gap: {
     inside: 8,
     block: 12,
-    section: 32
+    section: 32,
+    title: 16,
+    aboveTitle: 24,
+    heading: 12
   },
   inset: {
     card: 16,
@@ -376,7 +514,7 @@ export const iosDark = {
     avatar: {
       mark: 28,
       shop: 40,
-      shopOnRow: 24
+      shopOnRow: 20
     },
     thumb: {
       request: 56,
@@ -387,9 +525,22 @@ export const iosDark = {
       bar: 24
     },
     close: 30,
-    field: 50,
+    field: 48,
     dot: 8,
-    step: 20
+    step: 20,
+    category: {
+      width: 120,
+      height: 164,
+      art: 120
+    },
+    askBar: {
+      leading: 16,
+      trailing: 14,
+      gap: 10,
+      mic: 20,
+      ring: 2
+    },
+    peek: 80
   },
   layout: {
     bubbleMax: 0.78,
@@ -408,13 +559,21 @@ export const iosDark = {
       lineHeight: 46,
       letterSpacing: -0.8
     },
+    displayLarge: {
+      fontFamily: "Gambetta",
+      fontFamilyWeb: "Gambetta, Georgia, serif",
+      fontWeight: "700",
+      fontSize: 48,
+      lineHeight: 52,
+      letterSpacing: -0.96
+    },
     displayTitle: {
       fontFamily: "Gambetta",
       fontFamilyWeb: "Gambetta, Georgia, serif",
       fontWeight: "700",
-      fontSize: 34,
-      lineHeight: 40,
-      letterSpacing: -0.51
+      fontSize: 40,
+      lineHeight: 44,
+      letterSpacing: -0.6
     },
     displayName: {
       fontFamily: "Gambetta",
@@ -423,6 +582,14 @@ export const iosDark = {
       fontSize: 26,
       lineHeight: 30,
       letterSpacing: -0.26
+    },
+    sectionTitle: {
+      fontFamily: "Gambetta",
+      fontFamilyWeb: "Gambetta, Georgia, serif",
+      fontWeight: "700",
+      fontSize: 22,
+      lineHeight: 28,
+      letterSpacing: -0.22
     },
     title1: {
       fontFamily: "Switzer",
@@ -504,6 +671,14 @@ export const iosDark = {
       lineHeight: 16,
       letterSpacing: 0.18
     },
+    caption1Strong: {
+      fontFamily: "Switzer",
+      fontFamilyWeb: "Switzer, -apple-system, system-ui, Roboto, sans-serif",
+      fontWeight: "600",
+      fontSize: 12,
+      lineHeight: 16,
+      letterSpacing: 0.18
+    },
     caption2: {
       fontFamily: "Switzer",
       fontFamilyWeb: "Switzer, -apple-system, system-ui, Roboto, sans-serif",
@@ -534,7 +709,18 @@ export const iosDark = {
     pressedLayer: 0.1,
     disabledContent: 0.38,
     disabledContainer: 0.12,
-    scrim: 0.4
+    scrim: 0.4,
+    glassFill: 0.55,
+    glassHighlight: 0.6,
+    glassShadow: 0.1,
+    glassBlur: 20,
+    glassSaturate: 1.6,
+    glassEdge: 0.06,
+    glassShadowY: 6,
+    glassShadowBlur: 20,
+    cardShadow: 0.04,
+    cardShadowFar: 0.05,
+    glassRim: 0.5
   },
   spring: {
     press: {
@@ -569,7 +755,7 @@ export const androidLight = {
   platform: "android",
   scheme: "light",
   color: {
-    background: "#F4F1ED",
+    background: "#EEE9E2",
     card: "#FFFFFF",
     muted: "#E5E2DE",
     mutedForeground: "#59534D",
@@ -579,6 +765,9 @@ export const androidLight = {
     tint: "#3D35B8",
     chipSelected: "#E8ECFF",
     onChipSelected: "#3D35B8",
+    chipSelectedEdge: "#D1D8FF",
+    filterSelected: "#100A06",
+    onFilterSelected: "#FCFAF6",
     badge: {
       promoted: {
         fill: "#E9F0E1",
@@ -605,6 +794,45 @@ export const androidLight = {
     separator: "#DEDAD5",
     codeSurface: "#FFFFFF",
     codeInk: "#000000",
+    shop: {
+      accent: {
+        peach: {
+          wash: "#F9E9E4",
+          tile: "#FEC5B2",
+          ink: "#663627"
+        },
+        pistachio: {
+          wash: "#E9F0E1",
+          tile: "#C5DEAE",
+          ink: "#384D1A"
+        },
+        butter: {
+          wash: "#FFE7A0",
+          tile: "#E7D48F",
+          ink: "#53430D"
+        },
+        lavender: {
+          wash: "#EDEBF8",
+          tile: "#D7CCFE",
+          ink: "#483C67"
+        }
+      }
+    },
+    snuffle: {
+      bubble: "#D7CCFE",
+      dot: "#9687C3"
+    },
+    chat: {
+      ground: "#FFFFFF",
+      fill: "#EEE9E2",
+      edge: "#DEDAD5"
+    },
+    sheet: "#EEE9E2",
+    count: "#3D35B8",
+    onCount: "#FFFFFF",
+    glassEdge: "#100A06",
+    glassShine: "#FFFFFF",
+    shadow: "#100A06",
     destructive: "#BA2B28"
   },
   space: {
@@ -620,7 +848,10 @@ export const androidLight = {
   gap: {
     inside: 8,
     block: 12,
-    section: 32
+    section: 32,
+    title: 16,
+    aboveTitle: 24,
+    heading: 12
   },
   inset: {
     card: 16,
@@ -657,7 +888,7 @@ export const androidLight = {
     avatar: {
       mark: 28,
       shop: 40,
-      shopOnRow: 24
+      shopOnRow: 20
     },
     thumb: {
       request: 56,
@@ -668,9 +899,22 @@ export const androidLight = {
       bar: 24
     },
     close: 30,
-    field: 50,
+    field: 48,
     dot: 8,
-    step: 20
+    step: 20,
+    category: {
+      width: 120,
+      height: 164,
+      art: 120
+    },
+    askBar: {
+      leading: 16,
+      trailing: 14,
+      gap: 10,
+      mic: 20,
+      ring: 2
+    },
+    peek: 80
   },
   layout: {
     bubbleMax: 0.78,
@@ -689,13 +933,21 @@ export const androidLight = {
       lineHeight: 46,
       letterSpacing: -0.8
     },
+    displayLarge: {
+      fontFamily: "Gambetta",
+      fontFamilyWeb: "Gambetta, Georgia, serif",
+      fontWeight: "700",
+      fontSize: 48,
+      lineHeight: 52,
+      letterSpacing: -0.96
+    },
     displayTitle: {
       fontFamily: "Gambetta",
       fontFamilyWeb: "Gambetta, Georgia, serif",
       fontWeight: "700",
-      fontSize: 34,
-      lineHeight: 40,
-      letterSpacing: -0.51
+      fontSize: 40,
+      lineHeight: 44,
+      letterSpacing: -0.6
     },
     displayName: {
       fontFamily: "Gambetta",
@@ -704,6 +956,14 @@ export const androidLight = {
       fontSize: 26,
       lineHeight: 30,
       letterSpacing: -0.26
+    },
+    sectionTitle: {
+      fontFamily: "Gambetta",
+      fontFamilyWeb: "Gambetta, Georgia, serif",
+      fontWeight: "700",
+      fontSize: 22,
+      lineHeight: 28,
+      letterSpacing: -0.22
     },
     title1: {
       fontFamily: "Switzer",
@@ -785,6 +1045,14 @@ export const androidLight = {
       lineHeight: 16,
       letterSpacing: 0.18
     },
+    caption1Strong: {
+      fontFamily: "Switzer",
+      fontFamilyWeb: "Switzer, -apple-system, system-ui, Roboto, sans-serif",
+      fontWeight: "600",
+      fontSize: 12,
+      lineHeight: 16,
+      letterSpacing: 0.18
+    },
     caption2: {
       fontFamily: "Switzer",
       fontFamilyWeb: "Switzer, -apple-system, system-ui, Roboto, sans-serif",
@@ -815,7 +1083,18 @@ export const androidLight = {
     pressedLayer: 0.1,
     disabledContent: 0.38,
     disabledContainer: 0.12,
-    scrim: 0.4
+    scrim: 0.4,
+    glassFill: 0.55,
+    glassHighlight: 0.6,
+    glassShadow: 0.1,
+    glassBlur: 20,
+    glassSaturate: 1.6,
+    glassEdge: 0.06,
+    glassShadowY: 6,
+    glassShadowBlur: 20,
+    cardShadow: 0.04,
+    cardShadowFar: 0.05,
+    glassRim: 0.5
   },
   spring: {
     press: {
@@ -857,8 +1136,8 @@ export const androidDark = {
   scheme: "dark",
   color: {
     background: "#100A06",
-    card: "#231D18",
-    muted: "#332C27",
+    card: "#2B2420",
+    muted: "#38312C",
     mutedForeground: "#B1AA9F",
     foreground: "#FCFAF6",
     primary: "#B5BFFF",
@@ -866,21 +1145,24 @@ export const androidDark = {
     tint: "#B5BFFF",
     chipSelected: "#222169",
     onChipSelected: "#D1D8FF",
+    chipSelectedEdge: "#3D35B8",
+    filterSelected: "#FCFAF6",
+    onFilterSelected: "#100A06",
     badge: {
       promoted: {
-        fill: "#24340E",
-        text: "#C9EBA2",
-        dot: "#9BB57C"
+        fill: "#E9F0E1",
+        text: "#384D1A",
+        dot: "#809E5C"
       },
       new: {
-        fill: "#462318",
-        text: "#F2D3C9",
-        dot: "#D69B88"
+        fill: "#F9E9E4",
+        text: "#663627",
+        dot: "#C17F6B"
       },
       delivers: {
-        fill: "#382C04",
-        text: "#E4DAC0",
-        dot: "#BCAA73"
+        fill: "#FFE7A0",
+        text: "#53430D",
+        dot: "#A69050"
       }
     },
     mapGround: "#2B2420",
@@ -892,6 +1174,45 @@ export const androidDark = {
     separator: "#38312C",
     codeSurface: "#FFFFFF",
     codeInk: "#000000",
+    shop: {
+      accent: {
+        peach: {
+          wash: "#462318",
+          tile: "#602C1C",
+          ink: "#F2D3C9"
+        },
+        pistachio: {
+          wash: "#24340E",
+          tile: "#2A4618",
+          ink: "#C9EBA2"
+        },
+        butter: {
+          wash: "#382C04",
+          tile: "#4C3B01",
+          ink: "#E4DAC0"
+        },
+        lavender: {
+          wash: "#302747",
+          tile: "#3F3659",
+          ink: "#DCD6F1"
+        }
+      }
+    },
+    snuffle: {
+      bubble: "#302747",
+      dot: "#AEA2D6"
+    },
+    chat: {
+      ground: "#100A06",
+      fill: "#2B2420",
+      edge: "#2B2420"
+    },
+    sheet: "#1C1612",
+    count: "#3D35B8",
+    onCount: "#FFFFFF",
+    glassEdge: "#100A06",
+    glassShine: "#FFFFFF",
+    shadow: "#100A06",
     destructive: "#F07F77"
   },
   space: {
@@ -907,7 +1228,10 @@ export const androidDark = {
   gap: {
     inside: 8,
     block: 12,
-    section: 32
+    section: 32,
+    title: 16,
+    aboveTitle: 24,
+    heading: 12
   },
   inset: {
     card: 16,
@@ -944,7 +1268,7 @@ export const androidDark = {
     avatar: {
       mark: 28,
       shop: 40,
-      shopOnRow: 24
+      shopOnRow: 20
     },
     thumb: {
       request: 56,
@@ -955,9 +1279,22 @@ export const androidDark = {
       bar: 24
     },
     close: 30,
-    field: 50,
+    field: 48,
     dot: 8,
-    step: 20
+    step: 20,
+    category: {
+      width: 120,
+      height: 164,
+      art: 120
+    },
+    askBar: {
+      leading: 16,
+      trailing: 14,
+      gap: 10,
+      mic: 20,
+      ring: 2
+    },
+    peek: 80
   },
   layout: {
     bubbleMax: 0.78,
@@ -976,13 +1313,21 @@ export const androidDark = {
       lineHeight: 46,
       letterSpacing: -0.8
     },
+    displayLarge: {
+      fontFamily: "Gambetta",
+      fontFamilyWeb: "Gambetta, Georgia, serif",
+      fontWeight: "700",
+      fontSize: 48,
+      lineHeight: 52,
+      letterSpacing: -0.96
+    },
     displayTitle: {
       fontFamily: "Gambetta",
       fontFamilyWeb: "Gambetta, Georgia, serif",
       fontWeight: "700",
-      fontSize: 34,
-      lineHeight: 40,
-      letterSpacing: -0.51
+      fontSize: 40,
+      lineHeight: 44,
+      letterSpacing: -0.6
     },
     displayName: {
       fontFamily: "Gambetta",
@@ -991,6 +1336,14 @@ export const androidDark = {
       fontSize: 26,
       lineHeight: 30,
       letterSpacing: -0.26
+    },
+    sectionTitle: {
+      fontFamily: "Gambetta",
+      fontFamilyWeb: "Gambetta, Georgia, serif",
+      fontWeight: "700",
+      fontSize: 22,
+      lineHeight: 28,
+      letterSpacing: -0.22
     },
     title1: {
       fontFamily: "Switzer",
@@ -1072,6 +1425,14 @@ export const androidDark = {
       lineHeight: 16,
       letterSpacing: 0.18
     },
+    caption1Strong: {
+      fontFamily: "Switzer",
+      fontFamilyWeb: "Switzer, -apple-system, system-ui, Roboto, sans-serif",
+      fontWeight: "600",
+      fontSize: 12,
+      lineHeight: 16,
+      letterSpacing: 0.18
+    },
     caption2: {
       fontFamily: "Switzer",
       fontFamilyWeb: "Switzer, -apple-system, system-ui, Roboto, sans-serif",
@@ -1102,7 +1463,18 @@ export const androidDark = {
     pressedLayer: 0.1,
     disabledContent: 0.38,
     disabledContainer: 0.12,
-    scrim: 0.4
+    scrim: 0.4,
+    glassFill: 0.55,
+    glassHighlight: 0.6,
+    glassShadow: 0.1,
+    glassBlur: 20,
+    glassSaturate: 1.6,
+    glassEdge: 0.06,
+    glassShadowY: 6,
+    glassShadowBlur: 20,
+    cardShadow: 0.04,
+    cardShadowFar: 0.05,
+    glassRim: 0.5
   },
   spring: {
     press: {
@@ -1142,9 +1514,10 @@ export const themes = { iosLight, iosDark, androidLight, androidDark } as const;
 
 export type ThemeName = keyof typeof themes;
 export type AppTheme = (typeof themes)[ThemeName];
-export type ColorName = 'background' | 'card' | 'muted' | 'mutedForeground' | 'foreground' | 'primary' | 'onPrimary' | 'tint' | 'chipSelected' | 'onChipSelected' | 'mapGround' | 'scrim' | 'onDestructive' | 'warning' | 'success' | 'border' | 'separator' | 'codeSurface' | 'codeInk' | 'destructive';
+export type ColorName = 'background' | 'card' | 'muted' | 'mutedForeground' | 'foreground' | 'primary' | 'onPrimary' | 'tint' | 'chipSelected' | 'onChipSelected' | 'chipSelectedEdge' | 'filterSelected' | 'onFilterSelected' | 'mapGround' | 'scrim' | 'onDestructive' | 'warning' | 'success' | 'border' | 'separator' | 'codeSurface' | 'codeInk' | 'sheet' | 'count' | 'onCount' | 'glassEdge' | 'glassShine' | 'shadow' | 'destructive';
 export type BadgeName = 'promoted' | 'new' | 'delivers';
-export type TypeStyleName = 'splash' | 'displayTitle' | 'displayName' | 'title1' | 'title2' | 'title3' | 'headline' | 'body' | 'callout' | 'subheadline' | 'subheadlineStrong' | 'footnote' | 'caption1' | 'caption2' | 'code' | 'clock';
+export type ShopAccentName = 'peach' | 'pistachio' | 'butter' | 'lavender';
+export type TypeStyleName = 'splash' | 'displayLarge' | 'displayTitle' | 'displayName' | 'sectionTitle' | 'title1' | 'title2' | 'title3' | 'headline' | 'body' | 'callout' | 'subheadline' | 'subheadlineStrong' | 'footnote' | 'caption1' | 'caption1Strong' | 'caption2' | 'code' | 'clock';
 export type SpaceName = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8';
 export type RadiusName = 'none' | 'inner' | 'bubble' | 'card' | 'sheet' | 'full';
 export type SpringName = 'press' | 'snappy' | 'smooth' | 'arrive' | 'fade' | 'status';

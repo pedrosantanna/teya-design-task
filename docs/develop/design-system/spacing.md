@@ -5,14 +5,19 @@ The spacing scale, the gaps that group content on a screen, and the grid that si
 ```summary
 Takeaways:
 - Eight spacing tokens on a 4-pt base, from 4 to 48, and seven semantic gaps built on them: inside a group, between blocks, card and bubble insets, between sections, the screen margin and the minimum hit area.
-- The gap between groups is at least twice the largest gap inside them. A heading sits 8 from its content and 32 from the section before. In the chat, bubbles from one sender are 12 apart and a change of sender is 24.
+- The gap between groups is at least twice the largest gap inside them. A heading sits 8 from its content and 32 from the section before, a carousel ends 32 above the next heading, and a card holds 12 between blocks and 16 of padding. In the chat, bubbles from one sender are 12 apart and a change of sender is 24.
 - A card is used only where spacing alone can't group, such as the answer and order cards in the chat.
 - One content column with a 16 margin below 414 pt wide and 20 from 414 up. Tile widths come from a formula; only margins and gutters are fixed. Carousels show a peek of the next tile.
+- The web build uses the same values in CSS pixels.
 Call:
 - I asked for spacing and the grid to start from iOS, widen to Material and follow Gestalt (decision 041).
 - I kept the values provisional, to be tuned at real size in the prototype.
+- In an earlier round I asked for a review of vertical spacing. The section gap stays at 32 and the rhythm between blocks is stated gap by gap.
+- In this round I found the Nearby title too close to the area row and too far from "Open near you", and the Requests title too close to Back and to the chips. A large title now sits closer to what it introduces than to what is above it (decision 045).
 AI:
 - An agent researched Apple's Human Interface Guidelines (read from the HIG JSON, since the pages render by script), Material 3 and the Android docs, and NN/g on Gestalt, and proposed the tokens and rules. I asked for a modern design system grounded in iOS first, then Material, and in Gestalt.
+- An agent listed every vertical gap between blocks on Nearby, the shop page and the chat and wrote them as one table.
+- An agent added the large-title gaps as tokens (`gap.aboveTitle`, `gap.title`, `gap.heading`) and applied them on Nearby, Requests, Places and the shop page, on the web and native builds.
 Trade-offs:
 - A 4-pt base matches Material's steps and sits close to Apple's values, at the cost of a few in-between sizes Apple uses (such as 10 and 14) that only appear in the bubble inset.
 - The 16 and 20 margins follow what UIKit is reported to do on current iPhones; I haven't confirmed them for iOS 26.
@@ -29,7 +34,7 @@ Trade-offs:
 | `space.5` | 20 | Screen margin on wide iPhones |
 | `space.6` | 24 | Between unrelated groups in a section, a change of sender in the chat |
 | `space.7` | 32 | Between sections on Nearby, Requests and the shop page |
-| `space.8` | 48 | Bottom clearance above the ask bar only; under a large title the first section starts 8 below |
+| `space.8` | 48 | Bottom clearance above the ask bar only |
 
 ## Semantic gaps
 
@@ -53,6 +58,22 @@ Trade-offs:
 | Safe areas first | Content scrolls under the bars; controls sit inside `useSafeAreaInsets` |
 | Text width | Body text is never wider than the readable guide, which on a phone is the screen margins |
 
+## Vertical rhythm
+
+| Between | Gap | Token |
+| --- | --- | --- |
+| A section and the next | 32 | `gap.section` |
+| A section heading and its content | 12 | `gap.heading` |
+| A carousel and the next heading | 32, from the tiles' meta line | `gap.section` |
+| Blocks inside a card | 12 | `gap.block` |
+| A card's edge and its content | 16 | `inset.card` |
+| The row above a large title (Nearby's area row) and the title | 24 | `gap.aboveTitle` |
+| The bar's controls (Back) and a large title below them | 16 | `gap.title` |
+| A large title and the content it introduces (first section heading, filter chips, a list) | 16 | `gap.title` |
+| The last content and the ask bar | 48 | `space.8` |
+
+Each gap is set on one side only, at the top of the block below, so two gaps never add up. The web build follows the same values in CSS pixels at the same phone widths.
+
 ## Grid and layout tokens
 
 | Token | Value | Used for |
@@ -65,7 +86,7 @@ Trade-offs:
 | Category cell | (content − 36) / 4 ≈ 84 / 91, 1:1 | Category grid |
 | Bubble max width | 78% of content ≈ 290 / 312 | Chat bubbles |
 | Answer and order cards | Full content width | Chat |
-| Web build | Phone frame, 402 × 874 | Prototype in a browser |
+| Web build | Phone frame, 402 × 874; the same spacing values in px | Prototype in a browser |
 
 Widths are for a 402 pt iPhone 17 and a 440 pt iPhone 17 Pro Max. Older 6.1″ iPhones are 393 pt wide and the Air is 420. On Android, compact width (under 600 dp) covers almost every phone in portrait.
 

@@ -15,10 +15,12 @@ import {
   AnswerCard,
   AnswerRow,
   Button,
+  Illustration,
   ChatBubble,
   Chip,
   Composer,
   Dock,
+  Ground,
   ListRow,
   Map,
   NavBar,
@@ -29,6 +31,7 @@ import {
   Text,
   Toast,
   TypingIndicator,
+  ZoomOrigin,
   chatGap,
   screenMargin,
   useNavBarHeight,
@@ -36,13 +39,13 @@ import {
   type AnswerRowKind,
   type ChatSender,
 } from '@/design-system';
-import { imageSource } from '@/content/images';
 import {
   answerCardText,
   answerLabel,
   matchAsk,
   openDirections,
   price,
+  shopAccent,
   shopById,
   shopHoursLabel,
   sim,
@@ -70,6 +73,7 @@ function ActiveChat() {
   const insets = useSafeAreaInsets();
   const content = useContent();
   const { items, typing, fresh } = useVisibleChat();
+  const request = useApp('request');
   const scroll = useNavBarScroll();
   const top = useNavBarHeight();
   const margin = screenMargin(theme, rt.screen.width);
@@ -129,6 +133,7 @@ function ActiveChat() {
   const newestFirst = [...items].reverse();
 
   return (
+    <Ground value="chat">
     <View style={styles.screen}>
       <KeyboardAvoidingView style={styles.fill} behavior="padding">
         <Animated.FlatList
@@ -146,7 +151,14 @@ function ActiveChat() {
             />
           )}
           ListHeaderComponent={
-            typing ? <TypingIndicator gap={last ? (last.kind === 'bubble' ? chatGap(lastSender, 'snuffle') : 'newSender') : 'none'} /> : undefined
+            typing ? (
+              <TypingIndicator gap={last ? (last.kind === 'bubble' ? chatGap(lastSender, 'snuffle') : 'newSender') : 'none'} />
+            ) : request === 'notFound' ? (
+              // Nothing found: the quiet street under Snuffle's last message (the list is inverted, so the header is the bottom).
+              <View style={[styles.block, styles.art]}>
+                <Illustration name="quietstreet" size="medium" />
+              </View>
+            ) : undefined
           }
           onScroll={scroll.onScroll}
           scrollEventThrottle={16}
@@ -163,9 +175,13 @@ function ActiveChat() {
           </View>
         </Dock>
       </KeyboardStickyView>
-      {/* The chat is always under the bar, so the bar keeps its fill. */}
+      {/* The chat is always under the bar, so the bar keeps its fill. "Snuffle" with the glyph names who speaks;
+          the request's name sits under it. */}
       <NavBar
-        title={content.active.title}
+        title="Snuffle"
+        titleMark
+        subtitle={content.active.title}
+        fill="chat"
         leading="back"
         backLabel="Requests"
         onLeading={() => (router.canGoBack() ? router.back() : router.navigate('/requests'))}
@@ -199,6 +215,7 @@ function ActiveChat() {
       />
       <Toast visible={toast != null} message={toast ?? ''} onHide={() => setToast(null)} />
     </View>
+    </Ground>
   );
 }
 
@@ -278,8 +295,15 @@ function AskingList() {
   const content = useContent();
   const answers = useApp('answers');
   const offers = content.active.offers;
+  // The scooter rides while Snuffle asks and leaves when the first answer arrives (illustrations.md).
+  const waiting = offers.every((o) => (answers[o.shopId] ?? 'asked') === 'asked' || answers[o.shopId] === 'seen');
   return (
     <View style={styles.block}>
+      {waiting ? (
+        <View style={styles.art}>
+          <Illustration name="scooter" size="medium" />
+        </View>
+      ) : null}
       {offers.map((offer, i) => {
         const shop = shopById(content, offer.shopId);
         const state = answers[offer.shopId] ?? 'asked';
@@ -310,7 +334,7 @@ function Answer({ shopId, best, animateIn, onDismiss }: { shopId: string; best: 
   if (!offer) return null;
   const t = answerCardText(content, offer, state);
   return (
-    <View style={styles.block}>
+    <ZoomOrigin id={`answer:${shopId}`} style={styles.block}>
       <AnswerCard
         id={shopId}
         shop={t.shop?.name ?? shopId}
@@ -320,7 +344,7 @@ function Answer({ shopId, best, animateIn, onDismiss }: { shopId: string; best: 
         price={t.price}
         walk={t.walk}
         collectBy={t.collectBy}
-        image={t.shop ? imageSource(t.shop.image, 40) : undefined}
+        accent={shopAccent(t.shop)}
         action={t.similar ? 'showMe' : 'buy'}
         buyLabel={t.buyLabel}
         best={best}
@@ -330,7 +354,7 @@ function Answer({ shopId, best, animateIn, onDismiss }: { shopId: string; best: 
         onShowMe={sim.openDetails}
         onDismiss={onDismiss}
       />
-    </View>
+    </ZoomOrigin>
   );
 }
 
@@ -438,17 +462,20 @@ function DetailsSheet({ onToast }: { onToast: (text: string) => void }) {
       open={open}
       onClose={sim.closeDetails}
       title={shop.name}
+      titleVariant="displayName"
+      barTitle="Buy"
       initialDetent="large"
+      origin={`answer:${shop.id}`}
       footer={<Button label={buyLabel} accessibilityLabel={`Buy, ${price(total)}`} onPress={sim.buy} />}
     >
-      <Text variant="footnote" color="mutedForeground" align="center">
+      <Text variant="footnote" color="mutedForeground">
         {`${shopHoursLabel(shopHours, shop)} · ${shop.street} · ${shop.walkMinutes} min walk`}
       </Text>
       <View style={styles.map}>
         <Map />
       </View>
       <View>
-        <ListRow title={offer.item ?? `${content.active.title}`} detail={`${t.status}${t.source ? ` · ${t.source}` : ''}`} value={t.price} position="first" />
+        <ListRow title={offer.item ?? `${content.active.title}`} detail={`${t.status}${t.source ? ` · ${t.source}` : ''}`} value={t.price} valueStrong position="first" />
         <ListRow title="Quantity" position="last">
           <Stepper value={quantity} onChange={sim.setQuantity} max={max} />
         </ListRow>
@@ -515,6 +542,7 @@ function OtherRequestChat({ id }: { id: string }) {
   const [speaker, ...rest] = (request?.preview ?? '').split(': ');
   const text = rest.join(': ');
   return (
+    <Ground value="chat">
     <View style={styles.screen}>
       <Animated.ScrollView onScroll={scroll.onScroll} scrollEventThrottle={16} contentContainerStyle={styles.plainContent(screenMargin(theme, rt.screen.width), top, insets.bottom)}>
         {request ? <ChatBubble sender={speaker === 'You' ? 'shopper' : 'snuffle'} text={text} /> : null}
@@ -527,18 +555,23 @@ function OtherRequestChat({ id }: { id: string }) {
         ) : null}
       </Animated.ScrollView>
       <NavBar
-        title={request?.title ?? 'Request'}
+        title="Snuffle"
+        titleMark
+        subtitle={request?.title ?? 'Request'}
+        fill="chat"
         leading="back"
         backLabel="Requests"
         onLeading={() => (router.canGoBack() ? router.back() : router.navigate('/requests'))}
         scroll={scroll}
       />
     </View>
+    </Ground>
   );
 }
 
 const styles = StyleSheet.create((theme) => ({
-  screen: { flex: 1, backgroundColor: theme.color.background },
+  // A chat's neutral ground: Card in light mode, Background in dark (colour.md, Snuffle).
+  screen: { flex: 1, backgroundColor: theme.color.chat.ground },
   fill: { flex: 1 },
   // Inverted: the list's top padding sits at the bottom of the screen (room for the dock) and its bottom
   // padding under the nav bar.
@@ -561,7 +594,7 @@ const styles = StyleSheet.create((theme) => ({
     flexWrap: 'wrap',
     gap: theme.space[2],
     marginTop: theme.space[2],
-    paddingLeft: theme.size.avatar.mark + theme.space[2],
   },
+  art: { alignItems: 'center', paddingBottom: theme.space[2] },
   map: { height: theme.size.thumb.request * 2, borderRadius: theme.radius.inner, overflow: 'hidden' },
 }));

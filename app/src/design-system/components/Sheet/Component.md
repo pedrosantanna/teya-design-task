@@ -8,18 +8,26 @@ The details sheet, where the shopper buys. Spec: Sheet on `docs/develop/design-s
 | --- | --- | --- | --- |
 | `open` | boolean | required | |
 | `onClose` | function | required | Called once the sheet has gone (drag down, Close, scrim, escape gesture) |
-| `title` | string | required | Headline in the header, between Close and the grabber |
+| `title` | string | required | In the header, between Close and Confirm (or the balancing space), one line |
+| `titleVariant` | `'headline'`, `'displayName'` | `'headline'` | Headline (Switzer 600, 17), centred between Close and Confirm. `displayName`: the subject is a shop (the details sheet), so the bar has no title and the name is the first content, Gambetta 26, left-aligned |
 | `children` | ReactNode | required | Scrolls; `space.6` padding, `gap.block` between blocks |
 | `footer` | ReactNode | none | Pinned at the bottom above the safe area at every detent: Buy |
 | `detents` | `('medium' \| 'large')[]` | both | Medium 50%, large 92% of the screen (`layout.sheet*Detent`, provisional) |
 | `initialDetent` | detent | first | Open at large when the content needs it |
 | `dismissible` | boolean | `true` | `false` while Buy is loading: no drag-to-close, no scrim or Close |
+| `onConfirm` | function | none | Adds `ConfirmButton` at the top right (tinted checkmark on iOS and the web, "Done" on Android) |
+| `confirmLabel` | string | `'Done'` | |
+| `confirmDisabled` | boolean | `false` | |
+| `origin` | string | none | A `ZoomOrigin` id: the sheet grows from that view and shrinks back into it on Close |
 
 ## Behaviour
 
 - Built on Reanimated and Gesture Handler: the grabber and header drag the sheet on the UI thread; it snaps to the nearest detent with `spring.smooth`, using the release velocity; a downward flick from the lowest detent closes it.
 - Presented through the root portal, so on the web it stays inside the phone frame.
-- `radius.sheet` top corners on both platforms (custom sheet); 40% scrim behind.
+- iOS and the web (iOS 26): at the medium detent the sheet floats inset by `space.2` in glass with every corner at `radius.sheet` and no scrim; toward the large detent it anchors to the edges, turns opaque, keeps only its top corners round, and the 40% scrim comes in.
+- Android: anchored at every detent, opaque, 40% scrim.
+- Close is the 44 glass ×; the footer sits over a scroll-edge fade, not a filled bar.
+- Under Reduce Motion the sheet appears at its detent without sliding or zooming.
 
 ## Why not a library
 

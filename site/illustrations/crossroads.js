@@ -2,10 +2,12 @@
 // shops facing the streets (painted fascias, brick or stucco upper floors with sash windows) and a small garden
 // behind. Raised pavements with kerbs on all four corners, a zebra crossing with Belisha beacons on each arm,
 // centre-line dashes, double yellow lines, lamp columns, a K6 phone box, a pillar box, litter bins, benches,
-// plane trees, and café tables outside a café and an ice-cream shop.
-// Entry: the ground, the markings, then the four blocks drop in one after another and the street furniture last.
-// Idle: the awnings move very slightly.
+// plane trees, and café tables outside a café and an ice-cream shop. People: three walk round the junction over
+// all four zebras (one with a dog, one with a bag), one sits on a bench, one at a café table, one waits at a door.
+// Entry: the ground, the markings, then the four blocks drop in one after another, the street furniture and the
+// people last. Idle: the awnings move very slightly and the people walk; with Reduce Motion everyone stands still.
 import { street } from './street.js';
+import { PS, shapes, walkers, still, sway } from './people.js';
 
 export default {
   id: 'crossroads',
@@ -100,15 +102,46 @@ export default {
       S.tree([-3.2, Y0 + 0.02, 3.9]),
     ];
 
+    // People. The walkers go round the junction inside the beacons, crossing each arm on its zebra; feet and
+    // shadows step down the kerb onto the road and back up.
+    const PS3 = shapes(THREE), M2 = 0.008;
+    const surface = (x, z) => {
+      const d = Math.min(Math.abs(x), Math.abs(z)) - R; // > 0 on a pavement
+      const f = Math.min(1, Math.max(0, (d + 0.025) / 0.05));
+      return [RY + (Y0 - RY) * f * f * (3 - 2 * f), d > 0 ? Y0 : RY + M2];
+    };
+    // Start points (at) fall on the corner pavements, so with Reduce Motion nobody stands in the road.
+    const c = 0.97, a = 1.2;
+    const walk = walkers(THREE, P, { surface, speed: 0.2, routes: [{
+      pts: [[a, -c], [a, c], [c, a], [-c, a], [-a, c], [-a, -c], [-c, -a], [c, -a]],
+      people: [
+        { at: 0.232, coat: P.indigo[600], legs: P.indigo[900], skin: P.peach[200], top: 'hat', long: true, hatColour: P.biscuit.darkMuted },
+        { at: 0.482, coat: P.butter[400], legs: P.indigo[800], skin: P.peach[600], top: 'bob', hair: P.butter[700], long: true, dog: { coat: P.peach[500] } },
+        { at: 0.732, coat: P.pistachio[500], legs: P.biscuit.darkMuted, skin: P.peach[300], top: 'short', hair: P.peach[700], bag: P.butter[300] },
+      ],
+    }] }, PS3);
+    const SEAT = 0.194 / PS + 0.075; // bench and café chair seats, in the figures' metres
+    const stills = [
+      still(THREE, P, PS3, { pose: 'sit', seat: SEAT, coat: P.lavender[500], legs: P.indigo[900], skin: P.peach[700], top: 'short', hair: P.indigo[900] }, [-2.45, Y0, -1.21], 0),
+      still(THREE, P, PS3, { pose: 'sit', seat: SEAT + 0.01, reach: 1, coat: P.peach[300], legs: P.lavender[800], skin: P.peach[400], top: 'bob', hair: P.biscuit.darkMuted }, [-1.355, Y0, 3.04], Math.PI / 2),
+      still(THREE, P, PS3, { pose: 'stand', coat: P.indigo[300], legs: P.indigo[900], skin: P.peach[400], top: 'hat' }, [1.33, Y0, -1.575], -Math.PI / 2 + 0.5), // at the corner shop's side door
+    ];
+
     const parts = [[ground, 0], [markings, 0.1],
       ...blocks.map((b, i) => [b, 0.24 + i * 0.16]),
       ...furniture.map((f, i) => [f, 0.95 + i * 0.025]),
-      ...trees.map((t, i) => [t, 1.0 + i * 0.06])]
+      ...trees.map((t, i) => [t, 1.0 + i * 0.06]),
+      ...[...stills, ...walk.parts].map((o, i) => [o, 1.45 + i * 0.05])]
       .map(([object, delay]) => { g.add(object); return { object, delay }; });
     g.userData.awnings = awnings;
+    g.userData.walk = walk;
+    g.userData.stills = stills;
     return { group: g, parts, ground: Y0 };
   },
+  reset(g) { g.userData.walk.reset(); g.userData.stills.forEach(f => sway(f, 0)); },
   idle(g, t) {
     g.userData.awnings.forEach((a, i) => { a.rotation.x = 0.015 * Math.sin(t * 1.3 + i * 1.1); });
+    g.userData.walk.update(t);
+    g.userData.stills.forEach((f, i) => sway(f, t, i * 2));
   },
 };

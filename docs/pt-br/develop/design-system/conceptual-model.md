@@ -5,6 +5,7 @@ Os objetos do app, o que o comprador pode fazer com cada um, os estados por que 
 ```summary
 Takeaways:
 - Quatro objetos: Request (pedido), Shop (loja), Answer (resposta) e Order (compra). O Snuffle é a voz que fala com o comprador, não um objeto. Um item nunca é objeto: lojas pequenas não têm catálogo, então um item é texto e quantidade dentro de um pedido, de uma resposta ou de uma compra.
+- O lugar de onde o comprador está comprando (a localização atual ou um lugar salvo, com um raio a pé) é um atributo da sessão. Ele define quais lojas e ruas contam, e o modelo mantém os seus quatro objetos.
 - Cada objeto tem uma forma de cartão e uma de detalhe: um pedido é uma linha que abre sua conversa, uma resposta é um cartão na conversa que abre uma folha de detalhes, uma compra é um cartão que abre o recibo, uma loja é uma linha que abre a página da loja.
 - Um verbo por ação no app inteiro. Buy é o único jeito de pagar; a loja separa; o comprador retira.
 - Uma tabela só de rótulos de status, usada igual nas linhas, nos cartões da conversa, nas notificações e na Live Activity. O dinheiro tem três desfechos que o comprador vê: pago, não cobrado, reembolsado.
@@ -12,8 +13,10 @@ Call:
 - Pedi um modelo conceitual antes de mais telas: os objetos, o que o comprador faz com cada um, seus estados e palavras, simples e apoiado em referências e na pesquisa.
 - Decidi os quatro pontos em aberto (decisão 039): o item fica fora do modelo, o pedido que fica aberto é "Keep looking", a resposta da loja é "answer" e as lojas aparecem como tiles com foto na home. Segue as decisões 025, 031 e 037.
 - Perguntei se um só "answer" serve tanto para o estoque de uma loja conectada quanto para a resposta de uma loja consultada, e fechei as lacunas que a revisão das telas encontrou.
+- Nesta rodada pedi um fluxo de localização: o endereço no topo de Nearby abre uma sheet para escolher o lugar e o raio, e os lugares salvos são gerenciados pela conta.
 AI:
 - Um agente procurou na netnografia, no mapa de empatia, nas personas e nos benchmarks as palavras que os compradores usam e os objetos em que pensam, conferiu as referências abaixo e propôs os objetos, verbos, estados e termos. Também listou onde a v7 quebra o modelo. Eu pedi um modelo simples e apoiado em referências antes de desenhar mais telas.
+- Um agente acrescentou o lugar ao modelo como atributo da sessão, seguindo a decisão 024, e escreveu o fluxo nos componentes.
 Trade-offs:
 - Deixar o item fora do modelo combina com lojas sem catálogo e abre mão de uma página por item, então "quem mais tem" fica no pedido, não no item.
 - Request é palavra nossa: os compradores escrevem perguntas, não pedidos. O teste do protótipo vai mostrar se a lista de Requests faz sentido.
@@ -57,9 +60,21 @@ Não há evidência de "errand", "basket", "hold" ou "reserve" nas palavras dos 
 
 ## Uma resposta, duas origens
 
-O POS de uma loja conectada compartilha o estoque, então a resposta dela chega na hora e a venda também; uma loja consultada responde a uma mensagem no seu tempo e confirma depois que o comprador compra (decisão 031). As duas são o mesmo objeto porque fazem o mesmo trabalho para o comprador: dizer se a loja tem o item, por quanto e até quando. O que muda é a origem, que todo cartão de resposta mostra: "Has it · replied 2 min ago" para uma loja consultada, "In stock now · from the shop's till" para uma loja conectada, encurtado para "In stock now · till" nas linhas compactas, e os passos depois do Buy: uma resposta vinda do caixa pula o "Waiting for [loja]". A palavra "answer" fica nos docs e em "replied"; a interface mostra o status, não o nome do objeto.
+O POS de uma loja conectada compartilha o estoque, então a resposta dela chega na hora e a venda também; uma loja consultada responde a uma mensagem no seu tempo e confirma depois que o comprador compra (decisão 031). As duas são o mesmo objeto porque fazem o mesmo trabalho para o comprador: dizer se a loja tem o item, por quanto e até quando. O que muda é a origem, que todo cartão de resposta mostra: "Has it · replied 2 min ago" para uma loja consultada, "In stock now · from the shop's till" para uma loja conectada, encurtado nas linhas compactas para "In stock now" ou "In stock · 1 of 2" ao lado do símbolo de raio, que representa o caixa (o VoiceOver continua lendo "from the shop's till"), e os passos depois do Buy: uma resposta vinda do caixa pula o "Waiting for [loja]". A palavra "answer" fica nos docs e em "replied"; a interface mostra o status, não o nome do objeto.
 
 Todo cartão de resposta tem a loja como título. Quando a loja oferece algo parecido, o item oferecido vai na linha de status depois de "Has something similar", e o título continua sendo o nome da loja.
+
+## Lugar
+
+A área do comprador (decisão 024) vem de um lugar e de um raio. Os dois pertencem à sessão do comprador; um pedido guarda a área em que foi feito.
+
+| Atributo | Valores | Onde se define |
+| --- | --- | --- |
+| Lugar | Localização atual, um lugar salvo (Home, Work) ou um endereço que o comprador buscou | A sheet "Where are you shopping?", aberta pelo endereço no topo de Nearby ("Blythe Road, W14 ›") |
+| Raio | Within 10, 15 ou 20 min walk | A mesma sheet |
+| Lugares salvos | Adicionar, renomear, apagar | A linha Places na sheet da conta |
+
+Escolher um lugar ou um raio recarrega Nearby. O lugar ativo só muda pelo topo de Nearby; a sheet da conta gerencia a lista.
 
 ## Ações
 
@@ -75,7 +90,7 @@ Todo cartão de resposta tem a loja como título. Quando a loja oferece algo par
 | Objeto | Rótulos, em ordem |
 | --- | --- |
 | Request | "Asking 6 shops" → "2 shops have it" → "Needs you · [o quê]"; esperando por escolha: "Looking · until Fri 6 Nov" ou "Every Friday"; nada encontrado: "Not found"; fechado pelo comprador: "Closed". Quando existe uma compra, a linha mostra o rótulo da compra. Vale um sufixo de prazo ("2 shops have them · by 4pm"). Os filtros agrupam os estados: Needs you, Looking (o Snuffle ainda está procurando, uma vez ou de forma recorrente), Waiting (uma compra espera a loja ou a retirada), Done |
-| Answer | "Asked" → "Seen" → "Has it", "Has 1 of 2", "Has something similar", "Doesn't have it" ou "No reply"; vinda do caixa: "In stock now" ou "In stock now · 1 of 2", seguido de "· from the shop's till" ("· till" nas linhas compactas); sob encomenda: "Can make it · [antecedência]" ("Can make it · 2 days' notice"); na página da loja, respostas passadas: "Had it · [quando]", "Didn't have it · [quando]" |
+| Answer | "Asked" → "Seen" → "Has it", "Has 1 of 2", "Has something similar", "Doesn't have it" ou "No reply"; vinda do caixa: "In stock now" ou "In stock now · 1 of 2", seguido de "· from the shop's till" (nas linhas compactas o símbolo de raio substitui o sufixo, e "In stock now · 1 of 2" encurta para "In stock · 1 of 2"); sob encomenda: "Can make it · [antecedência]" ("Can make it · 2 days' notice"); na página da loja, respostas passadas: "Had it · [quando]", "Didn't have it · [quando]" |
 | Order, retirada | "Waiting for [loja] · not charged yet" → "Ready · collect by Mon 9 Nov" → "Extended · collect by Mon 16 Nov" → "Collected"; finais: "Not confirmed · not charged", "Sold · not charged", "Cancelled · refunded", "Not collected · refunded". Depois de uma compra parcial, o cartão ganha uma linha, "Keep looking for [n] more" |
 | Order, entrega | "Waiting for [loja] · not charged yet" → "Paid" → "On its way" → "Delivered". Um pagamento que falha não cria compra; o pedido mantém o rótulo dele |
 | Shop | "Open till 7pm", "Closes soon", "Closed · opens 9am" |
@@ -94,6 +109,7 @@ Todo cartão de resposta tem a loja como título. Quando a loja oferece algo par
 | A janela de retirada | "Collect by Mon 9 Nov", com a duração uma vez antes do Buy ("7 days") | janela de retirada | pickup, hold for |
 | Dinheiro | paid, not charged, refunded | autorizado, cobrado, autorização caiu, liberado | termos de pagamento na conversa |
 | Um pedido que fica aberto | Keep looking | pedido em aberto | keep it open, save request |
+| Onde o comprador está comprando | o endereço ("Blythe Road, W14"); "Places" para os salvos | lugar, área | neighbourhood, zone, high street |
 | Prova no balcão | collection code | código | outros nomes |
 | A home | Nearby | Nearby | Home, street |
 
@@ -112,7 +128,7 @@ Os rótulos concordam com o item: "has it" para uma coisa, "has them" para vári
 | Linhas enquanto pergunta | Na lista de lojas perguntadas, toda resposta é uma linha compacta, porque a lista mostra o progresso; os cartões de resposta completos aparecem na conversa |
 | Item não tem página | Um item aparece dentro de um pedido, de uma resposta, de uma compra ou na página de uma loja |
 | A compra fica no pedido | Requests é a única lista; não existe uma lista separada de compras |
-| Detalhe é empurrado, tarefa é sheet | A forma de detalhe de um objeto (página da loja, conversa do pedido, recibo) é empurrada e sai com Voltar; uma tarefa (a folha de detalhes onde o comprador compra, pagar, estender, a conta) é uma sheet e sai com Fechar; o código de retirada ampliado é um modal com Fechar |
+| Detalhe é empurrado, tarefa é sheet | A forma de detalhe de um objeto (página da loja, conversa do pedido, recibo) é empurrada e sai com Voltar; uma tarefa (a folha de detalhes onde o comprador compra, pagar, estender, escolher o lugar, a conta) é uma sheet e sai com Fechar; o código de retirada ampliado é um modal com Fechar |
 
 ## Pontos decididos
 

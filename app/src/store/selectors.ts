@@ -3,9 +3,9 @@ import { useShallow } from 'zustand/react/shallow';
 
 import { stepById, type JourneyStep } from './journey';
 import { answerLabel, orderLabel, requestLabel, type AnswerForm } from './labels';
-import { contentFor, shopById } from './seed';
+import { areas, contentFor, shopById } from './seed';
 import { useAppStore } from './store';
-import type { AnswerState, PersonaContent } from './types';
+import type { AnswerState, PersonaContent, Shop } from './types';
 
 /** The current persona's content in the current content set (stable object per persona and set). */
 export function useContent(): PersonaContent {
@@ -67,4 +67,22 @@ export function useOrderLabel(): string {
     collectBy: content.order.collectBy,
     extendedTo: content.order.extendedTo,
   });
+}
+
+export type AreaView = { name: string; streetsLine: string; shops: Shop[]; key: string };
+
+/** The area Nearby shows: the chosen place's area, its shops within the walking radius and its street count. */
+export function useArea(): AreaView {
+  const content = useContent();
+  const { place, radius } = useAppStore(useShallow((s) => ({ place: s.place, radius: s.radius })));
+  const area = areas[place.area];
+  const pool = place.area === 'blythe' ? content.shops : area.shops;
+  const shops = pool.filter((s) => s.walkMinutes <= radius);
+  const streets = area.streets[radius];
+  return {
+    name: place.address,
+    streetsLine: `${streets} shopping streets within ${radius} min`,
+    shops,
+    key: `${place.area}:${radius}`,
+  };
 }

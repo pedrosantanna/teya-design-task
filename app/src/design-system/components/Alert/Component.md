@@ -1,6 +1,6 @@
 # Alert
 
-A system alert, drawn through the root portal so it stays inside the phone frame on the web. Used for "Cancel for a refund" and the simulated notifications permission prompt. Spec: Alert on `docs/develop/design-system/platforms.md`; layer order on `states.md` (alerts above sheets, toasts above alerts).
+A system alert, drawn through the root portal so it stays inside the phone frame on the web. Used for "Cancel for a refund" and the simulated notifications and location permission prompts. Spec: Alert on `docs/develop/design-system/platforms.md`; layer order on `states.md` (alerts above sheets, toasts above alerts).
 
 ## Props
 
@@ -9,7 +9,7 @@ A system alert, drawn through the root portal so it stays inside the phone frame
 | `visible` | boolean | required | |
 | `title` | string | required | |
 | `message` | string | none | What happens and where the money goes |
-| `actions` | `{ label, style?, onPress }[]` | required | One or two; `style` is `default`, `cancel` or `destructive` (red, warning haptic) |
+| `actions` | `{ label, style?, onPress }[]` | required | One or two side by side; three or more stack vertically, as the system's location prompt does. `style` is `default`, `cancel` or `destructive` (red, warning haptic) |
 | `onDismiss` | function | none | Android only: a tap outside closes a Material dialog |
 
 ## iOS and Android

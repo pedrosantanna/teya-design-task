@@ -11,6 +11,8 @@ Takeaways:
 Call:
 - I asked for tags to be covered the same way as shape and motion, starting from iOS and widening to Material (decision 041).
 - I kept the values provisional, to be tuned at real size in the prototype.
+- I asked for Indigo to mean action only, so a selected filter chip became Foreground with inverse text, and chips moved to the card colour because Muted barely shows on the new background (decision 045).
+- In this round a craft review found the black selected chip the heaviest mark on Nearby. I asked for selection to go back to tonal Indigo (Indigo 100 with Indigo 800 text in semibold), for "Needs you" in Foreground so Buy is the only Indigo on a request row, and for badges to keep their light values on photos in both modes (change craft-pass-2).
 AI:
 - An agent researched Apple's Human Interface Guidelines (read from the HIG JSON, since the pages render by script) and Material 3's chips and badges, and proposed the types and rules against the colour page and the conceptual model. I asked for a modern design system grounded in iOS first, then Material.
 Trade-offs:
@@ -22,11 +24,11 @@ Trade-offs:
 
 | Type | Anatomy | Size | Colour | Where |
 | --- | --- | --- | --- | --- |
-| Filter chip | Label, optional leading symbol, count after "·" | 32 high, 12–14 padding, `radius.full`, 44 hit | Off: muted. On: Indigo 100 fill, 800 text (dark: 900 / 200) | Requests filters, street filter on Nearby; single choice, "All" first |
-| Suggestion chip | Text, optional symbol | As filter chip | Muted fill, foreground text | Above the ask bar; a tap sends the text; at most 3 visible |
-| Status label | Optional icon, then text in Caption 1 | Inline, no fill | Muted foreground; tint only for "Needs you"; a warning icon only on the endings "Not confirmed · not charged" and "Sold · not charged", never on "not charged yet" | Rows, cards and notifications, exactly as in the state table |
-| Badge | Text in Caption 2 | 20 high, 8 padding, `radius.full`, 8 from the photo corner | Accent 100 fill, 800 text (dark: 900 / 200). Promoted Pistachio, New Peach, Delivers Butter | Photo tiles only |
-| Count | A number | 18 minimum diameter, `radius.full` | Primary fill with its label colour | On the round Requests button, for requests that need the shopper; capped at "9+" |
+| Filter chip | Label, optional leading symbol, count after "·" | 32 high, 12–14 padding, `radius.full`, 44 hit | Off: Card fill (on a chat's ground, `chat.fill`), Foreground text. On: `chipSelected`, Indigo 100 fill with Indigo 800 text at 600, 7.45:1 (dark: Indigo 900 with Indigo 200, 10.06:1) | Requests filters, street filter on Nearby; single choice, "All" first |
+| Suggestion chip | Text, optional symbol | As filter chip | Card fill (on a chat's ground, `chat.fill`), Foreground text | Under the Snuffle bubble that offers them: three on New Request, and in a chat; a tap sends the text |
+| Status label | Optional icon, then text in Caption 1 | Inline, no fill | Muted foreground; "Needs you" in Foreground at 600 (Caption 1 Strong); a warning icon only on the endings "Not confirmed · not charged" and "Sold · not charged", never on "not charged yet" | Rows, cards and notifications, exactly as in the state table |
+| Badge | Text in Caption 2 | 20 high, 8 padding, `radius.full`, 8 from the photo corner | Accent 100 fill, 800 text, in both modes, since a photo doesn't change with the theme. On a shop's accent (the shop page header): Card fill, Foreground text. Promoted Pistachio, New Peach, Delivers Butter | Photo tiles and the shop page header |
+| Count | A number | 18 minimum diameter, `radius.full`, in a 2 pt ring of the Background | Indigo 800 with white text in both modes (8.75:1) | On the round Requests button, for requests that need the shopper; capped at "9+" |
 
 ## Rules
 
@@ -38,7 +40,7 @@ Trade-offs:
 | More than colour | Warnings also get a symbol; colour never carries meaning alone |
 | Selection keeps the label | A selected chip keeps its text; Android adds a checkmark, as Material does |
 | Badges for what matters | A count only for requests that need the shopper, as the HIG reserves badges for critical information |
-| Source of an answer | An asked shop's answer reads "Has it · replied 2 min ago"; a connected shop's reads "In stock now · from the shop's till", shortened to "In stock now · till" in compact rows |
+| Source of an answer | An asked shop's answer reads "Has it · replied 2 min ago"; a connected shop's reads "In stock now · from the shop's till", shortened in compact rows to "In stock now" or "In stock · 1 of 2" beside the flash symbol, which stands for the till (VoiceOver still reads "from the shop's till") |
 
 Material's badge sizes (6 dp dot, 16 dp labelled) are to confirm on m3.material.io.
 

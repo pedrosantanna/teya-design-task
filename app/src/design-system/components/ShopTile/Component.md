@@ -13,7 +13,7 @@ A shop on Nearby: a 4:3 photo with up to two badges, the name and a meta line. S
 | `badges` | `BadgeName[]` | `[]` | At most two shown; Promoted always first |
 | `size` | `'large'`, `'medium'` | `'large'` | `tile.large` = 0.78 × content width, `tile.medium` = (content − 12) / 2.3 |
 | `contentWidth` | number | frame width − margins | |
-| `credit` | string | none | "Photo: Clara Lilley, Unsplash"; read as the accessibility hint, never drawn |
+| `accent` | ShopAccentName | `butter` | The shop's accent: the tonal tile under the photo while it loads, and instead of it if it fails (colour.md, Shop accents) |
 | `onPress` | `(id) => void` | none | |
 
 `tileWidth(theme, contentWidth, size)` is exported for carousels and skeletons. A photo that fails to load falls back to the placeholder. Photo at `radius.bubble`; badges 8 from the corner; name and meta `space.1` apart.

@@ -18,7 +18,7 @@ export function RequestRowExamples() {
         status="Needs you · buy by Thu 5 Nov"
         tone="needsYou"
         image={photo('rossis-bakery-front', 120)}
-        shopLogos={[photo('rossis-bakery-interior', 48)]}
+        shopLogos={[{ name: "Rossi's Bakery", accent: 'butter' }, { name: 'Paper & Co', accent: 'lavender' }]}
         unread={2}
         actionLabel="Buy at Rossi's"
         onAction={noop}

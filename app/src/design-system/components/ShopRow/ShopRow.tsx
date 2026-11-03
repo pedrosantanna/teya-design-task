@@ -4,11 +4,11 @@ import { Pressable, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { IMAGE_FILL } from '../../internal/media';
+import { IMAGE_OVER } from '../../internal/media';
 import { spoken } from '../../internal/PressableCard';
 import { ShopPlaceholder } from '../../internal/ShopPlaceholder';
 import { usePress } from '../../internal/usePress';
-import { cornerCurve } from '../../theme';
+import { cornerCurve, type ShopAccentName } from '../../theme';
 import { Icon } from '../Icon/Icon';
 import { Text } from '../Text/Text';
 
@@ -21,11 +21,13 @@ export type ShopRowProps = {
   /** "Open till 7pm · King Street · 13 min walk"; the street drops first when space runs out. */
   meta: string;
   logo?: string;
+  /** The shop's accent: the 40 circle with its initials when there is no logo. */
+  accent?: ShopAccentName;
   position?: RowPosition;
   onPress?: (id: string) => void;
 };
 
-export const ShopRow = memo(function ShopRow({ id, name, meta, logo, position = 'only', onPress }: ShopRowProps) {
+export const ShopRow = memo(function ShopRow({ id, name, meta, logo, accent, position = 'only', onPress }: ShopRowProps) {
   const { theme } = useUnistyles();
   const press = usePress();
   const grouped = theme.platform === 'ios';
@@ -40,14 +42,16 @@ export const ShopRow = memo(function ShopRow({ id, name, meta, logo, position = 
     >
       <Animated.View pointerEvents="none" style={[styles.layer, press.layerStyle]} />
       <View style={styles.logo}>
-        {logo ? <Image source={{ uri: logo }} style={IMAGE_FILL} contentFit="cover" accessible={false} /> : <ShopPlaceholder name={name} round />}
+        <ShopPlaceholder name={name} accent={accent} size="small" round />
+        {logo ? <Image source={{ uri: logo }} style={IMAGE_OVER} contentFit="cover" accessible={false} /> : null}
       </View>
       <View style={styles.text(grouped && position !== 'last' && position !== 'only')}>
         <View style={styles.grow}>
           <Text variant="headline" numberOfLines={1}>
             {name}
           </Text>
-          <Text variant="footnote" color="mutedForeground" numberOfLines={1}>
+          {/* The meta line wraps to a second line: its last part (the walk time) is the one that matters. */}
+          <Text variant="footnote" color="mutedForeground" numberOfLines={2}>
             {meta}
           </Text>
         </View>
@@ -81,7 +85,6 @@ const styles = StyleSheet.create((theme) => ({
     height: theme.size.avatar.shop,
     borderRadius: theme.radius.full,
     overflow: 'hidden',
-    backgroundColor: theme.color.muted,
   },
   // The separator is inset to the text, as in an iOS list.
   text: (separator: boolean) => ({

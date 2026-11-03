@@ -5,10 +5,12 @@ import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { ChatBubble, Chip, Composer, NavBar, Text, TypingIndicator, screenMargin, useNavBarHeight } from '@/design-system';
+import { ASK_ORIGIN, ChatBubble, Chip, Composer, Ground, NavBar, TypingIndicator, navigateWith, screenMargin, useNavBarHeight } from '@/design-system';
 import { OFF_SCRIPT_REPLY, TYPING_MS, matchAsk, scriptedAsks, shopById, sim, useApp, useAppActions, useContent, useSim } from '@/store';
 
 const SUGGESTIONS = ['Eclipse glasses near me, today', 'A fan I can collect after work', "Sourdough from Rossi's every Friday"];
+// What Snuffle does, said once, instead of a greeting (craft-pass-2).
+const OPENING = "Tell me what you need and by when. I'll ask the shops within a short walk and bring back who has it.";
 const SPLIT_REPLY = 'Glasses today and a cake for Saturday go to different shops. Shall I make them two requests, so each gets its own answers?';
 
 /** "By 4pm" from "…before 4pm" or "…by 4:30pm"; "Today" from "today". */
@@ -20,8 +22,10 @@ function deadlineFrom(text: string): string | null {
   return null;
 }
 
-// The Ask screen (v7 frames "Ask" and "Snuffle suggests two requests"): suggestions, the composer with the
-// place and deadline chips read from the text, and Snuffle's reply when the text isn't one request.
+// The Ask screen (v7 frames "Ask" and "Snuffle suggests two requests"; craft-pass-2): Snuffle's opening bubble
+// with three suggestions, the composer with the place and deadline chips read from the text, and Snuffle's reply
+// when the text isn't one request. A chat's neutral ground, "Snuffle" with the glyph in the bar, no tint or glow.
+// The composer grows out of Nearby's ask bar as the keyboard rises.
 export default function NewRequest() {
   const { theme, rt } = useUnistyles();
   const insets = useSafeAreaInsets();
@@ -46,17 +50,16 @@ export default function NewRequest() {
   };
 
   return (
+    <Ground value="chat">
     <View style={styles.screen}>
       <KeyboardAvoidingView style={styles.fill} behavior="padding">
         <ScrollView contentContainerStyle={styles.content(margin, top, insets.bottom)} keyboardShouldPersistTaps="handled">
           {sent ? (
             <Conversation key={sent} text={sent} />
           ) : (
-            <View style={styles.group}>
-              <Text variant="footnote" color="mutedForeground">
-                {shop ? `Ask ${shop.name}` : 'Try asking'}
-              </Text>
-              <View style={styles.chips}>
+            <View>
+              <ChatBubble sender="snuffle" text={shop ? `What would you like to ask ${shop.name}? I'll send it to them and tell you when they answer.` : OPENING} />
+              <View style={styles.replyChips} accessibilityLabel="Suggestions">
                 {SUGGESTIONS.map((s) => (
                   <Chip key={s} kind="suggestion" label={s} onPress={send} />
                 ))}
@@ -69,6 +72,8 @@ export default function NewRequest() {
             value={text}
             onChangeText={setText}
             onSend={send}
+            mark
+            morphFrom={ASK_ORIGIN}
             autoFocus={!sent}
             placeholder={shop ? `Ask ${shop.name}` : 'Ask for anything nearby'}
             chips={
@@ -81,16 +86,21 @@ export default function NewRequest() {
         </View>
       </KeyboardAvoidingView>
       <NavBar
-        title="New request"
-        leading="close"
+        title="Snuffle"
+        titleMark
+        fill="chat"
+        leading="back"
+        backLabel="Nearby"
         onLeading={() => {
           sim.compose(null);
           set({ draft: null });
-          if (router.canGoBack()) router.back();
+          // Back the way it came: the composer folds into the ask bar while the screen crossfades.
+          if (router.canGoBack()) navigateWith('unmorph', () => router.back(), ASK_ORIGIN);
           else router.navigate('/');
         }}
       />
     </View>
+    </Ground>
   );
 }
 
@@ -108,7 +118,7 @@ function Conversation({ text }: { text: string }) {
       <ChatBubble sender="shopper" text={text} animateIn />
       {replied ? (
         <>
-          <ChatBubble sender="snuffle" gap="newSender" text={split ? SPLIT_REPLY : OFF_SCRIPT_REPLY} />
+          <ChatBubble sender="snuffle" gap="newSender" text={split ? SPLIT_REPLY : OFF_SCRIPT_REPLY} animateIn />
           <View style={styles.replyChips}>
             {split ? (
               <>
@@ -130,15 +140,14 @@ function Conversation({ text }: { text: string }) {
 }
 
 const styles = StyleSheet.create((theme) => ({
-  screen: { flex: 1, backgroundColor: theme.color.background },
+  // A chat's neutral ground: Card in light mode, Background in dark (colour.md, Snuffle).
+  screen: { flex: 1, backgroundColor: theme.color.chat.ground },
   fill: { flex: 1 },
   content: (margin: number, top: number, bottom: number) => ({
     paddingHorizontal: margin,
     paddingTop: top + theme.space[4],
     paddingBottom: bottom + theme.size.field * 2 + theme.clearance.askBar,
   }),
-  group: { gap: theme.space[2] },
-  chips: { flexDirection: 'row', flexWrap: 'wrap', gap: theme.space[2] },
-  replyChips: { flexDirection: 'row', flexWrap: 'wrap', gap: theme.space[2], marginTop: theme.space[2], paddingLeft: theme.size.avatar.mark + theme.space[2] },
+  replyChips: { flexDirection: 'row', flexWrap: 'wrap', gap: theme.space[2], marginTop: theme.space[2] },
   composer: (margin: number, bottom: number) => ({ position: 'absolute', left: margin, right: margin, bottom: bottom + theme.space[2] }),
 }));

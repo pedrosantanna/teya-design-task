@@ -9,16 +9,20 @@ Takeaways:
 - As fotos são da própria loja, com luz do dia, da fachada ou do balcão. Sem fotos de banco de imagens, sem filtros, sem pessoas identificáveis. Um item nunca tem foto: as miniaturas mostram a loja ou um placeholder do pedido.
 - Poucas proporções: 4:3 para tiles, 1:1 para miniaturas e categorias, 3:2 para o topo da página da loja. Os cantos seguem os tokens de forma.
 - Uma loja sem foto ganha um tile tonal com as iniciais e o toldo da marca. É uma proposta e não foi testada.
+- O mapa é o MapLibre com dados do OpenStreetMap embutidos e um estilo feito a partir da paleta: chão quente, ruas discretas, prédios em 3D, sem rótulos por enquanto e o pin em Primary.
 Call:
 - Pedi que as imagens fossem tratadas do mesmo jeito que forma e movimento, partindo do iOS e ampliando para o Material (decisão 041).
 - Escolhi o HugeIcons em vez do SF Symbols e do Material Symbols, para o app ter um estilo de ícone só nas duas plataformas (decisão 042).
 - Mantive os valores provisórios, para serem ajustados no tamanho real, no protótipo.
+- Nesta rodada pedi um mapa gratuito que eu possa estilizar. Se ele mostra nomes de ruas e pontos de interesse ainda é decisão minha; até lá o estilo os deixa de fora.
 AI:
 - Um agente pesquisou as Human Interface Guidelines da Apple sobre imagens (lidas a partir do JSON da HIG, porque as páginas são renderizadas por script) e propôs os tamanhos e as regras. Eu pedi um design system moderno, baseado primeiro no iOS, depois no Material.
 - Um agente associou cada ícone do app flow v7 a um nome do HugeIcons, conferiu cada nome na lista de ícones do `@hugeicons/core-free-icons` 4.4.0 e desenhou os candidatos numa folha de contatos para escolher as formas. Eu escolhi o conjunto.
+- Um agente propôs o MapLibre com dados do OpenStreetMap e escreveu o estilo a partir da paleta.
 Trade-offs:
 - Fotos reais das lojas variam em qualidade; fotos de banco de imagens ficariam mais arrumadas e não diriam nada ao comprador sobre a loja.
 - Um conjunto só de ícones fica igual no iOS e no Android e abre mão do que os símbolos do sistema fazem sem custo: peso que acompanha o Dynamic Type, animações de símbolo e variantes preenchidas. O conjunto gratuito é só de traço, então um estado selecionado não pode trocar para um ícone preenchido.
+- Um mapa desenhado com dados do OpenStreetMap embutidos é gratuito e todo estilizável, e o app precisa empacotar e atualizar esses dados por conta própria.
 ```
 
 ## Origem das imagens e dos ícones
@@ -55,12 +59,14 @@ Os tamanhos são em pt no iOS e em dp no Android. As larguras dos tiles estão e
 | O traço segue o texto | `strokeWidth` 1,5 ao lado de Switzer 400 e 500, 2 ao lado de Switzer 600; os ícones escalam com o texto ao lado deles |
 | Monocromático por padrão | Um ícone usa a cor do seu texto; ícones de status usam o papel de aviso ou de sucesso da [Cor](colour.md) |
 | Sem preenchimento para seleção | O conjunto gratuito não tem formas preenchidas, então a seleção aparece na cor e no rótulo |
-| Formas da plataforma | Compartilhar, voltar e mais seguem a plataforma, como no mapa abaixo; todos os outros ícones são iguais nas duas |
+| Formas da plataforma | Compartilhar, voltar e mais seguem a plataforma, como no mapa abaixo; todos os outros ícones são iguais nas duas. No iOS 26 o sistema desenha o Voltar; o chevron do HugeIcons só é usado onde o próprio app desenha o Voltar, como no protótipo multiplataforma |
 | Fotos das lojas | Da própria loja, com luz do dia, fachada ou balcão, sem filtros, sem banco de imagens, sem pessoas identificáveis |
 | Sem fotos de item | Itens não têm foto; uma linha mostra a foto da loja ou o placeholder do pedido |
 | Scrim só quando precisa | Um gradiente preto de 0 → 40% só sob badges ou botões de glass sobre uma foto |
-| Placeholder sem foto (proposta, não testada) | Um tile tonal com o fundo 100 do acento escolhido pelo tipo de loja, iniciais em Switzer 600 no tom 800 e o toldo de cinco listras da marca como uma faixa no topo |
-| Estilo do mapa | Claro: chão Manteiga 50 (#F9F7F0), ruas em Cinza biscoito (secundário, #E5E2DE), pinos Índigo 800. Escuro: chão Manteiga 900 (#382C04), ruas no secundário (#332C27), pinos Índigo 300. Rótulos em Switzer, nenhum ponto de interesse além das lojas |
+| Tile de placeholder | O tile tonal da loja ([Cor](colour.md), Acentos das lojas): o passo `tile` do acento da loja, iniciais em Switzer 600 no passo `ink` e o toldo de cinco listras da marca como uma faixa no topo. Ele fica sob toda foto de loja, então uma foto carregando ou que falhou mostra a cor da loja; os cartões de resposta e os círculos de loja nas linhas de pedido mostram só o tile |
+| Dados do mapa | MapLibre no iOS, no Android e na web, com dados do OpenStreetMap embutidos: GeoJSON na web, PMTiles ou GeoJSON no app. "© OpenStreetMap contributors" aparece no mapa, no app e na gravação |
+| Estilo do mapa | Gerado a partir da paleta. Chão Manteiga 50 (#F9F7F0), no escuro #2B2420; ruas em Cinza biscoito (#E5E2DE, no escuro #332C27); parques e água em tons suaves; prédios extrudados em 3D com altura padrão de 8 m onde os dados não trazem altura, vistos com inclinação de 45–60°. Sem rótulos nem pontos de interesse até eu decidir sobre eles |
+| Pin e alternativa do mapa | O pin é o `Location01Icon` em Primary. Cada loja tem uma imagem estática do mapa, mostrada enquanto o mapa carrega e se ele falhar |
 | Texto alternativo | "[Shop] shopfront, [street]"; placeholders e imagens decorativas ficam ocultos para o VoiceOver e o TalkBack; um ícone que age leva o nome da ação |
 | Badges no rótulo | Os badges são lidos como parte do rótulo do tile: "Rossi's Bakery, promoted, open till 6pm" |
 
@@ -96,7 +102,7 @@ Todos os ícones do [app flow v7](../ideation/app-flow.md) e os que as próximas
 | Busca | Busca em Requests | `Search01Icon` | |
 | Câmera | Pedir com uma foto | `Camera01Icon` | |
 | Repetir | "Every Friday" | `RepeatIcon` | |
-| Do caixa | "In stock now · till" | `FlashIcon` | |
+| Do caixa | "In stock now", "In stock · 1 of 2" | `FlashIcon` | |
 | Visto | Uma loja consultada viu o pedido | `ViewIcon` | |
 | Não tem | Uma resposta sem nada para comprar | `CancelCircleIcon` | |
 | Retirar | Retirar na loja | `Store02Icon` | |
@@ -114,6 +120,9 @@ Estados vazios, o primeiro uso e o splash usam ilustrações 3D: formas simples,
 - HugeIcons: https://hugeicons.com
 - `@hugeicons/react-native` (props `icon`, `size`, `color`, `strokeWidth`): https://www.npmjs.com/package/@hugeicons/react-native
 - `@hugeicons/core-free-icons` (lista de ícones, licença MIT): https://www.npmjs.com/package/@hugeicons/core-free-icons
+- MapLibre: https://maplibre.org; MapLibre React Native: https://github.com/maplibre/maplibre-react-native
+- OpenStreetMap, direitos autorais e atribuição: https://www.openstreetmap.org/copyright
+- Protomaps, PMTiles: https://docs.protomaps.com/pmtiles/
 - Apple, Human Interface Guidelines, Images: https://developer.apple.com/design/human-interface-guidelines/images
 - Apple, Human Interface Guidelines, Icons (ícones de interface): https://developer.apple.com/design/human-interface-guidelines/icons
 - [Forma e materiais](shape.md) (tokens de canto), [Cor](colour.md) (fundos dos acentos, cores do mapa), [Marca](mark.md) (o toldo)

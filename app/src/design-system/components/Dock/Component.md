@@ -13,7 +13,7 @@ The strip at the bottom of Nearby, the Ask screen and the chat that holds the as
 
 ## iOS and Android
 
-iOS and the web: a blur (the floating material's fallback) with a hairline Separator on top, so what scrolls under it stays legible but out of the way. Android and Reduce Transparency: solid Background with the same hairline, so the ask bar's Card field still reads as a field.
+No bar fill on any platform (iOS 26 patterns): the controls float in their own glass (or tonal surface on Android) over a scroll-edge fade from Background, which starts `space.6` above the strip and reaches the bottom edge. The web adds a masked backdrop blur under the fade.
 
 ## Accessibility
 

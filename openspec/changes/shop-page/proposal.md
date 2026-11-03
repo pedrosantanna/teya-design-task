@@ -18,7 +18,7 @@ Tiles on Nearby and shop names in answers lead to the shop page, and Ask from a 
 None.
 
 ### Modified Capabilities
-- `shop-page`: adds the photo credit and simulated Call and Directions.
+- `shop-page`: keeps photo credits in code only (changed by `identity-in-use`) and adds simulated Call and Directions.
 
 ## Impact
 

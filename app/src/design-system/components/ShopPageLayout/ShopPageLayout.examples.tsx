@@ -17,8 +17,8 @@ export function ShopPageLayoutExamples() {
         name="Rossi's Bakery"
         status={['Open till 6pm · Blythe Road · 2 min walk', "Made to order · 2 days' notice"]}
         photos={[
-          { source: photo('rossis-bakery-front'), label: "Rossi's Bakery shopfront, Blythe Road", credit: 'Photo: Clara Lilley, Unsplash' },
-          { source: photo('rossis-bakery-interior'), label: "Rossi's Bakery inside, Blythe Road", credit: 'Photo: Arlind Photography, Unsplash' },
+          { source: photo('rossis-bakery-front'), label: "Rossi's Bakery shopfront, Blythe Road" },
+          { source: photo('rossis-bakery-interior'), label: "Rossi's Bakery inside, Blythe Road" },
         ]}
         onBack={noop}
         backLabel="Nearby"

@@ -13,10 +13,12 @@ A row in a grouped list: the details sheet (item, quantity, the ways to get it),
 | `value` | string | none | Trailing text; never truncates. `valueStrong` sets it in Headline |
 | `trailing` | ReactNode | none | Trailing content in place of `value`, e.g. a `Stepper` |
 | `children` | ReactNode | none | Fills the row in place of title, detail and value: a `Stepper`, which has its own label |
-| `selected` | boolean | none | Makes the row one choice of a group: selected-chip fill, its text colour and a check. Selection haptic |
+| `selected` | boolean | none | Makes the row one choice of a group: the row keeps its fill; a check in Foreground and the title in Headline carry the choice. Selection haptic |
 | `position` | `RowPosition` | `'only'` | Corners and separators of an iOS inset grouped list |
 | `onPress` | `(id) => void` | none | Without it the row is static text |
-| `surface` | `'card'`, `'background'` | `'card'` | The grouped fill. `background` is for rows that sit on a card (shop page); in dark it uses Muted, since Background is too close to Card there |
+| `surface` | `'card'`, `'background'` | `'card'` | The grouped fill. `background` is for rows that sit on a Card surface; in dark it uses Muted, since Background is too close to Card there |
+
+`ListGroup` holds the rows of one list; `shadow` adds the delicate card shadow (0 1 2 at 4%, 0 4 12 at 5%), used on the shop page, where Card rows sit on the Background-coloured card.
 
 ## iOS and Android
 

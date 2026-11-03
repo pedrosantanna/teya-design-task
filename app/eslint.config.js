@@ -60,7 +60,20 @@ const local = {
 module.exports = defineConfig([
   expoConfig,
   {
-    ignores: ['dist/*', '.expo/*', 'node_modules/*', 'src/design-system/theme/theme.generated.ts'],
+    ignores: [
+      'dist/*',
+      '.expo/*',
+      'node_modules/*',
+      'src/design-system/theme/theme.generated.ts',
+      // The map's vendored maplibre-gl build (copied on install), its data and its generated style.
+      'public/map/*',
+      'assets/map/*',
+      'src/design-system/components/Map/style.generated.ts',
+    ],
+  },
+  {
+    files: ['scripts/**/*.mjs'],
+    languageOptions: { globals: { Buffer: 'readonly', process: 'readonly', console: 'readonly', URL: 'readonly', fetch: 'readonly' } },
   },
   {
     files: ['src/**/*.{ts,tsx}'],

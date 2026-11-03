@@ -4,10 +4,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
-<link rel="stylesheet" href="site/canvas.css?v=14">
-<script src="site/canvas.js?v=11"></script>
+<link rel="stylesheet" href="site/canvas.css?v=16">
+<script src="site/canvas.js?v=13"></script>
 <link rel="stylesheet" href="site/viewer3d.css?v=3">
-<script src="site/viewer3d.js?v=3"></script>
+<script src="site/viewer3d.js?v=4"></script>
 <style>
 /* Docs shell in the shadcn/ui idiom: neutral zinc tokens, hierarchy from weight and space, borders only where they separate. */
 :root {
@@ -525,7 +525,7 @@ i.m.unknown { opacity: .45; }
       verifiedTip: 'Checked against the live source', archiveTip: 'Collected from a public archive; not yet checked against the live source', source: 'Source ↗',
       photoFor: 'Photo standing in for', kept: 'kept going', gaveUp: 'gave up on local', notShown: 'not shown',
       mapNote: n => `Each dot is one post; posts with the same codes sit side by side. Not on the chart: ${n} posts where nothing broke.`,
-      persists: 'persists', defects: 'defects', unknown: 'stance unknown', urgent: 'urgent', openAlone: 'Open on its own', canvasLabel: 'Canvas. Scroll to pan, ⌘ or Ctrl and scroll to zoom.', canvasTools: 'Tools', toolSelect: 'Select', toolHand: 'Hand', zoom: 'Zoom', zoomIn: 'Zoom in', zoomOut: 'Zoom out', zoom100: 'Zoom to 100%', zoomFit: 'Zoom to fit', inspect: 'Inspect', close: 'Close', about: 'About this canvas', selectedN: n => `${n} selected`, kindScreen: 'Screen', kindState: 'State', kindNote: 'Note', kindArea: 'Section', kindBlock: 'Item', notes: 'Notes', linksIn: 'Comes from', linksOut: 'Goes to', canvasFail: 'Couldn’t load the canvas.', version: 'Version', current: 'current', notPublished: 'Not published yet', camera: 'Camera', isometric: 'Isometric', orthographic: 'Orthographic', perspective: 'Perspective', outlines: 'Outlines', shadows: 'Shadows', grid: 'Grid', autoRotate: 'Auto-rotate', background: 'Background', bgCanvas: 'Canvas', replayEntry: 'Replay entry', fps: 'FPS', viewerAbout: 'About these illustrations', viewerLabel: '3D illustration. Drag to use the selected tool, right-drag to pan, scroll to zoom.', viewerSettings: 'View settings', viewerGallery: 'Illustrations', viewerFail: 'Couldn’t load the 3D viewer.', viewerObjects: 'Objects', viewerTools: 'View tools', viewerDisplay: 'Display', viewerPerf: 'Performance', tool_orbit: 'Orbit', tool_pan: 'Pan', tool_zoom: 'Zoom', resetView: 'Reset view', light: 'Light', lightAngle: 'Angle', lightHeight: 'Height', frameTime: 'Frame time', hideNav: 'Hide sidebar', showNav: 'Show sidebar', isoShort: 'Iso', orthoShort: 'Ortho', perspShort: 'Persp', hidePanel: 'Hide panel', showObjects: 'Show objects', showSettings: 'Show settings',
+      persists: 'persists', defects: 'defects', unknown: 'stance unknown', urgent: 'urgent', openAlone: 'Open on its own', canvasLabel: 'Canvas. Scroll to pan, ⌘ or Ctrl and scroll to zoom.', canvasTools: 'Tools', toolSelect: 'Select', toolHand: 'Hand', zoom: 'Zoom', zoomIn: 'Zoom in', zoomOut: 'Zoom out', zoom100: 'Zoom to 100%', zoomFit: 'Zoom to fit', inspect: 'Inspect', close: 'Close', about: 'About this canvas', selectedN: n => `${n} selected`, kindScreen: 'Screen', kindState: 'State', kindNote: 'Note', kindArea: 'Section', kindBlock: 'Item', notes: 'Notes', linksIn: 'Comes from', linksOut: 'Goes to', canvasFail: 'Couldn’t load the canvas.', cvMode: 'Canvas mode', modeFlow: 'Flow', modeProto: 'Proto', modeFlowTip: 'Flow: the whole board (P)', modeProtoTip: 'Proto: click through the screens (P)', protoBar: 'Prototype controls', protoRestart: 'Restart', protoBack: 'Back', protoScreens: 'Screens', protoHotspots: 'Show hotspots', protoNext: 'next', protoOther: 'Other', version: 'Version', current: 'current', notPublished: 'Not published yet', camera: 'Camera', isometric: 'Isometric', orthographic: 'Orthographic', perspective: 'Perspective', outlines: 'Outlines', shadows: 'Shadows', grid: 'Grid', autoRotate: 'Auto-rotate', background: 'Background', bgCanvas: 'Canvas', replayEntry: 'Replay entry', fps: 'FPS', viewerAbout: 'About these illustrations', viewerLabel: '3D illustration. Drag to use the selected tool, right-drag to pan, scroll to zoom.', viewerSettings: 'View settings', viewerGallery: 'Illustrations', viewerFail: 'Couldn’t load the 3D viewer.', viewerObjects: 'Objects', viewerTools: 'View tools', viewerDisplay: 'Display', viewerPerf: 'Performance', tool_orbit: 'Orbit', tool_pan: 'Pan', tool_zoom: 'Zoom', resetView: 'Reset view', light: 'Light', lightAngle: 'Angle', lightHeight: 'Height', frameTime: 'Frame time', hideNav: 'Hide sidebar', showNav: 'Show sidebar', isoShort: 'Iso', orthoShort: 'Ortho', perspShort: 'Persp', hidePanel: 'Hide panel', showObjects: 'Show objects', showSettings: 'Show settings',
       loadFail: (src, m) => `Couldn’t load <code>${src}</code> (${m}). Check that the file exists in the repo and is published with the page.`,
       valueMap: 'Value map', customerProfile: 'Customer profile', screensSource: 'Main screens on Mobbin', screensAlt: 'Main app screens, captured from Mobbin', screensMissing: 'Screens are kept locally, not in the public repo.',
       notTranslated: 'This page isn’t translated yet, so it shows in English.' },
@@ -534,7 +534,7 @@ i.m.unknown { opacity: .45; }
       verifiedTip: 'Conferida na fonte original', archiveTip: 'Coletada de um arquivo público; ainda não conferida na fonte original', source: 'Fonte ↗',
       photoFor: 'Foto que representa', kept: 'continuou', gaveUp: 'desistiu do comércio local', notShown: 'não aparece',
       mapNote: n => `Cada ponto é um post; posts com as mesmas etiquetas ficam lado a lado. Fora do gráfico: ${n} posts em que nada deu errado.`,
-      persists: 'continuou', defects: 'desistiu', unknown: 'não aparece', urgent: 'urgente', openAlone: 'Abrir sozinho', canvasLabel: 'Canvas. Role para mover, ⌘ ou Ctrl e role para dar zoom.', canvasTools: 'Ferramentas', toolSelect: 'Selecionar', toolHand: 'Mão', zoom: 'Zoom', zoomIn: 'Aproximar', zoomOut: 'Afastar', zoom100: 'Zoom em 100%', zoomFit: 'Ajustar à tela', inspect: 'Inspecionar', close: 'Fechar', about: 'Sobre este canvas', selectedN: n => `${n} selecionados`, kindScreen: 'Tela', kindState: 'Estado', kindNote: 'Nota', kindArea: 'Seção', kindBlock: 'Item', notes: 'Notas', linksIn: 'Vem de', linksOut: 'Vai para', canvasFail: 'Não foi possível carregar o canvas.', version: 'Versão', current: 'atual', notPublished: 'Ainda não publicada', camera: 'Câmera', isometric: 'Isométrica', orthographic: 'Ortográfica', perspective: 'Perspectiva', outlines: 'Contornos', shadows: 'Sombras', grid: 'Grade', autoRotate: 'Girar sozinho', background: 'Fundo', bgCanvas: 'Canvas', replayEntry: 'Repetir entrada', fps: 'FPS', viewerAbout: 'Sobre estas ilustrações', viewerLabel: 'Ilustração 3D. Arraste para usar a ferramenta escolhida, arraste com o botão direito para mover, role para dar zoom.', viewerSettings: 'Ajustes de visualização', viewerGallery: 'Ilustrações', viewerFail: 'Não foi possível carregar o visualizador 3D.', viewerObjects: 'Objetos', viewerTools: 'Ferramentas de visualização', viewerDisplay: 'Exibição', viewerPerf: 'Desempenho', tool_orbit: 'Orbitar', tool_pan: 'Mover', tool_zoom: 'Zoom', resetView: 'Redefinir vista', light: 'Luz', lightAngle: 'Ângulo', lightHeight: 'Altura', frameTime: 'Tempo por quadro', hideNav: 'Ocultar barra lateral', showNav: 'Mostrar barra lateral', isoShort: 'Iso', orthoShort: 'Orto', perspShort: 'Persp', hidePanel: 'Ocultar painel', showObjects: 'Mostrar objetos', showSettings: 'Mostrar ajustes',
+      persists: 'continuou', defects: 'desistiu', unknown: 'não aparece', urgent: 'urgente', openAlone: 'Abrir sozinho', exportTitle: 'Exportar', exportObject: 'Objeto', exportSize: 'Tamanho (pt)', exportScale: 'Escala', exportGround: 'Fundo', exportClip: 'Trecho', exportFps: 'Quadros/s', exportGo: 'Exportar quadros PNG (.zip)', exportBusy: 'Renderizando…', exportFramesDone: 'quadros', canvasLabel: 'Canvas. Role para mover, ⌘ ou Ctrl e role para dar zoom.', canvasTools: 'Ferramentas', toolSelect: 'Selecionar', toolHand: 'Mão', zoom: 'Zoom', zoomIn: 'Aproximar', zoomOut: 'Afastar', zoom100: 'Zoom em 100%', zoomFit: 'Ajustar à tela', inspect: 'Inspecionar', close: 'Fechar', about: 'Sobre este canvas', selectedN: n => `${n} selecionados`, kindScreen: 'Tela', kindState: 'Estado', kindNote: 'Nota', kindArea: 'Seção', kindBlock: 'Item', notes: 'Notas', linksIn: 'Vem de', linksOut: 'Vai para', canvasFail: 'Não foi possível carregar o canvas.', cvMode: 'Modo do canvas', modeFlow: 'Fluxo', modeProto: 'Proto', modeFlowTip: 'Fluxo: o quadro inteiro (P)', modeProtoTip: 'Proto: navegue pelas telas clicando (P)', protoBar: 'Controles do protótipo', protoRestart: 'Recomeçar', protoBack: 'Voltar', protoScreens: 'Telas', protoHotspots: 'Mostrar áreas clicáveis', protoNext: 'próximo', protoOther: 'Outras', version: 'Versão', current: 'atual', notPublished: 'Ainda não publicada', camera: 'Câmera', isometric: 'Isométrica', orthographic: 'Ortográfica', perspective: 'Perspectiva', outlines: 'Contornos', shadows: 'Sombras', grid: 'Grade', autoRotate: 'Girar sozinho', background: 'Fundo', bgCanvas: 'Canvas', replayEntry: 'Repetir entrada', fps: 'FPS', viewerAbout: 'Sobre estas ilustrações', viewerLabel: 'Ilustração 3D. Arraste para usar a ferramenta escolhida, arraste com o botão direito para mover, role para dar zoom.', viewerSettings: 'Ajustes de visualização', viewerGallery: 'Ilustrações', viewerFail: 'Não foi possível carregar o visualizador 3D.', viewerObjects: 'Objetos', viewerTools: 'Ferramentas de visualização', viewerDisplay: 'Exibição', viewerPerf: 'Desempenho', tool_orbit: 'Orbitar', tool_pan: 'Mover', tool_zoom: 'Zoom', resetView: 'Redefinir vista', light: 'Luz', lightAngle: 'Ângulo', lightHeight: 'Altura', frameTime: 'Tempo por quadro', hideNav: 'Ocultar barra lateral', showNav: 'Mostrar barra lateral', isoShort: 'Iso', orthoShort: 'Orto', perspShort: 'Persp', hidePanel: 'Ocultar painel', showObjects: 'Mostrar objetos', showSettings: 'Mostrar ajustes',
       loadFail: (src, m) => `Não foi possível carregar <code>${src}</code> (${m}).`,
       valueMap: 'Mapa de valor', customerProfile: 'Perfil do cliente', screensSource: 'Telas principais no Mobbin', screensAlt: 'Telas principais do app, capturadas no Mobbin', screensMissing: 'As telas ficam só na cópia local, fora do repositório público.',
       notTranslated: 'Esta página ainda não foi traduzida, por isso aparece em inglês.' }
@@ -567,6 +567,8 @@ i.m.unknown { opacity: .45; }
     'briefcase': '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>',
     'check': '<path d="M20 6 9 17l-5-5"/>',
     'chevron-left': '<path d="m15 18-6-6 6-6"/>',
+    'arrow-left': '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+    'rotate-ccw': '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>',
     'chevron-right': '<path d="m9 18 6-6-6-6"/>',
     'circle-check': '<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>',
     'circle-x': '<circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/>',
@@ -921,7 +923,7 @@ i.m.unknown { opacity: .45; }
     });
   }
   const currentId = () => {
-    const h = decodeURIComponent(location.hash.slice(1));
+    const h = decodeURIComponent(location.hash.slice(1)).split('?')[0];
     return PAGES.some(p => p.id === h) ? h : PAGES[0].id;
   };
 
@@ -1062,11 +1064,23 @@ i.m.unknown { opacity: .45; }
       // A canvas page can carry versions, newest first; the newest opens and earlier ones stay one click away.
       const versions = Array.isArray(page.canvas) ? page.canvas : [{ file: page.canvas }];
       const picker = versions.length > 1 ? `<select class="cv-ver" aria-label="${esc(t('version'))}">${versions.map((v, i) => `<option value="${i}">${esc(v.version)}${i === 0 ? ` · ${esc(t('current'))}` : ''}</option>`).join('')}</select>` : '';
+      // Flow shows the whole board; Proto (canvases with links between screens) clicks through one screen at a time.
+      // The mode is remembered per page; #page?proto=<frame-id> opens Proto at that screen.
+      const modeSeg = `<div class="seg cv-mode" role="radiogroup" aria-label="${esc(t('cvMode'))}" hidden>${['flow', 'proto'].map(m => `<button type="button" role="radio" data-cvmode="${m}" aria-checked="false" title="${esc(t(m === 'flow' ? 'modeFlowTip' : 'modeProtoTip'))}">${esc(t(m === 'flow' ? 'modeFlow' : 'modeProto'))}</button>`).join('')}</div>`;
       els.content.innerHTML = `<div class="cv-page" data-lang="${LANG}"><div class="cv-board"></div>
-        <div class="cv-title"><div><div class="crumbs">${crumbs}</div><h1>${title}</h1></div>${picker}<button type="button" class="cv-about">${esc(t('about'))}</button></div></div>`;
+        <div class="cv-title"><div><div class="crumbs">${crumbs}</div><h1>${title}</h1></div>${modeSeg}${picker}<button type="button" class="cv-about">${esc(t('about'))}</button></div></div>`;
       els.toc.innerHTML = '';
       document.title = `${L(page)} · Snuffle Docs`;
       let cv = null;
+      const modeKey = `hs-cv-mode:${page.id}`, seg = els.content.querySelector('.cv-mode');
+      let deep = new URLSearchParams(decodeURIComponent(location.hash.slice(1)).split('?')[1] || '').get('proto');
+      const onChange = ({ mode, frame }) => {
+        store.set(modeKey, mode);
+        seg.querySelectorAll('button').forEach(b => b.setAttribute('aria-checked', String(b.dataset.cvmode === mode)));
+        const h = `#${page.id}${mode === 'proto' && frame ? `?proto=${encodeURIComponent(frame)}` : ''}`;
+        if (location.hash !== h) history.replaceState(null, '', h);
+      };
+      seg.addEventListener('click', e => { const b = e.target.closest('[data-cvmode]'); if (b && cv) cv.setMode(b.dataset.cvmode); });
       const show = async i => {
         const board = els.content.querySelector('.cv-board');
         let html;
@@ -1074,7 +1088,11 @@ i.m.unknown { opacity: .45; }
         catch (e) { board.innerHTML = `<p class="state">${esc(t('canvasFail'))} ${esc(e.message)}</p>`; return; }
         const box = document.createElement('div'); box.innerHTML = html;
         box.querySelectorAll('img[src]').forEach(img => { const s = img.getAttribute('src'); if (!/^(https?:|data:|\/)/.test(s)) img.setAttribute('src', resolve(versions[i].file, s)); });
-        cv = window.HSCanvas.mount(board, box.innerHTML, { lang: LANG, icon, t, about: `<div class="prose">${lede ? `<p>${lede}</p>` : ''}${tmp.innerHTML}</div>` });
+        const mode = deep ? 'proto' : (store.get(modeKey) === 'proto' ? 'proto' : 'flow');
+        cv = window.HSCanvas.mount(board, box.innerHTML, { lang: LANG, icon, t, mode, start: deep, onChange, about: `<div class="prose">${lede ? `<p>${lede}</p>` : ''}${tmp.innerHTML}</div>` });
+        deep = null;
+        seg.hidden = !cv.hasProto;
+        seg.querySelectorAll('button').forEach(b => b.setAttribute('aria-checked', String(b.dataset.cvmode === cv.mode)));
       };
       els.content.querySelector('.cv-about').addEventListener('click', () => cv && cv.showAbout());
       els.content.querySelector('.cv-ver')?.addEventListener('change', e => show(+e.target.value));

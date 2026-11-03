@@ -1,6 +1,6 @@
 # TypingIndicator
 
-Three dots in a Snuffle bubble with the mark, shown when Snuffle's reply takes more than about 300 ms and replaced in place by the reply. Spec: Typing indicator on `docs/develop/design-system/components.md`.
+Three dots in a Snuffle bubble, under the sender line (the bare glyph and "Snuffle") when it starts a group, shown when Snuffle's reply takes more than about 300 ms and replaced in place by the reply. Spec: Typing indicator on `docs/develop/design-system/components.md`.
 
 ## Props
 
@@ -10,7 +10,7 @@ Three dots in a Snuffle bubble with the mark, shown when Snuffle's reply takes m
 
 ## Behaviour
 
-Muted bubble, `radius.bubble`, `inset.bubble`; dots (8) in Muted foreground pulse with `spring.fade`, staggered. With Reduce Motion the dots stay still at half opacity.
+Snuffle bubble (`snuffle.bubble`, Lavender), `radius.bubble`, `inset.bubble`; dots (8) in `snuffle.dot` pulse with `spring.fade`, staggered. With Reduce Motion the dots stay still at half opacity.
 
 ## Accessibility
 

@@ -3,14 +3,14 @@
   "color": {
     "$type": "color",
     "background": {
-      "$value": "{color.biscuit.960}"
+      "$value": "{color.biscuit.940}"
     },
     "card": {
       "$value": "{color.biscuit.1000}"
     },
     "muted": {
       "$value": "{color.biscuit.915}",
-      "$description": "Chips and Snuffle bubbles"
+      "$description": "Tonal buttons and the stepper on cards"
     },
     "mutedForeground": {
       "$value": "{color.biscuit.445}",
@@ -31,10 +31,22 @@
       "$description": "Selected tab, links, icons that act"
     },
     "chipSelected": {
-      "$value": "{color.indigo.100}"
+      "$value": "{color.indigo.100}",
+      "$description": "Tonal Indigo selection on controls other than filter chips: the current order step, Android segmented control and snackbar action, the debugger"
     },
     "onChipSelected": {
       "$value": "{color.indigo.800}"
+    },
+    "chipSelectedEdge": {
+      "$value": "{color.indigo.200}",
+      "$description": "A 1 pt edge on a selected chip, so its tonal fill holds its own next to Card chips (colour.md, Roles)"
+    },
+    "filterSelected": {
+      "$value": "{color.biscuit.150}",
+      "$description": "Selected filter chip: Foreground fill, so Indigo means action, not selection (tags.md)"
+    },
+    "onFilterSelected": {
+      "$value": "{color.biscuit.985}"
     },
     "badge": {
       "promoted": {
@@ -104,6 +116,113 @@
     "codeInk": {
       "$value": "{color.black}",
       "$description": "QR code modules"
+    },
+    "shop": {
+      "accent": {
+        "peach": {
+          "wash": {
+            "$value": "{color.peach.100}",
+            "$description": "The light stripes of the awning band on the placeholder tile"
+          },
+          "tile": {
+            "$value": "{color.peach.tile}",
+            "$description": "Placeholder tile, category card, the shop page header, the receipt header"
+          },
+          "ink": {
+            "$value": "{color.peach.800}",
+            "$description": "Initials and the dark awning stripes on the tile"
+          }
+        },
+        "pistachio": {
+          "wash": {
+            "$value": "{color.pistachio.100}",
+            "$description": "The light stripes of the awning band on the placeholder tile"
+          },
+          "tile": {
+            "$value": "{color.pistachio.tile}",
+            "$description": "Placeholder tile, category card, the shop page header, the receipt header"
+          },
+          "ink": {
+            "$value": "{color.pistachio.800}",
+            "$description": "Initials and the dark awning stripes on the tile"
+          }
+        },
+        "butter": {
+          "wash": {
+            "$value": "{color.butter.100}",
+            "$description": "The light stripes of the awning band on the placeholder tile"
+          },
+          "tile": {
+            "$value": "{color.butter.tile}",
+            "$description": "Placeholder tile, category card, the shop page header, the receipt header"
+          },
+          "ink": {
+            "$value": "{color.butter.800}",
+            "$description": "Initials and the dark awning stripes on the tile"
+          }
+        },
+        "lavender": {
+          "wash": {
+            "$value": "{color.lavender.100}",
+            "$description": "The light stripes of the awning band on the placeholder tile"
+          },
+          "tile": {
+            "$value": "{color.lavender.tile}",
+            "$description": "Placeholder tile, category card, the shop page header, the receipt header"
+          },
+          "ink": {
+            "$value": "{color.lavender.800}",
+            "$description": "Initials and the dark awning stripes on the tile"
+          }
+        }
+      }
+    },
+    "snuffle": {
+      "bubble": {
+        "$value": "{color.lavender.tile}",
+        "$description": "Snuffle's chat bubbles and the typing indicator"
+      },
+      "dot": {
+        "$value": "{color.lavender.500}",
+        "$description": "Typing indicator dots"
+      }
+    },
+    "chat": {
+      "ground": {
+        "$value": "{color.biscuit.1000}",
+        "$description": "A chat's neutral ground: Card in light, Background in dark"
+      },
+      "fill": {
+        "$value": "{color.biscuit.940}",
+        "$description": "Chips and grouped rows on the chat ground: Background in light, Card in dark"
+      },
+      "edge": {
+        "$value": "{color.biscuit.890}",
+        "$description": "Hairline around cards and grouped rows on the chat ground (white on white needs an edge)"
+      }
+    },
+    "sheet": {
+      "$value": "{color.biscuit.940}",
+      "$description": "Opaque sheet ground (dark L 0.20, so Card at L 0.265 still separates)"
+    },
+    "count": {
+      "$value": "{color.indigo.800}",
+      "$description": "The count on the Requests button, Indigo 800 in both modes"
+    },
+    "onCount": {
+      "$value": "{color.white}"
+    },
+    "glassEdge": {
+      "$value": "{color.biscuit.150}",
+      "$description": "Web glass: the 0.5 pt hairline and the drop shadow colour"
+    },
+    "glassShine": {
+      "$value": "{color.white}",
+      "$description": "Web glass: the 0.5 pt inner highlight along the top edge"
+    },
+    "shadow": {
+      "$value": "{color.biscuit.150}",
+      "$description": "Colour of the delicate card shadow"
     }
   }
 }

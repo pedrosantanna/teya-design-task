@@ -42,7 +42,8 @@ export function requestFilter(state: RequestState, order: OrderState): 'Needs yo
   return 'Done';
 }
 
-/** Where an answer is drawn: a compact row on the asking list ("In stock now · 1 of 2 · till"), a full card's
+/** Where an answer is drawn: a compact row on the asking list ("In stock · 1 of 2"; the row's flash symbol says it
+ *  came from the till, and its spoken label says so), a full card's
  *  status line ("In stock now · 1 of 2 · from the shop's till"), that line without its source (`cardStatus`, the
  *  card adds the source itself), or the bare status. */
 export type AnswerForm = 'row' | 'card' | 'cardStatus' | 'status';
@@ -61,7 +62,7 @@ export type AnswerLabelContext = {
 export function answerLabel(state: AnswerState, ctx: AnswerLabelContext, form: AnswerForm = 'status'): string {
   const them = plural(ctx.plural, 'it', 'them');
   const ofQuantity = `${ctx.available ?? 1} of ${ctx.quantity}`;
-  const till = form === 'row' ? ' · till' : form === 'cardStatus' ? '' : " · from the shop's till";
+  const till = form === 'row' || form === 'cardStatus' ? '' : " · from the shop's till";
   const replied = form === 'card' && ctx.repliedAgo ? ` · replied ${ctx.repliedAgo}` : '';
   const similarItem = (form === 'card' || form === 'cardStatus') && ctx.item ? ` · ${ctx.item}` : '';
   switch (state) {
@@ -82,7 +83,7 @@ export function answerLabel(state: AnswerState, ctx: AnswerLabelContext, form: A
     case 'inStock':
       return `In stock now${till}`;
     case 'inStockSome':
-      return `In stock now · ${ofQuantity}${till}`;
+      return `${form === 'row' ? 'In stock' : 'In stock now'} · ${ofQuantity}${till}`;
     case 'canMake':
       return `Can make it · ${ctx.notice ?? "2 days' notice"}`;
   }

@@ -11,6 +11,7 @@ Call:
 - Levei os dois primeiros testes de ícone do agente para o Figma, ajustei os vetores à mão e escolhi a quarta versão como marca provisória (decisão 033).
 - Pedi que ela fosse refinada numa grade de ícone, em preto e branco até a paleta ser escolhida, e apontei quando ficou alta demais.
 - Parei aqui de propósito. Com mais tempo eu desenvolveria mais a marca, talvez por outro caminho, mas o brand não é o foco deste exercício; achei divertido e o resultado é bom o bastante para dar uma cara ao app.
+- Dentro do app a marca é um glifo solto, de uma cor só que segue o tema, nunca num tile nem num avatar. Isso reverte a "marca sobre um tile Lavanda" da decisão 045.
 AI:
 - Um agente desenhou os testes de ícone em SVG a partir das minhas sementes (um cão farejador, as compras britânicas, os toldos da parade). Levei os dois primeiros para o Figma e mudei os vetores à mão. O agente exportou a minha versão, reconstruiu-a sobre um eixo só e desenhou as aplicações nas plataformas. O primeiro centro ótico deixou o desenho alto demais; eu apontei, e ele escolheu outro comparando deslocamentos no olho.
 Trade-offs:
@@ -71,6 +72,19 @@ Um ícone adaptável tem duas camadas de 108 dp. Os launchers mostram os 72 dp d
 <figure><img src="../../../develop/design-system/img/mark-android-circle.svg" alt="Ícone do Android com máscara circular" width="144" height="144"><figcaption>Máscara circular</figcaption></figure>
 <figure><img src="../../../develop/design-system/img/mark-android-themed.svg" alt="Ícone temático do Android" width="144" height="144"><figcaption>Temático, camada monocromática</figcaption></figure>
 </div>
+
+## No app
+
+O quadrado existe só como ícone do app, que o sistema desenha. Em todo o resto do app a marca é só o glifo: sem tile, sem círculo, sem avatar e sem nada atrás. Ela pega uma cor do tema, Foreground, então fica escura sobre fundos claros e clara sobre escuros; as duas listras de menos contraste ficam em Muted foreground, o tom mais claro da mesma tinta, como no ícone temático do Android.
+
+| Onde | Tamanho |
+| --- | --- |
+| A linha de remetente da conversa, ao lado de "Snuffle", sem coluna de avatar | 22 de largura |
+| Notificação e Live Activity | 40 de largura |
+| Login | 56 de largura |
+| O splash, nativo e no app, centralizado na cor de fundo | 120 de largura |
+
+Isso reverte a parte da decisão 045 que punha a marca sobre um tile Lavanda, com um rosto quente atrás do glifo. A Lavanda continua sendo a cor do Snuffle nos balões e nos pontos de digitação.
 
 ## Anatomia
 

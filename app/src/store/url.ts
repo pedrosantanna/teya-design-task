@@ -15,6 +15,8 @@ export type UrlState = {
   /** The embedding page's light or dark (the docs site), when the build runs in an iframe. */
   hostScheme?: 'light' | 'dark';
   set?: ContentSet;
+  /** `?firstRun=1`: start with first run (splash, Getting started, location, sign in). */
+  firstRun?: boolean;
 };
 
 function oneOf<T extends string>(value: string | null, options: readonly T[]): T | undefined {
@@ -53,6 +55,7 @@ export function readUrlState(params: URLSearchParams = startParams()): UrlState 
     scheme: embedded ? undefined : scheme,
     hostScheme: embedded && scheme !== 'system' ? scheme : undefined,
     set: oneOf(params.get('set'), ['default', 'empty', 'longNames', 'manyAnswers'] as const),
+    firstRun: params.get('firstRun') === '1',
   };
 }
 
@@ -73,7 +76,7 @@ export function basePath(): string {
 }
 
 /** A link that opens the web build in the given state. Keeps `frame` and `debug` from the current URL. */
-export function shareUrl(state: Required<Omit<UrlState, 'set' | 'hostScheme'>> & { set: ContentSet }): string {
+export function shareUrl(state: Required<Omit<UrlState, 'set' | 'hostScheme' | 'firstRun'>> & { set: ContentSet }): string {
   if (Platform.OS !== 'web' || typeof window === 'undefined') return '';
   const params = new URLSearchParams();
   params.set('step', state.step);

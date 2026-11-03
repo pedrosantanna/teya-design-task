@@ -1,4 +1,4 @@
-import { router, Stack, useRootNavigationState } from 'expo-router';
+import { router, Stack, usePathname, useRootNavigationState } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, type ReactNode } from 'react';
 import { Platform, View } from 'react-native';
@@ -7,7 +7,9 @@ import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles, withUnistyles } from 'react-native-unistyles';
 
-import { DesignSystemRoot, NotificationBanner } from '@/design-system';
+import { useReducedMotion } from 'react-native-reanimated';
+
+import { DesignSystemRoot, NotificationBanner, installWebTransitions, nameScreenArea, type TransitionKind } from '@/design-system';
 import { DebugGestureArea, DebugPanel, DebugToggle, useDebugShortcut } from '@/debug';
 import { DeviceFrame, useFrameLayout } from '@/device-frame';
 import { hrefFor, openActiveChat, readUrlState, sim, startThemeSync, useAppStore, useSim } from '@/store';
@@ -19,6 +21,28 @@ startThemeSync();
 // never mount it, its toggle or its gesture; the store's defaults apply there.
 const WEB = Platform.OS === 'web';
 
+// Web: every router call runs as a view transition (design-system/internal/transitions.ts). The kind follows
+// the route: zooms into the shop page and Requests come from their ZoomSource, the receipt fades, Keep looking and
+// Ask rise as sheets, everything else pushes and pops.
+let currentPath = '/';
+const SHEETS = /\/(keep-looking|requests\/new)$/;
+// First run (welcome, location ask, sign in) fades from screen to screen and into Nearby.
+const FIRST_RUN = /^\/(welcome|location-ask|sign-in)$/;
+function kindFor(target: string | null, current: string): TransitionKind {
+  if (FIRST_RUN.test(current) || (target != null && FIRST_RUN.test(target.split('?')[0]))) return 'fade';
+  if (target == null) {
+    if (/^\/shops\/[^/]+$/.test(current) || current === '/requests') return 'unzoom';
+    if (SHEETS.test(current)) return 'unsheet';
+    if (/\/order$/.test(current)) return 'fade';
+    return 'pop';
+  }
+  if (SHEETS.test(target)) return 'sheet';
+  if (/\/order$/.test(target)) return 'fade';
+  if (target === '/' || target === '/index') return 'pop';
+  return 'push';
+}
+installWebTransitions(router as never, kindFor, () => currentPath);
+
 // Third-party view: wrapped so Unistyles styles reach it on the web too.
 const RootView = withUnistyles(GestureHandlerRootView);
 
@@ -27,14 +51,39 @@ export default function RootLayout() {
   const { framed, device, docked } = useFrameLayout();
   useDebugShortcut();
   useOpenStepFromUrl();
+  const pathname = usePathname();
+  useEffect(() => {
+    currentPath = pathname;
+  }, [pathname]);
+  const reduceMotion = useReducedMotion();
+  // Native stacks animate each route (iOS 26 patterns, Apple Music as the reference); Reduce Motion crossfades.
+  // The web animates through view transitions instead, so its stack doesn't.
+  const anim = (native: 'default' | 'fade' | 'slide_from_bottom' | 'slide_from_right') =>
+    WEB ? 'none' : reduceMotion ? 'fade' : native;
+  const zoomAnim = anim(Platform.OS === 'android' ? 'fade' : 'default');
 
   const app = (
     <DesignSystemRoot>
       <StatusBar style={theme.scheme === 'dark' ? 'light' : 'dark'} />
       {/* A plain object: react-navigation's views don't take Unistyles styles on the web, so a theme switch has to re-render it. */}
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: theme.color.background } }}>
-        {/* The shop page is the shop's detail: a normal push with Back and the back gesture (v7 "Shop page"). */}
-        <Stack.Screen name="shops/[id]" options={{ gestureEnabled: true }} />
+        {/* The shop page and Requests zoom from their source (ZoomSource): the native zoom on iOS, a fade under the
+            container transform on Android. Both keep the back gesture. */}
+        <Stack.Screen name="shops/[id]" options={{ gestureEnabled: true, animation: zoomAnim }} />
+        <Stack.Screen name="requests/index" options={{ gestureEnabled: true, animation: zoomAnim }} />
+        <Stack.Screen name="requests/[id]/index" options={{ animation: anim('default') }} />
+        <Stack.Screen name="requests/[id]/order" options={{ animation: anim('fade') }} />
+        <Stack.Screen
+          name="requests/[id]/keep-looking"
+          options={{ presentation: WEB ? 'card' : 'modal', animation: anim(Platform.OS === 'android' ? 'slide_from_bottom' : 'default') }}
+        />
+        <Stack.Screen name="requests/new" options={{ animation: anim(Platform.OS === 'android' ? 'slide_from_bottom' : 'fade') }} />
+        <Stack.Screen name="places" options={{ animation: anim('default') }} />
+        {/* First run replaces screen by screen, so Back never returns into it; each fades in, Nearby too. */}
+        <Stack.Screen name="index" options={{ animation: anim('fade') }} />
+        <Stack.Screen name="(onboarding)/welcome" options={{ animation: anim('fade'), gestureEnabled: false }} />
+        <Stack.Screen name="(onboarding)/location-ask" options={{ animation: anim('fade'), gestureEnabled: false }} />
+        <Stack.Screen name="(onboarding)/sign-in" options={{ animation: anim('fade'), gestureEnabled: false }} />
       </Stack>
       <SimulatedNotification />
     </DesignSystemRoot>
@@ -66,8 +115,14 @@ export default function RootLayout() {
 }
 
 function Stage({ framed, device, children }: { framed: boolean; device: 'ios' | 'android'; children: ReactNode }) {
-  if (!framed) return <View style={styles.fill}>{children}</View>;
-  return <DeviceFrame device={device}>{children}</DeviceFrame>;
+  // The screen area is what web view transitions animate, so the page and the frame around it stay still.
+  const screen = (
+    <View ref={nameScreenArea} collapsable={false} style={styles.fill}>
+      {children}
+    </View>
+  );
+  if (!framed) return screen;
+  return <DeviceFrame device={device}>{screen}</DeviceFrame>;
 }
 
 /** A link like `?step=answers` sets the store at start (store.ts); this shows the step's screen once the router is up. */

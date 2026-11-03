@@ -2,12 +2,12 @@
 
 ## ADDED Requirements
 
-### Requirement: Header photo credit
-The shop page SHALL credit the header photo's photographer and Unsplash, reachable from the page without covering the shop's name.
+### Requirement: Photo credits in code only
+The prototype's photos are stand-ins, so the shop page SHALL NOT show photo credits in its interface; the photographer and Unsplash credit for each photo SHALL stay in `app/src/content/images.ts`. (Changed by `identity-in-use`; the map's "© OpenStreetMap contributors" stays, as the map data's licence requires.)
 
-#### Scenario: Credit
+#### Scenario: No credit lines
 - **WHEN** the shopper opens Rossi's Bakery
-- **THEN** the header photo's credit "Photo: Clara Lilley, Unsplash" is available on the page
+- **THEN** no photo credit appears on the page or in its accessibility hints
 
 ### Requirement: Simulated Call and Directions
 In the prototype, Call and Directions SHALL show what would happen (the number to call, the walking route) without leaving the app.

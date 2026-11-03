@@ -6,16 +6,20 @@ How things move in the app: six springs, what each one is for, and the rules tha
 Takeaways:
 - Six springs: press, snappy, smooth, arrive, fade and status. Each has an iOS value (duration and bounce) and the nearest Material 3 token for Android.
 - The answer card arriving in the chat is the one moment with visible bounce. Everything else settles without overshoot or with very little.
+- Every screen change is animated, with Apple Music as the reference: what opens grows from what was tapped (a zoom on iOS, a container transform on Android, a View Transition on the web) and closes back into it.
 - Feedback starts at touch-down, within 100 ms, and never waits for the network. A new tap retargets a running animation; nothing blocks input.
-- Reduce Motion swaps movement for a fade and keeps the haptics. Haptics are few: selection, a light tap on the primary button, success when the shop confirms and the order becomes Ready (collect) or Paid (delivery), a warning when an order ends not charged.
+- Reduce Motion turns movement and every screen transition into a crossfade and keeps the haptics. Haptics are few: selection, a light tap on the primary button, success when the shop confirms and the order becomes Ready (collect) or Paid (delivery), a warning when an order ends not charged.
 Call:
 - I asked for motion that feels premium and quick to respond, starting from iOS and Liquid Glass and adding Material.
 - I kept the values provisional until they are tuned on a phone in the prototype (decision 040).
+- In this round I asked for every screen change to be animated, with Apple Music as the reference, and brought back the zoom from the round Requests button (decision 026).
 AI:
 - An agent researched Apple's spring guidance (WWDC 2023 and 2024), the Material 3 and Material 3 Expressive motion tokens in the Compose source, and Reanimated and Expo Haptics, and proposed the springs and rules. I asked for motion that feels premium and fast to respond.
+- An agent matched each screen change to an iOS 26, Material 3 and web transition and checked what Expo Router, Reanimated and the browser support today.
 Trade-offs:
 - Springs feel alive and can be interrupted, and are harder to time exactly than eased curves.
 - Material's springs settle faster than Apple's defaults, so the same token feels a little quicker on Android.
+- Expo Router's zoom transition is still alpha and needs iOS 18, and Reanimated's shared elements are experimental, so some transitions may fall back to a push or a fade in the prototype.
 ```
 
 ## Springs
@@ -40,9 +44,30 @@ In Reanimated, a spring takes `duration` in milliseconds and `dampingRatio` = 1 
 | Motion starts where it came from | A sheet rises from what opened it; an answer card grows from its place in the chat |
 | Never block input | No animation disables touch; a new tap retargets it |
 | Show the shopper's action at once | Their bubble appears straight away; a skeleton shows only if an answer takes more than about 300 ms |
-| Respect Reduce Motion | Movement becomes a fade; haptics stay |
+| Respect Reduce Motion | Movement and screen transitions become a crossfade; haptics stay |
 | Few haptics | Selection for chips, a light impact for the primary button, success when the order becomes Ready (collect) or Paid (delivery), a warning only on the endings "Not confirmed · not charged" and "Sold · not charged", never on "not charged yet" |
 | Run on the UI thread | Reanimated shared values, Gesture Handler for pans, only transform and opacity on hot paths, all tokens in one `motion.ts` |
+
+## Screen transitions
+
+No screen changes without motion. Each transition starts from the element that was tapped, so the shopper sees where the new screen came from and where it goes back to.
+
+| Change | iOS | Android | Web |
+| --- | --- | --- | --- |
+| Nearby → shop page | Zoom from the tile; drag down to dismiss, following the finger | Container transform | View Transition morph from the tile |
+| Nearby → Requests | Zoom from the round Requests button (decision 026) | Container transform | View Transition from the circle |
+| Nearby → location sheet | Zoom from the address row | Bottom sheet rises | Sheet grows from the row |
+| Requests → chat | Push, under the glass Back | Shared axis X, with predictive back | Slide |
+| Chat → details sheet | The sheet zooms from the answer card | Bottom sheet rises | Sheet grows from the card |
+| Details sheet → payment | The Apple Pay sheet over the details sheet | Google Pay sheet | Slide up |
+| Payment → receipt | The details sheet morphs into the receipt | Fade through | Crossfade |
+| Receipt → enlarged code | Zoom from the code | Container transform | Morph |
+| Any → Keep looking | Sheet from the button | Bottom sheet | Fade and scale |
+
+With Reduce Motion on, each of these is a crossfade. Pushes and sheets the app draws use `spring.smooth`; system zooms and the payment sheets keep the system's timing.
+
+In the Expo app the zoom is Expo Router's `Link.AppleZoom`, which is alpha and needs iOS 18; Reanimated's shared element transitions are the other route and are experimental. The web build uses `document.startViewTransition`. Where none of them works, the change falls back to a push or a fade.
+
 
 ## Sources
 
@@ -51,3 +76,8 @@ In Reanimated, a spring takes `duration` in milliseconds and `dampingRatio` = 1 
 - Android, Material 3 motion tokens in Compose: https://github.com/androidx/androidx/blob/androidx-main/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens/ExpressiveMotionTokens.kt and StandardMotionTokens.kt in the same folder
 - Software Mansion, Reanimated `withSpring`: https://docs.swmansion.com/react-native-reanimated/docs/animations/withSpring/
 - Expo, Haptics: https://docs.expo.dev/versions/latest/sdk/haptics/
+- Apple, "Build a SwiftUI app with the new design", WWDC 2025 (zoom transitions, sheets): https://developer.apple.com/videos/play/wwdc2025/323/
+- Material 3, transition patterns (container transform, shared axis, fade through): https://m3.material.io/styles/motion/transitions/transition-patterns
+- Software Mansion, Reanimated shared element transitions: https://docs.swmansion.com/react-native-reanimated/docs/shared-element-transitions/overview/
+- Expo Router (`Link.AppleZoom`): https://docs.expo.dev/router/introduction/
+- MDN, `Document.startViewTransition()`: https://developer.mozilla.org/en-US/docs/Web/API/Document/startViewTransition

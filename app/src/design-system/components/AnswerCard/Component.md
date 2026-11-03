@@ -15,7 +15,8 @@ A shop's answer in the chat: shop, status with its source, price, walk time and 
 | `walk`, `collectBy` | string | required | Footnote, with Navigation and Calendar icons |
 | `image` | string (uri) | none | The answering shop's photo, 40 at `radius.inner`; never an item photo |
 | `action` | `'buy'`, `'showMe'`, `'none'` | `'buy'` | Buy (or `buyLabel`, e.g. "Buy 1"), or Show me with No thanks |
-| `best` | boolean | `false` | Only the best answer's Buy is filled; the others are tonal |
+| `best` | boolean | `false` | Only the best answer's Buy is filled; the others are tonal (neutral) |
+| `accent` | ShopAccentName | `butter` | The shop's tonal tile in the thumb (initials and awning band), under the photo or instead of it |
 | `onOpen`, `onBuy`, `onShowMe`, `onDismiss` | `(id) => void` | none | A tap anywhere on the card opens the details sheet, as Buy does |
 | `animateIn` | boolean | `false` | Arrives with `spring.arrive` (a fade with Reduce Motion) |
 | `accessibilityLabel` | string | built from the text | Override with the long form ("13 minute walk, collect by Monday 9 November") |

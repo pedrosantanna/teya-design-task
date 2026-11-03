@@ -166,6 +166,7 @@ function render(themes) {
     'export type AppTheme = (typeof themes)[ThemeName];',
     `export type ColorName = ${union(flatColor)};`,
     `export type BadgeName = ${union(Object.keys(ios.color.badge))};`,
+    `export type ShopAccentName = ${union(Object.keys(ios.color.shop.accent))};`,
     `export type TypeStyleName = ${union(Object.keys(ios.type))};`,
     `export type SpaceName = ${union(Object.keys(ios.space))};`,
     `export type RadiusName = ${union(Object.keys(ios.radius))};`,

@@ -29,7 +29,7 @@ const platformIcons: Record<PlatformIconName, { ios: IconSvgElement; android: Ic
  * `nav`: 22, nav and toolbar. `bar`: 24, the Requests button and the ask bar.
  * A type style name: inline beside that text, its line height minus 4 (imagery.md).
  */
-export type IconSize = 'nav' | 'bar' | TypeStyleName;
+export type IconSize = 'nav' | 'bar' | 'mic' | TypeStyleName;
 
 export type IconProps = {
   /** A HugeIcons icon imported from its own path, or a platform icon name. */
@@ -45,11 +45,12 @@ export type IconProps = {
 export function iconPixelSize(theme: AppTheme, size: IconSize): number {
   if (size === 'nav') return theme.size.icon.nav;
   if (size === 'bar') return theme.size.icon.bar;
+  if (size === 'mic') return theme.size.askBar.mic;
   return theme.type[size].lineHeight - theme.space[1];
 }
 
 function strokeFor(theme: AppTheme, size: IconSize, weight?: 'regular' | 'strong'): number {
-  const strong = weight ? weight === 'strong' : size !== 'nav' && size !== 'bar' && theme.type[size].fontWeight === '600';
+  const strong = weight ? weight === 'strong' : size !== 'nav' && size !== 'bar' && size !== 'mic' && theme.type[size].fontWeight === '600';
   return strong ? 2 : 1.5;
 }
 

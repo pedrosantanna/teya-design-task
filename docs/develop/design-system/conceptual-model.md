@@ -5,6 +5,7 @@ The app's objects, what the shopper can do with each, the states each goes throu
 ```summary
 Takeaways:
 - Four objects: Request, Shop, Answer and Order. Snuffle is the voice that talks to the shopper, not an object. An item is never an object: small shops have no catalogue, so an item is text and a quantity inside a request, an answer or an order.
+- The place the shopper is shopping from (current location or a saved place, with a walking radius) is an attribute of the session. It sets which shops and streets count, and the model keeps its four objects.
 - Each object has one card form and one detail form: a request is a row that opens its chat, an answer a card in the chat that opens a details sheet, an order a card that opens the receipt, a shop a row that opens the shop page.
 - One verb per action across the app. Buy is the only way to pay; shops set aside; the shopper collects.
 - One table of status labels, used the same way in rows, chat cards, notifications and the Live Activity. Money has three outcomes the shopper sees: paid, not charged, refunded.
@@ -12,8 +13,10 @@ Call:
 - I asked for a conceptual model before any more screens: the objects, what the shopper does with each, their states and words, simple and grounded in references and in the research.
 - I decided the four open points (decision 039): items stay out of the model, a request left open is "Keep looking", a shop's reply is an "answer", and shops show as photo tiles on the home screen. It follows decisions 025, 031 and 037.
 - I asked whether one "answer" fits both a connected shop's stock and an asked shop's reply, and closed the gaps the screen review found.
+- In this round I asked for a location flow: the address at the top of Nearby opens a sheet to choose the place and the radius, and saved places are managed from the account.
 AI:
 - An agent searched the netnography, empathy map, personas and benchmarks for the words shoppers use and the objects they think in, checked the references below and proposed the objects, verbs, states and terms. It also listed where v7 breaks the model. I asked for the model to be simple and grounded in references before more screens are drawn.
+- An agent added place to the model as an attribute of the session, following decision 024, and wrote the flow into the components.
 Trade-offs:
 - Keeping items out of the model fits shops without catalogues, and gives up a page per item, so "who else has it" lives in the request, not on the item.
 - Request is our word: shoppers write questions, not requests. The prototype test will show whether the Requests list reads.
@@ -57,9 +60,21 @@ There is no evidence for "errand", "basket", "hold" or "reserve" in shoppers' wo
 
 ## One answer, two sources
 
-A connected shop's POS shares its stock, so its answer arrives at once and the sale is immediate; an asked shop answers a message in its own time and confirms after the shopper buys (decision 031). Both are the same object because they do the same job for the shopper: say whether a shop has the item, at what price and until when. What differs is the source, which every answer card states: "Has it · replied 2 min ago" from an asked shop, "In stock now · from the shop's till" from a connected shop, shortened to "In stock now · till" in compact rows, and the steps after Buy: a till answer skips "Waiting for [shop]". The word "answer" stays in the docs and in "replied"; the interface shows the status, not the object's name.
+A connected shop's POS shares its stock, so its answer arrives at once and the sale is immediate; an asked shop answers a message in its own time and confirms after the shopper buys (decision 031). Both are the same object because they do the same job for the shopper: say whether a shop has the item, at what price and until when. What differs is the source, which every answer card states: "Has it · replied 2 min ago" from an asked shop, "In stock now · from the shop's till" from a connected shop, shortened in compact rows to "In stock now" or "In stock · 1 of 2" beside the flash symbol, which stands for the till (VoiceOver still reads "from the shop's till"), and the steps after Buy: a till answer skips "Waiting for [shop]". The word "answer" stays in the docs and in "replied"; the interface shows the status, not the object's name.
 
 Every answer card is titled with the shop. When the shop offers something similar, the item it offers goes in the status line after "Has something similar", and the title stays the shop's name.
+
+## Place
+
+The shopper's area (decision 024) comes from a place and a radius. Both belong to the shopper's session; a request records the area it was asked in.
+
+| Attribute | Values | Set where |
+| --- | --- | --- |
+| Place | Current location, a saved place (Home, Work) or an address the shopper searched | The "Where are you shopping?" sheet, opened from the address at the top of Nearby ("Blythe Road, W14 ›") |
+| Radius | Within 10, 15 or 20 min walk | The same sheet |
+| Saved places | Add, rename, delete | The Places row in the account sheet |
+
+Choosing a place or a radius reloads Nearby. The active place changes only from the top of Nearby; the account sheet manages the list.
 
 ## Actions
 
@@ -75,7 +90,7 @@ Every answer card is titled with the shop. When the shop offers something simila
 | Object | Labels, in order |
 | --- | --- |
 | Request | "Asking 6 shops" → "2 shops have it" → "Needs you · [what]"; waiting by choice: "Looking · until Fri 6 Nov" or "Every Friday"; nothing found: "Not found"; closed by the shopper: "Closed". Once there is an order, the row shows the order's label. One deadline suffix is allowed ("2 shops have them · by 4pm"). Filters group the states: Needs you, Looking (Snuffle is still searching, once or on repeat), Waiting (an order waits for the shop or for collection), Done |
-| Answer | "Asked" → "Seen" → "Has it", "Has 1 of 2", "Has something similar", "Doesn't have it" or "No reply"; from a till: "In stock now" or "In stock now · 1 of 2", followed by "· from the shop's till" ("· till" in compact rows); made to order: "Can make it · [notice]" ("Can make it · 2 days' notice"); on a shop page, past answers: "Had it · [when]", "Didn't have it · [when]" |
+| Answer | "Asked" → "Seen" → "Has it", "Has 1 of 2", "Has something similar", "Doesn't have it" or "No reply"; from a till: "In stock now" or "In stock now · 1 of 2", followed by "· from the shop's till" (in compact rows the flash symbol replaces it, and "In stock now · 1 of 2" shortens to "In stock · 1 of 2"); made to order: "Can make it · [notice]" ("Can make it · 2 days' notice"); on a shop page, past answers: "Had it · [when]", "Didn't have it · [when]" |
 | Order, collect | "Waiting for [shop] · not charged yet" → "Ready · collect by Mon 9 Nov" → "Extended · collect by Mon 16 Nov" → "Collected"; endings: "Not confirmed · not charged", "Sold · not charged", "Cancelled · refunded", "Not collected · refunded". After a partial buy the card adds a line, "Keep looking for [n] more" |
 | Order, delivery | "Waiting for [shop] · not charged yet" → "Paid" → "On its way" → "Delivered". A failed payment creates no order; the request keeps its label |
 | Shop | "Open till 7pm", "Closes soon", "Closed · opens 9am" |
@@ -94,6 +109,7 @@ Every answer card is titled with the shop. When the shop offers something simila
 | The collection window | "Collect by Mon 9 Nov", with the length once before Buy ("7 days") | collection window | pickup, hold for |
 | Money | paid, not charged, refunded | authorised, taken, lapsed, released | payment terms in the chat |
 | A request left open | Keep looking | standing request | keep it open, save request |
+| Where the shopper is shopping | the address ("Blythe Road, W14"); "Places" for the saved ones | place, area | neighbourhood, zone, high street |
 | Proof at the counter | collection code | code | other names |
 | The home screen | Nearby | Nearby | Home, street |
 
@@ -112,7 +128,7 @@ Labels agree with the item: "has it" for one thing, "has them" for several. Shop
 | Rows while asking | On the asking list every answer is a compact row, since the list shows progress; full answer cards appear in the chat |
 | Items have no page | An item appears inside a request, an answer, an order, or on a shop page |
 | Orders live in their request | Requests is the only list; there is no separate list of orders |
-| Detail is pushed, tasks are sheets | An object's detail form (shop page, request chat, receipt) is pushed and exits with Back; a task (the details sheet where the shopper buys, paying, extending, the account) is a sheet and exits with Close; the enlarged collection code is a modal with Close |
+| Detail is pushed, tasks are sheets | An object's detail form (shop page, request chat, receipt) is pushed and exits with Back; a task (the details sheet where the shopper buys, paying, extending, choosing the place, the account) is a sheet and exits with Close; the enlarged collection code is a modal with Close |
 
 ## Decided points
 

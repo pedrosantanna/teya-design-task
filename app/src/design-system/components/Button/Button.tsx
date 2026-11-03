@@ -13,7 +13,8 @@ export type ButtonSize = 'large' | 'compact';
 export type ButtonProps = {
   label: string;
   onPress?: () => void;
-  /** filled: the one primary action on a screen. tonal: secondary. plain: low emphasis. destructive: Cancel for a refund. */
+  /** filled: the one commit action in view (Buy, Ask, send), the only Indigo fill. tonal: secondary, a neutral fill
+   *  with Foreground text. plain: a text button in Tint. destructive: a text button in red (Cancel for a refund). */
   role?: ButtonRole;
   /** large: 50 high, full content width. compact: 36 high, hugs its label. */
   size?: ButtonSize;
@@ -33,6 +34,8 @@ function contentColor(theme: AppTheme, role: ButtonRole): string {
       return theme.color.onPrimary;
     case 'destructive':
       return theme.color.destructive;
+    case 'tonal':
+      return theme.color.foreground;
     default:
       return theme.color.tint;
   }
@@ -56,7 +59,7 @@ export function Button({
   const color = disabled ? theme.color.foreground : contentColor(theme, role);
   const labelVariant = size === 'large' ? 'headline' : 'subheadlineStrong';
 
-  styles.useVariants({ role, size, disabled });
+  styles.useVariants({ role, size, disabled, withIcon: !!icon && !loading });
 
   const animated = useAnimatedStyle(() => ({ transform: [{ scale: scale.get() }] }));
   const layerStyle = useAnimatedStyle(() => ({ opacity: layer.get() }));
@@ -120,6 +123,8 @@ function labelColor(role: ButtonRole, disabled: boolean) {
       return 'onPrimary' as const;
     case 'destructive':
       return 'destructive' as const;
+    case 'tonal':
+      return 'foreground' as const;
     default:
       return 'tint' as const;
   }
@@ -155,8 +160,15 @@ const styles = StyleSheet.create((theme) => ({
         true: {},
         false: {},
       },
+      withIcon: {
+        true: {},
+        false: {},
+      },
     },
     compoundVariants: [
+      // A compact button with an icon: the icon's side bearing reads as padding, so the sides are space.3, and three
+      // fit across the shop page's card (visual critique 2).
+      { size: 'compact', withIcon: true, styles: { paddingHorizontal: theme.space[3] } },
       { role: 'filled', disabled: true, styles: { backgroundColor: withAlpha(theme.color.foreground, theme.state.disabledContainer) } },
       { role: 'tonal', disabled: true, styles: { backgroundColor: withAlpha(theme.color.foreground, theme.state.disabledContainer) } },
     ],

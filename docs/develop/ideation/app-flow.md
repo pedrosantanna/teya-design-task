@@ -1,11 +1,13 @@
 # App flow
 
-The shopper app's main flow as wireframes, from the home screen to collecting the item, with the paths for when something fails. It follows the [service blueprint](../../define/blueprint.md), steps 1 to 5, with the shops' answers simulated. Screens use Apple's iOS kit in black and white; visual design comes later.
+The shopper app's main flow as wireframes, from the home screen to collecting the item, with the paths for when something fails. It follows the [service blueprint](../../define/blueprint.md), steps 1 to 5, with the shops' answers simulated. Screens use Apple's iOS kit in black and white, drawn to iOS 26 and Liquid Glass since v8; visual design comes later.
 
 ```summary
 Takeaways:
 - The agent the shopper talks to is called Snuffle in the interface and has the mark as its avatar. It is the same agent that answers on WhatsApp and MCP.
-- The home is the street with a large ask bar at the bottom, like Granola's. A round button left of the bar opens Requests full screen, a list of chats with a status per row (decision 026). There is no tab bar.
+- The home is the street with a large ask bar at the bottom, like Granola's. A round button left of the bar opens Requests full screen, a list of chats with a status per row (decision 026). There is no tab bar. The bar and the button float as a glass bottom accessory that minimises on scroll.
+- The address row at the top of Nearby changes the place the shopper is shopping from; the account keeps the list of places (decision 024).
+- A first run comes before Nearby: splash, Getting started in three pages, location asked in context, then sign in with Apple first among the social logins.
 - After asking, the shopper can leave. Shop replies arrive as notifications and a Live Activity, and each answer appears in the chat as it comes in.
 - The shopper buys: Apple Pay authorises the amount, and an asked shop's yes takes it. A connected shop's sale is immediate. Each shop sets its collection window, shown before Buy, and an order nobody collects is refunded in full (decision 037).
 Call:
@@ -13,8 +15,9 @@ Call:
 - I set the structure (the composer bar at the bottom, the avatar menu, the screens in the flow) and chose a round Requests button left of the ask bar that opens Requests full screen (decision 026).
 - I asked for Hold to be dropped because it read as a free reservation and left the shopper unsure whether they had bought anything, and chose Buy (decision 037).
 - I asked to version this canvas: it opens on the latest, and earlier versions stay in the version menu.
+- For v8 I asked for iOS 26 and Liquid Glass as Apple Music and Freeform use them, Display large titles at 40 pt, a transition on every arrow, the location flow and the first run.
 AI:
-- An agent looked at home screens on Mobbin (Granola, Shop, Deliveroo, Uber Eats, Wolt, Too Good To Go, Airbnb, ChatGPT, Perplexity) and proposed the module order. Another looked at chat lists for the Requests rows. Agents drew the wireframes from the blueprint. In v7 one agent reviewed the flow for missing cases, another did a craft pass, and a third applied Buy and the review's gaps. I set the structure, chose Buy over Hold and which gaps to close.
+- An agent looked at home screens on Mobbin (Granola, Shop, Deliveroo, Uber Eats, Wolt, Too Good To Go, Airbnb, ChatGPT, Perplexity) and proposed the module order. Another looked at chat lists for the Requests rows. Agents drew the wireframes from the blueprint. In v7 one agent reviewed the flow for missing cases, another did a craft pass, and a third applied Buy and the review's gaps. I set the structure, chose Buy over Hold and which gaps to close. In v8 an agent redrew every screen to iOS 26, added the location flow and the first run, and proposed letting the shopper browse before signing in, which is still mine to decide.
 Trade-offs:
 - Putting the ask bar at the bottom leaves no room for a tab bar, so Requests sits behind a button and settings behind the avatar.
 - Charging only on the shop's yes means the shopper waits a few minutes at an asked shop before the purchase is final.
@@ -24,7 +27,8 @@ Trade-offs:
 
 | Version | What changed | Why |
 | --- | --- | --- |
-| v7 (current) | Buy replaces Hold: Apple Pay authorises, the shop's yes takes the payment, a connected shop's sale is immediate; the collection window and refund show before Buy. New screens: no shop has it, the shop didn't confirm in time, the day-before reminder with an extension, the shop's own delivery. The agent is Snuffle with the mark as avatar. Actions on failure screens moved to the bottom, sheets became page sheets, times and prices agree across screens, arrows route around the screens | An agent's review found missing cases and arrows that skipped steps; I dropped Hold (decision 037) and asked for the craft fixes |
+| v8 (current) | iOS 26 and Liquid Glass: Back is a chevron in a glass circle, close a glass ×, and a sheet that commits has a filled check; icon actions share one glass capsule; no bar fills, a scroll-edge fade instead; the ask bar and the Requests button float as a glass bottom accessory; medium sheets are inset glass, large ones opaque. Display large titles in Gambetta at 40 pt. Each arrow names its transition (zoom, push, sheet). New areas: first run (splash, Getting started in three pages, the location ask, sign in with Apple, Google, Facebook or email) and where the shopper shops (the location sheet from the address row, Nearby at Work, the account sheet, Places). A Map note on the shop page: MapLibre with bundled OpenStreetMap data | I asked to follow iOS 26 as Apple Music and Freeform use it, and for the location flow and the entry before Nearby, which were missing |
+| v7 | Buy replaces Hold: Apple Pay authorises, the shop's yes takes the payment, a connected shop's sale is immediate; the collection window and refund show before Buy. New screens: no shop has it, the shop didn't confirm in time, the day-before reminder with an extension, the shop's own delivery. The agent is Snuffle with the mark as avatar. Actions on failure screens moved to the bottom, sheets became page sheets, times and prices agree across screens, arrows route around the screens | An agent's review found missing cases and arrows that skipped steps; I dropped Hold (decision 037) and asked for the craft fixes |
 | v6 | The shop details sheet offers two ways (pay and they keep it 7 days, the shop delivers); the concierge says that without paying there is no hold | The unpaid reserve put the payment outside the app and the no-show risk on the shop (decision 032) |
 | v5 | The shop details sheet offers three ways to get the item (pay and they keep it 7 days, reserve and pay in the shop, the shop delivers) and a collection day; holds show dates; a connected shop answers "in stock now" from its till | A hold of a few hours was shorter than UK shops keep paid orders (decisions 030 and 031) |
 | v4 | Requests opens full screen, growing out of the round button, with a storyboard of the transition | A sheet left the list half a screen; the transition keeps the link to the button it came from |

@@ -7,14 +7,17 @@ import { scheduleOnRN } from 'react-native-worklets';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { haptic } from '../../internal/haptics';
-import { IMAGE_FILL, photoSource, type PhotoSource } from '../../internal/media';
+import { IMAGE_OVER, photoSource, type PhotoSource } from '../../internal/media';
 import { spoken } from '../../internal/PressableCard';
 import { ShopPlaceholder } from '../../internal/ShopPlaceholder';
 import { usePress } from '../../internal/usePress';
-import { cornerCurve } from '../../theme';
+import { cornerCurve, type ShopAccentName } from '../../theme';
 import { Button } from '../Button/Button';
 import { StatusLabel, Count, type StatusTone } from '../Tag/Tag';
 import { Text } from '../Text/Text';
+
+/** A shop on a request row: its name (initials), its accent and, if it has one, a logo. */
+export type RequestRowShop = { name: string; accent?: ShopAccentName; logo?: PhotoSource };
 
 export type RequestRowProps = {
   id: string;
@@ -26,10 +29,12 @@ export type RequestRowProps = {
   preview: string;
   status: string;
   tone?: StatusTone;
-  /** The request placeholder or the answering shop's photo. */
+  /** The item's photo; without one, a tonal tile in `accent`. */
   image?: PhotoSource;
-  /** Logos of the shops in the request, at most three. */
-  shopLogos?: PhotoSource[];
+  /** Accent of the tile behind the item photo: the shop's accent once there is an order, else Butter. */
+  accent?: ShopAccentName;
+  /** The shops that answered: at most two 20 pt circles in their accents with their initials (or a logo), then "+1". */
+  shopLogos?: RequestRowShop[];
   /** Unread answers. */
   unread?: number;
   /** Only when the request needs the shopper: "Buy at Rossi's". */
@@ -48,6 +53,7 @@ export const RequestRow = memo(function RequestRow({
   status,
   tone = 'default',
   image,
+  accent,
   shopLogos = [],
   unread = 0,
   actionLabel,
@@ -127,15 +133,25 @@ export const RequestRow = memo(function RequestRow({
             <Animated.View pointerEvents="none" style={[styles.layer, press.layerStyle]} />
             <View>
               <View style={styles.thumb}>
-                {image ? <Image source={photoSource(image)} style={IMAGE_FILL} contentFit="cover" accessible={false} /> : <ShopPlaceholder name={name} tone="new" />}
+                <ShopPlaceholder name={name} accent={accent} />
+                {image ? <Image source={photoSource(image)} style={IMAGE_OVER} contentFit="cover" accessible={false} /> : null}
               </View>
               {shopLogos.length > 0 ? (
                 <View style={styles.logos}>
-                  {shopLogos.slice(0, 3).map((logo, i) => (
-                    <View key={i} style={styles.logo}>
-                      <Image source={photoSource(logo)} style={IMAGE_FILL} contentFit="cover" accessible={false} />
+                  {shopLogos.length > 2 ? (
+                    <View style={styles.more}>
+                      <Text variant="caption2" color="foreground">{`+${shopLogos.length - 2}`}</Text>
                     </View>
-                  ))}
+                  ) : null}
+                  {shopLogos
+                    .slice(0, 2)
+                    .reverse()
+                    .map((shop) => (
+                      <View key={shop.name} style={styles.logo}>
+                        <ShopPlaceholder name={shop.name} accent={shop.accent} size="tiny" round />
+                        {shop.logo ? <Image source={photoSource(shop.logo)} style={IMAGE_OVER} contentFit="cover" accessible={false} /> : null}
+                      </View>
+                    ))}
                 </View>
               ) : null}
             </View>
@@ -192,18 +208,31 @@ const styles = StyleSheet.create((theme) => ({
     height: theme.size.thumb.request,
     borderRadius: theme.radius.inner,
     overflow: 'hidden',
-    backgroundColor: theme.color.muted,
   },
+  // At most two circles and "+1", overlapping the thumb's bottom right corner; each has a 2 pt ring in the
+  // Background colour so it cuts out of the photo (craft-pass-2). They overlap by 6 pt, the left one on top, so the
+  // second circle's initials stay clear (visual critique 2).
   logos: { position: 'absolute', right: -theme.space[1], bottom: -theme.space[1], flexDirection: 'row-reverse' },
   logo: {
-    width: theme.size.avatar.shopOnRow,
-    height: theme.size.avatar.shopOnRow,
+    width: theme.size.avatar.shopOnRow + 2 * theme.size.askBar.ring,
+    height: theme.size.avatar.shopOnRow + 2 * theme.size.askBar.ring,
     borderRadius: theme.radius.full,
-    borderWidth: StyleSheet.hairlineWidth * 2,
+    borderWidth: theme.size.askBar.ring,
     borderColor: theme.color.background,
-    marginLeft: -theme.space[2],
+    marginLeft: -(theme.space[1] + theme.space[1] / 2),
     overflow: 'hidden',
-    backgroundColor: theme.color.muted,
+  },
+  more: {
+    minWidth: theme.size.avatar.shopOnRow + 2 * theme.size.askBar.ring,
+    height: theme.size.avatar.shopOnRow + 2 * theme.size.askBar.ring,
+    borderRadius: theme.radius.full,
+    borderWidth: theme.size.askBar.ring,
+    borderColor: theme.color.background,
+    backgroundColor: theme.color.card,
+    paddingHorizontal: theme.space[1],
+    marginLeft: -(theme.space[1] + theme.space[1] / 2),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   body: { flex: 1, gap: theme.gap.inside },
   titleLine: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2] },

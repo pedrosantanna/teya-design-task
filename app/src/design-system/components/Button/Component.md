@@ -7,7 +7,7 @@ The app's one button. Roles and sizes follow the Button table on `docs/develop/d
 | Prop | Type | Default | Notes |
 | --- | --- | --- | --- |
 | `label` | string | required | Never truncates; wraps at accessibility sizes |
-| `role` | `filled`, `tonal`, `plain`, `destructive` | `filled` | Filled: Primary fill, its label colour. Tonal: Muted fill, Tint label. Plain: no fill, Tint label. Destructive: no fill, red label |
+| `role` | `filled`, `tonal`, `plain`, `destructive` | `filled` | Filled: Primary fill, its label colour. Tonal: Muted fill, Foreground label (neutral). Plain: no fill, Tint label. Destructive: no fill, red label |
 | `size` | `large`, `compact` | `large` | Large: 50 high, full content width, label in Headline. Compact: 36 high, `space.4` sides, label in Subheadline at 600, hit slop up to `hit.min` |
 | `icon` | `IconSvgElement` | none | A HugeIcons icon, imported from its own path (`@hugeicons/core-free-icons/ArrowRight01Icon`). Size is the label's line height minus 4, stroke 2 |
 | `loading` | boolean | `false` | Spinner replaces the label, width kept, reported busy. Used on Buy while the payment sheet returns |
@@ -23,7 +23,7 @@ The app's one button. Roles and sizes follow the Button table on `docs/develop/d
 
 ## Rules
 
-- One filled button visible per screen. On an answer card only the best answer's Buy is filled; the others are tonal.
+- At most one filled (Indigo) button per viewport: the commit action (Buy, Ask, send). On an answer card only the best answer's Buy is filled; "Buy 1" and "Show me" are tonal. Indigo means the shopper acts; secondary actions are neutral.
 - "Cancel for a refund" is destructive and confirms in an alert.
 - Buttons in a row sit `space.2` apart.
 - The red for `destructive` has no palette token yet: the theme uses iOS system red and the Material 3 error colour, marked provisional in `tokens/primitives.tokens.json`.

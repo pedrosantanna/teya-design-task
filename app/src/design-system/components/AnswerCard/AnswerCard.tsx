@@ -6,9 +6,10 @@ import { memo } from 'react';
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
-import { IMAGE_FILL, photoSource, type PhotoSource } from '../../internal/media';
+import { IMAGE_OVER, photoSource, type PhotoSource } from '../../internal/media';
 import { PressableCard, spoken, type CardAction } from '../../internal/PressableCard';
-import { cornerCurve } from '../../theme';
+import { ShopPlaceholder } from '../../internal/ShopPlaceholder';
+import { cornerCurve, type ShopAccentName } from '../../theme';
 import { Button } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
 import { Text } from '../Text/Text';
@@ -29,12 +30,14 @@ export type AnswerCardProps = {
   walk: string;
   /** "Collect by Mon 9 Nov" */
   collectBy: string;
-  /** The answering shop's photo (never an item photo). */
+  /** The answering shop's photo (never an item photo). Without one, the shop's tonal tile shows. */
   image?: PhotoSource;
+  /** The shop's accent (colour.md, Shop accents): the tile behind or instead of the photo. */
+  accent?: ShopAccentName;
   /** buy: Buy (or `buyLabel`). showMe: Show me with No thanks. none: no action row. */
   action?: AnswerAction;
   buyLabel?: string;
-  /** Only the best answer's Buy is filled; the others are tonal. */
+  /** Only the best answer's Buy is filled (Indigo); the others are tonal, in neutral colours. */
   best?: boolean;
   /** Spoken label; by default built from the visible text. */
   accessibilityLabel?: string;
@@ -57,6 +60,7 @@ export const AnswerCard = memo(function AnswerCard({
   walk,
   collectBy,
   image,
+  accent,
   action = 'buy',
   buyLabel = 'Buy',
   best = false,
@@ -84,7 +88,8 @@ export const AnswerCard = memo(function AnswerCard({
     >
       <View style={styles.head}>
         <View style={styles.thumb}>
-          {image ? <Image source={photoSource(image)} style={IMAGE_FILL} contentFit="cover" accessible={false} /> : null}
+          <ShopPlaceholder name={shop} accent={accent} size="small" />
+          {image ? <Image source={photoSource(image)} style={IMAGE_OVER} contentFit="cover" accessible={false} /> : null}
         </View>
         <View style={styles.title}>
           <Text variant="headline" numberOfLines={1}>
@@ -137,7 +142,6 @@ const styles = StyleSheet.create((theme) => ({
     width: theme.size.thumb.answer,
     height: theme.size.thumb.answer,
     borderRadius: theme.radius.inner,
-    backgroundColor: theme.color.muted,
     overflow: 'hidden',
   },
   title: { flex: 1, gap: theme.space[1] },

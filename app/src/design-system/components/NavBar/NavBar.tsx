@@ -1,6 +1,7 @@
-// Nav bar (components.md): a large title that collapses to an inline title as the list scrolls, an
-// inline title alone, or no title until the content scrolls under the bar (shop page), which can also
-// hide while scrolling down. iOS navigation bar ↔ Material large top app bar collapsing to small.
+// Nav bar (components.md, iOS 26 patterns): a large title that scrolls with the content and collapses to an
+// inline leading title, an inline title alone, or no title until the content scrolls under the bar (shop page),
+// which can also hide while scrolling down. No fill: the controls float in glass over a scroll-edge fade.
+// iOS navigation bar ↔ Material large top app bar collapsing to small.
 import type { IconSvgElement } from '@hugeicons/react-native';
 import { memo } from 'react';
 import { Pressable, View } from 'react-native';
@@ -20,7 +21,11 @@ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { FloatingSurface } from '../../internal/FloatingSurface';
 import { usePress } from '../../internal/usePress';
+import { ScrollEdge, type EdgeFill } from '../../internal/ScrollEdge';
+import { SnuffleMark } from '../SnuffleMark/SnuffleMark';
 import { CloseButton } from '../CloseButton/CloseButton';
+import { ConfirmButton } from '../ConfirmButton/ConfirmButton';
+import { GlassButton } from '../GlassButton/GlassButton';
 import { Icon, type PlatformIconName } from '../Icon/Icon';
 import { Text } from '../Text/Text';
 
@@ -61,25 +66,48 @@ export type NavBarProps = {
    *  inline: always inline. reveal: no title until the content scrolls `revealAt` points. */
   mode?: 'large' | 'inline' | 'reveal';
   scroll?: NavBarScroll;
-  /** back: the chevron with the previous title on iOS ("Requests"), the arrow on Android; in reveal mode a glass
-   *  circle over the map until the bar's fill shows. close: Close on the left. */
+  /** back: the chevron alone in a glass circle on iOS and the web (the previous title only in its accessibility
+   *  label, "Back to Requests"), the arrow icon button on Android. close: the glass × on the left. */
   leading?: 'back' | 'close' | 'none';
   backLabel?: string;
   onLeading?: () => void;
+  /** Icon-only actions, grouped in one glass capsule on the right (iOS, the web); icon buttons on Android. */
   trailing?: NavAction[];
+  /** Confirm at the right, for a presented screen that commits a choice. */
+  confirm?: { onPress?: () => void; label?: string };
   /** Hides while scrolling down, returns on scroll up (shop page). Needs `useNavBarScroll(true)`. */
   hideOnScroll?: boolean;
   revealAt?: number;
   /** Space above the bar; defaults to the safe-area top. */
   topInset?: number;
-  /** The bar's fill once content is under it: Background, or Card on a screen whose content is a card (shop page). */
-  fill?: 'background' | 'card';
-  /** Scroll offset at which the fill shows; defaults to 8 points, or `revealAt` in reveal mode. */
+  /** The colour of the scroll-edge fade: the screen's ground (Background, Card, a chat's ground). */
+  fill?: EdgeFill;
+  /** The Snuffle glyph before the inline title ("Snuffle" on New Request and in a chat). */
+  titleMark?: boolean;
+  /** A line under the inline title: the request's name in a chat titled "Snuffle". */
+  subtitle?: string;
+  /** Scroll offset at which the scroll-edge fade shows; defaults to 8 points, or `revealAt` in reveal mode. */
   backgroundAt?: number;
+  /** A second fill the scroll edge shows until the content scrolls `until` points, then crossfades to `fill`: the
+   *  shop page's accent while its wash is under the bar, so the material never lays a pale band over the wash. */
+  fillBefore?: { fill: EdgeFill; until: number };
 };
 
-function BarButton({ action }: { action: NavAction }) {
+function BarActions({ actions }: { actions: NavAction[] }) {
+  // The platform form follows the theme; the React Compiler would keep the first one, since the theme object stays the same.
+  'use no memo';
   const { theme } = useUnistyles();
+  if (actions.length === 0) return null;
+  const buttons = actions.map((action) => <BarButton key={action.label} action={action} />);
+  if (theme.platform === 'android') return <View style={styles.actions}>{buttons}</View>;
+  return (
+    <FloatingSurface interactive style={styles.capsule}>
+      {buttons}
+    </FloatingSurface>
+  );
+}
+
+function BarButton({ action }: { action: NavAction }) {
   const press = usePress();
   return (
     <Animated.View style={press.scaleStyle}>
@@ -91,7 +119,7 @@ function BarButton({ action }: { action: NavAction }) {
         onPressOut={press.onPressOut}
         style={styles.barButton}
       >
-        <Icon icon={action.icon} size="nav" color={theme.platform === 'ios' ? 'tint' : 'foreground'} />
+        <Icon icon={action.icon} size="nav" weight="strong" color="foreground" />
       </Pressable>
     </Animated.View>
   );
@@ -105,11 +133,15 @@ export const NavBar = memo(function NavBar({
   backLabel,
   onLeading,
   trailing = [],
+  confirm,
   hideOnScroll = false,
   revealAt,
   topInset,
   fill = 'background',
   backgroundAt: backgroundAtProp,
+  titleMark = false,
+  subtitle,
+  fillBefore,
 }: NavBarProps) {
   // The platform form follows the theme; the React Compiler would keep the first one, since the theme object stays the same.
   'use no memo';
@@ -122,20 +154,27 @@ export const NavBar = memo(function NavBar({
   const hidden = scroll?.hidden ?? fallback;
   const largeHeight = theme.type.title1.lineHeight + theme.space[2];
   const reveal = mode === 'large' ? largeHeight : mode === 'reveal' ? (revealAt ?? largeHeight) : 0;
-  const barHeight = ios ? theme.hit.min : theme.hit.min + theme.space[4];
+  const barHeight = ios ? theme.hit.min + theme.space[2] : theme.hit.min + theme.space[4];
   const total = top + barHeight;
   const spring = theme.spring.smooth;
   const fade = theme.spring.fade;
   const reduceMotion = useReducedMotion();
-  // The bar's background shows once the content scrolls under it; on the shop page, once the title reaches it.
+  // The scroll-edge fade shows once the content scrolls under the bar; on the shop page, once the title reaches it.
   const backgroundAt = backgroundAtProp ?? (mode === 'reveal' ? reveal : theme.space[2]);
 
   const titleStyle = useAnimatedStyle(() => ({
     opacity: reveal === 0 ? 1 : interpolate(scrollY.get(), [reveal - theme.space[2], reveal], [0, 1], Extrapolation.CLAMP),
   }));
-  const backgroundStyle = useAnimatedStyle(() => ({
-    opacity: interpolate(scrollY.get(), [backgroundAt - theme.space[2], backgroundAt], [0, 1], Extrapolation.CLAMP),
-  }));
+  const backgroundStyle = useAnimatedStyle(() => {
+    const shown = interpolate(scrollY.get(), [backgroundAt - theme.space[2], backgroundAt], [0, 1], Extrapolation.CLAMP);
+    if (!fillBefore) return { opacity: shown };
+    return { opacity: shown * interpolate(scrollY.get(), [fillBefore.until - theme.space[4], fillBefore.until], [0, 1], Extrapolation.CLAMP) };
+  });
+  const beforeStyle = useAnimatedStyle(() => {
+    if (!fillBefore) return { opacity: 0 };
+    const shown = interpolate(scrollY.get(), [backgroundAt - theme.space[2], backgroundAt], [0, 1], Extrapolation.CLAMP);
+    return { opacity: shown * interpolate(scrollY.get(), [fillBefore.until - theme.space[4], fillBefore.until], [1, 0], Extrapolation.CLAMP) };
+  });
   // Reduce Motion: the bar fades out and in instead of sliding, and moves out of the way once faded.
   const shown = useSharedValue(1);
   useAnimatedReaction(
@@ -151,67 +190,41 @@ export const NavBar = memo(function NavBar({
     return { opacity: o, transform: [{ translateY: o < 0.01 ? -total : 0 }] };
   });
 
-  // Reveal mode sits over the map or a photo: Back starts as a glass circle and becomes the plain Back with the
-  // previous title once the bar's fill shows.
-  const mediaStyle = useAnimatedStyle(() => ({
-    opacity: interpolate(scrollY.get(), [backgroundAt - theme.space[2], backgroundAt], [1, 0], Extrapolation.CLAMP),
-  }));
-  const backContent = (
-    <>
-      <Icon icon="back" size="nav" color={ios ? 'tint' : 'foreground'} />
-      {ios && backLabel ? (
-        <Text variant="body" color="tint" numberOfLines={1}>
-          {backLabel}
-        </Text>
-      ) : null}
-    </>
-  );
-
   const leadingNode =
-    leading === 'back' && mode === 'reveal' ? (
-      <Pressable accessibilityRole="button" accessibilityLabel={backLabel ? `Back to ${backLabel}` : 'Back'} onPress={onLeading} style={styles.back}>
-        <Animated.View style={[styles.back, backgroundStyle]} pointerEvents="none">
-          {backContent}
-        </Animated.View>
-        <Animated.View style={[styles.mediaBack, mediaStyle]} pointerEvents="none">
-          <FloatingSurface interactive style={styles.circle}>
-            <Icon icon="back" size="subheadline" weight="strong" color="foreground" />
-          </FloatingSurface>
-        </Animated.View>
-      </Pressable>
-    ) : leading === 'back' ? (
-      <Pressable accessibilityRole="button" accessibilityLabel={backLabel ? `Back to ${backLabel}` : 'Back'} onPress={onLeading} style={styles.back}>
-        {backContent}
-      </Pressable>
+    leading === 'back' ? (
+      <GlassButton icon="back" accessibilityLabel={backLabel ? `Back to ${backLabel}` : 'Back'} onPress={onLeading} overMedia={mode === 'reveal'} edge={fill === 'chat'} />
     ) : leading === 'close' ? (
-      <View style={styles.closeSlot}>
-        <CloseButton onPress={onLeading} overMedia={mode === 'reveal'} />
-      </View>
+      <CloseButton onPress={onLeading} overMedia={mode === 'reveal'} />
     ) : null;
 
   return (
     <>
-    {/* box-none: the bar's empty parts let touches through to the content under it (Nearby's avatar row). */}
+    {/* No bar fill (iOS 26): a scroll-edge fade under the floating controls once content is under them. */}
+    {fillBefore ? <ScrollEdge edge="top" height={total + theme.space[4]} fill={fillBefore.fill} style={beforeStyle} /> : null}
+    <ScrollEdge edge="top" height={total + theme.space[4]} fill={fill} style={backgroundStyle} />
+    {/* box-none: the bar's empty parts let touches through to the content under it (Nearby's area row). */}
     <Animated.View style={[styles.bar(top), hideStyle]} pointerEvents="box-none">
-      <Animated.View pointerEvents="none" style={[styles.background(fill), backgroundStyle]} />
-      <View style={styles.row(barHeight)} pointerEvents="box-none">
-        <View style={styles.side(ios)} pointerEvents="box-none">
-          {leadingNode}
-        </View>
-        <Animated.View style={[styles.titleSlot(ios), titleStyle]} pointerEvents="none">
-          <Text variant="headline" numberOfLines={1} align={ios ? 'center' : 'left'} accessibilityRole="header">
-            {title}
-          </Text>
+      <View style={styles.row(barHeight, leadingNode != null)} pointerEvents="box-none">
+        {leadingNode}
+        <Animated.View style={[styles.titleSlot, titleMark && styles.titleWithMark, titleStyle]} pointerEvents="none">
+          {titleMark ? <SnuffleMark size="inline" /> : null}
+          <View style={styles.titleText}>
+            <Text variant="headline" numberOfLines={1} accessibilityRole="header">
+              {title}
+            </Text>
+            {subtitle ? (
+              <Text variant="caption1" color="mutedForeground" numberOfLines={1}>
+                {subtitle}
+              </Text>
+            ) : null}
+          </View>
         </Animated.View>
-        <View style={[styles.side(ios), styles.trailing]} pointerEvents="box-none">
-          {trailing.map((action) => (
-            <BarButton key={action.label} action={action} />
-          ))}
+        <View style={styles.trailing} pointerEvents="box-none">
+          <BarActions actions={trailing} />
+          {confirm ? <ConfirmButton onPress={confirm.onPress} label={confirm.label} /> : null}
         </View>
       </View>
     </Animated.View>
-    {/* A bar that hides leaves the status bar's strip filled, so content never runs under the clock bare. */}
-    {hideOnScroll && top > 0 ? <Animated.View pointerEvents="none" style={[styles.statusStrip(top, fill), backgroundStyle]} /> : null}
     </>
   );
 });
@@ -219,19 +232,20 @@ export const NavBar = memo(function NavBar({
 export type LargeTitleProps = {
   title: string;
   scroll?: NavBarScroll;
-  /** Display title in Gambetta (the Nearby large title, typography.md) instead of Title 1. */
+  /** A root screen (Nearby, Requests): Display large, 48. Otherwise Display title, 40. Both Gambetta (typography.md). */
   display?: boolean;
   /** Scroll offset at which the title starts to fade; when content sits above it (Nearby's area row). */
   offset?: number;
 };
 
-/** The large title at the top of the scroll content (Title 1); fades as it scrolls under the bar. */
+/** The large title at the top of the scroll content, in Gambetta; fades as it scrolls under the bar. The screen sets
+ *  the space around it (spacing.md: gap.aboveTitle above, gap.title below). */
 export const LargeTitle = memo(function LargeTitle({ title, scroll, display = false, offset = 0 }: LargeTitleProps) {
   const { theme } = useUnistyles();
   const fallback = useSharedValue(0);
   const scrollY = scroll?.scrollY ?? fallback;
-  const variant = display ? 'displayTitle' : 'title1';
-  const height = theme.type[variant].lineHeight + theme.space[2];
+  const variant = display ? 'displayLarge' : 'displayTitle';
+  const height = theme.type[variant].lineHeight;
   const style = useAnimatedStyle(() => ({
     opacity: interpolate(scrollY.get(), [offset, offset + height], [1, 0], Extrapolation.CLAMP),
     transform: [{ scale: interpolate(scrollY.get(), [-height, 0], [1.1, 1], Extrapolation.CLAMP) }],
@@ -250,34 +264,25 @@ export function useNavBarHeight(topInset?: number): number {
   const { theme } = useUnistyles();
   const insets = useSafeAreaInsets();
   const top = topInset ?? insets.top;
-  return top + (theme.platform === 'ios' ? theme.hit.min : theme.hit.min + theme.space[4]);
+  return top + (theme.platform === 'ios' ? theme.hit.min + theme.space[2] : theme.hit.min + theme.space[4]);
 }
 
 const styles = StyleSheet.create((theme) => ({
   bar: (top: number) => ({ position: 'absolute', top: 0, left: 0, right: 0, paddingTop: top, zIndex: 2 }),
-  background: (fill: 'background' | 'card') => ({
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: theme.color[fill],
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: theme.color.separator,
-  }),
-  statusStrip: (height: number, fill: 'background' | 'card') => ({
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
+  row: (height: number, leading: boolean) => ({
     height,
-    zIndex: 3,
-    backgroundColor: theme.color[fill],
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.space[2],
+    paddingLeft: leading ? theme.space[2] : theme.margin.screenCompact,
+    paddingRight: theme.space[2],
   }),
-  row: (height: number) => ({ height, flexDirection: 'row', alignItems: 'center', paddingHorizontal: theme.space[2] }),
-  side: (ios: boolean) => (ios ? { flex: 1, flexDirection: 'row', alignItems: 'center' } : { flexDirection: 'row', alignItems: 'center' }),
-  trailing: { justifyContent: 'flex-end' },
-  titleSlot: (ios: boolean) => (ios ? { flex: 2 } : { flex: 1, paddingHorizontal: theme.space[2] }),
-  back: { flexDirection: 'row', alignItems: 'center', minHeight: theme.hit.min, minWidth: theme.hit.min, gap: theme.space[1] },
-  mediaBack: { position: 'absolute', top: 0, left: 0, width: theme.hit.min, height: theme.hit.min, alignItems: 'center', justifyContent: 'center' },
-  circle: { width: theme.size.close, height: theme.size.close, borderRadius: theme.radius.full, alignItems: 'center', justifyContent: 'center' },
-  closeSlot: { minWidth: theme.hit.min, minHeight: theme.hit.min, alignItems: 'center', justifyContent: 'center' },
-  barButton: { width: theme.hit.min, height: theme.hit.min, alignItems: 'center', justifyContent: 'center' },
-  large: { paddingTop: theme.space[2], transformOrigin: 'left' },
+  titleSlot: { flex: 1 },
+  titleWithMark: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2] },
+  titleText: { flexShrink: 1 },
+  trailing: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2] },
+  actions: { flexDirection: 'row', alignItems: 'center' },
+  capsule: { flexDirection: 'row', alignItems: 'center', height: theme.hit.min, borderRadius: theme.radius.full, paddingHorizontal: theme.space[1] },
+  barButton: { width: theme.hit.min - theme.space[1], height: theme.hit.min, alignItems: 'center', justifyContent: 'center' },
+  large: { transformOrigin: 'left' },
 }));

@@ -7,6 +7,7 @@ import type { IconSvgElement } from '@hugeicons/react-native';
 import { memo, useEffect, useRef } from 'react';
 import { View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSequence, withSpring, withTiming } from 'react-native-reanimated';
+import { useGround } from '../../internal/ground';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { spoken } from '../../internal/PressableCard';
@@ -42,6 +43,7 @@ const icons: Record<AnswerRowKind, IconSvgElement> = {
  */
 export const AnswerRow = memo(function AnswerRow({ shop, street, status, kind, position = 'only' }: AnswerRowProps) {
   const { theme } = useUnistyles();
+  const onChat = useGround() === 'chat';
   const grouped = theme.platform === 'ios';
   const change = useSharedValue(1);
   const previous = useRef(status);
@@ -55,7 +57,7 @@ export const AnswerRow = memo(function AnswerRow({ shop, street, status, kind, p
   const color: ColorName = good ? 'success' : 'mutedForeground';
 
   return (
-    <View accessible accessibilityLabel={spoken(shop, street, status)} accessibilityLiveRegion="polite" style={styles.row(grouped, position)}>
+    <View accessible accessibilityLabel={spoken(shop, street, kind === 'till' ? `${status}, from the shop's till` : status)} accessibilityLiveRegion="polite" style={styles.row(grouped, position, onChat)}>
       <View style={styles.text(grouped && position !== 'last' && position !== 'only')}>
         <View style={styles.grow}>
           <Text variant="subheadlineStrong" numberOfLines={1}>
@@ -77,13 +79,14 @@ export const AnswerRow = memo(function AnswerRow({ shop, street, status, kind, p
 });
 
 const styles = StyleSheet.create((theme) => ({
-  row: (grouped: boolean, position: RowPosition) => {
+  row: (grouped: boolean, position: RowPosition, onChat = false) => {
     const top = position === 'first' || position === 'only';
     const bottom = position === 'last' || position === 'only';
     const corner = grouped ? theme.radius.card : theme.radius.none;
     return {
       paddingLeft: theme.space[4],
-      backgroundColor: grouped ? theme.color.card : 'transparent',
+      // On a chat's white ground the group takes the chat fill (Background in light), so it still reads as a group.
+      backgroundColor: grouped ? (onChat ? theme.color.chat.fill : theme.color.card) : 'transparent',
       borderTopLeftRadius: top ? corner : 0,
       borderTopRightRadius: top ? corner : 0,
       borderBottomLeftRadius: bottom ? corner : 0,

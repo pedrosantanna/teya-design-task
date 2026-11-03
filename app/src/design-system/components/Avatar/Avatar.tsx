@@ -28,7 +28,7 @@ export const Avatar = memo(function Avatar({ name, image, size = 'regular', onPr
   const source = typeof image === 'string' ? { uri: image } : image;
   const circle = (
     <View style={styles.circle(size)}>
-      {source ? <Image source={source} style={IMAGE_FILL} contentFit="cover" accessible={false} /> : <ShopPlaceholder name={name} tone="new" round />}
+      {source ? <Image source={source} style={IMAGE_FILL} contentFit="cover" accessible={false} /> : <ShopPlaceholder name={name} accent="peach" round />}
     </View>
   );
   if (!onPress) {

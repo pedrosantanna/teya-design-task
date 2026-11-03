@@ -8,7 +8,7 @@ A shop in a list: logo or monogram (40, circle), name and meta. Spec: Shop row o
 | --- | --- | --- | --- |
 | `id` | string | required | |
 | `name` | string | required | Headline, one line |
-| `meta` | string | required | Footnote, one line; the street drops first |
+| `meta` | string | required | Footnote, up to two lines; it wraps before anything is cut |
 | `logo` | string (uri) | none | Monogram on the accent fill without one |
 | `position` | `'only'`, `'first'`, `'middle'`, `'last'` | `'only'` | Where the row sits in its list |
 | `onPress` | `(id) => void` | none | |

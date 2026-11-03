@@ -25,6 +25,7 @@
       }
     },
     "biscuit": {
+      "$description": "Biscuit grey neutral. Keys are OKLCH lightness x 1000 (colour.md, Surfaces).",
       "150": {
         "$value": {
           "colorSpace": "srgb",
@@ -36,6 +37,18 @@
           "hex": "#100A06"
         },
         "$description": "L 0.15, light foreground and dark background"
+      },
+      "200": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1098,
+            0.0863,
+            0.0706
+          ],
+          "hex": "#1C1612"
+        },
+        "$description": "L 0.20: the dark sheet ground"
       },
       "235": {
         "$value": {
@@ -157,6 +170,18 @@
         },
         "$description": "L 0.915, light muted"
       },
+      "940": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9333,
+            0.9137,
+            0.8863
+          ],
+          "hex": "#EEE9E2"
+        },
+        "$description": "L 0.935, light background (identity-in-use: white cards at 1.21:1 on it)"
+      },
       "960": {
         "$value": {
           "colorSpace": "srgb",
@@ -167,7 +192,7 @@
           ],
           "hex": "#F4F1ED"
         },
-        "$description": "L 0.96, light background"
+        "$description": "L 0.96, the light background until the identity-in-use round"
       },
       "985": {
         "$value": {
@@ -192,8 +217,7 @@
           "hex": "#FFFFFF"
         },
         "$description": "L 1.00, light card"
-      },
-      "$description": "Biscuit grey neutral. Keys are OKLCH lightness x 1000 (colour.md, Surfaces)."
+      }
     },
     "indigo": {
       "50": {
@@ -419,6 +443,30 @@
           ],
           "hex": "#462318"
         }
+      },
+      "tile": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9961,
+            0.7725,
+            0.698
+          ],
+          "hex": "#FEC5B2"
+        },
+        "$description": "Tile step, light: OKLCH L 0.87, C 0.07 (colour.md, Shop accents)"
+      },
+      "tileDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3765,
+            0.1725,
+            0.1098
+          ],
+          "hex": "#602C1C"
+        },
+        "$description": "Tile step, dark: OKLCH L 0.36, C 0.08, h 38 (colour.md, Shop accents)"
       }
     },
     "pistachio": {
@@ -532,6 +580,30 @@
           ],
           "hex": "#24340E"
         }
+      },
+      "tile": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7725,
+            0.8706,
+            0.6824
+          ],
+          "hex": "#C5DEAE"
+        },
+        "$description": "Tile step, light: OKLCH L 0.87, C 0.07 (colour.md, Shop accents)"
+      },
+      "tileDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1647,
+            0.2745,
+            0.0941
+          ],
+          "hex": "#2A4618"
+        },
+        "$description": "Tile step, dark: OKLCH L 0.36, C 0.08, h 135 (colour.md, Shop accents)"
       }
     },
     "butter": {
@@ -645,6 +717,30 @@
           ],
           "hex": "#382C04"
         }
+      },
+      "tile": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9059,
+            0.8314,
+            0.5608
+          ],
+          "hex": "#E7D48F"
+        },
+        "$description": "Tile step, light: OKLCH L 0.87, C 0.09, h 95 (colour.md, Shop accents)"
+      },
+      "tileDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.298,
+            0.2314,
+            0.0039
+          ],
+          "hex": "#4C3B01"
+        },
+        "$description": "Tile step, dark: OKLCH L 0.36, C 0.073 (gamut limit), h 90 (colour.md, Shop accents)"
       }
     },
     "lavender": {
@@ -758,6 +854,30 @@
           ],
           "hex": "#302747"
         }
+      },
+      "tile": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8431,
+            0.8,
+            0.9961
+          ],
+          "hex": "#D7CCFE"
+        },
+        "$description": "Tile step, light: OKLCH L 0.87, C 0.07 (colour.md, Shop accents)"
+      },
+      "tileDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2471,
+            0.2118,
+            0.349
+          ],
+          "hex": "#3F3659"
+        },
+        "$description": "Tile step, dark: OKLCH L 0.36, C 0.06 (colour.md, Shop accents)"
       }
     },
     "system": {

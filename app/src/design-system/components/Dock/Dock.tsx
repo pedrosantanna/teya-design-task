@@ -1,17 +1,14 @@
-// The bottom dock (components.md, Ask bar and composer): the strip that holds the ask bar or the chat
-// composer, with the suggestion chips above it on Nearby. It reaches the bottom of the screen through the
-// safe area, so content scrolling under it is blurred (iOS, the web) or covered (Android, Reduce Transparency)
-// and chips or messages never sit bare over it.
+// The bottom dock (components.md, Ask bar and composer; iOS 26 patterns): the strip that holds the chat
+// composer, or the ask bar with the suggestion chips. No bar fill: the controls float in glass over a
+// scroll-edge fade that reaches the bottom of the screen through the safe area, so content scrolling under
+// them recedes instead of sitting bare behind the glass.
 import type { ReactNode } from 'react';
 import { View, type StyleProp, type ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { StyleSheet, useUnistyles } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 
-import { ThemedBlurView } from '../../internal/media';
-import { useReduceTransparency } from '../../internal/useReduceTransparency';
-
-// Blur strength, as on FloatingSurface's fallback; a material setting, not a layout value.
-const BLUR_INTENSITY = 60;
+import { useGround } from '../../internal/ground';
+import { ScrollEdge } from '../../internal/ScrollEdge';
 
 export type DockProps = {
   children: ReactNode;
@@ -23,21 +20,17 @@ export type DockProps = {
 };
 
 export function Dock({ children, floating = true, bottomInset, style }: DockProps) {
-  // The platform form follows the theme; the React Compiler would keep the first one, since the theme object stays the same.
-  'use no memo';
-  const { theme } = useUnistyles();
   const insets = useSafeAreaInsets();
-  const reduceTransparency = useReduceTransparency();
   const bottom = bottomInset ?? insets.bottom;
-  const layout = [styles.strip(bottom), floating && styles.floating, style];
-
-  if (theme.platform === 'android' || reduceTransparency) {
-    return <View style={[layout, styles.solid]}>{children}</View>;
-  }
+  // The fade is drawn from the ground the dock floats over: a chat's, or the Background.
+  const ground = useGround();
   return (
-    <ThemedBlurView intensity={BLUR_INTENSITY} tint={theme.scheme === 'dark' ? 'dark' : 'light'} style={[layout, styles.blur]}>
+    <View style={[styles.strip(bottom), floating && styles.floating, style]} pointerEvents="box-none">
+      <View style={styles.edge} pointerEvents="none">
+        <ScrollEdge edge="bottom" height="100%" fill={ground === 'chat' ? 'chat' : 'background'} />
+      </View>
       {children}
-    </ThemedBlurView>
+    </View>
   );
 }
 
@@ -46,11 +39,8 @@ const styles = StyleSheet.create((theme) => ({
     paddingTop: theme.space[3],
     paddingBottom: bottom + theme.space[2],
     gap: theme.space[3],
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: theme.color.separator,
   }),
   floating: { position: 'absolute', left: 0, right: 0, bottom: 0 },
-  // Android: the screen's own surface, so the ask bar's Card field still reads as a field on it.
-  solid: { backgroundColor: theme.color.background },
-  blur: { overflow: 'hidden' },
+  // The fade starts a little above the controls so the content's edge dissolves before it reaches the glass.
+  edge: { position: 'absolute', left: 0, right: 0, bottom: 0, top: -theme.space[6] },
 }));

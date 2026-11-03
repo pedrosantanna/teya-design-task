@@ -1,6 +1,6 @@
 # Sources
 
-Every quote and every link used across the docs, in one place. 72 quotes (71 checked against the live source) and 161 other sources. This page is generated from the other pages by `scripts/build_sources.py`.
+Every quote and every link used across the docs, in one place. 72 quotes (71 checked against the live source) and 170 other sources. This page is generated from the other pages by `scripts/build_sources.py`.
 
 ## Quotes by network
 
@@ -176,6 +176,15 @@ Status **verified** means the text, author and date were matched against the liv
 | [The high street today](high-street-landscape.md) | [Consumer Rights Act 2015](https://www.legislation.gov.uk/ukpga/2015/15/contents) |
 | [The high street today](high-street-landscape.md) | [CMS](https://cms.law/en/gbr/legal-updates/the-dmcc-act-consumer-elements-come-into-force-from-6-april-2025) |
 | [The high street today](high-street-landscape.md) | [FSA](https://www.food.gov.uk/business-industry/guidancenotes/food-sold-online) |
+| [The high street today](high-street-landscape.md) | [Argos](https://help.argos.co.uk/help/delivery-and-collection/what-happens-if-my-collection-window-expires) |
+| [The high street today](high-street-landscape.md) | [Argos](https://help.argos.co.uk/help/ordering/can-i-reserve-an-item) |
+| [The high street today](high-street-landscape.md) | [Decathlon](https://custhelp-sprinklr.decathlon.co.uk/articles/my-order/how-long-do-you-hold-click-and-collect-orders/698c644d6873450e473e2e7d) |
+| [The high street today](high-street-landscape.md) | [John Lewis](https://www.johnlewis.com/customer-services/delivery-information/click-and-collect) |
+| [The high street today](high-street-landscape.md) | [Screwfix](https://www.vip.screwfix.com/help/clickandcollect) |
+| [The high street today](high-street-landscape.md) | [Smyths](https://www.smythstoys.com/uk/en-gb/click-and-collect) |
+| [The high street today](high-street-landscape.md) | [Beaverbrooks](https://beaverbrooks.co.uk/info/delivery/store-delivery) |
+| [The high street today](high-street-landscape.md) | [Aesop](https://www.aesop.co.uk/customer-service/click-and-collect-terms-and-conditions.html) |
+| [The high street today](high-street-landscape.md) | [section 29](https://www.legislation.gov.uk/ukpga/2015/15/section/29) |
 | [The high street today](high-street-landscape.md) | [Knight Frank (Green Street data)](https://www.knightfrank.co.uk/research/article/2026/7/retail-renaissance-store-wars-a-new-hope) |
 | [The high street today](high-street-landscape.md) | [Savills](https://www.savills.co.uk/research_articles/229130/390116-0) |
 | [The high street today](high-street-landscape.md) | [Retail Rewired (BRC-Sensormatic)](https://retailrewired.co.uk/2026/10/09/sluggish-september-footfall-prompts-calls-for-the-budget-to-deliver-for-shoppers-retail-businesses/) |
@@ -245,12 +254,12 @@ Status **verified** means the text, author and date were matched against the liv
 | [Method in detail](personas/method-details.md) | [@tafsonthemove](https://www.tiktok.com/@tafsonthemove/video/7503202705293266198) |
 | [Method in detail](personas/method-details.md) | [@Jojo_agboola](https://x.com/Jojo_agboola/status/2112618905525276980) |
 | [Method in detail](personas/method-details.md) | [u/claudiav2603](https://www.reddit.com/r/london/comments/1vk3h8e/comment/p2y26dy/) |
-| [Method in detail](personas/method-details.md) | [@London_W4](https://x.com/London_W4/status/2102723893463044506) |
 | [Method in detail](personas/method-details.md) | [Kenjenny](https://www.mumsnet.com/talk/_chat/5509007-do-you-still-enjoy-shopping-on-the-high-street-or-mostly-online?reply=151334270) |
 | [Method in detail](personas/method-details.md) | [u/No_Witness9533](https://www.reddit.com/r/london/comments/1vr9i0n/comment/p4bxk0e/) |
 | [Method in detail](personas/method-details.md) | [u/squeakyeggs](https://www.reddit.com/r/Ealing/comments/1vhe1k8/comment/p7t14xd/) |
 | [Method in detail](personas/method-details.md) | [u/Rhubarbatross](https://www.reddit.com/r/london/comments/1pvd92z/comment/nvw7a0u/) |
 | [Method in detail](personas/method-details.md) | [u/anonypanda](https://www.reddit.com/r/london/comments/1uke914/comment/ouyun00/) |
+| [Method in detail](personas/method-details.md) | [@London_W4](https://x.com/London_W4/status/2102723893463044506) |
 | [Method in detail](personas/method-details.md) | [@OpenChiswickW4](https://x.com/OpenChiswickW4/status/2069295025561760040) |
 | [Method in detail](personas/method-details.md) | [@loveandlondon](https://www.tiktok.com/@loveandlondon/video/7509933373075492118) |
 | [Method in detail](personas/method-details.md) | [@stillshipping](https://www.tiktok.com/@stillshipping/video/7693511674925518102) |

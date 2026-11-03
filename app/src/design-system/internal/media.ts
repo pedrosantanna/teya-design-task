@@ -10,6 +10,9 @@ export const ThemedGlassView = withUnistyles(GlassView);
 /** expo-image is styled with this plain object inside a themed View (a clipped box), not through
  *  Unistyles: re-rendering it on a theme change dropped the photo on the web. */
 export const IMAGE_FILL = { width: '100%', height: '100%' } as const;
+/** A photo laid over the shop's tonal tile (ShopPlaceholder), which is absolutely positioned: the photo must be
+ *  too, or the tile paints over it on the web. */
+export const IMAGE_OVER = { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' } as const;
 
 /** A photo the app draws: a bundled image (a Metro asset id) or a remote URL. */
 export type PhotoSource = number | string;

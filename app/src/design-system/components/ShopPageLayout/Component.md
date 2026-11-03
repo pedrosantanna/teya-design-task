@@ -8,12 +8,14 @@ The shop page's frame: the map, the photos, the content card and the nav bar, wi
 | --- | --- | --- | --- |
 | `name` | string | required | Display title in the card (up to two lines), then the bar's inline title |
 | `status` | string[] | `[]` | Footnote lines under the name: "Open till 6pm · Blythe Road · 2 min walk", "Made to order · 2 days' notice" |
-| `photos` | `ShopPhoto[]` | `[]` | Up to three: `uri`, `label` ("Rossi's Bakery shopfront, Blythe Road"), `credit` ("Photo: Clara Lilley, Unsplash") |
+| `photos` | `ShopPhoto[]` | `[]` | Up to three: `uri`, `label` ("Rossi's Bakery shopfront, Blythe Road") |
+| `accent` | ShopAccentName | none | The shop's accent: a wash behind the name at the top of the card (edge to edge once the card fills the screen) and the tonal tile under each photo |
 | `onBack` | function | required | Back in the top left; the page is the shop's detail, pushed with Back and the back gesture |
 | `backLabel` | string | none | The previous screen's title ("Nearby"), beside the chevron once the bar fills |
 | `mapLoading` | boolean | `false` | Map ground alone |
-| `actions` | ReactNode | none | Ask, Call and Directions, `space.4` under the status lines |
-| `children` | ReactNode | required | The rest of the card, `gap.section` apart: "Asked about recently", how the shop works, credits |
+| `tags` | ReactNode | none | Badges (Promoted, New, Delivers) in one row that scrolls sideways |
+| `actions` | ReactNode | none | Ask (primary), Call and Directions as capsule buttons in one row that scrolls sideways, never wrapped or stacked |
+| `children` | ReactNode | required | The rest of the card, `gap.section` apart: "Asked about recently", how the shop works |
 
 ## Layout
 
@@ -24,6 +26,9 @@ The shop page's frame: the map, the photos, the content card and the nav bar, wi
 - The content inside sits at the screen margin plus `inset.card` from the screen edge at every scroll position, so it never moves sideways or reflows.
 
 ## Scroll
+
+The content's sides follow the card's edges: as the card grows from inset to the full width, the content grows with it and the padding inside the card stays `inset.card` (animated on the UI thread; the text reflows over the first bar-height of scroll). The tag and action rows bleed to the card's edges.
+
 
 1. Resting: the inset card sits over the map. As the scroll starts, over the first bar-height of travel, the card grows to the full width (inset to 0) and its top corners go from `radius.card` to `radius.sheet`, covering the map at its sides; the title moves up with the card. Under Reduce Motion it jumps between the inset and the full-width card.
 2. The photos and the map stay put while the card scrolls over them.
@@ -39,4 +44,4 @@ Same layout. The bar is the iOS navigation bar with the hide-on-swipe behaviour 
 
 ## Accessibility
 
-Reading order: Back ("Back to Nearby"), name, status lines, then the screen's content; the photos are read as "[Shop] shopfront, [street]" with the credit as their hint. The map is hidden from screen readers.
+Reading order: Back ("Back to Nearby"), name, status lines, then the screen's content; the photos are read as "[Shop] shopfront, [street]". The map is hidden from screen readers.

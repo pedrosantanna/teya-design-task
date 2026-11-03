@@ -11,6 +11,9 @@
 //   and creases (faces meeting at 35° or more) come out as one line of constant width at any zoom.
 //   MSAA on the colour buffer and FXAA at the end keep edges and curves smooth.
 // - A flat cast shadow in the same derived dark tone, projected from one light onto the ground.
+// Export (app assets): the Export section of the settings panel, or ?export=1 in the URL for scripts
+// (window.__exportFrames), renders numbered PNG frames at size × scale pixels with a true isometric camera,
+// a fixed-step clock and a transparent background shaded for a given ground (app/scripts/illustrations).
 (function () {
   const CDN = 'https://cdn.jsdelivr.net/npm/three@0.170.0';
   let libP = null;
@@ -59,6 +62,54 @@
   const DROP = 2.2, SPRING = 150, DAMP = 2 * 0.38 * Math.sqrt(150); // entry spring
   const LINE_CSS = 1.25; // outline width in CSS pixels
   const CREASE = Math.cos(35 * Math.PI / 180);
+
+  // --- Export mode (app assets) ---------------------------------------------------------------
+  // URL: ?export=1&object=box&size=120&scale=3&ground=%23F4F1ED&fps=24&seconds=2&clip=entry|idle|still
+  // (read from the query string, or from a query after the hash: #illustrations?export=1&…).
+  // In this mode window.__exportFrames(opts?) renders and returns { frames: [PNG data URLs], meta }.
+  const EXPORT_DEFAULTS = { object: 'box', size: 120, scale: 3, ground: '#F4F1ED', fps: 24, clip: 'entry', seconds: null, margin: 0.07, shadows: true, az: null, el: null, dark: null, opaque: false, height: null, shade: null, k: null, ink: null, recolor: null };
+  function exportParams() {
+    const q = new URLSearchParams(location.search);
+    const h = location.hash.indexOf('?');
+    if (h >= 0) new URLSearchParams(location.hash.slice(h + 1)).forEach((v, k) => q.set(k, v));
+    if (q.get('export') !== '1') return null;
+    const o = { ...EXPORT_DEFAULTS };
+    q.forEach((v, k) => {
+      if (!(k in o)) return;
+      o[k] = typeof EXPORT_DEFAULTS[k] === 'number' || ['seconds', 'az', 'el', 'height', 'shade', 'k'].includes(k) ? +v : k === 'shadows' || k === 'opaque' ? v !== '0' && v !== 'false' : v;
+    });
+    return o;
+  }
+  // A store-only zip (PNGs are compressed already).
+  const CRC_T = (() => {
+    const t = new Uint32Array(256);
+    for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; }
+    return t;
+  })();
+  const crc32 = b => { let c = ~0; for (let i = 0; i < b.length; i++) c = CRC_T[(c ^ b[i]) & 255] ^ (c >>> 8); return ~c >>> 0; };
+  function zipStore(files) {
+    const enc = new TextEncoder(), out = [], dir = [];
+    let off = 0;
+    files.forEach(f => {
+      const name = enc.encode(f.name), crc = crc32(f.data), n = f.data.length;
+      const h = new DataView(new ArrayBuffer(30));
+      h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(12, 0x21, true);
+      h.setUint32(14, crc, true); h.setUint32(18, n, true); h.setUint32(22, n, true); h.setUint16(26, name.length, true);
+      out.push(h, name, f.data);
+      const c = new DataView(new ArrayBuffer(46));
+      c.setUint32(0, 0x02014b50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(14, 0x21, true);
+      c.setUint32(16, crc, true); c.setUint32(20, n, true); c.setUint32(24, n, true); c.setUint16(28, name.length, true);
+      c.setUint32(42, off, true);
+      dir.push(c, name);
+      off += 30 + name.length + n;
+    });
+    const size = dir.reduce((s, x) => s + x.byteLength, 0);
+    const e = new DataView(new ArrayBuffer(22));
+    e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true);
+    e.setUint32(12, size, true); e.setUint32(16, off, true);
+    return new Blob([...out, ...dir, e], { type: 'application/zip' });
+  }
+  const dataUrlBytes = u => Uint8Array.from(atob(u.slice(u.indexOf(',') + 1)), ch => ch.charCodeAt(0));
 
   const svg = p => `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
   const IC = {
@@ -162,6 +213,16 @@
   function mount(root, opts = {}) {
     root.__viewer?.destroy?.();
     const t = k => (opts.t ? opts.t(k) : k) ?? k;
+    const tx = (k, en) => { const v = t(k); return v && v !== k ? v : en; }; // strings not in the site's UI tables yet
+    const exportURL = exportParams();
+    if (!document.getElementById('v3-export-css')) {
+      const st = document.createElement('style');
+      st.id = 'v3-export-css';
+      st.textContent = `.v3-field{display:grid;grid-template-columns:72px minmax(0,1fr);align-items:center;gap:8px;font-size:13px}
+.v3-field select,.v3-field input{min-width:0;height:28px;padding:0 6px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--fg);font:inherit;font-size:13px}
+.v3-ex-status{margin:0;color:var(--muted-fg);font-size:12px}.v3-ex-status:empty{display:none}`;
+      document.head.appendChild(st);
+    }
     const icon = (n, fb) => (opts.icon && opts.icon(n)) || fb || '';
     const lang = opts.lang === 'pt' ? 'pt' : 'en';
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -229,6 +290,17 @@
           <h3 class="v3-h">${esc(t('light'))}</h3>
           <label class="v3-range"><span>${esc(t('lightAngle'))}</span><input type="range" min="-180" max="180" step="1" value="${LIGHT_AZ}" data-light="az"><output>${LIGHT_AZ}°</output></label>
           <label class="v3-range"><span>${esc(t('lightHeight'))}</span><input type="range" min="25" max="85" step="1" value="${LIGHT_EL}" data-light="el"><output>${LIGHT_EL}°</output></label>
+        </div>
+        <div class="v3-sec v3-export">
+          <h3 class="v3-h">${esc(tx('exportTitle', 'Export'))}</h3>
+          <label class="v3-field"><span>${esc(tx('exportObject', 'Object'))}</span><select data-ex="object"></select></label>
+          <label class="v3-field"><span>${esc(tx('exportSize', 'Size (pt)'))}</span><select data-ex="size">${[64, 88, 120, 160].map(s => `<option${s === 120 ? ' selected' : ''}>${s}</option>`).join('')}</select></label>
+          <label class="v3-field"><span>${esc(tx('exportScale', 'Scale'))}</span><select data-ex="scale">${[1, 2, 3].map(s => `<option value="${s}"${s === 3 ? ' selected' : ''}>@${s}x</option>`).join('')}</select></label>
+          <label class="v3-field"><span>${esc(tx('exportGround', 'Ground'))}</span><input type="text" data-ex="ground" value="${EXPORT_DEFAULTS.ground}" spellcheck="false" maxlength="7"></label>
+          <label class="v3-field"><span>${esc(tx('exportClip', 'Clip'))}</span><select data-ex="clip">${['entry', 'idle', 'still'].map(c => `<option>${c}</option>`).join('')}</select></label>
+          <label class="v3-field"><span>${esc(tx('exportFps', 'Frames/s'))}</span><select data-ex="fps">${[12, 24, 30].map(f => `<option${f === 24 ? ' selected' : ''}>${f}</option>`).join('')}</select></label>
+          <button type="button" class="v3-btn" data-ex-go>${esc(tx('exportGo', 'Export PNG frames (.zip)'))}</button>
+          <p class="v3-ex-status" aria-live="polite"></p>
         </div>
       </section>
       <aside class="cv-drawer is-about" aria-label="${esc(t('viewerAbout'))}" hidden>
@@ -306,11 +378,12 @@
     const fail = e => { status.hidden = false; status.textContent = `${t('viewerFail')} ${e && e.message ? e.message : ''}`; console.error(e); };
 
     const modelsUrl = new URL(opts.modelsUrl || 'site/illustrations/index.js', document.baseURI).href;
-    Promise.all([loadLib(), import(modelsUrl)])
-      .then(([lib, mod]) => { if (alive) start(lib, mod.default || []); })
+    const extrasUrl = new URL('export.js', modelsUrl).href;
+    Promise.all([loadLib(), import(modelsUrl), import(extrasUrl).catch(() => ({}))])
+      .then(([lib, mod, extras]) => { if (alive) start(lib, mod.default || [], extras); })
       .catch(fail);
 
-    function start(lib, defs) {
+    function start(lib, defs, extras = {}) {
       const { THREE, OrbitControls, EffectComposer, RenderPass, ShaderPass, FXAAShader } = lib;
       let renderer;
       try { renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true }); }
@@ -368,6 +441,7 @@
       applyLight();
 
       // --- Models -----------------------------------------------------------------------
+      let recolorMap = null; // { '#RRGGBB': '#RRGGBB' } while an export with `recolor` renders
       function buildModel(def) {
         const built = def.build(THREE, PALETTE);
         const { group, parts } = built;
@@ -418,7 +492,9 @@
         meshes.forEach((m, i) => {
           geos.add(m.geometry);
           const src = m.material, side = src.side;
-          const toon = toonMat(src.color, side);
+          // Export option recolor: palette swaps for one render (e.g. lighter iron on a dark ground).
+          const swap = recolorMap && recolorMap[`#${src.color.getHexString()}`.toUpperCase()];
+          const toon = toonMat(swap ? new THREE.Color(swap) : src.color, side);
           src.dispose();
           // Meshes that share a part name share an id, so no line is drawn where they meet.
           const key = m.userData.part || `#${i}`;
@@ -450,9 +526,17 @@
           s.visible = shown(s.userData.src);
           if (!s.visible) continue;
           // Project onto the plane y = ground; the shadow group lifts the result to that height.
-          s.matrix.multiplyMatrices(shadowM, s.userData.src.matrixWorld);
-          s.matrix.elements[12] += ox;
-          s.matrix.elements[14] += oz;
+          // A mesh may carry its own ground height (shadowRef.y, e.g. a walker stepping off the kerb onto the road).
+          const src = s.userData.src, r = src.userData.shadowRef;
+          s.matrix.multiplyMatrices(shadowM, src.matrixWorld);
+          if (r) {
+            s.matrix.elements[12] += r.y * L.x / L.y;
+            s.matrix.elements[13] += r.y - m.groundY;
+            s.matrix.elements[14] += r.y * L.z / L.y;
+          } else {
+            s.matrix.elements[12] += ox;
+            s.matrix.elements[14] += oz;
+          }
         }
       }
 
@@ -563,10 +647,14 @@
       };
       const lum = hex => { const c = new THREE.Color(hex); return 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b; };
       const bgC = new THREE.Color(), tint = new THREE.Color(), white = new THREE.Color(1, 1, 1), tmpC = new THREE.Color();
+      const darkFor = color => (lum(color) < 0.1 ? PALETTE.indigo[900] : INK);
       function applyBg() {
         const b = BGS.find(x => x.id === state.bg) || BGS[0];
         const color = b.color || cssColor();
-        const dark = b.dark || (lum(color) < 0.1 ? PALETTE.indigo[900] : INK);
+        setGround(color, b.dark || darkFor(color));
+      }
+      // Shading and shadow tones for a ground colour and its dark tone (also used by the export).
+      function setGround(color, dark) {
         bgC.set(color);
         SU.uDark.value.set(dark);
         // Ambient tint: the background's hue at full brightness, half strength.
@@ -664,6 +752,7 @@
       function replay() {
         if (!current) return;
         idleT = -1; entryT = 0;
+        current.def.reset?.(current.group); // back to the pose the parts were measured in (e.g. walkers to their start)
         if (reduce) {
           current.parts.forEach(p => { p.y = 0; p.v = 0; p.done = true; p.o.visible = true; placePart(p); });
           entering = false; return;
@@ -673,11 +762,15 @@
       }
       function stepEntry(dt) {
         entryT += dt;
+        if (stepParts(current.parts, entryT, dt)) { entering = false; idleT = 0; }
+      }
+      // Advances the entry spring of every part to time `at` by `dt`; true once every part has landed.
+      function stepParts(parts, at, dt) {
         let all = true;
         const n = 4, h = dt / n;
         // Parts are in support order, so a carried part is placed after the part it rests on, every frame.
-        current.parts.forEach(p => {
-          if (entryT >= p.delay) {
+        parts.forEach(p => {
+          if (at >= p.delay) {
             p.o.visible = true;
             if (!p.done) {
               for (let i = 0; i < n; i++) { p.v += (-SPRING * p.y - DAMP * p.v) * h; p.y += p.v * h; }
@@ -687,8 +780,163 @@
           } else all = false;
           placePart(p);
         });
-        if (all) { entering = false; idleT = 0; }
+        return all;
       }
+
+      // --- Export: frames for the app at an exact pixel size --------------------------------------
+      // True isometric camera, a fixed-step clock, size × scale pixels (the outline radius follows the scale,
+      // as it follows the screen's density in the viewer), a transparent background, and shading and shadow
+      // computed for the ground the image will sit on. The shadow is a translucent shape that composites
+      // over that ground (in sRGB, as images are composited) to the tone the viewer draws there.
+      const allDefs = [...defs, ...(extras.defs || [])];
+      const LOOPS = extras.loops || {};
+      const expShadow = new THREE.MeshBasicMaterial({
+        color: 0x000000, transparent: true, depthWrite: false,
+        stencilWrite: true, stencilRef: 1, stencilFunc: THREE.NotEqualStencilFunc, stencilZPass: THREE.ReplaceStencilOp,
+      });
+      function fitShadow(ground) {
+        const g = new THREE.Color(ground).getRGB({}, THREE.SRGBColorSpace);
+        const s = shadowMat.color.getRGB({}, THREE.SRGBColorSpace);
+        let a = 0.35; // the lowest alpha that keeps the colour in range, at least this
+        ['r', 'g', 'b'].forEach(k => {
+          const d = s[k] - g[k];
+          if (d < 0) a = Math.max(a, -d / Math.max(g[k], 1e-4));
+          else if (d > 0) a = Math.max(a, d / Math.max(1 - g[k], 1e-4));
+        });
+        a = Math.min(1, a);
+        const c = {};
+        ['r', 'g', 'b'].forEach(k => { c[k] = THREE.MathUtils.clamp(g[k] + (s[k] - g[k]) / a, 0, 1); });
+        expShadow.color.setRGB(c.r, c.g, c.b, THREE.SRGBColorSpace);
+        expShadow.opacity = a;
+        return { color: `#${expShadow.color.getHexString(THREE.SRGBColorSpace)}`, alpha: +a.toFixed(3), over: `#${shadowMat.color.getHexString(THREE.SRGBColorSpace)}` };
+      }
+      function exportFrames(input = {}) {
+        const o = { ...EXPORT_DEFAULTS, ...(exportURL || {}), ...input };
+        const def = allDefs.find(d => d.id === o.object);
+        if (!def) throw new Error(`Unknown object "${o.object}". Known: ${allDefs.map(d => d.id).join(', ')}`);
+        if (!/^#[0-9a-f]{6}$/i.test(o.ground)) throw new Error(`Ground must be #RRGGBB, got "${o.ground}"`);
+        const loop = LOOPS[def.id] || {};
+        const idle = loop.idle || def.idle;
+        const fps = +o.fps, size = +o.size, scale = +o.scale, px = Math.round(size * scale);
+        const seconds = Number.isFinite(o.seconds) && o.seconds > 0 ? +o.seconds : (o.clip === 'idle' ? loop.seconds || 2 : 5);
+        const t0 = performance.now();
+        cancelAnimationFrame(raf); raf = 0;
+        let m = null;
+        const saved = { ...light };
+        try {
+          if (Number.isFinite(+o.az) && o.az !== null) light.az = +o.az;
+          if (Number.isFinite(+o.el) && o.el !== null) light.el = +o.el;
+          applyLight();
+          // The dark tone shade and shadow mix toward: given (a palette ramp's 800 or 900 step), or the viewer's rule.
+          if (o.dark && !/^#[0-9a-f]{6}$/i.test(o.dark)) throw new Error(`Dark tone must be #RRGGBB, got "${o.dark}"`);
+          // Optional tone overrides for one render (e.g. lighter shade on a dark ground so the object stays legible).
+          if (Number.isFinite(o.shade) && o.shade > 0) SU.uShade.value = +o.shade;
+          if (Number.isFinite(o.k) && o.k >= 0) SU.uK.value = +o.k;
+          setGround(o.ground, o.dark || darkFor(o.ground));
+          recolorMap = o.recolor && typeof o.recolor === 'object' ? Object.fromEntries(Object.entries(o.recolor).map(([a, b]) => [a.toUpperCase(), b])) : null;
+          if (o.ink && /^#[0-9a-f]{6}$/i.test(o.ink)) OU.uInk.value.set(...[1, 3, 5].map(i => parseInt(o.ink.slice(i, i + 2), 16) / 255));
+          const shadow = fitShadow(o.ground);
+          m = buildModel(def);
+          m.shadows.forEach(s => { if (s.material === shadowMat) s.material = expShadow; });
+          m.shadowGroup.visible = o.shadows !== false;
+          const sc = new THREE.Scene();
+          sc.add(m.pivot, m.shadowGroup);
+          const cam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 120);
+          cam.position.copy(m.center).addScaledVector(ISO, 40); cam.lookAt(m.center); cam.updateMatrixWorld(true);
+          // Frame the rest pose: every vertex and its shadow on the ground, then a margin for the squash and idle.
+          m.parts.forEach(p => { p.y = 0; p.v = 0; p.done = true; p.o.visible = true; placePart(p); });
+          def.reset?.(m.group);
+          sc.updateMatrixWorld(true);
+          const inv = cam.matrixWorldInverse, v = new THREE.Vector3();
+          let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+          const add = () => { v.applyMatrix4(inv); x0 = Math.min(x0, v.x); x1 = Math.max(x1, v.x); y0 = Math.min(y0, v.y); y1 = Math.max(y1, v.y); };
+          const kx = L.x / L.y, kz = L.z / L.y, gy = m.groundY;
+          m.meshes.forEach(mesh => {
+            if (!shown(mesh)) return;
+            const pos = mesh.geometry.attributes.position, casts = o.shadows !== false && !mesh.userData.noShadow;
+            for (let i = 0; i < pos.count; i++) {
+              v.fromBufferAttribute(pos, i).applyMatrix4(mesh.matrixWorld);
+              const wx = v.x, wy = v.y, wz = v.z;
+              add();
+              if (casts) { v.set(wx - kx * (wy - gy), gy, wz - kz * (wy - gy)); add(); }
+            }
+          });
+          const side = Math.max(x1 - x0, y1 - y0) * (1 + 2 * o.margin), cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+          // A taller frame (height > size, e.g. a category card) keeps the object in the top size × size square.
+          const hPt = Number.isFinite(o.height) && o.height > 0 ? +o.height : size;
+          Object.assign(cam, { left: cx - side / 2, right: cx + side / 2, top: cy + side / 2, bottom: cy + side / 2 - side * hPt / size });
+          cam.updateProjectionMatrix();
+          setPipelineSize(size, hPt, scale);
+          const frames = [];
+          // Opaque: the frame is laid on the ground colour (category cards), so the image needs no alpha.
+          const flat = o.opaque ? Object.assign(document.createElement('canvas'), { width: pxW, height: pxH }) : null;
+          const shot = () => {
+            sc.updateMatrixWorld(); updateShadows(m); draw(sc, cam, m);
+            if (!flat) { frames.push(canvas.toDataURL('image/png')); return; }
+            const c2 = flat.getContext('2d');
+            c2.fillStyle = o.ground; c2.fillRect(0, 0, pxW, pxH); c2.drawImage(canvas, 0, 0);
+            frames.push(flat.toDataURL('image/png'));
+          };
+          const rest = () => m.parts.forEach(p => { p.y = 0; p.v = 0; p.done = true; p.o.visible = true; placePart(p); });
+          const dt = 1 / fps;
+          if (o.clip === 'idle') {
+            const n = Math.max(1, Math.round(seconds * fps));
+            for (let f = 0; f < n; f++) { idle?.(m.group, f * dt); shot(); }
+          } else if (o.clip === 'entry') {
+            // Ends once every part has started and nothing moves by more than a quarter pixel; the last frame
+            // is the exact rest pose, so it matches the still.
+            const still = 0.25 * side / px, last = Math.max(...m.parts.map(p => p.delay));
+            m.parts.forEach(p => { p.y = DROP; p.v = 0; p.done = false; p.o.visible = false; placePart(p); });
+            const max = Math.round(seconds * fps);
+            let at = 0;
+            for (let f = 0; f < max; f++) {
+              at += dt;
+              const done = stepParts(m.parts, at, dt);
+              if (done || (at >= last && m.parts.every(p => Math.abs(p.y) < still))) { rest(); shot(); break; }
+              shot();
+            }
+          } else shot();
+          return {
+            frames,
+            meta: { object: def.id, clip: o.clip, size, height: hPt, scale, px, pxH: Math.round(hPt * scale), fps, frames: frames.length, durationMs: Math.round(frames.length * 1000 / fps),
+              ground: o.ground.toUpperCase(), dark: (o.dark || darkFor(o.ground)).toUpperCase(), opaque: !!o.opaque, shadow, light: { az: light.az, el: light.el }, renderMs: Math.round(performance.now() - t0) },
+          };
+        } finally {
+          m?.dispose();
+          recolorMap = null;
+          SU.uShade.value = SHADE; SU.uK.value = K;
+          OU.uInk.value.set(...[1, 3, 5].map(i => parseInt(INK.slice(i, i + 2), 16) / 255));
+          Object.assign(light, saved);
+          applyLight();
+          applyBg();
+          resize();
+          wake();
+        }
+      }
+      api.exportFrames = exportFrames;
+      api.exportObjects = () => allDefs.map(d => ({ id: d.id, name: d.name.en, idleSeconds: LOOPS[d.id]?.seconds ?? null }));
+
+      // Export panel: renders the chosen clip and downloads the frames as a zip.
+      const exSel = root.querySelector('[data-ex="object"]'), exStatus = root.querySelector('.v3-ex-status');
+      exSel.innerHTML = allDefs.map(d => `<option value="${esc(d.id)}">${esc(d.name[lang] || d.name.en)}</option>`).join('');
+      on(root.querySelector('[data-ex-go]'), 'click', () => {
+        const val = k => root.querySelector(`[data-ex="${k}"]`).value.trim();
+        exStatus.textContent = tx('exportBusy', 'Rendering…');
+        setTimeout(() => {
+          try {
+            const r = exportFrames({ object: val('object'), size: +val('size'), scale: +val('scale'), ground: val('ground'), clip: val('clip'), fps: +val('fps'), seconds: null });
+            const base = `${r.meta.object}-${r.meta.clip}.${r.meta.ground.slice(1).toLowerCase()}.${r.meta.size}@${r.meta.scale}x`;
+            const files = r.frames.map((u, i) => ({ name: `${base}/frame-${String(i + 1).padStart(4, '0')}.png`, data: dataUrlBytes(u) }));
+            files.push({ name: `${base}/meta.json`, data: new TextEncoder().encode(JSON.stringify(r.meta, null, 2)) });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(zipStore(files));
+            a.download = `${base}.zip`;
+            a.click();
+            setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+            exStatus.textContent = `${r.frames.length} ${tx('exportFramesDone', 'frames')} · ${r.meta.px}×${r.meta.px} px`;
+          } catch (e) { exStatus.textContent = e.message; console.error(e); }
+        }, 30);
+      });
 
       // --- Controls wiring ----------------------------------------------------------------
       root.querySelectorAll('[data-cam]').forEach(b => on(b, 'click', () => b.dataset.cam !== mode && setCamera(b.dataset.cam)));
@@ -787,7 +1035,7 @@
       teardown = () => {
         ro.disconnect(); themeObs.disconnect(); controls?.dispose();
         if (current) current.dispose();
-        [shadowMat, shadowMul, grid.geometry, grid.material, idRT, colorRT, outlinePass.material, fxaaPass.material].forEach(x => x.dispose());
+        [shadowMat, shadowMul, expShadow, grid.geometry, grid.material, idRT, colorRT, outlinePass.material, fxaaPass.material].forEach(x => x.dispose());
         idRT.depthTexture.dispose();
         composer.dispose?.();
         renderer.dispose(); renderer.forceContextLoss();
@@ -799,6 +1047,11 @@
       makeControls();
       show(0);
       wake();
+      if (exportURL) {
+        window.__exportFrames = opts => exportFrames(opts);
+        window.__exportObjects = api.exportObjects;
+        window.__exportReady = true;
+      }
     }
     return api;
   }

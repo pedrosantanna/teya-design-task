@@ -22,5 +22,5 @@ export function ChatBubbleExamples() {
 }
 
 const styles = StyleSheet.create((theme) => ({
-  chips: { flexDirection: 'row', gap: theme.space[2], marginTop: theme.space[2], paddingLeft: theme.size.avatar.mark + theme.space[2] },
+  chips: { flexDirection: 'row', gap: theme.space[2], marginTop: theme.space[2] },
 }));

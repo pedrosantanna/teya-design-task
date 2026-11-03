@@ -1,15 +1,17 @@
 # Revisão de telas
 
-As 18 verificações por que passa toda tela, seja wireframe ou protótipo. Um agente as aplica em todas as telas, olhando a tela renderizada, e relata o que falha, tela por tela. As verificações cobrem agrupamento e hierarquia, o modelo conceitual e suas palavras, os tokens das outras páginas do design system e as diretrizes da Apple primeiro, depois as do Material.
+As 19 verificações por que passa toda tela, seja wireframe ou protótipo. Um agente as aplica em todas as telas, olhando a tela renderizada, e relata o que falha, tela por tela. As verificações cobrem agrupamento e hierarquia, o modelo conceitual e suas palavras, os tokens das outras páginas do design system e as diretrizes da Apple primeiro, depois as do Material.
 
 ```summary
 Takeaways:
-- Dezoito verificações sob cinco títulos: Gestalt, hierarquia, arquitetura da informação, modelo e palavras, acessibilidade.
+- Dezenove verificações sob cinco títulos: Gestalt, hierarquia, arquitetura da informação, modelo e palavras, acessibilidade.
+- Os papéis das cores também são verificados: o Índigo é o comprador agindo, a Lavanda é o Snuffle falando, os pastéis quentes são as lojas. No máximo um controle preenchido em Índigo fica à vista.
 - Cada verificação tem um critério que dá para medir na tela: um espaço em tokens, uma contagem de tamanhos ou ações, uma palavra da tabela de Palavras.
 - O agente revisa a tela renderizada, não o código, e relata as falhas por tela, para eu corrigir ou registrar por que uma fica.
 Call:
 - Pedi que cada tela fosse verificada contra Gestalt e arquitetura de informação, visualmente, por um agente no fluxo de trabalho (decisão 041).
 - Mantive as verificações provisórias; elas serão ajustadas conforme o protótipo mostrar quais pegam problemas de fato.
+- Nesta rodada pedi uma verificação que limite o Índigo a um controle preenchido por tela visível e que os papéis das cores sejam revisados em toda tela (decisão 045).
 AI:
 - Um agente pesquisou o NN/g sobre Gestalt, hierarquia visual e revelação progressiva, o Laws of UX sobre a lei de Hick, e Rosenfeld, Morville e Arango e Covert sobre arquitetura da informação, e propôs a lista. Eu pedi que toda tela fosse verificada contra o design system.
 Trade-offs:
@@ -34,6 +36,7 @@ Trade-offs:
 | --- | --- | --- |
 | 8 | Hierarquia visual | No máximo três tamanhos de texto por bloco e quatro por tela, sem contar a barra de navegação e a interface do sistema; um botão principal preenchido (Índigo) visível ao mesmo tempo. O enviar do compositor e os balões do comprador também são Índigo e não contam |
 | 9 | Lei de Hick | No máximo 5 chips de filtro ou 3 sugestões visíveis; uma sheet tem no máximo 2 ações mais Cancel |
+| 19 | Papéis das cores | No máximo um controle preenchido em Índigo por tela visível, a ação de confirmação (Buy, Ask, enviar); as ações secundárias são neutras e um chip selecionado é Foreground. O Índigo é o comprador agindo, a Lavanda é o Snuffle falando (balões, marca, notificações, Live Activity), o pastel quente de uma loja é aquela loja (o tile, o cabeçalho da página, o recibo), e nenhuma cor troca de papel |
 
 ## Arquitetura da informação
 

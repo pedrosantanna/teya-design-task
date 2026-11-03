@@ -9,19 +9,20 @@ The navigation bar. Spec: Nav bar on `docs/develop/design-system/components.md`.
 | `title` | string | required | Inline title in Headline, one line |
 | `mode` | `'large'`, `'inline'`, `'reveal'` | `'inline'` | Large: put `<LargeTitle>` at the top of the content; the inline title fades in as it scrolls away. Reveal: no title until `revealAt` points (shop page) |
 | `scroll` | `NavBarScroll` | none | From `useNavBarScroll()`; pass its `onScroll` to an `Animated.ScrollView` or `Animated.FlatList` |
-| `leading` | `'back'`, `'close'`, `'none'` | `'none'` | Back with the previous title on iOS ("Requests"), the arrow on Android. Close over the map uses the glass button. In reveal mode Back starts as a glass circle over the map and becomes the plain Back with `backLabel` once the bar fills (shop page) |
-| `backLabel` | string | none | |
-| `trailing` | `NavAction[]` | `[]` | Icon buttons at `hit.min`, icons 22 |
+| `leading` | `'back'`, `'close'`, `'none'` | `'none'` | Back is the chevron alone in a 44 glass circle (`GlassButton`) on iOS and the web, the arrow icon button on Android. Close is the glass × |
+| `backLabel` | string | none | The previous screen's title, only in Back's accessibility label ("Back to Requests") |
+| `trailing` | `NavAction[]` | `[]` | Icon-only actions grouped in one glass capsule on iOS and the web; icon buttons on Android |
+| `confirm` | `{ onPress, label }` | none | `ConfirmButton` at the right |
 | `hideOnScroll` | boolean | `false` | Needs `useNavBarScroll(true, hideAfter)`; past `hideAfter` points it hides while the content scrolls up and returns on a scroll down, with `spring.smooth` (a fade with `spring.fade` under Reduce Motion) |
 | `topInset` | number | safe-area top | |
-| `fill` | `'background'`, `'card'` | `'background'` | The bar's fill once content is under it; Card on the shop page, whose content is a card |
+| `fill` | `'background'`, `'card'` | `'background'` | Colour of the scroll-edge fade; Card on the shop page, whose content is a card |
 | `backgroundAt` | number | 8, or `revealAt` in reveal mode | Scroll offset at which the fill shows (the shop page shows it when the card's top edge reaches the bar) |
 
-The bar's background (Background with a hairline separator) fades in after the first 8 points of scroll; in reveal mode, when the title appears. With `hideOnScroll`, the status bar's strip keeps the fill while the bar is hidden. All scroll work runs in a Reanimated scroll handler on the UI thread.
+No bar fill (iOS 26): a scroll-edge fade from Background (or Card) to transparent fades in under the floating controls after the first 8 points of scroll, or at `backgroundAt`; the web adds a masked backdrop blur. The fade stays while a `hideOnScroll` bar is hidden. The inline title is leading, after Back. All scroll work runs in a Reanimated scroll handler on the UI thread.
 
 ## iOS and Android
 
-iOS navigation bar (44, centred inline title, Tint buttons) ↔ Material top app bar (64, title after the navigation icon, Foreground icons).
+iOS 26 navigation bar (52: 44 glass controls with `space.2`, leading inline title, Foreground glyphs in glass) ↔ Material top app bar (64, title after the navigation icon, Foreground icons, no glass).
 
 ## Accessibility
 

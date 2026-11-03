@@ -11,6 +11,7 @@ Call:
 - I took the agent's first two icon tests into Figma, adjusted the vectors by hand and chose the fourth version as the provisional mark (decision 033).
 - I asked for it to be refined on an icon grid in black and white until the palette was chosen, and pointed out when it sat too high.
 - I stopped here on purpose. With more time I would develop the mark further, perhaps in another direction, but the brand is not the focus of this exercise; I enjoyed it and the result is good enough to give the app a face.
+- Inside the app the mark is a bare glyph in one colour that follows the theme, never on a tile or in an avatar. This reverses the "mark on a Lavender tile" of decision 045.
 AI:
 - An agent drew the icon tests in SVG from my seeds (a sniffer dog, British shopping, the parade's awnings). I took the first two into Figma and changed the vectors by hand. The agent exported my version, rebuilt it on one axis and drew the platform applications. Its first optical centre put the glyph too high; I pointed it out and it chose a new one by comparing offsets by eye.
 Trade-offs:
@@ -71,6 +72,19 @@ An adaptive icon is two 108 dp layers. Launchers show the middle 72 dp through t
 <figure><img src="img/mark-android-circle.svg" alt="Android icon in a circle mask" width="144" height="144"><figcaption>Circle mask</figcaption></figure>
 <figure><img src="img/mark-android-themed.svg" alt="Android themed icon" width="144" height="144"><figcaption>Themed, monochrome layer</figcaption></figure>
 </div>
+
+## In the app
+
+The square exists only as the app icon, which the system draws. Everywhere inside the app the mark is the glyph alone: no tile, no circle, no avatar, and nothing behind it. It takes one colour from the theme, Foreground, so it is dark on light backgrounds and light on dark ones; the two low-contrast stripes are Muted foreground, the lighter tone of the same ink, as on Android's themed icon.
+
+| Where | Size |
+| --- | --- |
+| The chat's sender line, beside "Snuffle", with no avatar column | 22 wide |
+| Notification and Live Activity | 40 wide |
+| Sign in | 56 wide |
+| The splash, native and in the app, centred on the background colour | 120 wide |
+
+This reverses the part of decision 045 that put the mark on a Lavender tile with a warm face behind the glyph. Lavender stays Snuffle's colour through its bubbles and typing dots.
 
 ## Anatomy
 

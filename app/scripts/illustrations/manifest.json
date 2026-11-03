@@ -1,0 +1,312 @@
+{
+  "$comment": "Which 3D illustrations the app ships, on which ground and at which size. render.mjs renders the frames from the docs viewer's export mode; encode.mjs turns them into app/assets/illustrations and manifest.generated.ts. Grounds are the background and card tokens (src/design-system/tokens); change them here when the colour tokens change. darkTones overrides the shade for the dark render where an object reads too dark on a dark ground. sizes are the display sizes the Illustration component accepts; each illustration lists the ones rendered (smaller display sizes scale the 120 pt asset down). Clips ship at animationScales only (@3x, which Metro also serves to @2x screens) to keep the set under 5 MB; stills ship at every scale. groundTones is the dark tone each ground's shade and cast shadow mix toward, from the Biscuit ramp, so shadows are warm and never indigo or flat grey. extra lists more ground × size combinations for one illustration (the hero size on Getting started and the location ask). animationScalesBySize ships the hero clips at @2x only, inside the budget; clipsBySize picks the clips a size ships (the location ask's hero is a still, so the set stays under 5 MB).",
+  "page": "/?export=1#illustrations",
+  "fps": 24,
+  "clipFps": {
+    "entry": 20,
+    "idle": 24
+  },
+  "light": {
+    "az": -30,
+    "el": 62
+  },
+  "grounds": {
+    "background-light": "#EEE9E2",
+    "background-dark": "#100A06",
+    "card-light": "#FFFFFF",
+    "card-dark": "#2B2420"
+  },
+  "groundTones": {
+    "background-light": "#6E4A2C",
+    "background-dark": "#050302",
+    "card-light": "#6E4A2C",
+    "card-dark": "#050302"
+  },
+  "sizes": {
+    "small": 64,
+    "medium": 88,
+    "large": 120,
+    "hero": 220
+  },
+  "scales": [
+    2,
+    3
+  ],
+  "animationScales": [
+    3
+  ],
+  "animationScalesBySize": {
+    "hero": [
+      2
+    ]
+  },
+  "budgets": {
+    "animationKB": 300,
+    "stillKB": 40
+  },
+  "illustrations": [
+    {
+      "name": "basket",
+      "object": "basket",
+      "uses": [
+        "Receipt"
+      ],
+      "clips": [
+        "entry"
+      ],
+      "grounds": [
+        "card"
+      ],
+      "sizes": [
+        "large"
+      ],
+      "darkTones": {
+        "shade": 0.8,
+        "k": 0.12
+      }
+    },
+    {
+      "name": "box",
+      "object": "box",
+      "uses": [
+        "Receipt (delivery)",
+        "Getting started"
+      ],
+      "clips": [
+        "entry"
+      ],
+      "grounds": [
+        "card"
+      ],
+      "sizes": [
+        "large"
+      ],
+      "extra": [
+        {
+          "grounds": [
+            "background"
+          ],
+          "sizes": [
+            "hero"
+          ]
+        }
+      ],
+      "clipsBySize": {
+        "hero": [
+          "entry"
+        ]
+      }
+    },
+    {
+      "name": "scooter",
+      "object": "scooter",
+      "uses": [
+        "Asking the shops"
+      ],
+      "clips": [
+        "entry",
+        "idle"
+      ],
+      "grounds": [
+        "background"
+      ],
+      "sizes": [
+        "large"
+      ]
+    },
+    {
+      "name": "crossroads",
+      "object": "crossroads",
+      "uses": [
+        "Empty states",
+        "Getting started"
+      ],
+      "clips": [
+        "entry"
+      ],
+      "grounds": [
+        "background"
+      ],
+      "sizes": [
+        "large"
+      ],
+      "extra": [
+        {
+          "grounds": [
+            "background"
+          ],
+          "sizes": [
+            "hero"
+          ]
+        }
+      ],
+      "clipsBySize": {
+        "hero": [
+          "entry"
+        ]
+      }
+    },
+    {
+      "name": "quietstreet",
+      "object": "quietstreet",
+      "uses": [
+        "Not found",
+        "Location ask"
+      ],
+      "clips": [
+        "entry"
+      ],
+      "grounds": [
+        "background"
+      ],
+      "sizes": [
+        "large"
+      ],
+      "extra": [
+        {
+          "grounds": [
+            "background"
+          ],
+          "sizes": [
+            "hero"
+          ]
+        }
+      ],
+      "clipsBySize": {
+        "hero": []
+      },
+      "darkTones": {
+        "recolor": {
+          "#332C27": "#8C847B"
+        }
+      }
+    },
+    {
+      "name": "shop",
+      "object": "shop",
+      "uses": [
+        "Shop page",
+        "Getting started"
+      ],
+      "clips": [
+        "entry",
+        "idle"
+      ],
+      "grounds": [
+        "background"
+      ],
+      "sizes": [
+        "large"
+      ],
+      "extra": [
+        {
+          "grounds": [
+            "background"
+          ],
+          "sizes": [
+            "hero"
+          ]
+        }
+      ],
+      "clipsBySize": {
+        "hero": [
+          "entry"
+        ]
+      }
+    }
+  ],
+  "ramps": {
+    "lavender": {
+      "100": "#EDEBF8",
+      "800": "#483C67",
+      "900": "#302747",
+      "tile": "#D7CCFE",
+      "tileDark": "#3F3659"
+    },
+    "butter": {
+      "100": "#FFE7A0",
+      "800": "#53430D",
+      "900": "#382C04",
+      "tile": "#E7D48F",
+      "tileDark": "#4C3B01"
+    },
+    "peach": {
+      "100": "#F9E9E4",
+      "800": "#663627",
+      "900": "#462318",
+      "tile": "#FEC5B2",
+      "tileDark": "#602C1C"
+    },
+    "pistachio": {
+      "100": "#E9F0E1",
+      "800": "#384D1A",
+      "900": "#24340E",
+      "tile": "#C5DEAE",
+      "tileDark": "#2A4618"
+    }
+  },
+  "categories": {
+    "$comment": "Nearby's category cards (CategoryCard, size.category 120 × 164): opaque stills on the card's tile step (light: ramp tile, shade toward 800; dark: ramp tileDark, shade toward 900; craft-pass-2). Ramps follow KIND_ACCENT in store/kinds.ts. The object sits in the top 120 × 120; the label goes below. No animation in lists.",
+    "size": 120,
+    "scales": [
+      2,
+      3
+    ],
+    "margin": 0.1,
+    "clips": [],
+    "budgets": {
+      "stillKB": 40
+    },
+    "items": [
+      {
+        "id": "fashion",
+        "label": "Fashion",
+        "object": "mannequin",
+        "ramp": "peach"
+      },
+      {
+        "id": "bakery",
+        "label": "Bakery",
+        "object": "basket",
+        "ramp": "butter"
+      },
+      {
+        "id": "cafe",
+        "label": "Café",
+        "object": "tea",
+        "ramp": "peach"
+      },
+      {
+        "id": "opticians",
+        "label": "Opticians",
+        "object": "glasses",
+        "ramp": "pistachio"
+      },
+      {
+        "id": "bags",
+        "label": "Bags & leather",
+        "object": "bag",
+        "ramp": "butter"
+      },
+      {
+        "id": "gifts",
+        "label": "Gifts",
+        "object": "box",
+        "ramp": "butter"
+      },
+      {
+        "id": "florist",
+        "label": "Florist",
+        "object": "flowers",
+        "ramp": "pistachio"
+      },
+      {
+        "id": "hardware",
+        "label": "Hardware",
+        "object": "hardware",
+        "ramp": "butter"
+      }
+    ],
+    "height": 164
+  }
+}

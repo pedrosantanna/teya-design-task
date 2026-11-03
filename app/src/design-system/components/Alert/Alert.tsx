@@ -20,7 +20,8 @@ export type AlertProps = {
   visible: boolean;
   title: string;
   message?: string;
-  /** One or two actions, in reading order (the cancel action first on iOS, as the system does). */
+  /** In reading order (the cancel action first on iOS, as the system does). Three or more stack vertically, as
+   *  the system's location prompt does. */
   actions: AlertAction[];
   /** Called when the scrim is tapped on Android (Material dialogs close outside); iOS alerts don't. */
   onDismiss?: () => void;
@@ -37,6 +38,7 @@ export const Alert = memo(function Alert({ visible, title, message, actions, onD
   const { theme } = useUnistyles();
   if (!visible) return null;
   const ios = theme.platform === 'ios';
+  const stacked = actions.length > 2;
   const run = (action: AlertAction) => {
     if (action.style === 'destructive') haptic('warning');
     action.onPress();
@@ -63,14 +65,14 @@ export const Alert = memo(function Alert({ visible, title, message, actions, onD
               </Text>
             ) : null}
           </View>
-          <View style={styles.actions(ios)}>
+          <View style={styles.actions(ios, stacked)}>
             {actions.map((action, i) => (
               <Pressable
                 key={action.label}
                 accessibilityRole="button"
                 accessibilityLabel={action.label}
                 onPress={() => run(action)}
-                style={({ pressed }) => [styles.action(ios, i > 0), pressed && styles.pressed]}
+                style={({ pressed }) => [styles.action(ios, i > 0, stacked), pressed && styles.pressed]}
               >
                 <Text
                   variant={ios ? (action.style === 'cancel' ? 'headline' : 'body') : 'subheadlineStrong'}
@@ -104,22 +106,25 @@ const styles = StyleSheet.create((theme) => ({
     paddingTop: ios ? theme.space[5] : theme.inset.sheet,
     paddingBottom: ios ? theme.space[4] : theme.space[5],
   }),
-  actions: (ios: boolean) => ({
-    flexDirection: 'row',
+  actions: (ios: boolean, stacked: boolean) => ({
+    flexDirection: stacked ? 'column' : 'row',
     justifyContent: ios ? 'center' : 'flex-end',
+    alignItems: stacked && !ios ? 'flex-end' : undefined,
     gap: ios ? 0 : theme.space[2],
     borderTopWidth: ios ? StyleSheet.hairlineWidth : 0,
     borderTopColor: theme.color.separator,
     paddingHorizontal: ios ? 0 : theme.space[4],
     paddingBottom: ios ? 0 : theme.space[4],
   }),
-  action: (ios: boolean, divided: boolean) => ({
-    flex: ios ? 1 : undefined,
+  action: (ios: boolean, divided: boolean, stacked: boolean) => ({
+    flex: ios && !stacked ? 1 : undefined,
     minHeight: theme.hit.min,
     justifyContent: 'center',
     paddingHorizontal: ios ? theme.space[2] : theme.space[3],
-    borderLeftWidth: ios && divided ? StyleSheet.hairlineWidth : 0,
+    borderLeftWidth: ios && divided && !stacked ? StyleSheet.hairlineWidth : 0,
+    borderTopWidth: ios && divided && stacked ? StyleSheet.hairlineWidth : 0,
     borderLeftColor: theme.color.separator,
+    borderTopColor: theme.color.separator,
     borderRadius: ios ? 0 : theme.radius.full,
   }),
   pressed: { backgroundColor: theme.color.muted },

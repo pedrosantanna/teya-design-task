@@ -9,16 +9,20 @@ Takeaways:
 - Photos are the shop's own, in daylight, of the shopfront or counter. No stock photos, no filters, no identifiable people. An item never has a photo: thumbnails show the shop or a request placeholder.
 - Ratios are few: 4:3 for tiles, 1:1 for thumbnails and categories, 3:2 for the shop page header. Corners follow the shape tokens.
 - A shop with no photo gets a tonal tile with its initials and the mark's awning. This is a proposal and hasn't been tested.
+- The map is MapLibre with bundled OpenStreetMap data and a style made from the palette: a warm ground, quiet roads, buildings in 3D, no labels for now and the pin in Primary.
 Call:
 - I asked for imagery to be covered the same way as shape and motion, starting from iOS and widening to Material (decision 041).
 - I chose HugeIcons over SF Symbols and Material Symbols, so the app has one icon style on both platforms (decision 042).
 - I kept the values provisional, to be tuned at real size in the prototype.
+- In this round I asked for a free map I can style. Whether it shows street labels and points of interest is still my call; until then the style leaves them out.
 AI:
 - An agent researched Apple's Human Interface Guidelines on images (read from the HIG JSON, since the pages render by script) and proposed the sizes and rules. I asked for a modern design system grounded in iOS first, then Material.
 - An agent mapped every icon in app flow v7 to a HugeIcons name, checked each name against the icon list in `@hugeicons/core-free-icons` 4.4.0 and drew the candidates on a contact sheet to pick the forms. I chose the set.
+- An agent proposed MapLibre with OpenStreetMap data and wrote the style from the palette.
 Trade-offs:
 - Real shop photos vary in quality; stock photos would look tidier and tell the shopper nothing about the shop.
 - One icon set looks the same on iOS and Android and gives up what the system symbols do for free: weight that follows Dynamic Type, symbol animations and filled variants. The free set is stroke only, so a selected state can't switch to a filled icon.
+- A map drawn from bundled OpenStreetMap data is free and fully styleable, and the app has to ship and update the data itself.
 ```
 
 ## Sources of images and icons
@@ -55,12 +59,14 @@ Sizes are in pt on iOS and dp on Android. Tile widths are on [Spacing and layout
 | Stroke follows the text | `strokeWidth` 1.5 next to Switzer 400 and 500, 2 next to Switzer 600; icons scale with the text they sit beside |
 | Monochrome by default | An icon takes the colour of its text; status icons take the warning or success role from [Colour](colour.md) |
 | No fill for selection | The free set has no filled forms, so selection shows in colour and in the label |
-| Platform forms | Share, back and more follow the platform, as in the map below; every other icon is the same on both |
+| Platform forms | Share, back and more follow the platform, as in the map below; every other icon is the same on both. On iOS 26 the system draws Back; the HugeIcons chevron is used only where the app draws Back itself, as in the cross-platform prototype |
 | Shop photos | The shop's own, in daylight, shopfront or counter, no filters, no stock photos, no identifiable people |
 | No item photos | Items have no photos; a row shows the shop's photo or the request placeholder |
 | Scrim only when needed | A 0 → 40% black gradient only under badges or glass buttons on a photo |
-| No-photo placeholder (proposal, untested) | A tonal tile in the accent 100 fill chosen by the shop's kind, initials in Switzer 600 in the 800 tone, and the mark's five-stripe awning as a band across the top |
-| Map style | Light: Butter 50 ground (#F9F7F0), Biscuit grey roads (muted, #E5E2DE), Indigo 800 pins. Dark: Butter 900 ground (#382C04), muted roads (#332C27), Indigo 300 pins. Labels in Switzer, no points of interest other than the shops |
+| Placeholder tile | The shop's tonal tile ([Colour](colour.md), Shop accents): the `tile` step of the shop's accent, initials in Switzer 600 in the `ink` step, and the mark's five-stripe awning as a band across the top. It sits under every shop photo, so a loading or failed photo shows the shop's colour; answer cards and the shop circles on request rows show the tile alone |
+| Map data | MapLibre on iOS, Android and the web, with bundled OpenStreetMap data: GeoJSON on the web, PMTiles or GeoJSON in the app. "© OpenStreetMap contributors" is shown on the map, in the app and in the recording |
+| Map style | Generated from the palette. Ground Butter 50 (#F9F7F0), dark #2B2420; roads Biscuit grey (#E5E2DE, dark #332C27); parks and water in muted tints; buildings extruded in 3D at a default height of 8 m where the data has none, seen at a pitch of 45–60°. No labels or points of interest until I decide on them |
+| Map pin and fallback | The pin is `Location01Icon` in Primary. Each shop has a static map image, shown while the map loads and if it fails |
 | Alt text | "[Shop] shopfront, [street]"; placeholders and decorative images are hidden from VoiceOver and TalkBack; an icon that acts carries the action's name |
 | Badges in the label | Badges are read as part of the tile's label: "Rossi's Bakery, promoted, open till 6pm" |
 
@@ -96,7 +102,7 @@ Every icon in [app flow v7](../ideation/app-flow.md) and the ones the next scree
 | Search | Search in Requests | `Search01Icon` | |
 | Camera | Ask with a photo | `Camera01Icon` | |
 | Repeat | "Every Friday" | `RepeatIcon` | |
-| From the till | "In stock now · till" | `FlashIcon` | |
+| From the till | "In stock now", "In stock · 1 of 2" | `FlashIcon` | |
 | Seen | An asked shop has seen the request | `ViewIcon` | |
 | Doesn't have it | An answer with nothing to buy | `CancelCircleIcon` | |
 | Collect | Collect at the shop | `Store02Icon` | |
@@ -114,6 +120,9 @@ Empty states, first run and the splash use 3D illustrations: simple shapes, the 
 - HugeIcons: https://hugeicons.com
 - `@hugeicons/react-native` (props `icon`, `size`, `color`, `strokeWidth`): https://www.npmjs.com/package/@hugeicons/react-native
 - `@hugeicons/core-free-icons` (icon list, MIT licence): https://www.npmjs.com/package/@hugeicons/core-free-icons
+- MapLibre: https://maplibre.org; MapLibre React Native: https://github.com/maplibre/maplibre-react-native
+- OpenStreetMap, copyright and attribution: https://www.openstreetmap.org/copyright
+- Protomaps, PMTiles: https://docs.protomaps.com/pmtiles/
 - Apple, Human Interface Guidelines, Images: https://developer.apple.com/design/human-interface-guidelines/images
 - Apple, Human Interface Guidelines, Icons (interface icons): https://developer.apple.com/design/human-interface-guidelines/icons
 - [Shape and materials](shape.md) (corner tokens), [Colour](colour.md) (accent fills, map colours), [Mark](mark.md) (the awning)

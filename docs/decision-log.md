@@ -360,5 +360,21 @@ The prototype is one Expo app in `app/`, with no monorepo or Turborepo: one proj
 **Why:** I asked for spec-driven development that is light and not set in stone, with a PRD and features and issues that can grow from it, and for the design system to work as a harness for coding agents. OpenSpec is the lightest current option and keeps specs living; GitHub Spec Kit and Kiro are heavier. A monorepo would only help with several packages, and there is one.
 **Open:** iOS and Android dev builds, and the Lighthouse and frame-rate checks, have not run yet; the fonts are not bundled in the app yet.
 
+## 045 · Identity in use
+**2026-11-03 · Provisional**
+
+Each colour has one job. Indigo is the shopper acting: at most one filled Indigo control per viewport, the commit action, with neutral tonal buttons and a Foreground selected chip. Lavender is Snuffle speaking: its bubbles, typing dots, its mark (redrawn as a golden retriever on a Lavender tile), notifications and the Live Activity. Each shop has a fixed accent from its kind (Peach, Pistachio, Butter or Lavender), shown as a tonal tile with its initials and the mark's awning, a wash behind its name on its page and a tinted header on its receipt. The light background moves to #EEE9E2 and the dark card to #2B2420. Every screen title and section heading is in Gambetta, with 48 pt titles on Nearby and Requests and a large title placed closer to its content than to what is above it. Nearby gains "Shops by kind" with the 3D stills, and the receipt, the asking state, empty Requests and Not found show an illustration. Photo credits leave the interface and stay in the code.
+
+**Why:** a brand review of the prototype found Indigo was the only colour doing anything, the pastels appeared only in small badges, surfaces read as stock iOS, shops without photos were grey squares, the mark read as a panda at 28 pt, Gambetta had little presence and the illustrations never appeared. The photos are stand-ins in a prototype that isn't published as a product, so their credits don't belong on screen.
+**Open:** Gambetta on every heading replaces decisions 028 and 029 as a test and can be reverted. The light wash (step 50) is close to white and barely shows behind a shop's name. The illustrations were rendered on the old background and dark card and need rendering again; there is no offline state yet for the phone box.
+
+## 046 · iOS 26 patterns, a bundled map and the bare mark
+**2026-11-03 · Decided**
+
+The app follows iOS 26's Liquid Glass patterns as Apple's own apps use them, with Material 3 Expressive on Android and the same patterns drawn on the web: a back chevron alone in a glass circle, glass close and confirm buttons, no bar fills, every screen change animated. The ask bar stays full size and never minimises, since asking is the app's main action. The map is MapLibre with OpenStreetMap data bundled in the app and a palette style with 3D buildings. The Snuffle mark is a bare glyph in the theme's foreground and never sits in a tile or circle, which reverses decision 045's mark tile. Chats keep a neutral ground; Snuffle is marked by its glyph, its name and Lavender bubbles, not a purple screen.
+
+**Why:** I wanted the prototype to feel like Apple's current apps on every platform, a map I could style for free and that loads inside the artifact, and a mark that reads as itself rather than an app icon. The research showed apps that host an assistant mark who is speaking rather than tinting the whole screen.
+**Open:** interactive dismiss of the zoom transitions is not verified on a device; map tiles in the published artifact are not verified.
+
 ## Still open
 

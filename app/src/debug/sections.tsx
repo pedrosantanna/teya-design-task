@@ -9,6 +9,8 @@ import { Button, Checkbox, OptionList, Select, Switch, Text, type Option } from 
 import { useFrameMode, type FrameMode } from '@/device-frame';
 import {
   answerLabel,
+  replayFirstRun,
+  currentPlace,
   orderLabel,
   orderStatesFor,
   requestLabel,
@@ -32,6 +34,7 @@ import {
   type Fulfilment,
   type OrderState,
   type PaymentState,
+  type Radius,
   type RequestState,
   type ShopHours,
   type StepId,
@@ -238,8 +241,11 @@ const contentOptions: Option<ContentSet>[] = [
 ];
 
 export function ContentSection() {
-  const { contentSet, loading, locationOff, notificationsAllowed } = useAppStore(
+  const { contentSet, loading, locationOff, notificationsAllowed, place, places, radius } = useAppStore(
     useShallow((s) => ({
+      place: s.place,
+      places: s.places,
+      radius: s.radius,
       contentSet: s.contentSet,
       loading: s.loading,
       locationOff: s.locationOff,
@@ -252,6 +258,22 @@ export function ContentSection() {
       <Select label="Content set" options={contentOptions} value={contentSet} onChange={(c) => set({ contentSet: c })} />
       <Switch label="Loading" detail="Skeletons in place of content" value={loading} onValueChange={(v) => set({ loading: v })} />
       <Switch label="Location off" value={locationOff} onValueChange={(v) => set({ locationOff: v })} />
+      <Select
+        label="Place"
+        options={[currentPlace, ...places].map((p): Option<string> => ({ value: p.id, label: p.id === 'current' ? `Current location · ${p.address}` : `${p.label} · ${p.address}` }))}
+        value={place.id}
+        onChange={(id) => set({ place: [currentPlace, ...places].find((p) => p.id === id) ?? currentPlace })}
+      />
+      <Segmented
+        label="Radius"
+        options={[
+          { value: '10', label: '10 min' },
+          { value: '15', label: '15 min' },
+          { value: '20', label: '20 min' },
+        ]}
+        value={String(radius)}
+        onChange={(r) => set({ radius: Number(r) as Radius })}
+      />
       <Switch
         label="Notifications allowed"
         value={notificationsAllowed}
@@ -282,6 +304,7 @@ export function ActionsSection() {
     <Section title="Actions">
       <View style={styles.row}>
         <Button label="Reset" size="compact" role="tonal" onPress={reset} />
+        <Button label="Replay first run" size="compact" role="tonal" onPress={replayFirstRun} />
         {Platform.OS === 'web' ? <Button label={copied ? 'Copied' : 'Copy link'} size="compact" role="tonal" onPress={copy} /> : null}
         <Button label="Hide" size="compact" role="plain" onPress={toggleHidden} />
       </View>

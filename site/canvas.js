@@ -7,6 +7,7 @@
 //   <div class="block" id data-x data-y data-w data-title> any other item (palette, logo, image); styles live in the canvas file
 //   <a class="link" data-from="id or selector" data-to="id" data-label-en data-label-pt>  an arrow
 // Items can be selected, not moved. Pan: wheel, space/middle drag, H. Zoom: ctrl/cmd + wheel, pinch.
+// Canvases with links between screens also have a Proto mode (P): one screen at a time, clicked through.
 (() => {
   const MIN = 0.04, MAX = 4, PAD = 64;
   const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -325,6 +326,207 @@
     }
     drawer.querySelector('.cv-close').addEventListener('click', () => { select([]); drawer.hidden = true; vp.focus(); });
 
+    // --- Proto mode: one screen at a time, navigated by clicking, as in Figma's prototype view ---
+    // Hotspots come from the links: a link whose data-from is a selector inside a frame makes those
+    // elements clickable; a link from the frame itself becomes a "next" button under the screen.
+    // The transition is read from the English label: zoom, push (or page), sheet, sheet closes, else a fade.
+    const screens = items.filter(el => el.id && el.matches('.frame, .state'));
+    const byId = new Map(screens.map(s => [s.id, s]));
+    const labelOf = l => l.dataset[lang === 'pt' ? 'labelPt' : 'labelEn'] || l.dataset.labelEn || '';
+    const kindFrom = en => /closes/.test(en) ? 'close' : /zoom/.test(en) ? 'zoom' : /push|\bpage\b/.test(en) ? 'push' : /sheet/.test(en) ? 'sheet' : 'fade';
+    const plinks = [];
+    links.forEach(l => {
+      const sel = l.dataset.from, isId = /^[\w-]+$/.test(sel);
+      let els = [];
+      try { els = isId ? [] : [...world.querySelectorAll(sel)]; } catch (e) { return; }
+      const fromId = isId ? sel : els[0]?.closest('.cv-item')?.id;
+      if (!byId.has(fromId) || !byId.has(l.dataset.to)) return;
+      const hot = els.filter(e => !e.matches('.cv-item'));
+      const p = { n: plinks.length, from: fromId, to: l.dataset.to, label: labelOf(l), kind: kindFrom((l.dataset.labelEn || '').toLowerCase()), frameLevel: !hot.length, spec: hot.length };
+      plinks.push(p);
+      // An element hit by several links keeps the most specific one (the selector with the fewest matches).
+      hot.forEach(e => { const prev = plinks[e.dataset.pl]; if (!prev || prev.spec >= p.spec) e.dataset.pl = p.n; });
+    });
+    const hasProto = plinks.length > 0;
+    let mode = 'flow';
+    const proto = { cur: null, hist: [], busy: false, s: 1, w: 393, h: 852 };
+    let pv = null;
+    if (hasProto) {
+      root.insertAdjacentHTML('beforeend', `
+        <div class="cv-proto" hidden tabindex="-1">
+          <p class="cv-proto-name" aria-live="polite"></p>
+          <div class="cv-proto-fit"><div class="cv-proto-device"></div></div>
+          <div class="cv-proto-next"></div>
+          <div class="cv-proto-bar" role="toolbar" aria-label="${t('protoBar')}">
+            <button type="button" data-p="restart" title="${t('protoRestart')} (R)" aria-label="${t('protoRestart')}">${icon('rotate-ccw')}</button>
+            <button type="button" data-p="back" title="${t('protoBack')} (←)" aria-label="${t('protoBack')}">${icon('arrow-left')}</button>
+            <select class="cv-proto-pick" aria-label="${t('protoScreens')}"></select>
+            <button type="button" data-p="hot" aria-pressed="false" title="${t('protoHotspots')}">${icon('mouse-pointer-2')}<span>${t('protoHotspots')}</span></button>
+          </div>
+        </div>`);
+      const el = root.querySelector('.cv-proto');
+      pv = { el, name: el.querySelector('.cv-proto-name'), fit: el.querySelector('.cv-proto-fit'), device: el.querySelector('.cv-proto-device'), next: el.querySelector('.cv-proto-next'), pick: el.querySelector('.cv-proto-pick'), back: el.querySelector('[data-p=back]'), hot: el.querySelector('[data-p=hot]') };
+      // Screens grouped by the area they sit in, areas in title order ("0 · First run", "1 · …"), screens top-left first.
+      const areas = items.filter(a => a.matches('.area')).map(a => ({ a, b: box(a), title: a.dataset[lang === 'pt' ? 'titlePt' : 'titleEn'] || a.dataset.titleEn || '', en: a.dataset.titleEn || '' }));
+      const groups = new Map();
+      screens.forEach(s => {
+        const b = box(s), c = { x: b.x + b.w / 2, y: b.y + b.h / 2 };
+        const g = areas.find(o => c.x >= o.b.x && c.x <= o.b.x + o.b.w && c.y >= o.b.y && c.y <= o.b.y + o.b.h);
+        const key = g ? g.title : '';
+        if (!groups.has(key)) groups.set(key, { title: key || t('protoOther'), en: g ? g.en : '~', list: [] });
+        groups.get(key).list.push(s);
+      });
+      proto.groups = [...groups.values()].sort((p, q) => p.en.localeCompare(q.en, undefined, { numeric: true }));
+      proto.groups.forEach(g => g.list.sort((p, q) => (p.offsetTop - q.offsetTop) || (p.offsetLeft - q.offsetLeft)));
+      pv.pick.innerHTML = proto.groups.map(g => `<optgroup label="${g.title.replace(/"/g, '&quot;')}">${g.list.map(s => `<option value="${s.id}">${titleOf(s).replace(/</g, '&lt;')}</option>`).join('')}</optgroup>`).join('');
+      proto.phone = screens.some(s => s.matches('.frame'));
+    }
+    const startId = () => {
+      if (byId.has('splash')) return 'splash';
+      const zero = proto.groups.find(g => /^0\b/.test(g.en));
+      if (zero) return zero.list[0].id;
+      if (byId.has('home')) return 'home';
+      const first = screens.find(s => s.matches('.start'));
+      return first ? first.id : proto.groups[0].list[0].id;
+    };
+    function screenSize(s) {
+      if (s.matches('.frame')) { const i = s.querySelector('.ios') || s; return { w: i.offsetWidth || 393, h: i.offsetHeight || 852 }; }
+      return { w: s.offsetWidth + 80, h: Math.max(...screens.filter(o => o.matches('.state')).map(o => o.offsetHeight)) + 80 };
+    }
+    function protoLayout() {
+      if (!pv || mode !== 'proto') return;
+      const head = root.parentElement?.querySelector('.cv-title');
+      pv.el.style.setProperty('--top', (head ? head.offsetTop + head.offsetHeight + 12 : 16) + 'px');
+      const W = pv.fit.clientWidth - 24, H = pv.fit.clientHeight - 8;
+      const max = proto.phone ? 1 : 1.6;
+      proto.s = Math.max(0.1, Math.min(max, W / proto.w, H / proto.h));
+      Object.assign(pv.device.style, { width: proto.w + 'px', height: proto.h + 'px', transform: `translate(-50%, -50%) scale(${proto.s})` });
+    }
+    function makeLayer(id) {
+      const s = byId.get(id), layer = document.createElement('div');
+      layer.className = 'cv-proto-layer';
+      const c = s.cloneNode(true);
+      c.querySelectorAll(':scope > .cv-frame-title, .cv-badge').forEach(n => n.remove());
+      c.classList.remove('is-selected', 'chosen', 'dropped');
+      c.style.left = c.style.top = '';
+      c.querySelectorAll('[data-pl]').forEach(h => h.classList.add('cv-hot'));
+      layer.appendChild(c);
+      return layer;
+    }
+    const EASE = 'cubic-bezier(.32, .72, 0, 1)', DUR = 340;
+    function transition(old, neu, kind, rect) {
+      const dev = pv.device;
+      if (reduced() && kind !== 'none') kind = 'fade';
+      if ((kind === 'zoom' || kind === 'unzoom') && !rect) kind = 'fade';
+      const under = kind === 'unzoom' || kind === 'pop' || kind === 'close';
+      if (under && old) dev.insertBefore(neu, old); else dev.appendChild(neu);
+      let over = false;
+      const done = () => { if (over) return; over = true; neu.getAnimations?.().forEach(x => x.cancel()); neu.querySelector(':scope > .cv-proto-dim')?.remove(); old?.remove(); proto.busy = false; };
+      if (!old || kind === 'none') { done(); return; }
+      proto.busy = true;
+      const dim = layer => { const d = document.createElement('i'); d.className = 'cv-proto-dim'; layer.appendChild(d); return d; };
+      const opt = { duration: DUR, easing: EASE, fill: 'both' };
+      let a;
+      if (kind === 'zoom' || kind === 'unzoom') {
+        const small = `translate(${rect.x}px, ${rect.y}px) scale(${rect.w / proto.w}, ${rect.h / proto.h})`;
+        const moving = kind === 'zoom' ? neu : old;
+        moving.style.transformOrigin = '0 0';
+        const frames = [{ transform: small, opacity: 0 }, { transform: 'none', opacity: 1, offset: 1 }];
+        a = moving.animate(kind === 'zoom' ? frames : frames.slice().reverse().map((f, i) => ({ ...f, offset: i })), opt);
+      } else if (kind === 'push' || kind === 'pop') {
+        const fwd = kind === 'push';
+        (fwd ? old : neu).animate([{ transform: `translateX(${fwd ? 0 : -30}%)` }, { transform: `translateX(${fwd ? -30 : 0}%)` }], opt);
+        dim(fwd ? old : neu).animate([{ opacity: fwd ? 0 : 1 }, { opacity: fwd ? 1 : 0 }], opt);
+        a = (fwd ? neu : old).animate([{ transform: `translateX(${fwd ? 100 : 0}%)` }, { transform: `translateX(${fwd ? 0 : 100}%)` }], opt);
+      } else if (kind === 'sheet') {
+        dim(old).animate([{ opacity: 0 }, { opacity: 1 }], opt);
+        a = neu.animate([{ transform: 'translateY(100%)' }, { transform: 'translateY(0)' }], opt);
+      } else if (kind === 'close') {
+        dim(neu).animate([{ opacity: 1 }, { opacity: 0 }], opt);
+        a = old.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(100%)' }], opt);
+      } else {
+        a = neu.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: 'ease-out', fill: 'both' });
+      }
+      // A timer backs up the animation's promise, which a hidden tab may never settle.
+      a.finished.then(done, done);
+      setTimeout(done, (kind === 'fade' ? 200 : DUR) + 120);
+    }
+    const REVERSE = { zoom: 'unzoom', push: 'pop', sheet: 'close', close: 'sheet', fade: 'fade', none: 'none' };
+    function protoShow(id, kind = 'none', rect = null) {
+      const old = pv.device.querySelector('.cv-proto-layer:last-child');
+      pv.device.querySelectorAll('.cv-proto-layer').forEach(l => { if (l !== old) l.remove(); });
+      const s = byId.get(id);
+      const size = screenSize(s);
+      if (size.w !== proto.w || size.h !== proto.h) { proto.w = size.w; proto.h = size.h; protoLayout(); }
+      pv.device.classList.toggle('phone', s.matches('.frame'));
+      pv.device.classList.toggle('card', !s.matches('.frame'));
+      transition(old, makeLayer(id), kind, rect);
+      proto.cur = id;
+      pv.name.textContent = titleOf(s);
+      pv.pick.value = id;
+      pv.back.disabled = !proto.hist.length;
+      const outs = plinks.filter(p => p.from === id && p.frameLevel);
+      pv.next.innerHTML = outs.map(p => `<button type="button" data-n="${p.n}">${icon('chevron-right')}<span>${t('protoNext')}: ${(p.label || titleOf(byId.get(p.to))).replace(/</g, '&lt;')}</span></button>`).join('');
+      opts?.onChange?.({ mode, frame: id });
+    }
+    function protoGo(p, hotEl) {
+      if (proto.busy) return;
+      let rect = null;
+      if (hotEl) {
+        const d = pv.device.getBoundingClientRect(), r = hotEl.getBoundingClientRect();
+        rect = { x: (r.left - d.left) / proto.s, y: (r.top - d.top) / proto.s, w: r.width / proto.s, h: r.height / proto.s };
+      }
+      proto.hist.push({ id: proto.cur, kind: p.kind, rect });
+      protoShow(p.to, p.kind, rect);
+    }
+    function protoBack() {
+      if (proto.busy || !proto.hist.length) return;
+      const h = proto.hist.pop();
+      protoShow(h.id, REVERSE[h.kind] || 'fade', h.rect);
+    }
+    function protoRestart() { if (proto.busy) return; proto.hist = []; protoShow(startId(), 'fade'); }
+    let flashT = 0;
+    function protoFlash() {
+      pv.device.classList.remove('is-flash'); void pv.device.offsetWidth; pv.device.classList.add('is-flash');
+      clearTimeout(flashT); flashT = setTimeout(() => pv.device.classList.remove('is-flash'), 700);
+    }
+    if (pv) {
+      pv.el.addEventListener('click', e => {
+        if (e.target.closest('.cv-proto-bar')) return;
+        const n = e.target.closest('[data-n]');
+        if (n) { protoGo(plinks[n.dataset.n]); return; }
+        const hot = e.target.closest('.cv-hot');
+        if (hot && pv.device.contains(hot)) { protoGo(plinks[hot.dataset.pl], hot); return; }
+        protoFlash();
+      });
+      pv.el.querySelector('[data-p=restart]').addEventListener('click', protoRestart);
+      pv.back.addEventListener('click', protoBack);
+      pv.hot.addEventListener('click', () => { const on = pv.hot.getAttribute('aria-pressed') !== 'true'; pv.hot.setAttribute('aria-pressed', String(on)); pv.el.classList.toggle('show-hot', on); });
+      pv.pick.addEventListener('change', () => { if (pv.pick.value !== proto.cur) { proto.hist.push({ id: proto.cur, kind: 'fade' }); protoShow(pv.pick.value, 'fade'); } });
+    }
+    function setMode(m, at) {
+      if (m === 'proto' && !hasProto) m = 'flow';
+      if (m === mode && !(m === 'proto' && at)) return;
+      mode = m;
+      root.dataset.mode = m;
+      if (pv) pv.el.hidden = m !== 'proto';
+      if (m === 'proto') {
+        select([]); drawer.hidden = true;
+        proto.hist = [];
+        pv.device.innerHTML = '';
+        const first = byId.get(at) ? at : startId();
+        const sz = screenSize(byId.get(first)); proto.w = sz.w; proto.h = sz.h;
+        protoLayout();
+        protoShow(first);
+        pv.el.focus({ preventScroll: true });
+      } else {
+        const f = proto.cur && byId.get(proto.cur);
+        if (f) fitTo([f], false, 1);
+        vp.focus({ preventScroll: true });
+        opts?.onChange?.({ mode, frame: null });
+      }
+    }
+
     // --- Tools and input ---------------------------------------------------------------
     let tool = 'select', space = false;
     const setTool = name => {
@@ -414,6 +616,13 @@
       if (!root.isConnected) { document.removeEventListener('keydown', onKey); document.removeEventListener('keyup', onKeyUp); return; }
       if (e.target.closest && e.target.closest('input, textarea, select')) return;
       const mod = e.metaKey || e.ctrlKey, cx = vp.clientWidth / 2, cy = vp.clientHeight / 2;
+      if (!mod && !e.altKey && hasProto && (e.key === 'p' || e.key === 'P')) { setMode(mode === 'proto' ? 'flow' : 'proto'); return; }
+      if (mode === 'proto') {
+        if (mod || e.altKey) return;
+        if (e.key === 'ArrowLeft' || e.key === 'Backspace') { e.preventDefault(); protoBack(); }
+        else if (e.key === 'r' || e.key === 'R') protoRestart();
+        return;
+      }
       if (e.code === 'Space' && !space) { space = true; vp.classList.add('is-hand'); e.preventDefault(); return; }
       if (mod && (e.key === '=' || e.key === '+')) { e.preventDefault(); zoomAt(cx, cy, k * 1.25, true); }
       else if (mod && e.key === '-') { e.preventDefault(); zoomAt(cx, cy, k / 1.25, true); }
@@ -435,9 +644,10 @@
     const imgs = [...world.querySelectorAll('img')].filter(i => !i.complete);
     Promise.all([document.fonts ? document.fonts.ready : null, ...imgs.map(i => new Promise(r => { i.onload = i.onerror = r; }))]).then(() => requestAnimationFrame(ready));
     let rt = 0;
-    const ro = new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => { if (root.isConnected) apply(); }, 50); });
+    const ro = new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => { if (root.isConnected) { apply(); protoLayout(); } }, 50); });
     ro.observe(vp);
-    const api = { destroy: () => { document.removeEventListener('keydown', onKey); document.removeEventListener('keyup', onKeyUp); ro.disconnect(); }, showAbout: () => renderDrawer(true), fit: () => fitAll(true), zoomTo: (ids, maxK = 1.5) => { const els = String(ids).split(',').map(i => world.querySelector('#' + i.trim())).filter(Boolean); if (els.length) fitTo(els, false, maxK); } };
+    if (opts?.mode === 'proto' && hasProto) setMode('proto', opts.start);
+    const api = { hasProto, setMode: (m, at) => setMode(m, at), get mode() { return mode; }, destroy: () => { document.removeEventListener('keydown', onKey); document.removeEventListener('keyup', onKeyUp); ro.disconnect(); }, showAbout: () => renderDrawer(true), fit: () => fitAll(true), zoomTo: (ids, maxK = 1.5) => { const els = String(ids).split(',').map(i => world.querySelector('#' + i.trim())).filter(Boolean); if (els.length) fitTo(els, false, maxK); } };
     root.__canvas = api;
     return api;
   }

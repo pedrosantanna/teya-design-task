@@ -12,16 +12,19 @@ import {
   Alert,
   Button,
   CollectionCode,
+  Illustration,
   ListRow,
   NavBar,
   StatusLabel,
   Text,
   Toast,
+  cornerCurve,
   screenMargin,
+  type ShopAccentName,
   useNavBarHeight,
   useNavBarScroll,
 } from '@/design-system';
-import { openDirections, sim, useContent, useCurrentOrder, useSim } from '@/store';
+import { openDirections, shopAccent, shopById, sim, useContent, useCurrentOrder, useSim } from '@/store';
 
 const PAID: string[] = ['ready', 'extended', 'collected', 'paid', 'onItsWay', 'delivered'];
 const REFUNDED: string[] = ['cancelled', 'notCollected'];
@@ -34,7 +37,8 @@ export default function Receipt() {
   const scroll = useNavBarScroll();
   const top = useNavBarHeight();
   const order = useCurrentOrder();
-  const title = useContent().active.title;
+  const content = useContent();
+  const title = content.active.title;
   const codeOpen = useSim((s) => s.codeOpen);
   const [confirm, setConfirm] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
@@ -55,6 +59,8 @@ export default function Receipt() {
   }
 
   const them = order.quantity === 1 ? 'it' : 'them';
+  // The header is the shop's accent at the tile step; no shop kind is Lavender, Snuffle's colour (kinds.ts).
+  const accent = shopAccent(shopById(content, order.shopId));
   const collecting = order.fulfilment === 'collect' && (order.state === 'ready' || order.state === 'extended');
   const where = order.collectAt ?? { street: order.street, openUntil: order.openUntil };
   const money = PAID.includes(order.state)
@@ -71,9 +77,18 @@ export default function Receipt() {
   return (
     <View style={styles.screen}>
       <Animated.ScrollView onScroll={scroll.onScroll} scrollEventThrottle={16} contentContainerStyle={styles.content(margin, top, insets.bottom)}>
-        <View style={styles.head}>
+        {/* Ready: the basket, decorative, one per screen (illustrations.md); still under Reduce Motion. */}
+        <View style={styles.top}>
+        {collecting ? (
+          <View style={styles.art}>
+            <Illustration name="basket" size="medium" />
+          </View>
+        ) : null}
+        {/* The receipt's header: the shop's accent at the tile step (colour.md, Shop accents) and the shop's name in
+            Display name. */}
+        <View style={styles.head(accent)}>
           <StatusLabel label={order.label} tone={order.tone} />
-          <Text variant="title1" align="center" accessibilityRole="header">
+          <Text variant="displayName" align="center" accessibilityRole="header" numberOfLines={2}>
             {order.shop}
           </Text>
           <Text variant="subheadline" color="mutedForeground" align="center">
@@ -83,6 +98,7 @@ export default function Receipt() {
                 ? `${order.items}, set aside · full refund if you don't collect`
                 : order.items}
           </Text>
+        </View>
         </View>
 
         {collecting || order.state === 'collected' ? (
@@ -108,7 +124,7 @@ export default function Receipt() {
 
         <View style={styles.actions}>
           {collecting ? <Button label="Directions" icon={Navigation03Icon} onPress={directions} /> : null}
-          {order.state === 'ready' ? <Button label={`Extend to ${order.extendedTo}`} role="tonal" onPress={sim.extend} /> : null}
+          {order.state === 'ready' ? <Button label={`Extend to ${order.extendedTo}`} role="plain" onPress={sim.extend} /> : null}
           {collecting ? <Button label="Cancel for a refund" role="destructive" onPress={() => setConfirm(true)} /> : null}
         </View>
       </Animated.ScrollView>
@@ -143,6 +159,16 @@ const styles = StyleSheet.create((theme) => ({
     paddingBottom: bottom + theme.space[8],
     gap: theme.gap.section,
   }),
-  head: { alignItems: 'center', gap: theme.space[1] },
+  head: (accent: ShopAccentName) => ({
+    ...cornerCurve,
+    alignItems: 'center',
+    gap: theme.space[1],
+    padding: theme.inset.card,
+    borderRadius: theme.radius.card,
+    overflow: 'hidden',
+    backgroundColor: theme.color.shop.accent[accent].tile,
+  }),
+  top: { gap: theme.space[2] },
+  art: { alignItems: 'center' },
   actions: { gap: theme.space[2] },
 }));

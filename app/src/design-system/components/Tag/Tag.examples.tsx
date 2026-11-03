@@ -34,7 +34,7 @@ export function TagExamples() {
       <View style={styles.column}>
         <StatusLabel label="Asking 6 shops" />
         <StatusLabel label="Needs you · buy by Thu 5 Nov" tone="needsYou" />
-        <StatusLabel label="In stock now · 1 of 2 · till" icon={FlashIcon} />
+        <StatusLabel label="In stock · 1 of 2" icon={FlashIcon} />
         <StatusLabel label="Waiting for Paper & Co · not charged yet" />
         <StatusLabel label="Ready · collect by Mon 9 Nov" tone="success" />
         <StatusLabel label="Sold · not charged" tone="warning" />

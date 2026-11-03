@@ -14,7 +14,7 @@ A notification from Snuffle as the system draws it. `Notification` is the card a
 
 ## iOS and Android
 
-iOS: a glass card (blur before iOS 26 and on the web) with the app icon, the title and the time on one line, the body under it. Android: a heads-up notification on the tonal surface, "Snuffle · now" in Caption 1, then the title and body. The banner slides down with `spring.smooth`.
+iOS: a glass card (blur before iOS 26 and on the web) with the bare Snuffle glyph (no icon tile), the title and the time on one line, the body under it. Android: a heads-up notification on the tonal surface, "Snuffle · now" in Caption 1, then the title and body; the small header icon is the bare glyph. The banner slides down with `spring.smooth`.
 
 ## Rules
 

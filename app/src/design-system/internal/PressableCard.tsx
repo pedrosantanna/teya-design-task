@@ -7,6 +7,8 @@ import Animated, { useAnimatedStyle, useReducedMotion, useSharedValue, withSprin
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { cornerCurve } from '../theme';
+import { useGround } from './ground';
+import { cardShadow } from './shadow';
 import { usePress } from './usePress';
 
 export type CardAction = { name: string; label: string; run: () => void };
@@ -25,6 +27,7 @@ export type PressableCardProps = {
 export function PressableCard({ children, accessibilityLabel, accessibilityHint, onPress, actions, animateIn, style, testID }: PressableCardProps) {
   const { theme } = useUnistyles();
   const press = usePress();
+  const onChat = useGround() === 'chat';
   const reduceMotion = useReducedMotion();
   const arrive = useSharedValue(animateIn ? 0 : 1);
   const lift = theme.space[6];
@@ -60,7 +63,7 @@ export function PressableCard({ children, accessibilityLabel, accessibilityHint,
         onPress={onPress}
         onPressIn={onPress ? press.onPressIn : undefined}
         onPressOut={onPress ? press.onPressOut : undefined}
-        style={[styles.card, style]}
+        style={[styles.card, onChat && styles.onChat, style]}
       >
         <Animated.View pointerEvents="none" style={[styles.layer, press.layerStyle]} />
         {children}
@@ -86,5 +89,7 @@ const styles = StyleSheet.create((theme) => ({
     gap: theme.gap.block,
     overflow: 'hidden',
   },
+  // On a chat's white ground a Card needs an edge: a hairline in the chat edge colour and the delicate shadow.
+  onChat: { borderWidth: StyleSheet.hairlineWidth, borderColor: theme.color.chat.edge, boxShadow: cardShadow(theme) },
   layer: { ...StyleSheet.absoluteFillObject, backgroundColor: theme.color.foreground },
 }));

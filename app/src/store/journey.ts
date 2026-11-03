@@ -1,10 +1,14 @@
-// Journey steps: one per frame of app flow v7. Each step is a preset of the store plus the route that shows it.
+// Journey steps: one per frame of app flow v7 (v8 keeps the same frames). Each step is a preset of the store plus the route that shows it.
 // Screens that aren't built yet show on /preview/[step]; a later change points `href` at the real screen.
 import type { Href } from 'expo-router';
 
 import type { AnswerState, Fulfilment, OrderState, PaymentState, Persona, RequestState } from './types';
 
 export type StepId =
+  | 'splash'
+  | 'gettingStarted'
+  | 'locationAsk'
+  | 'signIn'
   | 'home'
   | 'requests'
   | 'ask'
@@ -29,7 +33,7 @@ export type StepId =
   | 'keepLooking'
   | 'shopPage';
 
-export type StepGroup = 'Browse and ask' | 'Snuffle asks shops' | 'Answers' | 'Buy' | 'Collect' | 'Shops' | 'Requests';
+export type StepGroup = 'First run' | 'Browse and ask' | 'Snuffle asks shops' | 'Answers' | 'Buy' | 'Collect' | 'Shops' | 'Requests';
 
 /** The part of the store a step sets. Answers are keyed by shop id. */
 export type StepPreset = {
@@ -56,7 +60,7 @@ const asking: Record<string, AnswerState> = {
   bushOpticians: 'doesntHave',
   paperCo: 'seen',
   olympia: 'seen',
-  goldhawk: 'asked',
+  brookHardware: 'asked',
   brookToys: 'asked',
 };
 
@@ -73,6 +77,11 @@ const afterAnswers = { ...base, request: 'haveIt', answers: answered } as const 
 
 export const steps: JourneyStep[] = [
   { id: 'home', title: 'Nearby', group: 'Browse and ask', time: '13:01', preset: base },
+  // First run (app flow v8, area 0): shown before Nearby on the first launch.
+  { id: 'splash', title: 'Splash', group: 'First run', time: '9:41', preset: base },
+  { id: 'gettingStarted', title: 'Getting started', group: 'First run', time: '9:41', preset: base },
+  { id: 'locationAsk', title: 'Location, asked in context', group: 'First run', time: '9:42', preset: base },
+  { id: 'signIn', title: 'Sign in', group: 'First run', time: '9:42', preset: base },
   { id: 'ask', title: 'Ask', group: 'Browse and ask', time: '13:02', preset: base },
   { id: 'split', title: 'Snuffle suggests two requests', group: 'Browse and ask', time: '13:02', preset: base },
   { id: 'confirm', title: 'Snuffle confirms', group: 'Snuffle asks shops', time: '13:02', preset: { ...base, persona: 'sam', request: 'asking' } },
@@ -104,7 +113,7 @@ export const steps: JourneyStep[] = [
         bushOpticians: 'doesntHave',
         paperCo: 'doesntHave',
         olympia: 'doesntHave',
-        goldhawk: 'noReply',
+        brookHardware: 'noReply',
         brookToys: 'noReply',
       },
     },
@@ -139,7 +148,10 @@ export const steps: JourneyStep[] = [
   { id: 'requests', title: 'Requests (full screen)', group: 'Requests', time: '13:14', preset: { ...afterAnswers, persona: 'sam' } },
 ];
 
-export const stepGroups: StepGroup[] = ['Browse and ask', 'Snuffle asks shops', 'Answers', 'Buy', 'Collect', 'Shops', 'Requests'];
+export const stepGroups: StepGroup[] = ['First run', 'Browse and ask', 'Snuffle asks shops', 'Answers', 'Buy', 'Collect', 'Shops', 'Requests'];
+
+/** The first-run steps: picking one of them doesn't count as having finished first run. */
+export const FIRST_RUN_STEPS: readonly StepId[] = ['splash', 'gettingStarted', 'locationAsk', 'signIn'];
 
 const byId = new Map(steps.map((s) => [s.id, s]));
 
@@ -150,6 +162,10 @@ export function stepById(id: string | undefined | null): JourneyStep | undefined
 /** The route that shows a step. Nearby is the index; the rest use the preview screen until their screens exist. */
 export function hrefFor(step: StepId): Href {
   if (step === 'home') return '/';
+  if (step === 'splash') return '/welcome';
+  if (step === 'gettingStarted') return { pathname: '/welcome', params: { page: '0' } };
+  if (step === 'locationAsk') return '/location-ask';
+  if (step === 'signIn') return '/sign-in';
   if (step === 'shopPage') return { pathname: '/shops/[id]', params: { id: 'rossis' } };
   // Requests, Ask and the request's chat (request-chat-answers, buy-and-collect). The sheets, the payment
   // sheet and the full-screen code open from the simulation's state, which each step sets (simulation.ts).

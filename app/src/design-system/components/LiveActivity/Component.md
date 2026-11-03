@@ -13,7 +13,7 @@ A request's live status on the lock screen: a Live Activity on iOS, a Live Updat
 
 ## iOS and Android
 
-iOS: a Live Activity, the mark at 40, title, status and deadline, and a segmented bar. Android: an ongoing notification (a Live Update from Android 16): the small mark and "Snuffle · 2 of 6 answered · by 4pm" in Caption 1, then the title and status, then a Material linear progress bar.
+iOS: a Live Activity, the bare mark glyph at 40 wide (no tile), title, status and deadline, and a segmented bar. Android: an ongoing notification (a Live Update from Android 16): the small bare glyph and "Snuffle · 2 of 6 answered · by 4pm" in Caption 1, then the title and status, then a Material linear progress bar.
 
 ## Rules
 

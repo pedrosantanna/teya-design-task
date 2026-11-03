@@ -8,7 +8,7 @@ import { FloatingSurface } from '../../internal/FloatingSurface';
 import { withSpringToken } from '../../internal/layoutSpring';
 import { Portal } from '../../internal/Portal';
 import { cornerCurve } from '../../theme';
-import { SnuffleMark } from '../ChatBubble/SnuffleMark';
+import { SnuffleMark } from '../SnuffleMark/SnuffleMark';
 import { Text } from '../Text/Text';
 
 export type NotificationProps = {
@@ -42,7 +42,7 @@ export const Notification = memo(function Notification({ title, body, time = 'no
     <Pressable accessibilityRole="button" accessibilityLabel={`Snuffle, ${title}, ${body}`} accessibilityHint="Opens the request" onPress={onPress}>
       <FloatingSurface style={styles.card(ios)}>
         <View style={styles.row}>
-          <SnuffleMark size={ios ? theme.size.avatar.shop : theme.size.icon.bar} />
+          <SnuffleMark size={ios ? 'icon' : 'inline'} />
           <View style={styles.grow}>
             <View style={styles.meta}>
               <Text variant={ios ? 'subheadlineStrong' : 'caption1'} color={ios ? 'foreground' : 'mutedForeground'} numberOfLines={1}>

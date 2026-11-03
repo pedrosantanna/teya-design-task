@@ -149,6 +149,70 @@
           "pt": "Hipóteses"
         },
         {
+          "id": "app-flow",
+          "title": "App flow",
+          "src": "docs/develop/ideation/app-flow.md",
+          "canvas": [
+            {
+              "version": "v8",
+              "file": "docs/develop/ideation/app-flow-v8.html"
+            },
+            {
+              "version": "v7",
+              "file": "docs/develop/ideation/app-flow-v7.html"
+            },
+            {
+              "version": "v6",
+              "file": "docs/develop/ideation/app-flow-v6.html"
+            },
+            {
+              "version": "v5",
+              "file": "docs/develop/ideation/app-flow-v5.html"
+            },
+            {
+              "version": "v4",
+              "file": "docs/develop/ideation/app-flow-v4.html"
+            },
+            {
+              "version": "v3",
+              "file": "docs/develop/ideation/app-flow-v3.html"
+            },
+            {
+              "version": "v2",
+              "file": "docs/develop/ideation/app-flow-v2.html"
+            },
+            {
+              "version": "v1",
+              "file": "docs/develop/ideation/app-flow-v1.html"
+            }
+          ],
+          "pt": "Fluxo do app"
+        },
+        {
+          "id": "shop-states",
+          "title": "Shop request states",
+          "src": "docs/develop/ideation/shop-states.md",
+          "canvas": [
+            {
+              "version": "v4",
+              "file": "docs/develop/ideation/shop-states-v4.html"
+            },
+            {
+              "version": "v3",
+              "file": "docs/develop/ideation/shop-states-v3.html"
+            },
+            {
+              "version": "v2",
+              "file": "docs/develop/ideation/shop-states-v2.html"
+            },
+            {
+              "version": "v1",
+              "file": "docs/develop/ideation/shop-states-v1.html"
+            }
+          ],
+          "pt": "Estados do pedido na loja"
+        },
+        {
           "id": "next-step",
           "title": "Next step",
           "src": "docs/define/next-step.md",
@@ -170,66 +234,6 @@
           "title": "Ideation",
           "pt": "Ideação",
           "children": [
-            {
-              "id": "app-flow",
-              "title": "App flow",
-              "src": "docs/develop/ideation/app-flow.md",
-              "canvas": [
-                {
-                  "version": "v7",
-                  "file": "docs/develop/ideation/app-flow-v7.html"
-                },
-                {
-                  "version": "v6",
-                  "file": "docs/develop/ideation/app-flow-v6.html"
-                },
-                {
-                  "version": "v5",
-                  "file": "docs/develop/ideation/app-flow-v5.html"
-                },
-                {
-                  "version": "v4",
-                  "file": "docs/develop/ideation/app-flow-v4.html"
-                },
-                {
-                  "version": "v3",
-                  "file": "docs/develop/ideation/app-flow-v3.html"
-                },
-                {
-                  "version": "v2",
-                  "file": "docs/develop/ideation/app-flow-v2.html"
-                },
-                {
-                  "version": "v1",
-                  "file": "docs/develop/ideation/app-flow-v1.html"
-                }
-              ],
-              "pt": "Fluxo do app"
-            },
-            {
-              "id": "shop-states",
-              "title": "Shop request states",
-              "src": "docs/develop/ideation/shop-states.md",
-              "canvas": [
-                {
-                  "version": "v4",
-                  "file": "docs/develop/ideation/shop-states-v4.html"
-                },
-                {
-                  "version": "v3",
-                  "file": "docs/develop/ideation/shop-states-v3.html"
-                },
-                {
-                  "version": "v2",
-                  "file": "docs/develop/ideation/shop-states-v2.html"
-                },
-                {
-                  "version": "v1",
-                  "file": "docs/develop/ideation/shop-states-v1.html"
-                }
-              ],
-              "pt": "Estados do pedido na loja"
-            },
             {
               "id": "tab-placement",
               "title": "Tab placement",

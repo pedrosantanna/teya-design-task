@@ -5,11 +5,11 @@ import Animated from 'react-native-reanimated';
 import { useSafeAreaFrame } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { IMAGE_FILL, photoSource, type PhotoSource } from '../../internal/media';
+import { IMAGE_OVER, photoSource, type PhotoSource } from '../../internal/media';
 import { spoken } from '../../internal/PressableCard';
 import { ShopPlaceholder } from '../../internal/ShopPlaceholder';
 import { usePress } from '../../internal/usePress';
-import { cornerCurve, screenMargin, type AppTheme, type BadgeName } from '../../theme';
+import { cornerCurve, screenMargin, type AppTheme, type BadgeName, type ShopAccentName } from '../../theme';
 import { Badge, badgeLabel } from '../Tag/Tag';
 import { Text } from '../Text/Text';
 
@@ -34,12 +34,12 @@ export type ShopTileProps = {
   size?: ShopTileSize;
   /** The screen's content width; defaults to the window width minus the screen margins. */
   contentWidth?: number;
-  /** The photo's credit ("Photo: Clara Lilley, Unsplash"), read as the tile's hint; no text on the tile. */
-  credit?: string;
+  /** The shop's accent: the tonal tile under the photo while it loads, or instead of it. */
+  accent?: ShopAccentName;
   onPress?: (id: string) => void;
 };
 
-export const ShopTile = memo(function ShopTile({ id, name, meta, image, badges = [], size = 'large', contentWidth, credit, onPress }: ShopTileProps) {
+export const ShopTile = memo(function ShopTile({ id, name, meta, image, badges = [], size = 'large', contentWidth, accent, onPress }: ShopTileProps) {
   const [failed, setFailed] = useState<PhotoSource | null>(null);
   const { theme } = useUnistyles();
   const frame = useSafeAreaFrame();
@@ -53,25 +53,23 @@ export const ShopTile = memo(function ShopTile({ id, name, meta, image, badges =
       <Pressable
         accessibilityRole="button"
         accessibilityLabel={spoken(name, ...shown.map((b) => badgeLabel(b).toLowerCase()), meta)}
-        accessibilityHint={credit}
         onPress={onPress ? () => onPress(id) : undefined}
         onPressIn={press.onPressIn}
         onPressOut={press.onPressOut}
         style={styles.inner}
       >
         <View style={styles.photo}>
+          <ShopPlaceholder name={name} accent={accent} />
           {image && failed !== image ? (
             <Image
               source={photoSource(image)}
-              style={IMAGE_FILL}
+              style={IMAGE_OVER}
               contentFit="cover"
               transition={PHOTO_FADE_MS}
               accessible={false}
               onError={() => setFailed(image)}
             />
-          ) : (
-            <ShopPlaceholder name={name} />
-          )}
+          ) : null}
           <Animated.View pointerEvents="none" style={[styles.layer, press.layerStyle]} />
           {shown.length > 0 ? (
             <View style={styles.badges}>
@@ -103,7 +101,6 @@ const styles = StyleSheet.create((theme) => ({
     aspectRatio: 4 / 3,
     borderRadius: theme.radius.bubble,
     overflow: 'hidden',
-    backgroundColor: theme.color.muted,
   },
   layer: { ...StyleSheet.absoluteFillObject, backgroundColor: theme.color.scrim },
   badges: { position: 'absolute', top: theme.space[2], left: theme.space[2], flexDirection: 'row', gap: theme.space[1] },

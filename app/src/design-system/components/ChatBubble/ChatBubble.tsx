@@ -7,7 +7,7 @@ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { cornerCurve } from '../../theme';
 import { Icon } from '../Icon/Icon';
 import { Text } from '../Text/Text';
-import { SnuffleMark } from './SnuffleMark';
+import { SnuffleMark } from '../SnuffleMark/SnuffleMark';
 
 export type ChatSender = 'shopper' | 'snuffle';
 export type ChatGap = 'none' | 'sameSender' | 'newSender';
@@ -21,7 +21,7 @@ export function chatGap(previous: ChatSender | undefined, sender: ChatSender): C
 export type ChatBubbleProps = {
   sender: ChatSender;
   text: string;
-  /** First bubble of a Snuffle group: shows the mark and the sender line. */
+  /** First bubble of a Snuffle group: shows the sender line (the glyph and "Snuffle"). */
   firstInGroup?: boolean;
   /** The day, when it isn't today ("Sun 8 Nov"), added to the sender line. */
   day?: string;
@@ -95,18 +95,25 @@ export const ChatBubble = memo(function ChatBubble({
 
   return (
     <View style={styles.row(gap, false)} accessible accessibilityLabel={label}>
-      <View style={styles.markColumn}>{firstInGroup ? <SnuffleMark /> : null}</View>
       <View style={styles.theirs}>
-        {firstInGroup ? (
-          <Text variant="caption1" color="mutedForeground">
-            {day ? `Snuffle · ${day}` : 'Snuffle'}
-          </Text>
-        ) : null}
+        {firstInGroup ? <SnuffleSender day={day} /> : null}
         {bubble}
       </View>
     </View>
   );
 });
+
+/** The sender line of a Snuffle group: the bare glyph (no avatar, no tile) before "Snuffle", and the day if it isn't today. */
+export function SnuffleSender({ day }: { day?: string }) {
+  return (
+    <View style={styles.sender}>
+      <SnuffleMark size="inline" />
+      <Text variant="caption1" color="mutedForeground">
+        {day ? `Snuffle · ${day}` : 'Snuffle'}
+      </Text>
+    </View>
+  );
+}
 
 const styles = StyleSheet.create((theme) => ({
   row: (gap: ChatGap, mine: boolean) => ({
@@ -117,14 +124,14 @@ const styles = StyleSheet.create((theme) => ({
   }),
   mine: { maxWidth: `${theme.layout.bubbleMax * 100}%`, alignItems: 'flex-end', gap: theme.space[1] },
   mineLine: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2] },
-  markColumn: { width: theme.size.avatar.mark },
+  sender: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1] },
   theirs: { maxWidth: `${theme.layout.bubbleMax * 100}%`, alignItems: 'flex-start', gap: theme.space[1] },
   bubble: (mine: boolean) => ({
     ...cornerCurve,
     borderRadius: theme.radius.bubble,
     paddingVertical: theme.inset.bubbleVertical,
     paddingHorizontal: theme.inset.bubbleHorizontal,
-    backgroundColor: mine ? theme.color.primary : theme.color.muted,
+    backgroundColor: mine ? theme.color.primary : theme.color.snuffle.bubble,
     flexShrink: 1,
   }),
 }));

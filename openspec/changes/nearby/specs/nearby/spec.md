@@ -9,12 +9,12 @@ Nearby SHALL take its area, shops and suggestions from the content set of the pe
 - **WHEN** the persona is Jess
 - **THEN** the suggestions include "Sourdough from Rossi's every Friday" and the greeting uses her name
 
-### Requirement: Photo credits
-Every Unsplash photo SHALL carry its photographer's credit where a viewer can reach it, without adding text to the tile.
+### Requirement: Photo credits in code only
+Every Unsplash photo SHALL keep its photographer's credit in `app/src/content/images.ts`. The prototype's photos are stand-ins, so Nearby SHALL NOT show credits in its interface or its accessibility hints (changed by `identity-in-use`).
 
-#### Scenario: Credit on a tile
-- **WHEN** a screen reader focuses a tile, or the reviewer opens the credits in the debugger
-- **THEN** the photographer and "Unsplash" are available for that photo
+#### Scenario: Tile without a credit
+- **WHEN** a screen reader focuses a tile
+- **THEN** it reads the shop's name, badges and meta line, and no photo credit
 
 ### Requirement: Loading
 Nearby SHALL show tile-shaped skeletons only if content takes longer than about 300 ms, and photos SHALL fade in over them; a failed photo SHALL show the no-photo placeholder.

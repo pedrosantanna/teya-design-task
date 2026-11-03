@@ -47,6 +47,18 @@
     "section": {
       "$value": "{dimension.space.7}",
       "$description": "Sections on a screen"
+    },
+    "title": {
+      "$value": "{dimension.space.4}",
+      "$description": "A large title to the content it introduces (16); nav controls to a large title below them (16)"
+    },
+    "aboveTitle": {
+      "$value": "{dimension.space.6}",
+      "$description": "The row above a large title to the title (24), so the title sits closer to what it introduces"
+    },
+    "heading": {
+      "$value": "{dimension.space.3}",
+      "$description": "A section heading to its content (12)"
     }
   },
   "inset": {
@@ -160,10 +172,10 @@
       },
       "shopOnRow": {
         "$value": {
-          "value": 24,
+          "value": 20,
           "unit": "px"
         },
-        "$description": "Shop logos on a request row"
+        "$description": "Shop circles on a request row: two at most, then \"+1\""
       }
     },
     "thumb": {
@@ -207,10 +219,10 @@
     },
     "field": {
       "$value": {
-        "value": 50,
+        "value": 48,
         "unit": "px"
       },
-      "$description": "Ask bar and composer height, matching a large button (components.md)"
+      "$description": "Ask bar, Requests circle and composer height (components.md, Ask bar)"
     },
     "dot": {
       "$value": {
@@ -225,6 +237,79 @@
         "unit": "px"
       },
       "$description": "Step marker on an order card"
+    },
+    "category": {
+      "width": {
+        "$value": {
+          "value": 120,
+          "unit": "px"
+        },
+        "$description": "Category card on Nearby; fixed, so the rail never lays out again"
+      },
+      "height": {
+        "$value": {
+          "value": 164,
+          "unit": "px"
+        },
+        "$description": "Category card on Nearby: the 120 art square, then the label"
+      },
+      "art": {
+        "$value": {
+          "value": 120,
+          "unit": "px"
+        },
+        "$description": "The category's pre-rendered still: an opaque 120 square on the card's own colour (illustration pipeline, categories)"
+      }
+    },
+    "askBar": {
+      "leading": {
+        "$type": "dimension",
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        },
+        "$description": "Ask bar padding before the glyph"
+      },
+      "trailing": {
+        "$type": "dimension",
+        "$value": {
+          "value": 14,
+          "unit": "px"
+        },
+        "$description": "Ask bar padding after the mic; off the 4-pt grid so the mic sits optically centred in the capsule end"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": {
+          "value": 10,
+          "unit": "px"
+        },
+        "$description": "Glyph to placeholder in the ask bar"
+      },
+      "mic": {
+        "$type": "dimension",
+        "$value": {
+          "value": 20,
+          "unit": "px"
+        },
+        "$description": "Mic icon in the ask bar (44 hit)"
+      },
+      "ring": {
+        "$type": "dimension",
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        },
+        "$description": "Ring around the count and the shop circles on a request row, in the ground colour"
+      }
+    },
+    "peek": {
+      "$type": "dimension",
+      "$value": {
+        "value": 80,
+        "unit": "px"
+      },
+      "$description": "How much of the next photo shows on the shop page (72 to 88)"
     }
   },
   "type": {
@@ -252,25 +337,49 @@
         }
       }
     },
+    "displayLarge": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.gambetta}",
+        "fontWeight": "{font.weight.bold}",
+        "fontSize": {
+          "value": 48,
+          "unit": "px"
+        },
+        "lineHeight": 1.0833,
+        "letterSpacing": {
+          "value": -0.96,
+          "unit": "px"
+        }
+      },
+      "$description": "48/52, -0.02 em. Material 3: Display medium. Large titles of the root screens, Nearby and Requests (author's test, round of 2026-11-03)",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 52,
+          "trackingEm": -0.02,
+          "material3": "Display medium"
+        }
+      }
+    },
     "displayTitle": {
       "$type": "typography",
       "$value": {
         "fontFamily": "{font.family.gambetta}",
         "fontWeight": "{font.weight.bold}",
         "fontSize": {
-          "value": 34,
+          "value": 40,
           "unit": "px"
         },
-        "lineHeight": 1.1765,
+        "lineHeight": 1.1,
         "letterSpacing": {
-          "value": -0.51,
+          "value": -0.6,
           "unit": "px"
         }
       },
-      "$description": "34/40, -0.015 em. Material 3: Display small. Get started, home greeting, shop page header",
+      "$description": "40/44, -0.015 em. Material 3: Display small. Nearby large title, get started, shop page header",
       "$extensions": {
         "app.snuffle": {
-          "leading": 40,
+          "leading": 44,
           "trackingEm": -0.015,
           "material3": "Display small"
         }
@@ -297,6 +406,30 @@
           "leading": 30,
           "trackingEm": -0.01,
           "material3": "Headline small"
+        }
+      }
+    },
+    "sectionTitle": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.gambetta}",
+        "fontWeight": "{font.weight.bold}",
+        "fontSize": {
+          "value": 22,
+          "unit": "px"
+        },
+        "lineHeight": 1.2727,
+        "letterSpacing": {
+          "value": -0.22,
+          "unit": "px"
+        }
+      },
+      "$description": "22/28, -0.01 em. Material 3: Title large. Section headings and sheet titles that name a section (author's test, round of 2026-11-03)",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 28,
+          "trackingEm": -0.01,
+          "material3": "Title large"
         }
       }
     },
@@ -540,6 +673,30 @@
         }
       }
     },
+    "caption1Strong": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.switzer}",
+        "fontWeight": "{font.weight.semibold}",
+        "fontSize": {
+          "value": 12,
+          "unit": "px"
+        },
+        "lineHeight": 1.3333,
+        "letterSpacing": {
+          "value": 0.18,
+          "unit": "px"
+        }
+      },
+      "$description": "12/16, Switzer 600. \"Needs you\" on a request row",
+      "$extensions": {
+        "app.snuffle": {
+          "leading": 16,
+          "trackingEm": 0.015,
+          "material3": "Label medium"
+        }
+      }
+    },
     "caption2": {
       "$type": "typography",
       "$value": {
@@ -634,6 +791,50 @@
     "scrim": {
       "$value": 0.4,
       "$description": "Scrim of black behind modals (states.md)"
+    },
+    "glassFill": {
+      "$value": 0.55,
+      "$description": "Glass on the web and the blur fallback: opacity of the Card fill under the backdrop blur (shape.md)"
+    },
+    "glassHighlight": {
+      "$value": 0.6,
+      "$description": "Glass: opacity of the 1 px inner highlight along the top edge"
+    },
+    "glassShadow": {
+      "$value": 0.1,
+      "$description": "Glass: opacity of the soft shadow under a floating control"
+    },
+    "glassBlur": {
+      "$value": 20,
+      "$description": "Glass on the web: backdrop blur radius in px"
+    },
+    "glassSaturate": {
+      "$value": 1.6,
+      "$description": "Glass on the web: backdrop saturation"
+    },
+    "glassEdge": {
+      "$value": 0.06,
+      "$description": "Web glass: opacity of the 0.5 pt hairline"
+    },
+    "glassShadowY": {
+      "$value": 6,
+      "$description": "Web glass: shadow offset in px"
+    },
+    "glassShadowBlur": {
+      "$value": 20,
+      "$description": "Web glass: shadow blur in px"
+    },
+    "cardShadow": {
+      "$value": 0.04,
+      "$description": "Delicate card shadow, first layer: 0 1 2 at this opacity"
+    },
+    "cardShadowFar": {
+      "$value": 0.05,
+      "$description": "Delicate card shadow, second layer: 0 4 12 at this opacity"
+    },
+    "glassRim": {
+      "$value": 0.5,
+      "$description": "Web glass: width in px of the inner highlight and the hairline"
     }
   },
   "layout": {

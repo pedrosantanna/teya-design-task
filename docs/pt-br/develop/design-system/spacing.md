@@ -5,14 +5,19 @@ A escala de espaçamento, os espaços que agrupam o conteúdo numa tela e o grid
 ```summary
 Takeaways:
 - Oito tokens de espaçamento numa base de 4 pt, de 4 a 48, e sete espaços semânticos construídos sobre eles: dentro de um grupo, entre blocos, recuos de cartão e de balão, entre seções, a margem da tela e a área mínima de toque.
-- O espaço entre grupos é pelo menos o dobro do maior espaço dentro deles. Um título fica a 8 do seu conteúdo e a 32 da seção anterior. Na conversa, balões do mesmo remetente ficam a 12 um do outro, e uma troca de remetente fica a 24.
+- O espaço entre grupos é pelo menos o dobro do maior espaço dentro deles. Um título fica a 8 do seu conteúdo e a 32 da seção anterior, um carrossel termina a 32 do título seguinte, e um cartão tem 12 entre blocos e 16 de padding. Na conversa, balões do mesmo remetente ficam a 12 um do outro, e uma troca de remetente fica a 24.
 - Um cartão só é usado onde o espaçamento sozinho não agrupa, como os cartões de resposta e de compra na conversa.
 - Uma coluna de conteúdo com margem de 16 abaixo de 414 pt de largura e 20 a partir de 414. A largura dos tiles vem de uma fórmula; só margens e gutters são fixos. Os carrosséis mostram uma ponta do tile seguinte.
+- A versão web usa os mesmos valores, em pixels de CSS.
 Call:
 - Pedi que o espaçamento e o grid partissem do iOS, ampliassem para o Material e seguissem a Gestalt (decisão 041).
 - Mantive os valores provisórios, para serem ajustados no tamanho real, no protótipo.
+- Numa rodada anterior pedi uma revisão do espaçamento vertical. O espaço entre seções continua em 32, e o ritmo entre blocos está escrito espaço por espaço.
+- Nesta rodada achei o título de Nearby perto demais da linha da área e longe demais de "Open near you", e o título de Requests perto demais do Voltar e dos chips. Um título grande agora fica mais perto do que apresenta do que do que está acima dele (decisão 045).
 AI:
 - Um agente pesquisou as Human Interface Guidelines da Apple (lidas a partir do JSON da HIG, porque as páginas são renderizadas por script), o Material 3 e a documentação do Android, e o NN/g sobre Gestalt, e propôs os tokens e as regras. Eu pedi um design system moderno, baseado primeiro no iOS, depois no Material, e na Gestalt.
+- Um agente listou cada espaço vertical entre blocos em Nearby, na página da loja e na conversa e os escreveu numa tabela só.
+- Um agente criou os espaços do título grande como tokens (`gap.aboveTitle`, `gap.title`, `gap.heading`) e os aplicou em Nearby, Requests, Places e na página da loja, na versão web e na nativa.
 Trade-offs:
 - Uma base de 4 pt bate com os passos do Material e fica perto dos valores da Apple, ao custo de alguns tamanhos intermediários que a Apple usa (como 10 e 14), que só aparecem no recuo do balão.
 - As margens de 16 e 20 seguem o que o UIKit faz nos iPhones atuais, segundo relatos; não confirmei no iOS 26.
@@ -29,7 +34,7 @@ Trade-offs:
 | `space.5` | 20 | Margem da tela nos iPhones largos |
 | `space.6` | 24 | Entre grupos sem relação numa seção, troca de remetente na conversa |
 | `space.7` | 32 | Entre seções em Nearby, Requests e na página da loja |
-| `space.8` | 48 | Só a folga inferior acima da barra de pedido; sob um título grande, a primeira seção começa 8 abaixo |
+| `space.8` | 48 | Só a folga inferior acima da barra de pedido |
 
 ## Espaços semânticos
 
@@ -53,6 +58,22 @@ Trade-offs:
 | Áreas seguras primeiro | O conteúdo rola por baixo das barras; os controles ficam dentro de `useSafeAreaInsets` |
 | Largura do texto | O corpo de texto nunca passa da guia de leitura, que num celular são as margens da tela |
 
+## Ritmo vertical
+
+| Entre | Espaço | Token |
+| --- | --- | --- |
+| Uma seção e a seguinte | 32 | `gap.section` |
+| Um título de seção e o seu conteúdo | 12 | `gap.heading` |
+| Um carrossel e o título seguinte | 32, a partir da linha de meta dos tiles | `gap.section` |
+| Blocos dentro de um cartão | 12 | `gap.block` |
+| A borda de um cartão e o conteúdo | 16 | `inset.card` |
+| A linha acima de um título grande (a linha da área em Nearby) e o título | 24 | `gap.aboveTitle` |
+| Os controles da barra (Voltar) e um título grande abaixo deles | 16 | `gap.title` |
+| Um título grande e o conteúdo que ele apresenta (primeiro título de seção, chips de filtro, uma lista) | 16 | `gap.title` |
+| O último conteúdo e a barra de pedido | 48 | `space.8` |
+
+Cada espaço é definido de um lado só, no topo do bloco de baixo, para que dois espaços nunca se somem. A versão web segue os mesmos valores em pixels de CSS, nas mesmas larguras de celular.
+
 ## Tokens de grid e layout
 
 | Token | Valor | Onde |
@@ -65,7 +86,7 @@ Trade-offs:
 | Célula de categoria | (conteúdo − 36) / 4 ≈ 84 / 91, 1:1 | Grid de categorias |
 | Largura máxima do balão | 78% do conteúdo ≈ 290 / 312 | Balões da conversa |
 | Cartões de resposta e de compra | Largura total do conteúdo | Conversa |
-| Versão web | Moldura de celular, 402 × 874 | Protótipo no navegador |
+| Versão web | Moldura de celular, 402 × 874; os mesmos valores de espaçamento em px | Protótipo no navegador |
 
 As larguras são para um iPhone 17 de 402 pt e um iPhone 17 Pro Max de 440 pt. Os iPhones antigos de 6,1″ têm 393 pt de largura e o Air, 420. No Android, a largura compacta (abaixo de 600 dp) cobre quase todos os celulares na vertical.
 

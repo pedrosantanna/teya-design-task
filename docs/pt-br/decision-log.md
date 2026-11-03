@@ -360,5 +360,21 @@ O protótipo é um app Expo só, em `app/`, sem monorepo nem Turborepo: um proje
 **Por quê:** pedi um desenvolvimento guiado por specs leve e não escrito em pedra, com um PRD e features e issues que possam crescer a partir dele, e que o design system funcionasse como harness para agentes de código. O OpenSpec é a opção atual mais leve e mantém as specs vivas; o GitHub Spec Kit e o Kiro são mais pesados. Um monorepo só ajudaria com vários pacotes, e há um.
 **Em aberto:** os builds de desenvolvimento de iOS e Android e as checagens de Lighthouse e de frame rate ainda não rodaram; as fontes ainda não estão embutidas no app.
 
+## 045 · Identidade em uso
+**2026-11-03 · Provisório**
+
+Cada cor tem uma função. O Índigo é o comprador agindo: no máximo um controle preenchido em Índigo por tela visível, a ação de confirmação, com botões tonais neutros e o chip selecionado em Foreground. A Lavanda é o Snuffle falando: os balões, os pontos de digitação, a marca (redesenhada como um golden retriever sobre um tile Lavanda), as notificações e a Live Activity. Cada loja tem um acento fixo vindo do tipo dela (Pêssego, Pistache, Manteiga ou Lavanda), mostrado como um tile tonal com as iniciais e o toldo da marca, um wash atrás do nome na página dela e um cabeçalho tingido no recibo. O fundo claro vai para #EEE9E2 e o cartão escuro para #2B2420. Todo título de tela e de seção fica em Gambetta, com títulos de 48 pt em Nearby e Requests e o título grande mais perto do conteúdo do que do que está acima dele. O Nearby ganha "Shops by kind" com as imagens 3D, e o recibo, o momento em que o Snuffle pergunta, o Requests vazio e o Not found mostram uma ilustração. Os créditos das fotos saem da interface e ficam no código.
+
+**Por quê:** uma revisão de marca do protótipo viu que o Índigo era a única cor fazendo alguma coisa, os pastéis só apareciam em badges pequenos, as superfícies pareciam iOS padrão, lojas sem foto eram quadrados cinza, a marca parecia um panda a 28 pt, a Gambetta tinha pouca presença e as ilustrações nunca apareciam. As fotos são provisórias num protótipo que não é publicado como produto, então os créditos não pertencem à tela.
+**Em aberto:** Gambetta em todo título substitui as decisões 028 e 029 como teste e pode ser revertida. O wash claro (passo 50) é quase branco e mal aparece atrás do nome de uma loja. As ilustrações foram renderizadas sobre o fundo e o cartão escuro antigos e precisam ser renderizadas de novo; ainda não há estado offline para a cabine telefônica.
+
+## 046 · Padrões do iOS 26, um mapa embutido e a marca solta
+**2026-11-03 · Decidido**
+
+O app segue os padrões do Liquid Glass do iOS 26 como os próprios apps da Apple usam, com o Material 3 Expressive no Android e os mesmos padrões desenhados no web: voltar só com o chevron num círculo de glass, botões de fechar e confirmar em glass, barras sem preenchimento, toda troca de tela animada. A barra de pedido fica sempre inteira e nunca recolhe, porque pedir é a ação principal do app. O mapa é o MapLibre com dados do OpenStreetMap dentro do app e um estilo da paleta com prédios em 3D. A marca do Snuffle é um glifo solto na cor de primeiro plano do tema e nunca fica dentro de um tile ou círculo, o que desfaz o tile da marca da decisão 045. As conversas mantêm um fundo neutro; o Snuffle é marcado pelo glifo, pelo nome e pelos balões em Lavanda, não por uma tela roxa.
+
+**Por quê:** eu queria que o protótipo parecesse com os apps atuais da Apple em todas as plataformas, um mapa que eu pudesse estilizar de graça e que carregasse dentro do artifact, e uma marca que se leia como ela mesma, não como ícone de app. A pesquisa mostrou que apps que hospedam um assistente marcam quem está falando em vez de pintar a tela inteira.
+**Em aberto:** o gesto de arrastar para fechar as transições de zoom não foi verificado num aparelho; o mapa no artifact publicado não foi verificado.
+
 ## Ainda em aberto
 

@@ -4,7 +4,9 @@ import { router } from 'expo-router';
 import { Platform } from 'react-native';
 import { create } from 'zustand';
 
-import { hrefFor, stepById, steps, type StepId, type StepPreset } from './journey';
+import { FIRST_RUN_STEPS, hrefFor, stepById, steps, type StepId, type StepPreset } from './journey';
+import { readPersisted } from './persist';
+import { currentPlace, seedPlaces } from './seed';
 import { readUrlState } from './url';
 import type {
   AnswerState,
@@ -13,7 +15,9 @@ import type {
   OrderState,
   PaymentState,
   Persona,
+  Place,
   PlatformName,
+  Radius,
   RequestState,
   Scheme,
   ShopHours,
@@ -41,6 +45,14 @@ export type AppState = {
   keepLookingForMore: boolean;
   /** What a new request starts with: a suggestion chip's text, or the shop it is addressed to (Ask from a shop page). */
   draft: Draft | null;
+  /** Where the shopper is shopping: current location, a saved place or a searched address. */
+  place: Place;
+  /** How far they will walk, in minutes. */
+  radius: Radius;
+  /** Saved places (mock persistence for the session). */
+  places: Place[];
+  /** First run is done (or skipped). Persisted across launches (persist.ts); see first-run.ts. */
+  hasOnboarded: boolean;
 };
 
 export type Draft = { text?: string; shopId?: string };
@@ -82,6 +94,10 @@ const defaults: AppState = {
   notificationsAllowed: true,
   keepLookingForMore: false,
   draft: null,
+  place: currentPlace,
+  radius: 15,
+  places: seedPlaces,
+  hasOnboarded: false,
 };
 
 /** Defaults, then the URL on web (`?step=…&persona=…&os=…&scheme=…&set=…`). */
@@ -90,12 +106,27 @@ function initialState(): AppState {
   const step = stepById(url.step);
   return {
     ...defaults,
+    hasOnboarded: onboardedAtStart(url),
     ...(step ? { step: step.id, ...fromPreset(step.preset), persona: step.preset.persona ?? defaults.persona } : null),
     ...(url.persona ? { persona: url.persona } : null),
     ...(url.platform ? { platform: url.platform } : null),
     ...(url.scheme ? { scheme: url.scheme } : null),
     ...(url.set ? { contentSet: url.set } : null),
   };
+}
+
+/**
+ * Native: first run shows until it is finished once (remembered in a file). Web: the build lives in the docs and
+ * opens on Nearby, so first run shows only with `?firstRun=1` or after Replay first run; a `?step=` link always
+ * opens on its step.
+ */
+function onboardedAtStart(url: ReturnType<typeof readUrlState>): boolean {
+  if (url.firstRun) return false;
+  const stepIsFirstRun = url.step != null && FIRST_RUN_STEPS.includes(url.step);
+  if (url.step && !stepIsFirstRun) return true;
+  const saved = readPersisted().hasOnboarded;
+  if (Platform.OS === 'web') return saved ?? true;
+  return saved ?? false;
 }
 
 export const useAppStore = create<AppState & AppActions>()((set, get) => ({
@@ -124,6 +155,8 @@ export const useAppStore = create<AppState & AppActions>()((set, get) => ({
       locationOff: false,
       notificationsAllowed: true,
       keepLookingForMore: false,
+      place: currentPlace,
+      radius: 15,
     });
     for (const hook of stepHooks) hook('home');
     navigateTo('home');

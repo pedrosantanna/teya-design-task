@@ -19,6 +19,8 @@ The code shown at the counter, on the receipt. Spec: Collection code on `docs/de
 - Enlarged: full screen through the root portal (so it stays in the phone frame on the web), the code in the `code` type style (Switzer 600, 48, +0.12 em), a QR sized to the screen, Close. Screen brightness goes to full with `expo-brightness` on a phone and is restored on close; `expo-keep-awake` stops the screen dimming or locking while the code is shown.
 - The code keeps one line at every text size; the QR shrinks first.
 
+- The enlarged view zooms from the code on the receipt and back into it on Close (`spring.smooth`; a fade under Reduce Motion).
+
 ## Accessibility
 
 The code is read character by character ("K, 7, Q, 2"); the QR is hidden; the enlarged view is modal with a Close button.

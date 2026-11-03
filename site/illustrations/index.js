@@ -16,6 +16,9 @@ import mannequin from './mannequin.js';
 import bag from './bag.js';
 import glasses from './glasses.js';
 import tea from './tea.js';
+import people from './people.js';
+import flowers from './flowers.js';
+import hardware from './hardware.js';
 
 export default [shop, shopPlain, corner, crossroads, basket, scooter, box,
-  phonebox, pillarbox, busstop, litterbin, bench, cafetable, lamppost, mannequin, bag, glasses, tea];
+  phonebox, pillarbox, busstop, litterbin, bench, cafetable, lamppost, mannequin, bag, glasses, tea, flowers, hardware, people];

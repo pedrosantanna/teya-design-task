@@ -91,9 +91,9 @@ const samScript: ScriptEvent[] = [
   { at: 5, shop: 'bushOpticians', state: 'doesntHave' },
   { at: 10, shop: 'paperCo', state: 'hasIt' },
   { at: 16, shop: 'olympia', state: 'similar' },
-  { at: 24, shop: 'goldhawk', state: 'seen' },
+  { at: 24, shop: 'brookHardware', state: 'seen' },
   { at: 32, shop: 'brookToys', state: 'seen' },
-  { at: 40, shop: 'goldhawk', state: 'noReply' },
+  { at: 40, shop: 'brookHardware', state: 'noReply' },
   { at: 40, shop: 'brookToys', state: 'noReply' },
 ];
 

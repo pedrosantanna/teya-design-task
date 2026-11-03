@@ -1,13 +1,15 @@
 import ArrowExpand01Icon from '@hugeicons/core-free-icons/ArrowExpand01Icon';
 import * as Brightness from 'expo-brightness';
 import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { Platform, Pressable, View } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import Animated, { Extrapolation, interpolate, useAnimatedStyle, useReducedMotion, useSharedValue, withSpring } from 'react-native-reanimated';
+import { scheduleOnRN } from 'react-native-worklets';
 import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
+import { measureView, type Rect, type ViewRef } from '../../internal/origins';
 import { Portal } from '../../internal/Portal';
 import { cornerCurve } from '../../theme';
 import { CloseButton } from '../CloseButton/CloseButton';
@@ -81,6 +83,39 @@ export const CollectionCode = memo(function CollectionCode({
     onEnlargedChange?.(next);
   };
   useFullBrightness(enlarged);
+  // The enlarged code zooms from the code on the receipt and back into it on close (iOS 26 patterns).
+  const blockRef = useRef<ViewRef>(null);
+  const fullRef = useRef<ViewRef>(null);
+  const [shown, setShown] = useState(enlarged);
+  const reduceMotion = useReducedMotion();
+  const p = useSharedValue(0);
+  const from = useSharedValue<Rect | null>(null);
+  if (enlarged && !shown) setShown(true);
+  useEffect(() => {
+    const spring = reduceMotion ? theme.spring.fade : theme.spring.smooth;
+    if (enlarged) {
+      Promise.all([measureView(blockRef.current), measureView(fullRef.current)]).then(([rect, host]) => {
+        from.set(rect && host && !reduceMotion ? { x: rect.x - host.x, y: rect.y - host.y, width: rect.width, height: rect.height } : null);
+        p.set(withSpring(1, spring));
+      });
+    } else if (shown) {
+      p.set(withSpring(0, spring, (done) => done && scheduleOnRN(setShown, false)));
+    }
+  }, [enlarged, shown, p, from, reduceMotion, theme.spring.fade, theme.spring.smooth]);
+  const zoomStyle = useAnimatedStyle(() => {
+    const rect = from.get();
+    const v = p.get();
+    if (!rect) return { opacity: v, transform: [{ translateX: 0 }, { translateY: 0 }, { scale: 1 }] };
+    const scale = rect.width / frame.width + (1 - rect.width / frame.width) * v;
+    return {
+      opacity: interpolate(v, [0, 0.4], [0, 1], Extrapolation.CLAMP),
+      transform: [
+        { translateX: (rect.x + rect.width / 2 - frame.width / 2) * (1 - v) },
+        { translateY: (rect.y + rect.height / 2 - frame.height / 2) * (1 - v) },
+        { scale },
+      ],
+    };
+  });
   const value = qrValue ?? code;
   const smallQr = theme.size.thumb.request * 2;
   // The QR shrinks first so the code keeps one line at every text size (components.md).
@@ -89,6 +124,7 @@ export const CollectionCode = memo(function CollectionCode({
   return (
     <>
       <Pressable
+        ref={blockRef}
         accessibilityRole="button"
         accessibilityLabel={`Collection code, ${spokenCode(code)}`}
         accessibilityHint="Opens the code full screen"
@@ -111,10 +147,10 @@ export const CollectionCode = memo(function CollectionCode({
           </Text>
         </View>
       </Pressable>
-      {enlarged ? (
+      {shown ? (
         // Presented through the root portal so it stays inside the phone frame on the web.
         <Portal>
-          <Animated.View entering={FadeIn} exiting={FadeOut} style={styles.full(insets.top, insets.bottom)} accessibilityViewIsModal>
+          <Animated.View ref={fullRef} collapsable={false} style={[styles.full(insets.top, insets.bottom), zoomStyle]} accessibilityViewIsModal>
             <View style={styles.closeRow}>
               <CloseButton onPress={() => setEnlarged(false)} />
             </View>

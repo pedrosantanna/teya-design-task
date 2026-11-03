@@ -45,3 +45,4 @@ example
 # Fontshare fonts (ITF Free Font License): embedding in the app is allowed, redistributing the files from a public repo is not.
 # `npm run fonts` downloads them from Fontshare; postinstall runs it.
 assets/fonts/*.ttf
+public/map/

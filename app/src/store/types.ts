@@ -50,9 +50,28 @@ export type ShopHours = 'open' | 'closesSoon' | 'closed';
 
 export type AnswerSource = 'till' | 'asked';
 
+/** What a shop sells. It fixes the shop's accent (colour.md, Shop accents) and its category card. */
+export type ShopKind =
+  | 'bakery'
+  | 'cafe'
+  | 'fashion'
+  | 'opticians'
+  | 'bags'
+  | 'gifts'
+  | 'florist'
+  | 'hardware'
+  | 'stationery'
+  | 'cameras'
+  | 'chemist'
+  | 'toys'
+  | 'cornerShop'
+  | 'books'
+  | 'butcher';
+
 export type Shop = {
   id: string;
   name: string;
+  kind: ShopKind;
   street: string;
   walkMinutes: number;
   openUntil: string;
@@ -67,6 +86,10 @@ export type Shop = {
   source: AnswerSource;
   /** What the shop page shows under "Asked about recently". */
   history?: { item: string; had: boolean; when: string }[];
+  /** How long a bought item waits for collection: "7 days", "14 days", "30 days", "same day", "next day". */
+  collectWindow?: string;
+  /** Three example items with prices, for shop pages and answers (docs/deliver/prototype.md, Mocked content). */
+  items?: { name: string; price: number }[];
 };
 
 /** What one shop offers for the active request, whatever its current state. */
@@ -131,3 +154,15 @@ export type PersonaContent = {
     collectAt?: string;
   };
 };
+
+/** A seed area the prototype has shops for: around Blythe Road (home) or Kensington High Street (work). */
+export type AreaId = 'blythe' | 'kensington';
+
+/** How far the shopper will walk, in minutes. */
+export type Radius = 10 | 15 | 20;
+
+/** A saved place: "Home · Blythe Road, W14". */
+export type Place = { id: string; label: string; address: string; area: AreaId };
+
+/** An area's name, its shops and how many shopping streets it has within each radius. */
+export type Area = { id: AreaId; name: string; shops: Shop[]; streets: Record<Radius, number> };

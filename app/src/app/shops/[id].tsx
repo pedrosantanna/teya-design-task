@@ -10,9 +10,9 @@ import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 import { useShallow } from 'zustand/react/shallow';
 
-import { imageCredit, imageSource, images, type ImageKey } from '@/content/images';
-import { Button, ListRow, Map, Sheet, ShopPageLayout, Skeleton, Text, type ShopPhoto } from '@/design-system';
-import { pastAnswerLabel, price, shopById, shopHoursLabel, useAppActions, useAppStore, useContent, type Shop } from '@/store';
+import { imageSource, images, type ImageKey } from '@/content/images';
+import { Badge, Button, ListGroup, ListRow, Map, Sheet, ShopPageLayout, Skeleton, Text, ZoomTarget, type BadgeName, type ShopPhoto } from '@/design-system';
+import { pastAnswerLabel, price, shopAccent, shopById, shopHoursLabel, useAppActions, useAppStore, useContent, type Shop } from '@/store';
 
 const MAX_PHOTOS = 3;
 // Photo width if a photo is not bundled (then it comes from Unsplash): tile.large wide, about 300 pt on a phone.
@@ -29,7 +29,6 @@ function shopPhotos(shop: Shop): ShopPhoto[] {
   return [shop.image, ...keys].slice(0, MAX_PHOTOS).map((key) => ({
     source: imageSource(key, PHOTO_WIDTH),
     label: `${shop.name} ${images[key].kind === 'interior' ? 'inside' : 'shopfront'}, ${shop.street}`,
-    credit: imageCredit(key),
   }));
 }
 
@@ -65,21 +64,28 @@ export default function ShopPage() {
   const photos = loading ? [] : shopPhotos(shop);
   const history = shop.history ?? [];
 
+  const badges: BadgeName[] = [];
+  if (shop.promoted) badges.push('promoted');
+  if (shop.isNew) badges.push('new');
+  if (shop.delivers) badges.push('delivers');
+
   return (
-    <>
+    <ZoomTarget>
       <ShopPageLayout
         name={shop.name}
+        accent={shopAccent(shop)}
         status={status}
         photos={photos}
         mapLoading={loading}
         onBack={back}
         backLabel="Nearby"
+        tags={badges.length > 0 ? badges.map((b) => <Badge key={b} badge={b} on="wash" />) : undefined}
         actions={
-          <View style={styles.actions}>
+          <>
             <Button label={askLabel(shop.name)} size="compact" icon={BubbleChatIcon} onPress={ask} />
             <Button label="Call" role="tonal" size="compact" icon={Call02Icon} onPress={() => setSheet('call')} />
             <Button label="Directions" role="tonal" size="compact" icon={Navigation03Icon} onPress={() => setSheet('directions')} />
-          </View>
+          </>
         }
       >
 
@@ -89,50 +95,42 @@ export default function ShopPage() {
           <>
             {history.length > 0 ? (
               <View style={styles.section}>
-                <Text variant="title3" accessibilityRole="header">
+                <Text variant="sectionTitle" accessibilityRole="header">
                   Asked about recently
                 </Text>
-                <View>
+                <ListGroup shadow>
                   {history.map((h, i) => (
                     <ListRow
                       key={h.item}
                       title={h.item}
                       detail={pastAnswerLabel(h.had, h.when)}
-                      surface="background"
+                      surface="card"
                       position={history.length === 1 ? 'only' : i === 0 ? 'first' : i === history.length - 1 ? 'last' : 'middle'}
                     />
                   ))}
-                </View>
+                </ListGroup>
               </View>
             ) : null}
 
             <View style={styles.section}>
-              <Text variant="title3" accessibilityRole="header">
+              <Text variant="sectionTitle" accessibilityRole="header">
                 How it works
               </Text>
-              <View>
+              <ListGroup shadow>
                 <ListRow
                   position="first"
-                  surface="background"
+                  surface="card"
                   title="Answers"
                   value={shop.source === 'till' ? 'From its till' : 'By reply'}
                 />
-                <ListRow position="middle" surface="background" title="Collection" value={KEEPS_ITEMS} />
+                <ListRow position="middle" surface="card" title="Collection" value={KEEPS_ITEMS} />
                 <ListRow
                   position="last"
-                  surface="background"
+                  surface="card"
                   title="Delivery"
                   value={shop.delivers ? `${shop.delivers.by[0].toUpperCase()}${shop.delivers.by.slice(1)} · ${price(shop.delivers.fee)}` : 'Collect only'}
                 />
-              </View>
-            </View>
-
-            <View style={styles.credits}>
-              {photos.map((p, i) => (
-                <Text key={`${i}-${p.label}`} variant="caption1" color="mutedForeground">
-                  {p.credit}
-                </Text>
-              ))}
+              </ListGroup>
             </View>
           </>
         )}
@@ -156,13 +154,11 @@ export default function ShopPage() {
           {`From ${content.area} to ${shop.name}, ${shop.street}. On a phone this opens the maps app; the prototype stays here.`}
         </Text>
       </Sheet>
-    </>
+    </ZoomTarget>
   );
 }
 
 const styles = StyleSheet.create((theme) => ({
-  actions: { flexDirection: 'row', flexWrap: 'wrap', gap: theme.space[2] },
-  section: { gap: theme.space[2] },
-  credits: { gap: theme.space[1] / 2 },
+  section: { gap: theme.gap.heading },
   route: { aspectRatio: 3 / 2, borderRadius: theme.radius.inner, overflow: 'hidden' },
 }));

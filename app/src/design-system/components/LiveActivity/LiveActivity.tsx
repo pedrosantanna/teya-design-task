@@ -4,7 +4,7 @@ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { FloatingSurface } from '../../internal/FloatingSurface';
 import { cornerCurve } from '../../theme';
-import { SnuffleMark } from '../ChatBubble/SnuffleMark';
+import { SnuffleMark } from '../SnuffleMark/SnuffleMark';
 import { Text } from '../Text/Text';
 
 export type LiveActivityProps = {
@@ -38,7 +38,7 @@ export const LiveActivity = memo(function LiveActivity({ title, status, deadline
       <FloatingSurface style={styles.card(false)}>
         <View accessible accessibilityLabel={label} style={styles.body}>
           <View style={styles.header}>
-            <SnuffleMark size={theme.size.icon.bar} />
+            <SnuffleMark size="inline" />
             <Text variant="caption1" color="mutedForeground" numberOfLines={1}>
               {`Snuffle · ${answered} of ${asked} answered${deadline ? ` · ${deadline}` : ''}`}
             </Text>
@@ -63,7 +63,7 @@ export const LiveActivity = memo(function LiveActivity({ title, status, deadline
     <FloatingSurface style={styles.card(true)}>
       <View accessible accessibilityLabel={label} style={styles.body}>
         <View style={styles.row}>
-          <SnuffleMark size={theme.size.avatar.shop} />
+          <SnuffleMark size="icon" />
           <View style={styles.grow}>
             <Text variant="headline" numberOfLines={1}>
               {title}
@@ -99,13 +99,13 @@ const styles = StyleSheet.create((theme) => ({
   grow: { flex: 1, gap: theme.space[1] / 2 },
   header: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2] },
   bar: { flexDirection: 'row', gap: theme.space[1] },
-  // Material linear progress indicator: a rounded track with a determinate fill.
-  track: { height: theme.space[1], borderRadius: theme.radius.full, backgroundColor: theme.color.muted, overflow: 'hidden' },
-  progress: (share: number) => ({ width: `${Math.round(share * 100)}%`, height: '100%', borderRadius: theme.radius.full, backgroundColor: theme.color.primary }),
+  // Material linear progress indicator: a rounded track with a determinate fill, in Snuffle's Lavender (it is Snuffle reporting).
+  track: { height: theme.space[1], borderRadius: theme.radius.full, backgroundColor: theme.color.snuffle.bubble, overflow: 'hidden' },
+  progress: (share: number) => ({ width: `${Math.round(share * 100)}%`, height: '100%', borderRadius: theme.radius.full, backgroundColor: theme.color.snuffle.dot }),
   segment: (on: boolean) => ({
     flex: 1,
     height: theme.space[1],
     borderRadius: theme.radius.full,
-    backgroundColor: on ? theme.color.primary : theme.color.muted,
+    backgroundColor: on ? theme.color.snuffle.dot : theme.color.snuffle.bubble,
   }),
 }));

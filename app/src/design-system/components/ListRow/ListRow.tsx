@@ -6,6 +6,7 @@ import Animated from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { spoken } from '../../internal/PressableCard';
+import { cardShadow } from '../../internal/shadow';
 import { usePress } from '../../internal/usePress';
 import { cornerCurve, type ColorName } from '../../theme';
 import { Icon } from '../Icon/Icon';
@@ -66,13 +67,13 @@ export const ListRow = memo(function ListRow({
   const press = usePress(selected === undefined ? undefined : 'selection');
   const grouped = theme.platform === 'ios';
   const choice = selected !== undefined;
-  const fill: ColorName = choice && selected ? 'onChipSelected' : 'foreground';
+  const fill: ColorName = 'foreground';
   const content = (
     <>
       <Animated.View pointerEvents="none" style={[styles.layer, press.layerStyle]} />
       {icon ? (
         <View style={styles.icon}>
-          <Icon icon={icon} size="body" color={choice && selected ? 'onChipSelected' : 'mutedForeground'} />
+          <Icon icon={icon} size="body" color={choice && selected ? 'foreground' : 'mutedForeground'} />
         </View>
       ) : null}
       <View style={styles.text(grouped && position !== 'last' && position !== 'only')}>
@@ -82,7 +83,7 @@ export const ListRow = memo(function ListRow({
             {title}
           </Text>
           {detail ? (
-            <Text variant="footnote" color={choice && selected ? 'onChipSelected' : 'mutedForeground'} numberOfLines={3}>
+            <Text variant="footnote" color="mutedForeground" numberOfLines={3}>
               {detail}
             </Text>
           ) : null}
@@ -95,7 +96,7 @@ export const ListRow = memo(function ListRow({
         ) : null}
         {chevron && grouped ? <Icon icon="chevron" size="body" color="mutedForeground" /> : null}
         {choice ? (
-          <View style={styles.check}>{selected ? <Icon icon={Tick02Icon} size="body" weight="strong" color="onChipSelected" /> : null}</View>
+          <View style={styles.check}>{selected ? <Icon icon={Tick02Icon} size="body" weight="strong" color="foreground" /> : null}</View>
         ) : null}
       </View>
     </>
@@ -129,7 +130,17 @@ function groupedFill(theme: { scheme: string; color: { card: string; background:
   return theme.color[surface];
 }
 
+export type ListGroupProps = { children: ReactNode; shadow?: boolean };
+
+/** Holds the rows of one grouped list. With `shadow`, the group lifts off a same-coloured ground with the delicate
+ *  card shadow (the shop page, where Card rows sit on a Background card), instead of a lighter step. */
+export function ListGroup({ children, shadow = false }: ListGroupProps) {
+  return <View style={[styles.group, shadow && styles.groupShadow]}>{children}</View>;
+}
+
 const styles = StyleSheet.create((theme) => ({
+  group: { ...cornerCurve, borderRadius: theme.radius.inner },
+  groupShadow: { boxShadow: cardShadow(theme) },
   row: (grouped: boolean, position: RowPosition, selected: boolean, surface: 'card' | 'background' = 'card') => {
     const top = position === 'first' || position === 'only';
     const bottom = position === 'last' || position === 'only';
@@ -141,7 +152,8 @@ const styles = StyleSheet.create((theme) => ({
       gap: theme.space[3],
       paddingLeft: theme.space[4],
       minHeight: theme.hit.min,
-      backgroundColor: selected ? theme.color.chipSelected : grouped ? groupedFill(theme, surface) : 'transparent',
+      // Selected keeps the row's fill: the tick and the semibold title carry the choice (colour.md, craft-pass-2).
+      backgroundColor: grouped ? groupedFill(theme, surface) : 'transparent',
       borderTopLeftRadius: top ? corner : 0,
       borderTopRightRadius: top ? corner : 0,
       borderBottomLeftRadius: bottom ? corner : 0,

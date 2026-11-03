@@ -1,15 +1,17 @@
 # Screen review
 
-The eighteen checks every screen goes through, wireframe or prototype. An agent runs them on every screen, looking at it rendered, and reports what breaks, screen by screen. The checks cover grouping and hierarchy, the conceptual model and its words, the tokens on the other design-system pages and Apple's guidelines first, then Material's.
+The nineteen checks every screen goes through, wireframe or prototype. An agent runs them on every screen, looking at it rendered, and reports what breaks, screen by screen. The checks cover grouping and hierarchy, the conceptual model and its words, the tokens on the other design-system pages and Apple's guidelines first, then Material's.
 
 ```summary
 Takeaways:
-- Eighteen checks under five headings: Gestalt, hierarchy, information architecture, model and words, accessibility.
+- Nineteen checks under five headings: Gestalt, hierarchy, information architecture, model and words, accessibility.
+- Colour roles are checked too: Indigo is the shopper acting, Lavender is Snuffle speaking, warm pastels are shops. At most one filled Indigo control is in view.
 - Each check has a pass mark that can be measured on the screen: a gap in tokens, a count of sizes or actions, a word from the Words table.
 - The agent reviews the rendered screen, not the code, and reports breaks by screen so I can fix them or log why one stays.
 Call:
 - I asked for every screen to be checked against Gestalt and information architecture, visually, by an agent in the workflow (decision 041).
 - I kept the checks provisional; they will be adjusted as the prototype shows which ones catch real problems.
+- In this round I asked for a check that keeps Indigo to one filled control per viewport and for the colour roles to be reviewed on every screen (decision 045).
 AI:
 - An agent researched NN/g on Gestalt, visual hierarchy and progressive disclosure, Laws of UX on Hick's law, and Rosenfeld, Morville and Arango and Covert on information architecture, and proposed the checklist. I asked for every screen to be checked against the design system.
 Trade-offs:
@@ -34,6 +36,7 @@ Trade-offs:
 | --- | --- | --- |
 | 8 | Visual hierarchy | At most three text sizes per block and four per screen, not counting the nav bar and system UI; one filled primary (Indigo) button visible at once. The composer's send and the shopper's bubbles are Indigo too and don't count |
 | 9 | Hick's law | At most 5 filter chips or 3 suggestions visible; a sheet has at most 2 actions plus Cancel |
+| 19 | Colour roles | At most one filled Indigo control per viewport, the commit action (Buy, Ask, send); secondary actions are neutral and a selected chip is Foreground. Indigo is the shopper acting, Lavender is Snuffle speaking (its bubbles, mark, notifications, Live Activity), a shop's warm pastel is that shop (its tile, page header, receipt), and no colour crosses roles |
 
 ## Information architecture
 

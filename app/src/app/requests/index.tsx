@@ -8,20 +8,24 @@ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import {
   Chip,
   Composer,
+  Dock,
+  Illustration,
   LargeTitle,
   NavBar,
   RequestRow,
-  SnuffleMark,
   Text,
   Toast,
+  ZoomTarget,
   screenMargin,
   useNavBarHeight,
   useNavBarScroll,
   type PhotoSource,
+  type RequestRowShop,
+  type ShopAccentName,
   type StatusTone,
 } from '@/design-system';
 import { imageSource } from '@/content/images';
-import { requestFilter, shopById, sim, twelveHour, useActiveRequestRow, useApp, useContent, useSim } from '@/store';
+import { requestFilter, shopAccent, shopById, sim, twelveHour, useActiveRequestRow, useApp, useContent, useSim } from '@/store';
 
 type Filter = 'All' | 'Needs you' | 'Looking' | 'Waiting' | 'Done';
 const FILTERS: Filter[] = ['All', 'Needs you', 'Looking', 'Waiting', 'Done'];
@@ -42,15 +46,16 @@ type Row = {
   tone: StatusTone;
   filter: Exclude<Filter, 'All'>;
   image: PhotoSource;
-  logos: PhotoSource[];
+  accent?: ShopAccentName;
+  logos: RequestRowShop[];
   unread: number;
   action?: string;
 };
 
 // Requests, full screen (v7 frame "Requests"): every request as a row with one status label, filters that
-// group the states, and the ask bar. Opened from the round Requests button on Nearby with the stack's standard
-// push, so it has a matching exit and the back swipe. The zoom from the button (decision 026) waits for a
-// native zoom transition that can also run backwards under the finger.
+// group the states, and the ask bar. Zooms open from the round Requests button on Nearby (decision 026, iOS 26
+// patterns): the native zoom with its interactive dismiss on iOS, a view transition on the web, a container
+// transform on Android. A request's chat pushes from the side.
 export default function Requests() {
   const { theme, rt } = useUnistyles();
   const insets = useSafeAreaInsets();
@@ -73,7 +78,7 @@ export default function Requests() {
       .filter((o) => answers[o.shopId] && answers[o.shopId] !== 'asked' && answers[o.shopId] !== 'seen' && answers[o.shopId] !== 'doesntHave')
       .slice(0, 3)
       .map((o) => shopById(content, o.shopId))
-      .flatMap((s) => (s ? [imageSource(s.image, 24)] : []));
+      .flatMap((s) => (s ? [{ name: s.name, accent: shopAccent(s) }] : []));
     rows.push({
       id: content.active.id,
       name: content.active.title,
@@ -83,6 +88,7 @@ export default function Requests() {
       tone: active.tone,
       filter: requestFilter(request === 'none' ? 'asking' : request, order),
       image: imageSource(content.active.image, 56),
+      accent: order !== 'none' ? shopAccent(shopById(content, content.order.shopId)) : undefined,
       logos,
       unread: active.unread,
     });
@@ -114,10 +120,11 @@ export default function Requests() {
   };
 
   return (
+    <ZoomTarget>
     <View style={styles.screen}>
       <Animated.ScrollView onScroll={scroll.onScroll} scrollEventThrottle={16} contentContainerStyle={styles.content(top, insets.bottom)}>
         <View style={styles.pad(margin)}>
-          <LargeTitle title="Requests" scroll={scroll} />
+          <LargeTitle title="Requests" display scroll={scroll} />
         </View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.filters(margin)}>
           {FILTERS.map((f) => (
@@ -126,7 +133,8 @@ export default function Requests() {
         </ScrollView>
         {shown.length === 0 ? (
           <View style={styles.empty(margin)}>
-            {filter === 'All' ? <SnuffleMark size={theme.size.thumb.request} /> : null}
+            {/* No requests yet: the crossroads (illustrations.md); a filtered list that's empty keeps to text. */}
+            {filter === 'All' ? <Illustration name="crossroads" size="large" /> : null}
             <Text variant="subheadline" color="mutedForeground" align="center">
               {EMPTY[filter]}
             </Text>
@@ -143,6 +151,7 @@ export default function Requests() {
                 status={r.status}
                 tone={r.tone}
                 image={r.image}
+                accent={r.accent}
                 shopLogos={r.logos}
                 unread={r.unread}
                 actionLabel={r.action}
@@ -162,17 +171,20 @@ export default function Requests() {
         onLeading={() => (router.canGoBack() ? router.back() : router.navigate('/'))}
         scroll={scroll}
       />
-      <View style={styles.composer(margin, insets.bottom)}>
+      <Dock>
+        <View style={styles.composer(margin)}>
         <Composer
           value=""
           onChangeText={() => undefined}
           placeholder="Ask for anything nearby"
+          mark
           onFieldPress={() => {
             sim.compose(null);
             router.push('/requests/new');
           }}
         />
-      </View>
+        </View>
+      </Dock>
       <Toast
         visible={undo != null}
         message="Request closed"
@@ -181,18 +193,20 @@ export default function Requests() {
         onHide={() => setUndo(null)}
       />
     </View>
+    </ZoomTarget>
   );
 }
 
 const styles = StyleSheet.create((theme) => ({
   screen: { flex: 1, backgroundColor: theme.color.background },
+  // Proximity (spacing.md): 16 from the bar's controls to the large title, 16 from the title to the filters.
   content: (top: number, bottom: number) => ({
-    paddingTop: top,
-    paddingBottom: bottom + theme.size.field + theme.clearance.askBar,
-    gap: theme.space[3],
+    paddingTop: top + theme.gap.title,
+    paddingBottom: bottom + theme.space[3] + theme.size.field + theme.space[2] + theme.clearance.askBar,
+    gap: theme.gap.title,
   }),
   pad: (margin: number) => ({ paddingHorizontal: margin }),
   filters: (margin: number) => ({ paddingHorizontal: margin, gap: theme.space[2] }),
   empty: (margin: number) => ({ paddingHorizontal: margin, paddingTop: theme.space[8], alignItems: 'center', gap: theme.space[4] }),
-  composer: (margin: number, bottom: number) => ({ position: 'absolute', left: margin, right: margin, bottom: bottom + theme.space[2] }),
+  composer: (margin: number) => ({ paddingHorizontal: margin }),
 }));

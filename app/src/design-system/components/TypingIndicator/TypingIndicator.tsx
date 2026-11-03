@@ -13,7 +13,7 @@ import Animated, {
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { cornerCurve } from '../../theme';
-import { SnuffleMark } from '../ChatBubble/SnuffleMark';
+import { SnuffleSender } from '../ChatBubble/ChatBubble';
 
 // The dim end of the pulse, and the stagger between dots in ms.
 const DIM = 0.3;
@@ -49,7 +49,8 @@ export const TypingIndicator = memo(function TypingIndicator({ gap = 'none' }: T
 
   return (
     <View style={styles.row(gap)} accessible accessibilityLabel="Snuffle is writing">
-      <SnuffleMark />
+      {/* A new group starts with the sender line; after a Snuffle bubble the dots join that group. */}
+      {gap === 'sameSender' ? null : <SnuffleSender />}
       <View style={styles.bubble}>
         <Dot value={a} />
         <Dot value={b} />
@@ -61,9 +62,8 @@ export const TypingIndicator = memo(function TypingIndicator({ gap = 'none' }: T
 
 const styles = StyleSheet.create((theme) => ({
   row: (gap: 'none' | 'sameSender' | 'newSender') => ({
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    gap: theme.space[2],
+    alignItems: 'flex-start',
+    gap: theme.space[1],
     marginTop: gap === 'none' ? 0 : gap === 'sameSender' ? theme.space[3] : theme.space[6],
   }),
   bubble: {
@@ -75,12 +75,12 @@ const styles = StyleSheet.create((theme) => ({
     paddingVertical: theme.inset.bubbleVertical,
     paddingHorizontal: theme.inset.bubbleHorizontal,
     height: theme.type.body.lineHeight + theme.inset.bubbleVertical * 2,
-    backgroundColor: theme.color.muted,
+    backgroundColor: theme.color.snuffle.bubble,
   },
   dot: {
     width: theme.size.dot,
     height: theme.size.dot,
     borderRadius: theme.radius.full,
-    backgroundColor: theme.color.mutedForeground,
+    backgroundColor: theme.color.snuffle.dot,
   },
 }));
