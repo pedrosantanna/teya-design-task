@@ -43,3 +43,5 @@ Na prova de conceito começo pela versão aberta, porque as hipóteses precisam 
 - **Dados de demanda pagos.** O resumo semanal da demanda é gratuito; uma versão paga traria detalhe por hora, por item e em comparação com o resto da rua. Depende de as lojas darem valor ao resumo gratuito primeiro (H9).
 
 As duas ficam fora das hipóteses até a prova de conceito dizer se as condições delas se confirmam.
+
+Coloquei números nessas fontes na [estimativa de receita](revenue-estimate.md): lojas, compradores, GMV e receita em três cenários.

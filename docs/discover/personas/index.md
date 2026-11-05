@@ -54,8 +54,8 @@ The names are common British first names, short and easy to tell apart, and the 
 name: Sam, the mission shopper
 tagline: Needs a specific thing, often by a deadline, and can't find out who has it.
 image: img/sam.jpg
-credit: Photo: Beatriz Cattel, Unsplash
-credit_url: https://unsplash.com/photos/young-man-in-a-light-blue-collared-shirt-smiling-az3QxXQ7Fqc
+credit: Photo: Elizeu Dias, Unsplash
+credit_url: https://unsplash.com/photos/selective-focus-of-man-smiling-during-daytime-2EGNqazbAMk
 - Where: Lives or works in West London
 - Asks: Reddit, WhatsApp groups, AI chatbots
 - Buys locally: A specific item, at short notice

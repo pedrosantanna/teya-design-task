@@ -12,7 +12,7 @@ Call:
 - Pedi que ela fosse refinada numa grade de ícone, em preto e branco até a paleta ser escolhida, e apontei quando ficou alta demais.
 - Parei aqui de propósito. Com mais tempo eu desenvolveria mais a marca, talvez por outro caminho, mas o brand não é o foco deste exercício; achei divertido e o resultado é bom o bastante para dar uma cara ao app.
 - Pedi que o splash fosse uma animação vetorial curta sobre Índigo: primeiro o toldo, desenrolando listra por listra, depois o rosto e duas piscadas.
-- Dentro do app a marca é um glifo solto, de uma cor só que segue o tema, nunca num tile nem num avatar. Isso reverte a "marca sobre um tile Lavanda" da decisão 045.
+- Dentro do app a marca é um glifo solto, de uma cor só que segue o tema, nunca num tile. A única exceção é o avatar do Snuffle na conversa: um círculo de 24 pt no Lavanda do balão do Snuffle, ao lado do nome (decisão 057). Isso reverte a "marca sobre um tile Lavanda" da decisão 045.
 AI:
 - Um agente construiu a animação do splash em código a partir dos caminhos do próprio glifo. Um agente desenhou os testes de ícone em SVG a partir das minhas sementes (um cão farejador, as compras britânicas, os toldos da parade). Levei os dois primeiros para o Figma e mudei os vetores à mão. O agente exportou a minha versão, reconstruiu-a sobre um eixo só e desenhou as aplicações nas plataformas. O primeiro centro ótico deixou o desenho alto demais; eu apontei, e ele escolheu outro comparando deslocamentos no olho.
 Trade-offs:
@@ -77,11 +77,11 @@ Um ícone adaptável tem duas camadas de 108 dp. Os launchers mostram os 72 dp d
 
 ## No app
 
-O quadrado existe só como ícone do app, que o sistema desenha. Em todo o resto do app a marca é só o glifo: sem tile, sem círculo, sem avatar e sem nada atrás. Ela pega uma cor do tema, Foreground, então fica escura sobre fundos claros e clara sobre escuros; as duas listras de menos contraste ficam em Muted foreground, o tom mais claro da mesma tinta, como no ícone temático do Android.
+O quadrado existe só como ícone do app, que o sistema desenha. Em todo o resto do app a marca é só o glifo, sem tile e sem nada atrás, exceto na linha de remetente da conversa, onde fica num pequeno avatar Lavanda. Ela pega uma cor do tema, Foreground, então fica escura sobre fundos claros e clara sobre escuros; as duas listras de menos contraste ficam em Muted foreground, o tom mais claro da mesma tinta, como no ícone temático do Android.
 
 | Onde | Tamanho |
 | --- | --- |
-| A linha de remetente da conversa, ao lado de "Snuffle", sem coluna de avatar | 22 de largura |
+| A linha de remetente da conversa, num avatar Lavanda de 24 pt ao lado de "Snuffle" | 14 de largura |
 | Notificação e Live Activity | 40 de largura |
 | Login | 56 de largura |
 | O splash, nativo e no app, centralizado em Índigo 800 (glifo branco, veja abaixo) | 120 de largura |
@@ -91,6 +91,19 @@ No splash o glifo usa duas cores fixas sobre o Índigo 800, a cor da marca: bran
 Isso reverte a parte da decisão 045 que punha a marca sobre um tile Lavanda, com um rosto quente atrás do glifo. A Lavanda continua sendo a cor do Snuffle nos balões e nos pontos de digitação.
 
 ## Animação do splash
+
+<video class="intro-video" src="../../../develop/design-system/img/mark-intro.mp4" poster="../../../develop/design-system/img/mark-intro.png" width="480" height="480" aria-label="A animação do splash: o toldo desenrola, o rosto aparece e o cachorro pisca duas vezes" controls loop muted playsinline autoplay></video>
+
+O vídeo repete em laço e toca sozinho, a menos que o sistema peça movimento reduzido.
+
+| Tempo | O que acontece |
+| --- | --- |
+| 0 ms | Só o toldo aparece, enrolado no alto |
+| 100 a 800 ms | As cinco listras se desenrolam da esquerda para a direita, cada uma com um balanço |
+| 780 ms | As orelhas deslizam para dentro |
+| 960 e 1050 ms | Os olhos crescem, depois o nariz salta |
+| 1240 e 1400 ms | Duas piscadas |
+| 1600 ms | A marca pronta |
 
 O splash mostra a marca se construindo, em cerca de 1,6 s; o tempo está na [página de movimento](motion.md#splash). No começo só o toldo aparece, enrolado no alto como a cortina de uma loja. Ele desce, e as cinco listras se desenrolam uma depois da outra, cada uma com um balanço curto e um pequeno excesso. Depois aparecem as orelhas, os olhos e o nariz, e o cachorro pisca duas vezes. O último quadro é o glifo acima, igual à imagem do splash nativo. A animação começa pelo toldo enrolado, então o rosto some por um instante quando o sistema passa a vez, e depois volta a se construir. As listras são os mesmos cinco caminhos do glifo, desenhados um a um, então o último quadro coincide com ele exatamente.
 

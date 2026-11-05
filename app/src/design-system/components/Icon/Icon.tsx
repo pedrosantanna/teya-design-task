@@ -12,6 +12,7 @@ import { memo } from 'react';
 import { View } from 'react-native';
 import { useUnistyles } from 'react-native-unistyles';
 
+import { useOnGround } from '../../internal/ground';
 import type { AppTheme, ColorName, TypeStyleName } from '../../theme';
 
 /** Icons whose form follows the platform (imagery.md, Icon map). `chevron` has no Android form. */
@@ -54,8 +55,9 @@ function strokeFor(theme: AppTheme, size: IconSize, weight?: 'regular' | 'strong
   return strong ? 2 : 1.5;
 }
 
-export const Icon = memo(function Icon({ icon, size = 'nav', weight, color = 'foreground', accessibilityLabel }: IconProps) {
+export const Icon = memo(function Icon({ icon, size = 'nav', weight, color: colorProp = 'foreground', accessibilityLabel }: IconProps) {
   const { theme } = useUnistyles();
+  const color = useOnGround(colorProp);
   const svg = typeof icon === 'string' ? platformIcons[icon][theme.platform] : icon;
   if (!svg) return null;
   const px = iconPixelSize(theme, size);

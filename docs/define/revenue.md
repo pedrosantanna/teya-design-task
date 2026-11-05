@@ -43,3 +43,5 @@ For the proof of concept I start open, because the hypotheses need enough shops 
 - **Paid demand insights.** The weekly demand summary is free; a paid version would add detail by hour, by item and against the rest of the street. It depends on shops valuing the free summary first (H9).
 
 Both stay out of the hypotheses until the proof of concept says whether their preconditions hold.
+
+I put numbers on these sources in the [revenue estimate](revenue-estimate.md): shops, shoppers, GMV and revenue in three scenarios.

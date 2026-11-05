@@ -1,6 +1,6 @@
 # Sources
 
-Every quote and every link used across the docs, in one place. 72 quotes (71 checked against the live source) and 175 other sources. This page is generated from the other pages by `scripts/build_sources.py`.
+Every quote and every link used across the docs, in one place. 72 quotes (71 checked against the live source) and 192 other sources. This page is generated from the other pages by `scripts/build_sources.py`.
 
 ## Quotes by network
 
@@ -96,6 +96,24 @@ Status **verified** means the text, author and date were matched against the liv
 
 | Used on | Source |
 | --- | --- |
+| [Revenue estimate](../define/revenue-estimate.md) | [UK business: activity, size and location, 2025](https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/ukbusinessactivitysizeandlocation/2025) |
+| [Revenue estimate](../define/revenue-estimate.md) | [Business population estimates 2025](https://www.gov.uk/government/statistics/business-population-estimates-2025/business-population-estimates-for-the-uk-and-regions-2025-statistical-release) |
+| [Revenue estimate](../define/revenue-estimate.md) | [House of Commons Library briefing on the retail industry](https://researchbriefings.files.parliament.uk/documents/SN06186/SN06186.pdf) |
+| [Revenue estimate](../define/revenue-estimate.md) | [demography data](https://data.london.gov.uk/demography) |
+| [Revenue estimate](../define/revenue-estimate.md) | [mid-2024 UK population estimates](https://www.gov.uk/government/statistics/population-estimates-for-the-uk-england-wales-scotland-and-northern-ireland-mid-2024) |
+| [Revenue estimate](../define/revenue-estimate.md) | [card-acquiring market review, final report (November 2021)](https://www.psr.org.uk/media/p1tlg0iw/psr-card-acquiring-market-review-final-report-november-2021.pdf) |
+| [Revenue estimate](../define/revenue-estimate.md) | [The Interchange Fee Regulation: the fee cap is now in force](https://www.osborneclarke.com/insights/the-interchange-fee-regulation-the-fee-cap-is-now-in-force) |
+| [Revenue estimate](../define/revenue-estimate.md) | [best card readers for UK small businesses](https://www.sumup.com/en-gb/compare/best-card-readers/) |
+| [Revenue estimate](../define/revenue-estimate.md) | [Essential card machine](https://teya.com/shop/essential-card-machine) |
+| [Revenue estimate](../define/revenue-estimate.md) | [pricing](https://www.teya.com/pricing) |
+| [Revenue estimate](../define/revenue-estimate.md) | [H2 2025 results](https://www.adyen.com/press-and-media/adyen-publishes-h2-2025-financial-results-3pgu2) |
+| [Revenue estimate](../define/revenue-estimate.md) | [Q4 2024 trading update](https://corporate.deliveroo.co.uk/assets/2317/3700/9446/Deliveroo_Q4_2024_Trading_Update_RNS_vFINAL.pdf) |
+| [Revenue estimate](../define/revenue-estimate.md) | [Deliveroo ad revenue](https://fr.statista.com/statistics/1208634/deliveroo-ad-revenue/) |
+| [Revenue estimate](../define/revenue-estimate.md) | [press release on 40 million bags](https://www.toogoodtogo.com/en-gb/press/40-million) |
+| [Revenue estimate](../define/revenue-estimate.md) | [Too Good To Go profile](https://www.igd.com/articles/too-good-to-go) |
+| [Revenue estimate](../define/revenue-estimate.md) | [mobile app retention](https://www.braze.com/resources/articles/mobile-app-retention) |
+| [Revenue estimate](../define/revenue-estimate.md) | [retention benchmarks](https://phiture.com/mobilegrowthstack/managing-retention-rate-benchmarks-and-expectations/) |
+| [Revenue estimate](../define/revenue-estimate.md) | [research](https://www.acs.org.uk/research) |
 | [Synthetic test users](../deliver/synthetic-users.md) | [Rosala and Moran, 2024](https://www.nngroup.com/articles/synthetic-users/) |
 | [Synthetic test users](../deliver/synthetic-users.md) | [Mooney et al., 2025](https://arxiv.org/abs/2509.03736) |
 | [Synthetic test users](../deliver/synthetic-users.md) | [Park et al., 2024](https://arxiv.org/abs/2411.10109) |
@@ -200,7 +218,6 @@ Status **verified** means the text, author and date were matched against the liv
 | [The high street today](high-street-landscape.md) | [Source](https://www.thegrocer.co.uk/news/shop-theft-at-record-level-growing-20-past-500k-offences/707339.article) |
 | [The high street today](high-street-landscape.md) | [Source](https://www.gov.uk/government/news/pm-backs-true-patriots-to-lead-uk-renewal-with-5bn-investment) |
 | [The high street today](high-street-landscape.md) | [Source](https://www.gpb.org/news/2026/07/20/andy-burnham-becomes-uk-prime-minister-after-starmer-resigns) |
-| [The high street today](high-street-landscape.md) | [Teya pricing](https://www.teya.com/pricing) |
 | [The high street today](high-street-landscape.md) | [SumUp comparison page](https://www.sumup.com/en-gb/compare/sumup-vs-zettle/) |
 | [The high street today](high-street-landscape.md) | [MobileTransaction](https://mobiletransaction.org/square-vs-izettle-vs-sumup) |
 | [The high street today](high-street-landscape.md) | [ExpertMarket](https://www.expertmarket.com/uk/merchant-accounts/dojo-review?p=29692) |

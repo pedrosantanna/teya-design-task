@@ -8,7 +8,7 @@ import { View } from 'react-native';
 import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { Alert, Button, Illustration, Text, ZoomOrigin, screenMargin } from '@/design-system';
+import { Alert, Button, Illustration, Text, screenMargin } from '@/design-system';
 import { LocationSheet } from '@/screens/LocationSheet';
 import { useAppActions } from '@/store';
 
@@ -33,7 +33,7 @@ export default function LocationAsk() {
     <View style={styles.screen}>
       <View style={styles.body(insets.top, margin)}>
         <View style={styles.hero}>
-          <Illustration name="quietstreet" size="hero" />
+          <Illustration name="quietstreet" size="hero" ground="location" />
         </View>
         <View style={styles.copy}>
           <Text variant="displayTitle" align="center" accessibilityRole="header">
@@ -47,12 +47,10 @@ export default function LocationAsk() {
       </View>
       <View style={styles.actions(insets.bottom, margin)}>
         <Button label="Allow location" onPress={() => setPrompt(true)} />
-        <ZoomOrigin id="first-run-place">
-          <Button label="Choose a place instead" role="plain" onPress={() => setSheet(true)} />
-        </ZoomOrigin>
+        <Button label="Choose a place instead" role="plain" onPress={() => setSheet(true)} />
       </View>
 
-      <LocationSheet open={sheet} onClose={() => setSheet(false)} origin="first-run-place" onConfirm={() => toSignIn()} />
+      <LocationSheet open={sheet} onClose={() => setSheet(false)} onConfirm={() => toSignIn()} />
 
       {/* The system prompt, as each platform words it. */}
       <Alert
@@ -78,10 +76,12 @@ export default function LocationAsk() {
 }
 
 const styles = StyleSheet.create((theme) => ({
+  // The app's Background in both modes; in dark the quiet street is rendered for color.location and Illustration lifts
+  // that colour softly behind it (colour.md, Location ask).
   screen: { flex: 1, backgroundColor: theme.color.background },
-  body: (top: number, margin: number) => ({ flex: 1, paddingTop: top + theme.hit.min, paddingHorizontal: margin, gap: theme.gap.section }),
-  // The art sits at the optical centre of the space above the copy: a section gap above the true centre.
-  hero: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingBottom: theme.gap.section },
+  body: (top: number, margin: number) => ({ flex: 1, paddingTop: top, paddingHorizontal: margin, gap: theme.gap.section }),
+  // The art is centred between the status bar and the headline (visual critique, round 12).
+  hero: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   copy: { gap: theme.gap.block, paddingBottom: theme.gap.section },
   actions: (bottom: number, margin: number) => ({ paddingHorizontal: margin, paddingBottom: bottom + theme.space[4], gap: theme.space[2] }),
 }));

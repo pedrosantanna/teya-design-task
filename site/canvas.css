@@ -494,6 +494,9 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .ios-from.glyph { grid-template-columns: minmax(0, 1fr); }
 .ios-from.glyph > .who, .ios-from.glyph > .msgs { grid-column: 1; }
 .ios-from.glyph > .who { display: flex; align-items: center; gap: 4px; padding-left: 0; }
+/* Snuffle's avatar on the sender line (app flow v10): the glyph in a 24 circle, greyscale in wireframes. */
+.ios-snav { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; margin-right: 4px; border-radius: 50%; background: var(--ios-fill); color: var(--ios-label); }
+.ios-snav .ios-mark { width: 14px; height: 10px; margin: 0; }
 
 /* Ratings (app flow v9). New classes only, so earlier versions keep their look. */
 .ios-thumbs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 16px; }

@@ -64,6 +64,7 @@ try {
     n++;
     console.log(`✓ ${name}: ${r.frames.length} frame${r.frames.length === 1 ? '' : 's'}, ${r.meta.px}px, ${r.meta.renderMs} ms`);
   }
+  const lineOf = () => ({ line: m.line ?? 1.25, ...(m.lineSmall ?? {}) });
   const wantClip = (c) => !f.clips || f.clips.includes(c);
 
   if (sets.includes('main')) {
@@ -72,16 +73,19 @@ try {
       for (const clip of [...clips, 'still'].filter(wantClip)) {
         const name = stem(j.ill.name, clip, j.ground, j.size, j.scale);
         await one(clip === 'still' ? `${name} (still)` : name, path.join(FRAMES, clip === 'still' ? `${name}.still` : name),
-          { object: j.ill.object, size: j.size, scale: j.scale, ground: j.color, ...(j.dark ? { dark: j.dark } : {}), clip, ...(j.ground.endsWith('-dark') ? j.ill.darkTones : {}) },
+          { object: j.ill.object, size: j.size, scale: j.scale, ground: j.color, rot: j.ill.rot ?? 0, ...lineOf(), ...(j.dark ? { dark: j.dark } : {}), clip, ...(j.ground.endsWith('-dark') ? j.darkTones : {}) },
           { name: j.ill.name, groundId: j.ground, sizeName: j.sizeName });
       }
     }
   }
-  // Category cards: opaque, on the kind's tile token (color.shop.accent.<ramp>.tile; shade toward 800 in light, 900
-  // in dark), framed the same way for every object (categories.fit).
+  // Category cards: transparent, shaded for the kind's tile token (color.shop.accent.<ramp>.tile; shade toward 800 in
+  // light, 900 in dark); the app composites them over the tile. Every object is centred and framed the same way
+  // (categories.fit.center).
   if (sets.includes('categories') && m.categories) {
     const c = m.categories;
-    const fit = c.fit?.area
+    const fit = c.fit?.center
+      ? { fitCenter: c.fit.center, ...(c.fit.clear != null ? { fitClear: c.fit.clear } : {}) }
+      : c.fit?.area
       ? { fitArea: c.fit.area, fitMaxW: c.fit.maxWidth, fitMaxH: c.fit.maxHeight, fitBase: c.fit.base, fitClear: c.fit.clear }
       : c.fit
         ? { fitW: c.fit.width, fitTop: c.fit.top, fitBase: c.fit.base }
@@ -94,7 +98,7 @@ try {
           for (const clip of [...c.clips, 'still'].filter(wantClip)) {
             const name = stem(it.id, clip, scheme, c.size, scale);
             await one(`categories/${name}${clip === 'still' ? ' (still)' : ''}`, path.join(FRAMES, 'categories', clip === 'still' ? `${name}.still` : name),
-              { object: it.object, size: c.size, height: c.height, scale, ground, dark, opaque: true, ...fit, clip },
+              { object: it.object, size: c.size, height: c.height, scale, ground, dark, opaque: !!c.opaque, rot: it.rot ?? 0, ...fit, ...lineOf(), clip },
               { name: it.id, set: 'categories', groundId: scheme, sizeName: 'card', ramp: it.ramp });
           }
         }
@@ -104,20 +108,23 @@ try {
   // Getting started: each object on its own page's Indigo ground (transparent, so the crossfading page shows no edge).
   if (sets.includes('welcome') && m.welcome) {
     const w = m.welcome;
-    const sizeName = w.size;
-    const size = m.sizes[sizeName];
     for (const it of w.items) {
       if (f.only && !f.only.includes(it.name)) continue;
+      const sizeName = it.size ?? w.size;
+      const size = m.sizes[sizeName];
+      // A bleed item (frame) is a window onto a larger scene: size × height pt, fitCenter times the width.
+      const frame = it.frame ? { height: m.heights?.[sizeName] ?? size, fitCenter: it.frame.fitCenter, fitFrame: 1, focusX: it.frame.focusX ?? 0, focusY: it.frame.focusY ?? 0 } : {};
       for (const scheme of ['light', 'dark'].filter((x) => !f.schemes || f.schemes.includes(x))) {
         const groundId = `welcome-${scheme}`;
         const { ground, dark } = it[scheme];
         for (const scale of m.scales.filter((x) => !f.scales || f.scales.includes(String(x)))) {
           const clips = clipScales(m, sizeName).includes(scale) ? it.clips : [];
+          if (it.scales && !it.scales.includes(scale)) continue;
           for (const clip of [...clips, 'still'].filter(wantClip)) {
             const name = stem(it.name, clip, groundId, size, scale);
             await one(clip === 'still' ? `${name} (still)` : name, path.join(FRAMES, clip === 'still' ? `${name}.still` : name),
-              { object: it.object, size, scale, ground, dark, clip, ...(scheme === 'dark' ? it.darkTones : {}) },
-              { name: it.name, set: 'welcome', groundId, sizeName });
+              { object: it.object, size, scale, ground, dark, rot: it.rot ?? 0, ...frame, ...lineOf(), clip, ...(scheme === 'dark' ? it.darkTones : {}) },
+              { name: it.name, set: 'welcome', groundId, sizeName, fadeBottom: it.frame?.fadeBottom, dim: it[scheme].dim });
           }
         }
       }

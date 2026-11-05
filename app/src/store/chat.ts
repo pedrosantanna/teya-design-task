@@ -17,7 +17,11 @@ export type ChatItem =
   | { kind: 'chips'; key: string; chips: Chip[] }
   | { kind: 'asking'; key: string; wider?: boolean }
   | { kind: 'answer'; key: string; shopId: string; best: boolean }
-  | { kind: 'order'; key: string; order: OrderView };
+  | { kind: 'order'; key: string; order: OrderView }
+  // The other requests' chats (other-chat.ts): their asking list, answer and status are written out, not worked out from the simulation.
+  | { kind: 'rows'; key: string; rows: { shopId: string; shop: string; street: string; status: string; kind: 'asked' | 'seen' | 'yes' | 'till' | 'no' }[] }
+  | { kind: 'offer'; key: string; shopId: string; shop: string; status: string; source?: string; price: string; walk: string; collectBy: string; buyLabel: string }
+  | { kind: 'status'; key: string; label: string; tone: 'default' | 'needsYou' | 'warning' | 'success' | 'quiet' };
 
 /** Everything an order card, the receipt and the request row need about one order. */
 export type OrderView = {

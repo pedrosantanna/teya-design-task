@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { Text as NativeText, type AccessibilityRole, type TextProps as NativeTextProps } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
+import { useOnGround } from '../../internal/ground';
 import { textStyle, type ColorName, type TypeStyleName } from '../../theme';
 
 export type TextProps = {
@@ -21,12 +22,13 @@ export type TextProps = {
 
 export function Text({
   variant = 'body',
-  color = 'foreground',
+  color: colorProp = 'foreground',
   align = 'auto',
   numberOfLines,
   children,
   ...rest
 }: TextProps) {
+  const color = useOnGround(colorProp);
   return (
     <NativeText
       {...rest}

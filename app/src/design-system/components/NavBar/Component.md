@@ -19,7 +19,7 @@ The navigation bar. Spec: Nav bar on `docs/develop/design-system/components.md`.
 | `subtitleThumb` | `{ photo }` or `{ category, accent }` | none | A 28 pt square (`size.thumb.nav`, 6 pt radius, 1 pt Border edge) before `subtitle`: the request's photo, or its category's still on the accent's tile. Decorative; pass it only for one item of a known kind |
 | `backgroundAt` | number | 8, or `revealAt` in reveal mode | Scroll offset at which the fill shows (the shop page shows it when the card's top edge reaches the bar) |
 
-No bar fill (iOS 26): a scroll-edge fade from Background (or Card) to transparent fades in under the floating controls after the first 8 points of scroll, or at `backgroundAt`; the web adds a masked backdrop blur. The fade stays while a `hideOnScroll` bar is hidden. The inline title is leading, after Back. All scroll work runs in a Reanimated scroll handler on the UI thread.
+With `fill` set to a chat or a shop's accent the bar is a solid fill of that colour with a 0.5 pt hairline under it, so nothing shows half cut beside the controls; with a `subtitle` it is as tall as its two centred title lines plus `space.3` above and below (`useNavBarHeight(undefined, true)`). Otherwise: no bar fill (iOS 26): a scroll-edge fade from Background (or Card) to transparent fades in under the floating controls after the first 8 points of scroll, or at `backgroundAt`; the web adds a masked backdrop blur. The fade stays while a `hideOnScroll` bar is hidden. The inline title is leading, after Back. All scroll work runs in a Reanimated scroll handler on the UI thread.
 
 ## iOS and Android
 

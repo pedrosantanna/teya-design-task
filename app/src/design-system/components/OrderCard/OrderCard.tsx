@@ -4,6 +4,7 @@ import { AccessibilityInfo, Platform, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSequence, withSpring, withTiming } from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
+import { ShopLink } from '../../internal/ShopLink';
 import { haptic } from '../../internal/haptics';
 import { PressableCard, spoken, type CardAction } from '../../internal/PressableCard';
 import { Button } from '../Button/Button';
@@ -33,12 +34,14 @@ export type OrderCardProps = {
   note?: string;
   /** Opens the receipt. */
   onOpen?: (id: string) => void;
+  /** Tap on the shop's name: opens the shop's page. Also a custom accessibility action, "View shop". */
+  onOpenShop?: (id: string) => void;
   /** One tonal action under the card, also a custom accessibility action: Rate after Collected. */
   action?: { label: string; onPress: () => void };
   animateIn?: boolean;
 };
 
-export const OrderCard = memo(function OrderCard({ id, status, tone = 'default', shop, items, total, steps, note, onOpen, action, animateIn }: OrderCardProps) {
+export const OrderCard = memo(function OrderCard({ id, status, tone = 'default', shop, items, total, steps, note, onOpen, onOpenShop, action, animateIn }: OrderCardProps) {
   const { theme } = useUnistyles();
   const change = useSharedValue(1);
   const previous = useRef(status);
@@ -58,7 +61,9 @@ export const OrderCard = memo(function OrderCard({ id, status, tone = 'default',
   const current = shown.findIndex((s) => s.state === 'current');
   const stepText = current >= 0 ? `step ${current + 1} of ${shown.length}, ${shown[current].title}` : undefined;
 
-  const actions: CardAction[] = action ? [{ name: 'action', label: action.label, run: action.onPress }] : [];
+  const actions: CardAction[] = [];
+  if (onOpenShop) actions.push({ name: 'viewShop', label: 'View shop', run: () => onOpenShop(id) });
+  if (action) actions.push({ name: 'action', label: action.label, run: action.onPress });
 
   return (
     <PressableCard
@@ -72,9 +77,13 @@ export const OrderCard = memo(function OrderCard({ id, status, tone = 'default',
           <Animated.View style={changeStyle}>
             <StatusLabel label={status} tone={tone} />
           </Animated.View>
-          <Text variant="headline" numberOfLines={2}>
-            {shop}
-          </Text>
+          {onOpenShop ? (
+            <ShopLink name={shop} numberOfLines={2} onPress={() => onOpenShop(id)} />
+          ) : (
+            <Text variant="headline" numberOfLines={2}>
+              {shop}
+            </Text>
+          )}
           <Text variant="footnote" color="mutedForeground" numberOfLines={2}>
             {items}
           </Text>

@@ -16,6 +16,7 @@ export const iosLight = {
       "445": "#575859",
       "740": "#AAABAD",
       "840": "#CACBCD",
+      "880": "#DADBDD",
       "985": "#FAFAFB"
     },
     map: {
@@ -45,6 +46,12 @@ export const iosLight = {
     onPrimary: "#FFFFFF",
     tint: "#3D35B8",
     chipSelected: "#E8ECFF",
+    chipSelectedRaised: "#E8ECFF",
+    chipSelectedOnTile: "#E8ECFF",
+    tag: {
+      fill: "#EEE9E2",
+      fillRaised: "#DEDAD5"
+    },
     onChipSelected: "#3D35B8",
     chipSelectedEdge: "#D1D8FF",
     filterSelected: "#100A06",
@@ -80,6 +87,8 @@ export const iosLight = {
     onDestructive: "#FFFFFF",
     warning: "#6F5C1A",
     success: "#4D682A",
+    successOnTile: "#384D1A",
+    warningOnTile: "#53430D",
     border: "#D4D0CB",
     separator: "#DEDAD5",
     codeSurface: "#FFFFFF",
@@ -125,25 +134,20 @@ export const iosLight = {
       dot: "#9687C3"
     },
     chat: {
-      ground: "#FFFFFF",
-      fill: "#EEE9E2",
+      ground: "#EEE9E2",
+      fill: "#FFFFFF",
       edge: "#DEDAD5",
-      field: "#EEE9E2",
+      field: "#FFFFFF",
       fieldEdge: "#D4D0CB"
     },
     sheet: "#DEDAD5",
-    shopPage: {
-      card: "#E5E2DE",
-      row: "#FFFFFF",
-      rowEdge: "#DEDAD5",
-      cardEdge: "#E5E2DE"
-    },
     askEdge: "#100A06",
     count: "#3D35B8",
     onCount: "#FFFFFF",
     glassEdge: "#100A06",
     glassShine: "#FFFFFF",
     shadow: "#100A06",
+    location: "#EEE9E2",
     welcome: {
       ground1: "#B5BFFF",
       ground2: "#FEC5B2",
@@ -222,6 +226,8 @@ export const iosLight = {
     badge: 20,
     count: 18,
     avatar: {
+      chat: 24,
+      chatMark: 14,
       mark: 28,
       shop: 40,
       shopOnRow: 20
@@ -446,7 +452,7 @@ export const iosLight = {
     glassRim: 0.5,
     pageDotOff: 0.55,
     photoScrim: 0.4,
-    photoPill: 0.3,
+    photoPill: 0.2,
     tonalOnTile: 0.55,
     sheetScrim: 0.2,
     askEdge: 0.08,
@@ -497,6 +503,7 @@ export const iosDark = {
       "445": "#575859",
       "740": "#AAABAD",
       "840": "#CACBCD",
+      "880": "#DADBDD",
       "985": "#FAFAFB"
     },
     map: {
@@ -520,12 +527,18 @@ export const iosDark = {
     card: "#252627",
     muted: "#323334",
     mutedForeground: "#AAABAD",
-    mutedForegroundOnTile: "#CACBCD",
+    mutedForegroundOnTile: "#DADBDD",
     foreground: "#FAFAFB",
     primary: "#B5BFFF",
     onPrimary: "#000000",
     tint: "#B5BFFF",
     chipSelected: "#222169",
+    chipSelectedRaised: "#2E2B8F",
+    chipSelectedOnTile: "#1A194F",
+    tag: {
+      fill: "#323334",
+      fillRaised: "#3D3E3F"
+    },
     onChipSelected: "#D1D8FF",
     chipSelectedEdge: "#B5BFFF",
     filterSelected: "#FAFAFB",
@@ -561,6 +574,8 @@ export const iosDark = {
     onDestructive: "#000000",
     warning: "#D2C49A",
     success: "#B8CDA1",
+    successOnTile: "#FAFAFB",
+    warningOnTile: "#FAFAFB",
     border: "#3D3E3F",
     separator: "#323334",
     codeSurface: "#FFFFFF",
@@ -571,7 +586,7 @@ export const iosDark = {
           wash: "#3C2922",
           tile: "#52352C",
           ink: "#E8D6D1",
-          cardOnTile: "#5C4F4B",
+          cardOnTile: "#624D46",
           detail: "#E8D6D1",
           onDetail: "#52352C"
         },
@@ -579,7 +594,7 @@ export const iosDark = {
           wash: "#293120",
           tile: "#34422C",
           ink: "#D3E5C0",
-          cardOnTile: "#4F554B",
+          cardOnTile: "#4C5745",
           detail: "#D3E5C0",
           onDetail: "#34422C"
         },
@@ -587,7 +602,7 @@ export const iosDark = {
           wash: "#352D16",
           tile: "#403925",
           ink: "#E1DAC9",
-          cardOnTile: "#565249",
+          cardOnTile: "#595242",
           detail: "#E1DAC9",
           onDetail: "#403925"
         },
@@ -595,7 +610,7 @@ export const iosDark = {
           wash: "#2F2A3F",
           tile: "#3E3950",
           ink: "#DBD7E9",
-          cardOnTile: "#53515C",
+          cardOnTile: "#535062",
           detail: "#DBD7E9",
           onDetail: "#3E3950"
         }
@@ -613,18 +628,13 @@ export const iosDark = {
       fieldEdge: "#3D3E3F"
     },
     sheet: "#1C1D1E",
-    shopPage: {
-      card: "#1C1D1E",
-      row: "#323334",
-      rowEdge: "#323334",
-      cardEdge: "#3D3E3F"
-    },
     askEdge: "#FFFFFF",
     count: "#B5BFFF",
     onCount: "#000000",
     glassEdge: "#0B0C0D",
     glassShine: "#FFFFFF",
     shadow: "#0B0C0D",
+    location: "#3D3E3F",
     welcome: {
       ground1: "#3D35B8",
       ground2: "#52352C",
@@ -703,6 +713,8 @@ export const iosDark = {
     badge: 20,
     count: 18,
     avatar: {
+      chat: 24,
+      chatMark: 14,
       mark: 28,
       shop: 40,
       shopOnRow: 20
@@ -927,7 +939,7 @@ export const iosDark = {
     glassRim: 0.5,
     pageDotOff: 0.55,
     photoScrim: 0.4,
-    photoPill: 0.3,
+    photoPill: 0.2,
     tonalOnTile: 0.06,
     sheetScrim: 0.48,
     askEdge: 0.1,
@@ -978,6 +990,7 @@ export const androidLight = {
       "445": "#575859",
       "740": "#AAABAD",
       "840": "#CACBCD",
+      "880": "#DADBDD",
       "985": "#FAFAFB"
     },
     map: {
@@ -1007,6 +1020,12 @@ export const androidLight = {
     onPrimary: "#FFFFFF",
     tint: "#3D35B8",
     chipSelected: "#E8ECFF",
+    chipSelectedRaised: "#E8ECFF",
+    chipSelectedOnTile: "#E8ECFF",
+    tag: {
+      fill: "#EEE9E2",
+      fillRaised: "#DEDAD5"
+    },
     onChipSelected: "#3D35B8",
     chipSelectedEdge: "#D1D8FF",
     filterSelected: "#100A06",
@@ -1042,6 +1061,8 @@ export const androidLight = {
     onDestructive: "#FFFFFF",
     warning: "#6F5C1A",
     success: "#4D682A",
+    successOnTile: "#384D1A",
+    warningOnTile: "#53430D",
     border: "#D4D0CB",
     separator: "#DEDAD5",
     codeSurface: "#FFFFFF",
@@ -1087,25 +1108,20 @@ export const androidLight = {
       dot: "#9687C3"
     },
     chat: {
-      ground: "#FFFFFF",
-      fill: "#EEE9E2",
+      ground: "#EEE9E2",
+      fill: "#FFFFFF",
       edge: "#DEDAD5",
-      field: "#EEE9E2",
+      field: "#FFFFFF",
       fieldEdge: "#D4D0CB"
     },
     sheet: "#DEDAD5",
-    shopPage: {
-      card: "#E5E2DE",
-      row: "#FFFFFF",
-      rowEdge: "#DEDAD5",
-      cardEdge: "#E5E2DE"
-    },
     askEdge: "#100A06",
     count: "#3D35B8",
     onCount: "#FFFFFF",
     glassEdge: "#100A06",
     glassShine: "#FFFFFF",
     shadow: "#100A06",
+    location: "#EEE9E2",
     welcome: {
       ground1: "#B5BFFF",
       ground2: "#FEC5B2",
@@ -1184,6 +1200,8 @@ export const androidLight = {
     badge: 20,
     count: 18,
     avatar: {
+      chat: 24,
+      chatMark: 14,
       mark: 28,
       shop: 40,
       shopOnRow: 20
@@ -1408,7 +1426,7 @@ export const androidLight = {
     glassRim: 0.5,
     pageDotOff: 0.55,
     photoScrim: 0.4,
-    photoPill: 0.3,
+    photoPill: 0.2,
     tonalOnTile: 0.55,
     sheetScrim: 0.2,
     askEdge: 0.08,
@@ -1465,6 +1483,7 @@ export const androidDark = {
       "445": "#575859",
       "740": "#AAABAD",
       "840": "#CACBCD",
+      "880": "#DADBDD",
       "985": "#FAFAFB"
     },
     map: {
@@ -1488,12 +1507,18 @@ export const androidDark = {
     card: "#252627",
     muted: "#323334",
     mutedForeground: "#AAABAD",
-    mutedForegroundOnTile: "#CACBCD",
+    mutedForegroundOnTile: "#DADBDD",
     foreground: "#FAFAFB",
     primary: "#B5BFFF",
     onPrimary: "#000000",
     tint: "#B5BFFF",
     chipSelected: "#222169",
+    chipSelectedRaised: "#2E2B8F",
+    chipSelectedOnTile: "#1A194F",
+    tag: {
+      fill: "#323334",
+      fillRaised: "#3D3E3F"
+    },
     onChipSelected: "#D1D8FF",
     chipSelectedEdge: "#B5BFFF",
     filterSelected: "#FAFAFB",
@@ -1529,6 +1554,8 @@ export const androidDark = {
     onDestructive: "#000000",
     warning: "#D2C49A",
     success: "#B8CDA1",
+    successOnTile: "#FAFAFB",
+    warningOnTile: "#FAFAFB",
     border: "#3D3E3F",
     separator: "#323334",
     codeSurface: "#FFFFFF",
@@ -1539,7 +1566,7 @@ export const androidDark = {
           wash: "#3C2922",
           tile: "#52352C",
           ink: "#E8D6D1",
-          cardOnTile: "#5C4F4B",
+          cardOnTile: "#624D46",
           detail: "#E8D6D1",
           onDetail: "#52352C"
         },
@@ -1547,7 +1574,7 @@ export const androidDark = {
           wash: "#293120",
           tile: "#34422C",
           ink: "#D3E5C0",
-          cardOnTile: "#4F554B",
+          cardOnTile: "#4C5745",
           detail: "#D3E5C0",
           onDetail: "#34422C"
         },
@@ -1555,7 +1582,7 @@ export const androidDark = {
           wash: "#352D16",
           tile: "#403925",
           ink: "#E1DAC9",
-          cardOnTile: "#565249",
+          cardOnTile: "#595242",
           detail: "#E1DAC9",
           onDetail: "#403925"
         },
@@ -1563,7 +1590,7 @@ export const androidDark = {
           wash: "#2F2A3F",
           tile: "#3E3950",
           ink: "#DBD7E9",
-          cardOnTile: "#53515C",
+          cardOnTile: "#535062",
           detail: "#DBD7E9",
           onDetail: "#3E3950"
         }
@@ -1581,18 +1608,13 @@ export const androidDark = {
       fieldEdge: "#3D3E3F"
     },
     sheet: "#1C1D1E",
-    shopPage: {
-      card: "#1C1D1E",
-      row: "#323334",
-      rowEdge: "#323334",
-      cardEdge: "#3D3E3F"
-    },
     askEdge: "#FFFFFF",
     count: "#B5BFFF",
     onCount: "#000000",
     glassEdge: "#0B0C0D",
     glassShine: "#FFFFFF",
     shadow: "#0B0C0D",
+    location: "#3D3E3F",
     welcome: {
       ground1: "#3D35B8",
       ground2: "#52352C",
@@ -1671,6 +1693,8 @@ export const androidDark = {
     badge: 20,
     count: 18,
     avatar: {
+      chat: 24,
+      chatMark: 14,
       mark: 28,
       shop: 40,
       shopOnRow: 20
@@ -1895,7 +1919,7 @@ export const androidDark = {
     glassRim: 0.5,
     pageDotOff: 0.55,
     photoScrim: 0.4,
-    photoPill: 0.3,
+    photoPill: 0.2,
     tonalOnTile: 0.06,
     sheetScrim: 0.48,
     askEdge: 0.1,
@@ -1942,7 +1966,7 @@ export const themes = { iosLight, iosDark, androidLight, androidDark } as const;
 
 export type ThemeName = keyof typeof themes;
 export type AppTheme = (typeof themes)[ThemeName];
-export type ColorName = 'background' | 'card' | 'muted' | 'mutedForeground' | 'mutedForegroundOnTile' | 'foreground' | 'primary' | 'onPrimary' | 'tint' | 'chipSelected' | 'onChipSelected' | 'chipSelectedEdge' | 'filterSelected' | 'onFilterSelected' | 'mapGround' | 'mapRoad' | 'mapRoadMain' | 'mapBuilding' | 'mapPark' | 'mapWater' | 'scrim' | 'photoScrim' | 'lightbox' | 'onLightbox' | 'onLightboxMuted' | 'onDestructive' | 'warning' | 'success' | 'border' | 'separator' | 'codeSurface' | 'codeInk' | 'sheet' | 'askEdge' | 'count' | 'onCount' | 'glassEdge' | 'glassShine' | 'shadow' | 'tonalOnTile' | 'chipOn' | 'sheetScrim' | 'glassHairline' | 'grabber' | 'googleLogoBlue' | 'googleLogoRed' | 'googleLogoYellow' | 'googleLogoGreen' | 'facebookLogoBlue' | 'facebookLogoF' | 'destructive';
+export type ColorName = 'background' | 'card' | 'muted' | 'mutedForeground' | 'mutedForegroundOnTile' | 'foreground' | 'primary' | 'onPrimary' | 'tint' | 'chipSelected' | 'chipSelectedRaised' | 'chipSelectedOnTile' | 'onChipSelected' | 'chipSelectedEdge' | 'filterSelected' | 'onFilterSelected' | 'mapGround' | 'mapRoad' | 'mapRoadMain' | 'mapBuilding' | 'mapPark' | 'mapWater' | 'scrim' | 'photoScrim' | 'lightbox' | 'onLightbox' | 'onLightboxMuted' | 'onDestructive' | 'warning' | 'success' | 'successOnTile' | 'warningOnTile' | 'border' | 'separator' | 'codeSurface' | 'codeInk' | 'sheet' | 'askEdge' | 'count' | 'onCount' | 'glassEdge' | 'glassShine' | 'shadow' | 'location' | 'tonalOnTile' | 'chipOn' | 'sheetScrim' | 'glassHairline' | 'grabber' | 'googleLogoBlue' | 'googleLogoRed' | 'googleLogoYellow' | 'googleLogoGreen' | 'facebookLogoBlue' | 'facebookLogoF' | 'destructive';
 export type BadgeName = 'promoted' | 'new' | 'delivers';
 export type ShopAccentName = 'peach' | 'pistachio' | 'butter' | 'lavender';
 export type TypeStyleName = 'splash' | 'displayLarge' | 'displayTitle' | 'displayName' | 'sectionTitle' | 'title1' | 'title2' | 'title3' | 'headline' | 'body' | 'callout' | 'subheadline' | 'subheadlineStrong' | 'footnote' | 'caption1' | 'caption1Strong' | 'caption2' | 'code' | 'clock';

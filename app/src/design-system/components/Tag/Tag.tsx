@@ -2,8 +2,10 @@
 // only inform (status label, badge, count).
 import Alert02Icon from '@hugeicons/core-free-icons/Alert02Icon';
 import ArrowDown01Icon from '@hugeicons/core-free-icons/ArrowDown01Icon';
+import Scooter01Icon from '@hugeicons/core-free-icons/Scooter01Icon';
+import SparklesIcon from '@hugeicons/core-free-icons/SparklesIcon';
 import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
-import type { IconSvgElement } from '@hugeicons/react-native';
+import { HugeiconsIcon, type IconSvgElement } from '@hugeicons/react-native';
 import { memo, useEffect } from 'react';
 import { Text as NativeText, Pressable, View } from 'react-native';
 import Animated, { interpolateColor, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
@@ -13,7 +15,7 @@ import { useGround, useGroundAccent } from '../../internal/ground';
 import { webHitArea } from '../../internal/hitArea';
 import { usePress } from '../../internal/usePress';
 import { cornerCurve, textStyle, withAlpha, type BadgeName, type ColorName } from '../../theme';
-import { Icon } from '../Icon/Icon';
+import { Icon, iconPixelSize } from '../Icon/Icon';
 import { Text } from '../Text/Text';
 
 // ---------- Chip ----------
@@ -39,39 +41,47 @@ export const Chip = memo(function Chip({ label, kind = 'filter', selected = fals
   const press = usePress('selection');
   const on = kind === 'filter' && selected;
   const progress = useSharedValue(on ? 1 : 0);
-  // Off sits a level down from the selected chip (tags.md): on a shop's or category's tile, the tonalOnTile overlay;
-  // on the Background or a sheet in light, that ground itself with a 1 pt edge (glassEdge at state.chipEdge); on the
-  // Background in dark, the Background with a 1 pt Border edge (Card read the same as the selected chip); on a dark
-  // sheet and inside a Card section (the shop page), Muted; on a chat's white ground, the chat chip colour.
-  // On: Card with Indigo 800 semibold text and a 1.5 pt Indigo 800 edge (light), Card with Indigo 300 text and a
-  // 1 pt edge (dark), on every ground (decision 049).
+  // Off sits a level down from the selected chip (tags.md). Light: on a shop's or category's tile, the tonalOnTile
+  // overlay; on the Background or a sheet, that ground itself with a 1 pt edge (glassEdge at state.chipEdge); on a
+  // Card section, Muted; on a chat's white ground, the chat chip colour. On: Card with Indigo 800 semibold text and
+  // a 1.5 pt Indigo 800 edge (decision 049).
+  // Dark has no edges (round 10): every chip is a tonal container one clear step from its ground. Off: tag.fill on the
+  // Background and a chat, tag.fillRaised on a sheet and a Card section, the shop accent's tile where a shop colours its
+  // chips (the shop page's "What they sell", on a row card: 1.4:1 from the row in dark, 1.45:1 in light), the accent's
+  // cardOnTile on a tile (the rows' colour, 1.4:1 from the tile). On: Indigo 900 (chipSelected) on
+  // the Background and a chat, Indigo 850 (chipSelectedRaised) on the raised grounds, Indigo 950 (chipSelectedOnTile) on a
+  // tile, with Indigo 200 semibold text.
   const ground = useGround();
-  // On the shop page's sheet and card grounds an accent colours the chips: the accent's tile fill with Foreground text, and
-  // in dark its Detail colour as a 1 pt edge, so the chip carries the shop's colour without a large pastel area.
   const accent = useGroundAccent();
-  const tinted = (ground === 'sheet' || ground === 'card' || ground === 'shop') && accent && !on ? theme.color.shop.accent[accent] : undefined;
   const dark = theme.scheme === 'dark';
-  const plain = (ground === 'background' || ground === 'sheet' || ground === 'shop') && !dark;
-  const darkGround = ground === 'background' && dark;
-  const off =
+  const raised = ground === 'sheet' || ground === 'card';
+  const tinted = raised && accent && !on ? theme.color.shop.accent[accent] : undefined;
+  const plain = (ground === 'background' || ground === 'sheet') && !dark;
+  const lightOff =
     ground === 'chat'
       ? theme.color.chat.fill
       : ground === 'tile'
         ? withAlpha(theme.color.tonalOnTile, theme.state.tonalOnTile)
-        : ground === 'card' || ((ground === 'sheet' || ground === 'shop') && dark)
+        : ground === 'card'
           ? theme.color.muted
           : plain
-            ? ground === 'shop' ? theme.color.shopPage.row : theme.color[ground === 'sheet' ? 'sheet' : 'background']
-            : darkGround
-              ? theme.color.background
-              : theme.color.card;
-  // Muted on Card in dark is 1.15:1, so a chip inside a Card section takes the Border edge there too.
-  const darkCard = ground === 'card' && dark;
-  const offEdge = ground === 'chat' ? theme.color.chat.fieldEdge : plain ? withAlpha(theme.color.glassEdge, theme.state.chipEdge) : darkGround || darkCard ? theme.color.border : off;
-  const fillOff = tinted ? tinted.tile : off;
-  const edgeOff = tinted ? (dark ? tinted.detail : tinted.tile) : offEdge;
-  const onFill = theme.color.card;
-  const onEdge = theme.color.chipOn;
+            ? theme.color[ground === 'sheet' ? 'sheet' : 'background']
+            : theme.color.card;
+  const darkOff =
+    ground === 'tile'
+      ? accent ? theme.color.shop.accent[accent].cardOnTile : withAlpha(theme.color.tonalOnTile, theme.state.tonalOnTile)
+      : tinted
+        ? tinted.tile
+        : raised
+          ? theme.color.tag.fillRaised
+          : theme.color.tag.fill;
+  const off = dark ? darkOff : lightOff;
+  // The edge keeps the chip's size when it turns on; in dark it is the fill's own colour, so nothing shows.
+  const lightEdge = ground === 'chat' ? theme.color.chat.fieldEdge : plain ? withAlpha(theme.color.glassEdge, theme.state.chipEdge) : off;
+  const fillOff = tinted && !dark ? tinted.tile : off;
+  const edgeOff = dark ? off : tinted ? tinted.tile : lightEdge;
+  const onFill = dark ? (ground === 'tile' ? theme.color.chipSelectedOnTile : raised ? theme.color.chipSelectedRaised : theme.color.chipSelected) : theme.color.card;
+  const onEdge = dark ? onFill : theme.color.chipOn;
 
   useEffect(() => {
     progress.set(withSpring(on ? 1 : 0, theme.spring.snappy));
@@ -82,7 +92,8 @@ export const Chip = memo(function Chip({ label, kind = 'filter', selected = fals
     borderColor: interpolateColor(progress.get(), [0, 1], [edgeOff, onEdge]),
   }));
   const text = count != null ? `${label}, ${count}` : label;
-  const contentColor: ColorName = on ? 'chipOn' : 'foreground';
+  const onText: ColorName = dark ? 'onChipSelected' : 'chipOn';
+  const contentColor: ColorName = on ? onText : 'foreground';
   const slop = (theme.hit.min - theme.size.chip) / 2;
   // Android adds a checkmark to a selected filter chip, as Material does (tags.md).
   const leading = on && theme.platform === 'android' ? Tick02Icon : icon;
@@ -108,7 +119,7 @@ export const Chip = memo(function Chip({ label, kind = 'filter', selected = fals
             {label}
           </Text>
           {count != null ? (
-            <Text variant="subheadline" color={on ? 'chipOn' : 'mutedForeground'} numberOfLines={1}>
+            <Text variant="subheadline" color={on ? onText : 'mutedForeground'} numberOfLines={1}>
               {String(count)}
             </Text>
           ) : null}
@@ -146,9 +157,13 @@ export const StatusLabel = memo(function StatusLabel({ label, tone = 'default', 
   const shown = icon ?? toneIcon;
   const { status, detail } = splitStatus(label);
   const pill = tone === 'needsYou';
+  const { theme } = useUnistyles();
+  const ground = useGround();
+  // Dark: the pill is a tonal container (tag.fill, tag.fillRaised on a sheet or a Card section), one step from its ground.
+  const darkFill = theme.scheme === 'dark' ? (ground === 'sheet' || ground === 'card' ? theme.color.tag.fillRaised : theme.color.tag.fill) : undefined;
   return (
     <View style={styles.status}>
-      <View style={[styles.statusMain, pill && styles.pill]}>
+      <View style={[styles.statusMain, pill && styles.pill, pill && darkFill ? { backgroundColor: darkFill } : null]}>
         {shown ? <Icon icon={shown} size="caption1" color={tone === 'warning' || tone === 'success' ? color : 'mutedForeground'} /> : null}
         <Text variant={tone === 'quiet' ? 'caption1' : 'caption1Strong'} color={color} numberOfLines={2}>
           {status}
@@ -166,7 +181,7 @@ export const StatusLabel = memo(function StatusLabel({ label, tone = 'default', 
 // ---------- Badge ----------
 
 export type BadgeProps = {
-  /** Promoted (Pistachio) always shows, as it discloses paid placement. */
+  /** New and Delivers carry a small icon. Promoted stays in the data but is not shown in the prototype. */
   badge: BadgeName;
   label?: string;
   /** photo (default): the badge's own fill, the light values in both modes. wash: on a shop's accent (the shop
@@ -176,10 +191,19 @@ export type BadgeProps = {
 
 const badgeLabels: Record<BadgeName, string> = { promoted: 'Promoted', new: 'New', delivers: 'Delivers' };
 
+const badgeIcons: Partial<Record<BadgeName, IconSvgElement>> = { new: SparklesIcon, delivers: Scooter01Icon };
+
 export const Badge = memo(function Badge({ badge, label, on = 'photo' }: BadgeProps) {
+  const { theme } = useUnistyles();
   const wash = on === 'wash';
+  const icon = badgeIcons[badge];
   return (
     <View style={[styles.badge(badge), wash && styles.badgeOnWash]}>
+      {icon ? (
+        <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+          <HugeiconsIcon icon={icon} size={iconPixelSize(theme, 'caption2')} strokeWidth={1.5} color={wash ? theme.color.foreground : theme.color.badge[badge].text} />
+        </View>
+      ) : null}
       <NativeText style={[styles.badgeText(badge), wash && styles.badgeTextOnWash]} numberOfLines={1}>
         {label ?? badgeLabels[badge]}
       </NativeText>
@@ -227,7 +251,7 @@ const styles = StyleSheet.create((theme) => ({
   // The status and its detail wrap as two units, 8 pt apart.
   status: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', columnGap: theme.space[2], rowGap: theme.space[1], flexShrink: 1 },
   statusMain: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1], flexShrink: 1 },
-  // "Needs you": a Card pill a level above the Background (1.2:1 in light, 1.4:1 in dark), not a control's fill.
+  // "Needs you": a Card pill a level above the Background (1.2:1 in light; dark takes tag.fill, 1.55:1), not a control's fill.
   pill: {
     ...cornerCurve,
     height: theme.size.badge,
@@ -240,7 +264,9 @@ const styles = StyleSheet.create((theme) => ({
     height: theme.size.badge,
     borderRadius: theme.radius.full,
     paddingHorizontal: theme.space[2],
-    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.space[1],
     alignSelf: 'flex-start',
     backgroundColor: theme.color.badge[badge].fill,
   }),

@@ -8,7 +8,7 @@ A kind of shop on Nearby, in "Browse by category"; a tap zooms into the Category
 | `label` | string | required | "Bakery", Headline (17) in Foreground, one line: keep it short ("Toys", "Butchers") |
 | `accent` | ShopAccentName | required | The card fill is `shop.accent.<hue>.tile`, the tile step |
 | `art` | CategoryId | `id` | The pipeline still to show when it differs from the kind (Toys shows the gifts still) |
-| `still` | ImageSource | from the pipeline | Overrides the kind's still. By default the card takes `categoryIllustration(id, scheme).still` from the illustration pipeline: an opaque 120 square rendered on this card's tile colour. Without one the card is colour and label |
+| `still` | ImageSource | from the pipeline | Overrides the kind's still. By default the card takes `categoryIllustration(id, scheme).still` from the illustration pipeline: a transparent 120 × 164 image shaded for this card's tile colour, drawn over the tile. Without one the card is colour and label |
 | `onPress` | `(id) => void` | none | Nearby opens the Category screen |
 
 ## CategoryHeader

@@ -20,7 +20,7 @@ export type ProductSummaryProps = {
   asked?: { item: string; detail: string }[];
   /** Called with the chip's text: New Request opens addressed to the shop with it filled in. */
   onCategory?: (category: string) => void;
-  /** The shop's accent: the chips take its tile (and, in dark, its Detail edge). */
+  /** The shop's accent: the chips take the accent's tile fill, with no edge. */
   accent?: ShopAccentName;
   /** The shop's name, for the chips' spoken hint ("Ask Rossi's Bakery about Sourdough"). */
   shop?: string;

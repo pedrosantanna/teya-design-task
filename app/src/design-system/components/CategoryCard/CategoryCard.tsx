@@ -1,6 +1,6 @@
 // A kind of shop on Nearby ("Browse by category", components.md, Category card): a fixed-size card in the kind's
-// tile step with its label and a still of the closest 3D object from the illustration pipeline (an opaque square
-// rendered on this card's own tile colour, so it has no edge). A tap opens the Category screen.
+// tile step with its label and a still of the closest 3D object from the illustration pipeline (a transparent image shaded for this
+// card's own tile colour and drawn over it). A tap opens the Category screen.
 // Built for a long sideways list: fixed size (no layout pass on scroll), memoised, and the still is a
 // pre-rendered image drawn at exactly its size, cached on disk and recycled when the list reuses the cell.
 import { Image, type ImageSource } from 'expo-image';
@@ -105,7 +105,7 @@ const styles = StyleSheet.create((theme) => ({
   // The header sits close to the chips it introduces: its text sets the height and rests gap.title (16) above the
   // chips, and the title starts gap.aboveTitle under the content's top, so Back to title is 32. The still rests on the
   // same bottom edge; its empty top (the object stands on a baseline near the square's foot) may rise past the text
-  // into the screen's own colour, since the still is opaque on that colour.
+  // into the screen's own colour, since the still is transparent over that colour.
   header: { justifyContent: 'flex-end' },
   // A long title wraps before the still, space.6 clear of its square ("Florists and plants").
   headerText: { gap: theme.space[2], paddingTop: theme.gap.aboveTitle, paddingRight: theme.size.category.art + theme.space[6] },

@@ -54,8 +54,8 @@ Os nomes são primeiros nomes britânicos comuns, curtos e fáceis de distinguir
 name: Sam, o comprador em missão
 tagline: Precisa de uma coisa específica, muitas vezes com prazo, e não consegue saber quem tem.
 image: ../../../discover/personas/img/sam.jpg
-credit: Photo: Beatriz Cattel, Unsplash
-credit_url: https://unsplash.com/photos/young-man-in-a-light-blue-collared-shirt-smiling-az3QxXQ7Fqc
+credit: Photo: Elizeu Dias, Unsplash
+credit_url: https://unsplash.com/photos/selective-focus-of-man-smiling-during-daytime-2EGNqazbAMk
 - Onde: Mora ou trabalha no oeste de Londres
 - Pergunta a: Reddit, grupos de WhatsApp, chatbots de IA
 - Compra no comércio local: Um item específico, em cima da hora

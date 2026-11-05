@@ -17,7 +17,7 @@ The top of Ratings on the shop page: the share who would go back as a large figu
 
 - Thumbs, never stars. "People" for who rated: only someone who bought through Snuffle can rate.
 - No percentage below 5 ratings. Percentages are rounded down (35 of 38 is 92%).
-- Tags are chips that only inform: Background fill with a 1 pt Border edge, `size.chip` high, the tag in Footnote with its count in Muted foreground, `space.2` apart, wrapping. They sit a level down from the row and are never a control's fill, and nothing happens on tap.
+- Tags are chips that only inform: Background fill with a 1 pt Border edge (in dark on an accent tile, the accent's `tile` with no edge), `size.chip` high, the tag in Footnote with its count in Muted foreground, `space.2` apart, wrapping. They sit a level down from the row and are never a control's fill, and nothing happens on tap.
 
 ## Type
 

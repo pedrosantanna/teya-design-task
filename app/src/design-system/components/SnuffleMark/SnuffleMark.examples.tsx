@@ -1,6 +1,7 @@
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
+import { SnuffleAvatar } from '../SnuffleAvatar/SnuffleAvatar';
 import { Text } from '../Text/Text';
 import { SnuffleMark } from './SnuffleMark';
 
@@ -15,7 +16,7 @@ export function SnuffleMarkExamples() {
         <SnuffleMark size="splash" />
       </View>
       <View style={styles.sender}>
-        <SnuffleMark />
+        <SnuffleAvatar />
         <Text variant="caption1" color="mutedForeground">
           Snuffle
         </Text>
@@ -27,5 +28,5 @@ export function SnuffleMarkExamples() {
 const styles = StyleSheet.create((theme) => ({
   column: { gap: theme.space[4] },
   row: { flexDirection: 'row', alignItems: 'flex-end', gap: theme.space[4] },
-  sender: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1] },
+  sender: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2] },
 }));

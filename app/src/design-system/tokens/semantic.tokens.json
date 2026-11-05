@@ -156,6 +156,20 @@
       "$description": "Count minimum diameter (tags.md)"
     },
     "avatar": {
+      "chat": {
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        },
+        "$description": "Snuffle avatar on the chat's sender line"
+      },
+      "chatMark": {
+        "$value": {
+          "value": 14,
+          "unit": "px"
+        },
+        "$description": "The mark glyph's width inside the Snuffle avatar"
+      },
       "mark": {
         "$value": {
           "value": 28,

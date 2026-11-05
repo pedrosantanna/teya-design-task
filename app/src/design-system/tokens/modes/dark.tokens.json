@@ -18,8 +18,8 @@
       "$description": "Secondary text"
     },
     "mutedForegroundOnTile": {
-      "$value": "{color.stone.840}",
-      "$description": "Secondary text and chevrons on a row card on an accent tile: Muted foreground in light; Stone 840 in dark, 4.74:1 or more on every cardOnTile (Stone 740 was 3.35:1)"
+      "$value": "{color.stone.880}",
+      "$description": "Secondary text and chevrons on a row card on an accent tile: Muted foreground in light; Stone 880 in dark, 5.5:1 or more on every cardOnTile (Stone 840 was 4.7:1, Stone 740 3.35:1)"
     },
     "foreground": {
       "$value": "{color.stone.985}"
@@ -38,6 +38,24 @@
     "chipSelected": {
       "$value": "{color.indigo.900}",
       "$description": "Tonal Indigo selection on controls other than filter chips: the current order step, Android segmented control and snackbar action, the debugger"
+    },
+    "chipSelectedRaised": {
+      "$value": "{color.indigo.850}",
+      "$description": "A selected filter chip on a sheet, a Card section or the shop page card in dark: Indigo 850, 1.5:1 from the sheet, with onChipSelected text (tags.md)"
+    },
+    "chipSelectedOnTile": {
+      "$value": "{color.indigo.950}",
+      "$description": "A selected filter chip on a shop's accent tile in dark (the Category screen): Indigo 950, 1.4 to 1.5:1 from the tiles (tags.md)"
+    },
+    "tag": {
+      "fill": {
+        "$value": "{color.stone.320}",
+        "$description": "An unselected chip and the Needs you pill on the Background or a chat in dark: Stone 320, 1.55:1 from the Background, no edge (tags.md)"
+      },
+      "fillRaised": {
+        "$value": "{color.stone.360}",
+        "$description": "The same on a sheet, a Card section or the shop page card in dark: Stone 360, 1.58:1 from the sheet and 1.41:1 from Card (tags.md)"
+      }
     },
     "onChipSelected": {
       "$value": "{color.indigo.200}"
@@ -128,7 +146,15 @@
       "$description": "Count and controls on the photo viewer: 21:1 on Lightbox"
     },
     "onLightboxMuted": {
-      "$value": { "colorSpace": "srgb", "components": [0.749, 0.749, 0.749], "hex": "#BFBFBF" },
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.749,
+          0.749,
+          0.749
+        ],
+        "hex": "#BFBFBF"
+      },
       "$description": "Hint under the photo on the viewer: white at 75% on Lightbox, 11.4:1"
     },
     "onDestructive": {
@@ -142,6 +168,14 @@
     "success": {
       "$value": "{color.pistachio.300}",
       "$description": "Check icon on Ready, Paid and Collected (colour.md)"
+    },
+    "successOnTile": {
+      "$value": "{color.stone.985}",
+      "$description": "The Open word on an accent tile (the shop page's status line, the Category rows): Foreground in dark, because Success is 4.5:1 or less on the tinted row cards"
+    },
+    "warningOnTile": {
+      "$value": "{color.stone.985}",
+      "$description": "The Closes soon word on an accent tile: Warning 800 in light (700 is 4.30:1 on Peach), Foreground in dark"
     },
     "border": {
       "$value": "{color.stone.360}",
@@ -280,46 +314,28 @@
     "chat": {
       "ground": {
         "$value": "{color.stone.150}",
-        "$description": "A chat's neutral ground: Card in light, Background in dark"
+        "$description": "A chat's ground is the app's Background in both modes (colour.md, Snuffle)"
       },
       "fill": {
         "$value": "{color.stone.265}",
-        "$description": "Chips and grouped rows on the chat ground: Background in light, Card in dark"
+        "$description": "Chips and grouped rows on the chat ground: Card white in light, Card in dark"
       },
       "edge": {
         "$value": "{color.stone.265}",
-        "$description": "Hairline around cards and grouped rows on the chat ground (white on white needs an edge)"
+        "$description": "Hairline around cards and grouped rows on the chat ground"
       },
       "field": {
         "$value": "{color.card}",
-        "$description": "The composer field on a chat: Background in light, Card in dark, with a Border hairline (the white glass vanished on the white ground)"
+        "$description": "The composer field in every place it appears (New Request, a chat, Requests): Card with a Border hairline, in both modes"
       },
       "fieldEdge": {
         "$value": "{color.border}",
-        "$description": "Hairline around the composer field"
+        "$description": "Hairline around the composer field and the chips on a chat"
       }
     },
     "sheet": {
       "$value": "{color.stone.200}",
       "$description": "Sheet ground, one Stone step above the Background (L 0.22, 1.16:1 on the Background); rows inside a sheet take Muted (1.33:1) (shape.md, Sheets)"
-    },
-    "shopPage": {
-      "card": {
-        "$value": "{color.stone.200}",
-        "$description": "The shop page's card in dark: the Sheet colour"
-      },
-      "row": {
-        "$value": "{color.muted}",
-        "$description": "Grouped rows on the shop page's card: Muted"
-      },
-      "rowEdge": {
-        "$value": "{color.muted}",
-        "$description": "No visible hairline on dark rows (Muted is already 1.33:1 on the card)"
-      },
-      "cardEdge": {
-        "$value": "{color.border}",
-        "$description": "1 pt Border along the card's top edge, so the card lifts off the map"
-      }
     },
     "askEdge": {
       "$value": "{color.white}",
@@ -343,6 +359,10 @@
     "shadow": {
       "$value": "{color.stone.150}",
       "$description": "Colour of the delicate card shadow"
+    },
+    "location": {
+      "$value": "{color.stone.360}",
+      "$description": "The location ask in dark mode: Stone 360, the ground the quiet street is rendered for and the colour of the soft radial lift behind it (outlines 1.67:1 at its centre, mid-tones 1.5 to 4.7:1). The screen itself is the Background, so text keeps its usual contrast; colour.md, Location ask"
     },
     "welcome": {
       "$description": "Getting started in dark mode: Indigo 900, then the Peach and Pistachio dark tiles, under the same Foreground",
@@ -430,8 +450,8 @@
       "$description": "Opacity of color.photoScrim (black) at the bottom edge of a shop photo"
     },
     "photoPill": {
-      "$value": 0.3,
-      "$description": "Opacity of the black pill the carousel's dots sit in, over the scrim"
+      "$value": 0.2,
+      "$description": "Opacity of the black pill the carousel's dots sit in, over the scrim: 20% (round 12; the critique asked for about 12%, which measured 2.5 to 2.8:1 for the white dots on a pale photo; 30% read as a dark lozenge)"
     },
     "tonalOnTile": {
       "$value": 0.06,

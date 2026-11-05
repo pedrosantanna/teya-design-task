@@ -11,7 +11,7 @@ export function ShopTileExamples() {
   return (
     <View style={styles.list}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
-        <ShopTile id="rossis" name="Rossi's Bakery" facts={{ state: 'open', detail: 'until\u00A06pm', walk: '2\u00A0min\u00A0walk' }} image={photo('rossis-bakery-front')} badges={['promoted']} />
+        <ShopTile id="rossis" name="Rossi's Bakery" facts={{ state: 'open', detail: 'until\u00A06pm', walk: '2\u00A0min\u00A0walk' }} image={photo('rossis-bakery-front')} badges={['delivers']} />
         <ShopTile id="paper" name="Paper & Co" facts={{ state: 'open', detail: 'until\u00A07pm', walk: '13\u00A0min\u00A0walk' }} />
       </ScrollView>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>

@@ -5,11 +5,11 @@ import { Pressable, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { useGround, type GroundName } from '../../internal/ground';
+import { useGround, useTileAccent, type GroundName } from '../../internal/ground';
 import { spoken } from '../../internal/PressableCard';
 import { cardShadow } from '../../internal/shadow';
 import { usePress } from '../../internal/usePress';
-import { cornerCurve, type ColorName } from '../../theme';
+import { cornerCurve, type ColorName, type ShopAccentName } from '../../theme';
 import { Icon } from '../Icon/Icon';
 import type { RowPosition } from '../ShopRow/ShopRow';
 import { ShopMeta, shopFactsLabel, type ShopFacts } from '../ShopMeta/ShopMeta';
@@ -74,6 +74,7 @@ export const ListRow = memo(function ListRow({
   const choice = selected !== undefined;
   const fill: ColorName = 'foreground';
   const ground = useGround();
+  const tile = useTileAccent();
   const content = (
     <>
       <Animated.View pointerEvents="none" style={[styles.layer, press.layerStyle]} />
@@ -113,7 +114,7 @@ export const ListRow = memo(function ListRow({
   const label = accessibilityLabel ?? spoken(title, facts ? shopFactsLabel(facts) : detail, value);
   if (!onPress) {
     return (
-      <View accessible={!trailing && !children} accessibilityLabel={trailing || children ? undefined : label} style={styles.row(grouped, position, false, surface, ground)}>
+      <View accessible={!trailing && !children} accessibilityLabel={trailing || children ? undefined : label} style={styles.row(grouped, position, false, surface, ground, tile)}>
         {content}
       </View>
     );
@@ -126,7 +127,7 @@ export const ListRow = memo(function ListRow({
       onPress={() => onPress(id)}
       onPressIn={press.onPressIn}
       onPressOut={press.onPressOut}
-      style={styles.row(grouped, position, choice && !!selected, surface, ground)}
+      style={styles.row(grouped, position, choice && !!selected, surface, ground, tile)}
     >
       {content}
     </Pressable>
@@ -136,8 +137,8 @@ export const ListRow = memo(function ListRow({
 /** A grouped row on the screen background in light; on Muted in dark, where Background sits too close to Card.
  *  Inside a sheet the row sits one level above the sheet's ground: Card in light (1.39:1 on #DEDAD5), Muted in dark
  *  (1.40:1 on #191715, where Card would be 1.17:1). */
-function groupedFill(theme: { scheme: string; color: { card: string; background: string; muted: string; shopPage: { row: string } } }, surface: 'card' | 'background', ground?: GroundName): string {
-  if (ground === 'shop') return theme.color.shopPage.row;
+function groupedFill(theme: { scheme: string; color: { card: string; background: string; muted: string; shop: { accent: Record<ShopAccentName, { cardOnTile: string }> } } }, surface: 'card' | 'background', ground?: GroundName, tile?: ShopAccentName): string {
+  if (ground === 'tile' && tile) return theme.color.shop.accent[tile].cardOnTile;
   if (ground === 'sheet') return theme.scheme === 'dark' ? theme.color.muted : theme.color.card;
   if (surface === 'background' && theme.scheme === 'dark') return theme.color.muted;
   return theme.color[surface];
@@ -145,7 +146,7 @@ function groupedFill(theme: { scheme: string; color: { card: string; background:
 
 /** The dark Separator is the Muted colour, so on a sheet's Muted rows the separator takes Border (#403D3A). */
 function separatorOn(theme: { scheme: string; color: { separator: string; border: string } }, ground?: GroundName): string {
-  return (ground === 'sheet' || ground === 'shop') && theme.scheme === 'dark' ? theme.color.border : theme.color.separator;
+  return ground === 'sheet' && theme.scheme === 'dark' ? theme.color.border : theme.color.separator;
 }
 
 export type ListGroupProps = {
@@ -157,12 +158,11 @@ export type ListGroupProps = {
 };
 
 /** Holds the rows of one grouped list. With `shadow`, the group lifts off a same-coloured ground with the delicate
- *  card shadow (the shop page, where Card rows sit on a Background card), instead of a lighter step. */
+ *  card shadow (the shop page, where the rows sit on the accent tile), instead of a lighter step. */
 export function ListGroup({ children, shadow = false, corner = 'inner' }: ListGroupProps) {
   const ground = useGround();
   const inSheet = ground === 'sheet';
-  const inShop = ground === 'shop';
-  return <View style={[styles.group, inSheet && styles.groupInSheet, corner === 'card' && styles.groupCard, shadow && !inShop && styles.groupShadow, inShop && styles.groupShop]}>{children}</View>;
+  return <View style={[styles.group, inSheet && styles.groupInSheet, corner === 'card' && styles.groupCard, shadow && styles.groupShadow]}>{children}</View>;
 }
 
 export type ListBlockProps = { children: ReactNode; position?: RowPosition; surface?: 'card' | 'background'; accessibilityLabel?: string };
@@ -172,9 +172,10 @@ export type ListBlockProps = { children: ReactNode; position?: RowPosition; surf
 export function ListBlock({ children, position = 'only', surface = 'card', accessibilityLabel }: ListBlockProps) {
   const { theme } = useUnistyles();
   const ground = useGround();
+  const tile = useTileAccent();
   const grouped = theme.platform === 'ios';
   return (
-    <View accessibilityLabel={accessibilityLabel} style={[styles.row(grouped, position, false, surface, ground), styles.block]}>
+    <View accessibilityLabel={accessibilityLabel} style={[styles.row(grouped, position, false, surface, ground, tile), styles.block]}>
       <View style={styles.blockInner(grouped && position !== 'last' && position !== 'only', ground)}>{children}</View>
     </View>
   );
@@ -193,10 +194,8 @@ const styles = StyleSheet.create((theme) => ({
   group: { ...cornerCurve, borderRadius: theme.radius.inner },
   groupInSheet: { borderRadius: theme.radius.bubble },
   groupCard: { borderRadius: theme.radius.card },
-  // On the shop page's card the rows step down from white to an off-white, and a 1 pt hairline makes them register.
-  groupShop: { borderWidth: 1, borderColor: theme.color.shopPage.rowEdge },
   groupShadow: { boxShadow: cardShadow(theme) },
-  row: (grouped: boolean, position: RowPosition, selected: boolean, surface: 'card' | 'background' = 'card', ground?: GroundName) => {
+  row: (grouped: boolean, position: RowPosition, selected: boolean, surface: 'card' | 'background' = 'card', ground?: GroundName, tile?: ShopAccentName) => {
     const top = position === 'first' || position === 'only';
     const bottom = position === 'last' || position === 'only';
     // Inside a sheet the group takes the iOS 26 inset-grouped corner (radius.bubble, shape.md, Sheets): the sheet's
@@ -210,7 +209,7 @@ const styles = StyleSheet.create((theme) => ({
       paddingLeft: theme.space[4],
       minHeight: theme.hit.min,
       // Selected keeps the row's fill: the tick and the semibold title carry the choice (colour.md, craft-pass-2).
-      backgroundColor: grouped ? groupedFill(theme, surface, ground) : 'transparent',
+      backgroundColor: grouped ? groupedFill(theme, surface, ground, tile) : 'transparent',
       borderTopLeftRadius: top ? corner : 0,
       borderTopRightRadius: top ? corner : 0,
       borderBottomLeftRadius: bottom ? corner : 0,

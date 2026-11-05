@@ -6,6 +6,7 @@ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { cornerCurve } from '../../theme';
 import { Icon } from '../Icon/Icon';
+import { SnuffleAvatar } from '../SnuffleAvatar/SnuffleAvatar';
 import { Text } from '../Text/Text';
 
 export type ChatSender = 'shopper' | 'snuffle';
@@ -102,12 +103,15 @@ export const ChatBubble = memo(function ChatBubble({
   );
 });
 
-/** The sender line of a Snuffle group: the word "Snuffle", and the day if it isn't today. No glyph or avatar. */
+/** The sender line of a Snuffle group: the avatar, then the word "Snuffle" and the day if it isn't today. The avatar is decorative. */
 export function SnuffleSender({ day }: { day?: string }) {
   return (
-    <Text variant="caption1" color="mutedForeground">
-      {day ? `Snuffle, ${day}` : 'Snuffle'}
-    </Text>
+    <View style={styles.sender}>
+      <SnuffleAvatar />
+      <Text variant="caption1" color="mutedForeground">
+        {day ? `Snuffle, ${day}` : 'Snuffle'}
+      </Text>
+    </View>
   );
 }
 
@@ -118,6 +122,7 @@ const styles = StyleSheet.create((theme) => ({
     gap: theme.space[2],
     marginTop: gap === 'none' ? 0 : gap === 'sameSender' ? theme.space[3] : theme.space[6],
   }),
+  sender: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2] },
   mine: { maxWidth: `${theme.layout.bubbleMax * 100}%`, alignItems: 'flex-end', gap: theme.space[1] },
   mineLine: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2] },
   theirs: { maxWidth: `${theme.layout.bubbleMax * 100}%`, alignItems: 'flex-start', gap: theme.space[1] },

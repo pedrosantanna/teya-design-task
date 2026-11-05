@@ -101,6 +101,13 @@ export default function Receipt() {
                 ? `${order.items}, set aside${order.collectAt ? ` at ${order.collectAt.name}` : ''}. Full refund if you don't collect`
                 : order.items}
           </Text>
+          <Button
+            label="View shop"
+            role="plain"
+            size="compact"
+            accessibilityLabel={`View ${order.shop}`}
+            onPress={() => router.push({ pathname: '/shops/[id]', params: { id: order.shopId } })}
+          />
         </View>
         </View>
 

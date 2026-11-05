@@ -448,7 +448,7 @@ Usuários de teste roteirizados a partir dos objetivos de Sam e Jess conduzem a 
 **Em aberto:** nada da primeira rodada; um agente corrigiu as quebras e a segunda rodada chegou a todos os objetivos. Três alvos ainda ficam abaixo de 44 pt na web.
 
 ## 055 · Uma página de loja neutra, um campo de chat preenchido, Requests de volta à esquerda
-**2026-11-05 · Decidido**
+**2026-11-05 · Decidido · o cartão neutro foi revertido pela 058**
 
 A página da loja deixa de usar a cor do tile da loja como fundo: a página e o cartão da loja ficam neutros, o padding do cartão sobe de 20 para 24 e o accent da loja aparece só em detalhes pequenos (os chips e o pin). No claro, o cartão é branco, com as linhas um passo abaixo, como faz o Airbnb. O mapa usa a paleta do Snuffle. O cartão continua sólido; o vidro fica no Voltar e na barra fixa. No chat, o compositor vira um campo preenchido com um filete, em vez de vidro branco sobre fundo branco. Na barra de pedido do Nearby, o círculo de Requests volta para antes do campo, o que reverte a posição da decisão 050.
 
@@ -463,6 +463,29 @@ As linhas de metadados não juntam mais os fatos com pontos. Uma palavra de stat
 **Por quê:** as linhas com pontos pareciam genéricas; as melhores páginas de lugares (Apple Maps, Google Maps, Airbnb) separam os fatos por peso, cor e ícones e guardam os pontos para listas simples de quantidades. Um primeiro nome faz a avaliação parecer de uma pessoa sem expô-la. Um carrossel de nomes sem fotos só acrescentaria uma rolagem.
 O botão de compra diz "Buy for £29.98".
 **Em aberto:** se a contagem diz "people" ou "buyers".
+
+## 057 · Ilustrações desenhadas para a tela, badges tonais no escuro, avaliações em carrossel, o avatar do Snuffle
+**2026-11-05 · Decidido**
+
+As ilustrações 3D são renderizadas sobre fundo transparente, com a caixa do próprio objeto centrada (a sombra cai onde a luz manda), num tamanho maior (a arte das categorias em 80% do quadrado, o Getting started em 312 pt), com um contorno de 1,4 pt que mantém a mesma largura em qualquer tamanho de exibição e vincos mais leves nos tamanhos pequenos. O app as compõe sobre a cor do tile ou da página. No modo escuro, badges e chips são preenchimentos tonais com um passo claro em relação ao fundo (1,39 a 1,58:1), com texto em 7,4:1 ou mais, e sem bordas; a seleção aparece pelo preenchimento e pelo peso. As avaliações da página da loja são um carrossel com encaixe de até cinco cartões (uma lista em textos grandes), cada um com primeiro nome e data. O carrossel de fotos fica dentro do cartão da loja, depois das ações, e o cartão começa logo abaixo do pin. "Delivers" e "New" levam um ícone; "Promoted" não aparece e não reordena o Nearby. No chat, a linha de remetente do Snuffle tem um pequeno avatar: a marca num círculo do Lavanda do balão do Snuffle, o único lugar em que a marca fica dentro de uma forma no app.
+
+**Por quê:** traços desenhados em unidades do mundo engrossavam e se fundiam nos tamanhos pequenos, e tiles embutidos obrigavam a renderizar de novo a cada mudança de cor. As bordas nos badges escuros faziam o trabalho que a cor deveria fazer, como mostram os contêineres tonais do Material e os preenchimentos escuros da Apple. Um carrossel mantém as avaliações numa fileira da página. Uma ordem paga sem rótulo enganaria, então sem o rótulo a ordem também sai.
+**Em aberto:** se o destaque pago volta a aparecer, identificado; o custo medido de um cartão de loja em vidro.
+
+## 058 · O cartão da loja volta a ter a cor da categoria; vidro medido e deixado de fora
+**2026-11-05 · Decidido · reverte o cartão neutro da 055**
+
+O cartão da loja volta a ser o tile de accent da loja, no claro e no escuro, com tudo sobre ele recolorido para o tile: linhas no tom de cartão do tile, chips na cor do tile, Call e Directions na sobreposição tonal, palavras de status nos novos papéis `successOnTile` e `warningOnTile`, e Ask como o único Índigo preenchido. O cartão fica a 12 pt das bordas da tela, mais alto, para o pin da loja ficar centrado na faixa de mapa acima dele, e cresce até a largura total ao rolar; todo contêiner cresce junto, enquanto o texto mantém as quebras de linha. "Delivers" e "New" são fatos com ícone na linha da caminhada e da rua, e as fotos ficam entre dois espaços de seção. O cartão continua sólido.
+
+**Por quê:** com a paleta escura de croma baixo (051) e os badges tonais sem borda (057), um cartão colorido funciona no modo escuro e liga a página da loja à categoria de onde ela veio. Um agente mediu um cartão de vidro: a CPU no simulador do iOS ficou dentro do ruído, mas a versão web perdeu quadros durante a subida com a CPU 4x mais lenta, o custo de GPU não pôde ser medido, e o texto secundário só passava porque o mapa é claro ou quase preto.
+
+## 059 · Todo pedido é uma conversa completa; chats no bege do app
+**2026-11-05 · Decidido**
+
+Todo pedido da lista de Requests abre como uma conversa completa, com histórico, status e próxima ação (comprar, mudar ou parar um pedido recorrente, avaliar, continuar procurando ou perguntar mais longe), e toda conversa tem o compositor. O fundo do chat é o Background nos dois modos, e o campo do compositor é Card com um filete de Border em todo lugar em que aparece, então ele se lê igual no New Request, num pedido e na lista de Requests. Isso reverte o fundo branco do chat do craft-pass-2.
+
+**Por quê:** os pedidos antigos abriam como uma mensagem sem como agir, então não ficava claro o que fazer nem onde responder. Num chat branco o campo era bege, e na lista de Requests, que é bege, o mesmo campo sumia; um fundo e um campo resolvem os dois e tiram o salto de cor ao abrir uma conversa.
+**Em aberto:** comprar a partir de um pedido antigo pula as sheets de detalhes e de pagamento, e uma avaliação dada ali não chega à página da loja.
 
 ## Ainda em aberto
 

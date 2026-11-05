@@ -266,6 +266,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .marks figcaption { max-width: 24ch; font-size: 13px; line-height: 1.4; color: var(--muted-fg); }
 .marks.wide figcaption { max-width: 70ch; }
 .marks.wide img { border-radius: 14px; }
+.intro-video { display: block; width: 100%; max-width: 320px; height: auto; aspect-ratio: 1; margin: var(--s-4) 0 var(--s-6); border-radius: 14px; background: #3d35b8; }
 .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: var(--s-3); margin: var(--s-3) 0 var(--s-5); }
 .swatch { margin: 0; display: grid; gap: var(--s-1); }
 .swatch i { display: block; height: 56px; border-radius: 10px; box-shadow: inset 0 0 0 1px rgba(127,127,127,.25); }
@@ -1027,6 +1028,12 @@ i.m.unknown { opacity: .45; }
       const src = img.getAttribute('data-src') || img.getAttribute('src');
       if (!/^(https?:|data:|\/)/.test(src)) img.setAttribute('src', resolve(srcOf, src));
       img.removeAttribute('data-src');
+    });
+    // Videos too; with reduced motion they wait for the viewer to press play.
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    tmp.querySelectorAll('video').forEach(v => {
+      ['src', 'poster'].forEach(k => { const u = v.getAttribute(k); if (u && !/^(https?:|data:|\/)/.test(u)) v.setAttribute(k, resolve(srcOf, u)); });
+      if (still) { v.removeAttribute('autoplay'); v.removeAttribute('loop'); }
     });
     // Consecutive quote cards sit in a grid.
     let run = [];

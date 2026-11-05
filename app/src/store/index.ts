@@ -57,3 +57,4 @@ export {
   type Chip,
   type OrderView,
 } from './chat';
+export { buildOtherChat, hasScript, isStanding, looksRepeating, otherActions, otherKey, useOtherThread, useOtherThreads, type Thread } from './other-chat';

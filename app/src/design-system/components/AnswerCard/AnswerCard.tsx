@@ -8,6 +8,7 @@ import { StyleSheet } from 'react-native-unistyles';
 
 import { IMAGE_OVER, photoSource, type PhotoSource } from '../../internal/media';
 import { PressableCard, spoken, type CardAction } from '../../internal/PressableCard';
+import { ShopLink } from '../../internal/ShopLink';
 import { ShopPlaceholder } from '../../internal/ShopPlaceholder';
 import { cornerCurve, type ShopAccentName } from '../../theme';
 import { Button } from '../Button/Button';
@@ -44,6 +45,8 @@ export type AnswerCardProps = {
   accessibilityLabel?: string;
   /** Tap on the card: opens the details sheet, as Buy does. */
   onOpen?: (id: string) => void;
+  /** Tap on the shop's name: opens the shop's page. Also a custom accessibility action, "View shop". */
+  onOpenShop?: (id: string) => void;
   onBuy?: (id: string) => void;
   onShowMe?: (id: string) => void;
   onDismiss?: (id: string) => void;
@@ -67,6 +70,7 @@ export const AnswerCard = memo(function AnswerCard({
   best = false,
   accessibilityLabel,
   onOpen,
+  onOpenShop,
   onBuy,
   onShowMe,
   onDismiss,
@@ -74,6 +78,7 @@ export const AnswerCard = memo(function AnswerCard({
 }: AnswerCardProps) {
   const statusLine = source ? `${status} · ${source}` : status;
   const actions: CardAction[] = [];
+  if (onOpenShop) actions.push({ name: 'viewShop', label: 'View shop', run: () => onOpenShop(id) });
   if (action === 'buy' && onBuy) actions.push({ name: 'buy', label: buyLabel, run: () => onBuy(id) });
   if (action === 'showMe') {
     if (onShowMe) actions.push({ name: 'showMe', label: 'Show me', run: () => onShowMe(id) });
@@ -93,9 +98,13 @@ export const AnswerCard = memo(function AnswerCard({
           {image ? <Image source={photoSource(image)} style={IMAGE_OVER} contentFit="cover" accessible={false} /> : null}
         </View>
         <View style={styles.title}>
-          <Text variant="headline" numberOfLines={1}>
-            {shop}
-          </Text>
+          {onOpenShop ? (
+            <ShopLink name={shop} onPress={() => onOpenShop(id)} />
+          ) : (
+            <Text variant="headline" numberOfLines={1}>
+              {shop}
+            </Text>
+          )}
           <View style={styles.statusLine}>
             {statusIcon ? <Icon icon={statusIcon} size="footnote" color="mutedForeground" /> : null}
             <View style={styles.grow}>

@@ -31,6 +31,7 @@ import {
   RatingSheet,
   Sheet,
   Stepper,
+  StatusLabel,
   Text,
   Toast,
   TypingIndicator,
@@ -65,7 +66,12 @@ import {
   useApp,
   useAppActions,
   useContent,
+  useOtherThread,
   useSim,
+  buildOtherChat,
+  isStanding,
+  otherActions,
+  otherKey,
   useVisibleChat,
   type AnswerState,
   type ChatItem,
@@ -93,7 +99,8 @@ function ActiveChat() {
   const request = useApp('request');
   const widened = useSim((s) => s.wider != null);
   const scroll = useNavBarScroll();
-  const top = useNavBarHeight();
+  // The chat's bar carries a subtitle, so it is the tall one.
+  const top = useNavBarHeight(undefined, true);
   const margin = screenMargin(theme, frame.width);
   const [reply, setReply] = useState('');
   const [undo, setUndo] = useState<string | null>(null);
@@ -132,6 +139,7 @@ function ActiveChat() {
     }
   };
 
+  const openShop = (shopId: string) => router.push({ pathname: '/shops/[id]', params: { id: shopId } });
   const openReceipt = () => router.push({ pathname: '/requests/[id]/order', params: { id: content.active.id } });
 
   const send = (text: string) => {
@@ -181,6 +189,7 @@ function ActiveChat() {
               onChip={onChip}
               onDismiss={dismiss}
               onOpenOrder={openReceipt}
+              onOpenShop={openShop}
             />
           )}
           ListHeaderComponent={
@@ -260,10 +269,14 @@ type ChatRowProps = {
   isNew: boolean;
   onChip: (action: string) => void;
   onDismiss: (shopId: string) => void;
-  onOpenOrder: () => void;
+  onOpenOrder?: () => void;
+  onOpenShop: (shopId: string) => void;
+  /** Other requests' chats: Buy on an offer, and Rate on a collected order. */
+  onBuy?: () => void;
+  onRate?: () => void;
 };
 
-function ChatRow({ item, before, isNew, onChip, onDismiss, onOpenOrder }: ChatRowProps) {
+function ChatRow({ item, before, isNew, onChip, onDismiss, onOpenOrder, onOpenShop, onBuy, onRate }: ChatRowProps) {
   const previous: ChatSender | undefined = before?.kind === 'bubble' ? before.sender : undefined;
   switch (item.kind) {
     case 'bubble':
@@ -287,8 +300,49 @@ function ChatRow({ item, before, isNew, onChip, onDismiss, onOpenOrder }: ChatRo
       );
     case 'asking':
       return <AskingList wider={item.wider} />;
+    case 'rows':
+      return (
+        <View style={styles.block}>
+          {item.rows.map((row, i) => (
+            <AnswerRow
+              key={row.shopId}
+              shop={row.shop}
+              street={row.street}
+              status={row.status}
+              kind={row.kind}
+              onOpenShop={() => onOpenShop(row.shopId)}
+              position={item.rows.length === 1 ? 'only' : i === 0 ? 'first' : i === item.rows.length - 1 ? 'last' : 'middle'}
+            />
+          ))}
+        </View>
+      );
+    case 'offer':
+      return (
+        <View style={styles.block}>
+          <AnswerCard
+            id={item.shopId}
+            shop={item.shop}
+            status={item.status}
+            source={item.source}
+            price={item.price}
+            walk={item.walk}
+            collectBy={item.collectBy}
+            action="buy"
+            buyLabel={item.buyLabel}
+            best
+            onOpenShop={onOpenShop}
+            onBuy={onBuy}
+          />
+        </View>
+      );
+    case 'status':
+      return (
+        <View style={styles.block}>
+          <StatusLabel label={item.label} tone={item.tone} />
+        </View>
+      );
     case 'answer':
-      return <Answer shopId={item.shopId} best={item.best} animateIn={isNew} onDismiss={onDismiss} />;
+      return <Answer shopId={item.shopId} best={item.best} animateIn={isNew} onDismiss={onDismiss} onOpenShop={onOpenShop} />;
     case 'order':
       return (
         <View style={styles.block}>
@@ -301,9 +355,10 @@ function ChatRow({ item, before, isNew, onChip, onDismiss, onOpenOrder }: ChatRo
             total={item.order.total}
             steps={item.order.steps}
             note={item.order.note}
-            action={item.order.canRate ? { label: 'Rate', onPress: sim.openRating } : undefined}
+            action={item.order.canRate ? { label: 'Rate', onPress: onRate ?? sim.openRating } : undefined}
             animateIn={isNew}
             onOpen={onOpenOrder}
+            onOpenShop={onOpenShop}
           />
         </View>
       );
@@ -357,6 +412,7 @@ function AskingList({ wider = false }: { wider?: boolean }) {
             street={shop?.street ?? ''}
             status={status}
             kind={rowKind(state)}
+            onOpenShop={() => router.push({ pathname: '/shops/[id]', params: { id: offer.shopId } })}
             position={offers.length === 1 ? 'only' : i === 0 ? 'first' : i === offers.length - 1 ? 'last' : 'middle'}
           />
         );
@@ -365,7 +421,7 @@ function AskingList({ wider = false }: { wider?: boolean }) {
   );
 }
 
-function Answer({ shopId, best, animateIn, onDismiss }: { shopId: string; best: boolean; animateIn: boolean; onDismiss: (id: string) => void }) {
+function Answer({ shopId, best, animateIn, onDismiss, onOpenShop }: { shopId: string; best: boolean; animateIn: boolean; onDismiss: (id: string) => void; onOpenShop: (id: string) => void }) {
   const content = useContent();
   const state = useApp('answers')[shopId] ?? 'asked';
   const offer = content.active.offers.find((o) => o.shopId === shopId);
@@ -388,6 +444,7 @@ function Answer({ shopId, best, animateIn, onDismiss }: { shopId: string; best: 
         best={best}
         animateIn={animateIn}
         onOpen={sim.openDetails}
+        onOpenShop={onOpenShop}
         onBuy={sim.openDetails}
         onShowMe={sim.openDetails}
         onDismiss={onDismiss}
@@ -605,39 +662,125 @@ function splitCard(card: string): [string, string] {
   return at < 0 ? [card, ''] : [card.slice(0, at).trim(), card.slice(at)];
 }
 
-/** Requests other than the active one keep their last messages only. */
+/** A request that isn't the active one: a full conversation (store/other-chat.ts) with its composer and the one
+ *  next action its state allows. Replies go through the same off-script answer as the active chat. */
 function OtherRequestChat({ id }: { id: string }) {
   const { theme } = useUnistyles();
   const frame = useSafeAreaFrame();
   const insets = useSafeAreaInsets();
   const content = useContent();
   const scroll = useNavBarScroll();
-  const top = useNavBarHeight();
+  const top = useNavBarHeight(undefined, true);
+  const margin = screenMargin(theme, frame.width);
+  const key = otherKey(content.id, id);
   const request = content.others.find((r) => r.id === id);
-  const [speaker, ...rest] = (request?.preview ?? '').split(': ');
-  const text = rest.join(': ');
+  const thread = useOtherThread(key);
+  const [reply, setReply] = useState('');
+  const [rating, setRating] = useState<{ open: boolean; up: boolean | null; tags: string[]; note: string }>({ open: false, up: null, tags: [], note: '' });
+  const items = request ? buildOtherChat(content, id, thread) : [];
+  const newestFirst = [...items].reverse();
+  const bottomInset = insets.bottom;
+  const renderScroll = useCallback(
+    (props: ScrollViewProps) => <KeyboardChatScrollView {...props} inverted offset={bottomInset} />,
+    [bottomInset],
+  );
+  const boughtAt = items.find((i) => i.kind === 'order');
+  const shopName = boughtAt?.kind === 'order' ? boughtAt.order.shop : '';
+
+  const toAsk = (text: string) => {
+    if (matchAsk(text) === 'active') {
+      sim.startRequest(text);
+      router.navigate({ pathname: '/requests/[id]', params: { id: content.active.id } });
+    } else {
+      sim.compose(text);
+      router.push('/requests/new');
+    }
+  };
+  const onChip = (action: string) => {
+    if (action === 'askFurther') return otherActions.askFurther(key);
+    if (action === 'keepLooking') return otherActions.keepLooking(key, isStanding(key));
+    if (action === 'changeLooking') return router.push({ pathname: '/requests/[id]/keep-looking', params: { id } });
+    if (action === 'stopLooking') return otherActions.stop(key, isStanding(key));
+    if (action === 'rate') return setRating({ open: true, up: null, tags: [], note: '' });
+    if (action.startsWith('ask:')) toAsk(action.slice(4));
+  };
+  const send = (text: string) => {
+    setReply('');
+    if (matchAsk(text) === 'active') return toAsk(text);
+    otherActions.say(key, text);
+  };
+
   return (
     <Ground value="chat">
     <View style={styles.screen}>
-      <Animated.ScrollView onScroll={scroll.onScroll} scrollEventThrottle={16} contentContainerStyle={styles.plainContent(screenMargin(theme, frame.width), top, insets.bottom)}>
-        {request ? <ChatBubble sender={speaker === 'You' ? 'shopper' : 'snuffle'} text={text} /> : null}
-        {request?.state === 'needsYou' ? (
-          <View style={styles.block}>
-            <Text variant="footnote" color="mutedForeground">
-              {request.label}
-            </Text>
+      <ChatGestureArea style={styles.fill} interpolator="ios" offset={theme.space[3] + theme.size.field + theme.space[2]} textInputNativeID={COMPOSER_ID}>
+        <Animated.FlatList
+          inverted
+          renderScrollComponent={WEB ? undefined : renderScroll}
+          data={newestFirst}
+          keyExtractor={(item) => item.key}
+          renderItem={({ item, index }) => (
+            <ChatRow
+              item={item}
+              before={newestFirst[index + 1]}
+              isNew={false}
+              onChip={onChip}
+              onDismiss={() => undefined}
+              onOpenShop={(shopId) => router.push({ pathname: '/shops/[id]', params: { id: shopId } })}
+              onBuy={() => otherActions.buy(key)}
+              onRate={() => onChip('rate')}
+            />
+          )}
+          ListHeaderComponent={
+            id === 'fan' && content.id === 'sam' && !thread.keeping && !thread.widened ? (
+              <View style={[styles.block, styles.art]}>
+                <Illustration name="quietstreet" size="medium" />
+              </View>
+            ) : undefined
+          }
+          onScroll={scroll.onScroll}
+          scrollEventThrottle={16}
+          keyboardDismissMode="interactive"
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={styles.content(margin, top, insets.bottom)}
+        />
+      </ChatGestureArea>
+      <KeyboardStickyView style={styles.sticky} offset={{ opened: insets.bottom }}>
+        <Dock floating={false}>
+          <View style={styles.pad(margin)}>
+            <Composer value={reply} onChangeText={setReply} onSend={send} nativeID={COMPOSER_ID} />
           </View>
-        ) : null}
-      </Animated.ScrollView>
+        </Dock>
+      </KeyboardStickyView>
       <NavBar
         title="Snuffle"
         titleMark
         subtitle={request?.title ?? 'Request'}
+        subtitleThumb={request ? { photo: imageSource(request.image, REQUEST_THUMB_WIDTH) } : undefined}
         fill="chat"
         leading="back"
         backLabel="Requests"
         onLeading={() => (router.canGoBack() ? router.back() : router.navigate('/requests'))}
         scroll={scroll}
+        backgroundAt={-theme.space[2]}
+      />
+      <RatingSheet
+        open={rating.open}
+        onClose={() => setRating((r) => ({ ...r, open: false }))}
+        shop={shopName}
+        up={rating.up}
+        upTags={UP_TAGS}
+        downTags={DOWN_TAGS}
+        tags={rating.tags}
+        note={rating.note}
+        noteMax={NOTE_MAX}
+        onAnswer={(up) => setRating((r) => ({ ...r, up, tags: r.up === up ? r.tags : [] }))}
+        onToggleTag={(tag) => setRating((r) => ({ ...r, tags: r.tags.includes(tag) ? r.tags.filter((t) => t !== tag) : r.tags.length >= 3 ? r.tags : [...r.tags, tag] }))}
+        onNote={(note) => setRating((r) => ({ ...r, note }))}
+        onSend={() => {
+          if (rating.up != null) otherActions.rate(key, rating.up);
+          setRating((r) => ({ ...r, open: false }));
+        }}
       />
     </View>
     </Ground>
@@ -645,7 +788,7 @@ function OtherRequestChat({ id }: { id: string }) {
 }
 
 const styles = StyleSheet.create((theme) => ({
-  // A chat's neutral ground: Card in light mode, Background in dark (colour.md, Snuffle).
+  // A chat's ground is the app's Background in both modes (colour.md, Snuffle).
   screen: { flex: 1, backgroundColor: theme.color.chat.ground },
   fill: { flex: 1 },
   // Inverted: the list's top padding sits at the bottom of the screen (room for the dock) and its bottom
@@ -654,12 +797,6 @@ const styles = StyleSheet.create((theme) => ({
     paddingHorizontal: margin,
     paddingTop: bottom + theme.space[3] + theme.size.field + theme.space[2] + theme.clearance.askBar,
     paddingBottom: top + theme.space[4],
-  }),
-  // The other requests' chats are a plain scroll view.
-  plainContent: (margin: number, top: number, bottom: number) => ({
-    paddingHorizontal: margin,
-    paddingTop: top + theme.space[4],
-    paddingBottom: bottom + theme.clearance.askBar,
   }),
   sticky: { position: 'absolute', left: 0, right: 0, bottom: 0 },
   pad: (margin: number) => ({ paddingHorizontal: margin }),

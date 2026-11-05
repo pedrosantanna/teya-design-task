@@ -1,6 +1,6 @@
 # Fontes
 
-Todas as citações e todos os links usados na documentação, num só lugar. 72 citações (71 conferidas na fonte original) e 175 outras fontes. Esta página é gerada a partir das outras pelo `scripts/build_sources.py`.
+Todas as citações e todos os links usados na documentação, num só lugar. 72 citações (71 conferidas na fonte original) e 192 outras fontes. Esta página é gerada a partir das outras pelo `scripts/build_sources.py`.
 
 ## Citações por rede
 
@@ -96,6 +96,24 @@ Status **verified** quer dizer que texto, autor e data foram conferidos na pági
 
 | Usada em | Fonte |
 | --- | --- |
+| [Estimativa de receita](../define/revenue-estimate.md) | [UK business: activity, size and location, 2025](https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/ukbusinessactivitysizeandlocation/2025) |
+| [Estimativa de receita](../define/revenue-estimate.md) | [Business population estimates 2025](https://www.gov.uk/government/statistics/business-population-estimates-2025/business-population-estimates-for-the-uk-and-regions-2025-statistical-release) |
+| [Estimativa de receita](../define/revenue-estimate.md) | [briefing da Biblioteca da Câmara dos Comuns sobre o varejo](https://researchbriefings.files.parliament.uk/documents/SN06186/SN06186.pdf) |
+| [Estimativa de receita](../define/revenue-estimate.md) | [dados demográficos](https://data.london.gov.uk/demography) |
+| [Estimativa de receita](../define/revenue-estimate.md) | [estimativas de população do Reino Unido, meados de 2024](https://www.gov.uk/government/statistics/population-estimates-for-the-uk-england-wales-scotland-and-northern-ireland-mid-2024) |
+| [Estimativa de receita](../define/revenue-estimate.md) | [revisão do mercado de adquirência de cartões, relatório final (novembro de 2021)](https://www.psr.org.uk/media/p1tlg0iw/psr-card-acquiring-market-review-final-report-november-2021.pdf) |
+| [Estimativa de receita](../define/revenue-estimate.md) | [The Interchange Fee Regulation: the fee cap is now in force](https://www.osborneclarke.com/insights/the-interchange-fee-regulation-the-fee-cap-is-now-in-force) |
+| [Estimativa de receita](../define/revenue-estimate.md) | [melhores leitores de cartão para pequenas empresas do Reino Unido](https://www.sumup.com/en-gb/compare/best-card-readers/) |
+| [Estimativa de receita](../define/revenue-estimate.md) | [maquininha Essential](https://teya.com/shop/essential-card-machine) |
+| [Estimativa de receita](../define/revenue-estimate.md) | [preços](https://www.teya.com/pricing) |
+| [Estimativa de receita](../define/revenue-estimate.md) | [resultados do 2º semestre de 2025](https://www.adyen.com/press-and-media/adyen-publishes-h2-2025-financial-results-3pgu2) |
+| [Estimativa de receita](../define/revenue-estimate.md) | [atualização de resultados do 4º trimestre de 2024](https://corporate.deliveroo.co.uk/assets/2317/3700/9446/Deliveroo_Q4_2024_Trading_Update_RNS_vFINAL.pdf) |
+| [Estimativa de receita](../define/revenue-estimate.md) | [receita de anúncios da Deliveroo](https://fr.statista.com/statistics/1208634/deliveroo-ad-revenue/) |
+| [Estimativa de receita](../define/revenue-estimate.md) | [comunicado dos 40 milhões de sacolas](https://www.toogoodtogo.com/en-gb/press/40-million) |
+| [Estimativa de receita](../define/revenue-estimate.md) | [perfil do Too Good To Go](https://www.igd.com/articles/too-good-to-go) |
+| [Estimativa de receita](../define/revenue-estimate.md) | [retenção de apps](https://www.braze.com/resources/articles/mobile-app-retention) |
+| [Estimativa de receita](../define/revenue-estimate.md) | [referências de retenção](https://phiture.com/mobilegrowthstack/managing-retention-rate-benchmarks-and-expectations/) |
+| [Estimativa de receita](../define/revenue-estimate.md) | [pesquisa](https://www.acs.org.uk/research) |
 | [Usuários sintéticos de teste](../deliver/synthetic-users.md) | [Rosala e Moran, 2024](https://www.nngroup.com/articles/synthetic-users/) |
 | [Usuários sintéticos de teste](../deliver/synthetic-users.md) | [Mooney et al., 2025](https://arxiv.org/abs/2509.03736) |
 | [Usuários sintéticos de teste](../deliver/synthetic-users.md) | [Park et al., 2024](https://arxiv.org/abs/2411.10109) |
@@ -200,7 +218,6 @@ Status **verified** quer dizer que texto, autor e data foram conferidos na pági
 | [A high street hoje](high-street-landscape.md) | [Fonte](https://www.thegrocer.co.uk/news/shop-theft-at-record-level-growing-20-past-500k-offences/707339.article) |
 | [A high street hoje](high-street-landscape.md) | [Fonte](https://www.gov.uk/government/news/pm-backs-true-patriots-to-lead-uk-renewal-with-5bn-investment) |
 | [A high street hoje](high-street-landscape.md) | [Fonte](https://www.gpb.org/news/2026/07/20/andy-burnham-becomes-uk-prime-minister-after-starmer-resigns) |
-| [A high street hoje](high-street-landscape.md) | [Teya pricing](https://www.teya.com/pricing) |
 | [A high street hoje](high-street-landscape.md) | [Página de comparação da SumUp](https://www.sumup.com/en-gb/compare/sumup-vs-zettle/) |
 | [A high street hoje](high-street-landscape.md) | [MobileTransaction](https://mobiletransaction.org/square-vs-izettle-vs-sumup) |
 | [A high street hoje](high-street-landscape.md) | [ExpertMarket](https://www.expertmarket.com/uk/merchant-accounts/dojo-review?p=29692) |

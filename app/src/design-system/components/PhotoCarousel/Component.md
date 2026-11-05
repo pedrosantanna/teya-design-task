@@ -16,9 +16,9 @@ The shop's photos on the shop page, between the map and the shop card. Spec: Pho
 
 ## Layout
 
-- One photo at a time at the content width (screen width minus two screen margins), `layout.carouselRatio` (2:1), `radius.card`; paging, with the next photo off screen at rest.
+- One photo at a time at the container's width (`width` at rest, plus `grow` as the card widens; the height stays the one at rest), `layout.carouselRatio` (2:1), each photo at `radius.inner` and the container's width less 24; paging by photo with 8 between them, 16 pt of the next one showing.
 - A black scrim (`color.photoScrim`) runs up the bottom of each photo, `state.photoScrim` (40%) at the edge and gone by `layout.photoScrimReach` (45%) of its height.
-- Page dots (PageDots `on="photo"`, white) sit in a pill, black at `state.photoPill` (30%), `space.3` above the bottom edge, over the scrim; with one photo there are no dots and no paging.
+- Page dots (PageDots `on="photo"`, white) sit in a pill, black at `state.photoPill` (20%), centred on the photo, `space.3` above the bottom edge, over the scrim; with one photo there are no dots and no paging.
 
 ## Accessibility
 

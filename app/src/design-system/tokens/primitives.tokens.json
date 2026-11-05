@@ -330,6 +330,30 @@
           ],
           "hex": "#222169"
         }
+      },
+      "850": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1804,
+            0.1686,
+            0.5608
+          ],
+          "hex": "#2E2B8F"
+        },
+        "$description": "Selected chip on a raised dark ground (sheet, shop page card): 1.5:1 from the sheet, 8.9:1 under Indigo 200 text (tags.md)"
+      },
+      "950": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.102,
+            0.098,
+            0.3098
+          ],
+          "hex": "#1A194F"
+        },
+        "$description": "Selected chip on a shop's accent tile in dark: 1.4 to 1.5:1 from the four tiles, 11.6:1 under Indigo 200 text (tags.md)"
       }
     },
     "peach": {
@@ -472,13 +496,13 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.3608,
-            0.3098,
-            0.2941
+            0.3843,
+            0.302,
+            0.2745
           ],
-          "hex": "#5C4F4B"
+          "hex": "#624D46"
         },
-        "$description": "Card on the dark tile: OKLCH L 0.439, C 0.019, h 38 (round 10)"
+        "$description": "Card on the dark tile: the round 10 row (OKLCH L 0.44) with its chroma raised 1.7 times so rows read as the tile's own hue, not grey (round 12); 1.40 to 1.48:1 from the tile"
       },
       "washDark": {
         "$value": {
@@ -645,13 +669,13 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.3098,
-            0.3333,
-            0.2941
+            0.298,
+            0.3412,
+            0.2706
           ],
-          "hex": "#4F554B"
+          "hex": "#4C5745"
         },
-        "$description": "Card on the dark tile: OKLCH L 0.441, C 0.018, h 133 (round 10)"
+        "$description": "Card on the dark tile: the round 10 row (OKLCH L 0.44) with its chroma raised 1.7 times so rows read as the tile's own hue, not grey (round 12); 1.40 to 1.48:1 from the tile"
       },
       "washDark": {
         "$value": {
@@ -830,13 +854,13 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.3373,
+            0.349,
             0.3216,
-            0.2863
+            0.2588
           ],
-          "hex": "#565249"
+          "hex": "#595242"
         },
-        "$description": "Card on the dark tile: OKLCH L 0.440, C 0.015, h 87 (round 10)"
+        "$description": "Card on the dark tile: the round 10 row (OKLCH L 0.44) with its chroma raised 1.7 times so rows read as the tile's own hue, not grey (round 12); 1.40 to 1.48:1 from the tile"
       },
       "washDark": {
         "$value": {
@@ -1004,12 +1028,12 @@
           "colorSpace": "srgb",
           "components": [
             0.3255,
-            0.3176,
-            0.3608
+            0.3137,
+            0.3843
           ],
-          "hex": "#53515C"
+          "hex": "#535062"
         },
-        "$description": "Card on the dark tile: OKLCH L 0.441, C 0.018, h 294 (round 10)"
+        "$description": "Card on the dark tile: the round 10 row (OKLCH L 0.44) with its chroma raised 1.7 times so rows read as the tile's own hue, not grey (round 12); 1.40 to 1.48:1 from the tile"
       },
       "washDark": {
         "$value": {
@@ -1211,6 +1235,18 @@
           "hex": "#CACBCD"
         },
         "$description": "Stone 740's hue and chroma at L 0.84: muted text on the lighter dark cards that sit on an accent tile (decision 050)"
+      },
+      "880": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8549,
+            0.8588,
+            0.8667
+          ],
+          "hex": "#DADBDD"
+        },
+        "$description": "Stone 740's hue and chroma at L 0.89: muted text on the dark cards that sit on an accent tile, 5.5:1 or more on every cardOnTile (round 12; Stone 840 was 4.7:1)"
       },
       "985": {
         "$value": {

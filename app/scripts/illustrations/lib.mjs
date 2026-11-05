@@ -32,7 +32,7 @@ export function jobs(m, filter = {}) {
               const key = `${ill.name}/${ground}/${sizeName}/${scale}`;
               if (seen.has(key)) continue;
               seen.add(key);
-              out.push({ ill, ground, color: tokenHex(scheme, `color.${g}`), dark: m.groundTones?.[ground], sizeName, size, scale });
+              out.push({ ill, ground, color: tokenHex(scheme, `color.${g}`), dark: m.groundTones?.[ground], sizeName, size, scale, darkTones: combo.darkTones ?? ill.darkTones });
             }
           }
         }

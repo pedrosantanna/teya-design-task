@@ -69,7 +69,7 @@ function tileFacts(hours: ShopHours, shop: Shop) {
   return shopFacts(hours, shop, false);
 }
 
-/** Promoted and New are not shown on a tile (v10); the shop page says Promoted. The data stays. */
+/** Only Delivers shows on a tile, with its scooter. New shows on the shop page; Promoted is not shown anywhere (round 10). The data stays. */
 function tileBadges(shop: Shop): BadgeName[] {
   const badges: BadgeName[] = [];
   if (shop.delivers) badges.push('delivers');
@@ -121,9 +121,9 @@ function Nearby() {
   const revealAt = Math.max(theme.space[2], titleBottom - barHeight);
   const empty = contentSet === 'empty';
 
-  // Open near you: paid placements first, then the nearest. New near you: shops marked new, filtered by street.
+  // Open near you: the nearest first (paid placement is not shown in the prototype, decision 052). New near you: shops marked new, filtered by street.
   const openShops = useMemo(
-    () => [...area.shops].sort((a, b) => Number(!!b.promoted) - Number(!!a.promoted) || a.walkMinutes - b.walkMinutes).slice(0, 6),
+    () => [...area.shops].sort((a, b) => a.walkMinutes - b.walkMinutes).slice(0, 6),
     [area.shops],
   );
   const newShops = useMemo(() => area.shops.filter((s) => s.isNew).sort((a, b) => a.walkMinutes - b.walkMinutes), [area.shops]);
@@ -278,7 +278,7 @@ function Nearby() {
         )}
       />
 
-      <LocationSheet open={locationOpen} onClose={() => setLocationOpen(false)} origin="area" />
+      <LocationSheet open={locationOpen} onClose={() => setLocationOpen(false)} />
 
       <Sheet open={accountOpen} onClose={() => setAccountOpen(false)} title="Account" detents={['medium', 'large']}>
         {/* The profile and each group are space.6 apart, so the first row doesn't crowd the profile. */}

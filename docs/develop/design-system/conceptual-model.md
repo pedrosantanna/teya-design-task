@@ -59,7 +59,7 @@ There is no evidence for "errand", "basket", "hold" or "reserve" in shoppers' wo
 | --- | --- | --- | --- | --- |
 | Request | What I asked for | Items and quantity, deadline, area, collect or delivery, repeat | Has many answers and any number of orders | Row in Requests → the chat |
 | Shop | The shop | Name, street, walk time, open until, made to order with notice ("2 days' notice"), answers from its till or by reply, collection window, delivers and fee; what it sells; ratings; how it does on Snuffle | Gives many answers, has many orders | Photo tile on Nearby, the home screen; row in any other list → shop page |
-| Answer | "Paper & Co has them" | Shop, what it has (all, some, something similar), price, source of the answer, collect-by date, delivery | Belongs to one request and one shop; may become one order | Compact row on the asking list, full card in the chat once the shop replies → details sheet, where the shopper buys |
+| Answer | "Paper & Co has them" | Shop, what it has (all, some, something similar), price, source of the answer, collect-by date, delivery | Belongs to one request and one shop; may become one order | Compact row on the asking list, full card in the chat once the shop replies → details sheet, where the shopper buys. The shop's name on the row, the card and the order card is a link to the shop's page |
 | Order | My order | Items, shop, total, collect or delivery, collect-by date, collected at (the shop or a collection point), collection code, payment, rating | Belongs to one request, one shop and one answer | Card in the chat with its status label → receipt, which holds the collection code |
 
 ## One answer, two sources
@@ -125,6 +125,8 @@ Choosing a place or a radius reloads Nearby. The active place changes only from 
 | Order, collect | "Waiting for [shop] · not charged yet" → "Ready · collect by Mon 9 Nov" → "Extended · collect by Mon 16 Nov" → "Collected" → "Collected · rate [shop]" until the buyer rates (then "Collected · rated") or the 30 days end; endings: "Not confirmed · not charged", "Sold · not charged", "Cancelled · refunded", "Not collected · refunded". After a partial buy the card adds a line, "Keep looking for [n] more" |
 | Order, delivery | "Waiting for [shop] · not charged yet" → "Paid" → "On its way" → "Delivered", followed by Snuffle's bubble "How was [shop]?" with a Rate chip. A failed payment creates no order; the request keeps its label |
 | Shop | "Open until 7pm", "Closes soon", "Closed, opens 9am"; on its page, by ratings: "No ratings yet" with "Snuffle has asked them 4 times", "New on Snuffle" with "3 people so far" (below 5), "92%" with "would go back" and "38 people" |
+
+Every request opens as a full conversation, whichever state it is in: the shopper's ask, Snuffle's confirmation, the asking list, the answer and order cards, then the one next action the state allows. Needs you shows the answer card with Buy and the deadline; a standing request shows last week's order, this week's order and Change and Stop; Collected ends on the order card with Rate; Not found offers Ask further away and Keep looking. Every chat has the composer, and a reply that the prototype doesn't know gets the off-script answer.
 
 The dot in a label ("Ready · collect by Mon 9 Nov") only marks where the status ends and its detail begins. The interface draws the two in different weights and colours and never shows the dot (Metadata lines on the [Content](content.md) page).
 

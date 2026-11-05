@@ -5,8 +5,9 @@
 import ThumbsDownIcon from '@hugeicons/core-free-icons/ThumbsDownIcon';
 import { memo } from 'react';
 import { View } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
+import { useTileAccent } from '../../internal/ground';
 import { Icon } from '../Icon/Icon';
 import { Text } from '../Text/Text';
 
@@ -28,6 +29,12 @@ export type RatingSummaryProps = {
 };
 
 export const RatingSummary = memo(function RatingSummary({ figure, caption, title, detail, accessibilityLabel, tags = [] }: RatingSummaryProps) {
+  const { theme } = useUnistyles();
+  const dark = theme.scheme === 'dark';
+  const accent = useTileAccent();
+  // In dark on an accent tile the chips take the accent's tile fill, as the "What they sell" chips do: 1.40 to 1.48:1 from
+  // the row (tag.fillRaised was 1.37 to 1.40:1 there).
+  const onTile = dark && accent ? { borderColor: theme.color.shop.accent[accent].tile, backgroundColor: theme.color.shop.accent[accent].tile } : undefined;
   const spokenTags = tags.map((t) => `${t.tag}, ${t.count}`).join('; ');
   return (
     <View accessible accessibilityLabel={spokenTags ? `${accessibilityLabel}. ${spokenTags}` : accessibilityLabel} style={styles.root}>
@@ -56,7 +63,7 @@ export const RatingSummary = memo(function RatingSummary({ figure, caption, titl
       {tags.length > 0 ? (
         <View style={styles.tags}>
           {tags.map((t) => (
-            <View key={t.tag} style={styles.tag}>
+            <View key={t.tag} style={[styles.tag, dark && styles.tagDark, onTile]}>
               {t.up ? null : <Icon icon={ThumbsDownIcon} size="footnote" color="mutedForeground" />}
               <Text variant="footnote">{t.tag}</Text>
               <Text variant="footnote" color="mutedForeground">
@@ -74,8 +81,8 @@ const styles = StyleSheet.create((theme) => ({
   root: { gap: theme.gap.block },
   head: { flexDirection: 'row', alignItems: 'center', gap: theme.space[3] },
   words: { flexShrink: 1 },
-  // Chips that only inform: Background with a 1 pt Border edge, a level down from the row (Background on Card in light,
-  // the Muted row in dark), never a control's fill.
+  // Chips that only inform. Light: Background with a 1 pt Border edge, a level down from the Card row. Dark: no edge, a tonal
+  // container (tag.fillRaised on a Card row; on an accent tile's row the accent's tile, 1.40:1 or more), never a control's fill.
   tags: { flexDirection: 'row', flexWrap: 'wrap', gap: theme.space[2] },
   tag: {
     flexDirection: 'row',
@@ -88,4 +95,5 @@ const styles = StyleSheet.create((theme) => ({
     borderColor: theme.color.border,
     backgroundColor: theme.color.background,
   },
+  tagDark: { borderColor: theme.color.tag.fillRaised, backgroundColor: theme.color.tag.fillRaised },
 }));

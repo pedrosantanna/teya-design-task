@@ -14,6 +14,7 @@ Call:
 - In this round I asked for a check that keeps Indigo to one filled control per viewport and for the colour roles to be reviewed on every screen (decision 045).
 AI:
 - An agent researched NN/g on Gestalt, visual hierarchy and progressive disclosure, Laws of UX on Hick's law, and Rosenfeld, Morville and Arango and Covert on information architecture, and proposed the checklist. I asked for every screen to be checked against the design system.
+- In round 12 an agent added two rules from the screen review: a link inside a pressable card keeps its own target, and a chip on a tinted row needs a 1.4:1 step from it.
 Trade-offs:
 - Fixed counts (three text sizes, five chips) are easy to check and can flag a screen that works; a break is a prompt to look, and I decide whether it stays.
 ```
@@ -24,7 +25,7 @@ Trade-offs:
 | --- | --- | --- |
 | 1 | Proximity | Items in a group are 4–12 apart, groups at least 24, sections 32, and every gap is a `space.*` value; in the chat, 12 between one sender's bubbles and 24 at a change of sender |
 | 2 | Heading proximity | Each heading is at least twice as close to its content as to the section before |
-| 3 | Common region | A card or sheet appears only where spacing can't separate; no cards inside cards. Run it in light and dark: a grouped container can vanish against the dark background |
+| 3 | Common region | A card or sheet appears only where spacing can't separate; no cards inside cards. Run it in light and dark: a grouped container can vanish against the dark background; a chip on a row inside a tinted card needs a tonal step of at least 1.4:1 from that row |
 | 4 | Similarity | One object looks the same everywhere (a shop is a tile on Nearby and a row elsewhere) |
 | 5 | Continuity and alignment | Everything sits on the margin line or an indent; a carousel's first item lines up with its heading |
 | 6 | Figure and ground | Glass only on floating controls; text over a photo passes 4.5:1 with its scrim |
@@ -57,7 +58,7 @@ Trade-offs:
 
 | # | Check | Passes when |
 | --- | --- | --- |
-| 15 | Target size | Every target is at least 44 pt (48 dp), with at least 8 between targets |
+| 15 | Target size | Every target is at least 44 pt (48 dp), with at least 8 between targets. A link inside a pressable card keeps its own 44 pt target; the card's press area must not overlap it beyond the 8 pt separation |
 | 16 | Safe areas | Nothing important under the Dynamic Island, the home indicator or the ask bar; the last item clears the ask bar by 48 |
 | 17 | Scroll extent | Content can't scroll past its last item by more than the ask-bar clearance: at the end, the last item rests 48 above the ask bar |
 | 18 | Colour and images | Colour is never the only signal; every image is labelled or hidden |

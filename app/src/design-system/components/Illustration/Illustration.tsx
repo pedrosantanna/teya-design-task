@@ -5,9 +5,10 @@
 import { useIsFocused } from 'expo-router';
 import { Image } from 'expo-image';
 import { VideoView, useVideoPlayer } from 'expo-video';
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useId, useState } from 'react';
 import { View } from 'react-native';
 import { useReducedMotion } from 'react-native-reanimated';
+import Svg, { Defs, RadialGradient, Rect, Stop } from 'react-native-svg';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { useGround } from '../../internal/ground';
@@ -15,6 +16,7 @@ import { IMAGE_FILL, IMAGE_OVER } from '../../internal/media';
 import {
   CATEGORY_ILLUSTRATIONS,
   ILLUSTRATIONS,
+  ILLUSTRATION_HEIGHTS,
   ILLUSTRATION_SIZES,
   type CategoryId,
   type IllustrationAsset,
@@ -28,7 +30,7 @@ export type IllustrationPlay = 'entry-then-idle' | 'idle' | 'still';
 
 export type IllustrationProps = {
   name: IllustrationName;
-  /** small 64, medium 88, large 120, hero 220 (the location ask), welcome 240 (Getting started). */
+  /** small 64, medium 88, large 120, hero 352 (the location ask), welcome 312 (Getting started), bleed 460 × 420 (a window onto the Getting started crossroads, wider than the screen so the screen crops it). */
   size?: IllustrationSize;
   /** The surface it sits on; shading and shadow are baked for it. The light or dark file follows the theme.
    *  welcome: Getting started, where each object is rendered for its own page's Indigo ground. */
@@ -46,7 +48,12 @@ export function useIllustrationScheme(): IllustrationScheme {
 }
 
 /** The asset for a name, ground and size; falls back to another size, then the other ground, of the same scheme. */
-export function illustrationAsset(name: IllustrationName, ground: IllustrationGround, scheme: IllustrationScheme, size: IllustrationSize): IllustrationAsset | undefined {
+export function illustrationAsset(
+  name: IllustrationName,
+  ground: IllustrationGround,
+  scheme: IllustrationScheme,
+  size: IllustrationSize,
+): IllustrationAsset | undefined {
   const sizes = Object.keys(ILLUSTRATION_SIZES) as IllustrationSize[];
   const others: IllustrationGround[] = (['background', 'card'] as const).filter((g) => g !== ground);
   for (const g of [ground, ...others]) {
@@ -67,7 +74,7 @@ export function isCategoryId(id: string): id is CategoryId {
   return id in CATEGORY_ILLUSTRATIONS;
 }
 
-/** A category card's art (opaque, on the category's colour) for the active scheme. */
+/** A category card's art (transparent, shaded for the category's colour) for the active scheme. */
 export function categoryIllustration(id: CategoryId, scheme: IllustrationScheme) {
   return CATEGORY_ILLUSTRATIONS[id]?.[scheme];
 }
@@ -90,14 +97,58 @@ function ClipVideo({ entry, idle }: { entry?: number; idle?: number }) {
     const sub = player.addListener('playToEnd', () => {
       if (!idle) return;
       player.loop = true;
-      player.replaceAsync(idle).then(() => player.play()).catch(() => undefined);
+      player
+        .replaceAsync(idle)
+        .then(() => player.play())
+        .catch(() => undefined);
     });
     return () => sub.remove();
   }, [player, entry, idle]);
-  return <VideoView player={player} surfaceType="textureView" nativeControls={false} fullscreenOptions={{ enable: false }} allowsPictureInPicture={false} contentFit="contain" style={IMAGE_FILL} />;
+  return (
+    <VideoView
+      player={player}
+      surfaceType="textureView"
+      nativeControls={false}
+      fullscreenOptions={{ enable: false }}
+      allowsPictureInPicture={false}
+      contentFit="contain"
+      style={IMAGE_FILL}
+    />
+  );
 }
 
-export const Illustration = memo(function Illustration({ name, size = 'large', ground: groundProp, play = 'entry-then-idle', accessibilityLabel }: IllustrationProps) {
+const LIFT_REACH = 1.9;
+
+// The location ask's art is shaded for a ground one step above the screen's Background (color.location, dark mode), so
+// its outlines read. The screen keeps the Background; this soft radial lift, in that colour, sits behind the art and
+// fades out well inside the screen (visual critique, round 12). In light mode the two are the same colour: no lift.
+function Lift({ side }: { side: number }) {
+  const { theme } = useUnistyles();
+  const id = `lift${useId().replace(/[^a-zA-Z0-9]/g, '')}`;
+  if (theme.color.location === theme.color.background) return null;
+  return (
+    <View style={styles.lift(side)} pointerEvents="none">
+      <Svg width="100%" height="100%">
+        <Defs>
+          <RadialGradient id={id} cx="50%" cy="50%" r="50%">
+            <Stop offset="0" stopColor={theme.color.location} stopOpacity={1} />
+            <Stop offset="0.5" stopColor={theme.color.location} stopOpacity={0.85} />
+            <Stop offset="1" stopColor={theme.color.location} stopOpacity={0} />
+          </RadialGradient>
+        </Defs>
+        <Rect x="0" y="0" width="100%" height="100%" fill={`url(#${id})`} />
+      </Svg>
+    </View>
+  );
+}
+
+export const Illustration = memo(function Illustration({
+  name,
+  size = 'large',
+  ground: groundProp,
+  play = 'entry-then-idle',
+  accessibilityLabel,
+}: IllustrationProps) {
   const scheme = useIllustrationScheme();
   // A chat's ground is Card in light mode and Background in dark (craft-pass-2); elsewhere, the Background.
   const onChat = useGround() === 'chat';
@@ -105,7 +156,18 @@ export const Illustration = memo(function Illustration({ name, size = 'large', g
   const reduceMotion = useReducedMotion();
   const focused = useIsFocused();
   const asset = illustrationAsset(name, ground, scheme, size);
-  const first: Phase = reduceMotion || play === 'still' || !asset ? 'still' : play === 'idle' ? (asset.idle ? 'idle' : 'still') : asset.entry ? 'entry' : asset.idle ? 'idle' : 'still';
+  const first: Phase =
+    reduceMotion || play === 'still' || !asset
+      ? 'still'
+      : play === 'idle'
+        ? asset.idle
+          ? 'idle'
+          : 'still'
+        : asset.entry
+          ? 'entry'
+          : asset.idle
+            ? 'idle'
+            : 'still';
   const [phase, setPhase] = useState<Phase>(first);
   const [key, setKey] = useState(`${name}/${ground}/${scheme}/${size}/${play}/${reduceMotion}`);
   const nextKey = `${name}/${ground}/${scheme}/${size}/${play}/${reduceMotion}`;
@@ -156,20 +218,29 @@ export const Illustration = memo(function Illustration({ name, size = 'large', g
   if (accessibilityLabel) {
     return (
       <View style={styles.box(size)} accessible accessibilityRole="image" accessibilityLabel={accessibilityLabel}>
+        {ground === 'location' ? <Lift side={ILLUSTRATION_SIZES[size]} /> : null}
         {image}
       </View>
     );
   }
   return (
     <View style={styles.box(size)} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+      {ground === 'location' ? <Lift side={ILLUSTRATION_SIZES[size]} /> : null}
       {image}
     </View>
   );
 });
 
 const styles = StyleSheet.create(() => ({
+  lift: (side: number) => ({
+    position: 'absolute',
+    top: -side * ((LIFT_REACH - 1) / 2),
+    left: -side * ((LIFT_REACH - 1) / 2),
+    width: side * LIFT_REACH,
+    height: side * LIFT_REACH,
+  }),
   box: (size: IllustrationSize) => {
     const side = ILLUSTRATION_SIZES[size];
-    return { width: side, height: side };
+    return { width: side, height: ILLUSTRATION_HEIGHTS[size] ?? side };
   },
 }));

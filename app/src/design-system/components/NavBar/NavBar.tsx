@@ -102,6 +102,13 @@ export type NavBarProps = {
   fillBefore?: { fill: EdgeFill; until: number };
 };
 
+/** The bar's height under the safe area. With a subtitle (a chat) the bar is as tall as its two title lines
+ *  (Headline and the 28 pt thumb) plus `space.3` above and below, so the title keeps clear of the top and of the Back circle's axis. */
+function barHeightFor(theme: ReturnType<typeof useUnistyles>['theme'], tall: boolean) {
+  if (tall) return theme.type.headline.lineHeight + theme.size.thumb.nav + 2 * theme.space[3];
+  return theme.platform === 'ios' ? theme.hit.min + theme.space[2] : theme.hit.min + theme.space[4];
+}
+
 /** The subtitle's square: the same image as the request's thumbnail in Requests, so the two match. */
 function SubtitleThumb({ thumb }: { thumb: NonNullable<NavBarProps['subtitleThumb']> }) {
   const scheme = useIllustrationScheme();
@@ -180,13 +187,15 @@ export const NavBar = memo(function NavBar({
   // Back, Close and the trailing controls sit on the screen margin, in line with the content under them.
   const margin = screenMargin(theme, frame.width);
   const top = topInset ?? insets.top;
-  const ios = theme.platform === 'ios';
   const fallback = useSharedValue(0);
   const scrollY = scroll?.scrollY ?? fallback;
   const hidden = scroll?.hidden ?? fallback;
   const largeHeight = theme.type.title1.lineHeight + theme.space[2];
   const reveal = mode === 'large' ? largeHeight : mode === 'reveal' ? (revealAt ?? largeHeight) : 0;
-  const barHeight = ios ? theme.hit.min + theme.space[2] : theme.hit.min + theme.space[4];
+  const barHeight = barHeightFor(theme, Boolean(subtitle));
+  // One title block centred on the screen, with the glyph and the request's thumbnail each leading its own line.
+  const centred = Boolean(subtitle);
+  const solidBar = typeof fill === 'object' ? 'tile' : fill === 'chat' ? 'chat' : undefined;
   const total = top + barHeight;
   const spring = theme.spring.smooth;
   const fade = theme.spring.fade;
@@ -233,37 +242,47 @@ export const NavBar = memo(function NavBar({
     <>
     {/* No bar fill (iOS 26): a scroll-edge fade under the floating controls once content is under them. */}
     {fillBefore ? <ScrollEdge edge="top" height={total + theme.space[4]} fill={fillBefore.fill} style={beforeStyle} /> : null}
-    {/* On a shop's tile the edge stays opaque down to the bar's bottom, then fades over space.6, so the inline title
-        reads on the tile and white rows never show through behind it. */}
-    <ScrollEdge
-      edge="top"
-      height={typeof fill === 'object' ? total + theme.space[6] : total + theme.space[4]}
-      solid={typeof fill === 'object' ? total / (total + theme.space[6]) : undefined}
-      fill={fill}
-      style={backgroundStyle}
-    />
+    {/* On a shop's tile and in a chat the bar is a solid fill of the page's own colour down to the bar's bottom with a
+        0.5 pt hairline under it, so nothing half-cut shows beside the controls (visual critique, round 12). Elsewhere a
+        scroll-edge fade shows once content is under the bar. */}
+    {solidBar ? (
+      <Animated.View pointerEvents="none" style={[styles.solid(total, solidBar === 'chat' ? theme.color.chat.ground : theme.color.shop.accent[(fill as { accent: ShopAccentName }).accent].tile, solidBar === 'chat' ? theme.color.chat.edge : theme.color.border), backgroundStyle]} />
+    ) : (
+      <ScrollEdge edge="top" height={total + theme.space[4]} fill={fill} style={backgroundStyle} />
+    )}
     {/* box-none: the bar's empty parts let touches through to the content under it (Nearby's area row). */}
     <Animated.View style={[styles.bar(top), hideStyle]} pointerEvents="box-none">
       <View style={styles.row(barHeight, margin)} pointerEvents="box-none">
         {leadingNode}
-        <Animated.View style={[styles.titleSlot, titleMark && styles.titleWithMark, titleStyle]} pointerEvents="none">
-          {titleMark ? <SnuffleMark size="inline" /> : null}
-          <View style={styles.titleText}>
-            <Text variant="headline" numberOfLines={1} accessibilityRole="header">
-              {title}
-            </Text>
-            {subtitle ? (
-              <View style={styles.subtitleRow}>
-                {subtitleThumb ? <SubtitleThumb thumb={subtitleThumb} /> : null}
-                <View style={styles.titleText}>
-                  <Text variant="caption1" color="mutedForeground" numberOfLines={1}>
-                    {subtitle}
-                  </Text>
-                </View>
+        {centred ? (
+          <Animated.View style={[styles.centredSlot(margin + theme.hit.min + theme.space[2]), titleStyle]} pointerEvents="none">
+            <View style={styles.centredLine}>
+              {titleMark ? <SnuffleMark size="inline" /> : null}
+              <View style={styles.titleText}>
+                <Text variant="headline" numberOfLines={1} accessibilityRole="header">
+                  {title}
+                </Text>
               </View>
-            ) : null}
-          </View>
-        </Animated.View>
+            </View>
+            <View style={styles.centredLine}>
+              {subtitleThumb ? <SubtitleThumb thumb={subtitleThumb} /> : null}
+              <View style={styles.titleText}>
+                <Text variant="caption1" color="mutedForeground" numberOfLines={1}>
+                  {subtitle}
+                </Text>
+              </View>
+            </View>
+          </Animated.View>
+        ) : (
+          <Animated.View style={[styles.titleSlot, titleMark && styles.titleWithMark, titleStyle]} pointerEvents="none">
+            {titleMark ? <SnuffleMark size="inline" /> : null}
+            <View style={styles.titleText}>
+              <Text variant="headline" numberOfLines={1} accessibilityRole="header">
+                {title}
+              </Text>
+            </View>
+          </Animated.View>
+        )}
         <View style={styles.trailing} pointerEvents="box-none">
           <BarActions actions={trailing} />
           {confirm ? <ConfirmButton onPress={confirm.onPress} label={confirm.label} /> : null}
@@ -304,12 +323,12 @@ export const LargeTitle = memo(function LargeTitle({ title, scroll, display = fa
   );
 });
 
-/** Height of the bar plus the top inset (the safe area by default), for the scroll content's top padding. */
-export function useNavBarHeight(topInset?: number): number {
+/** Height of the bar plus the top inset (the safe area by default), for the scroll content's top padding. `tall` is the bar with a subtitle (a chat). */
+export function useNavBarHeight(topInset?: number, tall = false): number {
   const { theme } = useUnistyles();
   const insets = useSafeAreaInsets();
   const top = topInset ?? insets.top;
-  return top + (theme.platform === 'ios' ? theme.hit.min + theme.space[2] : theme.hit.min + theme.space[4]);
+  return top + barHeightFor(theme, tall);
 }
 
 const styles = StyleSheet.create((theme) => ({
@@ -322,6 +341,19 @@ const styles = StyleSheet.create((theme) => ({
     paddingHorizontal: margin,
   }),
   titleSlot: { flex: 1 },
+  // The chat's title block: centred on the screen between the Back circle's width and the same width on the right.
+  centredSlot: (inset: number) => ({ position: 'absolute', top: 0, bottom: 0, left: inset, right: inset, alignItems: 'center', justifyContent: 'center' }),
+  centredLine: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2], maxWidth: '100%' },
+  solid: (height: number, color: string, edge: string) => ({
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height,
+    backgroundColor: color,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: edge,
+  }),
   titleWithMark: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2] },
   titleText: { flexShrink: 1 },
   subtitleRow: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1] },

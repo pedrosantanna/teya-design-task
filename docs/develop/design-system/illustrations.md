@@ -14,14 +14,19 @@ Call:
 - In the third round I asked for side panels that collapse (the docs sidebar and the viewer's two panels), the view controls moved to the viewport corners, a review of the shop's awning, a crossroads scene, London street furniture, and a fix for objects that flickered on landing.
 - I kept two shop variants side by side so I can choose later: the classic order with the fascia sign above the awning, and one with the awning alone.
 - The style is provisional until the objects are seen at real size in the prototype.
+- In round 10 I asked for the app art to be composed on a transparent area with the object centred, so the shadow is a consequence of the light; for each object's most readable face toward the viewer; for category art at about 80% of the card's art area and Getting started art 1.3 times larger; and for a line of fixed weight on screen that no longer clumps at small sizes.
+- I asked for the High Street crossroads on Getting started page 1 to be very large and bleed off the screen so its detail shows, and for the location ask's dark ground to let the quiet street read. I chose the corner it is framed on, the ground (Stone 360) and the still with a drift over an entry clip.
 AI:
+- In round 12 an agent added a clearance to the centred category frame, so the object shrinks until its whole shadow sits inside the square with 8 pt to spare, shortened the Getting started fade, dimmed the dark crossroads, and re-rendered the quiet street at 352 pt with a lift behind it. It measured the line again and the set at 3.8 MB.
+- In round 10 an agent changed the export (a centred, transparent frame; a line width in device pixels; lighter creases at small sizes; a camera turn per object), re-rendered all 140 assets in light and dark, replaced the encoder's corner-pixel check, and measured the stroke before and after. I chose the 80% fill, the line weight and the camera turn of the camera.
 - An agent rebuilt the outline rendering, the shading and the viewer, simplified the four existing objects and modelled the street corner from my notes and close-up screenshots of the problems. I review each object in the viewer and decide what changes.
-- In the third round an agent compared the shop with its previous version, rebuilt the awning from it (seven stripes, a roller box, a scalloped edge), modelled the crossroads and the London shop buildings, and traced the flicker: a label or band sitting on a part that squashed was swallowed by that part for a few frames. Another agent modelled the street furniture as separate objects.
+- In the third round an agent compared the shop with its previous version, rebuilt the awning from it (seven stripes, a roller box, a scalloped edge), modelled the crossroads and the London shop buildings, and traced the flicker: a label or band sitting on a part that squashed was swallowed by that part for a few frames. Another agent modelled the street furniture as separate objects.- For round 10 an agent added a window option to the export (a frame onto part of a scene), a lower fade applied at encode time, and a ground for the location ask; it measured the candidate grounds and tried an entry clip for the hero, which was 1.6 MB, before dropping it.
 Trade-offs:
+- Transparent category art is composited over the tile at run time, which costs nothing on the card but means the shadow tone is baked for one tile colour: a token change needs a re-render, and the encoder checks it.
 - Screen-space outlines need a second render of the scene each frame (object ids, surface directions and depth) and two full-screen passes. The agent measured about 10 ms per frame at 2x pixel density on an M1 laptop, inside the 16 ms a 60 fps frame allows.
 - Shadows are projected flat onto the ground, so an object never shades itself; the shade tone on faces turned from the light does that job. On the street corner the shadow lies at pavement height, so where it crosses onto the lower road it sits a few centimetres high.
 - The viewer loads three.js from a CDN, so it needs a network connection; the app would ship rendered images, not the viewer.
-- The street scenes merge the static pieces of each building and each piece of furniture by colour, so the crossroads draws about 230 meshes instead of 500. Where two merged pieces of one colour touch, no line is drawn between them.
+- The street scenes merge the static pieces of each building and each piece of furniture by colour, so the crossroads draws about 230 meshes instead of 500. Where two merged pieces of one colour touch, no line is drawn between them.- The page 1 hero has no entry clip, so its entry is a rise and fade drawn by the screen, not the parts dropping in one after another like the other objects.
 ```
 
 ## Style rules
@@ -31,7 +36,7 @@ Trade-offs:
 | Simple forms | A few large boxes, cylinders, spheres, capsules and extruded profiles. Few small parts and almost no rounded bevels, so each object still reads at 64 to 120 px |
 | Palette colours only | Fills come from the [colour](colour.md) ramps: pale steps for large surfaces, 500 to 900 for small accents |
 | Two tones per surface | Lit faces show the palette colour. Faces turned from the light show the colour × 0.56 × an ambient tint, mixed 36% toward the background's dark tone. The ambient tint is the background's hue; the dark tone is the 800 step of its ramp (900 on Indigo 800), near-black on Biscuit and indigo 900 on the dark grounds |
-| Screen-space outlines | After the scene is drawn, one pass compares each pixel's object, surface direction and depth with its neighbours. A line appears at a silhouette, where two parts meet, and where two faces of one part meet at 35° or more. Lines are near-black #1a1714, about 1.25 px, the same width at every zoom; MSAA and FXAA keep curves smooth |
+| Screen-space outlines | After the scene is drawn, one pass compares each pixel's object, surface direction and depth with its neighbours. A line appears at a silhouette, where two parts meet, and where two faces of one part meet at 35° or more. Lines are near-black #1a1714 and a fixed width on screen (see Line weight); MSAA and FXAA keep curves smooth |
 | Parts sit on surfaces | A part touches the surface it belongs to instead of sinking into it, and no two visible faces share a plane, so nothing flickers where they meet |
 | Solid shadow | One light, from the upper left unless moved in the viewer. The shadow is a flat shape on the ground in the background's own shade tone; on an object with its own ground, such as the street corner, it darkens that ground by the same rule |
 | Isometric view | Objects are shown at the true isometric angle (35.264° elevation, 45° turn); the viewer also offers free orthographic and perspective cameras |
@@ -41,11 +46,53 @@ Two references shaped these rules. Gooch, Gooch, Shirley and Cohen ("A non-photo
 
 ## Getting started
 
-Each Getting started page shows its object at 240 pt on that page's ground: the crossroads on Indigo (page 1), the shop on Peach (page 2) and the delivery box on Pistachio (page 3). The objects are rendered for their own ground, so shade and shadow mix toward that colour's 900 step (Indigo 900, Peach 900, Pistachio 900; near-black on the dark Indigo 900 page), and on a transparent ground: the page colour blends while the shopper drags, and an opaque square would show its edge mid-swipe. When the grounds were all Indigo, the shop's Indigo 800 parts had to be recoloured to Peach 500 on dark page 2; on the Peach dark tile its own Indigo roof stands apart, so the recolour is gone. Stills ship at @2x and @3x, the entry clips at @2x, and the shop also has its idle loop. The crossroads entry only fit the 300 KB budget once the encoder kept half the frames while parts move and a quarter once the scene settles.
+Each Getting started page shows its object on that page's ground: the crossroads on Indigo (page 1), the shop on Peach (page 2) and the delivery box on Pistachio (page 3). Pages 2 and 3 draw theirs at 312 pt (1.3 times the earlier 240); page 1 is a hero that bleeds off the screen (below). The objects are rendered for their own ground, so shade and shadow mix toward that colour's 900 step (Peach 900, Pistachio 900; near-black on the dark Indigo page), and on a transparent ground: the page colour blends while the shopper drags, and an opaque square would show its edge mid-swipe. When the grounds were all Indigo, the shop's Indigo 800 parts had to be recoloured to Peach 500 on dark page 2; on the Peach dark tile its own Indigo roof stands apart, so the recolour is gone. Stills ship at @2x and @3x, the entry clips of the shop and the box at @2x, and the shop also has its idle loop.
+
+### Page 1 hero
+
+The High Street crossroads on page 1 is drawn about 2.2 times the screen width (874 pt on a 402 pt screen) and the screen crops it at the sides, so the detail of the four blocks shows: shop fronts, awnings, the phone box and pillar box, the people at the crossings. The export renders a window onto the scene, 460 × 420 pt (the `bleed` size), instead of the whole object: `fitCenter` 1.9 sets the scene at 1.9 times the window's width, and `focusX` and `focusY` move the window's centre across the scene by a fraction of its width and height (`fitFrame` turns this on). I set it on the corner with the phone box, the pillar box and the café awning, with the low block in front cut by the bottom edge. The window has 29 pt to spare on each side of a 402 pt screen, which the slow drift uses (the art moves 12 pt each way over 9 s). On a wider screen, such as the web preview, the art is scaled up so that it still bleeds.
+
+The line is 1.4 pt at the size it is displayed, the same as every other illustration, because the window is rendered at 1 pt per pt. The ground is transparent, and the window's lower edge dissolves over its last 40 pt (`fadeBottom`, applied when the frames are encoded) so no hard cut shows above the headline; at 70 pt the pale building faces turned lavender over the Indigo and read as a washed band. In dark mode the encoder multiplies the colour by 0.9 (`dim`), so the cream city sits calmer on Indigo 800. The ground the art is shaded for in dark mode is Indigo 800, the page's token (the manifest said Indigo 900 before).
+
+It has no entry clip. At 920 px wide the entry was 1.6 MB for each of light and dark even at half the frame rate, against 0.5 MB left for the whole page. The screen plays the entry itself instead: the art rises and fades in with the arrive spring, then drifts. Both run in Reanimated on the image, so they cost no bytes; with Reduce Motion the art shows at rest. The two stills (@2x, @3x) take 400 KB in all.
+
+### Location ask
+
+The location ask's screen is the Background in both modes. `color.location` is the ground the art is rendered for: the Background in light mode, Stone 360 in dark, where the art sits on a soft radial lift in that colour (about 1.9 times the art's size, fading to nothing) instead of a screen of its own, which read as another app. The quiet street (a lamp column and a bench) is rendered at 352 pt (1.6 times the earlier 220 pt) and centred between the status bar and the headline, with the iron recoloured from Stone 320 to Stone 740 in dark mode. The earlier dark render drew the near-black iron on the Background and the outlines vanished into it. I measured the dominant fills and the outline ink (#1A1714) against the candidates:
+
+| Ground | Outline ink | Iron in shade | Wood in shade | Muted foreground text | Verdict |
+| --- | --- | --- | --- | --- | --- |
+| Stone 150 (the Background), old iron | 1.08:1 | 1.57:1 | not measured | 8.52:1 | Masses disappear |
+| Stone 320 #323334, light iron | 1.43:1 | 2.41:1 | 1.05:1 | 5.51:1 | Outline under 1.5:1 |
+| Stone 360 #3D3E3F, light iron | 1.67:1 | 2.04:1 | 1.24:1 | 4.66:1 | Chosen |
+| Indigo 850 #2E2B8F, light iron | 1.58:1 | 2.54:1 | 1.18:1 | 4.92:1 | Reads as well, but a second saturated surface after Getting started |
+| Indigo 900 #222169, lightest iron | 1.28:1 | 2.51:1 | 1.06:1 | 6.13:1 | Outline under 1.5:1 |
+
+Stone 360 is the lightest step that keeps the muted body text at 4.5:1 (4.66:1; Foreground 10.28:1, the Indigo 300 buttons 6.05:1) while the outlines and the main masses (the iron's lit side 4.7:1, the lit wood 3.3:1, the iron in shade 2:1) separate from it. The wood in shade stays near the ground (1.24:1), which is the small share of its surface turned from the light. The ground sits 1.83:1 from the Background, so the screen reads as its own surface. The old iron recolour in `darkTones` pointed at a colour the iron did not have (#332C27, the iron is #323334), so it had no effect on the Not found art; that is left as it was, since the Not found screens are not part of this change.
 
 ## Category cards
 
-Each category card's still is opaque, rendered on that kind's tile colour, which the pipeline reads from the colour tokens (`shop.accent.<hue>.tile`), so a token change can't leave a still on an old colour. The encoder fails when a still's corner pixel differs from its tile by more than 2 per channel. Every object is framed the same way: without its shadow it is 72% of the card's 120 pt width, or as tall as the room between 12 pt from the top and a baseline at 110 pt allows, standing on that baseline and centred across; its shadow stays inside the square.
+Each category card's art is a transparent image, 120 × 164 pt, shaded for that kind's tile colour (read from the colour tokens, `shop.accent.<hue>.tile`) and drawn over the tile in the app. The object's bounding box, without its shadow, is centred in the top 120 pt square and its longer side is 80% of that square, so every object has the same footprint. The shadow falls where the light sends it, and the object shrinks until the whole shadow sits inside the square with at least 8 pt to spare on every side (`fit.clear`), so no card edge cuts it; the bakery and the café were cut on the right before. The Category screen's header shows the same square. The earlier round placed the object with its shadow in mind, which left it small (about 22% of the square) and high.
+
+Each object is checked on its contact sheet for the face a shopper reads first. The isometric camera already shows the most readable face of 18 of the 19 objects. The film camera showed its lens at a slant under its top plate, so its set turns the camera 35° (`rot` in the manifest) and the lens faces the viewer; the light turns with it. A turn of 25° the other way hid the lens and was dropped.
+
+The encoder replaces the corner-pixel check with two others: the top-left pixel of every category still must be fully transparent, and the tile each still was shaded for (`categories.grounds.json`) must equal the token's current value, since a changed token leaves the shadow tone off.
+
+## Line weight
+
+The outline pass works in device pixels. Its width is `line` pt at the display size times the output scale, minus 0.75 px that FXAA and edge anti-aliasing add, and the pass covers a pixel by how far the nearest edge is, so the width is fractional (1.4 pt gives 2.05 px at @2x and 3.45 px at @3x) and stays the same whatever the render size. The viewer applies the same rule at its own pixel density with 1.25 CSS px. Creases inside one part, found by the surface angle, are lighter than silhouettes and the lines where two parts meet. At 130 pt or less a crease needs 50° instead of 35° and is drawn at 60% of the width, so dense detail (the bread's cuts, the dice, the books' pages) does not clump.
+
+Measured as the mean width (px converted to pt) of the run of ink-coloured pixels along every row and column of the stills:
+
+| Display size | Before | After |
+| --- | --- | --- |
+| 120 pt (bakery, @2x / @3x) | 1.80 / 1.56 pt | 1.47 / 1.18 pt |
+| 220 pt, now 352 pt (quiet street, @2x / @3x) | 2.48 / 2.06 pt | 1.80 / 1.42 pt |
+| Getting started (shop, @2x / @3x) | 1.55 / 1.45 pt (240 pt) | 1.44 / 1.22 pt (312 pt) |
+
+## Ground and video
+
+Videos have no alpha. The scooter, shop, crossroads, quiet street, basket and box clips on a flat ground (the background or the card) stay MP4: the clips are 21 to 120 KB each, and the ground is known and flat there, so the baked colour matches the token (the encoder tunes it to within 1 per channel after H.264). Getting started stays WebP with alpha because its ground crossfades while the shopper drags. Category cards have no clips. The whole set is 3.85 MiB (138 files), under the 5 MB budget.
 
 ## Viewer
 

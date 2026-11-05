@@ -14,25 +14,31 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
 import Animated, {
+  Easing,
   interpolateColor,
   useAnimatedScrollHandler,
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
+  withRepeat,
+  withSequence,
+  withSpring,
+  withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { scheduleOnRN } from 'react-native-worklets';
 
-import { Button, Illustration, MarkIntro, PageDots, Text, screenMargin, type IllustrationProps } from '@/design-system';
+import { Button, ILLUSTRATION_SIZES, Illustration, MarkIntro, PageDots, Text, screenMargin, type IllustrationProps } from '@/design-system';
 
-type Page = { title: string; body: string; art: IllustrationProps['name'] };
+type Page = { title: string; body: string; art: IllustrationProps['name']; size?: IllustrationProps['size'] };
 
 const PAGES: Page[] = [
   {
     title: 'Ask for anything nearby',
     body: 'Type what you need, from candles to a cake. Snuffle looks in the small shops around you.',
     art: 'crossroads',
+    size: 'bleed',
   },
   {
     title: 'Snuffle asks the shops for you',
@@ -45,6 +51,46 @@ const PAGES: Page[] = [
     art: 'box',
   },
 ];
+
+// The crossroads is drawn about twice the screen's width and the screen crops it at the sides (illustrations.md,
+// Getting started). It plays no clip: it rises and fades in with the arrive spring, then drifts slowly from side to
+// side, both on the UI thread, so the detail costs no bytes. The window the art is rendered in has PAN pt to spare on
+// each side, and it is scaled up where the screen is wider than that (the web preview).
+const ART_WIDTH = ILLUSTRATION_SIZES.bleed;
+const DRIFT_MS = 9000;
+
+function BleedHero({ play, width }: { play: boolean; width: number }) {
+  const { theme } = useUnistyles();
+  const reduceMotion = useReducedMotion();
+  const pan = theme.space[3];
+  const scale = Math.max(1, (width + 2 * pan) / ART_WIDTH);
+  const shown = useSharedValue(reduceMotion || play ? 1 : 0);
+  const x = useSharedValue(0);
+  useEffect(() => {
+    if (reduceMotion) {
+      shown.set(1);
+      x.set(0);
+      return;
+    }
+    if (!play) {
+      shown.set(0);
+      x.set(0);
+      return;
+    }
+    shown.set(withSpring(1, theme.spring.arrive));
+    const ease = Easing.inOut(Easing.sin);
+    x.set(withRepeat(withSequence(withTiming(-pan, { duration: DRIFT_MS, easing: ease }), withTiming(pan, { duration: DRIFT_MS, easing: ease })), -1, true));
+  }, [play, reduceMotion, pan, shown, x, theme]);
+  const style = useAnimatedStyle(() => ({
+    opacity: shown.get(),
+    transform: [{ translateY: (1 - shown.get()) * theme.space[7] }, { translateX: x.get() }, { scale }],
+  }));
+  return (
+    <Animated.View style={[styles.bleed, style]}>
+      <Illustration name="crossroads" size="bleed" ground="welcome" play="still" />
+    </Animated.View>
+  );
+}
 
 export default function Welcome() {
   const { theme } = useUnistyles();
@@ -129,7 +175,11 @@ export default function Welcome() {
               <View key={p.title} style={styles.page(width, pagesHeight, margin)}>
                 <View style={styles.hero}>
                   {/* Only the page in view plays its entry; the others hold their still. Still under Reduce Motion. */}
-                  <Illustration name={p.art} size="welcome" ground="welcome" play={i === page ? 'entry-then-idle' : 'still'} />
+                  {p.size === 'bleed' ? (
+                    <BleedHero play={i === page} width={width} />
+                  ) : (
+                    <Illustration name={p.art} size="welcome" ground="welcome" play={i === page ? 'entry-then-idle' : 'still'} />
+                  )}
                 </View>
                 <View style={styles.copy}>
                   <Text variant="displayTitle" align="center" accessibilityRole="header">
@@ -184,6 +234,8 @@ const styles = StyleSheet.create((theme) => ({
     justifyContent: 'flex-end',
     paddingBottom: theme.gap.section,
   },
+  // Wider than the page, so the sides run off the screen; the scroll view crops them.
+  bleed: { transformOrigin: 'bottom' },
   copy: { gap: theme.gap.block, paddingBottom: theme.gap.section },
   bottom: (bottom: number, margin: number) => ({
     paddingHorizontal: margin,

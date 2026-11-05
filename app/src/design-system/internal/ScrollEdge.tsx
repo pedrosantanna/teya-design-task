@@ -12,7 +12,7 @@ import { useWebEdgeBlur } from './glass';
 import type { ShopAccentName } from '../theme';
 
 /** The screen's ground, or a shop's accent at the tile step (the shop page while its wash is under the bar). */
-export type EdgeFill = 'background' | 'card' | 'chat' | 'sheet' | 'shopPage' | { accent: ShopAccentName };
+export type EdgeFill = 'background' | 'card' | 'chat' | 'sheet' | { accent: ShopAccentName };
 
 export type ScrollEdgeProps = {
   edge: 'top' | 'bottom';
@@ -36,7 +36,7 @@ export function ScrollEdge({ edge, height, fill = 'background', style, solid: so
   const fadeOver = edge === 'top' && typeof height === 'number' ? theme.space[6] : undefined;
   const solid = solidProp ?? (fadeOver != null && typeof height === 'number' ? Math.max(0, (height - fadeOver) / height) : 0.55);
   const blurRef = useWebEdgeBlur(edge, fadeOver);
-  const color = typeof fill === 'object' ? theme.color.shop.accent[fill.accent].tile : fill === 'chat' ? theme.color.chat.ground : fill === 'shopPage' ? theme.color.shopPage.card : theme.color[fill];
+  const color = typeof fill === 'object' ? theme.color.shop.accent[fill.accent].tile : fill === 'chat' ? theme.color.chat.ground : theme.color[fill];
   const top = edge === 'top';
   return (
     <Animated.View pointerEvents="none" style={[styles.edge(edge, height), style]}>

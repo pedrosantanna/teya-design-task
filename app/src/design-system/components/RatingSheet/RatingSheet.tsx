@@ -130,9 +130,12 @@ const styles = StyleSheet.create((theme) => ({
   thumbs: { flexDirection: 'row', gap: theme.space[3] },
   thumbWrap: { flex: 1 },
   // Large targets, two hit heights tall (88), radius.bubble (20). Selected takes the selected chip's tonal Indigo with its 1 pt edge (colour.md).
-  // Off: Card in light; Muted in dark, where Card sits at 1.17:1 on the sheet.
+  // Off: Card in light; tag.fillRaised in dark (1.58:1 on the sheet). Dark has no edges: the edge takes the fill's own colour,
+  // and the selected button stays distinct by its Indigo fill, the check and the heavier label.
   thumb: (selected: boolean) => {
-    const off = theme.scheme === 'dark' ? theme.color.muted : theme.color.card;
+    const dark = theme.scheme === 'dark';
+    const off = dark ? theme.color.tag.fillRaised : theme.color.card;
+    const on = dark ? theme.color.chipSelectedRaised : theme.color.chipSelected;
     return {
       ...cornerCurve,
       minHeight: theme.hit.min * 2,
@@ -142,8 +145,8 @@ const styles = StyleSheet.create((theme) => ({
       gap: theme.space[1],
       paddingVertical: theme.space[3],
       borderWidth: theme.size.edge.control,
-      borderColor: selected ? theme.color.chipSelectedEdge : off,
-      backgroundColor: selected ? theme.color.chipSelected : off,
+      borderColor: selected ? (dark ? on : theme.color.chipSelectedEdge) : off,
+      backgroundColor: selected ? on : off,
       overflow: 'hidden',
     };
   },

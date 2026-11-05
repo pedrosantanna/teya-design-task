@@ -8,7 +8,7 @@ Takeaways:
 - Modo escuro: fundo #0B0C0D, cartões #252627 (1,29:1), secundário #323334. São passos do Stone: os passos de luminosidade do Biscuit no matiz 270 e com cerca de um quinto do croma, para o escuro ser lido como um cinza simples e frio, e os tiles quentes se destacarem sobre ele.
 - O Índigo #3D35B8 é o comprador agindo: o único botão preenchido de confirmação à vista, os links, a cor de destaque e os balões do comprador. No modo escuro ele sobe para o Índigo 300 com texto preto.
 - Cada loja tem um acento fixo, escolhido pelo tipo dela: Pêssego, Pistache ou Manteiga. O passo de tile (OKLCH L 0,87, C 0,07, Manteiga C 0,09; no escuro L 0,36, C 0,04 a 0,045 nos matizes 38, 135 e 295, e a Manteiga em L 0,345, C 0,034 e matiz 91) fica entre 1,20 e 1,26:1 sobre o fundo claro e preenche o tile tonal, o cartão de categoria, a página da loja inteira e o cabeçalho do recibo (1,71 a 1,83:1 sobre o fundo escuro). Na página da loja ele é o fundo de todas as seções, com as linhas em Card por cima sob a sombra suave; a cor do texto fica em 10,2:1 ou mais sobre todos os tiles e o texto secundário em 4,6:1 ou mais, no claro e no escuro.
-- A Lavanda é o Snuffle e nenhuma loja a usa: os balões (o passo de tile da Lavanda, #D7CCFE), os pontos de digitação e a Live Activity. Os chats ficam sobre um fundo neutro: branco no modo claro, o fundo no escuro.
+- A Lavanda é o Snuffle e nenhuma loja a usa: os balões (o passo de tile da Lavanda, #D7CCFE), os pontos de digitação e a Live Activity. Os chats ficam sobre o fundo nos dois modos (a decisão 059 reverte o fundo branco do chat da craft-pass-2).
 - Os papéis semânticos vêm das mesmas escalas: o destrutivo é o vermelho do iOS escurecido para levar um rótulo branco (6,06:1), o aviso é Manteiga, o sucesso é Pistache, e o Aumentar Contraste dá a cada cartão uma borda de 1 px a 3,4:1 ou mais.
 Call:
 - Pedi para manter o Oat e o Brew, explorar acentos e cinzas quentes em volta deles e fazer o preto e o branco puros funcionarem com tudo isso. Escolhi o Cinza biscoito como neutro (decisão 034).
@@ -22,6 +22,8 @@ Call:
 - Na tela de categoria escura, as linhas em Card ficavam mais escuras que o tile e pareciam buracos. Escolhi manter a cor inteira como fundo e fazer das linhas um cartão tingido mais claro que ele, em vez de um fundo escuro com uma faixa que se desfaz (decisão 050).
 - Depois de outra crítica visual e de uma revisão de telas da versão web, pedi as correções das duas: uma alça mais discreta no escuro, um trilho do controle segmentado que apareça na sheet clara, chips escuros sobre o fundo que não se confundam com o selecionado, a contagem do cabeçalho da tela de categoria na mesma cor do texto secundário das linhas e um Voltar escuro sobre o tile sem a saturação extra e o halo.
 - Os acentos escuros me pareciam feios. Perguntei se os acentos claros, usados sem mudança no escuro, funcionariam melhor e se o neutro escuro deveria ser mais frio e menos saturado. Escolhi acentos com croma menor sobre um neutro mais frio para o modo escuro, depois de comparar quatro opções no quadro de identidade (rodada 10).
+- Na rodada 10 achei feias as bordas escuras de chips e pílulas e pedi que cor e contraste fizessem esse trabalho, seguindo os contêineres tonais do Material 3 e os preenchimentos escuros da Apple, com borda só onde um preenchimento não funciona.
+- Na rodada 10 pedi que o cartão da página da loja voltasse a ter a cor da loja, no claro e no escuro, e que tudo dentro fosse recolorido e medido, com o Ask continuando como o único Índigo preenchido (decisão 056, que reverte a decisão 055).
 AI:
 - Um agente montou as escalas em OKLCH, desenhou as rodadas no quadro de identidade e mediu cada par abaixo. Eu escolhi a paleta, o neutro e o passo do fundo.
 - Um agente propôs os papéis semânticos a partir das escalas existentes e calculou os contrastes com um script que usa a fórmula do WCAG 2. Eu pedi o conjunto e que o vermelho do iOS fosse adaptado à paleta.
@@ -35,13 +37,16 @@ AI:
 - Um agente achou as imagens Manteiga escuras renderizadas sobre um tile antigo (#4C3B01 contra o token #403925), fez o pipeline de ilustrações ler as cores dos tiles dos tokens e falhar quando o canto de uma imagem difere, renderizou de novo as imagens de categoria e mediu os novos pares de chip, controle segmentado, sheet e glass.
 - Um agente criou `color.grabber` (Stone 445 no escuro, 2,49:1 sobre a sheet), passou o trilho do controle segmentado claro para Border, deu aos chips escuros sobre o fundo uma borda Border, criou os valores de glass sobre o tile e mediu cada par novo com o script do WCAG 2.
 - Um agente montou as quatro opções escuras no quadro de identidade, a partir das mesmas quatro telas. Depois da minha escolha, definiu os novos passos do Stone, as cores escuras de tile e de linha e o wash e o ink escuros com o croma reduzido, renderizou de novo as imagens escuras, os clipes e o fallback do mapa e recalculou cada par escuro desta página com o script do WCAG 2.
+- Um agente tirou as bordas escuras de chips e da pílula "Needs you", criou os contêineres `tag`, o Índigo 850 e 950 e os contêineres de destaque nos tokens, e mediu cada par contra o seu fundo.
+- Um agente devolveu o cartão da página da loja ao tile do acento, recoloriu as linhas, os chips, os cartões de avaliação e os botões para ele, acrescentou `successOnTile` e `warningOnTile` depois que a palavra de status deu 4,16:1 sobre o Pêssego, e mediu cada par no claro e no escuro.
+- Na rodada 12 um agente subiu o croma dos cartões de linha escuros em 1,7 vez, acrescentou o Stone 880 para o texto secundário sobre eles, tirou as tags de avaliação do `tag.fillRaised` nas linhas tingidas, apagou o papel `container` do acento, que ninguém usava, e mediu cada par alterado.
 Trade-offs:
 - O secundário #E5E2DE sobre o novo fundo fica em 1,07:1, então não marca um chip ali; os chips foram para a cor do cartão, e o secundário só aparece sobre cartões.
 - A sheet escura fica em 1,09:1 sobre o fundo, abaixo do 1,15:1 buscado: sheets mais claras aproximam dela as linhas em cartão e em secundário. O realce do contorno marca a borda de cima no lugar disso.
 - Com um pastel por loja, a cor da loja não carrega significado além do reconhecimento; status e ações mantêm as próprias cores, então um tile Pêssego nunca é lido como aviso.
 - Os pontos de digitação em Lavanda 500 sobre Lavanda 100 ficam em 2,72:1. São decorativos (o VoiceOver lê "Snuffle is writing"), então mantive o passo mais claro.
 - O texto secundário sobre o passo de tile escuro fica entre 4,66 e 4,99:1: passa no AA, mas com menos folga que no modo claro (5,00:1 ou mais). O croma menor devolveu um pouco (o Pistache foi de 4,58 para 4,66:1).
-- Um fundo de chat branco põe superfícies de cartão sobre cartão, então cartões e linhas agrupadas no chat precisam de um contorno (um fio e uma sombra suave) que não precisam em outros lugares.
+- O chat fica sobre o fundo, como o resto do app, então as superfícies de cartão (cartões de resposta e de pedido, linhas agrupadas, chips, o campo do compositor) são brancas sobre bege (1,21:1) e mantêm o fio e a sombra suave.
 ```
 
 ## Superfícies
@@ -68,7 +73,7 @@ Secundário | #323334 | L 0,32, botões tonais e o stepper sobre cartões
 Texto secundário | #AAABAD | L 0,74
 Texto | #FAFAFB | L 0,985
 Sheet | #1C1D1E | L 0,22, o fundo de toda sheet; as linhas sobre ela usam o secundário (1,33:1)
-Texto secundário sobre o tile | #CACBCD | L 0,84, stone.840, o texto secundário das linhas da tela de categoria (4,73:1 ou mais)
+Texto secundário sobre o tile | #DADBDD | L 0,89, stone.880, o texto secundário das linhas de um tile (5,50:1 ou mais)
 ```
 
 Toda sheet tem o mesmo fundo, um tom afastado do fundo da tela: mais escuro no modo claro, mais claro no escuro. O que fica sobre uma sheet sobe um nível: linhas e campos são cartão no modo claro (1,39:1 sobre a sheet) e secundário no escuro (1,33:1), onde o cartão ficaria em 1,11:1; o Fechar e o Confirmar do cabeçalho também, no escuro. Os chips e o controle segmentado seguem a regra deles (um nível abaixo do selecionado); o trilho do controle segmentado é Border no claro (1,10:1 sobre a sheet, com o seletor branco a 1,53:1 sobre ele; Muted dava 1,08:1 e o seletor 1,29:1). A alça é `color.grabber`: texto secundário a 38% no claro (1,72:1), Stone 445 #575859 no escuro (2,37:1), uma cor sólida mais discreta que o título; o texto secundário a 38% aparecia como #514F4C na sheet do Stone anterior (2,19:1), um cinza translúcido que dependia do que estava embaixo. Atrás de toda sheet há um scrim, `sheetScrim`: texto a 20% no claro, preto a 48% no escuro. Texto sobre a sheet: texto 14,13:1 e texto secundário 5,45:1 no claro, 16,19:1 e 7,35:1 no escuro. No escuro a sheet fica em 1,16:1 sobre o fundo, acima do 1,15 que eu buscava (era 1,09:1 em #171719), e o realce do contorno de glass ainda marca a borda de cima. O fundo de um chat é o cartão no modo claro e o fundo no escuro (veja Snuffle, abaixo).
@@ -159,13 +164,14 @@ Cada acento é uma escala de dez passos montada em OKLCH a partir da cor base. A
 | Primária | Índigo 800 #3D35B8, texto branco | Índigo 300 #B5BFFF, texto preto | O único botão preenchido de confirmação à vista (Buy, Ask), o enviar do compositor, os balões do comprador |
 | Destaque (tint) | Índigo 800 | Índigo 300 | Links, botões de texto, ícones de ação. O ícone do botão de Requests fica na cor do texto: o contador ao lado leva o Índigo |
 | Botão tonal | Fundo secundário, texto na cor do texto | Fundo secundário, texto na cor do texto | Ações secundárias: Call e Directions na página da loja, Buy nas respostas que não são a melhor |
-| Chip de filtro selecionado (`chipOn`) | Fundo cartão, texto Índigo 800 em semibold (8,75:1), uma borda de 1,5 pt em Índigo 800 (7,25:1 sobre o fundo) | Fundo cartão, texto Índigo 300 (8,56:1), uma borda de 1 pt em Índigo 300 | Filtro ativo e os chips de lugar e prazo. O fundo Índigo 100 que ele substituiu dava 1,03:1 sobre o fundo, mais claro que os chips brancos ao lado |
+| Chip de filtro selecionado (`chipOn`, `chipSelected*`) | Fundo cartão, texto Índigo 800 em semibold (8,75:1), uma borda de 1,5 pt em Índigo 800 (7,25:1 sobre o fundo) | Sem borda: fundo Índigo 900 (1,39:1 sobre o fundo), Índigo 850 numa sheet (1,49:1), Índigo 950 num tile (1,41 a 1,51:1), com texto Índigo 200 (8,06 a 11,56:1) | Filtro ativo e os chips de lugar e prazo. O fundo Índigo 100 que ele substituiu dava 1,03:1 sobre o fundo, mais claro que os chips brancos ao lado. No escuro, o fundo cartão com borda Índigo 300 virou um contêiner tonal na rodada 10, veja [Tags](tags.md#contêineres-escuros) |
+| Contêineres de tag escuros (`tag.fill`, `tag.fillRaised`, o chip de destaque usa `shop.accent.<hue>.tile`) | Só lidos no escuro; o claro mantém o fundo com borda de 1 pt | Stone 320 (1,55:1 sobre o fundo), Stone 360 (1,58:1 sobre a sheet, 1,41:1 sobre o Card), e, sobre uma linha de um tile, o tile do acento (1,40 a 1,48:1) | Chips desligados e a pílula "Needs you", sem borda. O Foreground sobre eles dá 8,00 a 12,14:1. O papel `container` do acento dava 1,09 a 1,15:1 sobre o cartão de linha e foi apagado; os chips e as tags de avaliação da página da loja usam o `tile` (1,40 a 1,48:1 sobre a linha, Foreground com 10,26:1 ou mais). A tabela completa por fundo está em [Tags](tags.md#contêineres-escuros) |
 | Seleção tonal (`chipSelected`) | Fundo Índigo 100, texto Índigo 800 em semibold (7,45:1), uma borda de 1 pt em Índigo 200 (`chipSelectedEdge`) | Fundo Índigo 900, texto Índigo 200 (10,06:1), uma borda de 1 pt em Índigo 800 | O passo atual num cartão de compra, os polegares da sheet de avaliação, o controle segmentado e a ação do snackbar no Android |
 | Linha selecionada | A linha mantém o fundo; um check e o título em Headline | O mesmo | Uma escolha numa lista: o lugar na sheet de localização, retirar ou entregar na sheet de detalhes |
 | Contador (`count`) | Índigo 800, texto branco (8,75:1), um anel de 2 pt na cor do fundo | Índigo 300, texto preto (11,86:1), o mesmo anel; o Índigo 800 sobre o fundo escuro dava 2,24:1 | O botão de Requests e as respostas não lidas |
 | Badge sobre foto | Fundo 100 do acento, texto 800, ponto 500 | Os valores do claro | Promoted (Pistache), New (Pêssego), Delivers (Manteiga) |
-| Badge sobre wash | Fundo do cartão, texto na cor do texto | Fundo do cartão, texto na cor do texto | A página da loja, onde um badge pastel ficaria sobre outro pastel |
-| Fundo do mapa (`mapGround`) | Biscoito 960 | Background #0B0C0D | O fundo do mapa; o cartão da página da loja fica a 1,15:1 sobre ele no claro (Biscoito 915) e 1,16:1 no escuro (a cor Sheet) |
+| Badge sobre wash | Fundo do cartão, texto na cor do texto | Fundo do cartão, texto na cor do texto | Fora da página da loja desde a rodada 10: Delivers e New são grupos de fato na linha de fatos dela |
+| Fundo do mapa (`mapGround`) | Biscoito 960 | Background #0B0C0D | O fundo do mapa; o cartão da página da loja é o tile da loja, a 1,29 a 1,35:1 sobre ele no claro e 1,71 a 1,83:1 no escuro |
 | Ruas do mapa (`mapRoad`, `mapRoadMain`) | Biscoito 890, Biscoito 860 | Stone 265, Stone 320 | Ruas e avenidas, 1,24:1 e 1,36:1 sobre o fundo no claro, 1,29:1 e 1,55:1 no escuro |
 | Prédios do mapa (`mapBuilding`) | Card (branco) | Stone 200 | Prédios extrudados, sombreados pela luz da extrusão: 1,13:1 sobre o fundo no claro, 1,16:1 no escuro |
 | Parques do mapa (`mapPark`) | Tile Pistache #C5DEAE | #222B1D | Parques, 1,29:1 sobre o fundo no claro, 1,33:1 no escuro |
@@ -183,13 +189,14 @@ Cada loja tem um acento fixo, escolhido pelo tipo dela (`store/kinds.ts`), entã
 
 | Token | Claro | Escuro | Onde |
 | --- | --- | --- | --- |
-| `shop.accent.<hue>.tile` | Passo de tile: Pêssego #FEC5B2, Pistache #C5DEAE, Manteiga #E7D48F, Lavanda #D7CCFE | Pêssego #52352C, Pistache #34422C, Manteiga #403925, Lavanda #3E3950 | O tile tonal, o cartão de categoria e o cabeçalho da tela de categoria, o cabeçalho do recibo, os chips da página da loja |
-| `shop.accent.<hue>.detail` | O passo de tile | O passo de tinta (Pêssego #E8D6D1, Pistache #D3E5C0, Manteiga #E1DAC9) | Pequenos acentos na página neutra da loja: a faixa na borda de cima do cartão e o pin do mapa. Pastel nos dois modos: uma área pequena no tom claro funciona no escuro (tema escuro do Material), e uma grande nunca |
+| `shop.accent.<hue>.tile` | Passo de tile: Pêssego #FEC5B2, Pistache #C5DEAE, Manteiga #E7D48F, Lavanda #D7CCFE | Pêssego #52352C, Pistache #34422C, Manteiga #403925, Lavanda #3E3950 | O tile tonal, o cartão de categoria e o cabeçalho da tela de categoria, o cabeçalho do recibo, o cartão da página da loja e os chips nele |
+| `shop.accent.<hue>.detail` | O passo de tile | O passo de tinta (Pêssego #E8D6D1, Pistache #D3E5C0, Manteiga #E1DAC9) | O pin do mapa na página da loja. Pastel nos dois modos: uma área pequena no tom claro funciona no escuro (tema escuro do Material), e uma grande nunca |
 | `shop.accent.<hue>.onDetail` | Tinta (800) | Tile (escuro) | A borda e o ponto do pin: 6,4:1 a 6,5:1 sobre `detail` no claro, 7,9:1 a 8,2:1 no escuro |
 | `shop.accent.<hue>.wash` | 100 | 900 | As listras claras do toldo no tile tonal |
 | `shop.accent.<hue>.ink` | 800 | 200 | As iniciais e as listras escuras do toldo no tile |
-| `shop.accent.<hue>.cardOnTile` | Card (branco) | Pêssego #5C4F4B, Pistache #4F554B, Manteiga #565249, Lavanda #53515C | As linhas de loja na tela de categoria |
-| `mutedForegroundOnTile` | Texto secundário | Stone 840, #CACBCD | A linha de detalhes e o chevron das linhas na tela de categoria |
+| `shop.accent.<hue>.cardOnTile` | Card (branco) | Pêssego #624D46, Pistache #4C5745, Manteiga #595242, Lavanda #535062 | As linhas de loja na tela de categoria, e as linhas, os cartões de avaliação e o bloco "What they sell" na página da loja |
+| `mutedForegroundOnTile` | Texto secundário | Stone 880, #DADBDD | A linha de detalhes e o chevron das linhas, e todo texto Muted foreground sobre um chão de tile (os componentes `Text` e `Icon` trocam para ele dentro de `<Ground value="tile">`) |
+| `successOnTile`, `warningOnTile` | Success 800 #384D1A, Warning 800 #53430D | Foreground | As palavras Open e Closes soon sobre um tile. O Success 700 deu 4,16:1 sobre o Pêssego e o Warning 700 deu 4,30:1; os passos 800 dão 6,17 a 6,63:1. No escuro a palavra usa Foreground (10,26:1 ou mais), porque o Success dá 4,49 a 4,59:1 sobre os cartões de linha tingidos |
 
 Os passos 100 ficavam entre L 0,95 e 0,97, sobre um fundo em L 0,935, e mediam de 1,01 a 1,04:1 contra ele, então um tile parecia o próprio fundo. O passo de tile é definido pela luminosidade: OKLCH L 0,87 e C 0,07 no ângulo de cada matiz no modo claro, com a Manteiga em C 0,09 e matiz 95, para ler como amarelo e não como marca-texto. No modo escuro é L 0,36 com um croma menor (rodada 10, opção 3), e os matizes continuam afastados para que as três cores de loja não virem um oliva só: Pêssego em 38 e C 0,045, Pistache em 135 e C 0,042, Lavanda em 295 e C 0,040. A Manteiga é mais calma, em matiz 91, L 0,345 e C 0,034: em L 0,36 e C 0,073 (#4C3B01) ela puxava para um cáqui amarronzado, e as linhas em Card Stone sobre ela pareciam sujas. Os tiles escuros anteriores tinham C 0,08 (Manteiga 0,05, Lavanda 0,06), de 1,5 a 1,8 vez mais. O wash e o ink escuros são os passos 900 e 200 com a mesma parte do croma deles (`washDark` e `inkDark` em cada escala). O recibo não tem mais a faixa de 4 pt em ink.
 
@@ -204,22 +211,22 @@ Contraste no passo de tile, claro / escuro:
 
 Todo par de texto passa no AA. O texto passa no AAA; o texto secundário e o Índigo, não.
 
-Na página da loja as linhas ficam sobre o tile em Card: branco nos tiles claros (1,45 a 1,52:1) e Stone #252627 nos escuros (Pêssego 1,37:1, Pistache 1,42:1, Manteiga 1,32:1), destacadas pela sombra delicada. Botões tonais sobre um tile não usam Muted, uma cápsula cinza que media 1,13 a 1,17:1 no claro e 1,08 a 1,20:1 no escuro e parecia uma mancha sobre o matiz. Eles usam `color.tonalOnTile` (branco) com `state.tonalOnTile`: 55% no claro (1,23 a 1,26:1 sobre o tile; 40% dava 1,17 a 1,18:1 e o Call e o Directions sumiam no tile Manteiga, texto sobre ele a 15,33:1 ou mais) e 6% no escuro (1,19 a 1,20:1, texto a 8,61:1 ou mais). As telas põem os botões em `<Ground value="tile">`.
+Na página da loja o cartão é o tile (rodada 10, decisão 056, que reverte o cartão neutro da decisão 055). Ele fica a 1,29 a 1,35:1 sobre o mapa no claro e a 1,71 a 1,83:1 no escuro, então não precisa de borda. As linhas, os cartões de avaliação e o bloco "What they sell" usam `cardOnTile`: branco no claro (1,45 a 1,52:1 sobre o tile, destacado pela sombra delicada) e o cartão tingido no escuro (1,40 a 1,48:1). Os chips usam o `tile` do acento sobre esse cartão: 1,45 a 1,52:1 no claro e 1,40 a 1,48:1 no escuro, com Foreground a 10,26:1 ou mais. As tags de avaliação mantêm o Background no claro (1,21:1 sobre a linha branca, com uma borda Border a 1,53:1) e usam o `tile` do acento no escuro, como os chips (rodada 12: o `tag.fillRaised` dava 1,37 a 1,40:1 sobre a linha, abaixo dos 1,4:1 que um chip sobre uma linha tingida precisa). Botões tonais sobre um tile não usam Muted, uma cápsula cinza que deu 1,13 a 1,17:1 no claro e 1,08 a 1,20:1 no escuro e parecia uma mancha sobre o matiz. Eles usam `color.tonalOnTile` (branco) em `state.tonalOnTile`: 55% no claro (1,23 a 1,26:1 sobre o tile; 40% dava 1,17 a 1,18:1 e Call e Directions sumiam no tile Manteiga, com Foreground a 15,33:1 ou mais) e 6% no escuro (1,19 a 1,20:1, Foreground a 8,61:1 ou mais). O Ask continua sendo o único Índigo preenchido: 5,77 a 6,01:1 sobre o tile no claro e 6,05 a 6,48:1 no escuro. O cartão inteiro fica dentro de `<Ground value="tile" accent>`, então a tela não define nada disso.
 
 ### Linhas na tela de categoria
 
-No modo escuro a tela de categoria mantém o tile inteiro como fundo, e as linhas em Card (Stone #252627) ficavam mais escuras que o tile, então pareciam buracos na cor. As linhas passam a usar `shop.accent.<hue>.cardOnTile`: OKLCH L 0,44, C 0,015 a 0,019 no matiz do acento, mais claro que o tile e bem menos saturado, então a lista se destaca da cor sem competir com ela. O modo claro mantém as linhas em Card branco. A tela informa o acento com `<Ground value="tile" accent>`, e o `ShopRow` o lê.
+No modo escuro a tela de categoria mantém o tile inteiro como fundo, e as linhas em Card (Stone #252627) ficavam mais escuras que o tile, então pareciam buracos na cor. As linhas passam a usar `shop.accent.<hue>.cardOnTile`: OKLCH L 0,44, C 0,026 a 0,032 no matiz do acento (rodada 12: as linhas da rodada 10, com C 0,015 a 0,019, pareciam cinza e sujas, então o croma subiu 1,7 vez), mais claro que o tile e menos saturado, então a lista se destaca da cor sem competir com ela. O modo claro mantém as linhas em Card branco. A tela informa o acento com `<Ground value="tile" accent>`, e o `ShopRow` o lê.
 
-O texto secundário (Stone 740) mede 3,34 a 3,42:1 sobre os cartões, abaixo do AA. Baixar o cartão não resolve: no 1,2:1 que o cartão precisa sobre o tile, o Stone 740 ainda fica perto de 3,9:1. A linha de detalhes e o chevron usam `mutedForegroundOnTile`, o Stone 840 (#CACBCD, o matiz e o croma do Stone 740 em L 0,84). Valores no escuro:
+O texto secundário (Stone 740) mede 3,34 a 3,42:1 sobre os cartões, abaixo do AA. Baixar o cartão não resolve: no 1,2:1 que o cartão precisa sobre o tile, o Stone 740 ainda fica perto de 3,9:1. A linha de detalhes e o chevron usam `mutedForegroundOnTile`, o Stone 880 (#DADBDD, o matiz e o croma do Stone 740 em L 0,89; o Stone 840 dava 4,73 a 4,84:1). Valores no escuro:
 
-| Matiz | Cartão sobre o tile | Cartão contra o tile | Texto | Texto secundário sobre o tile (Stone 840) | Stone 740, para comparar | Separador | Card #252627 contra o tile, para comparar |
+| Matiz | Cartão sobre o tile | Cartão contra o tile | Texto | Texto secundário sobre o tile (Stone 880) | Stone 740, para comparar | Separador | Card #252627 contra o tile, para comparar |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Pêssego | #5C4F4B | 1,40:1 | 7,53:1 | 4,84:1 | 3,42:1 | 1,61:1 | 1,37:1, mais escuro |
-| Pistache | #4F554B | 1,39:1 | 7,37:1 | 4,73:1 | 3,34:1 | 1,65:1 | 1,42:1, mais escuro |
-| Manteiga | #565249 | 1,47:1 | 7,46:1 | 4,79:1 | 3,39:1 | 1,63:1 | 1,32:1, mais escuro |
-| Lavanda | #53515C | 1,42:1 | 7,46:1 | 4,79:1 | 3,39:1 | 1,63:1 | 1,38:1, mais escuro |
+| Pêssego | #624D46 | 1,40:1 | 7,54:1 | 5,68:1 | 3,42:1 | 1,61:1 | 1,37:1, mais escuro |
+| Pistache | #4C5745 | 1,41:1 | 7,30:1 | 5,50:1 | 3,31:1 | 1,66:1 | 1,42:1, mais escuro |
+| Manteiga | #595242 | 1,48:1 | 7,43:1 | 5,59:1 | 3,37:1 | 1,63:1 | 1,32:1, mais escuro |
+| Lavanda | #535062 | 1,41:1 | 7,48:1 | 5,63:1 | 3,39:1 | 1,62:1 | 1,38:1, mais escuro |
 
-Todo cartão fica 1,39:1 ou mais claro que o tile. Os chips de rua e o Voltar mantêm a camada `tonalOnTile`. O chip selecionado continua em Card com texto Índigo 300 (8,56:1): sobre o cartão tingido o Índigo 300 ficaria em 4,34 a 4,43:1, abaixo do AA. As linhas da página da loja não mudam; ela continua pondo linhas em Card sobre o tile.
+Todo cartão fica 1,40:1 ou mais claro que o tile. Os chips de rua e o Voltar mantêm a camada `tonalOnTile`. No escuro o chip selecionado é Índigo 950 com texto Índigo 200 (11,56:1); sobre o cartão tingido o Índigo 300 ficaria em 4,34 a 4,43:1, abaixo do AA, e Card com borda é o visual que a rodada 10 abandonou. A página da loja usa as mesmas cores de linha e de chip.
 
 ## Snuffle
 
@@ -227,15 +234,15 @@ Todo cartão fica 1,39:1 ou mais claro que o tile. Os chips de rua e o Voltar ma
 | --- | --- | --- | --- |
 | `snuffle.bubble` | Passo de tile da Lavanda #D7CCFE | Lavanda 900 #302747 | Os balões do Snuffle, o indicador de digitação, a trilha da Live Activity |
 | `snuffle.dot` | Lavanda 500 | Lavanda 400 | Pontos de digitação, o progresso da Live Activity |
-| `chat.ground` | Cartão #FFFFFF | Fundo #0B0C0D | O fundo do New Request e de todo chat |
-| `chat.fill` | Fundo #EEE9E2 | Cartão #252627 | Chips e linhas agrupadas sobre o fundo do chat |
+| `chat.ground` | Fundo #EEE9E2 | Fundo #0B0C0D | O fundo do New Request e de todo chat |
+| `chat.fill` | Cartão #FFFFFF | Cartão #252627 | Linhas agrupadas sobre o fundo do chat e chips no claro; chips escuros usam `tag.fill` |
 | `chat.edge` | #DEDAD5 | #252627 | Um fio em volta dos cartões sobre o fundo do chat, com a sombra suave |
-| `chat.field` | Fundo #EEE9E2 | Cartão #252627 | O campo do chat: 1,21:1 sobre o fundo branco, 1,29:1 sobre o escuro |
-| `chat.fieldEdge` | Borda #D4D0CB | Borda #3D3E3F | O fio do campo: 1,53:1 sobre o fundo branco, 1,83:1 sobre o escuro |
+| `chat.field` | Cartão #FFFFFF | Cartão #252627 | O campo do compositor onde ele aparece (New Request, um chat, a lista de Requests): 1,21:1 sobre o fundo bege, 1,29:1 sobre o escuro |
+| `chat.fieldEdge` | Borda #D4D0CB | Borda #3D3E3F | O fio do campo: 1,27:1 sobre o fundo bege, 1,83:1 sobre o escuro |
 
-O balão fica em 1,50:1 sobre o fundo branco do chat e em 1,40:1 sobre o escuro; o texto nele fica em 13,07:1 e 13,36:1. O chat não tem tom roxo, degradê nem brilho (a [Identidade](../ideation/identity.md) descarta degradês roxos): a Lavanda aparece só nos balões do Snuffle. A marca é o glifo sozinho na cor do texto (veja [Marca](mark.md)); os tokens que a desenhavam sobre um tile Lavanda com rosto Manteiga saíram.
+O balão fica em 1,25:1 sobre o fundo bege do chat e em 1,40:1 sobre o escuro; o texto nele fica em 13,07:1 e 13,36:1. O chat não tem tom roxo, degradê nem brilho (a [Identidade](../ideation/identity.md) descarta degradês roxos): a Lavanda aparece só nos balões do Snuffle. A marca é o glifo sozinho na cor do texto (veja [Marca](mark.md)); os tokens que a desenhavam sobre um tile Lavanda com rosto Manteiga saíram.
 
-A sombra suave do cartão tem duas camadas da cor do texto (claro): 0 1 2 a 4% e 0 4 12 a 5%. Ela separa as linhas em cartão de um fundo da mesma cor (a página da loja) e os cartões do fundo branco do chat.
+A sombra suave do cartão tem duas camadas da cor do texto (claro): 0 1 2 a 4% e 0 4 12 a 5%. Ela separa as linhas em cartão de um fundo da mesma cor (a página da loja) e os cartões do fundo do chat.
 
 ## Papéis semânticos
 
@@ -268,6 +275,10 @@ Getting started é o único lugar em que uma cor da marca ocupa a tela. Cada uma
 
 Título, corpo, Skip e o ponto da página atual ficam em Foreground (#100A06 no claro, #FAFAFB no escuro). Um texto Muted cairia abaixo de 4,5:1 nesses fundos, então o corpo também é Foreground e os estilos de tipo fazem a hierarquia. Continue ("Get started" na última página) é uma cápsula em Foreground com rótulo em Background (16,28:1 no claro, 18,77:1 no escuro), para se destacar em qualquer fundo; sobre um fundo colorido de onboarding a ação é Foreground-inverse, não Primary, que ficaria Índigo sobre Índigo. O tile escuro de Pistache (#34422C) parecia oliva numa tela inteira, então a página 3 usa um verde mais fundo e mais frio (matiz 150, L 0,33, C 0,036). Os outros pontos ficam em Foreground a 55% (`state.pageDotOff`) e tomam a cor do fundo: 3,71 a 3,95:1 nos fundos claros e 3,64 a 4,69:1 nos escuros (35% dava 2,16 a 2,22:1 nos claros), a no mínimo 2,99:1 no claro e 2,30:1 no escuro do ponto atual. Os tokens são `color.welcome.ground1` a `ground3`.
 
+## Pedido de localização
+
+A tela do pedido de localização é o Background nos dois modos. `color.location` é a cor para a qual a rua tranquila é renderizada e, no modo escuro, a cor de uma luz radial suave atrás dela: o Background no modo claro e Stone 360 (#3D3E3F) no escuro. Uma tela inteira em Stone 360 parecia outro app, então ela agora emoldura só a arte. Sobre o Background, o ferro quase preto da rua tranquila e seus contornos não tinham contraste com o fundo (1,08:1). Stone 360 fica a 1,83:1 do Background, o que mantém os contornos legíveis no centro da luz; o texto fica sobre o Background, então o Foreground e o Muted foreground mantêm o contraste de sempre ali, e os botões Índigo 300 chegam a 6,05:1 sobre Stone 360 como antes. As medições dos outros fundos estão em [ilustrações](illustrations.md).
+
 ## Contraste
 
 | Par | Claro | Escuro |
@@ -278,10 +289,10 @@ Título, corpo, Skip e o ponto da página atual ficam em Foreground (#100A06 no 
 | Cartão sobre o fundo | 1,21:1 | 1,29:1 |
 | Rótulo sobre a primária | 8,75:1 | 11,11:1 |
 | Destaque sobre o fundo | 7,25:1 | 11,06:1 |
-| Texto do chip selecionado sobre o fundo cartão | 8,75:1 | 8,56:1 |
+| Texto do chip selecionado sobre o seu preenchimento | 8,75:1 (Card) | 10,06:1 (Índigo 900), 8,06:1 (Índigo 850), 11,56:1 (Índigo 950) |
 | Texto da seleção tonal sobre o fundo dela | 7,45:1 | 10,06:1 |
 | Texto do badge sobre o fundo dele | 7,45 a 8,42:1 | 7,45 a 8,42:1 (valores do claro) |
-| Balão do Snuffle sobre o fundo do chat | 1,50:1 | 1,41:1 |
+| Balão do Snuffle sobre o fundo do chat | 1,25:1 | 1,41:1 |
 | Sheet sobre o fundo | 1,15:1 | 1,09:1 |
 | Linhas sobre a sheet (cartão no claro, secundário no escuro) | 1,39:1 | 1,41:1 |
 | Texto sobre a sheet | 14,13:1 | 17,16:1 |

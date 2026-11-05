@@ -30,7 +30,7 @@ export type ShopTileProps = {
   /** Status and walk, as ShopMeta draws them ("Open until 6pm", "2 min walk"); no street on a tile. */
   facts: ShopFacts;
   image?: PhotoSource;
-  /** At most two; Promoted always shows. */
+  /** At most two. Promoted is never drawn in the prototype. */
   badges?: BadgeName[];
   size?: ShopTileSize;
   /** The screen's content width; defaults to the window width minus the screen margins. */
@@ -49,7 +49,7 @@ export const ShopTile = memo(function ShopTile({ id, name, facts, image, badges 
   const press = usePress();
   const content = contentWidth ?? frame.width - 2 * screenMargin(theme, frame.width);
   const width = tileWidth(theme, content, size);
-  const shown = [...badges].sort((a, b) => Number(b === 'promoted') - Number(a === 'promoted')).slice(0, 2);
+  const shown = badges.filter((b) => b !== 'promoted').slice(0, 2);
 
   return (
     <Animated.View style={[styles.tile(width), press.scaleStyle]}>

@@ -4,7 +4,7 @@ The Snuffle mark as the app shows it: the bare glyph from `docs/develop/design-s
 
 ## Rule
 
-The mark is a glyph on its own. It never sits on a tile, in a circle or as an avatar: no fill, border or shadow behind it. It is one colour that follows the theme, Foreground (dark on light backgrounds, light on dark); the awning's two low-contrast stripes are Muted foreground. This reverses decision 045's "mark on a Lavender tile". Only the app icon, which the system draws, keeps a tile.
+The mark is a glyph on its own: no fill, border or shadow behind it. The one exception is `SnuffleAvatar`, the glyph in a circle of the Snuffle bubble's colour on the chat's sender line. It is one colour that follows the theme, Foreground (dark on light backgrounds, light on dark); the awning's two low-contrast stripes are Muted foreground. This reverses decision 045's "mark on a Lavender tile". Only the app icon, which the system draws, keeps a tile.
 
 ## Props
 
@@ -16,7 +16,7 @@ The mark is a glyph on its own. It never sits on a tile, in a circle or as an av
 
 ## Where it appears
 
-- The chat's sender line: the inline glyph before "Snuffle", no avatar column beside the bubbles (`ChatBubble`, `TypingIndicator`).
+- The chat's sender line, inside `SnuffleAvatar` before "Snuffle"; no avatar column beside the bubbles (`ChatBubble`, `TypingIndicator`).
 - Notifications and the Live Activity, at `icon` (Android's small header icon at `inline`).
 - The splash and sign in in first run.
 

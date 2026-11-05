@@ -448,7 +448,7 @@ Scripted test users built from Sam's and Jess's goals drive the web build throug
 **Open:** nothing from the first run; an agent fixed its breaks and the second run reached every goal. Three targets are still under 44 pt on the web.
 
 ## 055 · A neutral shop page, a filled chat field, Requests back on the left
-**2026-11-05 · Decided**
+**2026-11-05 · Decided · the neutral card reversed by 058**
 
 The shop page no longer takes the shop's tile colour as its ground: the page and the shop card are neutral, the card's padding grows from 20 to 24, and the shop's accent shows only in small details (the chips and the pin). In light the card is white, with its rows a step down, as Airbnb does. The map takes the Snuffle palette. The card stays solid; glass stays on Back and the pinned bar. In the chat, the composer becomes a filled field with a hairline instead of white glass on a white ground. On Nearby's ask bar the Requests circle goes back before the field, which reverses decision 050's placement.
 
@@ -463,6 +463,29 @@ Metadata lines no longer join facts with middle dots. A status word carries its 
 **Why:** the dotted lines read as generic; the best place pages (Apple Maps, Google Maps, Airbnb) separate facts by weight, colour and icons and keep dots for plain countable lists. A first name makes a review read as a person's without exposing them. A carousel of names without photos would only add a scroll.
 The buy button says "Buy for £29.98".
 **Open:** whether the count reads "people" or "buyers".
+
+## 057 · Illustrations drawn for the screen, tonal badges in dark, ratings in a carousel, Snuffle's avatar
+**2026-11-05 · Decided**
+
+The 3D illustrations render on a transparent ground with the object's own bounding box centred (the shadow falls where the light sends it), at a larger size (category art at 80% of its square, Getting started at 312 pt), with a 1.4 pt outline that stays the same width at every display size and lighter creases at small sizes. The app composites them over the tile or page colour. In dark mode, badges and chips are tonal fills a clear step from their ground (1.39 to 1.58:1) with text at 7.4:1 or more, and no borders; selection shows by fill and weight. The shop page's reviews are a snapping carousel of up to five cards (a list at large text sizes), each with a first name and a date. The photo carousel sits inside the shop card, after its actions, and the card starts just below the pin. "Delivers" and "New" carry an icon; "Promoted" is not shown and does not reorder Nearby. In the chat, Snuffle's sender line has a small avatar: the mark in a circle of the Snuffle bubble's Lavender, the one place the mark sits in a shape inside the app.
+
+**Why:** strokes drawn in world units grew thick and merged at small sizes, and baked tiles meant re-rendering whenever a colour changed. Borders on dark badges were doing the job colour should do, as Material's tonal containers and Apple's dark fills show. A carousel keeps the reviews to one row of the page. An unlabelled paid order would mislead, so with the label gone the order goes too.
+**Open:** whether to show paid placement again, labelled; the measured cost of a glass shop card.
+
+## 058 · The shop card takes its category colour again; glass measured and left out
+**2026-11-05 · Decided · reverses 055's neutral card**
+
+The shop card is the shop's accent tile again, in light and dark, with everything on it recoloured for the tile: rows in the tile's card tone, chips in the tile colour, Call and Directions in the tonal overlay, status words in new `successOnTile` and `warningOnTile` roles, and Ask as the one filled Indigo. The card rests 12 pt from the screen edges, raised so the shop's pin sits centred in the strip of map above it, and grows to the full width on scroll; every container grows with it while the text keeps its line breaks. "Delivers" and "New" are icon facts on the walk and street line, and the photos sit between two section gaps. The card stays solid.
+
+**Why:** with the low-chroma dark palette (051) and borderless tonal badges (057), a coloured card works in dark mode, and it ties the shop page to the category it came from. An agent measured a glass card: CPU on the iOS simulator stayed within noise, but the web build dropped frames during the lift under a 4x CPU throttle, the GPU cost could not be measured, and muted text only passed because the map is pale or near-black.
+
+## 059 · Every request is a full conversation; chats on the app's beige
+**2026-11-05 · Decided**
+
+Every request on the Requests list opens as a full conversation with its history, its status and its next action (buy, change or stop a standing request, rate, keep looking or ask further away), and every conversation has the composer. The chat's ground is the Background in both modes, and the composer field is Card with a Border hairline everywhere it appears, so it reads the same in New Request, a request and the Requests list. This reverses the white chat ground from craft-pass-2.
+
+**Why:** the older requests opened as one message with no way to act, so it wasn't clear what to do or where to reply. On a white chat the field was beige, and on the beige Requests list the same field disappeared; one ground and one field fix both and remove the jump in colour when a chat opens.
+**Open:** buying from an older request skips the details and payment sheets, and a rating given there doesn't reach the shop page.
 
 ## Still open
 

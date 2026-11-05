@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native-unistyles';
 
 import { imageSource, type ImageKey } from '../../../content/images';
 import { Button } from '../Button/Button';
-import { Badge } from '../Tag/Tag';
 import { Text } from '../Text/Text';
 import { ShopPageLayout } from './ShopPageLayout';
 
@@ -16,14 +15,14 @@ export function ShopPageLayoutExamples() {
     <View style={styles.phone}>
       <ShopPageLayout
         name="Rossi's Bakery"
-        facts={{ state: 'open', detail: 'until\u00A06pm', walk: '2\u00A0min\u00A0walk', street: 'Blythe\u00A0Road' }}
+        accent="butter"
+        facts={{ state: 'open', detail: 'until\u00A06pm', walk: '2\u00A0min\u00A0walk', street: 'Blythe\u00A0Road', delivers: true, isNew: true }}
         photos={[
           { source: photo('rossis-bakery-front'), label: "Rossi's Bakery shopfront, Blythe Road" },
           { source: photo('rossis-bakery-interior'), label: "Rossi's Bakery inside, Blythe Road" },
         ]}
         onBack={noop}
         backLabel="Nearby"
-        tags={<Badge badge="promoted" on="wash" />}
         actions={<Button label="Ask Rossi's" size="compact" />}
       >
         <Text variant="footnote" color="mutedForeground">

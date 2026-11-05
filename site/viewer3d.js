@@ -63,13 +63,14 @@
   const LIGHT_AZ = -30, LIGHT_EL = 62; // degrees; upper left in the isometric view
   const DROP = 2.2, SPRING = 150, DAMP = 2 * 0.38 * Math.sqrt(150); // entry spring
   const LINE_CSS = 1.25; // outline width in CSS pixels
+  const LINE_BLEED = 0.75; // device pixels the FXAA pass and the edge's anti-aliasing add to a drawn line, taken off the export's width
   const CREASE = Math.cos(35 * Math.PI / 180);
 
   // --- Export mode (app assets) ---------------------------------------------------------------
   // URL: ?export=1&object=box&size=120&scale=3&ground=%23F4F1ED&fps=24&seconds=2&clip=entry|idle|still
   // (read from the query string, or from a query after the hash: #illustrations?export=1&…).
   // In this mode window.__exportFrames(opts?) renders and returns { frames: [PNG data URLs], meta }.
-  const EXPORT_DEFAULTS = { object: 'box', size: 120, scale: 3, ground: '#F4F1ED', fps: 24, clip: 'entry', seconds: null, margin: 0.07, shadows: true, az: null, el: null, dark: null, opaque: false, height: null, shade: null, k: null, ink: null, recolor: null, fitW: null, fitTop: null, fitBase: null, fitArea: null, fitMaxW: null, fitMaxH: null, fitClear: null };
+  const EXPORT_DEFAULTS = { object: 'box', size: 120, scale: 3, ground: '#F4F1ED', fps: 24, clip: 'entry', seconds: null, margin: 0.07, shadows: true, az: null, el: null, dark: null, opaque: false, height: null, shade: null, k: null, ink: null, recolor: null, fitW: null, fitTop: null, fitBase: null, fitArea: null, fitMaxW: null, fitMaxH: null, fitClear: null, fitCenter: null, fitFrame: 0, focusX: 0, focusY: 0, rot: 0, line: 1.25, crease: null, minor: null };
   function exportParams() {
     const q = new URLSearchParams(location.search);
     const h = location.hash.indexOf('?');
@@ -78,7 +79,7 @@
     const o = { ...EXPORT_DEFAULTS };
     q.forEach((v, k) => {
       if (!(k in o)) return;
-      o[k] = typeof EXPORT_DEFAULTS[k] === 'number' || ['seconds', 'az', 'el', 'height', 'shade', 'k', 'fitW', 'fitTop', 'fitBase', 'fitArea', 'fitMaxW', 'fitMaxH', 'fitClear'].includes(k) ? +v : k === 'shadows' || k === 'opaque' ? v !== '0' && v !== 'false' : v;
+      o[k] = typeof EXPORT_DEFAULTS[k] === 'number' || ['seconds', 'az', 'el', 'height', 'shade', 'k', 'fitW', 'fitTop', 'fitBase', 'fitArea', 'fitMaxW', 'fitMaxH', 'fitClear', 'fitCenter', 'fitFrame', 'focusX', 'focusY', 'rot', 'line', 'crease', 'minor'].includes(k) ? +v : k === 'shadows' || k === 'opaque' ? v !== '0' && v !== 'false' : v;
     });
     return o;
   }
@@ -158,14 +159,14 @@
   const OUTLINE = {
     uniforms: {
       tDiffuse: { value: null }, tNormal: { value: null }, tDepth: { value: null },
-      uTexel: { value: null }, uR: { value: 1 }, uOn: { value: 1 }, uOrtho: { value: 1 }, uNear: { value: 0.1 }, uFar: { value: 100 },
+      uTexel: { value: null }, uR: { value: 1 }, uH: { value: 0.625 }, uMinor: { value: 1 }, uOn: { value: 1 }, uOrtho: { value: 1 }, uNear: { value: 0.1 }, uFar: { value: 100 },
       uPx0: { value: 0.01 }, uPxK: { value: 0.001 }, uCos: { value: CREASE }, uInk: { value: null },
     },
     vertexShader: `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 ); }`,
     fragmentShader: `
       #include <packing>
       uniform sampler2D tDiffuse; uniform sampler2D tNormal; uniform sampler2D tDepth;
-      uniform vec2 uTexel; uniform float uR; uniform float uOn; uniform float uOrtho; uniform float uNear; uniform float uFar;
+      uniform vec2 uTexel; uniform float uR; uniform float uH; uniform float uMinor; uniform float uOn; uniform float uOrtho; uniform float uNear; uniform float uFar;
       uniform float uPx0; uniform float uPxK; uniform float uCos; uniform vec3 uInk;
       varying vec2 vUv;
       float vz( vec2 uv ) {
@@ -177,7 +178,7 @@
         vec4 b = texture2D( tNormal, uv );
         if ( abs( a.w - b.w ) > 0.5 ) return 1.0;      // another object, or the background
         if ( a.w < 0.5 ) return 0.0;                   // background on both sides
-        if ( dot( a.xyz, b.xyz ) < uCos ) return 1.0;  // crease on the same object
+        if ( dot( a.xyz, b.xyz ) < uCos ) return uMinor; // crease on the same object: a lighter line
         return step( tol * length( o ), abs( za - vz( uv ) ) ); // the object passes in front of itself
       }
       vec3 toSRGB( vec3 c ) { return mix( c * 12.92, 1.055 * pow( c, vec3( 1.0 / 2.4 ) ) - 0.055, step( 0.0031308, c ) ); }
@@ -190,18 +191,23 @@
           float nz = max( abs( a.z ), 0.12 );
           float px = uOrtho > 0.5 ? uPx0 : za * uPxK;
           float tol = px * ( 2.5 * sqrt( max( 0.0, 1.0 - nz * nz ) ) / nz + 6.0 ) + 0.01;
-          for ( int i = 1; i <= 3; i++ ) {
+          // Line weight is a width in screen pixels (uH is half of it): an edge r pixels away covers this pixel
+          // by clamp(h - r + 1), so the width is fractional and stays the same at every render size and density.
+          // Crease edges carry a strength below 1 (uMinor), which makes them thinner than the silhouette.
+          for ( int i = 1; i <= 6; i++ ) {
             float r = float( i );
-            if ( r > uR || cov > 0.5 ) break;
+            if ( r > uR || cov > 0.999 ) break;
             float d = floor( r * 0.7071 + 0.5 );
-            cov = max( cov, edge( a, za, tol, vec2( r, 0.0 ) ) );
-            cov = max( cov, edge( a, za, tol, vec2( -r, 0.0 ) ) );
-            cov = max( cov, edge( a, za, tol, vec2( 0.0, r ) ) );
-            cov = max( cov, edge( a, za, tol, vec2( 0.0, -r ) ) );
-            cov = max( cov, edge( a, za, tol, vec2( d, d ) ) );
-            cov = max( cov, edge( a, za, tol, vec2( -d, d ) ) );
-            cov = max( cov, edge( a, za, tol, vec2( d, -d ) ) );
-            cov = max( cov, edge( a, za, tol, vec2( -d, -d ) ) );
+            float k = 0.0;
+            k = max( k, edge( a, za, tol, vec2( r, 0.0 ) ) );
+            k = max( k, edge( a, za, tol, vec2( -r, 0.0 ) ) );
+            k = max( k, edge( a, za, tol, vec2( 0.0, r ) ) );
+            k = max( k, edge( a, za, tol, vec2( 0.0, -r ) ) );
+            k = max( k, edge( a, za, tol, vec2( d, d ) ) );
+            k = max( k, edge( a, za, tol, vec2( -d, d ) ) );
+            k = max( k, edge( a, za, tol, vec2( d, -d ) ) );
+            k = max( k, edge( a, za, tol, vec2( -d, -d ) ) );
+            cov = max( cov, step( 0.001, k ) * clamp( uH * k - r + 1.0, 0.0, 1.0 ) );
           }
         }
         // The colour buffer is premultiplied linear light; ink goes over it, then out as sRGB.
@@ -414,7 +420,12 @@
         idRT.setSize(pxW, pxH);
         OU.uTexel.value.set(1 / pxW, 1 / pxH);
         fxaaPass.uniforms.resolution.value.set(1 / pxW, 1 / pxH);
-        OU.uR.value = Math.max(1, Math.round(dpr * LINE_CSS / 2));
+        setLine(dpr * LINE_CSS);
+      }
+      // Outline width in device pixels (fractional); the search radius is the pixels it can reach.
+      function setLine(widthPx) {
+        OU.uH.value = widthPx / 2;
+        OU.uR.value = Math.max(1, Math.ceil(widthPx / 2));
       }
 
       // Shared uniforms for every surface: light direction and the background-derived shade.
@@ -826,7 +837,9 @@
         let m = null;
         const saved = { ...light };
         try {
+          const rot = Number.isFinite(+o.rot) ? +o.rot : 0;
           if (Number.isFinite(+o.az) && o.az !== null) light.az = +o.az;
+          light.az += rot; // the camera turns by rot around the object, the light with it
           if (Number.isFinite(+o.el) && o.el !== null) light.el = +o.el;
           applyLight();
           // The dark tone shade and shadow mix toward: given (a palette ramp's 800 or 900 step), or the viewer's rule.
@@ -844,7 +857,8 @@
           const sc = new THREE.Scene();
           sc.add(m.pivot, m.shadowGroup);
           const cam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 120);
-          cam.position.copy(m.center).addScaledVector(ISO, 40); cam.lookAt(m.center); cam.updateMatrixWorld(true);
+          const isoRot = ISO.clone().applyAxisAngle(new THREE.Vector3(0, 1, 0), THREE.MathUtils.degToRad(rot));
+          cam.position.copy(m.center).addScaledVector(isoRot, 40); cam.lookAt(m.center); cam.updateMatrixWorld(true);
           // Frame the rest pose: every vertex and its shadow on the ground, then a margin for the squash and idle.
           m.parts.forEach(p => { p.y = 0; p.v = 0; p.done = true; p.o.visible = true; placePart(p); });
           def.reset?.(m.group);
@@ -871,7 +885,29 @@
           // A taller frame (height > size, e.g. a category card) keeps the object in the top size × size square.
           const hPt = Number.isFinite(o.height) && o.height > 0 ? +o.height : size;
           let left, top, side;
-          if (Number.isFinite(o.fitArea) && o.fitArea > 0) {
+          if (Number.isFinite(o.fitCenter) && o.fitCenter > 0) {
+            // Centred object (category cards, round 10): the object's own bounding box, without its cast shadow, is
+            // centred in the size × size square and its longer side is fitCenter of it. The shadow falls where the
+            // light sends it and is clipped only by the frame.
+            let u = Math.max(ox1 - ox0, oy1 - oy0) / (o.fitCenter * size); // world units per pt
+            // With fitClear (round 12), the object stays centred and shrinks until its whole cast shadow sits inside the
+            // square with fitClear pt to spare on every side (a framed window, fitFrame, keeps the crop instead).
+            if (!+o.fitFrame && Number.isFinite(o.fitClear) && o.fitClear >= 0) {
+              const cx = (ox0 + ox1) / 2, cy = (oy0 + oy1) / 2, room = size / 2 - +o.fitClear;
+              u = Math.max(u, Math.max(x1 - cx, cx - x0, y1 - cy, cy - y0) / room);
+            }
+            side = size * u;
+            left = (ox0 + ox1) / 2 - side / 2;
+            top = (oy0 + oy1) / 2 + side / 2;
+            if (+o.fitFrame) {
+              // A window onto a larger scene (the Getting started crossroads, which bleeds off the screen): the frame is
+              // size × height pt, centred on the object's box moved by focusX and focusY (fractions of the box's width and
+              // height, right and up positive), so fitCenter above 1 shows only part of the object, at full detail.
+              const cx = (ox0 + ox1) / 2 + (+o.focusX || 0) * (ox1 - ox0), cy = (oy0 + oy1) / 2 + (+o.focusY || 0) * (oy1 - oy0);
+              left = cx - side / 2;
+              top = cy + side * hPt / size / 2;
+            }
+          } else if (Number.isFinite(o.fitArea) && o.fitArea > 0) {
             // Equal optical area (category cards, round 3): the box around the object and its cast shadow covers
             // fitArea of the size × size square, capped at fitMaxW of the width and fitMaxH of the height. The object
             // stands on the baseline fitBase (pt from the top); the whole box is centred across, and fitClear pt stay
@@ -912,6 +948,12 @@
           Object.assign(cam, { left, right: left + side, top, bottom: top - side * hPt / size });
           cam.updateProjectionMatrix();
           setPipelineSize(size, hPt, scale);
+          // Line weight is fixed in screen space: o.line pt at the display size, so scale × line device pixels. Small
+          // art (120 pt or less) also drops the lightest creases and thins the rest, so dense detail does not clump.
+          setLine(Math.max(1, scale * o.line - LINE_BLEED));
+          const small = size <= 130;
+          OU.uMinor.value = Number.isFinite(o.minor) ? +o.minor : small ? 0.6 : 0.8;
+          OU.uCos.value = Math.cos(THREE.MathUtils.degToRad(Number.isFinite(o.crease) ? +o.crease : small ? 50 : 35));
           const frames = [];
           // Opaque: the frame is laid on the ground colour (category cards), so the image needs no alpha.
           const flat = o.opaque ? Object.assign(document.createElement('canvas'), { width: pxW, height: pxH }) : null;
@@ -950,6 +992,7 @@
           m?.dispose();
           recolorMap = null;
           SU.uShade.value = SHADE; SU.uK.value = K;
+          OU.uMinor.value = 1; OU.uCos.value = CREASE;
           OU.uInk.value.set(...[1, 3, 5].map(i => parseInt(INK.slice(i, i + 2), 16) / 255));
           Object.assign(light, saved);
           applyLight();

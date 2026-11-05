@@ -1,6 +1,6 @@
 // The shop page (openspec/specs/shop-page, app flow v10 "Shop page" and "Photo viewer"): the shop's detail, pushed from
-// Nearby with Back, with the map and its pin, a carousel of up to three photos that opens a full-screen viewer, and one
-// card for the name, status and actions, then what the shop sells, what shoppers found there recently, how collection
+// Nearby with Back, with the map and its pin, one
+// card for the name, status and actions with a carousel of up to three photos inside it that opens a full-screen viewer, then what the shop sells, what shoppers found there recently, how collection
 // and delivery work, its ratings (change shop-ratings-and-range) and how it does on Snuffle. Call and Directions
 // are simulated in sheets; nothing leaves the app.
 import BubbleChatIcon from '@hugeicons/core-free-icons/BubbleChatIcon';
@@ -9,12 +9,11 @@ import Navigation03Icon from '@hugeicons/core-free-icons/Navigation03Icon';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { useShallow } from 'zustand/react/shallow';
 
 import { imageSource, images, type ImageKey } from '@/content/images';
 import {
-  Badge,
   Button,
   ListBlock,
   ListGroup,
@@ -24,12 +23,13 @@ import {
   RatingSummary,
   ReliabilityRow,
   ReviewCard,
+  ReviewCarousel,
   Sheet,
   ShopPageLayout,
+  ShopPageText,
   Skeleton,
   Text,
   ZoomTarget,
-  type BadgeName,
   type ReliabilityKind,
   type ShopPhoto,
 } from '@/design-system';
@@ -59,8 +59,8 @@ import { foundRecently } from '@/store/found';
 
 const MAX_PHOTOS = 3;
 // Reviews on the page; "See all" opens the rest.
-const PAGE_REVIEWS = 3;
-// Photo width if a photo is not bundled (then it comes from Unsplash): the carousel's width, about 360 pt on a phone.
+const PAGE_REVIEWS = 5;
+// Photo width if a photo is not bundled (then it comes from Unsplash): the carousel's width, about 300 pt on a phone.
 const PHOTO_WIDTH = 400;
 // Collection window for a bought item (decision 037, H6).
 const KEEPS_ITEMS = '7 days to collect';
@@ -77,10 +77,14 @@ function shopPhotos(shop: Shop): ShopPhoto[] {
   }));
 }
 
-/** "Ask Rossi's" for a possessive name, "Ask Paper & Co" otherwise. */
+/** The longest name the Ask button spells out; beyond it the button says "Ask" and the actions row keeps its trailing padding. */
+const ASK_NAME_MAX = 10;
+
+/** "Ask Rossi's" for a possessive name, "Ask Paper & Co" for a short one, "Ask" for a long one (VoiceOver still hears the shop). */
 function askLabel(name: string): string {
   const first = name.split(' ')[0];
-  return `Ask ${/'s$/.test(first) ? first : name}`;
+  if (/'s$/.test(first)) return `Ask ${first}`;
+  return name.length <= ASK_NAME_MAX ? `Ask ${name}` : 'Ask';
 }
 
 /** A made-up number in Ofcom's drama range (020 7946 0000–0999), so it can never ring a real line. */
@@ -90,6 +94,7 @@ function phoneFor(index: number): string {
 
 export default function ShopPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
+  const { theme } = useUnistyles();
   const content = useContent();
   const { goTo, set } = useAppActions();
   const { shopHours, loading } = useAppStore(useShallow((s) => ({ shopHours: s.shopHours, loading: s.loading })));
@@ -109,7 +114,8 @@ export default function ShopPage() {
   const photos = loading ? [] : shopPhotos(shop);
   const lines = reliabilityLines(shop);
   const headline = ratingHeadline(ratings, shop.reliability?.asked);
-  const quotes = quoteMix(ratings, PAGE_REVIEWS);
+  // The shopper's own note leads.
+  const quotes = quoteMix(ratings, PAGE_REVIEWS).sort((a, b) => Number(b.name === 'You') - Number(a.name === 'You'));
   const found = foundRecently(shop, index);
   // Made to order sits here, with how the item reaches the shopper, not in the header's facts.
   const howItWorks = [
@@ -118,26 +124,19 @@ export default function ShopPage() {
     { title: 'Delivery', value: shop.delivers ? `${shop.delivers.by[0].toUpperCase()}${shop.delivers.by.slice(1)}, ${price(shop.delivers.fee)}` : 'Collect only' },
   ];
 
-  // Promoted leads the tags row under the name: a paid placement is disclosed there, not inside a facts line.
-  const badges: BadgeName[] = [];
-  if (shop.promoted) badges.push('promoted');
-  if (shop.isNew) badges.push('new');
-  if (shop.delivers) badges.push('delivers');
-
   return (
     <ZoomTarget>
       <ShopPageLayout
         name={shop.name}
         accent={shopAccent(shop)}
-        facts={shopFacts(shopHours, shop)}
+        facts={{ ...shopFacts(shopHours, shop), delivers: !!shop.delivers, isNew: shop.isNew }}
         photos={photos}
         mapLoading={loading}
         onBack={back}
         backLabel="Nearby"
-        tags={badges.length > 0 ? badges.map((b) => <Badge key={b} badge={b} on="wash" />) : undefined}
         actions={
           <>
-            <Button label={askLabel(shop.name)} size="compact" icon={BubbleChatIcon} onPress={() => ask()} />
+            <Button label={askLabel(shop.name)} accessibilityLabel={`Ask ${shop.name}`} size="compact" icon={BubbleChatIcon} onPress={() => ask()} />
             <Button label="Call" role="tonal" size="compact" icon={Call02Icon} onPress={() => setSheet('call')} />
             <Button label="Directions" role="tonal" size="compact" icon={Navigation03Icon} onPress={() => setSheet('directions')} />
           </>
@@ -173,9 +172,11 @@ export default function ShopPage() {
                 ))}
               </ListGroup>
               {/* Names only, nothing to press: the line says where they come from. */}
-              <Text variant="footnote" color="mutedForeground">
-                What shoppers found here through Snuffle.
-              </Text>
+              <ShopPageText>
+                <Text variant="footnote" color="mutedForeground">
+                  What shoppers found here through Snuffle.
+                </Text>
+              </ShopPageText>
             </View>
 
             <View style={styles.section}>
@@ -193,31 +194,39 @@ export default function ShopPage() {
               <Text variant="sectionTitle" accessibilityRole="header">
                 Ratings
               </Text>
-              <ListGroup shadow>
-                <ListBlock position="first">
-                  <RatingSummary
-                    figure={headline.figure}
-                    caption={headline.caption}
-                    title={headline.title}
-                    detail={headline.detail}
-                    accessibilityLabel={headline.spoken}
-                    tags={topTags(ratings, 6)}
-                  />
-                </ListBlock>
-                {quotes.map((q) => (
-                  <ReviewCard key={q.text} name={q.name} text={q.text} up={q.up} month={q.month} lines={3} position="middle" />
-                ))}
-                {headline.total > 0 ? (
-                  <ListRow
-                    title={`See all ${headline.total} reviews`}
-                    surface="card"
-                    chevron
-                    position="middle"
-                    onPress={() => router.push({ pathname: '/reviews/[id]', params: { id: shop.id } })}
-                  />
+              <View style={styles.ratings}>
+                <ListGroup shadow>
+                  <ListBlock>
+                    <RatingSummary
+                      figure={headline.figure}
+                      caption={headline.caption}
+                      title={headline.title}
+                      detail={headline.detail}
+                      accessibilityLabel={headline.spoken}
+                      tags={topTags(ratings, 6)}
+                    />
+                  </ListBlock>
+                </ListGroup>
+                {quotes.length > 0 ? (
+                  <ReviewCarousel accessibilityLabel={`Reviews, ${quotes.length} of ${headline.total}`} bleed={theme.space[6]} count={quotes.length}>
+                    {(width) => quotes.map((q) => <ReviewCard key={q.text} name={q.name} text={q.text} up={q.up} month={q.month} lines={5} width={width} />)}
+                  </ReviewCarousel>
                 ) : null}
-                <ListRow title="How ratings work" surface="card" chevron position="last" onPress={() => setSheet('ratings')} />
-              </ListGroup>
+                <View style={styles.more}>
+                <ListGroup shadow>
+                  {headline.total > 0 ? (
+                    <ListRow
+                      title={`See all ${headline.total} reviews`}
+                      surface="card"
+                      chevron
+                      position="first"
+                      onPress={() => router.push({ pathname: '/reviews/[id]', params: { id: shop.id } })}
+                    />
+                  ) : null}
+                  <ListRow title="How ratings work" surface="card" chevron position={headline.total > 0 ? 'last' : 'only'} onPress={() => setSheet('ratings')} />
+                </ListGroup>
+                </View>
+              </View>
             </View>
 
             {lines.length > 0 ? (
@@ -301,5 +310,8 @@ function reliabilityKind(shop: Shop, line: ReliabilityLine): ReliabilityKind {
 
 const styles = StyleSheet.create((theme) => ({
   section: { gap: theme.gap.heading },
+  ratings: { gap: theme.gap.block },
+  // The links to the rest sit 24 pt under what comes before them (the block gap and this).
+  more: { paddingTop: theme.space[3] },
   route: { aspectRatio: 3 / 2, borderRadius: theme.radius.inner, overflow: 'hidden' },
 }));

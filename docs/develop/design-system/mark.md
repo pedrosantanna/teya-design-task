@@ -12,7 +12,7 @@ Call:
 - I asked for it to be refined on an icon grid in black and white until the palette was chosen, and pointed out when it sat too high.
 - I stopped here on purpose. With more time I would develop the mark further, perhaps in another direction, but the brand is not the focus of this exercise; I enjoyed it and the result is good enough to give the app a face.
 - I asked for the splash to be a short vector animation on Indigo: the awning first, unrolling stripe by stripe, then the face and two blinks.
-- Inside the app the mark is a bare glyph in one colour that follows the theme, never on a tile or in an avatar. This reverses the "mark on a Lavender tile" of decision 045.
+- Inside the app the mark is a bare glyph in one colour that follows the theme, never on a tile. The one exception is Snuffle's avatar in the chat: a 24 pt circle in the Snuffle bubble's Lavender, beside its name (decision 057). This reverses the "mark on a Lavender tile" of decision 045.
 AI:
 - An agent built the splash intro in code from the glyph's own paths. An agent drew the icon tests in SVG from my seeds (a sniffer dog, British shopping, the parade's awnings). I took the first two into Figma and changed the vectors by hand. The agent exported my version, rebuilt it on one axis and drew the platform applications. Its first optical centre put the glyph too high; I pointed it out and it chose a new one by comparing offsets by eye.
 Trade-offs:
@@ -77,11 +77,11 @@ An adaptive icon is two 108 dp layers. Launchers show the middle 72 dp through t
 
 ## In the app
 
-The square exists only as the app icon, which the system draws. Everywhere inside the app the mark is the glyph alone: no tile, no circle, no avatar, and nothing behind it. It takes one colour from the theme, Foreground, so it is dark on light backgrounds and light on dark ones; the two low-contrast stripes are Muted foreground, the lighter tone of the same ink, as on Android's themed icon.
+The square exists only as the app icon, which the system draws. Everywhere inside the app the mark is the glyph alone, with no tile and nothing behind it, except the chat's sender line, where it sits in a small Lavender avatar. It takes one colour from the theme, Foreground, so it is dark on light backgrounds and light on dark ones; the two low-contrast stripes are Muted foreground, the lighter tone of the same ink, as on Android's themed icon.
 
 | Where | Size |
 | --- | --- |
-| The chat's sender line, beside "Snuffle", with no avatar column | 22 wide |
+| The chat's sender line, in a 24 pt Lavender avatar beside "Snuffle" | 14 wide |
 | Notification and Live Activity | 40 wide |
 | Sign in | 56 wide |
 | The splash, native and in the app, centred on Indigo 800 (white glyph, see below) | 120 wide |
@@ -91,6 +91,19 @@ On the splash the glyph takes two fixed colours on Indigo 800, the brand colour:
 This reverses the part of decision 045 that put the mark on a Lavender tile with a warm face behind the glyph. Lavender stays Snuffle's colour through its bubbles and typing dots.
 
 ## Splash intro
+
+<video class="intro-video" src="img/mark-intro.mp4" poster="img/mark-intro.png" width="480" height="480" aria-label="The splash intro: the awning unrolls, the face appears and the dog blinks twice" controls loop muted playsinline autoplay></video>
+
+The clip loops, and it plays on its own unless the system asks for reduced motion.
+
+| Time | What happens |
+| --- | --- |
+| 0 ms | Only the awning shows, rolled up at the top |
+| 100 to 800 ms | The five stripes unroll left to right, each with a sway |
+| 780 ms | The ears slide in |
+| 960 and 1050 ms | The eyes grow, then the nose pops |
+| 1240 and 1400 ms | Two blinks |
+| 1600 ms | The finished mark |
 
 The splash plays the mark building itself, in about 1.6 s; the timing is on the [motion page](motion.md#splash). Only the awning shows at first, rolled up at the top like the blind of a shop. It comes down, and the five stripes unroll one after the other, each with a short sway and a small overshoot. Then the ears, eyes and nose appear and the dog blinks twice. The final frame is the glyph above, the same as the native splash image. The intro starts from the rolled awning, so the face drops out for a moment when the system hands over, then builds back. The stripes are the same five paths as the glyph, drawn one by one, so the last frame matches it exactly.
 

@@ -38,6 +38,24 @@
       "$value": "{color.indigo.100}",
       "$description": "Tonal Indigo selection on controls other than filter chips: the current order step, Android segmented control and snackbar action, the debugger"
     },
+    "chipSelectedRaised": {
+      "$value": "{color.indigo.100}",
+      "$description": "Light keeps the Card chip with an Indigo 800 edge for a selected filter chip; this role is read in dark only (tags.md)"
+    },
+    "chipSelectedOnTile": {
+      "$value": "{color.indigo.100}",
+      "$description": "Read in dark only; see chipSelectedRaised (tags.md)"
+    },
+    "tag": {
+      "fill": {
+        "$value": "{color.background}",
+        "$description": "Read in dark only; light draws an unselected chip as its ground with a 1 pt edge (tags.md)"
+      },
+      "fillRaised": {
+        "$value": "{color.sheet}",
+        "$description": "Read in dark only; see tag.fill (tags.md)"
+      }
+    },
     "onChipSelected": {
       "$value": "{color.indigo.800}"
     },
@@ -127,7 +145,15 @@
       "$description": "Count and controls on the photo viewer: 21:1 on Lightbox"
     },
     "onLightboxMuted": {
-      "$value": { "colorSpace": "srgb", "components": [0.749, 0.749, 0.749], "hex": "#BFBFBF" },
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.749,
+          0.749,
+          0.749
+        ],
+        "hex": "#BFBFBF"
+      },
       "$description": "Hint under the photo on the viewer: white at 75% on Lightbox, 11.4:1"
     },
     "onDestructive": {
@@ -141,6 +167,14 @@
     "success": {
       "$value": "{color.pistachio.700}",
       "$description": "Check icon on Ready, Paid and Collected (colour.md)"
+    },
+    "successOnTile": {
+      "$value": "{color.pistachio.800}",
+      "$description": "The Open word on an accent tile (the shop page's status line, the Category rows): Success 800 in light, because Success 700 is 4.16:1 on Peach"
+    },
+    "warningOnTile": {
+      "$value": "{color.butter.800}",
+      "$description": "The Closes soon word on an accent tile: Warning 800 in light (700 is 4.30:1 on Peach), Foreground in dark"
     },
     "border": {
       "$value": "{color.biscuit.860}",
@@ -278,47 +312,29 @@
     },
     "chat": {
       "ground": {
-        "$value": "{color.biscuit.1000}",
-        "$description": "A chat's neutral ground: Card in light, Background in dark"
+        "$value": "{color.background}",
+        "$description": "A chat's ground is the app's Background in both modes (colour.md, Snuffle)"
       },
       "fill": {
-        "$value": "{color.biscuit.940}",
-        "$description": "Chips and grouped rows on the chat ground: Background in light, Card in dark"
+        "$value": "{color.card}",
+        "$description": "Chips and grouped rows on the chat ground: Card white in light (1.21:1 on the Background), Card in dark"
       },
       "edge": {
         "$value": "{color.biscuit.890}",
-        "$description": "Hairline around cards and grouped rows on the chat ground (white on white needs an edge)"
+        "$description": "Hairline around cards and grouped rows on the chat ground (1.15:1 on the Background)"
       },
       "field": {
-        "$value": "{color.biscuit.940}",
-        "$description": "The composer field on a chat: Background in light, Card in dark, with a Border hairline (the white glass vanished on the white ground)"
+        "$value": "{color.card}",
+        "$description": "The composer field in every place it appears (New Request, a chat, Requests): Card with a Border hairline, in both modes"
       },
       "fieldEdge": {
-        "$value": "{color.biscuit.860}",
-        "$description": "Hairline around the composer field"
+        "$value": "{color.border}",
+        "$description": "Hairline around the composer field and the chips on a chat"
       }
     },
     "sheet": {
       "$value": "{color.biscuit.890}",
       "$description": "Sheet ground, one tone darker than the Background (L 0.89, 1.15:1), so white rows (1.39:1) and the sheet both separate (shape.md, Sheets)"
-    },
-    "shopPage": {
-      "card": {
-        "$value": "{color.biscuit.915}",
-        "$description": "The shop page's card in light: a warm grey, Biscuit 915 (1.15:1 on the map ground Biscuit 960), so the grouped rows step up onto it"
-      },
-      "row": {
-        "$value": "{color.biscuit.1000}",
-        "$description": "Grouped rows on the shop page's card: Card white, one step up from the warm grey card (1.29:1)"
-      },
-      "rowEdge": {
-        "$value": "{color.biscuit.890}",
-        "$description": "1 pt hairline around the rows on the shop page, so they register"
-      },
-      "cardEdge": {
-        "$value": "{color.biscuit.915}",
-        "$description": "The card's top edge: none in light (the same grey as the card)"
-      }
     },
     "askEdge": {
       "$value": "{color.biscuit.150}",
@@ -342,6 +358,10 @@
     "shadow": {
       "$value": "{color.biscuit.150}",
       "$description": "Colour of the delicate card shadow"
+    },
+    "location": {
+      "$value": "{color.background}",
+      "$description": "The location ask in light mode: the Background, so the quiet street keeps its look (no lift behind the art)"
     },
     "welcome": {
       "$description": "Getting started (colour.md, Getting started): one full-bleed brand ground per page, Indigo then Peach then Pistachio. Text, Skip, the dots and the Continue capsule use Foreground and Background over it",
@@ -429,8 +449,8 @@
       "$description": "Opacity of color.photoScrim (black) at the bottom edge of a shop photo"
     },
     "photoPill": {
-      "$value": 0.3,
-      "$description": "Opacity of the black pill the carousel's dots sit in, over the scrim"
+      "$value": 0.2,
+      "$description": "Opacity of the black pill the carousel's dots sit in, over the scrim: 20% (round 12; the critique asked for about 12%, which measured 2.5 to 2.8:1 for the white dots on a pale photo; 30% read as a dark lozenge)"
     },
     "tonalOnTile": {
       "$value": 0.55,

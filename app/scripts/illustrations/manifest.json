@@ -1,12 +1,16 @@
 {
-  "$comment": "Which 3D illustrations the app ships, on which ground and at which size. render.mjs renders the frames from the docs viewer's export mode; encode.mjs turns them into app/assets/illustrations and manifest.generated.ts. Grounds are the background and card colour tokens, read from src/design-system/tokens at render time (lib.mjs, tokenHex); category cards bake on each kind's tile token. darkTones overrides the shade for the dark render where an object reads too dark on a dark ground. sizes are the display sizes the Illustration component accepts; each illustration lists the ones rendered (smaller display sizes scale the 120 pt asset down). Clips ship at animationScales only (@3x, which Metro also serves to @2x screens) to keep the set under 5 MB (a clip over 240 KB falls back to lossy q90); stills ship at every scale. groundTones is the dark tone each ground's shade and cast shadow mix toward, from the Biscuit ramp, so shadows are warm and never indigo or flat grey. extra lists more ground × size combinations for one illustration (the hero size on Getting started and the location ask). animationScalesBySize ships the hero clips at @2x only, inside the budget; clipsBySize picks the clips a size ships (the location ask's hero is a still, so the set stays under 5 MB). welcome is Getting started: per-page Indigo grounds, rendered with --set welcome.",
+  "$comment": "Which 3D illustrations the app ships, on which ground and at which size. render.mjs renders the frames from the docs viewer's export mode; encode.mjs turns them into app/assets/illustrations and manifest.generated.ts. Grounds are the background and card colour tokens, read from src/design-system/tokens at render time (lib.mjs, tokenHex); category cards bake on each kind's tile token. darkTones overrides the shade for the dark render where an object reads too dark on a dark ground. sizes are the display sizes the Illustration component accepts; each illustration lists the ones rendered (smaller display sizes scale the 120 pt asset down). Clips ship at animationScales only (@3x, which Metro also serves to @2x screens) to keep the set under 5 MB (a clip over 240 KB falls back to lossy q90); stills ship at every scale. groundTones is the dark tone each ground's shade and cast shadow mix toward, from the Biscuit ramp, so shadows are warm and never indigo or flat grey. extra lists more ground \u00d7 size combinations for one illustration (the hero size on Getting started and the location ask). animationScalesBySize ships the hero clips at @2x only, inside the budget; clipsBySize picks the clips a size ships (the location ask's hero is a still, so the set stays under 5 MB). welcome is Getting started: per-page Indigo grounds, rendered with --set welcome.",
   "page": "/?export=1#illustrations",
   "video": {
     "$comment": "Clips on a flat ground are also encoded as video (encode.mjs): MP4 H.264 on every platform (Safari needs the MP4, so WebM is not made). Video has no alpha, so Getting started (a crossfading ground) is listed in keepWebp and stays WebP.",
-    "formats": ["mp4"],
+    "formats": [
+      "mp4"
+    ],
     "crf": 16,
     "replaceWebp": true,
-    "keepWebp": ["welcome"]
+    "keepWebp": [
+      "welcome"
+    ]
   },
   "fps": 24,
   "clipFps": {
@@ -21,14 +25,17 @@
     "background-light": "#6E4A2C",
     "background-dark": "#050302",
     "card-light": "#6E4A2C",
-    "card-dark": "#050302"
+    "card-dark": "#050302",
+    "location-light": "#6E4A2C",
+    "location-dark": "#050302"
   },
   "sizes": {
     "small": 64,
     "medium": 88,
     "large": 120,
-    "hero": 220,
-    "welcome": 240
+    "hero": 352,
+    "welcome": 312,
+    "bleed": 460
   },
   "scales": [
     2,
@@ -138,11 +145,16 @@
       "extra": [
         {
           "grounds": [
-            "background"
+            "location"
           ],
           "sizes": [
             "hero"
-          ]
+          ],
+          "darkTones": {
+            "recolor": {
+              "#323334": "#AAABAD"
+            }
+          }
         }
       ],
       "clipsBySize": {
@@ -173,7 +185,7 @@
     }
   ],
   "categories": {
-    "$comment": "Nearby's category cards (CategoryCard, size.category 120 × 164): opaque stills on the kind's tile token, color.shop.accent.<ramp>.tile from src/design-system/tokens (shade toward the ramp's 800 in light, 900 in dark; craft-pass-2). encode.mjs fails when a still's corner pixel differs from that token. Ramps follow KIND_ACCENT in store/kinds.ts. The object sits in the top 120 × 120; the label goes below. fit frames every object to the same optical area: the box around the object and its cast shadow covers area of the 120 × 120 square (capped at maxWidth of its width and maxHeight of its height), the object stands on a baseline base pt from the top, the box is centred across, and clear pt stay free on the right and under the shadow. No animation in lists.",
+    "$comment": "Nearby's category cards (CategoryCard, size.category 120 \u00d7 164): opaque stills on the kind's tile token, color.shop.accent.<ramp>.tile from src/design-system/tokens (shade toward the ramp's 800 in light, 900 in dark; craft-pass-2). encode.mjs fails when a still's corner pixel differs from that token. Ramps follow KIND_ACCENT in store/kinds.ts. The object sits in the top 120 \u00d7 120; the label goes below. fit frames every object to the same optical area: the box around the object and its cast shadow covers area of the 120 \u00d7 120 square (capped at maxWidth of its width and maxHeight of its height), the object stands on a baseline base pt from the top, the box is centred across, and clear pt stay free on the right and under the shadow. No animation in lists.",
     "size": 120,
     "scales": [
       2,
@@ -198,7 +210,7 @@
       },
       {
         "id": "cafe",
-        "label": "Café",
+        "label": "Caf\u00e9",
         "object": "tea",
         "ramp": "peach"
       },
@@ -260,7 +272,8 @@
         "id": "cameras",
         "label": "Cameras",
         "object": "camera",
-        "ramp": "peach"
+        "ramp": "peach",
+        "rot": -35
       },
       {
         "id": "stationery",
@@ -301,15 +314,13 @@
     ],
     "height": 164,
     "fit": {
-      "area": 0.22,
-      "maxWidth": 0.72,
-      "maxHeight": 0.55,
-      "base": 110,
+      "center": 0.8,
       "clear": 8
-    }
+    },
+    "opaque": false
   },
   "welcome": {
-    "$comment": "Getting started: each page has its own brand ground (light: Indigo 300, the Peach tile, the Pistachio tile; dark: Indigo 900, the Peach and Pistachio dark tiles; colour.md, Getting started) and its object is rendered for it at the welcome size (240 pt). Transparent, not opaque: the page ground crossfades while the shopper drags, so an opaque square would show its edge mid-swipe. Shade and shadow mix toward the ground's own 900 step (Indigo 900, Peach 900, Pistachio 900), and toward near-black on Indigo 900. Stills at @2x and @3x; clips at @2x (animationScalesBySize.welcome).",
+    "$comment": "Getting started: each page has its own brand ground (light: Indigo 300, the Peach tile, the Pistachio tile; dark: Indigo 900, the Peach and Pistachio dark tiles; colour.md, Getting started) and its object is rendered for it at the welcome size (312 pt, 1.3 times the earlier 240). Transparent, not opaque: the page ground crossfades while the shopper drags, so an opaque square would show its edge mid-swipe. Shade and shadow mix toward the ground's own 900 step (Indigo 900, Peach 900, Pistachio 900), and toward near-black on Indigo 900. Stills at @2x and @3x; clips at @2x (animationScalesBySize.welcome). The crossroads entry (the largest scene) has its own animationKB of 480: at 312 pt it needs a lossy clip at half the frame rate (up to 490 KB). The crossroads on page 1 is a bleed hero (item.frame): a 460 \u00d7 420 pt window onto the scene drawn about 2.2 times the screen width (fitCenter 1.9 of 460 pt), centred with focusX and focusY on the busiest corner, so the screen crops it at the sides. It has no clip: at 920 px wide the entry is 1.6 MB even at half rate, so the screen plays the entry itself (a rise and fade) and pans the still slowly, both with Reanimated, which costs no bytes. fadeBottom dissolves the window's lower edge over that many pt so no hard cut shows above the copy.",
     "size": "welcome",
     "budgets": {
       "animationKB": 300,
@@ -320,17 +331,24 @@
         "name": "crossroads",
         "object": "crossroads",
         "page": 1,
-        "clips": [
-          "entry"
-        ],
+        "clips": [],
         "light": {
           "ground": "#B5BFFF",
           "dark": "#222169"
         },
         "dark": {
-          "ground": "#222169",
-          "dark": "#050302"
-        }
+          "ground": "#3D35B8",
+          "dark": "#050302",
+          "dim": 0.9
+        },
+        "size": "bleed",
+        "frame": {
+          "fitCenter": 1.9,
+          "focusX": -0.03,
+          "focusY": 0.17,
+          "fadeBottom": 40
+        },
+        "stillKB": 400
       },
       {
         "name": "shop",
@@ -366,5 +384,9 @@
         }
       }
     ]
+  },
+  "line": 1.4,
+  "heights": {
+    "bleed": 420
   }
 }

@@ -35,11 +35,13 @@ export function snuffleMarkWidth(theme: AppTheme, size: SnuffleMarkSize): number
 export type SnuffleMarkProps = {
   /** inline: beside "Snuffle" on the sender line. icon: notification and Live Activity. large: sign in. splash: the splash. */
   size?: SnuffleMarkSize;
+  /** The glyph's width when a component sets its own (the Snuffle avatar). Overrides `size`. */
+  width?: number;
 };
 
-export const SnuffleMark = memo(function SnuffleMark({ size = 'inline' }: SnuffleMarkProps) {
+export const SnuffleMark = memo(function SnuffleMark({ size = 'inline', width: widthOverride }: SnuffleMarkProps) {
   const { theme } = useUnistyles();
-  const width = snuffleMarkWidth(theme, size);
+  const width = widthOverride ?? snuffleMarkWidth(theme, size);
   const ink = theme.color.foreground;
   const soft = theme.color.mutedForeground;
   return (

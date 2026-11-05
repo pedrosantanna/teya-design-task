@@ -26,6 +26,7 @@ export { Avatar, type AvatarProps } from './components/Avatar/Avatar';
 export { AvatarExamples } from './components/Avatar/Avatar.examples';
 export { ChatBubble, SnuffleSender, chatGap, type ChatBubbleProps, type ChatGap, type ChatSender } from './components/ChatBubble/ChatBubble';
 export { ChatBubbleExamples } from './components/ChatBubble/ChatBubble.examples';
+export { SnuffleAvatar } from './components/SnuffleAvatar/SnuffleAvatar';
 export { SnuffleMark, snuffleMarkWidth, type SnuffleMarkProps, type SnuffleMarkSize } from './components/SnuffleMark/SnuffleMark';
 export { SnuffleMarkExamples } from './components/SnuffleMark/SnuffleMark.examples';
 export { MarkIntro, MARK_INTRO_MS } from './components/MarkIntro/MarkIntro';
@@ -37,6 +38,7 @@ export { SignInButtonExamples } from './components/SignInButton/SignInButton.exa
 export { CategoryCard, CategoryHeader, type CategoryCardProps, type CategoryHeaderProps } from './components/CategoryCard/CategoryCard';
 export { CategoryCardExamples } from './components/CategoryCard/CategoryCard.examples';
 export { Illustration, categoryIllustration, isCategoryId, useIllustrationScheme, type IllustrationProps } from './components/Illustration/Illustration';
+export { ILLUSTRATION_SIZES } from './components/Illustration/manifest.generated';
 export type { CategoryId } from './components/Illustration/manifest.generated';
 export { IllustrationExamples } from './components/Illustration/Illustration.examples';
 export { CloseButton, type CloseButtonProps } from './components/CloseButton/CloseButton';
@@ -69,7 +71,7 @@ export { SegmentedControl, type Segment, type SegmentedControlProps } from './co
 export { SegmentedControlExamples } from './components/SegmentedControl/SegmentedControl.examples';
 export { Sheet, SheetProvider, type SheetDetent, type SheetProps } from './components/Sheet/Sheet';
 export { SheetExamples } from './components/Sheet/Sheet.examples';
-export { ShopPageLayout, type ShopPageLayoutProps, type ShopPhoto } from './components/ShopPageLayout/ShopPageLayout';
+export { ShopPageLayout, ShopPageText, type ShopPageLayoutProps, type ShopPhoto } from './components/ShopPageLayout/ShopPageLayout';
 export { PhotoCarousel, type PhotoCarouselProps } from './components/PhotoCarousel/PhotoCarousel';
 export { PhotoCarouselExamples } from './components/PhotoCarousel/PhotoCarousel.examples';
 export { Lightbox, type LightboxProps } from './components/Lightbox/Lightbox';
@@ -102,7 +104,7 @@ export { RatingSummary, type RatingSummaryProps, type RatingSummaryTag } from '.
 export { RatingSummaryExamples } from './components/RatingSummary/RatingSummary.examples';
 export { ReliabilityRow, type ReliabilityKind, type ReliabilityRowProps } from './components/ReliabilityRow/ReliabilityRow';
 export { ReliabilityRowExamples } from './components/ReliabilityRow/ReliabilityRow.examples';
-export { ReviewCard, type ReviewCardProps } from './components/ReviewCard/ReviewCard';
+export { ReviewCard, ReviewCarousel, type ReviewCardProps, type ReviewCarouselProps } from './components/ReviewCard/ReviewCard';
 export { ReviewCardExamples } from './components/ReviewCard/ReviewCard.examples';
 // Prototype tools (state debugger).
 export { Checkbox, type CheckboxProps } from './components/Checkbox/Checkbox';

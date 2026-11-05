@@ -4,7 +4,7 @@ How a control looks when pressed, disabled, selected, focused or loading; how su
 
 ```summary
 Takeaways:
-- Five interaction states with tokens: pressed (scale 0.97 and a 10% state layer, `spring.press`), disabled (38% content on a 12% container), selected (a Card chip with Indigo text and edge; the segmented control's thumb), focus (a 2 px ring in the web build) and loading (a spinner in place of the label, same width).
+- Five interaction states with tokens: pressed (scale 0.97 and a 10% state layer, `spring.press`), disabled (38% content on a 12% container), selected (a Card chip with Indigo text and edge in light, an Indigo container with no edge in dark; the segmented control's thumb), focus (a 2 px ring in the web build) and loading (a spinner in place of the label, same width).
 - Three levels of elevation: flat content, floating controls in glass or a tonal surface, and modal sheets over a scrim (Foreground at 20% in light, black at 48% in dark). No shadows in dark mode.
 - Skeletons copy the shape of the rows and cards they stand for and appear only after about 300 ms.
 - Every error message says what happened, where the money is and what the shopper can do next.
@@ -14,10 +14,12 @@ Call:
 - I kept these states provisional (decision 043); the prototype will show which empty and error screens need their own design.
 - Later I asked for ratings on the shop page and chose to show stock accuracy only after 10 "has it" answers (decision 047).
 - After a visual critique I asked for the selected chip to sit a level above the unselected ones, for the iOS segmented control and for one scrim behind every sheet.
+- In round 10 I asked for dark mode to drop the edge on chips and pills, so a selected chip in dark is told apart by its Indigo fill and its semibold label.
 AI:
 - An agent reviewed the design system against the v7 screens and found no states beyond the happy path and the payment endings. Another agent wrote this page from the existing tokens; I set the error pattern of happened, money and next step.
 - An agent wrote the rating states from the low-count rules on the Content page.
 - An agent rewrote the selected state and the sheet scrim from the visual critique and measured them in light and dark.
+- An agent replaced the dark chip edges with tonal containers and measured them (see Tags).
 Trade-offs:
 - A state layer at a fixed percentage is simple to build on both platforms and looks slightly weaker on the pale fills than on Indigo.
 - Waiting 300 ms before a skeleton means a slow answer briefly shows nothing; showing a skeleton at once would flash on every fast answer.
@@ -29,7 +31,7 @@ Trade-offs:
 | --- | --- | --- | --- |
 | Pressed | Scale to 0.97 and a state layer of about 10% of the content colour over the fill | `spring.press` in, `spring.snappy` on release | Starts at touch-down; a card presses as a whole |
 | Disabled | Content at 38% opacity on its container at 12% | No motion | Used rarely: a disabled control says why next to it, or isn't shown |
-| Selected | Filter chips: Card fill, label in Indigo 800 at 600 and a 1.5 pt Indigo 800 edge (dark: Card, Indigo 300 and a 1 pt edge); unselected chips sit a level down. Segments: a Card thumb under the delicate shadow on a Muted track, label in Foreground at 600 (dark: a Stone 360 thumb on a Card track). Options: the tick and a semibold title | `color.chipOn`, `size.edge.selected`, `color.segmented.*`, `spring.snappy` | Chips, segments and options in the details sheet; the label stays the same. The tonal Indigo role (`chipSelected`) stays on the order card's current step, Android's segmented button and the rating sheet's thumbs |
+| Selected | Filter chips: Card fill, label in Indigo 800 at 600 and a 1.5 pt Indigo 800 edge (dark: no edge, an Indigo 900 fill, 850 on a sheet, 950 on a tile or the shop page card, with Indigo 200 text); unselected chips sit a level down. Segments: a Card thumb under the delicate shadow on a Muted track, label in Foreground at 600 (dark: a Stone 360 thumb on a Card track). Options: the tick and a semibold title | `color.chipOn`, `color.chipSelected`, `color.chipSelectedRaised`, `color.chipSelectedOnTile`, `size.edge.selected`, `color.segmented.*`, `spring.snappy` | Chips, segments and options in the details sheet; the label stays the same. The tonal Indigo role (`chipSelected`) stays on the order card's current step, Android's segmented button and the rating sheet's thumbs |
 | Focus | A visible 2 px ring in Tint, 2 px outside the control, following its corner | Matches the control's radius plus 2 | Web build and keyboard use (WCAG 2.4.7); on the phones the system draws its own focus |
 | Loading | A spinner replaces the label; the control keeps its width and fill | `spring.fade` between label and spinner | Only that control stops taking input; Close and the rest of the screen stay live |
 

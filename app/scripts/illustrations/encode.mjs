@@ -20,7 +20,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, wri
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
-import { ASSETS, FRAMES, GENERATED, categoryColors, clipScales, flags, manifest, tool } from './lib.mjs';
+import { ASSETS, FRAMES, GENERATED, HERE, categoryColors, clipScales, flags, manifest, tool } from './lib.mjs';
 
 const f = flags();
 const m = manifest();
@@ -54,11 +54,31 @@ async function webp(files, fps, loop, mode, delays = null) {
   return sharp(files, { join: { animated: true } }).webp(opts).toBuffer();
 }
 
-async function still(file, limit) {
-  let buf = await sharp(file).png({ compressionLevel: 9, effort: 10 }).toBuffer();
+// fadeBottom (pt, from the manifest's welcome frame): the alpha ramps to 0 over the last fadeBottom pt, so a window
+// onto a larger scene has no hard lower edge. Returns a PNG buffer of the frame with that ramp applied.
+// dim (a scheme's item.dim in the manifest, e.g. 0.9 for the dark crossroads): the colour is multiplied by it, alpha untouched,
+// so a cream scene sits calmer on a dark ground.
+async function faded(file, meta) {
+  if (meta.dim && meta.dim !== 1) file = await sharp(file).ensureAlpha().modulate({ brightness: meta.dim }).png().toBuffer();
+  if (!meta.fadeBottom) return sharp(file);
+  const { width, height } = await sharp(file).metadata();
+  const h = Math.round(meta.fadeBottom * meta.scale);
+  const ramp = Buffer.alloc(width * height * 4, 255);
+  for (let y = 0; y < height; y++) {
+    const t = Math.min(1, Math.max(0, (height - 1 - y) / h));
+    const a = Math.round(255 * (t * t * (3 - 2 * t)));
+    for (let x = 0; x < width; x++) ramp[(y * width + x) * 4 + 3] = a;
+  }
+  const mask = await sharp(ramp, { raw: { width, height, channels: 4 } }).png().toBuffer();
+  return sharp(await sharp(file).ensureAlpha().composite([{ input: mask, blend: 'dest-in' }]).png().toBuffer());
+}
+
+async function still(file, limit, meta = {}) {
+  const src = await faded(file, meta);
+  let buf = await src.clone().png({ compressionLevel: 9, effort: 10 }).toBuffer();
   let note = 'png';
   if (buf.length > limit) {
-    buf = await sharp(file).png({ palette: true, colours: 256, dither: 0, compressionLevel: 9, effort: 10 }).toBuffer();
+    buf = await src.clone().png({ palette: true, colours: 256, dither: 0, compressionLevel: 9, effort: 10 }).toBuffer();
     note = 'png8';
   }
   return { buf, note };
@@ -188,14 +208,27 @@ async function encode(dir, outDir, limits) {
   const files = framesOf(dir);
   const isStill = meta.clip === 'still';
   const out = path.join(outDir, isStill ? `${d.replace(/\.still$/, '')}.png` : `${d}.webp`);
-  const limit = meta.set === 'welcome' && m.welcome?.budgets ? (isStill ? m.welcome.budgets.stillKB : m.welcome.budgets.animationKB) * KB : isStill ? limits.still : limits.anim;
+  const own = meta.set === 'welcome' ? m.welcome.items.find((i) => i.name === meta.name)?.animationKB : undefined;
+  const limit = meta.set === 'welcome' && m.welcome?.budgets ? (isStill ? (m.welcome.items.find((i) => i.name === meta.name)?.stillKB ?? m.welcome.budgets.stillKB) : own ?? m.welcome.budgets.animationKB) * KB : isStill ? limits.still : limits.anim;
   mkdirSync(outDir, { recursive: true });
   const asVideo = V && hasFfmpeg && !isStill && meta.set !== 'categories' && meta.set !== 'welcome' && !(V.keepWebp || []).includes(meta.groundId.replace(/-(light|dark)$/, ''));
   if (asVideo) {
     for (const r of await videos(dir, d, meta, outDir)) rows.push({ ...r, ok: true });
     if (V.replaceWebp) return;
   }
-  const { buf, note } = isStill ? await still(files[0], limit) : await anim(files, meta, limit);
+  let clipFiles = files;
+  if (!isStill && meta.fadeBottom) {
+    // The clip's frames get the same lower fade as the still, so the hand-off to the still shows no change.
+    const dst = path.join(tmpdir(), `ill-fade-${process.pid}-${d}`);
+    mkdirSync(dst, { recursive: true });
+    clipFiles = [];
+    for (const file of files) {
+      const out = path.join(dst, path.basename(file));
+      await (await faded(file, meta)).png().toFile(out);
+      clipFiles.push(out);
+    }
+  }
+  const { buf, note } = isStill ? await still(files[0], limit, meta) : await anim(clipFiles, meta, limit);
   writeFileSync(out, buf);
   written.add(out);
   rows.push({ file: path.relative(ASSETS, out), kb: buf.length / KB, frames: files.length, note, ok: buf.length <= limit });
@@ -226,24 +259,32 @@ if (!f.only && f.prune) {
     }
   }
 }
-// Every category still on disk (not only this run's) must be baked on its kind's tile token for its scheme: the
-// top-left pixel is ground, so it must match color.shop.accent.<ramp>.tile within 2 per channel. A mismatch means
-// the token changed after the still was rendered (it shows as a box on the card): re-render that kind.
+// Category stills are transparent and shaded for their kind's tile token (color.shop.accent.<ramp>.tile), and the app
+// composites them over that tile. Two checks: the top-left pixel is fully transparent (nothing is baked on a ground),
+// and the tile each still was shaded for (categories.grounds.json, written from this run's frames) is still the
+// token's value. A changed token leaves the cast shadow tone off: re-render that kind.
 const stale = [];
 const CAT_RE = /^([a-z0-9]+)\.(light|dark)\.\d+@\dx\.png$/;
+const GROUNDS = path.join(HERE, 'categories.grounds.json');
+const shaded = existsSync(GROUNDS) ? JSON.parse(readFileSync(GROUNDS, 'utf8')) : {};
+for (const d of subdirs(path.join(FRAMES, 'categories'))) {
+  const meta = JSON.parse(readFileSync(path.join(FRAMES, 'categories', d, 'meta.json'), 'utf8'));
+  if (meta.clip === 'still' && !f.only) shaded[`${meta.name}.${meta.groundId}`] = meta.ground;
+}
+if (!f.only) writeFileSync(GROUNDS, `${JSON.stringify(Object.fromEntries(Object.entries(shaded).sort()), null, 2)}\n`);
 for (const file of files0(path.join(ASSETS, 'categories'))) {
   const mt = file.match(CAT_RE);
   if (!mt) continue;
   const item = m.categories?.items.find((i) => i.id === mt[1]);
   if (!item) continue;
   const want = categoryColors(item.ramp, mt[2]).ground;
-  const { data } = await sharp(path.join(ASSETS, 'categories', file)).extract({ left: 0, top: 0, width: 1, height: 1 }).removeAlpha().raw().toBuffer({ resolveWithObject: true });
-  const got = `#${[...data.subarray(0, 3)].map((x) => x.toString(16).padStart(2, '0')).join('').toUpperCase()}`;
-  const off = [1, 3, 5].some((i, k) => Math.abs(parseInt(want.slice(i, i + 2), 16) - data[k]) > 2);
-  if (off) stale.push(`${file}: corner ${got}, token ${want} (color.shop.accent.${item.ramp}.tile, ${mt[2]})`);
+  const { data } = await sharp(path.join(ASSETS, 'categories', file)).ensureAlpha().extract({ left: 0, top: 0, width: 1, height: 1 }).raw().toBuffer({ resolveWithObject: true });
+  if (!m.categories.opaque && data[3] !== 0) stale.push(`${file}: top-left pixel is not transparent (alpha ${data[3]})`);
+  const got = shaded[`${mt[1]}.${mt[2]}`];
+  if (got && got.toUpperCase() !== want.toUpperCase()) stale.push(`${file}: shaded for ${got}, token ${want} (color.shop.accent.${item.ramp}.tile, ${mt[2]})`);
 }
 if (stale.length) {
-  console.error(`\n✗ ${stale.length} category still${stale.length === 1 ? '' : 's'} baked on a stale tile colour. Re-render them:`);
+  console.error(`\n✗ ${stale.length} category still${stale.length === 1 ? '' : 's'} out of date. Re-render them:`);
   for (const x of stale) console.error(`  ${x}`);
 }
 const over = rows.filter((r) => !r.ok).length;
@@ -289,10 +330,12 @@ const L = [
   '// Each asset is required by its base name; Metro picks the @2x or @3x file for the screen.',
   '',
   `export const ILLUSTRATION_SIZES = { ${Object.entries(m.sizes).map(([k, v]) => `${k}: ${v}`).join(', ')} } as const;`,
+  '/** Sizes taller than wide (a bleed hero is a window onto a scene); every other size is square. */',
+  `export const ILLUSTRATION_HEIGHTS: Partial<Record<keyof typeof ILLUSTRATION_SIZES, number>> = { ${Object.entries(m.heights ?? {}).map(([k, v]) => `${k}: ${v}`).join(', ')} };`,
   'export type IllustrationSize = keyof typeof ILLUSTRATION_SIZES;',
   `export type IllustrationName = ${union(Object.keys(main))};`,
-  "/** welcome: Getting started, each object on its own page's Indigo ground (scripts/illustrations/manifest.json, welcome). */",
-  "export type IllustrationGround = 'background' | 'card' | 'welcome';",
+  "/** welcome: Getting started, each object on its own page's ground; location: the location ask's ground (scripts/illustrations/manifest.json). */",
+  "export type IllustrationGround = 'background' | 'card' | 'welcome' | 'location';",
   "export type IllustrationScheme = 'light' | 'dark';",
   "/** An MP4 (video, H.264, baked on the ground, for flat grounds) and/or an animated WebP (source, with alpha); ms is its length. */",
   'export type IllustrationClip = { video?: number; source?: number; ms: number };',
@@ -318,7 +361,7 @@ L.push('};', '');
 const catSize = m.categories?.size ?? 120;
 const catHeight = m.categories?.height ?? catSize;
 L.push(
-  `/** Category cards on Nearby: opaque ${catSize} × ${catHeight} pt (theme.size.category) in the card's tile colour, the object in the top ${catSize} × ${catSize}. */`,
+  `/** Category cards on Nearby: transparent ${catSize} × ${catHeight} pt (theme.size.category), shaded for the card's tile colour and drawn over it, the object centred in the top ${catSize} × ${catSize}. */`,
   `export type CategoryId = ${union(Object.keys(cats))};`,
   `export const CATEGORY_LABELS: Record<CategoryId, string> = { ${(m.categories?.items || []).filter((i) => cats[i.id]).map((i) => `${i.id}: ${JSON.stringify(i.label)}`).join(', ')} };`,
   'export const CATEGORY_ILLUSTRATIONS: Record<CategoryId, Partial<Record<IllustrationScheme, { still: number; entry?: IllustrationClip }>>> = {',

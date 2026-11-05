@@ -137,6 +137,12 @@
           "pt": "Receita"
         },
         {
+          "id": "revenue-estimate",
+          "title": "Revenue estimate",
+          "src": "docs/define/revenue-estimate.md",
+          "pt": "Estimativa de receita"
+        },
+        {
           "id": "blueprint",
           "title": "Service blueprint",
           "src": "docs/define/blueprint.md",

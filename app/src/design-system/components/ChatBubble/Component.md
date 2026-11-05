@@ -1,6 +1,6 @@
 # ChatBubble
 
-A message in a request's chat, from the shopper or from Snuffle. Spec: Chat bubble on `docs/develop/design-system/components.md`; spacing from `spacing.md`. Also exports `SnuffleSender` (the sender line: the word "Snuffle", with no glyph, avatar or tile) and `chatGap()`.
+A message in a request's chat, from the shopper or from Snuffle. Spec: Chat bubble on `docs/develop/design-system/components.md`; spacing from `spacing.md`. Also exports `SnuffleSender` (the sender line: the `SnuffleAvatar`, then the word "Snuffle") and `chatGap()`.
 
 ## Props
 
@@ -8,7 +8,7 @@ A message in a request's chat, from the shopper or from Snuffle. Spec: Chat bubb
 | --- | --- | --- | --- |
 | `sender` | `'shopper'`, `'snuffle'` | required | Shopper: Primary fill, right. Snuffle: `snuffle.bubble` fill (the Lavender tile step #D7CCFE, dark Lavender 900), left; Lavender is Snuffle speaking |
 | `text` | string | required | Body; never truncates |
-| `firstInGroup` | boolean | `true` | Snuffle: shows the sender line ("Snuffle", as text) on the first bubble of a group. There is no avatar column; Snuffle's bubbles start at the content edge |
+| `firstInGroup` | boolean | `true` | Snuffle: shows the sender line (avatar and "Snuffle") on the first bubble of a group. There is no avatar column beside the bubbles; they start at the content edge |
 | `day` | string | none | Added to the sender line when it isn't today ("Snuffle · Sun 8 Nov") |
 | `gap` | `'none'`, `'sameSender'`, `'newSender'` | `'none'` | Space above: 12 within a sender, 24 at a change. `chatGap(previous, sender)` works it out |
 | `status` | `'sending'`, `'sent'`, `'failed'` | `'sent'` | Failed shows a retry symbol and "Not sent · tap to retry" |

@@ -14,6 +14,7 @@ Call:
 - Nesta rodada pedi uma verificação que limite o Índigo a um controle preenchido por tela visível e que os papéis das cores sejam revisados em toda tela (decisão 045).
 AI:
 - Um agente pesquisou o NN/g sobre Gestalt, hierarquia visual e revelação progressiva, o Laws of UX sobre a lei de Hick, e Rosenfeld, Morville e Arango e Covert sobre arquitetura da informação, e propôs a lista. Eu pedi que toda tela fosse verificada contra o design system.
+- Na rodada 12 um agente acrescentou duas regras da revisão de telas: um link dentro de um cartão pressionável mantém o seu próprio alvo, e um chip sobre uma linha tingida precisa de um passo de 1,4:1 em relação a ela.
 Trade-offs:
 - Contagens fixas (três tamanhos de texto, cinco chips) são fáceis de verificar e podem acusar uma tela que funciona; uma falha é um aviso para olhar, e eu decido se ela fica.
 ```
@@ -24,7 +25,7 @@ Trade-offs:
 | --- | --- | --- |
 | 1 | Proximidade | Itens de um grupo ficam a 4–12 um do outro, grupos a pelo menos 24, seções a 32, e todo espaço é um valor `space.*`; na conversa, 12 entre os balões de um remetente e 24 na troca de remetente |
 | 2 | Proximidade dos títulos | Cada título fica pelo menos duas vezes mais perto do seu conteúdo que da seção anterior |
-| 3 | Região comum | Um cartão ou sheet só aparece onde o espaçamento não separa; nada de cartão dentro de cartão. Roda no claro e no escuro: um contêiner agrupado pode sumir contra o fundo escuro |
+| 3 | Região comum | Um cartão ou sheet só aparece onde o espaçamento não separa; nada de cartão dentro de cartão. Roda no claro e no escuro: um contêiner agrupado pode sumir contra o fundo escuro; um chip sobre uma linha dentro de um cartão tingido precisa de um passo tonal de pelo menos 1,4:1 em relação a essa linha |
 | 4 | Semelhança | Um objeto tem a mesma aparência em todo lugar (uma loja é um tile em Nearby e uma linha no resto) |
 | 5 | Continuidade e alinhamento | Tudo fica na linha da margem ou num recuo; o primeiro item de um carrossel se alinha com o título |
 | 6 | Figura e fundo | Glass só em controles flutuantes; texto sobre foto passa 4,5:1 com o scrim |
@@ -57,7 +58,7 @@ Trade-offs:
 
 | # | Verificação | Passa quando |
 | --- | --- | --- |
-| 15 | Tamanho dos alvos | Todo alvo tem pelo menos 44 pt (48 dp), com pelo menos 8 entre alvos |
+| 15 | Tamanho dos alvos | Todo alvo tem pelo menos 44 pt (48 dp), com pelo menos 8 entre alvos. Um link dentro de um cartão pressionável mantém o seu próprio alvo de 44 pt; a área de toque do cartão não pode se sobrepor a ele além da separação de 8 pt |
 | 16 | Áreas seguras | Nada importante sob a Dynamic Island, o indicador de início ou a barra de pedido; o último item fica a 48 da barra de pedido |
 | 17 | Extensão da rolagem | O conteúdo não rola além do último item mais do que o espaço livre da barra de pedido: no fim, o último item para 48 acima da barra de pedido |
 | 18 | Cor e imagens | A cor nunca é o único sinal; toda imagem tem rótulo ou fica oculta |

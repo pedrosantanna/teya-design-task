@@ -10,6 +10,7 @@ import Animated, { useAnimatedStyle, useSharedValue, withSequence, withSpring, w
 import { useGround } from '../../internal/ground';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
+import { ShopLink } from '../../internal/ShopLink';
 import { spoken } from '../../internal/PressableCard';
 import { type ColorName } from '../../theme';
 import { Icon } from '../Icon/Icon';
@@ -27,6 +28,8 @@ export type AnswerRowProps = {
   status: string;
   kind: AnswerRowKind;
   position?: RowPosition;
+  /** Tap on the shop's name: opens the shop's page. The rest of the row stays still. */
+  onOpenShop?: () => void;
 };
 
 const icons: Record<AnswerRowKind, IconSvgElement> = {
@@ -39,10 +42,10 @@ const icons: Record<AnswerRowKind, IconSvgElement> = {
 
 /**
  * An answer on the asking list (conceptual model: "Rows while asking"): shop, street and the answer's
- * status with a symbol. The status fades through with spring.status when it changes. Not pressable: the
- * full answer cards in the chat are where the shopper acts.
+ * status with a symbol. The status fades through with spring.status when it changes. The shop's name opens the shop's page; the full
+ * answer cards in the chat are where the shopper acts.
  */
-export const AnswerRow = memo(function AnswerRow({ shop, street, status, kind, position = 'only' }: AnswerRowProps) {
+export const AnswerRow = memo(function AnswerRow({ shop, street, status, kind, position = 'only', onOpenShop }: AnswerRowProps) {
   const { theme } = useUnistyles();
   const onChat = useGround() === 'chat';
   const grouped = theme.platform === 'ios';
@@ -58,12 +61,22 @@ export const AnswerRow = memo(function AnswerRow({ shop, street, status, kind, p
   const color: ColorName = good ? 'success' : 'mutedForeground';
 
   return (
-    <View accessible accessibilityLabel={spoken(shop, street, kind === 'till' ? `${status}, from the shop's till` : status)} accessibilityLiveRegion="polite" style={styles.row(grouped, position, onChat)}>
+    <View
+      accessible
+      accessibilityLabel={spoken(shop, street, kind === 'till' ? `${status}, from the shop's till` : status)}
+      accessibilityActions={onOpenShop ? [{ name: 'viewShop', label: 'View shop' }] : undefined}
+      onAccessibilityAction={onOpenShop ? () => onOpenShop() : undefined}
+      accessibilityLiveRegion="polite"
+      style={styles.row(grouped, position, onChat)}>
       <View style={styles.text(grouped && position !== 'last' && position !== 'only')}>
         <View style={styles.grow}>
-          <Text variant="subheadlineStrong" numberOfLines={1}>
-            {shop}
-          </Text>
+          {onOpenShop ? (
+            <ShopLink name={shop} variant="subheadlineStrong" onPress={onOpenShop} />
+          ) : (
+            <Text variant="subheadlineStrong" numberOfLines={1}>
+              {shop}
+            </Text>
+          )}
           <Text variant="footnote" color="mutedForeground" numberOfLines={1}>
             {street}
           </Text>
