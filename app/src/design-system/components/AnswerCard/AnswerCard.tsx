@@ -12,6 +12,7 @@ import { ShopPlaceholder } from '../../internal/ShopPlaceholder';
 import { cornerCurve, type ShopAccentName } from '../../theme';
 import { Button } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
+import { StatusLabel } from '../Tag/Tag';
 import { Text } from '../Text/Text';
 
 export type AnswerAction = 'buy' | 'showMe' | 'none';
@@ -98,9 +99,7 @@ export const AnswerCard = memo(function AnswerCard({
           <View style={styles.statusLine}>
             {statusIcon ? <Icon icon={statusIcon} size="footnote" color="mutedForeground" /> : null}
             <View style={styles.grow}>
-              <Text variant="footnote" color="mutedForeground" numberOfLines={2}>
-                {statusLine}
-              </Text>
+              <StatusLabel label={statusLine} />
             </View>
           </View>
         </View>

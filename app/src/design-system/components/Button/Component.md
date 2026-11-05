@@ -33,7 +33,7 @@ The app's one button. Roles and sizes follow the Button table on `docs/develop/d
 `Button.examples.tsx` renders every role, both sizes, loading and disabled on the `/design-system` route.
 
 ```tsx
-<Button label="Buy · £29.98" accessibilityLabel="Buy, £29.98" onPress={buy} />
+<Button label="Buy for £29.98" accessibilityLabel="Buy, £29.98" onPress={buy} />
 <Button label="Keep looking" role="tonal" />
 <Button label="Buy at Rossi's" size="compact" />
 ```

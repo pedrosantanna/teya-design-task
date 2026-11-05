@@ -27,7 +27,7 @@ import {
   type ShopAccentName,
 } from '@/design-system';
 import { imageSource } from '@/content/images';
-import { shopAccent, shopHoursLabel, useApp, useArea } from '@/store';
+import { shopAccent, shopFacts, useApp, useArea } from '@/store';
 import { areaCategories } from '@/store/categories';
 
 const ALL = 'All';
@@ -91,8 +91,8 @@ export default function Category() {
                     key={shop.id}
                     id={shop.id}
                     name={shop.name}
-                    // The street drops while a street chip is selected; a no-break space keeps "6 min" with "walk".
-                    meta={[shopHoursLabel(shopHours, shop), street === ALL ? shop.street : null, `${shop.walkMinutes}\u00A0min walk`].filter(Boolean).join(' · ')}
+                    // The street drops while a street chip is selected, as the chip already names it.
+                    facts={shopFacts(shopHours, shop, street === ALL)}
                     accent={shopAccent(shop)}
                     image={imageSource(shop.image, theme.size.avatar.shop)}
                     position={shown.length === 1 ? 'only' : i === 0 ? 'first' : i === shown.length - 1 ? 'last' : 'middle'}

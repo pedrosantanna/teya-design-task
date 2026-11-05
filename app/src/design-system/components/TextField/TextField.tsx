@@ -32,7 +32,7 @@ export type TextFieldProps = {
 export const TextField = memo(function TextField({ value, onChangeText, label, placeholder, icon, autoFocus, onSubmit, multiline = false, maxLength }: TextFieldProps) {
   const { theme } = useUnistyles();
   const [focused, setFocused] = useState(false);
-  const raised = useGround() === 'sheet' && theme.scheme === 'dark';
+  const raised = ['sheet', 'shop'].includes(useGround()) && theme.scheme === 'dark';
   // A sheet's field unmounts with the sheet; if it still had focus the keyboard would stay up over the screen.
   const inputRef = useRef<FieldRef>(null);
   const release = useReleaseOnUnmount();

@@ -104,8 +104,8 @@ export type Shop = {
 /** A rating tag; the up list and the down list are fixed (store/ratings.ts). */
 export type RatingTag = string;
 
-/** A buyer's note on a shop page: their words, whether they'd go back, the month, and how they got the item. */
-export type RatingNote = { text: string; up: boolean; month: string; how: 'Collected' | 'Delivered' };
+/** A buyer's note on a shop page: their first name (never a surname or photo; "You" for the shopper's own), their words, whether they'd go back, the month, and how they got the item. */
+export type RatingNote = { name: string; text: string; up: boolean; month: string; how: 'Collected' | 'Delivered' };
 
 export type ShopRatings = {
   /** Buyers who would go back. */

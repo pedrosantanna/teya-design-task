@@ -1225,81 +1225,48 @@
         "$description": "Biscuit 985 at 45% chroma, then hue 270 and half the chroma (round 10, option 4)"
       }
     },
+    "map": {
+      "$description": "Map-only fills the neutrals and accents don't cover: a pale cool water and low-chroma dark parks and water (round 10, map in brand colours).",
+      "waterLight": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8392,
+            0.8941,
+            0.9333
+          ],
+          "hex": "#D6E4EE"
+        },
+        "$description": "Water in light: a pale cool blue-grey, 1.18:1 on the light map ground"
+      },
+      "waterDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1216,
+            0.1686,
+            0.2039
+          ],
+          "hex": "#1F2B34"
+        },
+        "$description": "Water in dark: low-chroma cool, one step off the dark ground"
+      },
+      "parkDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1333,
+            0.1686,
+            0.1137
+          ],
+          "hex": "#222B1D"
+        },
+        "$description": "Parks in dark: Pistachio at low chroma and lightness"
+      }
+    },
     "brand": {
-      "$description": "Colours a provider's branding rules fix. Used only by the sign in buttons; named for the brand so no one reuses them as theme colours.",
+      "$description": "Colours a provider's logo fixes: Google's four-colour G and Facebook's blue disc with the white f. Used only by the sign in buttons; named for the brand so no one reuses them as theme colours.",
       "google": {
-        "fill": {
-          "$value": {
-            "colorSpace": "srgb",
-            "components": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "hex": "#FFFFFF"
-          },
-          "$description": "Google sign in, light theme: button fill (developers.google.com/identity/branding-guidelines)"
-        },
-        "stroke": {
-          "$value": {
-            "colorSpace": "srgb",
-            "components": [
-              0.4549,
-              0.4667,
-              0.4588
-            ],
-            "hex": "#747775"
-          },
-          "$description": "Light theme: 1 px stroke"
-        },
-        "text": {
-          "$value": {
-            "colorSpace": "srgb",
-            "components": [
-              0.1216,
-              0.1216,
-              0.1216
-            ],
-            "hex": "#1F1F1F"
-          },
-          "$description": "Light theme: label"
-        },
-        "fillDark": {
-          "$value": {
-            "colorSpace": "srgb",
-            "components": [
-              0.0745,
-              0.0745,
-              0.0784
-            ],
-            "hex": "#131314"
-          },
-          "$description": "Dark theme: button fill"
-        },
-        "strokeDark": {
-          "$value": {
-            "colorSpace": "srgb",
-            "components": [
-              0.5569,
-              0.5686,
-              0.5608
-            ],
-            "hex": "#8E918F"
-          },
-          "$description": "Dark theme: 1 px stroke"
-        },
-        "textDark": {
-          "$value": {
-            "colorSpace": "srgb",
-            "components": [
-              0.8902,
-              0.8902,
-              0.8902
-            ],
-            "hex": "#E3E3E3"
-          },
-          "$description": "Dark theme: label"
-        },
         "logoBlue": {
           "$value": {
             "colorSpace": "srgb",

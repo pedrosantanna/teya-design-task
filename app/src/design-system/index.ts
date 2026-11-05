@@ -76,6 +76,8 @@ export { Lightbox, type LightboxProps } from './components/Lightbox/Lightbox';
 export { LightboxExamples } from './components/Lightbox/Lightbox.examples';
 export type { PhotoSource } from './internal/media';
 export { ShopPageLayoutExamples } from './components/ShopPageLayout/ShopPageLayout.examples';
+export { ShopMeta, ShopStatus, shopFactsLabel, type ShopFacts, type ShopMetaProps, type ShopStatusProps, type ShopStatusState } from './components/ShopMeta/ShopMeta';
+export { ShopMetaExamples } from './components/ShopMeta/ShopMeta.examples';
 export { ShopRow, type RowPosition, type ShopRowProps } from './components/ShopRow/ShopRow';
 export { ShopRowExamples } from './components/ShopRow/ShopRow.examples';
 export { ShopTile, tileWidth, type ShopTileProps, type ShopTileSize } from './components/ShopTile/ShopTile';

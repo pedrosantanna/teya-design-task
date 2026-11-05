@@ -54,8 +54,8 @@ Os nomes são primeiros nomes britânicos comuns, curtos e fáceis de distinguir
 name: Sam, o comprador em missão
 tagline: Precisa de uma coisa específica, muitas vezes com prazo, e não consegue saber quem tem.
 image: ../../../discover/personas/img/sam.jpg
-credit: Photo: Raymond Okoro, Unsplash
-credit_url: https://unsplash.com/photos/man-in-coat-uses-phone-outside-a-building-20RwJn43ixM
+credit: Photo: Beatriz Cattel, Unsplash
+credit_url: https://unsplash.com/photos/young-man-in-a-light-blue-collared-shirt-smiling-az3QxXQ7Fqc
 - Onde: Mora ou trabalha no oeste de Londres
 - Pergunta a: Reddit, grupos de WhatsApp, chatbots de IA
 - Compra no comércio local: Um item específico, em cima da hora
@@ -91,8 +91,8 @@ status: verified
 name: Jess, a local que desistiu
 tagline: Usaria as lojas do bairro se elas coubessem na semana dela. Não cabem, então ela parou.
 image: ../../../discover/personas/img/jess.jpg
-credit: Photo: Louis Zhang, Unsplash
-credit_url: https://unsplash.com/photos/a-woman-sitting-in-a-train-looking-out-the-window-8czqNBTRcXI
+credit: Photo: Jake Nackos, Unsplash
+credit_url: https://unsplash.com/photos/IF9TK5Uy-KI
 - Onde: Londres e outras partes do Reino Unido
 - Semana: Está trabalhando no horário em que as lojas abrem
 - Paga: Cartão ou celular, sem dinheiro
@@ -130,8 +130,8 @@ status: verified
 name: Ruth, a frequentadora
 tagline: Continua comprando no comércio local enquanto as lojas dela fecham.
 image: ../../../discover/personas/img/ruth.jpg
-credit: Photo: Centre for Ageing Better, Unsplash
-credit_url: https://unsplash.com/photos/elderly-woman-smiling-in-a-room-filled-with-clothes-UZCqtOcY8b4
+credit: Photo: Vitaly Gariev, Unsplash
+credit_url: https://unsplash.com/photos/elderly-woman-smiling-in-a-living-room-IihDS3WZGlY
 - Onde: Principalmente oeste de Londres (Kew, Ealing, Hammersmith)
 - Idade: Provavelmente 50 anos ou mais | pesquisa documental
 - Rotina: Açougue toda semana, balcão dos correios na banca de jornal

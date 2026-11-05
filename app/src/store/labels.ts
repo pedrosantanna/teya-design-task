@@ -171,7 +171,7 @@ export function answerCanBuy(state: AnswerState): boolean {
 
 /** Past answers on a shop page. */
 export function pastAnswerLabel(had: boolean, when: string): string {
-  return `${had ? 'Had it' : "Didn't have it"} · ${when}`;
+  return `${had ? 'Had it' : "Didn't have it"}, ${when}`;
 }
 
 export type OrderLabelContext = {
@@ -223,12 +223,52 @@ export function keepLookingLine(more: number): string {
 export function shopHoursLabel(hours: ShopHours, shop: Pick<Shop, 'openUntil' | 'opensAt'>): string {
   switch (hours) {
     case 'open':
-      return `Open till ${shop.openUntil}`;
+      return noBreak(`Open until ${shop.openUntil}`);
     case 'closesSoon':
-      return 'Closes soon';
+      return noBreak('Closes soon');
     case 'closed':
-      return `Closed · opens ${shop.opensAt}`;
+      return `Closed, ${noBreak(`opens ${shop.opensAt}`)}`;
   }
+}
+
+/** A state-table label as running text: its dot becomes a comma ("In stock now, 1 of 2"). */
+export function commas(label: string): string {
+  return label.replaceAll(' · ', ', ');
+}
+
+/** Binds a phrase with non-breaking spaces, so a line breaks between facts, never inside one ("Open till 6pm"). */
+export function noBreak(phrase: string): string {
+  return phrase.replace(/ /g, '\u00A0');
+}
+
+/** "2 min walk" as one unit. */
+export function walkLabel(minutes: number): string {
+  return noBreak(`${minutes} min walk`);
+}
+
+/** A street as one unit when it is short ("Blythe Road"); a long one keeps its last two words together. */
+export function streetLabel(street: string): string {
+  if (street.length <= 16) return noBreak(street);
+  const words = street.split(' ');
+  return `${words.slice(0, -2).join(' ')} ${words.slice(-2).join('\u00A0')}`;
+}
+
+/** What the shop's status shows: the word's state and the time that follows it ("until 6pm", "opens 9am"), bound with
+ *  non-breaking spaces. Closes soon has no time. */
+export function shopStatus(hours: ShopHours, shop: Pick<Shop, 'openUntil' | 'opensAt'>): { state: ShopHours; detail?: string } {
+  switch (hours) {
+    case 'open':
+      return { state: 'open', detail: noBreak(`until ${shop.openUntil}`) };
+    case 'closesSoon':
+      return { state: 'closesSoon' };
+    case 'closed':
+      return { state: 'closed', detail: noBreak(`opens ${shop.opensAt}`) };
+  }
+}
+
+/** The facts of a shop for ShopMeta (content.md, Metadata lines): status, walk and, where room allows, street, each a unit. */
+export function shopFacts(hours: ShopHours, shop: Pick<Shop, 'openUntil' | 'opensAt' | 'street' | 'walkMinutes'>, withStreet = true) {
+  return { ...shopStatus(hours, shop), walk: walkLabel(shop.walkMinutes), street: withStreet ? streetLabel(shop.street) : undefined };
 }
 
 export function price(amount: number): string {

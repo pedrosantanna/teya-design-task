@@ -11,6 +11,7 @@ import { ShopPlaceholder } from '../../internal/ShopPlaceholder';
 import { usePress } from '../../internal/usePress';
 import { cornerCurve, type ShopAccentName } from '../../theme';
 import { Icon } from '../Icon/Icon';
+import { ShopMeta, shopFactsLabel, type ShopFacts } from '../ShopMeta/ShopMeta';
 import { Text } from '../Text/Text';
 
 /** Where the row sits in its list: iOS draws an inset grouped list, so first and last rows round their corners. */
@@ -19,8 +20,8 @@ export type RowPosition = 'only' | 'first' | 'middle' | 'last';
 export type ShopRowProps = {
   id: string;
   name: string;
-  /** "Open till 7pm · King Street · 13 min walk"; the street drops first when space runs out. */
-  meta: string;
+  /** Status, walk and street, as ShopMeta draws them; the street is left out where the Category screen's filter shows it. */
+  facts: ShopFacts;
   logo?: string;
   /** The shop's photo: a 40 pt thumbnail at radius.inner, over the accent tile while it loads. Wins over `logo`. */
   image?: PhotoSource;
@@ -30,7 +31,7 @@ export type ShopRowProps = {
   onPress?: (id: string) => void;
 };
 
-export const ShopRow = memo(function ShopRow({ id, name, meta, logo, image, accent, position = 'only', onPress }: ShopRowProps) {
+export const ShopRow = memo(function ShopRow({ id, name, facts, logo, image, accent, position = 'only', onPress }: ShopRowProps) {
   const { theme } = useUnistyles();
   const press = usePress();
   const grouped = theme.platform === 'ios';
@@ -46,7 +47,7 @@ export const ShopRow = memo(function ShopRow({ id, name, meta, logo, image, acce
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={spoken(name, meta)}
+      accessibilityLabel={spoken(name, shopFactsLabel(facts))}
       onPress={onPress ? () => onPress(id) : undefined}
       onPressIn={press.onPressIn}
       onPressOut={press.onPressOut}
@@ -69,10 +70,8 @@ export const ShopRow = memo(function ShopRow({ id, name, meta, logo, image, acce
           <Text variant="headline" numberOfLines={1}>
             {name}
           </Text>
-          {/* The meta line wraps to a second line: its last part (the walk time) is the one that matters. */}
-          <Text variant="footnote" color={secondary} numberOfLines={2}>
-            {meta}
-          </Text>
+          {/* Status, walk and street wrap between units, on two lines at most. */}
+          <ShopMeta {...facts} />
         </View>
         <Icon icon="chevron" size="body" color={secondary} />
       </View>

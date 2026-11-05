@@ -26,11 +26,11 @@ export function SheetExamples() {
         onClose={() => setOpen(false)}
         title="Paper & Co"
         dismissible={!loading}
-        footer={<Button label={`Buy · £${(14.99 * quantity).toFixed(2)}`} accessibilityLabel={`Buy, £${(14.99 * quantity).toFixed(2)}`} loading={loading} onPress={buy} />}
+        footer={<Button label={`Buy for £${(14.99 * quantity).toFixed(2)}`} accessibilityLabel={`Buy, £${(14.99 * quantity).toFixed(2)}`} loading={loading} onPress={buy} />}
       >
         <Text variant="title3">Eclipse glasses</Text>
         <Text variant="subheadline" color="mutedForeground">
-          £14.99 a pair · Has them · replied 2 min ago
+          £14.99 a pair, has them, replied 2 min ago
         </Text>
         <Stepper value={quantity} onChange={setQuantity} max={2} />
         <SegmentedControl

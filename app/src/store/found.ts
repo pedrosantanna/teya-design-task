@@ -1,5 +1,5 @@
 // "Found here recently" on the shop page (app flow v10): three to five item names that Snuffle shoppers found at the
-// shop lately, with no buyer and no price. Mock content, derived from each shop's own items, past answers and
+// shop lately, each with when ("Today", "2 days ago"), and no buyer and no price. Mock content, derived from each shop's own items, past answers and
 // categories so it never contradicts the rest of its page, and stable from one visit to the next.
 import type { Shop, ShopKind } from './types';
 
@@ -32,8 +32,13 @@ const sameThing = (a: string, b: string) => {
   return x === y || x.startsWith(y) || y.startsWith(x);
 };
 
-/** Three to five names, the count varying from shop to shop. */
-export function foundRecently(shop: Shop, index: number): string[] {
+/** When each item was last found, newest first; the prototype's mock times, in the order of the list. */
+const WHEN = ['Today', 'Yesterday', '2 days ago', '4 days ago', 'Last week'];
+
+export type FoundItem = { name: string; when: string };
+
+/** Three to five items, the count varying from shop to shop, newest first. */
+export function foundRecently(shop: Shop, index: number): FoundItem[] {
   const want = 3 + (index % 3);
   const pool = [
     ...(shop.items ?? []).map((i) => clean(i.name)),
@@ -46,5 +51,5 @@ export function foundRecently(shop: Shop, index: number): string[] {
     if (out.length >= want) break;
     if (!out.some((o) => sameThing(o, name))) out.push(name);
   }
-  return out;
+  return out.map((name, i) => ({ name, when: WHEN[Math.min(i + (index % 2), WHEN.length - 1)] }));
 }

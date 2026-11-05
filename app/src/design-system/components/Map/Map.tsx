@@ -14,7 +14,7 @@ import { cameraPadding, MapAttribution, MapFallback, MapPin, useSettled, type Ma
 
 export type { MapProps } from './MapParts';
 
-export const Map = memo(function Map({ loading = false, pin = true, extent, interactive = false }: MapProps) {
+export const Map = memo(function Map({ loading = false, pin = true, extent, interactive = false, accent }: MapProps) {
   const { theme } = useUnistyles();
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -49,7 +49,7 @@ export const Map = memo(function Map({ loading = false, pin = true, extent, inte
             </MapLibreMap>
           )}
           {ready && !failed ? null : <MapFallback extent={extent} />}
-          {pin ? <MapPin extent={extent} /> : null}
+          {pin ? <MapPin extent={extent} accent={accent} /> : null}
           <MapAttribution extent={extent} />
         </>
       )}

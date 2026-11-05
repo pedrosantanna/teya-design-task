@@ -1,8 +1,7 @@
-// A buyer's note on the shop page and the reviews list (change shop-ratings-and-range): a plain row in the grouped
-// list, with the buyer's words in quotation marks and how and when they got the item ("Collected · Oct 2026") under
-// them, a separator between rows. Only a note from a buyer who wouldn't go back says so, with the thumbs-down symbol;
-// a thumbs-up is the default and needs no label (visual critique 3).
-import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
+// A person's note on the shop page and the reviews list (change shop-ratings-and-range): a plain row in the grouped list,
+// the first name and the month on one line, then their words, clamped to three lines on the shop page. No avatar, no
+// surname, no purchase type. Only a note from someone who wouldn't go back says so, with the thumbs-down symbol; a
+// thumbs-up is the default and needs no label (visual critique 3).
 import ThumbsDownIcon from '@hugeicons/core-free-icons/ThumbsDownIcon';
 import { memo } from 'react';
 import { View } from 'react-native';
@@ -14,14 +13,16 @@ import type { RowPosition } from '../ShopRow/ShopRow';
 import { Text } from '../Text/Text';
 
 export type ReviewCardProps = {
-  /** The buyer's note, without quotation marks. */
+  /** First name only; "You" for the shopper's own note. */
+  name: string;
+  /** The note, without quotation marks. */
   text: string;
   /** Would they go back? */
   up: boolean;
   /** "Oct 2026" */
   month: string;
-  /** How they got the item. */
-  how: 'Collected' | 'Delivered';
+  /** Clamp the note to this many lines; whole when left out. */
+  lines?: number;
   /** Its place in the grouped list: corners on the first and last, a separator under every row but the last. */
   position?: RowPosition;
 };
@@ -31,7 +32,7 @@ const MONTHS: Record<string, string> = {
   Jul: 'July', Aug: 'August', Sep: 'September', Oct: 'October', Nov: 'November', Dec: 'December',
 };
 
-export const ReviewCard = memo(function ReviewCard({ text, up, month, how, position = 'only' }: ReviewCardProps) {
+export const ReviewCard = memo(function ReviewCard({ name, text, up, month, lines, position = 'only' }: ReviewCardProps) {
   const { theme } = useUnistyles();
   const grouped = theme.platform === 'ios';
   const verdict = up ? 'Would go back' : "Wouldn't go back";
@@ -41,21 +42,24 @@ export const ReviewCard = memo(function ReviewCard({ text, up, month, how, posit
   return (
     <View
       accessible
-      accessibilityLabel={`${verdict}. “${text}” ${how}, ${MONTHS[m] ?? m} ${y ?? ''}`.trim()}
+      accessibilityLabel={`${name}, ${MONTHS[m] ?? m} ${y ?? ''}. ${verdict}. ${text}`.replace(/\s+\./, '.')}
       style={styles.row(grouped, top, bottom)}
     >
       <View style={styles.inner(grouped && !bottom)}>
-        {up ? null : (
-          <View style={styles.line}>
-            <Icon icon={ThumbsDownIcon} size="footnote" color="foreground" />
-            <Text variant="footnote">{verdict}</Text>
-          </View>
-        )}
-        <Text variant="body">{`“${text}”`}</Text>
         <View style={styles.line}>
-          <Icon icon={Tick02Icon} size="footnote" color="success" />
-          <Text variant="footnote" color="mutedForeground">{`${how} · ${month}`}</Text>
+          {up ? null : <Icon icon={ThumbsDownIcon} size="subheadline" color="foreground" />}
+          <View style={styles.grow}>
+            <Text variant="subheadlineStrong" numberOfLines={1}>
+              {name}
+            </Text>
+          </View>
+          <Text variant="footnote" color="mutedForeground">
+            {month}
+          </Text>
         </View>
+        <Text variant="body" numberOfLines={lines}>
+          {text}
+        </Text>
       </View>
     </View>
   );
@@ -80,4 +84,5 @@ const styles = StyleSheet.create((theme) => ({
     borderBottomColor: theme.color.separator,
   }),
   line: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1] },
+  grow: { flex: 1 },
 }));

@@ -132,7 +132,7 @@ export const CollectionCode = memo(function CollectionCode({
         style={styles.block}
       >
         <Text variant="caption1" color="mutedForeground" align="center">
-          Collection code · show at the counter
+          Collection code, show at the counter
         </Text>
         <Text variant="title1" align="center" numberOfLines={1}>
           {code.split('').join(' ')}
@@ -156,7 +156,7 @@ export const CollectionCode = memo(function CollectionCode({
             </View>
             <View style={styles.centre}>
               <Text variant="caption1" color="mutedForeground" align="center">
-                Collection code · show at the counter
+                Collection code, show at the counter
               </Text>
               <Text variant="code" align="center" numberOfLines={1} accessibilityLabel={spokenCode(code)}>
                 {code}

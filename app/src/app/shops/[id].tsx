@@ -1,7 +1,7 @@
 // The shop page (openspec/specs/shop-page, app flow v10 "Shop page" and "Photo viewer"): the shop's detail, pushed from
 // Nearby with Back, with the map and its pin, a carousel of up to three photos that opens a full-screen viewer, and one
-// card for the name, status and actions, then what the shop sells, what shoppers found there recently and its ratings
-// (change shop-ratings-and-range), how it does on Snuffle, and how collection and delivery work. Call and Directions
+// card for the name, status and actions, then what the shop sells, what shoppers found there recently, how collection
+// and delivery work, its ratings (change shop-ratings-and-range) and how it does on Snuffle. Call and Directions
 // are simulated in sheets; nothing leaves the app.
 import BubbleChatIcon from '@hugeicons/core-free-icons/BubbleChatIcon';
 import Call02Icon from '@hugeicons/core-free-icons/Call02Icon';
@@ -44,7 +44,9 @@ import {
   shopAccent,
   shopById,
   shopNumber,
+  shopFacts,
   shopHoursLabel,
+  walkLabel,
   topTags,
   useAppActions,
   useAppStore,
@@ -104,15 +106,21 @@ export default function ShopPage() {
     goTo('ask');
   };
 
-  const status = [`${shopHoursLabel(shopHours, shop)} · ${shop.street} · ${shop.walkMinutes} min walk`];
-  if (shop.notice) status.push(`Made to order · ${shop.notice}`);
   const photos = loading ? [] : shopPhotos(shop);
   const lines = reliabilityLines(shop);
   const headline = ratingHeadline(ratings, shop.reliability?.asked);
   const quotes = quoteMix(ratings, PAGE_REVIEWS);
   const found = foundRecently(shop, index);
+  // Made to order sits here, with how the item reaches the shopper, not in the header's facts.
+  const howItWorks = [
+    ...(shop.notice ? [{ title: 'Made to order', value: shop.notice }] : []),
+    { title: 'Collection', value: KEEPS_ITEMS },
+    { title: 'Delivery', value: shop.delivers ? `${shop.delivers.by[0].toUpperCase()}${shop.delivers.by.slice(1)}, ${price(shop.delivers.fee)}` : 'Collect only' },
+  ];
 
+  // Promoted leads the tags row under the name: a paid placement is disclosed there, not inside a facts line.
   const badges: BadgeName[] = [];
+  if (shop.promoted) badges.push('promoted');
   if (shop.isNew) badges.push('new');
   if (shop.delivers) badges.push('delivers');
 
@@ -121,12 +129,11 @@ export default function ShopPage() {
       <ShopPageLayout
         name={shop.name}
         accent={shopAccent(shop)}
-        status={status}
+        facts={shopFacts(shopHours, shop)}
         photos={photos}
         mapLoading={loading}
         onBack={back}
         backLabel="Nearby"
-        promoted={shop.promoted}
         tags={badges.length > 0 ? badges.map((b) => <Badge key={b} badge={b} on="wash" />) : undefined}
         actions={
           <>
@@ -151,6 +158,7 @@ export default function ShopPage() {
                   categories={shop.categories}
                   priceLine={priceRangeLine(shop)}
                   onCategory={ask}
+                  accent={shopAccent(shop)}
                 />
               </View>
             ) : null}
@@ -160,8 +168,8 @@ export default function ShopPage() {
                 Found here recently
               </Text>
               <ListGroup shadow>
-                {found.map((name, i) => (
-                  <ListRow key={name} title={name} surface="card" position={i === 0 ? 'first' : i === found.length - 1 ? 'last' : 'middle'} />
+                {found.map((item, i) => (
+                  <ListRow key={item.name} title={item.name} value={item.when} surface="card" position={found.length === 1 ? 'only' : i === 0 ? 'first' : i === found.length - 1 ? 'last' : 'middle'} />
                 ))}
               </ListGroup>
               {/* Names only, nothing to press: the line says where they come from. */}
@@ -172,25 +180,36 @@ export default function ShopPage() {
 
             <View style={styles.section}>
               <Text variant="sectionTitle" accessibilityRole="header">
+                How it works
+              </Text>
+              <ListGroup shadow>
+                {howItWorks.map((row, i) => (
+                  <ListRow key={row.title} surface="card" title={row.title} value={row.value} position={i === 0 ? 'first' : i === howItWorks.length - 1 ? 'last' : 'middle'} />
+                ))}
+              </ListGroup>
+            </View>
+
+            <View style={styles.section}>
+              <Text variant="sectionTitle" accessibilityRole="header">
                 Ratings
               </Text>
               <ListGroup shadow>
                 <ListBlock position="first">
                   <RatingSummary
-                    question="Would you go back?"
-                    title={headline.share != null ? `${headline.share}%` : headline.title}
+                    figure={headline.figure}
+                    caption={headline.caption}
+                    title={headline.title}
                     detail={headline.detail}
-                    accessibilityLabel={`Would you go back? ${headline.spoken}`}
-                    hasShare={headline.share != null}
-                    tags={topTags(ratings, 4)}
+                    accessibilityLabel={headline.spoken}
+                    tags={topTags(ratings, 6)}
                   />
                 </ListBlock>
                 {quotes.map((q) => (
-                  <ReviewCard key={q.text} text={q.text} up={q.up} month={q.month} how={q.how} position="middle" />
+                  <ReviewCard key={q.text} name={q.name} text={q.text} up={q.up} month={q.month} lines={3} position="middle" />
                 ))}
                 {headline.total > 0 ? (
                   <ListRow
-                    title={`See all ${headline.total}`}
+                    title={`See all ${headline.total} reviews`}
                     surface="card"
                     chevron
                     position="middle"
@@ -221,21 +240,6 @@ export default function ShopPage() {
                 </ListGroup>
               </View>
             ) : null}
-
-            <View style={styles.section}>
-              <Text variant="sectionTitle" accessibilityRole="header">
-                How it works
-              </Text>
-              <ListGroup shadow>
-                <ListRow position="first" surface="card" title="Collection" value={KEEPS_ITEMS} />
-                <ListRow
-                  position="last"
-                  surface="card"
-                  title="Delivery"
-                  value={shop.delivers ? `${shop.delivers.by[0].toUpperCase()}${shop.delivers.by.slice(1)} · ${price(shop.delivers.fee)}` : 'Collect only'}
-                />
-              </ListGroup>
-            </View>
           </>
         )}
       </ShopPageLayout>
@@ -279,7 +283,7 @@ export default function ShopPage() {
         <View style={styles.route}>
           <Map />
         </View>
-        <Text variant="headline">{`${shop.walkMinutes} min walk`}</Text>
+        <Text variant="headline">{walkLabel(shop.walkMinutes)}</Text>
         <Text variant="subheadline" color="mutedForeground">
           {`From ${content.area} to ${shop.name}, ${shop.street}. On a phone this opens the maps app; the prototype stays here.`}
         </Text>

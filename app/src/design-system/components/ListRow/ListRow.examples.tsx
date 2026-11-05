@@ -25,7 +25,7 @@ export function ListRowExamples() {
           id="collect"
           icon={Store01Icon}
           title="Collect at Paper & Co"
-          detail="Collect by Mon 9 Nov (7 days) · full refund if you don't"
+          detail="Collect by Mon 9 Nov (7 days). Full refund if you don't"
           selected={how === 'collect'}
           onPress={setHow}
           position="first"
@@ -34,13 +34,13 @@ export function ListRowExamples() {
           id="delivery"
           icon={DeliveryTruck01Icon}
           title="They deliver"
-          detail="Paper & Co's own courier · £3.50 · today"
+          detail="Paper & Co's own courier, today" value="£3.50"
           selected={how === 'delivery'}
           onPress={setHow}
           position="last"
         />
       </View>
-      <ListRow icon={CreditCardIcon} title="Paid £29.98" detail="Apple Pay · debit card •••• 4021" />
+      <ListRow icon={CreditCardIcon} title="Paid £29.98" detail="Apple Pay, debit card •••• 4021" />
     </View>
   );
 }

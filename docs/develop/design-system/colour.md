@@ -165,13 +165,17 @@ Each accent is a ten-step ramp built in OKLCH from its base colour. The base sit
 | Count (`count`) | Indigo 800, white text (8.75:1), a 2 pt ring in the Background | Indigo 300, black text (11.86:1), the same ring; Indigo 800 on the dark Background was 2.24:1 | The Requests button and unread answers |
 | Badge on a photo | Accent 100 fill, 800 text, 500 dot | The light values | Promoted (Pistachio), New (Peach), Delivers (Butter) |
 | Badge on a wash | Card fill, Foreground text | Card fill, Foreground text | The shop page, where a pastel badge would sit on a pastel |
-| Map ground | Butter 50 | Card #252627 | Map placeholder behind pins |
+| Map ground (`mapGround`) | Biscuit 960 | Background #0B0C0D | The map's ground; the shop page's card is 1.15:1 over it in light (Biscuit 915) and 1.16:1 in dark (the Sheet colour) |
+| Map roads (`mapRoad`, `mapRoadMain`) | Biscuit 890, Biscuit 860 | Stone 265, Stone 320 | Streets and main roads, 1.24:1 and 1.36:1 on the ground in light, 1.29:1 and 1.55:1 in dark |
+| Map buildings (`mapBuilding`) | Card (white) | Stone 200 | Extruded buildings, shaded by the extrusion light: 1.13:1 on the ground in light, 1.16:1 in dark |
+| Map parks (`mapPark`) | Pistachio tile #C5DEAE | #222B1D | Parks, 1.29:1 on the ground in light, 1.33:1 in dark |
+| Map water (`mapWater`) | #D6E4EE, a pale cool blue-grey | #1F2B34 | Water, 1.15:1 on the ground in light, 1.35:1 in dark |
 
 `filterSelected` (Foreground fill) is no longer used: a black selected chip was the heaviest mark on Nearby, so selection went back to tonal Indigo. Badges keep their light values in dark mode because they sit on photos, which don't change with the theme.
 
 Primary fills at most one control per viewport, the commit action; the composer's send and the shopper's bubbles share the colour without counting as that button ([screen review](screen-review.md), checks 8 and 19).
 
-In dark mode the map ground was Butter 900, which read as mustard behind the pins. It is #252627, the Stone step of the dark card.
+In dark mode the map ground was Butter 900, which read as mustard behind the pins, then the card's Stone step; the card sits on the map now, so the ground is the dark Background and the Sheet card separates from it.
 
 ## Shop accents
 
@@ -179,7 +183,9 @@ Each shop has one accent for good, chosen by its kind (`store/kinds.ts`), so it 
 
 | Token | Light | Dark | Where |
 | --- | --- | --- | --- |
-| `shop.accent.<hue>.tile` | Tile step: Peach #FEC5B2, Pistachio #C5DEAE, Butter #E7D48F, Lavender #D7CCFE | Peach #52352C, Pistachio #34422C, Butter #403925, Lavender #3E3950 | The placeholder tile, the category card and the Category header, the shop page, tinted in full (the card's ground behind every section, and the pinned bar's scroll edge), the receipt header |
+| `shop.accent.<hue>.tile` | Tile step: Peach #FEC5B2, Pistachio #C5DEAE, Butter #E7D48F, Lavender #D7CCFE | Peach #52352C, Pistachio #34422C, Butter #403925, Lavender #3E3950 | The placeholder tile, the category card and the Category header, the receipt header, the chips on the shop page |
+| `shop.accent.<hue>.detail` | The tile step | The ink step (Peach #E8D6D1, Pistachio #D3E5C0, Butter #E1DAC9) | Small accents on the neutral shop page: the band along the card's top edge, the map pin. Pastel in both modes: a small area in the light tone is fine on dark (Material's dark theme), and a large one never is |
+| `shop.accent.<hue>.onDetail` | Ink (800) | Tile (dark) | The pin's edge and dot: 6.4:1 to 6.5:1 on `detail` in light, 7.9:1 to 8.2:1 in dark |
 | `shop.accent.<hue>.wash` | 100 | 900 | The light stripes of the awning band on the placeholder tile |
 | `shop.accent.<hue>.ink` | 800 | 200 | Initials and the dark awning stripes on the tile |
 | `shop.accent.<hue>.cardOnTile` | Card (white) | Peach #5C4F4B, Pistachio #4F554B, Butter #565249, Lavender #53515C | The shop rows on the Category screen |
@@ -224,6 +230,8 @@ Every card is lighter than its tile by 1.39:1 or more. The street chips and Back
 | `chat.ground` | Card #FFFFFF | Background #0B0C0D | The ground of New Request and every chat |
 | `chat.fill` | Background #EEE9E2 | Card #252627 | Chips and grouped rows on the chat ground |
 | `chat.edge` | #DEDAD5 | #252627 | A hairline round cards on the chat ground, with the delicate shadow |
+| `chat.field` | Background #EEE9E2 | Card #252627 | The composer field on a chat: 1.21:1 on the white ground, 1.29:1 on the dark one |
+| `chat.fieldEdge` | Border #D4D0CB | Border #3D3E3F | The composer's hairline: 1.53:1 on the white ground, 1.83:1 on the dark one |
 
 The bubble is 1.50:1 on the white chat ground and 1.40:1 on the dark one; text on it is 13.07:1 and 13.36:1. The chat has no purple tint, gradient or glow ([Identity](../ideation/identity.md) rules out purple gradients): Lavender appears only in Snuffle's bubbles. The mark is the bare glyph in Foreground (see [Mark](mark.md)); the tokens that drew it on a Lavender tile with a Butter face are gone.
 

@@ -37,10 +37,11 @@ export default function Reviews() {
         <ListGroup shadow>
           <ListBlock>
             <RatingSummary
+              figure={headline.figure}
+              caption={headline.caption}
               title={headline.title}
               detail={headline.detail}
               accessibilityLabel={headline.spoken}
-              hasShare={headline.share != null}
               tags={topTags(ratings, 10)}
             />
           </ListBlock>
@@ -54,10 +55,10 @@ export default function Reviews() {
               {ratings.notes.map((n, i) => (
                 <ReviewCard
                   key={`${i}-${n.text}`}
+                  name={n.name}
                   text={n.text}
                   up={n.up}
                   month={n.month}
-                  how={n.how}
                   position={ratings.notes.length === 1 ? 'only' : i === 0 ? 'first' : i === ratings.notes.length - 1 ? 'last' : 'middle'}
                 />
               ))}
@@ -66,7 +67,7 @@ export default function Reviews() {
         ) : null}
         {silent > 0 ? (
           <Text variant="footnote" color="mutedForeground">
-            {`${silent} more ${silent === 1 ? 'buyer' : 'buyers'} rated without a note.`}
+            {`${silent} more ${silent === 1 ? 'person' : 'people'} rated without a note.`}
           </Text>
         ) : null}
       </Animated.ScrollView>

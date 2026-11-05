@@ -1,8 +1,9 @@
-// Sign in with a provider (first run, app flow v8 "Sign in"). Apple comes first and follows Apple's HIG: black on
-// light backgrounds, white on dark (codeInk and codeSurface are pure black and white in both modes). Google
-// is Google's own light or dark theme (white or #131314 with a 1 px stroke, the full-colour G); Facebook is Card with
-// a 1 px Border and email a text button. The Apple, Google and Facebook logos are the owners' shapes
-// (BrandLogos.tsx), Facebook's the white f on its #1877F2 disc. Large: 50 high, the full content width, `radius.full`.
+// Sign in with a provider (first run, app flow v8 "Sign in"). All four share the design system's secondary capsule:
+// 50 high, the full content width, `radius.full`, Card with a 1 pt Border edge, the label in Headline and Foreground,
+// the icon 20 pt leading. Only the icon differs: the Apple, Google and Facebook logos are the owners' shapes
+// (BrandLogos.tsx), never redrawn. Apple's logo and title are both Foreground, near-black on light and white on dark,
+// as its HIG asks (both black or both white); Google keeps its full-colour G; Facebook its white f on #1877F2. Email
+// is a text button in Tint.
 import Mail01Icon from '@hugeicons/core-free-icons/Mail01Icon';
 import { HugeiconsIcon, type IconSvgElement } from '@hugeicons/react-native';
 import { ActivityIndicator, Pressable, View } from 'react-native';
@@ -10,7 +11,7 @@ import Animated from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { usePress } from '../../internal/usePress';
-import { cornerCurve, type AppTheme, type ColorName } from '../../theme';
+import { cornerCurve } from '../../theme';
 import { Text } from '../Text/Text';
 import { AppleLogo, FacebookLogo, GoogleLogo } from './BrandLogos';
 
@@ -35,22 +36,14 @@ export type SignInButtonProps = {
   disabled?: boolean;
 };
 
-/** Apple's black-or-white button inverts with the scheme; the rest keep the theme's own colours. */
-function labelColor(theme: AppTheme, provider: SignInProvider): ColorName {
-  if (provider === 'apple') return theme.scheme === 'dark' ? 'codeInk' : 'codeSurface';
-  if (provider === 'google') return 'googleText';
-  if (provider === 'email') return 'tint';
-  return 'foreground';
-}
-
 export function SignInButton({ provider, onPress, loading = false, disabled = false }: SignInButtonProps) {
   const { theme } = useUnistyles();
-  const press = usePress(provider === 'apple' ? 'primary' : undefined);
-  const colorName = labelColor(theme, provider);
+  const press = usePress();
+  const colorName = provider === 'email' ? 'tint' : 'foreground';
   const color = theme.color[colorName] as string;
   const label = LABEL[provider];
-  // The logo is sized to the label: its line height less a little air.
-  const logo = theme.type.headline.lineHeight - theme.space[1];
+  // The icon is 20 pt (Google's own icon size for its button), `space.5`.
+  const logo = theme.space[5];
   return (
     <Animated.View style={[styles.wrapper, press.scaleStyle]}>
       <Pressable
@@ -61,7 +54,7 @@ export function SignInButton({ provider, onPress, loading = false, disabled = fa
         onPress={() => onPress?.(provider)}
         onPressIn={press.onPressIn}
         onPressOut={press.onPressOut}
-        style={styles.button(provider, theme.scheme === 'dark')}
+        style={styles.button(provider)}
       >
         <Animated.View pointerEvents="none" style={[styles.layer(color), press.layerStyle]} />
         {loading ? (
@@ -89,7 +82,7 @@ export function SignInButton({ provider, onPress, loading = false, disabled = fa
 
 const styles = StyleSheet.create((theme) => ({
   wrapper: { alignSelf: 'stretch' },
-  button: (provider: SignInProvider, dark: boolean) => ({
+  button: (provider: SignInProvider) => ({
     ...cornerCurve,
     height: theme.size.button.large,
     paddingHorizontal: theme.space[5],
@@ -97,19 +90,9 @@ const styles = StyleSheet.create((theme) => ({
     overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor:
-      provider === 'apple'
-        ? dark
-          ? theme.color.codeSurface
-          : theme.color.codeInk
-        : provider === 'email'
-          ? 'transparent'
-          : provider === 'google'
-            ? theme.color.googleFill
-            : theme.color.card,
-    // Google and Facebook share one stroke width; Facebook takes the Border colour, Google its own (brand rules).
-    borderWidth: provider === 'google' || provider === 'facebook' ? theme.size.edge.control : 0,
-    borderColor: provider === 'google' ? theme.color.googleStroke : theme.color.border,
+    backgroundColor: provider === 'email' ? 'transparent' : theme.color.card,
+    borderWidth: provider === 'email' ? 0 : theme.size.edge.control,
+    borderColor: theme.color.border,
   }),
   layer: (color: string) => ({ ...StyleSheet.absoluteFillObject, backgroundColor: color }),
   content: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2] },

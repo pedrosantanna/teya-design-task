@@ -40,7 +40,10 @@ export const LiveActivity = memo(function LiveActivity({ title, status, deadline
           <View style={styles.header}>
             <SnuffleMark size="inline" />
             <Text variant="caption1" color="mutedForeground" numberOfLines={1}>
-              {`Snuffle · ${answered} of ${asked} answered${deadline ? ` · ${deadline}` : ''}`}
+              <Text variant="caption1Strong" color="mutedForeground">
+                Snuffle
+              </Text>
+              {` ${answered} of ${asked} answered${deadline ? `, ${deadline}` : ''}`}
             </Text>
           </View>
           <View style={styles.grow}>

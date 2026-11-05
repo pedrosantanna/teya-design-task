@@ -84,14 +84,14 @@ A página da loja mostra dois sinais com títulos separados, para o comprador sa
 
 | Sinal | Origem | Aparece como |
 | --- | --- | --- |
-| Ratings | Avaliações de compras retiradas e entregues | "92% would go back · 38 buyers" e a contagem de cada tag. Abaixo de 5 avaliações, só as tags: "New on Snuffle · 3 buyers so far" |
+| Ratings | Avaliações de compras retiradas e entregues | "92%" com "would go back" e "38 people", e a contagem de cada tag; cada nota mostra o primeiro nome da pessoa e o mês, nunca sobrenome nem foto, e "You" na nota da própria pessoa. Abaixo de 5 avaliações, só as tags: "New on Snuffle" e "3 people so far" |
 | How they do on Snuffle: taxa de resposta | Respostas | "Answers 9 in 10 requests" |
 | How they do on Snuffle: precisão de estoque | Respostas e compras | "Had it 24 of 25 times when they said yes", só depois de 10 respostas "has it"; antes disso, "New on Snuffle" com a taxa e o tempo de resposta |
 | How they do on Snuffle: tempo de resposta | Respostas | "Usually replies in 6 min"; uma loja conectada mostra "Stock from the till" |
 
-O que a loja vende é um terceiro atributo da loja. O de uma loja conectada vem das categorias e dos mais vendidos do caixa; o de uma loja consultada, das respostas "Had it" passadas e do tipo de loja. Aparece como chips de categoria, cada um abrindo o Ask com a categoria preenchida, uma linha de preço ("Most items £2–£35 · from past answers" ou "· from the shop's till"). Os itens continuam sem página. Abaixo dela, "Found here recently" lista de três a cinco nomes de itens que compradores encontraram na loja, resumindo só pelo nome as respostas "Had it" dela: nada para tocar, sem comprador e sem preço, com uma linha que diz de onde vêm. As linhas "Had it · 2 hours ago" por resposta ficam no chat.
+O que a loja vende é um terceiro atributo da loja. O de uma loja conectada vem das categorias e dos mais vendidos do caixa; o de uma loja consultada, das respostas "Had it" passadas e do tipo de loja. Aparece como chips de categoria, cada um abrindo o Ask com a categoria preenchida, uma linha de preço ("Most items £2–£35, from past answers" ou "from the shop's till"). Os itens continuam sem página. Abaixo dela, "Found here recently" lista de três a cinco nomes de itens que compradores encontraram na loja, resumindo só pelo nome as respostas "Had it" dela: nada para tocar, sem comprador e sem preço, com uma linha que diz de onde vêm. As linhas "Had it, 2 hours ago" por resposta ficam no chat. Cada nome da lista mostra quando foi encontrado pela última vez ("Yesterday", "2 days ago"), em texto simples no fim da linha.
 
-A página da loja segue esta ordem: cabeçalho e ações, What they sell, Found here recently, Ratings, How they do on Snuffle, How it works.
+A página da loja segue esta ordem: cabeçalho e ações, What they sell, Found here recently, How it works, Ratings, How they do on Snuffle.
 
 A loja vê os próprios sinais e pode contestar um caso específico, como um "Not ready when I came" numa compra que ela separou no prazo. A loja não tem interface, então isso fica nos estados do pedido do lado da loja.
 
@@ -124,7 +124,9 @@ Escolher um lugar ou um raio recarrega Nearby. O lugar ativo só muda pelo topo 
 | Answer | "Asked" → "Seen" → "Has it", "Has 1 of 2", "Has something similar", "Doesn't have it" ou "No reply"; vinda do caixa: "In stock now" ou "In stock now · 1 of 2", seguido de "· from the shop's till" (nas linhas compactas o símbolo de raio substitui o sufixo, e "In stock now · 1 of 2" encurta para "In stock · 1 of 2"); sob encomenda: "Can make it · [antecedência]" ("Can make it · 2 days' notice"); na página da loja, respostas passadas: "Had it · [quando]", "Didn't have it · [quando]" |
 | Order, retirada | "Waiting for [loja] · not charged yet" → "Ready · collect by Mon 9 Nov" → "Extended · collect by Mon 16 Nov" → "Collected" → "Collected · rate [loja]" até quem comprou avaliar (aí "Collected · rated") ou passarem os 30 dias; finais: "Not confirmed · not charged", "Sold · not charged", "Cancelled · refunded", "Not collected · refunded". Depois de uma compra parcial, o cartão ganha uma linha, "Keep looking for [n] more" |
 | Order, entrega | "Waiting for [loja] · not charged yet" → "Paid" → "On its way" → "Delivered", seguido do balão do Snuffle "How was [loja]?" com um chip Rate. Um pagamento que falha não cria compra; o pedido mantém o rótulo dele |
-| Shop | "Open till 7pm", "Closes soon", "Closed · opens 9am"; na página dela, pelas avaliações: "No ratings yet · Snuffle has asked them 4 times", "New on Snuffle · 3 buyers so far" (abaixo de 5), "92% would go back · 38 buyers" |
+| Shop | "Open until 7pm", "Closes soon", "Closed, opens 9am"; na página dela, pelas avaliações: "No ratings yet" com "Snuffle has asked them 4 times", "New on Snuffle" com "3 people so far" (abaixo de 5), "92%" com "would go back" e "38 people" |
+
+O ponto num rótulo ("Ready · collect by Mon 9 Nov") só marca onde o estado termina e o detalhe começa. A interface desenha os dois em pesos e cores diferentes e nunca mostra o ponto (Linhas de metadados na página [Conteúdo](content.md)).
 
 ## Palavras
 
@@ -134,7 +136,7 @@ Escolher um lugar ou um raio recarrega Nearby. O lugar ativo só muda pelo topo 
 | O que o comprador pediu | request | pedido | errand, search, saved request |
 | A resposta de uma loja | answer, "replied" | resposta | offer, result, quote |
 | Quem vende | shop | loja; loja conectada, loja consultada | store, merchant, retailer |
-| Pagar | Buy, "Buy · £29.98" | comprar | hold, reserve, order como verbo |
+| Pagar | Buy, "Buy for £29.98" | comprar | hold, reserve, order como verbo |
 | O que foi comprado | order | compra | purchase, booking, hold |
 | O passo da loja | sets aside | separar | keeps, holds, puts aside |
 | A janela de retirada | "Collect by Mon 9 Nov", com a duração uma vez antes do Buy ("7 days") | janela de retirada | pickup, hold for |

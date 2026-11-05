@@ -9,6 +9,7 @@ import Svg, { Path } from 'react-native-svg';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { IMAGE_FILL } from '../../internal/media';
+import type { ShopAccentName } from '../../theme';
 import { Text } from '../Text/Text';
 
 export type MapProps = {
@@ -20,6 +21,8 @@ export type MapProps = {
    *  the top. The camera keeps the shop under the pin; the visible map is the band from the top to twice `pinY`.
    *  `attributionY` places the attribution's top where nothing covers it (the shop page: between photos and card). */
   extent?: { width: number; height: number; pinY: number; attributionY?: number };
+  /** The shop's accent: its Detail colour fills the pin (On detail for the edge and the dot) instead of Primary. */
+  accent?: ShopAccentName;
   /** Let the shopper pan and zoom. Off by default: on the shop page the map is a backdrop. */
   interactive?: boolean;
 };
@@ -68,18 +71,20 @@ export function MapFallback({ extent }: Pick<MapProps, 'extent'>) {
   );
 }
 
-// The glyph's paths, drawn filled: the outline in Primary, the dot in On Primary. Its tip is at (12, 22).
+// The glyph's paths, drawn filled: the outline in Primary, the dot in On Primary (or the shop's Detail and On detail). Its tip is at (12, 22).
 const [outline, dot] = Location01Icon as unknown as [string, { d: string }][];
 
-export function MapPin({ extent }: Pick<MapProps, 'extent'>) {
+export function MapPin({ extent, accent }: Pick<MapProps, 'extent' | 'accent'>) {
   const { theme } = useUnistyles();
   const size = theme.size.avatar.shop;
+  const fill = accent ? theme.color.shop.accent[accent].detail : theme.color.primary;
+  const mark = accent ? theme.color.shop.accent[accent].onDetail : theme.color.onPrimary;
   return (
     <View style={styles.centre(extent?.pinY)} pointerEvents="none">
       <View style={styles.pin(size)}>
         <Svg width={size} height={size} viewBox="0 0 24 24">
-          <Path d={outline[1].d} fill={theme.color.primary} stroke={theme.color.onPrimary} strokeWidth={1} />
-          <Path d={dot[1].d} fill={theme.color.onPrimary} />
+          <Path d={outline[1].d} fill={fill} stroke={mark} strokeWidth={1} />
+          <Path d={dot[1].d} fill={mark} />
         </Svg>
       </View>
     </View>

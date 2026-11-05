@@ -404,7 +404,7 @@ Um chip de filtro selecionado é cartão com o rótulo em Índigo 800 em 600 e u
 **Em aberto:** o fundo escuro da tela de categoria (a tela inteira no tile do tipo) ainda está por decidir. O Índigo tonal (`chipSelected`) continua no passo atual do cartão de compra, nos polegares da sheet de avaliação e no botão segmentado do Android.
 
 ## 050 · Linhas tingidas mais claras na tela de categoria escura; Requests depois do campo
-**2026-11-04 · Decidido**
+**2026-11-04 · Decidido** · a posição de Requests foi revertida pela 055
 
 No modo escuro a tela de categoria mantém o tile inteiro do tipo como fundo, e as linhas de loja sobre ele são um cartão tingido mais claro que o tile: OKLCH L 0,44, C 0,03 no matiz do acento (`shop.accent.<hue>.cardOnTile`: Pêssego #624D47, Pistache #4B5646, Manteiga #595240, Lavanda #534F62), 1,37 a 1,51:1 acima do tile. A linha de detalhes e o chevron das linhas usam o Stone 840 (#CECAC6, `mutedForegroundOnTile`), com 4,74:1 ou mais sobre todos os cartões, porque o Stone 740 media 3,35 a 3,42:1 ali. O modo claro mantém as linhas em Card branco. Na barra de pedido do Nearby, o círculo de Requests sai de antes da cápsula Ask e vai para depois dela, no fim, com o contador.
 
@@ -446,6 +446,23 @@ Usuários de teste roteirizados a partir dos objetivos de Sam e Jess conduzem a 
 
 **Por quê:** eles acham quebras funcionais e de usabilidade rápido e de forma repetível, nos termos da própria persona. A NN/g e artigos recentes alertam que usuários simulados são otimistas demais e homogêneos, então eu os mantenho fora da pesquisa: não validam demanda, não substituem compradores nem lojistas e não substituem a prova de conceito.
 **Em aberto:** nada da primeira rodada; um agente corrigiu as quebras e a segunda rodada chegou a todos os objetivos. Três alvos ainda ficam abaixo de 44 pt na web.
+
+## 055 · Uma página de loja neutra, um campo de chat preenchido, Requests de volta à esquerda
+**2026-11-05 · Decidido**
+
+A página da loja deixa de usar a cor do tile da loja como fundo: a página e o cartão da loja ficam neutros, o padding do cartão sobe de 20 para 24 e o accent da loja aparece só em detalhes pequenos (os chips e o pin). No claro, o cartão é branco, com as linhas um passo abaixo, como faz o Airbnb. O mapa usa a paleta do Snuffle. O cartão continua sólido; o vidro fica no Voltar e na barra fixa. No chat, o compositor vira um campo preenchido com um filete, em vez de vidro branco sobre fundo branco. Na barra de pedido do Nearby, o círculo de Requests volta para antes do campo, o que reverte a posição da decisão 050.
+
+**Por quê:** um pastel usado como fundo de uma tela inteira é a coisa mais clara do modo escuro, inverte a ordem de elevação e põe texto escuro em ilhas claras; accents pequenos no tom claro funcionam no escuro, como recomenda a orientação de tema escuro do Material. A Apple reserva o Liquid Glass para a camada de controles, então um cartão de conteúdo em vidro faria o texto depender do mapa atrás dele. O compositor de vidro media cerca de 1,0:1 contra o chat branco. À direita, o círculo de Requests ficava a 8 pt do microfone, onde o polegar descansa, o que convida a toques errados; à esquerda ele se alinha ao Voltar.
+**Em aberto:** se a tela de categoria mantém a cor cheia.
+
+## 056 · Fatos sem pontos flutuantes, primeiro nome nas avaliações
+**2026-11-05 · Decidido**
+
+As linhas de metadados não juntam mais os fatos com pontos. Uma palavra de status leva a sua cor ("Open" na cor de sucesso, o horário em Muted), a caminhada e a rua são grupos com ícone, as unidades nunca quebram ("12 min walk"), as linhas só quebram entre grupos, e "Promoted" é uma tag. As linhas de pedidos mostram uma tag "Needs you" com o prazo ao lado. O cartão da loja é um cinza quente (Biscuit 915), e o texto dele mantém as quebras de linha quando o cartão alarga. As avaliações mostram o primeiro nome de quem avaliou e o mês, nunca sobrenome, foto ou como o pedido foi entregue. A seção de avaliações segue: a fatia de quem voltaria, as tags principais, três avaliações e "See all". Found here recently é uma lista curta de até cinco nomes com há quanto tempo. How it works vem logo depois de Found here recently.
+
+**Por quê:** as linhas com pontos pareciam genéricas; as melhores páginas de lugares (Apple Maps, Google Maps, Airbnb) separam os fatos por peso, cor e ícones e guardam os pontos para listas simples de quantidades. Um primeiro nome faz a avaliação parecer de uma pessoa sem expô-la. Um carrossel de nomes sem fotos só acrescentaria uma rolagem.
+O botão de compra diz "Buy for £29.98".
+**Em aberto:** se a contagem diz "people" ou "buyers".
 
 ## Ainda em aberto
 

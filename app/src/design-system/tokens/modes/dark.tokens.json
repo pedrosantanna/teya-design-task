@@ -89,8 +89,28 @@
       }
     },
     "mapGround": {
+      "$value": "{color.stone.150}",
+      "$description": "Map ground: the dark Background, so the card (Sheet) separates from it"
+    },
+    "mapRoad": {
       "$value": "{color.stone.265}",
-      "$description": "Biscuit 265, the card's step, so the map reads as part of the dark surfaces"
+      "$description": "Minor roads and streets on the map"
+    },
+    "mapRoadMain": {
+      "$value": "{color.stone.320}",
+      "$description": "Main roads on the map"
+    },
+    "mapBuilding": {
+      "$value": "{color.stone.200}",
+      "$description": "Buildings on the map, lit from one side by the extrusion light"
+    },
+    "mapPark": {
+      "$value": "{color.map.parkDark}",
+      "$description": "Parks on the map: low-chroma Pistachio"
+    },
+    "mapWater": {
+      "$value": "{color.map.waterDark}",
+      "$description": "Water on the map: low-chroma cool"
     },
     "scrim": {
       "$value": "{color.black}"
@@ -157,6 +177,14 @@
           "cardOnTile": {
             "$value": "{color.peach.cardOnTileDark}",
             "$description": "Rows on this accent's tile (the Category screen): a tinted card lighter than the tile, so rows don't read as holes (decision 050)"
+          },
+          "detail": {
+            "$value": "{color.peach.inkDark}",
+            "$description": "Small accents on the neutral shop page: the band on the card, the chips and the map pin. Pastel in both modes: small areas in the light tone are fine on dark (Material dark theme)"
+          },
+          "onDetail": {
+            "$value": "{color.peach.tileDark}",
+            "$description": "Text and marks on Detail"
           }
         },
         "pistachio": {
@@ -175,6 +203,14 @@
           "cardOnTile": {
             "$value": "{color.pistachio.cardOnTileDark}",
             "$description": "Rows on this accent's tile (the Category screen): a tinted card lighter than the tile, so rows don't read as holes (decision 050)"
+          },
+          "detail": {
+            "$value": "{color.pistachio.inkDark}",
+            "$description": "Small accents on the neutral shop page: the band on the card, the chips and the map pin. Pastel in both modes: small areas in the light tone are fine on dark (Material dark theme)"
+          },
+          "onDetail": {
+            "$value": "{color.pistachio.tileDark}",
+            "$description": "Text and marks on Detail"
           }
         },
         "butter": {
@@ -193,6 +229,14 @@
           "cardOnTile": {
             "$value": "{color.butter.cardOnTileDark}",
             "$description": "Rows on this accent's tile (the Category screen): a tinted card lighter than the tile, so rows don't read as holes (decision 050)"
+          },
+          "detail": {
+            "$value": "{color.butter.inkDark}",
+            "$description": "Small accents on the neutral shop page: the band on the card, the chips and the map pin. Pastel in both modes: small areas in the light tone are fine on dark (Material dark theme)"
+          },
+          "onDetail": {
+            "$value": "{color.butter.tileDark}",
+            "$description": "Text and marks on Detail"
           }
         },
         "lavender": {
@@ -211,6 +255,14 @@
           "cardOnTile": {
             "$value": "{color.lavender.cardOnTileDark}",
             "$description": "Rows on this accent's tile (the Category screen): a tinted card lighter than the tile, so rows don't read as holes (decision 050)"
+          },
+          "detail": {
+            "$value": "{color.lavender.inkDark}",
+            "$description": "Small accents on the neutral shop page: the band on the card, the chips and the map pin. Pastel in both modes: small areas in the light tone are fine on dark (Material dark theme)"
+          },
+          "onDetail": {
+            "$value": "{color.lavender.tileDark}",
+            "$description": "Text and marks on Detail"
           }
         }
       }
@@ -237,11 +289,41 @@
       "edge": {
         "$value": "{color.stone.265}",
         "$description": "Hairline around cards and grouped rows on the chat ground (white on white needs an edge)"
+      },
+      "field": {
+        "$value": "{color.card}",
+        "$description": "The composer field on a chat: Background in light, Card in dark, with a Border hairline (the white glass vanished on the white ground)"
+      },
+      "fieldEdge": {
+        "$value": "{color.border}",
+        "$description": "Hairline around the composer field"
       }
     },
     "sheet": {
       "$value": "{color.stone.200}",
       "$description": "Sheet ground, one Stone step above the Background (L 0.22, 1.16:1 on the Background); rows inside a sheet take Muted (1.33:1) (shape.md, Sheets)"
+    },
+    "shopPage": {
+      "card": {
+        "$value": "{color.stone.200}",
+        "$description": "The shop page's card in dark: the Sheet colour"
+      },
+      "row": {
+        "$value": "{color.muted}",
+        "$description": "Grouped rows on the shop page's card: Muted"
+      },
+      "rowEdge": {
+        "$value": "{color.muted}",
+        "$description": "No visible hairline on dark rows (Muted is already 1.33:1 on the card)"
+      },
+      "cardEdge": {
+        "$value": "{color.border}",
+        "$description": "1 pt Border along the card's top edge, so the card lifts off the map"
+      }
+    },
+    "askEdge": {
+      "$value": "{color.white}",
+      "$description": "1 pt edge of the Nearby ask bar and the Requests circle, at state.askEdge"
     },
     "count": {
       "$value": "{color.indigo.300}",
@@ -322,15 +404,6 @@
         "$description": "The mark's two lighter stripes on the splash; 4.94:1 on the ground, 1.8:1 beside white"
       }
     },
-    "googleFill": {
-      "$value": "{color.brand.google.fillDark}"
-    },
-    "googleStroke": {
-      "$value": "{color.brand.google.strokeDark}"
-    },
-    "googleText": {
-      "$value": "{color.brand.google.textDark}"
-    },
     "googleLogoBlue": {
       "$value": "{color.brand.google.logoBlue}"
     },
@@ -367,6 +440,10 @@
     "sheetScrim": {
       "$value": 0.48,
       "$description": "Opacity of color.sheetScrim behind a sheet at rest (shape.md, Sheets)"
+    },
+    "askEdge": {
+      "$value": 0.1,
+      "$description": "Opacity of color.askEdge: white at 10% in dark"
     },
     "glassHairline": {
       "$value": 1,

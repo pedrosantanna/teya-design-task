@@ -1,6 +1,6 @@
 // Ratings, reliability and the price line on a shop page (change shop-ratings-and-range). The author's rules:
 // thumbs and "Would you go back?", never stars; no percentage below 5 ratings; the stock line only after 10 "has it"
-// answers; numbers are rounded down, never up; people who rated are "buyers". Words live here so the shop page, the
+// answers; numbers are rounded down, never up; people who rated are "people" in the count ("48 people"). Words live here so the shop page, the
 // reviews list and the rating sheet say the same thing.
 import { price } from './labels';
 import { useSim } from './simulation';
@@ -31,7 +31,7 @@ export function withOwnRating(shop: Shop, own: OrderRating | null, how: RatingNo
   if (!own || own.shopId !== shop.id) return base;
   const tags = { ...base.tags };
   for (const tag of own.tags) tags[tag] = (tags[tag] ?? 0) + 1;
-  const note: RatingNote[] = own.note.trim() ? [{ text: own.note.trim(), up: own.up, month: THIS_MONTH, how }] : [];
+  const note: RatingNote[] = own.note.trim() ? [{ name: 'You', text: own.note.trim(), up: own.up, month: THIS_MONTH, how }] : [];
   return { up: base.up + (own.up ? 1 : 0), down: base.down + (own.up ? 0 : 1), tags, notes: [...note, ...base.notes] };
 }
 
@@ -44,18 +44,22 @@ export function useShopRatings(shop: Shop): ShopRatings {
 }
 
 export type RatingHeadline = {
-  /** "92% would go back"; below 5 ratings "3 buyers so far" or "No ratings yet · Snuffle has asked them 4 times". */
+  /** "92% would go back"; below 5 ratings "3 people so far" or "No ratings yet". */
   title: string;
-  /** "38 buyers" with a share; none below 5 ratings, where "New on Snuffle" already shows under How they do. */
+  /** "92%": the large figure, from 5 ratings. */
+  figure?: string;
+  /** "would go back", beside the figure. */
+  caption?: string;
+  /** "48 people" with a share; below 5 ratings none, where "New on Snuffle" already shows under How they do; with none, "Snuffle has asked them 4 times". */
   detail?: string;
-  /** "Would go back, 92 percent of 38 buyers". */
+  /** "Would go back, 92 percent of 48 people". */
   spoken: string;
   total: number;
   /** Shown only from 5 ratings. */
   share?: number;
 };
 
-const buyers = (n: number) => `${n} ${n === 1 ? 'buyer' : 'buyers'}`;
+const people = (n: number) => `${n} ${n === 1 ? 'person' : 'people'}`;
 
 export function ratingHeadline(r: ShopRatings, asked?: number): RatingHeadline {
   const total = r.up + r.down;
@@ -66,14 +70,16 @@ export function ratingHeadline(r: ShopRatings, asked?: number): RatingHeadline {
     return { title: 'No ratings yet', detail: times, spoken: times ? `No ratings yet. ${times}` : 'No ratings yet', total };
   }
   if (total < MIN_RATINGS_FOR_SHARE) {
-    return { title: `${buyers(total)} so far`, spoken: `${buyers(total)} so far have rated it`, total };
+    return { title: `${people(total)} so far`, spoken: `${people(total)} so far have rated it`, total };
   }
   // Rounded down: 35 of 38 is 92.1%, shown as 92%; 37 of 38 (97.4%) never shows as 98%.
   const share = Math.floor((r.up * 100) / total);
   return {
     title: `${share}% would go back`,
-    detail: buyers(total),
-    spoken: `Would go back, ${share} percent of ${buyers(total)}`,
+    figure: `${share}%`,
+    caption: 'would go back',
+    detail: people(total),
+    spoken: `Would go back, ${share} percent of ${people(total)}`,
     total,
     share,
   };
@@ -93,8 +99,8 @@ export function topTags(r: ShopRatings, max = 5): RatingTagCount[] {
   return [...up.slice(0, max - keepDown), ...down].slice(0, max);
 }
 
-/** Two notes that mirror the overall split: round(2 × share up) of them are thumbs up. */
-export function quoteMix(r: ShopRatings, count = 2): RatingNote[] {
+/** Three notes that mirror the overall split: round(3 × share up) of them are thumbs up. */
+export function quoteMix(r: ShopRatings, count = 3): RatingNote[] {
   const total = r.up + r.down;
   if (total === 0 || r.notes.length === 0) return [];
   const upWanted = Math.round((count * r.up) / total);
@@ -151,9 +157,9 @@ export function reliabilityLines(shop: Shop): ReliabilityLine[] {
   return lines;
 }
 
-/** "Most items £2–£35 · from past answers", or "· from the shop's till" for a connected shop. */
+/** "Most items £2–£35, from past answers", or "from the shop's till" for a connected shop. */
 export function priceRangeLine(shop: Shop): string | undefined {
   if (!shop.priceRange) return undefined;
   const source = shop.reliability?.connected || shop.source === 'till' ? "from the shop's till" : 'from past answers';
-  return `Most items ${price(shop.priceRange.from)}–${price(shop.priceRange.to)} · ${source}`;
+  return `Most items ${price(shop.priceRange.from)}–${price(shop.priceRange.to)}, ${source}`;
 }

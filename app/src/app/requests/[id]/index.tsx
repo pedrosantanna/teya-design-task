@@ -23,6 +23,7 @@ import {
   Dock,
   Ground,
   ListRow,
+  ShopMeta,
   Map,
   NavBar,
   OrderCard,
@@ -55,7 +56,11 @@ import {
   price,
   shopAccent,
   shopById,
+  commas,
+  noBreak,
+  shopFacts,
   shopHoursLabel,
+  streetLabel,
   sim,
   useApp,
   useAppActions,
@@ -442,7 +447,7 @@ function DetailsSheet({ onToast }: { onToast: (text: string) => void }) {
   const isJess = persona === 'jess' && !!collectPoint;
   // "Rossi's" for Rossi's Bakery, the full name otherwise (v7 copy).
   const short = /^\S+'s\b/.exec(shop.name)?.[0] ?? shop.name;
-  const buyLabel = `Buy · ${price(total)}`;
+  const buyLabel = `Buy for ${price(total)}`;
 
   const body = isJess ? (
     <>
@@ -463,7 +468,7 @@ function DetailsSheet({ onToast }: { onToast: (text: string) => void }) {
           id="collectPoint"
           icon={Store01Icon}
           title="At the corner shop"
-          detail={`${collectPoint.street} · open till ${collectPoint.openUntil}`}
+          facts={{ state: 'open', detail: noBreak(`until ${collectPoint.openUntil}`), street: streetLabel(collectPoint.street) }}
           selected={at === 'collectPoint'}
           onPress={() => setAt('collectPoint')}
           position="last"
@@ -471,8 +476,8 @@ function DetailsSheet({ onToast }: { onToast: (text: string) => void }) {
       </View>
       <Text variant="footnote" color="mutedForeground">
         {at === 'collectPoint'
-          ? `${short} drops ${them} at the corner shop before closing. Collect by ${offer.collectBy}, ${collectPoint.openUntil} ${windowLength(persona, offer.collectBy)} · full refund if you don't.`
-          : `Collect by ${offer.collectBy}, ${shop.openUntil} ${windowLength(persona, offer.collectBy)} · full refund if you don't.`}
+          ? `${short} drops ${them} at the corner shop before closing. Collect by ${offer.collectBy}, ${collectPoint.openUntil} ${windowLength(persona, offer.collectBy)}. Full refund if you don't.`
+          : `Collect by ${offer.collectBy}, ${shop.openUntil} ${windowLength(persona, offer.collectBy)}. Full refund if you don't.`}
       </Text>
     </>
   ) : (
@@ -485,7 +490,7 @@ function DetailsSheet({ onToast }: { onToast: (text: string) => void }) {
           id="collect"
           icon={Store01Icon}
           title={`Collect at ${shop.name}`}
-          detail={`Collect by ${offer.collectBy} ${windowLength(persona, offer.collectBy)} · full refund if you don't`}
+          detail={`Collect by ${offer.collectBy} ${windowLength(persona, offer.collectBy)}. Full refund if you don't`}
           selected={!delivery}
           onPress={() => set({ fulfilment: 'collect' })}
           position={shop.delivers ? 'first' : 'only'}
@@ -495,7 +500,8 @@ function DetailsSheet({ onToast }: { onToast: (text: string) => void }) {
             id="delivery"
             icon={DeliveryTruck01Icon}
             title="They deliver"
-            detail={`${shop.name}'s own courier · ${price(shop.delivers.fee)} · ${shop.delivers.by}`}
+            detail={`${shop.name}'s own courier, ${shop.delivers.by}`}
+            value={price(shop.delivers.fee)}
             selected={delivery}
             onPress={() => set({ fulfilment: 'delivery' })}
             position="last"
@@ -516,14 +522,12 @@ function DetailsSheet({ onToast }: { onToast: (text: string) => void }) {
       origin={`answer:${shop.id}`}
       footer={<Button label={buyLabel} accessibilityLabel={`Buy, ${price(total)}`} onPress={() => sim.buy(isJess ? (at === 'shop' ? 'shop' : 'point') : undefined)} />}
     >
-      <Text variant="footnote" color="mutedForeground">
-        {`${shopHoursLabel(shopHours, shop)} · ${shop.street} · ${shop.walkMinutes} min walk`}
-      </Text>
+      <ShopMeta {...shopFacts(shopHours, shop)} />
       <View style={styles.map}>
         <Map />
       </View>
       <View>
-        <ListRow title={offer.item ?? `${content.active.title}`} detail={`${t.status}${t.source ? ` · ${t.source}` : ''}`} value={t.price} valueStrong position="first" />
+        <ListRow title={offer.item ?? `${content.active.title}`} detail={`${commas(t.status)}${t.source ? `, ${t.source}` : ''}`} value={t.price} valueStrong position="first" />
         <ListRow title="Quantity" position="last">
           <Stepper value={quantity} onChange={sim.setQuantity} max={max} />
         </ListRow>

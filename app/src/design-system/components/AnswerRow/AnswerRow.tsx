@@ -14,6 +14,7 @@ import { spoken } from '../../internal/PressableCard';
 import { type ColorName } from '../../theme';
 import { Icon } from '../Icon/Icon';
 import type { RowPosition } from '../ShopRow/ShopRow';
+import { StatusLabel } from '../Tag/Tag';
 import { Text } from '../Text/Text';
 
 /** How the row's status reads: still waiting, a yes (from a reply or the till), or a no. */
@@ -69,9 +70,7 @@ export const AnswerRow = memo(function AnswerRow({ shop, street, status, kind, p
         </View>
         <Animated.View style={[styles.status, changeStyle]}>
           <Icon icon={icons[kind]} size="caption1" color={color} />
-          <Text variant="caption1" color={good ? 'foreground' : 'mutedForeground'} numberOfLines={2}>
-            {status}
-          </Text>
+          <StatusLabel label={status} tone={good ? 'default' : 'quiet'} />
         </Animated.View>
       </View>
     </View>

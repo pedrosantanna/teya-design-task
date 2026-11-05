@@ -215,7 +215,7 @@ export const Lightbox = memo(function Lightbox({ photos, open, index, onIndexCha
           </View>
           <View style={styles.hint(insets.bottom)} pointerEvents="none">
             <Text variant="footnote" color="onLightboxMuted" align="center">
-              {photos.length > 1 ? 'Pinch to zoom · swipe for the next photo' : 'Pinch to zoom'}
+              {photos.length > 1 ? 'Pinch to zoom, swipe for the next photo' : 'Pinch to zoom'}
             </Text>
           </View>
         </Animated.View>

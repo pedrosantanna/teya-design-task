@@ -14,10 +14,12 @@ Call:
 - Escolhi horários em 12 horas em todo o texto, inclusive nos carimbos de hora, e mantive estas regras provisórias (decisão 043).
 - Depois pedi avaliações na página da loja. Escolhi um polegar para cima ou para baixo em vez de estrelas e uma contestação para as lojas, e defini as regras a partir do DMCC Act e do guia da CMA sobre avaliações falsas (decisão 047).
 - Na rodada 10 pedi que a lista de Requests mostrasse o último status do Snuffle na voz dele para cada estado, sem pontos, ícones nem botão na linha.
+- Na rodada 11 disse que as linhas de metadados ligadas por pontos soltos pareciam genéricas e pedi fatos distinguidos por peso, cor, ícone e posição. Pedi que a seção de avaliações abrisse com um número grande, depois as tags, três notas com primeiro nome e data e "See all", e que "Found here recently" virasse uma lista curta.
 AI:
 - Um agente revisou o design system contra as telas da v7 e encontrou formatos de hora misturados (carimbos em 24 horas ao lado de "by 4pm"). Outro agente escreveu esta página a partir do texto da v7 e do modelo conceitual.
 - Um agente leu o Schedule 20 do DMCC Act 2024 e o guia da CMA (CMA208) e transformou cada dever numa regra para as telas do Snuffle.
 - Um agente escreveu uma linha de prévia para cada estado de pedido e de compra do modelo conceitual e levou a prévia para uma só função no store.
+- Um agente comparou como Airbnb, Apple Maps, Google Maps e Uber Eats agrupam seus fatos, montou um componente para estado, caminhada e rua de uma loja e reescreveu todas as strings com ponto que achou no app; o Mobbin estava bloqueado, então o que ele lembrou de outros apps é orientação, não evidência.
 Trade-offs:
 - Horários em 12 horas seguem o jeito como se fala no Reino Unido e o estilo do GOV.UK, e ocupam um pouco mais de largura que os de 24 horas nas linhas.
 - Uma voz simples e sem desculpas pode soar fria quando algo dá errado; dizer primeiro a situação do dinheiro é o que deve mostrar o cuidado.
@@ -90,21 +92,40 @@ Toda mensagem depois que algo dá errado, ou depois que uma compra termina, tem 
 
 ## Rótulos de botão
 
-Os botões são verbos do modelo conceitual, em sentence case, com o objeto da ação quando ajuda: Buy, "Buy 1", "Buy · £29.98", Ask, "Ask Rossi's", Extend, "Extend to Mon 16 Nov", "Cancel for a refund", "Keep looking", "Try again", "Show me", "No thanks", Call, Rate. Directions mantém o substantivo de costume da plataforma. Um botão nunca diz OK, Submit ou Continue quando cabe um verbo do modelo.
+Os botões são verbos do modelo conceitual, em sentence case, com o objeto da ação quando ajuda: Buy, "Buy 1", "Buy for £29.98", Ask, "Ask Rossi's", Extend, "Extend to Mon 16 Nov", "Cancel for a refund", "Keep looking", "Try again", "Show me", "No thanks", Call, Rate. Directions mantém o substantivo de costume da plataforma. Um botão nunca diz OK, Submit ou Continue quando cabe um verbo do modelo.
+
+## Linhas de metadados
+
+Os fatos de uma loja ou de um pedido se distinguem por peso, cor, ícone e posição. Um ponto solto entre eles parece enchimento e dificulta a leitura rápida.
+
+| Regra | Na prática | Nunca |
+| --- | --- | --- |
+| Estado primeiro, na própria cor | "Open" em Success ou "Closes soon" em Warning, depois o horário em Muted foreground: "Open until 6pm". Loja fechada: "Closed, opens 9am" | "Open till 6pm · Blythe Road · 2 min walk" |
+| Um grupo por tipo de fato | A caminhada é o símbolo de pegadas com "2 min walk", a rua um alfinete com "Blythe Road"; cada grupo é uma unidade | Uma sequência de fatos ligada por pontos |
+| Unidades inteiras | Espaços não separáveis dentro de um grupo ("2 min walk", "until 6pm"); a linha só quebra entre grupos, em duas linhas no máximo | Quebra entre "2 min" e "walk" |
+| Cabeçalho da página da loja | Linha 1 o estado, linha 2 a caminhada e a rua; Promoted é uma tag sob os fatos; o prazo ("Made to order", "2 days' notice") é uma linha em How it works | O prazo ou "Promoted" dentro de uma linha de fatos |
+| Linhas e cards | O estado e o tempo de caminhada com o símbolo; a rua só onde nada mais na tela a nomeia | A rua repetida sob um filtro de rua |
+| Linhas de pedido | Uma tag de estado ("Needs you"), o prazo como texto próprio ("Buy by Thu 5 Nov"), a contagem como selo ao final | "Needs you · by Tuesday", "Needs you · 1" |
+| Contagens em filtros | A contagem depois do rótulo em Muted foreground: "Needs you 1" | Um ponto antes da contagem |
+| Detalhes e desfechos | Uma vírgula ou uma frase nova: "Collect by Mon 9 Nov. Full refund if you don't", "In stock now, 1 of 2" | Um ponto entre orações |
+| Onde o ponto fica | Uma lista simples de fatos contáveis do mesmo tipo, como o Airbnb escreve "2 beds · 1 bath"; o protótipo não tem uma lista assim, então o app não tem pontos; um botão que leva o valor diz "Buy for £29.98" | Um ponto entre um estado e seu detalhe, ou entre fatos de tipos diferentes |
+
+Os rótulos da tabela de estados mantêm o ponto na fonte como o lugar onde o estado termina e o detalhe começa. O rótulo de estado desenha os dois em pesos e cores diferentes e nunca mostra o ponto.
 
 ## Avaliações
 
 | Regra | Na prática | Nunca |
 | --- | --- | --- |
 | Uma pergunta | "Would you go back?", respondida com um polegar para cima ou para baixo | Estrelas, notas de 0 a 10, "How satisfied were you?" |
-| Uma porcentagem de quem comprou | "92% would go back · 38 buyers"; a contagem sempre ao lado do número | "4.6", "9.2/10", um número sem a contagem |
+| Uma porcentagem de pessoas | "92%" grande, com "would go back" e "38 people" ao lado; a contagem sempre ao lado do número | "4.6", "9.2/10", um número sem a contagem |
 | Nunca arredondar para cima | 91,7% aparece como "91%"; contagens ficam como contagens ("Had it 24 of 25 times when they said yes") | "92%" para 91,7%, "100%" para 24 de 25 |
-| Poucas avaliações | Abaixo de 5, as tags e os sinais do Snuffle com "New on Snuffle · 3 buyers so far"; nenhuma: "No ratings yet · Snuffle has asked them 4 times" | Uma porcentagem a partir de 3 pessoas |
-| Quem comprou | "buyers", "38 buyers" | customers, reviewers, users |
+| Poucas avaliações | Abaixo de 5, as tags e os sinais do Snuffle com "New on Snuffle" e "3 people so far"; nenhuma: "No ratings yet" e "Snuffle has asked them 4 times" | Uma porcentagem a partir de 3 pessoas |
+| Pessoas | "38 people" para a contagem; "buyers" onde a regra é sobre quem pode avaliar | customers, reviewers, users |
+| Primeiros nomes | Uma nota mostra o primeiro nome da pessoa com o mês ("Priya", "Oct 2026"); a nota da própria pessoa diz "You" | Sobrenomes, fotos, avatares, o tipo de compra |
 | Vereditos simples | "Would go back", "Wouldn't go back" e as tags fixas | "Excellent!", "Top rated", "Highly recommended" |
 | Origem em todo sinal | "What buyers said", "What Snuffle saw", "from 31 requests on Snuffle", "from the shop's till" | "verified", "trusted", "guaranteed" |
 | Datas pelo mês | "Oct 2026", "Edited Oct 2026" | "3 weeks ago", "12/10/2026" |
-| Um elemento por linha | Cada sinal é uma linha com rótulo completo: "Would go back, 92 percent of 38 buyers"; a cor e o glifo de polegar nunca levam o sentido sozinhos | Um número verde ou vermelho sem palavras |
+| Um elemento por linha | Cada sinal é uma linha com rótulo completo: "Would go back, 92 percent of 38 people"; a cor e o glifo de polegar nunca levam o sentido sozinhos | Um número verde ou vermelho sem palavras |
 
 ## Regras sobre avaliações
 

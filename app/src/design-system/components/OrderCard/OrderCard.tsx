@@ -73,7 +73,10 @@ export const OrderCard = memo(function OrderCard({ id, status, tone = 'default',
             <StatusLabel label={status} tone={tone} />
           </Animated.View>
           <Text variant="headline" numberOfLines={2}>
-            {`${shop} · ${items}`}
+            {shop}
+          </Text>
+          <Text variant="footnote" color="mutedForeground" numberOfLines={2}>
+            {items}
           </Text>
         </View>
         <Text variant="headline">{total}</Text>

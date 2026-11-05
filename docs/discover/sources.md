@@ -1,6 +1,6 @@
 # Sources
 
-Every quote and every link used across the docs, in one place. 72 quotes (71 checked against the live source) and 170 other sources. This page is generated from the other pages by `scripts/build_sources.py`.
+Every quote and every link used across the docs, in one place. 72 quotes (71 checked against the live source) and 175 other sources. This page is generated from the other pages by `scripts/build_sources.py`.
 
 ## Quotes by network
 
@@ -96,6 +96,11 @@ Status **verified** means the text, author and date were matched against the liv
 
 | Used on | Source |
 | --- | --- |
+| [Synthetic test users](../deliver/synthetic-users.md) | [Rosala and Moran, 2024](https://www.nngroup.com/articles/synthetic-users/) |
+| [Synthetic test users](../deliver/synthetic-users.md) | [Mooney et al., 2025](https://arxiv.org/abs/2509.03736) |
+| [Synthetic test users](../deliver/synthetic-users.md) | [Park et al., 2024](https://arxiv.org/abs/2411.10109) |
+| [Synthetic test users](../deliver/synthetic-users.md) | [Lu et al., 2025](https://arxiv.org/abs/2502.12561) |
+| [Components](../develop/design-system/components.md) | [help.deliveroo.com/articles/3203714](https://help.deliveroo.com/articles/3203714) |
 | [Benchmarks](benchmarks.md) | [Google Merchant Center Help](https://support.google.com/merchants/answer/15609877?hl=en-GB) |
 | [Benchmarks](benchmarks.md) | [Asian Trader](https://www.asiantrader.biz/nearst-tech-connects-uber-eats-deliveroo-just-eat) |
 | [Benchmarks](benchmarks.md) | [Digital Commerce 360](https://www.digitalcommerce360.com/2026/10/16/google-universal-cart-launch-features/) |

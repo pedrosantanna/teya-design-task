@@ -9,7 +9,7 @@ import { Text as NativeText, Pressable, View } from 'react-native';
 import Animated, { interpolateColor, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { useGround } from '../../internal/ground';
+import { useGround, useGroundAccent } from '../../internal/ground';
 import { webHitArea } from '../../internal/hitArea';
 import { usePress } from '../../internal/usePress';
 import { cornerCurve, textStyle, withAlpha, type BadgeName, type ColorName } from '../../theme';
@@ -24,7 +24,7 @@ export type ChipProps = {
    *  and deadline on New Request), drawn like an unselected chip with a chevron; a tap opens its choices. */
   kind?: 'filter' | 'suggestion' | 'menu';
   selected?: boolean;
-  /** Filter chips: a count after "·" ("Needs you · 2"). */
+  /** Filter chips: a count after the label, in Muted foreground ("Needs you 2"). */
   count?: number;
   /** An optional leading HugeIcons icon. */
   icon?: IconSvgElement;
@@ -46,24 +46,30 @@ export const Chip = memo(function Chip({ label, kind = 'filter', selected = fals
   // On: Card with Indigo 800 semibold text and a 1.5 pt Indigo 800 edge (light), Card with Indigo 300 text and a
   // 1 pt edge (dark), on every ground (decision 049).
   const ground = useGround();
+  // On the shop page's sheet and card grounds an accent colours the chips: the accent's tile fill with Foreground text, and
+  // in dark its Detail colour as a 1 pt edge, so the chip carries the shop's colour without a large pastel area.
+  const accent = useGroundAccent();
+  const tinted = (ground === 'sheet' || ground === 'card' || ground === 'shop') && accent && !on ? theme.color.shop.accent[accent] : undefined;
   const dark = theme.scheme === 'dark';
-  const plain = (ground === 'background' || ground === 'sheet') && !dark;
+  const plain = (ground === 'background' || ground === 'sheet' || ground === 'shop') && !dark;
   const darkGround = ground === 'background' && dark;
   const off =
     ground === 'chat'
       ? theme.color.chat.fill
       : ground === 'tile'
         ? withAlpha(theme.color.tonalOnTile, theme.state.tonalOnTile)
-        : ground === 'card' || (ground === 'sheet' && dark)
+        : ground === 'card' || ((ground === 'sheet' || ground === 'shop') && dark)
           ? theme.color.muted
           : plain
-            ? theme.color[ground === 'sheet' ? 'sheet' : 'background']
+            ? ground === 'shop' ? theme.color.shopPage.row : theme.color[ground === 'sheet' ? 'sheet' : 'background']
             : darkGround
               ? theme.color.background
               : theme.color.card;
   // Muted on Card in dark is 1.15:1, so a chip inside a Card section takes the Border edge there too.
   const darkCard = ground === 'card' && dark;
-  const offEdge = plain ? withAlpha(theme.color.glassEdge, theme.state.chipEdge) : darkGround || darkCard ? theme.color.border : off;
+  const offEdge = ground === 'chat' ? theme.color.chat.fieldEdge : plain ? withAlpha(theme.color.glassEdge, theme.state.chipEdge) : darkGround || darkCard ? theme.color.border : off;
+  const fillOff = tinted ? tinted.tile : off;
+  const edgeOff = tinted ? (dark ? tinted.detail : tinted.tile) : offEdge;
   const onFill = theme.color.card;
   const onEdge = theme.color.chipOn;
 
@@ -72,10 +78,10 @@ export const Chip = memo(function Chip({ label, kind = 'filter', selected = fals
   }, [on, progress, theme.spring.snappy]);
 
   const fill = useAnimatedStyle(() => ({
-    backgroundColor: interpolateColor(progress.get(), [0, 1], [off, onFill]),
-    borderColor: interpolateColor(progress.get(), [0, 1], [offEdge, onEdge]),
+    backgroundColor: interpolateColor(progress.get(), [0, 1], [fillOff, onFill]),
+    borderColor: interpolateColor(progress.get(), [0, 1], [edgeOff, onEdge]),
   }));
-  const text = count != null ? `${label} · ${count}` : label;
+  const text = count != null ? `${label}, ${count}` : label;
   const contentColor: ColorName = on ? 'chipOn' : 'foreground';
   const slop = (theme.hit.min - theme.size.chip) / 2;
   // Android adds a checkmark to a selected filter chip, as Material does (tags.md).
@@ -99,8 +105,13 @@ export const Chip = memo(function Chip({ label, kind = 'filter', selected = fals
           <Animated.View pointerEvents="none" style={[styles.layer, press.layerStyle]} />
           {leading ? <Icon icon={leading} size="subheadline" color={contentColor} /> : null}
           <Text variant={on ? 'subheadlineStrong' : 'subheadline'} color={contentColor} numberOfLines={1}>
-            {text}
+            {label}
           </Text>
+          {count != null ? (
+            <Text variant="subheadline" color={on ? 'chipOn' : 'mutedForeground'} numberOfLines={1}>
+              {String(count)}
+            </Text>
+          ) : null}
           {kind === 'menu' ? <Icon icon={ArrowDown01Icon} size="subheadline" color="mutedForeground" /> : null}
         </Animated.View>
       </Pressable>
@@ -110,28 +121,44 @@ export const Chip = memo(function Chip({ label, kind = 'filter', selected = fals
 
 // ---------- Status label ----------
 
-export type StatusTone = 'default' | 'needsYou' | 'warning' | 'success';
+export type StatusTone = 'default' | 'needsYou' | 'warning' | 'success' | 'quiet';
 
 export type StatusLabelProps = {
-  /** Exactly as in the conceptual model's state table ("Waiting for Paper & Co · not charged yet"). */
+  /** The state table's label ("Waiting for Paper & Co · not charged yet"). The table's dot only separates the status from its
+   *  detail; it is never drawn: the status shows in its own weight and colour, the detail after it in Muted foreground. */
   label: string;
-  /** needsYou: Foreground semibold, so Buy is the only Indigo on a request row. warning: the "not charged" endings, with the warning symbol. success: Ready, Paid, Collected. */
+  /** needsYou: the status in a Card pill, Foreground semibold, so Buy is the only Indigo on a request row. warning: the "not charged" endings, with the warning symbol and colour. success: Ready, Paid, Collected, with the check and colour. quiet: a no or a wait ("Doesn't have them"), in Muted foreground, regular. */
   tone?: StatusTone;
   /** A leading icon in place of the tone's own (FlashIcon for "In stock now · till"). */
   icon?: IconSvgElement;
 };
 
+/** Splits a state-table label at its dot: the status, and what follows it, first letter capitalised ("Collect by Mon 9 Nov"). */
+export function splitStatus(label: string): { status: string; detail?: string } {
+  const [status, ...rest] = label.split(' · ');
+  const detail = rest.join(', ');
+  return { status, detail: detail ? `${detail[0].toUpperCase()}${detail.slice(1)}` : undefined };
+}
+
 export const StatusLabel = memo(function StatusLabel({ label, tone = 'default', icon }: StatusLabelProps) {
   const toneIcon = tone === 'warning' ? Alert02Icon : tone === 'success' ? Tick02Icon : undefined;
-  const iconColor: ColorName = tone === 'warning' ? 'warning' : tone === 'success' ? 'success' : tone === 'needsYou' ? 'foreground' : 'mutedForeground';
+  const color: ColorName = tone === 'warning' ? 'warning' : tone === 'success' ? 'success' : tone === 'quiet' ? 'mutedForeground' : 'foreground';
   const shown = icon ?? toneIcon;
+  const { status, detail } = splitStatus(label);
+  const pill = tone === 'needsYou';
   return (
     <View style={styles.status}>
-      {shown ? <Icon icon={shown} size="caption1" color={iconColor} /> : null}
-      {/* One line; the suffix after "·" may wrap under it at large text sizes before anything is cut. */}
-      <Text variant={tone === 'needsYou' ? 'caption1Strong' : 'caption1'} color={tone === 'needsYou' ? 'foreground' : 'mutedForeground'} numberOfLines={2}>
-        {label}
-      </Text>
+      <View style={[styles.statusMain, pill && styles.pill]}>
+        {shown ? <Icon icon={shown} size="caption1" color={tone === 'warning' || tone === 'success' ? color : 'mutedForeground'} /> : null}
+        <Text variant={tone === 'quiet' ? 'caption1' : 'caption1Strong'} color={color} numberOfLines={2}>
+          {status}
+        </Text>
+      </View>
+      {detail ? (
+        <Text variant="caption1" color="mutedForeground" numberOfLines={2}>
+          {detail}
+        </Text>
+      ) : null}
     </View>
   );
 });
@@ -197,7 +224,17 @@ const styles = StyleSheet.create((theme) => ({
   },
   chipOn: { paddingHorizontal: theme.space[3] - theme.size.edge.selected, borderWidth: theme.size.edge.selected },
   layer: { ...StyleSheet.absoluteFillObject, backgroundColor: theme.color.foreground },
-  status: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1], flexShrink: 1 },
+  // The status and its detail wrap as two units, 8 pt apart.
+  status: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', columnGap: theme.space[2], rowGap: theme.space[1], flexShrink: 1 },
+  statusMain: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1], flexShrink: 1 },
+  // "Needs you": a Card pill a level above the Background (1.2:1 in light, 1.4:1 in dark), not a control's fill.
+  pill: {
+    ...cornerCurve,
+    height: theme.size.badge,
+    borderRadius: theme.radius.full,
+    paddingHorizontal: theme.space[2],
+    backgroundColor: theme.color.card,
+  },
   badge: (badge: BadgeName) => ({
     ...cornerCurve,
     height: theme.size.badge,

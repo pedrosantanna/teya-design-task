@@ -13,17 +13,17 @@ export function ProductSummaryExamples() {
       <ProductSummary
         shop="Rossi's Bakery"
         categories={['Sourdough', 'Rye', 'Pastries', 'Focaccia', 'Celebration cakes']}
-        priceLine="Most items £2–£35 · from past answers"
+        priceLine="Most items £2–£35, from past answers"
         asked={[
-          { item: 'Sourdough', detail: 'Had it · 2 hours ago' },
-          { item: 'Rye loaf', detail: "Didn't have it · this morning" },
+          { item: 'Sourdough', detail: 'Had it, 2 hours ago' },
+          { item: 'Rye loaf', detail: "Didn't have it, this morning" },
         ]}
         onCategory={setAsked}
       />
       <ProductSummary
         shop="Broadway Chemist"
         categories={['Sun care', 'Hay fever', 'First aid', 'Eclipse glasses', 'Baby care']}
-        priceLine="Most items £2–£25 · from the shop's till"
+        priceLine="Most items £2–£25, from the shop's till"
         onCategory={setAsked}
       />
       <Text variant="footnote" color="mutedForeground">

@@ -1,6 +1,6 @@
 # ShopTile
 
-A shop on Nearby: a 4:3 photo with up to two badges, the name and a meta line. Spec: Shop tile on `docs/develop/design-system/components.md`; sizes from `spacing.md`; placeholder from `imagery.md`.
+A shop on Nearby: a 4:3 photo with up to two badges, the name and its facts. Spec: Shop tile on `docs/develop/design-system/components.md`; sizes from `spacing.md`; placeholder from `imagery.md`.
 
 ## Props
 
@@ -8,7 +8,7 @@ A shop on Nearby: a 4:3 photo with up to two badges, the name and a meta line. S
 | --- | --- | --- | --- |
 | `id` | string | required | Passed to `onPress` |
 | `name` | string | required | Headline, one line |
-| `meta` | string | required | "Open till 6pm · 2 min walk", "Closed · opens 9am"; one line |
+| `facts` | ShopFacts | required | Status and walk as ShopMeta draws them ("Open until 6pm", "2 min walk"); they wrap between units, on two lines at most |
 | `image` | string (uri) | none | The shop's own photo; without one, the no-photo placeholder (tonal tile, initials, awning stripes; a proposal) |
 | `badges` | `BadgeName[]` | `[]` | At most two shown; Promoted always first |
 | `size` | `'large'`, `'medium'` | `'large'` | `tile.large` = 0.78 × content width, `tile.medium` = (content − 12) / 2.3 |
@@ -16,7 +16,7 @@ A shop on Nearby: a 4:3 photo with up to two badges, the name and a meta line. S
 | `accent` | ShopAccentName | `butter` | The shop's accent: the tonal tile under the photo while it loads, and instead of it if it fails (colour.md, Shop accents) |
 | `onPress` | `(id) => void` | none | |
 
-`tileWidth(theme, contentWidth, size)` is exported for carousels and skeletons. A photo that fails to load falls back to the placeholder. Photo at `radius.bubble`; badges 8 from the corner; name and meta `space.1` apart.
+`tileWidth(theme, contentWidth, size)` is exported for carousels and skeletons. A photo that fails to load falls back to the placeholder. Photo at `radius.bubble`; badges 8 from the corner; name and facts `space.1` apart.
 
 ## Do and don't
 
@@ -25,7 +25,7 @@ A shop on Nearby: a 4:3 photo with up to two badges, the name and a meta line. S
 
 ## Accessibility
 
-One element: name, badges, meta ("Rossi's Bakery, promoted, Open till 6pm, 2 min walk"). The photo has no label of its own.
+One element: name, badges, facts ("Rossi's Bakery, promoted, Open, until 6pm, 2 min walk"). The photo has no label of its own.
 
 ## iOS and Android
 

@@ -46,7 +46,7 @@ export const Notification = memo(function Notification({ title, body, time = 'no
           <View style={styles.grow}>
             <View style={styles.meta}>
               <Text variant={ios ? 'subheadlineStrong' : 'caption1'} color={ios ? 'foreground' : 'mutedForeground'} numberOfLines={1}>
-                {ios ? title : `Snuffle · ${time}`}
+                {ios ? title : `Snuffle, ${time}`}
               </Text>
               {ios ? (
                 <Text variant="caption1" color="mutedForeground">

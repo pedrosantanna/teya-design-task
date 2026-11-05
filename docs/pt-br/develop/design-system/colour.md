@@ -165,7 +165,11 @@ Cada acento é uma escala de dez passos montada em OKLCH a partir da cor base. A
 | Contador (`count`) | Índigo 800, texto branco (8,75:1), um anel de 2 pt na cor do fundo | Índigo 300, texto preto (11,86:1), o mesmo anel; o Índigo 800 sobre o fundo escuro dava 2,24:1 | O botão de Requests e as respostas não lidas |
 | Badge sobre foto | Fundo 100 do acento, texto 800, ponto 500 | Os valores do claro | Promoted (Pistache), New (Pêssego), Delivers (Manteiga) |
 | Badge sobre wash | Fundo do cartão, texto na cor do texto | Fundo do cartão, texto na cor do texto | A página da loja, onde um badge pastel ficaria sobre outro pastel |
-| Fundo do mapa | Manteiga 50 | Cartão #252627 | Placeholder do mapa atrás dos pinos |
+| Fundo do mapa (`mapGround`) | Biscoito 960 | Background #0B0C0D | O fundo do mapa; o cartão da página da loja fica a 1,15:1 sobre ele no claro (Biscoito 915) e 1,16:1 no escuro (a cor Sheet) |
+| Ruas do mapa (`mapRoad`, `mapRoadMain`) | Biscoito 890, Biscoito 860 | Stone 265, Stone 320 | Ruas e avenidas, 1,24:1 e 1,36:1 sobre o fundo no claro, 1,29:1 e 1,55:1 no escuro |
+| Prédios do mapa (`mapBuilding`) | Card (branco) | Stone 200 | Prédios extrudados, sombreados pela luz da extrusão: 1,13:1 sobre o fundo no claro, 1,16:1 no escuro |
+| Parques do mapa (`mapPark`) | Tile Pistache #C5DEAE | #222B1D | Parques, 1,29:1 sobre o fundo no claro, 1,33:1 no escuro |
+| Água do mapa (`mapWater`) | #D6E4EE, um azul-acinzentado frio e pálido | #1F2B34 | Água, 1,15:1 sobre o fundo no claro, 1,35:1 no escuro |
 
 O `filterSelected` (fundo na cor do texto) não é mais usado: um chip selecionado preto era a marca mais pesada do Nearby, então a seleção voltou para o Índigo tonal. Os badges mantêm os valores do claro no modo escuro porque ficam sobre fotos, que não mudam com o tema.
 
@@ -179,7 +183,9 @@ Cada loja tem um acento fixo, escolhido pelo tipo dela (`store/kinds.ts`), entã
 
 | Token | Claro | Escuro | Onde |
 | --- | --- | --- | --- |
-| `shop.accent.<hue>.tile` | Passo de tile: Pêssego #FEC5B2, Pistache #C5DEAE, Manteiga #E7D48F, Lavanda #D7CCFE | Pêssego #52352C, Pistache #34422C, Manteiga #403925, Lavanda #3E3950 | O tile tonal, o cartão de categoria e o cabeçalho da tela de categoria, a página da loja, tingida por inteiro (o fundo do cartão atrás de todas as seções e o scroll edge da barra fixa), o cabeçalho do recibo |
+| `shop.accent.<hue>.tile` | Passo de tile: Pêssego #FEC5B2, Pistache #C5DEAE, Manteiga #E7D48F, Lavanda #D7CCFE | Pêssego #52352C, Pistache #34422C, Manteiga #403925, Lavanda #3E3950 | O tile tonal, o cartão de categoria e o cabeçalho da tela de categoria, o cabeçalho do recibo, os chips da página da loja |
+| `shop.accent.<hue>.detail` | O passo de tile | O passo de tinta (Pêssego #E8D6D1, Pistache #D3E5C0, Manteiga #E1DAC9) | Pequenos acentos na página neutra da loja: a faixa na borda de cima do cartão e o pin do mapa. Pastel nos dois modos: uma área pequena no tom claro funciona no escuro (tema escuro do Material), e uma grande nunca |
+| `shop.accent.<hue>.onDetail` | Tinta (800) | Tile (escuro) | A borda e o ponto do pin: 6,4:1 a 6,5:1 sobre `detail` no claro, 7,9:1 a 8,2:1 no escuro |
 | `shop.accent.<hue>.wash` | 100 | 900 | As listras claras do toldo no tile tonal |
 | `shop.accent.<hue>.ink` | 800 | 200 | As iniciais e as listras escuras do toldo no tile |
 | `shop.accent.<hue>.cardOnTile` | Card (branco) | Pêssego #5C4F4B, Pistache #4F554B, Manteiga #565249, Lavanda #53515C | As linhas de loja na tela de categoria |
@@ -224,6 +230,8 @@ Todo cartão fica 1,39:1 ou mais claro que o tile. Os chips de rua e o Voltar ma
 | `chat.ground` | Cartão #FFFFFF | Fundo #0B0C0D | O fundo do New Request e de todo chat |
 | `chat.fill` | Fundo #EEE9E2 | Cartão #252627 | Chips e linhas agrupadas sobre o fundo do chat |
 | `chat.edge` | #DEDAD5 | #252627 | Um fio em volta dos cartões sobre o fundo do chat, com a sombra suave |
+| `chat.field` | Fundo #EEE9E2 | Cartão #252627 | O campo do chat: 1,21:1 sobre o fundo branco, 1,29:1 sobre o escuro |
+| `chat.fieldEdge` | Borda #D4D0CB | Borda #3D3E3F | O fio do campo: 1,53:1 sobre o fundo branco, 1,83:1 sobre o escuro |
 
 O balão fica em 1,50:1 sobre o fundo branco do chat e em 1,40:1 sobre o escuro; o texto nele fica em 13,07:1 e 13,36:1. O chat não tem tom roxo, degradê nem brilho (a [Identidade](../ideation/identity.md) descarta degradês roxos): a Lavanda aparece só nos balões do Snuffle. A marca é o glifo sozinho na cor do texto (veja [Marca](mark.md)); os tokens que a desenhavam sobre um tile Lavanda com rosto Manteiga saíram.
 

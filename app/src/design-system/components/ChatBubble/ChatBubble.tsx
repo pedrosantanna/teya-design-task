@@ -84,7 +84,7 @@ export const ChatBubble = memo(function ChatBubble({
           </View>
           {failed ? (
             <Text variant="caption1" color="destructive">
-              Not sent · tap to retry
+              Not sent. Tap to retry
             </Text>
           ) : null}
         </Pressable>
@@ -106,7 +106,7 @@ export const ChatBubble = memo(function ChatBubble({
 export function SnuffleSender({ day }: { day?: string }) {
   return (
     <Text variant="caption1" color="mutedForeground">
-      {day ? `Snuffle · ${day}` : 'Snuffle'}
+      {day ? `Snuffle, ${day}` : 'Snuffle'}
     </Text>
   );
 }

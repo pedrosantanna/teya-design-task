@@ -8,10 +8,11 @@ A row in a grouped list: the details sheet (item, quantity, the ways to get it),
 | --- | --- | --- | --- |
 | `id` | string | `''` | Passed to `onPress` |
 | `title` | string | required | Body; Headline when `strong` or selected |
-| `detail` | string | none | Footnote in Muted foreground, up to three lines ("Collect by Mon 9 Nov (7 days) · full refund if you don't") |
+| `detail` | string | none | Footnote in Muted foreground, up to three lines ("Collect by Mon 9 Nov (7 days), full refund if you don't") |
 | `icon` | `IconSvgElement` | none | Leading HugeIcons icon at Body size |
 | `value` | string | none | Trailing text; never truncates. `valueStrong` sets it in Headline |
 | `trailing` | ReactNode | none | Trailing content in place of `value`, e.g. a `Stepper` |
+| `facts` | ShopFacts | none | A shop's status, walk and street under the title in place of `detail` (the receipt's "where" row) |
 | `children` | ReactNode | none | Fills the row in place of title, detail and value: a `Stepper`, which has its own label |
 | `selected` | boolean | none | Makes the row one choice of a group: the row keeps its fill; a check in Foreground and the title in Headline carry the choice. Selection haptic |
 | `position` | `RowPosition` | `'only'` | Corners and separators of an iOS inset grouped list |

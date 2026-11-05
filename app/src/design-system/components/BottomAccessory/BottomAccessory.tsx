@@ -1,6 +1,6 @@
-// Nearby's ask bar (components.md, Ask bar; craft-pass-2): one row floating in glass at the bottom, the Ask capsule
-// and a 48 pt Requests circle after it (decision 050: trailing, as iOS 26 places the secondary button after the search
-// field in Music and Podcasts). It never shrinks or hides: pressing it is the screen's primary
+// Nearby's ask bar (components.md, Ask bar; craft-pass-2): one row floating in glass at the bottom, a 48 pt Requests
+// circle and then the Ask capsule (round 10: the circle is leading again, reversing decision 050; the mic sits at the
+// capsule's trailing end, 8 pt from where the thumb rests on a trailing circle, and a leading circle lines up with Back). It never shrinks or hides: pressing it is the screen's primary
 // action, and a bar that retracts while scrolling read as gone. Inside the capsule: the Snuffle glyph, the
 // placeholder in Body and a mic. The capsule registers as the origin "ask", so New Request's composer grows out of
 // it (a view transition on the web, a zoom from its rectangle on the phones).
@@ -14,6 +14,7 @@ import { StyleSheet } from 'react-native-unistyles';
 import { FloatingSurface } from '../../internal/FloatingSurface';
 import { registerOrigin, type ViewRef } from '../../internal/origins';
 import { usePress } from '../../internal/usePress';
+import { withAlpha } from '../../theme';
 import { Dock } from '../Dock/Dock';
 import { Icon } from '../Icon/Icon';
 import { SnuffleMark } from '../SnuffleMark/SnuffleMark';
@@ -70,6 +71,7 @@ export const BottomAccessory = memo(function BottomAccessory({
   return (
     <Dock>
       <View style={styles.row(margin)}>
+        {renderRequests ? renderRequests(button) : button(() => onRequestsPress?.())}
         <Animated.View style={[styles.grow, askPress.scaleStyle]}>
           <Pressable
             accessibilityRole="button"
@@ -99,11 +101,14 @@ export const BottomAccessory = memo(function BottomAccessory({
             </View>
           </Pressable>
         </Animated.View>
-        {renderRequests ? renderRequests(button) : button(() => onRequestsPress?.())}
       </View>
     </Dock>
   );
 });
+
+// A 1 pt edge on the glass (state.askEdge: black at 8% in light, white at 10% in dark), so the bar and the circle read
+// over a busy map or a white shop card.
+const edge = (theme: { color: { askEdge: string }; state: { askEdge: number } }) => ({ borderWidth: 1, borderColor: withAlpha(theme.color.askEdge, theme.state.askEdge) });
 
 const styles = StyleSheet.create((theme) => ({
   row: (margin: number) => ({ flexDirection: 'row', alignItems: 'center', gap: theme.space[2], paddingHorizontal: margin }),
@@ -111,13 +116,14 @@ const styles = StyleSheet.create((theme) => ({
     width: theme.size.field,
     height: theme.size.field,
     borderRadius: theme.radius.full,
+    ...edge(theme),
     alignItems: 'center',
     justifyContent: 'center',
   },
   // The count's ring overlaps the circle's top right edge, as on an app icon.
   count: { position: 'absolute', top: -theme.size.askBar.ring, right: -theme.size.askBar.ring },
   grow: { flex: 1 },
-  capsule: { height: theme.size.field, borderRadius: theme.radius.full, justifyContent: 'center' },
+  capsule: { height: theme.size.field, borderRadius: theme.radius.full, ...edge(theme), justifyContent: 'center' },
   line: {
     flexDirection: 'row',
     alignItems: 'center',

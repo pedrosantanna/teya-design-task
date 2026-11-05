@@ -11,13 +11,13 @@ export function ShopTileExamples() {
   return (
     <View style={styles.list}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
-        <ShopTile id="rossis" name="Rossi's Bakery" meta="Open till 6pm · 2 min walk" image={photo('rossis-bakery-front')} badges={['promoted']} />
-        <ShopTile id="paper" name="Paper & Co" meta="Open till 7pm · 13 min walk" />
+        <ShopTile id="rossis" name="Rossi's Bakery" facts={{ state: 'open', detail: 'until\u00A06pm', walk: '2\u00A0min\u00A0walk' }} image={photo('rossis-bakery-front')} badges={['promoted']} />
+        <ShopTile id="paper" name="Paper & Co" facts={{ state: 'open', detail: 'until\u00A07pm', walk: '13\u00A0min\u00A0walk' }} />
       </ScrollView>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
-        <ShopTile id="halo" size="medium" name="Halo Florist" meta="Open till 5pm · 13 min walk" image={photo('rossis-bakery-interior')} badges={['new', 'delivers']} />
-        <ShopTile id="cameras" size="medium" name="Olympia Cameras" meta="Closed · opens 9am" />
-        <ShopTile id="chemist" size="medium" name="Broadway Chemist" meta="Open till 8pm · 12 min walk" badges={['delivers']} />
+        <ShopTile id="halo" size="medium" name="Halo Florist" facts={{ state: 'open', detail: 'until\u00A05pm', walk: '13\u00A0min\u00A0walk' }} image={photo('rossis-bakery-interior')} badges={['new', 'delivers']} />
+        <ShopTile id="cameras" size="medium" name="Olympia Cameras" facts={{ state: 'closed', detail: 'opens\u00A09am', walk: '6\u00A0min\u00A0walk' }} />
+        <ShopTile id="chemist" size="medium" name="Broadway Chemist" facts={{ state: 'open', detail: 'until\u00A08pm', walk: '12\u00A0min\u00A0walk' }} badges={['delivers']} />
       </ScrollView>
     </View>
   );

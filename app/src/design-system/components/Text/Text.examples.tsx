@@ -19,7 +19,7 @@ const samples: Record<TypeStyleName, string> = {
   callout: 'Ask for anything nearby',
   subheadline: 'Collect by Mon 9 Nov',
   subheadlineStrong: 'Buy at Rossi’s',
-  footnote: 'King Street · 13 min walk · open till 7pm',
+  footnote: 'King Street, 13 min walk, open until 7pm',
   caption1Strong: 'Needs you',
   caption1: 'Replied 4 min ago',
   caption2: '3 new',

@@ -24,7 +24,7 @@ import {
   useNavBarHeight,
   useNavBarScroll,
 } from '@/design-system';
-import { openDirections, shopAccent, shopById, sim, useContent, useCurrentOrder, useSim } from '@/store';
+import { noBreak, openDirections, shopAccent, shopById, sim, streetLabel, useContent, useCurrentOrder, useSim } from '@/store';
 
 const PAID: string[] = ['ready', 'extended', 'collected', 'paid', 'onItsWay', 'delivered'];
 const REFUNDED: string[] = ['cancelled', 'notCollected'];
@@ -65,13 +65,14 @@ export default function Receipt() {
   const collecting = order.fulfilment === 'collect' && (order.state === 'ready' || order.state === 'extended');
   // Where the shopper collects: the shop the order was bought from, or the collection point it drops at.
   const where = order.collectAt ?? { name: order.shop, street: order.street, openUntil: order.openUntil };
+  // The money row: what happened to the charge as the title, the amount as its value.
   const money = PAID.includes(order.state)
-    ? `Paid ${order.total}`
+    ? 'Paid'
     : REFUNDED.includes(order.state)
-      ? `Refunded ${order.total}`
+      ? 'Refunded'
       : order.state === 'waiting'
-        ? `${order.total} · not charged yet`
-        : `${order.total} · not charged`;
+        ? 'Not charged yet'
+        : 'Not charged';
   const directions = () => {
     if (!openDirections({ name: where.name, street: where.street })) setToast('Directions open the Maps app on a phone.');
   };
@@ -97,7 +98,7 @@ export default function Receipt() {
             {order.fulfilment === 'delivery'
               ? `${order.items}, delivered by ${order.shop}`
               : collecting
-                ? `${order.items}, set aside${order.collectAt ? ` at ${order.collectAt.name}` : ''} · full refund if you don't collect`
+                ? `${order.items}, set aside${order.collectAt ? ` at ${order.collectAt.name}` : ''}. Full refund if you don't collect`
                 : order.items}
           </Text>
         </View>
@@ -109,17 +110,19 @@ export default function Receipt() {
             qrValue={`snuffle:order:${order.code}`}
             enlarged={codeOpen}
             onEnlargedChange={sim.setCodeOpen}
-            detail={`${order.items} · ${order.shop}`}
+            detail={`${order.items}, ${order.shop}`}
             note={`${where.name} scans the code, or taps Collected on their side.`}
           />
         ) : null}
 
         <View>
-          <ListRow icon={Location01Icon} title={where.name} detail={`${where.street} · Open till ${where.openUntil} · ${order.walk}`} position="first" />
+          <ListRow icon={Location01Icon} title={where.name} facts={{ state: 'open', detail: noBreak(`until ${where.openUntil}`), walk: noBreak(order.walk), street: streetLabel(where.street) }} position="first" />
           <ListRow
             icon={CreditCardIcon}
             title={money}
-            detail={`${order.payName} · ${order.card.charAt(0).toLowerCase()}${order.card.slice(1)}`}
+            value={order.total}
+            valueStrong
+            detail={`${order.payName}, ${order.card.charAt(0).toLowerCase()}${order.card.slice(1)}`}
             position="last"
           />
         </View>

@@ -12,6 +12,7 @@ import { usePress } from '../../internal/usePress';
 import { cornerCurve, type ColorName } from '../../theme';
 import { Icon } from '../Icon/Icon';
 import type { RowPosition } from '../ShopRow/ShopRow';
+import { ShopMeta, shopFactsLabel, type ShopFacts } from '../ShopMeta/ShopMeta';
 import { Text } from '../Text/Text';
 
 export type ListRowProps = {
@@ -20,6 +21,8 @@ export type ListRowProps = {
   title: string;
   /** Footnote under the title, two lines at most. */
   detail?: string;
+  /** A shop's status, walk and street under the title in place of `detail`, as ShopMeta draws them. */
+  facts?: ShopFacts;
   /** A leading HugeIcons icon (Store, Truck, Map pin, Credit card). */
   icon?: IconSvgElement;
   /** Trailing text: a price or a value ("£14.99", "Within 15 min"). Never truncates. */
@@ -51,6 +54,7 @@ export const ListRow = memo(function ListRow({
   id = '',
   title,
   detail,
+  facts,
   icon,
   value,
   valueStrong = false,
@@ -86,7 +90,8 @@ export const ListRow = memo(function ListRow({
           <Text variant={strong || (choice && selected) ? 'headline' : 'body'} color={fill}>
             {title}
           </Text>
-          {detail ? (
+          {facts ? <ShopMeta {...facts} /> : null}
+          {detail && !facts ? (
             <Text variant="footnote" color="mutedForeground" numberOfLines={3}>
               {detail}
             </Text>
@@ -105,7 +110,7 @@ export const ListRow = memo(function ListRow({
       </View>
     </>
   );
-  const label = accessibilityLabel ?? spoken(title, detail, value);
+  const label = accessibilityLabel ?? spoken(title, facts ? shopFactsLabel(facts) : detail, value);
   if (!onPress) {
     return (
       <View accessible={!trailing && !children} accessibilityLabel={trailing || children ? undefined : label} style={styles.row(grouped, position, false, surface, ground)}>
@@ -131,7 +136,8 @@ export const ListRow = memo(function ListRow({
 /** A grouped row on the screen background in light; on Muted in dark, where Background sits too close to Card.
  *  Inside a sheet the row sits one level above the sheet's ground: Card in light (1.39:1 on #DEDAD5), Muted in dark
  *  (1.40:1 on #191715, where Card would be 1.17:1). */
-function groupedFill(theme: { scheme: string; color: { card: string; background: string; muted: string } }, surface: 'card' | 'background', ground?: GroundName): string {
+function groupedFill(theme: { scheme: string; color: { card: string; background: string; muted: string; shopPage: { row: string } } }, surface: 'card' | 'background', ground?: GroundName): string {
+  if (ground === 'shop') return theme.color.shopPage.row;
   if (ground === 'sheet') return theme.scheme === 'dark' ? theme.color.muted : theme.color.card;
   if (surface === 'background' && theme.scheme === 'dark') return theme.color.muted;
   return theme.color[surface];
@@ -139,7 +145,7 @@ function groupedFill(theme: { scheme: string; color: { card: string; background:
 
 /** The dark Separator is the Muted colour, so on a sheet's Muted rows the separator takes Border (#403D3A). */
 function separatorOn(theme: { scheme: string; color: { separator: string; border: string } }, ground?: GroundName): string {
-  return ground === 'sheet' && theme.scheme === 'dark' ? theme.color.border : theme.color.separator;
+  return (ground === 'sheet' || ground === 'shop') && theme.scheme === 'dark' ? theme.color.border : theme.color.separator;
 }
 
 export type ListGroupProps = {
@@ -153,8 +159,10 @@ export type ListGroupProps = {
 /** Holds the rows of one grouped list. With `shadow`, the group lifts off a same-coloured ground with the delicate
  *  card shadow (the shop page, where Card rows sit on a Background card), instead of a lighter step. */
 export function ListGroup({ children, shadow = false, corner = 'inner' }: ListGroupProps) {
-  const inSheet = useGround() === 'sheet';
-  return <View style={[styles.group, inSheet && styles.groupInSheet, corner === 'card' && styles.groupCard, shadow && styles.groupShadow]}>{children}</View>;
+  const ground = useGround();
+  const inSheet = ground === 'sheet';
+  const inShop = ground === 'shop';
+  return <View style={[styles.group, inSheet && styles.groupInSheet, corner === 'card' && styles.groupCard, shadow && !inShop && styles.groupShadow, inShop && styles.groupShop]}>{children}</View>;
 }
 
 export type ListBlockProps = { children: ReactNode; position?: RowPosition; surface?: 'card' | 'background'; accessibilityLabel?: string };
@@ -185,6 +193,8 @@ const styles = StyleSheet.create((theme) => ({
   group: { ...cornerCurve, borderRadius: theme.radius.inner },
   groupInSheet: { borderRadius: theme.radius.bubble },
   groupCard: { borderRadius: theme.radius.card },
+  // On the shop page's card the rows step down from white to an off-white, and a 1 pt hairline makes them register.
+  groupShop: { borderWidth: 1, borderColor: theme.color.shopPage.rowEdge },
   groupShadow: { boxShadow: cardShadow(theme) },
   row: (grouped: boolean, position: RowPosition, selected: boolean, surface: 'card' | 'background' = 'card', ground?: GroundName) => {
     const top = position === 'first' || position === 'only';

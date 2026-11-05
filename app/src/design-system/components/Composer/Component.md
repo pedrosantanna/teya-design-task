@@ -23,7 +23,7 @@ The ask bar on Nearby (round Requests button and the field "Ask for anything nea
 - Height 50 to match a large button, `radius.full`; the field grows to five lines, then scrolls.
 - Send appears inside the field's right end only when there is text, in Primary, scaling in with `spring.snappy`; the field is empty at the right otherwise. Dictation can't be simulated in the prototype, so the typing composer has no microphone for now; the Nearby ask bar keeps it as part of the button that opens Ask.
 - On the web, Enter sends and Shift+Enter starts a new line.
-- Material: Liquid Glass (interactive) on iOS 26 when the system offers it and Reduce Transparency is off; blur on earlier iOS and the web; a solid surface on Android or with Reduce Transparency. The palette has no surface-container role, so Android uses Card.
+- Material: a filled field, `chat.field` (Background in light, Card in dark) with a `chat.fieldEdge` hairline (Border) on every platform, as iMessage; glass over the white chat ground measured 1.0:1. The Requests circle of the `ask` mode stays glass.
 - The screen places it at the bottom with `margin.screen` at the sides and keeps `clearance.askBar` (48) under the last row of content. On the phones it rides on the keyboard in a `KeyboardStickyView` (react-native-keyboard-controller), with the home-indicator inset dropped while the keyboard is open, and the conversation is a `KeyboardChatScrollView` so its last message stays above the composer; dragging the conversation down dismisses the keyboard with the finger.
 - Web: a 2 px Tint focus ring while the field has focus.
 

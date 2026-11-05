@@ -7,10 +7,9 @@ The shop page's frame: the map, the photo carousel, the content card and the nav
 | Prop | Type | Default | Notes |
 | --- | --- | --- | --- |
 | `name` | string | required | Display title in the card (up to two lines), then the bar's inline title |
-| `status` | string[] | `[]` | Footnote lines under the name: "Open till 6pm · Blythe Road · 2 min walk", "Made to order · 2 days' notice" |
+| `facts` | ShopFacts | none | Under the name, as ShopMeta draws them: the status on its own line ("Open until 6pm"), then the walk and the street as icon-led units |
 | `photos` | `ShopPhoto[]` | `[]` | Up to three: `source`, `label` ("Rossi's Bakery shopfront, Blythe Road"); they fill the PhotoCarousel, and a tap opens the Lightbox |
-| `promoted` | boolean | `false` | A paid placement: a "Promoted" footnote line under the status lines |
-| `accent` | ShopAccentName | none | The shop's accent: its tile step fills the whole card (edge to edge once the card fills the screen) and the bar's scroll edge, with the sections' Card rows on it under the delicate shadow, and it is the tonal tile under each photo |
+| `accent` | ShopAccentName | none | The shop's accent, in details only: the chips (tile fill, plus a `detail` edge in dark), the map pin and the tonal tile under each photo. The card is `shopPage.card` (a warm grey, Biscuit 915, in light; the Sheet colour in dark with a 1 pt `cardEdge` along its top), solid; rows on it are `shopPage.row` (Card white) with a 1 pt `shopPage.rowEdge` hairline in light and Muted in dark, with no shadow |
 | `onBack` | function | required | Back in the top left; the page is the shop's detail, pushed with Back and the back gesture |
 | `backLabel` | string | none | The previous screen's title ("Nearby"), beside the chevron once the bar fills |
 | `mapLoading` | boolean | `false` | Map ground alone |
@@ -23,12 +22,12 @@ The shop page's frame: the map, the photo carousel, the content card and the nav
 - The map fills the whole screen behind everything, with the pin halfway between the bar and the card's resting edge (Map's `extent`).
 - Back over the map is a glass circle with the chevron (iOS) or arrow (Android); once the bar fills it becomes the plain Back with the previous title.
 - The map's pin sits in the band under the bar; the PhotoCarousel follows at the content width, `space.2` above the card, and scrolls with the content.
-- The card rests `space.2` under the carousel, inset from the screen edges by the screen margin (16, or 20 on wide phones), in the shop's accent tile with `radius.card` top corners and `space.6` padding at the top; the map shows at its sides.
+- The card rests `space.2` under the carousel, inset from the screen edges by the screen margin (16, or 20 on wide phones), in the neutral Sheet colour with `radius.card` top corners, `space.5` padding at the sides and `space.6` at the top; the map shows at its sides.
 - The content inside sits at the screen margin plus `inset.card` from the screen edge at every scroll position, so it never moves sideways or reflows.
 
 ## Scroll
 
-The content's sides follow the card's edges: as the card grows from inset to the full width, the content grows with it and the padding inside the card stays `inset.card` (animated on the UI thread; the text reflows over the first bar-height of scroll). The tag and action rows bleed to the card's edges.
+The text keeps its width at rest, so line breaks never change: the card's surface and the margin around the text grow from inset to the full width, and the padding inside the card visually increases without reflowing the text. The tag and action rows are clipped to the card's edges, which an animated clip and offset follow (UI thread), so their first chip stays under the text's left edge.
 
 
 1. Resting: the inset card sits over the map. As the scroll starts, over the first bar-height of travel, the card grows to the full width (inset to 0) and its top corners go from `radius.card` to `radius.sheet`, covering the map at its sides; the title moves up with the card. Under Reduce Motion it jumps between the inset and the full-width card.
@@ -45,4 +44,4 @@ Same layout. The bar is the iOS navigation bar with the hide-on-swipe behaviour 
 
 ## Accessibility
 
-Reading order: Back ("Back to Nearby"), name, status lines, then the screen's content; the photos are buttons read as "[Shop] shopfront, [street], 1 of 3". The map is hidden from screen readers.
+Reading order: Back ("Back to Nearby"), name, facts, then the screen's content; the photos are buttons read as "[Shop] shopfront, [street], 1 of 3". The map is hidden from screen readers.

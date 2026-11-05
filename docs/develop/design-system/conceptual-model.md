@@ -84,14 +84,14 @@ The shop page shows two signals under separate headings, so the shopper can tell
 
 | Signal | Source | Shown as |
 | --- | --- | --- |
-| Ratings | Ratings on collected and delivered orders | "92% would go back · 38 buyers" and the count of each tag. Below 5 ratings, tags only: "New on Snuffle · 3 buyers so far" |
+| Ratings | Ratings on collected and delivered orders | "92%" with "would go back" and "38 people", and the count of each tag; each note shows the person's first name and the month, never a surname or photo, and "You" on the shopper's own. Below 5 ratings, tags only: "New on Snuffle" and "3 people so far" |
 | How they do on Snuffle: answer rate | Answers | "Answers 9 in 10 requests" |
 | How they do on Snuffle: stock accuracy | Answers and orders | "Had it 24 of 25 times when they said yes", only after 10 "has it" answers; before that, "New on Snuffle" with the answer rate and reply time |
 | How they do on Snuffle: reply time | Answers | "Usually replies in 6 min"; a connected shop shows "Stock from the till" |
 
-What the shop sells is a third attribute of the shop. A connected shop's comes from its till's categories and best sellers; an asked shop's from its past "Had it" answers and its kind. It shows as category chips, each opening Ask with the category filled in, a price line ("Most items £2–£35 · from past answers", or "· from the shop's till"). Items still have no page. Below it, "Found here recently" lists three to five item names that shoppers found at the shop, summarising its "Had it" answers by name only: nothing to press, no buyer and no price, with a line that says where they come from. The per-answer "Had it · 2 hours ago" rows stay in the chat.
+What the shop sells is a third attribute of the shop. A connected shop's comes from its till's categories and best sellers; an asked shop's from its past "Had it" answers and its kind. It shows as category chips, each opening Ask with the category filled in, a price line ("Most items £2–£35, from past answers", or "from the shop's till"). Items still have no page. Below it, "Found here recently" lists three to five item names that shoppers found at the shop, summarising its "Had it" answers by name only: nothing to press, no buyer and no price, with a line that says where they come from. The per-answer "Had it, 2 hours ago" rows stay in the chat. Each name in the list shows when it was last found ("Yesterday", "2 days ago"), as plain text at the end of its row.
 
-The shop page runs in this order: header and actions, What they sell, Found here recently, Ratings, How they do on Snuffle, How it works.
+The shop page runs in this order: header and actions, What they sell, Found here recently, How it works, Ratings, How they do on Snuffle.
 
 A shop sees its own signals and can dispute a specific case, such as a "Not ready when I came" on an order it set aside on time. The shop has no interface, so this is mapped in the shop's request states.
 
@@ -124,7 +124,9 @@ Choosing a place or a radius reloads Nearby. The active place changes only from 
 | Answer | "Asked" → "Seen" → "Has it", "Has 1 of 2", "Has something similar", "Doesn't have it" or "No reply"; from a till: "In stock now" or "In stock now · 1 of 2", followed by "· from the shop's till" (in compact rows the flash symbol replaces it, and "In stock now · 1 of 2" shortens to "In stock · 1 of 2"); made to order: "Can make it · [notice]" ("Can make it · 2 days' notice"); on a shop page, past answers: "Had it · [when]", "Didn't have it · [when]" |
 | Order, collect | "Waiting for [shop] · not charged yet" → "Ready · collect by Mon 9 Nov" → "Extended · collect by Mon 16 Nov" → "Collected" → "Collected · rate [shop]" until the buyer rates (then "Collected · rated") or the 30 days end; endings: "Not confirmed · not charged", "Sold · not charged", "Cancelled · refunded", "Not collected · refunded". After a partial buy the card adds a line, "Keep looking for [n] more" |
 | Order, delivery | "Waiting for [shop] · not charged yet" → "Paid" → "On its way" → "Delivered", followed by Snuffle's bubble "How was [shop]?" with a Rate chip. A failed payment creates no order; the request keeps its label |
-| Shop | "Open till 7pm", "Closes soon", "Closed · opens 9am"; on its page, by ratings: "No ratings yet · Snuffle has asked them 4 times", "New on Snuffle · 3 buyers so far" (below 5), "92% would go back · 38 buyers" |
+| Shop | "Open until 7pm", "Closes soon", "Closed, opens 9am"; on its page, by ratings: "No ratings yet" with "Snuffle has asked them 4 times", "New on Snuffle" with "3 people so far" (below 5), "92%" with "would go back" and "38 people" |
+
+The dot in a label ("Ready · collect by Mon 9 Nov") only marks where the status ends and its detail begins. The interface draws the two in different weights and colours and never shows the dot (Metadata lines on the [Content](content.md) page).
 
 ## Words
 
@@ -134,7 +136,7 @@ Choosing a place or a radius reloads Nearby. The active place changes only from 
 | What the shopper asked | request | request | errand, search, saved request |
 | A shop's reply | answer, "replied" | answer | offer, result, quote |
 | The seller | shop | shop; connected shop, asked shop | store, merchant, retailer |
-| Paying | Buy, "Buy · £29.98" | buy | hold, reserve, order as a verb |
+| Paying | Buy, "Buy for £29.98" | buy | hold, reserve, order as a verb |
 | What was bought | order | order | purchase, booking, hold |
 | The shop's step | sets aside | set aside | keeps, holds, puts aside |
 | The collection window | "Collect by Mon 9 Nov", with the length once before Buy ("7 days") | collection window | pickup, hold for |

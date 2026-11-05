@@ -6,8 +6,8 @@
 // critique 2). Every scroll-driven value runs in a Reanimated scroll handler on the UI thread. A tap on a photo opens
 // the Lightbox, which grows from it.
 import { memo, useId, useState, type ReactNode } from 'react';
-import { Platform, ScrollView, View } from 'react-native';
-import Animated, { Extrapolation, interpolate, useAnimatedStyle, useReducedMotion } from 'react-native-reanimated';
+import { Platform, ScrollView, View, type ViewStyle } from 'react-native';
+import Animated, { type AnimatedStyle, Extrapolation, interpolate, useAnimatedStyle, useReducedMotion } from 'react-native-reanimated';
 import { useSafeAreaFrame } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
@@ -17,6 +17,7 @@ import { Map } from '../Map/Map';
 import { NavBar, useNavBarHeight, useNavBarScroll } from '../NavBar/NavBar';
 import { Lightbox } from '../Lightbox/Lightbox';
 import { PhotoCarousel, carouselHeight, type ShopPhoto } from '../PhotoCarousel/PhotoCarousel';
+import { ShopMeta, type ShopFacts } from '../ShopMeta/ShopMeta';
 import { Text } from '../Text/Text';
 
 // The card's two halves overlap by a pixel more than they need to, so no seam shows where they meet.
@@ -35,23 +36,20 @@ export type ShopPageLayoutProps = {
   backLabel?: string;
   /** The map ground alone while the shop's place is loading. */
   mapLoading?: boolean;
-  /** Lines under the name: "Open till 6pm · Blythe Road · 2 min walk", "Made to order · 2 days' notice". */
-  status?: string[];
+  /** Under the name: the status on its own line ("Open until 6pm"), then the walk and the street as icon-led units (content.md, Metadata lines). */
+  facts?: ShopFacts;
   /** Ask, Call and Directions, right under the status lines: one row of capsule buttons that scrolls sideways. */
   actions?: ReactNode;
-  /** The shop is a paid placement: "· Promoted" ends the first status line, after the walk time. */
-  promoted?: boolean;
-  /** Badges and status tags (New, Delivers): one row that scrolls sideways, under the name. */
+  /** Badges (Promoted, New, Delivers): one row that scrolls sideways, under the facts. */
   tags?: ReactNode;
-  /** The shop's accent (colour.md, Shop accents): its tile step is the whole card's ground, under the name, the
-   *  status, the actions and every section, edge to edge once the card fills the screen, and the bar's scroll edge
-   *  takes it too; it is also the tonal tile under each photo. Without one the card is the Background. */
+  /** The shop's accent (colour.md, Shop accents). The card is neutral (a warm grey in both modes); the accent shows only in small
+   *  details: the chips, the map pin, and the tonal tile under each photo. */
   accent?: ShopAccentName;
   /** The rest of the card: past answers, how the shop works. */
   children: ReactNode;
 };
 
-export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], onBack, backLabel, mapLoading = false, status = [], promoted = false, actions, tags, accent, children }: ShopPageLayoutProps) {
+export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], onBack, backLabel, mapLoading = false, facts, actions, tags, accent, children }: ShopPageLayoutProps) {
   const { theme } = useUnistyles();
   const frame = useSafeAreaFrame();
   const navH = useNavBarHeight();
@@ -96,13 +94,17 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
     const s = surface(scrollY.get());
     return { transform: [{ translateX: -s.x }, { translateY: s.y }], borderTopRightRadius: s.r };
   });
-  // The content's sides follow the card's edges, so the padding inside the card stays inset.card while the card
-  // grows to the full width (the text reflows with it, on the UI thread).
-  const pad = theme.space[5];
-  const innerStyle = useAnimatedStyle(() => {
-    const s = surface(scrollY.get());
-    return { paddingLeft: s.x + pad, paddingRight: s.x + pad };
+  // The text keeps the width it has at rest (the screen margin plus the card's padding on each side), so its line
+  // breaks never change while the card grows: only the surface and the margin around the text grow. The Rails, which
+  // scroll sideways and bleed to the card's edges, follow the surface's edges instead.
+  const pad = theme.space[6];
+  const side = margin + pad;
+  const railClip = useAnimatedStyle(() => {
+    const x = surface(scrollY.get()).x;
+    return { marginLeft: x - side, marginRight: x - side };
   });
+  const railShift = useAnimatedStyle(() => ({ marginLeft: -surface(scrollY.get()).x }));
+  const railStyles = { clip: railClip, shift: railShift, side, width: frame.width };
   // The photo the Lightbox is open on, or null while it is closed; the carousel follows it.
   const [viewer, setViewer] = useState<number | null>(null);
   const [page, setPage] = useState(0);
@@ -113,6 +115,7 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
       <View style={styles.map}>
         <Map
           loading={mapLoading}
+          accent={accent}
           extent={{ width: frame.width, height: frame.height, pinY: (navH + carouselTop) / 2, attributionY: hasPhotos ? carouselTop - theme.space[5] : undefined }}
         />
       </View>
@@ -141,30 +144,30 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
 
         {/* Tall enough for the title to pass under the bar and for the bar to hide, however short the content. */}
         <View style={styles.card(frame.height - restTop + revealAt + navH)}>
-          <Animated.View pointerEvents="none" style={[styles.half(navH, frame.height, frame.width / 2 + margin + SEAM, 'left', accent), leftStyle]} />
-          <Animated.View pointerEvents="none" style={[styles.half(navH, frame.height, frame.width / 2 + margin + SEAM, 'right', accent), rightStyle]} />
-          <Animated.View style={[styles.inner, innerStyle]}>
+          <Animated.View pointerEvents="none" style={[styles.half(navH, frame.height, frame.width / 2 + margin + SEAM, 'left'), leftStyle]} />
+          <Animated.View pointerEvents="none" style={[styles.half(navH, frame.height, frame.width / 2 + margin + SEAM, 'right'), rightStyle]} />
+          <View style={styles.inner(side)}>
             <View style={styles.top}>
               <View style={styles.header}>
                 <Text variant="displayTitle" accessibilityRole="header" numberOfLines={2}>
                   {name}
                 </Text>
-                {status.map((line, i) => (
-                  <Text key={line} variant="footnote" color="mutedForeground">
-                    {promoted && i === 0 ? `${line} · Promoted` : line}
-                  </Text>
-                ))}
+                {facts ? <ShopMeta layout="stacked" size="subheadline" {...facts} /> : null}
               </View>
-              {tags ? <Rail label={`${name} tags`}>{tags}</Rail> : null}
-              {/* On the accent tile, tonal actions take the white overlay (state.tonalOnTile), not Muted. */}
+              {tags ? <Rail label={`${name} tags`} rail={railStyles}>{tags}</Rail> : null}
+              {/* The tonal actions take the white overlay (state.tonalOnTile) in both modes: Muted is the card's own grey in light
+                  and 1.05:1 on it in dark. */}
               {actions ? (
-                <Ground value={accent ? 'tile' : 'background'}>
-                  <Rail label={`${name} actions`}>{actions}</Rail>
+                <Ground value="tile">
+                  <Rail label={`${name} actions`} rail={railStyles}>{actions}</Rail>
                 </Ground>
               ) : null}
             </View>
-            <View style={styles.body}>{children}</View>
-          </Animated.View>
+            {/* Rows and chips step away from the card (Card white with a hairline in light, Muted in dark); the chips take the accent. */}
+            <Ground value="shop" accent={accent}>
+              <View style={styles.body}>{children}</View>
+            </Ground>
+          </View>
         </View>
       </Animated.ScrollView>
 
@@ -186,7 +189,7 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
         title={name}
         mode="reveal"
         revealAt={revealAt}
-        fill={accent ? { accent } : 'background'}
+        fill="shopPage"
         leading="back"
         backLabel={backLabel}
         onLeading={onBack}
@@ -196,12 +199,19 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
   );
 });
 
-/** A row that scrolls sideways and bleeds to the card's edges, so a long row never wraps or stacks. */
-function Rail({ label, children }: { label: string; children: ReactNode }) {
+type RailStyles = { clip: AnimatedStyle<ViewStyle>; shift: AnimatedStyle<ViewStyle>; side: number; width: number };
+
+/** A row that scrolls sideways and bleeds to the card's edges, so a long row never wraps or stacks. It is clipped to the
+ *  card's edges (the animated `clip`) and holds a full-screen-wide scroller, so its chips stay where the text is. */
+function Rail({ label, rail, children }: { label: string; rail: RailStyles; children: ReactNode }) {
   return (
-    <ScrollView horizontal showsHorizontalScrollIndicator={false} accessibilityLabel={label} style={styles.rail} contentContainerStyle={styles.railContent}>
-      {children}
-    </ScrollView>
+    <Animated.View style={[styles.rail, rail.clip]}>
+      <Animated.View style={[styles.railScroll(rail.width), rail.shift]}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} accessibilityLabel={label} contentContainerStyle={styles.railContent(rail.side)}>
+          {children}
+        </ScrollView>
+      </Animated.View>
+    </Animated.View>
   );
 }
 
@@ -215,7 +225,7 @@ const styles = StyleSheet.create((theme) => ({
   // Each half of the card's surface reaches a bar-height above the card and, on native, well below it to cover a
   // bounce at the bottom; it is moved, never resized. On the web an absolute child counts towards the scroll
   // height, so there it ends with the card (the web has no bounce to cover).
-  half: (navH: number, height: number, width: number, side: 'left' | 'right', accent?: ShopAccentName) => ({
+  half: (navH: number, height: number, width: number, side: 'left' | 'right') => ({
     ...cornerCurve,
     position: 'absolute',
     top: -navH,
@@ -223,19 +233,24 @@ const styles = StyleSheet.create((theme) => ({
     [side]: 0,
     width,
     overflow: 'hidden',
-    // The card is the shop's accent tile in full (or the Background without one); its rows sit on Card under the
-    // delicate shadow (craft-pass-2). Foreground and Muted foreground keep 4.6:1 or more on every tile, light and dark.
-    backgroundColor: accent ? theme.color.shop.accent[accent].tile : theme.color.background,
+    // The card is a warm grey in light (Biscuit 915) and the Sheet colour in dark (shopPage.card); the rows step one level up
+    // (Card white with a hairline in light, Muted in dark). A 1 pt top edge in dark lifts the card off the map.
+    backgroundColor: theme.color.shopPage.card,
+    borderTopWidth: 1,
+    borderTopColor: theme.color.shopPage.cardEdge,
   }),
-  // The sides are animated with the card's edges (innerStyle); padding inside the card is 20 (space.5) throughout.
-  inner: {
+  // The text's width is fixed at its width at rest: the screen margin plus space.6 on each side.
+  inner: (side: number) => ({
     paddingTop: theme.space[6],
     paddingBottom: theme.space[8],
-  },
+    paddingHorizontal: side,
+  }),
   // The first section heading sits a section's distance below the actions (spacing.md).
   top: { gap: theme.space[3] },
   body: { paddingTop: theme.gap.section, gap: theme.gap.section },
-  rail: { marginHorizontal: -theme.space[5], flexGrow: 0 },
-  railContent: { paddingHorizontal: theme.space[5], gap: theme.space[2], alignItems: 'center' },
-  header: { gap: theme.space[1] },
+  rail: { flexGrow: 0, overflow: 'hidden' },
+  // The scroller is as wide as the screen and starts at its left edge, whatever the clip's edge is.
+  railScroll: (width: number) => ({ width }),
+  railContent: (side: number) => ({ paddingHorizontal: side, gap: theme.space[2], alignItems: 'center' }),
+  header: { gap: theme.space[2] },
 }));

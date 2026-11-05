@@ -14,10 +14,12 @@ Call:
 - I chose 12-hour times in all copy, including timestamps, and kept these rules provisional (decision 043).
 - Later I asked for ratings on the shop page. I chose a thumbs up or down over stars and a dispute for shops, and set the rules from the DMCC Act and the CMA's fake reviews guidance (decision 047).
 - In round 10 I asked for the Requests list to carry Snuffle's latest status in its own voice for every state, with no dots, icons or button in the row.
+- In round 11 I said the metadata lines joined with floating dots looked generic, and asked for facts told apart by weight, colour, icon and position instead. I asked for the ratings section to open with one large figure, then tags, three notes with a first name and date, and "See all", and for "Found here recently" to become a short list.
 AI:
 - An agent reviewed the design system against the v7 screens and found the time formats mixed (24-hour timestamps beside "by 4pm"). Another agent wrote this page from the v7 copy and the conceptual model.
 - An agent read Schedule 20 of the DMCC Act 2024 and the CMA's guidance (CMA208) and turned each duty into a rule for Snuffle's screens.
 - An agent wrote a preview line for each request and order state in the conceptual model and moved the preview into one function in the store.
+- An agent compared how Airbnb, Apple Maps, Google Maps and Uber Eats group their facts, built one component for a shop's status, walk and street, and rewrote every dot-joined string it found in the app; Mobbin was blocked, so what it recalled of other apps is guidance, not evidence.
 Trade-offs:
 - 12-hour times match how people in the UK say them and GOV.UK's style, and take a little more width than 24-hour times in rows.
 - A plain, unapologetic voice can read as cold when something fails; saying the money state first is meant to carry the care instead.
@@ -90,21 +92,40 @@ Every message after something goes wrong, or after an order ends, has three part
 
 ## Button labels
 
-Buttons are verbs from the conceptual model, in sentence case, with what they act on when it helps: Buy, "Buy 1", "Buy · £29.98", Ask, "Ask Rossi's", Extend, "Extend to Mon 16 Nov", "Cancel for a refund", "Keep looking", "Try again", "Show me", "No thanks", Call, Rate. Directions keeps the platform's usual noun. A button never says OK, Submit or Continue when a verb from the model fits.
+Buttons are verbs from the conceptual model, in sentence case, with what they act on when it helps: Buy, "Buy 1", "Buy for £29.98", Ask, "Ask Rossi's", Extend, "Extend to Mon 16 Nov", "Cancel for a refund", "Keep looking", "Try again", "Show me", "No thanks", Call, Rate. Directions keeps the platform's usual noun. A button never says OK, Submit or Continue when a verb from the model fits.
+
+## Metadata lines
+
+Facts about a shop or a request are told apart by weight, colour, icon and position. A floating dot between them reads as filler and makes the line hard to scan.
+
+| Rule | In practice | Never |
+| --- | --- | --- |
+| Status first, in its own colour | "Open" in Success or "Closes soon" in Warning, then its time in Muted foreground: "Open until 6pm". A closed shop reads "Closed, opens 9am" | "Open till 6pm · Blythe Road · 2 min walk" |
+| One group per kind of fact | The walk is a footprints symbol with "2 min walk", the street a pin with "Blythe Road"; each group is one unit | A string of facts joined with dots |
+| Units stay whole | Non-breaking spaces inside a group ("2 min walk", "until 6pm"); a line breaks only between groups, on two lines at most | A break between "2 min" and "walk" |
+| The shop page header | Line 1 the status, line 2 the walk and the street; Promoted is a tag under the facts; the lead time ("Made to order", "2 days' notice") is a row in How it works | The lead time or "Promoted" inside a facts line |
+| Rows and tiles | The status and the walk time with its symbol; the street only where nothing else on the screen names it | The street repeated under a street filter |
+| Request rows | A status tag ("Needs you"), the deadline as its own text ("Buy by Thu 5 Nov"), the count as the trailing badge | "Needs you · by Tuesday", "Needs you · 1" |
+| Filter counts | The count after the label in Muted foreground: "Needs you 1" | A dot before the count |
+| Details and endings | A comma or a new sentence: "Collect by Mon 9 Nov. Full refund if you don't", "In stock now, 1 of 2" | A dot between clauses |
+| Where a dot stays | A plain list of countable facts of one kind, as Airbnb writes "2 beds · 1 bath"; the prototype has no such list, so the app has no dots; a button that carries its amount says "Buy for £29.98" | A dot between a status and its detail, or between unlike facts |
+
+The state table's labels keep their dot in the source as the place where the status ends and its detail begins. The status label draws the two in different weights and colours and never shows the dot.
 
 ## Ratings
 
 | Rule | In practice | Never |
 | --- | --- | --- |
 | One question | "Would you go back?", answered with a thumbs up or down | Stars, scores out of 10, "How satisfied were you?" |
-| A percentage of buyers | "92% would go back · 38 buyers"; the count always beside the figure | "4.6", "9.2/10", a figure without its count |
+| A percentage of people | "92%" large, with "would go back" and "38 people" beside it; the count always beside the figure | "4.6", "9.2/10", a figure without its count |
 | Never round up | 91.7% shows as "91%"; counts stay as counts ("Had it 24 of 25 times when they said yes") | "92%" for 91.7%, "100%" for 24 of 25 |
-| Few ratings | Below 5, tags and Snuffle's signals with "New on Snuffle · 3 buyers so far"; none: "No ratings yet · Snuffle has asked them 4 times" | A percentage from 3 buyers |
-| Buyers | "buyers", "38 buyers" | customers, reviewers, users |
+| Few ratings | Below 5, tags and Snuffle's signals with "New on Snuffle" and "3 people so far"; none: "No ratings yet" and "Snuffle has asked them 4 times" | A percentage from 3 people |
+| People | "38 people" for the count; "buyers" where the rule is about who can rate | customers, reviewers, users |
+| First names | A note shows the person's first name with the month ("Priya", "Oct 2026"); the shopper's own note says "You" | Surnames, photos, avatars, the type of purchase |
 | Plain verdicts | "Would go back", "Wouldn't go back" and the fixed tags | "Excellent!", "Top rated", "Highly recommended" |
 | Source on every signal | "What buyers said", "What Snuffle saw", "from 31 requests on Snuffle", "from the shop's till" | "verified", "trusted", "guaranteed" |
 | Dates by month | "Oct 2026", "Edited Oct 2026" | "3 weeks ago", "12/10/2026" |
-| One element per row | Each signal is one row with a full label: "Would go back, 92 percent of 38 buyers"; colour and the thumbs glyph never carry the meaning alone | A green or red figure with no words |
+| One element per row | Each signal is one row with a full label: "Would go back, 92 percent of 38 people"; colour and the thumbs glyph never carry the meaning alone | A green or red figure with no words |
 
 ## Rules on reviews
 

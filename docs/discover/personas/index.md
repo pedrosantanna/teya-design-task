@@ -54,8 +54,8 @@ The names are common British first names, short and easy to tell apart, and the 
 name: Sam, the mission shopper
 tagline: Needs a specific thing, often by a deadline, and can't find out who has it.
 image: img/sam.jpg
-credit: Photo: Raymond Okoro, Unsplash
-credit_url: https://unsplash.com/photos/man-in-coat-uses-phone-outside-a-building-20RwJn43ixM
+credit: Photo: Beatriz Cattel, Unsplash
+credit_url: https://unsplash.com/photos/young-man-in-a-light-blue-collared-shirt-smiling-az3QxXQ7Fqc
 - Where: Lives or works in West London
 - Asks: Reddit, WhatsApp groups, AI chatbots
 - Buys locally: A specific item, at short notice
@@ -91,8 +91,8 @@ status: verified
 name: Jess, the lapsed local
 tagline: Would use local shops if they fitted her week. They don't, so she's stopped.
 image: img/jess.jpg
-credit: Photo: Louis Zhang, Unsplash
-credit_url: https://unsplash.com/photos/a-woman-sitting-in-a-train-looking-out-the-window-8czqNBTRcXI
+credit: Photo: Jake Nackos, Unsplash
+credit_url: https://unsplash.com/photos/IF9TK5Uy-KI
 - Where: London and elsewhere in the UK
 - Week: At work during the hours the shops are open
 - Pays: Card or phone, no cash
@@ -130,8 +130,8 @@ status: verified
 name: Ruth, the regular
 tagline: Keeps shopping locally while her shops close.
 image: img/ruth.jpg
-credit: Photo: Centre for Ageing Better, Unsplash
-credit_url: https://unsplash.com/photos/elderly-woman-smiling-in-a-room-filled-with-clothes-UZCqtOcY8b4
+credit: Photo: Vitaly Gariev, Unsplash
+credit_url: https://unsplash.com/photos/elderly-woman-smiling-in-a-living-room-IihDS3WZGlY
 - Where: Mostly West London: Kew, Ealing, Hammersmith
 - Age: Probably 50 or over | desk research
 - Routine: Weekly butcher, newsagent post-office counter

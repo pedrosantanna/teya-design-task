@@ -9,12 +9,12 @@ import { Button } from './Button';
 export function ButtonExamples() {
   return (
     <View style={styles.list}>
-      <Button label="Buy · £29.98" accessibilityLabel="Buy, £29.98" />
+      <Button label="Buy for £29.98" accessibilityLabel="Buy, £29.98" />
       <Button label="Keep looking" role="tonal" />
       <Button label="Directions" role="plain" icon={ArrowRight01Icon} />
       <Button label="Cancel for a refund" role="destructive" />
-      <Button label="Buy · £29.98" loading />
-      <Button label="Buy · £29.98" disabled />
+      <Button label="Buy for £29.98" loading />
+      <Button label="Buy for £29.98" disabled />
       <View style={styles.row}>
         <Button label="Buy at Rossi's" size="compact" />
         <Button label="Ask" size="compact" role="tonal" icon={BubbleChatIcon} />

@@ -1,9 +1,8 @@
-// The top of "What buyers say" on the shop page (change shop-ratings-and-range): the share of buyers who would go back
-// and how many rated ("92% would go back · 38 buyers"), or the count alone below 5 ratings ("3 buyers so far"), then the
-// tags buyers picked, with counts, as plain text: nothing happens on tap, so they don't look like filter chips
-// (visual critique 3). Thumbs, never stars. One element for screen readers.
+// The top of Ratings on the shop page (change shop-ratings-and-range): the share of people who would go back as a large
+// figure, with "would go back" and how many rated beside it, or the count alone below 5 ratings ("3 people so far"),
+// then the tags people picked, with counts, as a wrapping group of chips that do nothing on tap (content.md, Ratings).
+// Thumbs, never stars. One element for screen readers.
 import ThumbsDownIcon from '@hugeicons/core-free-icons/ThumbsDownIcon';
-import ThumbsUpIcon from '@hugeicons/core-free-icons/ThumbsUpIcon';
 import { memo } from 'react';
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
@@ -14,38 +13,46 @@ import { Text } from '../Text/Text';
 export type RatingSummaryTag = { tag: string; count: number; up: boolean };
 
 export type RatingSummaryProps = {
-  /** "Would you go back?", a footnote above the title: the one question buyers answer. */
-  question?: string;
-  /** "92% would go back", or "3 buyers so far" below 5 ratings. */
-  title: string;
-  /** "38 buyers", after the title; none below 5 ratings. */
+  /** "92%", the share who would go back; set only from 5 ratings, and then `title` is not shown. */
+  figure?: string;
+  /** "would go back", beside the figure. */
+  caption?: string;
+  /** "3 people so far" or "No ratings yet", in place of a figure. */
+  title?: string;
+  /** "48 people" under the caption; under the title when there is no figure. */
   detail?: string;
-  /** "Would go back, 92 percent of 38 buyers". */
+  /** "Would go back, 92 percent of 48 people". */
   accessibilityLabel: string;
   /** Tags with their counts, most common first; thumbs-down tags carry their symbol. */
   tags?: RatingSummaryTag[];
-  /** With a share shown, the thumbs-up symbol leads the title. */
-  hasShare?: boolean;
 };
 
-export const RatingSummary = memo(function RatingSummary({ question, title, detail, accessibilityLabel, tags = [], hasShare = false }: RatingSummaryProps) {
+export const RatingSummary = memo(function RatingSummary({ figure, caption, title, detail, accessibilityLabel, tags = [] }: RatingSummaryProps) {
   const spokenTags = tags.map((t) => `${t.tag}, ${t.count}`).join('; ');
   return (
     <View accessible accessibilityLabel={spokenTags ? `${accessibilityLabel}. ${spokenTags}` : accessibilityLabel} style={styles.root}>
-      {question ? (
-        <Text variant="footnote" color="mutedForeground">
-          {question}
-        </Text>
-      ) : null}
-      <View style={styles.head}>
-        {hasShare ? <Icon icon={ThumbsUpIcon} size="title3" color="foreground" /> : null}
-        <View style={styles.grow}>
-          <Text variant="title3">
-            {title}
-            {detail ? <Text variant="subheadline" color="mutedForeground">{` · ${detail}`}</Text> : null}
-          </Text>
+      {figure ? (
+        <View style={styles.head}>
+          <Text variant="displayTitle">{figure}</Text>
+          <View style={styles.words}>
+            {caption ? <Text variant="body">{caption}</Text> : null}
+            {detail ? (
+              <Text variant="subheadline" color="mutedForeground">
+                {detail}
+              </Text>
+            ) : null}
+          </View>
         </View>
-      </View>
+      ) : (
+        <View style={styles.words}>
+          <Text variant="title3">{title ?? ''}</Text>
+          {detail ? (
+            <Text variant="subheadline" color="mutedForeground">
+              {detail}
+            </Text>
+          ) : null}
+        </View>
+      )}
       {tags.length > 0 ? (
         <View style={styles.tags}>
           {tags.map((t) => (
@@ -65,9 +72,20 @@ export const RatingSummary = memo(function RatingSummary({ question, title, deta
 
 const styles = StyleSheet.create((theme) => ({
   root: { gap: theme.gap.block },
-  head: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2] },
-  grow: { flex: 1 },
-  // Plain text, no capsule: a tag is a count, not a control (visual critique 3).
-  tags: { flexDirection: 'row', flexWrap: 'wrap', columnGap: theme.space[4], rowGap: theme.space[1] },
-  tag: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1] },
+  head: { flexDirection: 'row', alignItems: 'center', gap: theme.space[3] },
+  words: { flexShrink: 1 },
+  // Chips that only inform: Background with a 1 pt Border edge, a level down from the row (Background on Card in light,
+  // the Muted row in dark), never a control's fill.
+  tags: { flexDirection: 'row', flexWrap: 'wrap', gap: theme.space[2] },
+  tag: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.space[1],
+    height: theme.size.chip,
+    paddingHorizontal: theme.space[3] - theme.size.edge.control,
+    borderRadius: theme.radius.full,
+    borderWidth: theme.size.edge.control,
+    borderColor: theme.color.border,
+    backgroundColor: theme.color.background,
+  },
 }));

@@ -404,7 +404,7 @@ A selected filter chip is Card with its label in Indigo 800 at 600 and a 1.5 pt 
 **Open:** the dark Category ground (the whole screen in the kind's tile) is still to decide. Tonal Indigo (`chipSelected`) stays on the order card's current step, the rating sheet's thumbs and Android's segmented button.
 
 ## 050 · Lighter tinted rows on the dark Category screen; Requests after the field
-**2026-11-04 · Decided**
+**2026-11-04 · Decided · the Requests placement reversed by 055**
 
 In dark mode the Category screen keeps the kind's full tile as its ground, and the shop rows on it are a tinted card lighter than the tile: OKLCH L 0.44, C 0.03 at the accent's hue (`shop.accent.<hue>.cardOnTile`: Peach #624D47, Pistachio #4B5646, Butter #595240, Lavender #534F62), 1.37 to 1.51:1 over the tile. The rows' meta line and chevron take Stone 840 (#CECAC6, `mutedForegroundOnTile`), 4.74:1 or more on every card, because Stone 740 measured 3.35 to 3.42:1 there. Light mode keeps white Card rows. On Nearby's ask bar the Requests circle moves from before the Ask capsule to after it, at the trailing end, with its count.
 
@@ -446,6 +446,23 @@ Scripted test users built from Sam's and Jess's goals drive the web build throug
 
 **Why:** they find functional and usability breaks quickly and repeatably, in the persona's own terms. NN/g and recent papers warn that simulated users are over-optimistic and homogeneous, so I keep them out of research: they don't validate demand, don't stand in for shoppers or shopkeepers, and don't replace the proof of concept.
 **Open:** nothing from the first run; an agent fixed its breaks and the second run reached every goal. Three targets are still under 44 pt on the web.
+
+## 055 · A neutral shop page, a filled chat field, Requests back on the left
+**2026-11-05 · Decided**
+
+The shop page no longer takes the shop's tile colour as its ground: the page and the shop card are neutral, the card's padding grows from 20 to 24, and the shop's accent shows only in small details (the chips and the pin). In light the card is white, with its rows a step down, as Airbnb does. The map takes the Snuffle palette. The card stays solid; glass stays on Back and the pinned bar. In the chat, the composer becomes a filled field with a hairline instead of white glass on a white ground. On Nearby's ask bar the Requests circle goes back before the field, which reverses decision 050's placement.
+
+**Why:** a pastel used as the ground of a whole screen is the brightest thing in dark mode, inverts the elevation order and puts dark text on light islands; small accents in the light tone are fine on dark, as Material's dark-theme guidance recommends. Apple keeps Liquid Glass for the control layer, so a content card in glass would make its text depend on the map behind it. The glass composer measured about 1.0:1 against the white chat. On the right, the Requests circle sat 8 pt from the mic where the thumb rests, which invites wrong taps; on the left it lines up with Back.
+**Open:** whether the Category screen keeps its full colour.
+
+## 056 · Facts without floating dots, first names on reviews
+**2026-11-05 · Decided**
+
+Metadata lines no longer join facts with middle dots. A status word carries its colour ("Open" in the success colour, its time in Muted), the walk and the street are groups with an icon, units never break ("12 min walk"), lines wrap only between groups, and "Promoted" is a tag. Request rows show a "Needs you" tag with the deadline beside it. The shop card is a warm grey (Biscuit 915) whose text keeps its line breaks when the card widens. Reviews show the reviewer's first name and the month, never a surname, photo or how the order was handed over. The ratings section runs: the share who would go back, the top tags, three reviews, then "See all". Found here recently is a short list of up to five names with how long ago. How it works comes right after Found here recently.
+
+**Why:** the dotted lines read as generic; the best place pages (Apple Maps, Google Maps, Airbnb) separate facts by weight, colour and icons and keep dots for plain countable lists. A first name makes a review read as a person's without exposing them. A carousel of names without photos would only add a scroll.
+The buy button says "Buy for £29.98".
+**Open:** whether the count reads "people" or "buyers".
 
 ## Still open
 

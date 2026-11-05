@@ -89,7 +89,7 @@ export const RatingSheet = memo(function RatingSheet({
       ) : null}
       {up != null ? (
         <View style={styles.group}>
-          <TextField multiline value={note} onChangeText={onNote} maxLength={noteMax} label="Anything to add?" placeholder={`Optional · ${noteMax} characters`} />
+          <TextField multiline value={note} onChangeText={onNote} maxLength={noteMax} label="Anything to add?" placeholder={`Optional, ${noteMax} characters`} />
           <Text variant="caption1" color="mutedForeground" align="right">{`${note.length}/${noteMax}`}</Text>
         </View>
       ) : null}

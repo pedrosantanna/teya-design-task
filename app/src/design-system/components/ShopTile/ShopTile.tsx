@@ -11,6 +11,7 @@ import { ShopPlaceholder } from '../../internal/ShopPlaceholder';
 import { usePress } from '../../internal/usePress';
 import { cornerCurve, screenMargin, type AppTheme, type BadgeName, type ShopAccentName } from '../../theme';
 import { Badge, badgeLabel } from '../Tag/Tag';
+import { ShopMeta, shopFactsLabel, type ShopFacts } from '../ShopMeta/ShopMeta';
 import { Text } from '../Text/Text';
 
 // Photos fade in over their skeleton (states.md); expo-image takes a duration, so spring.fade's 0.25 s.
@@ -26,8 +27,8 @@ export function tileWidth(theme: AppTheme, contentWidth: number, size: ShopTileS
 export type ShopTileProps = {
   id: string;
   name: string;
-  /** "Open till 6pm · 2 min walk", "Closed · opens 9am" */
-  meta: string;
+  /** Status and walk, as ShopMeta draws them ("Open until 6pm", "2 min walk"); no street on a tile. */
+  facts: ShopFacts;
   image?: PhotoSource;
   /** At most two; Promoted always shows. */
   badges?: BadgeName[];
@@ -41,7 +42,7 @@ export type ShopTileProps = {
   priority?: 'high';
 };
 
-export const ShopTile = memo(function ShopTile({ id, name, meta, image, badges = [], size = 'large', contentWidth, accent, onPress, priority }: ShopTileProps) {
+export const ShopTile = memo(function ShopTile({ id, name, facts, image, badges = [], size = 'large', contentWidth, accent, onPress, priority }: ShopTileProps) {
   const [failed, setFailed] = useState<PhotoSource | null>(null);
   const { theme } = useUnistyles();
   const frame = useSafeAreaFrame();
@@ -54,7 +55,7 @@ export const ShopTile = memo(function ShopTile({ id, name, meta, image, badges =
     <Animated.View style={[styles.tile(width), press.scaleStyle]}>
       <Pressable
         accessibilityRole="button"
-        accessibilityLabel={spoken(name, ...shown.map((b) => badgeLabel(b).toLowerCase()), meta)}
+        accessibilityLabel={spoken(name, ...shown.map((b) => badgeLabel(b).toLowerCase()), shopFactsLabel(facts))}
         onPress={onPress ? () => onPress(id) : undefined}
         onPressIn={press.onPressIn}
         onPressOut={press.onPressOut}
@@ -87,9 +88,7 @@ export const ShopTile = memo(function ShopTile({ id, name, meta, image, badges =
           <Text variant="headline" numberOfLines={1}>
             {name}
           </Text>
-          <Text variant="footnote" color="mutedForeground" numberOfLines={1}>
-            {meta}
-          </Text>
+          <ShopMeta {...facts} />
         </View>
       </Pressable>
     </Animated.View>

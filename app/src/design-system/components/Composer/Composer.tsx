@@ -1,5 +1,5 @@
 // The composer (components.md, Ask bar and composer; craft-pass-2): the ask bar's anatomy as a field. A 48 pt
-// glass capsule, 16 before the optional Snuffle glyph, 10 between parts, the text in Body, and a mic that becomes
+// filled capsule (chat.field, a Border hairline), 16 before the optional Snuffle glyph, 10 between parts, the text in Body, and a mic that becomes
 // the Indigo send once there is text, 14 from the end. On New Request it grows out of the ask bar (`morphFrom`).
 import BubbleChatIcon from '@hugeicons/core-free-icons/BubbleChatIcon';
 import Mic01Icon from '@hugeicons/core-free-icons/Mic01Icon';
@@ -14,7 +14,7 @@ import { useDismissKeyboardOnBlur, useReleaseOnUnmount, type FieldRef } from '..
 import { measureOrigin, measureView, type ViewRef } from '../../internal/origins';
 import { setMorphTarget } from '../../internal/transitions';
 import { usePress } from '../../internal/usePress';
-import { textStyle } from '../../theme';
+import { cornerCurve, textStyle } from '../../theme';
 import { Icon } from '../Icon/Icon';
 import { SnuffleMark } from '../SnuffleMark/SnuffleMark';
 import { Count } from '../Tag/Tag';
@@ -183,7 +183,7 @@ export const Composer = memo(function Composer({
             onPressIn={fieldPress.onPressIn}
             onPressOut={fieldPress.onPressOut}
           >
-            <FloatingSurface interactive style={styles.field}>
+            <View style={styles.field}>
               <View style={styles.line} pointerEvents="none">
                 {mark ? (
                   <View style={styles.mark}>
@@ -199,12 +199,12 @@ export const Composer = memo(function Composer({
                   <Icon icon={Mic01Icon} size="mic" color="mutedForeground" />
                 </View>
               </View>
-            </FloatingSurface>
+            </View>
           </Pressable>
         </Animated.View>
       ) : (
         <Animated.View ref={glassRef} collapsable={false} style={[styles.grow, morphStyle]}>
-          <FloatingSurface interactive style={styles.field}>
+          <View style={styles.field}>
             {chips ? <View style={styles.chips}>{chips}</View> : null}
             <View style={styles.line}>
               {mark ? (
@@ -275,7 +275,7 @@ export const Composer = memo(function Composer({
                 )}
               </View>
             </View>
-          </FloatingSurface>
+          </View>
         </Animated.View>
       )}
     </View>
@@ -294,7 +294,13 @@ const styles = StyleSheet.create((theme) => ({
   count: { position: 'absolute', top: -theme.size.askBar.ring, right: -theme.size.askBar.ring },
   grow: { flex: 1 },
   fieldText: { flex: 1, paddingVertical: (theme.size.field - theme.type.body.lineHeight) / 2 },
+  // A filled field with a Border hairline, as in iMessage: glass over a white chat ground was 1.0:1 and barely showed.
   field: {
+    ...cornerCurve,
+    overflow: 'hidden',
+    backgroundColor: theme.color.chat.field,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: theme.color.chat.fieldEdge,
     flex: 1,
     minHeight: theme.size.field,
     borderRadius: theme.size.field / 2,

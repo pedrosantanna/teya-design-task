@@ -51,6 +51,7 @@ import {
   useAppStore,
   useArea,
   useContent,
+  shopFacts,
   type Shop,
   type ShopHours,
 } from '@/store';
@@ -63,10 +64,9 @@ function shortStreet(street: string): string {
   return street.replace(/\bRoad$/, 'Rd').replace(/\bStreet$/, 'St');
 }
 
-/** One meta pattern on both rails, short enough for the medium tile: "Till 6pm · 2 min walk", "Opens 9am · 4 min walk". */
-function tileMeta(hours: ShopHours, shop: Shop): string {
-  const when = hours === 'open' ? `Till ${shop.openUntil}` : hours === 'closed' ? `Opens ${shop.opensAt}` : 'Closes soon';
-  return `${when} · ${shop.walkMinutes}\u00A0min walk`;
+/** One facts pattern on both rails: the status and the walk, no street ("Open until 6pm", "2 min walk"). */
+function tileFacts(hours: ShopHours, shop: Shop) {
+  return shopFacts(hours, shop, false);
 }
 
 /** Promoted and New are not shown on a tile (v10); the shop page says Promoted. The data stays. */
@@ -212,7 +212,7 @@ function Nearby() {
                       <ShopTile
                         id={shop.id}
                         name={shop.name}
-                        meta={tileMeta(shopHours, shop)}
+                        facts={tileFacts(shopHours, shop)}
                         image={imageSource(shop.image, tileWidth(theme, contentWidth, 'large'))}
                         accent={shopAccent(shop)}
                         badges={tileBadges(shop)}
@@ -247,7 +247,7 @@ function Nearby() {
                         id={shop.id}
                         size="medium"
                         name={shop.name}
-                        meta={tileMeta(shopHours, shop)}
+                        facts={tileFacts(shopHours, shop)}
                         image={imageSource(shop.image, tileWidth(theme, contentWidth, 'medium'))}
                         accent={shopAccent(shop)}
                         badges={tileBadges(shop)}

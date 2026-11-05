@@ -1,6 +1,6 @@
 # Fontes
 
-Todas as citações e todos os links usados na documentação, num só lugar. 72 citações (71 conferidas na fonte original) e 170 outras fontes. Esta página é gerada a partir das outras pelo `scripts/build_sources.py`.
+Todas as citações e todos os links usados na documentação, num só lugar. 72 citações (71 conferidas na fonte original) e 175 outras fontes. Esta página é gerada a partir das outras pelo `scripts/build_sources.py`.
 
 ## Citações por rede
 
@@ -96,6 +96,11 @@ Status **verified** quer dizer que texto, autor e data foram conferidos na pági
 
 | Usada em | Fonte |
 | --- | --- |
+| [Usuários sintéticos de teste](../deliver/synthetic-users.md) | [Rosala e Moran, 2024](https://www.nngroup.com/articles/synthetic-users/) |
+| [Usuários sintéticos de teste](../deliver/synthetic-users.md) | [Mooney et al., 2025](https://arxiv.org/abs/2509.03736) |
+| [Usuários sintéticos de teste](../deliver/synthetic-users.md) | [Park et al., 2024](https://arxiv.org/abs/2411.10109) |
+| [Usuários sintéticos de teste](../deliver/synthetic-users.md) | [Lu et al., 2025](https://arxiv.org/abs/2502.12561) |
+| [Componentes](../develop/design-system/components.md) | [help.deliveroo.com/articles/3203714](https://help.deliveroo.com/articles/3203714) |
 | [Benchmarks](benchmarks.md) | [Google Merchant Center Help](https://support.google.com/merchants/answer/15609877?hl=en-GB) |
 | [Benchmarks](benchmarks.md) | [Asian Trader](https://www.asiantrader.biz/nearst-tech-connects-uber-eats-deliveroo-just-eat) |
 | [Benchmarks](benchmarks.md) | [Digital Commerce 360](https://www.digitalcommerce360.com/2026/10/16/google-universal-cart-launch-features/) |
