@@ -16,10 +16,12 @@ Call:
 - Perguntei se um só "answer" serve tanto para o estoque de uma loja conectada quanto para a resposta de uma loja consultada, e fechei as lacunas que a revisão das telas encontrou.
 - Nesta rodada pedi um fluxo de localização: o endereço no topo de Nearby abre uma sheet para escolher o lugar e o raio, e os lugares salvos são gerenciados pela conta.
 - Depois pedi avaliações e um resumo do que a loja vende na página da loja. Escolhi um polegar para cima ou para baixo para "Would you go back?" em vez de estrelas, mostrar a precisão de estoque só depois de 10 respostas "has it" e dar à loja um jeito de contestar um caso específico (decisão 047).
+- Depois pedi que as avaliações na página da loja se lessem como um bloco só.
 AI:
 - Um agente procurou na netnografia, no mapa de empatia, nas personas e nos benchmarks as palavras que os compradores usam e os objetos em que pensam, conferiu as referências abaixo e propôs os objetos, verbos, estados e termos. Também listou onde a v7 quebra o modelo. Eu pedi um modelo simples e apoiado em referências antes de desenhar mais telas.
 - Um agente acrescentou o lugar ao modelo como atributo da sessão, seguindo a decisão 024, e escreveu o fluxo nos componentes.
 - Um agente comparou como oito produtos coletam e mostram avaliações, leu as regras do Reino Unido sobre avaliações de consumidores e propôs onde as avaliações ficam: na compra, com os sinais do próprio Snuffle na loja. Ele manteve os quatro objetos.
+- Um agente moveu o resumo das avaliações para o primeiro cartão de um carrossel de Ratings, e "See all" e "How ratings work" como duas linhas no pé do painel.
 Trade-offs:
 - Deixar o item fora do modelo combina com lojas sem catálogo e abre mão de uma página por item, então "quem mais tem" fica no pedido, não no item.
 - Request é palavra nossa: os compradores escrevem perguntas, não pedidos. O teste do protótipo vai mostrar se a lista de Requests faz sentido.
@@ -86,12 +88,12 @@ A página da loja mostra dois sinais com títulos separados, para o comprador sa
 | --- | --- | --- |
 | Ratings | Avaliações de compras retiradas e entregues | "92%" com "would go back" e "38 people", e a contagem de cada tag; cada nota mostra o primeiro nome da pessoa e o mês, nunca sobrenome nem foto, e "You" na nota da própria pessoa. Abaixo de 5 avaliações, só as tags: "New on Snuffle" e "3 people so far" |
 | How they do on Snuffle: taxa de resposta | Respostas | "Answers 9 in 10 requests" |
-| How they do on Snuffle: precisão de estoque | Respostas e compras | "Had it 24 of 25 times when they said yes", só depois de 10 respostas "has it"; antes disso, "New on Snuffle" com a taxa e o tempo de resposta |
+| How they do on Snuffle: precisão de estoque | Respostas e compras | "Had it 24 of 25 times they said yes", só depois de 10 respostas "has it"; antes disso, "New on Snuffle" com a taxa e o tempo de resposta |
 | How they do on Snuffle: tempo de resposta | Respostas | "Usually replies in 6 min"; uma loja conectada mostra "Stock from the till" |
 
 O que a loja vende é um terceiro atributo da loja. O de uma loja conectada vem das categorias e dos mais vendidos do caixa; o de uma loja consultada, das respostas "Had it" passadas e do tipo de loja. Aparece como chips de categoria, cada um abrindo o Ask com a categoria preenchida, uma linha de preço ("Most items £2–£35, from past answers" ou "from the shop's till"). Os itens continuam sem página. Abaixo dela, "Found here recently" lista de três a cinco nomes de itens que compradores encontraram na loja, resumindo só pelo nome as respostas "Had it" dela: nada para tocar, sem comprador e sem preço, com uma linha que diz de onde vêm. As linhas "Had it, 2 hours ago" por resposta ficam no chat. Cada nome da lista mostra quando foi encontrado pela última vez ("Yesterday", "2 days ago"), em texto simples no fim da linha.
 
-A página da loja segue esta ordem: cabeçalho e ações, What they sell, Found here recently, How it works, Ratings, How they do on Snuffle.
+A página da loja segue esta ordem: cabeçalho e ações, What they sell, Found here recently, How it works, Ratings, How they do on Snuffle. Ratings é um bloco lateral só: um cartão de resumo primeiro (a porcentagem, as pessoas, até três tags), depois as notas como cartões da mesma altura, com "See all 38 reviews" e "How ratings work" como duas linhas no pé do painel.
 
 A loja vê os próprios sinais e pode contestar um caso específico, como um "Not ready when I came" numa compra que ela separou no prazo. A loja não tem interface, então isso fica nos estados do pedido do lado da loja.
 

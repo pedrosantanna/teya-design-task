@@ -218,7 +218,9 @@ const styles = StyleSheet.create((theme) => ({
     };
   },
   layer: { ...StyleSheet.absoluteFillObject, backgroundColor: theme.color.foreground },
-  icon: { width: theme.size.icon.bar, alignItems: 'center' },
+  // The icon column starts at the row's leading inset, the same as the text of a row without one, so the symbol sits as far
+  // from the card's edge as the titles do; the separator starts at the text.
+  icon: { width: theme.size.icon.bar, alignItems: 'flex-start' },
   iconFirstLine: (variant: 'headline' | 'body') => ({
     alignSelf: 'flex-start',
     marginTop: theme.space[3],

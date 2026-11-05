@@ -10,7 +10,7 @@
 import { createContext, memo, useContext, useId, useState, type ReactNode } from 'react';
 import { Platform, ScrollView, View } from 'react-native';
 import Animated, { Extrapolation, interpolate, useAnimatedStyle, useDerivedValue, useReducedMotion } from 'react-native-reanimated';
-import { useSafeAreaFrame } from 'react-native-safe-area-context';
+import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { Ground } from '../../internal/ground';
@@ -61,18 +61,20 @@ export function ShopPageText({ children }: { children: ReactNode }) {
 export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], onBack, backLabel, mapLoading = false, facts, actions, accent, children }: ShopPageLayoutProps) {
   const { theme } = useUnistyles();
   const frame = useSafeAreaFrame();
+  const insets = useSafeAreaInsets();
   const navH = useNavBarHeight();
   // The map shows at the card's sides by this much at rest (space.3, on the grid), and the card pads its content by space.6.
   const margin = theme.space[3];
   const pad = theme.space[6];
 
   // Geometry, all from tokens. The strip of map above the card is measured from the top of the screen (the safe area
-  // included); the shop's pin sits at its middle: the same distance from the pin to the screen's top as from the pin to the card.
+  // included); the shop's pin sits in the middle of what is left under the status bar: the same distance from the island to the pin as from the pin to the card.
   const hasPhotos = photos.length > 0;
   const restTop = navH + theme.space[8];
   // The glyph's ink runs from 2 to 22 of 24 (its tip is the anchor); its middle is half the ink above the tip.
   const pinInk = (theme.size.avatar.shop * (PIN_TIP - PIN_TOP)) / PIN_BOX;
-  const pinY = restTop / 2 + pinInk / 2;
+  // It is centred between the bottom of the status bar (the safe area's top inset, under the Dynamic Island) and the card's top edge.
+  const pinY = (insets.top + restTop) / 2 + pinInk / 2;
   // The card's top edge reaches the screen's top over the last bar-height of travel (step 2 of the storyboard); with a
   // short strip that starts at once.
   const expandFrom = Math.max(0, restTop - 2 * navH);

@@ -115,7 +115,6 @@ function PlaceSheet({ editing, onClose, onSave, onDelete }: { editing: Editing; 
       open={editing != null}
       onClose={onClose}
       title={shown?.mode === 'edit' ? 'Edit place' : 'New place'}
-      detents={['large']}
       onConfirm={confirm}
       confirmLabel="Save"
       confirmDisabled={!ready}

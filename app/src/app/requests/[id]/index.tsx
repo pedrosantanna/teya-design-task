@@ -575,7 +575,6 @@ function DetailsSheet({ onToast }: { onToast: (text: string) => void }) {
       title={shop.name}
       titleVariant="displayName"
       barTitle="Buy"
-      initialDetent="large"
       origin={`answer:${shop.id}`}
       footer={<Button label={buyLabel} accessibilityLabel={`Buy, ${price(total)}`} onPress={() => sim.buy(isJess ? (at === 'shop' ? 'shop' : 'point') : undefined)} />}
     >

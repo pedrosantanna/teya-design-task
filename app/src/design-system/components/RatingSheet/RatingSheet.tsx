@@ -65,7 +65,6 @@ export const RatingSheet = memo(function RatingSheet({
       onClose={onClose}
       title="Would you go back?"
       subtitle={`Your visit to ${shop}`}
-      detents={['medium', 'large']}
     >
       <View style={styles.thumbs} accessibilityRole="radiogroup" accessibilityLabel="Would you go back?">
         <Thumb icon={ThumbsUpIcon} label="Yes" spoken="Yes, I'd go back" selected={up === true} onPress={() => onAnswer(true)} />

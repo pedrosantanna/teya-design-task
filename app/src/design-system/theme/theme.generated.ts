@@ -50,7 +50,8 @@ export const iosLight = {
     chipSelectedOnTile: "#E8ECFF",
     tag: {
       fill: "#EEE9E2",
-      fillRaised: "#DEDAD5"
+      fillRaised: "#DEDAD5",
+      fillOnRow: "#EEE9E2"
     },
     onChipSelected: "#3D35B8",
     chipSelectedEdge: "#D1D8FF",
@@ -537,7 +538,8 @@ export const iosDark = {
     chipSelectedOnTile: "#1A194F",
     tag: {
       fill: "#323334",
-      fillRaised: "#3D3E3F"
+      fillRaised: "#3D3E3F",
+      fillOnRow: "#3D3E3F"
     },
     onChipSelected: "#D1D8FF",
     chipSelectedEdge: "#B5BFFF",
@@ -1024,7 +1026,8 @@ export const androidLight = {
     chipSelectedOnTile: "#E8ECFF",
     tag: {
       fill: "#EEE9E2",
-      fillRaised: "#DEDAD5"
+      fillRaised: "#DEDAD5",
+      fillOnRow: "#EEE9E2"
     },
     onChipSelected: "#3D35B8",
     chipSelectedEdge: "#D1D8FF",
@@ -1517,7 +1520,8 @@ export const androidDark = {
     chipSelectedOnTile: "#1A194F",
     tag: {
       fill: "#323334",
-      fillRaised: "#3D3E3F"
+      fillRaised: "#3D3E3F",
+      fillOnRow: "#3D3E3F"
     },
     onChipSelected: "#D1D8FF",
     chipSelectedEdge: "#B5BFFF",

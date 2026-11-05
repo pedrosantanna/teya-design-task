@@ -124,7 +124,7 @@ export default function NewRequest() {
         }}
       />
       <LocationSheet open={placeOpen} onClose={() => setPlaceOpen(false)} />
-      <Sheet open={deadlineOpen} onClose={() => setDeadlineOpen(false)} title="By when?" detents={['medium']}>
+      <Sheet open={deadlineOpen} onClose={() => setDeadlineOpen(false)} title="By when?">
         <View>
           {DEADLINES.map((d, i) => (
             <ListRow

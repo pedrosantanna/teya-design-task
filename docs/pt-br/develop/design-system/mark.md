@@ -92,9 +92,9 @@ Isso reverte a parte da decisão 045 que punha a marca sobre um tile Lavanda, co
 
 ## Animação do splash
 
-<video class="intro-video" src="../../../develop/design-system/img/mark-intro.mp4" poster="../../../develop/design-system/img/mark-intro.png" width="480" height="480" aria-label="A animação do splash: o toldo desenrola, o rosto aparece e o cachorro pisca duas vezes" controls loop muted playsinline autoplay></video>
+<video class="intro-video" src="../../../develop/design-system/img/mark-intro.mp4" poster="../../../develop/design-system/img/mark-intro.png" width="480" height="480" aria-label="A animação do splash: o toldo desenrola, o rosto aparece e o cachorro pisca duas vezes" controls muted playsinline autoplay></video>
 
-O vídeo repete em laço e toca sozinho, a menos que o sistema peça movimento reduzido.
+O vídeo toca uma vez e para na marca pronta; toque em play para ver de novo. Com movimento reduzido, ele espera o play.
 
 | Tempo | O que acontece |
 | --- | --- |

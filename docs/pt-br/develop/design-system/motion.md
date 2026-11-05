@@ -81,7 +81,7 @@ Nenhuma tela muda sem movimento. Cada transição começa no elemento que foi to
 | Recibo → código ampliado | Zoom a partir do código | Container transform | Morph |
 | Qualquer tela → Keep looking | Sheet a partir do botão | Bottom sheet | Fade e escala |
 
-Com o Reduzir Movimento ligado, cada uma delas vira um crossfade. Os pushes e as sheets que o app desenha usam `spring.smooth`; os zooms do sistema e as folhas de pagamento mantêm o tempo do sistema.
+Com o Reduzir Movimento ligado, cada uma delas vira um crossfade. Os pushes e as sheets que o app desenha usam `spring.smooth`; os zooms do sistema e as folhas de pagamento mantêm o tempo do sistema. Uma sheet no detent ajustado também usa `spring.smooth` para ir à nova altura quando o conteúdo muda; com Reduzir Movimento, ela salta.
 
 No app em Expo, o zoom é o `Link.AppleZoom` do Expo Router, que é alpha e pede o iOS 18; as shared element transitions do Reanimated são o outro caminho e são experimentais. A versão web usa `document.startViewTransition`. Onde nenhum deles funciona, a troca cai para um push ou um fade.
 

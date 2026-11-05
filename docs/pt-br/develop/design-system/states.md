@@ -57,7 +57,7 @@ Ordem de trás para a frente:
 | 6 | Alerta |
 | 7 | Toast e snackbar |
 
-Um toast fica acima de um alerta para que o Undo continue alcançável; o scrim de um alerta cobre a sheet abaixo dele.
+Um toast fica acima de um alerta para que o Undo continue alcançável; o scrim de um alerta cobre a sheet abaixo dele. Uma sheet que se ajusta ao conteúdo cresce ou encolhe até a nova altura quando o conteúdo muda, até o detent grande, e rola além dele.
 
 ## Estados vazios
 

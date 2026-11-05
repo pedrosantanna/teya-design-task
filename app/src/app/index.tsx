@@ -280,7 +280,7 @@ function Nearby() {
 
       <LocationSheet open={locationOpen} onClose={() => setLocationOpen(false)} />
 
-      <Sheet open={accountOpen} onClose={() => setAccountOpen(false)} title="Account" detents={['medium', 'large']}>
+      <Sheet open={accountOpen} onClose={() => setAccountOpen(false)} title="Account">
         {/* The profile and each group are space.6 apart, so the first row doesn't crowd the profile. */}
         <View style={styles.accountBody}>
           <View style={styles.account}>

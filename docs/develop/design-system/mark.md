@@ -92,9 +92,9 @@ This reverses the part of decision 045 that put the mark on a Lavender tile with
 
 ## Splash intro
 
-<video class="intro-video" src="img/mark-intro.mp4" poster="img/mark-intro.png" width="480" height="480" aria-label="The splash intro: the awning unrolls, the face appears and the dog blinks twice" controls loop muted playsinline autoplay></video>
+<video class="intro-video" src="img/mark-intro.mp4" poster="img/mark-intro.png" width="480" height="480" aria-label="The splash intro: the awning unrolls, the face appears and the dog blinks twice" controls muted playsinline autoplay></video>
 
-The clip loops, and it plays on its own unless the system asks for reduced motion.
+The clip plays once and stops on the finished mark; press play to see it again. With reduced motion it waits for play.
 
 | Time | What happens |
 | --- | --- |

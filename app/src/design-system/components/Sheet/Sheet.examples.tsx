@@ -8,7 +8,7 @@ import { Stepper } from '../Stepper/Stepper';
 import { Text } from '../Text/Text';
 import { Sheet } from './Sheet';
 
-// The details sheet: medium and large detents, Buy pinned, dismissing blocked while Buy is loading.
+// The details sheet: fitted to its content, Buy pinned, dismissing blocked while Buy is loading.
 export function SheetExamples() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);

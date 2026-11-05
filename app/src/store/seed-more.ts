@@ -30,8 +30,8 @@ export const moreShops: Shop[] = [
       down: 2,
       tags: { 'Had it as promised': 12, Friendly: 9, 'Set aside on time': 6 },
       notes: [
-        { name: 'Owen', text: 'Loaf set aside with my name on the bag.', up: true, month: 'Oct 2026', how: 'Collected' },
-        { name: 'Isla', text: 'Lovely bread, but £5 a loaf adds up.', up: false, month: 'Sep 2026', how: 'Collected' },
+        { name: 'Owen', text: 'Asked for a wholemeal loaf and two rolls. Set aside with my name on the bag, still warm, and the lad remembered me.', up: true, month: 'Oct 2026', how: 'Collected' },
+        { name: 'Isla', text: "The sourdough is crusty and properly sour. But at five pounds a loaf it adds up, so it's a weekend treat for us.", up: false, month: 'Sep 2026', how: 'Collected' },
       ],
     },
   },
@@ -58,7 +58,7 @@ export const moreShops: Shop[] = [
       up: 16,
       down: 1,
       tags: { Friendly: 10, 'Good value': 8, 'Had it as promised': 6, 'Not ready when I came': 1 },
-      notes: [{ name: 'Kofi', text: 'Six natas boxed and still warm at half five.', up: true, month: 'Oct 2026', how: 'Collected' }],
+      notes: [{ name: 'Kofi', text: 'Collected six natas at half five, boxed and still warm. They told me how to warm them in the oven for Sunday.', up: true, month: 'Oct 2026', how: 'Collected' }],
     },
   },
   {
@@ -87,8 +87,8 @@ export const moreShops: Shop[] = [
       down: 1,
       tags: { 'Had it as promised': 6, Friendly: 4, 'Not ready when I came': 1 },
       notes: [
-        { name: 'Lucy', text: 'The cake looked exactly like the sketch I sent.', up: true, month: 'Oct 2026', how: 'Delivered' },
-        { name: 'Amelia', text: 'Took a day to answer my first message.', up: false, month: 'Aug 2026', how: 'Collected' },
+        { name: 'Lucy', text: 'I sent a rough sketch of a dinosaur cake for my nephew. What I collected matched it, green icing and all, and fed twelve.', up: true, month: 'Oct 2026', how: 'Delivered' },
+        { name: 'Amelia', text: "My first message sat for a day and I'd nearly gone elsewhere. The cupcakes were worth the wait, and they apologised.", up: false, month: 'Aug 2026', how: 'Collected' },
       ],
     },
   },
@@ -116,7 +116,7 @@ export const moreShops: Shop[] = [
       up: 14,
       down: 1,
       tags: { Friendly: 9, 'Set aside on time': 6, 'Knew their stuff': 4, 'Not ready when I came': 1 },
-      notes: [{ name: 'Oliver', text: 'They ground the beans while I waited.', up: true, month: 'Oct 2026', how: 'Collected' }],
+      notes: [{ name: 'Oliver', text: 'Asked for the house blend. They ground it while I waited and found me a better filter size. The whole shop smelled wonderful.', up: true, month: 'Oct 2026', how: 'Collected' }],
     },
   },
   {
@@ -139,7 +139,7 @@ export const moreShops: Shop[] = [
     categories: ['Coffee', 'Pastries', 'Cold brew'],
     priceRange: { from: 2, to: 14 },
     reliability: { answered: 4, asked: 5, hadItRight: 2, hadItTotal: 2, replyMinutes: 9, connected: false },
-    ratings: { up: 3, down: 0, tags: { Friendly: 2, 'Knew their stuff': 1 }, notes: [{ name: 'Priya', text: 'Cold brew ready on time for the office.', up: true, month: 'Oct 2026', how: 'Collected' }] },
+    ratings: { up: 3, down: 0, tags: { Friendly: 2, 'Knew their stuff': 1 }, notes: [{ name: 'Priya', text: 'Ordered ten cold brews for a team meeting. Ready on time, labelled with our names and carried out in a tray.', up: true, month: 'Oct 2026', how: 'Collected' }] },
   },
   {
     id: 'groveCafe',
@@ -165,8 +165,8 @@ export const moreShops: Shop[] = [
       down: 3,
       tags: { Friendly: 7, 'Good value': 5, 'Not ready when I came': 3 },
       notes: [
-        { name: 'Tom', text: 'Quiche boxed up for a picnic on the green.', up: true, month: 'Sep 2026', how: 'Collected' },
-        { name: 'Hannah', text: 'Busy at lunch, my order was not ready.', up: false, month: 'Sep 2026', how: 'Collected' },
+        { name: 'Tom', text: 'Collected a quiche and potato salad for a picnic on the green. Boxed with napkins and cutlery thrown in. Not a crumb left.', up: true, month: 'Sep 2026', how: 'Collected' },
+        { name: 'Hannah', text: "Went at one as they'd said, but the lunch rush was on and my order wasn't ready. Fifteen minutes later it was fine.", up: false, month: 'Sep 2026', how: 'Collected' },
       ],
     },
   },
@@ -196,8 +196,8 @@ export const moreShops: Shop[] = [
       down: 2,
       tags: { 'Had it as promised': 11, Friendly: 9 },
       notes: [
-        { name: 'Callum', text: 'Board for six was beautiful and labelled.', up: true, month: 'Oct 2026', how: 'Delivered' },
-        { name: 'Sophie', text: 'Good cheese, dear for a weekday.', up: false, month: 'Jul 2026', how: 'Collected' },
+        { name: 'Callum', text: 'The cheese board for six was delivered with every cheese labelled and a jar of quince paste. Guests asked where it came from.', up: true, month: 'Oct 2026', how: 'Delivered' },
+        { name: 'Sophie', text: 'Excellent cheese, and they let me taste a few first. For a Tuesday supper I found it dear and bought less than planned.', up: false, month: 'Jul 2026', how: 'Collected' },
       ],
     },
   },
@@ -225,8 +225,8 @@ export const moreShops: Shop[] = [
       down: 2,
       tags: { 'Had it as promised': 17, 'Good value': 12, Friendly: 8, 'Hard to find': 1, "Wasn't as described": 1 },
       notes: [
-        { name: 'Ravi', text: 'The till said in stock and the pasta was there.', up: true, month: 'Oct 2026', how: 'Collected' },
-        { name: 'Megan', text: 'Got the wrong size tin, swapped it next day.', up: false, month: 'Aug 2026', how: 'Collected' },
+        { name: 'Ravi', text: 'The till said the fresh pasta was in stock and it was, still cold from the fridge. Bought the sauce they suggested too.', up: true, month: 'Oct 2026', how: 'Collected' },
+        { name: 'Megan', text: 'They gave me the wrong size of tin. I noticed at home, went back next day, and they swapped it straight away.', up: false, month: 'Aug 2026', how: 'Collected' },
       ],
     },
   },
@@ -253,7 +253,7 @@ export const moreShops: Shop[] = [
       up: 7,
       down: 1,
       tags: { Friendly: 5, 'Had it as promised': 3, 'Not ready when I came': 1 },
-      notes: [{ name: 'Jack', text: 'Hamper ready for a picnic, ribbon and all.', up: true, month: 'Sep 2026', how: 'Collected' }],
+      notes: [{ name: 'Jack', text: 'The hamper was ready when I arrived, packed with ribbon and a little card. We ate everything on the heath.', up: true, month: 'Sep 2026', how: 'Collected' }],
     },
   },
   // Hardware
@@ -282,8 +282,8 @@ export const moreShops: Shop[] = [
       down: 3,
       tags: { 'Had it as promised': 7, 'Good value': 5, 'Not ready when I came': 3 },
       notes: [
-        { name: 'Chloe', text: 'Colour matched from a chip of my old wall.', up: true, month: 'Oct 2026', how: 'Collected' },
-        { name: 'Imran', text: 'Delivery came after lunch, not the morning.', up: false, month: 'Sep 2026', how: 'Delivered' },
+        { name: 'Chloe', text: 'Took in a chip of my old hallway wall. They matched the colour first time, mixed it while I waited, and gave me a brush.', up: true, month: 'Oct 2026', how: 'Collected' },
+        { name: 'Imran', text: 'I paid for a morning delivery but the paint came after lunch and I had to rearrange my day. The paint itself was spot on.', up: false, month: 'Sep 2026', how: 'Delivered' },
       ],
     },
   },
@@ -311,7 +311,7 @@ export const moreShops: Shop[] = [
       up: 24,
       down: 1,
       tags: { 'Knew their stuff': 12, 'Good value': 10, Friendly: 7, 'Not ready when I came': 1 },
-      notes: [{ name: 'Beth', text: 'Two keys cut in five minutes, first try.', up: true, month: 'Oct 2026', how: 'Collected' }],
+      notes: [{ name: 'Beth', text: 'Two keys cut in five minutes and both worked first time. He noticed my lock sticking and oiled it for nothing.', up: true, month: 'Oct 2026', how: 'Collected' }],
     },
   },
   // Toys and games
@@ -335,7 +335,7 @@ export const moreShops: Shop[] = [
     categories: ['Soft toys', 'Baby toys', 'Picture books', 'Gifts'],
     priceRange: { from: 5, to: 45 },
     reliability: { answered: 3, asked: 4, hadItRight: 2, hadItTotal: 2, replyMinutes: 14, connected: false },
-    ratings: { up: 2, down: 0, tags: { Friendly: 2 }, notes: [{ name: 'Dan', text: 'Gift-wrapped the bear for a first birthday.', up: true, month: 'Oct 2026', how: 'Collected' }] },
+    ratings: { up: 2, down: 0, tags: { Friendly: 2 }, notes: [{ name: 'Dan', text: 'Bought a soft bear for a first birthday. Gift-wrapped with a tag and a card, and the price label cut off.', up: true, month: 'Oct 2026', how: 'Collected' }] },
   },
   {
     id: 'brookGreenGames',
@@ -360,7 +360,7 @@ export const moreShops: Shop[] = [
       up: 15,
       down: 1,
       tags: { Friendly: 9, 'Had it as promised': 7, 'Good value': 3 },
-      notes: [{ name: 'Ayesha', text: 'Recommended a game for six and it was a hit.', up: true, month: 'Sep 2026', how: 'Collected' }],
+      notes: [{ name: 'Ayesha', text: 'Asked for a game for six adults and a nine-year-old. They suggested one, explained it in a minute, and it was a hit.', up: true, month: 'Sep 2026', how: 'Collected' }],
     },
   },
   // Butcher and fish
@@ -389,8 +389,8 @@ export const moreShops: Shop[] = [
       down: 2,
       tags: { 'Had it as promised': 10, Friendly: 6 },
       notes: [
-        { name: 'Rosie', text: 'Lamb boned and rolled the way I asked.', up: true, month: 'Oct 2026', how: 'Collected' },
-        { name: 'Liam', text: 'Excellent meat, but the bill stung.', up: false, month: 'Aug 2026', how: 'Collected' },
+        { name: 'Rosie', text: 'Asked for a leg of lamb boned and rolled for Easter. Done just as I asked, bones in a bag for stock, and a tip on timing.', up: true, month: 'Oct 2026', how: 'Collected' },
+        { name: 'Liam', text: "The meat was excellent, tender and well hung. But the bill for two steaks and some mince stung, so it's for occasions.", up: false, month: 'Aug 2026', how: 'Collected' },
       ],
     },
   },
@@ -418,8 +418,8 @@ export const moreShops: Shop[] = [
       down: 2,
       tags: { 'Good value': 9, Friendly: 8, 'Had it as promised': 6, "Wasn't as described": 1, 'Not ready when I came': 1 },
       notes: [
-        { name: 'Fatima', text: 'Filleted the mackerel while I waited.', up: true, month: 'Oct 2026', how: 'Collected' },
-        { name: 'Ed', text: 'Said sea bass, it was bream that day.', up: false, month: 'Sep 2026', how: 'Collected' },
+        { name: 'Fatima', text: 'Four mackerel filleted while I waited, with a tip on pan-frying them. Smelled wonderful and cost less than the supermarket.', up: true, month: 'Oct 2026', how: 'Collected' },
+        { name: 'Ed', text: 'Reserved sea bass but it was bream when I got there. They told me honestly and knocked something off. Still lovely.', up: false, month: 'Sep 2026', how: 'Collected' },
       ],
     },
   },
@@ -448,8 +448,8 @@ export const moreShops: Shop[] = [
       down: 3,
       tags: { 'Had it as promised': 20, 'Set aside on time': 15, Friendly: 10, 'Hard to find': 2 },
       notes: [
-        { name: 'Nadia', text: 'Ready at the counter before I got there.', up: true, month: 'Oct 2026', how: 'Collected' },
-        { name: 'Joe', text: 'Queue for the counter was long at six.', up: false, month: 'Sep 2026', how: 'Collected' },
+        { name: 'Nadia', text: 'The prescription was ready at the counter with my name on the bag. The pharmacist also checked that I knew the dose.', up: true, month: 'Oct 2026', how: 'Collected' },
+        { name: 'Joe', text: 'The queue was long at six and I waited twenty minutes for a simple pick-up. They were kind about it, but not a quick stop.', up: false, month: 'Sep 2026', how: 'Collected' },
       ],
     },
   },
@@ -476,7 +476,7 @@ export const moreShops: Shop[] = [
       up: 10,
       down: 2,
       tags: { Friendly: 6, 'Had it as promised': 5 },
-      notes: [{ name: 'Maya', text: 'Brought my own jars and they filled them.', up: true, month: 'Oct 2026', how: 'Collected' }],
+      notes: [{ name: 'Maya', text: 'Brought my own jars and they filled them with oats and lentils, weighing each first. Less packaging and a fair bill.', up: true, month: 'Oct 2026', how: 'Collected' }],
     },
   },
   // Cameras
@@ -526,7 +526,7 @@ export const moreShops: Shop[] = [
       up: 9,
       down: 1,
       tags: { 'Had it as promised': 6, Friendly: 4, 'Not ready when I came': 1 },
-      notes: [{ name: 'Harry', text: 'Lens was exactly as the photos showed.', up: true, month: 'Sep 2026', how: 'Delivered' }],
+      notes: [{ name: 'Harry', text: 'The lens was exactly as the photos showed, with a cleaning cloth and a note about the one scratch on the cap.', up: true, month: 'Sep 2026', how: 'Delivered' }],
     },
   },
   // Stationery
@@ -553,7 +553,7 @@ export const moreShops: Shop[] = [
       up: 21,
       down: 1,
       tags: { 'Had it as promised': 12, Friendly: 8, 'Set aside on time': 5 },
-      notes: [{ name: 'Grace', text: 'Pen engraved and boxed the same afternoon.', up: true, month: 'Oct 2026', how: 'Collected' }],
+      notes: [{ name: 'Grace', text: "Asked for my dad's initials on a fountain pen. Engraved and boxed the same afternoon, with a bottle of ink included.", up: true, month: 'Oct 2026', how: 'Collected' }],
     },
   },
   {
@@ -576,7 +576,7 @@ export const moreShops: Shop[] = [
     categories: ['Paints', 'Pencils', 'Canvas', 'Sketchbooks'],
     priceRange: { from: 2, to: 80 },
     reliability: { answered: 5, asked: 6, hadItRight: 3, hadItTotal: 3, replyMinutes: 12, connected: false },
-    ratings: { up: 3, down: 1, tags: { Friendly: 2, 'Had it as promised': 1, 'Not ready when I came': 1 }, notes: [{ name: 'Ben', text: 'Knew exactly which paper I needed.', up: true, month: 'Oct 2026', how: 'Collected' }] },
+    ratings: { up: 3, down: 1, tags: { Friendly: 2, 'Had it as promised': 1, 'Not ready when I came': 1 }, notes: [{ name: 'Ben', text: 'Showed them a sketch and they knew exactly which paper I needed, then cut it to size. Saved me buying a whole pad.', up: true, month: 'Oct 2026', how: 'Collected' }] },
   },
   // Florist and plants
   {
@@ -604,8 +604,8 @@ export const moreShops: Shop[] = [
       down: 2,
       tags: { Friendly: 11, 'Had it as promised': 9, 'Good value': 4, 'Not ready when I came': 2 },
       notes: [
-        { name: 'Zara', text: 'Delivered before seven, as promised.', up: true, month: 'Oct 2026', how: 'Delivered' },
-        { name: 'Owen', text: 'Had to wait while they finished the bouquet.', up: false, month: 'Aug 2026', how: 'Collected' },
+        { name: 'Zara', text: 'Delivered before seven, as promised, with the pot wrapped in paper against the cold. The plant looked healthier than the photo.', up: true, month: 'Oct 2026', how: 'Delivered' },
+        { name: 'Owen', text: "The bouquet wasn't finished when I came in, so I waited ten minutes while they tied it. Beautiful, but I'd hoped to dash.", up: false, month: 'Aug 2026', how: 'Collected' },
       ],
     },
   },
@@ -655,7 +655,7 @@ export const moreShops: Shop[] = [
       up: 11,
       down: 2,
       tags: { Friendly: 7, 'Had it as promised': 5, 'Not ready when I came': 2 },
-      notes: [{ name: 'Isla', text: 'Tightened my frames for nothing.', up: true, month: 'Sep 2026', how: 'Collected' }],
+      notes: [{ name: 'Isla', text: "Popped in with wobbly frames. They tightened the screws and polished the lenses, and wouldn't take any money. Very kind.", up: true, month: 'Sep 2026', how: 'Collected' }],
     },
   },
   {
@@ -681,7 +681,7 @@ export const moreShops: Shop[] = [
       up: 6,
       down: 1,
       tags: { Friendly: 4, 'Had it as promised': 3, 'Not ready when I came': 1 },
-      notes: [{ name: 'Kofi', text: 'Kept two strengths aside for me to try.', up: true, month: 'Oct 2026', how: 'Collected' }],
+      notes: [{ name: 'Kofi', text: 'Kept two strengths of lenses aside to try before I committed. I picked the weaker pair and they checked the fit.', up: true, month: 'Oct 2026', how: 'Collected' }],
     },
   },
   // Newsagent
@@ -708,7 +708,7 @@ export const moreShops: Shop[] = [
       up: 6,
       down: 1,
       tags: { 'Set aside on time': 4, Friendly: 3, 'Not ready when I came': 1 },
-      notes: [{ name: 'Lucy', text: 'Open late when everything else had shut.', up: true, month: 'Oct 2026', how: 'Collected' }],
+      notes: [{ name: 'Lucy', text: 'Open late when everything else on the road had shut. I picked up milk and a card for a friend, and she was cheerful.', up: true, month: 'Oct 2026', how: 'Collected' }],
     },
   },
   {
@@ -730,7 +730,7 @@ export const moreShops: Shop[] = [
     categories: ['Newspapers', 'Magazines', 'Snacks', 'Umbrellas'],
     priceRange: { from: 1, to: 12 },
     reliability: { answered: 3, asked: 6, hadItRight: 2, hadItTotal: 2, replyMinutes: 30, connected: false },
-    ratings: { up: 2, down: 1, tags: { 'Set aside on time': 2, 'Not ready when I came': 1 }, notes: [{ name: 'Amelia', text: 'Kept the magazine behind the counter.', up: true, month: 'Sep 2026', how: 'Collected' }] },
+    ratings: { up: 2, down: 1, tags: { 'Set aside on time': 2, 'Not ready when I came': 1 }, notes: [{ name: 'Amelia', text: 'Kept the magazine behind the counter with my name on it, because it sells out each month. Collected at lunch, no fuss.', up: true, month: 'Sep 2026', how: 'Collected' }] },
   },
   // Books
   {
@@ -757,8 +757,8 @@ export const moreShops: Shop[] = [
       down: 2,
       tags: { 'Good value': 8, Friendly: 7, 'Not ready when I came': 2 },
       notes: [
-        { name: 'Oliver', text: 'Found the out-of-print one I had given up on.', up: true, month: 'Oct 2026', how: 'Collected' },
-        { name: 'Priya', text: 'Answered the next day, by then I had bought it.', up: false, month: 'Jul 2026', how: 'Collected' },
+        { name: 'Oliver', text: 'I had given up on an out-of-print novel. They found a copy in the back, wiped the cover and held it for a week.', up: true, month: 'Oct 2026', how: 'Collected' },
+        { name: 'Priya', text: "They answered the next day, by which point I'd bought the book elsewhere. A friendly reply, but I could have used it sooner.", up: false, month: 'Jul 2026', how: 'Collected' },
       ],
     },
   },
@@ -782,7 +782,7 @@ export const moreShops: Shop[] = [
     categories: ['Graphic novels', 'Manga', 'Comics', 'Subscriptions'],
     priceRange: { from: 4, to: 40 },
     reliability: { answered: 4, asked: 5, hadItRight: 2, hadItTotal: 2, replyMinutes: 18, connected: false },
-    ratings: { up: 2, down: 0, tags: { Friendly: 2, 'Had it as promised': 1 }, notes: [{ name: 'Tom', text: 'Pull list set up in two minutes.', up: true, month: 'Oct 2026', how: 'Collected' }] },
+    ratings: { up: 2, down: 0, tags: { Friendly: 2, 'Had it as promised': 1 }, notes: [{ name: 'Tom', text: 'Set up my comic pull list in two minutes, with a chat about which series to follow. First issues waiting the next week.', up: true, month: 'Oct 2026', how: 'Collected' }] },
   },
   {
     id: 'riverside',
@@ -807,7 +807,7 @@ export const moreShops: Shop[] = [
       up: 26,
       down: 1,
       tags: { 'Had it as promised': 15, Friendly: 11, 'Set aside on time': 7, 'Not ready when I came': 1 },
-      notes: [{ name: 'Hannah', text: 'Ordered in on Monday, on the shelf by Wednesday.', up: true, month: 'Oct 2026', how: 'Collected' }],
+      notes: [{ name: 'Hannah', text: 'Ordered a cookbook on Monday and it was on the shelf by Wednesday. They messaged when it arrived and offered a bag for the rain.', up: true, month: 'Oct 2026', how: 'Collected' }],
     },
   },
 ];

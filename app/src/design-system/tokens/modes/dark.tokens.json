@@ -55,6 +55,10 @@
       "fillRaised": {
         "$value": "{color.stone.360}",
         "$description": "The same on a sheet, a Card section or the shop page card in dark: Stone 360, 1.58:1 from the sheet and 1.41:1 from Card (tags.md)"
+      },
+      "fillOnRow": {
+        "$value": "{color.tag.fillRaised}",
+        "$description": "The same in dark: Stone 360 (tag.fillRaised), 1.36 to 1.41:1 from the cardOnTile rows and 1.41:1 from Card, Foreground text 10.3:1 and the count in Stone 880 7.7:1 (tags.md)"
       }
     },
     "onChipSelected": {

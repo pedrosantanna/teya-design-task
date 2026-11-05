@@ -8,7 +8,7 @@ export function ReliabilityRowExamples() {
       <ListGroup shadow>
         <ReliabilityRow kind="answers" title="Answers 9 in 10 requests" detail="46 of 51 so far" accessibilityLabel="Answers 9 in 10 requests, 46 of 51 so far" position="first" />
         <ReliabilityRow kind="speed" title="Usually replies in 6 min" accessibilityLabel="Usually replies in 6 minutes" position="middle" />
-        <ReliabilityRow kind="stock" title="Had it 24 of 25 times when they said yes" accessibilityLabel="Had it 24 of 25 times when they said yes" position="last" />
+        <ReliabilityRow kind="stock" title="Had it 24 of 25 times they said yes" accessibilityLabel="Had it 24 of 25 times they said yes" position="last" />
       </ListGroup>
       <ListGroup shadow>
         <ReliabilityRow kind="answers" title="Answers every request" detail="34 of 34 so far" accessibilityLabel="Answers every request, 34 so far" position="first" />

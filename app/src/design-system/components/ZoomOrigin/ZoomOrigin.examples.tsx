@@ -15,7 +15,7 @@ export function ZoomOriginExamples() {
       <ZoomOrigin id="example-origin">
         <Button label="Open from here" role="tonal" size="compact" onPress={() => setOpen(true)} />
       </ZoomOrigin>
-      <Sheet open={open} onClose={() => setOpen(false)} title="From the button" detents={['medium']} origin="example-origin">
+      <Sheet open={open} onClose={() => setOpen(false)} title="From the button" origin="example-origin">
         <Text variant="body">This sheet grew from the button.</Text>
       </Sheet>
     </View>

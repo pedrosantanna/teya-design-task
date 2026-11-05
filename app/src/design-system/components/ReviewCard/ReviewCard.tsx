@@ -4,12 +4,11 @@
 // thumbs-up is the default and needs no label (visual critique 3).
 import ThumbsDownIcon from '@hugeicons/core-free-icons/ThumbsDownIcon';
 import { memo, useState, type ReactNode } from 'react';
-import { ScrollView, View, useWindowDimensions } from 'react-native';
+import { Pressable, ScrollView, View, useWindowDimensions } from 'react-native';
 import { useReducedMotion } from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { useTileAccent } from '../../internal/ground';
-import { cardShadow } from '../../internal/shadow';
 import { cornerCurve, type ShopAccentName } from '../../theme';
 import { Icon } from '../Icon/Icon';
 import type { RowPosition } from '../ShopRow/ShopRow';
@@ -81,62 +80,95 @@ export const ReviewCard = memo(function ReviewCard({ name, text, up, month, line
 /** The font scale from which text counts as an accessibility size (content.md: iOS AX1 and up, Android above 150%). */
 const ACCESSIBILITY_FONT_SCALE = 1.5;
 
-/** The cards' share of the content width: the next one peeks in (spacing.md). */
-const CARD_SHARE = 0.8;
+/** The summary card's share of the panel's inner width, and the review cards' (the next one peeks in; spacing.md). */
+const SUMMARY_SHARE = 0.72;
+const REVIEW_SHARE = 0.8;
 
 export type ReviewCarouselProps = {
-  /** Spoken for the scroller: "Reviews, 3 of 38". */
+  /** Spoken for the scroller: "Ratings and reviews, 3 of 38". */
   accessibilityLabel: string;
-  /** Cards that bleed to the card's edge: the scroller reaches this far past the content on each side and pads itself back. */
-  bleed: number;
-  /** How many cards: one alone takes the full content width, as nothing is there to peek. */
+  /** How many review cards follow the summary: with none, the summary takes the full width, as nothing is there to peek. */
   count: number;
-  /** Renders one card at the width it is given. */
-  children: (width: number) => ReactNode;
+  /** Rows at the foot of the panel, full width under the cards, each with a chevron and a hairline above ("See all 38 reviews", "How ratings work"). */
+  links?: { label: string; onPress: () => void }[];
+  /** Renders the cards at the widths it is given: the summary first, then one ReviewCard each. */
+  children: (width: { summary: number; review: number }) => ReactNode;
 };
 
-/** A sideways row of ReviewCards (the shop page's Ratings): 80% of the content width, `space.3` apart, snapping card by card
- *  from the content edge, the next one peeking in. No autoplay. Under Reduce Motion the fling settles at once. At
- *  accessibility text sizes it is a vertical list of full-width cards (content.md, Accessibility sizes). */
-export function ReviewCarousel({ accessibilityLabel, bleed, count, children }: ReviewCarouselProps) {
+/** The shop page's Ratings as one block: a panel on a deeper surface than the page card (the Background in light, the
+ *  Background in dark), holding a sideways row of cards of equal height. The first, at 72% of the inner width, is the
+ *  summary; the review cards are 80%, `space.3` apart, and the next one peeks in. Snaps card by card from the panel's
+ *  inner edge. No autoplay. Under Reduce Motion the fling settles at once. At accessibility text sizes the cards are a
+ *  vertical stack of full-width cards, the summary first (content.md, Accessibility sizes). */
+export function ReviewCarousel({ accessibilityLabel, count, links = [], children }: ReviewCarouselProps) {
   const { theme } = useUnistyles();
   const reduceMotion = useReducedMotion();
-  const [content, setContent] = useState(0);
+  const [panel, setPanel] = useState(0);
   const { fontScale } = useWindowDimensions();
   const stacked = fontScale >= ACCESSIBILITY_FONT_SCALE;
-  const width = Math.round(content * (count > 1 && !stacked ? CARD_SHARE : 1));
-  if (stacked) {
-    return (
-      <View onLayout={(e) => setContent(e.nativeEvent.layout.width)} accessibilityLabel={accessibilityLabel} style={styles.list}>
-        {width > 0 ? children(width) : null}
-      </View>
-    );
-  }
+  const gap = theme.space[3];
+  const inner = Math.max(0, panel - 2 * gap);
+  const alone = count === 0 || stacked;
+  const widths = {
+    summary: Math.round(inner * (alone ? 1 : SUMMARY_SHARE)),
+    review: Math.round(inner * (stacked ? 1 : REVIEW_SHARE)),
+  };
+  // Where each card starts, from the summary's left edge: the snap points.
+  const offsets = [0, ...Array.from({ length: count }, (_, i) => widths.summary + gap + i * (widths.review + gap))];
   return (
-    <View onLayout={(e) => setContent(e.nativeEvent.layout.width)}>
-      {width > 0 ? (
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          accessibilityLabel={accessibilityLabel}
-          snapToInterval={width + theme.space[3]}
-          snapToAlignment="start"
-          decelerationRate={reduceMotion ? 'normal' : 'fast'}
-          contentContainerStyle={styles.rail(bleed)}
-          style={styles.scroller(bleed)}
-        >
-          {children(width)}
-        </ScrollView>
+    <View onLayout={(e) => setPanel(e.nativeEvent.layout.width)} style={styles.panel} accessibilityLabel={stacked ? accessibilityLabel : undefined}>
+      {inner > 0 ? (
+        stacked ? (
+          <View style={styles.list}>{children(widths)}</View>
+        ) : (
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            accessibilityLabel={accessibilityLabel}
+            snapToOffsets={offsets}
+            snapToAlignment="start"
+            decelerationRate={reduceMotion ? 'normal' : 'fast'}
+            contentContainerStyle={styles.rail}
+            style={styles.scroller}
+          >
+            {children(widths)}
+          </ScrollView>
+        )
+      ) : null}
+      {links.length > 0 ? (
+        <View style={styles.links}>
+          {links.map((l) => (
+            <Pressable key={l.label} accessibilityRole="button" accessibilityLabel={l.label} onPress={l.onPress} style={styles.link}>
+              <View style={styles.grow}>
+                <Text variant="body">{l.label}</Text>
+              </View>
+              <Icon icon="chevron" size="body" color="mutedForeground" />
+            </Pressable>
+          ))}
+        </View>
       ) : null}
     </View>
   );
 }
 
 const styles = StyleSheet.create((theme) => ({
-  // The scroller is wider than the content by `bleed` each side; the wrapper measures the content between them.
-  scroller: (bleed: number) => ({ marginHorizontal: -bleed }),
-  list: { gap: theme.space[3] },
-  rail: (bleed: number) => ({ paddingHorizontal: bleed, gap: theme.space[3] }),
+  // One container: the Background (light, 1.21:1 under a white card) or Background in dark, clipped to its corners. The scroller
+  // reaches the panel's edges and pads itself back, so the cards run to the edge while they scroll.
+  panel: { ...cornerCurve, overflow: 'hidden', borderRadius: theme.radius.inner, backgroundColor: theme.scheme === 'dark' ? theme.color.sheet : theme.color.background, paddingVertical: theme.space[3] },
+  scroller: { flexGrow: 0 },
+  // The links run the panel's width under the cards, inset like list rows, a hairline above each.
+  links: { paddingHorizontal: theme.space[4], paddingTop: theme.space[1] },
+  link: {
+    minHeight: theme.hit.min,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.space[2],
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: theme.color.separator,
+  },
+  list: { gap: theme.space[3], paddingHorizontal: theme.space[3] },
+  // The row stretches its cards to the tallest.
+  rail: { paddingHorizontal: theme.space[3], gap: theme.space[3] },
   card: (width: number, tile?: ShopAccentName) => ({
     ...cornerCurve,
     width,
@@ -145,7 +177,6 @@ const styles = StyleSheet.create((theme) => ({
     borderRadius: theme.radius.inner,
     // On an accent tile (the shop page) the card takes that accent's cardOnTile, as the rows do.
     backgroundColor: tile ? theme.color.shop.accent[tile].cardOnTile : theme.color.card,
-    boxShadow: cardShadow(theme),
   }),
   // The grouped row's fill, corners and inset separator, as ListRow on Card (Material: no fill, as its lists).
   row: (grouped: boolean, top: boolean, bottom: boolean) => ({

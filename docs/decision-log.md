@@ -487,5 +487,12 @@ Every request on the Requests list opens as a full conversation with its history
 **Why:** the older requests opened as one message with no way to act, so it wasn't clear what to do or where to reply. On a white chat the field was beige, and on the beige Requests list the same field disappeared; one ground and one field fix both and remove the jump in colour when a chat opens.
 **Open:** buying from an older request skips the details and payment sheets, and a rating given there doesn't reach the shop page.
 
+## 060 · Ratings in one panel, one quiet chip, sheets that fit
+**2026-11-05 · Decided**
+
+The shop page's ratings are one panel: a carousel whose first card is the summary (the share who would go back, the people count, up to three tags) and whose next cards are reviews, all the same height, with "See all N reviews" and "How ratings work" at the panel's foot. Chips on a row inside the shop card are one quiet neutral fill with no border and no tile colour, rating tags included. The shop's pin is centred between the bottom of the status bar and the card. Action and settings sheets open at the height of their content, up to the large detent (iOS's custom detent; Material's bottom sheet does the same), and the location sheet never shrinks while the shopper types; Directions keeps the medium detent because the map behind it matters. The Bakery art is a paper bag of baguettes with a scored loaf, and the Deli art puts the jar and the cheese side by side.
+
+**Why:** the ratings were three separate groups and the review list ran long; one panel keeps them together and scannable. Chips in the card's own colour looked like holes, and the bordered ones looked like inputs. A sheet that opened halfway hid part of Account. The splash video on the Mark page now plays once, since a 2.4 s loop read as flicker.
+
 ## Still open
 

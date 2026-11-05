@@ -16,10 +16,12 @@ Call:
 - I asked whether one "answer" fits both a connected shop's stock and an asked shop's reply, and closed the gaps the screen review found.
 - In this round I asked for a location flow: the address at the top of Nearby opens a sheet to choose the place and the radius, and saved places are managed from the account.
 - Later I asked for ratings and a summary of what a shop sells on the shop page. I chose a thumbs up or down for "Would you go back?" over stars, stock accuracy shown only after 10 "has it" answers, and a way for a shop to dispute a specific case (decision 047).
+- Later I asked for the ratings on the shop page to read as one block.
 AI:
 - An agent searched the netnography, empathy map, personas and benchmarks for the words shoppers use and the objects they think in, checked the references below and proposed the objects, verbs, states and terms. It also listed where v7 breaks the model. I asked for the model to be simple and grounded in references before more screens are drawn.
 - An agent added place to the model as an attribute of the session, following decision 024, and wrote the flow into the components.
 - An agent compared how eight products collect and show ratings, read the UK rules on consumer reviews and proposed where ratings sit: on the order, with Snuffle's own signals on the shop. It kept the four objects.
+- An agent moved the rating summary into the first card of a Ratings carousel, and put "See all" and "How ratings work" as two rows at the panel's foot.
 Trade-offs:
 - Keeping items out of the model fits shops without catalogues, and gives up a page per item, so "who else has it" lives in the request, not on the item.
 - Request is our word: shoppers write questions, not requests. The prototype test will show whether the Requests list reads.
@@ -86,12 +88,12 @@ The shop page shows two signals under separate headings, so the shopper can tell
 | --- | --- | --- |
 | Ratings | Ratings on collected and delivered orders | "92%" with "would go back" and "38 people", and the count of each tag; each note shows the person's first name and the month, never a surname or photo, and "You" on the shopper's own. Below 5 ratings, tags only: "New on Snuffle" and "3 people so far" |
 | How they do on Snuffle: answer rate | Answers | "Answers 9 in 10 requests" |
-| How they do on Snuffle: stock accuracy | Answers and orders | "Had it 24 of 25 times when they said yes", only after 10 "has it" answers; before that, "New on Snuffle" with the answer rate and reply time |
+| How they do on Snuffle: stock accuracy | Answers and orders | "Had it 24 of 25 times they said yes", only after 10 "has it" answers; before that, "New on Snuffle" with the answer rate and reply time |
 | How they do on Snuffle: reply time | Answers | "Usually replies in 6 min"; a connected shop shows "Stock from the till" |
 
 What the shop sells is a third attribute of the shop. A connected shop's comes from its till's categories and best sellers; an asked shop's from its past "Had it" answers and its kind. It shows as category chips, each opening Ask with the category filled in, a price line ("Most items £2–£35, from past answers", or "from the shop's till"). Items still have no page. Below it, "Found here recently" lists three to five item names that shoppers found at the shop, summarising its "Had it" answers by name only: nothing to press, no buyer and no price, with a line that says where they come from. The per-answer "Had it, 2 hours ago" rows stay in the chat. Each name in the list shows when it was last found ("Yesterday", "2 days ago"), as plain text at the end of its row.
 
-The shop page runs in this order: header and actions, What they sell, Found here recently, How it works, Ratings, How they do on Snuffle.
+The shop page runs in this order: header and actions, What they sell, Found here recently, How it works, Ratings, How they do on Snuffle. Ratings is one sideways block: a summary card first (the share, the people, up to three tags), then the notes as cards of the same height, with "See all 38 reviews" and "How ratings work" as two rows at the foot of the panel.
 
 A shop sees its own signals and can dispute a specific case, such as a "Not ready when I came" on an order it set aside on time. The shop has no interface, so this is mapped in the shop's request states.
 

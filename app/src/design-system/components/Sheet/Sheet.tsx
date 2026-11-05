@@ -1,4 +1,4 @@
-// The sheet (components.md, Sheet; iOS 26 patterns): medium and large detents, Close on the left, an optional
+// The sheet (components.md, Sheet; iOS 26 patterns): fit, medium and large detents, Close on the left, an optional
 // Confirm on the right, and a footer (Buy) pinned at the bottom. Every sheet has the same ground: the Sheet colour,
 // opaque, one tone darker than the Background in light mode (one Stone step lighter in dark), and one scrim behind
 // it (color.sheetScrim at state.sheetScrim) that comes in with the sheet; a tap on it dismisses. On iOS and the web
@@ -6,7 +6,9 @@
 // screen edges with the top corners rounded; Android keeps the Material modal bottom sheet with a drag handle. A sheet
 // can grow from what opened it (`origin`, a ZoomOrigin id). Built on Reanimated and Gesture Handler, so the
 // drag and the springs run on the UI thread, and presented through the root portal so it stays inside the
-// phone frame on the web.
+// phone frame on the web. The `fit` detent (iOS 16 custom detent, a Material bottom sheet wrapping its content)
+// opens at the height of the header, the content and the bottom safe area, up to the large detent, and follows the
+// content while it changes.
 import { useEffect, useRef, useState, type ComponentRef, type ReactNode } from 'react';
 import { AccessibilityInfo, BackHandler, Platform, Pressable, ScrollView, View, findNodeHandle } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
@@ -30,7 +32,7 @@ import { Text } from '../Text/Text';
 /** Hosts sheets and other overlays. Put it once near the root, inside the app's frame. */
 export const SheetProvider = PortalHost;
 
-export type SheetDetent = 'medium' | 'large';
+export type SheetDetent = 'fit' | 'medium' | 'large';
 
 export type SheetProps = {
   open: boolean;
@@ -49,10 +51,14 @@ export type SheetProps = {
   children: ReactNode;
   /** Pinned at the bottom above the safe area: the Buy button. */
   footer?: ReactNode;
-  /** Detents the sheet can rest at; it opens at the first unless `initialDetent` says otherwise. */
+  /** Detents the sheet can rest at; it opens at the first unless `initialDetent` says otherwise. `fit` (default)
+   *  is the height of the content, capped at large, and animates when the content changes height. */
   detents?: SheetDetent[];
   initialDetent?: SheetDetent;
   /** Blocks dismissing, e.g. while Buy is loading. */
+  /** With `fit`: `'opened'` keeps the height the sheet opened at as a minimum while it is open, so it only grows
+   *  (a search whose results come and go). Default: the fitted height follows the content both ways. */
+  fitMin?: 'opened';
   dismissible?: boolean;
   /** Confirm at the top right: the tinted checkmark on iOS and the web, "Done" on Android. */
   onConfirm?: () => void;
@@ -74,8 +80,9 @@ export function Sheet({
   subtitle,
   children,
   footer,
-  detents = ['medium', 'large'],
+  detents = ['fit'],
   initialDetent,
+  fitMin,
   dismissible = true,
   onConfirm,
   confirmLabel,
@@ -97,12 +104,31 @@ export function Sheet({
   const pad = screenMargin(theme, frame.width);
 
   // `h` is the visible height: a rest is a detent's height; below the smallest rest the sheet slides down instead.
-  const heightOf = (d: SheetDetent) => frame.height * (d === 'large' ? theme.layout.sheetLargeDetent : theme.layout.sheetMediumDetent);
+  // `fit` is the measured header plus content (the content's bottom padding already holds the footer and the safe
+  // area), capped at the large detent; taller content scrolls.
+  const [headerH, setHeaderH] = useState(0);
+  const [contentH, setContentH] = useState(0);
+  const largeH = frame.height * theme.layout.sheetLargeDetent;
+  const mediumH = frame.height * theme.layout.sheetMediumDetent;
+  const rawFit = Math.min(Math.ceil(headerH + contentH), largeH);
+  // The height at open, kept while open for `fitMin="opened"` (state adjusted during render, as `mounted` is).
+  const [openedFit, setOpenedFit] = useState<number | null>(null);
+  const wantsFloor = fitMin === 'opened';
+  if (wantsFloor && open && headerH > 0 && contentH > 0 && openedFit == null) setOpenedFit(rawFit);
+  if (openedFit != null && (!wantsFloor || (!open && !mounted))) setOpenedFit(null);
+  const fitH = wantsFloor && openedFit != null ? Math.max(rawFit, openedFit) : rawFit;
+  const hasFit = detents.includes('fit');
+  const ready = !hasFit || (headerH > 0 && contentH > 0);
+  const heightOf = (d: SheetDetent) => (d === 'large' ? largeH : d === 'medium' ? mediumH : fitH);
   const rests = detents.map(heightOf);
-  const minRest = Math.min(...rests);
-  const largeH = heightOf('large');
-  const mediumH = heightOf('medium');
-  const start = heightOf(initialDetent ?? detents[0]);
+  const minRest = Math.max(1, Math.min(...rests));
+  const reachesLarge = rests.some((r) => r >= largeH - 1);
+  const startDetent = initialDetent ?? detents[0];
+  const start = heightOf(startDetent);
+  // Whether the sheet rests at the fitted height, so a change in the content moves it.
+  const atFit = useSharedValue(startDetent === 'fit');
+  const startRef = useRef(start);
+  const settledFit = useRef(fitH);
   const h = useSharedValue(0);
   // Zoom from the origin: 0 at the origin's rectangle, 1 at rest.
   const z = useSharedValue(1);
@@ -135,8 +161,13 @@ export function Sheet({
   }, [open]);
 
   useEffect(() => {
-    if (open) {
+    startRef.current = start;
+  });
+  useEffect(() => {
+    if (open && ready) {
       let cancelled = false;
+      settledFit.current = fitH;
+      atFit.set(startDetent === 'fit');
       let frame = 0;
       let tries = 0;
       // The overlay and the title mount through the Portal host a commit after this effect runs, so the measure
@@ -148,13 +179,13 @@ export function Sheet({
           if (rect && host) {
             from.set({ x: rect.x - host.x, y: rect.y - host.y, width: rect.width, height: rect.height });
             z.set(0);
-            h.set(start);
+            h.set(startRef.current);
             z.set(withSpring(1, smooth));
           } else {
             from.set(null);
             z.set(1);
-            h.set(reduceMotion ? start : 0);
-            if (!reduceMotion) h.set(withSpring(start, smooth));
+            h.set(reduceMotion ? startRef.current : 0);
+            if (!reduceMotion) h.set(withSpring(startRef.current, smooth));
           }
         });
         // Focus moves to the sheet's title on open (components.md). React Native Web has no findNodeHandle:
@@ -176,11 +207,21 @@ export function Sheet({
         cancelled = true;
         cancelAnimationFrame(frame);
       };
-    } else if (mounted) {
+    } else if (mounted && !open) {
       if (from.get()) z.set(withSpring(0, smooth, (done) => done && scheduleOnRN(setMounted, false)));
       else h.set(withSpring(0, smooth, (done) => done && scheduleOnRN(setMounted, false)));
     }
-  }, [open, start, smooth, h, z, from, mounted, origin, reduceMotion]);
+    // fitH and startDetent are read when the sheet opens only; later changes of the content go through the effect below.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, ready, smooth, h, z, from, mounted, origin, reduceMotion]);
+
+  // The content changed height while the sheet rests at its fitted height: it moves to the new one.
+  useEffect(() => {
+    if (!open || !ready || !atFit.get() || settledFit.current === fitH) return;
+    settledFit.current = fitH;
+    if (reduceMotion) h.set(fitH);
+    else h.set(withSpring(fitH, smooth));
+  }, [open, ready, fitH, h, smooth, reduceMotion, atFit]);
 
   const dismiss = () => {
     if (!dismissible) return;
@@ -233,6 +274,7 @@ export function Sheet({
       let target = targets.reduce((best, t) => (Math.abs(t - projected) < Math.abs(best - projected) ? t : best), targets[0]);
       if (dismissible && e.velocityY > FLICK_VELOCITY && h.get() < minRest + 1) target = 0;
       const closing = target === 0;
+      atFit.set(hasFit && target === fitH);
       h.set(withSpring(target, { ...smooth, velocity: -e.velocityY }, (done) => done && closing && scheduleOnRN(finishClose)));
     });
 
@@ -240,7 +282,7 @@ export function Sheet({
   const anchored = (v: number) => {
     'worklet';
     if (!floating) return 1;
-    return rests.length === 1 && rests[0] === mediumH ? 0 : interpolate(v, [mediumH, largeH], [0, 1], Extrapolation.CLAMP);
+    return reachesLarge ? interpolate(v, [mediumH, largeH], [0, 1], Extrapolation.CLAMP) : 0;
   };
   const panelStyle = useAnimatedStyle(() => {
     const v = h.get();
@@ -300,7 +342,7 @@ export function Sheet({
           {/* The glass rim, as on every glass element: a white highlight along the top edge and a hairline. */}
           {floating ? <View pointerEvents="none" style={styles.rim} /> : null}
           <GestureDetector gesture={pan}>
-            <View>
+            <View onLayout={(e) => setHeaderH(e.nativeEvent.layout.height)}>
               <View style={styles.grabberArea}>
                 <View style={styles.grabber} />
               </View>
@@ -341,6 +383,7 @@ export function Sheet({
             style={styles.fill}
             keyboardShouldPersistTaps="handled"
             keyboardDismissMode="interactive"
+            onContentSizeChange={(_w, ch) => setContentH(ch)}
             contentContainerStyle={styles.content(pad, footer ? theme.size.button.large + theme.space[6] + insets.bottom : insets.bottom)}
           >
             {inContent ? (

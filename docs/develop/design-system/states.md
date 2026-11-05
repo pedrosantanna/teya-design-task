@@ -57,7 +57,7 @@ Order from back to front:
 | 6 | Alert |
 | 7 | Toast and snackbar |
 
-A toast sits above an alert so an Undo stays reachable; an alert's scrim covers the sheet below it.
+A toast sits above an alert so an Undo stays reachable; an alert's scrim covers the sheet below it. A sheet that fits its content grows or shrinks to the new height when the content changes, up to the large detent, and scrolls beyond it.
 
 ## Empty states
 

@@ -6,7 +6,6 @@ import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
 import { Ground } from '../../internal/ground';
-import type { ShopAccentName } from '../../theme';
 import { ListBlock, ListGroup, ListRow } from '../ListRow/ListRow';
 import { Chip } from '../Tag/Tag';
 import { Text } from '../Text/Text';
@@ -20,17 +19,15 @@ export type ProductSummaryProps = {
   asked?: { item: string; detail: string }[];
   /** Called with the chip's text: New Request opens addressed to the shop with it filled in. */
   onCategory?: (category: string) => void;
-  /** The shop's accent: the chips take the accent's tile fill, with no edge. */
-  accent?: ShopAccentName;
   /** The shop's name, for the chips' spoken hint ("Ask Rossi's Bakery about Sourdough"). */
   shop?: string;
 };
 
-export const ProductSummary = memo(function ProductSummary({ categories, priceLine, asked = [], onCategory, shop, accent }: ProductSummaryProps) {
+export const ProductSummary = memo(function ProductSummary({ categories, priceLine, asked = [], onCategory, shop }: ProductSummaryProps) {
   return (
     <ListGroup shadow>
       <ListBlock position={asked.length > 0 ? 'first' : 'only'}>
-        <Ground value="card" accent={accent}>
+        <Ground value="card">
           <View style={styles.chips} accessibilityLabel={shop ? `Ask ${shop} about` : 'Categories'}>
             {categories.map((c) => (
               <Chip key={c} kind="suggestion" label={c} onPress={onCategory} />

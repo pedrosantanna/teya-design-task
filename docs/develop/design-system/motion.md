@@ -81,7 +81,7 @@ No screen changes without motion. Each transition starts from the element that w
 | Receipt → enlarged code | Zoom from the code | Container transform | Morph |
 | Any → Keep looking | Sheet from the button | Bottom sheet | Fade and scale |
 
-With Reduce Motion on, each of these is a crossfade. Pushes and sheets the app draws use `spring.smooth`; system zooms and the payment sheets keep the system's timing.
+With Reduce Motion on, each of these is a crossfade. Pushes and sheets the app draws use `spring.smooth`; system zooms and the payment sheets keep the system's timing. A sheet at the fit detent also uses `spring.smooth` to move to a new height when its content changes; under Reduce Motion it jumps.
 
 In the Expo app the zoom is Expo Router's `Link.AppleZoom`, which is alpha and needs iOS 18; Reanimated's shared element transitions are the other route and are experimental. The web build uses `document.startViewTransition`. Where none of them works, the change falls back to a push or a fade.
 

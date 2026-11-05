@@ -118,7 +118,7 @@ Os rótulos da tabela de estados mantêm o ponto na fonte como o lugar onde o es
 | --- | --- | --- |
 | Uma pergunta | "Would you go back?", respondida com um polegar para cima ou para baixo | Estrelas, notas de 0 a 10, "How satisfied were you?" |
 | Uma porcentagem de pessoas | "92%" grande, com "would go back" e "38 people" ao lado; a contagem sempre ao lado do número | "4.6", "9.2/10", um número sem a contagem |
-| Nunca arredondar para cima | 91,7% aparece como "91%"; contagens ficam como contagens ("Had it 24 of 25 times when they said yes") | "92%" para 91,7%, "100%" para 24 de 25 |
+| Nunca arredondar para cima | 91,7% aparece como "91%"; contagens ficam como contagens ("Had it 24 of 25 times they said yes") | "92%" para 91,7%, "100%" para 24 de 25 |
 | Poucas avaliações | Abaixo de 5, as tags e os sinais do Snuffle com "New on Snuffle" e "3 people so far"; nenhuma: "No ratings yet" e "Snuffle has asked them 4 times" | Uma porcentagem a partir de 3 pessoas |
 | Pessoas | "38 people" para a contagem; "buyers" onde a regra é sobre quem pode avaliar | customers, reviewers, users |
 | Primeiros nomes | Uma nota mostra o primeiro nome da pessoa com o mês ("Priya", "Oct 2026"); a nota da própria pessoa diz "You" | Sobrenomes, fotos, avatares, o tipo de compra |

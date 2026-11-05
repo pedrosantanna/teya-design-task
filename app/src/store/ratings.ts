@@ -143,8 +143,8 @@ export function reliabilityLines(shop: Shop): ReliabilityLine[] {
   if (r.hadItTotal >= MIN_ANSWERS_FOR_STOCK) {
     lines.push({
       key: 'stock',
-      title: `Had it ${r.hadItRight} of ${r.hadItTotal} times when they said yes`,
-      spoken: `Had it ${r.hadItRight} of ${r.hadItTotal} times when they said yes`,
+      title: `Had it ${r.hadItRight} of ${r.hadItTotal} times they said yes`,
+      spoken: `Had it ${r.hadItRight} of ${r.hadItTotal} times they said yes`,
     });
   } else {
     lines.push({

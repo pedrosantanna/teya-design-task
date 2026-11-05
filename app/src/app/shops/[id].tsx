@@ -9,13 +9,12 @@ import Navigation03Icon from '@hugeicons/core-free-icons/Navigation03Icon';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
-import { StyleSheet, useUnistyles } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 import { useShallow } from 'zustand/react/shallow';
 
 import { imageSource, images, type ImageKey } from '@/content/images';
 import {
   Button,
-  ListBlock,
   ListGroup,
   ListRow,
   Map,
@@ -58,6 +57,12 @@ import {
 import { foundRecently } from '@/store/found';
 
 const MAX_PHOTOS = 3;
+// Review text on a carousel card: as many lines as the summary card's height leaves.
+const REVIEW_LINES = 5;
+// Tags on the ratings summary card.
+const MAX_SUMMARY_TAGS = 3;
+// A tag longer than this would not fit the summary card on one line; it is dropped, never truncated.
+const MAX_TAG_CHARS = 18;
 // Reviews on the page; "See all" opens the rest.
 const PAGE_REVIEWS = 5;
 // Photo width if a photo is not bundled (then it comes from Unsplash): the carousel's width, about 300 pt on a phone.
@@ -77,6 +82,14 @@ function shopPhotos(shop: Shop): ShopPhoto[] {
   }));
 }
 
+/** Up to three tags that fit the summary card whole, the shortest first. */
+function summaryTags(ratings: ReturnType<typeof useShopRatings>) {
+  return topTags(ratings, 6)
+    .filter((t) => t.tag.length <= MAX_TAG_CHARS)
+    .slice(0, MAX_SUMMARY_TAGS)
+    .sort((a, b) => a.tag.length - b.tag.length);
+}
+
 /** The longest name the Ask button spells out; beyond it the button says "Ask" and the actions row keeps its trailing padding. */
 const ASK_NAME_MAX = 10;
 
@@ -94,7 +107,6 @@ function phoneFor(index: number): string {
 
 export default function ShopPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { theme } = useUnistyles();
   const content = useContent();
   const { goTo, set } = useAppActions();
   const { shopHours, loading } = useAppStore(useShallow((s) => ({ shopHours: s.shopHours, loading: s.loading })));
@@ -157,7 +169,6 @@ export default function ShopPage() {
                   categories={shop.categories}
                   priceLine={priceRangeLine(shop)}
                   onCategory={ask}
-                  accent={shopAccent(shop)}
                 />
               </View>
             ) : null}
@@ -194,39 +205,29 @@ export default function ShopPage() {
               <Text variant="sectionTitle" accessibilityRole="header">
                 Ratings
               </Text>
-              <View style={styles.ratings}>
-                <ListGroup shadow>
-                  <ListBlock>
+              <ReviewCarousel accessibilityLabel={`Ratings and reviews, ${quotes.length} of ${headline.total}`} count={quotes.length}
+                links={[
+                  ...(headline.total > 0 ? [{ label: `See all ${headline.total} reviews`, onPress: () => router.push({ pathname: '/reviews/[id]', params: { id: shop.id } }) }] : []),
+                  { label: 'How ratings work', onPress: () => setSheet('ratings') },
+                ]}
+              >
+                {(width) => (
+                  <>
                     <RatingSummary
+                      width={width.summary}
                       figure={headline.figure}
                       caption={headline.caption}
                       title={headline.title}
                       detail={headline.detail}
                       accessibilityLabel={headline.spoken}
-                      tags={topTags(ratings, 6)}
+                      tags={summaryTags(ratings)}
                     />
-                  </ListBlock>
-                </ListGroup>
-                {quotes.length > 0 ? (
-                  <ReviewCarousel accessibilityLabel={`Reviews, ${quotes.length} of ${headline.total}`} bleed={theme.space[6]} count={quotes.length}>
-                    {(width) => quotes.map((q) => <ReviewCard key={q.text} name={q.name} text={q.text} up={q.up} month={q.month} lines={5} width={width} />)}
-                  </ReviewCarousel>
-                ) : null}
-                <View style={styles.more}>
-                <ListGroup shadow>
-                  {headline.total > 0 ? (
-                    <ListRow
-                      title={`See all ${headline.total} reviews`}
-                      surface="card"
-                      chevron
-                      position="first"
-                      onPress={() => router.push({ pathname: '/reviews/[id]', params: { id: shop.id } })}
-                    />
-                  ) : null}
-                  <ListRow title="How ratings work" surface="card" chevron position={headline.total > 0 ? 'last' : 'only'} onPress={() => setSheet('ratings')} />
-                </ListGroup>
-                </View>
-              </View>
+                    {quotes.map((q) => (
+                      <ReviewCard key={q.text} name={q.name} text={q.text} up={q.up} month={q.month} lines={REVIEW_LINES} width={width.review} />
+                    ))}
+                  </>
+                )}
+              </ReviewCarousel>
             </View>
 
             {lines.length > 0 ? (
@@ -253,7 +254,7 @@ export default function ShopPage() {
         )}
       </ShopPageLayout>
 
-      <Sheet open={sheet === 'call'} onClose={() => setSheet(null)} title={`Call ${shop.name}`} detents={['medium']}>
+      <Sheet open={sheet === 'call'} onClose={() => setSheet(null)} title={`Call ${shop.name}`} detents={['fit']}>
         <Text variant="title2" selectable>
           {phoneFor(index)}
         </Text>
@@ -262,7 +263,7 @@ export default function ShopPage() {
         </Text>
       </Sheet>
 
-      <Sheet open={sheet === 'reliability'} onClose={() => setSheet(null)} title="How we work this out" detents={['medium', 'large']}>
+      <Sheet open={sheet === 'reliability'} onClose={() => setSheet(null)} title="How we work this out" detents={['fit']}>
         <Text variant="subheadline">
           Answers counts the requests Snuffle sent this shop and how many it answered, in tenths, rounded down.
         </Text>
@@ -277,7 +278,7 @@ export default function ShopPage() {
         </Text>
       </Sheet>
 
-      <Sheet open={sheet === 'ratings'} onClose={() => setSheet(null)} title="How ratings work" detents={['medium', 'large']}>
+      <Sheet open={sheet === 'ratings'} onClose={() => setSheet(null)} title="How ratings work" detents={['fit']}>
         <Text variant="subheadline">Only buyers rate: people who bought here through Snuffle and collected the item or had it delivered.</Text>
         <Text variant="subheadline">They answer one question, would you go back, with a thumbs up or down, and can add tags and a short note.</Text>
         <Text variant="subheadline">
@@ -310,8 +311,5 @@ function reliabilityKind(shop: Shop, line: ReliabilityLine): ReliabilityKind {
 
 const styles = StyleSheet.create((theme) => ({
   section: { gap: theme.gap.heading },
-  ratings: { gap: theme.gap.block },
-  // The links to the rest sit 24 pt under what comes before them (the block gap and this).
-  more: { paddingTop: theme.space[3] },
   route: { aspectRatio: 3 / 2, borderRadius: theme.radius.inner, overflow: 'hidden' },
 }));

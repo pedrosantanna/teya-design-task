@@ -46,16 +46,16 @@ export const Chip = memo(function Chip({ label, kind = 'filter', selected = fals
   // Card section, Muted; on a chat's white ground, the chat chip colour. On: Card with Indigo 800 semibold text and
   // a 1.5 pt Indigo 800 edge (decision 049).
   // Dark has no edges (round 10): every chip is a tonal container one clear step from its ground. Off: tag.fill on the
-  // Background and a chat, tag.fillRaised on a sheet and a Card section, the shop accent's tile where a shop colours its
-  // chips (the shop page's "What they sell", on a row card: 1.4:1 from the row in dark, 1.45:1 in light), the accent's
-  // cardOnTile on a tile (the rows' colour, 1.4:1 from the tile). On: Indigo 900 (chipSelected) on
+  // Background and a chat, tag.fillRaised on a sheet and a Card section, tag.fillOnRow on a row inside the shop
+  // page card (its "What they sell" and rating tags: the Background on the white row in light, 1.21:1; tag.fillRaised in dark,
+  // 1.36 to 1.41:1; no edge, no tile colour), the accent's cardOnTile on a tile (the rows' colour, 1.4:1 from the tile). On: Indigo 900 (chipSelected) on
   // the Background and a chat, Indigo 850 (chipSelectedRaised) on the raised grounds, Indigo 950 (chipSelectedOnTile) on a
   // tile, with Indigo 200 semibold text.
   const ground = useGround();
   const accent = useGroundAccent();
   const dark = theme.scheme === 'dark';
   const raised = ground === 'sheet' || ground === 'card';
-  const tinted = raised && accent && !on ? theme.color.shop.accent[accent] : undefined;
+  const onRow = ground === 'card' && !on;
   const plain = (ground === 'background' || ground === 'sheet') && !dark;
   const lightOff =
     ground === 'chat'
@@ -63,23 +63,23 @@ export const Chip = memo(function Chip({ label, kind = 'filter', selected = fals
       : ground === 'tile'
         ? withAlpha(theme.color.tonalOnTile, theme.state.tonalOnTile)
         : ground === 'card'
-          ? theme.color.muted
+          ? theme.color.tag.fillOnRow
           : plain
             ? theme.color[ground === 'sheet' ? 'sheet' : 'background']
             : theme.color.card;
   const darkOff =
     ground === 'tile'
       ? accent ? theme.color.shop.accent[accent].cardOnTile : withAlpha(theme.color.tonalOnTile, theme.state.tonalOnTile)
-      : tinted
-        ? tinted.tile
+      : onRow
+        ? theme.color.tag.fillOnRow
         : raised
           ? theme.color.tag.fillRaised
           : theme.color.tag.fill;
   const off = dark ? darkOff : lightOff;
   // The edge keeps the chip's size when it turns on; in dark it is the fill's own colour, so nothing shows.
   const lightEdge = ground === 'chat' ? theme.color.chat.fieldEdge : plain ? withAlpha(theme.color.glassEdge, theme.state.chipEdge) : off;
-  const fillOff = tinted && !dark ? tinted.tile : off;
-  const edgeOff = dark ? off : tinted ? tinted.tile : lightEdge;
+  const fillOff = off;
+  const edgeOff = dark || onRow ? off : lightEdge;
   const onFill = dark ? (ground === 'tile' ? theme.color.chipSelectedOnTile : raised ? theme.color.chipSelectedRaised : theme.color.chipSelected) : theme.color.card;
   const onEdge = dark ? onFill : theme.color.chipOn;
 

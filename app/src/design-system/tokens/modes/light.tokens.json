@@ -54,6 +54,10 @@
       "fillRaised": {
         "$value": "{color.sheet}",
         "$description": "Read in dark only; see tag.fill (tags.md)"
+      },
+      "fillOnRow": {
+        "$value": "{color.background}",
+        "$description": "A chip on a row inside the shop page card (What they sell, the rating tags): the Background, 1.21:1 from the white row, no edge, Foreground text 16.3:1 and Muted foreground 6.3:1 (tags.md)"
       }
     },
     "onChipSelected": {

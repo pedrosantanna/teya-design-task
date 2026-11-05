@@ -54,7 +54,7 @@ export function LocationSheet({ open, onClose, origin, onConfirm }: { open: bool
   };
 
   return (
-    <Sheet open={open} onClose={onClose} title="Where are you shopping?" detents={['medium', 'large']} origin={origin} onConfirm={confirm} confirmLabel="Confirm">
+    <Sheet open={open} onClose={onClose} title="Where are you shopping?" fitMin="opened" origin={origin} onConfirm={confirm} confirmLabel="Confirm">
       <TextField value={query} onChangeText={setQuery} label="Search for an address" placeholder="Search for an address" icon={Search01Icon} />
       {q ? (
         results.length > 0 ? (

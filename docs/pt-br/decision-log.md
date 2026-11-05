@@ -487,5 +487,12 @@ Todo pedido da lista de Requests abre como uma conversa completa, com histórico
 **Por quê:** os pedidos antigos abriam como uma mensagem sem como agir, então não ficava claro o que fazer nem onde responder. Num chat branco o campo era bege, e na lista de Requests, que é bege, o mesmo campo sumia; um fundo e um campo resolvem os dois e tiram o salto de cor ao abrir uma conversa.
 **Em aberto:** comprar a partir de um pedido antigo pula as sheets de detalhes e de pagamento, e uma avaliação dada ali não chega à página da loja.
 
+## 060 · Avaliações num painel, um chip discreto, sheets do tamanho do conteúdo
+**2026-11-05 · Decidido**
+
+As avaliações da página da loja são um painel: um carrossel cujo primeiro cartão é o resumo (a fatia de quem voltaria, a contagem de pessoas, até três tags) e cujos cartões seguintes são avaliações, todos da mesma altura, com "See all N reviews" e "How ratings work" no pé do painel. Os chips numa linha dentro do cartão da loja têm um único preenchimento neutro e discreto, sem borda e sem a cor do tile, tags de avaliação incluídas. O pin da loja fica centrado entre o fim da status bar e o cartão. Sheets de ações e de ajustes abrem na altura do conteúdo, até o detent grande (o detent personalizado do iOS; a bottom sheet do Material faz o mesmo), e a sheet de localização não encolhe enquanto o comprador digita; Directions mantém o detent médio porque o mapa atrás importa. A arte da Bakery é um saco de papel com baguetes e um pão com cortes, e a do Deli põe o pote e o queijo lado a lado.
+
+**Por quê:** as avaliações eram três grupos separados e a lista ficava longa; um painel as mantém juntas e fáceis de ler. Chips na própria cor do cartão pareciam buracos, e os com borda pareciam campos. Uma sheet que abria pela metade escondia parte de Account. O vídeo do splash na página da Marca agora toca uma vez, porque um loop de 2,4 s parecia piscar.
+
 ## Ainda em aberto
 

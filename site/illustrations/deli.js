@@ -19,10 +19,10 @@ export default {
     const rind = k.mesh(new THREE.CylinderGeometry(R + 0.012, R + 0.012, H, 64, 1, true, -Math.PI / 2 - A / 2, A), P.peach[500],
       { pos: [0, H / 2, 0], part: 'rind' });
     rind.material.side = THREE.DoubleSide;
-    const cheese = k.group([wedge, rind], [0.62, 0, 0.18]);
-    cheese.rotation.y = 0.75;
+    const cheese = k.group([wedge, rind], [0.36, 0, -0.3]);
+    cheese.rotation.y = 1.5;
 
-    const jx = -0.45, jz = -0.35;
+    const jx = -0.45, jz = 0.4;
     const jar = k.group([
       k.lathe([[0, 0], [0.2, 0], [0.22, 0.03], [0.22, 0.5], [0.19, 0.55], [0.17, 0.57], [0, 0.57]], P.pistachio[500], [0, 0, 0]),
       k.cyl(0.224, 0.224, 0.2, P.biscuit.card, [0, 0.26, 0], { part: 'label' }),

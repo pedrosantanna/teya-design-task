@@ -25,7 +25,7 @@ const icons: Record<ReliabilityKind, IconSvgElement> = {
 
 export type ReliabilityRowProps = {
   kind: ReliabilityKind;
-  /** "Answers 9 in 10 requests", "Usually replies in 6 min", "Had it 24 of 25 times when they said yes". */
+  /** "Answers 9 in 10 requests", "Usually replies in 6 min", "Had it 24 of 25 times they said yes". */
   title: string;
   /** Footnote under the title: "46 of 51 so far". */
   detail?: string;

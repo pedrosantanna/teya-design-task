@@ -118,7 +118,7 @@ The state table's labels keep their dot in the source as the place where the sta
 | --- | --- | --- |
 | One question | "Would you go back?", answered with a thumbs up or down | Stars, scores out of 10, "How satisfied were you?" |
 | A percentage of people | "92%" large, with "would go back" and "38 people" beside it; the count always beside the figure | "4.6", "9.2/10", a figure without its count |
-| Never round up | 91.7% shows as "91%"; counts stay as counts ("Had it 24 of 25 times when they said yes") | "92%" for 91.7%, "100%" for 24 of 25 |
+| Never round up | 91.7% shows as "91%"; counts stay as counts ("Had it 24 of 25 times they said yes") | "92%" for 91.7%, "100%" for 24 of 25 |
 | Few ratings | Below 5, tags and Snuffle's signals with "New on Snuffle" and "3 people so far"; none: "No ratings yet" and "Snuffle has asked them 4 times" | A percentage from 3 people |
 | People | "38 people" for the count; "buyers" where the rule is about who can rate | customers, reviewers, users |
 | First names | A note shows the person's first name with the month ("Priya", "Oct 2026"); the shopper's own note says "You" | Surnames, photos, avatars, the type of purchase |
