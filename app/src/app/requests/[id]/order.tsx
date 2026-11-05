@@ -5,7 +5,7 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import {
@@ -32,7 +32,8 @@ const REFUNDED: string[] = ['cancelled', 'notCollected'];
 // The receipt (v7 frames "Bought: the receipt" and "At the counter: the code, full screen"): status, the
 // collection code, where and what was paid, Directions, Extend and Cancel for a refund.
 export default function Receipt() {
-  const { theme, rt } = useUnistyles();
+  const { theme } = useUnistyles();
+  const frame = useSafeAreaFrame();
   const insets = useSafeAreaInsets();
   const scroll = useNavBarScroll();
   const top = useNavBarHeight();
@@ -42,7 +43,7 @@ export default function Receipt() {
   const codeOpen = useSim((s) => s.codeOpen);
   const [confirm, setConfirm] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
-  const margin = screenMargin(theme, rt.screen.width);
+  const margin = screenMargin(theme, frame.width);
   const back = () => (router.canGoBack() ? router.back() : router.navigate('/requests'));
 
   if (!order) {

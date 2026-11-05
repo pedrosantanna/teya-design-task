@@ -29,6 +29,13 @@ export function TagExamples() {
         <Chip kind="suggestion" label="Picture hooks" />
       </View>
       <Text variant="caption1" color="mutedForeground">
+        Menu chips (a value already set; a tap opens its choices)
+      </Text>
+      <View style={styles.row}>
+        <Chip kind="menu" label="Within 15 min" onPress={() => undefined} />
+        <Chip kind="menu" label="Any time" onPress={() => undefined} />
+      </View>
+      <Text variant="caption1" color="mutedForeground">
         Status labels
       </Text>
       <View style={styles.column}>

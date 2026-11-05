@@ -19,6 +19,19 @@ import tea from './tea.js';
 import people from './people.js';
 import flowers from './flowers.js';
 import hardware from './hardware.js';
+import butcher from './butcher.js';
+import fishmonger from './fishmonger.js';
+import chemist from './chemist.js';
+import camera from './camera.js';
+import stationery from './stationery.js';
+import books from './books.js';
+import newsagent from './newsagent.js';
+import deli from './deli.js';
+import plant from './plant.js';
+import games from './games.js';
+import train from './train.js';
+import bread from './bread.js';
 
 export default [shop, shopPlain, corner, crossroads, basket, scooter, box,
-  phonebox, pillarbox, busstop, litterbin, bench, cafetable, lamppost, mannequin, bag, glasses, tea, flowers, hardware, people];
+  phonebox, pillarbox, busstop, litterbin, bench, cafetable, lamppost, mannequin, bag, glasses, tea, flowers, hardware,
+  bread, train, butcher, fishmonger, chemist, camera, stationery, books, newsagent, deli, plant, games, people];

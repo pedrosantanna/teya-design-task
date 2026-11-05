@@ -32,7 +32,7 @@ export function jobs(m, filter = {}) {
               const key = `${ill.name}/${ground}/${sizeName}/${scale}`;
               if (seen.has(key)) continue;
               seen.add(key);
-              out.push({ ill, ground, color: m.grounds[ground], dark: m.groundTones?.[ground], sizeName, size, scale });
+              out.push({ ill, ground, color: tokenHex(scheme, `color.${g}`), dark: m.groundTones?.[ground], sizeName, size, scale });
             }
           }
         }
@@ -79,3 +79,30 @@ export async function tool(name, hint) {
   }
   throw new Error(`${name} is not installed. Run through npx, e.g.\n  ${hint}`);
 }
+
+// Colour tokens (src/design-system/tokens), so the grounds the pipeline bakes come from the same source as the app.
+// tokenHex('dark', 'color.shop.accent.butter.tile') → '#423717'. The scheme's mode file wins over the shared ones.
+const TOKENS = path.join(APP, 'src/design-system/tokens');
+const tokenFiles = {};
+const loadTokens = (scheme) =>
+  (tokenFiles[scheme] ??= [`modes/${scheme}.tokens.json`, 'semantic.tokens.json', 'primitives.tokens.json'].map((f) => JSON.parse(readFileSync(path.join(TOKENS, f), 'utf8'))));
+export function tokenHex(scheme, ref, depth = 0) {
+  if (depth > 8) throw new Error(`Token alias loop at ${ref}`);
+  for (const file of loadTokens(scheme)) {
+    const node = ref.split('.').reduce((o, k) => (o && typeof o === 'object' ? o[k] : undefined), file);
+    if (!node || !('$value' in node)) continue;
+    const v = node.$value;
+    if (typeof v === 'string' && v.startsWith('{')) return tokenHex(scheme, v.slice(1, -1), depth + 1);
+    if (v && typeof v === 'object' && v.hex) return v.hex.toUpperCase();
+    if (typeof v === 'string' && /^#[0-9a-f]{6}$/i.test(v)) return v.toUpperCase();
+    throw new Error(`Token ${ref} is not a colour`);
+  }
+  throw new Error(`No token ${ref} for ${scheme}`);
+}
+
+// A category card's baking colours: the ground is the kind's tile token (color.shop.accent.<ramp>.tile), and shade
+// and shadow mix toward the ramp's 800 (light) or 900 (dark) step.
+export const categoryColors = (ramp, scheme) => ({
+  ground: tokenHex(scheme, `color.shop.accent.${ramp}.tile`),
+  dark: tokenHex(scheme, `color.${ramp}.${scheme === 'light' ? 800 : 900}`),
+});

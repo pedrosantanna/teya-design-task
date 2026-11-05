@@ -1,10 +1,12 @@
 // Where the shopper is in a short run of pages (Getting started): one dot per page, the current one in
-// Foreground and the rest in the border colour. The dots aren't buttons; swipe and Continue move between pages.
+// Foreground and the rest in Foreground at state.pageDotOff, so they take the colour of the ground (Getting started's Indigo). The dots aren't buttons; swipe and Continue move between pages.
 // The current dot's colour moves with spring.fade.
 import { memo, useEffect } from 'react';
 import { View } from 'react-native';
 import Animated, { interpolateColor, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
+
+import { withAlpha } from '../../theme';
 
 export type PageDotsProps = {
   count: number;
@@ -18,7 +20,7 @@ function Dot({ on }: { on: boolean }) {
   useEffect(() => {
     value.set(withSpring(on ? 1 : 0, theme.spring.fade));
   }, [on, value, theme.spring.fade]);
-  const off = theme.color.border;
+  const off = withAlpha(theme.color.foreground, theme.state.pageDotOff);
   const current = theme.color.foreground;
   const style = useAnimatedStyle(() => ({ backgroundColor: interpolateColor(value.get(), [0, 1], [off, current]) }));
   return <Animated.View style={[styles.dot, style]} />;

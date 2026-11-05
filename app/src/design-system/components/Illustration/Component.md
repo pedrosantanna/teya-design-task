@@ -10,7 +10,8 @@ A 3D illustration from `docs/develop/design-system/illustrations.md`, shipped as
 | Asking the shops | `scooter` (entry, then idle) | background |
 | Empty states (Nearby, Requests) | `crossroads` | background |
 | Not found | `quietstreet` | background |
-| Shop page, Getting started | `shop` (entry, then idle) | background |
+| Shop page | `shop` (entry, then idle) | background |
+| Getting started | `crossroads`, `shop` (entry, then idle), `box` at `size="welcome"` | welcome: each page's own Indigo step |
 | Nearby, Shops by kind | category art through `CategoryCard` | the card's tile colour |
 
 The images come from `app/scripts/illustrations` (see its `manifest.json`): `render.mjs` renders frames from the docs viewer's export mode, `encode.mjs` writes `app/assets/illustrations/` and `manifest.generated.ts`. Never edit the generated file.
@@ -20,8 +21,8 @@ The images come from `app/scripts/illustrations` (see its `manifest.json`): `ren
 | Prop | Type | Default | Notes |
 | --- | --- | --- | --- |
 | `name` | `IllustrationName` | required | `basket`, `box`, `scooter`, `crossroads`, `quietstreet`, `shop` |
-| `size` | `'small'`, `'medium'`, `'large'`, `'hero'` | `'large'` | 64, 88, 120, 220 pt. 120 pt is rendered for every illustration and smaller sizes draw it scaled down; 220 pt (hero) is rendered only for crossroads, shop, box and quietstreet on the Background, for Getting started and the location ask |
-| `ground` | `'background'`, `'card'` | `'background'` | The surface behind it; light or dark follows the theme. Each illustration is rendered for the one ground its screen uses (table above); asking for the other falls back to it |
+| `size` | `'small'`, `'medium'`, `'large'`, `'hero'`, `'welcome'` | `'large'` | 64, 88, 120, 220, 240 pt. 120 pt is rendered for every illustration and smaller sizes draw it scaled down; 220 pt (hero) only for quietstreet on the location ask; 240 pt (welcome) only for Getting started |
+| `ground` | `'background'`, `'card'`, `'welcome'` | `'background'` | The surface behind it; light or dark follows the theme. Each illustration is rendered for the one ground its screen uses (table above); asking for the other falls back to it |
 | `play` | `'entry-then-idle'`, `'idle'`, `'still'` | `'entry-then-idle'` | Entry plays once (its length is in the manifest), then the idle loop, or the still when there is none |
 | `accessibilityLabel` | string | none | Only when the picture carries meaning. Without it the illustration is decorative and hidden from VoiceOver and TalkBack |
 
@@ -29,7 +30,8 @@ The images come from `app/scripts/illustrations` (see its `manifest.json`): `ren
 
 - With Reduce Motion (Reanimated `useReducedMotion`) it shows the still and never animates.
 - The still is the clip's placeholder, so nothing blinks while a WebP decodes; it is also the entry's last frame and the idle's first.
-- Files are required by base name (`basket.card-light.120.png`). Stills ship at @2x and @3x; clips only at @3x, which Metro also serves to @2x screens, and hero clips only at @2x, to keep the set under 5 MB (4.84 MB). Shade and cast shadow mix toward a warm dark tone from the Biscuit ramp per ground (`groundTones` in the pipeline manifest). In dark mode the quietstreet iron is recoloured lighter (#8C847B) so the lamp and bench read on #100A06.
+- Files are required by base name (`basket.card-light.120.png`). Stills ship at @2x and @3x; clips only at @3x, which Metro also serves to @2x screens, and hero clips only at @2x, to keep the set under 5 MB (4.84 MB). Shade and cast shadow mix toward a warm dark tone from the Biscuit ramp per ground (`groundTones` in the pipeline manifest). In dark mode the quietstreet iron is recoloured lighter (#8C847B) so the lamp and bench read on #0E0B09.
+- Getting started's art (`ground="welcome"`) comes from the pipeline's `welcome` set: each object on its own page's Indigo step, transparent so the blending page ground shows no edge, shade and shadow toward Indigo 900. Stills at @2x and @3x, clips at @2x, each under 300 KB.
 - On dark grounds the basket is rendered with lighter shade tones (`darkTones` in the manifest) so it stays legible.
 
 ## Category cards

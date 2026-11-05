@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { ScrollView, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { Button, Text, screenMargin } from '@/design-system';
@@ -20,7 +20,8 @@ import {
 // Stand-in for the journey's screens until their changes land: shows the v7 frame's name and every value the
 // store holds for it, so each debugger control has something to change. Each change replaces one step here.
 export default function StepPreview() {
-  const { theme, rt } = useUnistyles();
+  const { theme } = useUnistyles();
+  const frame = useSafeAreaFrame();
   const insets = useSafeAreaInsets();
   const { step: id } = useLocalSearchParams<{ step: string }>();
   const step = stepById(id);
@@ -37,7 +38,7 @@ export default function StepPreview() {
   const pageShop = shopById(content, 'rossis') ?? content.shops[0];
 
   return (
-    <ScrollView contentContainerStyle={styles.content(screenMargin(theme, rt.screen.width), insets.top, insets.bottom)}>
+    <ScrollView contentContainerStyle={styles.content(screenMargin(theme, frame.width), insets.top, insets.bottom)}>
       <Button label="Nearby" role="plain" size="compact" onPress={() => (router.canGoBack() ? router.back() : router.navigate('/'))} />
       <View style={styles.group}>
         <Text variant="footnote" color="mutedForeground">

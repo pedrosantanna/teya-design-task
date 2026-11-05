@@ -10,6 +10,7 @@ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { FloatingSurface } from '../../internal/FloatingSurface';
 import { haptic } from '../../internal/haptics';
+import { useDismissKeyboardOnBlur, useReleaseOnUnmount, type FieldRef } from '../../internal/keyboard';
 import { measureOrigin, measureView, type ViewRef } from '../../internal/origins';
 import { setMorphTarget } from '../../internal/transitions';
 import { usePress } from '../../internal/usePress';
@@ -40,6 +41,9 @@ export type ComposerProps = {
   chips?: ReactNode;
   autoFocus?: boolean;
   onFocus?: () => void;
+  /** The field's native id: links it to a `KeyboardGestureArea`, so an interactive keyboard dismiss starts at the
+   *  composer instead of at the keyboard's top edge (iOS). */
+  nativeID?: string;
   /** The field is a button that opens the Ask screen (Nearby), so the keyboard opens there, not here. */
   onFieldPress?: () => void;
   /** The Snuffle glyph at the start of the field, as on the ask bar (New Request). */
@@ -71,6 +75,7 @@ export const Composer = memo(function Composer({
   chips,
   autoFocus,
   onFocus,
+  nativeID,
   onFieldPress,
   mark = false,
   morphFrom,
@@ -82,6 +87,11 @@ export const Composer = memo(function Composer({
   const sendPress = usePress('primary');
   const requestsPress = usePress();
   const fieldPress = usePress();
+  // The keyboard goes with the field: it closes when this screen loses focus (New Request pushing the chat, a pop
+  // back to Nearby) and if the field unmounts focused. The ask bar has no field, so it leaves the keyboard alone.
+  const inputRef = useRef<FieldRef | null>(null);
+  useDismissKeyboardOnBlur(!onFieldPress);
+  const release = useReleaseOnUnmount();
 
   // The morph from the ask bar: 1 at rest; at 0 the glass sits on the origin's rectangle.
   const glassRef = useRef<ViewRef>(null);
@@ -186,7 +196,7 @@ export const Composer = memo(function Composer({
                   </Text>
                 </View>
                 <View style={styles.trailing}>
-                  <Icon icon={Mic01Icon} size="mic" color="foreground" />
+                  <Icon icon={Mic01Icon} size="mic" color="mutedForeground" />
                 </View>
               </View>
             </FloatingSurface>
@@ -203,16 +213,24 @@ export const Composer = memo(function Composer({
                 </View>
               ) : null}
               <TextInput
-                ref={dropWebOutline}
+                ref={(node) => {
+                  inputRef.current = node;
+                  dropWebOutline(node);
+                }}
                 value={value}
                 onChangeText={onChangeText}
                 placeholder={placeholder ?? (mode === 'ask' ? 'Ask for anything nearby' : 'Reply')}
                 placeholderTextColor={theme.color.mutedForeground}
-                accessibilityLabel="Ask Snuffle"
+                accessibilityLabel={mode === 'ask' ? 'Ask Snuffle' : 'Reply'}
                 multiline
                 rows={1}
                 autoFocus={autoFocus}
-                onFocus={onFocus}
+                onFocus={() => {
+                  release.onFocus();
+                  onFocus?.();
+                }}
+                onBlur={release.onBlur}
+                nativeID={nativeID}
                 // Web: Enter sends, Shift+Enter starts a new line. The phones send from the keyboard's Send key.
                 onKeyPress={
                   Platform.OS === 'web'
@@ -252,7 +270,7 @@ export const Composer = memo(function Composer({
                   </Animated.View>
                 ) : (
                   <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
-                    <Icon icon={Mic01Icon} size="mic" color="foreground" />
+                    <Icon icon={Mic01Icon} size="mic" color="mutedForeground" />
                   </View>
                 )}
               </View>
@@ -286,10 +304,11 @@ const styles = StyleSheet.create((theme) => ({
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: theme.space[2],
-    paddingTop: (theme.size.field - theme.size.button.compact) / 2,
-    paddingHorizontal: (theme.size.field - theme.size.button.compact) / 2,
+    // space.3 around the chips, so they don't crowd the capsule's rounded corners.
+    paddingTop: theme.space[3],
+    paddingHorizontal: theme.space[3],
   },
-  // 16 before the glyph, 10 between parts, 14 from the end to the mic's icon (its 44 box reaches past it).
+  // 16 before the glyph, 12 between parts, 16 from the end to the mic's icon (its 44 box reaches past it).
   line: {
     flexDirection: 'row',
     alignItems: 'flex-end',

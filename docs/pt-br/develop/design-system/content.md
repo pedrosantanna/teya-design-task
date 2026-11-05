@@ -8,14 +8,18 @@ Takeaways:
 - O Snuffle relata o que as lojas disseram; um cartão de resposta traz os fatos da loja e diz de onde vieram.
 - Mensagens de erro e de desfecho dizem o que aconteceu, onde está o dinheiro e o que fazer em seguida, nessa ordem.
 - Os formatos são do inglês do Reino Unido, em 12 horas: "by 4pm", "4:30pm", "Mon 9 Nov", "£6", "£14.99", "13 min walk", "9+". Os textos passam por plurais ICU, só en-GB.
+- As avaliações fazem uma pergunta só, "Would you go back?", e mostram a resposta como porcentagem de quem comprou, com a contagem ao lado, arredondada para baixo. Sem estrelas, sem "Excellent!", nunca "verified". As regras do Reino Unido sobre avaliações de consumidores definem como as avaliações são coletadas e mostradas.
 Call:
 - Depois que uma revisão de design encontrou faltando especificações de componentes, estados, equivalentes de plataforma e regras de conteúdo, pedi que o design system ficasse completo o bastante para construir o protótipo a partir dele.
 - Escolhi horários em 12 horas em todo o texto, inclusive nos carimbos de hora, e mantive estas regras provisórias (decisão 043).
+- Depois pedi avaliações na página da loja. Escolhi um polegar para cima ou para baixo em vez de estrelas e uma contestação para as lojas, e defini as regras a partir do DMCC Act e do guia da CMA sobre avaliações falsas (decisão 047).
 AI:
 - Um agente revisou o design system contra as telas da v7 e encontrou formatos de hora misturados (carimbos em 24 horas ao lado de "by 4pm"). Outro agente escreveu esta página a partir do texto da v7 e do modelo conceitual.
+- Um agente leu o Schedule 20 do DMCC Act 2024 e o guia da CMA (CMA208) e transformou cada dever numa regra para as telas do Snuffle.
 Trade-offs:
 - Horários em 12 horas seguem o jeito como se fala no Reino Unido e o estilo do GOV.UK, e ocupam um pouco mais de largura que os de 24 horas nas linhas.
 - Uma voz simples e sem desculpas pode soar fria quando algo dá errado; dizer primeiro a situação do dinheiro é o que deve mostrar o cuidado.
+- Arredondar para baixo e mostrar a contagem de quem comprou fazem a loja parecer um pouco pior do que uma média de estrelas faria; escolhi isso porque uma nota que nunca bajula é uma em que compradores e lojas conseguem confiar.
 ```
 
 ## A voz do Snuffle
@@ -53,6 +57,35 @@ Toda mensagem depois que algo dá errado, ou depois que uma compra termina, tem 
 ## Rótulos de botão
 
 Os botões são verbos do modelo conceitual, em sentence case, com o objeto da ação quando ajuda: Buy, "Buy 1", "Buy · £29.98", Ask, "Ask Rossi's", Extend, "Extend to Mon 16 Nov", "Cancel for a refund", "Keep looking", "Try again", "Show me", "No thanks", Call, Rate. Directions mantém o substantivo de costume da plataforma. Um botão nunca diz OK, Submit ou Continue quando cabe um verbo do modelo.
+
+## Avaliações
+
+| Regra | Na prática | Nunca |
+| --- | --- | --- |
+| Uma pergunta | "Would you go back?", respondida com um polegar para cima ou para baixo | Estrelas, notas de 0 a 10, "How satisfied were you?" |
+| Uma porcentagem de quem comprou | "92% would go back · 38 buyers"; a contagem sempre ao lado do número | "4.6", "9.2/10", um número sem a contagem |
+| Nunca arredondar para cima | 91,7% aparece como "91%"; contagens ficam como contagens ("Had it 24 of 25 times when they said yes") | "92%" para 91,7%, "100%" para 24 de 25 |
+| Poucas avaliações | Abaixo de 5, as tags e os sinais do Snuffle com "New on Snuffle · 3 buyers so far"; nenhuma: "No ratings yet · Snuffle has asked them 4 times" | Uma porcentagem a partir de 3 pessoas |
+| Quem comprou | "buyers", "38 buyers" | customers, reviewers, users |
+| Vereditos simples | "Would go back", "Wouldn't go back" e as tags fixas | "Excellent!", "Top rated", "Highly recommended" |
+| Origem em todo sinal | "What buyers said", "What Snuffle saw", "from 31 requests on Snuffle", "from the shop's till" | "verified", "trusted", "guaranteed" |
+| Datas pelo mês | "Oct 2026", "Edited Oct 2026" | "3 weeks ago", "12/10/2026" |
+| Um elemento por linha | Cada sinal é uma linha com rótulo completo: "Would go back, 92 percent of 38 buyers"; a cor e o glifo de polegar nunca levam o sentido sozinhos | Um número verde ou vermelho sem palavras |
+
+## Regras sobre avaliações
+
+O Schedule 20 do Digital Markets, Competition and Consumers Act 2024 (parágrafo 13), em vigor desde 6 de abril de 2025, proíbe avaliações falsas e avaliações com incentivo escondido, e exige que uma plataforma que publica avaliações tome medidas razoáveis e proporcionais para evitá-las e removê-las. O guia da CMA (CMA208) diz como são essas medidas. O Snuffle as segue como regras de produto:
+
+| Dever | Snuffle |
+| --- | --- |
+| As avaliações vêm de quem teve a experiência | Só uma compra marcada como Collected ou Delivered pode ser avaliada, uma avaliação por compra, editável por 30 dias |
+| Nada de conteúdo falso ou nocivo | As notas passam por filtro de abuso e de dados pessoais antes de aparecer; a loja pode contestar um caso específico |
+| Avaliações negativas não são suprimidas | Avaliações negativas nunca são retidas nem atrasadas; os cartões em destaque espelham a divisão geral, então com 10% de polegares para baixo pelo menos um cartão negativo aparece quando há mais de 10 avaliações |
+| Nada de review gating (CMA208, 4.5) | O Snuffle pergunta a todos que compraram uma compra retirada ou entregue, nunca só a quem ele espera que esteja satisfeito, com no máximo um lembrete |
+| Resumos por IA refletem opiniões reais | Um resumo é feito só com as notas de quem comprou e leva o rótulo "Summary by Snuffle from buyers' notes" |
+| Avaliações com incentivo são declaradas | O Snuffle nunca recompensa uma avaliação; uma avaliação que a loja pagou ou recompensou é marcada como tal |
+| A loja pode responder | A loja pode responder uma vez, em público, abaixo de uma avaliação |
+| As pessoas sabem como as avaliações funcionam | "How ratings work", com link no resumo das avaliações, diz quem pode avaliar, o que é filtrado e como os números são calculados |
 
 ## Formatos
 
@@ -96,6 +129,8 @@ O app sai só em en-GB. Todo texto fica numa tabela de strings e passa pelo ICU 
 
 ## Fontes
 
+- Digital Markets, Competition and Consumers Act 2024, Schedule 20, parágrafo 13: https://www.legislation.gov.uk/ukpga/2024/13/schedule/20
+- Competition and Markets Authority, Fake reviews guidance (CMA208), 2025: https://assets.publishing.service.gov.uk/media/67eeb64fe9c76fa33048c790/CMA208_-_Fake_reviews_guidance.pdf
 - GOV.UK, guia de estilo (horários, datas, dinheiro): https://www.gov.uk/guidance/style-guide/a-to-z
 - Apple, Human Interface Guidelines, Writing: https://developer.apple.com/design/human-interface-guidelines/writing
 - Material 3, content design: https://m3.material.io/foundations/content-design/overview

@@ -41,8 +41,8 @@ Trade-offs:
 | --- | --- | --- | --- |
 | Large tile (Open near you) | 4:3 | `tile.large` | `radius.bubble` |
 | Medium tile (New near you) | 4:3 | `tile.medium` | `radius.bubble` |
-| Category cell | 1:1 | Category cell | `radius.bubble` |
-| Shop or request thumbnail | 1:1 | 56 in rows, 40 in answer rows | `radius.inner` |
+| Category card | 120 × 164, the still in its top 120 square | Category card | `radius.bubble` |
+| Shop or request thumbnail | 1:1 | 40 in shop rows and answer rows, 56 in request rows | `radius.inner` |
 | Shop page header | 3:2 | Full bleed | `radius.none` |
 | Snuffle mark in the chat | 1:1 | 28 | Circle |
 | Shop logo or monogram | 1:1 | 24 on a thumbnail, 40 on a shop row | Circle |
@@ -65,7 +65,7 @@ Sizes are in pt on iOS and dp on Android. Tile widths are on [Spacing and layout
 | Scrim only when needed | A 0 → 40% black gradient only under badges or glass buttons on a photo |
 | Placeholder tile | The shop's tonal tile ([Colour](colour.md), Shop accents): the `tile` step of the shop's accent, initials in Switzer 600 in the `ink` step, and the mark's five-stripe awning as a band across the top. It sits under every shop photo, so a loading or failed photo shows the shop's colour; answer cards and the shop circles on request rows show the tile alone |
 | Map data | MapLibre on iOS, Android and the web, with bundled OpenStreetMap data: GeoJSON on the web, PMTiles or GeoJSON in the app. "© OpenStreetMap contributors" is shown on the map, in the app and in the recording |
-| Map style | Generated from the palette. Ground Butter 50 (#F9F7F0), dark #2B2420; roads Biscuit grey (#E5E2DE, dark #332C27); parks and water in muted tints; buildings extruded in 3D at a default height of 8 m where the data has none, seen at a pitch of 45–60°. No labels or points of interest until I decide on them |
+| Map style | Generated from the palette. Ground Butter 50 (#F9F7F0), dark Card #282523; roads in Muted (Biscuit grey #E5E2DE, dark Stone #353230); parks and water in muted tints; buildings extruded in 3D at a default height of 8 m where the data has none, seen at a pitch of 45–60°. No labels or points of interest until I decide on them |
 | Map pin and fallback | The pin is `Location01Icon` in Primary. Each shop has a static map image, shown while the map loads and if it fails |
 | Alt text | "[Shop] shopfront, [street]"; placeholders and decorative images are hidden from VoiceOver and TalkBack; an icon that acts carries the action's name |
 | Badges in the label | Badges are read as part of the tile's label: "Rossi's Bakery, promoted, open till 6pm" |

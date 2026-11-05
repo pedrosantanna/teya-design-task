@@ -4,10 +4,10 @@ import DeliveryTruck01Icon from '@hugeicons/core-free-icons/DeliveryTruck01Icon'
 import FlashIcon from '@hugeicons/core-free-icons/FlashIcon';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { View } from 'react-native';
-import { KeyboardAvoidingView, KeyboardStickyView } from 'react-native-keyboard-controller';
+import { Platform, View, type ScrollViewProps } from 'react-native';
+import { KeyboardChatScrollView, KeyboardStickyView } from 'react-native-keyboard-controller';
 import Animated from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import {
@@ -17,6 +17,7 @@ import {
   Button,
   Illustration,
   ChatBubble,
+  ChatGestureArea,
   Chip,
   Composer,
   Dock,
@@ -26,6 +27,7 @@ import {
   NavBar,
   OrderCard,
   PaymentSheet,
+  RatingSheet,
   Sheet,
   Stepper,
   Text,
@@ -33,13 +35,19 @@ import {
   TypingIndicator,
   ZoomOrigin,
   chatGap,
+  isCategoryId,
   screenMargin,
   useNavBarHeight,
   useNavBarScroll,
   type AnswerRowKind,
+  type NavBarProps,
   type ChatSender,
 } from '@/design-system';
+import { imageSource } from '@/content/images';
 import {
+  DOWN_TAGS,
+  NOTE_MAX,
+  UP_TAGS,
   answerCardText,
   answerLabel,
   matchAsk,
@@ -58,6 +66,9 @@ import {
   type ChatItem,
 } from '@/store';
 
+const WEB = Platform.OS === 'web';
+
+
 // A request's chat (v7 frames: Snuffle confirms, Asking shops, Answers as they arrive, Details, Apple Pay,
 // Waiting, the endings, the day before, the shop delivers, Collect after work). Everything on it is worked
 // out from the store (store/chat.ts); the simulation's clock moves the shops and the order.
@@ -69,14 +80,15 @@ export default function RequestChat() {
 }
 
 function ActiveChat() {
-  const { theme, rt } = useUnistyles();
+  const { theme } = useUnistyles();
+  const frame = useSafeAreaFrame();
   const insets = useSafeAreaInsets();
   const content = useContent();
   const { items, typing, fresh } = useVisibleChat();
   const request = useApp('request');
   const scroll = useNavBarScroll();
   const top = useNavBarHeight();
-  const margin = screenMargin(theme, rt.screen.width);
+  const margin = screenMargin(theme, frame.width);
   const [reply, setReply] = useState('');
   const [undo, setUndo] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
@@ -104,7 +116,7 @@ function ActiveChat() {
     if (action === 'askAgain') return sim.say(`Ask ${name} again`, { id: '', sender: 'snuffle', text: `I've asked ${name} again. I'll tell you when they answer.` });
     if (action === 'askFurther')
       return sim.say('Ask further away', { id: '', sender: 'snuffle', text: "I'm asking shops up to 30 minutes away. I'll tell you as they answer." });
-    if (action === 'rate') return sim.say('Rate', { id: '', sender: 'snuffle', text: `Thanks. I'll pass that on to ${name}.` });
+    if (action === 'rate') return sim.openRating();
     if (action.startsWith('ask:')) {
       const text = action.slice(4);
       if (matchAsk(text) === 'active') return sim.startRequest(text);
@@ -131,13 +143,27 @@ function ActiveChat() {
   // An inverted list keeps the chat anchored to its newest message: a deep link opens at the bottom and new
   // messages arrive in view. The data runs newest first; `before` still means the message above.
   const newestFirst = [...items].reverse();
+  const thumb = requestThumb(content);
+  // The list's scroll view grows its padding with the keyboard (less the home-indicator inset the content already
+  // leaves), so the newest message stays just above the composer as the keyboard rises, falls or follows a drag.
+  const bottomInset = insets.bottom;
+  const renderScroll = useCallback(
+    (props: ScrollViewProps) => <KeyboardChatScrollView {...props} inverted offset={bottomInset} />,
+    [bottomInset],
+  );
+  // The web has no keyboard frame to follow: KeyboardChatScrollView renders there without a scroll container and
+  // not inverted, so the chat stuck at its first message. The web keeps FlatList's own inverted scroll view and a
+  // plain View in place of the gesture area (ChatGestureArea).
 
   return (
     <Ground value="chat">
     <View style={styles.screen}>
-      <KeyboardAvoidingView style={styles.fill} behavior="padding">
+      {/* Dragging the conversation down takes the keyboard with the finger once it reaches the composer (iMessage);
+          Android follows the same gesture through the gesture area. */}
+      <ChatGestureArea style={styles.fill} interpolator="ios" offset={theme.space[3] + theme.size.field + theme.space[2]} textInputNativeID={COMPOSER_ID}>
         <Animated.FlatList
           inverted
+          renderScrollComponent={WEB ? undefined : renderScroll}
           data={newestFirst}
           keyExtractor={(item) => item.key}
           renderItem={({ item, index }) => (
@@ -166,12 +192,12 @@ function ActiveChat() {
           keyboardShouldPersistTaps="handled"
           contentContainerStyle={styles.content(margin, top, insets.bottom)}
         />
-      </KeyboardAvoidingView>
+      </ChatGestureArea>
       {/* The composer rides on the keyboard; with it open, the dock drops the home-indicator inset. */}
       <KeyboardStickyView style={styles.sticky} offset={{ opened: insets.bottom }}>
         <Dock floating={false}>
           <View style={styles.pad(margin)}>
-            <Composer value={reply} onChangeText={setReply} onSend={send} />
+            <Composer value={reply} onChangeText={setReply} onSend={send} nativeID={COMPOSER_ID} />
           </View>
         </Dock>
       </KeyboardStickyView>
@@ -181,6 +207,7 @@ function ActiveChat() {
         title="Snuffle"
         titleMark
         subtitle={content.active.title}
+        subtitleThumb={thumb}
         fill="chat"
         leading="back"
         backLabel="Requests"
@@ -190,6 +217,7 @@ function ActiveChat() {
       />
       <DetailsSheet onToast={setToast} />
       <Payment />
+      <Rating name={orderShop?.name ?? ''} />
       <Alert
         visible={notifyPrompt}
         title={theme.platform === 'ios' ? '“Snuffle” Would Like to Send You Notifications' : 'Allow Snuffle to send you notifications?'}
@@ -266,6 +294,7 @@ function ChatRow({ item, before, isNew, onChip, onDismiss, onOpenOrder }: ChatRo
             total={item.order.total}
             steps={item.order.steps}
             note={item.order.note}
+            action={item.order.canRate ? { label: 'Rate', onPress: sim.openRating } : undefined}
             animateIn={isNew}
             onOpen={onOpenOrder}
           />
@@ -356,6 +385,21 @@ function Answer({ shopId, best, animateIn, onDismiss }: { shopId: string; best: 
       />
     </ZoomOrigin>
   );
+}
+
+const COMPOSER_ID = 'chat-composer';
+// The width Requests asks the image pipeline for, so the bar shows the very file the row does.
+const REQUEST_THUMB_WIDTH = 56;
+
+/** The image beside the request's name in the bar: the photo its row in Requests shows (same key, same size), or
+ *  the category's still on the shop's tile when there is no photo. The scripted requests are one item of a known
+ *  kind, so they count as confident; anything else keeps the name alone. */
+function requestThumb(content: ReturnType<typeof useContent>): NavBarProps['subtitleThumb'] {
+  const request = content.active;
+  if (request.image) return { photo: imageSource(request.image, REQUEST_THUMB_WIDTH) };
+  const shop = shopById(content, request.offers[0]?.shopId ?? '');
+  if (shop && isCategoryId(shop.kind)) return { category: shop.kind, accent: shopAccent(shop) };
+  return undefined;
 }
 
 const NOW_DAY: Record<string, number> = { sam: 2, jess: 6 };
@@ -526,6 +570,28 @@ function Payment() {
   );
 }
 
+/** The rating sheet, from Rate on a collected order card or the Rate chip after delivery. */
+function Rating({ name }: { name: string }) {
+  const rating = useSim((s) => s.rating);
+  return (
+    <RatingSheet
+      open={rating.open}
+      onClose={sim.closeRating}
+      shop={name}
+      up={rating.up}
+      upTags={UP_TAGS}
+      downTags={DOWN_TAGS}
+      tags={rating.tags}
+      note={rating.note}
+      noteMax={NOTE_MAX}
+      onAnswer={sim.rateAnswer}
+      onToggleTag={sim.toggleRatingTag}
+      onNote={sim.setRatingNote}
+      onSend={sim.sendRating}
+    />
+  );
+}
+
 function splitCard(card: string): [string, string] {
   const at = card.indexOf('•');
   return at < 0 ? [card, ''] : [card.slice(0, at).trim(), card.slice(at)];
@@ -533,7 +599,8 @@ function splitCard(card: string): [string, string] {
 
 /** Requests other than the active one keep their last messages only. */
 function OtherRequestChat({ id }: { id: string }) {
-  const { theme, rt } = useUnistyles();
+  const { theme } = useUnistyles();
+  const frame = useSafeAreaFrame();
   const insets = useSafeAreaInsets();
   const content = useContent();
   const scroll = useNavBarScroll();
@@ -544,7 +611,7 @@ function OtherRequestChat({ id }: { id: string }) {
   return (
     <Ground value="chat">
     <View style={styles.screen}>
-      <Animated.ScrollView onScroll={scroll.onScroll} scrollEventThrottle={16} contentContainerStyle={styles.plainContent(screenMargin(theme, rt.screen.width), top, insets.bottom)}>
+      <Animated.ScrollView onScroll={scroll.onScroll} scrollEventThrottle={16} contentContainerStyle={styles.plainContent(screenMargin(theme, frame.width), top, insets.bottom)}>
         {request ? <ChatBubble sender={speaker === 'You' ? 'shopper' : 'snuffle'} text={text} /> : null}
         {request?.action ? (
           <View style={styles.block}>

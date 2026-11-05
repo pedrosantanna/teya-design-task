@@ -15,10 +15,12 @@ Call:
 - Reorganizei os benchmarks em torno de Sam, Jess e Ruth. Na etapa Define vou escolher um problema para um comprador, e uma lista agrupada por categoria de produto não mostrava de quem é o problema que cada produto toca.
 - Mantive os produtos que não tocam nos problemas das personas como notas curtas, porque ainda respondem perguntas do brief (excedente, checkout com várias lojas, quick commerce, vitrines de comerciantes).
 - Defini a regra do ✓: ele precisa de um post das páginas de achados ou de personas. Sem post, a marca é ○.
+- Depois, para as avaliações na página da loja, pedi um olhar à parte sobre como os produtos coletam e mostram avaliações (decisão 047).
 AI:
 - Um agente capturou as telas principais de oito apps no Mobbin, uma biblioteca de telas de apps. Elas ficam na minha cópia local, fora do repositório público, e aparecem no site com o link da fonte.
 - Um agente de pesquisa escolheu os 17 produtos e coletou avaliações datadas do feed da App Store, do Trustpilot e do Mumsnet. Um agente de escrita buscou de novo as citações truncadas e descartou as que não conseguiu confirmar.
 - Um agente reorganizou a página a partir das proto-personas e escreveu a tabela de personas e os padrões por persona. Cada ✓ indica o post que o sustenta, para que possa ser conferido.
+- Para as avaliações, um agente olhou as telas de avaliação de cinco apps no Mobbin pela minha conta, leu as páginas públicas de três produtos e quatro estudos, e escreveu a tabela de Avaliações.
 Trade-offs:
 - Os clusters de personas são pequenos (de 4 a 11 posts), então cada ✓ se apoia em um ou dois posts.
 - Sites de avaliação tendem a concentrar reclamações, e não há Reddit nesta página. As taxas de comissão são as informadas por terceiros.
@@ -522,3 +524,25 @@ status: verified
 - **Jess.** Ela poderia conseguir as coisas da rua no horário dela: retirada depois que a loja fecha, pagamento com cartão, ou uma única corrida de entregador por várias lojas da mesma rua, com cada loja continuando a ser a vendedora. As peças de checkout existem (Shop app, Etsy) e as peças de entrega existem (Gophr, Uber Direct); ninguém as juntou para uma high street, com preço pensado para competir com a entrega no mesmo dia da Amazon.
 - **Ruth.** Ela precisa saber o que ainda está aqui e aberto, mantido atualizado sem trabalho do dono. Os registros de caixa e de pagamento com cartão já passam por provedores como Square, SumUp e Teya, e poderiam alimentar horários de funcionamento e um "aberto hoje" sem nova tarefa administrativa.
 - **Sem persona.** Lojas sem códigos de produto poderiam mostrar "o que há de novo na sua rua hoje": a fornada do dia, as flores da semana. Usuários da Amazon dizem que a busca falha quando não sabem o que querem (KJCM98...3), e a surpresa funciona para o Too Good To Go. Isso fica na ponta passeando, onde nenhum dos três clusters está.
+
+## Avaliações
+
+Olhei estes produtos para as avaliações na página da loja (decisão 047). Os cinco primeiros foram vistos no Mobbin pela minha conta; as telas ficam na minha cópia local. Os outros três vêm das páginas públicas dos produtos.
+
+| Produto | Visto em | O que mostra | O que eu levei |
+| --- | --- | --- | --- |
+| Too Good To Go, detalhe da loja | Mobbin | "Overall experience · Based on 70 recent reviews", com notas parciais para Pickup, Quality, Variety e Quantity | Avaliações sobre a retirada e a visita, que viraram as tags |
+| Etsy, avaliações de item e da loja | Mobbin | Notas parciais e chips de tema com contagens | Tags com a contagem ao lado de cada uma |
+| Vinted, avaliações do vendedor | Mobbin | Avaliações de membros e avaliações automáticas em grupos separados | Dois sinais identificados pela origem, "What buyers said" e "What Snuffle saw" |
+| Airbnb, avaliações | Mobbin | O selo Guest favourite, que conta a confiabilidade além das notas | Confiabilidade medida pela plataforma, ao lado das opiniões |
+| Google Maps, avaliações de lugares | Mobbin | Temas com contagens, a distribuição das notas, um campo de escrita com chips de sugestão | Chips de tag na sheet de avaliação |
+| Apple Maps | Público | Só quem visitou pode avaliar; um polegar para cima ou para baixo por aspecto, mostrado como porcentagem | Um polegar para cima ou para baixo e uma porcentagem no lugar de estrelas, presos a uma visita |
+| Amazon | Público | "Customers say", um resumo por IA feito a partir de avaliações de compras verificadas | Um resumo feito só com as notas de quem comprou e identificado como do Snuffle |
+| Trustpilot | Público | O TrustScore começa toda empresa com um ponto de partida de 7 avaliações de 3,5, então poucas avaliações ficam perto do meio | Sem porcentagem abaixo de 5 avaliações, no lugar de um número ponderado |
+
+| Estudo | Achado | Regra no Snuffle |
+| --- | --- | --- |
+| Baymard Institute, "User ratings distribution summary" (https://baymard.com/blog/user-ratings-distribution-summary) | Os compradores olham além da média, para como as notas se distribuem | Contagem das tags, com as negativas mostradas como as positivas |
+| Nielsen Norman Group, "Social Proof in the User Experience" (https://www.nngroup.com/articles/social-proof-ux/) | O número de pessoas por trás de um sinal é parte do que convence | A contagem de quem comprou sempre ao lado da porcentagem |
+| Hu, Pavlou e Zhang, "Overcoming the J-shaped distribution of product reviews", *Communications of the ACM* 52(10), 2009 (https://ink.library.smu.edu.sg/sis_research/780) | As avaliações online se acumulam nos extremos, porque escrevem sobretudo os muito satisfeitos e os muito insatisfeitos | O Snuffle pergunta a todos que compraram, com uma pergunta simples |
+| Powell et al., "The Love of Large Numbers", *Psychological Science* 28, 2017 (https://read.qxmd.com/read/28825874/) | As pessoas escolhem o produto com mais avaliações mesmo quando a nota dele é menor, então a contagem pesa mais do que deveria | Sem porcentagem abaixo de 5 avaliações; "New on Snuffle · 3 buyers so far" |

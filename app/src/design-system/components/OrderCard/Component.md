@@ -14,6 +14,7 @@ An order in the chat: status label, shop and items, total, and while waiting up 
 | `steps` | `OrderStep[]` | none | Up to three (four when the shop delivers: Waiting, Paid, On its way, Delivered): `done` (check on Primary), `current` (number on the selected-chip fill), `todo` |
 | `note` | string | none | "Keep looking for 1 more", in Tint |
 | `onOpen` | `(id) => void` | none | Opens the receipt |
+| `action` | `{ label, onPress }` | none | One tonal compact button under the card, also a custom accessibility action: Rate after Collected ("Collected · rate Paper & Co"), gone once rated ("Collected · rated") |
 | `animateIn` | boolean | `false` | Arrives with `spring.arrive` |
 
 ## Behaviour

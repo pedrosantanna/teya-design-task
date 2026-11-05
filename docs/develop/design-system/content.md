@@ -8,14 +8,18 @@ Takeaways:
 - Snuffle reports what shops said; an answer card carries the shop's facts and says where they came from.
 - Error and outcome messages say what happened, where the money is and what to do next, in that order.
 - Formats are UK English and 12-hour: "by 4pm", "4:30pm", "Mon 9 Nov", "£6", "£14.99", "13 min walk", "9+". Strings go through ICU plurals, en-GB only.
+- Ratings ask one question, "Would you go back?", and show the answer as a percentage of buyers with the count beside it, rounded down. No stars, no "Excellent!", never "verified". The UK rules on consumer reviews set how ratings are collected and shown.
 Call:
 - After a design review found component specs, states, platform equivalents and content rules missing, I asked for the design system to be complete enough to build the prototype from.
 - I chose 12-hour times in all copy, including timestamps, and kept these rules provisional (decision 043).
+- Later I asked for ratings on the shop page. I chose a thumbs up or down over stars and a dispute for shops, and set the rules from the DMCC Act and the CMA's fake reviews guidance (decision 047).
 AI:
 - An agent reviewed the design system against the v7 screens and found the time formats mixed (24-hour timestamps beside "by 4pm"). Another agent wrote this page from the v7 copy and the conceptual model.
+- An agent read Schedule 20 of the DMCC Act 2024 and the CMA's guidance (CMA208) and turned each duty into a rule for Snuffle's screens.
 Trade-offs:
 - 12-hour times match how people in the UK say them and GOV.UK's style, and take a little more width than 24-hour times in rows.
 - A plain, unapologetic voice can read as cold when something fails; saying the money state first is meant to carry the care instead.
+- Rounding down and showing the buyer count make a shop look a little worse than an average of stars would; I chose them because a score that never flatters is one shoppers and shops can both trust.
 ```
 
 ## Snuffle's voice
@@ -53,6 +57,35 @@ Every message after something goes wrong, or after an order ends, has three part
 ## Button labels
 
 Buttons are verbs from the conceptual model, in sentence case, with what they act on when it helps: Buy, "Buy 1", "Buy · £29.98", Ask, "Ask Rossi's", Extend, "Extend to Mon 16 Nov", "Cancel for a refund", "Keep looking", "Try again", "Show me", "No thanks", Call, Rate. Directions keeps the platform's usual noun. A button never says OK, Submit or Continue when a verb from the model fits.
+
+## Ratings
+
+| Rule | In practice | Never |
+| --- | --- | --- |
+| One question | "Would you go back?", answered with a thumbs up or down | Stars, scores out of 10, "How satisfied were you?" |
+| A percentage of buyers | "92% would go back · 38 buyers"; the count always beside the figure | "4.6", "9.2/10", a figure without its count |
+| Never round up | 91.7% shows as "91%"; counts stay as counts ("Had it 24 of 25 times when they said yes") | "92%" for 91.7%, "100%" for 24 of 25 |
+| Few ratings | Below 5, tags and Snuffle's signals with "New on Snuffle · 3 buyers so far"; none: "No ratings yet · Snuffle has asked them 4 times" | A percentage from 3 buyers |
+| Buyers | "buyers", "38 buyers" | customers, reviewers, users |
+| Plain verdicts | "Would go back", "Wouldn't go back" and the fixed tags | "Excellent!", "Top rated", "Highly recommended" |
+| Source on every signal | "What buyers said", "What Snuffle saw", "from 31 requests on Snuffle", "from the shop's till" | "verified", "trusted", "guaranteed" |
+| Dates by month | "Oct 2026", "Edited Oct 2026" | "3 weeks ago", "12/10/2026" |
+| One element per row | Each signal is one row with a full label: "Would go back, 92 percent of 38 buyers"; colour and the thumbs glyph never carry the meaning alone | A green or red figure with no words |
+
+## Rules on reviews
+
+Schedule 20 of the Digital Markets, Competition and Consumers Act 2024 (paragraph 13), in force since 6 April 2025, bans fake reviews and concealed incentivised reviews, and requires a platform that publishes reviews to take reasonable and proportionate steps to prevent and remove them. The CMA's guidance (CMA208) says what those steps look like. Snuffle follows them as product rules:
+
+| Duty | Snuffle |
+| --- | --- |
+| Reviews come from people who had the experience | Only an order marked Collected or Delivered can be rated, one rating per order, editable for 30 days |
+| No fake or harmful content | Notes are screened for abuse and personal data before they show; a shop can dispute a specific case |
+| Negative reviews are not suppressed | Negative ratings are never withheld or delayed; the highlighted cards mirror the overall split, so with 10% thumbs down at least one negative card shows once there are more than 10 ratings |
+| No review gating (CMA208, 4.5) | Snuffle asks every buyer of a collected or delivered order, never only the ones it expects to be happy, with one reminder at most |
+| AI summaries reflect real opinions | A summary is built only from buyers' notes and labelled "Summary by Snuffle from buyers' notes" |
+| Incentivised reviews are disclosed | Snuffle never rewards a rating; a rating a shop paid or rewarded for is flagged as such |
+| Traders may respond | A shop can reply once, in public, under a rating |
+| Users know how reviews work | "How ratings work", linked from the rating summary, says who can rate, what is screened and how the figures are worked out |
 
 ## Formats
 
@@ -96,6 +129,8 @@ The app ships in en-GB only. Every string lives in one string table and goes thr
 
 ## Sources
 
+- Digital Markets, Competition and Consumers Act 2024, Schedule 20, paragraph 13: https://www.legislation.gov.uk/ukpga/2024/13/schedule/20
+- Competition and Markets Authority, Fake reviews guidance (CMA208), 2025: https://assets.publishing.service.gov.uk/media/67eeb64fe9c76fa33048c790/CMA208_-_Fake_reviews_guidance.pdf
 - GOV.UK, style guide (times, dates, money): https://www.gov.uk/guidance/style-guide/a-to-z
 - Apple, Human Interface Guidelines, Writing: https://developer.apple.com/design/human-interface-guidelines/writing
 - Material 3, content design: https://m3.material.io/foundations/content-design/overview

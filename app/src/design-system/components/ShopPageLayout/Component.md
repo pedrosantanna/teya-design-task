@@ -9,7 +9,7 @@ The shop page's frame: the map, the photos, the content card and the nav bar, wi
 | `name` | string | required | Display title in the card (up to two lines), then the bar's inline title |
 | `status` | string[] | `[]` | Footnote lines under the name: "Open till 6pm · Blythe Road · 2 min walk", "Made to order · 2 days' notice" |
 | `photos` | `ShopPhoto[]` | `[]` | Up to three: `uri`, `label` ("Rossi's Bakery shopfront, Blythe Road") |
-| `accent` | ShopAccentName | none | The shop's accent: a wash behind the name at the top of the card (edge to edge once the card fills the screen) and the tonal tile under each photo |
+| `accent` | ShopAccentName | none | The shop's accent: its tile step fills the whole card (edge to edge once the card fills the screen) and the bar's scroll edge, with the sections' Card rows on it under the delicate shadow, and it is the tonal tile under each photo |
 | `onBack` | function | required | Back in the top left; the page is the shop's detail, pushed with Back and the back gesture |
 | `backLabel` | string | none | The previous screen's title ("Nearby"), beside the chevron once the bar fills |
 | `mapLoading` | boolean | `false` | Map ground alone |

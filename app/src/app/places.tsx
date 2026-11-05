@@ -7,7 +7,7 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { useShallow } from 'zustand/react/shallow';
 
@@ -18,11 +18,12 @@ import { addressBook, currentPlace, useAppActions, useAppStore, type Place } fro
 type Editing = { mode: 'add' } | { mode: 'edit'; place: Place } | null;
 
 export default function Places() {
-  const { theme, rt } = useUnistyles();
+  const { theme } = useUnistyles();
+  const frame = useSafeAreaFrame();
   const insets = useSafeAreaInsets();
   const top = useNavBarHeight();
   const scroll = useNavBarScroll();
-  const margin = screenMargin(theme, rt.screen.width);
+  const margin = screenMargin(theme, frame.width);
   const { places, place } = useAppStore(useShallow((s) => ({ places: s.places, place: s.place })));
   const { set } = useAppActions();
   const [editing, setEditing] = useState<Editing>(null);

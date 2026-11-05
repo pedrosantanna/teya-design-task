@@ -22,7 +22,7 @@ export type CategoryCardProps = {
   /** "Bakery" */
   label: string;
   accent: ShopAccentName;
-  /** The pipeline's category still to show, when it differs from `id` (Toys shows the gifts still). */
+  /** The pipeline's category still to show, when it differs from `id` (Newsagents show the newsagent still). */
   art?: CategoryId;
   /** Overrides the pipeline's still for this kind. Without either, the card is colour and label. */
   still?: ImageSource | number;
@@ -54,7 +54,8 @@ export const CategoryCard = memo(function CategoryCard({ id, label, accent, art:
           </View>
         ) : null}
         <Animated.View pointerEvents="none" style={[styles.layer, press.layerStyle]} />
-        <Text variant="subheadlineStrong" color="foreground" numberOfLines={1}>
+        {/* Headline (17): the rail's labels are the one text size between the section title and the tiles' names. */}
+        <Text variant="headline" color="foreground" numberOfLines={1}>
           {label}
         </Text>
       </Pressable>
@@ -68,24 +69,25 @@ export type CategoryHeaderProps = {
   title: string;
   /** "3 places within 15 min walk" */
   detail?: string;
-  accent: ShopAccentName;
   art?: CategoryId;
 };
 
-/** The top of the Category screen: the category's tile colour, its still and its name in Display title. The screen
- *  zooms out of the category card, so the two share colour and picture. */
-export const CategoryHeader = memo(function CategoryHeader({ id, title, detail, accent, art: artId }: CategoryHeaderProps) {
+/** The top of the Category screen: its name in Display title and the category's still. The screen itself is the
+ *  category's tile (it zooms out of the category card, so the two share colour and picture); the header has no fill
+ *  or inset of its own, so its title lines up with the chips and the list under it. */
+export const CategoryHeader = memo(function CategoryHeader({ id, title, detail, art: artId }: CategoryHeaderProps) {
   const scheme = useIllustrationScheme();
   const key = artId ?? id;
   const art = isCategory(key) ? categoryIllustration(key, scheme)?.still : undefined;
   return (
-    <View style={styles.header(accent)}>
+    <View style={styles.header}>
       <View style={styles.headerText}>
         <Text variant="displayTitle" accessibilityRole="header" numberOfLines={2}>
           {title}
         </Text>
         {detail ? (
-          <Text variant="footnote" color="mutedForeground">
+          // The header sits on the tile, like the rows' meta line: mutedForegroundOnTile (Stone 840 in dark).
+          <Text variant="footnote" color="mutedForegroundOnTile">
             {detail}
           </Text>
         ) : null}
@@ -100,19 +102,15 @@ export const CategoryHeader = memo(function CategoryHeader({ id, title, detail, 
 });
 
 const styles = StyleSheet.create((theme) => ({
-  header: (accent: ShopAccentName) => ({
-    ...cornerCurve,
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    borderRadius: theme.radius.card,
-    overflow: 'hidden',
-    paddingLeft: theme.space[5],
-    minHeight: theme.size.category.art,
-    backgroundColor: theme.color.shop.accent[accent].tile,
-  }),
-  headerText: { flex: 1, gap: theme.space[1], paddingVertical: theme.space[5] },
+  // The header sits close to the chips it introduces: its text sets the height and rests gap.title (16) above the
+  // chips, and the title starts gap.aboveTitle under the content's top, so Back to title is 32. The still rests on the
+  // same bottom edge; its empty top (the object stands on a baseline near the square's foot) may rise past the text
+  // into the screen's own colour, since the still is opaque on that colour.
+  header: { justifyContent: 'flex-end' },
+  // A long title wraps before the still, space.6 clear of its square ("Florists and plants").
+  headerText: { gap: theme.space[2], paddingTop: theme.gap.aboveTitle, paddingRight: theme.size.category.art + theme.space[6] },
   // The still is rendered 120 × 164 with the object in the top 120 square; the header shows that square.
-  headerArt: { width: theme.size.category.art, height: theme.size.category.art, overflow: 'hidden', alignSelf: 'center' },
+  headerArt: { position: 'absolute', right: 0, bottom: 0, width: theme.size.category.art, height: theme.size.category.art, overflow: 'hidden' },
   card: (accent: ShopAccentName) => ({
     ...cornerCurve,
     width: theme.size.category.width,

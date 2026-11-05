@@ -5,6 +5,7 @@ import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-na
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { haptic } from '../../internal/haptics';
+import { cardShadow } from '../../internal/shadow';
 import { cornerCurve } from '../../theme';
 import { Icon } from '../Icon/Icon';
 import { Text } from '../Text/Text';
@@ -18,7 +19,9 @@ export type SegmentedControlProps = {
   accessibilityLabel?: string;
 };
 
-/** "Once" and "Every week". iOS: a sliding thumb on a muted track. Android: Material segmented button with a check. */
+/** "Once" and "Every week". iOS: the system pattern, a sliding thumb one level above its track under the delicate
+ *  card shadow (light: a Card thumb on a Border track; dark: a Stone 360 thumb on a Card track), the selected label in
+ *  Foreground semibold. Android: Material segmented button with a check. */
 export const SegmentedControl = memo(function SegmentedControl({ segments, value, onChange, accessibilityLabel }: SegmentedControlProps) {
   const { theme } = useUnistyles();
   const ios = theme.platform === 'ios';
@@ -29,7 +32,8 @@ export const SegmentedControl = memo(function SegmentedControl({ segments, value
     position.set(withSpring(index, theme.spring.snappy));
   }, [index, position, theme.spring.snappy]);
 
-  const inset = theme.space[1] / 2;
+  const inset = theme.size.segmented.inset;
+  const slop = (theme.hit.min - theme.size.chip) / 2;
   const segmentWidth = width > 0 ? (width - inset * 2) / segments.length : 0;
   const thumbStyle = useAnimatedStyle(() => ({ width: segmentWidth, transform: [{ translateX: position.get() * segmentWidth }] }));
   const onLayout = (e: LayoutChangeEvent) => setWidth(e.nativeEvent.layout.width);
@@ -52,10 +56,12 @@ export const SegmentedControl = memo(function SegmentedControl({ segments, value
             accessibilityLabel={`${segment.label}, ${i + 1} of ${segments.length}`}
             accessibilityState={{ selected }}
             onPress={() => select(segment.value)}
+            // 32 pt segments reach the 44 pt minimum through the slop above and below (iOS).
+            hitSlop={ios ? { top: slop, bottom: slop } : undefined}
             style={styles.segment(ios, selected, i > 0)}
           >
             {!ios && selected ? <Icon icon={Tick02Icon} size="subheadline" color="onChipSelected" /> : null}
-            <Text variant={selected && ios ? 'subheadlineStrong' : 'subheadline'} color={!ios && selected ? 'onChipSelected' : 'foreground'} numberOfLines={1}>
+            <Text variant={selected && ios ? 'subheadlineStrong' : 'subheadline'} color={selected && !ios ? 'onChipSelected' : 'foreground'} numberOfLines={1}>
               {segment.label}
             </Text>
           </Pressable>
@@ -71,20 +77,23 @@ const styles = StyleSheet.create((theme) => ({
     flexDirection: 'row',
     alignSelf: 'stretch',
     borderRadius: theme.radius.full,
-    padding: ios ? theme.space[1] / 2 : 0,
-    backgroundColor: ios ? theme.color.muted : 'transparent',
+    padding: ios ? theme.size.segmented.inset : 0,
+    backgroundColor: ios ? theme.color.segmented.track : 'transparent',
+    // Android: the outlined Material segmented button. iOS: no edge, the track's fill is the shape.
     borderWidth: ios ? 0 : StyleSheet.hairlineWidth * 2,
     borderColor: theme.color.border,
-    overflow: 'hidden',
+    // iOS lets the thumb's shadow out; Android clips the selected segment's fill to the capsule.
+    overflow: ios ? 'visible' : 'hidden',
   }),
   thumb: {
     ...cornerCurve,
     position: 'absolute',
-    top: theme.space[1] / 2,
-    bottom: theme.space[1] / 2,
-    left: theme.space[1] / 2,
+    top: theme.size.segmented.inset,
+    bottom: theme.size.segmented.inset,
+    left: theme.size.segmented.inset,
     borderRadius: theme.radius.full,
-    backgroundColor: theme.color.card,
+    backgroundColor: theme.color.segmented.thumb,
+    boxShadow: cardShadow(theme),
   },
   segment: (ios: boolean, selected: boolean, divider: boolean) => ({
     flex: 1,

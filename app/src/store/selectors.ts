@@ -76,7 +76,7 @@ export function useArea(): AreaView {
   const content = useContent();
   const { place, radius } = useAppStore(useShallow((s) => ({ place: s.place, radius: s.radius })));
   const area = areas[place.area];
-  const pool = place.area === 'blythe' ? content.shops : area.shops;
+  const pool = place.area === 'blythe' ? content.nearby : area.shops;
   const shops = pool.filter((s) => s.walkMinutes <= radius);
   const streets = area.streets[radius];
   return {

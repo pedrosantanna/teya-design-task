@@ -9,7 +9,7 @@ A page indicator for a short run of pages: Getting started in first run. Spec: G
 | `count` | number | required | Pages in the run |
 | `current` | number | required | Zero-based |
 
-Dots are `size.dot` (8) and `space.2` apart; the current dot is Foreground, the others Border. The colour moves with `spring.fade`.
+Dots are `size.dot` (8) and `space.2` apart; the current dot is Foreground, the others Foreground at `state.pageDotOff` (30%), so on Getting started they tint with the Indigo page under them. The colour moves with `spring.fade`.
 
 ## Do and don't
 

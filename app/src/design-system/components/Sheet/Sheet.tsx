@@ -1,23 +1,27 @@
 // The sheet (components.md, Sheet; iOS 26 patterns): medium and large detents, Close on the left, an optional
-// Confirm on the right, and a footer (Buy) pinned at the bottom. On iOS and the web the medium detent floats
-// inset in glass with every corner rounded, and the large detent anchors to the screen edges, opaque, with the
-// top corners rounded; Android keeps the Material modal bottom sheet with a drag handle and the scrim. A sheet
+// Confirm on the right, and a footer (Buy) pinned at the bottom. Every sheet has the same ground: the Sheet colour,
+// opaque, one tone darker than the Background in light mode (one Stone step lighter in dark), and one scrim behind
+// it (color.sheetScrim at state.sheetScrim) that comes in with the sheet; a tap on it dismisses. On iOS and the web
+// the medium detent floats inset with every corner rounded and the glass rim, and the large detent anchors to the
+// screen edges with the top corners rounded; Android keeps the Material modal bottom sheet with a drag handle. A sheet
 // can grow from what opened it (`origin`, a ZoomOrigin id). Built on Reanimated and Gesture Handler, so the
 // drag and the springs run on the UI thread, and presented through the root portal so it stays inside the
 // phone frame on the web.
 import { useEffect, useRef, useState, type ComponentRef, type ReactNode } from 'react';
-import { AccessibilityInfo, Platform, Pressable, ScrollView, View, findNodeHandle } from 'react-native';
+import { AccessibilityInfo, BackHandler, Platform, Pressable, ScrollView, View, findNodeHandle } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller';
 import Animated, { Extrapolation, interpolate, useAnimatedStyle, useReducedMotion, useSharedValue, withSpring } from 'react-native-reanimated';
 import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scheduleOnRN } from 'react-native-worklets';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { FloatingSurface, useGlass } from '../../internal/FloatingSurface';
+import { Ground } from '../../internal/ground';
+import { dismissKeyboard } from '../../internal/keyboard';
 import { measureOrigin, measureView, type Rect, type ViewRef } from '../../internal/origins';
 import { PortalHost, Portal } from '../../internal/Portal';
 import { ScrollEdge } from '../../internal/ScrollEdge';
-import { cornerCurve } from '../../theme';
+import { cornerCurve, screenMargin, withAlpha } from '../../theme';
 import { CloseButton } from '../CloseButton/CloseButton';
 import { ConfirmButton } from '../ConfirmButton/ConfirmButton';
 import { Text } from '../Text/Text';
@@ -38,9 +42,9 @@ export type SheetProps = {
   titleVariant?: 'headline' | 'displayName';
   /** With `titleVariant="displayName"`: the bar's own title in Headline, what the sheet does ("Buy"). */
   barTitle?: string;
-  /** Opaque in the `sheet` colour at every detent, never glass: sheets of rows over photos (the place and the
-   *  account sheets), where glass would let the photos smear through. */
-  opaque?: boolean;
+  /** A line of context under a Headline title, in the header (Subheadline, Muted foreground, space.1 under it):
+   *  "Your visit to Paper & Co". */
+  subtitle?: string;
   children: ReactNode;
   /** Pinned at the bottom above the safe area: the Buy button. */
   footer?: ReactNode;
@@ -66,7 +70,7 @@ export function Sheet({
   title,
   titleVariant = 'headline',
   barTitle,
-  opaque = false,
+  subtitle,
   children,
   footer,
   detents = ['medium', 'large'],
@@ -86,9 +90,10 @@ export function Sheet({
   const overlayRef = useRef<ViewRef>(null);
   const [mounted, setMounted] = useState(open);
   const reduceMotion = useReducedMotion();
-  const glass = useGlass() && !opaque;
   const floating = theme.platform === 'ios';
   const inContent = titleVariant === 'displayName';
+  // Header and content sit on the screen margin, so Close, Confirm and the rows line up (spacing.md, Sheets).
+  const pad = screenMargin(theme, frame.width);
 
   // `h` is the visible height: a rest is a detent's height; below the smallest rest the sheet slides down instead.
   const heightOf = (d: SheetDetent) => frame.height * (d === 'large' ? theme.layout.sheetLargeDetent : theme.layout.sheetMediumDetent);
@@ -103,6 +108,12 @@ export function Sheet({
   const from = useSharedValue<Rect | null>(null);
   const smooth = theme.spring.smooth;
   const margin = floating ? theme.space[2] : 0;
+  // The keyboard (negative height while it shows, tracked frame by frame on the UI thread): the sheet rides on
+  // top of it as iOS sheets do, so a focused field (the address search, a place's name) stays in view. The
+  // home-indicator inset under the content goes behind the keys instead of doubling the gap, and a tall detent
+  // gives up height rather than running under the status bar. Zero on the web and with no keyboard.
+  const keyboard = useReanimatedKeyboardAnimation().height;
+  const topLimit = insets.top + theme.space[2];
 
   const finishClose = () => {
     setMounted(false);
@@ -112,34 +123,57 @@ export function Sheet({
   // Mount as soon as `open` turns on (state adjusted during render); unmount after the closing spring.
   if (open && !mounted) setMounted(true);
 
+  // A sheet takes over from whatever field was being typed in underneath (iOS closes the keyboard too), and takes
+  // its own field's keyboard with it when it closes, whoever closes it. Only when `open` changes: the effect below
+  // runs again on other changes, and must not close a field inside the sheet.
+  // Not on mount: a closed sheet mounting with its screen must leave that screen's autofocused field alone.
+  const wasOpen = useRef(open);
+  useEffect(() => {
+    if (wasOpen.current !== open) dismissKeyboard();
+    wasOpen.current = open;
+  }, [open]);
+
   useEffect(() => {
     if (open) {
       let cancelled = false;
-      // The origin and the overlay are measured in the same window space; the difference places the zoom.
-      Promise.all([reduceMotion ? null : measureOrigin(origin), measureView(overlayRef.current)]).then(([rect, host]) => {
-        if (cancelled) return;
-        if (rect && host) {
-          from.set({ x: rect.x - host.x, y: rect.y - host.y, width: rect.width, height: rect.height });
-          z.set(0);
-          h.set(start);
-          z.set(withSpring(1, smooth));
-        } else {
-          from.set(null);
-          z.set(1);
-          h.set(reduceMotion ? start : 0);
-          if (!reduceMotion) h.set(withSpring(start, smooth));
+      let frame = 0;
+      let tries = 0;
+      // The overlay and the title mount through the Portal host a commit after this effect runs, so the measure
+      // and the focus wait for them (a few frames at most, then the slide-up fallback).
+      const run = () => {
+        // The origin and the overlay are measured in the same window space; the difference places the zoom.
+        Promise.all([reduceMotion ? null : measureOrigin(origin), measureView(overlayRef.current)]).then(([rect, host]) => {
+          if (cancelled) return;
+          if (rect && host) {
+            from.set({ x: rect.x - host.x, y: rect.y - host.y, width: rect.width, height: rect.height });
+            z.set(0);
+            h.set(start);
+            z.set(withSpring(1, smooth));
+          } else {
+            from.set(null);
+            z.set(1);
+            h.set(reduceMotion ? start : 0);
+            if (!reduceMotion) h.set(withSpring(start, smooth));
+          }
+        });
+        // Focus moves to the sheet's title on open (components.md). React Native Web has no findNodeHandle:
+        // there the ref is the DOM node, focused directly.
+        const titleNode = titleRef.current;
+        if (titleNode && Platform.OS === 'web') (titleNode as unknown as { focus?: () => void }).focus?.();
+        else if (titleNode) {
+          const node = findNodeHandle(titleNode);
+          if (node) AccessibilityInfo.setAccessibilityFocus(node);
         }
-      });
-      // Focus moves to the sheet's title on open (components.md). React Native Web has no findNodeHandle:
-      // there the ref is the DOM node, focused directly.
-      const titleNode = titleRef.current;
-      if (titleNode && Platform.OS === 'web') (titleNode as unknown as { focus?: () => void }).focus?.();
-      else if (titleNode) {
-        const node = findNodeHandle(titleNode);
-        if (node) AccessibilityInfo.setAccessibilityFocus(node);
-      }
+      };
+      const wait = () => {
+        if (cancelled) return;
+        if (!overlayRef.current && tries++ < 5) frame = requestAnimationFrame(wait);
+        else run();
+      };
+      frame = requestAnimationFrame(wait);
       return () => {
         cancelled = true;
+        cancelAnimationFrame(frame);
       };
     } else if (mounted) {
       if (from.get()) z.set(withSpring(0, smooth, (done) => done && scheduleOnRN(setMounted, false)));
@@ -149,9 +183,24 @@ export function Sheet({
 
   const dismiss = () => {
     if (!dismissible) return;
+    dismissKeyboard();
     if (from.get()) z.set(withSpring(0, smooth, (done) => done && scheduleOnRN(finishClose)));
     else h.set(withSpring(0, smooth, (done) => done && scheduleOnRN(finishClose)));
   };
+
+  // Android's Back closes the sheet, not the screen under it; when the sheet can't be dismissed, Back does nothing.
+  const dismissRef = useRef(dismiss);
+  useEffect(() => {
+    dismissRef.current = dismiss;
+  });
+  useEffect(() => {
+    if (!mounted || !open) return;
+    const sub = BackHandler.addEventListener('hardwareBackPress', () => {
+      dismissRef.current();
+      return true;
+    });
+    return () => sub.remove();
+  }, [mounted, open]);
 
   const confirm = () => {
     onConfirm?.();
@@ -194,6 +243,7 @@ export function Sheet({
     const rect = from.get();
     const zoom = z.get();
     const width = frame.width - 2 * inset;
+    const lift = Math.max(0, -keyboard.get() - insets.bottom - inset);
     let tx = 0;
     let ty = slide;
     let scale = 1;
@@ -206,21 +256,19 @@ export function Sheet({
     return {
       left: inset,
       right: inset,
-      bottom: inset,
-      height: visible,
+      bottom: inset + lift,
+      height: lift > 0 ? Math.min(visible, frame.height - topLimit - inset - lift) : visible,
       borderBottomLeftRadius: theme.radius.sheet * (1 - t),
       borderBottomRightRadius: theme.radius.sheet * (1 - t),
       opacity: rect ? interpolate(zoom, [0, 0.35], [0, 1], Extrapolation.CLAMP) : 1,
       transform: [{ translateX: tx }, { translateY: ty }, { scale }],
     };
   });
-  // The glass shows at medium and gives way to the opaque surface toward large.
-  const opaqueStyle = useAnimatedStyle(() => ({ opacity: floating && glass ? anchored(h.get()) : 1 }));
+  // One scrim at every detent and on every platform: it comes in with the sheet (its height, or the zoom from the
+  // origin) and is at state.sheetScrim once the sheet rests.
   const scrimStyle = useAnimatedStyle(() => {
-    const v = Math.min(h.get(), largeH) * z.get();
-    // iOS and the web dim only toward the large detent; Android dims at every detent.
-    if (floating) return { opacity: interpolate(v, [mediumH, largeH], [0, theme.state.scrim], Extrapolation.CLAMP) };
-    return { opacity: interpolate(v, [0, minRest], [0, theme.state.scrim], Extrapolation.CLAMP) };
+    const v = Math.min(h.get(), minRest) * z.get();
+    return { opacity: interpolate(v, [0, minRest], [0, theme.state.sheetScrim], Extrapolation.CLAMP) };
   });
 
   if (!mounted) return null;
@@ -228,46 +276,64 @@ export function Sheet({
   return (
     <Portal>
       <View ref={overlayRef} collapsable={false} style={styles.overlay} accessibilityViewIsModal>
-        <Pressable accessibilityRole="button" accessibilityLabel="Close" onPress={dismiss} style={StyleSheet.absoluteFill}>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="Close"
+          accessibilityState={{ disabled: !dismissible }}
+          disabled={!dismissible}
+          onPress={dismiss}
+          style={StyleSheet.absoluteFill}
+        >
           <Animated.View style={[styles.scrim, scrimStyle]} />
         </Pressable>
         <Animated.View style={[styles.panel, panelStyle]} onAccessibilityEscape={dismiss}>
-          {floating && glass ? <FloatingSurface shadow={false} style={StyleSheet.absoluteFill} /> : null}
-          <Animated.View pointerEvents="none" style={[styles.opaque, opaqueStyle]} />
+          {/* Opaque: at 94% over a blur, photos behind the sheet showed through as grey smudges. */}
+          <View pointerEvents="none" style={styles.opaque} />
+          {/* The glass rim, as on every glass element: a white highlight along the top edge and a hairline. */}
+          {floating ? <View pointerEvents="none" style={styles.rim} /> : null}
           <GestureDetector gesture={pan}>
             <View>
               <View style={styles.grabberArea}>
                 <View style={styles.grabber} />
               </View>
-              <View style={styles.header}>
-                <CloseButton onPress={dismissible ? dismiss : undefined} />
-                {inContent ? (
-                  <View style={styles.title} importantForAccessibility="no" accessibilityElementsHidden>
-                    {barTitle ? (
+              {/* The header's buttons sit on the sheet's ground too (a Muted circle in dark, GlassButton). */}
+              <Ground value="sheet">
+                <View style={styles.header(pad)}>
+                  <CloseButton onPress={dismissible ? dismiss : undefined} />
+                  {inContent ? (
+                    <View style={styles.title} importantForAccessibility="no" accessibilityElementsHidden>
+                      {barTitle ? (
+                        <Text variant="headline" numberOfLines={1} align="center">
+                          {barTitle}
+                        </Text>
+                      ) : null}
+                    </View>
+                  ) : (
+                    <View ref={titleRef} accessible focusable={Platform.OS === 'web'} accessibilityRole="header" style={[styles.title, styles.titleStack]}>
                       <Text variant="headline" numberOfLines={1} align="center">
-                        {barTitle}
+                        {title}
                       </Text>
-                    ) : null}
-                  </View>
-                ) : (
-                  <View ref={titleRef} accessible focusable={Platform.OS === 'web'} accessibilityRole="header" style={styles.title}>
-                    <Text variant="headline" numberOfLines={1} align="center">
-                      {title}
-                    </Text>
-                  </View>
-                )}
-                {onConfirm ? (
-                  <ConfirmButton onPress={confirm} label={confirmLabel} disabled={confirmDisabled} />
-                ) : (
-                  <View style={styles.balance} />
-                )}
-              </View>
+                      {subtitle ? (
+                        <Text variant="subheadline" color="mutedForeground" numberOfLines={1} align="center">
+                          {subtitle}
+                        </Text>
+                      ) : null}
+                    </View>
+                  )}
+                  {onConfirm ? (
+                    <ConfirmButton onPress={confirm} label={confirmLabel} disabled={confirmDisabled} />
+                  ) : (
+                    <View style={styles.balance} />
+                  )}
+                </View>
+              </Ground>
             </View>
           </GestureDetector>
           <ScrollView
             style={styles.fill}
             keyboardShouldPersistTaps="handled"
-            contentContainerStyle={styles.content(footer ? theme.size.button.large + theme.space[6] + insets.bottom : insets.bottom)}
+            keyboardDismissMode="interactive"
+            contentContainerStyle={styles.content(pad, footer ? theme.size.button.large + theme.space[6] + insets.bottom : insets.bottom)}
           >
             {inContent ? (
               <View ref={titleRef} accessible focusable={Platform.OS === 'web'} accessibilityRole="header">
@@ -276,13 +342,16 @@ export function Sheet({
                 </Text>
               </View>
             ) : null}
-            {children}
+            {/* Rows, fields and chips inside a sheet sit one level up from its ground (ListRow, Chip, TextField). */}
+            <Ground value="sheet">{children}</Ground>
           </ScrollView>
           {footer ? (
             <>
               {/* Drawn from the sheet's own colour, so the fade never shows a band of another ground. */}
               <ScrollEdge edge="bottom" fill="sheet" height={theme.size.button.large + theme.space[6] + insets.bottom + theme.space[4]} />
-              <View style={styles.footer(insets.bottom)}>{footer}</View>
+              <View style={styles.footer(pad, insets.bottom)}>
+                <Ground value="sheet">{footer}</Ground>
+              </View>
             </>
           ) : null}
         </Animated.View>
@@ -293,7 +362,7 @@ export function Sheet({
 
 const styles = StyleSheet.create((theme) => ({
   overlay: { ...StyleSheet.absoluteFillObject },
-  scrim: { ...StyleSheet.absoluteFillObject, backgroundColor: theme.color.scrim },
+  scrim: { ...StyleSheet.absoluteFillObject, backgroundColor: theme.color.sheetScrim },
   panel: {
     ...cornerCurve,
     position: 'absolute',
@@ -302,8 +371,15 @@ const styles = StyleSheet.create((theme) => ({
     borderTopRightRadius: theme.radius.sheet,
     overflow: 'hidden',
   },
-  // The sheet's ground: Background in light mode, #1C1612 in dark so Card rows (#2B2420) still separate.
+  // The sheet's ground: #DEDAD5 in light mode (1.15:1 under the Background), #191715 (Stone) in dark.
   opaque: { ...StyleSheet.absoluteFillObject, backgroundColor: theme.color.sheet },
+  rim: {
+    ...StyleSheet.absoluteFillObject,
+    borderRadius: theme.radius.sheet,
+    borderWidth: theme.state.glassRim,
+    borderColor: withAlpha(theme.color.glassHairline, theme.state.glassHairline),
+    borderTopColor: withAlpha(theme.color.glassShine, theme.state.glassHighlight),
+  },
   fill: { flex: 1 },
   grabberArea: { alignItems: 'center', paddingTop: theme.space[2], paddingBottom: theme.space[1] },
   // iOS grabber 36 × 4; the Material drag handle is 32 × 4.
@@ -311,30 +387,32 @@ const styles = StyleSheet.create((theme) => ({
     width: theme.platform === 'ios' ? theme.size.button.compact : theme.space[7],
     height: theme.space[1],
     borderRadius: theme.radius.full,
-    backgroundColor: theme.color.mutedForeground,
-    opacity: theme.state.disabledContent,
+    // Quieter than the title: Muted foreground at 38% in light, Stone 445 in dark (2.49:1 on the sheet).
+    backgroundColor: theme.color.grabber,
+    opacity: theme.state.grabber,
   },
-  header: {
+  header: (pad: number) => ({
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: theme.space[3],
+    paddingHorizontal: pad,
     paddingBottom: theme.space[2],
     gap: theme.space[2],
-  },
+  }),
   title: { flex: 1 },
+  titleStack: { gap: theme.space[1] },
   balance: { width: theme.hit.min },
-  content: (bottom: number) => ({
-    paddingHorizontal: theme.inset.sheet,
+  content: (pad: number, bottom: number) => ({
+    paddingHorizontal: pad,
     paddingTop: theme.space[2],
     paddingBottom: bottom + theme.inset.sheet,
     gap: theme.gap.block,
   }),
-  footer: (bottom: number) => ({
+  footer: (pad: number, bottom: number) => ({
     position: 'absolute',
     left: 0,
     right: 0,
     bottom: 0,
-    paddingHorizontal: theme.inset.sheet,
+    paddingHorizontal: pad,
     paddingTop: theme.space[3],
     paddingBottom: bottom + theme.space[3],
   }),

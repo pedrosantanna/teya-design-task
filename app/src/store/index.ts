@@ -3,7 +3,7 @@ export * from './types';
 export * from './labels';
 export { steps, stepGroups, stepById, hrefFor, FIRST_RUN_STEPS, type JourneyStep, type StepId, type StepGroup } from './journey';
 export { finishFirstRun, replayFirstRun } from './first-run';
-export { addressBook, areas, contentFor, currentPlace, personas, seedPlaces, shopById } from './seed';
+export { addressBook, areas, contentFor, currentPlace, personas, seedPlaces, shopById, shopNumber } from './seed';
 export { useAppStore, useApp, useAppActions, type AppState, type AppActions, type Draft } from './store';
 export { useArea, type AreaView } from './selectors';
 export { CATEGORIES, KIND_ACCENT, shopAccent, type Category } from './kinds';
@@ -27,7 +27,25 @@ export {
   type PayOutcome,
   type ShopOutcome,
   type ChatStage,
+  type RatingDraft,
 } from './simulation';
+export {
+  DOWN_TAGS,
+  MIN_ANSWERS_FOR_STOCK,
+  MIN_RATINGS_FOR_SHARE,
+  NOTE_MAX,
+  UP_TAGS,
+  priceRangeLine,
+  quoteMix,
+  ratingHeadline,
+  reliabilityLines,
+  topTags,
+  useShopRatings,
+  withOwnRating,
+  type RatingHeadline,
+  type RatingTagCount,
+  type ReliabilityLine,
+} from './ratings';
 export {
   useChat,
   useVisibleChat,

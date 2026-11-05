@@ -24,7 +24,7 @@ Open it on its own to use the full window: `app-web/index.html`. Add `?debug=0` 
 
 ## Mocked content
 
-All shops are invented and sit around Blythe Road, W14. Walk times are from Blythe Road; the Work place (Kensington High St, W8) reuses Olympia Cameras, Abingdon Deli and Church Street Books at 3, 4 and 9 minutes. The accent follows the shop's kind in `app/src/store/kinds.ts`. Lavender is kept for Snuffle, so shops use only Butter, Peach and Pistachio, four shops each. A connected shop answers from its till; an asked shop answers by message (WhatsApp).
+All shops are invented and sit around Blythe Road, W14. Walk times are from Blythe Road; the Work place (Kensington High St, W8) reuses Olympia Cameras, Abingdon Deli and Church Street Books at 3, 4 and 9 minutes, with seven of the other shops below. The accent follows the shop's kind in `app/src/store/kinds.ts`. Lavender is kept for Snuffle, so shops use only Butter, Peach and Pistachio; the 12 demo shops are four of each. A connected shop answers from its till; an asked shop answers by message (WhatsApp).
 
 | Shop | Kind | Street | Walk | Hours | Answers | Collect within | Delivers | Accent |
 |---|---|---|---|---|---|---|---|---|
@@ -38,10 +38,47 @@ All shops are invented and sit around Blythe Road, W14. Walk times are from Blyt
 | Paper & Co | Stationer | King Street | 13 min | 9am–7pm | Asked | 7 days | £3.50, today | Pistachio |
 | Halo Florist | Florist | Goldhawk Road | 13 min | 8am–5pm | Asked | Same day | £6, today | Pistachio |
 | Bush Opticians | Opticians | Shepherd's Bush Green | 14 min | 9am–6pm | Asked | 14 days | No | Pistachio |
-| Abingdon Deli | Deli and café | Abingdon Road | 18 min | 8am–8pm | Asked | Same day | £4, today | Peach |
+| Abingdon Deli | Deli | Abingdon Road | 18 min | 8am–8pm | Asked | Same day | £4, today | Peach |
 | Church Street Books | Bookshop | Kensington Church Street | 20 min | 9am–7pm | Connected | 30 days | No | Butter |
 
 The 15-minute radius shows the first ten shops; 20 minutes adds the deli and the bookshop.
+
+### Other shops
+
+Nearby and the Category screens also list 30 more invented shops, so every category has three to five places within 15 minutes; the 12 shops above carry the demo journey, and the other 30 are never asked in it. Fishmongers sit under Butcher, plant shops under Florist and the games shop under Toys; Abingdon Deli moves to a Deli category with the same Peach accent. Each has hours, a collection window, three items with prices, ratings and how it does on Snuffle (`app/src/store/seed-more.ts`). The Work place also lists seven of them. Each has a shopfront or inside photo from Unsplash, bundled at 640 px, and eight have a second photo.
+
+| Category | Shop | Street | Walk | Answers | Note |
+|---|---|---|---|---|---|
+| Bakery (Butter) | Brook Green Bread, artisan bakery | Brook Green | 5 min | Asked |  |
+|  | Pastelaria Estrela, Portuguese pastelaria | Hammersmith Road | 6 min | Asked |  |
+|  | Sugar & Spoon Cakes, cake maker | Shepherd's Bush Road | 10 min | Asked | 3 days' notice; delivers |
+| Café (Peach) | The Blythe Café, café | Blythe Road | 3 min | Asked |  |
+|  | Yellow Door Coffee, coffee shop | Hammersmith Road | 7 min | Asked | New |
+|  | Grove Café, café | Brook Green | 9 min | Asked |  |
+| Deli (Peach) | Alimentari Bellini, Italian grocer | North End Road | 8 min | Connected |  |
+|  | Hammersmith Cheese Room, cheesemonger | King Street | 12 min | Asked | Delivers |
+|  | Askew Road Deli, deli | Askew Road | 15 min | Asked |  |
+| Hardware (Butter) | Heel & Key, key cutter and cobbler | Hammersmith Road | 6 min | Asked |  |
+|  | Hammersmith Paint & DIY, paint and DIY | King Street | 11 min | Asked | Delivers |
+| Toys and games (Peach) | Brook Green Games, games shop | Shepherd's Bush Road | 9 min | Asked |  |
+|  | Little Bear Toys, toy shop | Holland Road | 10 min | Asked | New |
+| Butcher and fish (Peach) | Goldhawk Fish, fishmonger | Goldhawk Road | 11 min | Asked |  |
+|  | Larkin & Sons Butchers, organic butcher | Askew Road | 14 min | Asked | Cuts to order |
+| Chemist (Pistachio) | Brook Green Pharmacy, independent pharmacy | Brook Green | 4 min | Connected |  |
+|  | Hammersmith Health Foods, health-food shop | King Street | 13 min | Asked |  |
+| Cameras (Peach) | Addison Cameras, camera shop | Holland Road | 11 min | Asked | Delivers |
+|  | Silver Halide Film Lab, film lab | Uxbridge Road | 15 min | Asked | New, no ratings |
+| Stationery (Pistachio) | Quill & Ledger, stationer | Hammersmith Road | 7 min | Connected |  |
+|  | Pigment Art Supplies, art supplies | Shepherd's Bush Road | 10 min | Asked | New |
+| Florist and plants (Pistachio) | Fern & Pot, plant shop | Brook Green | 6 min | Asked | New, no ratings |
+|  | Wild Stem Flowers, florist | North End Road | 9 min | Asked | Delivers |
+| Opticians (Pistachio) | Clear View Opticians, opticians | Holland Road | 8 min | Asked |  |
+|  | King Street Opticians, opticians | King Street | 12 min | Asked |  |
+| Newsagent (Butter) | Brook Green News & Wine, corner shop | Brook Green | 5 min | Asked |  |
+|  | Goldhawk Road Kiosk, news kiosk | Goldhawk Road | 13 min | Asked |  |
+| Books (Butter) | Riverside Books, new books | Hammersmith Road | 7 min | Connected |  |
+|  | Second Chapter Books, second-hand books | Shepherd's Bush Road | 8 min | Asked |  |
+|  | Panel Comics, comics | King Street | 13 min | Asked | New |
 
 ### Items and sources
 

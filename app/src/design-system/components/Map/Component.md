@@ -11,7 +11,7 @@ A real map of the prototype's high street (Blythe Road / Brook Green, London W14
 | `extent` | `{ width, height, pinY }` | none | For a tall view such as the shop page's full-screen background: the camera keeps the shop under a pin `pinY` points from the top |
 | `interactive` | boolean | `false` | Pan and zoom. Off on the shop page, where the map is a backdrop |
 
-Map ground (Butter 50 / #2B2420), roads in Muted, parks and water in muted tints, buildings extruded in 3D (8 m where the data has no height), seen at a pitch of 50°. No labels, no points of interest. The pin is HugeIcons' location glyph filled in Primary (Indigo 800 / Indigo 300).
+Map ground (Butter 50 / Card #282523), roads in Muted, parks and water in muted tints, buildings extruded in 3D (8 m where the data has no height), seen at a pitch of 50°. No labels, no points of interest. The pin is HugeIcons' location glyph filled in Primary (Indigo 800 / Indigo 300).
 
 ## Platforms
 

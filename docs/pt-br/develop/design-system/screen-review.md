@@ -34,7 +34,7 @@ Trade-offs:
 
 | # | Verificação | Passa quando |
 | --- | --- | --- |
-| 8 | Hierarquia visual | No máximo três tamanhos de texto por bloco e quatro por tela, sem contar a barra de navegação e a interface do sistema; um botão principal preenchido (Índigo) visível ao mesmo tempo. O enviar do compositor e os balões do comprador também são Índigo e não contam |
+| 8 | Hierarquia visual | No máximo três tamanhos de texto por bloco e quatro por tela, sem contar a barra de navegação, a interface do sistema, os badges (Caption 2) e as contagens; um botão principal preenchido (Índigo) visível ao mesmo tempo. O enviar do compositor e os balões do comprador também são Índigo e não contam |
 | 9 | Lei de Hick | No máximo 5 chips de filtro ou 3 sugestões visíveis; uma sheet tem no máximo 2 ações mais Cancel |
 | 19 | Papéis das cores | No máximo um controle preenchido em Índigo por tela visível, a ação de confirmação (Buy, Ask, enviar); as ações secundárias são neutras e um chip selecionado é Foreground. O Índigo é o comprador agindo, a Lavanda é o Snuffle falando (balões, marca, notificações, Live Activity), o pastel quente de uma loja é aquela loja (o tile, o cabeçalho da página, o recibo), e nenhuma cor troca de papel |
 
@@ -59,7 +59,7 @@ Trade-offs:
 | --- | --- | --- |
 | 15 | Tamanho dos alvos | Todo alvo tem pelo menos 44 pt (48 dp), com pelo menos 8 entre alvos |
 | 16 | Áreas seguras | Nada importante sob a Dynamic Island, o indicador de início ou a barra de pedido; o último item fica a 48 da barra de pedido |
-| 17 | Extensão da rolagem | O conteúdo não rola além do último item mais do que o espaço livre da barra de pedido |
+| 17 | Extensão da rolagem | O conteúdo não rola além do último item mais do que o espaço livre da barra de pedido: no fim, o último item para 48 acima da barra de pedido |
 | 18 | Cor e imagens | A cor nunca é o único sinal; toda imagem tem rótulo ou fica oculta |
 
 Os relatos citam as verificações pelo número. Os tokens estão em [Espaçamento e layout](spacing.md), [Tags](tags.md), [Imagens e ícones](imagery.md), [Forma e materiais](shape.md) e [Cor](colour.md).

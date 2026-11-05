@@ -143,3 +143,20 @@ Source: English Markdown in `docs/`. Target: Brazilian Portuguese in `docs/pt-br
 | retriever | retriever (sem tradução; Golden Retriever, Labrador) |
 | brand | brand (sem tradução, para não confundir com marca = mark) |
 | naming | naming |
+
+## Terms settled for ratings
+| English | PT-BR |
+| --- | --- |
+| rating / Rate (the action) | avaliação / Rate (interface copy stays in English) |
+| buyer (who bought and can rate) / "buyers" in interface copy | quem comprou / "buyers" stays in English |
+| would go back / "Would you go back?" | voltaria / stays in English |
+| thumbs up / thumbs down | polegar para cima / polegar para baixo |
+| rating tag | tag de avaliação |
+| signals (Snuffle's) / "What Snuffle saw", "What buyers said" | sinais (do Snuffle) / stay in English |
+| answer rate / stock accuracy / reply time | taxa de resposta / precisão de estoque / tempo de resposta |
+| reliability row / rating summary / review card / product summary / rating sheet | linha de confiabilidade / resumo das avaliações / cartão de avaliação / resumo do que vende / sheet de avaliação |
+| "What they sell", "How they do on Snuffle", "What buyers say", "How ratings work" | stay in English |
+| dispute (a case) | contestar (um caso) / contestação |
+| review gating | review gating |
+| review policy | política de avaliações |
+| incentivised review | avaliação com incentivo |

@@ -39,6 +39,14 @@ Trade-offs:
 
 Duas referências moldaram essas regras. Gooch, Gooch, Shirley e Cohen ("A non-photorealistic lighting model for automatic technical illustration", SIGGRAPH 1998) sombreiam deslocando o matiz em vez de escurecer em direção ao preto, e contornam silhuetas e vincos; aqui quem dá o matiz é o fundo. Saito e Takahashi ("Comprehensible rendering of 3-D shapes", SIGGRAPH 1990) encontram os contornos a partir de descontinuidades em imagens de profundidade e de normais da cena; a passada de contorno faz o mesmo, com um id de objeto a mais. Colorir as sombras com a paleta da cena em vez de deixá-las cinza também é comum na ilustração chapada e em jogos como Monument Valley.
 
+## Getting started
+
+Cada página de Getting started mostra seu objeto em 240 pt sobre o passo de Índigo daquela página: o cruzamento na página 1, a loja na página 2 e a caixa de entrega na página 3. Os objetos são renderizados para o próprio passo, então sombreado e sombra se misturam ao Índigo 900 (quase preto na página escura em Índigo 900), e sobre fundo transparente: a cor da página se mistura enquanto o comprador arrasta, e um quadrado opaco mostraria a borda no meio do gesto. Na página 2 escura, que é Índigo 800, as partes da loja em Índigo 800 (telhado, cornija, letreiro e a caixa do toldo) são recoloridas para Pêssego 500. Com Índigo 600 elas ainda se confundiam com o fundo. As imagens paradas vão em @2x e @3x, os clipes de entrada em @2x, e a loja tem também o loop de repouso. A entrada do cruzamento só coube no limite de 300 KB quando o codificador passou a manter metade dos quadros enquanto as peças se mexem e um quarto depois que a cena assenta.
+
+## Cartões de categoria
+
+A imagem de cada cartão de categoria é opaca, renderizada na cor do tile daquele tipo, que o pipeline lê dos tokens de cor (`shop.accent.<hue>.tile`), então uma mudança de token não deixa uma imagem numa cor antiga. O encoder falha quando o pixel do canto de uma imagem difere do tile dela em mais de 2 por canal. Todo objeto é enquadrado do mesmo jeito: sem a sombra, ele ocupa 72% dos 120 pt de largura do cartão, ou fica tão alto quanto o espaço entre 12 pt do topo e uma linha de base a 110 pt permite, apoiado nessa linha e centralizado; a sombra fica dentro do quadrado.
+
 ## Visualizador
 
 Os objetos ficam listados à esquerda e os ajustes da cena à direita: repetir a entrada, contornos, sombras, grade, giro automático, fundo, e ângulo e altura da luz. Cada painel tem no cabeçalho um botão que o esconde, e [ e ] fazem o mesmo; com o painel de objetos escondido, o título da página flutua no canto superior esquerdo e leva o botão que traz o painel de volta. A barra lateral da documentação se recolhe do mesmo jeito, pelo botão à esquerda da barra superior ou com ⌘\ (Ctrl+\). O visualizador e o site lembram dessas escolhas.
@@ -57,3 +65,15 @@ Os cantos da área de visualização guardam os controles. No canto inferior esq
 | Scooter de entrega | Rodas, carenagem, escudo das pernas, banco, guidão, um baú no bagageiro, um entregador com capacete redondo e sem rosto, dois riscos de vento | As rodas giram, a scooter balança, os riscos passam |
 | Caixa de entrega | Uma caixa grande com fita adesiva e etiqueta de envio, e uma caixa menor em cima, de lado | Parada |
 | Pessoas | Cinco figuras desenhadas como o entregador da scooter, sem rosto: cabeça, corpo em cápsula ou casaco comprido, braços e pernas em cápsula, e cabelo chanel, cabelo curto ou chapéu. Uma carrega uma sacola de compras, uma passeia com um terrier em blocos na guia, uma está parada. As mesmas figuras, em escala menor, andam e se sentam nas duas cenas de rua | Quatro andam sem sair do lugar (pernas e braços balançam, o corpo sobe e desce), o cachorro trota, a que está parada balança de leve |
+| Cesta de pães | Uma cesta redonda e baixa com borda, um pão redondo com três cortes e uma baguete atravessada por cima. O cartão da categoria Padaria | Parada |
+| Trem de brinquedo | Uma locomotiva de madeira com caldeira, cabine, telhado vermelho e chaminé, puxando um vagão aberto com blocos de brinquedo, sobre rodas de madeira. O cartão da categoria Brinquedos | Parada |
+| Cepo de açougueiro | Um cepo de madeira com um pernil de cordeiro em cima, o osso saindo da ponta fina, e um cutelo cravado em pé na madeira. O cartão da categoria Açougue | Parada |
+| Peixe no gelo | Uma bandeja de inox com uma camada de gelo e cubos soltos, um peixe inteiro deitado de lado e meio limão. O cartão da categoria Peixaria | Parada |
+| Remédio e curativos | Um frasco âmbar com tampa e rótulo brancos, uma caixa de curativos com a cruz verde de farmácia na tampa e um curativo na frente. O cartão da categoria Farmácia | Parada |
+| Câmera de filme | Uma câmera compacta: corpo escuro, placa superior prateada, objetiva, visor, flash, botão do obturador e manivela de rebobinar. O cartão da categoria Câmeras | Parada |
+| Lápis e caderno | Três lápis sextavados num pote e um caderno fechado com elástico. O cartão da categoria Papelaria | Parada |
+| Pilha de livros | Quatro livros, cada um um pouco girado, com o miolo branco à mostra; o de cima é um livro de bolso nas faixas laranja e branca de um Penguin clássico. O cartão da categoria Livros | Parada |
+| Jornal e leite | Um jornal dobrado com uma barra de manchete, uma foto e linhas de texto, e uma garrafa de vidro de um pint de leite com tampa de alumínio verde, como as deixadas na porta das casas em Londres. O cartão da categoria Banca | Parada |
+| Queijo e azeitonas | Uma fatia de queijo com casca no lado curvo e um pote de azeitonas com tampa e rótulo. O cartão da categoria Delicatéssen | Parada |
+| Planta no vaso | Uma espada-de-são-jorge num vaso de terracota: sete folhas altas e pontudas sobre a terra. O cartão da categoria Plantas | As folhas balançam de leve |
+| Tabuleiro e dados | Um tabuleiro de damas com quatro peças e dois dados na frente. O cartão da categoria Jogos | Parada |

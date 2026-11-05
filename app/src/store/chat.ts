@@ -42,6 +42,10 @@ export type OrderView = {
   card: string;
   code: string;
   collectAt?: Shop;
+  /** Collected and not rated yet: the card carries Rate (change shop-ratings-and-range). */
+  canRate: boolean;
+  /** The shopper has rated this order. */
+  rated: boolean;
 };
 
 const NUMBERS = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
@@ -70,7 +74,15 @@ function appSlice(s: AppState): AppSlice {
 const toneFor = (state: OrderState): OrderView['tone'] =>
   state === 'sold' || state === 'notConfirmed' ? 'warning' : state === 'ready' || state === 'paid' || state === 'collected' ? 'success' : 'default';
 
-export function orderView(c: PersonaContent, app: AppSlice, shopId: string, quantity: number, state: OrderState, fulfilment: Fulfilment): OrderView {
+export function orderView(
+  c: PersonaContent,
+  app: AppSlice,
+  shopId: string,
+  quantity: number,
+  state: OrderState,
+  fulfilment: Fulfilment,
+  rated = false,
+): OrderView {
   const shop = shopById(c, shopId);
   const offer = c.active.offers.find((o) => o.shopId === shopId);
   const name = shop?.name ?? '';
@@ -82,7 +94,8 @@ export function orderView(c: PersonaContent, app: AppSlice, shopId: string, quan
   const extendedTo = shopId === c.order.shopId ? c.order.extendedTo : collectBy;
   const till = shop?.source === 'till';
   const payName = app.platform === 'android' ? 'Google Pay' : 'Apple Pay';
-  const label = orderLabel(state, { shop: name, collectBy, extendedTo });
+  // After Collected the label asks for a rating, then says it's done: "Collected · rate Paper & Co", "Collected · rated".
+  const label = state === 'collected' ? (rated ? 'Collected · rated' : `Collected · rate ${name}`) : orderLabel(state, { shop: name, collectBy, extendedTo });
   let steps: OrderView['steps'];
   if (fulfilment === 'delivery' && state !== 'sold' && state !== 'notConfirmed' && state !== 'cancelled') {
     const at = ['waiting', 'paid', 'onItsWay', 'delivered'].indexOf(state);
@@ -123,13 +136,16 @@ export function orderView(c: PersonaContent, app: AppSlice, shopId: string, quan
     card: c.card,
     code: c.order.code,
     collectAt: c.order.collectAt ? shopById(c, c.order.collectAt) : undefined,
+    canRate: state === 'collected' && !rated,
+    rated,
   };
 }
 
 /** The current order, or null before Buy. */
-export function currentOrder(c: PersonaContent, app: AppSlice, sim: Pick<SimState, 'orderShopId' | 'orderQty'>): OrderView | null {
+export function currentOrder(c: PersonaContent, app: AppSlice, sim: Pick<SimState, 'orderShopId' | 'orderQty' | 'orderRating'>): OrderView | null {
   if (app.order === 'none') return null;
-  return orderView(c, app, sim.orderShopId ?? c.order.shopId, sim.orderQty || c.active.quantity, app.order, app.fulfilment);
+  const shopId = sim.orderShopId ?? c.order.shopId;
+  return orderView(c, app, shopId, sim.orderQty || c.active.quantity, app.order, app.fulfilment, sim.orderRating?.shopId === shopId);
 }
 
 /** Answers with a card in the chat, best first: all of it, then some of it, then something similar. */
@@ -255,7 +271,8 @@ export function buildChat(c: PersonaContent, app: AppSlice, sim: SimState): Chat
   return items;
 
   function orderBlock(o: EndedOrder, current: boolean) {
-    const view = orderView(c, app, o.shopId, o.quantity, o.state, o.fulfilment);
+    const rated = current && sim.orderRating?.shopId === o.shopId;
+    const view = orderView(c, app, o.shopId, o.quantity, o.state, o.fulfilment, rated);
     const k = (name: string) => `${name}-${o.shopId}`;
     const it = o.quantity === 1 ? 'it' : 'them';
     shopper(k('buy'), o.fulfilment === 'delivery' ? `Buy ${o.quantity}, ${view.shop} delivers` : `Buy ${o.quantity} at ${view.shop}`);
@@ -284,13 +301,18 @@ export function buildChat(c: PersonaContent, app: AppSlice, sim: SimState): Chat
           snuffle(k('extended'), `Done. Collect by ${view.extendedTo}, ${closes}.`);
         }
         break;
+      // Collected: the order card carries Rate. Delivered: Snuffle asks, with a Rate chip.
       case 'collected':
-        snuffle(k('collected'), `Collected. How was ${view.shop}?`);
-        chips(k('rateChips'), [{ label: 'Rate', action: 'rate' }]);
+        if (rated) snuffle(k('rated'), `Thanks. Your rating is on ${view.shop}'s page now.`);
         break;
       case 'delivered':
-        snuffle(k('delivered'), `Delivered at 2:41pm. How was ${view.shop}?`);
-        chips(k('rateChips'), [{ label: 'Rate', action: 'rate' }]);
+        snuffle(k('delivered'), 'Delivered at 2:41pm.');
+        if (rated) {
+          snuffle(k('rated'), `Thanks. Your rating is on ${view.shop}'s page now.`);
+        } else if (current) {
+          snuffle(k('howWas'), `How was ${view.shop}?`);
+          chips(k('rateChips'), [{ label: 'Rate', action: 'rate' }]);
+        }
         break;
       case 'cancelled':
         snuffle(k('cancelled'), `Your order at ${view.shop} is cancelled. I've refunded ${view.total} to your card.`);
@@ -364,7 +386,7 @@ export function useChat(): ChatItem[] {
 
 export function useCurrentOrder(): OrderView | null {
   const app = useAppStore(useShallow(appSlice));
-  const sim = useSim(useShallow((s) => ({ orderShopId: s.orderShopId, orderQty: s.orderQty })));
+  const sim = useSim(useShallow((s) => ({ orderShopId: s.orderShopId, orderQty: s.orderQty, orderRating: s.orderRating })));
   return currentOrder(contentFor(app.persona, app.contentSet), app, sim);
 }
 

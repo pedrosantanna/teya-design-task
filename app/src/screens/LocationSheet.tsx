@@ -54,7 +54,7 @@ export function LocationSheet({ open, onClose, origin, onConfirm }: { open: bool
   };
 
   return (
-    <Sheet open={open} onClose={onClose} title="Where are you shopping?" detents={['medium', 'large']} opaque origin={origin} onConfirm={confirm} confirmLabel="Confirm">
+    <Sheet open={open} onClose={onClose} title="Where are you shopping?" detents={['medium', 'large']} origin={origin} onConfirm={confirm} confirmLabel="Confirm">
       <TextField value={query} onChangeText={setQuery} label="Search for an address" placeholder="Search for an address" icon={Search01Icon} />
       {q ? (
         results.length > 0 ? (
@@ -104,5 +104,6 @@ export function LocationSheet({ open, onClose, origin, onConfirm }: { open: bool
 }
 
 const styles = StyleSheet.create((theme) => ({
-  group: { gap: theme.space[2] },
+  // 24 above the walking distance (the sheet's gap.block plus space.3), 8 to the control it names.
+  group: { gap: theme.space[2], paddingTop: theme.space[3] },
 }));

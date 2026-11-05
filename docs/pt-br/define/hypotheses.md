@@ -1,6 +1,6 @@
 # Hipóteses
 
-O conceito se apoia em dezesseis hipóteses. A maioria vem de uma suposição ou pergunta em aberto da [conclusão do Discover](../discover/conclusion.md); quatro vêm dos meus motivos para fazer do concierge um agente, e cinco da forma como ele ganha dinheiro ([receita](revenue.md)). Cada uma tem um teste. Treze têm um critério de aprovação definido antes do teste; a H10, a H11 e a H16 são exploratórias e registram uma divisão ou uma contagem que define uma ordem ou um tamanho. Estão ordenadas por risco: o tamanho do estrago no conceito se a hipótese estiver errada, e o pouco de evidência que existe hoje.
+O conceito se apoia em dezenove hipóteses. A maioria vem de uma suposição ou pergunta em aberto da [conclusão do Discover](../discover/conclusion.md); quatro vêm dos meus motivos para fazer do concierge um agente, cinco da forma como ele ganha dinheiro ([receita](revenue.md)) e três das avaliações na página da loja (decisão 047). Cada uma tem um teste. Dezesseis têm um critério de aprovação definido antes do teste; a H10, a H11 e a H16 são exploratórias e registram uma divisão ou uma contagem que define uma ordem ou um tamanho. Estão ordenadas por risco: o tamanho do estrago no conceito se a hipótese estiver errada, e o pouco de evidência que existe hoje.
 
 ```summary
 Takeaways:
@@ -11,8 +11,10 @@ Call:
 - Acrescentei as quatro hipóteses sobre o agente (perguntar primeiro, a espera, pedidos deixados com antecedência, canais) e defini a ordem: o lado da loja é testado primeiro, à mão, antes de construir qualquer coisa que dependa dele.
 - Passei o teste à mão para o WhatsApp, comigo no papel de concierge. Ele testa as lojas, a espera e um dos canais de uma vez.
 - Defini os critérios de aprovação antes do teste, para que um resultado não possa ser lido do jeito que convém. Passar no protótipo registra o que os compradores dizem que fariam; onde sai barato, o concierge feito à mão confere a mesma coisa com pedidos reais (H2, H7).
+- Depois acrescentei três hipóteses sobre avaliações: que os sinais do Snuffle deixam uma loja consultada competir com uma conectada (H17), que "% would go back" se lê tão fácil quanto estrelas (H18) e que as lojas aceitam um número público de precisão de estoque (H19).
 AI:
 - Um agente rascunhou as hipóteses a partir das suposições e do conceito, e propôs testes e critérios de aprovação. Eu acrescentei as quatro sobre o agente e defini a ordem.
+- Um agente rascunhou a H17 a H19 e os testes delas a partir da decisão 047; eu escolhi o teste de 5 segundos para a H18 e perguntar às mesmas 10 lojas para a H19.
 Trade-offs:
 - Testes pequenos dão direção e não provam nada. Passar com seis compradores justifica o próximo passo. Um lançamento pediria bem mais.
 - Um concierge feito por uma pessoa esconde quão bem os agentes fariam o mesmo trabalho. Esse é um teste para depois, quando as lojas passarem.
@@ -39,6 +41,9 @@ Trade-offs:
 | H14 | As lojas que já estão no POS do provedor veem os compradores do app como um motivo para mantê-lo | Receita; decisão 023 | Comparar as vendas pelo app em cada loja ao longo de quatro semanas e depois perguntar às lojas da rede se isso muda o valor que dão ao seu POS | 3 de 5 dizem que isso as faria manter ou recomendar o POS |
 | H15 | As lojas pagariam para aparecer em destaque na tela inicial ou para um bairro além da sua rua | Receita | Depois de quatro semanas de resumos da demanda, oferecer um espaço em destaque a um preço semanal informado | 2 de 10 lojas pagam ou aceitam um teste pago |
 | H16 | Os compradores compram de uma loja mais distante quando ela é a única com o item e eles podem pagar antes | Receita | Dados da prova de conceito: parcela das compras retiradas em lojas a mais de 15 minutos a pé | Exploratória: registrada como parcela; serve para dimensionar o caso do alcance pago |
+| H17 | Com uma linha de confiabilidade, os compradores compram numa loja consultada tanto quanto numa loja conectada | Decisão 047; H5 | Protótipo com 6 compradores: dois cartões de resposta com o mesmo preço e o mesmo tempo a pé, um de uma loja consultada e um de uma loja conectada. Cada comprador vê o par duas vezes, com e sem a linha de confiabilidade no cartão da loja consultada, em ordem alternada | Com a linha, a loja consultada é escolhida em pelo menos 3 de 6 pares, e mais vezes do que sem ela |
+| H18 | Os compradores leem "% would go back" tão fácil quanto estrelas | Decisão 047 | Teste de 5 segundos com 6 compradores: uma página de loja aparece por cinco segundos, depois a pergunta "Como quem comprou avalia esta loja, e quantas pessoas avaliaram?". Cada um vê uma loja com "92% would go back · 38 buyers" e outra com média de estrelas e contagem, em ordem alternada | 5 de 6 acertam as duas partes com a porcentagem, e não menos do que com estrelas |
+| H19 | As lojas aceitam um número público de precisão de estoque | Decisão 047 | Perguntar às 10 lojas da H1, mostrando a cada uma o próprio número do teste à mão ("Had it 9 of 10 times when they said yes") e o direito de contestar um caso | 6 de 10 aceitam o número em público |
 
 Um teste de protótipo registra a escolha declarada: o que o comprador diz ou clica num cenário. Ele não mostra se a pessoa iria, pagaria ou retiraria. Para a H2 e a H7, o concierge feito à mão acrescenta a verificação de comportamento, com necessidades reais e compras de verdade.
 
@@ -46,8 +51,8 @@ Um teste de protótipo registra a escolha declarada: o que o comprador diz ou cl
 
 Estes testes acontecem dentro da [prova de conceito](next-step.md): o agente concierge chega às lojas, e o protótipo do app de quem compra é o que os compradores usam. A versão feita à mão abaixo é a alternativa se o agente não estiver pronto.
 
-- **Concierge à mão pelo WhatsApp (H1, acompanhamentos da H2 e da H7, H4, H6, H10, H11).** Um telefone com WhatsApp, uma lista de dez lojas a até 15 minutos a pé da Blythe Road que respondem pelo WhatsApp, de categorias que apareceram na netnografia (ferragens, floricultura, padaria, açougue, farmácia), e seis compradores com necessidades reais, pelo menos três deles trabalhando no horário das lojas. Eu faço o papel de concierge. Nada construído. Dois dias, mais uma volta pelo anel de 15 minutos depois das 18h30.
-- **Teste do protótipo (H2, H3, H5, H7, H8, H10).** O protótipo clicável do Deliver, com cenários tirados dos posts das personas (óculos para eclipse na véspera, um ventilador numa onda de calor, as compras da semana depois do trabalho). Seis compradores, 30 minutos cada.
+- **Concierge à mão pelo WhatsApp (H1, acompanhamentos da H2 e da H7, H4, H6, H10, H11, H19).** Um telefone com WhatsApp, uma lista de dez lojas a até 15 minutos a pé da Blythe Road que respondem pelo WhatsApp, de categorias que apareceram na netnografia (ferragens, floricultura, padaria, açougue, farmácia), e seis compradores com necessidades reais, pelo menos três deles trabalhando no horário das lojas. Eu faço o papel de concierge. Nada construído. Dois dias, mais uma volta pelo anel de 15 minutos depois das 18h30.
+- **Teste do protótipo (H2, H3, H5, H7, H8, H10, H17, H18).** O protótipo clicável do Deliver, com cenários tirados dos posts das personas (óculos para eclipse na véspera, um ventilador numa onda de calor, as compras da semana depois do trabalho). Seis compradores, 30 minutos cada.
 - **Conversas com lojistas (H9).** Cinco visitas curtas com um mock-up impresso.
 
 ## Se a H1 falhar
@@ -57,3 +62,7 @@ O concierge, do jeito que foi desenhado, não funciona. As alternativas são mai
 ## Se a H3 ou a H4 falhar
 
 O agente deixa de ser a entrada principal. Explorar lojas e categorias vira a tela principal, e o concierge fica como ferramenta para os pedidos que explorar não resolve.
+
+## Se a H19 falhar
+
+A precisão de estoque fica privada: cada loja vê o próprio número, e a página da loja mostra só a taxa e o tempo de resposta.

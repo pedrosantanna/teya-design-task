@@ -3,22 +3,26 @@
   "color": {
     "$type": "color",
     "background": {
-      "$value": "{color.biscuit.150}"
+      "$value": "{color.stone.150}"
     },
     "card": {
-      "$value": "{color.biscuit.265}",
+      "$value": "{color.stone.265}",
       "$description": "Raised from 235 so cards separate from the background (1.29:1)"
     },
     "muted": {
-      "$value": "{color.biscuit.320}",
+      "$value": "{color.stone.320}",
       "$description": "Tonal buttons and the stepper on cards; one step above the card"
     },
     "mutedForeground": {
-      "$value": "{color.biscuit.740}",
+      "$value": "{color.stone.740}",
       "$description": "Secondary text"
     },
+    "mutedForegroundOnTile": {
+      "$value": "{color.stone.840}",
+      "$description": "Secondary text and chevrons on a row card on an accent tile: Muted foreground in light; Stone 840 in dark, 4.74:1 or more on every cardOnTile (Stone 740 was 3.35:1)"
+    },
     "foreground": {
-      "$value": "{color.biscuit.985}"
+      "$value": "{color.stone.985}"
     },
     "primary": {
       "$value": "{color.indigo.300}",
@@ -43,11 +47,11 @@
       "$description": "A 1 pt edge on a selected chip, so its tonal fill holds its own next to Card chips (colour.md, Roles)"
     },
     "filterSelected": {
-      "$value": "{color.biscuit.985}",
+      "$value": "{color.stone.985}",
       "$description": "Selected filter chip: Foreground fill, so Indigo means action, not selection (tags.md)"
     },
     "onFilterSelected": {
-      "$value": "{color.biscuit.150}"
+      "$value": "{color.stone.150}"
     },
     "badge": {
       "promoted": {
@@ -85,7 +89,7 @@
       }
     },
     "mapGround": {
-      "$value": "{color.biscuit.265}",
+      "$value": "{color.stone.265}",
       "$description": "Biscuit 265, the card's step, so the map reads as part of the dark surfaces"
     },
     "scrim": {
@@ -104,11 +108,11 @@
       "$description": "Check icon on Ready, Paid and Collected (colour.md)"
     },
     "border": {
-      "$value": "{color.biscuit.360}",
+      "$value": "{color.stone.360}",
       "$description": "A card on a busy area, text fields"
     },
     "separator": {
-      "$value": "{color.biscuit.320}",
+      "$value": "{color.stone.320}",
       "$description": "1 px lines between rows, inset to the text"
     },
     "codeSurface": {
@@ -133,6 +137,10 @@
           "ink": {
             "$value": "{color.peach.200}",
             "$description": "Initials and the dark awning stripes on the tile"
+          },
+          "cardOnTile": {
+            "$value": "{color.peach.cardOnTileDark}",
+            "$description": "Rows on this accent's tile (the Category screen): a tinted card lighter than the tile, so rows don't read as holes (decision 050)"
           }
         },
         "pistachio": {
@@ -147,6 +155,10 @@
           "ink": {
             "$value": "{color.pistachio.200}",
             "$description": "Initials and the dark awning stripes on the tile"
+          },
+          "cardOnTile": {
+            "$value": "{color.pistachio.cardOnTileDark}",
+            "$description": "Rows on this accent's tile (the Category screen): a tinted card lighter than the tile, so rows don't read as holes (decision 050)"
           }
         },
         "butter": {
@@ -161,6 +173,10 @@
           "ink": {
             "$value": "{color.butter.200}",
             "$description": "Initials and the dark awning stripes on the tile"
+          },
+          "cardOnTile": {
+            "$value": "{color.butter.cardOnTileDark}",
+            "$description": "Rows on this accent's tile (the Category screen): a tinted card lighter than the tile, so rows don't read as holes (decision 050)"
           }
         },
         "lavender": {
@@ -175,6 +191,10 @@
           "ink": {
             "$value": "{color.lavender.200}",
             "$description": "Initials and the dark awning stripes on the tile"
+          },
+          "cardOnTile": {
+            "$value": "{color.lavender.cardOnTileDark}",
+            "$description": "Rows on this accent's tile (the Category screen): a tinted card lighter than the tile, so rows don't read as holes (decision 050)"
           }
         }
       }
@@ -191,21 +211,21 @@
     },
     "chat": {
       "ground": {
-        "$value": "{color.biscuit.150}",
+        "$value": "{color.stone.150}",
         "$description": "A chat's neutral ground: Card in light, Background in dark"
       },
       "fill": {
-        "$value": "{color.biscuit.265}",
+        "$value": "{color.stone.265}",
         "$description": "Chips and grouped rows on the chat ground: Background in light, Card in dark"
       },
       "edge": {
-        "$value": "{color.biscuit.265}",
+        "$value": "{color.stone.265}",
         "$description": "Hairline around cards and grouped rows on the chat ground (white on white needs an edge)"
       }
     },
     "sheet": {
-      "$value": "{color.biscuit.200}",
-      "$description": "Opaque sheet ground (dark L 0.20, so Card at L 0.265 still separates)"
+      "$value": "{color.stone.200}",
+      "$description": "Sheet ground, one Stone step above the Background (L 0.20); rows inside a sheet take Muted (1.40:1) (shape.md, Sheets)"
     },
     "count": {
       "$value": "{color.indigo.800}",
@@ -215,7 +235,7 @@
       "$value": "{color.white}"
     },
     "glassEdge": {
-      "$value": "{color.biscuit.150}",
+      "$value": "{color.stone.150}",
       "$description": "Web glass: the 0.5 pt hairline and the drop shadow colour"
     },
     "glassShine": {
@@ -223,8 +243,80 @@
       "$description": "Web glass: the 0.5 pt inner highlight along the top edge"
     },
     "shadow": {
-      "$value": "{color.biscuit.150}",
+      "$value": "{color.stone.150}",
       "$description": "Colour of the delicate card shadow"
+    },
+    "welcome": {
+      "$description": "Getting started in dark mode: the ramp runs the other way, Indigo 900 up to 700, under the same Foreground",
+      "ground1": {
+        "$value": "{color.indigo.900}",
+        "$description": "Page 1; text 13.52:1"
+      },
+      "ground2": {
+        "$value": "{color.indigo.800}",
+        "$description": "Page 2; text 8.39:1"
+      },
+      "ground3": {
+        "$value": "{color.indigo.700}",
+        "$description": "Page 3; text 6.66:1"
+      }
+    },
+    "tonalOnTile": {
+      "$value": "{color.white}",
+      "$description": "Tonal buttons on a shop's accent tile (the shop page's actions), at state.tonalOnTile (colour.md, Shop accents)"
+    },
+    "chipOn": {
+      "$value": "{color.indigo.300}",
+      "$description": "A selected filter chip's text and edge, on a Card fill: Indigo 800 in light, Indigo 300 in dark (tags.md)"
+    },
+    "sheetScrim": {
+      "$value": "{color.black}",
+      "$description": "Black at state.sheetScrim behind every sheet (shape.md, Sheets)"
+    },
+    "segmented": {
+      "track": {
+        "$value": "{color.stone.265}",
+        "$description": "iOS segmented control track: Border in light, Card in dark (components.md, Segmented control)"
+      },
+      "thumb": {
+        "$value": "{color.stone.360}",
+        "$description": "iOS segmented control thumb, a step above the Card track (1.37:1 on it; Muted was 1.15:1 and the thumb all but vanished), under the delicate shadow"
+      }
+    },
+    "glassHairline": {
+      "$value": "{color.stone.360}",
+      "$description": "Web glass: the 0.5 pt hairline, Stone 360 in full, so glass reads on the dark Background (shape.md, Glass recipe)"
+    },
+    "grabber": {
+      "$value": "{color.stone.445}",
+      "$description": "The sheet's grabber: Muted foreground at state.grabber in light; Stone 445 in full in dark (2.49:1, solid; Muted foreground at 38% rendered #514F4C, 2.19:1)"
+    }
+  },
+  "state": {
+    "$type": "number",
+    "tonalOnTile": {
+      "$value": 0.06,
+      "$description": "Dark: white at 6% over the tile, 1.19 to 1.20:1 on it (Muted was 1.08 to 1.20:1 and read as a dirty patch)"
+    },
+    "sheetScrim": {
+      "$value": 0.48,
+      "$description": "Opacity of color.sheetScrim behind a sheet at rest (shape.md, Sheets)"
+    },
+    "glassHairline": {
+      "$value": 1,
+      "$description": "Opacity of color.glassHairline"
+    },
+    "grabber": {
+      "$value": 1,
+      "$description": "Opacity of color.grabber: 38% in light, full in dark"
+    },
+    "glassSaturateOnTile": {
+      "$value": 1,
+      "$description": "Web glass on a tile: backdrop saturation, 1 in dark (1.6 turned Peach and Pistachio into the loudest thing on the screen)"
+    },
+    "glassShadowOnTile": {
+      "$value": 0,
+      "$description": "Web glass on a tile: no drop shadow in dark (it read as a halo)"
     }
   }
 }

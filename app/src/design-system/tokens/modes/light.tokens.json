@@ -16,6 +16,10 @@
       "$value": "{color.biscuit.445}",
       "$description": "Secondary text"
     },
+    "mutedForegroundOnTile": {
+      "$value": "{color.biscuit.445}",
+      "$description": "Secondary text and chevrons on a row card on an accent tile: Muted foreground in light; Stone 840 in dark, 4.74:1 or more on every cardOnTile (Stone 740 was 3.35:1)"
+    },
     "foreground": {
       "$value": "{color.biscuit.150}"
     },
@@ -131,6 +135,10 @@
           "ink": {
             "$value": "{color.peach.800}",
             "$description": "Initials and the dark awning stripes on the tile"
+          },
+          "cardOnTile": {
+            "$value": "{color.biscuit.1000}",
+            "$description": "Rows on this accent's tile (the Category screen): white Card, as on the Background"
           }
         },
         "pistachio": {
@@ -145,6 +153,10 @@
           "ink": {
             "$value": "{color.pistachio.800}",
             "$description": "Initials and the dark awning stripes on the tile"
+          },
+          "cardOnTile": {
+            "$value": "{color.biscuit.1000}",
+            "$description": "Rows on this accent's tile (the Category screen): white Card, as on the Background"
           }
         },
         "butter": {
@@ -159,6 +171,10 @@
           "ink": {
             "$value": "{color.butter.800}",
             "$description": "Initials and the dark awning stripes on the tile"
+          },
+          "cardOnTile": {
+            "$value": "{color.biscuit.1000}",
+            "$description": "Rows on this accent's tile (the Category screen): white Card, as on the Background"
           }
         },
         "lavender": {
@@ -173,6 +189,10 @@
           "ink": {
             "$value": "{color.lavender.800}",
             "$description": "Initials and the dark awning stripes on the tile"
+          },
+          "cardOnTile": {
+            "$value": "{color.biscuit.1000}",
+            "$description": "Rows on this accent's tile (the Category screen): white Card, as on the Background"
           }
         }
       }
@@ -202,8 +222,8 @@
       }
     },
     "sheet": {
-      "$value": "{color.biscuit.940}",
-      "$description": "Opaque sheet ground (dark L 0.20, so Card at L 0.265 still separates)"
+      "$value": "{color.biscuit.890}",
+      "$description": "Sheet ground, one tone darker than the Background (L 0.89, 1.15:1), so white rows (1.39:1) and the sheet both separate (shape.md, Sheets)"
     },
     "count": {
       "$value": "{color.indigo.800}",
@@ -223,6 +243,90 @@
     "shadow": {
       "$value": "{color.biscuit.150}",
       "$description": "Colour of the delicate card shadow"
+    },
+    "welcome": {
+      "$description": "Getting started (colour.md, Getting started): one full-bleed Indigo ground per page, deepening page by page. Text, Skip, the dots and the Continue capsule use Foreground and Background over it",
+      "ground1": {
+        "$value": "{color.indigo.300}",
+        "$description": "Page 1, Ask for anything nearby; ink 11.11:1"
+      },
+      "ground2": {
+        "$value": "{color.indigo.400}",
+        "$description": "Page 2, Snuffle asks the shops; ink 8.34:1"
+      },
+      "ground3": {
+        "$value": "{color.indigo.500}",
+        "$description": "Page 3, Buy then collect; ink 6.04:1"
+      }
+    },
+    "tonalOnTile": {
+      "$value": "{color.white}",
+      "$description": "Tonal buttons on a shop's accent tile (the shop page's actions), at state.tonalOnTile (colour.md, Shop accents)"
+    },
+    "chipOn": {
+      "$value": "{color.indigo.800}",
+      "$description": "A selected filter chip's text and edge, on a Card fill: Indigo 800 in light, Indigo 300 in dark (tags.md)"
+    },
+    "sheetScrim": {
+      "$value": "{color.biscuit.150}",
+      "$description": "Foreground at state.sheetScrim behind every sheet (shape.md, Sheets)"
+    },
+    "segmented": {
+      "track": {
+        "$value": "{color.biscuit.860}",
+        "$description": "iOS segmented control track: Border in light (1.10:1 on the sheet, the thumb 1.53:1 on it; Muted was 1.08:1 and the white thumb 1.29:1), Card in dark (components.md, Segmented control)"
+      },
+      "thumb": {
+        "$value": "{color.biscuit.1000}",
+        "$description": "iOS segmented control thumb, one level above the track: Card on the Muted track, under the delicate shadow (components.md, Segmented control)"
+      }
+    },
+    "glassHairline": {
+      "$value": "{color.biscuit.150}",
+      "$description": "Web glass: the 0.5 pt hairline, at state.glassHairline (6%)"
+    },
+    "grabber": {
+      "$value": "{color.biscuit.445}",
+      "$description": "The sheet's grabber: Muted foreground at state.grabber in light; Stone 445 in full in dark (2.49:1), quieter than the title"
+    }
+  },
+  "state": {
+    "$type": "number",
+    "tonalOnTile": {
+      "$value": 0.4,
+      "$description": "Light: white at 40% over the tile, 1.17 to 1.18:1 on it, so a tonal button keeps the shop hue instead of a grey Muted capsule"
+    },
+    "sheetScrim": {
+      "$value": 0.2,
+      "$description": "Opacity of color.sheetScrim behind a sheet at rest (shape.md, Sheets)"
+    },
+    "glassHairline": {
+      "$value": 0.06,
+      "$description": "Opacity of color.glassHairline"
+    },
+    "grabber": {
+      "$value": 0.38,
+      "$description": "Opacity of color.grabber: 38% in light (1.72:1 on the sheet), full in dark"
+    },
+    "glassSaturateOnTile": {
+      "$value": 1.6,
+      "$description": "Web glass on a tile: backdrop saturation. Light keeps the glass's 1.6; dark is 1, so the dark Back no longer reads as the most saturated thing on the screen"
+    },
+    "glassShadowOnTile": {
+      "$value": 0.1,
+      "$description": "Web glass on a tile: opacity of the drop shadow. Light keeps the glass's 10%; dark has none (it read as a halo)"
+    }
+  },
+  "size": {
+    "$type": "dimension",
+    "edge": {
+      "selected": {
+        "$value": {
+          "value": 1.5,
+          "unit": "px"
+        },
+        "$description": "Light: a selected filter chip's Indigo 800 edge is 1.5 pt, so it holds against the white unselected chips (tags.md)"
+      }
     }
   }
 }

@@ -3,7 +3,7 @@ import Location01Icon from '@hugeicons/core-free-icons/Location01Icon';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { Button, ListRow, NavBar, SegmentedControl, Text, screenMargin, useNavBarHeight } from '@/design-system';
@@ -17,12 +17,13 @@ const SEGMENTS = [
 // Keep looking (v7 frame "Keep looking"): Snuffle keeps the request open and messages the shopper when a
 // shop has it. Nothing is bought until Buy.
 export default function KeepLooking() {
-  const { theme, rt } = useUnistyles();
+  const { theme } = useUnistyles();
+  const frame = useSafeAreaFrame();
   const insets = useSafeAreaInsets();
   const top = useNavBarHeight();
   const content = useContent();
   const [repeat, setRepeat] = useState('once');
-  const margin = screenMargin(theme, rt.screen.width);
+  const margin = screenMargin(theme, frame.width);
   const them = content.active.plural ? 'them' : 'it';
   const close = () => (router.canGoBack() ? router.back() : router.navigate({ pathname: '/requests/[id]', params: { id: content.active.id } }));
   const done = () => {

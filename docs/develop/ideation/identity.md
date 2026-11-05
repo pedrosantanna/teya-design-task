@@ -9,7 +9,7 @@ Takeaways:
 - Three palettes, each built on a complementary pair plus a third colour: Pillar and park (green and red, butter), Awning (cobalt and marmalade, mint), Tiles (teal and rose, ochre). Every tint passes 4.5:1 as text and as a button label in light and dark mode.
 - The mark is now a retriever, a British breed whose job is to bring things back. Retriever names to consider: Nous (the breed's founding dog, and British slang for common sense), Bonnie, Bailey, Buddy, Teddy, Primrose. Sniffing names: Snuffle (my choice, decision 035), Sniffari, Truffle, Rootle, Boop, Waggy.
 - Several obvious names are taken or crowded (Parade, Fetch, Errand, Legwork), and "Nip" alone is an ethnic slur.
-- Round 9 puts more colour back into the light mode: the background at L 0.95 or L 0.96, at round 8's chroma, ×1.8 or ×2.5. The agent suggested L 0.96 at ×1.8; I chose L 0.96 at round 8's chroma (#F4F1ED), and dark mode stays as in round 8. ×2.5 reads as cream.
+- Round 9 puts more colour back into the light mode: the background at L 0.95 or L 0.96, at round 8's chroma, ×1.8 or ×2.5. The agent suggested L 0.96 at ×1.8; I chose L 0.96 at round 8's chroma (#F4F1ED), and dark mode stayed as in round 8 until I moved it to round 8's less colour column. ×2.5 reads as cream.
 - Round 7 replaces the brown dark mode: Biscuit grey's dark steps read as muddy brown and sit opposite indigo on the wheel. Aubergine, a warm plum, is the agent's suggestion; Night sky is cooler, Plum charcoal quieter.
 - Round 6 stresses Night bus: its solid badges glared because Amber, Neon pink and Cyan are light and very saturated; tonal badges (pale fill, dark text of the same hue) pass 7:1 and calm it down. Indigo carries all text and buttons.
 - Round 5 answers whether the saturated palettes work with Biscuit grey: they do, because the grey is almost neutral; the mark's Oat and Brew are the limit. Warm-led sets (Corner shop, Lido) sit best next to it.
@@ -19,6 +19,7 @@ Call:
 - I asked for more palettes and an icon test with the parade's awning as a terrier's beard, then picked icon test 3 and shortlisted palettes A, C, F, I and J.
 - I redrew icon tests 1 and 2 by hand in Figma as the provisional mark (decision 033); it is in the [design system](../design-system/mark.md).
 - I asked to compare the hybrids and dark modes side by side on screens, without borders, and chose Pastel parade with Indigo (decision 036) and a light background at L 0.96 with round 8's chroma (round 9); dark mode as in round 8. The name is decided: Snuffle.
+- Later I went back to round 8's dark mode tests and chose the less colour column for dark mode: Biscuit grey at 45% of its chroma, named Stone, because the full chroma read brown at night (decision 048). Light mode keeps Biscuit grey. It is marked on the board.
 AI:
 - I gave the seeds: a sniffer dog, a Sherlock-style investigator, British shopping culture. An agent searched the web for references and name conflicts, checked the Sherlock Holmes copyright and trademark position, built the palettes with a script that computes WCAG contrast and Material 3 tonal palettes, drew the mark sketches in SVG, applied the palettes to the v2 wireframes and captured nine apps from Mobbin.
 - The name checks are quick web searches, not trademark searches. Names marked "not checked" were not searched at all.
@@ -35,7 +36,7 @@ Every round stays on the same board, newest at the top, under a "Where it stands
 | Round | What it added |
 | --- | --- |
 | 9 | Biscuit grey in light mode with more colour: the background at L 0.95 and at L 0.96, each with round 8's chroma, ×1.8 and ×2.5 |
-| 8 | Pastel parade with Indigo on Biscuit grey, chosen (decision 036), in light and dark without borders: surfaces with more lightness distance, and a less saturated Biscuit grey beside it |
+| 8 | Pastel parade with Indigo on Biscuit grey, chosen (decision 036), in light and dark without borders: surfaces with more lightness distance, and a less saturated Biscuit grey beside it. Dark mode now uses that less saturated column at 45% of the chroma, as Stone (decision 048) |
 | 7 | Three dark modes in place of the brown one (Night sky, Aubergine, Plum charcoal), from a benchmark of Linear, Material 3 and Slack, each tried with Night bus, Lido with Indigo and Pastel parade with Indigo, next to the light mode and the round 6 brown, all without borders |
 | 6 | Night bus derived into ten-step OKLCH ramps per colour, tonal badges in place of solid ones, four screens in light and dark that push the palette, and Indigo in place of the blue in Lido and Pastel parade, each on the same four screens in light and dark |
 | 5 | Biscuit grey as the neutral, pre-decided. Pillar box with three candidates for the fifth colour in place of Slate roof (Duck egg, Bramley and Sea glass, brighter), and six saturated palettes from round 2 on Biscuit grey with the mark |

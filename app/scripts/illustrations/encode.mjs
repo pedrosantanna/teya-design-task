@@ -1,8 +1,9 @@
 // Encodes the rendered frames (scripts/illustrations/.frames, from render.mjs) into the app's assets and writes
 // src/design-system/components/Illustration/manifest.generated.ts.
 //
-//   cd app && npx -y -p sharp@0.34.5 node scripts/illustrations/encode.mjs [--only basket,box]
-// A run without --only also deletes assets it did not write (dropped from the manifest).
+//   cd app && npx -y -p sharp@0.34.5 node scripts/illustrations/encode.mjs [--only basket,box] [--prune]
+// --prune (with no --only) also deletes assets it did not write (dropped from the manifest). It is opt-in because
+// .frames/ is gitignored and may hold only part of the set on another checkout.
 //
 // Each clip becomes an animated WebP. Lossless and lossy (q90) are both encoded; lossless is kept when it fits the
 // budget and is no more than 10% bigger than lossy, else the smaller one. Entry clips play once, idle clips loop.
@@ -14,7 +15,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, wri
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
-import { ASSETS, FRAMES, GENERATED, clipScales, flags, manifest, tool } from './lib.mjs';
+import { ASSETS, FRAMES, GENERATED, categoryColors, clipScales, flags, manifest, tool } from './lib.mjs';
 
 const f = flags();
 const m = manifest();
@@ -33,10 +34,10 @@ if (!existsSync(FRAMES)) throw new Error('No frames: run render.mjs first.');
 
 const framesOf = (dir) => readdirSync(dir).filter((x) => x.endsWith('.png')).sort().map((x) => path.join(dir, x));
 
-async function webp(files, fps, loop, mode) {
+async function webp(files, fps, loop, mode, delays = null) {
   const delay = Math.round(1000 / fps);
   const q = mode === 'lossless' ? null : +mode.slice(1);
-  if (hasImg2webp) {
+  if (hasImg2webp && !delays) {
     const out = path.join(tmpdir(), `ill-${process.pid}-${mode}.webp`);
     const args = ['-min_size', '-loop', String(loop), '-d', String(delay), ...(q ? ['-lossy', '-q', String(q)] : ['-lossless']), '-m', '4', ...files, '-o', out];
     execFileSync('img2webp', args, { stdio: 'ignore' });
@@ -44,7 +45,7 @@ async function webp(files, fps, loop, mode) {
     rmSync(out);
     return buf;
   }
-  const opts = { loop, delay: files.map(() => delay), effort: 4, minSize: true, ...(q ? { quality: q, alphaQuality: 100 } : { lossless: true }) };
+  const opts = { loop, delay: delays ?? files.map(() => delay), effort: 4, minSize: true, ...(q ? { quality: q, alphaQuality: 100 } : { lossless: true }) };
   return sharp(files, { join: { animated: true } }).webp(opts).toBuffer();
 }
 
@@ -72,8 +73,45 @@ async function anim(files, meta, limit) {
       if (buf.length <= limit) return { buf, fps, note: `${mode}${tag} (tried ${tried.map((t) => `${t.label} ${(t.buf.length / KB).toFixed(0)}`).join(', ')} KB)` };
     }
   }
+  // Last resort: half rate while parts move, quarter rate once the scene has settled (under 2% of pixels change
+  // per frame, e.g. the crossroads' people shifting after the blocks land), with per-frame delays.
+  const tapered = await taper(files, meta.fps);
+  if (tapered) {
+    for (const mode of ['lossless', 'q90']) {
+      const buf = await webp(tapered.files, meta.fps / 2, loop, mode, tapered.delays);
+      tried.push({ buf, label: `${mode} tapered`, fps: meta.fps / 2 });
+      if (buf.length <= limit) return { buf, fps: meta.fps / 2, note: `${mode} tapered (tried ${tried.map((t) => `${t.label} ${(t.buf.length / KB).toFixed(0)}`).join(', ')} KB)` };
+    }
+  }
   const best = tried.reduce((a, b) => (b.buf.length < a.buf.length ? b : a));
   return { buf: best.buf, fps: best.fps, note: `OVER: smallest ${best.label} (tried ${tried.map((t) => `${t.label} ${(t.buf.length / KB).toFixed(0)}`).join(', ')} KB)` };
+}
+
+async function taper(files, fps) {
+  const raws = [];
+  for (const file of files) raws.push(await sharp(file).ensureAlpha().raw().toBuffer());
+  const moved = raws.map((b, i) => {
+    if (i === 0) return Infinity;
+    const a = raws[i - 1];
+    let n = 0;
+    for (let j = 0; j < b.length; j += 4) if (Math.abs(b[j] - a[j]) + Math.abs(b[j + 1] - a[j + 1]) + Math.abs(b[j + 2] - a[j + 2]) + Math.abs(b[j + 3] - a[j + 3]) > 24) n++;
+    return n / (b.length / 4);
+  });
+  const frameMs = 1000 / fps;
+  const kept = [];
+  const delays = [];
+  let settled = false;
+  for (let i = 0; i < files.length; i++) {
+    settled ||= moved[i] < 0.02 && i > 0;
+    const step = settled ? 4 : 2;
+    const last = i === files.length - 1;
+    if (kept.length && !last && (i - kept.at(-1).i) < step) continue;
+    if (kept.length) delays[delays.length - 1] = Math.round((i - kept.at(-1).i) * frameMs);
+    kept.push({ i, file: files[i] });
+    delays.push(Math.round(frameMs));
+  }
+  if (kept.length >= files.length / 2) return null;
+  return { files: kept.map((k) => k.file), delays };
 }
 
 // One frame set: <dir> → <outDir>/<stem>.png or .webp.
@@ -87,7 +125,7 @@ async function encode(dir, outDir, limits) {
   const files = framesOf(dir);
   const isStill = meta.clip === 'still';
   const out = path.join(outDir, isStill ? `${d.replace(/\.still$/, '')}.png` : `${d}.webp`);
-  const limit = isStill ? limits.still : limits.anim;
+  const limit = meta.set === 'welcome' && m.welcome?.budgets ? (isStill ? m.welcome.budgets.stillKB : m.welcome.budgets.animationKB) * KB : isStill ? limits.still : limits.anim;
   const { buf, note } = isStill ? await still(files[0], limit) : await anim(files, meta, limit);
   mkdirSync(outDir, { recursive: true });
   writeFileSync(out, buf);
@@ -95,6 +133,7 @@ async function encode(dir, outDir, limits) {
   rows.push({ file: path.relative(ASSETS, out), kb: buf.length / KB, frames: files.length, note, ok: buf.length <= limit });
 }
 
+const files0 = (p) => (existsSync(p) ? readdirSync(p).sort() : []);
 const subdirs = (p) => (existsSync(p) ? readdirSync(p).filter((d) => statSync(path.join(p, d)).isDirectory() && existsSync(path.join(p, d, 'meta.json'))).sort() : []);
 for (const d of subdirs(FRAMES)) {
   await encode(path.join(FRAMES, d), ASSETS, { anim: m.budgets.animationKB * KB, still: m.budgets.stillKB * KB });
@@ -106,8 +145,8 @@ if (m.categories) {
   }
 }
 
-// A full run (no --only) removes assets it did not write: illustrations, sizes or clips dropped from the manifest.
-if (!f.only) {
+// --prune on a full run removes assets it did not write: illustrations, sizes or clips dropped from the manifest.
+if (!f.only && f.prune) {
   for (const dir of [ASSETS, path.join(ASSETS, 'categories')]) {
     if (!existsSync(dir)) continue;
     for (const file of readdirSync(dir)) {
@@ -119,6 +158,26 @@ if (!f.only) {
     }
   }
 }
+// Every category still on disk (not only this run's) must be baked on its kind's tile token for its scheme: the
+// top-left pixel is ground, so it must match color.shop.accent.<ramp>.tile within 2 per channel. A mismatch means
+// the token changed after the still was rendered (it shows as a box on the card): re-render that kind.
+const stale = [];
+const CAT_RE = /^([a-z0-9]+)\.(light|dark)\.\d+@\dx\.png$/;
+for (const file of files0(path.join(ASSETS, 'categories'))) {
+  const mt = file.match(CAT_RE);
+  if (!mt) continue;
+  const item = m.categories?.items.find((i) => i.id === mt[1]);
+  if (!item) continue;
+  const want = categoryColors(item.ramp, mt[2]).ground;
+  const { data } = await sharp(path.join(ASSETS, 'categories', file)).extract({ left: 0, top: 0, width: 1, height: 1 }).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+  const got = `#${[...data.subarray(0, 3)].map((x) => x.toString(16).padStart(2, '0')).join('').toUpperCase()}`;
+  const off = [1, 3, 5].some((i, k) => Math.abs(parseInt(want.slice(i, i + 2), 16) - data[k]) > 2);
+  if (off) stale.push(`${file}: corner ${got}, token ${want} (color.shop.accent.${item.ramp}.tile, ${mt[2]})`);
+}
+if (stale.length) {
+  console.error(`\n✗ ${stale.length} category still${stale.length === 1 ? '' : 's'} baked on a stale tile colour. Re-render them:`);
+  for (const x of stale) console.error(`  ${x}`);
+}
 const over = rows.filter((r) => !r.ok).length;
 for (const r of rows) console.log(`${r.ok ? '✓' : '✗'} ${r.file.padEnd(56)} ${r.kb.toFixed(1).padStart(6)} KB  ${String(r.frames).padStart(3)} fr  ${r.note}`);
 console.log(`${rows.length} files, ${(rows.reduce((a, r) => a + r.kb, 0) / 1024).toFixed(2)} MB${over ? `, ${over} over budget` : ''}`);
@@ -127,7 +186,7 @@ console.log(`${rows.length} files, ${(rows.reduce((a, r) => a + r.kb, 0) / 1024)
 const durations = {};
 for (const [root, d] of [...subdirs(FRAMES).map((d) => [FRAMES, d]), ...subdirs(CAT).map((d) => [CAT, d])]) {
   const meta = JSON.parse(readFileSync(path.join(root, d, 'meta.json'), 'utf8'));
-  durations[`${meta.set || 'main'}/${meta.name}-${meta.clip}.${meta.groundId}.${meta.size}`] = meta.durationMs;
+  durations[`${meta.set === 'categories' ? 'categories' : 'main'}/${meta.name}-${meta.clip}.${meta.groundId}.${meta.size}`] = meta.durationMs;
 }
 const ms = (set, name, clip, ground, size) => durations[`${set}/${name}-${clip}.${ground}.${size}`] ?? 0;
 const RE = /^([a-z0-9]+)(?:-(entry|idle))?\.([a-z]+(?:-(?:light|dark))?)\.(\d+)@(\d)x\.(webp|png)$/;
@@ -162,7 +221,8 @@ const L = [
   `export const ILLUSTRATION_SIZES = { ${Object.entries(m.sizes).map(([k, v]) => `${k}: ${v}`).join(', ')} } as const;`,
   'export type IllustrationSize = keyof typeof ILLUSTRATION_SIZES;',
   `export type IllustrationName = ${union(Object.keys(main))};`,
-  "export type IllustrationGround = 'background' | 'card';",
+  "/** welcome: Getting started, each object on its own page's Indigo ground (scripts/illustrations/manifest.json, welcome). */",
+  "export type IllustrationGround = 'background' | 'card' | 'welcome';",
   "export type IllustrationScheme = 'light' | 'dark';",
   'export type IllustrationClip = { source: number; ms: number };',
   'export type IllustrationAsset = { still: number; entry?: IllustrationClip; idle?: IllustrationClip };',
@@ -201,4 +261,4 @@ L.push('};', '');
 mkdirSync(path.dirname(GENERATED), { recursive: true });
 writeFileSync(GENERATED, L.join('\n'));
 console.log(`wrote ${path.relative(process.cwd(), GENERATED)}`);
-process.exit(over ? 1 : 0);
+process.exit(over || stale.length ? 1 : 0);

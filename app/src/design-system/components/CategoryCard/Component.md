@@ -5,7 +5,7 @@ A kind of shop on Nearby, in "Browse by category"; a tap zooms into the Category
 | Prop | Type | Default | Notes |
 | --- | --- | --- | --- |
 | `id` | string | required | The kind ("bakery"); also the still's `recyclingKey` |
-| `label` | string | required | "Bakery", Subheadline 600 in Foreground |
+| `label` | string | required | "Bakery", Headline (17) in Foreground, one line: keep it short ("Toys", "Butchers") |
 | `accent` | ShopAccentName | required | The card fill is `shop.accent.<hue>.tile`, the tile step |
 | `art` | CategoryId | `id` | The pipeline still to show when it differs from the kind (Toys shows the gifts still) |
 | `still` | ImageSource | from the pipeline | Overrides the kind's still. By default the card takes `categoryIllustration(id, scheme).still` from the illustration pipeline: an opaque 120 square rendered on this card's tile colour. Without one the card is colour and label |
@@ -13,7 +13,7 @@ A kind of shop on Nearby, in "Browse by category"; a tap zooms into the Category
 
 ## CategoryHeader
 
-`id`, `title` ("Bakeries"), `detail` ("3 places within 15 min walk"), `accent`, `art`. A `radius.card` card in the tile step: the title in Display title and the detail in Footnote at the left, the top 120 square of the still at the right.
+`id`, `title` ("Bakeries"), `detail` ("3 places within 15 min walk"), `art`. No fill, corners or side inset of its own: the Category screen is the tile step, so the header's title lines up with the chips and the list under it. The title in Display title and the detail in Footnote (`mutedForegroundOnTile`, as the rows' meta) at the left, `space.2` apart (a two-line title needs the air), `gap.aboveTitle` above (Back to title 32), `space.6` clear of the still's square so a long title wraps before it; the top 120 square of the still at the right. The text sets the header's height; text and still rest on its bottom edge, `gap.title` (16) above the chips, and the still's empty top may rise past the text into the screen's own colour.
 
 ## Performance
 

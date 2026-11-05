@@ -494,3 +494,16 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .ios-from.glyph { grid-template-columns: minmax(0, 1fr); }
 .ios-from.glyph > .who, .ios-from.glyph > .msgs { grid-column: 1; }
 .ios-from.glyph > .who { display: flex; align-items: center; gap: 4px; padding-left: 0; }
+
+/* Ratings (app flow v9). New classes only, so earlier versions keep their look. */
+.ios-thumbs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 16px; }
+.ios-thumbs span { display: flex; align-items: center; justify-content: center; gap: 8px; height: 52px; border-radius: 26px; background: rgb(118 118 128 / .1); font-weight: 600; }
+.ios-thumbs span .ic { width: 22px; height: 22px; }
+.ios-thumbs span.on { background: var(--ios-label); color: var(--ios-bg); }
+.ios-field { position: relative; margin: 0 16px; min-height: 72px; padding: 10px 12px 24px; border-radius: 12px; background: rgb(118 118 128 / .1); color: var(--ios-label-2); }
+.ios-field.filled { color: var(--ios-label); }
+.ios-field .count { position: absolute; right: 12px; bottom: 6px; font-size: 13px; color: var(--ios-label-2); }
+.ios-chip .n { color: var(--ios-label-2); font-variant-numeric: tabular-nums; }
+.ios-chip.on .n { color: inherit; opacity: .7; }
+.ios-score { padding: 0 16px; font-size: 22px; line-height: 28px; font-weight: 700; letter-spacing: .35px; }
+.ios-score small { font-size: 15px; font-weight: 400; color: var(--ios-label-2); letter-spacing: -.24px; }

@@ -21,6 +21,11 @@ export function ButtonExamples() {
         <Button label="Call" size="compact" role="plain" />
         <Button label="Cancel" size="compact" role="destructive" />
       </View>
+      {/* On a coloured ground (Getting started, page 1). */}
+      <View style={styles.onGround}>
+        <Button label="Skip" size="compact" role="quiet" />
+        <Button label="Continue" role="inverse" />
+      </View>
     </View>
   );
 }
@@ -28,4 +33,5 @@ export function ButtonExamples() {
 const styles = StyleSheet.create((theme) => ({
   list: { gap: theme.gap.block },
   row: { flexDirection: 'row', flexWrap: 'wrap', gap: theme.space[2] },
+  onGround: { gap: theme.gap.block, padding: theme.space[4], borderRadius: theme.radius.card, backgroundColor: theme.color.welcome.ground1 },
 }));

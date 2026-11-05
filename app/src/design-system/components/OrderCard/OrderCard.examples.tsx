@@ -38,6 +38,17 @@ export function OrderCardExamples() {
       <Button label="Next status" role="plain" size="compact" onPress={() => setStep((n) => n + 1)} />
       <OrderCard id="o2" status="Not confirmed · not charged" tone="warning" shop="Broadway Chemist" items="1 × eclipse glasses" total="£9.50" />
       <OrderCard id="o3" status="Collected" tone="success" shop="Rossi's Bakery" items="1 × birthday cake, made to order" total="£32" onOpen={noop} />
+      <OrderCard
+        id="o4"
+        status="Collected · rate Paper & Co"
+        tone="success"
+        shop="Paper & Co"
+        items="2 × eclipse glasses"
+        total="£29.98"
+        onOpen={noop}
+        action={{ label: 'Rate', onPress: noop }}
+      />
+      <OrderCard id="o5" status="Collected · rated" tone="success" shop="Paper & Co" items="2 × eclipse glasses" total="£29.98" onOpen={noop} />
     </View>
   );
 }

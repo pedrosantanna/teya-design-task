@@ -8,7 +8,9 @@ import Animated from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { FloatingSurface } from '../../internal/FloatingSurface';
+import { useGround } from '../../internal/ground';
 import { usePress } from '../../internal/usePress';
+import { withAlpha } from '../../theme';
 import { Icon, type PlatformIconName } from '../Icon/Icon';
 
 export type GlassButtonProps = {
@@ -30,6 +32,10 @@ export const GlassButton = memo(function GlassButton({ icon, accessibilityLabel,
   const { theme } = useUnistyles();
   const press = usePress();
   const android = theme.platform === 'android';
+  // On an accent tile (the Category screen), the tonalOnTile overlay, as the shop page's tonal actions; in a dark
+  // sheet's header, a solid Muted circle, since glass over the Sheet colour all but vanishes there.
+  const ground = useGround();
+  const surface = ground === 'tile' ? 'tile' : ground === 'sheet' && theme.scheme === 'dark' ? 'muted' : 'glass';
   const glyph = <Icon icon={icon} size="nav" weight="strong" color="foreground" />;
   return (
     <Animated.View style={press.scaleStyle}>
@@ -44,9 +50,9 @@ export const GlassButton = memo(function GlassButton({ icon, accessibilityLabel,
         style={styles.hit}
       >
         {android ? (
-          <View style={[styles.circle, overMedia && styles.tonal]}>{glyph}</View>
+          <View style={[styles.circle, overMedia && styles.tonal, overMedia && surface === 'tile' && styles.onTile]}>{glyph}</View>
         ) : (
-          <FloatingSurface interactive style={[styles.circle, edge && styles.edge]}>
+          <FloatingSurface interactive surface={surface} style={[styles.circle, edge && styles.edge]}>
             {glyph}
           </FloatingSurface>
         )}
@@ -65,5 +71,6 @@ const styles = StyleSheet.create((theme) => ({
     justifyContent: 'center',
   },
   tonal: { backgroundColor: theme.color.card },
+  onTile: { backgroundColor: withAlpha(theme.color.tonalOnTile, theme.state.tonalOnTile) },
   edge: { borderWidth: StyleSheet.hairlineWidth, borderColor: theme.color.chat.edge },
 }));

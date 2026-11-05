@@ -66,7 +66,8 @@ export type ShopKind =
   | 'toys'
   | 'cornerShop'
   | 'books'
-  | 'butcher';
+  | 'butcher'
+  | 'deli';
 
 export type Shop = {
   id: string;
@@ -90,7 +91,47 @@ export type Shop = {
   collectWindow?: string;
   /** Three example items with prices, for shop pages and answers (docs/deliver/prototype.md, Mocked content). */
   items?: { name: string; price: number }[];
+  /** What the shop sells, as chips on its page ("Sourdough", "Celebration cakes"). */
+  categories?: string[];
+  /** Most items fall in this range; from past answers, or from the till for a connected shop. */
+  priceRange?: { from: number; to: number };
+  /** Buyers' ratings (thumbs, never stars). Absent or zero counts: nobody has rated the shop yet. */
+  ratings?: ShopRatings;
+  /** How the shop has done on Snuffle. */
+  reliability?: ShopReliability;
 };
+
+/** A rating tag; the up list and the down list are fixed (store/ratings.ts). */
+export type RatingTag = string;
+
+/** A buyer's note on a shop page: their words, whether they'd go back, the month, and how they got the item. */
+export type RatingNote = { text: string; up: boolean; month: string; how: 'Collected' | 'Delivered' };
+
+export type ShopRatings = {
+  /** Buyers who would go back. */
+  up: number;
+  /** Buyers who wouldn't. */
+  down: number;
+  /** Tag counts, by tag. */
+  tags: Record<RatingTag, number>;
+  /** A few notes, newest first. */
+  notes: RatingNote[];
+};
+
+export type ShopReliability = {
+  /** Requests the shop answered, of those it was asked. */
+  answered: number;
+  asked: number;
+  /** "Has it" answers where the shopper got the item, of all its "has it" answers. */
+  hadItRight: number;
+  hadItTotal: number;
+  /** Usual time to reply, in minutes; a connected shop answers from its till at once. */
+  replyMinutes?: number;
+  connected: boolean;
+};
+
+/** The shopper's own rating, stored on the order. */
+export type OrderRating = { shopId: string; up: boolean; tags: RatingTag[]; note: string };
 
 /** What one shop offers for the active request, whatever its current state. */
 export type Offer = {
@@ -140,7 +181,10 @@ export type PersonaContent = {
   /** Up to three suggestion chips above the ask bar on Nearby. */
   suggestions: string[];
   card: string;
+  /** The 12 demo shops: the ones the requests, answers and orders use. */
   shops: Shop[];
+  /** What Nearby and the Category screens list around Blythe Road: the 12 and the other mock shops. */
+  nearby: Shop[];
   active: Request;
   others: OtherRequest[];
   /** Order details for the active request. */

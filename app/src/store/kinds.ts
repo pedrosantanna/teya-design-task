@@ -1,7 +1,7 @@
 // Shop kinds and their accents (colour.md, Shop accents; identity-in-use). Each shop keeps one pastel for
 // good, chosen by its kind, so the same shop has the same colour on its tile, its page and its receipt.
-// Lavender is Snuffle's colour, so no shop kind uses it; the 12 mock shops split four each across Butter,
-// Peach and Pistachio (docs/deliver/prototype.md, Mocked content).
+// Lavender is Snuffle's colour, so no shop kind uses it; the 12 demo shops split four each across Butter,
+// Peach and Pistachio (docs/deliver/prototype.md, Mocked content). Deli shares the café's Peach.
 import type { ShopAccentName } from '@/design-system';
 
 import type { Shop, ShopKind } from './types';
@@ -22,6 +22,7 @@ export const KIND_ACCENT: Record<ShopKind, ShopAccentName> = {
   cornerShop: 'butter',
   books: 'butter',
   butcher: 'peach',
+  deli: 'peach',
 };
 
 /** The shop's accent; a shop without a known kind falls back to Butter. */

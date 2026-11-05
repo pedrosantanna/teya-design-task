@@ -1,17 +1,24 @@
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { ScrollView, View } from 'react-native';
-import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { View } from 'react-native';
+import { KeyboardStickyView } from 'react-native-keyboard-controller';
+import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { ASK_ORIGIN, ChatBubble, Chip, Composer, Ground, NavBar, TypingIndicator, navigateWith, screenMargin, useNavBarHeight } from '@/design-system';
+import { ASK_ORIGIN, ChatBubble, ChatGestureArea, ChatScroll, Chip, Composer, Ground, ListRow, NavBar, Sheet, TypingIndicator, navigateWith, screenMargin, useNavBarHeight } from '@/design-system';
+import { LocationSheet } from '@/screens/LocationSheet';
 import { OFF_SCRIPT_REPLY, TYPING_MS, matchAsk, scriptedAsks, shopById, sim, useApp, useAppActions, useContent, useSim } from '@/store';
 
 const SUGGESTIONS = ['Eclipse glasses near me, today', 'A fan I can collect after work', "Sourdough from Rossi's every Friday"];
 // What Snuffle does, said once, instead of a greeting (craft-pass-2).
 const OPENING = "Tell me what you need and by when. I'll ask the shops within a short walk and bring back who has it.";
+// Links the composer's field to the gesture area, so an interactive dismiss starts once the finger reaches the
+// composer (its field and chips row, about two field heights), not the keyboard (iMessage).
+const COMPOSER_ID = 'new-request-composer';
+// The deadline chip's choices; "Any time" until the shopper picks one or the text names one ("…, today").
+const DEADLINES = ['Any time', 'Today', 'After work', 'This weekend'];
 const SPLIT_REPLY = 'Glasses today and a cake for Saturday go to different shops. Shall I make them two requests, so each gets its own answers?';
+
 
 /** "By 4pm" from "…before 4pm" or "…by 4:30pm"; "Today" from "today". */
 function deadlineFrom(text: string): string | null {
@@ -23,11 +30,14 @@ function deadlineFrom(text: string): string | null {
 }
 
 // The Ask screen (v7 frames "Ask" and "Snuffle suggests two requests"; craft-pass-2): Snuffle's opening bubble
-// with three suggestions, the composer with the place and deadline chips read from the text, and Snuffle's reply
-// when the text isn't one request. A chat's neutral ground, "Snuffle" with the glyph in the bar, no tint or glow.
+// with three suggestions, the composer with the place and deadline chips, and Snuffle's reply when the text isn't one
+// request. A chat's neutral ground and "New request" in the bar: Snuffle is named once, by its sender line. The two
+// chips are values already set, drawn alike with a chevron: the place opens the location sheet (its walking
+// distance), the deadline a short list; the deadline also follows the text ("…, today").
 // The composer grows out of Nearby's ask bar as the keyboard rises.
 export default function NewRequest() {
-  const { theme, rt } = useUnistyles();
+  const { theme } = useUnistyles();
+  const frame = useSafeAreaFrame();
   const insets = useSafeAreaInsets();
   const top = useNavBarHeight();
   const content = useContent();
@@ -36,10 +46,13 @@ export default function NewRequest() {
   const sent = useSim((s) => s.composeText);
   const shop = draft?.shopId ? shopById(content, draft.shopId) : undefined;
   const [text, setText] = useState(draft?.text ?? '');
-  const [nearOnly, setNearOnly] = useState(true);
-  const margin = screenMargin(theme, rt.screen.width);
-  // While typing, from the field; once sent, from what was sent ("Today" for "…, today").
-  const deadline = deadlineFrom(text || sent || '');
+  const radius = useApp('radius');
+  const [placeOpen, setPlaceOpen] = useState(false);
+  const [deadlineOpen, setDeadlineOpen] = useState(false);
+  const [picked, setPicked] = useState<string | null>(null);
+  const margin = screenMargin(theme, frame.width);
+  // The shopper's pick wins; else, while typing, from the field; once sent, from what was sent ("Today" for "…, today").
+  const deadline = picked ?? deadlineFrom(text || sent || '') ?? DEADLINES[0];
 
   const send = (value: string) => {
     const words = shop && !value.toLowerCase().includes(shop.name.toLowerCase()) ? `${value} from ${shop.name}` : value;
@@ -52,8 +65,19 @@ export default function NewRequest() {
   return (
     <Ground value="chat">
     <View style={styles.screen}>
-      <KeyboardAvoidingView style={styles.fill} behavior="padding">
-        <ScrollView contentContainerStyle={styles.content(margin, top, insets.bottom)} keyboardShouldPersistTaps="handled">
+      {/* Keyboard (react-native-keyboard-controller): the composer rides on the keyboard frame by frame on the UI
+          thread (KeyboardStickyView), the conversation's padding grows with it so the last message stays above the
+          composer (KeyboardChatScrollView), and dragging the conversation down takes the keyboard with the finger.
+          With the keyboard open the home-indicator inset is dropped, so the composer sits a step above the keys. */}
+      <ChatGestureArea style={styles.fill} interpolator="ios" offset={theme.size.field * 2} textInputNativeID={COMPOSER_ID}>
+        <ChatScroll
+          style={styles.fill}
+          offset={insets.bottom}
+          keyboardLiftBehavior="whenAtEnd"
+          keyboardDismissMode="interactive"
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={styles.content(margin, top, insets.bottom)}
+        >
           {sent ? (
             <Conversation key={sent} text={sent} />
           ) : (
@@ -66,28 +90,28 @@ export default function NewRequest() {
               </View>
             </View>
           )}
-        </ScrollView>
-        <View style={styles.composer(margin, insets.bottom)}>
-          <Composer
-            value={text}
-            onChangeText={setText}
-            onSend={send}
-            mark
-            morphFrom={ASK_ORIGIN}
-            autoFocus={!sent}
-            placeholder={shop ? `Ask ${shop.name}` : 'Ask for anything nearby'}
-            chips={
-              <>
-                <Chip label="Within 15 min" selected={nearOnly} onPress={() => setNearOnly((on) => !on)} />
-                <Chip label={deadline ?? 'Any time'} selected={!!deadline} />
-              </>
-            }
-          />
-        </View>
-      </KeyboardAvoidingView>
+        </ChatScroll>
+      </ChatGestureArea>
+      <KeyboardStickyView style={styles.composer(margin, insets.bottom)} offset={{ opened: insets.bottom }}>
+        <Composer
+          value={text}
+          onChangeText={setText}
+          onSend={send}
+          mark
+          morphFrom={ASK_ORIGIN}
+          autoFocus={!sent}
+          nativeID={COMPOSER_ID}
+          placeholder={shop ? `Ask ${shop.name}` : 'Ask for anything nearby'}
+          chips={
+            <>
+              <Chip kind="menu" label={`Within ${radius} min`} onPress={() => setPlaceOpen(true)} />
+              <Chip kind="menu" label={deadline} onPress={() => setDeadlineOpen(true)} />
+            </>
+          }
+        />
+      </KeyboardStickyView>
       <NavBar
-        title="Snuffle"
-        titleMark
+        title="New request"
         fill="chat"
         leading="back"
         backLabel="Nearby"
@@ -99,6 +123,24 @@ export default function NewRequest() {
           else router.navigate('/');
         }}
       />
+      <LocationSheet open={placeOpen} onClose={() => setPlaceOpen(false)} />
+      <Sheet open={deadlineOpen} onClose={() => setDeadlineOpen(false)} title="By when?" detents={['medium']}>
+        <View>
+          {DEADLINES.map((d, i) => (
+            <ListRow
+              key={d}
+              id={d}
+              title={d}
+              selected={deadline === d}
+              position={i === 0 ? 'first' : i === DEADLINES.length - 1 ? 'last' : 'middle'}
+              onPress={(value) => {
+                setPicked(value);
+                setDeadlineOpen(false);
+              }}
+            />
+          ))}
+        </View>
+      </Sheet>
     </View>
     </Ground>
   );

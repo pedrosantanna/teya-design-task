@@ -1,5 +1,6 @@
-// Nearby's ask bar (components.md, Ask bar; craft-pass-2): one row floating in glass at the bottom, a 48 pt
-// Requests circle and the Ask capsule beside it. It never shrinks or hides: pressing it is the screen's primary
+// Nearby's ask bar (components.md, Ask bar; craft-pass-2): one row floating in glass at the bottom, the Ask capsule
+// and a 48 pt Requests circle after it (decision 050: trailing, as iOS 26 places the secondary button after the search
+// field in Music and Podcasts). It never shrinks or hides: pressing it is the screen's primary
 // action, and a bar that retracts while scrolling read as gone. Inside the capsule: the Snuffle glyph, the
 // placeholder in Body and a mic. The capsule registers as the origin "ask", so New Request's composer grows out of
 // it (a view transition on the web, a zoom from its rectangle on the phones).
@@ -69,7 +70,6 @@ export const BottomAccessory = memo(function BottomAccessory({
   return (
     <Dock>
       <View style={styles.row(margin)}>
-        {renderRequests ? renderRequests(button) : button(() => onRequestsPress?.())}
         <Animated.View style={[styles.grow, askPress.scaleStyle]}>
           <Pressable
             accessibilityRole="button"
@@ -89,15 +89,17 @@ export const BottomAccessory = memo(function BottomAccessory({
                     </Text>
                   </View>
                   {/* The mic is part of the capsule's press (a nested button can't live in a button on the web): it opens the
-                      same screen, where dictation is the keyboard's. A 44 pt box around the 20 pt icon. */}
+                      same screen, where dictation is the keyboard's. A 44 pt box around the 20 pt icon, in Muted foreground as
+                      the mic in an iOS search field: it isn't a separate action. */}
                   <View style={styles.mic} pointerEvents="none">
-                    <Icon icon={Mic01Icon} size="mic" color="foreground" />
+                    <Icon icon={Mic01Icon} size="mic" color="mutedForeground" />
                   </View>
                 </View>
               </FloatingSurface>
             </View>
           </Pressable>
         </Animated.View>
+        {renderRequests ? renderRequests(button) : button(() => onRequestsPress?.())}
       </View>
     </Dock>
   );

@@ -3,6 +3,7 @@
 // which can also hide while scrolling down. No fill: the controls float in glass over a scroll-edge fade.
 // iOS navigation bar ↔ Material large top app bar collapsing to small.
 import type { IconSvgElement } from '@hugeicons/react-native';
+import { Image } from 'expo-image';
 import { memo } from 'react';
 import { Pressable, View } from 'react-native';
 import Animated, {
@@ -16,10 +17,14 @@ import Animated, {
   withSpring,
   type SharedValue,
 } from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { FloatingSurface } from '../../internal/FloatingSurface';
+import { IMAGE_OVER, photoSource, type PhotoSource } from '../../internal/media';
+import { categoryIllustration, useIllustrationScheme } from '../Illustration/Illustration';
+import type { CategoryId } from '../Illustration/manifest.generated';
+import { screenMargin, type ShopAccentName } from '../../theme';
 import { usePress } from '../../internal/usePress';
 import { ScrollEdge, type EdgeFill } from '../../internal/ScrollEdge';
 import { SnuffleMark } from '../SnuffleMark/SnuffleMark';
@@ -86,12 +91,35 @@ export type NavBarProps = {
   titleMark?: boolean;
   /** A line under the inline title: the request's name in a chat titled "Snuffle". */
   subtitle?: string;
+  /** A 20 pt square before the subtitle (a chat's request): the item's photo, or the category's still on its shop
+   *  accent's tile when there is no photo. Decorative, hidden from VoiceOver and TalkBack. Pass it only when the
+   *  request is one item of a known kind; otherwise the subtitle stays text alone. */
+  subtitleThumb?: { photo: PhotoSource } | { category: CategoryId; accent: ShopAccentName };
   /** Scroll offset at which the scroll-edge fade shows; defaults to 8 points, or `revealAt` in reveal mode. */
   backgroundAt?: number;
   /** A second fill the scroll edge shows until the content scrolls `until` points, then crossfades to `fill`: the
    *  shop page's accent while its wash is under the bar, so the material never lays a pale band over the wash. */
   fillBefore?: { fill: EdgeFill; until: number };
 };
+
+/** The subtitle's square: the same image as the request's thumbnail in Requests, so the two match. */
+function SubtitleThumb({ thumb }: { thumb: NonNullable<NavBarProps['subtitleThumb']> }) {
+  const scheme = useIllustrationScheme();
+  const art = 'category' in thumb ? categoryIllustration(thumb.category, scheme)?.still : undefined;
+  return (
+    <View
+      style={[styles.thumb, 'category' in thumb && styles.thumbTile(thumb.accent)]}
+      accessibilityElementsHidden
+      importantForAccessibility="no-hide-descendants"
+    >
+      {'photo' in thumb ? (
+        <Image source={photoSource(thumb.photo)} style={IMAGE_OVER} contentFit="cover" accessible={false} />
+      ) : art != null ? (
+        <Image source={art} style={IMAGE_OVER} contentFit="cover" contentPosition="top" accessible={false} />
+      ) : null}
+    </View>
+  );
+}
 
 function BarActions({ actions }: { actions: NavAction[] }) {
   // The platform form follows the theme; the React Compiler would keep the first one, since the theme object stays the same.
@@ -141,12 +169,16 @@ export const NavBar = memo(function NavBar({
   backgroundAt: backgroundAtProp,
   titleMark = false,
   subtitle,
+  subtitleThumb,
   fillBefore,
 }: NavBarProps) {
   // The platform form follows the theme; the React Compiler would keep the first one, since the theme object stays the same.
   'use no memo';
   const { theme } = useUnistyles();
   const insets = useSafeAreaInsets();
+  const frame = useSafeAreaFrame();
+  // Back, Close and the trailing controls sit on the screen margin, in line with the content under them.
+  const margin = screenMargin(theme, frame.width);
   const top = topInset ?? insets.top;
   const ios = theme.platform === 'ios';
   const fallback = useSharedValue(0);
@@ -201,10 +233,18 @@ export const NavBar = memo(function NavBar({
     <>
     {/* No bar fill (iOS 26): a scroll-edge fade under the floating controls once content is under them. */}
     {fillBefore ? <ScrollEdge edge="top" height={total + theme.space[4]} fill={fillBefore.fill} style={beforeStyle} /> : null}
-    <ScrollEdge edge="top" height={total + theme.space[4]} fill={fill} style={backgroundStyle} />
+    {/* On a shop's tile the edge stays opaque down to the bar's bottom, then fades over space.6, so the inline title
+        reads on the tile and white rows never show through behind it. */}
+    <ScrollEdge
+      edge="top"
+      height={typeof fill === 'object' ? total + theme.space[6] : total + theme.space[4]}
+      solid={typeof fill === 'object' ? total / (total + theme.space[6]) : undefined}
+      fill={fill}
+      style={backgroundStyle}
+    />
     {/* box-none: the bar's empty parts let touches through to the content under it (Nearby's area row). */}
     <Animated.View style={[styles.bar(top), hideStyle]} pointerEvents="box-none">
-      <View style={styles.row(barHeight, leadingNode != null)} pointerEvents="box-none">
+      <View style={styles.row(barHeight, margin)} pointerEvents="box-none">
         {leadingNode}
         <Animated.View style={[styles.titleSlot, titleMark && styles.titleWithMark, titleStyle]} pointerEvents="none">
           {titleMark ? <SnuffleMark size="inline" /> : null}
@@ -213,9 +253,14 @@ export const NavBar = memo(function NavBar({
               {title}
             </Text>
             {subtitle ? (
-              <Text variant="caption1" color="mutedForeground" numberOfLines={1}>
-                {subtitle}
-              </Text>
+              <View style={styles.subtitleRow}>
+                {subtitleThumb ? <SubtitleThumb thumb={subtitleThumb} /> : null}
+                <View style={styles.titleText}>
+                  <Text variant="caption1" color="mutedForeground" numberOfLines={1}>
+                    {subtitle}
+                  </Text>
+                </View>
+              </View>
             ) : null}
           </View>
         </Animated.View>
@@ -269,17 +314,28 @@ export function useNavBarHeight(topInset?: number): number {
 
 const styles = StyleSheet.create((theme) => ({
   bar: (top: number) => ({ position: 'absolute', top: 0, left: 0, right: 0, paddingTop: top, zIndex: 2 }),
-  row: (height: number, leading: boolean) => ({
+  row: (height: number, margin: number) => ({
     height,
     flexDirection: 'row',
     alignItems: 'center',
     gap: theme.space[2],
-    paddingLeft: leading ? theme.space[2] : theme.margin.screenCompact,
-    paddingRight: theme.space[2],
+    paddingHorizontal: margin,
   }),
   titleSlot: { flex: 1 },
   titleWithMark: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2] },
   titleText: { flexShrink: 1 },
+  subtitleRow: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1] },
+  // 28 pt with a 1 pt Border edge, clipped to a 6 pt radius (half the inner radius): at 20 pt the photo read as a
+  // grey blur (visual critique).
+  thumb: {
+    width: theme.size.thumb.nav,
+    height: theme.size.thumb.nav,
+    borderRadius: theme.radius.inner / 2,
+    borderWidth: theme.size.edge.control,
+    borderColor: theme.color.border,
+    overflow: 'hidden',
+  },
+  thumbTile: (accent: ShopAccentName) => ({ backgroundColor: theme.color.shop.accent[accent].tile }),
   trailing: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2] },
   actions: { flexDirection: 'row', alignItems: 'center' },
   capsule: { flexDirection: 'row', alignItems: 'center', height: theme.hit.min, borderRadius: theme.radius.full, paddingHorizontal: theme.space[1] },

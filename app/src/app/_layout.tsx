@@ -70,6 +70,7 @@ export default function RootLayout() {
         {/* The shop page and Requests zoom from their source (ZoomSource): the native zoom on iOS, a fade under the
             container transform on Android. Both keep the back gesture. */}
         <Stack.Screen name="shops/[id]" options={{ gestureEnabled: true, animation: zoomAnim }} />
+        <Stack.Screen name="reviews/[id]" options={{ animation: anim('default') }} />
         <Stack.Screen name="requests/index" options={{ gestureEnabled: true, animation: zoomAnim }} />
         <Stack.Screen name="requests/[id]/index" options={{ animation: anim('default') }} />
         <Stack.Screen name="requests/[id]/order" options={{ animation: anim('fade') }} />

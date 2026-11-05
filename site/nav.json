@@ -154,6 +154,10 @@
           "src": "docs/develop/ideation/app-flow.md",
           "canvas": [
             {
+              "version": "v9",
+              "file": "docs/develop/ideation/app-flow-v9.html"
+            },
+            {
               "version": "v8",
               "file": "docs/develop/ideation/app-flow-v8.html"
             },
@@ -193,6 +197,10 @@
           "title": "Shop request states",
           "src": "docs/develop/ideation/shop-states.md",
           "canvas": [
+            {
+              "version": "v5",
+              "file": "docs/develop/ideation/shop-states-v5.html"
+            },
             {
               "version": "v4",
               "file": "docs/develop/ideation/shop-states-v4.html"

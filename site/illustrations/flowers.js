@@ -11,8 +11,9 @@ export default {
   build(THREE, P) {
     const k = kit(THREE);
     const g = new THREE.Group();
-    // Modelled standing (cone along +y), then laid down along x and lifted onto the ground.
-    const lay = o => { o.rotation.z = -Math.PI / 2 + 0.12; o.position.set(-0.75, 0.36, 0); return o; };
+    // Modelled standing (cone along +y), then laid down along x with the mouth tilted up so the paper's rim
+    // and the stem ends both touch the ground; the lift that seats it on y = 0 is measured below.
+    const lay = o => { o.rotation.z = -Math.PI / 2 + 0.185; o.position.set(-0.75, 0, 0); return o; };
     const R = 0.36, H = 1.05;
 
     const paper = lay(k.group([
@@ -25,7 +26,7 @@ export default {
     ]));
     const blooms = lay(k.group([
       [P.peach[300], P.peach[500], [0, H + 0.02, 0], 0.2],
-      [P.lavender[300], P.butter[400], [0.22, H - 0.08, 0.12], 0.17],
+      [P.lavender[300], P.butter[400], [0.2, H - 0.08, 0.12], 0.17],
       [P.butter[100], P.butter[400], [-0.22, H - 0.06, -0.08], 0.17],
       [P.peach[300], P.peach[500], [-0.14, H - 0.1, 0.24], 0.15],
       [P.lavender[300], P.butter[400], [0.16, H - 0.06, -0.22], 0.15],
@@ -33,11 +34,17 @@ export default {
       k.sphere(r, petal, [x, y, z], { scale: [1, 0.55, 1], part: `b${i}` }),
       k.sphere(r * 0.38, centre, [x, y + r * 0.42, z], { part: `c${i}` }),
     ])).concat([
-      k.sphere(0.16, P.pistachio[500], [0.3, H - 0.25, -0.05], { scale: [0.45, 1, 0.2], rot: [0, 0, -0.5], part: 'leaf1' }),
+      k.sphere(0.16, P.pistachio[500], [0.22, H - 0.25, -0.05], { scale: [0.45, 1, 0.2], rot: [0, 0, -0.5], part: 'leaf1' }),
       k.sphere(0.15, P.pistachio[500], [-0.3, H - 0.22, 0.1], { scale: [0.45, 1, 0.2], rot: [0, 0, 0.5], part: 'leaf2' }),
     ])));
     const tie = lay(k.group([k.cyl(0.075, 0.07, 0.07, P.indigo[600], [0, 0.14, 0])]));
 
+    // Seat the lowest point (the paper's rim, with the stem ends level with it) on y = 0.
+    const all = [paper, stems, blooms, tie];
+    all.forEach(o => g.add(o));
+    g.updateMatrixWorld(true);
+    const lift = -new THREE.Box3().setFromObject(g, true).min.y;
+    all.forEach(o => { o.position.y += lift; });
     const parts = collect(g, [[paper, 0], [stems, 0.12], [blooms, 0.22], [tie, 0.4]]);
     return { group: g, parts };
   },

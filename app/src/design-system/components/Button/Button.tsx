@@ -4,17 +4,20 @@ import { ActivityIndicator, Platform, Pressable, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
+import { useGround } from '../../internal/ground';
 import { cornerCurve, withAlpha, type AppTheme } from '../../theme';
 import { Text } from '../Text/Text';
 
-export type ButtonRole = 'filled' | 'tonal' | 'plain' | 'destructive';
+export type ButtonRole = 'filled' | 'tonal' | 'plain' | 'destructive' | 'inverse' | 'quiet';
 export type ButtonSize = 'large' | 'compact';
 
 export type ButtonProps = {
   label: string;
   onPress?: () => void;
   /** filled: the one commit action in view (Buy, Ask, send), the only Indigo fill. tonal: secondary, a neutral fill
-   *  with Foreground text. plain: a text button in Tint. destructive: a text button in red (Cancel for a refund). */
+   *  with Foreground text. plain: a text button in Tint. destructive: a text button in red (Cancel for a refund).
+   *  On a coloured ground (Getting started's Indigo pages): inverse, a Foreground capsule with a Background label, and
+   *  quiet, a text button in Foreground. */
   role?: ButtonRole;
   /** large: 50 high, full content width. compact: 36 high, hugs its label. */
   size?: ButtonSize;
@@ -35,7 +38,10 @@ function contentColor(theme: AppTheme, role: ButtonRole): string {
     case 'destructive':
       return theme.color.destructive;
     case 'tonal':
+    case 'quiet':
       return theme.color.foreground;
+    case 'inverse':
+      return theme.color.background;
     default:
       return theme.color.tint;
   }
@@ -56,6 +62,8 @@ export function Button({
   const scale = useSharedValue(1);
   const layer = useSharedValue(0);
   const inactive = disabled || loading;
+  // On a shop's accent tile a tonal button is a white overlay that keeps the shop's hue (colour.md, Shop accents).
+  const onTile = useGround() === 'tile' && role === 'tonal' && !disabled;
   const color = disabled ? theme.color.foreground : contentColor(theme, role);
   const labelVariant = size === 'large' ? 'headline' : 'subheadlineStrong';
 
@@ -90,7 +98,7 @@ export function Button({
         onPress={onPress}
         onPressIn={pressIn}
         onPressOut={pressOut}
-        style={styles.button}
+        style={[styles.button, onTile && styles.onTile]}
       >
         <Animated.View pointerEvents="none" style={[styles.layer, { backgroundColor: color }, layerStyle]} />
         {loading ? (
@@ -124,7 +132,10 @@ function labelColor(role: ButtonRole, disabled: boolean) {
     case 'destructive':
       return 'destructive' as const;
     case 'tonal':
+    case 'quiet':
       return 'foreground' as const;
+    case 'inverse':
+      return 'background' as const;
     default:
       return 'tint' as const;
   }
@@ -151,6 +162,8 @@ const styles = StyleSheet.create((theme) => ({
         tonal: { backgroundColor: theme.color.muted },
         plain: {},
         destructive: {},
+        inverse: { backgroundColor: theme.color.foreground },
+        quiet: {},
       },
       size: {
         large: { height: theme.size.button.large, paddingHorizontal: theme.space[5] },
@@ -170,9 +183,11 @@ const styles = StyleSheet.create((theme) => ({
       // fit across the shop page's card (visual critique 2).
       { size: 'compact', withIcon: true, styles: { paddingHorizontal: theme.space[3] } },
       { role: 'filled', disabled: true, styles: { backgroundColor: withAlpha(theme.color.foreground, theme.state.disabledContainer) } },
+      { role: 'inverse', disabled: true, styles: { backgroundColor: withAlpha(theme.color.foreground, theme.state.disabledContainer) } },
       { role: 'tonal', disabled: true, styles: { backgroundColor: withAlpha(theme.color.foreground, theme.state.disabledContainer) } },
     ],
   },
+  onTile: { backgroundColor: withAlpha(theme.color.tonalOnTile, theme.state.tonalOnTile) },
   layer: {
     ...StyleSheet.absoluteFillObject,
   },

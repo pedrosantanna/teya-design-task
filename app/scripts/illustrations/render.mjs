@@ -4,7 +4,7 @@
 //   cd app && npx -y -p playwright@1.58.2 node scripts/illustrations/render.mjs [filters]
 //
 // Filters (comma lists): --only basket,box  --grounds background,card  --schemes light,dark
-//   --sizes medium,large (or --pt 88,120)  --scales 3  --clips entry,idle,still  --set main,categories
+//   --sizes medium,large (or --pt 88,120)  --scales 3  --clips entry,idle,still  --set main,categories,welcome
 // Options: --port 4173 (starts site/serve.py there if nothing answers)  --url http://…  --bundled (use
 //   Playwright's own Chromium instead of the installed Chrome)  --fresh (clear .frames first).
 // three.js loads from jsDelivr, so the render needs a network connection.
@@ -12,7 +12,7 @@ import { spawn } from 'node:child_process';
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
-import { FRAMES, REPO, clipScales, flags, jobs, manifest, stem, tool } from './lib.mjs';
+import { FRAMES, REPO, categoryColors, clipScales, flags, jobs, manifest, stem, tool } from './lib.mjs';
 
 const f = flags();
 const m = manifest();
@@ -43,7 +43,7 @@ try {
   await page.goto(`${base}${m.page}`);
   await page.waitForFunction(() => window.__exportReady === true, null, { timeout: 60_000 });
 
-  const sets = f.set || ['main', 'categories'];
+  const sets = f.set || ['main', 'categories', 'welcome'];
   // --fresh: start from an empty frames folder (frames of illustrations dropped from the manifest go too).
   if (f.fresh) rmSync(FRAMES, { recursive: true, force: true });
   let n = 0;
@@ -77,20 +77,47 @@ try {
       }
     }
   }
-  // Category cards: opaque, on the category's tile step (light: tile over a shade toward 800; dark: tileDark toward 900).
+  // Category cards: opaque, on the kind's tile token (color.shop.accent.<ramp>.tile; shade toward 800 in light, 900
+  // in dark), framed the same way for every object (categories.fit).
   if (sets.includes('categories') && m.categories) {
     const c = m.categories;
+    const fit = c.fit?.area
+      ? { fitArea: c.fit.area, fitMaxW: c.fit.maxWidth, fitMaxH: c.fit.maxHeight, fitBase: c.fit.base, fitClear: c.fit.clear }
+      : c.fit
+        ? { fitW: c.fit.width, fitTop: c.fit.top, fitBase: c.fit.base }
+        : { margin: c.margin };
     for (const it of c.items) {
       if (f.only && !f.only.includes(it.id)) continue;
       for (const scheme of ['light', 'dark'].filter((x) => !f.schemes || f.schemes.includes(x))) {
-        const ramp = m.ramps[it.ramp];
-        const [ground, dark] = scheme === 'light' ? [ramp.tile ?? ramp['100'], ramp['800']] : [ramp.tileDark ?? ramp['800'], ramp['900']];
+        const { ground, dark } = categoryColors(it.ramp, scheme);
         for (const scale of c.scales.filter((x) => !f.scales || f.scales.includes(String(x)))) {
           for (const clip of [...c.clips, 'still'].filter(wantClip)) {
             const name = stem(it.id, clip, scheme, c.size, scale);
             await one(`categories/${name}${clip === 'still' ? ' (still)' : ''}`, path.join(FRAMES, 'categories', clip === 'still' ? `${name}.still` : name),
-              { object: it.object, size: c.size, height: c.height, scale, ground, dark, opaque: true, margin: c.margin, clip },
-              { name: it.id, set: 'categories', groundId: scheme, sizeName: 'card' });
+              { object: it.object, size: c.size, height: c.height, scale, ground, dark, opaque: true, ...fit, clip },
+              { name: it.id, set: 'categories', groundId: scheme, sizeName: 'card', ramp: it.ramp });
+          }
+        }
+      }
+    }
+  }
+  // Getting started: each object on its own page's Indigo ground (transparent, so the crossfading page shows no edge).
+  if (sets.includes('welcome') && m.welcome) {
+    const w = m.welcome;
+    const sizeName = w.size;
+    const size = m.sizes[sizeName];
+    for (const it of w.items) {
+      if (f.only && !f.only.includes(it.name)) continue;
+      for (const scheme of ['light', 'dark'].filter((x) => !f.schemes || f.schemes.includes(x))) {
+        const groundId = `welcome-${scheme}`;
+        const { ground, dark } = it[scheme];
+        for (const scale of m.scales.filter((x) => !f.scales || f.scales.includes(String(x)))) {
+          const clips = clipScales(m, sizeName).includes(scale) ? it.clips : [];
+          for (const clip of [...clips, 'still'].filter(wantClip)) {
+            const name = stem(it.name, clip, groundId, size, scale);
+            await one(clip === 'still' ? `${name} (still)` : name, path.join(FRAMES, clip === 'still' ? `${name}.still` : name),
+              { object: it.object, size, scale, ground, dark, clip, ...(scheme === 'dark' ? it.darkTones : {}) },
+              { name: it.name, set: 'welcome', groundId, sizeName });
           }
         }
       }

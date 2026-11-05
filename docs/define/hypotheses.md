@@ -1,6 +1,6 @@
 # Hypotheses
 
-The concept rests on sixteen hypotheses. Most come from an assumption or open question in the [Discover conclusion](../discover/conclusion.md); four come from my reasons for making the concierge an agent, and five from how it makes money ([revenue](revenue.md)). Each has a test. Thirteen have a pass mark set before testing; H10, H11 and H16 are exploratory and record a split or a count that sets an order or a size. They are ordered by risk: how badly the concept fails if the hypothesis is wrong, and how little evidence there is today.
+The concept rests on nineteen hypotheses. Most come from an assumption or open question in the [Discover conclusion](../discover/conclusion.md); four come from my reasons for making the concierge an agent, five from how it makes money ([revenue](revenue.md)) and three from ratings on the shop page (decision 047). Each has a test. Sixteen have a pass mark set before testing; H10, H11 and H16 are exploratory and record a split or a count that sets an order or a size. They are ordered by risk: how badly the concept fails if the hypothesis is wrong, and how little evidence there is today.
 
 ```summary
 Takeaways:
@@ -11,8 +11,10 @@ Call:
 - I added the four hypotheses about the agent (asking first, the wait, requests left ahead, channels) and set the order: the merchant side is tested first, by hand, before anything that depends on it is built.
 - I moved the hand test to WhatsApp, with me as the concierge. It tests the shops, the wait and one of the channels at once.
 - I set the pass marks before testing, so a result can't be read to fit. A prototype pass records what shoppers say they would do; where it's cheap, the hand-run concierge checks the same thing with real requests (H2, H7).
+- Later I added three hypotheses about ratings: that Snuffle's signals let an asked shop compete with a connected one (H17), that "% would go back" reads as easily as stars (H18), and that shops accept a public stock-accuracy figure (H19).
 AI:
 - An agent drafted the hypotheses from the assumptions and the concept, and proposed tests and pass marks. I added the four about the agent and set the order.
+- An agent drafted H17 to H19 and their tests from decision 047; I chose the 5-second test for H18 and asking the same 10 shops for H19.
 Trade-offs:
 - Small tests give direction, not proof. A pass with six shoppers justifies the next step, not a launch.
 - A concierge run by a person hides how well the agents would do the same job. That is a later test, once the shops pass.
@@ -39,6 +41,9 @@ Trade-offs:
 | H14 | Shops already on the provider's POS see the app's shoppers as a reason to keep it | Revenue; decision 023 | Compare sales from the app per shop over four weeks, then ask the shops on the network whether it changes how they value their POS | 3 of 5 say it would make them keep or recommend the POS |
 | H15 | Shops would pay to be promoted on the home screen or to a neighbourhood beyond their street | Revenue | After four weeks of demand summaries, offer a promoted slot at a stated weekly price | 2 of 10 shops pay for, or agree to, a paid trial |
 | H16 | Shoppers buy from a shop farther away when it's the only one with the item and they can pay ahead | Revenue | Proof-of-concept data: share of collected orders at shops more than 15 minutes' walk away | Exploratory: recorded as a share; it sizes the case for paid reach |
+| H17 | With a reliability row, shoppers buy at an asked shop as often as at a connected shop | Decision 047; H5 | Prototype with 6 shoppers: two answer cards at the same price and walk time, one from an asked shop and one from a connected shop. Each shopper sees the pair twice, with and without the reliability row on the asked shop's card, in a counterbalanced order | With the row, the asked shop is chosen in at least 3 of 6 pairs, and more often than without it |
+| H18 | Shoppers read "% would go back" as easily as stars | Decision 047 | 5-second test with 6 shoppers: a shop page shown for five seconds, then "How do buyers rate this shop, and how many rated it?". Each sees one shop with "92% would go back · 38 buyers" and another with a star average and count, in a counterbalanced order | 5 of 6 answer both parts correctly with the percentage, and no fewer than with stars |
+| H19 | Shops accept a public stock-accuracy figure | Decision 047 | Ask the 10 shops in H1, showing each its own figure from the hand test ("Had it 9 of 10 times when they said yes") and the right to dispute a case | 6 of 10 accept the figure shown in public |
 
 A prototype test records stated choice: what a shopper says or clicks in a scenario. It can't show whether they would go, pay or collect. For H2 and H7 the hand-run concierge adds the behavioural check, with real needs and real purchases.
 
@@ -46,8 +51,8 @@ A prototype test records stated choice: what a shopper says or clicks in a scena
 
 These tests run inside the [proof of concept](next-step.md): the concierge agent reaches the shops, and the shopper app prototype is what shoppers use. The hand-run version below is the fallback if the agent isn't ready.
 
-- **Concierge by hand over WhatsApp (H1, H2 and H7 follow-ups, H4, H6, H10, H11).** A phone with WhatsApp, a list of ten shops within 15 minutes' walk of Blythe Road that answer on WhatsApp, in categories that came up in the netnography (hardware, florist, bakery, butcher, chemist), and six shoppers with real needs, at least three of them working shop hours. I play the concierge. No build. Two days, plus a walk around the 15-minute ring after 6:30pm.
-- **Prototype test (H2, H3, H5, H7, H8, H10).** The clickable prototype from Deliver, with scenarios taken from the persona posts (eclipse glasses the day before, a fan in a heatwave, a weekly shop after work). Six shoppers, 30 minutes each.
+- **Concierge by hand over WhatsApp (H1, H2 and H7 follow-ups, H4, H6, H10, H11, H19).** A phone with WhatsApp, a list of ten shops within 15 minutes' walk of Blythe Road that answer on WhatsApp, in categories that came up in the netnography (hardware, florist, bakery, butcher, chemist), and six shoppers with real needs, at least three of them working shop hours. I play the concierge. No build. Two days, plus a walk around the 15-minute ring after 6:30pm.
+- **Prototype test (H2, H3, H5, H7, H8, H10, H17, H18).** The clickable prototype from Deliver, with scenarios taken from the persona posts (eclipse glasses the day before, a fan in a heatwave, a weekly shop after work). Six shoppers, 30 minutes each.
 - **Shopkeeper conversations (H9).** Five short visits with a printed mock-up.
 
 ## If H1 fails
@@ -57,3 +62,7 @@ The concierge as designed can't work. The fallbacks are narrower: only shops who
 ## If H3 or H4 fails
 
 The agent stops being the main way in. Browsing shops and categories becomes the main screen, and the concierge stays as a tool for the requests browsing can't answer.
+
+## If H19 fails
+
+Stock accuracy stays private: each shop sees its own figure, and the shop page shows only the answer rate and reply time.

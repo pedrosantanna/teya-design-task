@@ -7,10 +7,11 @@ import { router } from 'expo-router';
 import { Linking, Platform } from 'react-native';
 import { create } from 'zustand';
 
+import { MAX_TAGS } from './ratings';
 import { contentFor, shopById } from './seed';
 import { stepHooks, useAppStore } from './store';
 import type { StepId } from './journey';
-import type { AnswerState, Fulfilment, OrderState, PersonaContent, RequestState } from './types';
+import type { AnswerState, Fulfilment, OrderRating, OrderState, PersonaContent, RequestState } from './types';
 
 export type ChatStage = 'none' | 'clarify' | 'notify' | 'asking';
 export type PayOutcome = 'paid' | 'declined';
@@ -72,7 +73,15 @@ export type SimState = {
   fresh: string[];
   /** Keep looking: how often and until when. */
   looking: { repeat: boolean } | null;
+  /** The rating sheet: open or not, the answer to "Would you go back?", the tags picked and the note. */
+  rating: RatingDraft;
+  /** The shopper's rating, stored on the order once sent; the shop's page counts it. */
+  orderRating: OrderRating | null;
 };
+
+export type RatingDraft = { open: boolean; up: boolean | null; tags: string[]; note: string };
+
+const closedRating: RatingDraft = { open: false, up: null, tags: [], note: '' };
 
 const TICK_S = 0.25;
 const CONFIRM_AFTER_S = 6;
@@ -178,6 +187,8 @@ const fresh = (): Omit<SimState, 'clock' | 'running' | 'payOutcome' | 'shopOutco
   typing: false,
   fresh: [],
   looking: null,
+  rating: closedRating,
+  orderRating: null,
 });
 
 export const useSim = create<SimState>()(() => ({
@@ -203,6 +214,9 @@ function setupFor(step: StepId): Partial<SimState> {
   switch (step) {
     case 'home':
     case 'shopPage':
+    case 'shopNew':
+    case 'shopFew':
+    case 'reviews':
     case 'ask':
       return {};
     case 'split':
@@ -230,6 +244,14 @@ function setupFor(step: StepId): Partial<SimState> {
       return { ...asking, ...order, date: 'afterWindow' };
     case 'keepLooking':
       return { ...asking, looking: null };
+    case 'collected':
+      return { ...asking, ...order };
+    case 'rate':
+      return { ...asking, ...order, rating: { ...closedRating, open: true } };
+    case 'rateDown':
+      return { ...asking, ...order, rating: { open: true, up: false, tags: ['Not ready when I came'], note: '' } };
+    case 'rated':
+      return { ...asking, ...order, orderRating: { shopId: c.order.shopId, up: true, tags: ['Had it as promised', 'Friendly'], note: '' } };
     case 'waiting':
     case 'sold':
     case 'notConfirmed':
@@ -467,6 +489,38 @@ export const sim = {
   },
   setCodeOpen(open: boolean) {
     setSim({ codeOpen: open });
+  },
+  /** Rate on the order card or the chip after delivery: the rating sheet opens, empty. */
+  openRating() {
+    setSim({ rating: { ...closedRating, open: true } });
+  },
+  closeRating() {
+    setSim({ rating: { ...useSim.getState().rating, open: false } });
+  },
+  /** Thumbs up or down; the tags follow the answer, so the ones picked for the other answer are cleared. */
+  rateAnswer(up: boolean) {
+    const r = useSim.getState().rating;
+    setSim({ rating: { ...r, up, tags: r.up === up ? r.tags : [] } });
+  },
+  toggleRatingTag(tag: string) {
+    const r = useSim.getState().rating;
+    // Up to three tags (decision 047): a fourth is ignored until one is cleared.
+    if (!r.tags.includes(tag) && r.tags.length >= MAX_TAGS) return;
+    setSim({ rating: { ...r, tags: r.tags.includes(tag) ? r.tags.filter((t) => t !== tag) : [...r.tags, tag] } });
+  },
+  setRatingNote(note: string) {
+    setSim({ rating: { ...useSim.getState().rating, note } });
+  },
+  /** Send: the rating is stored on the order and the shop's page counts it. */
+  sendRating() {
+    const s = useSim.getState();
+    if (s.rating.up == null) return;
+    const shopId = s.orderShopId ?? content().order.shopId;
+    setSim({
+      orderRating: { shopId, up: s.rating.up, tags: s.rating.tags, note: s.rating.note.trim() },
+      rating: { ...s.rating, open: false },
+      instant: false,
+    });
   },
   // Debugger
   setRunning(running: boolean) {

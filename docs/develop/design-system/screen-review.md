@@ -34,7 +34,7 @@ Trade-offs:
 
 | # | Check | Passes when |
 | --- | --- | --- |
-| 8 | Visual hierarchy | At most three text sizes per block and four per screen, not counting the nav bar and system UI; one filled primary (Indigo) button visible at once. The composer's send and the shopper's bubbles are Indigo too and don't count |
+| 8 | Visual hierarchy | At most three text sizes per block and four per screen, not counting the nav bar, system UI, badges (Caption 2) and counts; one filled primary (Indigo) button visible at once. The composer's send and the shopper's bubbles are Indigo too and don't count |
 | 9 | Hick's law | At most 5 filter chips or 3 suggestions visible; a sheet has at most 2 actions plus Cancel |
 | 19 | Colour roles | At most one filled Indigo control per viewport, the commit action (Buy, Ask, send); secondary actions are neutral and a selected chip is Foreground. Indigo is the shopper acting, Lavender is Snuffle speaking (its bubbles, mark, notifications, Live Activity), a shop's warm pastel is that shop (its tile, page header, receipt), and no colour crosses roles |
 
@@ -59,7 +59,7 @@ Trade-offs:
 | --- | --- | --- |
 | 15 | Target size | Every target is at least 44 pt (48 dp), with at least 8 between targets |
 | 16 | Safe areas | Nothing important under the Dynamic Island, the home indicator or the ask bar; the last item clears the ask bar by 48 |
-| 17 | Scroll extent | Content can't scroll past its last item by more than the ask-bar clearance |
+| 17 | Scroll extent | Content can't scroll past its last item by more than the ask-bar clearance: at the end, the last item rests 48 above the ask bar |
 | 18 | Colour and images | Colour is never the only signal; every image is labelled or hidden |
 
 Reports cite checks by number. Tokens are on [Spacing and layout](spacing.md), [Tags](tags.md), [Imagery and icons](imagery.md), [Shape and materials](shape.md) and [Colour](colour.md).

@@ -9,7 +9,7 @@ Takeaways:
 - Três paletas, cada uma construída sobre um par complementar mais uma terceira cor: Pillar and park (verde e vermelho, manteiga), Awning (cobalto e laranja, menta), Tiles (verde-petróleo e rosa, ocre). Todo tint passa 4,5:1 como texto e como rótulo de botão nos modos claro e escuro.
 - A marca agora é um retriever, uma raça britânica cujo trabalho é trazer as coisas de volta. Nomes de retriever a considerar: Nous (o cão que fundou a raça, e gíria britânica para bom senso), Bonnie, Bailey, Buddy, Teddy, Primrose. Nomes de farejar: Snuffle (minha escolha, decisão 035), Sniffari, Truffle, Rootle, Boop, Waggy.
 - Vários nomes óbvios já existem ou estão concorridos (Parade, Fetch, Errand, Legwork), e "Nip" sozinho é uma ofensa étnica.
-- A rodada 9 devolve cor ao modo claro: o fundo em L 0,95 ou L 0,96, com o croma da rodada 8, ×1,8 ou ×2,5. O agente sugeriu L 0,96 com ×1,8; escolhi L 0,96 com o croma da rodada 8 (#F4F1ED), e o modo escuro fica como na rodada 8. Com ×2,5 parece creme.
+- A rodada 9 devolve cor ao modo claro: o fundo em L 0,95 ou L 0,96, com o croma da rodada 8, ×1,8 ou ×2,5. O agente sugeriu L 0,96 com ×1,8; escolhi L 0,96 com o croma da rodada 8 (#F4F1ED), e o modo escuro ficou como na rodada 8 até eu passá-lo para a coluna menos cor da rodada 8. Com ×2,5 parece creme.
 - A rodada 7 substitui o modo escuro marrom: os passos escuros do Cinza biscoito se leem como marrom sujo e ficam do lado oposto ao índigo no círculo. A Berinjela, um roxo quente, é a sugestão do agente; o Céu noturno é mais frio, o Carvão ameixa mais discreto.
 - A rodada 6 testa a Night bus: as badges sólidas ofuscavam porque Âmbar, Rosa neon e Ciano são claros e muito saturados; badges tonais (fundo claro, texto escuro do mesmo matiz) passam de 7:1 e acalmam a paleta. O Índigo leva todo o texto e os botões.
 - A rodada 5 responde se as paletas saturadas funcionam com o Cinza biscoito: funcionam, porque o cinza é quase neutro; o limite é o Oat e o Brew da marca. Os conjuntos puxados por matizes quentes (Corner shop, Lido) ficam melhor ao lado dela.
@@ -19,6 +19,7 @@ Call:
 - Pedi mais paletas e um teste de ícone com o toldo da parade como barba de terrier, depois escolhi o teste de ícone 3 e pré-selecionei as paletas A, C, F, I e J.
 - Redesenhei à mão no Figma os testes de ícone 1 e 2 como marca provisória (decisão 033); ela está no [design system](../design-system/mark.md).
 - Pedi para comparar os híbridos e os modos escuros lado a lado em telas, sem bordas, e escolhi Pastel parade com Índigo (decisão 036) e um fundo claro em L 0,96 com o croma da rodada 8 (rodada 9); modo escuro como na rodada 8. O nome está decidido: Snuffle.
+- Depois voltei aos testes de modo escuro da rodada 8 e escolhi a coluna menos cor para o modo escuro: o Cinza biscoito com 45% do croma, chamado Stone, porque o croma inteiro parecia marrom à noite (decisão 048). O modo claro continua no Cinza biscoito. A escolha está marcada no quadro.
 AI:
 - Eu dei as sementes: um cachorro farejador, um investigador no estilo Sherlock, a cultura de compras britânica. Um agente buscou na web referências e conflitos de nome, verificou a situação de direito autoral e de marca de Sherlock Holmes, montou as paletas com um script que calcula o contraste WCAG e as paletas tonais do Material 3, desenhou os esboços de marca em SVG, aplicou as paletas aos wireframes da v2 e capturou nove apps do Mobbin.
 - As verificações de nome são buscas rápidas na web, não buscas de marca registrada. Nomes marcados como "não verificado" não foram buscados.
@@ -35,7 +36,7 @@ Todas as rodadas ficam no mesmo quadro, a mais recente no topo, abaixo de uma á
 | Rodada | O que acrescentou |
 | --- | --- |
 | 9 | O Cinza biscoito no modo claro com mais cor: o fundo em L 0,95 e em L 0,96, cada um com o croma da rodada 8, ×1,8 e ×2,5 |
-| 8 | A Pastel parade com Índigo no Cinza biscoito, escolhida (decisão 036), no claro e no escuro sem bordas: superfícies com mais distância de luminosidade, e um Cinza biscoito menos saturado ao lado |
+| 8 | A Pastel parade com Índigo no Cinza biscoito, escolhida (decisão 036), no claro e no escuro sem bordas: superfícies com mais distância de luminosidade, e um Cinza biscoito menos saturado ao lado. O modo escuro agora usa essa coluna menos saturada, com 45% do croma, como Stone (decisão 048) |
 | 7 | Três modos escuros no lugar do marrom (Céu noturno, Berinjela, Carvão ameixa), a partir de um benchmark do Linear, do Material 3 e do Slack, cada um testado com a Night bus, a Lido com Índigo e a Pastel parade com Índigo, ao lado do modo claro e do marrom da rodada 6, tudo sem bordas |
 | 6 | A Night bus derivada em escalas de dez passos em OKLCH para cada cor, badges tonais no lugar das sólidas, quatro telas no claro e no escuro que forçam a paleta, e o Índigo no lugar do azul na Lido e na Pastel parade, cada uma nas mesmas quatro telas no claro e no escuro |
 | 5 | O Cinza biscoito como neutro, pré-decidido. A Caixa de correio com três candidatas à quinta cor no lugar da Slate roof (Duck egg, Bramley e Vidro do mar, mais vivos), e seis paletas saturadas da rodada 2 sobre o Cinza biscoito, com a marca |

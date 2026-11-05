@@ -1,6 +1,7 @@
 // The five small labels from tags.md: two chips the shopper taps (filter, suggestion) and three that
 // only inform (status label, badge, count).
 import Alert02Icon from '@hugeicons/core-free-icons/Alert02Icon';
+import ArrowDown01Icon from '@hugeicons/core-free-icons/ArrowDown01Icon';
 import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
 import type { IconSvgElement } from '@hugeicons/react-native';
 import { memo, useEffect } from 'react';
@@ -10,7 +11,7 @@ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { useGround } from '../../internal/ground';
 import { usePress } from '../../internal/usePress';
-import { cornerCurve, textStyle, type BadgeName, type ColorName } from '../../theme';
+import { cornerCurve, textStyle, withAlpha, type BadgeName, type ColorName } from '../../theme';
 import { Icon } from '../Icon/Icon';
 import { Text } from '../Text/Text';
 
@@ -18,8 +19,9 @@ import { Text } from '../Text/Text';
 
 export type ChipProps = {
   label: string;
-  /** filter: single choice, can be selected. suggestion: a tap sends the text. */
-  kind?: 'filter' | 'suggestion';
+  /** filter: single choice, can be selected. suggestion: a tap sends the text. menu: a value already set (the place
+   *  and deadline on New Request), drawn like an unselected chip with a chevron; a tap opens its choices. */
+  kind?: 'filter' | 'suggestion' | 'menu';
   selected?: boolean;
   /** Filter chips: a count after "·" ("Needs you · 2"). */
   count?: number;
@@ -36,25 +38,42 @@ export const Chip = memo(function Chip({ label, kind = 'filter', selected = fals
   const press = usePress('selection');
   const on = kind === 'filter' && selected;
   const progress = useSharedValue(on ? 1 : 0);
-  // Off: Card, since Muted barely shows on the background (1.07:1); on a chat's white ground, the chat chip colour.
-  // On: tonal Indigo (Indigo 100, Indigo 800 text, semibold): Foreground was the heaviest mark on screen (tags.md).
+  // Off sits a level down from the selected chip (tags.md): on a shop's or category's tile, the tonalOnTile overlay;
+  // on the Background or a sheet in light, that ground itself with a 1 pt edge (glassEdge at state.chipEdge); on the
+  // Background in dark, the Background with a 1 pt Border edge (Card read the same as the selected chip); on a dark
+  // sheet and inside a Card section (the shop page), Muted; on a chat's white ground, the chat chip colour.
+  // On: Card with Indigo 800 semibold text and a 1.5 pt Indigo 800 edge (light), Card with Indigo 300 text and a
+  // 1 pt edge (dark), on every ground (decision 049).
   const ground = useGround();
-  const off = ground === 'chat' ? theme.color.chat.fill : theme.color.card;
-  const onFill = theme.color.chipSelected;
+  const dark = theme.scheme === 'dark';
+  const plain = (ground === 'background' || ground === 'sheet') && !dark;
+  const darkGround = ground === 'background' && dark;
+  const off =
+    ground === 'chat'
+      ? theme.color.chat.fill
+      : ground === 'tile'
+        ? withAlpha(theme.color.tonalOnTile, theme.state.tonalOnTile)
+        : ground === 'card' || (ground === 'sheet' && dark)
+          ? theme.color.muted
+          : plain
+            ? theme.color[ground === 'sheet' ? 'sheet' : 'background']
+            : darkGround
+              ? theme.color.background
+              : theme.color.card;
+  const offEdge = plain ? withAlpha(theme.color.glassEdge, theme.state.chipEdge) : darkGround ? theme.color.border : off;
+  const onFill = theme.color.card;
+  const onEdge = theme.color.chipOn;
 
   useEffect(() => {
     progress.set(withSpring(on ? 1 : 0, theme.spring.snappy));
   }, [on, progress, theme.spring.snappy]);
 
-  // Selected also gets a 1 pt Indigo 200 edge (Indigo 800 in dark): the tonal fill alone has less surface than a
-  // white chip beside it (visual critique 2). The edge is the fill's colour while off, so nothing shifts.
-  const onEdge = theme.color.chipSelectedEdge;
   const fill = useAnimatedStyle(() => ({
     backgroundColor: interpolateColor(progress.get(), [0, 1], [off, onFill]),
-    borderColor: interpolateColor(progress.get(), [0, 1], [off, onEdge]),
+    borderColor: interpolateColor(progress.get(), [0, 1], [offEdge, onEdge]),
   }));
   const text = count != null ? `${label} · ${count}` : label;
-  const contentColor: ColorName = on ? 'onChipSelected' : 'foreground';
+  const contentColor: ColorName = on ? 'chipOn' : 'foreground';
   const slop = (theme.hit.min - theme.size.chip) / 2;
   // Android adds a checkmark to a selected filter chip, as Material does (tags.md).
   const leading = on && theme.platform === 'android' ? Tick02Icon : icon;
@@ -66,17 +85,19 @@ export const Chip = memo(function Chip({ label, kind = 'filter', selected = fals
         accessibilityRole="button"
         accessibilityLabel={text}
         accessibilityState={kind === 'filter' ? { selected: on } : undefined}
+        accessibilityHint={kind === 'menu' && onPress ? 'Shows the choices' : undefined}
         hitSlop={slop}
         onPress={onPress ? () => onPress(value ?? label) : undefined}
         onPressIn={press.onPressIn}
         onPressOut={press.onPressOut}
       >
-        <Animated.View style={[styles.chip, fill]}>
+        <Animated.View style={[styles.chip, on && styles.chipOn, fill]}>
           <Animated.View pointerEvents="none" style={[styles.layer, press.layerStyle]} />
           {leading ? <Icon icon={leading} size="subheadline" color={contentColor} /> : null}
           <Text variant={on ? 'subheadlineStrong' : 'subheadline'} color={contentColor} numberOfLines={1}>
             {text}
           </Text>
+          {kind === 'menu' ? <Icon icon={ArrowDown01Icon} size="subheadline" color="mutedForeground" /> : null}
         </Animated.View>
       </Pressable>
     </Animated.View>
@@ -161,14 +182,16 @@ const styles = StyleSheet.create((theme) => ({
     ...cornerCurve,
     height: theme.size.chip,
     borderRadius: theme.radius.full,
-    // A 1 pt edge (space.1 / 4) inside the 12 pt side padding, so the label doesn't move when it turns on.
-    paddingHorizontal: theme.space[3] - theme.space[1] / 4,
-    borderWidth: theme.space[1] / 4,
+    // The edge (size.edge.control, 1 pt) sits inside the 12 pt side padding, so the label doesn't move when the
+    // chip turns on and its edge grows to size.edge.selected.
+    paddingHorizontal: theme.space[3] - theme.size.edge.control,
+    borderWidth: theme.size.edge.control,
     flexDirection: 'row',
     alignItems: 'center',
     gap: theme.space[1],
     overflow: 'hidden',
   },
+  chipOn: { paddingHorizontal: theme.space[3] - theme.size.edge.selected, borderWidth: theme.size.edge.selected },
   layer: { ...StyleSheet.absoluteFillObject, backgroundColor: theme.color.foreground },
   status: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1], flexShrink: 1 },
   badge: (badge: BadgeName) => ({

@@ -5,6 +5,7 @@ import { Pressable, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
+import { useGround, type GroundName } from '../../internal/ground';
 import { spoken } from '../../internal/PressableCard';
 import { cardShadow } from '../../internal/shadow';
 import { usePress } from '../../internal/usePress';
@@ -68,15 +69,18 @@ export const ListRow = memo(function ListRow({
   const grouped = theme.platform === 'ios';
   const choice = selected !== undefined;
   const fill: ColorName = 'foreground';
+  const ground = useGround();
   const content = (
     <>
       <Animated.View pointerEvents="none" style={[styles.layer, press.layerStyle]} />
       {icon ? (
-        <View style={styles.icon}>
+        // The icon sits on the title's first line, so a two-line row doesn't centre it between lines (visual critique 3);
+        // on a one-line row that is the middle anyway.
+        <View style={[styles.icon, !children ? styles.iconFirstLine(strong || (choice && !!selected) ? 'headline' : 'body') : null]}>
           <Icon icon={icon} size="body" color={choice && selected ? 'foreground' : 'mutedForeground'} />
         </View>
       ) : null}
-      <View style={styles.text(grouped && position !== 'last' && position !== 'only')}>
+      <View style={styles.text(grouped && position !== 'last' && position !== 'only', ground)}>
         {children ? <View style={styles.grow}>{children}</View> : null}
         <View style={children ? styles.hidden : styles.grow}>
           <Text variant={strong || (choice && selected) ? 'headline' : 'body'} color={fill}>
@@ -104,7 +108,7 @@ export const ListRow = memo(function ListRow({
   const label = accessibilityLabel ?? spoken(title, detail, value);
   if (!onPress) {
     return (
-      <View accessible={!trailing && !children} accessibilityLabel={trailing || children ? undefined : label} style={styles.row(grouped, position, false, surface)}>
+      <View accessible={!trailing && !children} accessibilityLabel={trailing || children ? undefined : label} style={styles.row(grouped, position, false, surface, ground)}>
         {content}
       </View>
     );
@@ -117,34 +121,77 @@ export const ListRow = memo(function ListRow({
       onPress={() => onPress(id)}
       onPressIn={press.onPressIn}
       onPressOut={press.onPressOut}
-      style={styles.row(grouped, position, choice && !!selected, surface)}
+      style={styles.row(grouped, position, choice && !!selected, surface, ground)}
     >
       {content}
     </Pressable>
   );
 });
 
-/** A grouped row on the screen background in light; on Muted in dark, where Background sits too close to Card. */
-function groupedFill(theme: { scheme: string; color: { card: string; background: string; muted: string } }, surface: 'card' | 'background'): string {
+/** A grouped row on the screen background in light; on Muted in dark, where Background sits too close to Card.
+ *  Inside a sheet the row sits one level above the sheet's ground: Card in light (1.39:1 on #DEDAD5), Muted in dark
+ *  (1.40:1 on #191715, where Card would be 1.17:1). */
+function groupedFill(theme: { scheme: string; color: { card: string; background: string; muted: string } }, surface: 'card' | 'background', ground?: GroundName): string {
+  if (ground === 'sheet') return theme.scheme === 'dark' ? theme.color.muted : theme.color.card;
   if (surface === 'background' && theme.scheme === 'dark') return theme.color.muted;
   return theme.color[surface];
 }
 
-export type ListGroupProps = { children: ReactNode; shadow?: boolean };
+/** The dark Separator is the Muted colour, so on a sheet's Muted rows the separator takes Border (#403D3A). */
+function separatorOn(theme: { scheme: string; color: { separator: string; border: string } }, ground?: GroundName): string {
+  return ground === 'sheet' && theme.scheme === 'dark' ? theme.color.border : theme.color.separator;
+}
+
+export type ListGroupProps = {
+  children: ReactNode;
+  shadow?: boolean;
+  /** card: a standalone grouped list on a screen (the Category screen's shop rows) takes radius.card, as a card does
+   *  (shape.md); its rows round their first and last corners to match. */
+  corner?: 'inner' | 'card';
+};
 
 /** Holds the rows of one grouped list. With `shadow`, the group lifts off a same-coloured ground with the delicate
  *  card shadow (the shop page, where Card rows sit on a Background card), instead of a lighter step. */
-export function ListGroup({ children, shadow = false }: ListGroupProps) {
-  return <View style={[styles.group, shadow && styles.groupShadow]}>{children}</View>;
+export function ListGroup({ children, shadow = false, corner = 'inner' }: ListGroupProps) {
+  const inSheet = useGround() === 'sheet';
+  return <View style={[styles.group, inSheet && styles.groupInSheet, corner === 'card' && styles.groupCard, shadow && styles.groupShadow]}>{children}</View>;
+}
+
+export type ListBlockProps = { children: ReactNode; position?: RowPosition; surface?: 'card' | 'background'; accessibilityLabel?: string };
+
+/** Free content inside a grouped list: a padded block with the row's fill, corners and separator, so a summary or a
+ *  row of chips sits in the same card as the rows under it (the shop page's sections). */
+export function ListBlock({ children, position = 'only', surface = 'card', accessibilityLabel }: ListBlockProps) {
+  const { theme } = useUnistyles();
+  const ground = useGround();
+  const grouped = theme.platform === 'ios';
+  return (
+    <View accessibilityLabel={accessibilityLabel} style={[styles.row(grouped, position, false, surface, ground), styles.block]}>
+      <View style={styles.blockInner(grouped && position !== 'last' && position !== 'only', ground)}>{children}</View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create((theme) => ({
+  block: { alignItems: 'stretch' },
+  blockInner: (separator: boolean, ground?: GroundName) => ({
+    flex: 1,
+    gap: theme.gap.block,
+    paddingVertical: theme.space[4],
+    paddingRight: theme.space[4],
+    borderBottomWidth: separator ? StyleSheet.hairlineWidth : 0,
+    borderBottomColor: separatorOn(theme, ground),
+  }),
   group: { ...cornerCurve, borderRadius: theme.radius.inner },
+  groupInSheet: { borderRadius: theme.radius.bubble },
+  groupCard: { borderRadius: theme.radius.card },
   groupShadow: { boxShadow: cardShadow(theme) },
-  row: (grouped: boolean, position: RowPosition, selected: boolean, surface: 'card' | 'background' = 'card') => {
+  row: (grouped: boolean, position: RowPosition, selected: boolean, surface: 'card' | 'background' = 'card', ground?: GroundName) => {
     const top = position === 'first' || position === 'only';
     const bottom = position === 'last' || position === 'only';
-    const corner = grouped ? theme.radius.inner : theme.radius.none;
+    // Inside a sheet the group takes the iOS 26 inset-grouped corner (radius.bubble, shape.md, Sheets): the sheet's
+    // own 32 pt corners made the 12 pt group read as a different family.
+    const corner = grouped ? (ground === 'sheet' ? theme.radius.bubble : theme.radius.inner) : theme.radius.none;
     return {
       ...cornerCurve,
       flexDirection: 'row',
@@ -153,7 +200,7 @@ const styles = StyleSheet.create((theme) => ({
       paddingLeft: theme.space[4],
       minHeight: theme.hit.min,
       // Selected keeps the row's fill: the tick and the semibold title carry the choice (colour.md, craft-pass-2).
-      backgroundColor: grouped ? groupedFill(theme, surface) : 'transparent',
+      backgroundColor: grouped ? groupedFill(theme, surface, ground) : 'transparent',
       borderTopLeftRadius: top ? corner : 0,
       borderTopRightRadius: top ? corner : 0,
       borderBottomLeftRadius: bottom ? corner : 0,
@@ -163,7 +210,13 @@ const styles = StyleSheet.create((theme) => ({
   },
   layer: { ...StyleSheet.absoluteFillObject, backgroundColor: theme.color.foreground },
   icon: { width: theme.size.icon.bar, alignItems: 'center' },
-  text: (separator: boolean) => ({
+  iconFirstLine: (variant: 'headline' | 'body') => ({
+    alignSelf: 'flex-start',
+    marginTop: theme.space[3],
+    height: theme.type[variant].lineHeight,
+    justifyContent: 'center',
+  }),
+  text: (separator: boolean, ground?: GroundName) => ({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
@@ -171,7 +224,7 @@ const styles = StyleSheet.create((theme) => ({
     paddingVertical: theme.space[3],
     paddingRight: theme.space[4],
     borderBottomWidth: separator ? StyleSheet.hairlineWidth : 0,
-    borderBottomColor: theme.color.separator,
+    borderBottomColor: separatorOn(theme, ground),
   }),
   hidden: { display: 'none' },
   grow: { flex: 1, gap: theme.space[1] / 2 },

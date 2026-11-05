@@ -7,10 +7,22 @@ export const iosLight = {
   platform: "ios",
   scheme: "light",
   color: {
+    stone: {
+      "150": "#0E0B09",
+      "200": "#191715",
+      "265": "#282523",
+      "320": "#353230",
+      "360": "#403D3A",
+      "445": "#5A5754",
+      "740": "#AEAAA6",
+      "840": "#CECAC6",
+      "985": "#FBFAF8"
+    },
     background: "#EEE9E2",
     card: "#FFFFFF",
     muted: "#E5E2DE",
     mutedForeground: "#59534D",
+    mutedForegroundOnTile: "#59534D",
     foreground: "#100A06",
     primary: "#3D35B8",
     onPrimary: "#FFFFFF",
@@ -51,22 +63,26 @@ export const iosLight = {
         peach: {
           wash: "#F9E9E4",
           tile: "#FEC5B2",
-          ink: "#663627"
+          ink: "#663627",
+          cardOnTile: "#FFFFFF"
         },
         pistachio: {
           wash: "#E9F0E1",
           tile: "#C5DEAE",
-          ink: "#384D1A"
+          ink: "#384D1A",
+          cardOnTile: "#FFFFFF"
         },
         butter: {
           wash: "#FFE7A0",
           tile: "#E7D48F",
-          ink: "#53430D"
+          ink: "#53430D",
+          cardOnTile: "#FFFFFF"
         },
         lavender: {
           wash: "#EDEBF8",
           tile: "#D7CCFE",
-          ink: "#483C67"
+          ink: "#483C67",
+          cardOnTile: "#FFFFFF"
         }
       }
     },
@@ -79,12 +95,26 @@ export const iosLight = {
       fill: "#EEE9E2",
       edge: "#DEDAD5"
     },
-    sheet: "#EEE9E2",
+    sheet: "#DEDAD5",
     count: "#3D35B8",
     onCount: "#FFFFFF",
     glassEdge: "#100A06",
     glassShine: "#FFFFFF",
     shadow: "#100A06",
+    welcome: {
+      ground1: "#B5BFFF",
+      ground2: "#96A2FF",
+      ground3: "#7982FF"
+    },
+    tonalOnTile: "#FFFFFF",
+    chipOn: "#3D35B8",
+    sheetScrim: "#100A06",
+    segmented: {
+      track: "#D4D0CB",
+      thumb: "#FFFFFF"
+    },
+    glassHairline: "#100A06",
+    grabber: "#59534D",
     destructive: "#BA2B28"
   },
   space: {
@@ -144,7 +174,8 @@ export const iosLight = {
     },
     thumb: {
       request: 56,
-      answer: 40
+      answer: 40,
+      nav: 28
     },
     icon: {
       nav: 22,
@@ -161,12 +192,20 @@ export const iosLight = {
     },
     askBar: {
       leading: 16,
-      trailing: 14,
-      gap: 10,
+      trailing: 16,
+      gap: 12,
       mic: 20,
       ring: 2
     },
-    peek: 80
+    peek: 80,
+    edge: {
+      control: 1,
+      selected: 1.5,
+      focus: 2
+    },
+    segmented: {
+      inset: 2
+    }
   },
   layout: {
     bubbleMax: 0.78,
@@ -342,11 +381,19 @@ export const iosLight = {
     glassBlur: 20,
     glassSaturate: 1.6,
     glassEdge: 0.06,
+    chipEdge: 0.12,
     glassShadowY: 6,
     glassShadowBlur: 20,
     cardShadow: 0.04,
     cardShadowFar: 0.05,
-    glassRim: 0.5
+    glassRim: 0.5,
+    pageDotOff: 0.35,
+    tonalOnTile: 0.4,
+    sheetScrim: 0.2,
+    glassHairline: 0.06,
+    grabber: 0.38,
+    glassSaturateOnTile: 1.6,
+    glassShadowOnTile: 0.1
   },
   spring: {
     press: {
@@ -381,19 +428,31 @@ export const iosDark = {
   platform: "ios",
   scheme: "dark",
   color: {
-    background: "#100A06",
-    card: "#2B2420",
-    muted: "#38312C",
-    mutedForeground: "#B1AA9F",
-    foreground: "#FCFAF6",
+    stone: {
+      "150": "#0E0B09",
+      "200": "#191715",
+      "265": "#282523",
+      "320": "#353230",
+      "360": "#403D3A",
+      "445": "#5A5754",
+      "740": "#AEAAA6",
+      "840": "#CECAC6",
+      "985": "#FBFAF8"
+    },
+    background: "#0E0B09",
+    card: "#282523",
+    muted: "#353230",
+    mutedForeground: "#AEAAA6",
+    mutedForegroundOnTile: "#CECAC6",
+    foreground: "#FBFAF8",
     primary: "#B5BFFF",
     onPrimary: "#000000",
     tint: "#B5BFFF",
     chipSelected: "#222169",
     onChipSelected: "#D1D8FF",
     chipSelectedEdge: "#3D35B8",
-    filterSelected: "#FCFAF6",
-    onFilterSelected: "#100A06",
+    filterSelected: "#FBFAF8",
+    onFilterSelected: "#0E0B09",
     badge: {
       promoted: {
         fill: "#E9F0E1",
@@ -411,13 +470,13 @@ export const iosDark = {
         dot: "#A69050"
       }
     },
-    mapGround: "#2B2420",
+    mapGround: "#282523",
     scrim: "#000000",
     onDestructive: "#000000",
     warning: "#D2C49A",
     success: "#B8CDA1",
-    border: "#433C36",
-    separator: "#38312C",
+    border: "#403D3A",
+    separator: "#353230",
     codeSurface: "#FFFFFF",
     codeInk: "#000000",
     shop: {
@@ -425,22 +484,26 @@ export const iosDark = {
         peach: {
           wash: "#462318",
           tile: "#602C1C",
-          ink: "#F2D3C9"
+          ink: "#F2D3C9",
+          cardOnTile: "#624D47"
         },
         pistachio: {
           wash: "#24340E",
           tile: "#2A4618",
-          ink: "#C9EBA2"
+          ink: "#C9EBA2",
+          cardOnTile: "#4B5646"
         },
         butter: {
           wash: "#382C04",
-          tile: "#4C3B01",
-          ink: "#E4DAC0"
+          tile: "#423717",
+          ink: "#E4DAC0",
+          cardOnTile: "#595240"
         },
         lavender: {
           wash: "#302747",
           tile: "#3F3659",
-          ink: "#DCD6F1"
+          ink: "#DCD6F1",
+          cardOnTile: "#534F62"
         }
       }
     },
@@ -449,16 +512,30 @@ export const iosDark = {
       dot: "#AEA2D6"
     },
     chat: {
-      ground: "#100A06",
-      fill: "#2B2420",
-      edge: "#2B2420"
+      ground: "#0E0B09",
+      fill: "#282523",
+      edge: "#282523"
     },
-    sheet: "#1C1612",
+    sheet: "#191715",
     count: "#3D35B8",
     onCount: "#FFFFFF",
-    glassEdge: "#100A06",
+    glassEdge: "#0E0B09",
     glassShine: "#FFFFFF",
-    shadow: "#100A06",
+    shadow: "#0E0B09",
+    welcome: {
+      ground1: "#222169",
+      ground2: "#3D35B8",
+      ground3: "#494AC0"
+    },
+    tonalOnTile: "#FFFFFF",
+    chipOn: "#B5BFFF",
+    sheetScrim: "#000000",
+    segmented: {
+      track: "#282523",
+      thumb: "#403D3A"
+    },
+    glassHairline: "#403D3A",
+    grabber: "#5A5754",
     destructive: "#F07F77"
   },
   space: {
@@ -518,7 +595,8 @@ export const iosDark = {
     },
     thumb: {
       request: 56,
-      answer: 40
+      answer: 40,
+      nav: 28
     },
     icon: {
       nav: 22,
@@ -535,12 +613,20 @@ export const iosDark = {
     },
     askBar: {
       leading: 16,
-      trailing: 14,
-      gap: 10,
+      trailing: 16,
+      gap: 12,
       mic: 20,
       ring: 2
     },
-    peek: 80
+    peek: 80,
+    edge: {
+      control: 1,
+      selected: 1,
+      focus: 2
+    },
+    segmented: {
+      inset: 2
+    }
   },
   layout: {
     bubbleMax: 0.78,
@@ -716,11 +802,19 @@ export const iosDark = {
     glassBlur: 20,
     glassSaturate: 1.6,
     glassEdge: 0.06,
+    chipEdge: 0.12,
     glassShadowY: 6,
     glassShadowBlur: 20,
     cardShadow: 0.04,
     cardShadowFar: 0.05,
-    glassRim: 0.5
+    glassRim: 0.5,
+    pageDotOff: 0.35,
+    tonalOnTile: 0.06,
+    sheetScrim: 0.48,
+    glassHairline: 1,
+    grabber: 1,
+    glassSaturateOnTile: 1,
+    glassShadowOnTile: 0
   },
   spring: {
     press: {
@@ -755,10 +849,22 @@ export const androidLight = {
   platform: "android",
   scheme: "light",
   color: {
+    stone: {
+      "150": "#0E0B09",
+      "200": "#191715",
+      "265": "#282523",
+      "320": "#353230",
+      "360": "#403D3A",
+      "445": "#5A5754",
+      "740": "#AEAAA6",
+      "840": "#CECAC6",
+      "985": "#FBFAF8"
+    },
     background: "#EEE9E2",
     card: "#FFFFFF",
     muted: "#E5E2DE",
     mutedForeground: "#59534D",
+    mutedForegroundOnTile: "#59534D",
     foreground: "#100A06",
     primary: "#3D35B8",
     onPrimary: "#FFFFFF",
@@ -799,22 +905,26 @@ export const androidLight = {
         peach: {
           wash: "#F9E9E4",
           tile: "#FEC5B2",
-          ink: "#663627"
+          ink: "#663627",
+          cardOnTile: "#FFFFFF"
         },
         pistachio: {
           wash: "#E9F0E1",
           tile: "#C5DEAE",
-          ink: "#384D1A"
+          ink: "#384D1A",
+          cardOnTile: "#FFFFFF"
         },
         butter: {
           wash: "#FFE7A0",
           tile: "#E7D48F",
-          ink: "#53430D"
+          ink: "#53430D",
+          cardOnTile: "#FFFFFF"
         },
         lavender: {
           wash: "#EDEBF8",
           tile: "#D7CCFE",
-          ink: "#483C67"
+          ink: "#483C67",
+          cardOnTile: "#FFFFFF"
         }
       }
     },
@@ -827,12 +937,26 @@ export const androidLight = {
       fill: "#EEE9E2",
       edge: "#DEDAD5"
     },
-    sheet: "#EEE9E2",
+    sheet: "#DEDAD5",
     count: "#3D35B8",
     onCount: "#FFFFFF",
     glassEdge: "#100A06",
     glassShine: "#FFFFFF",
     shadow: "#100A06",
+    welcome: {
+      ground1: "#B5BFFF",
+      ground2: "#96A2FF",
+      ground3: "#7982FF"
+    },
+    tonalOnTile: "#FFFFFF",
+    chipOn: "#3D35B8",
+    sheetScrim: "#100A06",
+    segmented: {
+      track: "#D4D0CB",
+      thumb: "#FFFFFF"
+    },
+    glassHairline: "#100A06",
+    grabber: "#59534D",
     destructive: "#BA2B28"
   },
   space: {
@@ -892,7 +1016,8 @@ export const androidLight = {
     },
     thumb: {
       request: 56,
-      answer: 40
+      answer: 40,
+      nav: 28
     },
     icon: {
       nav: 22,
@@ -909,12 +1034,20 @@ export const androidLight = {
     },
     askBar: {
       leading: 16,
-      trailing: 14,
-      gap: 10,
+      trailing: 16,
+      gap: 12,
       mic: 20,
       ring: 2
     },
-    peek: 80
+    peek: 80,
+    edge: {
+      control: 1,
+      selected: 1.5,
+      focus: 2
+    },
+    segmented: {
+      inset: 2
+    }
   },
   layout: {
     bubbleMax: 0.78,
@@ -1090,11 +1223,19 @@ export const androidLight = {
     glassBlur: 20,
     glassSaturate: 1.6,
     glassEdge: 0.06,
+    chipEdge: 0.12,
     glassShadowY: 6,
     glassShadowBlur: 20,
     cardShadow: 0.04,
     cardShadowFar: 0.05,
-    glassRim: 0.5
+    glassRim: 0.5,
+    pageDotOff: 0.35,
+    tonalOnTile: 0.4,
+    sheetScrim: 0.2,
+    glassHairline: 0.06,
+    grabber: 0.38,
+    glassSaturateOnTile: 1.6,
+    glassShadowOnTile: 0.1
   },
   spring: {
     press: {
@@ -1135,19 +1276,31 @@ export const androidDark = {
   platform: "android",
   scheme: "dark",
   color: {
-    background: "#100A06",
-    card: "#2B2420",
-    muted: "#38312C",
-    mutedForeground: "#B1AA9F",
-    foreground: "#FCFAF6",
+    stone: {
+      "150": "#0E0B09",
+      "200": "#191715",
+      "265": "#282523",
+      "320": "#353230",
+      "360": "#403D3A",
+      "445": "#5A5754",
+      "740": "#AEAAA6",
+      "840": "#CECAC6",
+      "985": "#FBFAF8"
+    },
+    background: "#0E0B09",
+    card: "#282523",
+    muted: "#353230",
+    mutedForeground: "#AEAAA6",
+    mutedForegroundOnTile: "#CECAC6",
+    foreground: "#FBFAF8",
     primary: "#B5BFFF",
     onPrimary: "#000000",
     tint: "#B5BFFF",
     chipSelected: "#222169",
     onChipSelected: "#D1D8FF",
     chipSelectedEdge: "#3D35B8",
-    filterSelected: "#FCFAF6",
-    onFilterSelected: "#100A06",
+    filterSelected: "#FBFAF8",
+    onFilterSelected: "#0E0B09",
     badge: {
       promoted: {
         fill: "#E9F0E1",
@@ -1165,13 +1318,13 @@ export const androidDark = {
         dot: "#A69050"
       }
     },
-    mapGround: "#2B2420",
+    mapGround: "#282523",
     scrim: "#000000",
     onDestructive: "#000000",
     warning: "#D2C49A",
     success: "#B8CDA1",
-    border: "#433C36",
-    separator: "#38312C",
+    border: "#403D3A",
+    separator: "#353230",
     codeSurface: "#FFFFFF",
     codeInk: "#000000",
     shop: {
@@ -1179,22 +1332,26 @@ export const androidDark = {
         peach: {
           wash: "#462318",
           tile: "#602C1C",
-          ink: "#F2D3C9"
+          ink: "#F2D3C9",
+          cardOnTile: "#624D47"
         },
         pistachio: {
           wash: "#24340E",
           tile: "#2A4618",
-          ink: "#C9EBA2"
+          ink: "#C9EBA2",
+          cardOnTile: "#4B5646"
         },
         butter: {
           wash: "#382C04",
-          tile: "#4C3B01",
-          ink: "#E4DAC0"
+          tile: "#423717",
+          ink: "#E4DAC0",
+          cardOnTile: "#595240"
         },
         lavender: {
           wash: "#302747",
           tile: "#3F3659",
-          ink: "#DCD6F1"
+          ink: "#DCD6F1",
+          cardOnTile: "#534F62"
         }
       }
     },
@@ -1203,16 +1360,30 @@ export const androidDark = {
       dot: "#AEA2D6"
     },
     chat: {
-      ground: "#100A06",
-      fill: "#2B2420",
-      edge: "#2B2420"
+      ground: "#0E0B09",
+      fill: "#282523",
+      edge: "#282523"
     },
-    sheet: "#1C1612",
+    sheet: "#191715",
     count: "#3D35B8",
     onCount: "#FFFFFF",
-    glassEdge: "#100A06",
+    glassEdge: "#0E0B09",
     glassShine: "#FFFFFF",
-    shadow: "#100A06",
+    shadow: "#0E0B09",
+    welcome: {
+      ground1: "#222169",
+      ground2: "#3D35B8",
+      ground3: "#494AC0"
+    },
+    tonalOnTile: "#FFFFFF",
+    chipOn: "#B5BFFF",
+    sheetScrim: "#000000",
+    segmented: {
+      track: "#282523",
+      thumb: "#403D3A"
+    },
+    glassHairline: "#403D3A",
+    grabber: "#5A5754",
     destructive: "#F07F77"
   },
   space: {
@@ -1272,7 +1443,8 @@ export const androidDark = {
     },
     thumb: {
       request: 56,
-      answer: 40
+      answer: 40,
+      nav: 28
     },
     icon: {
       nav: 22,
@@ -1289,12 +1461,20 @@ export const androidDark = {
     },
     askBar: {
       leading: 16,
-      trailing: 14,
-      gap: 10,
+      trailing: 16,
+      gap: 12,
       mic: 20,
       ring: 2
     },
-    peek: 80
+    peek: 80,
+    edge: {
+      control: 1,
+      selected: 1,
+      focus: 2
+    },
+    segmented: {
+      inset: 2
+    }
   },
   layout: {
     bubbleMax: 0.78,
@@ -1470,11 +1650,19 @@ export const androidDark = {
     glassBlur: 20,
     glassSaturate: 1.6,
     glassEdge: 0.06,
+    chipEdge: 0.12,
     glassShadowY: 6,
     glassShadowBlur: 20,
     cardShadow: 0.04,
     cardShadowFar: 0.05,
-    glassRim: 0.5
+    glassRim: 0.5,
+    pageDotOff: 0.35,
+    tonalOnTile: 0.06,
+    sheetScrim: 0.48,
+    glassHairline: 1,
+    grabber: 1,
+    glassSaturateOnTile: 1,
+    glassShadowOnTile: 0
   },
   spring: {
     press: {
@@ -1514,7 +1702,7 @@ export const themes = { iosLight, iosDark, androidLight, androidDark } as const;
 
 export type ThemeName = keyof typeof themes;
 export type AppTheme = (typeof themes)[ThemeName];
-export type ColorName = 'background' | 'card' | 'muted' | 'mutedForeground' | 'foreground' | 'primary' | 'onPrimary' | 'tint' | 'chipSelected' | 'onChipSelected' | 'chipSelectedEdge' | 'filterSelected' | 'onFilterSelected' | 'mapGround' | 'scrim' | 'onDestructive' | 'warning' | 'success' | 'border' | 'separator' | 'codeSurface' | 'codeInk' | 'sheet' | 'count' | 'onCount' | 'glassEdge' | 'glassShine' | 'shadow' | 'destructive';
+export type ColorName = 'background' | 'card' | 'muted' | 'mutedForeground' | 'mutedForegroundOnTile' | 'foreground' | 'primary' | 'onPrimary' | 'tint' | 'chipSelected' | 'onChipSelected' | 'chipSelectedEdge' | 'filterSelected' | 'onFilterSelected' | 'mapGround' | 'scrim' | 'onDestructive' | 'warning' | 'success' | 'border' | 'separator' | 'codeSurface' | 'codeInk' | 'sheet' | 'count' | 'onCount' | 'glassEdge' | 'glassShine' | 'shadow' | 'tonalOnTile' | 'chipOn' | 'sheetScrim' | 'glassHairline' | 'grabber' | 'destructive';
 export type BadgeName = 'promoted' | 'new' | 'delivers';
 export type ShopAccentName = 'peach' | 'pistachio' | 'butter' | 'lavender';
 export type TypeStyleName = 'splash' | 'displayLarge' | 'displayTitle' | 'displayName' | 'sectionTitle' | 'title1' | 'title2' | 'title3' | 'headline' | 'body' | 'callout' | 'subheadline' | 'subheadlineStrong' | 'footnote' | 'caption1' | 'caption1Strong' | 'caption2' | 'code' | 'clock';

@@ -24,7 +24,8 @@ Trade-offs:
 
 | Version | What changed | Why |
 | --- | --- | --- |
-| v4 (current) | The shopper buys instead of holding: bought (authorised), set aside and charged, waiting for collection, collected by the shop. New branches: not confirmed in 10 minutes, shopper cancels, not collected by the date, has fewer than asked, delivery charged and dispatched. A note on the shop's collection-window setting. Messages come from Snuffle | Decision 037, and a flow review that found shop states with no shopper screen and the reverse |
+| v5 (current) | Ratings and signals (decision 047): rated by the buyer, with one public reply from the shop; a signal disputed by the shop, which Snuffle reviews and then excludes or keeps. A note lists the signals the shop sees: answer rate, reply time, and stock accuracy after 10 "has it" answers | Ratings and the shop page signals in app flow v9; I decided shops see their signals and can dispute them |
+| v4 | The shopper buys instead of holding: bought (authorised), set aside and charged, waiting for collection, collected by the shop. New branches: not confirmed in 10 minutes, shopper cancels, not collected by the date, has fewer than asked, delivery charged and dispatched. A note on the shop's collection-window setting. Messages come from Snuffle | Decision 037, and a flow review that found shop states with no shopper screen and the reverse |
 | v3 | The unpaid reserve is gone: after a yes the shop holds a paid item or delivers it | The unpaid reserve put the payment outside the app and the no-show risk on the shop (decision 032) |
 | v2 | Connected and asked shops, the three ways to get the item, holds in days with a collection day, the shop's own delivery mapped | A hold "until 4pm" was shorter than UK shops keep paid orders (decisions 030 and 031) |
 | v1 | First states from the blueprint, WhatsApp messages | First pass |

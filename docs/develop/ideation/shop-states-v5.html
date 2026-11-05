@@ -1,0 +1,266 @@
+<!-- Shop request states v5: v4 plus ratings and the shop's signals (decision 047). After collection the buyer is asked "Would you go back?" (thumbs, not stars); the shop sees each rating and can reply once, in public. The shop also sees its own signals (answer rate, reply time and, after 10 "has it" answers, how often it had the item) and can dispute one answer it thinks was counted wrong; Snuffle reviews it and the case is excluded or kept. Matches app flow v9. Format: see AGENTS.md, canvas pages. -->
+
+<div class="area" data-x="-80" data-y="-440" data-w="1620" data-h="1060" data-title-en="Answering" data-title-pt="Respondendo"></div>
+<div class="area" data-x="1580" data-y="-180" data-w="2200" data-h="500" data-title-en="Buy and collect" data-title-pt="Comprar e retirar"></div>
+<div class="area" data-x="1580" data-y="-920" data-w="2200" data-h="460" data-title-en="Buy and the shop delivers (mapped, not designed)" data-title-pt="Comprar e a loja entregar (mapeado, não desenhado)"></div>
+<div class="area" data-x="-80" data-y="680" data-w="3860" data-h="300" data-title-en="When it doesn't" data-title-pt="Quando não dá"></div>
+<div class="area" data-x="-80" data-y="1040" data-w="4220" data-h="480" data-title-en="What the shop sees" data-title-pt="O que a loja vê"></div>
+<div class="area" data-x="3860" data-y="-300" data-w="1300" data-h="1240" data-title-en="Ratings and signals" data-title-pt="Avaliações e sinais"></div>
+
+<!-- Answering: connected shop -->
+<div class="state start" id="pos" data-x="0" data-y="-320" style="--tone: var(--c4)">
+  <span class="state-name"><i data-icon="smartphone"></i>Stock checked in the POS</span>
+  <p lang="en">Connected shop. The POS shares item-level stock, so nobody is asked.</p>
+  <p lang="pt">Loja conectada. O POS compartilha o estoque por item, então ninguém é perguntado.</p>
+</div>
+<div class="state" id="instock" data-x="420" data-y="-320" style="--tone: var(--c4)">
+  <span class="state-name"><i data-icon="zap"></i>In stock now</span>
+  <p lang="en">Shown at once, labelled as stock data. An order is charged at once and the POS takes the item off stock.</p>
+  <p lang="pt">Aparece na hora, marcado como dado de estoque. Uma compra é cobrada na hora e o POS tira o item do estoque.</p>
+</div>
+
+<!-- Answering: asked shop -->
+<div class="state start" id="received" data-x="0" data-y="160" style="--tone: var(--c1)">
+  <span class="state-name"><i data-icon="message-circle"></i>Request received</span>
+  <p lang="en">Asked shop. Snuffle asks about one item, for one shopper, with a deadline.</p>
+  <p lang="pt">Loja consultada. O Snuffle pergunta por um item, para um comprador, com um prazo.</p>
+</div>
+<div class="state" id="seen" data-x="420" data-y="160" style="--tone: var(--c1)">
+  <span class="state-name"><i data-icon="eye"></i>Seen</span>
+  <p lang="en">Read receipt, when the shop has them on. The shopper sees "Seen".</p>
+  <p lang="pt">Confirmação de leitura, quando a loja deixa ativada. O comprador vê "Seen".</p>
+</div>
+<div class="state" id="answered" data-x="840" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="circle-check"></i>Has it</span>
+  <p lang="en">A clear yes, with a price. A valid answer for H1.</p>
+  <p lang="pt">Um sim claro, com preço. Uma resposta válida para a H1.</p>
+</div>
+<div class="state" id="alt" data-x="840" data-y="-80" style="--tone: var(--c2)">
+  <span class="state-name"><i data-icon="repeat"></i>Has something similar</span>
+  <p lang="en">The shop offers an alternative, sometimes with a shorter window. The shopper decides.</p>
+  <p lang="pt">A loja oferece uma alternativa, às vezes com uma janela menor. O comprador decide.</p>
+</div>
+<div class="state" id="fewer" data-x="840" data-y="400" style="--tone: var(--c2)">
+  <span class="state-name"><i data-icon="minus"></i>Has 1 of 2</span>
+  <p lang="en">The shop has 1 of 2. The shopper can buy what there is and Keep looking for the rest.</p>
+  <p lang="pt">A loja tem 1 de 2. O comprador pode comprar o que há e usar Keep looking para o resto.</p>
+</div>
+<div class="state" id="choose" data-x="1260" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="split"></i>Shopper buys</span>
+  <p lang="en">Collect, or the shop delivers, with the shop's window shown before Buy. Without buying, the shop sets nothing aside (decision 032).</p>
+  <p lang="pt">Retirar, ou a loja entrega, com a janela da loja visível antes do Buy. Sem comprar, a loja não separa nada (decisão 032).</p>
+</div>
+
+<!-- Buy and collect -->
+<div class="state" id="bought" data-x="1680" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="credit-card"></i>Bought, confirm it's set aside</span>
+  <p lang="en">The amount is authorised, not taken. A connected shop skips this: its POS already took the item.</p>
+  <p lang="pt">O valor está autorizado, não capturado. Uma loja conectada pula este passo: o POS já tirou o item.</p>
+</div>
+<div class="state" id="aside" data-x="2100" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="package"></i>Set aside and charged</span>
+  <p lang="en">The shop replies done; the authorised amount is taken and the shopper gets the receipt.</p>
+  <p lang="pt">A loja responde done; o valor autorizado é capturado e o comprador recebe o recibo.</p>
+</div>
+<div class="state" id="ready" data-x="2520" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="calendar-check"></i>Ready · collect by Mon 9 Nov</span>
+  <p lang="en">Until the end of the shop's window, Mon 9 Nov here. A reminder the day before.</p>
+  <p lang="pt">Até o fim da janela da loja, seg 9 nov aqui. Um lembrete na véspera.</p>
+</div>
+<div class="state end" id="collected" data-x="2940" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="shopping-bag"></i>Collected</span>
+  <p lang="en">The shop marks it, by scanning the code or with a tap. The shopper is asked for a rating.</p>
+  <p lang="pt">A loja marca, lendo o código ou com um toque. O comprador recebe um pedido de avaliação.</p>
+</div>
+<div class="state" id="extended" data-x="2520" data-y="-90" style="--tone: var(--c2)">
+  <span class="state-name"><i data-icon="calendar-plus"></i>Extended · collect by Mon 16 Nov</span>
+  <p lang="en">The shopper extends once, by the shop's window length.</p>
+  <p lang="pt">O comprador prorroga uma vez, pelo prazo da janela da loja.</p>
+</div>
+
+<!-- Buy and the shop delivers -->
+<div class="state" id="dbought" data-x="1680" data-y="-820" style="--tone: var(--c6)">
+  <span class="state-name"><i data-icon="credit-card"></i>Bought, can you send it?</span>
+  <p lang="en">Item and delivery authorised, at the shop's price.</p>
+  <p lang="pt">Item e entrega autorizados, ao preço da loja.</p>
+</div>
+<div class="state" id="dcharged" data-x="2100" data-y="-820" style="--tone: var(--c6)">
+  <span class="state-name"><i data-icon="package"></i>Paid</span>
+  <p lang="en">The shop says it can send it; the amount is taken.</p>
+  <p lang="pt">A loja diz que pode enviar; o valor é capturado.</p>
+</div>
+<div class="state" id="dispatched" data-x="2520" data-y="-820" style="--tone: var(--c6)">
+  <span class="state-name"><i data-icon="truck"></i>On its way</span>
+  <p lang="en">The shop's own courier. Snuffle relays it, with a tracking link if there is one.</p>
+  <p lang="pt">O entregador da própria loja. O Snuffle repassa, com link de rastreio se houver.</p>
+</div>
+<div class="state end" id="delivered" data-x="2940" data-y="-820" style="--tone: var(--c6)">
+  <span class="state-name"><i data-icon="house"></i>Delivered</span>
+  <p lang="en">Problems go to the shop; Snuffle helps the shopper ask.</p>
+  <p lang="pt">Problemas vão para a loja; o Snuffle ajuda o comprador a perguntar.</p>
+</div>
+
+<div class="state end fail" id="dnosend" data-x="2100" data-y="-600" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="circle-x"></i>Can't send it / no reply</span>
+  <p lang="en">The shop replies no, or nothing in 10 minutes. The authorisation is released, so nothing is charged. The shopper sees "Not confirmed · not charged" and the next shop's answer.</p>
+  <p lang="pt">A loja responde no, ou nada em 10 minutos. A autorização é liberada, então nada é cobrado. O comprador vê "Not confirmed · not charged" e a resposta da próxima loja.</p>
+</div>
+
+<!-- When it doesn't -->
+<div class="state end fail" id="noreply" data-x="420" data-y="780" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="clock"></i>No reply in 10 min</span>
+  <p lang="en">The shopper sees "No reply". A late reply still counts as demand.</p>
+  <p lang="pt">O comprador vê "No reply". Uma resposta atrasada ainda conta como demanda.</p>
+</div>
+<div class="state end fail" id="doesnt" data-x="840" data-y="780" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="circle-x"></i>Doesn't have it</span>
+  <p lang="en">Also valid for H1. Goes into the weekly demand summary.</p>
+  <p lang="pt">Também vale para a H1. Entra no resumo semanal da demanda.</p>
+</div>
+<div class="state end fail" id="lapsed" data-x="1680" data-y="780" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="hourglass"></i>Not confirmed in 10 min</span>
+  <p lang="en">The authorisation lapses; nothing is charged. The shopper is offered the next shop. The shopper sees "Not confirmed · not charged".</p>
+  <p lang="pt">A autorização expira; nada é cobrado. O comprador recebe a próxima loja. O comprador vê "Not confirmed · not charged".</p>
+</div>
+<div class="state end fail" id="sold" data-x="2100" data-y="780" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="circle-x"></i>Already sold</span>
+  <p lang="en">Found while setting it aside, or the POS stock was out of date. The authorisation is released. The shopper sees "Sold · not charged".</p>
+  <p lang="pt">Descoberto ao separar, ou o estoque do POS estava desatualizado. A autorização é liberada. O comprador vê "Sold · not charged".</p>
+</div>
+<div class="state end fail" id="cancelled" data-x="2520" data-y="780" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="x"></i>Shopper cancels</span>
+  <p lang="en">Refunded in full before collection. The shop puts the item back on sale. The shopper sees "Cancelled · refunded".</p>
+  <p lang="pt">Estornado por inteiro antes da retirada. A loja põe o item de volta à venda. O comprador vê "Cancelled · refunded".</p>
+</div>
+<div class="state end fail" id="expired" data-x="2940" data-y="780" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="calendar"></i>Not collected by the date</span>
+  <p lang="en">Cancelled and refunded in full, automatically. The item goes back on sale. The shopper sees "Not collected · refunded".</p>
+  <p lang="pt">Cancelado e estornado por inteiro, automaticamente. O item volta à venda. O comprador vê "Not collected · refunded".</p>
+</div>
+
+<!-- Messages the shop sees (interface copy stays in English) -->
+<div class="note" data-for="instock" data-x="0" data-y="1140">
+  <p><strong>POS notification</strong><br>Bought through Snuffle: 1 × <strong>eclipse glasses</strong>, paid £9.50. Set it aside for code <strong>B3M8</strong>. They'll collect by Wed 4 Nov. <strong>Done</strong></p>
+  <p lang="en">A connected shop is already paid and the stock already moved; the tap tells the shopper it's behind the counter.</p>
+  <p lang="pt">Uma loja conectada já recebeu e o estoque já saiu; o toque avisa o comprador que o item está atrás do balcão.</p>
+</div>
+<div class="note" data-for="received" data-x="420" data-y="1140">
+  <p><img class="ios-snuffle xs" src="../design-system/img/mark-ios-light.svg" alt=""><strong>Snuffle</strong><br>Hi Ana, someone a 13-minute walk away needs 2 pairs of <strong>eclipse glasses</strong> by 4pm today. Do you have them?<br>Reply <strong>1</strong> and your price · <strong>2</strong> No · <strong>3</strong> Something similar, or tell me how many you have.</p>
+  <p lang="en"><span class="tag">Template</span> Pre-approved, because the shop hasn't written in the last 24 hours.</p>
+  <p lang="pt"><span class="tag">Modelo</span> Pré-aprovado, porque a loja não escreveu nas últimas 24 horas.</p>
+</div>
+<div class="note" data-for="bought" data-x="840" data-y="1140">
+  <p><img class="ios-snuffle xs" src="../design-system/img/mark-ios-light.svg" alt=""><strong>Snuffle</strong><br>Bought: 2 × <strong>eclipse glasses</strong> at £14.99, £29.98 authorised. Please set them aside for code <strong>K7Q2</strong> and reply <strong>done</strong> within 10 minutes, or <strong>sold</strong> if they've gone. They'll collect by Mon 9 Nov.</p>
+  <p lang="en">The money is taken when the shop replies "done". With no reply in 10 minutes the authorisation lapses.</p>
+  <p lang="pt">O valor é capturado quando a loja responde "done". Sem resposta em 10 minutos, a autorização expira.</p>
+</div>
+<div class="note" data-for="aside" data-x="1260" data-y="1140">
+  <p><img class="ios-snuffle xs" src="../design-system/img/mark-ios-light.svg" alt=""><strong>Snuffle</strong><br>Charged £29.98 for <strong>K7Q2</strong>. Set aside until Mon 9 Nov. When they come in, scan the code or reply <strong>collected</strong>.</p>
+  <p lang="en">The payment lands in the shop's own payment account.</p>
+  <p lang="pt">O pagamento cai na conta de pagamentos da própria loja.</p>
+</div>
+<div class="note" data-for="dbought" data-x="1680" data-y="1140">
+  <p><img class="ios-snuffle xs" src="../design-system/img/mark-ios-light.svg" alt=""><strong>Snuffle</strong><br>Bought for delivery: 2 pairs + £3.50 delivery to Blythe Road, W14, £33.48 authorised. Can you send them today? Reply <strong>yes</strong>, then <strong>sent</strong> when they leave, with a tracking link if you have one.</p>
+  <p lang="en">Mapped, not designed: the app takes no part in the delivery itself.</p>
+  <p lang="pt">Mapeado, não desenhado: o app não participa da entrega em si.</p>
+</div>
+<div class="note" data-for="expired" data-x="2100" data-y="1140">
+  <p><img class="ios-snuffle xs" src="../design-system/img/mark-ios-light.svg" alt=""><strong>Snuffle</strong><br><strong>K7Q2</strong> wasn't collected by Mon 9 Nov. I've cancelled it and refunded the shopper; you can put them back on sale.</p>
+  <p lang="en">The same message, with "cancelled by the shopper", goes out when the shopper cancels.</p>
+  <p lang="pt">A mesma mensagem, com "cancelled by the shopper", sai quando o comprador cancela.</p>
+</div>
+<div class="note" data-for="doesnt" data-x="2520" data-y="1140">
+  <p><img class="ios-snuffle xs" src="../design-system/img/mark-ios-light.svg" alt=""><strong>Snuffle</strong><br>Thanks, noted. 3 people near you asked for it this week; you'll see it in Monday's summary.</p>
+  <p lang="en">The demand signal (H9) starts with the first "no".</p>
+  <p lang="pt">O sinal de demanda (H9) começa no primeiro "não".</p>
+</div>
+<div class="note" data-for="ready" data-x="2940" data-y="1140">
+  <p lang="en"><strong>Collection window.</strong> A setting the shop picks once: 7 days by default, or 14 or 30; the same day or the next for perishables. One extension of the same length. The shopper sees it before Buy and on the receipt (decision 037).</p>
+  <p lang="pt"><strong>Janela de retirada.</strong> Uma configuração que a loja escolhe uma vez: 7 dias no padrão, ou 14 ou 30; no mesmo dia ou no seguinte para perecíveis. Uma prorrogação do mesmo prazo. O comprador vê antes do Buy e no recibo (decisão 037).</p>
+</div>
+
+<div class="note" data-for="extended" data-x="3360" data-y="1140">
+  <p><img class="ios-snuffle xs" src="../design-system/img/mark-ios-light.svg" alt=""><strong>Snuffle</strong><br><strong>K7Q2</strong> now collects by Mon 16 Nov.</p>
+  <p lang="en">Sent when the shopper extends. The extension is the shop's own window length, once.</p>
+  <p lang="pt">Enviada quando o comprador prorroga. A prorrogação é o próprio prazo da janela da loja, uma vez.</p>
+</div>
+<div class="note" data-for="lapsed" data-x="3780" data-y="1140">
+  <p><img class="ios-snuffle xs" src="../design-system/img/mark-ios-light.svg" alt=""><strong>Snuffle</strong><br>Too late, the shopper wasn't charged; keep them on sale.</p>
+  <p lang="en">The reply to a "done" that arrives after the 10 minutes. The late answer still counts as demand.</p>
+  <p lang="pt">A resposta a um "done" que chega depois dos 10 minutos. A resposta atrasada ainda conta como demanda.</p>
+</div>
+
+<!-- Ratings and signals (v5, decision 047) -->
+<div class="state" id="rated" data-x="3940" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="thumbs-up"></i>Rated by buyer</span>
+  <p lang="en">The buyer who collected answers "Would you go back?" with tags and maybe a note. The shop sees it at once and may reply once, in public.</p>
+  <p lang="pt">O comprador que retirou responde "Would you go back?" com tags e talvez uma nota. A loja vê na hora e pode responder uma vez, em público.</p>
+</div>
+<div class="state end" id="replied" data-x="4360" data-y="160" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="message-square"></i>Replied</span>
+  <p lang="en">The reply shows under the rating on the shop page. One per rating; the rating itself stays.</p>
+  <p lang="pt">A resposta aparece sob a avaliação na página da loja. Uma por avaliação; a avaliação continua lá.</p>
+</div>
+<div class="state start" id="disputed" data-x="3940" data-y="520" style="--tone: var(--c2)">
+  <span class="state-name"><i data-icon="flag"></i>Signal disputed</span>
+  <p lang="en">The shop disputes one answer it thinks was counted wrong, such as a "didn't have it" when the buyer never came. Snuffle reviews the case.</p>
+  <p lang="pt">A loja contesta uma resposta que acha que foi contada errado, como um "não tinha" quando o comprador nem foi. O Snuffle revisa o caso.</p>
+</div>
+<div class="state end" id="excluded" data-x="4360" data-y="440" style="--tone: var(--c3)">
+  <span class="state-name"><i data-icon="circle-check"></i>Excluded</span>
+  <p lang="en">The case leaves the signal and the numbers are worked out again. The shop is told.</p>
+  <p lang="pt">O caso sai do sinal e os números são recalculados. A loja é avisada.</p>
+</div>
+<div class="state end" id="kept" data-x="4360" data-y="700" style="--tone: var(--c5)">
+  <span class="state-name"><i data-icon="circle-x"></i>Kept</span>
+  <p lang="en">The case stays counted, with the reason sent to the shop.</p>
+  <p lang="pt">O caso continua contado, e o motivo vai para a loja.</p>
+</div>
+<div class="note" data-free="1" data-x="3940" data-y="-200">
+  <p lang="en"><strong>Signals the shop sees.</strong> Answer rate (answers 9 in 10 requests), reply time (usually replies in 6 min) and stock accuracy (had it 24 of 25 times when it said yes), the last shown only after 10 "has it" answers. The same numbers buyers see on the shop page (decision 047).</p>
+  <p lang="pt"><strong>Sinais que a loja vê.</strong> Taxa de resposta (responde 9 em 10 pedidos), tempo de resposta (costuma responder em 6 min) e acerto de estoque (tinha 24 de 25 vezes em que disse sim), este último só depois de 10 respostas "tem". Os mesmos números que os compradores veem na página da loja (decisão 047).</p>
+  <p><span class="tag">Decision 047</span></p>
+</div>
+<div class="note" data-for="rated" data-x="4780" data-y="160">
+  <p><img class="ios-snuffle xs" src="../design-system/img/mark-ios-light.svg" alt=""><strong>Snuffle</strong><br>The buyer for <strong>K7Q2</strong> would go back: Had it as promised, Set aside on time. Reply <strong>reply</strong> and your message to answer once, in public.</p>
+  <p lang="en">Thumbs down arrives the same way, with its tags and note. The shop can't remove a rating.</p>
+  <p lang="pt">Um polegar para baixo chega do mesmo jeito, com as tags e a nota. A loja não pode remover uma avaliação.</p>
+</div>
+<div class="note" data-for="disputed" data-x="4780" data-y="520">
+  <p><img class="ios-snuffle xs" src="../design-system/img/mark-ios-light.svg" alt=""><strong>Snuffle</strong><br>Got it, I'll check <strong>K7Q2</strong>. Until then it still counts; I'll tell you what I decide.</p>
+  <p lang="en">The reply to a shop that writes <strong>dispute</strong> and the code. Who reviews, and how fast, is still open.</p>
+  <p lang="pt">A resposta a uma loja que escreve <strong>dispute</strong> e o código. Quem revisa, e em quanto tempo, ainda está em aberto.</p>
+</div>
+
+<!-- Transitions: what the shop or the shopper does -->
+<a class="link" data-from="pos" data-to="instock" data-label-en="has stock" data-label-pt="tem estoque"></a>
+<a class="link" data-from="instock" data-to="choose" data-label-en="shopper sees it" data-label-pt="o comprador vê"></a>
+<a class="link" data-from="received" data-to="seen" data-label-en="opens chat" data-label-pt="abre a conversa"></a>
+<a class="link" data-from="seen" data-to="answered" data-label-en="replies 1 + price" data-label-pt="responde 1 + preço"></a>
+<a class="link alt" data-from="seen" data-to="alt" data-label-en="replies 3" data-label-pt="responde 3"></a>
+<a class="link alt" data-from="seen" data-to="fewer" data-label-en="replies a number" data-label-pt="responde um número"></a>
+<a class="link" data-from="answered" data-to="choose"></a>
+<a class="link alt" data-from="alt" data-to="choose" data-label-en="shopper accepts" data-label-pt="o comprador aceita"></a>
+<a class="link alt" data-from="fewer" data-to="choose" data-label-en="buys what there is" data-label-pt="compra o que há"></a>
+<a class="link" data-from="choose" data-to="bought" data-label-en="buys, collects" data-label-pt="compra, retira"></a>
+<a class="link" data-from="bought" data-to="aside" data-label-en="replies done" data-label-pt="responde done"></a>
+<a class="link alt" data-from="choose" data-to="aside" data-label-en="connected: paid at once" data-label-pt="conectada: pago na hora"></a>
+<a class="link" data-from="aside" data-to="ready"></a>
+<a class="link" data-from="ready" data-to="collected" data-label-en="scans or taps" data-label-pt="lê ou toca"></a>
+<a class="link alt" data-from="ready" data-to="extended" data-label-en="shopper extends" data-label-pt="o comprador prorroga"></a>
+<a class="link alt" data-from="extended" data-to="collected"></a>
+<a class="link" data-from="choose" data-to="dbought" data-label-en="buys, shop delivers" data-label-pt="compra, a loja entrega"></a>
+<a class="link alt" data-from="dbought" data-to="dcharged" data-label-en="replies yes" data-label-pt="responde yes"></a>
+<a class="link alt" data-from="dcharged" data-to="dispatched" data-label-en="replies sent" data-label-pt="responde sent"></a>
+<a class="link alt" data-from="dispatched" data-to="delivered"></a>
+<a class="link alt" data-from="dbought" data-to="dnosend" data-label-en="replies no, or 10 min" data-label-pt="responde no, ou 10 min"></a>
+<a class="link" data-from="received" data-to="noreply" data-label-en="10 min, no reply" data-label-pt="10 min sem resposta"></a>
+<a class="link" data-from="seen" data-to="doesnt" data-label-en="replies 2" data-label-pt="responde 2"></a>
+<a class="link" data-from="bought" data-to="lapsed" data-label-en="10 min, no reply" data-label-pt="10 min sem resposta"></a>
+<a class="link" data-from="bought" data-to="sold" data-label-en="replies sold" data-label-pt="responde sold"></a>
+<a class="link" data-from="ready" data-to="cancelled" data-label-en="shopper cancels" data-label-pt="o comprador cancela"></a>
+<a class="link" data-from="ready" data-to="expired" data-label-en="the date passes" data-label-pt="a data passa"></a>
+<a class="link" data-from="collected" data-to="rated" data-label-en="buyer rates" data-label-pt="o comprador avalia"></a>
+<a class="link alt" data-from="rated" data-to="replied" data-label-en="replies once" data-label-pt="responde uma vez"></a>
+<a class="link" data-from="disputed" data-to="excluded" data-label-en="counted wrong" data-label-pt="contado errado"></a>
+<a class="link alt" data-from="disputed" data-to="kept" data-label-en="counted right" data-label-pt="contado certo"></a>

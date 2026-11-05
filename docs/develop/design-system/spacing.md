@@ -44,6 +44,7 @@ Trade-offs:
 | `gap.block` | 12 | Blocks within a card |
 | `inset.card` | 16 | A card at `radius.card` 28 minus 16 holds content at `radius.inner` 12 |
 | `inset.bubble` | 10 vertical, 14 horizontal | Chat bubbles |
+| `inset.sheet` | 24 | Under a sheet's last content; at the sides a sheet's header and content take `margin.screen`, so Close and Confirm line up with the rows |
 | `gap.section` | 32 | Sections on a screen |
 | `margin.screen` | 16 below 414 pt wide, 20 at 414 and up; 16 dp on Android | Android value from a secondary source, to confirm on m3.material.io |
 | `hit.min` | 44 pt on iOS, 48 dp on Android | Applies to the touch area, not the drawn size |
@@ -78,12 +79,12 @@ Each gap is set on one side only, at the top of the block below, so two gaps nev
 
 | Token | Value | Used for |
 | --- | --- | --- |
-| Columns | 1 content column; 4 in the category grid | Every screen |
+| Columns | 1 content column | Every screen |
 | Margin | 16 / 20 | As `margin.screen` |
-| Gutter | 12 | Carousels and the category grid |
+| Gutter | 12 | Carousels and the category rail |
 | `tile.large` | 0.78 × content width ≈ 290 / 312, image 4:3 | Open near you: one tile plus a peek |
 | `tile.medium` | (content − 12) / 2.3 ≈ 156 / 168, image 4:3 | New near you |
-| Category cell | (content − 36) / 4 ≈ 84 / 91, 1:1 | Category grid |
+| Category card | 120 × 164 (the 120 still, then the label), fixed, in a sideways rail, gutter 12 | Browse by category on Nearby |
 | Bubble max width | 78% of content ≈ 290 / 312 | Chat bubbles |
 | Answer and order cards | Full content width | Chat |
 | Web build | Phone frame, 402 × 874; the same spacing values in px | Prototype in a browser |
@@ -97,7 +98,7 @@ Widths are for a 402 pt iPhone 17 and a 440 pt iPhone 17 Pro Max. Older 6.1″ i
 | Carousels peek | The first tile starts on the margin, the last ends on the margin, paging snaps; the peek is the only scroll cue |
 | One ratio per row | All images in a row or carousel share one ratio |
 | Widths from the formula | Tiles and cells are computed from the content width; only gutters and margins are fixed |
-| Sheets follow Maps | Medium and large detents; content inside a sheet sits on the screen margin (16, or 20 on wide iPhones), as in Maps |
+| Sheets follow Maps | Medium and large detents; a sheet's header and content sit on the screen margin (16, or 20 on wide iPhones), as in Maps |
 | Standard layouts | A row or grid layout wherever possible, as the HIG asks for collections |
 
 The tile fractions 0.78 and 2.3 are a proposal to check at real size.

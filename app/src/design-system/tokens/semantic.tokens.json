@@ -192,6 +192,13 @@
           "unit": "px"
         },
         "$description": "Shop thumbnail in an answer card (imagery.md)"
+      },
+      "nav": {
+        "$value": {
+          "value": 28,
+          "unit": "px"
+        },
+        "$description": "The request's thumbnail beside the chat bar's subtitle, with a 1 pt edge (components.md, Nav bar)"
       }
     },
     "icon": {
@@ -272,19 +279,13 @@
       },
       "trailing": {
         "$type": "dimension",
-        "$value": {
-          "value": 14,
-          "unit": "px"
-        },
-        "$description": "Ask bar padding after the mic; off the 4-pt grid so the mic sits optically centred in the capsule end"
+        "$value": "{dimension.space.4}",
+        "$description": "Ask bar and composer padding after the mic (16), measured to the icon"
       },
       "gap": {
         "$type": "dimension",
-        "$value": {
-          "value": 10,
-          "unit": "px"
-        },
-        "$description": "Glyph to placeholder in the ask bar"
+        "$value": "{dimension.space.3}",
+        "$description": "Glyph to placeholder in the ask bar and the composer (12)"
       },
       "mic": {
         "$type": "dimension",
@@ -310,6 +311,40 @@
         "unit": "px"
       },
       "$description": "How much of the next photo shows on the shop page (72 to 88)"
+    },
+    "edge": {
+      "$type": "dimension",
+      "control": {
+        "$value": {
+          "value": 1,
+          "unit": "px"
+        },
+        "$description": "A 1 pt edge on a control: a chip, the rating buttons, the nav bar's category thumb"
+      },
+      "selected": {
+        "$value": {
+          "value": 1,
+          "unit": "px"
+        },
+        "$description": "The edge of a selected filter chip; 1.5 pt in light (modes/light.tokens.json), 1 pt in dark (tags.md)"
+      },
+      "focus": {
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        },
+        "$description": "A focus ring (text fields on the web) and the checkbox's box"
+      }
+    },
+    "segmented": {
+      "$type": "dimension",
+      "inset": {
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        },
+        "$description": "iOS segmented control: the track's padding around the thumb (components.md, Segmented control)"
+      }
     }
   },
   "type": {
@@ -816,6 +851,10 @@
       "$value": 0.06,
       "$description": "Web glass: opacity of the 0.5 pt hairline"
     },
+    "chipEdge": {
+      "$value": 0.12,
+      "$description": "An unselected filter chip on the Background (light): opacity of its 1 pt edge in glassEdge, so a Background chip still has a shape (tags.md)"
+    },
     "glassShadowY": {
       "$value": 6,
       "$description": "Web glass: shadow offset in px"
@@ -835,6 +874,10 @@
     "glassRim": {
       "$value": 0.5,
       "$description": "Web glass: width in px of the inner highlight and the hairline"
+    },
+    "pageDotOff": {
+      "$value": 0.35,
+      "$description": "Getting started: the other page dots, the welcome Foreground at this opacity over the Indigo ground (colour.md, Getting started)"
     }
   },
   "layout": {

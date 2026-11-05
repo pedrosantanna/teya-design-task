@@ -7,7 +7,7 @@ The app's one button. Roles and sizes follow the Button table on `docs/develop/d
 | Prop | Type | Default | Notes |
 | --- | --- | --- | --- |
 | `label` | string | required | Never truncates; wraps at accessibility sizes |
-| `role` | `filled`, `tonal`, `plain`, `destructive` | `filled` | Filled: Primary fill, its label colour. Tonal: Muted fill, Foreground label (neutral). Plain: no fill, Tint label. Destructive: no fill, red label |
+| `role` | `filled`, `tonal`, `plain`, `destructive`, `inverse`, `quiet` | `filled` | Filled: Primary fill, its label colour. Tonal: Muted fill, Foreground label (neutral). Plain: no fill, Tint label. Destructive: no fill, red label. Inverse and quiet are for a coloured ground (Getting started's Indigo pages): inverse is a Foreground capsule with a Background label (Continue), quiet a text button in Foreground (Skip) |
 | `size` | `large`, `compact` | `large` | Large: 50 high, full content width, label in Headline. Compact: 36 high, `space.4` sides, label in Subheadline at 600, hit slop up to `hit.min` |
 | `icon` | `IconSvgElement` | none | A HugeIcons icon, imported from its own path (`@hugeicons/core-free-icons/ArrowRight01Icon`). Size is the label's line height minus 4, stroke 2 |
 | `loading` | boolean | `false` | Spinner replaces the label, width kept, reported busy. Used on Buy while the payment sheet returns |

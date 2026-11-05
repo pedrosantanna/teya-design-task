@@ -1,5 +1,5 @@
 // Journey steps: one per frame of app flow v7 (v8 keeps the same frames). Each step is a preset of the store plus the route that shows it.
-// Screens that aren't built yet show on /preview/[step]; a later change points `href` at the real screen.
+// Steps without a screen of their own show on /preview/[step]; the rest point `href` at the real screen.
 import type { Href } from 'expo-router';
 
 import type { AnswerState, Fulfilment, OrderState, PaymentState, Persona, RequestState } from './types';
@@ -31,7 +31,14 @@ export type StepId =
   | 'delivers'
   | 'afterWork'
   | 'keepLooking'
-  | 'shopPage';
+  | 'collected'
+  | 'rate'
+  | 'rateDown'
+  | 'rated'
+  | 'shopPage'
+  | 'shopNew'
+  | 'shopFew'
+  | 'reviews';
 
 export type StepGroup = 'First run' | 'Browse and ask' | 'Snuffle asks shops' | 'Answers' | 'Buy' | 'Collect' | 'Shops' | 'Requests';
 
@@ -144,7 +151,15 @@ export const steps: JourneyStep[] = [
     time: '12:30',
     preset: { ...base, persona: 'jess', request: 'haveIt', answers: { rossis: 'hasIt' } },
   },
+  // Rating (change shop-ratings-and-range): after Collected, the order card asks for a rating.
+  { id: 'collected', title: 'Collected: rate the shop', group: 'Collect', time: '16:05', preset: { ...afterAnswers, persona: 'sam', order: 'collected' } },
+  { id: 'rate', title: 'Rate the shop', group: 'Collect', time: '16:06', preset: { ...afterAnswers, persona: 'sam', order: 'collected' } },
+  { id: 'rateDown', title: "Rate: wouldn't go back", group: 'Collect', time: '16:06', preset: { ...afterAnswers, persona: 'sam', order: 'collected' } },
+  { id: 'rated', title: 'Rated', group: 'Collect', time: '16:07', preset: { ...afterAnswers, persona: 'sam', order: 'collected' } },
   { id: 'shopPage', title: 'Shop page', group: 'Shops', time: '13:01', preset: base },
+  { id: 'shopNew', title: 'Shop page: no ratings yet', group: 'Shops', time: '13:01', preset: base },
+  { id: 'shopFew', title: 'Shop page: 3 ratings', group: 'Shops', time: '13:01', preset: base },
+  { id: 'reviews', title: 'What buyers say: all ratings', group: 'Shops', time: '13:01', preset: base },
   { id: 'requests', title: 'Requests (full screen)', group: 'Requests', time: '13:14', preset: { ...afterAnswers, persona: 'sam' } },
 ];
 
@@ -167,6 +182,9 @@ export function hrefFor(step: StepId): Href {
   if (step === 'locationAsk') return '/location-ask';
   if (step === 'signIn') return '/sign-in';
   if (step === 'shopPage') return { pathname: '/shops/[id]', params: { id: 'rossis' } };
+  if (step === 'shopNew') return { pathname: '/shops/[id]', params: { id: 'corner' } };
+  if (step === 'shopFew') return { pathname: '/shops/[id]', params: { id: 'halo' } };
+  if (step === 'reviews') return { pathname: '/reviews/[id]', params: { id: 'rossis' } };
   // Requests, Ask and the request's chat (request-chat-answers, buy-and-collect). The sheets, the payment
   // sheet and the full-screen code open from the simulation's state, which each step sets (simulation.ts).
   if (step === 'requests') return '/requests';

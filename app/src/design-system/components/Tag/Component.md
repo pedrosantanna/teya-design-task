@@ -1,14 +1,14 @@
 # Tags
 
-The five small labels from `docs/develop/design-system/tags.md`: `Chip` (filter and suggestion), `StatusLabel`, `Badge` and `Count`, all exported from `Tag.tsx`. Words come from the state table in `conceptual-model.md`.
+The five small labels from `docs/develop/design-system/tags.md`: `Chip` (filter, suggestion and menu), `StatusLabel`, `Badge` and `Count`, all exported from `Tag.tsx`. Words come from the state table in `conceptual-model.md`.
 
 ## Chip
 
 | Prop | Type | Default | Notes |
 | --- | --- | --- | --- |
 | `label` | string | required | One line; ellipsis when longer than the content width, read in full |
-| `kind` | `'filter'`, `'suggestion'` | `'filter'` | Filter: single choice. Suggestion: a tap sends the text |
-| `selected` | boolean | `false` | Filter only. Off: Card fill (`chat.fill` inside `<Ground value="chat">`). Selected: `chipSelected` (Indigo 100, Indigo 800 text in Subheadline 600); Android adds a leading check |
+| `kind` | `'filter'`, `'suggestion'`, `'menu'` | `'filter'` | Filter: single choice. Suggestion: a tap sends the text. Menu: a value already set (New Request's place and deadline), drawn as an unselected chip with a trailing `ArrowDown01Icon` in Muted foreground; a tap opens its choices |
+| `selected` | boolean | `false` | Filter only. Off sits a level below the selected chip: on the Background or a sheet in light, that ground with a 1 pt `glassEdge` edge at `state.chipEdge`; `tonalOnTile` inside `<Ground value="tile">`; Muted inside `<Ground value="card">` and on a dark sheet; the Background with a 1 pt Border edge on the dark Background; `chat.fill` inside `<Ground value="chat">`. Selected: Card fill, `chipOn` text in Subheadline 600 and a `size.edge.selected` edge in `chipOn` (1.5 pt Indigo 800 in light, 1 pt Indigo 300 in dark). Android adds a leading check |
 | `count` | number | none | Shown after "·" ("Needs you · 2") |
 | `icon` | `IconSvgElement` | none | Leading symbol |
 | `onPress` | `(value) => void` | none | Receives `value` or the label, so a list passes one stable handler |

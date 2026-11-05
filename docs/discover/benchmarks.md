@@ -15,10 +15,12 @@ Call:
 - I re-sorted the benchmarks around Sam, Jess and Ruth. Define will choose a problem for a shopper, and a list grouped by product category didn't show whose problem each product touches.
 - I kept products that don't touch the personas' problems as short notes, because they still answer questions in the brief (surplus, multi-shop checkout, quick commerce, merchant storefronts).
 - I set the rule for a ✓: it needs a post from the findings or persona pages. Without one, the mark is ○.
+- Later, for ratings on the shop page, I asked for a separate look at how products collect and show ratings (decision 047).
 AI:
 - An agent captured the main screens of eight apps from Mobbin, an app-screen library. They stay in my local copy, outside the public repo, and show on the site with a link to the source.
 - A research agent chose the 17 products and pulled dated reviews from the App Store feed, Trustpilot and Mumsnet. A writing agent re-fetched truncated quotes and dropped the ones it couldn't confirm.
 - An agent re-sorted the page against the proto-personas and wrote the persona table and the per-persona patterns. Each ✓ names the post behind it, so it can be checked.
+- For ratings, an agent looked at five apps' rating screens in Mobbin through my account, read three products' public pages and four studies, and wrote the Ratings table.
 Trade-offs:
 - The persona clusters are small (4 to 11 posts), so each ✓ rests on one or two posts.
 - Review sites skew towards complaints, and there's no Reddit on this page. Commission rates are as reported by third parties.
@@ -522,3 +524,25 @@ status: verified
 - **Jess.** She could get things from the street on her hours: collection after the shop shuts, card payment, or one courier run across several shops on the same street, each shop still the seller. The checkout pieces exist (Shop app, Etsy) and the courier pieces exist (Gophr, Uber Direct); nobody has joined them for a high street, priced against Amazon same-day.
 - **Ruth.** She needs to know what's still here and open, kept current without work from the owner. Till and card-payment records already pass through providers like Square, SumUp and Teya, and could feed opening hours and "trading today" without new admin.
 - **No persona.** Shops without product codes could show "what's new on your street today": today's bake, this week's flowers. Amazon users say search fails when they don't know what they want (KJCM98...3), and surprise works for Too Good To Go. This sits at the browsing end, where none of the three clusters is.
+
+## Ratings
+
+I looked at these for the ratings on the shop page (decision 047). The first five were seen in Mobbin through my account; the screens stay in my local copy. The other three are from the products' public pages.
+
+| Product | Seen in | What it shows | What I took |
+| --- | --- | --- | --- |
+| Too Good To Go, store detail | Mobbin | "Overall experience · Based on 70 recent reviews", with sub-scores for Pickup, Quality, Variety and Quantity | Ratings about the collection and the visit, which became the tags |
+| Etsy, item reviews and shop ratings | Mobbin | Sub-scores, and topic chips with counts | Tags with a count beside each |
+| Vinted, seller reviews | Mobbin | Member reviews and automatic reviews in separate groups | Two signals labelled by source, "What buyers said" and "What Snuffle saw" |
+| Airbnb, reviews | Mobbin | The Guest favourite badge, which counts reliability as well as ratings | Reliability measured by the platform, next to opinions |
+| Google Maps, place reviews | Mobbin | Topics with counts, the spread of ratings, a composer with suggestion chips | Tag chips in the rating sheet |
+| Apple Maps | Public | Only people who visited can rate; a thumbs up or down per aspect, shown as a percentage | A thumbs up or down and a percentage in place of stars, tied to a visit |
+| Amazon | Public | "Customers say", an AI summary built from verified-purchase reviews | A summary built only from buyers' notes and labelled as Snuffle's |
+| Trustpilot | Public | The TrustScore starts every company from a prior of 7 reviews at 3.5, so a handful of reviews stays near the middle | No percentage below 5 ratings, in place of a weighted figure |
+
+| Study | Finding | Rule in Snuffle |
+| --- | --- | --- |
+| Baymard Institute, "User ratings distribution summary" (https://baymard.com/blog/user-ratings-distribution-summary) | Shoppers look past the average to how ratings are spread | Tag counts, with negative tags shown like positive ones |
+| Nielsen Norman Group, "Social Proof in the User Experience" (https://www.nngroup.com/articles/social-proof-ux/) | The number of people behind a signal is part of what persuades | The buyer count always beside the percentage |
+| Hu, Pavlou and Zhang, "Overcoming the J-shaped distribution of product reviews", *Communications of the ACM* 52(10), 2009 (https://ink.library.smu.edu.sg/sis_research/780) | Online ratings pile up at the extremes, because mostly the very pleased and the very displeased write | Snuffle asks every buyer, with one simple question |
+| Powell et al., "The Love of Large Numbers", *Psychological Science* 28, 2017 (https://read.qxmd.com/read/28825874/) | People pick the product with more reviews even when its rating is lower, so a count weighs more than it should | No percentage below 5 ratings; "New on Snuffle · 3 buyers so far" |

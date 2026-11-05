@@ -20,9 +20,11 @@ A row in a grouped list: the details sheet (item, quantity, the ways to get it),
 
 `ListGroup` holds the rows of one list; `shadow` adds the delicate card shadow (0 1 2 at 4%, 0 4 12 at 5%), used on the shop page, where Card rows sit on the Background-coloured card.
 
+`ListBlock` puts free content in the same group: a padded block (`space.4` all round, `gap.block` inside) with the row's fill, corners and separator for its `position`. The shop page's sections use it for the product chips, the rating summary and the buyer notes above their rows.
+
 ## iOS and Android
 
-iOS: inset grouped list on Card, `radius.inner` on the first and last rows, separators inset to the text. Android: Material list item with no fill and no separators.
+iOS: inset grouped list on Card, `radius.inner` on the first and last rows (`radius.bubble` in a sheet; `ListGroup corner="card"` gives a standalone list `radius.card`), separators inset to the text. Android: Material list item with no fill and no separators.
 
 ## Accessibility
 

@@ -24,7 +24,7 @@ Abra sozinho para usar a janela inteira: `app-web/index.html`. Acrescente `?debu
 
 ## Conteúdo simulado
 
-Todas as lojas são inventadas e ficam em volta da Blythe Road, W14. Os tempos a pé são a partir da Blythe Road; o lugar Trabalho (Kensington High St, W8) reaproveita a Olympia Cameras, a Abingdon Deli e a Church Street Books a 3, 4 e 9 minutos. O acento segue o tipo da loja em `app/src/store/kinds.ts`. A Lavanda fica reservada ao Snuffle, então as lojas usam só Manteiga, Pêssego e Pistache, quatro lojas cada. Uma loja conectada responde pelo caixa; uma loja consultada responde por mensagem (WhatsApp).
+Todas as lojas são inventadas e ficam em volta da Blythe Road, W14. Os tempos a pé são a partir da Blythe Road; o lugar Trabalho (Kensington High St, W8) reaproveita a Olympia Cameras, a Abingdon Deli e a Church Street Books a 3, 4 e 9 minutos, além de sete das outras lojas abaixo. O acento segue o tipo da loja em `app/src/store/kinds.ts`. A Lavanda fica reservada ao Snuffle, então as lojas usam só Manteiga, Pêssego e Pistache; as 12 lojas do demo são quatro de cada. Uma loja conectada responde pelo caixa; uma loja consultada responde por mensagem (WhatsApp).
 
 | Loja | Tipo | Rua | A pé | Horário | Responde | Retirar em | Entrega | Acento |
 |---|---|---|---|---|---|---|---|---|
@@ -38,10 +38,47 @@ Todas as lojas são inventadas e ficam em volta da Blythe Road, W14. Os tempos a
 | Paper & Co | Papelaria | King Street | 13 min | 9h–19h | Consultada | 7 dias | £3,50, hoje | Pistache |
 | Halo Florist | Floricultura | Goldhawk Road | 13 min | 8h–17h | Consultada | No mesmo dia | £6, hoje | Pistache |
 | Bush Opticians | Ótica | Shepherd's Bush Green | 14 min | 9h–18h | Consultada | 14 dias | Não | Pistache |
-| Abingdon Deli | Delicatéssen e café | Abingdon Road | 18 min | 8h–20h | Consultada | No mesmo dia | £4, hoje | Pêssego |
+| Abingdon Deli | Delicatéssen | Abingdon Road | 18 min | 8h–20h | Consultada | No mesmo dia | £4, hoje | Pêssego |
 | Church Street Books | Livraria | Kensington Church Street | 20 min | 9h–19h | Conectada | 30 dias | Não | Manteiga |
 
 O raio de 15 minutos mostra as dez primeiras lojas; com 20 minutos entram a delicatéssen e a livraria.
+
+### Outras lojas
+
+O Nearby e a tela de categoria também listam mais 30 lojas inventadas, para que cada categoria tenha de três a cinco lugares a até 15 minutos; as 12 lojas acima carregam a jornada do demo, e as outras 30 nunca são consultadas nela. As peixarias ficam em Açougue, as lojas de plantas em Floricultura e a loja de jogos em Brinquedos; a Abingdon Deli passa para uma categoria Delicatéssen com o mesmo acento Pêssego. Cada uma tem horário, prazo de retirada, três itens com preço, avaliações e como se sai no Snuffle (`app/src/store/seed-more.ts`). O lugar Trabalho também lista sete delas. Cada uma tem uma foto de fachada ou de dentro, do Unsplash, embutida a 640 px, e oito têm uma segunda foto.
+
+| Categoria | Loja | Rua | A pé | Responde | Observação |
+|---|---|---|---|---|---|
+| Padaria (Manteiga) | Brook Green Bread, padaria artesanal | Brook Green | 5 min | Consultada |  |
+|  | Pastelaria Estrela, pastelaria portuguesa | Hammersmith Road | 6 min | Consultada |  |
+|  | Sugar & Spoon Cakes, confeitaria de bolos | Shepherd's Bush Road | 10 min | Consultada | 3 dias de antecedência; entrega |
+| Café (Pêssego) | The Blythe Café, café | Blythe Road | 3 min | Consultada |  |
+|  | Yellow Door Coffee, cafeteria | Hammersmith Road | 7 min | Consultada | Nova |
+|  | Grove Café, café | Brook Green | 9 min | Consultada |  |
+| Delicatéssen (Pêssego) | Alimentari Bellini, empório italiano | North End Road | 8 min | Conectada |  |
+|  | Hammersmith Cheese Room, queijaria | King Street | 12 min | Consultada | Entrega |
+|  | Askew Road Deli, delicatéssen | Askew Road | 15 min | Consultada |  |
+| Ferragens (Manteiga) | Heel & Key, chaveiro e sapateiro | Hammersmith Road | 6 min | Consultada |  |
+|  | Hammersmith Paint & DIY, tintas e faça-você-mesmo | King Street | 11 min | Consultada | Entrega |
+| Brinquedos e jogos (Pêssego) | Brook Green Games, loja de jogos | Shepherd's Bush Road | 9 min | Consultada |  |
+|  | Little Bear Toys, loja de brinquedos | Holland Road | 10 min | Consultada | Nova |
+| Açougue e peixaria (Pêssego) | Goldhawk Fish, peixaria | Goldhawk Road | 11 min | Consultada |  |
+|  | Larkin & Sons Butchers, açougue orgânico | Askew Road | 14 min | Consultada | Cortes sob encomenda |
+| Farmácia (Pistache) | Brook Green Pharmacy, farmácia independente | Brook Green | 4 min | Conectada |  |
+|  | Hammersmith Health Foods, loja de produtos naturais | King Street | 13 min | Consultada |  |
+| Câmeras (Pêssego) | Addison Cameras, loja de câmeras | Holland Road | 11 min | Consultada | Entrega |
+|  | Silver Halide Film Lab, laboratório de filme | Uxbridge Road | 15 min | Consultada | Nova, sem avaliações |
+| Papelaria (Pistache) | Quill & Ledger, papelaria | Hammersmith Road | 7 min | Conectada |  |
+|  | Pigment Art Supplies, material de arte | Shepherd's Bush Road | 10 min | Consultada | Nova |
+| Floricultura e plantas (Pistache) | Fern & Pot, loja de plantas | Brook Green | 6 min | Consultada | Nova, sem avaliações |
+|  | Wild Stem Flowers, floricultura | North End Road | 9 min | Consultada | Entrega |
+| Ótica (Pistache) | Clear View Opticians, ótica | Holland Road | 8 min | Consultada |  |
+|  | King Street Opticians, ótica | King Street | 12 min | Consultada |  |
+| Banca (Manteiga) | Brook Green News & Wine, mercadinho de esquina | Brook Green | 5 min | Consultada |  |
+|  | Goldhawk Road Kiosk, banca de jornal | Goldhawk Road | 13 min | Consultada |  |
+| Livros (Manteiga) | Riverside Books, livros novos | Hammersmith Road | 7 min | Conectada |  |
+|  | Second Chapter Books, sebo | Shepherd's Bush Road | 8 min | Consultada |  |
+|  | Panel Comics, quadrinhos | King Street | 13 min | Consultada | Nova |
 
 ### Itens e origens
 

@@ -1,5 +1,6 @@
 // Mock content from app flow v8 (docs/develop/ideation/app-flow-v8.html): Sam's eclipse glasses and
 // Jess's collect-after-work sourdough, around Blythe Road, W14. No real shop is represented.
+import { moreShops } from './seed-more';
 import type { Area, AreaId, ContentSet, Persona, PersonaContent, Place, Shop } from './types';
 
 // The 12 mock shops (docs/deliver/prototype.md, Mocked content). Walk times are from Blythe Road, W14; the
@@ -193,7 +194,7 @@ const shops: Record<string, Shop> = {
   abingdonDeli: {
     id: 'abingdonDeli',
     name: 'Abingdon Deli',
-    kind: 'cafe',
+    kind: 'deli',
     street: 'Abingdon Road',
     walkMinutes: 18,
     openUntil: '8pm',
@@ -230,8 +231,181 @@ const shops: Record<string, Shop> = {
   },
 };
 
+// What each shop sells, how it has done on Snuffle and what buyers say (change shop-ratings-and-range). Mock numbers,
+// plausible for each kind of shop: a busy bakery answers fast and often, an optician slowly. Blythe Road News has no
+// ratings yet and Halo Florist has three, so the page shows both of its early states.
+type Profile = Pick<Shop, 'categories' | 'priceRange' | 'ratings' | 'reliability'>;
+
+const profiles: Record<string, Profile> = {
+  corner: {
+    categories: ['Birthday cards', 'Batteries', 'Candles', 'Milk and bread', 'Stamps'],
+    priceRange: { from: 1, to: 12 },
+    reliability: { answered: 6, asked: 8, hadItRight: 4, hadItTotal: 4, replyMinutes: 9, connected: false },
+    ratings: { up: 0, down: 0, tags: {}, notes: [] },
+  },
+  rossis: {
+    categories: ['Sourdough', 'Rye', 'Pastries', 'Focaccia', 'Celebration cakes'],
+    priceRange: { from: 2, to: 35 },
+    reliability: { answered: 46, asked: 51, hadItRight: 24, hadItTotal: 25, replyMinutes: 6, connected: false },
+    ratings: {
+      up: 35,
+      down: 3,
+      tags: { Friendly: 21, 'Had it as promised': 18, 'Set aside on time': 12, 'Not ready when I came': 3 },
+      notes: [
+        { text: 'Loaf was waiting with my name on it. Still warm at 6.', up: true, month: 'Oct 2026', how: 'Collected' },
+        { text: 'Cake was exactly what I asked for, two days later as promised.', up: true, month: 'Oct 2026', how: 'Collected' },
+        { text: 'Had to wait ten minutes, they were still boxing it.', up: false, month: 'Sep 2026', how: 'Collected' },
+        { text: 'They kept the last rye back for me.', up: true, month: 'Aug 2026', how: 'Collected' },
+      ],
+    },
+  },
+  brookHardware: {
+    categories: ['Screws and fixings', 'Picture hooks', 'Keys cut', 'Paint', 'Fans and heaters'],
+    priceRange: { from: 1, to: 60 },
+    reliability: { answered: 30, asked: 38, hadItRight: 17, hadItTotal: 19, replyMinutes: 14, connected: false },
+    ratings: {
+      up: 19,
+      down: 4,
+      tags: { 'Had it as promised': 11, 'Good value': 9, Friendly: 6, 'Not ready when I came': 3, 'Hard to find': 1 },
+      notes: [
+        { text: 'Found the exact hooks and showed me how to use them.', up: true, month: 'Oct 2026', how: 'Collected' },
+        { text: 'Fan came the next morning, a day later than they said.', up: false, month: 'Aug 2026', how: 'Delivered' },
+        { text: 'Cheaper than the big shop and two minutes from home.', up: true, month: 'Jul 2026', how: 'Collected' },
+      ],
+    },
+  },
+  brookToys: {
+    categories: ['Wooden toys', 'Party bags', 'Science kits', 'Puzzles', 'Craft sets'],
+    priceRange: { from: 3, to: 40 },
+    reliability: { answered: 21, asked: 26, hadItRight: 12, hadItTotal: 13, replyMinutes: 11, connected: false },
+    ratings: {
+      up: 11,
+      down: 1,
+      tags: { Friendly: 7, 'Had it as promised': 5, 'Good value': 3 },
+      notes: [
+        { text: 'Wrapped it for the party without me asking.', up: true, month: 'Oct 2026', how: 'Collected' },
+        { text: 'Party bags sorted in an afternoon.', up: true, month: 'Sep 2026', how: 'Collected' },
+      ],
+    },
+  },
+  goldhawkButchers: {
+    categories: ['Beef', 'Sausages', 'Free-range chicken', 'Cuts to order', 'Barbecue packs'],
+    priceRange: { from: 5, to: 45 },
+    reliability: { answered: 33, asked: 36, hadItRight: 20, hadItTotal: 21, replyMinutes: 8, connected: false },
+    ratings: {
+      up: 27,
+      down: 2,
+      tags: { 'Had it as promised': 16, Friendly: 12, 'Good value': 8, 'Not ready when I came': 2 },
+      notes: [
+        { text: 'Rib cut to the size I asked, ready at 9.', up: true, month: 'Oct 2026', how: 'Collected' },
+        { text: 'Best sausages on this side of Hammersmith.', up: true, month: 'Sep 2026', how: 'Collected' },
+      ],
+    },
+  },
+  broadway: {
+    categories: ['Sun care', 'Hay fever', 'First aid', 'Eclipse glasses', 'Baby care'],
+    priceRange: { from: 2, to: 25 },
+    reliability: { answered: 120, asked: 120, hadItRight: 58, hadItTotal: 61, connected: true },
+    ratings: {
+      up: 41,
+      down: 5,
+      tags: { 'Had it as promised': 24, 'Set aside on time': 19, Friendly: 9, 'Hard to find': 3, "Wasn't as described": 2 },
+      notes: [
+        { text: 'The till said one left and it was there.', up: true, month: 'Oct 2026', how: 'Collected' },
+        { text: 'In and out in two minutes, code scanned at the counter.', up: true, month: 'Oct 2026', how: 'Collected' },
+        { text: 'Said in stock, but it was the wrong strength.', up: false, month: 'Sep 2026', how: 'Collected' },
+      ],
+    },
+  },
+  olympia: {
+    categories: ['Film', 'Solar filters', 'Camera repairs', 'Film processing', 'Lenses'],
+    priceRange: { from: 6, to: 120 },
+    reliability: { answered: 9, asked: 11, hadItRight: 5, hadItTotal: 5, replyMinutes: 12, connected: false },
+    ratings: {
+      up: 4,
+      down: 0,
+      tags: { 'Had it as promised': 3, Friendly: 2 },
+      notes: [{ text: 'Knew more about the eclipse than I did.', up: true, month: 'Oct 2026', how: 'Collected' }],
+    },
+  },
+  paperCo: {
+    categories: ['Cards', 'Frames', 'Notebooks', 'Art supplies', 'Eclipse glasses'],
+    priceRange: { from: 2, to: 35 },
+    reliability: { answered: 14, asked: 16, hadItRight: 8, hadItTotal: 8, replyMinutes: 6, connected: false },
+    ratings: {
+      up: 6,
+      down: 1,
+      tags: { 'Had it as promised': 4, 'Knew their stuff': 3, Friendly: 2 },
+      notes: [
+        { text: 'Frame was set aside and gift-wrapped.', up: true, month: 'Oct 2026', how: 'Collected' },
+        { text: 'Delivered the card the same afternoon.', up: true, month: 'Oct 2026', how: 'Delivered' },
+        { text: 'Fine, but dearer than I expected.', up: false, month: 'Sep 2026', how: 'Collected' },
+      ],
+    },
+  },
+  halo: {
+    categories: ['Bouquets', 'Single stems', 'Plants', 'Wedding flowers', 'Wreaths'],
+    priceRange: { from: 4, to: 60 },
+    reliability: { answered: 10, asked: 12, hadItRight: 6, hadItTotal: 7, replyMinutes: 9, connected: false },
+    ratings: {
+      up: 2,
+      down: 1,
+      tags: { Friendly: 2, 'Had it as promised': 1, 'Not ready when I came': 1 },
+      notes: [
+        { text: 'Bouquet was ready and lovely.', up: true, month: 'Oct 2026', how: 'Collected' },
+        { text: 'Delivery came an hour after the time they gave.', up: false, month: 'Oct 2026', how: 'Delivered' },
+      ],
+    },
+  },
+  bushOpticians: {
+    categories: ['Sunglasses', 'Repairs', 'Lens care', 'Clip-ons', 'Cases'],
+    priceRange: { from: 3, to: 90 },
+    reliability: { answered: 18, asked: 22, hadItRight: 10, hadItTotal: 11, replyMinutes: 20, connected: false },
+    ratings: {
+      up: 9,
+      down: 2,
+      tags: { Friendly: 6, 'Had it as promised': 5, 'Not ready when I came': 2 },
+      notes: [
+        { text: 'Fixed my glasses while I waited.', up: true, month: 'Sep 2026', how: 'Collected' },
+        { text: 'Took most of the day to answer.', up: false, month: 'Aug 2026', how: 'Collected' },
+      ],
+    },
+  },
+  abingdonDeli: {
+    categories: ['Olive oil', 'Coffee', 'Cheese', 'Veg boxes', 'Fresh pasta'],
+    priceRange: { from: 3, to: 30 },
+    reliability: { answered: 40, asked: 44, hadItRight: 31, hadItTotal: 33, replyMinutes: 7, connected: false },
+    ratings: {
+      up: 52,
+      down: 6,
+      tags: { 'Good value': 22, Friendly: 30, 'Had it as promised': 26, 'Not ready when I came': 2 },
+      notes: [
+        { text: 'Veg box on the doorstep before 6, as they said.', up: true, month: 'Oct 2026', how: 'Delivered' },
+        { text: 'They ground the beans for my machine.', up: true, month: 'Oct 2026', how: 'Collected' },
+        { text: 'Lovely oil, but twice the supermarket price.', up: false, month: 'Sep 2026', how: 'Collected' },
+      ],
+    },
+  },
+  churchBooks: {
+    categories: ['Maps and atlases', "Children's books", 'Fiction', 'Local history', 'Book tokens'],
+    priceRange: { from: 5, to: 30 },
+    reliability: { answered: 34, asked: 34, hadItRight: 15, hadItTotal: 15, connected: true },
+    ratings: {
+      up: 5,
+      down: 0,
+      tags: { 'Had it as promised': 4, 'Set aside on time': 3, Friendly: 2 },
+      notes: [{ text: 'The atlas was behind the counter with my name on it.', up: true, month: 'Oct 2026', how: 'Collected' }],
+    },
+  },
+};
+
+for (const [id, profile] of Object.entries(profiles)) Object.assign(shops[id], profile);
+
 /** All 12 shops, nearest first. The 15-minute radius shows the first ten; 20 minutes adds the deli and the bookshop. */
 const allTwelve = Object.values(shops);
+
+/** What Nearby and the Category screens list around Blythe Road: the 12 demo shops and the others (seed-more.ts). */
+const homeNearby = [...allTwelve, ...moreShops];
 
 const sam: PersonaContent = {
   id: 'sam',
@@ -242,6 +416,7 @@ const sam: PersonaContent = {
   suggestions: ['Birthday candles', 'Flowers for tonight', 'Picture hooks'],
   card: 'Debit card •••• 4021',
   shops: allTwelve,
+  nearby: homeNearby,
   active: {
     id: 'eclipse',
     title: 'Eclipse glasses',
@@ -318,6 +493,7 @@ const jess: PersonaContent = {
   suggestions: ["Sourdough from Rossi's every Friday", 'Flowers for tonight', 'A desk fan for work'],
   card: 'Debit card •••• 7730',
   shops: allTwelve,
+  nearby: homeNearby,
   active: {
     id: 'sourdough',
     title: 'Sourdough',
@@ -375,12 +551,13 @@ function withSet(base: PersonaContent, set: ContentSet): PersonaContent {
     case 'default':
       return base;
     case 'empty':
-      return { ...base, shops: base.shops.slice(0, 2), others: [] };
+      return { ...base, shops: base.shops.slice(0, 2), nearby: base.shops.slice(0, 2), others: [] };
     case 'longNames': {
       const rename = (shop: Shop): Shop => ({ ...shop, name: longNames[shop.id] ?? shop.name });
       return {
         ...base,
         shops: base.shops.map(rename),
+        nearby: base.nearby.map(rename),
         active: {
           ...base.active,
           title: `${base.active.title} for watching the partial solar eclipse from the park`,
@@ -394,6 +571,7 @@ function withSet(base: PersonaContent, set: ContentSet): PersonaContent {
       return {
         ...base,
         shops: [...base.shops, ...added],
+        nearby: [...base.nearby, ...added.filter((s) => !base.nearby.includes(s))],
         active: {
           ...base.active,
           offers: [
@@ -419,11 +597,20 @@ export function contentFor(persona: Persona, set: ContentSet): PersonaContent {
   return content;
 }
 
-// The second seed area, around Kensington High Street (Work): three of the 12 shops, walk times from there.
+// The second seed area, around Kensington High Street (Work): three of the 12 shops and some of the others, walk
+// times from there.
+const more = new Map(moreShops.map((s) => [s.id, s]));
 const workShops: Shop[] = [
   { ...shops.olympia, walkMinutes: 3, promoted: true, isNew: false },
   { ...shops.abingdonDeli, walkMinutes: 4 },
+  { ...more.get('addisonCameras')!, walkMinutes: 6 },
+  { ...more.get('clearView')!, walkMinutes: 7 },
   { ...shops.churchBooks, walkMinutes: 9 },
+  { ...more.get('alimentari')!, walkMinutes: 9 },
+  { ...more.get('littleBear')!, walkMinutes: 10 },
+  { ...more.get('wildStem')!, walkMinutes: 11 },
+  { ...more.get('pastelaria')!, walkMinutes: 12 },
+  { ...more.get('quillLedger')!, walkMinutes: 14 },
 ];
 
 export const areas: Record<AreaId, Area> = {
@@ -451,7 +638,13 @@ export const addressBook: { address: string; area: AreaId }[] = [
   { address: 'Abingdon Road, W8', area: 'kensington' },
 ];
 
-const allShops = new Map<string, Shop>(allTwelve.map((s) => [s.id, s]));
+const everyShop = [...allTwelve, ...moreShops];
+const allShops = new Map<string, Shop>(everyShop.map((s) => [s.id, s]));
+
+/** A shop's place in the full list, stable across content sets (the shop page's made-up phone number uses it). */
+export function shopNumber(id: string): number {
+  return Math.max(0, everyShop.findIndex((s) => s.id === id));
+}
 
 export function shopById(content: PersonaContent, id: string): Shop | undefined {
   return content.shops.find((s) => s.id === id) ?? allShops.get(id);

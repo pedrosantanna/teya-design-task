@@ -6,13 +6,14 @@
 // Every scroll-driven value runs in a Reanimated scroll handler on the UI thread.
 import { Image } from 'expo-image';
 import { memo, useState, type ReactNode } from 'react';
-import type { LayoutChangeEvent, NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
+import type { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 import { Platform, ScrollView, View } from 'react-native';
 import Animated, { Extrapolation, interpolate, useAnimatedStyle, useReducedMotion } from 'react-native-reanimated';
 import { useSafeAreaFrame } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { FloatingSurface } from '../../internal/FloatingSurface';
+import { Ground } from '../../internal/ground';
 import { IMAGE_OVER, photoSource, type PhotoSource } from '../../internal/media';
 import { ShopPlaceholder } from '../../internal/ShopPlaceholder';
 import { cornerCurve, screenMargin, type ShopAccentName } from '../../theme';
@@ -52,9 +53,9 @@ export type ShopPageLayoutProps = {
   actions?: ReactNode;
   /** Badges and status tags (Promoted, New, Delivers): one row that scrolls sideways, under the name. */
   tags?: ReactNode;
-  /** The shop's accent (colour.md, Shop accents): a solid wash behind the top of the card (name, status, tags and
-   *  actions) that ends at a straight edge, edge to edge once the card fills the screen, and the tonal tile under
-   *  each photo. */
+  /** The shop's accent (colour.md, Shop accents): its tile step is the whole card's ground, under the name, the
+   *  status, the actions and every section, edge to edge once the card fills the screen, and the bar's scroll edge
+   *  takes it too; it is also the tonal tile under each photo. Without one the card is the Background. */
   accent?: ShopAccentName;
   /** The rest of the card: past answers, how the shop works. */
   children: ReactNode;
@@ -113,16 +114,6 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
   });
   // The photos stay put while the card slides over them (they live in the scroll content so they can be swiped).
   const photosStyle = useAnimatedStyle(() => ({ transform: [{ translateY: Math.max(0, scrollY.get()) }] }));
-
-  // The accent covers the bar-height above the card, its top padding and the top block (name, status, tags,
-  // actions and the block's bottom padding), measured once on layout (never while scrolling), and ends there at a
-  // straight edge; the rest of the card is the Background.
-  const [headerH, setHeaderH] = useState(0);
-  const onHeader = (e: LayoutChangeEvent) => setHeaderH(e.nativeEvent.layout.height);
-  const washH = headerH > 0 ? navH + theme.space[6] + headerH : 0;
-  // The halves slide down by up to a bar-height at rest; the wash moves back up by the same amount, so its edge
-  // stays at the end of the top block while the part above the card is clipped.
-  const washStyle = useAnimatedStyle(() => ({ transform: [{ translateY: -surface(scrollY.get()).y }] }));
 
   const shown = photos.slice(0, MAX_PHOTOS);
   const peek = theme.size.peek;
@@ -188,14 +179,10 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
 
         {/* Tall enough for the title to pass under the bar and for the bar to hide, however short the content. */}
         <View style={styles.card(frame.height - restTop + revealAt + navH)}>
-          <Animated.View pointerEvents="none" style={[styles.half(navH, frame.height, frame.width / 2 + margin + SEAM, 'left'), leftStyle]}>
-            {accent && washH > 0 ? <Animated.View style={[styles.wash(accent, washH), washStyle]} /> : null}
-          </Animated.View>
-          <Animated.View pointerEvents="none" style={[styles.half(navH, frame.height, frame.width / 2 + margin + SEAM, 'right'), rightStyle]}>
-            {accent && washH > 0 ? <Animated.View style={[styles.wash(accent, washH), washStyle]} /> : null}
-          </Animated.View>
+          <Animated.View pointerEvents="none" style={[styles.half(navH, frame.height, frame.width / 2 + margin + SEAM, 'left', accent), leftStyle]} />
+          <Animated.View pointerEvents="none" style={[styles.half(navH, frame.height, frame.width / 2 + margin + SEAM, 'right', accent), rightStyle]} />
           <Animated.View style={[styles.inner, innerStyle]}>
-            <View style={styles.top} onLayout={onHeader}>
+            <View style={styles.top}>
               <View style={styles.header}>
                 <Text variant="displayTitle" accessibilityRole="header" numberOfLines={2}>
                   {name}
@@ -207,7 +194,12 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
                 ))}
               </View>
               {tags ? <Rail label={`${name} tags`}>{tags}</Rail> : null}
-              {actions ? <Rail label={`${name} actions`}>{actions}</Rail> : null}
+              {/* On the accent tile, tonal actions take the white overlay (state.tonalOnTile), not Muted. */}
+              {actions ? (
+                <Ground value={accent ? 'tile' : 'background'}>
+                  <Rail label={`${name} actions`}>{actions}</Rail>
+                </Ground>
+              ) : null}
             </View>
             <View style={styles.body}>{children}</View>
           </Animated.View>
@@ -218,8 +210,7 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
         title={name}
         mode="reveal"
         revealAt={revealAt}
-        fill="background"
-        fillBefore={accent && washH > 0 ? { fill: { accent }, until: restTop + theme.space[6] + headerH - navH } : undefined}
+        fill={accent ? { accent } : 'background'}
         leading="back"
         backLabel={backLabel}
         onLeading={onBack}
@@ -268,7 +259,7 @@ const styles = StyleSheet.create((theme) => ({
   // Each half of the card's surface reaches a bar-height above the card and, on native, well below it to cover a
   // bounce at the bottom; it is moved, never resized. On the web an absolute child counts towards the scroll
   // height, so there it ends with the card (the web has no bounce to cover).
-  half: (navH: number, height: number, width: number, side: 'left' | 'right') => ({
+  half: (navH: number, height: number, width: number, side: 'left' | 'right', accent?: ShopAccentName) => ({
     ...cornerCurve,
     position: 'absolute',
     top: -navH,
@@ -276,10 +267,10 @@ const styles = StyleSheet.create((theme) => ({
     [side]: 0,
     width,
     overflow: 'hidden',
-    // The card is the screen's Background; its rows sit on Card under the delicate shadow (craft-pass-2).
-    backgroundColor: theme.color.background,
+    // The card is the shop's accent tile in full (or the Background without one); its rows sit on Card under the
+    // delicate shadow (craft-pass-2). Foreground and Muted foreground keep 4.6:1 or more on every tile, light and dark.
+    backgroundColor: accent ? theme.color.shop.accent[accent].tile : theme.color.background,
   }),
-  wash: (accent: ShopAccentName, height: number) => ({ height, backgroundColor: theme.color.shop.accent[accent].tile }),
   pager: (photoH: number, margin: number) => ({ position: 'absolute', top: photoH - theme.space[2] - theme.size.badge - theme.space[1], right: margin + theme.space[2] }),
   pagerCapsule: { borderRadius: theme.radius.full, paddingHorizontal: theme.space[2], paddingVertical: theme.space[1] / 2 },
   // The sides are animated with the card's edges (innerStyle); padding inside the card is 20 (space.5) throughout.
@@ -287,9 +278,9 @@ const styles = StyleSheet.create((theme) => ({
     paddingTop: theme.space[6],
     paddingBottom: theme.space[8],
   },
-  // The top block ends 24 below the actions, where the wash ends; the body starts 24 below that edge.
-  top: { gap: theme.space[3], paddingBottom: theme.space[6] },
-  body: { paddingTop: theme.space[6], gap: theme.gap.section },
+  // The first section heading sits a section's distance below the actions (spacing.md).
+  top: { gap: theme.space[3] },
+  body: { paddingTop: theme.gap.section, gap: theme.gap.section },
   rail: { marginHorizontal: -theme.space[5], flexGrow: 0 },
   railContent: { paddingHorizontal: theme.space[5], gap: theme.space[2], alignItems: 'center' },
   header: { gap: theme.space[1] },

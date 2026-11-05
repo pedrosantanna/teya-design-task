@@ -25,9 +25,10 @@ export type IllustrationPlay = 'entry-then-idle' | 'idle' | 'still';
 
 export type IllustrationProps = {
   name: IllustrationName;
-  /** small 64, medium 88, large 120, hero 220 (pt; hero only on Getting started and the location ask). */
+  /** small 64, medium 88, large 120, hero 220 (the location ask), welcome 240 (Getting started). */
   size?: IllustrationSize;
-  /** The surface it sits on; shading and shadow are baked for it. The light or dark file follows the theme. */
+  /** The surface it sits on; shading and shadow are baked for it. The light or dark file follows the theme.
+   *  welcome: Getting started, where each object is rendered for its own page's Indigo ground. */
   ground?: IllustrationGround;
   /** entry-then-idle: parts drop in once, then the idle loop (or the still when there is none). */
   play?: IllustrationPlay;
@@ -44,8 +45,8 @@ export function useIllustrationScheme(): IllustrationScheme {
 /** The asset for a name, ground and size; falls back to another size, then the other ground, of the same scheme. */
 export function illustrationAsset(name: IllustrationName, ground: IllustrationGround, scheme: IllustrationScheme, size: IllustrationSize): IllustrationAsset | undefined {
   const sizes = Object.keys(ILLUSTRATION_SIZES) as IllustrationSize[];
-  const other: IllustrationGround = ground === 'card' ? 'background' : 'card';
-  for (const g of [ground, other]) {
+  const others: IllustrationGround[] = (['background', 'card'] as const).filter((g) => g !== ground);
+  for (const g of [ground, ...others]) {
     const bySize = ILLUSTRATIONS[name]?.[`${g}-${scheme}`];
     if (!bySize) continue;
     const exact = bySize[size];
@@ -56,6 +57,11 @@ export function illustrationAsset(name: IllustrationName, ground: IllustrationGr
     if (any) return bySize[any];
   }
   return undefined;
+}
+
+/** Whether a shop kind has category art. */
+export function isCategoryId(id: string): id is CategoryId {
+  return id in CATEGORY_ILLUSTRATIONS;
 }
 
 /** A category card's art (opaque, on the category's colour) for the active scheme. */

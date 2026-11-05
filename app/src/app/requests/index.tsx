@@ -2,7 +2,7 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import {
@@ -57,7 +57,8 @@ type Row = {
 // patterns): the native zoom with its interactive dismiss on iOS, a view transition on the web, a container
 // transform on Android. A request's chat pushes from the side.
 export default function Requests() {
-  const { theme, rt } = useUnistyles();
+  const { theme } = useUnistyles();
+  const frame = useSafeAreaFrame();
   const insets = useSafeAreaInsets();
   const content = useContent();
   const scroll = useNavBarScroll();
@@ -70,7 +71,7 @@ export default function Requests() {
   const [filter, setFilter] = useState<Filter>('All');
   const [closed, setClosed] = useState<string[]>([]);
   const [undo, setUndo] = useState<string | null>(null);
-  const margin = screenMargin(theme, rt.screen.width);
+  const margin = screenMargin(theme, frame.width);
 
   const rows: Row[] = [];
   if (active && (request !== 'none' || stage !== 'none')) {

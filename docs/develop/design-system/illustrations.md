@@ -39,6 +39,14 @@ Trade-offs:
 
 Two references shaped these rules. Gooch, Gooch, Shirley and Cohen ("A non-photorealistic lighting model for automatic technical illustration", SIGGRAPH 1998) shade by shifting hue instead of darkening toward black, and outline silhouettes and creases; here the background gives the hue. Saito and Takahashi ("Comprehensible rendering of 3-D shapes", SIGGRAPH 1990) find outlines from discontinuities in depth and normal images of the scene; the outline pass does the same, with an object id added. Colouring shadows from the scene's palette instead of greying them is also common in flat illustration and in games such as Monument Valley.
 
+## Getting started
+
+Each Getting started page shows its object at 240 pt on that page's Indigo step: the crossroads on page 1, the shop on page 2 and the delivery box on page 3. The objects are rendered for their own step, so shade and shadow mix toward Indigo 900 (near-black on the dark Indigo 900 page), and on a transparent ground: the page colour blends while the shopper drags, and an opaque square would show its edge mid-swipe. On the dark page 2, which is Indigo 800, the shop's Indigo 800 parts (roof, cornice, sign lettering and the awning's roller box) are recoloured to Peach 500. Indigo 600 still read as the ground. Stills ship at @2x and @3x, the entry clips at @2x, and the shop also has its idle loop. The crossroads entry only fit the 300 KB budget once the encoder kept half the frames while parts move and a quarter once the scene settles.
+
+## Category cards
+
+Each category card's still is opaque, rendered on that kind's tile colour, which the pipeline reads from the colour tokens (`shop.accent.<hue>.tile`), so a token change can't leave a still on an old colour. The encoder fails when a still's corner pixel differs from its tile by more than 2 per channel. Every object is framed the same way: without its shadow it is 72% of the card's 120 pt width, or as tall as the room between 12 pt from the top and a baseline at 110 pt allows, standing on that baseline and centred across; its shadow stays inside the square.
+
 ## Viewer
 
 Objects are listed on the left and the scene settings are on the right: replay entry, outlines, shadows, grid, auto-rotate, background, and light angle and height. Each panel has a button in its header that hides it, and [ and ] do the same; with the objects panel hidden, the page title floats at the top left and carries the button that brings it back. The docs sidebar collapses the same way, from the button at the left of the top bar or with ⌘\ (Ctrl+\). The viewer and the site remember these choices.
@@ -57,3 +65,15 @@ The viewport corners hold the controls. At the bottom left are the tools: Orbit 
 | Delivery scooter | Wheels, body, leg shield, seat, handlebar, a crate on the rack, a rider with a round helmet and no face, two wind streaks | Wheels spin, the scooter bobs, the streaks pass |
 | Delivery box | A large box with packing tape and a shipping label, and a smaller box on top at an angle | Still |
 | People | Five figures drawn like the scooter's rider, with no face: a head, a capsule body or a long coat, capsule arms and legs, and a bob, short hair or a hat. One carries a shopping bag, one walks a block-shaped terrier on a lead, one stands. The same figures, scaled down, walk and sit in the two street scenes | Four walk on the spot (legs and arms swing, the body bobs), the dog trots, the one standing sways slightly |
+| Bread basket | A low round basket with a rim, a round bloomer with three slashes and a baguette lying across it. The Bakery category card | Still |
+| Toy train | A wooden engine with a boiler, a cab, a red roof and a chimney, pulling an open wagon of toy blocks on wooden wheels. The Toys category card | Still |
+| Butcher's block | A wooden block with a leg of lamb on it, the bone out of the narrow end, and a cleaver stuck upright in the wood. The Butcher category card | Still |
+| Fish on ice | A steel tray with a bed of ice and loose cubes, a whole fish on its side and half a lemon. The Fishmonger category card | Still |
+| Medicine and plasters | An amber bottle with a white cap and label, a box of plasters with the green pharmacy cross on the lid and one plaster in front. The Chemist category card | Still |
+| Film camera | A compact camera: dark body, silver top plate, lens barrel, viewfinder, flash, shutter button and rewind knob. The Cameras category card | Still |
+| Pencils and notebook | Three hexagonal pencils in a pot and a closed notebook with an elastic. The Stationery category card | Still |
+| Stack of books | Four books, each turned a little, with white page blocks; the top one a paperback in the orange and white bands of a classic Penguin. The Books category card | Still |
+| Paper and a pint | A folded newspaper with a headline bar, a picture and lines of text, and a glass pint of milk with a green foil top, as left on a London doorstep. The Newsagent category card | Still |
+| Cheese and olives | A cheese wedge with a rind on its curved back and a jar of olives with a lid and a label. The Deli category card | Still |
+| Potted plant | A snake plant in a terracotta pot: seven tall pointed leaves over the soil. The Plants category card | The leaves sway slightly |
+| Board and dice | A draughts board with four pieces and two dice in front. The Games category card | Still |

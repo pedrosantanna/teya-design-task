@@ -1,5 +1,5 @@
 // Nearby, the home screen (openspec/specs/nearby, app flow v7 "Home"): the shopper's area, shops as photo
-// tiles, the categories the area has, and the ask bar with the round Requests button (craft-pass-2: the bar never
+// tiles under the categories the area has, and the ask bar with the round Requests button (craft-pass-2: the bar never
 // shrinks, and its suggestions moved to New Request).
 import CreditCardIcon from '@hugeicons/core-free-icons/CreditCardIcon';
 import Location01Icon from '@hugeicons/core-free-icons/Location01Icon';
@@ -45,7 +45,6 @@ import { LocationSheet } from '@/screens/LocationSheet';
 import {
   replayFirstRun,
   shopAccent,
-  shopHoursLabel,
   sim,
   useApp,
   useAppActions,
@@ -64,8 +63,10 @@ function shortStreet(street: string): string {
   return street.replace(/\bRoad$/, 'Rd').replace(/\bStreet$/, 'St');
 }
 
+/** One meta pattern on both rails, short enough for the medium tile: "Till 6pm · 2 min walk", "Opens 9am · 4 min walk". */
 function tileMeta(hours: ShopHours, shop: Shop): string {
-  return `${shopHoursLabel(hours, shop)} · ${shop.walkMinutes} min walk`;
+  const when = hours === 'open' ? `Till ${shop.openUntil}` : hours === 'closed' ? `Opens ${shop.opensAt}` : 'Closes soon';
+  return `${when} · ${shop.walkMinutes}\u00A0min walk`;
 }
 
 function tileBadges(shop: Shop): BadgeName[] {
@@ -179,12 +180,29 @@ function Nearby() {
           </View>
         ) : (
           <View style={styles.sections}>
+            {categories.length > 0 ? (
+              <View style={styles.section}>
+                <View style={styles.heading(margin)}>
+                  <Text variant="sectionTitle" accessibilityRole="header">
+                    Browse by category
+                  </Text>
+                </View>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.rail(margin)} accessibilityLabel="Categories">
+                  {categories.map((c) => (
+                    // Each card zooms into its Category screen; the still is the closest one the pipeline has.
+                    <ZoomSource key={c.kind} id={`category:${c.kind}`} href={{ pathname: '/categories/[kind]', params: { kind: c.kind } }}>
+                      {(open) => <CategoryCard id={c.kind} label={c.label} accent={c.accent} art={c.art} onPress={open} />}
+                    </ZoomSource>
+                  ))}
+                </ScrollView>
+              </View>
+            ) : null}
+
             <View style={styles.section}>
               <View style={styles.heading(margin)}>
                 <Text variant="sectionTitle" accessibilityRole="header">
                   Open near you
                 </Text>
-                <Button label="See all" role="plain" size="compact" />
               </View>
               <Carousel width={tileWidth(theme, contentWidth, 'large')} margin={margin}>
                 {showSkeletons
@@ -242,23 +260,6 @@ function Nearby() {
               </Carousel>
             </View>
 
-            {categories.length > 0 ? (
-              <View style={styles.section}>
-                <View style={styles.heading(margin)}>
-                  <Text variant="sectionTitle" accessibilityRole="header">
-                    Browse by category
-                  </Text>
-                </View>
-                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.rail(margin)} accessibilityLabel="Categories">
-                  {categories.map((c) => (
-                    // Each card zooms into its Category screen; the still is the closest one the pipeline has.
-                    <ZoomSource key={c.kind} id={`category:${c.kind}`} href={{ pathname: '/categories/[kind]', params: { kind: c.kind } }}>
-                      {(open) => <CategoryCard id={c.kind} label={c.label} accent={c.accent} art={c.art} onPress={open} />}
-                    </ZoomSource>
-                  ))}
-                </ScrollView>
-              </View>
-            ) : null}
           </View>
         )}
       </Animated.ScrollView>
@@ -279,42 +280,47 @@ function Nearby() {
 
       <LocationSheet open={locationOpen} onClose={() => setLocationOpen(false)} origin="area" />
 
-      <Sheet open={accountOpen} onClose={() => setAccountOpen(false)} title="Account" detents={['medium', 'large']} opaque>
-        <View style={styles.account}>
-          <Avatar name={content.name} image={personaPhotos[persona]} size="large" />
-          <View style={styles.grow}>
-            <Text variant="title2">{content.name}</Text>
-            <Text variant="footnote" color="mutedForeground">
-              {area.name}
-            </Text>
+      <Sheet open={accountOpen} onClose={() => setAccountOpen(false)} title="Account" detents={['medium', 'large']}>
+        {/* The profile and each group are space.6 apart, so the first row doesn't crowd the profile. */}
+        <View style={styles.accountBody}>
+          <View style={styles.account}>
+            <Avatar name={content.name} image={personaPhotos[persona]} size="large" />
+            <View style={styles.grow}>
+              <Text variant="title2">{content.name}</Text>
+              <Text variant="footnote" color="mutedForeground">
+                {area.name}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.accountGroups}>
+            <ListRow
+              icon={Location01Icon}
+              title="Places"
+              value={places.map((p) => p.label).join(', ')}
+              chevron
+              onPress={() => {
+                setAccountOpen(false);
+                router.push('/places');
+              }}
+            />
+            <View>
+              <ListRow position="first" icon={CreditCardIcon} title="Payment" detail={content.card} chevron />
+              <ListRow position="middle" icon={Notification01Icon} title="Notifications" chevron />
+              <ListRow position="last" icon={Settings01Icon} title="Settings" chevron />
+            </View>
+            {REPLAY_IN_ACCOUNT ? (
+              <ListRow
+                icon={RepeatIcon}
+                title="Replay first run"
+                detail="Development builds only"
+                onPress={() => {
+                  setAccountOpen(false);
+                  replayFirstRun();
+                }}
+              />
+            ) : null}
           </View>
         </View>
-        <ListRow
-          icon={Location01Icon}
-          title="Places"
-          value={places.map((p) => p.label).join(', ')}
-          chevron
-          onPress={() => {
-            setAccountOpen(false);
-            router.push('/places');
-          }}
-        />
-        <View>
-          <ListRow position="first" icon={CreditCardIcon} title="Payment" detail={content.card} chevron />
-          <ListRow position="middle" icon={Notification01Icon} title="Notifications" chevron />
-          <ListRow position="last" icon={Settings01Icon} title="Settings" chevron />
-        </View>
-        {REPLAY_IN_ACCOUNT ? (
-          <ListRow
-            icon={RepeatIcon}
-            title="Replay first run"
-            detail="Development builds only"
-            onPress={() => {
-              setAccountOpen(false);
-              replayFirstRun();
-            }}
-          />
-        ) : null}
       </Sheet>
     </View>
   );
@@ -357,9 +363,9 @@ const styles = StyleSheet.create((theme) => ({
   screen: { flex: 1, backgroundColor: theme.color.background },
   content: (top: number, bottom: number) => ({
     paddingTop: top + theme.space[2],
-    // Room for the dock (its padding and the ask bar), the dock's fade that starts 24 above it, then the clearance,
-    // so the last row rests clear of the fade (visual critique 2).
-    paddingBottom: bottom + theme.space[3] + theme.size.field + theme.space[2] + theme.space[6] + theme.clearance.askBar,
+    // Room for the dock's bottom padding (space.2) and the ask bar, then clearance.askBar: the last row rests 48 above
+    // the ask bar, clear of where the dock's fade starts (36 above it), screen-review check 17.
+    paddingBottom: bottom + theme.space[2] + theme.size.field + theme.clearance.askBar,
     // Proximity (spacing.md): the large title is 24 below the area row and 16 above the first section heading.
     gap: theme.gap.title,
   }),
@@ -373,5 +379,7 @@ const styles = StyleSheet.create((theme) => ({
   chips: (margin: number) => ({ paddingHorizontal: margin, gap: theme.space[2], paddingBottom: theme.space[1] }),
   empty: (margin: number) => ({ paddingHorizontal: margin, gap: theme.gap.block, alignItems: 'flex-start' }),
   actions: { flexDirection: 'row', gap: theme.space[2] },
+  accountBody: { gap: theme.space[6] },
+  accountGroups: { gap: theme.space[6] },
   account: { flexDirection: 'row', alignItems: 'center', gap: theme.space[4] },
 }));

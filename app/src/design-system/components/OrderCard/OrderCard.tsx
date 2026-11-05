@@ -5,7 +5,8 @@ import Animated, { useAnimatedStyle, useSharedValue, withSequence, withSpring, w
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { haptic } from '../../internal/haptics';
-import { PressableCard, spoken } from '../../internal/PressableCard';
+import { PressableCard, spoken, type CardAction } from '../../internal/PressableCard';
+import { Button } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
 import { StatusLabel, type StatusTone } from '../Tag/Tag';
 import { Text } from '../Text/Text';
@@ -32,10 +33,12 @@ export type OrderCardProps = {
   note?: string;
   /** Opens the receipt. */
   onOpen?: (id: string) => void;
+  /** One tonal action under the card, also a custom accessibility action: Rate after Collected. */
+  action?: { label: string; onPress: () => void };
   animateIn?: boolean;
 };
 
-export const OrderCard = memo(function OrderCard({ id, status, tone = 'default', shop, items, total, steps, note, onOpen, animateIn }: OrderCardProps) {
+export const OrderCard = memo(function OrderCard({ id, status, tone = 'default', shop, items, total, steps, note, onOpen, action, animateIn }: OrderCardProps) {
   const { theme } = useUnistyles();
   const change = useSharedValue(1);
   const previous = useRef(status);
@@ -55,10 +58,13 @@ export const OrderCard = memo(function OrderCard({ id, status, tone = 'default',
   const current = shown.findIndex((s) => s.state === 'current');
   const stepText = current >= 0 ? `step ${current + 1} of ${shown.length}, ${shown[current].title}` : undefined;
 
+  const actions: CardAction[] = action ? [{ name: 'action', label: action.label, run: action.onPress }] : [];
+
   return (
     <PressableCard
       accessibilityLabel={spoken(status, shop, items, total, stepText, note)}
       onPress={onOpen ? () => onOpen(id) : undefined}
+      actions={actions}
       animateIn={animateIn}
     >
       <View style={styles.head}>
@@ -103,6 +109,11 @@ export const OrderCard = memo(function OrderCard({ id, status, tone = 'default',
         <Text variant="footnote" color="tint">
           {note}
         </Text>
+      ) : null}
+      {action ? (
+        <View importantForAccessibility="no-hide-descendants" accessibilityElementsHidden>
+          <Button label={action.label} role="tonal" size="compact" onPress={action.onPress} />
+        </View>
       ) : null}
     </PressableCard>
   );

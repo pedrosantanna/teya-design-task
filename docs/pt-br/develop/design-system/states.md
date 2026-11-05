@@ -4,15 +4,20 @@ Como um controle fica quando pressionado, desabilitado, selecionado, em foco ou 
 
 ```summary
 Takeaways:
-- Cinco estados de interação com tokens: pressionado (escala 0,97 e uma camada de estado de 10%, `spring.press`), desabilitado (conteúdo a 38% sobre um contêiner a 12%), selecionado (fundo Índigo 100 e um check), foco (um anel de 2 px na versão web) e carregando (um spinner no lugar do rótulo, mesma largura).
-- Três níveis de elevação: conteúdo plano, controles flutuantes em glass ou superfície tonal, e sheets modais sobre um scrim preto de 40%. Nada de sombra no modo escuro.
+- Cinco estados de interação com tokens: pressionado (escala 0,97 e uma camada de estado de 10%, `spring.press`), desabilitado (conteúdo a 38% sobre um contêiner a 12%), selecionado (um chip cartão com texto e borda Índigo; o indicador do controle segmentado), foco (um anel de 2 px na versão web) e carregando (um spinner no lugar do rótulo, mesma largura).
+- Três níveis de elevação: conteúdo plano, controles flutuantes em glass ou superfície tonal, e sheets modais sobre um scrim (texto a 20% no claro, preto a 48% no escuro). Nada de sombra no modo escuro.
 - Os skeletons copiam a forma das linhas e dos cartões que substituem e só aparecem depois de uns 300 ms.
 - Toda mensagem de erro diz o que aconteceu, onde está o dinheiro e o que o comprador pode fazer em seguida.
+- A página da loja tem quatro estados de avaliação: sem avaliações, poucas (menos de 5, sem porcentagem), muitas e loja respondeu. A precisão de estoque espera 10 respostas "has it".
 Call:
 - Depois que uma revisão de design encontrou faltando especificações de componentes, estados, equivalentes de plataforma e regras de conteúdo, pedi que o design system ficasse completo o bastante para construir o protótipo a partir dele.
 - Mantive estes estados provisórios (decisão 043); o protótipo vai mostrar quais telas vazias e de erro precisam de um desenho próprio.
+- Depois pedi avaliações na página da loja e escolhi mostrar a precisão de estoque só depois de 10 respostas "has it" (decisão 047).
+- Depois de uma crítica visual, pedi que o chip selecionado ficasse um nível acima dos não selecionados, o controle segmentado do iOS e um scrim atrás de toda sheet.
 AI:
 - Um agente revisou o design system contra as telas da v7 e não encontrou estados além do caminho feliz e dos finais de pagamento. Outro agente escreveu esta página a partir dos tokens existentes; eu defini o padrão de erro: o que aconteceu, o dinheiro e o próximo passo.
+- Um agente escreveu os estados de avaliação a partir das regras de contagem baixa da página de Conteúdo.
+- Um agente reescreveu o estado selecionado e o scrim das sheets a partir da crítica visual e os mediu no claro e no escuro.
 Trade-offs:
 - Uma camada de estado com porcentagem fixa é simples de construir nas duas plataformas e fica um pouco mais fraca sobre os fundos claros do que sobre o Índigo.
 - Esperar 300 ms antes de um skeleton faz uma resposta lenta mostrar nada por um instante; mostrar o skeleton na hora faria ele piscar a cada resposta rápida.
@@ -24,7 +29,7 @@ Trade-offs:
 | --- | --- | --- | --- |
 | Pressionado | Escala para 0,97 e uma camada de estado de uns 10% da cor do conteúdo sobre o fundo | `spring.press` na entrada, `spring.snappy` ao soltar | Começa no toque; um cartão é pressionado inteiro |
 | Desabilitado | Conteúdo a 38% de opacidade sobre o contêiner a 12% | Sem movimento | Usado pouco: um controle desabilitado diz o porquê ao lado, ou não aparece |
-| Selecionado | Fundo Índigo 100, rótulo Índigo 800 e um check à esquerda (escuro: Índigo 900 e 200) | Papel Selected chip, `spring.snappy` | Chips, segmentos e opções da folha de detalhes; o rótulo continua o mesmo |
+| Selecionado | Chips de filtro: fundo cartão, rótulo Índigo 800 em 600 e uma borda Índigo 800 de 1,5 pt (escuro: cartão, Índigo 300 e borda de 1 pt); os chips não selecionados ficam um nível abaixo. Segmentos: um indicador cartão sob a sombra delicada sobre um trilho secundário, rótulo na cor do texto em 600 (escuro: indicador Stone 360 sobre trilho cartão). Opções: o check e o título em semibold | `color.chipOn`, `size.edge.selected`, `color.segmented.*`, `spring.snappy` | Chips, segmentos e opções da folha de detalhes; o rótulo continua o mesmo. O papel Índigo tonal (`chipSelected`) continua no passo atual do cartão de compra, no botão segmentado do Android e nos polegares da sheet de avaliação |
 | Foco | Um anel visível de 2 px em Tint, 2 px para fora do controle, seguindo o canto dele | O raio do controle mais 2 | Versão web e uso por teclado (WCAG 2.4.7); nos celulares o sistema desenha o próprio foco |
 | Carregando | Um spinner substitui o rótulo; o controle mantém a largura e o fundo | `spring.fade` entre rótulo e spinner | Só esse controle para de receber toques; o Close e o resto da tela continuam ativos |
 
@@ -36,7 +41,7 @@ Os valores de desabilitado e pressionado são os valores de estado do Material 3
 | --- | --- | --- | --- |
 | Plano | Conteúdo: tiles, linhas, cartões, balões | Superfícies sólidas (Background, Card, Muted) | Nenhuma; as superfícies se separam pela luminosidade |
 | Flutuante | A barra de pedido, botões de fechar sobre o mapa ou uma foto, toasts | Glass no iOS 26, blur no iOS anterior, um surface container tonal no Android | A sombra do próprio glass do sistema no modo claro; nenhuma no modo escuro |
-| Modal | Sheets, o código de retirada em tela cheia, alertas | Sheet do sistema ou superfície com `radius.sheet` sobre um scrim preto de 40% | Nenhuma no modo escuro; o scrim faz o trabalho |
+| Modal | Sheets, o código de retirada em tela cheia, alertas | Sheet do sistema ou superfície com `radius.sheet` sobre um scrim: texto a 20% (claro) ou preto a 48% (escuro) nas sheets, `color.sheetScrim`; preto a 40% nos alertas | Nenhuma no modo escuro; o scrim faz o trabalho |
 
 Ordem de trás para a frente:
 
@@ -61,7 +66,19 @@ Um toast fica acima de um alerta para que o Undo continue alcançável; o scrim 
 | Requests, um filtro | Nada naquele filtro | Uma linha com o nome do filtro ("Nothing needs you right now."), com All ainda selecionável |
 | Conversa | Um pedido novo antes de o Snuffle responder | O balão do comprador, depois o indicador de digitação |
 | Página da loja | Nenhuma resposta anterior | A seção "Asked about recently" sai, em vez de aparecer vazia |
+| Página da loja, avaliações | Nenhuma avaliação ainda | "No ratings yet · Snuffle has asked them 4 times" em What buyers say; How they do on Snuffle continua aparecendo |
 | Compra | Nunca fica vazia | n/a |
+
+## Estados de avaliação
+
+| Estado | Quando | What buyers say | How they do on Snuffle |
+| --- | --- | --- | --- |
+| Sem avaliações | Ninguém que comprou avaliou ainda | "No ratings yet · Snuffle has asked them 4 times" | Taxa e tempo de resposta; "New on Snuffle" até 10 respostas "has it" |
+| Poucas | De 1 a 4 avaliações | "New on Snuffle · 3 buyers so far", as tags com as contagens e os cartões de avaliação; sem porcentagem | Como acima, ou com a precisão de estoque quando houver 10 respostas "has it" |
+| Muitas | 5 avaliações ou mais | "92% would go back · 38 buyers", as tags, três cartões de avaliação que espelham a divisão, "All 38 ratings ›" | Taxa de resposta, precisão de estoque, tempo de resposta |
+| Loja respondeu | Uma avaliação tem a resposta única da loja | A resposta abaixo do cartão, como "Reply from [loja]" | Sem mudança |
+
+Uma loja conectada mostra "Stock from the till" no lugar do tempo de resposta em todos os estados. Uma avaliação fica editável por 30 dias; um cartão editado mostra "Edited Oct 2026".
 
 ## Estados de carregamento
 

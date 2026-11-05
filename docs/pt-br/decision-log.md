@@ -376,5 +376,42 @@ O app segue os padrões do Liquid Glass do iOS 26 como os próprios apps da Appl
 **Por quê:** eu queria que o protótipo parecesse com os apps atuais da Apple em todas as plataformas, um mapa que eu pudesse estilizar de graça e que carregasse dentro do artifact, e uma marca que se leia como ela mesma, não como ícone de app. A pesquisa mostrou que apps que hospedam um assistente marcam quem está falando em vez de pintar a tela inteira.
 **Em aberto:** o gesto de arrastar para fechar as transições de zoom não foi verificado num aparelho; o mapa no artifact publicado não foi verificado.
 
+## 047 · As avaliações vêm de compras retiradas; os sinais do próprio Snuffle ficam ao lado
+**2026-11-03 · Decidido**
+
+Uma avaliação é um atributo da compra, e o modelo mantém os seus quatro objetos. Só uma compra marcada como Collected ou Delivered pode ser avaliada, uma vez, e quem comprou pode mudá-la por 30 dias. Ela guarda um polegar para cima ou para baixo para "Would you go back?", até três tags de duas listas fixas, uma nota opcional de 140 caracteres e o mês da compra. A página da loja mostra dois sinais identificados pela origem: "What buyers said" ("92% would go back · 38 buyers" e a contagem das tags) e "What Snuffle saw", calculado a partir das respostas e das compras (taxa de resposta, precisão de estoque, tempo de resposta típico). Ela também ganha "What they sell": chips de categoria que abrem o Ask, "Asked about recently" e uma linha de preço. A página segue cabeçalho e ações, What they sell, How they do on Snuffle, What buyers say. Os itens continuam sem página.
+
+Fiz três escolhas. Um polegar para cima ou para baixo para "Would you go back?" em vez de estrelas. A precisão de estoque ("Had it 24 of 25 times when they said yes") só aparece depois de 10 respostas "has it"; antes disso a loja é "New on Snuffle", com a taxa e o tempo de resposta. As lojas veem os próprios sinais e podem contestar um caso específico, o que fica nos estados do pedido do lado da loja, já que a loja não tem interface.
+
+**Por quê:** uma loja consultada não tem dados de caixa, então quem escolhe entre ela e uma loja conectada só tem a resposta para se guiar. O Snuffle vê cada resposta e cada compra, então pode relatar como a loja se saiu sem perguntar a ninguém. O Vinted separa as avaliações de membros das automáticas, e essa separação deixa o comprador distinguir opinião de registro. Estrelas tendem a uma distribuição em J e a uma média que a esconde, e uma pergunta de sim ou não é mais rápida de responder depois de uma retirada. As regras do Reino Unido definem o resto: o Schedule 20 do DMCC Act 2024 (parágrafo 13, em vigor desde 6 de abril de 2025) proíbe avaliações falsas e com incentivo escondido, e o guia da CMA (CMA208) proíbe o review gating (4.5), então o Snuffle pergunta a todos que compraram, nunca retém uma avaliação negativa, espelha a divisão nos destaques, identifica qualquer resumo como feito a partir das notas de quem comprou, marca incentivos e publica "How ratings work".
+**Suposição:** as lojas aceitam um número público de precisão de estoque se puderem contestar um caso (H19); "% would go back" se lê tão fácil quanto estrelas (H18); a linha de confiabilidade deixa uma loja consultada competir com uma conectada (H17).
+**Em aberto:** como uma contestação é analisada, e por quem; o texto de "How ratings work"; se as listas de tags servem a todo tipo de loja.
+**Fontes:** Digital Markets, Competition and Consumers Act 2024, Schedule 20 (https://www.legislation.gov.uk/ukpga/2024/13/schedule/20); CMA, Fake reviews guidance, CMA208 (https://assets.publishing.service.gov.uk/media/67eeb64fe9c76fa33048c790/CMA208_-_Fake_reviews_guidance.pdf); a seção de Avaliações dos [benchmarks](discover/benchmarks.md).
+
+## 048 · Stone no modo escuro
+**2026-11-03 · Decidido**
+
+O modo escuro usa o Stone, o Cinza biscoito com 45% do croma (a coluna "menos cor" da rodada 8 da identidade), nos mesmos passos de luminosidade: fundo #0E0B09, sheet #191715, cartão #282523 (1,29:1), secundário #353230, texto secundário #AEAAA6 (6,6:1 no cartão) e texto #FBFAF8. O modo claro continua no Cinza biscoito. Os acentos e os tiles das lojas não mudam.
+
+**Por quê:** voltei aos testes de modo escuro no quadro de identidade e preferi o Biscuit menos saturado: a versão com o croma inteiro parecia marrom à noite, e o cinza mais calmo deixa os tiles pastel e o Índigo carregarem a cor.
+
+## 049 · Seleção de chip, um scrim de sheet e tiles renderizados a partir dos tokens
+**2026-11-04 · Decidido**
+
+Um chip de filtro selecionado é cartão com o rótulo em Índigo 800 em 600 e uma borda Índigo 800 de 1,5 pt (escuro: cartão, Índigo 300 e borda de 1 pt), e os chips não selecionados ficam um nível abaixo: o fundo com um fio de 12% no claro, a sobreposição tonalOnTile sobre um tile, secundário sobre um cartão ou uma sheet escura. O controle segmentado do iOS segue o padrão do sistema, um indicador um nível acima do trilho sob a sombra delicada, com o rótulo selecionado na cor do texto. Toda sheet é opaca, mantém o contorno do glass e tem um scrim atrás, texto a 20% no claro e preto a 48% no escuro; um toque nele fecha a sheet. As listas agrupadas numa sheet usam `radius.bubble`; Fechar e Confirmar numa sheet escura são secundário sólido; o glass escuro ganha um fio Stone 360; o Voltar sobre o tile de uma categoria usa o preenchimento tonalOnTile. O pipeline de ilustrações lê as cores dos tiles e dos fundos dos tokens de cor e falha quando o canto de uma imagem difere do tile dela, e as imagens de categoria seguem um enquadramento só.
+
+**Por quê:** uma crítica visual do build web mediu o chip Índigo 100 em 1,03:1 sobre o fundo, mais claro que os chips brancos ao lado; as fotos apareciam através da sheet a 94% como manchas cinza; o círculo de Fechar escuro dava 1,09:1 na sheet; e as imagens Manteiga escuras tinham sido renderizadas sobre uma cor de tile que os tokens não usavam mais, então apareciam como caixas. Pedi essas correções; um agente as construiu e mediu cada par novo.
+**Em aberto:** o fundo escuro da tela de categoria (a tela inteira no tile do tipo) ainda está por decidir. O Índigo tonal (`chipSelected`) continua no passo atual do cartão de compra, nos polegares da sheet de avaliação e no botão segmentado do Android.
+
+## 050 · Linhas tingidas mais claras na tela de categoria escura; Requests depois do campo
+**2026-11-04 · Decidido**
+
+No modo escuro a tela de categoria mantém o tile inteiro do tipo como fundo, e as linhas de loja sobre ele são um cartão tingido mais claro que o tile: OKLCH L 0,44, C 0,03 no matiz do acento (`shop.accent.<hue>.cardOnTile`: Pêssego #624D47, Pistache #4B5646, Manteiga #595240, Lavanda #534F62), 1,37 a 1,51:1 acima do tile. A linha de detalhes e o chevron das linhas usam o Stone 840 (#CECAC6, `mutedForegroundOnTile`), com 4,74:1 ou mais sobre todos os cartões, porque o Stone 740 media 3,35 a 3,42:1 ali. O modo claro mantém as linhas em Card branco. Na barra de pedido do Nearby, o círculo de Requests sai de antes da cápsula Ask e vai para depois dela, no fim, com o contador.
+
+Escolhi a cor inteira com linhas mais claras em vez de um fundo escuro com uma faixa da cor que se desfaz sob o cabeçalho. Escolhi o círculo no fim porque o iOS 26 põe o botão secundário depois do campo de busca, como no Music e no Podcasts.
+
+**Por quê:** as linhas em Card #282523 ficavam mais escuras que todos os tiles escuros (1,30 a 1,44:1 no sentido errado), então pareciam buracos recortados na cor. Um fundo escuro com uma faixa que se desfaz perderia a cor que liga a tela ao cartão de onde ela saiu no zoom. O círculo vinha antes para se dissolver no Voltar, no canto superior esquerdo; a transformação no New Request parte da cápsula, que agora começa na margem da tela como o campo, então seguir a posição da Apple não custa nada.
+**Em aberto:** a página da loja ainda põe linhas em Card sobre o tile escuro (1,30 a 1,44:1, mais escuras); se ela recebe os mesmos cartões não está decidido. O chip de rua selecionado continua em Card com Índigo 300, porque o Índigo 300 fica abaixo do AA sobre os cartões tingidos.
+
 ## Ainda em aberto
 

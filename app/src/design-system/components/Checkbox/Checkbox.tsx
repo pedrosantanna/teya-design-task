@@ -59,7 +59,7 @@ const styles = StyleSheet.create((theme) => ({
     width: theme.size.badge,
     height: theme.size.badge,
     borderRadius: theme.space[1] + theme.space[1] / 2,
-    borderWidth: theme.space[1] / 2,
+    borderWidth: theme.size.edge.focus,
     alignItems: 'center',
     justifyContent: 'center',
     variants: {

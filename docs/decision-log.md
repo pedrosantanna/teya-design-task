@@ -376,5 +376,42 @@ The app follows iOS 26's Liquid Glass patterns as Apple's own apps use them, wit
 **Why:** I wanted the prototype to feel like Apple's current apps on every platform, a map I could style for free and that loads inside the artifact, and a mark that reads as itself rather than an app icon. The research showed apps that host an assistant mark who is speaking rather than tinting the whole screen.
 **Open:** interactive dismiss of the zoom transitions is not verified on a device; map tiles in the published artifact are not verified.
 
+## 047 · Ratings come from collected orders; Snuffle's own signals sit beside them
+**2026-11-03 · Decided**
+
+A rating is an attribute of the order, and the model keeps its four objects. Only an order marked Collected or Delivered can be rated, once, and the buyer can change it for 30 days. It holds a thumbs up or down for "Would you go back?", up to three tags from two fixed lists, an optional note of 140 characters and the order's month. The shop page shows two signals labelled by source: "What buyers said" ("92% would go back · 38 buyers" and tag counts) and "What Snuffle saw", worked out from answers and orders (answer rate, stock accuracy, typical reply time). It also gets "What they sell": category chips that open Ask, "Asked about recently" and a price line. The page runs header and actions, What they sell, How they do on Snuffle, What buyers say. Items still have no page.
+
+I made three choices. A thumbs up or down for "Would you go back?" over stars. Stock accuracy ("Had it 24 of 25 times when they said yes") shows only after 10 "has it" answers; before that the shop is "New on Snuffle", with its answer rate and reply time. Shops see their own signals and can dispute a specific case, which is mapped in the shop's request states, since the shop has no interface.
+
+**Why:** an asked shop has no till data, so a shopper choosing between it and a connected shop has nothing to go on but the answer. Snuffle sees every answer and every order, so it can report how a shop has done without asking anyone. Vinted splits member reviews from automatic ones, and the split lets the shopper tell opinion from record. Stars invite a J-shaped spread and an average that hides it, and a binary question is quicker to answer after a collection. The UK rules set the rest: Schedule 20 of the DMCC Act 2024 (paragraph 13, in force 6 April 2025) bans fake and concealed incentivised reviews, and the CMA's guidance (CMA208) rules out review gating (4.5), so Snuffle asks every buyer, never withholds a negative rating, mirrors the split in its highlights, labels any summary as built from buyers' notes, flags incentives and publishes "How ratings work".
+**Assumption:** shops will accept a public stock-accuracy figure if they can dispute a case (H19); "% would go back" reads as easily as stars (H18); the reliability row lets an asked shop compete with a connected one (H17).
+**Open:** how a dispute is reviewed, and by whom; the wording of "How ratings work"; whether the tag lists fit every kind of shop.
+**Sources:** Digital Markets, Competition and Consumers Act 2024, Schedule 20 (https://www.legislation.gov.uk/ukpga/2024/13/schedule/20); CMA, Fake reviews guidance, CMA208 (https://assets.publishing.service.gov.uk/media/67eeb64fe9c76fa33048c790/CMA208_-_Fake_reviews_guidance.pdf); the Ratings section of the [benchmarks](discover/benchmarks.md).
+
+## 048 · Stone for dark mode
+**2026-11-03 · Decided**
+
+Dark mode uses Stone, Biscuit grey at 45% of its chroma (the "less colour" column of identity round 8), at the same lightness steps: background #0E0B09, sheet #191715, card #282523 (1.29:1), muted #353230, muted text #AEAAA6 (6.6:1 on the card) and text #FBFAF8. Light mode keeps Biscuit grey. Accents and the shop tiles don't change.
+
+**Why:** I went back to the dark-mode tests on the identity board and preferred the less saturated Biscuit: the full-chroma version read brown at night, and the calmer grey lets the pastel tiles and the Indigo carry the colour.
+
+## 049 · Chip selection, one sheet scrim and baked tiles from the tokens
+**2026-11-04 · Decided**
+
+A selected filter chip is Card with its label in Indigo 800 at 600 and a 1.5 pt Indigo 800 edge (dark: Card, Indigo 300 and a 1 pt edge), and unselected chips sit a level below it: the Background with a 12% hairline in light, the tonalOnTile overlay on a tile, Muted on a card or a dark sheet. The iOS segmented control is the system pattern, a thumb one level above its track under the delicate shadow, the selected label in Foreground. Every sheet is opaque, keeps the glass rim and has one scrim behind it, Foreground at 20% in light and black at 48% in dark; a tap on it dismisses. Grouped lists in a sheet take `radius.bubble`; Close and Confirm on a dark sheet are solid Muted; dark glass gets a Stone 360 hairline; Back on a category's tile takes the tonalOnTile fill. The illustration pipeline reads the tile and ground colours from the colour tokens and fails when a baked still's corner differs from its tile, and the category stills share one framing.
+
+**Why:** a visual critique of the web build measured the Indigo 100 chip at 1.03:1 on the Background, lighter than the white chips beside it; photos showed through the 94% sheet as grey smudges; the dark Close circle was 1.09:1 on the sheet; and the dark Butter stills had been baked on a tile colour the tokens no longer used, so they showed as boxes. I asked for these fixes; an agent built them and measured every new pair.
+**Open:** the dark Category ground (the whole screen in the kind's tile) is still to decide. Tonal Indigo (`chipSelected`) stays on the order card's current step, the rating sheet's thumbs and Android's segmented button.
+
+## 050 · Lighter tinted rows on the dark Category screen; Requests after the field
+**2026-11-04 · Decided**
+
+In dark mode the Category screen keeps the kind's full tile as its ground, and the shop rows on it are a tinted card lighter than the tile: OKLCH L 0.44, C 0.03 at the accent's hue (`shop.accent.<hue>.cardOnTile`: Peach #624D47, Pistachio #4B5646, Butter #595240, Lavender #534F62), 1.37 to 1.51:1 over the tile. The rows' meta line and chevron take Stone 840 (#CECAC6, `mutedForegroundOnTile`), 4.74:1 or more on every card, because Stone 740 measured 3.35 to 3.42:1 there. Light mode keeps white Card rows. On Nearby's ask bar the Requests circle moves from before the Ask capsule to after it, at the trailing end, with its count.
+
+I chose the full colour with lighter rows over a dark ground with a band of the colour that fades under the header. I chose the trailing circle because iOS 26 places the secondary button after the search field, as in Music and Podcasts.
+
+**Why:** Card #282523 rows were darker than every dark tile (1.30 to 1.44:1 the wrong way), so they read as holes cut into the colour. A dark ground with a fading band would have lost the colour that ties the screen to the card it zoomed out of. The leading circle had been kept so it could dissolve into Back at the top left; the morph into New Request comes from the capsule, which now starts at the screen margin as the composer does, so nothing is lost by following Apple's placement.
+**Open:** the shop page still puts Card rows on its dark tile (1.30 to 1.44:1, darker); whether it takes the same cards is not decided. The selected street chip stays Card with Indigo 300, since Indigo 300 is under AA on the tinted cards.
+
 ## Still open
 

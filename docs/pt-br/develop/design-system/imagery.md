@@ -41,8 +41,8 @@ Trade-offs:
 | --- | --- | --- | --- |
 | Tile grande (Open near you) | 4:3 | `tile.large` | `radius.bubble` |
 | Tile médio (New near you) | 4:3 | `tile.medium` | `radius.bubble` |
-| Célula de categoria | 1:1 | Célula de categoria | `radius.bubble` |
-| Miniatura de loja ou de pedido | 1:1 | 56 em linhas, 40 em linhas de resposta | `radius.inner` |
+| Cartão de categoria | 120 × 164, a imagem no quadrado de 120 do topo | Cartão de categoria | `radius.bubble` |
+| Miniatura de loja ou de pedido | 1:1 | 40 em linhas de loja e de resposta, 56 em linhas de pedido | `radius.inner` |
 | Topo da página da loja | 3:2 | De ponta a ponta | `radius.none` |
 | Marca do Snuffle na conversa | 1:1 | 28 | Círculo |
 | Logo ou monograma da loja | 1:1 | 24 sobre uma miniatura, 40 numa linha de loja | Círculo |
@@ -65,7 +65,7 @@ Os tamanhos são em pt no iOS e em dp no Android. As larguras dos tiles estão e
 | Scrim só quando precisa | Um gradiente preto de 0 → 40% só sob badges ou botões de glass sobre uma foto |
 | Tile de placeholder | O tile tonal da loja ([Cor](colour.md), Acentos das lojas): o passo `tile` do acento da loja, iniciais em Switzer 600 no passo `ink` e o toldo de cinco listras da marca como uma faixa no topo. Ele fica sob toda foto de loja, então uma foto carregando ou que falhou mostra a cor da loja; os cartões de resposta e os círculos de loja nas linhas de pedido mostram só o tile |
 | Dados do mapa | MapLibre no iOS, no Android e na web, com dados do OpenStreetMap embutidos: GeoJSON na web, PMTiles ou GeoJSON no app. "© OpenStreetMap contributors" aparece no mapa, no app e na gravação |
-| Estilo do mapa | Gerado a partir da paleta. Chão Manteiga 50 (#F9F7F0), no escuro #2B2420; ruas em Cinza biscoito (#E5E2DE, no escuro #332C27); parques e água em tons suaves; prédios extrudados em 3D com altura padrão de 8 m onde os dados não trazem altura, vistos com inclinação de 45–60°. Sem rótulos nem pontos de interesse até eu decidir sobre eles |
+| Estilo do mapa | Gerado a partir da paleta. Chão Manteiga 50 (#F9F7F0), no escuro o cartão #282523; ruas no secundário (Cinza biscoito #E5E2DE, no escuro Stone #353230); parques e água em tons suaves; prédios extrudados em 3D com altura padrão de 8 m onde os dados não trazem altura, vistos com inclinação de 45–60°. Sem rótulos nem pontos de interesse até eu decidir sobre eles |
 | Pin e alternativa do mapa | O pin é o `Location01Icon` em Primary. Cada loja tem uma imagem estática do mapa, mostrada enquanto o mapa carrega e se ele falhar |
 | Texto alternativo | "[Shop] shopfront, [street]"; placeholders e imagens decorativas ficam ocultos para o VoiceOver e o TalkBack; um ícone que age leva o nome da ação |
 | Badges no rótulo | Os badges são lidos como parte do rótulo do tile: "Rossi's Bakery, promoted, open till 6pm" |

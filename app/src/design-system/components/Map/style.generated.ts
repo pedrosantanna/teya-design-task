@@ -299,7 +299,7 @@ export const mapStyles: Record<'light' | 'dark', StyleSpecification> = {
     },
     "light": {
       "anchor": "viewport",
-      "color": "#FCFAF6",
+      "color": "#FBFAF8",
       "intensity": 0.25,
       "position": [
         1.2,
@@ -312,7 +312,7 @@ export const mapStyles: Record<'light' | 'dark', StyleSpecification> = {
         "id": "ground",
         "type": "background",
         "paint": {
-          "background-color": "#2B2420"
+          "background-color": "#282523"
         }
       },
       {
@@ -348,7 +348,7 @@ export const mapStyles: Record<'light' | 'dark', StyleSpecification> = {
           "line-join": "round"
         },
         "paint": {
-          "line-color": "#38312C",
+          "line-color": "#353230",
           "line-width": [
             "interpolate",
             [
@@ -374,7 +374,7 @@ export const mapStyles: Record<'light' | 'dark', StyleSpecification> = {
         "type": "line",
         "source": "rail",
         "paint": {
-          "line-color": "#433C36",
+          "line-color": "#403D3A",
           "line-width": [
             "interpolate",
             [
@@ -408,7 +408,7 @@ export const mapStyles: Record<'light' | 'dark', StyleSpecification> = {
           "line-join": "round"
         },
         "paint": {
-          "line-color": "#38312C",
+          "line-color": "#353230",
           "line-width": [
             "interpolate",
             [
@@ -442,7 +442,7 @@ export const mapStyles: Record<'light' | 'dark', StyleSpecification> = {
           "line-join": "round"
         },
         "paint": {
-          "line-color": "#38312C",
+          "line-color": "#353230",
           "line-width": [
             "interpolate",
             [
@@ -476,7 +476,7 @@ export const mapStyles: Record<'light' | 'dark', StyleSpecification> = {
           "line-join": "round"
         },
         "paint": {
-          "line-color": "#38312C",
+          "line-color": "#353230",
           "line-width": [
             "interpolate",
             [
@@ -498,7 +498,7 @@ export const mapStyles: Record<'light' | 'dark', StyleSpecification> = {
         "type": "fill-extrusion",
         "source": "buildings",
         "paint": {
-          "fill-extrusion-color": "#38312C",
+          "fill-extrusion-color": "#353230",
           "fill-extrusion-height": [
             "get",
             "h"

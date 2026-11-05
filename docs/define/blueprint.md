@@ -8,12 +8,15 @@ Takeaways:
 - The shop does three things: answers a request, puts the item aside, hands it over. Everything else is on the concierge's side.
 - Most fail points sit where the concierge waits on a shop: no answer in time, a wrong yes, a hold that nobody collects.
 - The shop sets the item aside before the shopper pays. For Jess, collection after work needs a later slot, a collection point or evening delivery, all untested.
+- After collection or delivery, Snuffle asks every buyer once whether they would go back. Ratings and Snuffle's own signals (answer rate, stock accuracy, reply time) show on the shop page under a published review policy.
 Call:
 - I set the steps and which agents sit behind the concierge. The first drawing was too noisy, so I asked for a second pass with cards only for the three lanes that act.
 - I chose one blueprint for the core flow, with the ways Jess's version differs listed, instead of a second blueprint.
 - I kept the shop lane as an assumption, since no shopkeeper has been asked yet (H1, H6 in the [hypotheses](hypotheses.md)).
+- Later I asked for ratings on the shop page and chose a thumbs up or down, stock accuracy only after 10 "has it" answers, and a dispute for shops (decision 047).
 AI:
 - An agent drafted the lanes and cells from the [concept](index.md) and the risks. I set the steps and which agents sit behind the concierge.
+- An agent added the ratings step to the After column and wrote the review policy from the CMA's fake reviews guidance.
 Trade-offs:
 - A blueprint at this level shows who does what, not timing. How long each wait can be is a question for the hand-run concierge test.
 ```
@@ -23,15 +26,15 @@ Trade-offs:
 ```blueprint
 Steps: Ask | Search | Offer | Reserve and pay | Collect or receive | After
 Touchpoint {muted text smartphone}: App chat ; WhatsApp ; Own AI assistant (MCP) | Same thread | Option cards | Payment sheet | Shop counter ; Collection point ; Courier | Notification
-Shopper {c1 card user}: Says what, where, by when ; Or leaves a request ahead | Waits, or leaves the thread | Compares the options | Picks a shop and a collection time ; Pays once it's set aside | Shows the code ; Or collects after work ; Or gets the delivery | Rates the shop ; Keeps a standing request
+Shopper {c1 card user}: Says what, where, by when ; Or leaves a request ahead | Waits, or leaves the thread | Compares the options | Picks a shop and a collection time ; Pays once it's set aside | Shows the code ; Or collects after work ; Or gets the delivery | Rates the order: would go back, tags, a note ; Keeps a standing request
 --- Line of interaction
-Concierge agent {c3 card bot}: Confirms in one line ; Asks only what's missing | "Checking six shops near you" | Shows each answer as it arrives ; Instant only from shared tills ; Keeps looking | "Set aside" from the shop ; Then the payment ; Hold code, place and time | Directions ; Reminder before the hold ends | Follows up ; Acts on standing requests
+Concierge agent {c3 card bot}: Confirms in one line ; Asks only what's missing | "Checking six shops near you" | Shows each answer as it arrives ; Instant only from shared tills ; Keeps looking | "Set aside" from the shop ; Then the payment ; Hold code, place and time | Directions ; Reminder before the hold ends | Asks every buyer "How was [shop]?", one reminder at most ; Acts on standing requests
 --- Line of visibility
-Agents behind it {c4 agent settings}: **Orchestrator** plans the tasks | **Stock** reads shared tills ; **Matching** picks likely shops within reach ; **Contact** messages each shop | Collects replies ; **Courier** quotes delivery ; Widens the search near the deadline | **Contact** gets the shop's confirmation ; **Payment** charges ; **Contact** releases the others | Watches the hold ; **Courier** books the drop or evening run | Logs demand ; Matches standing requests
-Shop {c2 card store}: - | Gets the request in its merchant app or WhatsApp | Answers: has it, price, hold, delivery | Sets the item aside ; Confirms it | Hands it over ; Or leaves it at a collection point | Weekly demand summary
+Agents behind it {c4 agent settings}: **Orchestrator** plans the tasks | **Stock** reads shared tills ; **Matching** picks likely shops within reach ; **Contact** messages each shop | Collects replies ; **Courier** quotes delivery ; Widens the search near the deadline | **Contact** gets the shop's confirmation ; **Payment** charges ; **Contact** releases the others | Watches the hold ; **Courier** books the drop or evening run | Logs demand ; Screens notes ; Works out answer rate, stock accuracy and reply time ; Matches standing requests
+Shop {c2 card store}: - | Gets the request in its merchant app or WhatsApp | Answers: has it, price, hold, delivery | Sets the item aside ; Confirms it | Hands it over ; Or leaves it at a collection point | Weekly demand summary ; Sees its signals ; Replies once to a rating ; Disputes a case
 --- Line of internal interaction
-Systems {muted text server}: Location ; Saved preferences | Till stock ; Listings and hours | Courier ; Maps | Card, wallet, pay by link | Courier ; Collection points ; Settlement | Demand records
-Fail points {fail triangle-alert}: Vague request | No answer in time (H1) | A wrong "yes" (A10) | Item already sold ; Payment fails | Hold expires ; No after-work option (H6) | Summary not valued (H9)
+Systems {muted text server}: Location ; Saved preferences | Till stock ; Listings and hours | Courier ; Maps | Card, wallet, pay by link | Courier ; Collection points ; Settlement | Demand records ; Ratings and signals
+Fail points {fail triangle-alert}: Vague request | No answer in time (H1) | A wrong "yes" (A10) | Item already sold ; Payment fails | Hold expires ; No after-work option (H6) | Summary not valued (H9) ; Ratings only from happy buyers ; Shops reject a public figure (H19)
 ```
 
 ## Answers in step 3
@@ -61,6 +64,33 @@ Paying ahead doesn't help if the shop closes before she finishes work, which I a
 | Evening delivery | A courier booked by the courier agent | Jess's home | An evening slot; the courier collects before the shop closes |
 
 Whether shops would offer a later slot or hand a paid item to a collection point, and whether such a point exists within reach of the shopper, is part of H6 in the [hypotheses](hypotheses.md).
+
+## Ratings after collection
+
+A rating can only start from an order marked Collected or Delivered. After collection the order card reads "Collected · rate Paper & Co"; after a delivery Snuffle posts "How was Paper & Co?" with a Rate chip. Snuffle asks about every collected or delivered order, never only the ones likely to go well, and reminds once at most. The rating sheet takes a thumbs up or down, up to three tags and an optional note, in under ten seconds, and the buyer can change it for 30 days.
+
+| Who | What they do |
+| --- | --- |
+| Buyer | Rates once per order; edits within 30 days |
+| Snuffle | Asks every buyer, screens notes, works out the shop's signals from answers and orders, shows both on the shop page with their source |
+| Shop | Sees its ratings and signals, replies once in public under a rating, disputes a specific case (for example "Not ready when I came" on an order it set aside on time) |
+
+The shop has no interface, so the reply and the dispute are mapped in the shop's request states.
+
+## Review policy
+
+"How ratings work" is linked from every shop page's rating summary. It says:
+
+| Topic | Policy |
+| --- | --- |
+| Who can rate | Only the buyer of an order marked Collected or Delivered, once per order, for 30 days |
+| Who is asked | Every buyer, with one reminder at most |
+| What is screened | Notes, for abuse and personal data; nothing is removed for being negative |
+| How figures are shown | The percentage who would go back, rounded down, beside the buyer count; no percentage below 5 ratings; highlights mirror the overall split |
+| Snuffle's signals | Worked out from answers and orders, labelled "What Snuffle saw"; stock accuracy only after 10 "has it" answers |
+| Summaries | Built only from buyers' notes and labelled "Summary by Snuffle from buyers' notes" |
+| Incentives | Snuffle never rewards a rating; ratings a shop rewarded are flagged |
+| Shops | One public reply per rating; a dispute is reviewed against the order's record, and the rating stays up while it is reviewed |
 
 ## What the prototype covers
 

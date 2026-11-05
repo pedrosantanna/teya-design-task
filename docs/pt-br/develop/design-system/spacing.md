@@ -44,6 +44,7 @@ Trade-offs:
 | `gap.block` | 12 | Blocos dentro de um cartão |
 | `inset.card` | 16 | Um cartão com `radius.card` 28 menos 16 leva o conteúdo com `radius.inner` 12 |
 | `inset.bubble` | 10 na vertical, 14 na horizontal | Balões da conversa |
+| `inset.sheet` | 24 | Abaixo do último conteúdo de uma sheet; nas laterais, o cabeçalho e o conteúdo da sheet usam `margin.screen`, para o Close e o Confirm ficarem alinhados com as linhas |
 | `gap.section` | 32 | Seções numa tela |
 | `margin.screen` | 16 abaixo de 414 pt de largura, 20 a partir de 414; 16 dp no Android | Valor do Android vindo de uma fonte secundária, a conferir em m3.material.io |
 | `hit.min` | 44 pt no iOS, 48 dp no Android | Vale para a área de toque, não para o tamanho desenhado |
@@ -78,12 +79,12 @@ Cada espaço é definido de um lado só, no topo do bloco de baixo, para que doi
 
 | Token | Valor | Onde |
 | --- | --- | --- |
-| Colunas | 1 coluna de conteúdo; 4 no grid de categorias | Todas as telas |
+| Colunas | 1 coluna de conteúdo | Todas as telas |
 | Margem | 16 / 20 | Como `margin.screen` |
-| Gutter | 12 | Carrosséis e o grid de categorias |
+| Gutter | 12 | Carrosséis e o trilho de categorias |
 | `tile.large` | 0,78 × largura do conteúdo ≈ 290 / 312, imagem 4:3 | Open near you: um tile e uma ponta do seguinte |
 | `tile.medium` | (conteúdo − 12) / 2,3 ≈ 156 / 168, imagem 4:3 | New near you |
-| Célula de categoria | (conteúdo − 36) / 4 ≈ 84 / 91, 1:1 | Grid de categorias |
+| Cartão de categoria | 120 × 164 (a imagem de 120, depois o rótulo), fixo, num trilho lateral, gutter 12 | Browse by category em Nearby |
 | Largura máxima do balão | 78% do conteúdo ≈ 290 / 312 | Balões da conversa |
 | Cartões de resposta e de compra | Largura total do conteúdo | Conversa |
 | Versão web | Moldura de celular, 402 × 874; os mesmos valores de espaçamento em px | Protótipo no navegador |
@@ -97,7 +98,7 @@ As larguras são para um iPhone 17 de 402 pt e um iPhone 17 Pro Max de 440 pt. O
 | Carrosséis mostram uma ponta | O primeiro tile começa na margem, o último termina na margem, a paginação encaixa; a ponta é o único sinal de rolagem |
 | Uma proporção por linha | Todas as imagens de uma linha ou carrossel têm a mesma proporção |
 | Larguras pela fórmula | Tiles e células são calculados a partir da largura do conteúdo; só gutters e margens são fixos |
-| Sheets como no Maps | Detents médio e grande; o conteúdo dentro da sheet fica na margem da tela (16, ou 20 nos iPhones largos), como no Maps |
+| Sheets como no Maps | Detents médio e grande; o cabeçalho e o conteúdo da sheet ficam na margem da tela (16, ou 20 nos iPhones largos), como no Maps |
 | Layouts padrão | Linha ou grid sempre que possível, como a HIG pede para coleções |
 
 As frações 0,78 e 2,3 dos tiles são uma proposta a conferir no tamanho real.

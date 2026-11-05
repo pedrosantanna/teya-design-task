@@ -39,12 +39,14 @@
     butter: ramp(['#F9F7F0', '#FFE7A0', '#E4DAC0', '#D2C49A', '#BCAA73', '#A69050', '#8B752F', '#6F5C1A', '#53430D', '#382C04']),
     lavender: ramp(['#F7F6FD', '#EDEBF8', '#DCD6F1', '#CDBDFF', '#AEA2D6', '#9687C3', '#7C6CA8', '#625388', '#483C67', '#302747']),
     biscuit: { bg: '#F4F1ED', card: '#FFFFFF', muted: '#E5E2DE', mutedFg: '#59534D', fg: '#100A06',
-      darkBg: '#100A06', darkCard: '#231D18', darkMuted: '#332C27', darkMutedFg: '#B1AA9F', darkFg: '#FCFAF6' },
+      darkBg: '#0E0B09', darkCard: '#282523', darkMuted: '#353230', darkMutedFg: '#AEAAA6', darkFg: '#FBFAF8' },
   };
   const INK = '#1a1714';
   // Backgrounds, each with the dark tone of its own hue that shade and shadow mix toward.
-  // "canvas" follows the site's theme.
+  // "canvas" follows the site's theme. Indigo 400 is the default in both page themes (the author's call).
+  const BG_DEFAULT = 'indigo400';
   const BGS = [
+    { id: 'indigo400', name: 'Indigo 400', color: PALETTE.indigo[400], dark: PALETTE.indigo[900] },
     { id: 'canvas', name: 'Canvas' },
     { id: 'biscuit', name: 'Biscuit', color: PALETTE.biscuit.bg, dark: INK },
     { id: 'butter', name: 'Butter 100', color: PALETTE.butter[100], dark: PALETTE.butter[800] },
@@ -52,7 +54,7 @@
     { id: 'pistachio', name: 'Pistachio 200', color: PALETTE.pistachio[200], dark: PALETTE.pistachio[800] },
     { id: 'lavender', name: 'Lavender 200', color: PALETTE.lavender[200], dark: PALETTE.lavender[800] },
     { id: 'indigo', name: 'Indigo 800', color: PALETTE.indigo[800], dark: PALETTE.indigo[900] },
-    { id: 'dark', name: 'Biscuit dark', color: PALETTE.biscuit.darkBg, dark: PALETTE.indigo[900] },
+    { id: 'dark', name: 'Stone dark', color: PALETTE.biscuit.darkBg, dark: PALETTE.indigo[900] },
   ];
   // Shade = mix(base × SHADE × ambient tint, background dark, K). The cast shadow uses the same rule
   // with the ground colour as base and a stronger pull (KS) toward the dark tone.
@@ -67,7 +69,7 @@
   // URL: ?export=1&object=box&size=120&scale=3&ground=%23F4F1ED&fps=24&seconds=2&clip=entry|idle|still
   // (read from the query string, or from a query after the hash: #illustrations?export=1&…).
   // In this mode window.__exportFrames(opts?) renders and returns { frames: [PNG data URLs], meta }.
-  const EXPORT_DEFAULTS = { object: 'box', size: 120, scale: 3, ground: '#F4F1ED', fps: 24, clip: 'entry', seconds: null, margin: 0.07, shadows: true, az: null, el: null, dark: null, opaque: false, height: null, shade: null, k: null, ink: null, recolor: null };
+  const EXPORT_DEFAULTS = { object: 'box', size: 120, scale: 3, ground: '#F4F1ED', fps: 24, clip: 'entry', seconds: null, margin: 0.07, shadows: true, az: null, el: null, dark: null, opaque: false, height: null, shade: null, k: null, ink: null, recolor: null, fitW: null, fitTop: null, fitBase: null, fitArea: null, fitMaxW: null, fitMaxH: null, fitClear: null };
   function exportParams() {
     const q = new URLSearchParams(location.search);
     const h = location.hash.indexOf('?');
@@ -76,7 +78,7 @@
     const o = { ...EXPORT_DEFAULTS };
     q.forEach((v, k) => {
       if (!(k in o)) return;
-      o[k] = typeof EXPORT_DEFAULTS[k] === 'number' || ['seconds', 'az', 'el', 'height', 'shade', 'k'].includes(k) ? +v : k === 'shadows' || k === 'opaque' ? v !== '0' && v !== 'false' : v;
+      o[k] = typeof EXPORT_DEFAULTS[k] === 'number' || ['seconds', 'az', 'el', 'height', 'shade', 'k', 'fitW', 'fitTop', 'fitBase', 'fitArea', 'fitMaxW', 'fitMaxH', 'fitClear'].includes(k) ? +v : k === 'shadows' || k === 'opaque' ? v !== '0' && v !== 'false' : v;
     });
     return o;
   }
@@ -284,7 +286,7 @@
         </div>
         <div class="v3-sec">
           <h3 class="v3-h">${esc(t('background'))}</h3>
-          <div class="v3-swatches">${BGS.map((b, i) => `<button type="button" class="v3-swatch${b.color ? '' : ' is-canvas'}" data-bg="${b.id}" title="${esc(b.id === 'canvas' ? t('bgCanvas') : b.name)}" aria-label="${esc(b.id === 'canvas' ? t('bgCanvas') : b.name)}" aria-pressed="${i === 0}"${b.color ? ` style="background:${b.color}"` : ''}></button>`).join('')}</div>
+          <div class="v3-swatches">${BGS.map((b, i) => `<button type="button" class="v3-swatch${b.color ? '' : ' is-canvas'}" data-bg="${b.id}" title="${esc(b.id === 'canvas' ? t('bgCanvas') : b.name)}" aria-label="${esc(b.id === 'canvas' ? t('bgCanvas') : b.name)}" aria-pressed="${b.id === BG_DEFAULT}"${b.color ? ` style="background:${b.color}"` : ''}></button>`).join('')}</div>
         </div>
         <div class="v3-sec">
           <h3 class="v3-h">${esc(t('light'))}</h3>
@@ -551,7 +553,7 @@
       const ISO = new THREE.Vector3(Math.cos(ISO_EL) * Math.sin(Math.PI / 4), Math.sin(ISO_EL), Math.cos(ISO_EL) * Math.cos(Math.PI / 4));
       let mode = 'iso', camera = ortho, controls = null, current = null, W = 1, H = 1;
       let tool = 'orbit', spaceDown = false;
-      const state = { outlines: true, shadows: true, grid: false, autoRotate: false, bg: 'canvas' };
+      const state = { outlines: true, shadows: true, grid: false, autoRotate: false, bg: BG_DEFAULT };
       // Fit: the projected half height, or half width over the aspect, plus a 12% margin.
       const fitHalf = (m, a) => (m ? Math.max(m.half.y, m.half.x / a) : 1.5) * 1.12;
       const fitDist = () => {
@@ -849,7 +851,12 @@
           sc.updateMatrixWorld(true);
           const inv = cam.matrixWorldInverse, v = new THREE.Vector3();
           let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
-          const add = () => { v.applyMatrix4(inv); x0 = Math.min(x0, v.x); x1 = Math.max(x1, v.x); y0 = Math.min(y0, v.y); y1 = Math.max(y1, v.y); };
+          // The object alone (no cast shadow), for the fixed framing below.
+          let ox0 = Infinity, ox1 = -Infinity, oy0 = Infinity, oy1 = -Infinity;
+          const add = (own) => {
+            v.applyMatrix4(inv); x0 = Math.min(x0, v.x); x1 = Math.max(x1, v.x); y0 = Math.min(y0, v.y); y1 = Math.max(y1, v.y);
+            if (own) { ox0 = Math.min(ox0, v.x); ox1 = Math.max(ox1, v.x); oy0 = Math.min(oy0, v.y); oy1 = Math.max(oy1, v.y); }
+          };
           const kx = L.x / L.y, kz = L.z / L.y, gy = m.groundY;
           m.meshes.forEach(mesh => {
             if (!shown(mesh)) return;
@@ -857,14 +864,52 @@
             for (let i = 0; i < pos.count; i++) {
               v.fromBufferAttribute(pos, i).applyMatrix4(mesh.matrixWorld);
               const wx = v.x, wy = v.y, wz = v.z;
-              add();
-              if (casts) { v.set(wx - kx * (wy - gy), gy, wz - kz * (wy - gy)); add(); }
+              add(true);
+              if (casts) { v.set(wx - kx * (wy - gy), gy, wz - kz * (wy - gy)); add(false); }
             }
           });
-          const side = Math.max(x1 - x0, y1 - y0) * (1 + 2 * o.margin), cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
           // A taller frame (height > size, e.g. a category card) keeps the object in the top size × size square.
           const hPt = Number.isFinite(o.height) && o.height > 0 ? +o.height : size;
-          Object.assign(cam, { left: cx - side / 2, right: cx + side / 2, top: cy + side / 2, bottom: cy + side / 2 - side * hPt / size });
+          let left, top, side;
+          if (Number.isFinite(o.fitArea) && o.fitArea > 0) {
+            // Equal optical area (category cards, round 3): the box around the object and its cast shadow covers
+            // fitArea of the size × size square, capped at fitMaxW of the width and fitMaxH of the height. The object
+            // stands on the baseline fitBase (pt from the top); the whole box is centred across, and fitClear pt stay
+            // free on the right and below the shadow.
+            const fb = Number.isFinite(o.fitBase) ? +o.fitBase : size * 0.9;
+            const clear = Number.isFinite(o.fitClear) ? +o.fitClear : 8;
+            const maxW = Number.isFinite(o.fitMaxW) ? +o.fitMaxW : 0.72, maxH = Number.isFinite(o.fitMaxH) ? +o.fitMaxH : 0.55;
+            const bw = x1 - x0, bh = y1 - y0;
+            let u = Math.sqrt((bw * bh) / (o.fitArea * size * size)); // world units per pt
+            u = Math.max(u, bw / (maxW * size), bh / (maxH * size), bw / (size - 2 * clear));
+            side = size * u;
+            left = (x0 + x1) / 2 - side / 2;
+            if (x1 > left + side - clear * u) left = x1 - side + clear * u;
+            top = oy0 + fb * u;
+            // The shadow's lowest point keeps fitClear above the bottom of the square too.
+            if (y0 < top - side + clear * u) top = y0 + side - clear * u;
+          } else if (Number.isFinite(o.fitW) && o.fitW > 0) {
+            // Fixed framing (category cards): the object, without its shadow, is fitW of the frame's width, or as tall
+            // as the room between fitTop and fitBase allows; it stands on the baseline fitBase (pt from the top) and
+            // is centred across. The shadow must stay inside the frame (2 pt clear), else the object shifts or shrinks.
+            const ft = Number.isFinite(o.fitTop) ? +o.fitTop : 12, fb = Number.isFinite(o.fitBase) ? +o.fitBase : size - ft;
+            const clear = 2;
+            let u = Math.max((ox1 - ox0) / (o.fitW * size), (oy1 - oy0) / (fb - ft)); // world units per pt
+            let ocx = (ox0 + ox1) / 2;
+            for (let pass = 0; pass < 2; pass++) {
+              const lo = ocx - (size / 2 - clear) * u, hi = ocx + (size / 2 - clear) * u;
+              if (x1 - x0 > (size - 2 * clear) * u) { u = (x1 - x0) / (size - 2 * clear); continue; }
+              if (x0 < lo) ocx -= lo - x0; else if (x1 > hi) ocx += x1 - hi;
+              break;
+            }
+            side = size * u; left = ocx - side / 2; top = oy0 + fb * u;
+            // The shadow's lowest point must stay above the bottom of the square too.
+            if (y0 < top - side + clear * u) top = y0 + side - clear * u;
+          } else {
+            side = Math.max(x1 - x0, y1 - y0) * (1 + 2 * o.margin);
+            left = (x0 + x1) / 2 - side / 2; top = (y0 + y1) / 2 + side / 2;
+          }
+          Object.assign(cam, { left, right: left + side, top, bottom: top - side * hPt / size });
           cam.updateProjectionMatrix();
           setPipelineSize(size, hPt, scale);
           const frames = [];
