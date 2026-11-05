@@ -1,0 +1,244 @@
+{
+  "id": "sam",
+  "name": "Sam, the mission shopper",
+  "inScope": true,
+  "source": "docs/discover/personas/index.md",
+  "notResearch": "A scripted test user built from a proto-persona. It tests whether flows break. It is not a shopper, says nothing about demand and replaces no research.",
+  "goals": [
+    "Find out which nearby shop has a specific item before setting off.",
+    "Get it in time, usually the same day."
+  ],
+  "constraints": {
+    "time": "A deadline, often today. Eclipse glasses by 4pm.",
+    "hours": "Free at lunch and after work; shops that are shut are no use.",
+    "device": "One-handed phone use on the move, asks chatbots and groups first, so expects an answer in minutes.",
+    "trust": "Has been sent to shops without stock, so does not trust stock or hours that he cannot confirm."
+  },
+  "scenarios": [
+    {
+      "id": "eclipse-today",
+      "title": "Eclipse glasses before 4pm: ask, compare answers, buy, collect",
+      "goal": "Two pairs of eclipse glasses bought and a collection code on screen, from Nearby, with no help.",
+      "start": "persona=sam",
+      "steps": [
+        {
+          "tap": {
+            "role": "button",
+            "name": "Ask Snuffle"
+          }
+        },
+        {
+          "tap": {
+            "role": "button",
+            "name": "Eclipse glasses near me, today"
+          },
+          "label": "send the suggested eclipse request"
+        },
+        {
+          "expect": {
+            "textMatches": "Got it: 2 pairs",
+            "text": "2 pairs"
+          },
+          "why": "The request should be read back with the quantity and the 4pm deadline."
+        },
+        {
+          "tap": {
+            "role": "button",
+            "name": "Collect"
+          }
+        },
+        {
+          "waitFor": {
+            "role": "button",
+            "name": "Allow"
+          },
+          "timeoutS": 10,
+          "label": "wait for the notifications ask"
+        },
+        {
+          "tap": {
+            "role": "button",
+            "name": "Allow"
+          },
+          "label": "allow notifications"
+        },
+        {
+          "waitFor": {
+            "text": "Has them"
+          },
+          "timeoutS": 60,
+          "label": "wait for the first shop to say it has them"
+        },
+        {
+          "expect": {
+            "text": "Collect by"
+          },
+          "why": "Each answer should say by when it can be collected."
+        },
+        {
+          "tap": {
+            "role": "button",
+            "name": "Buy"
+          },
+          "label": "buy from the shop that has them"
+        },
+        {
+          "expect": {
+            "text": "Quantity"
+          }
+        },
+        {
+          "tap": {
+            "role": "button",
+            "nameContains": "Buy, \u00a3"
+          },
+          "label": "confirm the basket"
+        },
+        {
+          "tap": {
+            "role": "button",
+            "name": "Confirm with side button"
+          },
+          "label": "pay"
+        },
+        {
+          "waitFor": {
+            "role": "any",
+            "nameContains": "Ready, collect by"
+          },
+          "timeoutS": 60,
+          "label": "wait for the shop to set them aside"
+        },
+        {
+          "tap": {
+            "role": "any",
+            "nameContains": "Ready, collect by"
+          },
+          "label": "open the receipt"
+        },
+        {
+          "expect": {
+            "text": "Collection code"
+          },
+          "goal": true
+        }
+      ]
+    },
+    {
+      "id": "no-answer-keep-looking",
+      "title": "No shop has them: keep looking",
+      "goal": "A standing search is confirmed and the shopper can tell it is running.",
+      "start": "step=noShop&persona=sam",
+      "endsWithoutNextAction": true,
+      "steps": [
+        {
+          "expect": {
+            "text": "None of the 6 shops has them before 4pm"
+          }
+        },
+        {
+          "tap": {
+            "role": "button",
+            "name": "Keep looking"
+          },
+          "label": "choose keep looking"
+        },
+        {
+          "tap": {
+            "role": "button",
+            "name": "Keep looking"
+          },
+          "label": "confirm keep looking"
+        },
+        {
+          "expect": {
+            "textMatches": "keep looking until"
+          },
+          "goal": true
+        },
+        {
+          "expect": {
+            "role": "button",
+            "nameMatches": "Stop|Cancel|Change|Edit"
+          },
+          "severity": "usability",
+          "why": "A running search should show a way to change or stop it."
+        }
+      ]
+    },
+    {
+      "id": "widen-search",
+      "title": "No shop has them: ask further away",
+      "goal": "Asking up to 30 minutes away brings at least one new shop or answer.",
+      "start": "step=noShop&persona=sam",
+      "steps": [
+        {
+          "expect": {
+            "text": "None of the 6 shops has them before 4pm"
+          }
+        },
+        {
+          "tap": {
+            "role": "button",
+            "name": "Ask further away"
+          }
+        },
+        {
+          "waitFor": {
+            "textMatches": "Has them|In stock|Has something similar"
+          },
+          "timeoutS": 45,
+          "label": "wait for a wider answer",
+          "severity": "break"
+        },
+        {
+          "expect": {
+            "textMatches": "Has them|In stock|Has something similar"
+          },
+          "goal": true
+        }
+      ]
+    },
+    {
+      "id": "payment-declined",
+      "title": "The payment is declined: try again",
+      "goal": "After a declined payment Sam can pay again and reach the collection code.",
+      "start": "step=declined&persona=sam",
+      "steps": [
+        {
+          "expect": {
+            "text": "haven't been charged"
+          },
+          "why": "A declined payment should say plainly that nothing was charged."
+        },
+        {
+          "tap": {
+            "role": "button",
+            "name": "Try again"
+          }
+        },
+        {
+          "tap": {
+            "role": "button",
+            "name": "Confirm with side button"
+          },
+          "label": "pay"
+        },
+        {
+          "waitFor": {
+            "role": "any",
+            "nameContains": "Ready, collect by"
+          },
+          "timeoutS": 60
+        },
+        {
+          "expect": {
+            "role": "any",
+            "nameContains": "Ready, collect by"
+          },
+          "goal": true
+        }
+      ]
+    }
+  ]
+}

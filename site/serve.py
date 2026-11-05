@@ -9,7 +9,9 @@ so a reload on any screen works.
 
     python3 site/serve.py [port]
 """
+import gzip
 import http.server
+import mimetypes
 import pathlib
 import sys
 
@@ -25,6 +27,21 @@ SKELETON = (
 
 
 APP_WEB = "/app-web/"
+
+# Text types are sent gzip-compressed when the browser accepts it (the web bundle is 3.7 MB of JavaScript, about a
+# quarter of that compressed). Compressed bodies are kept until the file changes.
+COMPRESSIBLE = {".js", ".mjs", ".json", ".css", ".html", ".md", ".svg", ".txt", ".map", ".wasm", ".ttf", ".otf"}
+_gzip_cache = {}
+
+
+def gzipped(file):
+    key = str(file)
+    stamp = file.stat().st_mtime_ns
+    hit = _gzip_cache.get(key)
+    if not hit or hit[0] != stamp:
+        hit = (stamp, gzip.compress(file.read_bytes(), compresslevel=6))
+        _gzip_cache[key] = hit
+    return hit[1]
 
 
 def app_web_page():
@@ -58,6 +75,21 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             body = app_web_page().encode("utf-8")
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+        file = ROOT / path.lstrip("/")
+        if (
+            file.is_file()
+            and file.suffix.lower() in COMPRESSIBLE
+            and "gzip" in self.headers.get("Accept-Encoding", "")
+        ):
+            body = gzipped(file)
+            self.send_response(200)
+            self.send_header("Content-Type", mimetypes.guess_type(file.name)[0] or "application/octet-stream")
+            self.send_header("Content-Encoding", "gzip")
+            self.send_header("Vary", "Accept-Encoding")
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             self.wfile.write(body)

@@ -86,6 +86,7 @@ function ActiveChat() {
   const content = useContent();
   const { items, typing, fresh } = useVisibleChat();
   const request = useApp('request');
+  const widened = useSim((s) => s.wider != null);
   const scroll = useNavBarScroll();
   const top = useNavBarHeight();
   const margin = screenMargin(theme, frame.width);
@@ -108,14 +109,15 @@ function ActiveChat() {
     if (action === 'collect' || action === 'delivery') return sim.chooseHow(action);
     if (action === 'extend') return sim.extend();
     if (action === 'tryAgain') return sim.tryAgain();
+    if (action === 'changeLooking') return router.push({ pathname: '/requests/[id]/keep-looking', params: { id: content.active.id } });
+    if (action === 'stopLooking') return sim.stopLooking();
     if (action === 'keepLooking') return router.push({ pathname: '/requests/[id]/keep-looking', params: { id: content.active.id } });
     if (action === 'directions') {
       if (orderShop && !openDirections(orderShop)) setToast('Directions open the Maps app on a phone.');
       return;
     }
     if (action === 'askAgain') return sim.say(`Ask ${name} again`, { id: '', sender: 'snuffle', text: `I've asked ${name} again. I'll tell you when they answer.` });
-    if (action === 'askFurther')
-      return sim.say('Ask further away', { id: '', sender: 'snuffle', text: "I'm asking shops up to 30 minutes away. I'll tell you as they answer." });
+    if (action === 'askFurther') return sim.askFurther();
     if (action === 'rate') return sim.openRating();
     if (action.startsWith('ask:')) {
       const text = action.slice(4);
@@ -179,7 +181,7 @@ function ActiveChat() {
           ListHeaderComponent={
             typing ? (
               <TypingIndicator gap={last ? (last.kind === 'bubble' ? chatGap(lastSender, 'snuffle') : 'newSender') : 'none'} />
-            ) : request === 'notFound' ? (
+            ) : request === 'notFound' && !widened ? (
               // Nothing found: the quiet street under Snuffle's last message (the list is inverted, so the header is the bottom).
               <View style={[styles.block, styles.art]}>
                 <Illustration name="quietstreet" size="medium" />
@@ -279,7 +281,7 @@ function ChatRow({ item, before, isNew, onChip, onDismiss, onOpenOrder }: ChatRo
         </View>
       );
     case 'asking':
-      return <AskingList />;
+      return <AskingList wider={item.wider} />;
     case 'answer':
       return <Answer shopId={item.shopId} best={item.best} animateIn={isNew} onDismiss={onDismiss} />;
     case 'order':
@@ -320,10 +322,12 @@ const rowKind = (state: AnswerState): AnswerRowKind => {
   }
 };
 
-function AskingList() {
+function AskingList({ wider = false }: { wider?: boolean }) {
   const content = useContent();
   const answers = useApp('answers');
-  const offers = content.active.offers;
+  // After "Ask further away" the request's offers also hold the shops further away: one list each.
+  const near = content.active.nearCount ?? content.active.offers.length;
+  const offers = wider ? content.active.offers.slice(near) : content.active.offers.slice(0, near);
   // The scooter rides while Snuffle asks and leaves when the first answer arrives (illustrations.md).
   const waiting = offers.every((o) => (answers[o.shopId] ?? 'asked') === 'asked' || answers[o.shopId] === 'seen');
   return (
@@ -510,7 +514,7 @@ function DetailsSheet({ onToast }: { onToast: (text: string) => void }) {
       barTitle="Buy"
       initialDetent="large"
       origin={`answer:${shop.id}`}
-      footer={<Button label={buyLabel} accessibilityLabel={`Buy, ${price(total)}`} onPress={sim.buy} />}
+      footer={<Button label={buyLabel} accessibilityLabel={`Buy, ${price(total)}`} onPress={() => sim.buy(isJess ? (at === 'shop' ? 'shop' : 'point') : undefined)} />}
     >
       <Text variant="footnote" color="mutedForeground">
         {`${shopHoursLabel(shopHours, shop)} · ${shop.street} · ${shop.walkMinutes} min walk`}
@@ -613,7 +617,7 @@ function OtherRequestChat({ id }: { id: string }) {
     <View style={styles.screen}>
       <Animated.ScrollView onScroll={scroll.onScroll} scrollEventThrottle={16} contentContainerStyle={styles.plainContent(screenMargin(theme, frame.width), top, insets.bottom)}>
         {request ? <ChatBubble sender={speaker === 'You' ? 'shopper' : 'snuffle'} text={text} /> : null}
-        {request?.action ? (
+        {request?.state === 'needsYou' ? (
           <View style={styles.block}>
             <Text variant="footnote" color="mutedForeground">
               {request.label}

@@ -66,12 +66,12 @@ A toast sits above an alert so an Undo stays reachable; an alert's scrim covers 
 | Requests, a filter | Nothing in that filter | One line naming the filter ("Nothing needs you right now."), with All still selectable |
 | Chat | A new request before Snuffle answers | The shopper's bubble, then the typing indicator |
 | Shop page | No past answers | The section "Asked about recently" is left out, not shown empty |
-| Shop page, ratings | No ratings yet | "No ratings yet · Snuffle has asked them 4 times" under What buyers say; How they do on Snuffle still shows |
+| Shop page, ratings | No ratings yet | "No ratings yet · Snuffle has asked them 4 times" under Ratings; How they do on Snuffle still shows |
 | Order | Never empty | n/a |
 
 ## Rating states
 
-| State | When | What buyers say | How they do on Snuffle |
+| State | When | Ratings | How they do on Snuffle |
 | --- | --- | --- | --- |
 | No ratings | No buyer has rated yet | "No ratings yet · Snuffle has asked them 4 times" | Answer rate and reply time; "New on Snuffle" until 10 "has it" answers |
 | Few | 1 to 4 ratings | "New on Snuffle · 3 buyers so far", the tags with their counts and the review cards; no percentage | As above, or with stock accuracy once there are 10 "has it" answers |

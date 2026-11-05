@@ -1,6 +1,6 @@
 # RequestRow
 
-A request in Requests: thumbnail with the shops' logos, name and time, a preview with its speaker, one status label, an optional compact button and an unread count. Spec: Request row on `docs/develop/design-system/components.md`.
+A request in Requests: thumbnail, name and time, Snuffle's latest status as the preview, one status label and an unread count. Spec: Request row on `docs/develop/design-system/components.md`.
 
 ## Props
 
@@ -9,12 +9,10 @@ A request in Requests: thumbnail with the shops' logos, name and time, a preview
 | `id` | string | required | Passed to every handler |
 | `name` | string | required | Headline, one line |
 | `time` | string | required | Caption 1 |
-| `preview` | string | required | With its speaker ("Snuffle: …"); Subheadline in Muted foreground, two lines |
+| `preview` | string | required | Snuffle's latest status, "Snuffle: …"; Subheadline in Muted foreground, one line, truncated |
 | `status`, `tone` | string, `StatusTone` | required | `needsYou` puts it in Tint |
 | `image` | string (uri) | none | 56 at `radius.inner`; the request placeholder without one |
-| `shopLogos` | string[] | `[]` | Up to three, 24 each |
 | `unread` | number | `0` | Count of unread answers |
-| `actionLabel`, `onAction` | string, `(id) => void` | none | Only when the request needs the shopper: "Buy at Rossi's" |
 | `onPress` | `(id) => void` | none | Opens the chat |
 | `onClose` | `(id) => void` | none | Close |
 
@@ -25,4 +23,4 @@ A request in Requests: thumbnail with the shops' logos, name and time, a preview
 
 ## Accessibility
 
-One element: name, status, preview, time, unread. The button and Close are custom actions.
+One element: name, status, preview, time, unread. Close is a custom action.

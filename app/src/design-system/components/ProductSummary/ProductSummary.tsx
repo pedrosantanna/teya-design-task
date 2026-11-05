@@ -1,6 +1,6 @@
 // "What they sell" on the shop page (change shop-ratings-and-range): the shop's categories as chips that start a
-// request addressed to the shop, the usual price range with where it comes from, and the items people often asked it
-// about, with what the shop answered. One Card section with the delicate shadow, like the page's other sections.
+// request addressed to the shop, the usual price range with where it comes from, and the items people asked it about
+// lately, with what the shop answered, when the page passes them. One Card section with the delicate shadow, like the page's other sections.
 import { memo } from 'react';
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
@@ -41,7 +41,7 @@ export const ProductSummary = memo(function ProductSummary({ categories, priceLi
         ) : null}
         {asked.length > 0 ? (
           <Text variant="caption1Strong" color="mutedForeground" accessibilityRole="header">
-            Often asked about here
+            Asked about recently
           </Text>
         ) : null}
       </ListBlock>

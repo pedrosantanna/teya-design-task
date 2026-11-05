@@ -43,7 +43,7 @@
       "$value": "{color.indigo.200}"
     },
     "chipSelectedEdge": {
-      "$value": "{color.indigo.800}",
+      "$value": "{color.indigo.300}",
       "$description": "A 1 pt edge on a selected chip, so its tonal fill holds its own next to Card chips (colour.md, Roles)"
     },
     "filterSelected": {
@@ -95,6 +95,22 @@
     "scrim": {
       "$value": "{color.black}"
     },
+    "photoScrim": {
+      "$value": "{color.black}",
+      "$description": "Shop photo carousel: black, faded from state.photoScrim at the bottom edge of each photo to nothing, so the white dots hold their contrast on a pale photo (round 10; the Background scrim left a pale photo pale)"
+    },
+    "lightbox": {
+      "$value": "{color.black}",
+      "$description": "Photo viewer ground: black in both schemes, as Photos and Airbnb do, so a photo is the brightest thing on the screen"
+    },
+    "onLightbox": {
+      "$value": "{color.white}",
+      "$description": "Count and controls on the photo viewer: 21:1 on Lightbox"
+    },
+    "onLightboxMuted": {
+      "$value": { "colorSpace": "srgb", "components": [0.749, 0.749, 0.749], "hex": "#BFBFBF" },
+      "$description": "Hint under the photo on the viewer: white at 75% on Lightbox, 11.4:1"
+    },
     "onDestructive": {
       "$value": "{color.black}",
       "$description": "Label on a destructive fill"
@@ -127,7 +143,7 @@
       "accent": {
         "peach": {
           "wash": {
-            "$value": "{color.peach.900}",
+            "$value": "{color.peach.washDark}",
             "$description": "The light stripes of the awning band on the placeholder tile"
           },
           "tile": {
@@ -135,7 +151,7 @@
             "$description": "Placeholder tile, category card, the shop page header, the receipt header"
           },
           "ink": {
-            "$value": "{color.peach.200}",
+            "$value": "{color.peach.inkDark}",
             "$description": "Initials and the dark awning stripes on the tile"
           },
           "cardOnTile": {
@@ -145,7 +161,7 @@
         },
         "pistachio": {
           "wash": {
-            "$value": "{color.pistachio.900}",
+            "$value": "{color.pistachio.washDark}",
             "$description": "The light stripes of the awning band on the placeholder tile"
           },
           "tile": {
@@ -153,7 +169,7 @@
             "$description": "Placeholder tile, category card, the shop page header, the receipt header"
           },
           "ink": {
-            "$value": "{color.pistachio.200}",
+            "$value": "{color.pistachio.inkDark}",
             "$description": "Initials and the dark awning stripes on the tile"
           },
           "cardOnTile": {
@@ -163,7 +179,7 @@
         },
         "butter": {
           "wash": {
-            "$value": "{color.butter.900}",
+            "$value": "{color.butter.washDark}",
             "$description": "The light stripes of the awning band on the placeholder tile"
           },
           "tile": {
@@ -171,7 +187,7 @@
             "$description": "Placeholder tile, category card, the shop page header, the receipt header"
           },
           "ink": {
-            "$value": "{color.butter.200}",
+            "$value": "{color.butter.inkDark}",
             "$description": "Initials and the dark awning stripes on the tile"
           },
           "cardOnTile": {
@@ -181,7 +197,7 @@
         },
         "lavender": {
           "wash": {
-            "$value": "{color.lavender.900}",
+            "$value": "{color.lavender.washDark}",
             "$description": "The light stripes of the awning band on the placeholder tile"
           },
           "tile": {
@@ -189,7 +205,7 @@
             "$description": "Placeholder tile, category card, the shop page header, the receipt header"
           },
           "ink": {
-            "$value": "{color.lavender.200}",
+            "$value": "{color.lavender.inkDark}",
             "$description": "Initials and the dark awning stripes on the tile"
           },
           "cardOnTile": {
@@ -225,14 +241,14 @@
     },
     "sheet": {
       "$value": "{color.stone.200}",
-      "$description": "Sheet ground, one Stone step above the Background (L 0.20); rows inside a sheet take Muted (1.40:1) (shape.md, Sheets)"
+      "$description": "Sheet ground, one Stone step above the Background (L 0.22, 1.16:1 on the Background); rows inside a sheet take Muted (1.33:1) (shape.md, Sheets)"
     },
     "count": {
-      "$value": "{color.indigo.800}",
-      "$description": "The count on the Requests button, Indigo 800 in both modes"
+      "$value": "{color.indigo.300}",
+      "$description": "The count on the Requests button: Indigo 800 in light, Indigo 300 in dark (Indigo 800 on the dark Background is 2.24:1)"
     },
     "onCount": {
-      "$value": "{color.white}"
+      "$value": "{color.black}"
     },
     "glassEdge": {
       "$value": "{color.stone.150}",
@@ -247,18 +263,18 @@
       "$description": "Colour of the delicate card shadow"
     },
     "welcome": {
-      "$description": "Getting started in dark mode: the ramp runs the other way, Indigo 900 up to 700, under the same Foreground",
+      "$description": "Getting started in dark mode: Indigo 900, then the Peach and Pistachio dark tiles, under the same Foreground",
       "ground1": {
-        "$value": "{color.indigo.900}",
-        "$description": "Page 1; text 13.52:1"
+        "$value": "{color.indigo.800}",
+        "$description": "Page 1: Indigo 800, the splash's own ground in both modes, so the hand-off from the splash doesn't jump to another Indigo; text 8.75:1"
       },
       "ground2": {
-        "$value": "{color.indigo.800}",
-        "$description": "Page 2; text 8.39:1"
+        "$value": "{color.peach.tileDark}",
+        "$description": "Page 2, Peach dark tile; text 10.57:1"
       },
       "ground3": {
-        "$value": "{color.indigo.700}",
-        "$description": "Page 3; text 6.66:1"
+        "$value": "{color.pistachio.welcomeDark}",
+        "$description": "Page 3, a deeper green than the Pistachio dark tile, which read as olive on a full screen; text 11.5:1"
       }
     },
     "tonalOnTile": {
@@ -289,11 +305,61 @@
     },
     "grabber": {
       "$value": "{color.stone.445}",
-      "$description": "The sheet's grabber: Muted foreground at state.grabber in light; Stone 445 in full in dark (2.49:1, solid; Muted foreground at 38% rendered #514F4C, 2.19:1)"
+      "$description": "The sheet's grabber: Muted foreground at state.grabber in light; Stone 445 in full in dark (2.37:1, solid; Muted foreground at 38% rendered #514F4C, 2.19:1)"
+    },
+    "splash": {
+      "$description": "The splash and its intro (motion.md, Splash): Indigo 800, the brand colour, in both modes, with the mark in white and Indigo 300 (mark.md)",
+      "ground": {
+        "$value": "{color.indigo.800}",
+        "$description": "Splash ground, also the native splash colour; white on it 8.75:1"
+      },
+      "ink": {
+        "$value": "{color.white}",
+        "$description": "The mark's face and three stripes on the splash"
+      },
+      "soft": {
+        "$value": "{color.indigo.300}",
+        "$description": "The mark's two lighter stripes on the splash; 4.94:1 on the ground, 1.8:1 beside white"
+      }
+    },
+    "googleFill": {
+      "$value": "{color.brand.google.fillDark}"
+    },
+    "googleStroke": {
+      "$value": "{color.brand.google.strokeDark}"
+    },
+    "googleText": {
+      "$value": "{color.brand.google.textDark}"
+    },
+    "googleLogoBlue": {
+      "$value": "{color.brand.google.logoBlue}"
+    },
+    "googleLogoRed": {
+      "$value": "{color.brand.google.logoRed}"
+    },
+    "googleLogoYellow": {
+      "$value": "{color.brand.google.logoYellow}"
+    },
+    "googleLogoGreen": {
+      "$value": "{color.brand.google.logoGreen}"
+    },
+    "facebookLogoBlue": {
+      "$value": "{color.brand.facebook.blue}"
+    },
+    "facebookLogoF": {
+      "$value": "{color.brand.facebook.f}"
     }
   },
   "state": {
     "$type": "number",
+    "photoScrim": {
+      "$value": 0.4,
+      "$description": "Opacity of color.photoScrim (black) at the bottom edge of a shop photo"
+    },
+    "photoPill": {
+      "$value": 0.3,
+      "$description": "Opacity of the black pill the carousel's dots sit in, over the scrim"
+    },
     "tonalOnTile": {
       "$value": 0.06,
       "$description": "Dark: white at 6% over the tile, 1.19 to 1.20:1 on it (Muted was 1.08 to 1.20:1 and read as a dirty patch)"

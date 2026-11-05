@@ -46,3 +46,6 @@ example
 # `npm run fonts` downloads them from Fontshare; postinstall runs it.
 assets/fonts/*.ttf
 public/map/
+
+# Synthetic test users: screenshots and reports of the latest run
+e2e/out/

@@ -28,6 +28,8 @@ export { ChatBubble, SnuffleSender, chatGap, type ChatBubbleProps, type ChatGap,
 export { ChatBubbleExamples } from './components/ChatBubble/ChatBubble.examples';
 export { SnuffleMark, snuffleMarkWidth, type SnuffleMarkProps, type SnuffleMarkSize } from './components/SnuffleMark/SnuffleMark';
 export { SnuffleMarkExamples } from './components/SnuffleMark/SnuffleMark.examples';
+export { MarkIntro, MARK_INTRO_MS } from './components/MarkIntro/MarkIntro';
+export { MarkIntroExamples } from './components/MarkIntro/MarkIntro.examples';
 export { PageDots, type PageDotsProps } from './components/PageDots/PageDots';
 export { PageDotsExamples } from './components/PageDots/PageDots.examples';
 export { SignInButton, type SignInButtonProps, type SignInProvider } from './components/SignInButton/SignInButton';
@@ -61,13 +63,17 @@ export { OrderCard, type OrderCardProps, type OrderStep } from './components/Ord
 export { OrderCardExamples } from './components/OrderCard/OrderCard.examples';
 export { PaymentSheet, type PaymentSheetProps, type PaymentSheetStatus } from './components/PaymentSheet/PaymentSheet';
 export { PaymentSheetExamples } from './components/PaymentSheet/PaymentSheet.examples';
-export { RequestRow, type RequestRowProps, type RequestRowShop } from './components/RequestRow/RequestRow';
+export { RequestRow, type RequestRowProps } from './components/RequestRow/RequestRow';
 export { RequestRowExamples } from './components/RequestRow/RequestRow.examples';
 export { SegmentedControl, type Segment, type SegmentedControlProps } from './components/SegmentedControl/SegmentedControl';
 export { SegmentedControlExamples } from './components/SegmentedControl/SegmentedControl.examples';
 export { Sheet, SheetProvider, type SheetDetent, type SheetProps } from './components/Sheet/Sheet';
 export { SheetExamples } from './components/Sheet/Sheet.examples';
 export { ShopPageLayout, type ShopPageLayoutProps, type ShopPhoto } from './components/ShopPageLayout/ShopPageLayout';
+export { PhotoCarousel, type PhotoCarouselProps } from './components/PhotoCarousel/PhotoCarousel';
+export { PhotoCarouselExamples } from './components/PhotoCarousel/PhotoCarousel.examples';
+export { Lightbox, type LightboxProps } from './components/Lightbox/Lightbox';
+export { LightboxExamples } from './components/Lightbox/Lightbox.examples';
 export type { PhotoSource } from './internal/media';
 export { ShopPageLayoutExamples } from './components/ShopPageLayout/ShopPageLayout.examples';
 export { ShopRow, type RowPosition, type ShopRowProps } from './components/ShopRow/ShopRow';

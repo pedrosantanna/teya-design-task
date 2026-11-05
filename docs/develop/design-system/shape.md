@@ -68,9 +68,9 @@ One recipe for every glass element: the ask bar and the Requests circle, Back, C
 | Part | Light | Dark | Token |
 | --- | --- | --- | --- |
 | Fill, controls | Card #FFFFFF at 55% | Card #282523 at 55% | `state.glassFill` |
-| Fill, controls on an accent tile | White at 40% over the tile | White at 6% over the tile | `color.tonalOnTile`, `state.tonalOnTile` |
-| Fill, header buttons on a sheet | Glass, as controls | Muted #353230, solid (1.40:1 on the sheet; the glass circle was 1.09:1) | `color.muted` |
-| Fill, sheets | Sheet #DEDAD5, opaque | Sheet #191715, opaque | `color.sheet` |
+| Fill, controls on an accent tile | White at 55% over the tile | White at 6% over the tile | `color.tonalOnTile`, `state.tonalOnTile` |
+| Fill, header buttons on a sheet | Glass, as controls | Muted #323334, solid (1.33:1 on the sheet; the glass circle was 1.09:1) | `color.muted` |
+| Fill, sheets | Sheet #DEDAD5, opaque | Sheet #1C1D1E, opaque | `color.sheet` |
 | Blur (web) | 20 px | 20 px | `state.glassBlur` |
 | Saturation (web) | 1.6 | 1.6 | `state.glassSaturate` |
 | Saturation (web), controls on an accent tile | 1.6 | 1 (at 1.6 the dark Back was the most saturated thing on the screen) | `state.glassSaturateOnTile` |

@@ -1,11 +1,11 @@
 # Protótipo
 
-O app do comprador rodando no navegador, a partir do mesmo código Expo que roda no iPhone e no Android. O conteúdo é simulado; as lojas respondem por um roteiro. Aperte D, ou o botão redondo, para abrir o state debugger e trocar a persona, a plataforma, o passo da jornada e o estado de cada pedido, resposta e compra.
+O app do comprador rodando no navegador, a partir do mesmo código Expo que roda no iPhone e no Android. O conteúdo é simulado; as lojas respondem por um roteiro. Aperte D, ou o botão no canto superior direito, para abrir o state debugger, um painel encaixado à direita do celular, e trocar a persona, a plataforma, o passo da jornada e o estado de cada pedido, resposta e compra.
 
 ```summary
 Takeaways:
 - Um app Expo só gera iOS, Android e esta versão web (decisão 038); a moldura troca entre um iPhone e um Pixel junto com a plataforma.
-- O state debugger define persona (Sam ou Jess), plataforma, claro ou escuro, passo da jornada, os estados do modelo conceitual e o conjunto de conteúdo; o relógio da simulação pode ser pausado ou avançado.
+- O state debugger é um painel encaixado à direita do celular, em seções recolhíveis como o painel direito do Figma. Define persona (Sam ou Jess), plataforma, claro ou escuro, passo da jornada, os estados do modelo conceitual e o conjunto de conteúdo; o relógio da simulação pode ser pausado ou avançado.
 - A jornada do Sam roda do começo ao fim: pedir, respostas chegando, comprar, esperar a loja, retirar; cada caminho de falha do app flow v7 está a um clique.
 - Doze lojas inventadas em volta da Blythe Road são as únicas lojas do protótipo, e cada uma vem de algo que ouvi na Descoberta.
 Call:
@@ -20,7 +20,7 @@ Trade-offs:
 - As fotos são de lojas reais em outros lugares da Grã-Bretanha e da Europa, então algumas mostram o nome de outra loja na placa.
 ```
 
-Abra sozinho para usar a janela inteira: `app-web/index.html`. Acrescente `?debug=0` para esconder o debugger, `?os=android` para Android, ou `?step=` para começar num passo.
+Abra sozinho para usar a janela inteira: `app-web/index.html`. Em janelas mais estreitas que 800 px o painel aparece sobreposto, vindo da direita, com um botão de fechar, em vez de encaixado. Acrescente `?debug=0` para esconder o debugger, `?os=android` para Android, ou `?step=` para começar num passo.
 
 ## Conteúdo simulado
 

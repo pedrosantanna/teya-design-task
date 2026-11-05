@@ -14,6 +14,8 @@ import { Text } from '../Text/Text';
 export type RatingSummaryTag = { tag: string; count: number; up: boolean };
 
 export type RatingSummaryProps = {
+  /** "Would you go back?", a footnote above the title: the one question buyers answer. */
+  question?: string;
   /** "92% would go back", or "3 buyers so far" below 5 ratings. */
   title: string;
   /** "38 buyers", after the title; none below 5 ratings. */
@@ -26,10 +28,15 @@ export type RatingSummaryProps = {
   hasShare?: boolean;
 };
 
-export const RatingSummary = memo(function RatingSummary({ title, detail, accessibilityLabel, tags = [], hasShare = false }: RatingSummaryProps) {
+export const RatingSummary = memo(function RatingSummary({ question, title, detail, accessibilityLabel, tags = [], hasShare = false }: RatingSummaryProps) {
   const spokenTags = tags.map((t) => `${t.tag}, ${t.count}`).join('; ');
   return (
     <View accessible accessibilityLabel={spokenTags ? `${accessibilityLabel}. ${spokenTags}` : accessibilityLabel} style={styles.root}>
+      {question ? (
+        <Text variant="footnote" color="mutedForeground">
+          {question}
+        </Text>
+      ) : null}
       <View style={styles.head}>
         {hasShare ? <Icon icon={ThumbsUpIcon} size="title3" color="foreground" /> : null}
         <View style={styles.grow}>

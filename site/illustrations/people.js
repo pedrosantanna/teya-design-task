@@ -1,10 +1,10 @@
 // People for the street scenes and a gallery row of them. Drawn like the scooter's rider: no face, a head,
-// a capsule body, capsule arms and legs, a haircut or a hat; very few parts, so a figure still reads at a
-// few dozen pixels. Standalone figures are about 1.7 m at 1 unit = 1 m; in the scenes they are scaled by PS.
+// a capsule body, capsule arms, two-segment legs (thigh and shin) with a shoe, a haircut or a hat; very few
+// parts, so a figure still reads at a few dozen pixels. Standalone figures are about 1.7 m at 1 unit = 1 m; in the scenes they are scaled by PS.
 //
 // buildPerson(THREE, P, opts) returns a group standing on y = 0, facing +z, with the joints in userData so
 // stride() can pose a walk. opts: { coat, legs, skin, hair, top: 'bob' | 'short' | 'hat', long (a long coat),
-// bag (a bag in the left hand, its colour), lead (the right arm holds a lead), pose: 'walk' | 'stand' | 'sit', seat (hip height when
+// shoes (colour), bag (a bag in the left hand, its colour), lead (the right arm holds a lead), pose: 'walk' | 'stand' | 'sit', seat (hip height when
 // sitting), reach (sitting arms forward, 0–1), shapes (shared geometries) }.
 // buildDog(THREE, P, opts) is a terrier-sized block dog on y = 0 facing +z: { coat, scale, shapes }.
 // walkers() moves people (and dogs on leads) along polyline loops on the scene's pavements and crossings.
@@ -12,6 +12,8 @@ import kit from './kit.js';
 
 export const PS = 0.28; // people in the scenes: 1.7 m ≈ 0.48 units, a little smaller than the furniture scale
 const HIP = 0.84, SHOULDER = 1.38, ARM = 0.6, STRIDE = 1.3; // metres; STRIDE: ground covered by one leg cycle
+const THIGH = 0.42, SHIN = 0.42; // THIGH + SHIN = HIP: the sole of a straight leg is on the ground
+const HEM = 0.52; // a long coat's hem: above the knee of a standing figure, so only shin and shoe show below it
 
 // Geometries shared by every figure in one scene (the viewer disposes them once, with the scene).
 export function shapes(THREE) {
@@ -21,10 +23,14 @@ export function shapes(THREE) {
   const box = (w, h, d, y = 0) => { const g = new THREE.BoxGeometry(w, h, d); g.translate(0, y, 0); return g; };
   const torso = new THREE.CapsuleGeometry(0.17, 0.44, 8, 24);
   torso.translate(0, 1.14, 0);
-  const coat = new THREE.LatheGeometry([[0, 0.5], [0.2, 0.5], [0.185, 0.95], [0.17, 1.3], [0.13, 1.48], [0, 1.54]]
-    .map(([r, y]) => new THREE.Vector2(r, y)), 24);
+  // A long coat in two pieces: the body (from the chest down to the waist) hangs from the shoulders; the skirt is
+  // an open flare that hangs from the hips, wide enough at the hem to clear a thigh at full stride.
+  const lathe = (pts) => new THREE.LatheGeometry(pts.map(([r, y]) => new THREE.Vector2(r, y)), 24);
+  const coat = lathe([[0.186, 0.9], [0.185, 0.95], [0.17, 1.3], [0.13, 1.48], [0, 1.54]]);
+  const skirt = lathe([[0.3, HEM], [0.285, 0.62], [0.25, 0.74], [0.215, 0.86], [0.192, 0.96], [0.185, 1.0]]);
+  const shoe = new THREE.BoxGeometry(0.11, 0.08, 0.25); shoe.translate(0, -0.04, 0.05);
   return {
-    leg: limb(0.075, HIP), arm: limb(0.055, ARM), torso, coat,
+    thigh: limb(0.075, THIGH), shin: limb(0.066, SHIN - 0.04), shoe, arm: limb(0.055, ARM), torso, coat, skirt,
     head: new THREE.SphereGeometry(0.125, 28, 14),
     bob: cap(0.14, Math.PI * 0.6), short: cap(0.134, Math.PI * 0.42),
     brim: new THREE.CylinderGeometry(0.2, 0.2, 0.025, 28), crown: new THREE.CylinderGeometry(0.115, 0.125, 0.12, 28),
@@ -53,14 +59,27 @@ export function buildPerson(THREE, P, o = {}) {
       rig.add(k.capsule(knee, foot, 0.068, legsC, { part: legPart }));
     });
   } else {
+    // Thigh from the hip, shin from the knee, a shoe at the ankle; stride() poses them. They share one outline
+    // part, so no line is drawn at the knee or the ankle.
     [1, -1].forEach(s => {
-      const l = k.mesh(S.leg, legsC, { pos: [0.085 * s, HIP, 0], part: legPart });
-      rig.add(l); legs.push(l);
+      const thigh = k.mesh(S.thigh, legsC, { pos: [0.085 * s, HIP, 0], part: legPart });
+      const shin = k.mesh(S.shin, legsC, { pos: [0, -THIGH, 0], part: legPart });
+      const shoe = k.mesh(S.shoe, o.shoes || P.biscuit.darkMuted, { pos: [0, -SHIN + 0.08, 0], part: `ps${id}` });
+      shin.add(shoe);
+      thigh.add(shin);
+      rig.add(thigh); legs.push({ thigh, shin, shoe });
     });
   }
   const upper = k.group([], [0, dy, 0]);
   rig.add(upper);
-  upper.add(o.long ? k.mesh(S.coat, coat, { scale: [1, 1, 0.8], part: body }) : k.mesh(S.torso, coat, { scale: [1, 1, 0.74], part: body }));
+  // A long coat: the skirt hangs from the hips (a pivot at hip height, so it swings like cloth), the body from the
+  // shoulders. Short coats are just the torso.
+  let hem = null;
+  if (o.long) {
+    upper.add(k.mesh(S.coat, coat, { scale: [1, 1, 0.8], part: body }));
+    hem = k.group([k.mesh(S.skirt, coat, { pos: [0, -HIP, 0], scale: [1, 1, 0.92], part: body })], [0, HIP + dy, 0]);
+    rig.add(hem);
+  } else upper.add(k.mesh(S.torso, coat, { scale: [1, 1, 0.74], part: body }));
   const arms = [1, -1].map(s => {
     const a = k.group([k.mesh(S.arm, coat, { part: body })], [0.215 * s, SHOULDER, 0]);
     upper.add(a);
@@ -82,18 +101,42 @@ export function buildPerson(THREE, P, o = {}) {
   arms.forEach((a, i) => { a.rotation.z = (i ? -1 : 1) * 0.06; });
   if (pose === 'sit') arms.forEach(a => { a.rotation.x = -0.5 - (o.reach || 0) * 0.7; });
   if (o.lead) arms[1].rotation.x = -0.45;
-  person.userData = { rig, legs, arms, upper, lead: !!o.lead, bag: !!o.bag, pose };
+  person.userData = { rig, legs, arms, upper, hem, lead: !!o.lead, bag: !!o.bag, pose };
   return person;
 }
 
-// One frame of the walk: phase in radians (2π per stride). The swung leg lifts the hip, so the rig drops
-// by the same amount and the planted foot stays on the ground; the arms swing against the legs.
-export function stride(person, phase, amp = 0.36) {
-  const u = person.userData, a = amp * Math.sin(phase);
-  u.legs[0].rotation.x = a; u.legs[1].rotation.x = -a;
+// One frame of the walk: phase in radians (2π per stride, two steps). Each leg follows the four poses of the
+// contact walk: contact (leg forward and straight, heel down), down (the weight lands, the knee gives, the hips are
+// lowest), passing (the swung leg's knee is bent and under the body) and up (the hips are highest, the toe leaves
+// the ground). The hips ride on whichever ankle is lower, so the planted foot stays on the ground; the arms swing
+// against the legs, and a long coat's skirt lags the legs and swings against the one in front.
+const AMP = 0.42, KNEE = 0.95, LAG = 0.5; // thigh swing (rad), knee bend at passing, coat lag (rad of phase, about 1.5 frames at 20 fps)
+export function stride(person, phase, amp = AMP) {
+  const u = person.userData;
+  let low = 0;
+  u.legs.forEach((leg, i) => {
+    const psi = phase + (i ? 0 : Math.PI);                        // leg 1 swings forward when leg 0 is back
+    const sn = Math.sin(psi), cs = Math.cos(psi);
+    const f = amp * sn;                                           // thigh angle, positive = forward
+    const kn = KNEE * Math.max(0, cs) + 0.14 * Math.max(0, -cs) * Math.max(0, sn); // swing bend, then the landing give
+    const toe = -0.5 * Math.max(0, -sn) + 0.2 * Math.max(0, sn);  // shoe pitch: toe down at push-off, up at contact
+    leg.thigh.rotation.x = -f;
+    leg.shin.rotation.x = kn;
+    leg.shoe.rotation.x = f - kn - toe;                           // keeps the shoe at its own pitch, whatever the leg does
+    low = Math.min(low, -(THIGH * Math.cos(f) + SHIN * Math.cos(f - kn)));
+  });
+  const a = amp * Math.sin(phase) * (0.36 / AMP);
   u.arms[0].rotation.x = -a * (u.bag ? 0.35 : 0.8);
   if (!u.lead) u.arms[1].rotation.x = a * 0.8;
-  u.rig.position.y = -HIP * (1 - Math.cos(a));
+  const dy = -(HIP + low);                                        // 0 when the legs are straight under the hips
+  u.rig.position.y = dy;
+  if (u.hem) {
+    // the skirt is pivoted at the hips, so it rides the bob too; it lags the legs and swings against the leg in front
+    const lagged = phase - LAG;
+    u.hem.position.y = HIP + 0;
+    u.hem.rotation.x = 0.1 * Math.sin(lagged);
+    u.hem.rotation.z = 0.05 * Math.cos(lagged);
+  }
 }
 
 export function buildDog(THREE, P, o = {}) {

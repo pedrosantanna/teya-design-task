@@ -7,7 +7,7 @@ import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-cont
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { Button, ListRow, NavBar, SegmentedControl, Text, screenMargin, useNavBarHeight } from '@/design-system';
-import { sim, unitFor, useContent } from '@/store';
+import { lookUntil, sim, unitFor, useContent, useSim } from '@/store';
 
 const SEGMENTS = [
   { value: 'once', label: 'Once' },
@@ -22,7 +22,10 @@ export default function KeepLooking() {
   const insets = useSafeAreaInsets();
   const top = useNavBarHeight();
   const content = useContent();
-  const [repeat, setRepeat] = useState('once');
+  // Change from the chat opens with what is running now.
+  const running = useSim((s) => s.looking);
+  const [repeat, setRepeat] = useState(running?.repeat ? 'weekly' : 'once');
+  const day = running?.day ?? 'Friday';
   const margin = screenMargin(theme, frame.width);
   const them = content.active.plural ? 'them' : 'it';
   const close = () => (router.canGoBack() ? router.back() : router.navigate({ pathname: '/requests/[id]', params: { id: content.active.id } }));
@@ -38,10 +41,12 @@ export default function KeepLooking() {
         <Text variant="headline">{`${content.active.title}, ${content.active.quantity} ${unitFor(content, content.active.quantity)}`}</Text>
         <View>
           <ListRow icon={Location01Icon} title="Where" value={content.active.area} position="first" />
-          <ListRow icon={Calendar03Icon} title="Until" value="Fri 6 Nov" position="last" />
+          <ListRow icon={Calendar03Icon} title="Until" value={lookUntil(repeat === 'weekly')} position="last" />
         </View>
         <Text variant="footnote" color="mutedForeground">
-          {`You'll get one message when a shop has ${them}. Nothing is bought until you tap Buy.`}
+          {repeat === 'weekly'
+            ? `I'll ask again every ${day} and message you each time a shop near you has ${them}. Nothing is bought until you tap Buy.`
+            : `You'll get one message when a shop has ${them}. Nothing is bought until you tap Buy.`}
         </Text>
       </ScrollView>
       <View style={styles.footer(margin, insets.bottom)}>

@@ -413,5 +413,39 @@ I chose the full colour with lighter rows over a dark ground with a band of the 
 **Why:** Card #282523 rows were darker than every dark tile (1.30 to 1.44:1 the wrong way), so they read as holes cut into the colour. A dark ground with a fading band would have lost the colour that ties the screen to the card it zoomed out of. The leading circle had been kept so it could dissolve into Back at the top left; the morph into New Request comes from the capsule, which now starts at the screen margin as the composer does, so nothing is lost by following Apple's placement.
 **Open:** the shop page still puts Card rows on its dark tile (1.30 to 1.44:1, darker); whether it takes the same cards is not decided. The selected street chip stays Card with Indigo 300, since Indigo 300 is under AA on the tinted cards.
 
+## 051 · A calmer, cooler dark mode
+**2026-11-05 · Decided**
+
+Dark mode takes lower-chroma accents on a cooler neutral. The tiles keep their hues at about 55% of the chroma: Peach #52352C, Pistachio #34422C, Butter #403925, Lavender #3E3950, with tinted rows on them (#5C4F4B, #4F554B, #565249, #53515C). The Stone neutral moves to hue 270 at half its chroma: Background #0B0C0D, Sheet #171719, Card #252627, Muted #323334, Foreground #FAFAFB. Shop accents in dark take new wash and ink steps at the same share of chroma. The dark sheet moved to #1C1D1E so it separates from the background at 1.16:1.
+
+I chose this after comparing four options on the identity board (round 10): today's dark accents, the light accents used unchanged in dark, lower-chroma accents, and a cooler neutral.
+
+**Why:** today's tiles read as brown, green and olive. The light accents made every tile the brightest thing on screen. Lower chroma keeps the hue order and the tile-over-card hierarchy, and every text pair still passes AA (muted text on a tile went from 4.58 to 4.66:1 at its lowest). The cooler neutral changes little on its own, but it lets the warm tiles stand apart from a plain grey.
+**Open:** the Snuffle bubble in dark (Lavender 900) still has the old chroma.
+
+## 052 · Promoted on the shop page, not on the tile
+**2026-11-05 · Decided**
+
+Nearby's tiles carry no Promoted or New badge. A paid placement is labelled on the shop page, as a "Promoted" line on the shop card.
+
+**Why:** the tiles already sit under a heading that says what the row is, and the badges made Nearby busy. UK advertising rules (the CAP code) expect a paid placement to be identifiable, so the label moves rather than disappears.
+**Open:** whether the rail itself needs an explanation of how placement works.
+
+## 053 · Categories ordered by what is open near you
+**2026-11-05 · Assumption**
+
+Browse by category orders kinds by how many shops of that kind are open now in the shopper's area, with ties broken by a fixed everyday order (café, bakery, chemist, newsagent, butcher, deli, florist, hardware, …). Kinds with nothing open go last, and colours are spread so neighbours differ.
+
+**Why:** a research agent found that Deliveroo personalises by past orders and time of day, and no other app publishes its rule. With no usage data, supply near the shopper is the most useful signal the prototype has.
+**Open:** per-shop opening hours; the prototype has one global hours state.
+
+## 054 · Synthetic test users test flows, not demand
+**2026-11-05 · Decided**
+
+Scripted test users built from Sam's and Jess's goals drive the web build through eight scenarios with Playwright, and record steps, time, dead ends, unnamed controls, small targets and errors. An optional agent review reads the recorded steps against the screen-review checklist and is labelled as a heuristic review.
+
+**Why:** they find functional and usability breaks quickly and repeatably, in the persona's own terms. NN/g and recent papers warn that simulated users are over-optimistic and homogeneous, so I keep them out of research: they don't validate demand, don't stand in for shoppers or shopkeepers, and don't replace the proof of concept.
+**Open:** nothing from the first run; an agent fixed its breaks and the second run reached every goal. Three targets are still under 44 pt on the web.
+
 ## Still open
 

@@ -13,9 +13,11 @@ Call:
 - After a design review found component specs, states, platform equivalents and content rules missing, I asked for the design system to be complete enough to build the prototype from.
 - I chose 12-hour times in all copy, including timestamps, and kept these rules provisional (decision 043).
 - Later I asked for ratings on the shop page. I chose a thumbs up or down over stars and a dispute for shops, and set the rules from the DMCC Act and the CMA's fake reviews guidance (decision 047).
+- In round 10 I asked for the Requests list to carry Snuffle's latest status in its own voice for every state, with no dots, icons or button in the row.
 AI:
 - An agent reviewed the design system against the v7 screens and found the time formats mixed (24-hour timestamps beside "by 4pm"). Another agent wrote this page from the v7 copy and the conceptual model.
 - An agent read Schedule 20 of the DMCC Act 2024 and the CMA's guidance (CMA208) and turned each duty into a rule for Snuffle's screens.
+- An agent wrote a preview line for each request and order state in the conceptual model and moved the preview into one function in the store.
 Trade-offs:
 - 12-hour times match how people in the UK say them and GOV.UK's style, and take a little more width than 24-hour times in rows.
 - A plain, unapologetic voice can read as cold when something fails; saying the money state first is meant to carry the care instead.
@@ -33,6 +35,35 @@ Trade-offs:
 | Never salesy | No exclamation marks, no urgency it didn't get from a shop, no "great deal" | "Without buying, they may sell before you get there." |
 | No apologetic filler | No "Sorry", "Unfortunately" or "I'm afraid" before an outcome; the facts come first | "Paper & Co hasn't confirmed in 10 minutes, so you haven't been charged." |
 | Asks only what's missing | Place and deadline are filled from what the shopper typed | "Will you collect them, or should I check delivery too?" |
+
+### Request row previews
+
+The preview line of a request row is Snuffle's latest status in its own voice, written "Snuffle: …". The rule is first person, short, the state's news first. Once an order exists, its state sets the line.
+
+| State | Preview line |
+| --- | --- |
+| No request yet | Snuffle: What do you need? |
+| Asking | Snuffle: Asking 6 shops |
+| One shop has it | Snuffle: Found it at 1 shop |
+| Some shops have it | Snuffle: Found them at 2 shops |
+| Needs you | Snuffle: Rossi's needs your answer |
+| Looking | Snuffle: Still looking until Fri 6 Nov |
+| Every Friday | Snuffle: I'll ask again every Friday until Fri 4 Dec |
+| Not found | Snuffle: No one had it. Want me to keep looking? |
+| Closed | Snuffle: Closed. Nothing was bought (also what a request closed by swipe shows) |
+| Order waiting for the shop | Snuffle: Waiting for Rossi's. You haven't been charged |
+| Paid | Snuffle: Paid. Rossi's is setting it aside |
+| Ready | Snuffle: Ready to collect till 6pm |
+| Extended | Snuffle: Extended. Collect by Mon 16 Nov |
+| On its way | Snuffle: On its way from Paper & Co |
+| Delivered | Snuffle: Delivered. How was Paper & Co? |
+| Delivered and rated | Snuffle: Delivered. Thanks for rating Paper & Co |
+| Collected | Snuffle: How was Brook Hardware? |
+| Rated | Snuffle: Thanks for rating Brook Hardware |
+| Not confirmed | Snuffle: Paper & Co didn't confirm. You haven't been charged |
+| Sold | Snuffle: Paper & Co sold out. You haven't been charged |
+| Cancelled | Snuffle: Cancelled. I've refunded £29.98 |
+| Not collected | Snuffle: Not collected, so I've refunded £29.98 |
 
 ## Snuffle and the shops
 
@@ -53,6 +84,9 @@ Every message after something goes wrong, or after an order ends, has three part
 | Payment declined | "Apple Pay declined the payment, so you haven't been charged and Paper & Co hasn't been asked to set them aside." | none: no order exists | "Try again" |
 | Not collected | "You didn't collect by Mon 9 Nov, so your order at Paper & Co is cancelled. I've refunded £29.98 to your card." | Not collected · refunded | "Ask Paper & Co again", "Keep looking" |
 | Nothing found in time | "None of the 6 shops has them before 4pm: 4 said no and 2 didn't reply." | Not found | "Ask further away", "Keep looking" |
+| Asked further away | "I'm asking three more shops, up to 30 minutes away. I'll tell you as they answer." Then the shops' answers; if none has it: "None of the 3 shops further away has them either. I can keep looking and tell you when one has them." | Not found, until a shop answers | "Keep looking" |
+| Standing request | "I'll ask Rossi's again every week, on Fridays, until Fri 4 Dec, and tell you what they say." (an ask that says "every Friday") | Every Friday | Change, Stop |
+| Search stopped | "Done. I've stopped looking, and nothing was bought." (a standing request: "Done. I won't ask again, and nothing was bought.") | Closed | none |
 
 ## Button labels
 

@@ -6,8 +6,8 @@ The top of "What buyers say" on the shop page: the share who would go back and h
 
 | Prop | Type | Default | Notes |
 | --- | --- | --- | --- |
-| `title` | string | required | "92% would go back"; below 5 ratings the count alone, "3 buyers so far" or "No buyers have rated it yet" ("New on Snuffle" is the stock line of How they do on Snuffle, so it isn't repeated here) |
-| `detail` | string | none | "38 buyers", after " · " in Subheadline, Muted foreground; only with a share |
+| `title` | string | required | "92% would go back"; below 5 ratings the count alone, "3 buyers so far" or "No ratings yet" ("New on Snuffle" is the stock line of How they do on Snuffle, so it isn't repeated here) |
+| `detail` | string | none | "38 buyers", after " · " in Subheadline, Muted foreground; with a share; with no ratings "Snuffle has asked them 4 times" |
 | `accessibilityLabel` | string | required | "Would go back, 92 percent of 38 buyers"; the tags are read after it |
 | `tags` | `{ tag, count, up }[]` | `[]` | At most five; a thumbs-down tag leads with the ThumbsDown symbol |
 | `hasShare` | boolean | `false` | The ThumbsUp symbol leads the title when a share shows |

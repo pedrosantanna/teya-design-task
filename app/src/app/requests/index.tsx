@@ -20,12 +20,11 @@ import {
   useNavBarHeight,
   useNavBarScroll,
   type PhotoSource,
-  type RequestRowShop,
   type ShopAccentName,
   type StatusTone,
 } from '@/design-system';
 import { imageSource } from '@/content/images';
-import { requestFilter, shopAccent, shopById, sim, twelveHour, useActiveRequestRow, useApp, useContent, useSim } from '@/store';
+import { requestFilter, requestPreview, shopAccent, shopById, sim, twelveHour, useActiveRequestRow, useApp, useContent, useSim } from '@/store';
 
 type Filter = 'All' | 'Needs you' | 'Looking' | 'Waiting' | 'Done';
 const FILTERS: Filter[] = ['All', 'Needs you', 'Looking', 'Waiting', 'Done'];
@@ -47,15 +46,16 @@ type Row = {
   filter: Exclude<Filter, 'All'>;
   image: PhotoSource;
   accent?: ShopAccentName;
-  logos: RequestRowShop[];
   unread: number;
-  action?: string;
 };
 
 // Requests, full screen (v7 frame "Requests"): every request as a row with one status label, filters that
 // group the states, and the ask bar. Zooms open from the round Requests button on Nearby (decision 026, iOS 26
 // patterns): the native zoom with its interactive dismiss on iOS, a view transition on the web, a container
 // transform on Android. A request's chat pushes from the side.
+/** A request closed by swipe reads like any closed request: Snuffle's own line. */
+const CLOSED_PREVIEW = requestPreview('closed', 'none', { asked: 0, have: 0, shop: '', openUntil: '', extendedTo: '', total: '', rated: false });
+
 export default function Requests() {
   const { theme } = useUnistyles();
   const frame = useSafeAreaFrame();
@@ -65,7 +65,6 @@ export default function Requests() {
   const top = useNavBarHeight();
   const request = useApp('request');
   const order = useApp('order');
-  const answers = useApp('answers');
   const stage = useSim((s) => s.stage);
   const active = useActiveRequestRow();
   const [filter, setFilter] = useState<Filter>('All');
@@ -75,11 +74,6 @@ export default function Requests() {
 
   const rows: Row[] = [];
   if (active && (request !== 'none' || stage !== 'none')) {
-    const logos = content.active.offers
-      .filter((o) => answers[o.shopId] && answers[o.shopId] !== 'asked' && answers[o.shopId] !== 'seen' && answers[o.shopId] !== 'doesntHave')
-      .slice(0, 3)
-      .map((o) => shopById(content, o.shopId))
-      .flatMap((s) => (s ? [{ name: s.name, accent: shopAccent(s) }] : []));
     rows.push({
       id: content.active.id,
       name: content.active.title,
@@ -90,7 +84,6 @@ export default function Requests() {
       filter: requestFilter(request === 'none' ? 'asking' : request, order),
       image: imageSource(content.active.image, 56),
       accent: order !== 'none' ? shopAccent(shopById(content, content.order.shopId)) : undefined,
-      logos,
       unread: active.unread,
     });
   }
@@ -104,13 +97,11 @@ export default function Requests() {
       tone: r.state === 'needsYou' ? 'needsYou' : r.state === 'collected' ? 'success' : 'default',
       filter: r.state === 'collected' ? 'Done' : requestFilter(r.state, 'none'),
       image: imageSource(r.image, 56),
-      logos: [],
       unread: r.state === 'needsYou' ? 1 : 0,
-      action: r.action,
     });
   }
   const shown = rows
-    .map((r) => (closed.includes(r.id) ? { ...r, status: 'Closed', tone: 'default' as const, filter: 'Done' as const, action: undefined, unread: 0 } : r))
+    .map((r) => (closed.includes(r.id) ? { ...r, preview: CLOSED_PREVIEW, status: 'Closed', tone: 'default' as const, filter: 'Done' as const, unread: 0 } : r))
     .filter((r) => filter === 'All' || r.filter === filter);
   const needsYou = rows.filter((r) => r.filter === 'Needs you' && !closed.includes(r.id)).length;
 
@@ -153,10 +144,7 @@ export default function Requests() {
                 tone={r.tone}
                 image={r.image}
                 accent={r.accent}
-                shopLogos={r.logos}
                 unread={r.unread}
-                actionLabel={r.action}
-                onAction={open}
                 onPress={open}
                 onClose={closed.includes(r.id) ? undefined : close}
               />

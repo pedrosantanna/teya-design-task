@@ -35,7 +35,7 @@ const embedded = inIframe();
 /** Below this window width an unforced frame stays off: the page is on a phone. */
 const PHONE_WIDTH = 600;
 /** From this window width the debugger panel docks beside the frame instead of floating over it. */
-const DOCK_WIDTH = 900;
+const DOCK_WIDTH = 800;
 
 export type FrameLayout = {
   framed: boolean;

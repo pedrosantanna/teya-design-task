@@ -7,7 +7,8 @@ export type IllustrationName = 'basket' | 'box' | 'crossroads' | 'quietstreet' |
 /** welcome: Getting started, each object on its own page's Indigo ground (scripts/illustrations/manifest.json, welcome). */
 export type IllustrationGround = 'background' | 'card' | 'welcome';
 export type IllustrationScheme = 'light' | 'dark';
-export type IllustrationClip = { source: number; ms: number };
+/** An MP4 (video, H.264, baked on the ground, for flat grounds) and/or an animated WebP (source, with alpha); ms is its length. */
+export type IllustrationClip = { video?: number; source?: number; ms: number };
 export type IllustrationAsset = { still: number; entry?: IllustrationClip; idle?: IllustrationClip };
 type Grounds = Partial<Record<`${IllustrationGround}-${IllustrationScheme}`, Partial<Record<IllustrationSize, IllustrationAsset>>>>;
 
@@ -15,18 +16,18 @@ type Grounds = Partial<Record<`${IllustrationGround}-${IllustrationScheme}`, Par
 export const ILLUSTRATIONS: Record<IllustrationName, Grounds> = {
   basket: {
     'card-dark': {
-      large: { still: require('../../../../assets/illustrations/basket.card-dark.120.png'), entry: { source: require('../../../../assets/illustrations/basket-entry.card-dark.120.webp'), ms: 2000 } },
+      large: { still: require('../../../../assets/illustrations/basket.card-dark.120.png'), entry: { video: require('../../../../assets/illustrations/basket-entry.card-dark.120.mp4'), ms: 2000 } },
     },
     'card-light': {
-      large: { still: require('../../../../assets/illustrations/basket.card-light.120.png'), entry: { source: require('../../../../assets/illustrations/basket-entry.card-light.120.webp'), ms: 2000 } },
+      large: { still: require('../../../../assets/illustrations/basket.card-light.120.png'), entry: { video: require('../../../../assets/illustrations/basket-entry.card-light.120.mp4'), ms: 2000 } },
     },
   },
   box: {
     'card-dark': {
-      large: { still: require('../../../../assets/illustrations/box.card-dark.120.png'), entry: { source: require('../../../../assets/illustrations/box-entry.card-dark.120.webp'), ms: 1800 } },
+      large: { still: require('../../../../assets/illustrations/box.card-dark.120.png'), entry: { video: require('../../../../assets/illustrations/box-entry.card-dark.120.mp4'), ms: 1800 } },
     },
     'card-light': {
-      large: { still: require('../../../../assets/illustrations/box.card-light.120.png'), entry: { source: require('../../../../assets/illustrations/box-entry.card-light.120.webp'), ms: 1800 } },
+      large: { still: require('../../../../assets/illustrations/box.card-light.120.png'), entry: { video: require('../../../../assets/illustrations/box-entry.card-light.120.mp4'), ms: 1800 } },
     },
     'welcome-dark': {
       welcome: { still: require('../../../../assets/illustrations/box.welcome-dark.240.png'), entry: { source: require('../../../../assets/illustrations/box-entry.welcome-dark.240.webp'), ms: 1800 } },
@@ -37,10 +38,10 @@ export const ILLUSTRATIONS: Record<IllustrationName, Grounds> = {
   },
   crossroads: {
     'background-dark': {
-      large: { still: require('../../../../assets/illustrations/crossroads.background-dark.120.png'), entry: { source: require('../../../../assets/illustrations/crossroads-entry.background-dark.120.webp'), ms: 2700 } },
+      large: { still: require('../../../../assets/illustrations/crossroads.background-dark.120.png'), entry: { video: require('../../../../assets/illustrations/crossroads-entry.background-dark.120.mp4'), ms: 2700 } },
     },
     'background-light': {
-      large: { still: require('../../../../assets/illustrations/crossroads.background-light.120.png'), entry: { source: require('../../../../assets/illustrations/crossroads-entry.background-light.120.webp'), ms: 2700 } },
+      large: { still: require('../../../../assets/illustrations/crossroads.background-light.120.png'), entry: { video: require('../../../../assets/illustrations/crossroads-entry.background-light.120.mp4'), ms: 2700 } },
     },
     'welcome-dark': {
       welcome: { still: require('../../../../assets/illustrations/crossroads.welcome-dark.240.png'), entry: { source: require('../../../../assets/illustrations/crossroads-entry.welcome-dark.240.webp'), ms: 2900 } },
@@ -51,28 +52,28 @@ export const ILLUSTRATIONS: Record<IllustrationName, Grounds> = {
   },
   quietstreet: {
     'background-dark': {
-      large: { still: require('../../../../assets/illustrations/quietstreet.background-dark.120.png'), entry: { source: require('../../../../assets/illustrations/quietstreet-entry.background-dark.120.webp'), ms: 2250 } },
+      large: { still: require('../../../../assets/illustrations/quietstreet.background-dark.120.png'), entry: { video: require('../../../../assets/illustrations/quietstreet-entry.background-dark.120.mp4'), ms: 2250 } },
       hero: { still: require('../../../../assets/illustrations/quietstreet.background-dark.220.png') },
     },
     'background-light': {
-      large: { still: require('../../../../assets/illustrations/quietstreet.background-light.120.png'), entry: { source: require('../../../../assets/illustrations/quietstreet-entry.background-light.120.webp'), ms: 2250 } },
+      large: { still: require('../../../../assets/illustrations/quietstreet.background-light.120.png'), entry: { video: require('../../../../assets/illustrations/quietstreet-entry.background-light.120.mp4'), ms: 2250 } },
       hero: { still: require('../../../../assets/illustrations/quietstreet.background-light.220.png') },
     },
   },
   scooter: {
     'background-dark': {
-      large: { still: require('../../../../assets/illustrations/scooter.background-dark.120.png'), entry: { source: require('../../../../assets/illustrations/scooter-entry.background-dark.120.webp'), ms: 2200 }, idle: { source: require('../../../../assets/illustrations/scooter-idle.background-dark.120.webp'), ms: 1125 } },
+      large: { still: require('../../../../assets/illustrations/scooter.background-dark.120.png'), entry: { video: require('../../../../assets/illustrations/scooter-entry.background-dark.120.mp4'), ms: 2200 }, idle: { video: require('../../../../assets/illustrations/scooter-idle.background-dark.120.mp4'), ms: 1125 } },
     },
     'background-light': {
-      large: { still: require('../../../../assets/illustrations/scooter.background-light.120.png'), entry: { source: require('../../../../assets/illustrations/scooter-entry.background-light.120.webp'), ms: 2200 }, idle: { source: require('../../../../assets/illustrations/scooter-idle.background-light.120.webp'), ms: 1125 } },
+      large: { still: require('../../../../assets/illustrations/scooter.background-light.120.png'), entry: { video: require('../../../../assets/illustrations/scooter-entry.background-light.120.mp4'), ms: 2200 }, idle: { video: require('../../../../assets/illustrations/scooter-idle.background-light.120.mp4'), ms: 1125 } },
     },
   },
   shop: {
     'background-dark': {
-      large: { still: require('../../../../assets/illustrations/shop.background-dark.120.png'), entry: { source: require('../../../../assets/illustrations/shop-entry.background-dark.120.webp'), ms: 1900 }, idle: { source: require('../../../../assets/illustrations/shop-idle.background-dark.120.webp'), ms: 2875 } },
+      large: { still: require('../../../../assets/illustrations/shop.background-dark.120.png'), entry: { video: require('../../../../assets/illustrations/shop-entry.background-dark.120.mp4'), ms: 1900 }, idle: { video: require('../../../../assets/illustrations/shop-idle.background-dark.120.mp4'), ms: 2875 } },
     },
     'background-light': {
-      large: { still: require('../../../../assets/illustrations/shop.background-light.120.png'), entry: { source: require('../../../../assets/illustrations/shop-entry.background-light.120.webp'), ms: 1900 }, idle: { source: require('../../../../assets/illustrations/shop-idle.background-light.120.webp'), ms: 2875 } },
+      large: { still: require('../../../../assets/illustrations/shop.background-light.120.png'), entry: { video: require('../../../../assets/illustrations/shop-entry.background-light.120.mp4'), ms: 1900 }, idle: { video: require('../../../../assets/illustrations/shop-idle.background-light.120.mp4'), ms: 2875 } },
     },
     'welcome-dark': {
       welcome: { still: require('../../../../assets/illustrations/shop.welcome-dark.240.png'), entry: { source: require('../../../../assets/illustrations/shop-entry.welcome-dark.240.webp'), ms: 2000 }, idle: { source: require('../../../../assets/illustrations/shop-idle.welcome-dark.240.webp'), ms: 2875 } },

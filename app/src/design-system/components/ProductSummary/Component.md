@@ -1,6 +1,6 @@
 # ProductSummary
 
-"What they sell" on the shop page: category chips, the usual price range and its source, and "Often asked about here" with past answers. Change `shop-ratings-and-range`.
+"What they sell" on the shop page: category chips, the usual price range and its source, and "Asked about recently" with past answers. Change `shop-ratings-and-range`.
 
 ## Props
 
@@ -14,7 +14,7 @@
 
 ## Tokens
 
-A `ListGroup shadow`: a `ListBlock` with the chips (`space.2` apart, wrapping), the price line in Footnote and the "Often asked about here" heading in Caption 1 Strong, Muted foreground; then one `ListRow` per past answer. The chips sit inside `<Ground value="card">`, so their fill is Muted on the Card.
+A `ListGroup shadow`: a `ListBlock` with the chips (`space.2` apart, wrapping), the price line in Footnote and the "Asked about recently" heading in Caption 1 Strong, Muted foreground; then one `ListRow` per past answer. The chips sit inside `<Ground value="card">`, so their fill is Muted on the Card.
 
 ## Accessibility
 

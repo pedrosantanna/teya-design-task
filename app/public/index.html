@@ -17,6 +17,30 @@
         window.__SNUFFLE_BASE__ = path.replace(/\/[^/]*$/, '');
       })();
     </script>
+    <script>
+      // Route code is split: the first visit to a screen fetched its chunk while the transition waited, so a push
+      // started 300-400 ms late. Once the app has painted, the chunks load in the background (the entry bundle
+      // lists them) and the first visit costs the same as the second.
+      window.addEventListener('load', function () {
+        var idle = window.requestIdleCallback || function (cb) { return setTimeout(cb, 600); };
+        idle(function () {
+          var entry = document.querySelector('script[src*="/index-"]');
+          if (!entry) return;
+          fetch(entry.src).then(function (r) { return r.text(); }).then(function (code) {
+            var seen = {};
+            (code.match(/static\/js\/web\/[^"']+?\.js/g) || []).forEach(function (path) {
+              if (seen[path]) return;
+              seen[path] = true;
+              var link = document.createElement('link');
+              link.rel = 'prefetch';
+              link.as = 'script';
+              link.href = (window.__SNUFFLE_BASE__ || '') + '/_expo/' + path;
+              document.head.appendChild(link);
+            });
+          }).catch(function () {});
+        }, { timeout: 2000 });
+      });
+    </script>
     <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
     <style id="expo-reset">
       /* These styles make the body full-height */
@@ -34,6 +58,38 @@
         height: 100%;
         flex: 1;
       }
+    </style>
+    <!-- Touch feel (the native app's): no 300 ms tap delay or double-tap zoom, no long-press callout, no tap
+         highlight, no text selection on controls, scrolling that stops at its edge instead of chaining to the
+         page, and momentum scrolling. Text inputs keep selection. -->
+    <style id="touch-feel">
+      html, body {
+        overscroll-behavior: none;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        touch-action: manipulation;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      input, textarea, [contenteditable], [contenteditable] * {
+        -webkit-user-select: text;
+        user-select: text;
+        -webkit-touch-callout: default;
+      }
+      [role="button"], button, a, [tabindex], img {
+        touch-action: manipulation;
+        -webkit-user-drag: none;
+        -webkit-touch-callout: none;
+      }
+      img { user-drag: none; }
+      /* Scroll containers (react-native-web writes their overflow as atomic classes): contained overscroll and
+         momentum on touch. */
+      #root div { overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+      /* Animated layers hint the compositor (press, arrive, sheets). */
+      [style*="will-change"] { backface-visibility: hidden; }
     </style>
     <!-- The docs canvas background (site/canvas.css), shown around the phone frame. It follows the app's scheme
          (`data-scheme`, set by src/store/theme-sync.ts), and the device's until the app has started. -->

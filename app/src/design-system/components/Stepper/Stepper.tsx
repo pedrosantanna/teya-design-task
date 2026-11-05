@@ -2,7 +2,7 @@ import MinusSignIcon from '@hugeicons/core-free-icons/MinusSignIcon';
 import PlusSignIcon from '@hugeicons/core-free-icons/PlusSignIcon';
 import type { IconSvgElement } from '@hugeicons/react-native';
 import { memo } from 'react';
-import { Pressable, View, type AccessibilityActionEvent } from 'react-native';
+import { Platform, Pressable, View, type AccessibilityActionEvent } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
@@ -25,18 +25,22 @@ export type StepperProps = {
 function StepButton({ icon, label, disabled, onPress, joined }: { icon: IconSvgElement; label: string; disabled: boolean; onPress: () => void; joined: boolean }) {
   const { theme } = useUnistyles();
   const press = usePress();
+  // React Native Web ignores hitSlop: there the button is 44 tall with a negative margin, so the capsule keeps its 36.
+  const slop = (theme.hit.min - theme.size.button.compact) / 2;
+  const web = Platform.OS === 'web' ? { height: theme.hit.min, marginVertical: -slop } : undefined;
   return (
     <Animated.View style={press.scaleStyle}>
       <Pressable
+        accessibilityRole="button"
         accessibilityElementsHidden
         importantForAccessibility="no"
         accessibilityLabel={label}
         disabled={disabled}
-        hitSlop={(theme.hit.min - theme.size.button.compact) / 2}
+        hitSlop={slop}
         onPress={onPress}
         onPressIn={press.onPressIn}
         onPressOut={press.onPressOut}
-        style={[styles.button(joined), disabled && styles.disabled]}
+        style={[styles.button(joined), web, disabled && styles.disabled]}
       >
         <Icon icon={icon} size="headline" weight="strong" color="tint" />
       </Pressable>
@@ -101,7 +105,7 @@ export const Stepper = memo(function Stepper({ value, onChange, min = 1, max = N
 });
 
 const styles = StyleSheet.create((theme) => ({
-  row: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: theme.space[3] },
+  row: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: theme.space[3], minHeight: theme.hit.min },
   iosGroup: { flexDirection: 'row', alignItems: 'center', gap: theme.space[3] },
   androidGroup: { flexDirection: 'row', alignItems: 'center', gap: theme.space[3] },
   value: { minWidth: theme.size.button.compact },
@@ -111,7 +115,8 @@ const styles = StyleSheet.create((theme) => ({
     alignItems: 'center',
     borderRadius: theme.radius.full,
     backgroundColor: theme.color.muted,
-    overflow: 'hidden',
+    // Visible on the web, so the buttons' 44 pt boxes are not clipped to the capsule.
+    overflow: Platform.OS === 'web' ? 'visible' : 'hidden',
   },
   divider: { width: StyleSheet.hairlineWidth, height: theme.space[5], backgroundColor: theme.color.border },
   button: (joined: boolean) => ({

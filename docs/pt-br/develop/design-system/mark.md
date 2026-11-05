@@ -11,10 +11,12 @@ Call:
 - Levei os dois primeiros testes de ícone do agente para o Figma, ajustei os vetores à mão e escolhi a quarta versão como marca provisória (decisão 033).
 - Pedi que ela fosse refinada numa grade de ícone, em preto e branco até a paleta ser escolhida, e apontei quando ficou alta demais.
 - Parei aqui de propósito. Com mais tempo eu desenvolveria mais a marca, talvez por outro caminho, mas o brand não é o foco deste exercício; achei divertido e o resultado é bom o bastante para dar uma cara ao app.
+- Pedi que o splash fosse uma animação vetorial curta sobre Índigo: primeiro o toldo, desenrolando listra por listra, depois o rosto e duas piscadas.
 - Dentro do app a marca é um glifo solto, de uma cor só que segue o tema, nunca num tile nem num avatar. Isso reverte a "marca sobre um tile Lavanda" da decisão 045.
 AI:
-- Um agente desenhou os testes de ícone em SVG a partir das minhas sementes (um cão farejador, as compras britânicas, os toldos da parade). Levei os dois primeiros para o Figma e mudei os vetores à mão. O agente exportou a minha versão, reconstruiu-a sobre um eixo só e desenhou as aplicações nas plataformas. O primeiro centro ótico deixou o desenho alto demais; eu apontei, e ele escolheu outro comparando deslocamentos no olho.
+- Um agente construiu a animação do splash em código a partir dos caminhos do próprio glifo. Um agente desenhou os testes de ícone em SVG a partir das minhas sementes (um cão farejador, as compras britânicas, os toldos da parade). Levei os dois primeiros para o Figma e mudei os vetores à mão. O agente exportou a minha versão, reconstruiu-a sobre um eixo só e desenhou as aplicações nas plataformas. O primeiro centro ótico deixou o desenho alto demais; eu apontei, e ele escolheu outro comparando deslocamentos no olho.
 Trade-offs:
+- O splash nativo mostra o glifo pronto, e a animação no app começa pelo toldo enrolado, então o rosto some por um instante quando a animação começa; o último quadro dela é a imagem nativa de novo. Um splash nativo com o glifo já desenhado evita um flash de cor errada, e aceitei o salto.
 - No Android o desenho precisa caber numa zona segura de 66 dp, então ele ocupa cerca de metade da largura do ícone e as listras ficam finas em tamanhos pequenos. Uma versão mais simples para tamanhos pequenos continua em aberto.
 ```
 
@@ -82,9 +84,15 @@ O quadrado existe só como ícone do app, que o sistema desenha. Em todo o resto
 | A linha de remetente da conversa, ao lado de "Snuffle", sem coluna de avatar | 22 de largura |
 | Notificação e Live Activity | 40 de largura |
 | Login | 56 de largura |
-| O splash, nativo e no app, centralizado na cor de fundo | 120 de largura |
+| O splash, nativo e no app, centralizado em Índigo 800 (glifo branco, veja abaixo) | 120 de largura |
+
+No splash o glifo usa duas cores fixas sobre o Índigo 800, a cor da marca: branco (8,75:1 sobre o fundo) para o rosto e as listras 1, 3 e 5, e Índigo 300 (4,94:1 sobre o fundo, 1,8:1 ao lado do branco) para as listras 2 e 4. O cinza da variante branca acima é escuro demais sobre o Índigo, então o tom de menos contraste sobe na mesma rampa. Os tokens são `color.splash.ground`, `ink` e `soft`.
 
 Isso reverte a parte da decisão 045 que punha a marca sobre um tile Lavanda, com um rosto quente atrás do glifo. A Lavanda continua sendo a cor do Snuffle nos balões e nos pontos de digitação.
+
+## Animação do splash
+
+O splash mostra a marca se construindo, em cerca de 1,6 s; o tempo está na [página de movimento](motion.md#splash). No começo só o toldo aparece, enrolado no alto como a cortina de uma loja. Ele desce, e as cinco listras se desenrolam uma depois da outra, cada uma com um balanço curto e um pequeno excesso. Depois aparecem as orelhas, os olhos e o nariz, e o cachorro pisca duas vezes. O último quadro é o glifo acima, igual à imagem do splash nativo. A animação começa pelo toldo enrolado, então o rosto some por um instante quando o sistema passa a vez, e depois volta a se construir. As listras são os mesmos cinco caminhos do glifo, desenhados um a um, então o último quadro coincide com ele exatamente.
 
 ## Anatomia
 

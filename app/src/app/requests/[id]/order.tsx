@@ -63,7 +63,8 @@ export default function Receipt() {
   // The header is the shop's accent at the tile step; no shop kind is Lavender, Snuffle's colour (kinds.ts).
   const accent = shopAccent(shopById(content, order.shopId));
   const collecting = order.fulfilment === 'collect' && (order.state === 'ready' || order.state === 'extended');
-  const where = order.collectAt ?? { street: order.street, openUntil: order.openUntil };
+  // Where the shopper collects: the shop the order was bought from, or the collection point it drops at.
+  const where = order.collectAt ?? { name: order.shop, street: order.street, openUntil: order.openUntil };
   const money = PAID.includes(order.state)
     ? `Paid ${order.total}`
     : REFUNDED.includes(order.state)
@@ -72,7 +73,7 @@ export default function Receipt() {
         ? `${order.total} · not charged yet`
         : `${order.total} · not charged`;
   const directions = () => {
-    if (!openDirections({ name: order.shop, street: where.street })) setToast('Directions open the Maps app on a phone.');
+    if (!openDirections({ name: where.name, street: where.street })) setToast('Directions open the Maps app on a phone.');
   };
 
   return (
@@ -96,7 +97,7 @@ export default function Receipt() {
             {order.fulfilment === 'delivery'
               ? `${order.items}, delivered by ${order.shop}`
               : collecting
-                ? `${order.items}, set aside · full refund if you don't collect`
+                ? `${order.items}, set aside${order.collectAt ? ` at ${order.collectAt.name}` : ''} · full refund if you don't collect`
                 : order.items}
           </Text>
         </View>
@@ -109,12 +110,12 @@ export default function Receipt() {
             enlarged={codeOpen}
             onEnlargedChange={sim.setCodeOpen}
             detail={`${order.items} · ${order.shop}`}
-            note={`${order.shop} scans the code, or taps Collected on their side.`}
+            note={`${where.name} scans the code, or taps Collected on their side.`}
           />
         ) : null}
 
         <View>
-          <ListRow icon={Location01Icon} title={where.street} detail={`Open till ${where.openUntil} · ${order.walk}`} position="first" />
+          <ListRow icon={Location01Icon} title={where.name} detail={`${where.street} · Open till ${where.openUntil} · ${order.walk}`} position="first" />
           <ListRow
             icon={CreditCardIcon}
             title={money}

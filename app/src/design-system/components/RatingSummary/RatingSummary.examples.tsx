@@ -38,7 +38,7 @@ export function RatingSummaryExamples() {
       </ListGroup>
       <ListGroup shadow>
         <ListBlock>
-          <RatingSummary title="No buyers have rated it yet" accessibilityLabel="No buyers have rated it yet" />
+          <RatingSummary title="No ratings yet" detail="Snuffle has asked them 4 times" accessibilityLabel="No ratings yet. Snuffle has asked them 4 times" />
         </ListBlock>
       </ListGroup>
     </View>

@@ -1,6 +1,13 @@
 {
   "$comment": "Which 3D illustrations the app ships, on which ground and at which size. render.mjs renders the frames from the docs viewer's export mode; encode.mjs turns them into app/assets/illustrations and manifest.generated.ts. Grounds are the background and card colour tokens, read from src/design-system/tokens at render time (lib.mjs, tokenHex); category cards bake on each kind's tile token. darkTones overrides the shade for the dark render where an object reads too dark on a dark ground. sizes are the display sizes the Illustration component accepts; each illustration lists the ones rendered (smaller display sizes scale the 120 pt asset down). Clips ship at animationScales only (@3x, which Metro also serves to @2x screens) to keep the set under 5 MB (a clip over 240 KB falls back to lossy q90); stills ship at every scale. groundTones is the dark tone each ground's shade and cast shadow mix toward, from the Biscuit ramp, so shadows are warm and never indigo or flat grey. extra lists more ground × size combinations for one illustration (the hero size on Getting started and the location ask). animationScalesBySize ships the hero clips at @2x only, inside the budget; clipsBySize picks the clips a size ships (the location ask's hero is a still, so the set stays under 5 MB). welcome is Getting started: per-page Indigo grounds, rendered with --set welcome.",
   "page": "/?export=1#illustrations",
+  "video": {
+    "$comment": "Clips on a flat ground are also encoded as video (encode.mjs): MP4 H.264 on every platform (Safari needs the MP4, so WebM is not made). Video has no alpha, so Getting started (a crossfading ground) is listed in keepWebp and stays WebP.",
+    "formats": ["mp4"],
+    "crf": 16,
+    "replaceWebp": true,
+    "keepWebp": ["welcome"]
+  },
   "fps": 24,
   "clipFps": {
     "entry": 20,
@@ -302,7 +309,7 @@
     }
   },
   "welcome": {
-    "$comment": "Getting started: each page has its own Indigo ground (light 300, 400, 500; dark 900, 800, 700; colour.md, Getting started) and its object is rendered for it at the welcome size (240 pt). Transparent, not opaque: the page ground crossfades while the shopper drags, so an opaque square would show its edge mid-swipe. Shade and shadow mix toward Indigo 900 on the light grounds and 700/800, and toward near-black on Indigo 900. Stills at @2x and @3x; clips at @2x (animationScalesBySize.welcome). On dark page 2 (Indigo 800) the shop roof, Indigo 800 itself, is recoloured to Peach 500 so it stands apart from the ground.",
+    "$comment": "Getting started: each page has its own brand ground (light: Indigo 300, the Peach tile, the Pistachio tile; dark: Indigo 900, the Peach and Pistachio dark tiles; colour.md, Getting started) and its object is rendered for it at the welcome size (240 pt). Transparent, not opaque: the page ground crossfades while the shopper drags, so an opaque square would show its edge mid-swipe. Shade and shadow mix toward the ground's own 900 step (Indigo 900, Peach 900, Pistachio 900), and toward near-black on Indigo 900. Stills at @2x and @3x; clips at @2x (animationScalesBySize.welcome).",
     "size": "welcome",
     "budgets": {
       "animationKB": 300,
@@ -334,17 +341,12 @@
           "idle"
         ],
         "light": {
-          "ground": "#96A2FF",
-          "dark": "#222169"
+          "ground": "#FEC5B2",
+          "dark": "#462318"
         },
         "dark": {
-          "ground": "#3D35B8",
-          "dark": "#222169"
-        },
-        "darkTones": {
-          "recolor": {
-            "#3D35B8": "#C17F6B"
-          }
+          "ground": "#52352C",
+          "dark": "#462318"
         }
       },
       {
@@ -355,12 +357,12 @@
           "entry"
         ],
         "light": {
-          "ground": "#7982FF",
-          "dark": "#222169"
+          "ground": "#C5DEAE",
+          "dark": "#24340E"
         },
         "dark": {
-          "ground": "#494AC0",
-          "dark": "#222169"
+          "ground": "#34422C",
+          "dark": "#24340E"
         }
       }
     ]

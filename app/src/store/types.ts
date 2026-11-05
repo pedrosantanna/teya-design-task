@@ -158,9 +158,13 @@ export type Request = {
   image: ImageKey;
   /** Shops asked, in the order the asking list shows them. */
   offers: Offer[];
+  /** Shops 16 to 30 minutes away, asked once the shopper taps "Ask further away". Joins `offers` then. */
+  wider?: Offer[];
+  /** How many of `offers` are the near shops, once the wider ones have joined. */
+  nearCount?: number;
 };
 
-/** A request in the Requests list that isn't the active one: fixed label and preview. */
+/** A request in the Requests list that isn't the active one: fixed label and preview (Snuffle's latest status). */
 export type OtherRequest = {
   id: string;
   title: string;
@@ -168,7 +172,6 @@ export type OtherRequest = {
   preview: string;
   state: RequestState | 'collected';
   label: string;
-  action?: string;
   image: ImageKey;
 };
 

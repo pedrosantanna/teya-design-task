@@ -7,6 +7,7 @@ import { router } from 'expo-router';
 import { Linking, Platform } from 'react-native';
 import { create } from 'zustand';
 
+import { LOOK_DAY } from './labels';
 import { MAX_TAGS } from './ratings';
 import { contentFor, shopById } from './seed';
 import { stepHooks, useAppStore } from './store';
@@ -71,8 +72,12 @@ export type SimState = {
   typing: boolean;
   /** Chat items that appeared while the chat was on screen: they animate in. */
   fresh: string[];
-  /** Keep looking: how often and until when. */
-  looking: { repeat: boolean } | null;
+  /** Keep looking: how often, on which day, and whether it came with the ask ("every Friday"), which keeps the answers in view. */
+  looking: { repeat: boolean; day: string; standing: boolean } | null;
+  /** "Ask further away" was tapped: the shops 16 to 30 minutes away are asked from this clock time. */
+  wider: { start: number } | null;
+  /** Where the shopper chose to collect: the shop itself, or the collection point (the corner shop) it drops at. */
+  collectAt: 'shop' | 'point' | null;
   /** The rating sheet: open or not, the answer to "Would you go back?", the tags picked and the note. */
   rating: RatingDraft;
   /** The shopper's rating, stored on the order once sent; the shop's page counts it. */
@@ -112,11 +117,29 @@ const jessScript: ScriptEvent[] = [
   { at: 6, shop: 'rossis', state: 'hasIt' },
 ];
 
+/** What each shop further away answers, once asked (change widen-the-search): one has it, one has something similar, the rest don't. */
+const WIDER_ANSWER: Record<string, AnswerState> = {
+  hollandCameras: 'hasIt',
+  uxbridgeOpticians: 'doesntHave',
+  hollandStationers: 'similar',
+  kensingtonBake: 'hasIt',
+  wellsBakery: 'doesntHave',
+};
+
+function widerScript(content: PersonaContent): ScriptEvent[] {
+  const far = content.active.offers.slice(content.active.nearCount ?? content.active.offers.length);
+  return far.flatMap((o, i): ScriptEvent[] => [
+    { at: 2 + i, shop: o.shopId, state: 'seen' },
+    { at: 7 + i * 5, shop: o.shopId, state: WIDER_ANSWER[o.shopId] ?? 'doesntHave' },
+  ]);
+}
+
 function scriptFor(content: PersonaContent): ScriptEvent[] {
   const base = content.id === 'sam' ? samScript : jessScript;
   const known = new Set(base.map((e) => e.shop));
+  const near = content.active.offers.slice(0, content.active.nearCount ?? content.active.offers.length);
   // Shops added by the "Many answers" content set read and reply on a slower, staggered beat.
-  const extra = content.active.offers
+  const extra = near
     .filter((o) => !known.has(o.shopId))
     .flatMap((o, i): ScriptEvent[] => [
       { at: 6 + i, shop: o.shopId, state: 'seen' },
@@ -157,7 +180,7 @@ export function unitFor(content: PersonaContent, count: number): string {
 
 function content(): PersonaContent {
   const s = useAppStore.getState();
-  return contentFor(s.persona, s.contentSet);
+  return contentFor(s.persona, s.contentSet, useSim.getState().wider != null);
 }
 
 const fresh = (): Omit<SimState, 'clock' | 'running' | 'payOutcome' | 'shopOutcome'> => ({
@@ -187,6 +210,8 @@ const fresh = (): Omit<SimState, 'clock' | 'running' | 'payOutcome' | 'shopOutco
   typing: false,
   fresh: [],
   looking: null,
+  wider: null,
+  collectAt: null,
   rating: closedRating,
   orderRating: null,
 });
@@ -309,18 +334,22 @@ function tick(dt: number) {
       const hadYes = c.active.offers.some((o) => isYes(app.answers[o.shopId]));
       app.set({ answers, request: requestFrom(c, answers, app.request) });
       const news = due.find((e) => isBuyable(e.state) && shopById(c, e.shop)?.source === 'asked');
-      if (news && !sim.chatOpen && app.notificationsAllowed) {
-        const shop = shopById(c, news.shop);
-        const offer = c.active.offers.find((o) => o.shopId === news.shop);
-        if (shop && offer) {
-          const them = c.active.plural ? 'them' : 'it';
-          const body =
-            news.state === 'similar'
-              ? `${shop.name} on ${shop.street} has something similar: ${offer.item ?? 'have a look'}.`
-              : `${shop.name} on ${shop.street} has ${them}${hadYes ? ' too' : ''}: ${formatPrice(offer.price)} a ${unitFor(c, 1)}.`;
-          setSim({ banner: { title: c.active.title, body } });
-        }
-      }
+      if (news && !sim.chatOpen && app.notificationsAllowed) announce(c, news, hadYes);
+    }
+  }
+
+  // Shops further away answer, once asked: the first buyable answer takes the request out of Not found.
+  if (sim.wider && app.request !== 'asking') {
+    const start = sim.wider.start;
+    const due = widerScript(c).filter((e) => start + e.at > prev && start + e.at <= now);
+    if (due.length > 0) {
+      const answers = { ...app.answers };
+      for (const e of due) answers[e.shop] = e.state;
+      const hadYes = c.active.offers.some((o) => isYes(app.answers[o.shopId]));
+      const buyable = c.active.offers.some((o) => isBuyable(answers[o.shopId]));
+      app.set({ answers, request: buyable ? 'haveIt' : app.request });
+      const news = due.find((e) => isBuyable(e.state));
+      if (news && !sim.chatOpen && app.notificationsAllowed) announce(c, news, hadYes);
     }
   }
 
@@ -344,6 +373,19 @@ function tick(dt: number) {
 setInterval(() => {
   if (useSim.getState().running) tick(TICK_S);
 }, TICK_S * 1000);
+
+/** The banner for a shop's answer when the chat isn't on screen. */
+function announce(c: PersonaContent, news: ScriptEvent, hadYes: boolean) {
+  const shop = shopById(c, news.shop);
+  const offer = c.active.offers.find((o) => o.shopId === news.shop);
+  if (!shop || !offer) return;
+  const them = c.active.plural ? 'them' : 'it';
+  const body =
+    news.state === 'similar'
+      ? `${shop.name} on ${shop.street} has something similar: ${offer.item ?? 'have a look'}.`
+      : `${shop.name} on ${shop.street} has ${them}${hadYes ? ' too' : ''}: ${formatPrice(offer.price)} a ${unitFor(c, 1)}.`;
+  setSim({ banner: { title: c.active.title, body } });
+}
 
 function formatPrice(amount: number): string {
   return `£${amount.toFixed(2).replace(/\.00$/, '')}`;
@@ -372,6 +414,16 @@ export function scriptedAsks(): string[] {
     : ["Sourdough from Rossi's, but I finish work at 6"];
 }
 
+const DAYS = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+
+/** The day of a standing request: "every Friday" gives Friday, "every week" or "weekly" the usual day. Null for a one-off. */
+export function cadenceOf(text: string): string | null {
+  const t = text.toLowerCase();
+  const day = new RegExp(`\\bevery\\s+(${DAYS.join('|')})s?\\b`).exec(t);
+  if (day) return day[1][0].toUpperCase() + day[1].slice(1);
+  return /\bevery\s+week\b|\bweekly\b/.test(t) ? LOOK_DAY : null;
+}
+
 export const OFF_SCRIPT_REPLY = "This prototype only knows a few requests, so I can't ask the shops about that one. Try one of these.";
 
 let timers: ReturnType<typeof setTimeout>[] = [];
@@ -390,9 +442,12 @@ export const sim = {
     const c = content();
     const app = useAppStore.getState();
     const asksHow = app.persona === 'sam';
+    const day = cadenceOf(text);
     app.set({ request: 'asking', answers: {}, order: 'none', payment: 'idle', keepLookingForMore: false, draft: null });
     setSim({
       ...fresh(),
+      // "Every Friday" makes it a standing request: asked this week, and again each week until the shopper stops it.
+      looking: day ? { repeat: true, day, standing: true } : null,
       clock: useSim.getState().clock,
       instant: false,
       askedText: text,
@@ -428,8 +483,8 @@ export const sim = {
     setSim({ quantity });
   },
   /** Buy in the details sheet: the payment sheet opens. */
-  buy() {
-    setSim({ details: null, payStatus: 'ready' });
+  buy(collectAt?: 'shop' | 'point') {
+    setSim({ details: null, payStatus: 'ready', ...(collectAt ? { collectAt } : null) });
     useAppStore.getState().set({ payment: 'sheet' });
   },
   confirmPayment() {
@@ -464,9 +519,33 @@ export const sim = {
   cancelOrder() {
     useAppStore.getState().set({ order: 'cancelled' });
   },
+  /** Keep looking, or change how often a search that is running asks (Change in the chat). A standing request keeps its answers in view. */
   keepLooking(repeat: boolean) {
-    setSim({ looking: { repeat }, instant: false });
-    useAppStore.getState().set({ request: 'looking' });
+    const now = useSim.getState().looking;
+    const standing = !!now?.standing;
+    setSim({ looking: { repeat, day: now?.day ?? LOOK_DAY, standing }, instant: false });
+    if (!standing) useAppStore.getState().set({ request: 'looking' });
+  },
+  /** Stop in the chat: the search ends and nothing is bought. A standing request keeps this week's answers. */
+  stopLooking() {
+    const s = useSim.getState();
+    const standing = !!s.looking?.standing;
+    const id = `n${s.notes.length}`;
+    setSim({
+      looking: null,
+      instant: false,
+      notes: [
+        ...s.notes,
+        { id, sender: 'shopper', text: 'Stop' },
+        { id: `${id}r`, sender: 'snuffle', text: standing ? "Done. I won't ask again, and nothing was bought." : "Done. I've stopped looking, and nothing was bought." },
+      ],
+    });
+    if (!standing) useAppStore.getState().set({ request: 'closed' });
+  },
+  /** Ask further away: the shops 16 to 30 minutes away are asked, and a few answer. */
+  askFurther() {
+    if (useSim.getState().wider) return;
+    setSim({ wider: { start: useSim.getState().clock + 1 }, instant: false });
   },
   /** Free text in a chat: the shopper's bubble, then Snuffle's reply after the typing indicator. */
   say(text: string, reply?: Note) {

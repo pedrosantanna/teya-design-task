@@ -43,6 +43,10 @@ function kindFor(target: string | null, current: string): TransitionKind {
 }
 installWebTransitions(router as never, kindFor, () => currentPath);
 
+// `?intro=<ms>` holds the splash at that time of its build (frames for review). The router rewrites the address
+// before the splash screen's chunk loads, so the root layout keeps the value for it (see (onboarding)/welcome.tsx).
+if (WEB) (globalThis as { __snuffleIntro?: string | null }).__snuffleIntro = new URLSearchParams(window.location.search).get('intro');
+
 // Third-party view: wrapped so Unistyles styles reach it on the web too.
 const RootView = withUnistyles(GestureHandlerRootView);
 
@@ -55,6 +59,9 @@ export default function RootLayout() {
   useEffect(() => {
     currentPath = pathname;
   }, [pathname]);
+  // Until first run is done the screens sit on the splash's Indigo, so the native splash hands over to the same
+  // colour before the in-app splash mounts (no beige flash from Nearby's Background).
+  const onboarded = useAppStore((s) => s.hasOnboarded);
   const reduceMotion = useReducedMotion();
   // Native stacks animate each route (iOS 26 patterns, Apple Music as the reference); Reduce Motion crossfades.
   // The web animates through view transitions instead, so its stack doesn't.
@@ -66,7 +73,7 @@ export default function RootLayout() {
     <DesignSystemRoot>
       <StatusBar style={theme.scheme === 'dark' ? 'light' : 'dark'} />
       {/* A plain object: react-navigation's views don't take Unistyles styles on the web, so a theme switch has to re-render it. */}
-      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: theme.color.background } }}>
+      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: onboarded ? theme.color.background : theme.color.splash.ground } }}>
         {/* The shop page and Requests zoom from their source (ZoomSource): the native zoom on iOS, a fade under the
             container transform on Android. Both keep the back gesture. */}
         <Stack.Screen name="shops/[id]" options={{ gestureEnabled: true, animation: zoomAnim }} />

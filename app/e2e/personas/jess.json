@@ -1,0 +1,259 @@
+{
+  "id": "jess",
+  "name": "Jess, the lapsed local",
+  "inScope": true,
+  "source": "docs/discover/personas/index.md",
+  "notResearch": "A scripted test user built from a proto-persona. It tests whether flows break. It is not a shopper, says nothing about demand and replaces no research.",
+  "goals": [
+    "Get routine shopping done with the least effort.",
+    "Collect after work, or have it delivered, and pay by card or phone."
+  ],
+  "constraints": {
+    "time": "At work while independents are open; free from 6pm.",
+    "hours": "Rossi's closes at 6pm, the corner shop at 11pm.",
+    "device": "Phone on the commute; pays by card or phone, never cash.",
+    "trust": "Has stopped going to local shops because nothing about them fits her week, so a missed pickup costs the whole habit."
+  },
+  "scenarios": [
+    {
+      "id": "friday-sourdough-standing",
+      "title": "Sourdough every Friday after work: a standing request",
+      "goal": "The request is set up to repeat every week without Jess asking again.",
+      "start": "persona=jess",
+      "steps": [
+        {
+          "tap": {
+            "role": "button",
+            "name": "Ask Snuffle"
+          }
+        },
+        {
+          "tap": {
+            "role": "button",
+            "name": "Sourdough from Rossi's every Friday"
+          },
+          "label": "send the suggested request"
+        },
+        {
+          "waitFor": {
+            "text": "Has it"
+          },
+          "timeoutS": 30,
+          "label": "wait for Rossi's to answer"
+        },
+        {
+          "expect": {
+            "textMatches": "every week|each week|weekly|repeat|standing"
+          },
+          "goal": true,
+          "severity": "usability",
+          "why": "The request says every Friday, so Snuffle should confirm that it repeats."
+        },
+        {
+          "expect": {
+            "textMatches": "close|after work|6pm|corner shop"
+          },
+          "severity": "usability",
+          "why": "Rossi's closes at 6pm; the answer should deal with collecting after work."
+        }
+      ]
+    },
+    {
+      "id": "collect-after-work",
+      "title": "Collect the loaf at the corner shop after 6pm",
+      "goal": "Jess buys the loaf for collection at the corner shop and has a collection code.",
+      "start": "step=afterWork&persona=jess",
+      "steps": [
+        {
+          "expect": {
+            "textMatches": "Where will you collect it"
+          },
+          "why": "The afterWork step opens the buy sheet with the collection choice."
+        },
+        {
+          "tap": {
+            "role": "radio",
+            "nameContains": "corner shop"
+          },
+          "label": "choose the corner shop, open till 11pm"
+        },
+        {
+          "expect": {
+            "textMatches": "11pm"
+          }
+        },
+        {
+          "tap": {
+            "role": "button",
+            "nameContains": "Buy, \u00a3"
+          }
+        },
+        {
+          "tap": {
+            "role": "button",
+            "name": "Confirm with side button"
+          },
+          "label": "pay by phone"
+        },
+        {
+          "waitFor": {
+            "role": "any",
+            "nameContains": "Ready, collect by"
+          },
+          "timeoutS": 60
+        },
+        {
+          "tap": {
+            "role": "any",
+            "nameContains": "Ready, collect by"
+          },
+          "label": "open the receipt"
+        },
+        {
+          "expect": {
+            "text": "Collection code"
+          },
+          "goal": true
+        },
+        {
+          "expect": {
+            "textMatches": "Blythe Road News|corner shop"
+          },
+          "severity": "usability",
+          "why": "The receipt should name the place she collects from."
+        }
+      ]
+    },
+    {
+      "id": "browse-bakeries",
+      "title": "Browse bakeries and check a shop page",
+      "goal": "A shop page shows photos, hours, what they sell and how past buyers rated it.",
+      "start": "persona=jess",
+      "steps": [
+        {
+          "tap": {
+            "role": "button",
+            "name": "Bakery"
+          }
+        },
+        {
+          "expect": {
+            "text": "Open till"
+          }
+        },
+        {
+          "tap": {
+            "role": "button",
+            "nameContains": "Rossi's Bakery"
+          },
+          "label": "open Rossi's"
+        },
+        {
+          "expect": {
+            "textMatches": "of 3",
+            "text": "Rossi"
+          },
+          "label": "photos",
+          "severity": "usability",
+          "why": "The photos should show how many there are."
+        },
+        {
+          "scroll": 600
+        },
+        {
+          "scroll": 600
+        },
+        {
+          "expect": {
+            "textMatches": "would go back|ratings|rated|%"
+          },
+          "goal": true,
+          "why": "How the shop does on past orders is on its page."
+        }
+      ]
+    },
+    {
+      "id": "first-run-sign-in",
+      "title": "First run: from the splash to Nearby",
+      "goal": "Jess gets from the first screen to Nearby using the visible controls.",
+      "start": "firstRun=1&persona=jess",
+      "steps": [
+        {
+          "waitFor": {
+            "role": "button",
+            "name": "Continue"
+          },
+          "timeoutS": 20,
+          "label": "wait for Getting started"
+        },
+        {
+          "tap": {
+            "role": "button",
+            "name": "Continue"
+          }
+        },
+        {
+          "tap": {
+            "role": "button",
+            "name": "Continue"
+          }
+        },
+        {
+          "tap": {
+            "role": "button",
+            "name": "Get started"
+          }
+        },
+        {
+          "waitFor": {
+            "role": "button",
+            "name": "Allow location"
+          },
+          "timeoutS": 10,
+          "label": "reach the location ask"
+        },
+        {
+          "tap": {
+            "role": "button",
+            "name": "Allow location"
+          }
+        },
+        {
+          "tap": {
+            "role": "button",
+            "name": "Allow While Using App"
+          },
+          "label": "answer the system location prompt"
+        },
+        {
+          "waitFor": {
+            "role": "button",
+            "nameMatches": "Apple|Google|Not now"
+          },
+          "timeoutS": 15,
+          "label": "reach sign in"
+        },
+        {
+          "tap": {
+            "role": "button",
+            "nameMatches": "Apple"
+          },
+          "label": "sign in"
+        },
+        {
+          "waitFor": {
+            "role": "button",
+            "name": "Ask Snuffle"
+          },
+          "timeoutS": 20
+        },
+        {
+          "expect": {
+            "heading": "Nearby"
+          },
+          "goal": true
+        }
+      ]
+    }
+  ]
+}

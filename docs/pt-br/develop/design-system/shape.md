@@ -68,9 +68,9 @@ Uma receita para todo elemento de glass: a barra de pedido e o círculo de Reque
 | Parte | Claro | Escuro | Token |
 | --- | --- | --- | --- |
 | Preenchimento, controles | Cartão #FFFFFF a 55% | Cartão #282523 a 55% | `state.glassFill` |
-| Preenchimento, controles sobre um tile de destaque | Branco a 40% sobre o tile | Branco a 6% sobre o tile | `color.tonalOnTile`, `state.tonalOnTile` |
-| Preenchimento, botões do cabeçalho de uma sheet | Glass, como os controles | Secundária #353230, sólida (1,40:1 na sheet; o círculo de glass dava 1,09:1) | `color.muted` |
-| Preenchimento, sheets | Sheet #DEDAD5, opaca | Sheet #191715, opaca | `color.sheet` |
+| Preenchimento, controles sobre um tile de destaque | Branco a 55% sobre o tile | Branco a 6% sobre o tile | `color.tonalOnTile`, `state.tonalOnTile` |
+| Preenchimento, botões do cabeçalho de uma sheet | Glass, como os controles | Secundária #323334, sólida (1,33:1 na sheet; o círculo de glass dava 1,09:1) | `color.muted` |
+| Preenchimento, sheets | Sheet #DEDAD5, opaca | Sheet #1C1D1E, opaca | `color.sheet` |
 | Blur (web) | 20 px | 20 px | `state.glassBlur` |
 | Saturação (web) | 1,6 | 1,6 | `state.glassSaturate` |
 | Saturação (web), controles sobre um tile de destaque | 1,6 | 1 (a 1,6 o Voltar escuro era a coisa mais saturada da tela) | `state.glassSaturateOnTile` |

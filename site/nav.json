@@ -152,7 +152,12 @@
           "id": "app-flow",
           "title": "App flow",
           "src": "docs/develop/ideation/app-flow.md",
+          "proto": true,
           "canvas": [
+            {
+              "version": "v10",
+              "file": "docs/develop/ideation/app-flow-v10.html"
+            },
             {
               "version": "v9",
               "file": "docs/develop/ideation/app-flow-v9.html"
@@ -386,6 +391,12 @@
           "pt": "Protótipo",
           "src": "docs/deliver/prototype.md",
           "embed": "app-web/index.html"
+        },
+        {
+          "id": "synthetic-users",
+          "title": "Synthetic test users",
+          "pt": "Usuários sintéticos de teste",
+          "src": "docs/deliver/synthetic-users.md"
         }
       ]
     },

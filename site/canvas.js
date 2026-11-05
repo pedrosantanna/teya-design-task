@@ -347,7 +347,7 @@
       // An element hit by several links keeps the most specific one (the selector with the fewest matches).
       hot.forEach(e => { const prev = plinks[e.dataset.pl]; if (!prev || prev.spec >= p.spec) e.dataset.pl = p.n; });
     });
-    const hasProto = plinks.length > 0;
+    const hasProto = opts?.proto === true && plinks.length > 0; // opt-in per nav item ("proto": true)
     let mode = 'flow';
     const proto = { cur: null, hist: [], busy: false, s: 1, w: 393, h: 852 };
     let pv = null;

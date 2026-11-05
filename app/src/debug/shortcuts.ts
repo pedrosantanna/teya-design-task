@@ -1,4 +1,4 @@
-// Web shortcut: `D` shows or hides the debugger. Ignored while typing in a field or with a modifier held.
+// Web shortcut: `D` opens or closes the panel (and brings back a hidden debugger). Ignored while typing in a field or with a modifier held.
 import { useEffect } from 'react';
 import { Platform } from 'react-native';
 
@@ -18,7 +18,13 @@ export function useDebugShortcut() {
       if (event.metaKey || event.ctrlKey || event.altKey || event.repeat) return;
       if (isTyping(event.target) || isTyping(document.activeElement)) return;
       event.preventDefault();
-      useDebugger.getState().toggleHidden();
+      const { hidden, open, setOpen, toggleHidden } = useDebugger.getState();
+      if (hidden) {
+        toggleHidden();
+        setOpen(true);
+      } else {
+        setOpen(!open);
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);

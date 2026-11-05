@@ -27,6 +27,7 @@
     "expo-status-bar": "~58.0.4",
     "expo-symbols": "~58.0.4",
     "expo-system-ui": "~58.0.7",
+    "expo-video": "~58.0.13",
     "expo-web-browser": "~58.0.7",
     "maplibre-gl": "5.24.0",
     "react": "19.3.0",
@@ -67,7 +68,9 @@
     "map": "node scripts/build-map-style.mjs",
     "map:check": "node scripts/build-map-style.mjs --check",
     "map:fetch": "node scripts/fetch-map.mjs",
-    "map:fallback": "node scripts/render-map-fallback.mjs"
+    "map:fallback": "node scripts/render-map-fallback.mjs",
+    "synthetic": "npx -y -p playwright@1.58.2 node e2e/run.mjs",
+    "synthetic:judge": "node e2e/judge/build-bundle.mjs"
   },
   "private": true
 }

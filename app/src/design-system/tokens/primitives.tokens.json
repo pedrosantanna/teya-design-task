@@ -460,25 +460,49 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.3765,
-            0.1725,
-            0.1098
+            0.3216,
+            0.2078,
+            0.1725
           ],
-          "hex": "#602C1C"
+          "hex": "#52352C"
         },
-        "$description": "Tile step, dark: OKLCH L 0.36, C 0.08, h 38 (colour.md, Shop accents)"
+        "$description": "Tile step, dark: OKLCH L 0.361, C 0.045, h 38 (round 10, option 3: lower chroma; colour.md, Shop accents)"
       },
       "cardOnTileDark": {
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.3843,
-            0.302,
-            0.2784
+            0.3608,
+            0.3098,
+            0.2941
           ],
-          "hex": "#624D47"
+          "hex": "#5C4F4B"
         },
-        "$description": "Card on the dark tile: OKLCH L 0.44, C 0.03, h 38, lighter than the tile so rows lift off it (decision 050, colour.md, Shop accents)"
+        "$description": "Card on the dark tile: OKLCH L 0.439, C 0.019, h 38 (round 10)"
+      },
+      "washDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2353,
+            0.1608,
+            0.1333
+          ],
+          "hex": "#3C2922"
+        },
+        "$description": "Peach 900 at 56% of its chroma, for the dark shop accent wash (round 10)"
+      },
+      "inkDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9098,
+            0.8392,
+            0.8196
+          ],
+          "hex": "#E8D6D1"
+        },
+        "$description": "Peach 200 at 56% of its chroma, for the dark shop accent ink (round 10)"
       }
     },
     "pistachio": {
@@ -609,25 +633,61 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.1647,
-            0.2745,
-            0.0941
+            0.2039,
+            0.2588,
+            0.1725
           ],
-          "hex": "#2A4618"
+          "hex": "#34422C"
         },
-        "$description": "Tile step, dark: OKLCH L 0.36, C 0.08, h 135 (colour.md, Shop accents)"
+        "$description": "Tile step, dark: OKLCH L 0.360, C 0.041, h 134 (round 10, option 3: lower chroma; colour.md, Shop accents)"
       },
       "cardOnTileDark": {
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.2941,
-            0.3373,
-            0.2745
+            0.3098,
+            0.3333,
+            0.2941
           ],
-          "hex": "#4B5646"
+          "hex": "#4F554B"
         },
-        "$description": "Card on the dark tile: OKLCH L 0.44, C 0.03, h 135, lighter than the tile so rows lift off it (decision 050, colour.md, Shop accents)"
+        "$description": "Card on the dark tile: OKLCH L 0.441, C 0.018, h 133 (round 10)"
+      },
+      "washDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1608,
+            0.1922,
+            0.1255
+          ],
+          "hex": "#293120"
+        },
+        "$description": "Pistachio 900 at 51% of its chroma, for the dark shop accent wash (round 10)"
+      },
+      "inkDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8275,
+            0.898,
+            0.7529
+          ],
+          "hex": "#D3E5C0"
+        },
+        "$description": "Pistachio 200 at 51% of its chroma, for the dark shop accent ink (round 10)"
+      },
+      "welcomeDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1569,
+            0.2314,
+            0.1725
+          ],
+          "hex": "#283B2C"
+        },
+        "$description": "Getting started page 3 in dark: Pistachio's hue moved to 150 at L 0.33, C 0.036 (the tile #34422C read as muddy olive on a full screen); Foreground 11.5:1"
       }
     },
     "butter": {
@@ -758,25 +818,49 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.2588,
-            0.2157,
-            0.0902
+            0.251,
+            0.2235,
+            0.1451
           ],
-          "hex": "#423717"
+          "hex": "#403925"
         },
-        "$description": "Tile step, dark: OKLCH L 0.34, C 0.05, h 90, calmer than the other hues so it doesn't read khaki (colour.md, Shop accents)"
+        "$description": "Tile step, dark: OKLCH L 0.346, C 0.034, h 91 (round 10, option 3: lower chroma; colour.md, Shop accents)"
       },
       "cardOnTileDark": {
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.349,
+            0.3373,
             0.3216,
-            0.251
+            0.2863
           ],
-          "hex": "#595240"
+          "hex": "#565249"
         },
-        "$description": "Card on the dark tile: OKLCH L 0.44, C 0.03, h 91, lighter than the tile so rows lift off it (decision 050, colour.md, Shop accents)"
+        "$description": "Card on the dark tile: OKLCH L 0.440, C 0.015, h 87 (round 10)"
+      },
+      "washDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2078,
+            0.1765,
+            0.0863
+          ],
+          "hex": "#352D16"
+        },
+        "$description": "Butter 900 at 67% of its chroma, for the dark shop accent wash (round 10)"
+      },
+      "inkDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8824,
+            0.8549,
+            0.7882
+          ],
+          "hex": "#E1DAC9"
+        },
+        "$description": "Butter 200 at 67% of its chroma, for the dark shop accent ink (round 10)"
       }
     },
     "lavender": {
@@ -907,25 +991,49 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.2471,
-            0.2118,
-            0.349
+            0.2431,
+            0.2235,
+            0.3137
           ],
-          "hex": "#3F3659"
+          "hex": "#3E3950"
         },
-        "$description": "Tile step, dark: OKLCH L 0.36, C 0.06 (colour.md, Shop accents)"
+        "$description": "Tile step, dark: OKLCH L 0.359, C 0.040, h 294 (round 10, option 3: lower chroma; colour.md, Shop accents)"
       },
       "cardOnTileDark": {
         "$value": {
           "colorSpace": "srgb",
           "components": [
             0.3255,
-            0.3098,
-            0.3843
+            0.3176,
+            0.3608
           ],
-          "hex": "#534F62"
+          "hex": "#53515C"
         },
-        "$description": "Card on the dark tile: OKLCH L 0.44, C 0.03, h 295, lighter than the tile so rows lift off it (decision 050, colour.md, Shop accents)"
+        "$description": "Card on the dark tile: OKLCH L 0.441, C 0.018, h 294 (round 10)"
+      },
+      "washDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1843,
+            0.1647,
+            0.2471
+          ],
+          "hex": "#2F2A3F"
+        },
+        "$description": "Lavender 900 at 66% of its chroma, for the dark shop accent wash (round 10)"
+      },
+      "inkDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8588,
+            0.8431,
+            0.9137
+          ],
+          "hex": "#DBD7E9"
+        },
+        "$description": "Lavender 200 at 66% of its chroma, for the dark shop accent ink (round 10)"
       }
     },
     "system": {
@@ -1012,71 +1120,71 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.0549,
             0.0431,
-            0.0353
+            0.0471,
+            0.051
           ],
-          "hex": "#0E0B09"
+          "hex": "#0B0C0D"
         },
-        "$description": "Biscuit 150 at 45% chroma"
+        "$description": "Biscuit 150 at 45% chroma, then hue 270 and half the chroma (round 10, option 4)"
       },
       "200": {
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.098,
-            0.0902,
-            0.0824
+            0.1098,
+            0.1137,
+            0.1176
           ],
-          "hex": "#191715"
+          "hex": "#1C1D1E"
         },
-        "$description": "Biscuit 200 at 45% chroma"
+        "$description": "Stone at L 0.22, hue 270: the dark sheet ground (1.16:1 on the Background; round 10 moved it up from #171719, 1.09:1)"
       },
       "265": {
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.1569,
             0.1451,
-            0.1373
+            0.149,
+            0.1529
           ],
-          "hex": "#282523"
+          "hex": "#252627"
         },
-        "$description": "Biscuit 265 at 45% chroma"
+        "$description": "Biscuit 265 at 45% chroma, then hue 270 and half the chroma (round 10, option 4)"
       },
       "320": {
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.2078,
             0.1961,
-            0.1882
+            0.2,
+            0.2039
           ],
-          "hex": "#353230"
+          "hex": "#323334"
         },
-        "$description": "Biscuit 320 at 45% chroma"
+        "$description": "Biscuit 320 at 45% chroma, then hue 270 and half the chroma (round 10, option 4)"
       },
       "360": {
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.251,
             0.2392,
-            0.2275
+            0.2431,
+            0.2471
           ],
-          "hex": "#403D3A"
+          "hex": "#3D3E3F"
         },
-        "$description": "Biscuit 360 at 45% chroma"
+        "$description": "Biscuit 360 at 45% chroma, then hue 270 and half the chroma (round 10, option 4)"
       },
       "445": {
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.3529,
             0.3412,
-            0.3294
+            0.3451,
+            0.349
           ],
-          "hex": "#5A5754"
+          "hex": "#575859"
         },
         "$description": "Stone at L 0.445: the sheet grabber in dark (2.49:1 on the Sheet colour)"
       },
@@ -1084,23 +1192,23 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.6824,
             0.6667,
-            0.651
+            0.6706,
+            0.6784
           ],
-          "hex": "#AEAAA6"
+          "hex": "#AAABAD"
         },
-        "$description": "Biscuit 740 at 45% chroma"
+        "$description": "Biscuit 740 at 45% chroma, then hue 270 and half the chroma (round 10, option 4)"
       },
       "840": {
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.8078,
             0.7922,
-            0.7765
+            0.7961,
+            0.8039
           ],
-          "hex": "#CECAC6"
+          "hex": "#CACBCD"
         },
         "$description": "Stone 740's hue and chroma at L 0.84: muted text on the lighter dark cards that sit on an accent tile (decision 050)"
       },
@@ -1108,13 +1216,164 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.9843,
             0.9804,
-            0.9725
+            0.9804,
+            0.9843
           ],
-          "hex": "#FBFAF8"
+          "hex": "#FAFAFB"
         },
-        "$description": "Biscuit 985 at 45% chroma"
+        "$description": "Biscuit 985 at 45% chroma, then hue 270 and half the chroma (round 10, option 4)"
+      }
+    },
+    "brand": {
+      "$description": "Colours a provider's branding rules fix. Used only by the sign in buttons; named for the brand so no one reuses them as theme colours.",
+      "google": {
+        "fill": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "hex": "#FFFFFF"
+          },
+          "$description": "Google sign in, light theme: button fill (developers.google.com/identity/branding-guidelines)"
+        },
+        "stroke": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.4549,
+              0.4667,
+              0.4588
+            ],
+            "hex": "#747775"
+          },
+          "$description": "Light theme: 1 px stroke"
+        },
+        "text": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1216,
+              0.1216,
+              0.1216
+            ],
+            "hex": "#1F1F1F"
+          },
+          "$description": "Light theme: label"
+        },
+        "fillDark": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0745,
+              0.0745,
+              0.0784
+            ],
+            "hex": "#131314"
+          },
+          "$description": "Dark theme: button fill"
+        },
+        "strokeDark": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.5569,
+              0.5686,
+              0.5608
+            ],
+            "hex": "#8E918F"
+          },
+          "$description": "Dark theme: 1 px stroke"
+        },
+        "textDark": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8902,
+              0.8902,
+              0.8902
+            ],
+            "hex": "#E3E3E3"
+          },
+          "$description": "Dark theme: label"
+        },
+        "logoBlue": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.2588,
+              0.5216,
+              0.9569
+            ],
+            "hex": "#4285F4"
+          },
+          "$description": "The G logo's own colour; never recoloured"
+        },
+        "logoRed": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9176,
+              0.2627,
+              0.2078
+            ],
+            "hex": "#EA4335"
+          },
+          "$description": "The G logo's own colour; never recoloured"
+        },
+        "logoYellow": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9843,
+              0.7373,
+              0.0196
+            ],
+            "hex": "#FBBC05"
+          },
+          "$description": "The G logo's own colour; never recoloured"
+        },
+        "logoGreen": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.2039,
+              0.6588,
+              0.3255
+            ],
+            "hex": "#34A853"
+          },
+          "$description": "The G logo's own colour; never recoloured"
+        }
+      },
+      "facebook": {
+        "blue": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0941,
+              0.4667,
+              0.949
+            ],
+            "hex": "#1877F2"
+          },
+          "$description": "Facebook's logo: the disc (Facebook brand resources, 2019 logo)"
+        },
+        "f": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "hex": "#FFFFFF"
+          },
+          "$description": "Facebook's logo: the f, white on the blue disc"
+        }
       }
     }
   },

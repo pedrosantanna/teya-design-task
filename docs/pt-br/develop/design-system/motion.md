@@ -12,9 +12,11 @@ Takeaways:
 Call:
 - Pedi um movimento que pareça premium e responda rápido, partindo do iOS e do Liquid Glass e somando o Material.
 - Mantive os valores provisórios até serem ajustados num celular, no protótipo (decisão 040).
+- Pedi que o splash fosse uma intro vetorial curta da marca sobre Índigo, de cerca de 1,6 s, com o toldo desenrolando listra por listra e um balanço rápido.
 - Nesta rodada pedi que toda troca de tela fosse animada, com o Apple Music como referência, e trouxe de volta o zoom a partir do botão redondo de Requests (decisão 026).
 AI:
 - Um agente pesquisou as orientações da Apple sobre molas (WWDC 2023 e 2024), os tokens de movimento do Material 3 e do Material 3 Expressive no código do Compose, o Reanimated e o Expo Haptics, e propôs as molas e as regras. Eu pedi um movimento com sensação premium e resposta rápida.
+- Um agente escreveu a linha do tempo do splash e a construiu com um único relógio do Reanimated, depois tirou quadros em 0, 400, 800, 1200 e 1600 ms para conferir.
 - Um agente associou cada troca de tela a uma transição do iOS 26, do Material 3 e da web e conferiu o que o Expo Router, o Reanimated e o navegador suportam hoje.
 Trade-offs:
 - Molas parecem vivas e podem ser interrompidas, e são mais difíceis de cronometrar com exatidão que curvas de easing.
@@ -48,6 +50,21 @@ No Reanimated, uma mola recebe `duration` em milissegundos e `dampingRatio` = 1 
 | Poucos haptics | Seleção para chips, impacto leve no botão principal, sucesso quando a compra fica Ready (retirada) ou Paid (entrega), aviso só nos finais "Not confirmed · not charged" e "Sold · not charged", nunca em "not charged yet" |
 | Rodar na thread de UI | Shared values do Reanimated, Gesture Handler para arrastes, só transform e opacidade nos caminhos quentes, todos os tokens num `motion.ts` |
 
+## Splash
+
+O splash é a única sequência roteirizada: a marca se constrói sobre o Índigo 800 em cerca de 1,6 s, guiada por um único relógio na thread de UI, então toda execução é igual.
+
+| Tempo (ms) | O que se move |
+| --- | --- |
+| 0 | Só o toldo aparece, enrolado no alto como uma barra listrada fina, um pouco acima do seu lugar |
+| 100 a 800 | As cinco listras se desenrolam da esquerda para a direita, com 70 ms entre elas. Cada uma é uma mola com um pequeno excesso (amortecimento 0,55) e balança em torno da borda de cima, até 7 graus, esmaecendo em cerca de 0,4 s |
+| 780 | As orelhas entram deslizando de cada lado |
+| 960 e 1050 | Os olhos crescem a partir do centro, depois o nariz salta com um pouco mais de quique |
+| 1240 e 1400 | Duas piscadas: os olhos fecham até um décimo da altura e abrem de novo em 260 ms cada |
+| 1600 | A marca pronta fica parada por 250 ms, some em 150 ms, e depois o fundo some em 200 ms revelando o Getting started; a página monta quando o fundo começa a sumir, então sua animação de entrada é vista |
+
+Com Reduzir movimento a marca pronta aparece de uma vez e só os dois esmaecimentos ficam. A construção é desenhada com `react-native-svg` e Reanimated; um link com `?intro=<ms>` no build web a congela nesse tempo, para revisão.
+
 ## Transições de tela
 
 Nenhuma tela muda sem movimento. Cada transição começa no elemento que foi tocado, para o comprador ver de onde a tela nova veio e para onde ela volta.
@@ -67,6 +84,10 @@ Nenhuma tela muda sem movimento. Cada transição começa no elemento que foi to
 Com o Reduzir Movimento ligado, cada uma delas vira um crossfade. Os pushes e as sheets que o app desenha usam `spring.smooth`; os zooms do sistema e as folhas de pagamento mantêm o tempo do sistema.
 
 No app em Expo, o zoom é o `Link.AppleZoom` do Expo Router, que é alpha e pede o iOS 18; as shared element transitions do Reanimated são o outro caminho e são experimentais. A versão web usa `document.startViewTransition`. Onde nenhum deles funciona, a troca cai para um push ou um fade.
+
+### Web
+
+Na web um push leva 350 ms, uma sheet sobe em 380 ms e sai em 320 ms, um zoom leva 420 ms e o morph da barra de pergunta 420 ms, todos na curva do iOS `cubic-bezier(0.32, 0.72, 0, 1)`. Um zoom e um morph recortam em `radius.card` (28). O toque do ponteiro não tem atraso. Um arraste que começa a até 24 pt da borda esquerda e percorre 72 pt, quase na horizontal, volta como o botão Back; só funciona em telas empilhadas, então uma sheet ou o compositor do New Request fecham com o controle próprio. O navegador não consegue seguir o dedo numa view transition, então o gesto confirma ao soltar. Com Reduce Motion, toda mudança é um crossfade de 200 ms: as telas fazem fade no lugar e não deslizam. Os valores são constantes nomeadas em `internal/transitions.ts`, não tokens.
 
 
 ## Fontes

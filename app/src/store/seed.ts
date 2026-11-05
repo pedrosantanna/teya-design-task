@@ -1,6 +1,6 @@
 // Mock content from app flow v8 (docs/develop/ideation/app-flow-v8.html): Sam's eclipse glasses and
 // Jess's collect-after-work sourdough, around Blythe Road, W14. No real shop is represented.
-import { moreShops } from './seed-more';
+import { moreShops, widerShops } from './seed-more';
 import type { Area, AreaId, ContentSet, Persona, PersonaContent, Place, Shop } from './types';
 
 // The 12 mock shops (docs/deliver/prototype.md, Mocked content). Walk times are from Blythe Road, W14; the
@@ -434,23 +434,27 @@ const sam: PersonaContent = {
       { shopId: 'brookHardware', price: 0, collectBy: '' },
       { shopId: 'brookToys', price: 0, collectBy: '' },
     ],
+    wider: [
+      { shopId: 'hollandCameras', price: 6.5, collectBy: 'Mon 9 Nov', repliedAgo: '1 min ago' },
+      { shopId: 'uxbridgeOpticians', price: 0, collectBy: '' },
+      { shopId: 'hollandStationers', item: 'Solar viewer sheets', price: 4.5, collectBy: 'Mon 16 Nov', repliedAgo: '1 min ago' },
+    ],
   },
   others: [
     {
       id: 'cake',
       title: 'Birthday cake',
       when: '11:02',
-      preview: "Snuffle: Rossi's can do it with 2 days' notice.",
+      preview: "Snuffle: Rossi's needs your answer",
       state: 'needsYou',
       label: 'Needs you · buy by Thu 5 Nov',
-      action: "Buy at Rossi's",
       image: 'birthday-cake',
     },
     {
       id: 'sourdough',
       title: 'Sourdough',
       when: 'Fri',
-      preview: 'You: Collect after work as usual',
+      preview: "Snuffle: Next Friday's loaf is set aside",
       state: 'repeat',
       label: 'Every Friday',
       image: 'sourdough-loaf',
@@ -468,7 +472,7 @@ const sam: PersonaContent = {
       id: 'fan',
       title: 'Desk fan',
       when: 'Aug 2025',
-      preview: 'Snuffle: No shop nearby had one in time.',
+      preview: 'Snuffle: No one had it. Want me to keep looking?',
       state: 'notFound',
       label: 'Not found',
       image: 'desk-fan',
@@ -503,13 +507,17 @@ const jess: PersonaContent = {
     area: 'Within 15 min',
     image: 'sourdough-loaf',
     offers: [{ shopId: 'rossis', price: 4.2, collectBy: 'Fri 6 Nov', repliedAgo: '3 min ago' }],
+    wider: [
+      { shopId: 'kensingtonBake', price: 4.8, collectBy: 'Fri 6 Nov', repliedAgo: '2 min ago' },
+      { shopId: 'wellsBakery', price: 0, collectBy: '' },
+    ],
   },
   others: [
     {
       id: 'fan',
       title: 'Desk fan',
       when: '13:21',
-      preview: 'You: A fan I can collect after work',
+      preview: 'Snuffle: Still looking until Fri 6 Nov',
       state: 'looking',
       label: 'Looking · until Fri 6 Nov',
       image: 'desk-fan-alt',
@@ -584,14 +592,28 @@ function withSet(base: PersonaContent, set: ContentSet): PersonaContent {
   }
 }
 
+const widerById = new Map(widerShops.map((s) => [s.id, s]));
 const cache = new Map<string, PersonaContent>();
 
-/** The persona's content in the given content set. Cached so selectors return stable objects. */
-export function contentFor(persona: Persona, set: ContentSet): PersonaContent {
-  const key = `${persona}:${set}`;
+/** The shops asked after "Ask further away" join the request's offers and its shops. */
+function withWider(base: PersonaContent): PersonaContent {
+  const wider = base.active.wider ?? [];
+  if (wider.length === 0) return base;
+  const added = wider.map((o) => widerById.get(o.shopId)).filter((s): s is Shop => !!s);
+  return {
+    ...base,
+    shops: [...base.shops, ...added],
+    active: { ...base.active, nearCount: base.active.offers.length, offers: [...base.active.offers, ...wider] },
+  };
+}
+
+/** The persona's content in the given content set, with the wider shops once they have been asked. Cached so selectors return stable objects. */
+export function contentFor(persona: Persona, set: ContentSet, widened = false): PersonaContent {
+  const key = `${persona}:${set}:${widened ? 'wide' : 'near'}`;
   let content = cache.get(key);
   if (!content) {
-    content = withSet(personas[persona], set);
+    const base = withSet(personas[persona], set);
+    content = widened ? withWider(base) : base;
     cache.set(key, content);
   }
   return content;
@@ -638,7 +660,7 @@ export const addressBook: { address: string; area: AreaId }[] = [
   { address: 'Abingdon Road, W8', area: 'kensington' },
 ];
 
-const everyShop = [...allTwelve, ...moreShops];
+const everyShop = [...allTwelve, ...moreShops, ...widerShops];
 const allShops = new Map<string, Shop>(everyShop.map((s) => [s.id, s]));
 
 /** A shop's place in the full list, stable across content sets (the shop page's made-up phone number uses it). */

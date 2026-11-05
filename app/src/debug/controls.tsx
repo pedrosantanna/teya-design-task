@@ -1,23 +1,82 @@
-// Small layout pieces of the panel, built from design-system components only.
-import type { ReactNode } from 'react';
-import { View } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
+// Small controls of the panel: plain DOM elements styled by panel.css (web-only chrome, see chrome.web.ts).
+import { useState, type ReactNode } from 'react';
 
-import { Button, Text } from '@/design-system';
+import type { Option } from '@/design-system';
 
-/** A titled group of controls, like a section of Figma's right sidebar. */
-export function Section({ title, children }: { title: string; children: ReactNode }) {
+/** Which sections the viewer collapsed, kept while the panel is closed and opened again. */
+const folded = new Map<string, boolean>();
+
+/** A titled, collapsible group of controls, like a section of Figma's right sidebar. */
+export function Section({ title, children, defaultOpen = true }: { title: string; children: ReactNode; defaultOpen?: boolean }) {
+  const [open, setOpen] = useState(!(folded.get(title) ?? !defaultOpen));
+  const toggle = () => {
+    folded.set(title, open);
+    setOpen(!open);
+  };
   return (
-    <View style={styles.section}>
-      <Text variant="footnote" color="mutedForeground" accessibilityRole="header">
-        {title}
-      </Text>
-      <View style={styles.body}>{children}</View>
-    </View>
+    <section className="dbg-sec">
+      <h3 className="dbg-sec-h">
+        <button type="button" className="dbg-sec-t" aria-expanded={open} onClick={toggle}>
+          {title}
+        </button>
+      </h3>
+      {open ? <div className="dbg-sec-b">{children}</div> : null}
+    </section>
   );
 }
 
-/** A labelled row of choices: the chosen one filled, the others tonal. */
+function optionText<T extends string>(o: Option<T>) {
+  return o.detail ? `${o.label} · ${o.detail}` : o.label;
+}
+
+/** A small native select with its label to the left. Options may sit in named groups. */
+export function Select<T extends string>({
+  label,
+  options,
+  groups,
+  value,
+  onChange,
+}: {
+  label: string;
+  options?: readonly Option<T>[];
+  groups?: readonly { label: string; options: readonly Option<T>[] }[];
+  value: T;
+  onChange: (value: T) => void;
+}) {
+  return (
+    <label className="dbg-row">
+      <span className="dbg-lab" title={label}>
+        {label}
+      </span>
+      <select
+        className="dbg-select"
+        value={value}
+        onChange={(e) => {
+          onChange(e.target.value as T);
+          // A focused select would swallow the D shortcut.
+          e.target.blur();
+        }}
+      >
+        {options?.map((o) => (
+          <option key={o.value} value={o.value}>
+            {optionText(o)}
+          </option>
+        ))}
+        {groups?.map((g) => (
+          <optgroup key={g.label} label={g.label}>
+            {g.options.map((o) => (
+              <option key={o.value} value={o.value}>
+                {optionText(o)}
+              </option>
+            ))}
+          </optgroup>
+        ))}
+      </select>
+    </label>
+  );
+}
+
+/** A labelled row of choices; the chosen one sits raised on the track. */
 export function Segmented<T extends string>({
   label,
   options,
@@ -30,34 +89,59 @@ export function Segmented<T extends string>({
   onChange: (value: T) => void;
 }) {
   return (
-    <View style={styles.segmented}>
-      <Text variant="subheadline" color="mutedForeground">
+    <div className="dbg-row">
+      <span className="dbg-lab" title={label}>
         {label}
-      </Text>
-      <View style={styles.choices} accessibilityRole="radiogroup" accessibilityLabel={label}>
+      </span>
+      <div className="dbg-seg" role="group" aria-label={label}>
         {options.map((o) => (
-          <Button
-            key={o.value}
-            label={o.label}
-            size="compact"
-            role={o.value === value ? 'filled' : 'tonal'}
-            accessibilityLabel={`${label}: ${o.label}${o.value === value ? ', selected' : ''}`}
-            onPress={() => onChange(o.value)}
-          />
+          <button key={o.value} type="button" aria-pressed={o.value === value} onClick={() => onChange(o.value)}>
+            {o.label}
+          </button>
         ))}
-      </View>
-    </View>
+      </div>
+    </div>
   );
 }
 
-export function Divider() {
-  return <View style={styles.divider} />;
+/** A switch, label on the left. */
+export function Toggle({ label, detail, value, onChange }: { label: string; detail?: string; value: boolean; onChange: (value: boolean) => void }) {
+  return (
+    <label className="dbg-check">
+      <span className="dbg-check-t">
+        {label}
+        {detail ? <small>{detail}</small> : null}
+      </span>
+      <input type="checkbox" role="switch" className="dbg-switch" checked={value} onChange={(e) => onChange(e.target.checked)} />
+    </label>
+  );
 }
 
-const styles = StyleSheet.create((theme) => ({
-  section: { gap: theme.space[2] },
-  body: { gap: theme.space[2] },
-  segmented: { gap: theme.space[1] },
-  choices: { flexDirection: 'row', flexWrap: 'wrap', gap: theme.space[1] },
-  divider: { height: StyleSheet.hairlineWidth, backgroundColor: theme.color.muted },
-}));
+/** A checkbox, box on the left. */
+export function Check({ label, detail, checked, onChange }: { label: string; detail?: string; checked: boolean; onChange: (value: boolean) => void }) {
+  return (
+    <label className="dbg-check is-box">
+      <input type="checkbox" className="dbg-box" checked={checked} onChange={(e) => onChange(e.target.checked)} />
+      <span className="dbg-check-t">
+        {label}
+        {detail ? <small>{detail}</small> : null}
+      </span>
+    </label>
+  );
+}
+
+export function Button({ label, onPress }: { label: string; onPress: () => void }) {
+  return (
+    <button type="button" className="dbg-btn" onClick={onPress}>
+      {label}
+    </button>
+  );
+}
+
+export function Sub({ children }: { children: ReactNode }) {
+  return <p className="dbg-sub">{children}</p>;
+}
+
+export function Note({ children }: { children: ReactNode }) {
+  return <p className="dbg-note">{children}</p>;
+}

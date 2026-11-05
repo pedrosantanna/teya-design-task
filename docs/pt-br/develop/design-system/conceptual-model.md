@@ -9,7 +9,7 @@ Takeaways:
 - Cada objeto tem uma forma de cartão e uma de detalhe: um pedido é uma linha que abre sua conversa, uma resposta é um cartão na conversa que abre uma folha de detalhes, uma compra é um cartão que abre o recibo, uma loja é uma linha que abre a página da loja.
 - Um verbo por ação no app inteiro. Buy é o único jeito de pagar; a loja separa; o comprador retira.
 - Uma tabela só de rótulos de status, usada igual nas linhas, nos cartões da conversa, nas notificações e na Live Activity. O dinheiro tem três desfechos que o comprador vê: pago, não cobrado, reembolsado.
-- Uma avaliação é um atributo da compra, então só quem retirou ou recebeu uma compra pode avaliá-la. A página da loja mostra dois sinais identificados pela origem, "What buyers said" e "What Snuffle saw", e um resumo do que a loja vende; os três são atributos da loja.
+- Uma avaliação é um atributo da compra, então só quem retirou ou recebeu uma compra pode avaliá-la. A página da loja mostra dois sinais identificados pela origem, "Ratings" e "How they do on Snuffle", e um resumo do que a loja vende; os três são atributos da loja.
 Call:
 - Pedi um modelo conceitual antes de mais telas: os objetos, o que o comprador faz com cada um, seus estados e palavras, simples e apoiado em referências e na pesquisa.
 - Decidi os quatro pontos em aberto (decisão 039): o item fica fora do modelo, o pedido que fica aberto é "Keep looking", a resposta da loja é "answer" e as lojas aparecem como tiles com foto na home. Segue as decisões 025, 031 e 037.
@@ -58,7 +58,7 @@ Não há evidência de "errand", "basket", "hold" ou "reserve" nas palavras dos 
 | Objeto | Nas palavras do comprador | Atributos principais | Relações | Cartão → detalhe |
 | --- | --- | --- | --- | --- |
 | Request (pedido) | O que eu pedi | Itens e quantidade, prazo, área, retirar ou entrega, repetição | Tem muitas respostas e quantas compras houver | Linha em Requests → a conversa |
-| Shop (loja) | A loja | Nome, rua, tempo a pé, aberta até, feito sob encomenda com antecedência ("2 days' notice"), responde pelo caixa ou por mensagem, janela de retirada, entrega e taxa; o que vende; o que quem comprou disse; o que o Snuffle viu | Dá muitas respostas, tem muitas compras | Tile com foto em Nearby, a home; linha em qualquer outra lista → página da loja |
+| Shop (loja) | A loja | Nome, rua, tempo a pé, aberta até, feito sob encomenda com antecedência ("2 days' notice"), responde pelo caixa ou por mensagem, janela de retirada, entrega e taxa; o que vende; avaliações; como se sai no Snuffle | Dá muitas respostas, tem muitas compras | Tile com foto em Nearby, a home; linha em qualquer outra lista → página da loja |
 | Answer (resposta) | "A Paper & Co tem" | Loja, o que tem (tudo, parte, algo parecido), preço, origem da resposta, data limite de retirada, entrega | Pertence a um pedido e a uma loja; pode virar uma compra | Linha compacta na lista de lojas perguntadas, cartão completo na conversa quando a loja responde → folha de detalhes, onde o comprador compra |
 | Order (compra) | Minha compra | Itens, loja, total, retirar ou entrega, data limite de retirada, onde retira (a loja ou um ponto de retirada), código de retirada, pagamento, avaliação | Pertence a um pedido, a uma loja e a uma resposta | Cartão na conversa com o rótulo de status → recibo, que tem o código de retirada |
 
@@ -84,14 +84,14 @@ A página da loja mostra dois sinais com títulos separados, para o comprador sa
 
 | Sinal | Origem | Aparece como |
 | --- | --- | --- |
-| What buyers said | Avaliações de compras retiradas e entregues | "92% would go back · 38 buyers" e a contagem de cada tag. Abaixo de 5 avaliações, só as tags: "New on Snuffle · 3 buyers so far" |
-| What Snuffle saw: taxa de resposta | Respostas | "Answers 9 in 10 requests" |
-| What Snuffle saw: precisão de estoque | Respostas e compras | "Had it 24 of 25 times when they said yes", só depois de 10 respostas "has it"; antes disso, "New on Snuffle" com a taxa e o tempo de resposta |
-| What Snuffle saw: tempo de resposta | Respostas | "Usually replies in 6 min"; uma loja conectada mostra "Stock from the till" |
+| Ratings | Avaliações de compras retiradas e entregues | "92% would go back · 38 buyers" e a contagem de cada tag. Abaixo de 5 avaliações, só as tags: "New on Snuffle · 3 buyers so far" |
+| How they do on Snuffle: taxa de resposta | Respostas | "Answers 9 in 10 requests" |
+| How they do on Snuffle: precisão de estoque | Respostas e compras | "Had it 24 of 25 times when they said yes", só depois de 10 respostas "has it"; antes disso, "New on Snuffle" com a taxa e o tempo de resposta |
+| How they do on Snuffle: tempo de resposta | Respostas | "Usually replies in 6 min"; uma loja conectada mostra "Stock from the till" |
 
-O que a loja vende é um terceiro atributo da loja. O de uma loja conectada vem das categorias e dos mais vendidos do caixa; o de uma loja consultada, das respostas "Had it" passadas e do tipo de loja. Aparece como chips de categoria, cada um abrindo o Ask com a categoria preenchida, "Asked about recently" com as respostas passadas ("Had it · 2 hours ago") e uma linha de preço ("Most items £2–£35 · from past answers" ou "· from the shop's till"). Os itens continuam sem página.
+O que a loja vende é um terceiro atributo da loja. O de uma loja conectada vem das categorias e dos mais vendidos do caixa; o de uma loja consultada, das respostas "Had it" passadas e do tipo de loja. Aparece como chips de categoria, cada um abrindo o Ask com a categoria preenchida, uma linha de preço ("Most items £2–£35 · from past answers" ou "· from the shop's till"). Os itens continuam sem página. Abaixo dela, "Found here recently" lista de três a cinco nomes de itens que compradores encontraram na loja, resumindo só pelo nome as respostas "Had it" dela: nada para tocar, sem comprador e sem preço, com uma linha que diz de onde vêm. As linhas "Had it · 2 hours ago" por resposta ficam no chat.
 
-A página da loja segue esta ordem: cabeçalho e ações, What they sell, How they do on Snuffle, What buyers say.
+A página da loja segue esta ordem: cabeçalho e ações, What they sell, Found here recently, Ratings, How they do on Snuffle, How it works.
 
 A loja vê os próprios sinais e pode contestar um caso específico, como um "Not ready when I came" numa compra que ela separou no prazo. A loja não tem interface, então isso fica nos estados do pedido do lado da loja.
 

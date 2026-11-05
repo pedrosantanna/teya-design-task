@@ -1,0 +1,137 @@
+/* The state debugger panel: web-only chrome in the docs site's neutral idiom (see site/viewer3d.css, .v3-panel). */
+.dbg {
+  --d-bg: #ffffff;
+  --d-sub: #fafafa;
+  --d-fg: #09090b;
+  --d-fg2: #3f3f46;
+  --d-muted: #f4f4f5;
+  --d-mfg: #6b6b74;
+  --d-border: #e4e4e7;
+  --d-strong: #d4d4d8;
+  --d-primary: #18181b;
+  --d-on-primary: #fafafa;
+  --d-ring: #52525b;
+  --d-shadow: rgb(0 0 0 / 0.14);
+  box-sizing: border-box;
+  font: 400 13px/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--d-fg2);
+  -webkit-font-smoothing: antialiased;
+  color-scheme: light;
+}
+.dbg[data-scheme="dark"] {
+  --d-bg: #09090b;
+  --d-sub: #111113;
+  --d-fg: #fafafa;
+  --d-fg2: #d4d4d8;
+  --d-muted: #18181b;
+  --d-mfg: #a1a1aa;
+  --d-border: #27272a;
+  --d-strong: #3f3f46;
+  --d-primary: #fafafa;
+  --d-on-primary: #18181b;
+  --d-ring: #a1a1aa;
+  --d-shadow: rgb(0 0 0 / 0.5);
+  color-scheme: dark;
+}
+.dbg *, .dbg *::before, .dbg *::after { box-sizing: border-box; }
+
+/* Panel: docked column to the right of the phone frame, or an overlay from the right on narrow windows. */
+.dbg-panel {
+  display: flex; flex-direction: column; min-height: 0; background: var(--d-bg); border-left: 1px solid var(--d-border);
+  z-index: 20;
+}
+.dbg-panel.is-docked { flex: none; width: 288px; align-self: stretch; }
+.dbg-panel.is-overlay {
+  position: absolute; top: 0; right: 0; bottom: 0; width: min(288px, calc(100% - 48px));
+  box-shadow: -12px 0 40px var(--d-shadow); animation: dbg-in 0.2s ease-out;
+}
+@keyframes dbg-in { from { transform: translateX(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .dbg-panel.is-overlay { animation: none; } }
+
+.dbg-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex: none; height: 44px; padding: 0 8px 0 16px; border-bottom: 1px solid var(--d-border); }
+.dbg-title { margin: 0; font-size: 12px; font-weight: 600; line-height: 1.3; color: var(--d-fg); }
+.dbg-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+
+.dbg-iconbtn {
+  display: grid; place-items: center; flex: none; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 6px;
+  background: transparent; color: var(--d-mfg); cursor: pointer;
+}
+.dbg-iconbtn:hover { background: var(--d-muted); color: var(--d-fg); }
+.dbg-iconbtn svg { width: 16px; height: 16px; }
+
+/* Sections, collapsible like Figma's right panel. */
+.dbg-sec { border-bottom: 1px solid var(--d-border); }
+.dbg-sec:last-child { border-bottom: 0; }
+.dbg-sec-h { margin: 0; font: inherit; }
+.dbg-sec-t {
+  display: flex; align-items: center; gap: 6px; width: 100%; height: 36px; padding: 0 16px; border: 0; background: transparent;
+  color: var(--d-fg); font-family: inherit; font-size: 12px; font-weight: 600; line-height: 1.3; text-align: left; cursor: pointer;
+}
+.dbg-sec-t:hover { background: var(--d-sub); }
+.dbg-sec-t::before {
+  content: ""; flex: none; width: 5px; height: 5px; margin: 0 3px 0 1px; border-right: 1.5px solid var(--d-mfg); border-bottom: 1.5px solid var(--d-mfg);
+  transform: rotate(-45deg); transition: transform 0.15s;
+}
+.dbg-sec-t[aria-expanded="true"]::before { transform: rotate(45deg); }
+.dbg-sec-b { display: flex; flex-direction: column; gap: 8px; padding: 2px 16px 14px; }
+
+/* Rows */
+.dbg-row { display: grid; grid-template-columns: 84px minmax(0, 1fr); align-items: center; gap: 8px; min-width: 0; margin: 0; }
+.dbg-lab { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; color: var(--d-mfg); }
+.dbg-sub { margin: 4px 0 0; font-size: 12px; font-weight: 500; color: var(--d-fg); }
+.dbg-note { margin: 0; font-size: 12px; line-height: 1.45; color: var(--d-mfg); }
+.dbg-note kbd { padding: 0 4px; border: 1px solid var(--d-strong); border-radius: 4px; font: 500 11px ui-monospace, "SF Mono", Menlo, monospace; color: var(--d-fg2); }
+
+.dbg-select {
+  appearance: none; -webkit-appearance: none; width: 100%; min-width: 0; height: 28px; padding: 0 24px 0 8px; border: 1px solid var(--d-border); border-radius: 6px;
+  background: var(--d-bg); color: var(--d-fg); font: inherit; font-size: 12px; text-overflow: ellipsis; cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, var(--d-mfg) 50%), linear-gradient(135deg, var(--d-mfg) 50%, transparent 50%);
+  background-position: calc(100% - 12px) 12px, calc(100% - 8px) 12px; background-size: 4px 4px; background-repeat: no-repeat;
+}
+.dbg-select:hover { border-color: var(--d-strong); }
+.dbg-select option, .dbg-select optgroup { background: var(--d-bg); color: var(--d-fg); }
+
+.dbg-seg { display: flex; gap: 2px; padding: 2px; border-radius: 8px; background: var(--d-muted); min-width: 0; }
+.dbg-seg button {
+  flex: 1; min-width: 0; height: 24px; padding: 0 4px; border: 0; border-radius: 6px; background: transparent; color: var(--d-mfg);
+  font: inherit; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer;
+}
+.dbg-seg button:hover { color: var(--d-fg); }
+.dbg-seg button[aria-pressed="true"] { background: var(--d-bg); color: var(--d-fg); box-shadow: 0 1px 2px rgb(0 0 0 / 0.12), 0 0 0 1px var(--d-border); }
+
+.dbg-check { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-width: 0; margin: 0; cursor: pointer; }
+.dbg-check.is-box { justify-content: flex-start; align-items: flex-start; }
+.dbg-check-t { display: flex; flex-direction: column; min-width: 0; font-size: 12px; color: var(--d-fg); }
+.dbg-check-t small { font-size: 11px; line-height: 1.4; color: var(--d-mfg); }
+.dbg-switch {
+  appearance: none; -webkit-appearance: none; position: relative; flex: none; width: 28px; height: 16px; margin: 0;
+  border-radius: 999px; background: var(--d-strong); cursor: pointer; transition: background-color 0.15s;
+}
+.dbg-switch::after { content: ""; position: absolute; left: 2px; top: 2px; width: 12px; height: 12px; border-radius: 50%; background: var(--d-bg); transition: transform 0.15s; }
+.dbg-switch:checked { background: var(--d-primary); }
+.dbg-switch:checked::after { transform: translateX(12px); background: var(--d-on-primary); }
+.dbg-box {
+  appearance: none; -webkit-appearance: none; position: relative; flex: none; width: 14px; height: 14px; margin: 1px 0 0; border: 1px solid var(--d-mfg); border-radius: 4px;
+  background: var(--d-bg); cursor: pointer;
+}
+.dbg-box:checked { background: var(--d-primary); border-color: var(--d-primary); }
+.dbg-box:checked::after { content: ""; position: absolute; left: 4px; top: 1px; width: 3px; height: 7px; border: solid var(--d-on-primary); border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); }
+@media (prefers-reduced-motion: reduce) { .dbg-switch, .dbg-switch::after, .dbg-sec-t::before { transition: none; } }
+
+.dbg-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.dbg-btn {
+  height: 28px; padding: 0 10px; border: 1px solid var(--d-border); border-radius: 6px; background: var(--d-bg); color: var(--d-fg);
+  font: inherit; font-size: 12px; cursor: pointer;
+}
+.dbg-btn:hover { border-color: var(--d-strong); background: var(--d-sub); }
+
+.dbg :is(button, select, input):focus-visible { outline: 2px solid var(--d-ring); outline-offset: 1px; }
+
+/* The toggle that opens the panel, top right of the window. */
+.dbg-toggle {
+  position: absolute; z-index: 21; top: 8px; right: 8px; display: grid; place-items: center; width: 32px; height: 32px; padding: 0;
+  border: 1px solid var(--d-border); border-radius: 8px; background: var(--d-bg); color: var(--d-fg2); cursor: pointer;
+  box-shadow: 0 2px 8px var(--d-shadow);
+}
+.dbg-toggle:hover { color: var(--d-fg); border-color: var(--d-strong); }
+.dbg-toggle svg { width: 16px; height: 16px; }

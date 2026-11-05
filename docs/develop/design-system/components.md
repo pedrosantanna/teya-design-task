@@ -11,6 +11,7 @@ Takeaways:
 - The ask bar never shrinks: one row with the Ask capsule (the Snuffle glyph, "Ask for anything nearby", a mic) and the Requests circle after it. Its glass morphs into New Request's composer. Sheets title themselves in Headline, centred.
 - Bars have no fill: Back, Close and Confirm are glass circles, icon actions share one glass capsule, and a scroll edge effect replaces the bar background. The address at the top of Nearby opens the location sheet.
 - A shop name takes one line, a preview two, and a price never truncates.
+- The shop page puts a photo carousel under the map's pin, with a scrim of the Background so the page dots hold their contrast, and a tap opens a full-screen viewer that grows from the photo, zooms by pinch and pages by swipe.
 - Ratings add five components: the rating sheet a buyer fills in after an order, and on the shop page the product summary, the reliability row, the rating summary and the review card. Each signal names its source and is one element for a screen reader, with a full label.
 Call:
 - After a design review found component specs, states, platform equivalents and content rules missing, I asked for the design system to be complete enough to build the prototype from.
@@ -23,6 +24,7 @@ Call:
 - After a visual critique of the web build I asked for the selected chip to be the strongest chip in its row, for the iOS segmented control, for the Category header to line up with the list under it and for shop photos in its rows, and for one scrim behind every sheet.
 - Later I chose lighter tinted rows on the dark Category screen, keeping the full colour as its ground, and moved the Requests circle after the field, as iOS 26 places the secondary button after the search field in Music and Podcasts (decision 050).
 - After another visual critique and a screen review of the web build, I asked for their fixes to the Category header and rows, sheets, the segmented control, the ask bar's spacing, New Request's chips and the rating sheet. Where the rating sheet's tags disagreed with the conceptual model, the model's lists win (decision 047).
+- Later I asked for the shop page to follow Airbnb's listing page: a photo carousel under the pin, a full-screen photo viewer, "Found here recently" with item names and no buyer or price, the ratings higher up, and a "Promoted" line on a paid placement, since UK advertising rules expect paid placement to be identifiable.
 AI:
 - An agent reviewed the design system against the v7 screens and listed what was missing. Another agent wrote this page from the existing tokens and the v7 frames; I set the scope and the rules it had to follow.
 - An agent rewrote the nav bar, Back, Close, sheet, ask bar and map specs from the WWDC 2025 sessions on the new design and the MapLibre docs, and added the location control and Confirm.
@@ -32,6 +34,7 @@ AI:
 - An agent applied the visual critique to chips, the segmented control, sheets and the Category screen, measured the new pairs with the WCAG 2 formula and checked them on the web build in light and dark.
 - An agent added the tinted row cards and moved the Requests circle in the app, checked that the morph into New Request still starts from the capsule, and took screenshots of Nearby and four dark Category screens.
 - An agent applied that round's fixes in the app and on this page, kept the rating sheet's thumbs at 88 and wrote that into the spec, and checked the changed screens on the web build in light and dark.
+- An agent built the photo carousel, the viewer and the new shop page order from the v10 frames, added the scrim and viewer tokens, measured the page dots on black and white photos in light and dark, and checked the page at rest, scrolled and with the viewer open on the web build.
 Trade-offs:
 - Specifying every component before the prototype exists means some values will move once they are on a phone; writing them down first keeps the two platforms and the screens from drifting apart.
 - Making each card a single accessible element keeps the swipe order short, at the cost of reaching the card's secondary actions through the actions menu.
@@ -83,23 +86,33 @@ Trade-offs:
 | iOS ↔ Android | Same on both |
 | Accessibility | Decorative and hidden; the sender line or the surrounding label names Snuffle |
 
+## Splash intro
+
+| Aspect | Spec |
+| --- | --- |
+| Use | The first thing a first-run shopper sees, before Getting started: the mark builds itself on Indigo 800, then fades and hands over to page 1 (component `MarkIntro`) |
+| Anatomy | The Snuffle mark at `size.category.art` (120, the native splash image's width) in the splash colours (white and Indigo 300 stripes) on `color.splash.ground`; the awning rolled at the top, five stripes unrolling 70 ms apart, ears, eyes and nose, two blinks; about 1.6 s, then a 250 ms hold, a 150 ms mark fade and a 200 ms ground fade |
+| Tokens | `color.splash.*`; the ground is Indigo 800 in both modes, and Getting started's page 1 is the same Indigo 800 in dark, so the ground does not change colour as the intro hands over |
+| States | Reduce Motion starts at the final frame and fades; `?intro=<ms>` freezes it at a time for review frames |
+| Accessibility | Decorative and hidden; nothing to press |
+
 ## Chat bubble
 
 | Aspect | Spec |
 | --- | --- |
-| Anatomy | Shopper: text, right-aligned. Snuffle: a sender line on the first bubble of a group, the mark's bare glyph (inline, no avatar) beside "Snuffle", with the day when it isn't today ("Snuffle · Sun 8 Nov"), then the text, left-aligned from the content edge, with no avatar column |
-| Tokens | Shopper bubble in Primary with its label colour; Snuffle bubble in `snuffle.bubble` (Lavender) with Foreground. `radius.bubble`, `inset.bubble`, Body text, sender line Caption 1. Maximum width 78% of the content width. `space.3` between bubbles from the same sender, `space.5` at a change of sender. The shopper's bubble appears with `spring.snappy` |
-| Grouping | Consecutive bubbles from one sender form a group: one sender line, with its glyph, per group |
+| Anatomy | Shopper: text, right-aligned. Snuffle: a sender line on the first bubble of a group, the word "Snuffle" in Caption 1 with no glyph, face or avatar, with the day when it isn't today ("Snuffle · Sun 8 Nov"), then the text, left-aligned from the content edge, with no avatar column |
+| Tokens | Shopper bubble in Primary with its label colour; Snuffle bubble in `snuffle.bubble` (Lavender) with Foreground. `radius.bubble`, `inset.bubble`, Body text, sender line Caption 1. Maximum width 78% of the content width. `space.3` between bubbles from the same sender, `space.6` at a change of sender. The shopper's bubble appears with `spring.snappy` |
+| Grouping | Consecutive bubbles from one sender form a group: one sender line ("Snuffle") per group, on its first bubble only; later bubbles of the group carry none |
 | States | Sending (the bubble shows at once), sent, failed to send (a retry symbol beside it and "Not sent · tap to retry") |
 | iOS ↔ Android | Same on both |
-| Accessibility | Each bubble is read with its sender ("Snuffle: I'm asking 6 shops…", "You: Collect"). The mark is hidden. Suggestion chips under a Snuffle bubble follow it in the reading order |
+| Accessibility | Each bubble is read with its sender ("Snuffle: I'm asking 6 shops…", "You: Collect"). The sender line is visible text, and each bubble's label names the sender even where the line is not shown. Suggestion chips under a Snuffle bubble follow it in the reading order |
 | Truncation | Never truncates; long text wraps |
 
 ## Typing indicator
 
 | Aspect | Spec |
 | --- | --- |
-| Anatomy | Three dots in a Snuffle bubble, under the sender line (glyph and "Snuffle") when it starts a group |
+| Anatomy | Three dots in a Snuffle bubble, under the sender line ("Snuffle") when it starts a group |
 | Tokens | Snuffle bubble (`snuffle.bubble`), `radius.bubble`, `inset.bubble`; dots in `snuffle.dot`, pulsing with `spring.fade` |
 | States | Shown only if Snuffle's reply takes more than about 300 ms; replaced in place by the reply |
 | iOS ↔ Android | Same on both |
@@ -166,23 +179,23 @@ Checked against iOS 26 (the HIG on search fields and toolbars, Liquid Glass) and
 
 | Aspect | Spec |
 | --- | --- |
-| Shop tile (Nearby) | Photo 4:3 at `tile.large` or `tile.medium`, `radius.bubble`, up to two badges 8 from the photo's corner; name in Headline and meta in Footnote ("Open till 6pm · 2 min walk") under it, `space.1` apart |
+| Shop tile (Nearby) | Photo 4:3 at `tile.large` or `tile.medium`, `radius.bubble`, a Delivers badge 8 from the photo's corner when the shop delivers (Promoted and New are not shown on the tile; the shop page says Promoted); name in Headline and meta in Footnote ("Open till 6pm · 2 min walk") under it, `space.1` apart |
 | Shop row (lists) | The shop's photo as a 40 thumbnail at `radius.inner` (over the placeholder tile while it loads), else its logo or the placeholder tile as a 40 circle; name in Headline, meta in Footnote; `space.4` row padding |
 | Photo loading or missing | The placeholder tile in the shop's accent sits under the photo, so the shop's colour shows until it fades in, or for good if it fails |
 | States | Default, pressed; a closed shop's meta reads "Closed · opens 9am" |
 | iOS ↔ Android | Same layout; a list of rows is an inset grouped list on iOS and a Material list on Android |
-| Accessibility | One element. Label: name, badges, meta ("Rossi's Bakery, promoted, open till 6pm, 2 minute walk"); the photo has no separate label |
+| Accessibility | One element. Label: name, badges, meta ("Rossi's Bakery, open till 6pm, 2 minute walk"); the photo has no separate label |
 | Truncation | Name 1 line; meta up to 2 lines, wrapping before anything is cut |
 
 ## Request row
 
 | Aspect | Spec |
 | --- | --- |
-| Anatomy | Item photo (56, `radius.inner`) with at most two answering shops as 20 circles in their accents with their initials, each in a 2 pt ring of the Background, then "+1"; request name and time; preview with its speaker ("Snuffle: Paper & Co has them too."); one status label; a compact button only when the request needs the shopper ("Buy at Rossi's"); a count of unread answers |
+| Anatomy | Item photo (56, `radius.inner`) with nothing laid over it; request name and time; Snuffle's latest status in its own voice as the preview ("Snuffle: Rossi's needs your answer"; the lines for every state are in [Content](content.md)); one status label with no dot, icon or repeat symbol; a count of unread answers or of requests that need the shopper. No button in the row: the shopper opens the request to decide |
 | Tokens | Name Headline, time Caption 1, preview Subheadline in Muted foreground, status Caption 1 ("Needs you" in Foreground at 600, so Buy is the only Indigo on the row). `space.4` row padding, `gap.inside` within the text |
 | States | Default, pressed, unread (count shown), swiped (Close as a trailing action) |
 | iOS ↔ Android | Swipe actions on iOS ↔ a long-press menu on Android |
-| Accessibility | One element. Label: name, status, preview, time ("Birthday cake, needs you, buy by Thursday 5 November, Snuffle: Rossi's can do it with 2 days' notice, 11:02am"). The button and Close are custom actions |
+| Accessibility | One element. Label: name, status, preview, time ("Birthday cake, needs you, buy by Thursday 5 November, Snuffle: Rossi's needs your answer, 11:02am"). Close is a custom action |
 | Truncation | Name 1 line; preview 2 lines; status 1 line |
 
 ## Sheet
@@ -192,7 +205,7 @@ Checked against iOS 26 (the HIG on search fields and toolbars, Liquid Glass) and
 | Use | The details sheet, where the shopper buys: shop, item, price, quantity, how to get it, when the charge happens, Buy, the risk line and Directions |
 | Form | A system sheet with a grabber and Close at the top left; medium and large detents, opening at large when the content needs it; Buy stays pinned at the bottom above the safe area |
 | Title | Headline (Switzer 600, 17) by default, centred between Close and Confirm, as iOS sheets title themselves ("Where are you shopping?"). When the sheet's subject is a shop (the details sheet), the bar's title says what the sheet does ("Buy", Headline) and the shop's name is content: Display name (Gambetta 26), left-aligned under the bar |
-| Ground | Every sheet has the same ground: the `sheet` colour, one tone darker than the Background in light mode (#DEDAD5 on #EEE9E2, 1.15:1) and one Stone step lighter in dark (#191715 on #0E0B09, 1.10:1). It is opaque at every detent (at 94% over a blur, photos behind it showed through as grey smudges) and keeps the glass rim, and one scrim sits behind every sheet: Foreground at 20% in light, black at 48% in dark (`color.sheetScrim`, `state.sheetScrim`), fading in with the sheet. What sits on the sheet moves one level up: grouped rows and text fields are Card in light (1.39:1) and Muted in dark (1.40:1), grouped lists take `radius.bubble` (20, the iOS 26 inset-grouped corner), and Close and Confirm in the header are glass in light and a solid Muted circle in dark (1.40:1; glass was 1.09:1 on the sheet). Chips and the segmented control follow their own rules below. In dark the row separators are Border, since the dark Separator is the Muted colour |
+| Ground | Every sheet has the same ground: the `sheet` colour, one tone darker than the Background in light mode (#DEDAD5 on #EEE9E2, 1.15:1) and one Stone step lighter in dark (#1C1D1E on #0B0C0D, 1.16:1). It is opaque at every detent (at 94% over a blur, photos behind it showed through as grey smudges) and keeps the glass rim, and one scrim sits behind every sheet: Foreground at 20% in light, black at 48% in dark (`color.sheetScrim`, `state.sheetScrim`), fading in with the sheet. What sits on the sheet moves one level up: grouped rows and text fields are Card in light (1.39:1) and Muted in dark (1.40:1), grouped lists take `radius.bubble` (20, the iOS 26 inset-grouped corner), and Close and Confirm in the header are glass in light and a solid Muted circle in dark (1.40:1; glass was 1.09:1 on the sheet). Chips and the segmented control follow their own rules below. In dark the row separators are Border, since the dark Separator is the Muted colour |
 | Tokens | iOS: inset at medium and edge to edge at large. Android and web: `radius.sheet`, opaque in the `sheet` colour. The footer's fade is drawn from the sheet colour. A selected row keeps its fill; the tick carries the selection. Prices are Foreground. Header and content on `margin.screen` at the sides, so Close and Confirm line up with the rows, and `inset.sheet` (24) under the content; the inner option cards use `radius.inner`. The grabber is `color.grabber`, quieter than the title. An optional subtitle sits under a Headline title in the header, Subheadline in Muted foreground, `space.1` under it. Zooms from what was tapped (see [Motion](motion.md)) |
 | States | Medium, large, dismissing (a drag down or Close), blocked from dismissing while Buy is loading |
 | iOS ↔ Android | System sheet with detents ↔ Material modal bottom sheet with a drag handle. Both over the same scrim. Web: the iOS form |
@@ -288,8 +301,9 @@ Checked against iOS 26 (the HIG on search fields and toolbars, Liquid Glass) and
 | Aspect | Spec |
 | --- | --- |
 | Use | First run: the dots under Getting started's three pages; the sign-in buttons on Sign in |
-| Page dots | `size.dot` (8), `space.2` apart; the current one Foreground, the others Foreground at `state.pageDotOff` (35%), so they tint with the Indigo ground under them, changing with `spring.fade`. They show where the shopper is and aren't buttons; swipe and Continue move between pages |
-| Sign-in buttons | Large (50, full width, `radius.full`), label in Headline with the provider's logo. Apple first and black on light, white on dark, as Apple's HIG asks; Google and Facebook on Card with a hairline Border; email as a text button in Tint. The logos are HugeIcons glyphs in the prototype |
+| Page dots | `size.dot` (8), `space.2` apart; the current one Foreground, the others Foreground at `state.pageDotOff` (55%; 35% left them at 2.17:1 on the light Indigo), so they tint with the ground under them; over a shop photo they are white (`onLightbox`) in a black pill (`state.photoPill`, 30%), changing with `spring.fade`. They show where the shopper is and aren't buttons; swipe and Continue move between pages |
+| Sign-in buttons | Large (50, full width, `radius.full`), label in Headline with the provider's logo. Apple first and black on light, white on dark, as Apple's HIG asks; Google in its own light or dark theme with its 1 px stroke (Google's rules fix its fill and stroke), Facebook on Card with a 1 px Border; email as a text button in Tint at Headline's 600. The Apple, Google and Facebook logos are the owners' published shapes (Facebook's: a white f on a #1877F2 disc) |
+| Getting started button | On a coloured onboarding ground the action is Foreground-inverse: a Foreground capsule with a Background label (black in light, near-white in dark), not Primary, which would sit Indigo on Indigo or pastel. The last page's label is "Get started", the others "Continue" |
 | States | A sign-in button shows a spinner while it signs in, and the others are disabled |
 | Accessibility | The dots are one element ("Page 2 of 3"); each sign-in button is a button named by its label |
 
@@ -297,12 +311,34 @@ Checked against iOS 26 (the HIG on search fields and toolbars, Liquid Glass) and
 
 | Aspect | Spec |
 | --- | --- |
-| Anatomy | The map, fixed at the top; up to three shop photos that slide in from the right over it, the first position leaving the map in view; a content card that holds the name, status line ("Open till 6pm · Blythe Road · 2 min walk", "Made to order · 2 days' notice"), Ask [shop] as the filled button, Call and Directions as tonal buttons, then three sections in this order: What they sell (the product summary), How they do on Snuffle (reliability rows) and What buyers say (the rating summary and review cards) |
-| Tokens | Photos 3:2, `radius.bubble`, `space.3` gutter, each over the shop's placeholder tile; content card in the shop's accent tile colour in full, with `radius.sheet` on its top corners: the name, status lines, tags, actions and every section sit on it, and the sections' rows are Card under the delicate shadow; the first section heading is `gap.section` below the actions; the card is inset at rest and edge to edge once it fills the screen; the actions row keeps `space.5` of trailing room inside the card; the map's attribution sits between the photos and the card; name in Display title; section headings in Section title; status Footnote |
-| States | Resting (map visible); expanded (the card scrolls up over the map and the photos and fills the screen; the nav bar's title appears over a scroll edge in the tile colour, opaque down to the bar's bottom and fading over `space.6` below it, so no Card row shows through behind the title) |
+| Anatomy | The map with the shop's pin, fixed behind the screen; the photo carousel under the pin; a content card that holds the name, status line ("Open till 6pm · Blythe Road · 2 min walk", "Made to order · 2 days' notice"), "· Promoted" ending the first status line when the shop is a paid placement, Ask [shop] as the filled button, Call and Directions as tonal buttons, then the sections in this order: What they sell (the product summary), Found here recently, Ratings (the rating summary and three review cards, with "See all" opening the full list), How they do on Snuffle (reliability rows) and How it works |
+| Tokens | Card in the shop's accent tile colour in full, with `radius.sheet` on its top corners, `space.2` under the carousel: the name, status lines, tags, actions and every section sit on it, and the sections' rows are Card under the delicate shadow; the first section heading is `gap.section` below the actions; the card is inset at rest and edge to edge once it fills the screen; the actions row keeps `space.5` of trailing room inside the card; the map's attribution sits `space.5` above the carousel; name in Display title; section headings in Section title; the status lines, Promoted included, in Footnote, Muted foreground; the map's attribution is 11 pt (Caption 2) in the map's bottom right corner; Back over the map is glass in light, and in dark a solid Muted circle with a Border edge (glass is Card there, the same as the map) |
+| States | Resting (map visible above the carousel); expanded (the carousel and the card scroll up over the map together, and the card fills the screen; the nav bar's title appears over a scroll edge in the tile colour, opaque down to the bar's bottom and fading over `space.6` below it, so no Card row shows through behind the title) |
 | iOS ↔ Android | Same layout; it is pushed from the screen that opened it (the shop's detail), so it has Back, never Close (conceptual model) |
-| Accessibility | Reading order: name, status, Ask, Call, Directions, photos (each labelled "[Shop] shopfront, [street]"), past answers |
+| Accessibility | Reading order: Back, photos (each a button labelled "[Shop] shopfront, [street], 1 of 3"), name, status, Ask, Call, Directions, then the sections |
 | Truncation | Name wraps to two lines, never more; status lines wrap |
+
+## Photo carousel
+
+| Aspect | Spec |
+| --- | --- |
+| Use | The shop's photos on the shop page, between the map's pin and the card; Airbnb's listing page is the reference |
+| Anatomy | One photo at a time at the content width (screen width minus two screen margins), 2:1 (`layout.carouselRatio`), `radius.card`, over the shop's placeholder tile; paging sideways, the next photo off screen at rest; page dots over the photo's bottom edge, `space.3` above it; with one photo there are no dots and no paging |
+| Tokens | A scrim of the Background (`color.photoScrim`) rises from the bottom edge of each photo: `state.photoScrim` (60%) at the edge, gone at `layout.photoScrimReach` (70%) of the height. Dots are PageDots: Foreground, and the others at `state.pageDotOff` |
+| Contrast | Foreground dots on the photo with the scrim, at the dots' height (about 50% scrim), on a pure black photo and a pure white one: 4.2:1 and 17.9:1 in light, 19.4:1 and 3.5:1 in dark. The inactive dots are 1.5 to 2.5:1 and only mark position, as on Getting started |
+| States | Loading (the placeholder tile shows until the photo fades in, `spring.fade`); failed (the tile stays); pressed (opens the viewer) |
+| Accessibility | The list is "[Shop] photos"; each photo is a button read as "[label], 2 of 3" with the hint "Opens the photo full screen" |
+
+## Photo viewer
+
+| Aspect | Spec |
+| --- | --- |
+| Use | A full-screen view of the shop's photos, opened from a carousel photo (frame "Photo viewer" in app flow v10) |
+| Anatomy | A black ground (`color.lightbox`, the same in light and dark); the photo at the screen's width, centred; the glass Close at the top left below the status bar; "1 of 3" centred on that row in Headline (`color.onLightbox`, white on black 21:1); "Pinch to zoom · swipe for the next photo" in Footnote under the photo (`color.onLightboxMuted`, 11.4:1) |
+| Gestures | Pinch zooms up to 4x about the photo's centre; one finger moves a zoomed photo inside its edges; double-tap zooms to 2.5x and back; swiping moves to the next photo, and is off while a photo is zoomed |
+| Motion | Opening grows a copy of the tapped photo from its rectangle to its place with `spring.smooth` while the black ground fades in; closing does the reverse into the photo the viewer is on, and the carousel is already on it. With Reduce Motion, or when the photo it opened from has scrolled away, it fades with `spring.fade` |
+| iOS ↔ Android | Same layout; Close is glass on iOS and the web, a tonal circle on Android. The viewer is presented through the root portal, so on the web it stays inside the phone frame |
+| Accessibility | The viewer is modal; each photo is read with its label, the count as "Photo 1 of 3", Close as "Close photo" |
 
 ## Placeholder tile
 
@@ -318,7 +354,7 @@ Checked against iOS 26 (the HIG on search fields and toolbars, Liquid Glass) and
 
 | Aspect | Spec |
 | --- | --- |
-| Use | "Browse by category" on Nearby, the first section under the title: one card per kind the area has (a kind with no shop nearby has no card), in a sideways rail ordered so that same-hue cards sit as far apart as the counts allow, cycling Peach, Pistachio, Butter |
+| Use | "Browse by category" on Nearby, the first section under the title: one card per kind the area has (a kind with no shop nearby has no card), in a sideways rail ordered by the number of shops of that kind that are open now within the area (the area's one hours state, since there are no per-shop hours yet), most first; ties go by a fixed everyday-frequency prior (café, bakery, chemist, newsagent, butcher, deli, florist, hardware, stationery, books, toys, opticians, fashion, cameras, gifts, bags); kinds with none open go last in the same prior. Then the hues are spread: a card may move up at most two places when the card before it has the same pastel, so the count order breaks no more than it must. This rule is an assumption: there is no usage data yet, and the prior is my guess at what a shopper wants on an ordinary day. Deliveroo personalises its home screen by orders and time of day ([help.deliveroo.com/articles/3203714](https://help.deliveroo.com/articles/3203714)); with order history, the prior would give way to the shopper's own counts |
 | Anatomy | A 120 × 164 card in the kind's accent `tile`, `radius.bubble`; a still of the closest 3D object at the top, rendered on the card's own colour; the label in Headline (17) at the bottom, `space.3` inset, short enough for one line ("Toys", "Butchers"). Kinds without a close still are the tile and the label |
 | Performance | Fixed size so the rail never lays out again; memoised; the still is an `expo-image` at its exact size with a disk cache and a recycling key; stills only in the list, no clips or live 3D |
 | States | Default, pressed; a tap opens the Category screen with the zoom from the card |
@@ -348,10 +384,10 @@ Checked against iOS 26 (the HIG on search fields and toolbars, Liquid Glass) and
 | Aspect | Spec |
 | --- | --- |
 | Use | "What they sell", the first section on the shop page |
-| Anatomy | Category chips (a connected shop's from its till's categories and best sellers; an asked shop's from its past "Had it" answers and its kind); a price line in Footnote, "Most items £2–£35 · from past answers" or "· from the shop's till"; "Asked about recently", up to three past answers as rows ("Tide clock batteries", "Had it · 2 hours ago") |
+| Anatomy | Category chips (a connected shop's from its till's categories and best sellers; an asked shop's from its past "Had it" answers and its kind); a price line in Footnote, "Most items £2–£35 · from past answers" or "· from the shop's till"; "Asked about recently", up to three past answers as rows ("Tide clock batteries", "Had it · 2 hours ago"), left out where the page already shows Found here recently, which summarises the same answers by name |
 | Tokens | Chips as suggestion chips on Card, `space.2` apart, wrapping to two lines at most; `gap.block` between chips, price line and rows |
 | States | A chip press opens Ask with "[category] at [shop]" filled in; no past answers: "Asked about recently" is left out; no categories yet: the shop's kind alone ("Stationer") |
-| Rules | Items still get no page: a past answer row opens nothing, and a chip asks. The price line never rounds a range out to look cheaper |
+| Rules | Items still get no page: a past answer row opens nothing, and a chip asks. On the shop page What they sell is ranges and the price band, and "Found here recently" below it lists the names only, not tappable, with a line that says where they come from; the per-answer "Had it · 2 hours ago" rows live in the chat. A list of item names with no press carries its source. The price line never rounds a range out to look cheaper |
 | Accessibility | Chips are buttons labelled "Ask about [category]"; the price line reads "Most items 2 to 35 pounds, from past answers" |
 
 ## Reliability row
@@ -369,18 +405,18 @@ Checked against iOS 26 (the HIG on search fields and toolbars, Liquid Glass) and
 
 | Aspect | Spec |
 | --- | --- |
-| Use | The top of "What buyers say" |
-| Anatomy | A thumbs-up glyph and "92% would go back" in Title 3, "38 buyers" in Subheadline; then the tags with their counts as plain text that wraps ("Had it as promised 21"), no capsule or fill, positive tags first, a thumbs-down glyph before each negative one; the review rows and "How ratings work ›" follow in the same grouped list |
+| Use | The top of Ratings on the shop page |
+| Anatomy | The question "Would you go back?" in Footnote, Muted foreground; under it a thumbs-up glyph and "92%" in Title 3, "38 buyers" in Subheadline (below 5 ratings the count alone, "3 buyers so far"); then the tags with their counts as plain text that wraps ("Had it as promised 21"), no capsule or fill, positive tags first, a thumbs-down glyph before each negative one; the review rows and "How ratings work ›" follow in the same grouped list |
 | Tokens | On Card, `inset.card`; `gap.block` between the figure, the tags and the link |
-| States | No ratings: "No buyers have rated it yet"; few (fewer than 5): "3 buyers so far" and the tags, no percentage ("New on Snuffle" stays in How they do on Snuffle and isn't repeated here); many: the percentage; with a summary: "Summary by Snuffle from buyers' notes" above two lines of text |
+| States | No ratings: "No ratings yet" with "Snuffle has asked them 4 times" after it; few (fewer than 5): "3 buyers so far" and the tags, no percentage ("New on Snuffle" stays in How they do on Snuffle and isn't repeated here); many: the percentage; with a summary: "Summary by Snuffle from buyers' notes" above two lines of text |
 | Rules | No stars, no average, no decimal; the percentage is rounded down; the buyer count always sits next to it. Negative tags show with their counts like the positive ones |
-| Accessibility | One element: "Would go back, 92 percent of 38 buyers". Each tag row reads "Had it as promised, 21 buyers". The thumbs glyph is hidden; the number and words carry the meaning, never colour alone |
+| Accessibility | One element: "Would you go back? Would go back, 92 percent of 38 buyers". Each tag row reads "Had it as promised, 21 buyers". The thumbs glyph is hidden; the number and words carry the meaning, never colour alone |
 
 ## Review card
 
 | Aspect | Spec |
 | --- | --- |
-| Use | One buyer's note as a row of the "What buyers say" group, under the rating summary: two on the shop page, mirroring the split, then "See all 38 ›"; every note on the Reviews screen, which sits on the shop's accent tile |
+| Use | One buyer's note as a row of the Ratings group, under the rating summary: three on the shop page, then "See all 38 ›"; every note on the Reviews screen, which sits on the shop's accent tile |
 | Anatomy | A plain grouped row, no tile of its own: for a thumbs down only, a thumbs-down glyph and "Wouldn't go back" (a thumbs up has no label); the note in quotation marks; a "Collected" or "Delivered" check and the month ("Oct 2026"); a separator inset to the text between rows; the shop's reply, if there is one, indented under "Reply from [shop]" |
 | Tokens | The grouped row's Card fill, `radius.inner` on the group's first and last row, `space.4` leading and `space.3` above and below, lines `space.1` apart; verdict Footnote in Foreground, note Body, check and month Footnote in Muted foreground; the reply on `chat.fill` with `radius.bubble` |
 | States | Default; with a note; shop replied; edited ("Edited Oct 2026") |

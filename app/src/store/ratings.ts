@@ -4,6 +4,7 @@
 // reviews list and the rating sheet say the same thing.
 import { price } from './labels';
 import { useSim } from './simulation';
+import { useAppStore } from './store';
 import type { OrderRating, RatingNote, RatingTag, Shop, ShopRatings } from './types';
 
 /** Below this many ratings the page shows no percentage. */
@@ -25,23 +26,25 @@ const THIS_MONTH = 'Nov 2026';
 const EMPTY: ShopRatings = { up: 0, down: 0, tags: {}, notes: [] };
 
 /** The shop's ratings with the shopper's own, once sent, counted in. */
-export function withOwnRating(shop: Shop, own: OrderRating | null): ShopRatings {
+export function withOwnRating(shop: Shop, own: OrderRating | null, how: RatingNote['how'] = 'Collected'): ShopRatings {
   const base = shop.ratings ?? EMPTY;
   if (!own || own.shopId !== shop.id) return base;
   const tags = { ...base.tags };
   for (const tag of own.tags) tags[tag] = (tags[tag] ?? 0) + 1;
-  const note: RatingNote[] = own.note.trim() ? [{ text: own.note.trim(), up: own.up, month: THIS_MONTH, how: 'Collected' }] : [];
+  const note: RatingNote[] = own.note.trim() ? [{ text: own.note.trim(), up: own.up, month: THIS_MONTH, how }] : [];
   return { up: base.up + (own.up ? 1 : 0), down: base.down + (own.up ? 0 : 1), tags, notes: [...note, ...base.notes] };
 }
 
 /** The shop's ratings as the page shows them, including the shopper's own once sent. */
 export function useShopRatings(shop: Shop): ShopRatings {
   const own = useSim((s) => s.orderRating);
-  return withOwnRating(shop, own);
+  // How the order reached the shopper: a delivered order's note reads "Delivered", a collected one's "Collected".
+  const how = useAppStore((s) => (s.fulfilment === 'delivery' ? 'Delivered' : 'Collected'));
+  return withOwnRating(shop, own, how);
 }
 
 export type RatingHeadline = {
-  /** "92% would go back"; below 5 ratings "3 buyers so far" or "No buyers have rated it yet". */
+  /** "92% would go back"; below 5 ratings "3 buyers so far" or "No ratings yet · Snuffle has asked them 4 times". */
   title: string;
   /** "38 buyers" with a share; none below 5 ratings, where "New on Snuffle" already shows under How they do. */
   detail?: string;
@@ -54,12 +57,13 @@ export type RatingHeadline = {
 
 const buyers = (n: number) => `${n} ${n === 1 ? 'buyer' : 'buyers'}`;
 
-export function ratingHeadline(r: ShopRatings): RatingHeadline {
+export function ratingHeadline(r: ShopRatings, asked?: number): RatingHeadline {
   const total = r.up + r.down;
   // Below 5 ratings the headline is the count alone: "New on Snuffle" is already the stock line of How they do on
   // Snuffle, a section above, and said twice it read as filler (visual critique 3).
   if (total === 0) {
-    return { title: 'No buyers have rated it yet', spoken: 'No buyers have rated it yet', total };
+    const times = asked == null ? undefined : `Snuffle has asked them ${asked} ${asked === 1 ? 'time' : 'times'}`;
+    return { title: 'No ratings yet', detail: times, spoken: times ? `No ratings yet. ${times}` : 'No ratings yet', total };
   }
   if (total < MIN_RATINGS_FOR_SHARE) {
     return { title: `${buyers(total)} so far`, spoken: `${buyers(total)} so far have rated it`, total };

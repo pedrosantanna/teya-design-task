@@ -160,3 +160,5 @@ Source: English Markdown in `docs/`. Target: Brazilian Portuguese in `docs/pt-br
 | review gating | review gating |
 | review policy | política de avaliações |
 | incentivised review | avaliação com incentivo |
+| synthetic test users | usuários sintéticos de teste |
+| persona-driven scenario test | teste de cenário guiado por persona |

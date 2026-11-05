@@ -11,6 +11,7 @@ Takeaways:
 - A barra de pedido nunca encolhe: uma linha com a cápsula Ask (o glifo do Snuffle, "Ask for anything nearby", um microfone) e o círculo de Requests depois dela. O glass dela se transforma no campo do New Request. As sheets têm título em Headline, centralizado.
 - As barras não têm fundo: Voltar, Fechar e Confirmar são círculos de glass, as ações com ícone dividem uma cápsula de glass e um scroll edge effect substitui o fundo da barra. O endereço no topo de Nearby abre a sheet de localização.
 - O nome de uma loja ocupa uma linha, uma prévia duas, e um preço nunca é cortado.
+- A página da loja põe um carrossel de fotos abaixo do alfinete do mapa, com um scrim da cor de fundo para que os pontos de página mantenham o contraste, e um toque abre um visualizador em tela cheia que cresce a partir da foto, dá zoom com pinça e troca de foto com um deslize.
 - As avaliações trazem cinco componentes: a sheet de avaliação que quem comprou preenche depois de uma compra e, na página da loja, o resumo do que vende, a linha de confiabilidade, o resumo das avaliações e o cartão de avaliação. Cada sinal diz a sua origem e é um elemento só para o leitor de tela, com um rótulo completo.
 Call:
 - Depois que uma revisão de design encontrou faltando especificações de componentes, estados, equivalentes de plataforma e regras de conteúdo, pedi que o design system ficasse completo o bastante para construir o protótipo a partir dele.
@@ -23,6 +24,7 @@ Call:
 - Depois de uma crítica visual do build web, pedi que o chip selecionado fosse o chip mais forte da fileira, o controle segmentado do iOS, o cabeçalho da tela de categoria alinhado com a lista embaixo e fotos das lojas nas linhas dela, e um scrim atrás de toda sheet.
 - Depois escolhi linhas tingidas mais claras na tela de categoria escura, mantendo a cor inteira como fundo, e levei o círculo de Requests para depois do campo, como o iOS 26 põe o botão secundário depois do campo de busca no Music e no Podcasts (decisão 050).
 - Depois de outra crítica visual e de uma revisão de telas da versão web, pedi as correções das duas no cabeçalho e nas linhas da tela de categoria, nas sheets, no controle segmentado, no espaçamento da barra de pedido, nos chips do New Request e na sheet de avaliação. Onde as tags da sheet de avaliação não batiam com o modelo conceitual, valem as listas do modelo (decisão 047).
+- Depois pedi que a página da loja seguisse a página de anúncio do Airbnb: um carrossel de fotos abaixo do alfinete, um visualizador de fotos em tela cheia, "Found here recently" com nomes de itens e sem comprador nem preço, as avaliações mais acima e uma linha "Promoted" num destaque pago, já que as regras de publicidade do Reino Unido esperam que o destaque pago seja identificável.
 AI:
 - Um agente revisou o design system contra as telas da v7 e listou o que faltava. Outro agente escreveu esta página a partir dos tokens existentes e dos frames da v7; eu defini o escopo e as regras que ele tinha de seguir.
 - Um agente reescreveu as especificações da barra de navegação, do Voltar, do Fechar, da sheet, da barra de pedido e do mapa a partir das sessões da WWDC 2025 sobre o novo design e da documentação do MapLibre, e acrescentou o controle de localização e o Confirmar.
@@ -32,6 +34,7 @@ AI:
 - Um agente aplicou a crítica visual aos chips, ao controle segmentado, às sheets e à tela de categoria, mediu os novos pares com a fórmula do WCAG 2 e os conferiu no build web, no claro e no escuro.
 - Um agente fez os cartões tingidos das linhas e moveu o círculo de Requests no app, conferiu que a transformação no New Request ainda parte da cápsula e tirou capturas do Nearby e de quatro telas de categoria no escuro.
 - Um agente aplicou as correções dessa rodada no app e nesta página, manteve os polegares da sheet de avaliação com 88 e registrou isso na especificação, e conferiu as telas alteradas no build web, no claro e no escuro.
+- Um agente construiu o carrossel de fotos, o visualizador e a nova ordem da página da loja a partir dos frames da v10, acrescentou os tokens do scrim e do visualizador, mediu os pontos de página sobre fotos pretas e brancas no claro e no escuro e conferiu a página em repouso, rolada e com o visualizador aberto no build web.
 Trade-offs:
 - Especificar cada componente antes de o protótipo existir significa que alguns valores vão mudar quando estiverem num celular; escrever antes evita que as duas plataformas e as telas se afastem.
 - Fazer de cada cartão um único elemento acessível mantém curta a ordem de leitura, ao custo de chegar às ações secundárias do cartão pelo menu de ações.
@@ -83,23 +86,33 @@ Trade-offs:
 | iOS ↔ Android | Igual nos dois |
 | Acessibilidade | Decorativa e oculta; a linha de remetente ou o rótulo em volta nomeia o Snuffle |
 
+## Intro do splash
+
+| Aspecto | Especificação |
+| --- | --- |
+| Uso | A primeira coisa que quem abre o app pela primeira vez vê, antes do Getting started: a marca se constrói sobre o Índigo 800, depois some e passa a vez para a página 1 (componente `MarkIntro`) |
+| Anatomia | A marca do Snuffle em `size.category.art` (120, a largura da imagem do splash nativo) nas cores do splash (branco e listras em Índigo 300) sobre `color.splash.ground`; o toldo enrolado no alto, cinco listras se desenrolando com 70 ms de intervalo, orelhas, olhos e nariz, duas piscadas; cerca de 1,6 s, depois 250 ms parada, 150 ms de fade da marca e 200 ms de fade do fundo |
+| Tokens | `color.splash.*`; o fundo é Índigo 800 nos dois modos, e a página 1 do Getting started é o mesmo Índigo 800 no escuro, então o fundo não muda de cor na passagem |
+| Estados | Reduce Motion começa no último quadro e some; `?intro=<ms>` congela num instante, para quadros de revisão |
+| Acessibilidade | Decorativa e oculta; nada para tocar |
+
 ## Balão da conversa
 
 | Aspecto | Especificação |
 | --- | --- |
-| Anatomia | Comprador: texto, alinhado à direita. Snuffle: uma linha de remetente no primeiro balão de um grupo, o glifo solto da marca (inline, sem avatar) ao lado de "Snuffle", com o dia quando não é hoje ("Snuffle · Sun 8 Nov"), depois o texto, alinhado à esquerda a partir da borda do conteúdo, sem coluna de avatar |
-| Tokens | Balão do comprador em Primary com a cor de rótulo dele; balão do Snuffle em `snuffle.bubble` (Lavanda) com Foreground. `radius.bubble`, `inset.bubble`, texto em Body, linha de remetente em Caption 1. Largura máxima de 78% da largura do conteúdo. `space.3` entre balões do mesmo remetente, `space.5` quando o remetente muda. O balão do comprador aparece com `spring.snappy` |
-| Agrupamento | Balões seguidos de um remetente formam um grupo: uma linha de remetente, com o glifo, por grupo |
+| Anatomia | Comprador: texto, alinhado à direita. Snuffle: uma linha de remetente no primeiro balão de um grupo, a palavra "Snuffle" em Caption 1, sem glifo, rosto nem avatar, com o dia quando não é hoje ("Snuffle · Sun 8 Nov"), depois o texto, alinhado à esquerda a partir da borda do conteúdo, sem coluna de avatar |
+| Tokens | Balão do comprador em Primary com a cor de rótulo dele; balão do Snuffle em `snuffle.bubble` (Lavanda) com Foreground. `radius.bubble`, `inset.bubble`, texto em Body, linha de remetente em Caption 1. Largura máxima de 78% da largura do conteúdo. `space.3` entre balões do mesmo remetente, `space.6` quando o remetente muda. O balão do comprador aparece com `spring.snappy` |
+| Agrupamento | Balões seguidos de um remetente formam um grupo: uma linha de remetente ("Snuffle") por grupo, só no primeiro balão; os balões seguintes do grupo não têm |
 | Estados | Enviando (o balão aparece na hora), enviado, falhou (um símbolo de tentar de novo ao lado e "Not sent · tap to retry") |
 | iOS ↔ Android | Igual nos dois |
-| Acessibilidade | Cada balão é lido com o remetente ("Snuffle: I'm asking 6 shops…", "You: Collect"). A marca fica oculta. Os chips de sugestão sob um balão do Snuffle vêm logo depois dele na ordem de leitura |
+| Acessibilidade | Cada balão é lido com o remetente ("Snuffle: I'm asking 6 shops…", "You: Collect"). A linha de remetente é texto visível, e o rótulo de cada balão nomeia o remetente mesmo onde a linha não aparece. Os chips de sugestão sob um balão do Snuffle vêm logo depois dele na ordem de leitura |
 | Truncamento | Nunca é cortado; texto longo quebra a linha |
 
 ## Indicador de digitação
 
 | Aspecto | Especificação |
 | --- | --- |
-| Anatomia | Três pontos num balão do Snuffle, sob a linha de remetente (glifo e "Snuffle") quando abre um grupo |
+| Anatomia | Três pontos num balão do Snuffle, sob a linha de remetente ("Snuffle") quando abre um grupo |
 | Tokens | Balão do Snuffle (`snuffle.bubble`), `radius.bubble`, `inset.bubble`; pontos em `snuffle.dot`, pulsando com `spring.fade` |
 | Estados | Aparece só se a resposta do Snuffle levar mais de uns 300 ms; é substituído no lugar pela resposta |
 | iOS ↔ Android | Igual nos dois |
@@ -167,23 +180,23 @@ Conferida com o iOS 26 (as HIG sobre campos de busca e barras de ferramentas, Li
 
 | Aspecto | Especificação |
 | --- | --- |
-| Tile de loja (Nearby) | Foto 4:3 em `tile.large` ou `tile.medium`, `radius.bubble`, até dois badges a 8 do canto da foto; nome em Headline e meta em Footnote ("Open till 6pm · 2 min walk") embaixo, a `space.1` |
+| Tile de loja (Nearby) | Foto 4:3 em `tile.large` ou `tile.medium`, `radius.bubble`, um badge Delivers a 8 do canto da foto quando a loja entrega (Promoted e New não aparecem no tile; a página da loja mostra Promoted); nome em Headline e meta em Footnote ("Open till 6pm · 2 min walk") embaixo, a `space.1` |
 | Linha de loja (listas) | A foto da loja como miniatura de 40 com `radius.inner` (sobre o tile de placeholder enquanto carrega), senão o logo ou o tile de placeholder como um círculo de 40; nome em Headline, meta em Footnote; padding de linha `space.4` |
 | Foto carregando ou ausente | O tile de placeholder no acento da loja fica sob a foto, então a cor da loja aparece até a foto entrar, ou de vez se ela falhar |
 | Estados | Padrão, pressionado; a meta de uma loja fechada diz "Closed · opens 9am" |
 | iOS ↔ Android | Mesmo layout; uma lista de linhas é uma lista agrupada inset no iOS e uma lista do Material no Android |
-| Acessibilidade | Um elemento. Rótulo: nome, badges, meta ("Rossi's Bakery, promoted, open till 6pm, 2 minute walk"); a foto não tem rótulo próprio |
+| Acessibilidade | Um elemento. Rótulo: nome, badges, meta ("Rossi's Bakery, open till 6pm, 2 minute walk"); a foto não tem rótulo próprio |
 | Truncamento | Nome em 1 linha; meta em até 2 linhas, quebrando antes de cortar qualquer coisa |
 
 ## Linha de pedido
 
 | Aspecto | Especificação |
 | --- | --- |
-| Anatomia | Foto do item (56, `radius.inner`) com no máximo duas lojas que responderam em círculos de 20 nos acentos delas, com as iniciais, cada um num anel de 2 pt na cor do fundo, e depois "+1"; nome do pedido e horário; prévia com quem falou ("Snuffle: Paper & Co has them too."); um rótulo de status; um botão compacto só quando o pedido precisa do comprador ("Buy at Rossi's"); um contador de respostas não lidas |
+| Anatomia | Foto do item (56, `radius.inner`) sem nada por cima; nome do pedido e horário; o último status do Snuffle na voz dele como prévia ("Snuffle: Rossi's needs your answer"; as linhas de cada estado estão em [Conteúdo](content.md)); um rótulo de status sem ponto, ícone nem símbolo de repetir; um contador de respostas não lidas ou de pedidos que precisam do comprador. Sem botão na linha: o comprador abre o pedido para decidir |
 | Tokens | Nome em Headline, horário em Caption 1, prévia em Subheadline com Muted foreground, status em Caption 1 ("Needs you" na cor do texto com peso 600, para o Buy ser o único Índigo da linha). Padding de linha `space.4`, `gap.inside` dentro do texto |
 | Estados | Padrão, pressionado, não lido (contador visível), deslizado (Close como ação no fim da linha) |
 | iOS ↔ Android | Ações de deslizar no iOS ↔ um menu de toque longo no Android |
-| Acessibilidade | Um elemento. Rótulo: nome, status, prévia, horário ("Birthday cake, needs you, buy by Thursday 5 November, Snuffle: Rossi's can do it with 2 days' notice, 11:02am"). O botão e o Close são ações personalizadas |
+| Acessibilidade | Um elemento. Rótulo: nome, status, prévia, horário ("Birthday cake, needs you, buy by Thursday 5 November, Snuffle: Rossi's needs your answer, 11:02am"). O Close é uma ação personalizada |
 | Truncamento | Nome em 1 linha; prévia em 2 linhas; status em 1 linha |
 
 ## Sheet
@@ -193,7 +206,7 @@ Conferida com o iOS 26 (as HIG sobre campos de busca e barras de ferramentas, Li
 | Uso | A folha de detalhes, onde o comprador compra: loja, item, preço, quantidade, como receber, quando a cobrança acontece, Buy, a linha de risco e Directions |
 | Forma | Uma sheet do sistema com grabber e Fechar no canto superior esquerdo; detents médio e grande, abrindo no grande quando o conteúdo pede; o Buy fica fixo embaixo, acima da área segura |
 | Título | Headline (Switzer 600, 17) por padrão, centralizado entre Fechar e Confirmar, como as sheets do iOS ("Where are you shopping?"). Quando o assunto da sheet é uma loja (a sheet de detalhes), o título da barra diz o que a sheet faz ("Buy", Headline) e o nome da loja é conteúdo: Display name (Gambetta 26), alinhado à esquerda sob a barra |
-| Fundo | Toda sheet tem o mesmo fundo: a cor `sheet`, um tom mais escuro que o fundo no modo claro (#DEDAD5 sobre #EEE9E2, 1,15:1) e um passo do Stone mais claro no escuro (#191715 sobre #0E0B09, 1,10:1). Ela é opaca em todo detent (a 94% sobre um blur, as fotos de trás apareciam como manchas cinza) e mantém o contorno do glass, e um scrim fica atrás de toda sheet: texto a 20% no claro, preto a 48% no escuro (`color.sheetScrim`, `state.sheetScrim`), entrando junto com a sheet. O que fica sobre a sheet sobe um nível: linhas agrupadas e campos de texto são cartão no claro (1,39:1) e secundário no escuro (1,40:1), as listas agrupadas usam `radius.bubble` (20, o canto inset grouped do iOS 26), e Fechar e Confirmar no cabeçalho são glass no claro e um círculo secundário sólido no escuro (1,40:1; o glass dava 1,09:1 na sheet). Os chips e o controle segmentado seguem as regras deles, abaixo. No escuro, os separadores das linhas usam a borda, porque o separador escuro é a cor do secundário |
+| Fundo | Toda sheet tem o mesmo fundo: a cor `sheet`, um tom mais escuro que o fundo no modo claro (#DEDAD5 sobre #EEE9E2, 1,15:1) e um passo do Stone mais claro no escuro (#1C1D1E sobre #0B0C0D, 1,16:1). Ela é opaca em todo detent (a 94% sobre um blur, as fotos de trás apareciam como manchas cinza) e mantém o contorno do glass, e um scrim fica atrás de toda sheet: texto a 20% no claro, preto a 48% no escuro (`color.sheetScrim`, `state.sheetScrim`), entrando junto com a sheet. O que fica sobre a sheet sobe um nível: linhas agrupadas e campos de texto são cartão no claro (1,39:1) e secundário no escuro (1,40:1), as listas agrupadas usam `radius.bubble` (20, o canto inset grouped do iOS 26), e Fechar e Confirmar no cabeçalho são glass no claro e um círculo secundário sólido no escuro (1,40:1; o glass dava 1,09:1 na sheet). Os chips e o controle segmentado seguem as regras deles, abaixo. No escuro, os separadores das linhas usam a borda, porque o separador escuro é a cor do secundário |
 | Tokens | iOS: recuada no médio e de borda a borda no grande. Android e web: `radius.sheet`, opaca na cor `sheet`. O degradê do rodapé parte da cor da sheet. Uma linha selecionada mantém o fundo; o check marca a seleção. Os preços ficam na cor do texto. Cabeçalho e conteúdo na `margin.screen` nas laterais, para o Fechar e o Confirmar ficarem alinhados com as linhas, e `inset.sheet` (24) abaixo do conteúdo; os cartões de opção internos usam `radius.inner`. A alça é `color.grabber`, mais discreta que o título. Um subtítulo opcional fica sob o título em Headline no cabeçalho, em Subheadline na cor do texto secundário, a `space.1` dele. Abre com zoom a partir do que foi tocado (ver [Movimento](motion.md)) |
 | Estados | Média, grande, fechando (arrastar para baixo ou Close), sem poder fechar enquanto o Buy está carregando |
 | iOS ↔ Android | Sheet do sistema com detents ↔ modal bottom sheet do Material com alça. As duas sobre o mesmo scrim. Web: a forma do iOS |
@@ -289,8 +302,9 @@ Conferida com o iOS 26 (as HIG sobre campos de busca e barras de ferramentas, Li
 | Aspecto | Especificação |
 | --- | --- |
 | Uso | Primeiro uso: os pontos sob as três páginas do Getting started; os botões de login na tela de login |
-| Pontos de página | `size.dot` (8), a `space.2` um do outro; o atual em Foreground, os outros em Foreground a `state.pageDotOff` (35%), para que tomem a cor do fundo Índigo embaixo deles, mudando com `spring.fade`. Mostram onde o comprador está e não são botões; deslizar e Continue passam as páginas |
-| Botões de login | Grandes (50, largura toda, `radius.full`), rótulo em Headline com o logo do provedor. Apple primeiro, preto no claro e branco no escuro, como pede o HIG da Apple; Google e Facebook sobre Card com uma Border fina; email como botão de texto em Tint. Os logos são glifos do HugeIcons no protótipo |
+| Pontos de página | `size.dot` (8), a `space.2` um do outro; o atual em Foreground, os outros em Foreground a `state.pageDotOff` (55%; 35% deixava os pontos em 2,17:1 no Índigo claro), para que tomem a cor do fundo embaixo deles; sobre uma foto da loja ficam brancos (`onLightbox`) numa pílula preta (`state.photoPill`, 30%), mudando com `spring.fade`. Mostram onde o comprador está e não são botões; deslizar e Continue passam as páginas |
+| Botões de login | Grandes (50, largura toda, `radius.full`), rótulo em Headline com o logo do provedor. Apple primeiro, preto no claro e branco no escuro, como pede o HIG da Apple; Google no tema claro ou escuro dele, com traço de 1 px (as regras do Google fixam fundo e traço), Facebook sobre Card com Border de 1 px; email como botão de texto em Tint, no 600 do Headline. Os logos da Apple, do Google e do Facebook são as formas publicadas pelos donos (a do Facebook: um f branco num disco #1877F2) |
+| Botão do Getting started | Sobre um fundo colorido de onboarding a ação é Foreground-inverse: uma cápsula Foreground com rótulo Background (preta no claro, quase branca no escuro), não Primary, que ficaria Índigo sobre Índigo ou sobre pastel. O rótulo da última página é "Get started", os outros "Continue" |
 | Estados | Um botão de login mostra um spinner enquanto entra, e os outros ficam desativados |
 | Acessibilidade | Os pontos são um elemento só ("Page 2 of 3"); cada botão de login é um botão com o próprio rótulo |
 
@@ -298,12 +312,34 @@ Conferida com o iOS 26 (as HIG sobre campos de busca e barras de ferramentas, Li
 
 | Aspecto | Especificação |
 | --- | --- |
-| Anatomia | O mapa, fixo no topo; até três fotos da loja que entram pela direita sobre ele, a primeira posição deixando o mapa visível; um cartão de conteúdo com o nome, a linha de status ("Open till 6pm · Blythe Road · 2 min walk", "Made to order · 2 days' notice"), Ask [loja] como botão preenchido, Call e Directions como botões tonais, depois três seções nesta ordem: What they sell (o resumo do que vende), How they do on Snuffle (linhas de confiabilidade) e What buyers say (o resumo das avaliações e os cartões de avaliação) |
-| Tokens | Fotos 3:2, `radius.bubble`, gutter de `space.3`, cada uma sobre o tile de placeholder da loja; cartão de conteúdo inteiro na cor de tile do acento da loja, com `radius.sheet` nos cantos de cima: o nome, as linhas de status, as tags, as ações e todas as seções ficam sobre ele, e as linhas das seções são Card sob a sombra suave; o primeiro título de seção fica `gap.section` abaixo das ações; o cartão fica recuado em repouso e de borda a borda quando ocupa a tela; a linha de ações mantém `space.5` de folga no fim dentro do cartão; a atribuição do mapa fica entre as fotos e o cartão; nome em Display title; títulos de seção em Section title; status em Footnote |
-| Estados | Em repouso (mapa visível); expandido (o cartão sobe por cima do mapa e das fotos e ocupa a tela; o título aparece na barra de navegação sobre um scroll edge na cor do tile, opaco até a base da barra e esmaecendo ao longo de `space.6` abaixo dela, para que nenhuma linha em Card apareça atrás do título) |
+| Anatomia | O mapa com o alfinete da loja, fixo atrás da tela; o carrossel de fotos abaixo do alfinete; um cartão de conteúdo com o nome, a linha de status ("Open till 6pm · Blythe Road · 2 min walk", "Made to order · 2 days' notice"), "· Promoted" no fim da primeira linha de status quando a loja é um destaque pago, Ask [loja] como botão preenchido, Call e Directions como botões tonais, depois as seções nesta ordem: What they sell (o resumo do que vende), Found here recently, Ratings (o resumo das avaliações e três cartões de avaliação, com "See all" abrindo a lista completa), How they do on Snuffle (linhas de confiabilidade) e How it works |
+| Tokens | Card na cor de tile do acento da loja, inteiro, com `radius.sheet` nos cantos de cima, a `space.2` abaixo do carrossel: o nome, as linhas de status, as tags, as ações e todas as seções ficam sobre ele, e as linhas das seções são Card sob a sombra suave; o primeiro título de seção fica `gap.section` abaixo das ações; o cartão fica recuado em repouso e de borda a borda quando ocupa a tela; a linha de ações mantém `space.5` de folga no fim dentro do cartão; a atribuição do mapa fica `space.5` acima do carrossel; nome em Display title; títulos de seção em Section title; as linhas de status, Promoted incluída, em Footnote, Muted foreground; a atribuição do mapa tem 11 pt (Caption 2) no canto inferior direito do mapa; o Back sobre o mapa é glass no claro e, no escuro, um círculo Muted sólido com borda Border (o glass vira Card ali, igual ao mapa) |
+| Estados | Em repouso (mapa visível acima do carrossel); expandido (o carrossel e o cartão sobem juntos por cima do mapa, e o cartão ocupa a tela; o título aparece na barra de navegação sobre um scroll edge na cor do tile, opaco até a base da barra e esmaecendo ao longo de `space.6` abaixo dela, para que nenhuma linha em Card apareça atrás do título) |
 | iOS ↔ Android | Mesmo layout; é empilhado a partir da tela que o abriu (o detalhe da loja), por isso tem Voltar, nunca Fechar (modelo conceitual) |
-| Acessibilidade | Ordem de leitura: nome, status, Ask, Call, Directions, fotos (cada uma rotulada "[Loja] shopfront, [rua]"), respostas anteriores |
+| Acessibilidade | Ordem de leitura: Voltar, fotos (cada uma um botão rotulado "[Loja] shopfront, [rua], 1 of 3"), nome, status, Ask, Call, Directions, depois as seções |
 | Truncamento | O nome quebra em duas linhas, nunca mais; as linhas de status quebram |
+
+## Carrossel de fotos
+
+| Aspecto | Especificação |
+| --- | --- |
+| Uso | As fotos da loja na página da loja, entre o alfinete do mapa e o cartão; a página de anúncio do Airbnb é a referência |
+| Anatomia | Uma foto por vez na largura do conteúdo (largura da tela menos duas margens de tela), 2:1 (`layout.carouselRatio`), `radius.card`, sobre o tile de placeholder da loja; troca de página para os lados, com a próxima foto fora da tela em repouso; pontos de página sobre a borda de baixo da foto, a `space.3` dela; com uma foto só não há pontos nem troca de página |
+| Tokens | Um scrim da cor de fundo (`color.photoScrim`) sobe da borda de baixo de cada foto: `state.photoScrim` (60%) na borda, sumindo em `layout.photoScrimReach` (70%) da altura. Os pontos são o PageDots: Foreground, e os outros em `state.pageDotOff` |
+| Contraste | Pontos em Foreground sobre a foto com o scrim, na altura dos pontos (cerca de 50% de scrim), sobre uma foto totalmente preta e uma totalmente branca: 4,2:1 e 17,9:1 no claro, 19,4:1 e 3,5:1 no escuro. Os pontos inativos ficam entre 1,5 e 2,5:1 e só marcam a posição, como no Getting started |
+| Estados | Carregando (o tile de placeholder aparece até a foto surgir, `spring.fade`); falha (o tile fica); pressionada (abre o visualizador) |
+| Acessibilidade | A lista é "[Loja] photos"; cada foto é um botão lido como "[rótulo], 2 of 3" com a dica "Opens the photo full screen" |
+
+## Visualizador de fotos
+
+| Aspecto | Especificação |
+| --- | --- |
+| Uso | Uma visão em tela cheia das fotos da loja, aberta a partir de uma foto do carrossel (frame "Photo viewer" no app flow v10) |
+| Anatomia | Fundo preto (`color.lightbox`, igual no claro e no escuro); a foto na largura da tela, centralizada; o Fechar de vidro no canto superior esquerdo, abaixo da barra de status; "1 of 3" centralizado nessa linha em Headline (`color.onLightbox`, branco sobre preto, 21:1); "Pinch to zoom · swipe for the next photo" em Footnote sob a foto (`color.onLightboxMuted`, 11,4:1) |
+| Gestos | A pinça dá zoom até 4x a partir do centro da foto; um dedo move a foto ampliada dentro das bordas dela; toque duplo dá zoom de 2,5x e volta; deslizar passa para a próxima foto, e fica desligado enquanto a foto está ampliada |
+| Movimento | Abrir faz uma cópia da foto tocada crescer do retângulo dela até o lugar dela com `spring.smooth`, enquanto o fundo preto aparece; fechar faz o contrário para a foto em que o visualizador está, e o carrossel já está nela. Com Reduzir movimento, ou quando a foto de onde abriu saiu da tela, ele aparece com `spring.fade` |
+| iOS ↔ Android | Mesmo layout; o Fechar é de vidro no iOS e na web, um círculo tonal no Android. O visualizador é apresentado pelo portal da raiz, então na web fica dentro da moldura do celular |
+| Acessibilidade | O visualizador é modal; cada foto é lida com seu rótulo, a contagem como "Photo 1 of 3", o Fechar como "Close photo" |
 
 ## Tile de placeholder
 
@@ -319,7 +355,7 @@ Conferida com o iOS 26 (as HIG sobre campos de busca e barras de ferramentas, Li
 
 | Aspecto | Especificação |
 | --- | --- |
-| Uso | "Browse by category" no Nearby, a primeira seção abaixo do título: um cartão por tipo que a área tem (um tipo sem loja por perto não tem cartão), numa faixa lateral ordenada para que cartões do mesmo matiz fiquem o mais longe possível uns dos outros, alternando Pêssego, Pistache, Manteiga |
+| Uso | "Browse by category" no Nearby, a primeira seção abaixo do título: um cartão por tipo que a área tem (um tipo sem loja por perto não tem cartão), numa faixa lateral ordenada pelo número de lojas daquele tipo abertas agora na área (o único estado de horário da área, já que ainda não há horário por loja), as com mais lojas primeiro; empates seguem uma prévia fixa de frequência no dia a dia (café, padaria, farmácia, jornaleiro, açougue, deli, florista, ferragens, papelaria, livros, brinquedos, ótica, moda, câmeras, presentes, bolsas); tipos sem nenhuma aberta ficam por último, na mesma prévia. Depois os matizes são espalhados: um cartão pode subir no máximo duas posições quando o anterior tem o mesmo pastel, para a ordem por contagem quebrar só o necessário. Essa regra é uma suposição: ainda não há dados de uso, e a prévia é um palpite meu sobre o que o comprador quer num dia comum. A Deliveroo personaliza a tela inicial por pedidos e horário do dia ([help.deliveroo.com/articles/3203714](https://help.deliveroo.com/articles/3203714)); com histórico de pedidos, a prévia daria lugar às contagens do próprio comprador |
 | Anatomia | Um cartão de 120 × 164 no `tile` do acento do tipo, `radius.bubble`; uma imagem fixa do objeto 3D mais próximo no topo, renderizada na própria cor do cartão; o rótulo em Headline (17) embaixo, com recuo de `space.3`, curto o bastante para uma linha ("Toys", "Butchers"). Tipos sem uma imagem próxima ficam com o tile e o rótulo |
 | Desempenho | Tamanho fixo, para a faixa nunca refazer o layout; memoizado; a imagem é um `expo-image` no tamanho exato, com cache em disco e chave de reciclagem; só imagens fixas na lista, sem clipes nem 3D ao vivo |
 | Estados | Padrão, pressionado; um toque abre a tela de categoria com o zoom a partir do cartão |
@@ -349,10 +385,10 @@ Conferida com o iOS 26 (as HIG sobre campos de busca e barras de ferramentas, Li
 | Aspecto | Especificação |
 | --- | --- |
 | Uso | "What they sell", a primeira seção da página da loja |
-| Anatomia | Chips de categoria (os de uma loja conectada vêm das categorias e dos mais vendidos do caixa; os de uma loja consultada, das respostas "Had it" passadas e do tipo de loja); uma linha de preço em Footnote, "Most items £2–£35 · from past answers" ou "· from the shop's till"; "Asked about recently", até três respostas passadas como linhas ("Tide clock batteries", "Had it · 2 hours ago") |
+| Anatomia | Chips de categoria (os de uma loja conectada vêm das categorias e dos mais vendidos do caixa; os de uma loja consultada, das respostas "Had it" passadas e do tipo de loja); uma linha de preço em Footnote, "Most items £2–£35 · from past answers" ou "· from the shop's till"; "Asked about recently", até três respostas passadas como linhas ("Tide clock batteries", "Had it · 2 hours ago"), que saem onde a página já mostra Found here recently, que resume as mesmas respostas só pelo nome |
 | Tokens | Chips como chips de sugestão sobre Card, a `space.2` um do outro, quebrando em no máximo duas linhas; `gap.block` entre os chips, a linha de preço e as linhas |
 | Estados | Um toque no chip abre o Ask com "[categoria] at [loja]" preenchido; sem respostas passadas, "Asked about recently" sai; ainda sem categorias, só o tipo da loja ("Stationer") |
-| Regras | Os itens continuam sem página: uma linha de resposta passada não abre nada, e um chip pergunta. A linha de preço nunca arredonda uma faixa para parecer mais barata |
+| Regras | Os itens continuam sem página: uma linha de resposta passada não abre nada, e um chip pergunta. A linha de preço nunca arredonda uma faixa para parecer mais barata. Na página da loja, What they sell traz as faixas e a faixa de preço, e "Found here recently" logo abaixo lista só os nomes, sem toque, com uma linha que diz de onde vêm; as linhas "Had it · 2 hours ago" por resposta ficam no chat. Uma lista de nomes de itens sem toque informa a fonte dela |
 | Acessibilidade | Os chips são botões com o rótulo "Ask about [categoria]"; a linha de preço lê "Most items 2 to 35 pounds, from past answers" |
 
 ## Linha de confiabilidade
@@ -370,18 +406,18 @@ Conferida com o iOS 26 (as HIG sobre campos de busca e barras de ferramentas, Li
 
 | Aspecto | Especificação |
 | --- | --- |
-| Uso | O topo de "What buyers say" |
-| Anatomia | Um glifo de polegar para cima e "92% would go back" em Title 3, "38 buyers" em Subheadline; depois as tags com as contagens em texto simples que quebra ("Had it as promised 21"), sem cápsula nem fundo, positivas primeiro, um glifo de polegar para baixo antes de cada negativa; as linhas de avaliação e "How ratings work ›" vêm em seguida na mesma lista agrupada |
+| Uso | O topo de Ratings na página da loja |
+| Anatomia | A pergunta "Would you go back?" em Footnote, Muted foreground; embaixo, um glifo de polegar para cima e "92%" em Title 3, "38 buyers" em Subheadline (com menos de 5 avaliações, só a contagem, "3 buyers so far"); depois as tags com as contagens em texto simples que quebra ("Had it as promised 21"), sem cápsula nem fundo, positivas primeiro, um glifo de polegar para baixo antes de cada negativa; as linhas de avaliação e "How ratings work ›" vêm em seguida na mesma lista agrupada |
 | Tokens | Sobre Card, `inset.card`; `gap.block` entre o número, as tags e o link |
-| Estados | Sem avaliações: "No buyers have rated it yet"; poucas (menos de 5): "3 buyers so far" e as tags, sem porcentagem ("New on Snuffle" fica em How they do on Snuffle e não se repete aqui); muitas: a porcentagem; com resumo: "Summary by Snuffle from buyers' notes" acima de duas linhas de texto |
+| Estados | Sem avaliações: "No ratings yet" com "Snuffle has asked them 4 times" depois; poucas (menos de 5): "3 buyers so far" e as tags, sem porcentagem ("New on Snuffle" fica em How they do on Snuffle e não se repete aqui); muitas: a porcentagem; com resumo: "Summary by Snuffle from buyers' notes" acima de duas linhas de texto |
 | Regras | Sem estrelas, sem média, sem decimal; a porcentagem é arredondada para baixo; a contagem de quem comprou fica sempre ao lado. As tags negativas aparecem com as contagens, como as positivas |
-| Acessibilidade | Um elemento: "Would go back, 92 percent of 38 buyers". Cada linha de tag lê "Had it as promised, 21 buyers". O glifo de polegar fica oculto; o número e as palavras levam o sentido, nunca só a cor |
+| Acessibilidade | Um elemento: "Would you go back? Would go back, 92 percent of 38 buyers". Cada linha de tag lê "Had it as promised, 21 buyers". O glifo de polegar fica oculto; o número e as palavras levam o sentido, nunca só a cor |
 
 ## Cartão de avaliação
 
 | Aspecto | Especificação |
 | --- | --- |
-| Uso | A nota de uma pessoa que comprou, como linha do grupo "What buyers say", abaixo do resumo das avaliações: duas na página da loja, espelhando a divisão, depois "See all 38 ›"; todas as notas na tela de avaliações, que fica sobre o tile de acento da loja |
+| Uso | A nota de uma pessoa que comprou, como linha do grupo Ratings, abaixo do resumo das avaliações: três na página da loja, depois "See all 38 ›"; todas as notas na tela de avaliações, que fica sobre o tile de acento da loja |
 | Anatomia | Uma linha agrupada simples, sem tile próprio: só para um polegar para baixo, o glifo e "Wouldn't go back" (um polegar para cima não tem rótulo); a nota entre aspas; um check "Collected" ou "Delivered" e o mês ("Oct 2026"); um separador recuado até o texto entre as linhas; a resposta da loja, se houver, recuada sob "Reply from [loja]" |
 | Tokens | O fundo Card da linha agrupada, `radius.inner` na primeira e na última linha do grupo, `space.4` no início e `space.3` acima e abaixo, linhas a `space.1` uma da outra; veredito em Footnote com Foreground, nota em Body, check e mês em Footnote com Muted foreground; a resposta sobre `chat.fill` com `radius.bubble` |
 | Estados | Padrão; com nota; loja respondeu; editada ("Edited Oct 2026") |

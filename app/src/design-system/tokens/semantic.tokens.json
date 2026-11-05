@@ -831,6 +831,10 @@
       "$value": 0.55,
       "$description": "Glass on the web and the blur fallback: opacity of the Card fill under the backdrop blur (shape.md)"
     },
+    "mapAttribution": {
+      "$value": 0.85,
+      "$description": "The map's attribution chip: opacity of its Map ground fill, so the street still shows through a little (imagery.md, Map style)"
+    },
     "glassHighlight": {
       "$value": 0.6,
       "$description": "Glass: opacity of the 1 px inner highlight along the top edge"
@@ -876,12 +880,22 @@
       "$description": "Web glass: width in px of the inner highlight and the hairline"
     },
     "pageDotOff": {
-      "$value": 0.35,
-      "$description": "Getting started: the other page dots, the welcome Foreground at this opacity over the Indigo ground (colour.md, Getting started)"
+      "$value": 0.55,
+      "$description": "Getting started: the other page dots, the welcome Foreground at this opacity over the ground (colour.md, Getting started); 0.35 left them at 2.17:1 on the light Indigo"
     }
   },
   "layout": {
     "$description": "Grid fractions from spacing.md (Grid and layout tokens). Widths are computed from the content width.",
+    "photoScrimReach": {
+      "$type": "number",
+      "$value": 0.45,
+      "$description": "Shop photo carousel: how far up a photo the scrim reaches from its bottom edge, as a fraction of the photo's height (components.md, Photo carousel)"
+    },
+    "carouselRatio": {
+      "$type": "number",
+      "$value": 2,
+      "$description": "Shop photo carousel: photo width over height (2:1), the full content width"
+    },
     "bubbleMax": {
       "$type": "number",
       "$value": 0.78,

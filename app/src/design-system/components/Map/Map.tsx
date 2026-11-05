@@ -10,7 +10,7 @@ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { MAP_CENTER } from './mapData';
 import { MAP_CAMERA, mapStyle } from './mapStyle';
-import { cameraPadding, MapAttribution, MapFallback, MapPin, type MapProps } from './MapParts';
+import { cameraPadding, MapAttribution, MapFallback, MapPin, useSettled, type MapProps } from './MapParts';
 
 export type { MapProps } from './MapParts';
 
@@ -18,6 +18,7 @@ export const Map = memo(function Map({ loading = false, pin = true, extent, inte
   const { theme } = useUnistyles();
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
+  const settled = useSettled();
   return (
     <View
       style={styles.map}
@@ -27,7 +28,7 @@ export const Map = memo(function Map({ loading = false, pin = true, extent, inte
     >
       {loading ? null : (
         <>
-          {failed ? null : (
+          {failed || !settled ? null : (
             <MapLibreMap
               style={styles.fill}
               mapStyle={mapStyle(theme.scheme)}

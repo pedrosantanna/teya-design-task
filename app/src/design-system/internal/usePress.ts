@@ -4,6 +4,7 @@ import { interpolate, useAnimatedStyle, useSharedValue, withSpring } from 'react
 import { useUnistyles } from 'react-native-unistyles';
 
 import { haptic, type HapticKind } from './haptics';
+import './webPress';
 
 export function usePress(feedback?: HapticKind) {
   const { theme } = useUnistyles();

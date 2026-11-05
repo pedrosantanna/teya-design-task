@@ -1,45 +1,33 @@
-// Shop page header (components.md) and the scroll behaviour from the v7 "Scroll" storyboard: a map fixed
-// behind the whole screen, up to three photos that slide in from the right over it, and a content card that
-// rests inset from the screen edges, grows to the full width as the scroll starts, scrolls up over the photos,
-// fills the screen, then hands its title to the nav bar. The bar is pinned: the glass Back circle always shows, and
-// the name fades in over the scroll-edge material once the large title has passed under it (visual critique 2).
-// Every scroll-driven value runs in a Reanimated scroll handler on the UI thread.
-import { Image } from 'expo-image';
-import { memo, useState, type ReactNode } from 'react';
-import type { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
+// Shop page header (components.md) and the scroll behaviour from the v7 "Scroll" storyboard, with the v10 photo
+// carousel: a map fixed behind the whole screen, the shop's photos in a carousel under the pin that scrolls with the
+// content, and a card that rests inset from the screen edges, grows to the full width as the scroll starts, scrolls
+// up over the map, fills the screen, then hands its title to the nav bar. The bar is pinned: the glass Back circle
+// always shows, and the name fades in over the scroll-edge material once the large title has passed under it (visual
+// critique 2). Every scroll-driven value runs in a Reanimated scroll handler on the UI thread. A tap on a photo opens
+// the Lightbox, which grows from it.
+import { memo, useId, useState, type ReactNode } from 'react';
 import { Platform, ScrollView, View } from 'react-native';
 import Animated, { Extrapolation, interpolate, useAnimatedStyle, useReducedMotion } from 'react-native-reanimated';
 import { useSafeAreaFrame } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { FloatingSurface } from '../../internal/FloatingSurface';
 import { Ground } from '../../internal/ground';
-import { IMAGE_OVER, photoSource, type PhotoSource } from '../../internal/media';
-import { ShopPlaceholder } from '../../internal/ShopPlaceholder';
 import { cornerCurve, screenMargin, type ShopAccentName } from '../../theme';
 import { Map } from '../Map/Map';
 import { NavBar, useNavBarHeight, useNavBarScroll } from '../NavBar/NavBar';
-import { tileWidth } from '../ShopTile/ShopTile';
+import { Lightbox } from '../Lightbox/Lightbox';
+import { PhotoCarousel, carouselHeight, type ShopPhoto } from '../PhotoCarousel/PhotoCarousel';
 import { Text } from '../Text/Text';
 
-// Photos fade in over the placeholder, as on tiles (spring.fade's 0.25 s; expo-image takes a duration).
-const PHOTO_FADE_MS = 250;
-const PHOTO_RATIO = 3 / 2;
-const MAX_PHOTOS = 3;
 // The card's two halves overlap by a pixel more than they need to, so no seam shows where they meet.
 const SEAM = 1;
 
-export type ShopPhoto = {
-  /** A bundled image or a URL. */
-  source: PhotoSource;
-  /** "Rossi's Bakery shopfront, Blythe Road" */
-  label: string;
-};
+export type { ShopPhoto };
 
 export type ShopPageLayoutProps = {
   /** The shop's name: the large title in Display title, then the bar's inline title. */
   name: string;
-  /** Up to three; the first position leaves the map in view and the first photo peeks in from the right. */
+  /** The shop's photos, in the carousel under the pin; a tap opens the Lightbox. */
   photos?: ShopPhoto[];
   /** Back to the screen that pushed the page (Nearby): the shop page is the shop's detail, so it has Back. */
   onBack: () => void;
@@ -51,7 +39,9 @@ export type ShopPageLayoutProps = {
   status?: string[];
   /** Ask, Call and Directions, right under the status lines: one row of capsule buttons that scrolls sideways. */
   actions?: ReactNode;
-  /** Badges and status tags (Promoted, New, Delivers): one row that scrolls sideways, under the name. */
+  /** The shop is a paid placement: "· Promoted" ends the first status line, after the walk time. */
+  promoted?: boolean;
+  /** Badges and status tags (New, Delivers): one row that scrolls sideways, under the name. */
   tags?: ReactNode;
   /** The shop's accent (colour.md, Shop accents): its tile step is the whole card's ground, under the name, the
    *  status, the actions and every section, edge to edge once the card fills the screen, and the bar's scroll edge
@@ -61,18 +51,19 @@ export type ShopPageLayoutProps = {
   children: ReactNode;
 };
 
-export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], onBack, backLabel, mapLoading = false, status = [], actions, tags, accent, children }: ShopPageLayoutProps) {
+export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], onBack, backLabel, mapLoading = false, status = [], promoted = false, actions, tags, accent, children }: ShopPageLayoutProps) {
   const { theme } = useUnistyles();
   const frame = useSafeAreaFrame();
   const navH = useNavBarHeight();
   const margin = screenMargin(theme, frame.width);
   const content = frame.width - 2 * margin;
 
-  // Geometry, all from tokens: photos at tile.large width and 3:2 under the bar; the card rests below them.
-  const photoW = tileWidth(theme, content, 'large');
-  const photoH = photoW / PHOTO_RATIO;
-  const photosTop = navH + theme.space[2];
-  const restTop = photosTop + photoH + theme.space[6];
+  // Geometry, all from tokens: the map's pin sits in the band under the bar; the carousel follows, at the content width
+  // and layout.carouselRatio; the card rests a space.2 under it. Without photos the card follows the pin band.
+  const photoH = carouselHeight(theme, content);
+  const hasPhotos = photos.length > 0;
+  const carouselTop = navH + photoH / 2;
+  const restTop = hasPhotos ? carouselTop + photoH + theme.space[2] : carouselTop + theme.space[6];
   // The card's top edge reaches the screen's top over the last bar-height of travel (step 2 of the storyboard).
   const expandFrom = restTop - 2 * navH;
   const expandTo = restTop - navH;
@@ -112,31 +103,17 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
     const s = surface(scrollY.get());
     return { paddingLeft: s.x + pad, paddingRight: s.x + pad };
   });
-  // The photos stay put while the card slides over them (they live in the scroll content so they can be swiped).
-  const photosStyle = useAnimatedStyle(() => ({ transform: [{ translateY: Math.max(0, scrollY.get()) }] }));
-
-  const shown = photos.slice(0, MAX_PHOTOS);
-  const peek = theme.size.peek;
-  const lead = frame.width - peek;
-  const gutter = theme.layout.gutter;
-  const railWidth = lead + shown.length * photoW + Math.max(0, shown.length - 1) * gutter + margin;
-  const maxX = Math.max(0, railWidth - frame.width);
-  const snaps = [0, ...shown.map((_, i) => Math.min(maxX, lead + i * (photoW + gutter) - margin))];
-  // The page capsule reads the photo nearest the snap point ("1/3"); the map position counts as the first photo.
+  // The photo the Lightbox is open on, or null while it is closed; the carousel follows it.
+  const [viewer, setViewer] = useState<number | null>(null);
   const [page, setPage] = useState(0);
-  const onPhotos = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const x = e.nativeEvent.contentOffset.x;
-    const nearest = snaps.reduce((best, s, i) => (Math.abs(s - x) < Math.abs(snaps[best] - x) ? i : best), 0);
-    const next = Math.max(0, nearest - 1);
-    if (next !== page) setPage(next);
-  };
+  const originId = `shop-photo-${useId()}`;
 
   return (
     <View style={styles.root}>
       <View style={styles.map}>
         <Map
           loading={mapLoading}
-          extent={{ width: frame.width, height: frame.height, pinY: (navH + restTop) / 2, attributionY: shown.length > 0 ? photosTop + photoH + theme.space[1] : undefined }}
+          extent={{ width: frame.width, height: frame.height, pinY: (navH + carouselTop) / 2, attributionY: hasPhotos ? carouselTop - theme.space[5] : undefined }}
         />
       </View>
 
@@ -147,35 +124,20 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
         showsVerticalScrollIndicator={false}
         contentInsetAdjustmentBehavior="never"
       >
-        <View style={styles.rest(restTop)}>
-          {shown.length > 0 ? (
-            <Animated.View style={[styles.photos(photosTop), photosStyle]}>
-              <ScrollView
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                snapToOffsets={snaps}
-                decelerationRate="fast"
-                onScroll={onPhotos}
-                scrollEventThrottle={16}
-                contentContainerStyle={styles.photoRail(lead, margin)}
-                accessibilityLabel={`${name} photos`}
-              >
-                {shown.map((photo, i) => (
-                  <Photo key={`${i}-${photo.label}`} photo={photo} name={name} accent={accent} width={photoW} height={photoH} />
-                ))}
-              </ScrollView>
-              {shown.length > 1 ? (
-                <View style={styles.pager(photoH, margin)} pointerEvents="none">
-                  <FloatingSurface style={styles.pagerCapsule}>
-                    <Text variant="caption1Strong" accessibilityLabel={`Photo ${page + 1} of ${shown.length}`}>
-                      {`${page + 1}/${shown.length}`}
-                    </Text>
-                  </FloatingSurface>
-                </View>
-              ) : null}
-            </Animated.View>
-          ) : null}
-        </View>
+        {/* The map shows through the band above the carousel. */}
+        <View style={styles.rest(carouselTop)} />
+        {hasPhotos ? (
+          <PhotoCarousel
+            photos={photos}
+            name={name}
+            accent={accent}
+            originId={originId}
+            page={page}
+            onPageChange={setPage}
+            onOpen={setViewer}
+          />
+        ) : null}
+        <View style={styles.gap(hasPhotos ? theme.space[2] : theme.space[6])} />
 
         {/* Tall enough for the title to pass under the bar and for the bar to hide, however short the content. */}
         <View style={styles.card(frame.height - restTop + revealAt + navH)}>
@@ -187,9 +149,9 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
                 <Text variant="displayTitle" accessibilityRole="header" numberOfLines={2}>
                   {name}
                 </Text>
-                {status.map((line) => (
+                {status.map((line, i) => (
                   <Text key={line} variant="footnote" color="mutedForeground">
-                    {line}
+                    {promoted && i === 0 ? `${line} · Promoted` : line}
                   </Text>
                 ))}
               </View>
@@ -205,6 +167,20 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
           </Animated.View>
         </View>
       </Animated.ScrollView>
+
+      {hasPhotos ? (
+        <Lightbox
+          photos={photos}
+          open={viewer != null}
+          index={viewer ?? page}
+          onIndexChange={(i) => {
+            setViewer(i);
+            setPage(i);
+          }}
+          onClose={() => setViewer(null)}
+          originId={originId}
+        />
+      ) : null}
 
       <NavBar
         title={name}
@@ -229,32 +205,12 @@ function Rail({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 
-function Photo({ photo, name, accent, width, height }: { photo: ShopPhoto; name: string; accent?: ShopAccentName; width: number; height: number }) {
-  const [failed, setFailed] = useState(false);
-  return (
-    <View accessible accessibilityRole="image" accessibilityLabel={photo.label} style={styles.photo(width, height)}>
-      <ShopPlaceholder name={name} accent={accent} />
-      {failed ? null : (
-        <Image source={photoSource(photo.source)} style={IMAGE_OVER} contentFit="cover" transition={PHOTO_FADE_MS} accessible={false} onError={() => setFailed(true)} />
-      )}
-    </View>
-  );
-}
-
 const styles = StyleSheet.create((theme) => ({
   root: { flex: 1, backgroundColor: theme.color.mapGround },
   fill: { flex: 1 },
   map: { ...StyleSheet.absoluteFillObject },
   rest: (height: number) => ({ height }),
-  photos: (top: number) => ({ position: 'absolute', top, left: 0, right: 0 }),
-  photoRail: (lead: number, margin: number) => ({ paddingLeft: lead, paddingRight: margin, gap: theme.layout.gutter }),
-  photo: (width: number, height: number) => ({
-    ...cornerCurve,
-    width,
-    height,
-    borderRadius: theme.radius.bubble,
-    overflow: 'hidden',
-  }),
+  gap: (height: number) => ({ height }),
   card: (minHeight: number) => ({ minHeight }),
   // Each half of the card's surface reaches a bar-height above the card and, on native, well below it to cover a
   // bounce at the bottom; it is moved, never resized. On the web an absolute child counts towards the scroll
@@ -271,8 +227,6 @@ const styles = StyleSheet.create((theme) => ({
     // delicate shadow (craft-pass-2). Foreground and Muted foreground keep 4.6:1 or more on every tile, light and dark.
     backgroundColor: accent ? theme.color.shop.accent[accent].tile : theme.color.background,
   }),
-  pager: (photoH: number, margin: number) => ({ position: 'absolute', top: photoH - theme.space[2] - theme.size.badge - theme.space[1], right: margin + theme.space[2] }),
-  pagerCapsule: { borderRadius: theme.radius.full, paddingHorizontal: theme.space[2], paddingVertical: theme.space[1] / 2 },
   // The sides are animated with the card's edges (innerStyle); padding inside the card is 20 (space.5) throughout.
   inner: {
     paddingTop: theme.space[6],

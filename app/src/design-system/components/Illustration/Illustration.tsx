@@ -1,14 +1,17 @@
 // A 3D illustration rendered ahead of time from the docs viewer (docs/develop/design-system/illustrations.md):
-// a still PNG plus animated WebP clips, each shaded for the ground it sits on. Assets and their sizes come from
-// manifest.generated.ts (app/scripts/illustrations). Decorative by default.
+// a still PNG plus clips, each shaded for the ground it sits on. A clip on a flat ground is an MP4 (expo-video,
+// baked on that ground); a clip with a crossfading ground (Getting started) is an animated WebP with alpha
+// (expo-image). Assets and their sizes come from manifest.generated.ts (app/scripts/illustrations). Decorative by default.
+import { useIsFocused } from 'expo-router';
 import { Image } from 'expo-image';
+import { VideoView, useVideoPlayer } from 'expo-video';
 import { memo, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useReducedMotion } from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { useGround } from '../../internal/ground';
-import { IMAGE_FILL } from '../../internal/media';
+import { IMAGE_FILL, IMAGE_OVER } from '../../internal/media';
 import {
   CATEGORY_ILLUSTRATIONS,
   ILLUSTRATIONS,
@@ -71,12 +74,36 @@ export function categoryIllustration(id: CategoryId, scheme: IllustrationScheme)
 
 type Phase = 'entry' | 'idle' | 'still';
 
+/** One muted player for a clip pair: the entry plays once, then the same player loads the idle loop. The still sits
+ *  behind it and shows until the first frame is drawn. Illustration unmounts it while its screen is not focused. */
+function ClipVideo({ entry, idle }: { entry?: number; idle?: number }) {
+  const player = useVideoPlayer(entry ?? idle ?? null, (p) => {
+    p.muted = true;
+    p.loop = !entry;
+    p.keepScreenOnWhilePlaying = false;
+    p.audioMixingMode = 'mixWithOthers';
+    p.allowsExternalPlayback = false;
+    p.play();
+  });
+  useEffect(() => {
+    if (!entry) return;
+    const sub = player.addListener('playToEnd', () => {
+      if (!idle) return;
+      player.loop = true;
+      player.replaceAsync(idle).then(() => player.play()).catch(() => undefined);
+    });
+    return () => sub.remove();
+  }, [player, entry, idle]);
+  return <VideoView player={player} surfaceType="textureView" nativeControls={false} fullscreenOptions={{ enable: false }} allowsPictureInPicture={false} contentFit="contain" style={IMAGE_FILL} />;
+}
+
 export const Illustration = memo(function Illustration({ name, size = 'large', ground: groundProp, play = 'entry-then-idle', accessibilityLabel }: IllustrationProps) {
   const scheme = useIllustrationScheme();
   // A chat's ground is Card in light mode and Background in dark (craft-pass-2); elsewhere, the Background.
   const onChat = useGround() === 'chat';
   const ground: IllustrationGround = groundProp ?? (onChat && scheme === 'light' ? 'card' : 'background');
   const reduceMotion = useReducedMotion();
+  const focused = useIsFocused();
   const asset = illustrationAsset(name, ground, scheme, size);
   const first: Phase = reduceMotion || play === 'still' || !asset ? 'still' : play === 'idle' ? (asset.idle ? 'idle' : 'still') : asset.entry ? 'entry' : asset.idle ? 'idle' : 'still';
   const [phase, setPhase] = useState<Phase>(first);
@@ -98,12 +125,25 @@ export const Illustration = memo(function Illustration({ name, size = 'large', g
   }, [phase, entryMs, hasIdle]);
 
   if (!asset) return <View style={styles.box(size)} />;
-  const source = phase === 'entry' ? asset.entry!.source : phase === 'idle' ? asset.idle!.source : asset.still;
-  const image = (
+  // Video for the whole play when every clip it needs is an MP4; the phase timers below only serve the WebP path.
+  const wanted = first === 'still' ? [] : play === 'idle' ? [asset.idle] : [asset.entry, asset.idle];
+  const videoOf = (c?: { video?: number }) => c?.video;
+  const useVideo = wanted.length > 0 && wanted.every((c) => !c || videoOf(c));
+  // A screen under another one (or a tab out of sight) keeps only the still: a stacked player would keep decoding.
+  const showVideo = useVideo && focused;
+  const source = phase === 'entry' ? asset.entry?.source : phase === 'idle' ? asset.idle?.source : asset.still;
+  const image = showVideo ? (
+    <>
+      <Image source={asset.still} contentFit="contain" transition={0} style={IMAGE_FILL} accessible={false} />
+      <View style={IMAGE_OVER}>
+        <ClipVideo key={key} entry={play === 'idle' ? undefined : videoOf(asset.entry)} idle={videoOf(asset.idle)} />
+      </View>
+    </>
+  ) : (
     <Image
-      source={source}
+      source={useVideo ? asset.still : source}
       // The still is the rest pose (the entry's last frame and the idle's first), shown until a clip is decoded.
-      placeholder={phase === 'still' ? undefined : asset.still}
+      placeholder={phase === 'still' || useVideo ? undefined : asset.still}
       placeholderContentFit="contain"
       contentFit="contain"
       transition={0}

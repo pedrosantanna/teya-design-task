@@ -29,6 +29,7 @@ export default function SignIn() {
   );
 
   const signIn = (provider: SignInProvider) => {
+    if (timer.current) return;
     setPending(provider);
     timer.current = setTimeout(finishFirstRun, SIGN_IN_MS);
   };

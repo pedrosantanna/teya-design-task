@@ -39,7 +39,7 @@
     butter: ramp(['#F9F7F0', '#FFE7A0', '#E4DAC0', '#D2C49A', '#BCAA73', '#A69050', '#8B752F', '#6F5C1A', '#53430D', '#382C04']),
     lavender: ramp(['#F7F6FD', '#EDEBF8', '#DCD6F1', '#CDBDFF', '#AEA2D6', '#9687C3', '#7C6CA8', '#625388', '#483C67', '#302747']),
     biscuit: { bg: '#F4F1ED', card: '#FFFFFF', muted: '#E5E2DE', mutedFg: '#59534D', fg: '#100A06',
-      darkBg: '#0E0B09', darkCard: '#282523', darkMuted: '#353230', darkMutedFg: '#AEAAA6', darkFg: '#FBFAF8' },
+      darkBg: '#0B0C0D', darkCard: '#252627', darkMuted: '#323334', darkMutedFg: '#AAABAD', darkFg: '#FAFAFB' },
   };
   const INK = '#1a1714';
   // Backgrounds, each with the dark tone of its own hue that shade and shadow mix toward.

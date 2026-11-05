@@ -9,6 +9,7 @@ Takeaways:
 - Three palettes, each built on a complementary pair plus a third colour: Pillar and park (green and red, butter), Awning (cobalt and marmalade, mint), Tiles (teal and rose, ochre). Every tint passes 4.5:1 as text and as a button label in light and dark mode.
 - The mark is now a retriever, a British breed whose job is to bring things back. Retriever names to consider: Nous (the breed's founding dog, and British slang for common sense), Bonnie, Bailey, Buddy, Teddy, Primrose. Sniffing names: Snuffle (my choice, decision 035), Sniffari, Truffle, Rootle, Boop, Waggy.
 - Several obvious names are taken or crowded (Parade, Fetch, Errand, Legwork), and "Nip" alone is an ethnic slur.
+- Round 10 tests the dark mode's accents and neutral on four screens (Nearby, a Category screen, a shop page and a sheet): today's, the light accents unchanged (tile 12.93 to 13.48:1 on the background, against 1.67 to 1.86:1), lower-chroma accents (about 55% of today's, every text pair above 4.5:1), and a cooler neutral at half of Stone's chroma. Nothing is chosen yet.
 - Round 9 puts more colour back into the light mode: the background at L 0.95 or L 0.96, at round 8's chroma, ×1.8 or ×2.5. The agent suggested L 0.96 at ×1.8; I chose L 0.96 at round 8's chroma (#F4F1ED), and dark mode stayed as in round 8 until I moved it to round 8's less colour column. ×2.5 reads as cream.
 - Round 7 replaces the brown dark mode: Biscuit grey's dark steps read as muddy brown and sit opposite indigo on the wheel. Aubergine, a warm plum, is the agent's suggestion; Night sky is cooler, Plum charcoal quieter.
 - Round 6 stresses Night bus: its solid badges glared because Amber, Neon pink and Cyan are light and very saturated; tonal badges (pale fill, dark text of the same hue) pass 7:1 and calm it down. Indigo carries all text and buttons.
@@ -20,10 +21,12 @@ Call:
 - I redrew icon tests 1 and 2 by hand in Figma as the provisional mark (decision 033); it is in the [design system](../design-system/mark.md).
 - I asked to compare the hybrids and dark modes side by side on screens, without borders, and chose Pastel parade with Indigo (decision 036) and a light background at L 0.96 with round 8's chroma (round 9); dark mode as in round 8. The name is decided: Snuffle.
 - Later I went back to round 8's dark mode tests and chose the less colour column for dark mode: Biscuit grey at 45% of its chroma, named Stone, because the full chroma read brown at night (decision 048). Light mode keeps Biscuit grey. It is marked on the board.
+- I asked whether the light accents work in dark and whether the dark neutral should be cooler and less saturated.
 AI:
 - I gave the seeds: a sniffer dog, a Sherlock-style investigator, British shopping culture. An agent searched the web for references and name conflicts, checked the Sherlock Holmes copyright and trademark position, built the palettes with a script that computes WCAG contrast and Material 3 tonal palettes, drew the mark sketches in SVG, applied the palettes to the v2 wireframes and captured nine apps from Mobbin.
 - The name checks are quick web searches, not trademark searches. Names marked "not checked" were not searched at all.
 - In round 4 an agent read the shadcn/ui, Tailwind, Radix Colors and Material documentation on neutrals, built the grey ramps in OKLCH with a script, and checked every pairing for WCAG contrast, including pure black and white. It darkened Tea teal and Jam slightly so they pass on Oat.
+- An agent built four options for round 10 from the board's Nearby, Category, shop page and sheet mocks, chose the lower-chroma tile values in OKLCH, moved Stone's hue and halved its chroma, and measured every pair with the WCAG 2 script. It lowered the tiles from L 0.37 to L 0.36 after Pistachio's muted text measured 4.44:1.
 Trade-offs:
 - Each palette has a secondary and tertiary colour that fail as text on white (Butter, Marmalade, Mint, Rose, Ochre). They are kept for fills, badges and status dots; text in those hues uses the darker Material 3 tone.
 - Showing every palette on the same two screens makes them easy to compare, and hides how each would change layout, type or illustration.
@@ -35,6 +38,7 @@ Every round stays on the same board, newest at the top, under a "Where it stands
 
 | Round | What it added |
 | --- | --- |
+| 10 | Dark mode accents and neutral on four screens: today's, the light accents unchanged, lower-chroma accents, and a cooler neutral at half of Stone's chroma |
 | 9 | Biscuit grey in light mode with more colour: the background at L 0.95 and at L 0.96, each with round 8's chroma, ×1.8 and ×2.5 |
 | 8 | Pastel parade with Indigo on Biscuit grey, chosen (decision 036), in light and dark without borders: surfaces with more lightness distance, and a less saturated Biscuit grey beside it. Dark mode now uses that less saturated column at 45% of the chroma, as Stone (decision 048) |
 | 7 | Three dark modes in place of the brown one (Night sky, Aubergine, Plum charcoal), from a benchmark of Linear, Material 3 and Slack, each tried with Night bus, Lido with Indigo and Pastel parade with Indigo, next to the light mode and the round 6 brown, all without borders |
@@ -44,6 +48,10 @@ Every round stays on the same board, newest at the top, under a "Where it stands
 | 3 | Icon test 3 (brows and moustache) with a four or five-stripe moustache, in palettes A, C, F, I and J |
 | 2 | Ten more palettes of four or five colours, and six icon tests where the parade's awning becomes a terrier's beard |
 | 1 | Four concept directions, three palettes, applications on the v2 home, references |
+
+## Round 10
+
+The dark accents looked ugly to me, so I asked two things: whether the light accents, unchanged, work better in dark, and whether the dark neutral should be cooler and less saturated. The board shows four options on the same four screens, each with its hex values and measured contrast. Stone's chroma is already 0.005 to 0.007, so halving it moves each channel by 1 or 2 steps. Nothing is chosen yet.
 
 ## Palettes, round 2
 

@@ -1,11 +1,10 @@
 // The panel's sections. Each one subscribes only to the store fields it shows, so changing one control
 // re-renders one section, and the screen under it re-renders only where it reads that field.
 import { useState } from 'react';
-import { Platform, View } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
+import { Platform } from 'react-native';
 import { useShallow } from 'zustand/react/shallow';
 
-import { Button, Checkbox, OptionList, Select, Switch, Text, type Option } from '@/design-system';
+import type { Option } from '@/design-system';
 import { useFrameMode, type FrameMode } from '@/device-frame';
 import {
   answerLabel,
@@ -40,7 +39,7 @@ import {
   type StepId,
 } from '@/store';
 
-import { Section, Segmented } from './controls';
+import { Button, Check, Note, Section, Segmented, Select, Sub, Toggle } from './controls';
 import { useDebugger } from './visibility';
 
 export function PersonaSection() {
@@ -100,26 +99,23 @@ export function LookSection() {
 }
 
 /** The journey's steps by group, with their times in 12 hours; on Android the payment step is Google Pay. */
-function stepOptionsFor(platform: 'ios' | 'android'): Map<string, Option<StepId>[]> {
-  return new Map(
-    stepGroups.map((group) => [
-      group,
-      steps
-        .filter((s) => s.group === group)
-        .map((s): Option<StepId> => ({
-          value: s.id,
-          label: platform === 'android' && s.id === 'applePay' ? 'Google Pay' : s.title,
-          detail: twelveHour(s.time),
-        })),
-    ]),
-  );
+function stepGroupsFor(platform: 'ios' | 'android') {
+  return stepGroups.map((group) => ({
+    label: group,
+    options: steps
+      .filter((s) => s.group === group)
+      .map((s): Option<StepId> => ({
+        value: s.id,
+        label: platform === 'android' && s.id === 'applePay' ? 'Google Pay' : s.title,
+        detail: twelveHour(s.time),
+      })),
+  }));
 }
 
 export function JourneySection() {
   const step = useApp('step');
   const platform = useApp('platform');
   const { goTo } = useAppActions();
-  const stepOptions = stepOptionsFor(platform);
   // Picking a step, the current one included, applies it afresh and pauses the clock, so the frame holds
   // still until the simulation is started again.
   const pick = (id: StepId) => {
@@ -128,14 +124,7 @@ export function JourneySection() {
   };
   return (
     <Section title="Journey">
-      {stepGroups.map((group) => (
-        <View key={group} style={styles.group}>
-          <Text variant="caption1" color="mutedForeground">
-            {group}
-          </Text>
-          <OptionList options={stepOptions.get(group) ?? []} value={step} onChange={pick} accessibilityLabel={group} />
-        </View>
-      ))}
+      <Select label="Step" groups={stepGroupsFor(platform)} value={step} onChange={pick} />
     </Section>
   );
 }
@@ -194,7 +183,7 @@ export function StatesSection() {
         onChange={(f) => set({ fulfilment: f, order: orderStatesFor[f].includes(order) ? order : 'none' })}
       />
       <Select label="Order" options={orderOptions} value={order} onChange={(o) => set({ order: o })} />
-      <Checkbox
+      <Check
         label={`Keep looking for ${Math.max(1, active.quantity - 1)} more`}
         detail="Line on the order card after a partial buy"
         checked={keepLookingForMore}
@@ -202,9 +191,7 @@ export function StatesSection() {
       />
       <Select label="Payment" options={paymentOptions} value={payment} onChange={(p) => set({ payment: p })} />
       <Select label="Shop hours" options={hoursOptions} value={shopHours} onChange={(h) => set({ shopHours: h })} />
-      <Text variant="caption1" color="mutedForeground">
-        {`Answers · ${active.title}`}
-      </Text>
+      <Sub>{`Answers · ${active.title}`}</Sub>
       {active.offers.map((offer) => (
         <AnswerSelect key={offer.shopId} shopId={offer.shopId} />
       ))}
@@ -254,10 +241,10 @@ export function ContentSection() {
   );
   const { set } = useAppActions();
   return (
-    <Section title="Content">
+    <Section title="Content" defaultOpen={false}>
       <Select label="Content set" options={contentOptions} value={contentSet} onChange={(c) => set({ contentSet: c })} />
-      <Switch label="Loading" detail="Skeletons in place of content" value={loading} onValueChange={(v) => set({ loading: v })} />
-      <Switch label="Location off" value={locationOff} onValueChange={(v) => set({ locationOff: v })} />
+      <Toggle label="Loading" detail="Skeletons in place of content" value={loading} onChange={(v) => set({ loading: v })} />
+      <Toggle label="Location off" value={locationOff} onChange={(v) => set({ locationOff: v })} />
       <Select
         label="Place"
         options={[currentPlace, ...places].map((p): Option<string> => ({ value: p.id, label: p.id === 'current' ? `Current location · ${p.address}` : `${p.label} · ${p.address}` }))}
@@ -274,11 +261,7 @@ export function ContentSection() {
         value={String(radius)}
         onChange={(r) => set({ radius: Number(r) as Radius })}
       />
-      <Switch
-        label="Notifications allowed"
-        value={notificationsAllowed}
-        onValueChange={(v) => set({ notificationsAllowed: v })}
-      />
+      <Toggle label="Notifications allowed" value={notificationsAllowed} onChange={(v) => set({ notificationsAllowed: v })} />
     </Section>
   );
 }
@@ -302,25 +285,18 @@ export function ActionsSection() {
 
   return (
     <Section title="Actions">
-      <View style={styles.row}>
-        <Button label="Reset" size="compact" role="tonal" onPress={reset} />
-        <Button label="Replay first run" size="compact" role="tonal" onPress={replayFirstRun} />
-        {Platform.OS === 'web' ? <Button label={copied ? 'Copied' : 'Copy link'} size="compact" role="tonal" onPress={copy} /> : null}
-        <Button label="Hide" size="compact" role="plain" onPress={toggleHidden} />
-      </View>
-      <Text variant="footnote" color="mutedForeground">
-        {Platform.OS === 'web'
-          ? 'Press D to show or hide the debugger. ?debug=0 starts hidden.'
-          : 'Touch and hold with three fingers to show or hide the debugger.'}
-      </Text>
+      <div className="dbg-actions">
+        <Button label="Reset" onPress={reset} />
+        <Button label="Replay first run" onPress={replayFirstRun} />
+        {Platform.OS === 'web' ? <Button label={copied ? 'Copied' : 'Copy link'} onPress={copy} /> : null}
+        <Button label="Hide" onPress={toggleHidden} />
+      </div>
+      <Note>
+        Press <kbd>D</kbd> to open or close the panel. Hide removes the button too; <kbd>D</kbd> brings it back. ?debug=0 starts hidden.
+      </Note>
     </Section>
   );
 }
-
-const styles = StyleSheet.create((theme) => ({
-  group: { gap: theme.space[1] },
-  row: { flexDirection: 'row', flexWrap: 'wrap', gap: theme.space[2] },
-}));
 
 const payOptions: Option<PayOutcome>[] = [
   { value: 'paid', label: 'Goes through' },
@@ -343,12 +319,12 @@ export function SimulationSection() {
     useShallow((s) => ({ running: s.running, clock: Math.floor(s.clock), payOutcome: s.payOutcome, shopOutcome: s.shopOutcome, date: s.date })),
   );
   return (
-    <Section title="Simulation">
-      <Switch label="Clock running" detail={`Shops answer on a timer · ${clock} s`} value={running} onValueChange={sim.setRunning} />
-      <View style={styles.row}>
-        <Button label="Step 5 s" size="compact" role="tonal" onPress={() => sim.step(5)} />
-        <Button label="Skip 1 min" size="compact" role="tonal" onPress={() => sim.step(60)} />
-      </View>
+    <Section title="Simulation" defaultOpen={false}>
+      <Toggle label="Clock running" detail={`Shops answer on a timer · ${clock} s`} value={running} onChange={sim.setRunning} />
+      <div className="dbg-actions">
+        <Button label="Step 5 s" onPress={() => sim.step(5)} />
+        <Button label="Skip 1 min" onPress={() => sim.step(60)} />
+      </div>
       <Select label="Payment" options={payOptions} value={payOutcome} onChange={sim.setPayOutcome} />
       <Select label="Shop after Buy" options={shopOptions} value={shopOutcome} onChange={sim.setShopOutcome} />
       <Select label="Date" options={dateOptions} value={date} onChange={sim.setDate} />

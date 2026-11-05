@@ -5,6 +5,10 @@
 // are listed in docs/deliver/prototype.md (Mocked content); credits stay in this file and are not shown in the UI.
 // Unsplash licence: free to use, including copying and bundling; credit the photographer and Unsplash where the image appears.
 
+import { Platform } from 'react-native';
+
+import { bundledImages } from './images.generated';
+
 export type ImageSubject = 'shop' | 'product' | 'category';
 export type ImageKind = 'shopfront' | 'interior' | 'product' | 'category';
 export type ImageRatio = '4:3' | '3:2' | '1:1';
@@ -145,91 +149,25 @@ export const images = {
 export type ImageKey = keyof typeof images;
 
 // Bundled copies of the images the app draws (the seed's shops and products, the shop pages' extra photos and the
-// design-system examples). Metro needs each path written out.
-const bundled: Partial<Record<ImageKey, number>> = {
-  'abingdon-deli-front': require('../../assets/images/content/abingdon-deli-front.jpg'),
-  'abingdon-deli-produce': require('../../assets/images/content/abingdon-deli-produce.jpg'),
-  'addison-cameras-front': require('../../assets/images/content/addison-cameras-front.jpg'),
-  'alimentari-bellini-front': require('../../assets/images/content/alimentari-bellini-front.jpg'),
-  'askew-deli-interior': require('../../assets/images/content/askew-deli-interior.jpg'),
-  'birthday-cake': require('../../assets/images/content/birthday-cake.jpg'),
-  'blythe-cafe-front': require('../../assets/images/content/blythe-cafe-front.jpg'),
-  'broadway-chemist-counter': require('../../assets/images/content/broadway-chemist-counter.jpg'),
-  'broadway-chemist-front': require('../../assets/images/content/broadway-chemist-front.jpg'),
-  'broadway-chemist-interior': require('../../assets/images/content/broadway-chemist-interior.jpg'),
-  'brook-green-bread-front': require('../../assets/images/content/brook-green-bread-front.jpg'),
-  'brook-green-games-front': require('../../assets/images/content/brook-green-games-front.jpg'),
-  'brook-green-games-interior': require('../../assets/images/content/brook-green-games-interior.jpg'),
-  'brook-green-news-front': require('../../assets/images/content/brook-green-news-front.jpg'),
-  'brook-green-pharmacy-front': require('../../assets/images/content/brook-green-pharmacy-front.jpg'),
-  'brook-green-pharmacy-interior': require('../../assets/images/content/brook-green-pharmacy-interior.jpg'),
-  'brook-green-toys-front': require('../../assets/images/content/brook-green-toys-front.jpg'),
-  'brook-green-toys-front-alt': require('../../assets/images/content/brook-green-toys-front-alt.jpg'),
-  'brook-green-toys-interior': require('../../assets/images/content/brook-green-toys-interior.jpg'),
-  'brook-hardware-front': require('../../assets/images/content/brook-hardware-front.jpg'),
-  'brook-hardware-interior': require('../../assets/images/content/brook-hardware-interior.jpg'),
-  'brook-hardware-window': require('../../assets/images/content/brook-hardware-window.jpg'),
-  'bush-opticians-front': require('../../assets/images/content/bush-opticians-front.jpg'),
-  'bush-opticians-interior': require('../../assets/images/content/bush-opticians-interior.jpg'),
-  'cheese-room-front': require('../../assets/images/content/cheese-room-front.jpg'),
-  'cheese-room-interior': require('../../assets/images/content/cheese-room-interior.jpg'),
-  'church-street-books-front': require('../../assets/images/content/church-street-books-front.jpg'),
-  'church-street-books-interior': require('../../assets/images/content/church-street-books-interior.jpg'),
-  'clear-view-opticians-front': require('../../assets/images/content/clear-view-opticians-front.jpg'),
-  'corner-shop-front': require('../../assets/images/content/corner-shop-front.jpg'),
-  'corner-shop-interior': require('../../assets/images/content/corner-shop-interior.jpg'),
-  'desk-fan': require('../../assets/images/content/desk-fan.jpg'),
-  'desk-fan-alt': require('../../assets/images/content/desk-fan-alt.jpg'),
-  'eclipse-glasses': require('../../assets/images/content/eclipse-glasses.jpg'),
-  'fern-pot-front': require('../../assets/images/content/fern-pot-front.jpg'),
-  'fern-pot-interior': require('../../assets/images/content/fern-pot-interior.jpg'),
-  'flowers-bouquet': require('../../assets/images/content/flowers-bouquet.jpg'),
-  'goldhawk-butchers-counter': require('../../assets/images/content/goldhawk-butchers-counter.jpg'),
-  'goldhawk-butchers-front': require('../../assets/images/content/goldhawk-butchers-front.jpg'),
-  'goldhawk-fish-front': require('../../assets/images/content/goldhawk-fish-front.jpg'),
-  'goldhawk-fish-interior': require('../../assets/images/content/goldhawk-fish-interior.jpg'),
-  'grove-cafe-front': require('../../assets/images/content/grove-cafe-front.jpg'),
-  'halo-florist-front': require('../../assets/images/content/halo-florist-front.jpg'),
-  'halo-florist-front-alt': require('../../assets/images/content/halo-florist-front-alt.jpg'),
-  'halo-florist-interior': require('../../assets/images/content/halo-florist-interior.jpg'),
-  'health-foods-front': require('../../assets/images/content/health-foods-front.jpg'),
-  'health-foods-interior': require('../../assets/images/content/health-foods-interior.jpg'),
-  'heel-key-front': require('../../assets/images/content/heel-key-front.jpg'),
-  'king-street-opticians-front': require('../../assets/images/content/king-street-opticians-front.jpg'),
-  'larkin-butchers-front': require('../../assets/images/content/larkin-butchers-front.jpg'),
-  'little-bear-toys-front': require('../../assets/images/content/little-bear-toys-front.jpg'),
-  'olympia-cameras-front': require('../../assets/images/content/olympia-cameras-front.jpg'),
-  'olympia-cameras-interior': require('../../assets/images/content/olympia-cameras-interior.jpg'),
-  'olympia-cameras-interior-alt': require('../../assets/images/content/olympia-cameras-interior-alt.jpg'),
-  'paint-diy-front': require('../../assets/images/content/paint-diy-front.jpg'),
-  'panel-comics-front': require('../../assets/images/content/panel-comics-front.jpg'),
-  'panel-comics-interior': require('../../assets/images/content/panel-comics-interior.jpg'),
-  'paper-co-front': require('../../assets/images/content/paper-co-front.jpg'),
-  'paper-co-front-alt': require('../../assets/images/content/paper-co-front-alt.jpg'),
-  'paper-co-interior': require('../../assets/images/content/paper-co-interior.jpg'),
-  'pastelaria-estrela-front': require('../../assets/images/content/pastelaria-estrela-front.jpg'),
-  'picture-hooks': require('../../assets/images/content/picture-hooks.jpg'),
-  'pigment-art-front': require('../../assets/images/content/pigment-art-front.jpg'),
-  'quill-ledger-front': require('../../assets/images/content/quill-ledger-front.jpg'),
-  'quill-ledger-interior': require('../../assets/images/content/quill-ledger-interior.jpg'),
-  'riverside-books-front': require('../../assets/images/content/riverside-books-front.jpg'),
-  'rossis-bakery-front': require('../../assets/images/content/rossis-bakery-front.jpg'),
-  'rossis-bakery-front-alt': require('../../assets/images/content/rossis-bakery-front-alt.jpg'),
-  'rossis-bakery-interior': require('../../assets/images/content/rossis-bakery-interior.jpg'),
-  'second-chapter-front': require('../../assets/images/content/second-chapter-front.jpg'),
-  'second-chapter-interior': require('../../assets/images/content/second-chapter-interior.jpg'),
-  'silver-halide-front': require('../../assets/images/content/silver-halide-front.jpg'),
-  'sourdough-loaf': require('../../assets/images/content/sourdough-loaf.jpg'),
-  'station-kiosk-front': require('../../assets/images/content/station-kiosk-front.jpg'),
-  'sugar-spoon-front': require('../../assets/images/content/sugar-spoon-front.jpg'),
-  'sugar-spoon-interior': require('../../assets/images/content/sugar-spoon-interior.jpg'),
-  'wild-stem-front': require('../../assets/images/content/wild-stem-front.jpg'),
-  'yellow-door-coffee-front': require('../../assets/images/content/yellow-door-coffee-front.jpg'),
-};
+// design-system examples), each at up to three widths: scripts/image-variants.mjs makes the 160 and 400 px ones and
+// writes images.generated.ts, because Metro needs each path written out.
 
-/** The image to draw for `key`: the bundled copy, or the Unsplash URL at `width` points if it isn't bundled. */
+/** Pixel density the pictures are drawn at: 3x on iPhone, 2x elsewhere. */
+const DENSITY = Platform.OS === 'ios' ? 3 : 2;
+// The web build is published inside the docs artifact, which holds at most 512 files, so the web skips the
+// 160 px copies and starts at 400 px.
+const SMALLEST = Platform.OS === 'web' ? 400 : 0;
+
+/**
+ * The image to draw for `key` at `width` points: the smallest bundled copy that still has 2x (3x on iOS) the pixels,
+ * so a 40 pt thumbnail decodes 160 px and not the full 800. If it isn't bundled, the Unsplash URL at that width.
+ */
 export function imageSource(key: ImageKey, width: number): number | string {
-  return bundled[key] ?? `${images[key].image}?w=${Math.round(width * 2)}&q=75&fm=jpg`;
+  const copies = (bundledImages as Record<string, Record<number, number> | undefined>)[key];
+  if (!copies) return `${images[key].image}?w=${Math.round(width * 2)}&q=75&fm=jpg`;
+  const widths = Object.keys(copies).map(Number).filter((w) => w >= SMALLEST).sort((x, y) => x - y);
+  const wanted = width * DENSITY;
+  return copies[widths.find((w) => w >= wanted) ?? widths[widths.length - 1]];
 }
 
 /** The credit line for an image, as Unsplash asks for it. */

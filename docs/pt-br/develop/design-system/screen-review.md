@@ -34,7 +34,7 @@ Trade-offs:
 
 | # | Verificação | Passa quando |
 | --- | --- | --- |
-| 8 | Hierarquia visual | No máximo três tamanhos de texto por bloco e quatro por tela, sem contar a barra de navegação, a interface do sistema, os badges (Caption 2) e as contagens; um botão principal preenchido (Índigo) visível ao mesmo tempo. O enviar do compositor e os balões do comprador também são Índigo e não contam |
+| 8 | Hierarquia visual | No máximo três tamanhos de texto por bloco e quatro por tela, sem contar a barra de navegação, a interface do sistema, os badges (Caption 2) e as contagens; numa página longa com rolagem (a página da loja, o chat), os tamanhos são contados por viewport, como na verificação 19, e não ao longo de toda a rolagem; um botão principal preenchido (Índigo) visível ao mesmo tempo. O enviar do compositor e os balões do comprador também são Índigo e não contam |
 | 9 | Lei de Hick | No máximo 5 chips de filtro ou 3 sugestões visíveis; uma sheet tem no máximo 2 ações mais Cancel |
 | 19 | Papéis das cores | No máximo um controle preenchido em Índigo por tela visível, a ação de confirmação (Buy, Ask, enviar); as ações secundárias são neutras e um chip selecionado é Foreground. O Índigo é o comprador agindo, a Lavanda é o Snuffle falando (balões, marca, notificações, Live Activity), o pastel quente de uma loja é aquela loja (o tile, o cabeçalho da página, o recibo), e nenhuma cor troca de papel |
 
@@ -50,8 +50,8 @@ Trade-offs:
 
 | # | Verificação | Passa quando |
 | --- | --- | --- |
-| 13 | Rótulos | Toda palavra vem da tabela de Palavras do [modelo conceitual](conceptual-model.md); nenhum sinônimo evitado |
-| 14 | Rótulos de status | Um rótulo de status por cartão ou linha, exatamente como na tabela de estados |
+| 13 | Rótulos | Toda palavra vem da tabela de Palavras do [modelo conceitual](conceptual-model.md); nenhum sinônimo evitado. Uma lista de nomes de itens sem toque (Found here recently) só é permitida se informar a fonte dela |
+| 14 | Rótulos de status | Um rótulo de status por cartão ou linha, exatamente como na tabela de estados; a prévia de uma linha de pedido sempre acompanha o rótulo dela (as [prévias das linhas de pedido](content.md#request-row-previews)) |
 
 ## Acessibilidade
 

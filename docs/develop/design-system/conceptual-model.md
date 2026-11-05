@@ -9,7 +9,7 @@ Takeaways:
 - Each object has one card form and one detail form: a request is a row that opens its chat, an answer a card in the chat that opens a details sheet, an order a card that opens the receipt, a shop a row that opens the shop page.
 - One verb per action across the app. Buy is the only way to pay; shops set aside; the shopper collects.
 - One table of status labels, used the same way in rows, chat cards, notifications and the Live Activity. Money has three outcomes the shopper sees: paid, not charged, refunded.
-- A rating is an attribute of the order, so only a buyer who collected or received an order can rate it. The shop page shows two signals labelled by source, "What buyers said" and "What Snuffle saw", and a summary of what the shop sells; all three are attributes of the shop.
+- A rating is an attribute of the order, so only a buyer who collected or received an order can rate it. The shop page shows two signals labelled by source, "Ratings" and "How they do on Snuffle", and a summary of what the shop sells; all three are attributes of the shop.
 Call:
 - I asked for a conceptual model before any more screens: the objects, what the shopper does with each, their states and words, simple and grounded in references and in the research.
 - I decided the four open points (decision 039): items stay out of the model, a request left open is "Keep looking", a shop's reply is an "answer", and shops show as photo tiles on the home screen. It follows decisions 025, 031 and 037.
@@ -58,7 +58,7 @@ There is no evidence for "errand", "basket", "hold" or "reserve" in shoppers' wo
 | Object | In the shopper's words | Main attributes | Relationships | Card → detail |
 | --- | --- | --- | --- | --- |
 | Request | What I asked for | Items and quantity, deadline, area, collect or delivery, repeat | Has many answers and any number of orders | Row in Requests → the chat |
-| Shop | The shop | Name, street, walk time, open until, made to order with notice ("2 days' notice"), answers from its till or by reply, collection window, delivers and fee; what it sells; what buyers said; what Snuffle saw | Gives many answers, has many orders | Photo tile on Nearby, the home screen; row in any other list → shop page |
+| Shop | The shop | Name, street, walk time, open until, made to order with notice ("2 days' notice"), answers from its till or by reply, collection window, delivers and fee; what it sells; ratings; how it does on Snuffle | Gives many answers, has many orders | Photo tile on Nearby, the home screen; row in any other list → shop page |
 | Answer | "Paper & Co has them" | Shop, what it has (all, some, something similar), price, source of the answer, collect-by date, delivery | Belongs to one request and one shop; may become one order | Compact row on the asking list, full card in the chat once the shop replies → details sheet, where the shopper buys |
 | Order | My order | Items, shop, total, collect or delivery, collect-by date, collected at (the shop or a collection point), collection code, payment, rating | Belongs to one request, one shop and one answer | Card in the chat with its status label → receipt, which holds the collection code |
 
@@ -84,14 +84,14 @@ The shop page shows two signals under separate headings, so the shopper can tell
 
 | Signal | Source | Shown as |
 | --- | --- | --- |
-| What buyers said | Ratings on collected and delivered orders | "92% would go back · 38 buyers" and the count of each tag. Below 5 ratings, tags only: "New on Snuffle · 3 buyers so far" |
-| What Snuffle saw: answer rate | Answers | "Answers 9 in 10 requests" |
-| What Snuffle saw: stock accuracy | Answers and orders | "Had it 24 of 25 times when they said yes", only after 10 "has it" answers; before that, "New on Snuffle" with the answer rate and reply time |
-| What Snuffle saw: reply time | Answers | "Usually replies in 6 min"; a connected shop shows "Stock from the till" |
+| Ratings | Ratings on collected and delivered orders | "92% would go back · 38 buyers" and the count of each tag. Below 5 ratings, tags only: "New on Snuffle · 3 buyers so far" |
+| How they do on Snuffle: answer rate | Answers | "Answers 9 in 10 requests" |
+| How they do on Snuffle: stock accuracy | Answers and orders | "Had it 24 of 25 times when they said yes", only after 10 "has it" answers; before that, "New on Snuffle" with the answer rate and reply time |
+| How they do on Snuffle: reply time | Answers | "Usually replies in 6 min"; a connected shop shows "Stock from the till" |
 
-What the shop sells is a third attribute of the shop. A connected shop's comes from its till's categories and best sellers; an asked shop's from its past "Had it" answers and its kind. It shows as category chips, each opening Ask with the category filled in, "Asked about recently" with past answers ("Had it · 2 hours ago") and a price line ("Most items £2–£35 · from past answers", or "· from the shop's till"). Items still have no page.
+What the shop sells is a third attribute of the shop. A connected shop's comes from its till's categories and best sellers; an asked shop's from its past "Had it" answers and its kind. It shows as category chips, each opening Ask with the category filled in, a price line ("Most items £2–£35 · from past answers", or "· from the shop's till"). Items still have no page. Below it, "Found here recently" lists three to five item names that shoppers found at the shop, summarising its "Had it" answers by name only: nothing to press, no buyer and no price, with a line that says where they come from. The per-answer "Had it · 2 hours ago" rows stay in the chat.
 
-The shop page runs in this order: header and actions, What they sell, How they do on Snuffle, What buyers say.
+The shop page runs in this order: header and actions, What they sell, Found here recently, Ratings, How they do on Snuffle, How it works.
 
 A shop sees its own signals and can dispute a specific case, such as a "Not ready when I came" on an order it set aside on time. The shop has no interface, so this is mapped in the shop's request states.
 

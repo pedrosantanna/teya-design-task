@@ -1,7 +1,8 @@
-// The shop page (openspec/specs/shop-page, app flow v7 "Shop page" and its "Scroll" storyboard): the shop's
-// detail, pushed from Nearby with Back, with the map, up to three photos, and one card for the name, status and actions,
-// then what the shop sells, how it does on Snuffle and what buyers say (change shop-ratings-and-range), and how
-// collection and delivery work. Call and Directions are simulated in sheets; nothing leaves the app.
+// The shop page (openspec/specs/shop-page, app flow v10 "Shop page" and "Photo viewer"): the shop's detail, pushed from
+// Nearby with Back, with the map and its pin, a carousel of up to three photos that opens a full-screen viewer, and one
+// card for the name, status and actions, then what the shop sells, what shoppers found there recently and its ratings
+// (change shop-ratings-and-range), how it does on Snuffle, and how collection and delivery work. Call and Directions
+// are simulated in sheets; nothing leaves the app.
 import BubbleChatIcon from '@hugeicons/core-free-icons/BubbleChatIcon';
 import Call02Icon from '@hugeicons/core-free-icons/Call02Icon';
 import Navigation03Icon from '@hugeicons/core-free-icons/Navigation03Icon';
@@ -35,7 +36,6 @@ import {
 import {
   MIN_ANSWERS_FOR_STOCK,
   MIN_RATINGS_FOR_SHARE,
-  pastAnswerLabel,
   price,
   priceRangeLine,
   quoteMix,
@@ -53,10 +53,13 @@ import {
   type ReliabilityLine,
   type Shop,
 } from '@/store';
+import { foundRecently } from '@/store/found';
 
 const MAX_PHOTOS = 3;
-// Photo width if a photo is not bundled (then it comes from Unsplash): tile.large wide, about 300 pt on a phone.
-const PHOTO_WIDTH = 320;
+// Reviews on the page; "See all" opens the rest.
+const PAGE_REVIEWS = 3;
+// Photo width if a photo is not bundled (then it comes from Unsplash): the carousel's width, about 360 pt on a phone.
+const PHOTO_WIDTH = 400;
 // Collection window for a bought item (decision 037, H6).
 const KEEPS_ITEMS = '7 days to collect';
 
@@ -80,7 +83,7 @@ function askLabel(name: string): string {
 
 /** A made-up number in Ofcom's drama range (020 7946 0000–0999), so it can never ring a real line. */
 function phoneFor(index: number): string {
-  return `020 7946 0${String(100 + index * 37).padStart(3, '0')}`;
+  return `020 7946 0${String(100 + ((index * 37) % 900)).padStart(3, '0')}`;
 }
 
 export default function ShopPage() {
@@ -104,13 +107,12 @@ export default function ShopPage() {
   const status = [`${shopHoursLabel(shopHours, shop)} · ${shop.street} · ${shop.walkMinutes} min walk`];
   if (shop.notice) status.push(`Made to order · ${shop.notice}`);
   const photos = loading ? [] : shopPhotos(shop);
-  const history = shop.history ?? [];
   const lines = reliabilityLines(shop);
-  const headline = ratingHeadline(ratings);
-  const quotes = quoteMix(ratings);
+  const headline = ratingHeadline(ratings, shop.reliability?.asked);
+  const quotes = quoteMix(ratings, PAGE_REVIEWS);
+  const found = foundRecently(shop, index);
 
   const badges: BadgeName[] = [];
-  if (shop.promoted) badges.push('promoted');
   if (shop.isNew) badges.push('new');
   if (shop.delivers) badges.push('delivers');
 
@@ -124,6 +126,7 @@ export default function ShopPage() {
         mapLoading={loading}
         onBack={back}
         backLabel="Nearby"
+        promoted={shop.promoted}
         tags={badges.length > 0 ? badges.map((b) => <Badge key={b} badge={b} on="wash" />) : undefined}
         actions={
           <>
@@ -147,11 +150,56 @@ export default function ShopPage() {
                   shop={shop.name}
                   categories={shop.categories}
                   priceLine={priceRangeLine(shop)}
-                  asked={history.map((h) => ({ item: h.item, detail: pastAnswerLabel(h.had, h.when) }))}
                   onCategory={ask}
                 />
               </View>
             ) : null}
+
+            <View style={styles.section}>
+              <Text variant="sectionTitle" accessibilityRole="header">
+                Found here recently
+              </Text>
+              <ListGroup shadow>
+                {found.map((name, i) => (
+                  <ListRow key={name} title={name} surface="card" position={i === 0 ? 'first' : i === found.length - 1 ? 'last' : 'middle'} />
+                ))}
+              </ListGroup>
+              {/* Names only, nothing to press: the line says where they come from. */}
+              <Text variant="footnote" color="mutedForeground">
+                What shoppers found here through Snuffle.
+              </Text>
+            </View>
+
+            <View style={styles.section}>
+              <Text variant="sectionTitle" accessibilityRole="header">
+                Ratings
+              </Text>
+              <ListGroup shadow>
+                <ListBlock position="first">
+                  <RatingSummary
+                    question="Would you go back?"
+                    title={headline.share != null ? `${headline.share}%` : headline.title}
+                    detail={headline.detail}
+                    accessibilityLabel={`Would you go back? ${headline.spoken}`}
+                    hasShare={headline.share != null}
+                    tags={topTags(ratings, 4)}
+                  />
+                </ListBlock>
+                {quotes.map((q) => (
+                  <ReviewCard key={q.text} text={q.text} up={q.up} month={q.month} how={q.how} position="middle" />
+                ))}
+                {headline.total > 0 ? (
+                  <ListRow
+                    title={`See all ${headline.total}`}
+                    surface="card"
+                    chevron
+                    position="middle"
+                    onPress={() => router.push({ pathname: '/reviews/[id]', params: { id: shop.id } })}
+                  />
+                ) : null}
+                <ListRow title="How ratings work" surface="card" chevron position="last" onPress={() => setSheet('ratings')} />
+              </ListGroup>
+            </View>
 
             {lines.length > 0 ? (
               <View style={styles.section}>
@@ -173,36 +221,6 @@ export default function ShopPage() {
                 </ListGroup>
               </View>
             ) : null}
-
-            <View style={styles.section}>
-              <Text variant="sectionTitle" accessibilityRole="header">
-                What buyers say
-              </Text>
-              <ListGroup shadow>
-                <ListBlock position="first">
-                  <RatingSummary
-                    title={headline.title}
-                    detail={headline.detail}
-                    accessibilityLabel={headline.spoken}
-                    hasShare={headline.share != null}
-                    tags={topTags(ratings, 4)}
-                  />
-                </ListBlock>
-                {quotes.map((q) => (
-                  <ReviewCard key={q.text} text={q.text} up={q.up} month={q.month} how={q.how} position="middle" />
-                ))}
-                {headline.total > 0 ? (
-                  <ListRow
-                    title={`See all ${headline.total}`}
-                    surface="card"
-                    chevron
-                    position="middle"
-                    onPress={() => router.push({ pathname: '/reviews/[id]', params: { id: shop.id } })}
-                  />
-                ) : null}
-                <ListRow title="How ratings work" surface="card" chevron position="last" onPress={() => setSheet('ratings')} />
-              </ListGroup>
-            </View>
 
             <View style={styles.section}>
               <Text variant="sectionTitle" accessibilityRole="header">

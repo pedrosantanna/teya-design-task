@@ -7,7 +7,6 @@ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { cornerCurve } from '../../theme';
 import { Icon } from '../Icon/Icon';
 import { Text } from '../Text/Text';
-import { SnuffleMark } from '../SnuffleMark/SnuffleMark';
 
 export type ChatSender = 'shopper' | 'snuffle';
 export type ChatGap = 'none' | 'sameSender' | 'newSender';
@@ -21,7 +20,7 @@ export function chatGap(previous: ChatSender | undefined, sender: ChatSender): C
 export type ChatBubbleProps = {
   sender: ChatSender;
   text: string;
-  /** First bubble of a Snuffle group: shows the sender line (the glyph and "Snuffle"). */
+  /** First bubble of a Snuffle group: shows the sender line ("Snuffle"). */
   firstInGroup?: boolean;
   /** The day, when it isn't today ("Sun 8 Nov"), added to the sender line. */
   day?: string;
@@ -103,15 +102,12 @@ export const ChatBubble = memo(function ChatBubble({
   );
 });
 
-/** The sender line of a Snuffle group: the bare glyph (no avatar, no tile) before "Snuffle", and the day if it isn't today. */
+/** The sender line of a Snuffle group: the word "Snuffle", and the day if it isn't today. No glyph or avatar. */
 export function SnuffleSender({ day }: { day?: string }) {
   return (
-    <View style={styles.sender}>
-      <SnuffleMark size="inline" />
-      <Text variant="caption1" color="mutedForeground">
-        {day ? `Snuffle · ${day}` : 'Snuffle'}
-      </Text>
-    </View>
+    <Text variant="caption1" color="mutedForeground">
+      {day ? `Snuffle · ${day}` : 'Snuffle'}
+    </Text>
   );
 }
 
@@ -124,7 +120,6 @@ const styles = StyleSheet.create((theme) => ({
   }),
   mine: { maxWidth: `${theme.layout.bubbleMax * 100}%`, alignItems: 'flex-end', gap: theme.space[1] },
   mineLine: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2] },
-  sender: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1] },
   theirs: { maxWidth: `${theme.layout.bubbleMax * 100}%`, alignItems: 'flex-start', gap: theme.space[1] },
   bubble: (mine: boolean) => ({
     ...cornerCurve,

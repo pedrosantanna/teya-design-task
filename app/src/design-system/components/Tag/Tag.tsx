@@ -10,6 +10,7 @@ import Animated, { interpolateColor, useAnimatedStyle, useSharedValue, withSprin
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { useGround } from '../../internal/ground';
+import { webHitArea } from '../../internal/hitArea';
 import { usePress } from '../../internal/usePress';
 import { cornerCurve, textStyle, withAlpha, type BadgeName, type ColorName } from '../../theme';
 import { Icon } from '../Icon/Icon';
@@ -60,7 +61,9 @@ export const Chip = memo(function Chip({ label, kind = 'filter', selected = fals
             : darkGround
               ? theme.color.background
               : theme.color.card;
-  const offEdge = plain ? withAlpha(theme.color.glassEdge, theme.state.chipEdge) : darkGround ? theme.color.border : off;
+  // Muted on Card in dark is 1.15:1, so a chip inside a Card section takes the Border edge there too.
+  const darkCard = ground === 'card' && dark;
+  const offEdge = plain ? withAlpha(theme.color.glassEdge, theme.state.chipEdge) : darkGround || darkCard ? theme.color.border : off;
   const onFill = theme.color.card;
   const onEdge = theme.color.chipOn;
 
@@ -87,6 +90,7 @@ export const Chip = memo(function Chip({ label, kind = 'filter', selected = fals
         accessibilityState={kind === 'filter' ? { selected: on } : undefined}
         accessibilityHint={kind === 'menu' && onPress ? 'Shows the choices' : undefined}
         hitSlop={slop}
+        style={webHitArea(theme.size.chip, theme.hit.min)}
         onPress={onPress ? () => onPress(value ?? label) : undefined}
         onPressIn={press.onPressIn}
         onPressOut={press.onPressOut}

@@ -11,10 +11,12 @@ Call:
 - I took the agent's first two icon tests into Figma, adjusted the vectors by hand and chose the fourth version as the provisional mark (decision 033).
 - I asked for it to be refined on an icon grid in black and white until the palette was chosen, and pointed out when it sat too high.
 - I stopped here on purpose. With more time I would develop the mark further, perhaps in another direction, but the brand is not the focus of this exercise; I enjoyed it and the result is good enough to give the app a face.
+- I asked for the splash to be a short vector animation on Indigo: the awning first, unrolling stripe by stripe, then the face and two blinks.
 - Inside the app the mark is a bare glyph in one colour that follows the theme, never on a tile or in an avatar. This reverses the "mark on a Lavender tile" of decision 045.
 AI:
-- An agent drew the icon tests in SVG from my seeds (a sniffer dog, British shopping, the parade's awnings). I took the first two into Figma and changed the vectors by hand. The agent exported my version, rebuilt it on one axis and drew the platform applications. Its first optical centre put the glyph too high; I pointed it out and it chose a new one by comparing offsets by eye.
+- An agent built the splash intro in code from the glyph's own paths. An agent drew the icon tests in SVG from my seeds (a sniffer dog, British shopping, the parade's awnings). I took the first two into Figma and changed the vectors by hand. The agent exported my version, rebuilt it on one axis and drew the platform applications. Its first optical centre put the glyph too high; I pointed it out and it chose a new one by comparing offsets by eye.
 Trade-offs:
+- The native splash shows the finished glyph, and the in-app intro starts from the rolled awning, so the face disappears for a moment when the intro begins; the intro's last frame is the native image again. A native splash with the glyph already drawn avoids a flash of the wrong colour, and I accepted the jump.
 - On Android the glyph has to fit a 66 dp safe zone, so it is about half the icon's width and the stripes get thin at small sizes. A simpler version for small sizes is still open.
 ```
 
@@ -82,9 +84,15 @@ The square exists only as the app icon, which the system draws. Everywhere insid
 | The chat's sender line, beside "Snuffle", with no avatar column | 22 wide |
 | Notification and Live Activity | 40 wide |
 | Sign in | 56 wide |
-| The splash, native and in the app, centred on the background colour | 120 wide |
+| The splash, native and in the app, centred on Indigo 800 (white glyph, see below) | 120 wide |
+
+On the splash the glyph takes two fixed colours on Indigo 800, the brand colour: white (8.75:1 on the ground) for the face and stripes 1, 3 and 5, and Indigo 300 (4.94:1 on the ground, 1.8:1 beside the white) for stripes 2 and 4. The grey of the white variant above is too dark on Indigo, so the low tone moves up the same ramp. The tokens are `color.splash.ground`, `ink` and `soft`.
 
 This reverses the part of decision 045 that put the mark on a Lavender tile with a warm face behind the glyph. Lavender stays Snuffle's colour through its bubbles and typing dots.
+
+## Splash intro
+
+The splash plays the mark building itself, in about 1.6 s; the timing is on the [motion page](motion.md#splash). Only the awning shows at first, rolled up at the top like the blind of a shop. It comes down, and the five stripes unroll one after the other, each with a short sway and a small overshoot. Then the ears, eyes and nose appear and the dog blinks twice. The final frame is the glyph above, the same as the native splash image. The intro starts from the rolled awning, so the face drops out for a moment when the system hands over, then builds back. The stripes are the same five paths as the glyph, drawn one by one, so the last frame matches it exactly.
 
 ## Anatomy
 

@@ -3,10 +3,12 @@
 // attribution and the static fallback image shown while the map loads or if it can't draw.
 import Location01Icon from '@hugeicons/core-free-icons/Location01Icon';
 import { Image } from 'expo-image';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
+import { IMAGE_FILL } from '../../internal/media';
 import { Text } from '../Text/Text';
 
 export type MapProps = {
@@ -21,6 +23,21 @@ export type MapProps = {
   /** Let the shopper pan and zoom. Off by default: on the shop page the map is a backdrop. */
   interactive?: boolean;
 };
+
+// The live map costs a lot to start (MapLibre's script and worker on the web, the native renderer on the phones), so
+// it starts once the screen has stopped moving and the static image carries the first frames. The web's zoom takes
+// 420 ms; the native stack's push and zoom take about half a second.
+const SETTLE_MS = 600;
+
+/** True once the screen's transition is over. */
+export function useSettled(): boolean {
+  const [settled, setSettled] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setSettled(true), SETTLE_MS);
+    return () => clearTimeout(t);
+  }, []);
+  return settled;
+}
 
 /** Size of the static fallback image in points (scripts/render-map-fallback.mjs renders it at this size). */
 const FALLBACK_SIZE = 640;
@@ -37,13 +54,15 @@ export function cameraPadding(extent: MapProps['extent']) {
   return { top: 0, bottom, left: 0, right: 0 };
 }
 
-/** The static map, centred on the pin at its rendered scale. */
+/** The static map, centred on the pin at its rendered scale; in a tall view it grows to reach the bottom edge, so the
+ *  map never ends in a flat band beside the shop page's card. */
 export function MapFallback({ extent }: Pick<MapProps, 'extent'>) {
   const { theme } = useUnistyles();
+  const size = extent ? Math.max(FALLBACK_SIZE, 2 * (extent.height - extent.pinY)) : FALLBACK_SIZE;
   return (
     <View style={styles.centre(extent?.pinY)} pointerEvents="none">
-      <View style={styles.fallback(FALLBACK_SIZE)}>
-        <Image source={FALLBACK[theme.scheme]} style={styles.image} contentFit="cover" transition={0} />
+      <View style={styles.fallback(size)}>
+        <Image source={FALLBACK[theme.scheme]} style={IMAGE_FILL} contentFit="cover" transition={0} />
       </View>
     </View>
   );
@@ -67,8 +86,8 @@ export function MapPin({ extent }: Pick<MapProps, 'extent'>) {
   );
 }
 
-/** "© OpenStreetMap contributors" (ODbL): bottom right, or in a tall view on the left at `attributionY` (else just
- *  below the pin), where neither the nav bar, the photos nor the card cover it. */
+/** "© OpenStreetMap contributors" (ODbL), 11 pt in the map's bottom right corner: in a tall view at `attributionY` (else just
+ *  below the pin) on the right, where neither the nav bar, the photos nor the card cover it. */
 export function MapAttribution({ extent }: Pick<MapProps, 'extent'>) {
   return (
     <View style={extent ? styles.attributionBelowPin(extent.pinY, extent.attributionY) : styles.attribution} pointerEvents="none">
@@ -86,7 +105,6 @@ const styles = StyleSheet.create((theme) => ({
       ? { position: 'absolute', top: '50%', left: '50%', width: 0, height: 0, overflow: 'visible' }
       : { position: 'absolute', top: pinY, left: '50%', width: 0, height: 0, overflow: 'visible' },
   fallback: (size: number) => ({ position: 'absolute', width: size, height: size, left: -size / 2, top: -size / 2 }),
-  image: { width: '100%', height: '100%' },
   // The glyph's tip (12, 22 of 24) sits on the point.
   pin: (size: number) => ({ position: 'absolute', width: size, height: size, left: -size / 2, top: (-size * 22) / 24 }),
   attribution: {
@@ -96,15 +114,15 @@ const styles = StyleSheet.create((theme) => ({
     paddingHorizontal: theme.space[1],
     borderRadius: theme.radius.inner,
     backgroundColor: theme.color.mapGround,
-    opacity: 0.85,
+    opacity: theme.state.mapAttribution,
   },
   attributionBelowPin: (pinY: number, top?: number) => ({
     position: 'absolute',
-    left: theme.space[3],
+    right: theme.space[3],
     top: top ?? pinY + theme.space[6],
     paddingHorizontal: theme.space[1],
     borderRadius: theme.radius.inner,
     backgroundColor: theme.color.mapGround,
-    opacity: 0.85,
+    opacity: theme.state.mapAttribution,
   }),
 }));

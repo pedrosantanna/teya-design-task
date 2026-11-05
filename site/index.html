@@ -1092,7 +1092,7 @@ i.m.unknown { opacity: .45; }
         const box = document.createElement('div'); box.innerHTML = html;
         box.querySelectorAll('img[src]').forEach(img => { const s = img.getAttribute('src'); if (!/^(https?:|data:|\/)/.test(s)) img.setAttribute('src', resolve(versions[i].file, s)); });
         const mode = deep ? 'proto' : (store.get(modeKey) === 'proto' ? 'proto' : 'flow');
-        cv = window.HSCanvas.mount(board, box.innerHTML, { lang: LANG, icon, t, mode, start: deep, onChange, about: `<div class="prose">${lede ? `<p>${lede}</p>` : ''}${tmp.innerHTML}</div>` });
+        cv = window.HSCanvas.mount(board, box.innerHTML, { lang: LANG, icon, t, mode, proto: page.proto === true, start: deep, onChange, about: `<div class="prose">${lede ? `<p>${lede}</p>` : ''}${tmp.innerHTML}</div>` });
         deep = null;
         seg.hidden = !cv.hasProto;
         seg.querySelectorAll('button').forEach(b => b.setAttribute('aria-checked', String(b.dataset.cvmode === cv.mode)));

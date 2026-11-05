@@ -4,7 +4,7 @@
 // docs/develop/design-system/content.md.
 import { useShallow } from 'zustand/react/shallow';
 
-import { answerLabel, keepLookingLine, orderLabel, price, requestLabel } from './labels';
+import { answerLabel, keepLookingLine, lookUntil, orderLabel, price, requestLabel, requestPreview } from './labels';
 import { contentFor, shopById } from './seed';
 import { TYPING_MS, isBuyable, isYes, unitFor, useSim, type EndedOrder, type SimState } from './simulation';
 import { useAppStore, type AppState } from './store';
@@ -15,7 +15,7 @@ export type Chip = { label: string; action: string };
 export type ChatItem =
   | { kind: 'bubble'; key: string; sender: 'shopper' | 'snuffle'; text: string; day?: string }
   | { kind: 'chips'; key: string; chips: Chip[] }
-  | { kind: 'asking'; key: string }
+  | { kind: 'asking'; key: string; wider?: boolean }
   | { kind: 'answer'; key: string; shopId: string; best: boolean }
   | { kind: 'order'; key: string; order: OrderView };
 
@@ -82,11 +82,14 @@ export function orderView(
   state: OrderState,
   fulfilment: Fulfilment,
   rated = false,
+  collectPoint = true,
 ): OrderView {
   const shop = shopById(c, shopId);
   const offer = c.active.offers.find((o) => o.shopId === shopId);
   const name = shop?.name ?? '';
   const them = quantity === 1 ? 'it' : 'them';
+  // Jess's order can be collected at the corner shop the bakery drops at, or at the bakery itself.
+  const collectAt = collectPoint && shopId === c.order.shopId && c.order.collectAt ? shopById(c, c.order.collectAt) : undefined;
   const fee = fulfilment === 'delivery' ? (shop?.delivers?.fee ?? 0) : 0;
   const amount = (offer?.price ?? 0) * quantity + fee;
   const total = price(amount);
@@ -119,7 +122,7 @@ export function orderView(
     shop: name,
     street: shop?.street ?? '',
     openUntil: shop?.openUntil ?? '',
-    walk: `${shop?.walkMinutes ?? 0} min walk`,
+    walk: `${(collectAt ?? shop)?.walkMinutes ?? 0} min walk`,
     quantity,
     items: `${quantity} × ${c.active.title.toLowerCase()}`,
     total,
@@ -135,17 +138,17 @@ export function orderView(
     payName,
     card: c.card,
     code: c.order.code,
-    collectAt: c.order.collectAt ? shopById(c, c.order.collectAt) : undefined,
+    collectAt,
     canRate: state === 'collected' && !rated,
     rated,
   };
 }
 
 /** The current order, or null before Buy. */
-export function currentOrder(c: PersonaContent, app: AppSlice, sim: Pick<SimState, 'orderShopId' | 'orderQty' | 'orderRating'>): OrderView | null {
+export function currentOrder(c: PersonaContent, app: AppSlice, sim: Pick<SimState, 'orderShopId' | 'orderQty' | 'orderRating' | 'collectAt'>): OrderView | null {
   if (app.order === 'none') return null;
   const shopId = sim.orderShopId ?? c.order.shopId;
-  return orderView(c, app, shopId, sim.orderQty || c.active.quantity, app.order, app.fulfilment, sim.orderRating?.shopId === shopId);
+  return orderView(c, app, shopId, sim.orderQty || c.active.quantity, app.order, app.fulfilment, sim.orderRating?.shopId === shopId, sim.collectAt !== 'shop');
 }
 
 /** Answers with a card in the chat, best first: all of it, then some of it, then something similar. */
@@ -196,10 +199,20 @@ export function buildChat(c: PersonaContent, app: AppSlice, sim: SimState): Chat
     snuffle('confirm', `Got it: ${active.title.toLowerCase()} you can collect after work. ${closing ? `${closing.name} closes at ${closing.openUntil}, so I'll ask them what they can do.` : ''}`.trim());
   }
 
-  // Asking shops.
-  const shopCount = active.offers.length;
-  const streets = new Set(active.offers.map((o) => shopById(c, o.shopId)?.street)).size;
-  const first = shopById(c, active.offers[0]?.shopId ?? '');
+  // A standing request ("every Friday") says so right away, with when it ends.
+  if (sim.looking?.standing && sim.looking.repeat) {
+    const first = shopById(c, active.offers[0]?.shopId ?? '');
+    snuffle('standing', `I'll ask ${active.offers.length === 1 ? (first?.name ?? 'the shop') : 'the shops'} again every week, on ${sim.looking.day}s, until ${lookUntil(true)}, and tell you what they say.`);
+  }
+
+  // Asking shops. Once the shopper has asked further away, `offers` also holds those shops; the first ones are the near ones.
+  const near = active.nearCount ?? active.offers.length;
+  const nearOffers = active.offers.slice(0, near);
+  const widerOffers = active.offers.slice(near);
+  const widened = sim.wider != null && widerOffers.length > 0;
+  const shopCount = nearOffers.length;
+  const streets = new Set(nearOffers.map((o) => shopById(c, o.shopId)?.street)).size;
+  const first = shopById(c, nearOffers[0]?.shopId ?? '');
   snuffle(
     'asking',
     shopCount === 1
@@ -210,21 +223,39 @@ export function buildChat(c: PersonaContent, app: AppSlice, sim: SimState): Chat
   if (!app.notificationsAllowed) snuffle('notifyOff', "Notifications are off, so I'll keep answers here and on the Requests button.");
 
   // Nothing found in time.
-  if (app.request === 'notFound') {
-    const no = active.offers.filter((o) => app.answers[o.shopId] === 'doesntHave').length;
-    const silent = active.offers.filter((o) => (app.answers[o.shopId] ?? 'asked') === 'noReply' || (app.answers[o.shopId] ?? 'asked') === 'asked').length;
+  const nearHas = nearOffers.some((o) => isBuyable(app.answers[o.shopId]));
+  if (app.request === 'notFound' || (widened && !nearHas)) {
+    const no = nearOffers.filter((o) => app.answers[o.shopId] === 'doesntHave').length;
+    const silent = nearOffers.filter((o) => (app.answers[o.shopId] ?? 'asked') === 'noReply' || (app.answers[o.shopId] ?? 'asked') === 'asked').length;
     snuffle(
       'notFound',
       `None of the ${shopCount} shops has ${them}${active.deadline ? ` before ${active.deadline}` : ''}: ${no} said no and ${silent} didn't reply.`,
     );
-    snuffle('notFound2', `I can ask shops up to 30 minutes away, or keep looking and tell you when one near you has ${them}.`);
-    chips('notFoundChips', [
-      { label: 'Ask further away', action: 'askFurther' },
-      { label: 'Keep looking', action: 'keepLooking' },
-    ]);
-    appendLooking();
-    appendNotes();
-    return items;
+    if (!widened) {
+      snuffle('notFound2', `I can ask shops up to 30 minutes away, or keep looking and tell you when one near you has ${them}.`);
+      chips('notFoundChips', [
+        { label: 'Ask further away', action: 'askFurther' },
+        { label: 'Keep looking', action: 'keepLooking' },
+      ]);
+      appendLooking();
+      appendNotes();
+      return items;
+    }
+    // Further away: the shopper's ask, the shops asked, then their answers like any other.
+    shopper('wider', 'Ask further away');
+    snuffle('widerAsk', `I'm asking ${counted(widerOffers.length).toLowerCase()} more ${widerOffers.length === 1 ? 'shop' : 'shops'}, up to 30 minutes away. I'll tell you as they answer.`);
+    items.push({ kind: 'asking', key: 'widerList', wider: true });
+    const widerBuyable = widerOffers.some((o) => isBuyable(app.answers[o.shopId]));
+    if (!widerBuyable) {
+      const allIn = widerOffers.every((o) => !['asked', 'seen'].includes(app.answers[o.shopId] ?? 'asked'));
+      if (allIn) {
+        snuffle('widerNone', `None of the ${widerOffers.length} shops further away has ${them} either. I can keep looking and tell you when one has ${them}.`);
+        chips('widerChips', [{ label: 'Keep looking', action: 'keepLooking' }]);
+      }
+      appendLooking();
+      appendNotes();
+      return items;
+    }
   }
 
   // Answers.
@@ -237,7 +268,7 @@ export function buildChat(c: PersonaContent, app: AppSlice, sim: SimState): Chat
       have > 0
         ? active.offers.length === 1
           ? `${shopById(c, active.offers[0].shopId)?.name ?? 'The shop'} has ${them}.`
-          : `${counted(have)} ${have === 1 ? 'shop has' : 'shops have'} ${them} so far.`
+          : `${counted(have)} ${have === 1 ? 'shop' : 'shops'}${widened && !nearHas ? ' further away' : ''} ${have === 1 ? 'has' : 'have'} ${them} so far.`
         : `${counted(cards.length)} ${cards.length === 1 ? 'shop has' : 'shops have'} something similar so far.`,
     );
     if (app.order === 'none') {
@@ -272,7 +303,7 @@ export function buildChat(c: PersonaContent, app: AppSlice, sim: SimState): Chat
 
   function orderBlock(o: EndedOrder, current: boolean) {
     const rated = current && sim.orderRating?.shopId === o.shopId;
-    const view = orderView(c, app, o.shopId, o.quantity, o.state, o.fulfilment, rated);
+    const view = orderView(c, app, o.shopId, o.quantity, o.state, o.fulfilment, rated, sim.collectAt !== 'shop');
     const k = (name: string) => `${name}-${o.shopId}`;
     const it = o.quantity === 1 ? 'it' : 'them';
     shopper(k('buy'), o.fulfilment === 'delivery' ? `Buy ${o.quantity}, ${view.shop} delivers` : `Buy ${o.quantity} at ${view.shop}`);
@@ -287,7 +318,7 @@ export function buildChat(c: PersonaContent, app: AppSlice, sim: SimState): Chat
       case 'extended':
         if (!view.till && o.fulfilment === 'collect') snuffle(k('ready'), `${view.shop} has set ${it} aside, so you've paid ${view.total}. Your collection code is on the receipt.`);
         if (sim.date === 'dayBefore' || sim.extendedInChat) {
-          snuffle(k('reminder'), `Your ${o.quantity} ${unitFor(c, o.quantity)} are set aside at ${view.shop}. Collect by ${view.collectBy}, ${closes}.`, 'Sun 8 Nov');
+          snuffle(k('reminder'), `Your ${o.quantity} ${unitFor(c, o.quantity)} ${o.quantity === 1 ? 'is' : 'are'} set aside at ${view.collectAt?.name ?? view.shop}. Collect by ${view.collectBy}, ${closes}.`, 'Sun 8 Nov');
           snuffle(k('reminder2'), "Can't make it? You can extend once.");
           if (o.state === 'ready') {
             chips(k('reminderChips'), [
@@ -357,12 +388,21 @@ export function buildChat(c: PersonaContent, app: AppSlice, sim: SimState): Chat
   }
 
   function appendLooking() {
-    if (app.request !== 'looking') return;
-    shopper('looking', 'Keep looking');
-    snuffle(
-      'lookingReply',
-      `I'll keep looking${sim.looking?.repeat ? ' every week' : ''} until Fri 6 Nov and message you when a shop near you has ${them}. Nothing is bought until you tap Buy.`,
-    );
+    if (app.request === 'looking') {
+      shopper('looking', 'Keep looking');
+      const repeat = !!sim.looking?.repeat;
+      snuffle(
+        'lookingReply',
+        `I'll keep looking${repeat ? ` every week, on ${sim.looking?.day}s,` : ''} until ${lookUntil(repeat)} and message you when a shop near you has ${them}. Nothing is bought until you tap Buy.`,
+      );
+    }
+    // A search that is running always shows how to change or stop it.
+    if (sim.looking) {
+      chips('lookingChips', [
+        { label: 'Change', action: 'changeLooking' },
+        { label: 'Stop', action: 'stopLooking' },
+      ]);
+    }
   }
 
   function appendNotes() {
@@ -381,32 +421,41 @@ function withoutClock({ clock: _clock, ...rest }: SimState): SimState {
 export function useChat(): ChatItem[] {
   const app = useAppStore(useShallow(appSlice));
   const sim = useSim(useShallow(withoutClock));
-  return buildChat(contentFor(app.persona, app.contentSet), app, sim);
+  return buildChat(contentFor(app.persona, app.contentSet, sim.wider != null), app, sim);
 }
 
 export function useCurrentOrder(): OrderView | null {
   const app = useAppStore(useShallow(appSlice));
-  const sim = useSim(useShallow((s) => ({ orderShopId: s.orderShopId, orderQty: s.orderQty, orderRating: s.orderRating })));
-  return currentOrder(contentFor(app.persona, app.contentSet), app, sim);
+  const sim = useSim(useShallow((s) => ({ orderShopId: s.orderShopId, orderQty: s.orderQty, orderRating: s.orderRating, collectAt: s.collectAt, wider: s.wider != null })));
+  return currentOrder(contentFor(app.persona, app.contentSet, sim.wider), app, sim);
 }
 
 /** The active request as a row in Requests: its label (or its order's), the last message and unread answers. */
 export function useActiveRequestRow(): { status: string; tone: 'default' | 'needsYou' | 'warning' | 'success'; preview: string; unread: number } | null {
   const app = useAppStore(useShallow(appSlice));
   const sim = useSim(useShallow(withoutClock));
-  const c = contentFor(app.persona, app.contentSet);
+  const c = contentFor(app.persona, app.contentSet, sim.wider != null);
   if (app.request === 'none' && sim.stage === 'none') return null;
-  const items = buildChat(c, app, sim);
-  const last = [...items].reverse().find((i): i is Extract<ChatItem, { kind: 'bubble' }> => i.kind === 'bubble');
   const order = currentOrder(c, app, sim);
-  const have = c.active.offers.filter((o) => isYes(app.answers[o.shopId])).length;
+  const yes = c.active.offers.filter((o) => isYes(app.answers[o.shopId]));
+  const have = yes.length;
+  // A search that repeats shows its cadence ("Every Friday") in place of its end date.
+  const state = app.request === 'none' ? 'asking' : app.request === 'looking' && sim.looking?.repeat ? 'repeat' : app.request;
   const status = order
     ? order.label
-    : requestLabel(app.request === 'none' ? 'asking' : app.request, { asked: c.active.offers.length, have, plural: c.active.plural, deadline: c.active.deadline });
+    : requestLabel(state, { asked: c.active.offers.length, have, plural: c.active.plural, deadline: c.active.deadline });
   return {
     status,
     tone: order ? order.tone : app.request === 'needsYou' ? 'needsYou' : 'default',
-    preview: last ? `${last.sender === 'snuffle' ? 'Snuffle' : 'You'}: ${last.text}` : '',
+    preview: requestPreview(state, app.order, {
+      asked: c.active.offers.length,
+      have,
+      shop: order?.shop ?? shopById(c, yes[0]?.shopId ?? '')?.name ?? 'A shop',
+      openUntil: order?.openUntil ?? '',
+      extendedTo: order?.extendedTo ?? '',
+      total: order?.total ?? '',
+      rated: order?.rated ?? false,
+    }),
     unread: !order && app.request === 'haveIt' && !sim.chatOpen ? have : 0,
   };
 }
@@ -456,7 +505,7 @@ function drive() {
     for (;;) {
       const app = useAppStore.getState();
       const s = useSim.getState();
-      const items = buildChat(contentFor(app.persona, app.contentSet), appSlice(app), s);
+      const items = buildChat(contentFor(app.persona, app.contentSet, s.wider != null), appSlice(app), s);
       const keys = items.map((i) => i.key);
       const opened = s.chatOpen && !wasOpen;
       wasOpen = s.chatOpen;

@@ -85,6 +85,9 @@ export function Button({
   };
 
   const hitSlop = size === 'compact' ? (theme.hit.min - theme.size.button.compact) / 2 : undefined;
+  // Web: React Native Web ignores hitSlop, so a compact button grows a transparent 4 pt border to measure 44 and pulls
+  // it back with an equal negative margin; the fill stops at the padding box, so it looks the same.
+  const webSlop = Platform.OS === 'web' && hitSlop ? { height: theme.hit.min, borderWidth: hitSlop, margin: -hitSlop, borderColor: 'transparent', backgroundClip: 'padding-box' } : undefined;
 
   return (
     <Animated.View style={[styles.wrapper, animated]}>
@@ -98,7 +101,7 @@ export function Button({
         onPress={onPress}
         onPressIn={pressIn}
         onPressOut={pressOut}
-        style={[styles.button, onTile && styles.onTile]}
+        style={[styles.button, onTile && styles.onTile, webSlop as object | undefined]}
       >
         <Animated.View pointerEvents="none" style={[styles.layer, { backgroundColor: color }, layerStyle]} />
         {loading ? (

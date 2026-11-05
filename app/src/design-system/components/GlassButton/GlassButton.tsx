@@ -35,7 +35,10 @@ export const GlassButton = memo(function GlassButton({ icon, accessibilityLabel,
   // On an accent tile (the Category screen), the tonalOnTile overlay, as the shop page's tonal actions; in a dark
   // sheet's header, a solid Muted circle, since glass over the Sheet colour all but vanishes there.
   const ground = useGround();
-  const surface = ground === 'tile' ? 'tile' : ground === 'sheet' && theme.scheme === 'dark' ? 'muted' : 'glass';
+  // Over the map (the shop page's Back) in dark, the same solid Muted circle with a Border edge: the glass is Card
+  // there, and the dark map ground is Card too (1.0:1).
+  const overMap = overMedia && theme.scheme === 'dark';
+  const surface = ground === 'tile' ? 'tile' : (ground === 'sheet' || overMap) && theme.scheme === 'dark' ? 'muted' : 'glass';
   const glyph = <Icon icon={icon} size="nav" weight="strong" color="foreground" />;
   return (
     <Animated.View style={press.scaleStyle}>
@@ -52,7 +55,7 @@ export const GlassButton = memo(function GlassButton({ icon, accessibilityLabel,
         {android ? (
           <View style={[styles.circle, overMedia && styles.tonal, overMedia && surface === 'tile' && styles.onTile]}>{glyph}</View>
         ) : (
-          <FloatingSurface interactive surface={surface} style={[styles.circle, edge && styles.edge]}>
+          <FloatingSurface interactive surface={surface} style={[styles.circle, edge && styles.edge, overMap && surface === 'muted' && styles.mapEdge]}>
             {glyph}
           </FloatingSurface>
         )}
@@ -72,5 +75,6 @@ const styles = StyleSheet.create((theme) => ({
   },
   tonal: { backgroundColor: theme.color.card },
   onTile: { backgroundColor: withAlpha(theme.color.tonalOnTile, theme.state.tonalOnTile) },
+  mapEdge: { borderWidth: StyleSheet.hairlineWidth, borderColor: theme.color.border },
   edge: { borderWidth: StyleSheet.hairlineWidth, borderColor: theme.color.chat.edge },
 }));

@@ -1,11 +1,11 @@
 # Prototype
 
-The shopper app running in the browser, from the same Expo code that runs on iPhone and Android. Content is mocked; the shops answer on a script. Press D, or the round button, to open the state debugger and change the persona, the platform, the journey step and the state of each request, answer and order.
+The shopper app running in the browser, from the same Expo code that runs on iPhone and Android. Content is mocked; the shops answer on a script. Press D, or the button at the top right, to open the state debugger, a panel docked to the right of the phone, and change the persona, the platform, the journey step and the state of each request, answer and order.
 
 ```summary
 Takeaways:
 - One Expo app builds iOS, Android and this web version (decision 038); the frame switches between an iPhone and a Pixel with the platform.
-- The state debugger sets persona (Sam or Jess), platform, light or dark, journey step, the states from the conceptual model and the content set; the simulation clock can be paused or stepped.
+- The state debugger is a panel docked to the right of the phone, in collapsible sections like Figma's right panel. It sets persona (Sam or Jess), platform, light or dark, journey step, the states from the conceptual model and the content set; the simulation clock can be paused or stepped.
 - Sam's journey runs end to end: ask, answers arriving, buy, wait for the shop, collect; every failure path from app flow v7 is one jump away.
 - Twelve invented shops around Blythe Road are the only shops in the prototype, each traced to something heard in Discovery.
 Call:
@@ -20,7 +20,7 @@ Trade-offs:
 - The photos are of real shops elsewhere in Britain and Europe, so some show another shop's name on the sign.
 ```
 
-Open it on its own to use the full window: `app-web/index.html`. Add `?debug=0` to hide the debugger, `?os=android` for Android, or `?step=` to start at a step.
+Open it on its own to use the full window: `app-web/index.html`. On windows narrower than 800 px the panel overlays from the right, with a close button, instead of docking. Add `?debug=0` to hide the debugger, `?os=android` for Android, or `?step=` to start at a step.
 
 ## Mocked content
 

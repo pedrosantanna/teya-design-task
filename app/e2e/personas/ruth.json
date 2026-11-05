@@ -1,0 +1,16 @@
+{
+  "id": "ruth",
+  "name": "Ruth, the regular",
+  "inScope": false,
+  "source": "docs/discover/personas/index.md",
+  "notResearch": "Ruth is out of scope for the prototype: three posts, the least evidence, and the brief's problem does not turn on her. No scenarios are scripted.",
+  "goals": [
+    "Keep shopping locally while the shops around her close."
+  ],
+  "constraints": {
+    "time": "Not time-pressed.",
+    "hours": "Works around shop hours already.",
+    "device": "Not covered by the evidence."
+  },
+  "scenarios": []
+}

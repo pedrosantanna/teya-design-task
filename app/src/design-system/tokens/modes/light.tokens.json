@@ -93,6 +93,22 @@
     "scrim": {
       "$value": "{color.black}"
     },
+    "photoScrim": {
+      "$value": "{color.black}",
+      "$description": "Shop photo carousel: black, faded from state.photoScrim at the bottom edge of each photo to nothing, so the white dots hold their contrast on a pale photo (round 10; the Background scrim left a pale photo pale)"
+    },
+    "lightbox": {
+      "$value": "{color.black}",
+      "$description": "Photo viewer ground: black in both schemes, as Photos and Airbnb do, so a photo is the brightest thing on the screen"
+    },
+    "onLightbox": {
+      "$value": "{color.white}",
+      "$description": "Count and controls on the photo viewer: 21:1 on Lightbox"
+    },
+    "onLightboxMuted": {
+      "$value": { "colorSpace": "srgb", "components": [0.749, 0.749, 0.749], "hex": "#BFBFBF" },
+      "$description": "Hint under the photo on the viewer: white at 75% on Lightbox, 11.4:1"
+    },
     "onDestructive": {
       "$value": "{color.white}",
       "$description": "Label on a destructive fill"
@@ -245,18 +261,18 @@
       "$description": "Colour of the delicate card shadow"
     },
     "welcome": {
-      "$description": "Getting started (colour.md, Getting started): one full-bleed Indigo ground per page, deepening page by page. Text, Skip, the dots and the Continue capsule use Foreground and Background over it",
+      "$description": "Getting started (colour.md, Getting started): one full-bleed brand ground per page, Indigo then Peach then Pistachio. Text, Skip, the dots and the Continue capsule use Foreground and Background over it",
       "ground1": {
         "$value": "{color.indigo.300}",
         "$description": "Page 1, Ask for anything nearby; ink 11.11:1"
       },
       "ground2": {
-        "$value": "{color.indigo.400}",
-        "$description": "Page 2, Snuffle asks the shops; ink 8.34:1"
+        "$value": "{color.peach.tile}",
+        "$description": "Page 2, Snuffle asks the shops; the Peach tile, ink 12.96:1"
       },
       "ground3": {
-        "$value": "{color.indigo.500}",
-        "$description": "Page 3, Buy then collect; ink 6.04:1"
+        "$value": "{color.pistachio.tile}",
+        "$description": "Page 3, Buy then collect; the Pistachio tile, ink 13.51:1"
       }
     },
     "tonalOnTile": {
@@ -288,13 +304,63 @@
     "grabber": {
       "$value": "{color.biscuit.445}",
       "$description": "The sheet's grabber: Muted foreground at state.grabber in light; Stone 445 in full in dark (2.49:1), quieter than the title"
+    },
+    "splash": {
+      "$description": "The splash and its intro (motion.md, Splash): Indigo 800, the brand colour, in both modes, with the mark in white and Indigo 300 (mark.md)",
+      "ground": {
+        "$value": "{color.indigo.800}",
+        "$description": "Splash ground, also the native splash colour; white on it 8.75:1"
+      },
+      "ink": {
+        "$value": "{color.white}",
+        "$description": "The mark's face and three stripes on the splash"
+      },
+      "soft": {
+        "$value": "{color.indigo.300}",
+        "$description": "The mark's two lighter stripes on the splash; 4.94:1 on the ground, 1.8:1 beside white"
+      }
+    },
+    "googleFill": {
+      "$value": "{color.brand.google.fill}"
+    },
+    "googleStroke": {
+      "$value": "{color.brand.google.stroke}"
+    },
+    "googleText": {
+      "$value": "{color.brand.google.text}"
+    },
+    "googleLogoBlue": {
+      "$value": "{color.brand.google.logoBlue}"
+    },
+    "googleLogoRed": {
+      "$value": "{color.brand.google.logoRed}"
+    },
+    "googleLogoYellow": {
+      "$value": "{color.brand.google.logoYellow}"
+    },
+    "googleLogoGreen": {
+      "$value": "{color.brand.google.logoGreen}"
+    },
+    "facebookLogoBlue": {
+      "$value": "{color.brand.facebook.blue}"
+    },
+    "facebookLogoF": {
+      "$value": "{color.brand.facebook.f}"
     }
   },
   "state": {
     "$type": "number",
-    "tonalOnTile": {
+    "photoScrim": {
       "$value": 0.4,
-      "$description": "Light: white at 40% over the tile, 1.17 to 1.18:1 on it, so a tonal button keeps the shop hue instead of a grey Muted capsule"
+      "$description": "Opacity of color.photoScrim (black) at the bottom edge of a shop photo"
+    },
+    "photoPill": {
+      "$value": 0.3,
+      "$description": "Opacity of the black pill the carousel's dots sit in, over the scrim"
+    },
+    "tonalOnTile": {
+      "$value": 0.55,
+      "$description": "Light: white at 55% over the tile, 1.23 to 1.26:1 on it (40% was 1.17:1), so a tonal button keeps the shop hue instead of a grey Muted capsule"
     },
     "sheetScrim": {
       "$value": 0.2,

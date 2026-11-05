@@ -13,9 +13,11 @@ Call:
 - Depois que uma revisão de design encontrou faltando especificações de componentes, estados, equivalentes de plataforma e regras de conteúdo, pedi que o design system ficasse completo o bastante para construir o protótipo a partir dele.
 - Escolhi horários em 12 horas em todo o texto, inclusive nos carimbos de hora, e mantive estas regras provisórias (decisão 043).
 - Depois pedi avaliações na página da loja. Escolhi um polegar para cima ou para baixo em vez de estrelas e uma contestação para as lojas, e defini as regras a partir do DMCC Act e do guia da CMA sobre avaliações falsas (decisão 047).
+- Na rodada 10 pedi que a lista de Requests mostrasse o último status do Snuffle na voz dele para cada estado, sem pontos, ícones nem botão na linha.
 AI:
 - Um agente revisou o design system contra as telas da v7 e encontrou formatos de hora misturados (carimbos em 24 horas ao lado de "by 4pm"). Outro agente escreveu esta página a partir do texto da v7 e do modelo conceitual.
 - Um agente leu o Schedule 20 do DMCC Act 2024 e o guia da CMA (CMA208) e transformou cada dever numa regra para as telas do Snuffle.
+- Um agente escreveu uma linha de prévia para cada estado de pedido e de compra do modelo conceitual e levou a prévia para uma só função no store.
 Trade-offs:
 - Horários em 12 horas seguem o jeito como se fala no Reino Unido e o estilo do GOV.UK, e ocupam um pouco mais de largura que os de 24 horas nas linhas.
 - Uma voz simples e sem desculpas pode soar fria quando algo dá errado; dizer primeiro a situação do dinheiro é o que deve mostrar o cuidado.
@@ -33,6 +35,35 @@ Trade-offs:
 | Nunca vende | Sem pontos de exclamação, sem urgência que não veio de uma loja, sem "great deal" | "Without buying, they may sell before you get there." |
 | Sem desculpas de enchimento | Sem "Sorry", "Unfortunately" ou "I'm afraid" antes de um desfecho; os fatos vêm primeiro | "Paper & Co hasn't confirmed in 10 minutes, so you haven't been charged." |
 | Pergunta só o que falta | Lugar e prazo vêm preenchidos do que o comprador digitou | "Will you collect them, or should I check delivery too?" |
+
+### Prévias da linha de pedido
+
+A linha de prévia de um pedido é o último status do Snuffle na voz dele, escrito "Snuffle: …". A regra é primeira pessoa, curto, a novidade do estado primeiro. Quando existe um pedido, o estado dele define a linha. As linhas ficam em inglês, como o resto da interface.
+
+| Estado | Linha de prévia |
+| --- | --- |
+| No request yet | Snuffle: What do you need? |
+| Asking | Snuffle: Asking 6 shops |
+| One shop has it | Snuffle: Found it at 1 shop |
+| Some shops have it | Snuffle: Found them at 2 shops |
+| Needs you | Snuffle: Rossi's needs your answer |
+| Looking | Snuffle: Still looking until Fri 6 Nov |
+| Every Friday | Snuffle: I'll ask again every Friday until Fri 4 Dec |
+| Not found | Snuffle: No one had it. Want me to keep looking? |
+| Closed | Snuffle: Closed. Nothing was bought (também o que mostra um pedido fechado com o gesto de deslizar) |
+| Pedido esperando a loja | Snuffle: Waiting for Rossi's. You haven't been charged |
+| Paid | Snuffle: Paid. Rossi's is setting it aside |
+| Ready | Snuffle: Ready to collect till 6pm |
+| Extended | Snuffle: Extended. Collect by Mon 16 Nov |
+| On its way | Snuffle: On its way from Paper & Co |
+| Delivered | Snuffle: Delivered. How was Paper & Co? |
+| Delivered and rated | Snuffle: Delivered. Thanks for rating Paper & Co |
+| Collected | Snuffle: How was Brook Hardware? |
+| Rated | Snuffle: Thanks for rating Brook Hardware |
+| Not confirmed | Snuffle: Paper & Co didn't confirm. You haven't been charged |
+| Sold | Snuffle: Paper & Co sold out. You haven't been charged |
+| Cancelled | Snuffle: Cancelled. I've refunded £29.98 |
+| Not collected | Snuffle: Not collected, so I've refunded £29.98 |
 
 ## O Snuffle e as lojas
 
@@ -53,6 +84,9 @@ Toda mensagem depois que algo dá errado, ou depois que uma compra termina, tem 
 | Pagamento recusado | "Apple Pay declined the payment, so you haven't been charged and Paper & Co hasn't been asked to set them aside." | nenhum: a compra não existe | "Try again" |
 | Não retirado | "You didn't collect by Mon 9 Nov, so your order at Paper & Co is cancelled. I've refunded £29.98 to your card." | Not collected · refunded | "Ask Paper & Co again", "Keep looking" |
 | Nada encontrado a tempo | "None of the 6 shops has them before 4pm: 4 said no and 2 didn't reply." | Not found | "Ask further away", "Keep looking" |
+| Pedido a lojas mais distantes | "I'm asking three more shops, up to 30 minutes away. I'll tell you as they answer." Depois as respostas das lojas; se nenhuma tem: "None of the 3 shops further away has them either. I can keep looking and tell you when one has them." | Not found, até uma loja responder | "Keep looking" |
+| Pedido recorrente | "I'll ask Rossi's again every week, on Fridays, until Fri 4 Dec, and tell you what they say." (um pedido que diz "every Friday") | Every Friday | Change, Stop |
+| Busca encerrada | "Done. I've stopped looking, and nothing was bought." (num pedido recorrente: "Done. I won't ask again, and nothing was bought.") | Closed | nenhum |
 
 ## Rótulos de botão
 

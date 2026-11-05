@@ -9,7 +9,7 @@ import { ShopPageLayout } from './ShopPageLayout';
 const photo = (key: ImageKey) => imageSource(key, 320);
 const noop = () => undefined;
 
-// The shop page at rest in a phone-sized box: the map, the first photo peeking in and the card. Scroll inside it.
+// The shop page at rest in a phone-sized box: the map, the carousel and the card. Scroll inside it.
 export function ShopPageLayoutExamples() {
   return (
     <View style={styles.phone}>
@@ -22,6 +22,7 @@ export function ShopPageLayoutExamples() {
         ]}
         onBack={noop}
         backLabel="Nearby"
+        promoted
         actions={<Button label="Ask Rossi's" size="compact" />}
       >
         <Text variant="footnote" color="mutedForeground">

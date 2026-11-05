@@ -34,7 +34,7 @@ Trade-offs:
 
 | # | Check | Passes when |
 | --- | --- | --- |
-| 8 | Visual hierarchy | At most three text sizes per block and four per screen, not counting the nav bar, system UI, badges (Caption 2) and counts; one filled primary (Indigo) button visible at once. The composer's send and the shopper's bubbles are Indigo too and don't count |
+| 8 | Visual hierarchy | At most three text sizes per block and four per screen, not counting the nav bar, system UI, badges (Caption 2) and counts; on a long scrolling page (the shop page, the chat), the sizes are counted per viewport, as in check 19, not over the whole scroll; one filled primary (Indigo) button visible at once. The composer's send and the shopper's bubbles are Indigo too and don't count |
 | 9 | Hick's law | At most 5 filter chips or 3 suggestions visible; a sheet has at most 2 actions plus Cancel |
 | 19 | Colour roles | At most one filled Indigo control per viewport, the commit action (Buy, Ask, send); secondary actions are neutral and a selected chip is Foreground. Indigo is the shopper acting, Lavender is Snuffle speaking (its bubbles, mark, notifications, Live Activity), a shop's warm pastel is that shop (its tile, page header, receipt), and no colour crosses roles |
 
@@ -50,8 +50,8 @@ Trade-offs:
 
 | # | Check | Passes when |
 | --- | --- | --- |
-| 13 | Labelling | Every word comes from the Words table in the [conceptual model](conceptual-model.md); no avoided synonym |
-| 14 | Status labels | One status label per card or row, matching the state table exactly |
+| 13 | Labelling | Every word comes from the Words table in the [conceptual model](conceptual-model.md); no avoided synonym. A list of item names with no press (Found here recently) is allowed only if it states its source |
+| 14 | Status labels | One status label per card or row, matching the state table exactly; a request row's preview always follows its label (the [request row previews](content.md#request-row-previews)) |
 
 ## Accessibility
 

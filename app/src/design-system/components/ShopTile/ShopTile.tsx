@@ -37,9 +37,11 @@ export type ShopTileProps = {
   /** The shop's accent: the tonal tile under the photo while it loads, or instead of it. */
   accent?: ShopAccentName;
   onPress?: (id: string) => void;
+  /** `high` on the first tile of a screen, so its photo is the first thing fetched (the largest contentful paint). */
+  priority?: 'high';
 };
 
-export const ShopTile = memo(function ShopTile({ id, name, meta, image, badges = [], size = 'large', contentWidth, accent, onPress }: ShopTileProps) {
+export const ShopTile = memo(function ShopTile({ id, name, meta, image, badges = [], size = 'large', contentWidth, accent, onPress, priority }: ShopTileProps) {
   const [failed, setFailed] = useState<PhotoSource | null>(null);
   const { theme } = useUnistyles();
   const frame = useSafeAreaFrame();
@@ -65,6 +67,8 @@ export const ShopTile = memo(function ShopTile({ id, name, meta, image, badges =
               source={photoSource(image)}
               style={IMAGE_OVER}
               contentFit="cover"
+              priority={priority}
+              recyclingKey={id}
               transition={PHOTO_FADE_MS}
               accessible={false}
               onError={() => setFailed(image)}

@@ -6,6 +6,7 @@ import { Pressable, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
+import { webHitArea } from '../../internal/hitArea';
 import { IMAGE_FILL } from '../../internal/media';
 import { ShopPlaceholder } from '../../internal/ShopPlaceholder';
 import { usePress } from '../../internal/usePress';
@@ -44,6 +45,7 @@ export const Avatar = memo(function Avatar({ name, image, size = 'regular', onPr
         accessibilityRole="button"
         accessibilityLabel={accessibilityLabel ?? `Account, ${name}`}
         hitSlop={slop}
+        style={webHitArea(size === 'large' ? theme.size.thumb.request + theme.space[2] : theme.size.avatar.shop, theme.hit.min)}
         onPress={onPress}
         onPressIn={press.onPressIn}
         onPressOut={press.onPressOut}

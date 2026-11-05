@@ -17,6 +17,7 @@ import { scheduleOnRN } from 'react-native-worklets';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { Ground } from '../../internal/ground';
+import { setOverlayOpen } from '../../internal/overlay';
 import { dismissKeyboard } from '../../internal/keyboard';
 import { measureOrigin, measureView, type Rect, type ViewRef } from '../../internal/origins';
 import { PortalHost, Portal } from '../../internal/Portal';
@@ -201,6 +202,13 @@ export function Sheet({
     });
     return () => sub.remove();
   }, [mounted, open]);
+
+  // The page behind is hidden from assistive tech while the sheet is on screen.
+  useEffect(() => {
+    if (!mounted) return;
+    setOverlayOpen(true);
+    return () => setOverlayOpen(false);
+  }, [mounted]);
 
   const confirm = () => {
     onConfirm?.();

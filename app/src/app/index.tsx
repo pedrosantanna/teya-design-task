@@ -69,10 +69,9 @@ function tileMeta(hours: ShopHours, shop: Shop): string {
   return `${when} · ${shop.walkMinutes}\u00A0min walk`;
 }
 
+/** Promoted and New are not shown on a tile (v10); the shop page says Promoted. The data stays. */
 function tileBadges(shop: Shop): BadgeName[] {
   const badges: BadgeName[] = [];
-  if (shop.promoted) badges.push('promoted');
-  if (shop.isNew) badges.push('new');
   if (shop.delivers) badges.push('delivers');
   return badges;
 }
@@ -131,7 +130,7 @@ function Nearby() {
   const streets = useMemo(() => [ALL, ...new Set(newShops.map((s) => shortStreet(s.street)))], [newShops]);
   const shownNew = street === ALL ? newShops : newShops.filter((s) => shortStreet(s.street) === street);
   // Only the kinds this area has, so no category opens empty.
-  const categories = useMemo(() => areaCategories(area.shops), [area.shops]);
+  const categories = useMemo(() => areaCategories(area.shops, shopHours), [area.shops, shopHours]);
 
   const needsYou = content.others.filter((r) => r.state === 'needsYou').length + (request === 'needsYou' || request === 'haveIt' ? 1 : 0);
 
@@ -207,7 +206,7 @@ function Nearby() {
               <Carousel width={tileWidth(theme, contentWidth, 'large')} margin={margin}>
                 {showSkeletons
                   ? [0, 1].map((i) => <Skeleton key={i} variant="tileLarge" contentWidth={contentWidth} />)
-                  : openShops.map((shop) => (
+                  : openShops.map((shop, i) => (
                       <ZoomSource key={shop.id} id={`open:${shop.id}`} href={{ pathname: '/shops/[id]', params: { id: shop.id } }}>
                       {(open) => (
                       <ShopTile
@@ -218,6 +217,7 @@ function Nearby() {
                         accent={shopAccent(shop)}
                         badges={tileBadges(shop)}
                         contentWidth={contentWidth}
+                        priority={i === 0 ? 'high' : undefined}
                         onPress={open}
                       />
                       )}

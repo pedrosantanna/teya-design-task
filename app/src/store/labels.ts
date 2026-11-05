@@ -2,6 +2,16 @@
 // Rows, chat cards, notifications and the Live Activity all read them from here.
 import type { AnswerSource, AnswerState, Fulfilment, OrderState, RequestState, Shop, ShopHours } from './types';
 
+/** The day a request keeps looking until, the prototype's one date for it (the request is made on Mon 2 Nov). */
+export const LOOK_UNTIL = 'Fri 6 Nov';
+/** A search that repeats asks again on the same weekday, four weeks on (it can be renewed). */
+export const LOOK_UNTIL_WEEKLY = 'Fri 4 Dec';
+/** The weekday a repeating search asks on. */
+export const LOOK_DAY = 'Friday';
+
+/** When a search ends: Fri 6 Nov for a one-off, Fri 4 Dec when it repeats every week. */
+export const lookUntil = (repeat: boolean): string => (repeat ? LOOK_UNTIL_WEEKLY : LOOK_UNTIL);
+
 const plural = (isPlural: boolean, one: string, many: string) => (isPlural ? many : one);
 
 export type RequestLabelContext = {
@@ -23,7 +33,7 @@ export function requestLabel(state: RequestState, ctx: RequestLabelContext): str
     case 'needsYou':
       return 'Needs you · buy by Thu 5 Nov';
     case 'looking':
-      return 'Looking · until Fri 6 Nov';
+      return `Looking · until ${LOOK_UNTIL}`;
     case 'repeat':
       return 'Every Friday';
     case 'notFound':
@@ -31,6 +41,71 @@ export function requestLabel(state: RequestState, ctx: RequestLabelContext): str
     case 'closed':
       return 'Closed';
   }
+}
+
+export type RequestPreviewContext = {
+  asked: number;
+  have: number;
+  /** The shop that needs the shopper's answer, or the order's shop. */
+  shop: string;
+  /** "6pm": when the shop closes, for a ready order. */
+  openUntil: string;
+  extendedTo: string;
+  /** "£29.98" */
+  total: string;
+  rated: boolean;
+};
+
+/** Snuffle's latest status in its own voice, for the preview line of a request row (content.md, Snuffle's voice):
+ *  first person, short, the state's news first. An order's news replaces the request's once there is an order. */
+export function requestPreview(state: RequestState, order: OrderState, ctx: RequestPreviewContext): string {
+  const line = (() => {
+    switch (order) {
+      case 'waiting':
+        return `Waiting for ${ctx.shop}. You haven't been charged`;
+      case 'paid':
+        return `Paid. ${ctx.shop} is setting it aside`;
+      case 'ready':
+        return `Ready to collect till ${ctx.openUntil}`;
+      case 'extended':
+        return `Extended. Collect by ${ctx.extendedTo}`;
+      case 'onItsWay':
+        return `On its way from ${ctx.shop}`;
+      case 'delivered':
+        return ctx.rated ? `Delivered. Thanks for rating ${ctx.shop}` : `Delivered. How was ${ctx.shop}?`;
+      case 'collected':
+        return ctx.rated ? `Thanks for rating ${ctx.shop}` : `How was ${ctx.shop}?`;
+      case 'notConfirmed':
+        return `${ctx.shop} didn't confirm. You haven't been charged`;
+      case 'sold':
+        return `${ctx.shop} sold out. You haven't been charged`;
+      case 'cancelled':
+        return `Cancelled. I've refunded ${ctx.total}`;
+      case 'notCollected':
+        return `Not collected, so I've refunded ${ctx.total}`;
+      case 'none':
+        break;
+    }
+    switch (state) {
+      case 'none':
+        return 'What do you need?';
+      case 'asking':
+        return `Asking ${ctx.asked} shops`;
+      case 'haveIt':
+        return `Found ${ctx.have === 1 ? 'it' : 'them'} at ${ctx.have} ${ctx.have === 1 ? 'shop' : 'shops'}`;
+      case 'needsYou':
+        return `${ctx.shop} needs your answer`;
+      case 'looking':
+        return `Still looking until ${LOOK_UNTIL}`;
+      case 'repeat':
+        return `I'll ask again every Friday until ${LOOK_UNTIL_WEEKLY}`;
+      case 'notFound':
+        return 'No one had it. Want me to keep looking?';
+      case 'closed':
+        return 'Closed. Nothing was bought';
+    }
+  })();
+  return `Snuffle: ${line}`;
 }
 
 /** The filter a request falls under in Requests. */

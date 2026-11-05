@@ -66,12 +66,12 @@ Um toast fica acima de um alerta para que o Undo continue alcançável; o scrim 
 | Requests, um filtro | Nada naquele filtro | Uma linha com o nome do filtro ("Nothing needs you right now."), com All ainda selecionável |
 | Conversa | Um pedido novo antes de o Snuffle responder | O balão do comprador, depois o indicador de digitação |
 | Página da loja | Nenhuma resposta anterior | A seção "Asked about recently" sai, em vez de aparecer vazia |
-| Página da loja, avaliações | Nenhuma avaliação ainda | "No ratings yet · Snuffle has asked them 4 times" em What buyers say; How they do on Snuffle continua aparecendo |
+| Página da loja, avaliações | Nenhuma avaliação ainda | "No ratings yet · Snuffle has asked them 4 times" em Ratings; How they do on Snuffle continua aparecendo |
 | Compra | Nunca fica vazia | n/a |
 
 ## Estados de avaliação
 
-| Estado | Quando | What buyers say | How they do on Snuffle |
+| Estado | Quando | Ratings | How they do on Snuffle |
 | --- | --- | --- | --- |
 | Sem avaliações | Ninguém que comprou avaliou ainda | "No ratings yet · Snuffle has asked them 4 times" | Taxa e tempo de resposta; "New on Snuffle" até 10 respostas "has it" |
 | Poucas | De 1 a 4 avaliações | "New on Snuffle · 3 buyers so far", as tags com as contagens e os cartões de avaliação; sem porcentagem | Como acima, ou com a precisão de estoque quando houver 10 respostas "has it" |

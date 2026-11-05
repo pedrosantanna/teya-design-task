@@ -413,5 +413,39 @@ Escolhi a cor inteira com linhas mais claras em vez de um fundo escuro com uma f
 **Por quê:** as linhas em Card #282523 ficavam mais escuras que todos os tiles escuros (1,30 a 1,44:1 no sentido errado), então pareciam buracos recortados na cor. Um fundo escuro com uma faixa que se desfaz perderia a cor que liga a tela ao cartão de onde ela saiu no zoom. O círculo vinha antes para se dissolver no Voltar, no canto superior esquerdo; a transformação no New Request parte da cápsula, que agora começa na margem da tela como o campo, então seguir a posição da Apple não custa nada.
 **Em aberto:** a página da loja ainda põe linhas em Card sobre o tile escuro (1,30 a 1,44:1, mais escuras); se ela recebe os mesmos cartões não está decidido. O chip de rua selecionado continua em Card com Índigo 300, porque o Índigo 300 fica abaixo do AA sobre os cartões tingidos.
 
+## 051 · Um modo escuro mais calmo e mais frio
+**2026-11-05 · Decidido**
+
+O modo escuro usa accents com menos croma sobre um neutro mais frio. Os tiles mantêm os matizes com cerca de 55% do croma: Peach #52352C, Pistachio #34422C, Butter #403925, Lavender #3E3950, com linhas tingidas sobre eles (#5C4F4B, #4F554B, #565249, #53515C). O neutro Stone vai para o matiz 270 com metade do croma: Background #0B0C0D, Sheet #171719, Card #252627, Muted #323334, Foreground #FAFAFB. Os accents das lojas no escuro ganham passos novos de wash e ink com a mesma fração de croma. A sheet escura foi para #1C1D1E, para se separar do fundo em 1,16:1.
+
+Escolhi isso depois de comparar quatro opções no board de identidade (rodada 10): os accents escuros de hoje, os accents claros usados sem mudança no escuro, accents com menos croma e um neutro mais frio.
+
+**Por quê:** os tiles de hoje liam como marrom, verde e oliva. Os accents claros faziam de cada tile a coisa mais clara da tela. Menos croma mantém a ordem dos matizes e a hierarquia do tile sobre o cartão, e todo par de texto continua passando AA (o texto secundário sobre um tile foi de 4,58 para 4,66:1 no pior caso). O neutro mais frio muda pouco sozinho, mas separa os tiles quentes de um cinza neutro.
+**Em aberto:** o balão do Snuffle no escuro (Lavender 900) ainda tem o croma antigo.
+
+## 052 · Promoted na página da loja, não no tile
+**2026-11-05 · Decidido**
+
+Os tiles do Nearby não têm badge Promoted nem New. Um destaque pago é identificado na página da loja, com uma linha "Promoted" no cartão da loja.
+
+**Por quê:** os tiles já ficam sob um título que diz o que é a fileira, e os badges deixavam o Nearby carregado. As regras de publicidade do Reino Unido (o código CAP) esperam que um destaque pago seja identificável, então o rótulo muda de lugar em vez de sumir.
+**Em aberto:** se a própria fileira precisa explicar como funciona o destaque.
+
+## 053 · Categorias ordenadas pelo que está aberto perto de você
+**2026-11-05 · Premissa**
+
+O Browse by category ordena os tipos pela quantidade de lojas daquele tipo abertas agora na área do comprador, com empates resolvidos por uma ordem fixa do dia a dia (café, padaria, farmácia, banca, açougue, deli, floricultura, ferragens, …). Tipos sem nada aberto vão para o fim, e as cores se espalham para que vizinhos sejam diferentes.
+
+**Por quê:** um agente de pesquisa viu que o Deliveroo personaliza por pedidos anteriores e hora do dia, e nenhum outro app publica a sua regra. Sem dados de uso, a oferta perto do comprador é o sinal mais útil que o protótipo tem.
+**Em aberto:** horários por loja; o protótipo tem um único estado de horário.
+
+## 054 · Usuários sintéticos de teste testam fluxos, não demanda
+**2026-11-05 · Decidido**
+
+Usuários de teste roteirizados a partir dos objetivos de Sam e Jess conduzem a versão web por oito cenários com Playwright e registram passos, tempo, becos sem saída, controles sem nome, alvos pequenos e erros. Uma revisão opcional por agente lê os passos registrados contra o checklist de revisão de telas e é identificada como revisão heurística.
+
+**Por quê:** eles acham quebras funcionais e de usabilidade rápido e de forma repetível, nos termos da própria persona. A NN/g e artigos recentes alertam que usuários simulados são otimistas demais e homogêneos, então eu os mantenho fora da pesquisa: não validam demanda, não substituem compradores nem lojistas e não substituem a prova de conceito.
+**Em aberto:** nada da primeira rodada; um agente corrigiu as quebras e a segunda rodada chegou a todos os objetivos. Três alvos ainda ficam abaixo de 44 pt na web.
+
 ## Ainda em aberto
 

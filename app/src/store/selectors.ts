@@ -4,12 +4,15 @@ import { useShallow } from 'zustand/react/shallow';
 import { stepById, type JourneyStep } from './journey';
 import { answerLabel, orderLabel, requestLabel, type AnswerForm } from './labels';
 import { areas, contentFor, shopById } from './seed';
+import { useSim } from './simulation';
 import { useAppStore } from './store';
 import type { AnswerState, PersonaContent, Shop } from './types';
 
 /** The current persona's content in the current content set (stable object per persona and set). */
 export function useContent(): PersonaContent {
-  return useAppStore((s) => contentFor(s.persona, s.contentSet));
+  // Once the shopper has asked further away, the wider shops are part of the request.
+  const widened = useSim((s) => s.wider != null);
+  return useAppStore((s) => contentFor(s.persona, s.contentSet, widened));
 }
 
 export function useStep(): JourneyStep {
