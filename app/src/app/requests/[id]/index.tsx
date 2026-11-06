@@ -104,8 +104,7 @@ function ActiveChat() {
   const layout = useChatLayout();
   const widened = useSim((s) => s.wider != null);
   const scroll = useNavBarScroll();
-  // The chat's bar carries a subtitle, so it is the tall one.
-  const top = useNavBarHeight(undefined, true);
+  const top = useNavBarHeight();
   const margin = screenMargin(theme, frame.width);
   const [reply, setReply] = useState('');
   const [undo, setUndo] = useState<string | null>(null);
@@ -572,8 +571,7 @@ function DetailsSheet({ onToast }: { onToast: (text: string) => void }) {
             id="delivery"
             icon={DeliveryTruck01Icon}
             title="They deliver"
-            detail={`${shop.name}'s own courier, ${shop.delivers.by}`}
-            value={price(shop.delivers.fee)}
+            detail={`${price(shop.delivers.fee)} · ${shop.name}'s own courier, ${shop.delivers.by}`}
             selected={delivery}
             onPress={() => set({ fulfilment: 'delivery' })}
             position="last"
@@ -684,7 +682,7 @@ function OtherRequestChat({ id }: { id: string }) {
   const insets = useSafeAreaInsets();
   const content = useContent();
   const scroll = useNavBarScroll();
-  const top = useNavBarHeight(undefined, true);
+  const top = useNavBarHeight();
   const margin = screenMargin(theme, frame.width);
   const key = otherKey(content.id, id);
   const request = content.others.find((r) => r.id === id);

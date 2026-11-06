@@ -98,11 +98,10 @@ export type NavBarProps = {
   fillBefore?: { fill: EdgeFill; until: number };
 };
 
-/** The bar's height under the safe area. With a subtitle (a chat) the bar is as tall as its two title lines
- *  (Headline and the 28 pt thumb) plus `space.3` above and below, so the title keeps clear of the top and of the Back circle's axis. */
-function barHeightFor(theme: ReturnType<typeof useUnistyles>['theme'], tall: boolean) {
-  if (tall) return theme.type.headline.lineHeight + theme.size.thumb.nav + 2 * theme.space[3];
-  return theme.platform === 'ios' ? theme.hit.min + theme.space[2] : theme.hit.min + theme.space[4];
+/** The bar's height under the safe area: one height on every screen, so Back, Close and the title share an axis
+ *  (Nearby's area row sits on the same one). A chat's two title lines (Headline and Caption 1, 38 pt) fit inside it. */
+function barHeightFor(theme: ReturnType<typeof useUnistyles>['theme']) {
+  return theme.platform === 'ios' ? theme.hit.min + theme.space[3] : theme.hit.min + theme.space[4];
 }
 
 
@@ -182,7 +181,7 @@ export const NavBar = memo(function NavBar({
   const hidden = scroll?.hidden ?? fallback;
   const largeHeight = theme.type.title1.lineHeight + theme.space[2];
   const reveal = mode === 'large' ? largeHeight : mode === 'reveal' ? (revealAt ?? largeHeight) : 0;
-  const barHeight = barHeightFor(theme, Boolean(subtitle));
+  const barHeight = barHeightFor(theme);
   // One title block centred on the screen, with the glyph and the request's thumbnail each leading its own line.
   const centred = Boolean(subtitle);
   const solidBar = typeof fill === 'object' ? 'tile' : fill === 'chat' ? 'chat' : undefined;
@@ -313,12 +312,12 @@ export const LargeTitle = memo(function LargeTitle({ title, scroll, display = fa
   );
 });
 
-/** Height of the bar plus the top inset (the safe area by default), for the scroll content's top padding. `tall` is the bar with a subtitle (a chat). */
-export function useNavBarHeight(topInset?: number, tall = false): number {
+/** Height of the bar plus the top inset (the safe area by default), for the scroll content's top padding. */
+export function useNavBarHeight(topInset?: number): number {
   const { theme } = useUnistyles();
   const insets = useSafeAreaInsets();
   const top = topInset ?? insets.top;
-  return top + barHeightFor(theme, tall);
+  return top + barHeightFor(theme);
 }
 
 const styles = StyleSheet.create((theme) => ({

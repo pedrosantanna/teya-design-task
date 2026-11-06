@@ -73,7 +73,7 @@ try {
       for (const clip of [...clips, 'still'].filter(wantClip)) {
         const name = stem(j.ill.name, clip, j.ground, j.size, j.scale);
         await one(clip === 'still' ? `${name} (still)` : name, path.join(FRAMES, clip === 'still' ? `${name}.still` : name),
-          { object: j.ill.object, size: j.size, scale: j.scale, ground: j.color, rot: j.ill.rot ?? 0, ...lineOf(), ...(j.dark ? { dark: j.dark } : {}), clip, ...(j.ground.endsWith('-dark') ? j.darkTones : {}) },
+          { object: j.ill.object, size: j.size, scale: j.scale, ground: j.color, rot: j.ill.rot ?? 0, ...(j.fit ? { fitCenter: j.fit.center, fitClear: j.fit.clear } : {}), ...lineOf(), ...(j.dark ? { dark: j.dark } : {}), clip, ...(j.ground.endsWith('-dark') ? j.darkTones : {}) },
           { name: j.ill.name, groundId: j.ground, sizeName: j.sizeName });
       }
     }
@@ -113,7 +113,8 @@ try {
       const sizeName = it.size ?? w.size;
       const size = m.sizes[sizeName];
       // A bleed item (frame) is a window onto a larger scene: size × height pt, fitCenter times the width.
-      const frame = it.frame ? { height: m.heights?.[sizeName] ?? size, fitCenter: it.frame.fitCenter, fitFrame: 1, focusX: it.frame.focusX ?? 0, focusY: it.frame.focusY ?? 0 } : {};
+      const fit = it.fit ?? w.fit;
+      const frame = it.frame ? { height: m.heights?.[sizeName] ?? size, fitCenter: it.frame.fitCenter, fitFrame: 1, focusX: it.frame.focusX ?? 0, focusY: it.frame.focusY ?? 0 } : fit ? { fitCenter: fit.center, fitClear: fit.clear } : {};
       for (const scheme of ['light', 'dark'].filter((x) => !f.schemes || f.schemes.includes(x))) {
         const groundId = `welcome-${scheme}`;
         const { ground, dark } = it[scheme];

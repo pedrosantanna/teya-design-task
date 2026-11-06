@@ -101,13 +101,15 @@ export default function Receipt() {
                 ? `${order.items}, set aside${order.collectAt ? ` at ${order.collectAt.name}` : ''}. Full refund if you don't collect`
                 : order.items}
           </Text>
-          <Button
-            label="View shop"
-            role="plain"
-            size="compact"
-            accessibilityLabel={`View ${order.shop}`}
-            onPress={() => router.push({ pathname: '/shops/[id]', params: { id: order.shopId } })}
-          />
+          <View style={styles.centred}>
+            <Button
+              label="View shop"
+              role="plain"
+              size="compact"
+              accessibilityLabel={`View ${order.shop}`}
+              onPress={() => router.push({ pathname: '/shops/[id]', params: { id: order.shopId } })}
+            />
+          </View>
         </View>
         </View>
 
@@ -180,6 +182,7 @@ const styles = StyleSheet.create((theme) => ({
     overflow: 'hidden',
     backgroundColor: theme.color.shop.accent[accent].tile,
   }),
+  centred: { alignSelf: 'center' },
   top: { gap: theme.space[2] },
   art: { alignItems: 'center' },
   actions: { gap: theme.space[2] },

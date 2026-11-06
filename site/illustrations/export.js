@@ -15,7 +15,8 @@ const quietstreet = {
     const g = new THREE.Group();
     const lamp = lamppost.build(THREE, P), seat = bench.build(THREE, P);
     lamp.group.position.set(-1.25, 0, -0.55);
-    seat.group.position.set(0.15, 0, 0.1);
+    seat.group.rotation.y = Math.PI / 2;
+    seat.group.position.set(0.35, 0, -0.15);
     g.add(lamp.group, seat.group);
     const parts = [
       ...lamp.parts,

@@ -191,7 +191,7 @@ export function Sheet({
         // Focus moves to the sheet's title on open (components.md). React Native Web has no findNodeHandle:
         // there the ref is the DOM node, focused directly.
         const titleNode = titleRef.current;
-        if (titleNode && Platform.OS === 'web') (titleNode as unknown as { focus?: () => void }).focus?.();
+        if (titleNode && Platform.OS === 'web') (titleNode as unknown as { focus?: (o?: { preventScroll: boolean }) => void }).focus?.({ preventScroll: true });
         else if (titleNode) {
           const node = findNodeHandle(titleNode);
           if (node) AccessibilityInfo.setAccessibilityFocus(node);
@@ -339,8 +339,6 @@ export function Sheet({
         <Animated.View style={[styles.panel, panelStyle]} onAccessibilityEscape={dismiss}>
           {/* Opaque: at 94% over a blur, photos behind the sheet showed through as grey smudges. */}
           <View pointerEvents="none" style={styles.opaque} />
-          {/* The glass rim, as on every glass element: a white highlight along the top edge and a hairline. */}
-          {floating ? <View pointerEvents="none" style={styles.rim} /> : null}
           <GestureDetector gesture={pan}>
             <View onLayout={(e) => setHeaderH(e.nativeEvent.layout.height)}>
               <View style={styles.grabberArea}>
@@ -405,6 +403,9 @@ export function Sheet({
               </View>
             </>
           ) : null}
+          {/* The glass rim, as on every glass element: a white highlight along the top edge and a hairline. Last, so the
+              footer and its fade never paint over the side edge. */}
+          {floating ? <View pointerEvents="none" style={styles.rim} /> : null}
         </Animated.View>
       </View>
     </Portal>

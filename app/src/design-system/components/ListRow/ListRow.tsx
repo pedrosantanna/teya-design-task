@@ -85,7 +85,7 @@ export const ListRow = memo(function ListRow({
           <Icon icon={icon} size="body" color={choice && selected ? 'foreground' : 'mutedForeground'} />
         </View>
       ) : null}
-      <View style={styles.text(grouped && position !== 'last' && position !== 'only', ground)}>
+      <View style={styles.text(grouped && position !== 'last' && position !== 'only', ground, surface)}>
         {children ? <View style={styles.grow}>{children}</View> : null}
         <View style={children ? styles.hidden : styles.grow}>
           <Text variant={strong || (choice && selected) ? 'headline' : 'body'} color={fill}>
@@ -144,9 +144,9 @@ function groupedFill(theme: { scheme: string; color: { card: string; background:
   return theme.color[surface];
 }
 
-/** The dark Separator is the Muted colour, so on a sheet's Muted rows the separator takes Border (#403D3A). */
-function separatorOn(theme: { scheme: string; color: { separator: string; border: string } }, ground?: GroundName): string {
-  return ground === 'sheet' && theme.scheme === 'dark' ? theme.color.border : theme.color.separator;
+/** The dark Separator is the Muted colour, so on Muted rows (a sheet's rows, and the Background surface in dark) the separator takes Border (#403D3A). */
+function separatorOn(theme: { scheme: string; color: { separator: string; border: string } }, ground?: GroundName, surface: 'card' | 'background' = 'card'): string {
+  return theme.scheme === 'dark' && (ground === 'sheet' || surface === 'background') ? theme.color.border : theme.color.separator;
 }
 
 export type ListGroupProps = {
@@ -176,20 +176,20 @@ export function ListBlock({ children, position = 'only', surface = 'card', acces
   const grouped = theme.platform === 'ios';
   return (
     <View accessibilityLabel={accessibilityLabel} style={[styles.row(grouped, position, false, surface, ground, tile), styles.block]}>
-      <View style={styles.blockInner(grouped && position !== 'last' && position !== 'only', ground)}>{children}</View>
+      <View style={styles.blockInner(grouped && position !== 'last' && position !== 'only', ground, surface)}>{children}</View>
     </View>
   );
 }
 
 const styles = StyleSheet.create((theme) => ({
   block: { alignItems: 'stretch' },
-  blockInner: (separator: boolean, ground?: GroundName) => ({
+  blockInner: (separator: boolean, ground?: GroundName, surface: 'card' | 'background' = 'card') => ({
     flex: 1,
     gap: theme.gap.block,
     paddingVertical: theme.space[4],
     paddingRight: theme.space[4],
     borderBottomWidth: separator ? StyleSheet.hairlineWidth : 0,
-    borderBottomColor: separatorOn(theme, ground),
+    borderBottomColor: separatorOn(theme, ground, surface),
   }),
   group: { ...cornerCurve, borderRadius: theme.radius.inner },
   groupInSheet: { borderRadius: theme.radius.bubble },
@@ -227,7 +227,7 @@ const styles = StyleSheet.create((theme) => ({
     height: theme.type[variant].lineHeight,
     justifyContent: 'center',
   }),
-  text: (separator: boolean, ground?: GroundName) => ({
+  text: (separator: boolean, ground?: GroundName, surface: 'card' | 'background' = 'card') => ({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
@@ -235,7 +235,7 @@ const styles = StyleSheet.create((theme) => ({
     paddingVertical: theme.space[3],
     paddingRight: theme.space[4],
     borderBottomWidth: separator ? StyleSheet.hairlineWidth : 0,
-    borderBottomColor: separatorOn(theme, ground),
+    borderBottomColor: separatorOn(theme, ground, surface),
   }),
   hidden: { display: 'none' },
   grow: { flex: 1, gap: theme.space[1] / 2 },

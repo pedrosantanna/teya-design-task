@@ -15,6 +15,11 @@
           try { history.replaceState(history.state, '', path + location.search + location.hash); } catch (e) {}
         }
         window.__SNUFFLE_BASE__ = path.replace(/\/[^/]*$/, '');
+        // The icon's relative href would resolve against each route the router pushes (/shops/favicon.ico, 404).
+        document.addEventListener('DOMContentLoaded', function () {
+          var icon = document.querySelector('link[rel="icon"]');
+          if (icon) icon.setAttribute('href', window.__SNUFFLE_BASE__ + '/favicon.ico');
+        });
       })();
     </script>
     <script>
@@ -23,10 +28,13 @@
       // lists them) and the first visit costs the same as the second.
       window.addEventListener('load', function () {
         var idle = window.requestIdleCallback || function (cb) { return setTimeout(cb, 600); };
+        // Resolved now, from the page's folder: after the router has pushed /shops/x, a relative src would resolve
+        // against that route and ask for /shops/_expo/... (404).
+        var entry = document.querySelector('script[src*="/index-"]');
+        var entrySrc = entry && (window.__SNUFFLE_BASE__ || '') + '/' + entry.getAttribute('src').replace(/^\.\//, '');
         idle(function () {
-          var entry = document.querySelector('script[src*="/index-"]');
-          if (!entry) return;
-          fetch(entry.src).then(function (r) { return r.text(); }).then(function (code) {
+          if (!entrySrc) return;
+          fetch(entrySrc).then(function (r) { return r.text(); }).then(function (code) {
             var seen = {};
             (code.match(/static\/js\/web\/[^"']+?\.js/g) || []).forEach(function (path) {
               if (seen[path]) return;

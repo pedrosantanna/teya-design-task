@@ -15,14 +15,16 @@ import { useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
 import Animated, {
   Easing,
+  Extrapolation,
+  interpolate,
   interpolateColor,
   useAnimatedScrollHandler,
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
+  type SharedValue,
   withRepeat,
   withSequence,
-  withSpring,
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -53,41 +55,37 @@ const PAGES: Page[] = [
 ];
 
 // The crossroads is drawn about twice the screen's width and the screen crops it at the sides (illustrations.md,
-// Getting started). It plays no clip: it rises and fades in with the arrive spring, then drifts slowly from side to
-// side, both on the UI thread, so the detail costs no bytes. The window the art is rendered in has PAN pt to spare on
-// each side, and it is scaled up where the screen is wider than that (the web preview).
+// Getting started). Its entry clip (the blocks drop in one after another) plays when its page is shown, then the
+// last frame holds. The clip is an MP4 on the page's ground, so while the pages move the screen swaps it for the
+// transparent still. On top of it the screen drifts the art slowly from side to side on the UI thread, which costs
+// no bytes. The window the art is rendered in has PAN pt to spare on each side, and it is scaled up where the screen
+// is wider than that (the web preview). With Reduce Motion the art stays still and does not drift.
 const ART_WIDTH = ILLUSTRATION_SIZES.bleed;
 const DRIFT_MS = 9000;
 
-function BleedHero({ play, width }: { play: boolean; width: number }) {
+function BleedHero({ play, width, offset }: { play: boolean; width: number; offset: SharedValue<number> }) {
   const { theme } = useUnistyles();
   const reduceMotion = useReducedMotion();
   const pan = theme.space[3];
   const scale = Math.max(1, (width + 2 * pan) / ART_WIDTH);
-  const shown = useSharedValue(reduceMotion || play ? 1 : 0);
   const x = useSharedValue(0);
   useEffect(() => {
-    if (reduceMotion) {
-      shown.set(1);
+    if (reduceMotion || !play) {
       x.set(0);
       return;
     }
-    if (!play) {
-      shown.set(0);
-      x.set(0);
-      return;
-    }
-    shown.set(withSpring(1, theme.spring.arrive));
     const ease = Easing.inOut(Easing.sin);
     x.set(withRepeat(withSequence(withTiming(-pan, { duration: DRIFT_MS, easing: ease }), withTiming(pan, { duration: DRIFT_MS, easing: ease })), -1, true));
-  }, [play, reduceMotion, pan, shown, x, theme]);
+  }, [play, reduceMotion, pan, x]);
+  // The art is wider than its page, so its right side would show over the next page once this one has gone: it fades
+  // out over the last fifth of the swipe, when almost all of it is off the screen.
   const style = useAnimatedStyle(() => ({
-    opacity: shown.get(),
-    transform: [{ translateY: (1 - shown.get()) * theme.space[7] }, { translateX: x.get() }, { scale }],
+    opacity: interpolate(offset.get(), [0.8, 1], [1, 0], Extrapolation.CLAMP),
+    transform: [{ translateX: x.get() }, { scale }],
   }));
   return (
     <Animated.View style={[styles.bleed, style]}>
-      <Illustration name="crossroads" size="bleed" ground="welcome" play="still" />
+      <Illustration name="crossroads" size="bleed" ground="welcome" play={play ? 'entry-then-idle' : 'still'} />
     </Animated.View>
   );
 }
@@ -127,9 +125,18 @@ export default function Welcome() {
   // Horizontal offset in pages (0 to 2), on the UI thread; the ground's colour follows it.
   const offset = useSharedValue(startPage);
   const shown = useSharedValue(startPage);
+  // Between two pages (a drag or a scroll to the next): the hero's clip is an MP4 on its ground, which would show its
+  // edge against the blending ground, so the hero shows its transparent still until the page has settled.
+  const moving = useSharedValue(false);
+  const [inTransit, setInTransit] = useState(false);
   const onScroll = useAnimatedScrollHandler((e) => {
     const p = e.contentOffset.x / Math.max(width, 1);
     offset.set(p);
+    const away = Math.abs(p - Math.round(p)) > 0.005;
+    if (away !== moving.get()) {
+      moving.set(away);
+      scheduleOnRN(setInTransit, away);
+    }
     const next = Math.min(Math.max(Math.round(p), 0), PAGES.length - 1);
     if (next !== shown.get()) {
       shown.set(next);
@@ -176,7 +183,7 @@ export default function Welcome() {
                 <View style={styles.hero}>
                   {/* Only the page in view plays its entry; the others hold their still. Still under Reduce Motion. */}
                   {p.size === 'bleed' ? (
-                    <BleedHero play={i === page} width={width} />
+                    <BleedHero play={i === page && !inTransit} width={width} offset={offset} />
                   ) : (
                     <Illustration name={p.art} size="welcome" ground="welcome" play={i === page ? 'entry-then-idle' : 'still'} />
                   )}

@@ -123,9 +123,13 @@ export default function RootLayout() {
 }
 
 function Stage({ framed, device, children }: { framed: boolean; device: 'ios' | 'android'; children: ReactNode }) {
-  // The screen area is what web view transitions animate, so the page and the frame around it stay still.
+  // The screen area is what web view transitions animate, so the page and the frame around it stay still. It
+  // carries the screen ground itself, so a crossfade between two snapshots never shows the page behind it.
+  const { theme } = useUnistyles();
+  const onboarded = useAppStore((s) => s.hasOnboarded);
+  const ground = { backgroundColor: onboarded ? theme.color.background : theme.color.splash.ground };
   const screen = (
-    <View ref={nameScreenArea} collapsable={false} style={styles.fill}>
+    <View ref={nameScreenArea} collapsable={false} style={[styles.fill, ground]}>
       {children}
     </View>
   );

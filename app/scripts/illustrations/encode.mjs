@@ -16,7 +16,7 @@
 // Clips on a ground listed in video.keepWebp stay WebP (Getting started crossfades its ground, so it needs alpha).
 // Exits with 1 when a file is over budget.
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
@@ -54,23 +54,56 @@ async function webp(files, fps, loop, mode, delays = null) {
   return sharp(files, { join: { animated: true } }).webp(opts).toBuffer();
 }
 
-// fadeBottom (pt, from the manifest's welcome frame): the alpha ramps to 0 over the last fadeBottom pt, so a window
-// onto a larger scene has no hard lower edge. Returns a PNG buffer of the frame with that ramp applied.
+// fadeBottom (pt, from the manifest's welcome frame): a window onto a larger scene dissolves into the ground over its
+// last fadeBottom pt. The ramp is how Apple fades art into a ground: long, eased at both ends (smootherstep: its slope
+// and curvature are 0 where it starts and ends, so no edge or band shows), and with a progressive blur that grows down
+// the ramp (0 to BLUR pt, four levels cross-faded row by row), so the detail softens as it thins instead of going
+// translucent and sharp. The ground stays transparent: the page's colour crossfades while the shopper drags.
 // dim (a scheme's item.dim in the manifest, e.g. 0.9 for the dark crossroads): the colour is multiplied by it, alpha untouched,
 // so a cream scene sits calmer on a dark ground.
+const BLUR = 5; // pt of Gaussian sigma at the bottom edge
+const LEVELS = 4;
+const smootherstep = (t) => t * t * t * (t * (t * 6 - 15) + 10);
 async function faded(file, meta) {
   if (meta.dim && meta.dim !== 1) file = await sharp(file).ensureAlpha().modulate({ brightness: meta.dim }).png().toBuffer();
   if (!meta.fadeBottom) return sharp(file);
-  const { width, height } = await sharp(file).metadata();
-  const h = Math.round(meta.fadeBottom * meta.scale);
-  const ramp = Buffer.alloc(width * height * 4, 255);
-  for (let y = 0; y < height; y++) {
-    const t = Math.min(1, Math.max(0, (height - 1 - y) / h));
-    const a = Math.round(255 * (t * t * (3 - 2 * t)));
-    for (let x = 0; x < width; x++) ramp[(y * width + x) * 4 + 3] = a;
+  const { data, info } = await sharp(file).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const { width, height } = info;
+  const n = width * height;
+  // Blur premultiplied colour, so the transparent ground does not darken the edges.
+  const pm = Buffer.alloc(n * 4);
+  for (let i = 0; i < n * 4; i += 4) {
+    const a = data[i + 3] / 255;
+    pm[i] = data[i] * a;
+    pm[i + 1] = data[i + 1] * a;
+    pm[i + 2] = data[i + 2] * a;
+    pm[i + 3] = data[i + 3];
   }
-  const mask = await sharp(ramp, { raw: { width, height, channels: 4 } }).png().toBuffer();
-  return sharp(await sharp(file).ensureAlpha().composite([{ input: mask, blend: 'dest-in' }]).png().toBuffer());
+  // Each level is the premultiplied image blurred by its share of BLUR, as floats via 16-bit-free raw 8-bit copies.
+  const levels = [pm];
+  for (let k = 1; k < LEVELS; k++) {
+    const sigma = (BLUR * meta.scale * k) / (LEVELS - 1);
+    levels.push(await sharp(pm, { raw: { width, height, channels: 4 } }).blur(Math.max(sigma, 0.3)).raw().toBuffer());
+  }
+  const fh = Math.round(meta.fadeBottom * meta.scale);
+  const out = Buffer.alloc(n * 4);
+  for (let y = 0; y < height; y++) {
+    const t = Math.min(1, Math.max(0, (y - (height - fh)) / fh));
+    const mask = 1 - smootherstep(t);
+    const pos = t * (LEVELS - 1);
+    const lo = Math.min(LEVELS - 2, Math.floor(pos));
+    const w = pos - lo;
+    const A = levels[lo];
+    const B = levels[lo + 1];
+    for (let x = 0; x < width; x++) {
+      const i = (y * width + x) * 4;
+      const a = (A[i + 3] * (1 - w) + B[i + 3] * w) / 255;
+      if (a <= 0) continue;
+      for (let c = 0; c < 3; c++) out[i + c] = Math.min(255, Math.round((A[i + c] * (1 - w) + B[i + c] * w) / a));
+      out[i + 3] = Math.round(a * 255 * mask);
+    }
+  }
+  return sharp(out, { raw: { width, height, channels: 4 } });
 }
 
 async function still(file, limit, meta = {}) {
@@ -179,18 +212,28 @@ async function tuneGround(hex) {
 }
 const hasFfmpeg = (() => { try { sh('ffmpeg', ['-version']); return true; } catch { return false; } })();
 // Frames in <dir> → <outDir>/<d>.mp4 on the (tuned) ground. Returns the rows to print.
-async function videos(dir, d, meta, outDir) {
+// srgb: tag the stream's transfer as sRGB (and the primaries as BT.709, which sRGB shares). Without a transfer tag
+// Chrome on macOS decodes a flat Indigo 300 ground 9 levels lighter than the token, which shows as a box against the
+// page; with it the decoded ground is within 1 of the token (measured in Chrome, light and dark).
+// Every clip is tagged with the sRGB transfer (a lossless remux): with bt709 alone Chrome decoded flat grounds a few
+// levels off the token, so each clip showed as a box on its ground (visual sweep, round 16).
+async function videos(dir, d, meta, outDir, srgb = true) {
   const t = await tuneGround(meta.ground);
   const png = await groundPng(t.input, meta.px, path.join(tmp, `ground-${meta.px}-${t.input.join('-')}.png`));
   const out = [];
   const graph = `[0]format=gbrp[bg];[1]format=rgba[fg];[bg][fg]overlay=shortest=1:format=gbrp,format=rgb24,${SCALE},format=yuv420p`;
   const input = ['-v', 'error', '-y', '-loop', '1', '-framerate', String(meta.fps), '-i', png, '-framerate', String(meta.fps), '-i', path.join(dir, 'frame-%04d.png'), '-filter_complex', graph];
   const codecs = {
-    mp4: ['-c:v', 'libx264', '-preset', 'veryslow', '-crf', String(V.crf), '-movflags', '+faststart'],
+    mp4: ['-c:v', 'libx264', '-preset', 'veryslow', '-crf', String(m.welcome?.items?.find((i) => meta.set === 'welcome' && i.name === meta.name)?.crf ?? V.crf), '-movflags', '+faststart'],
   };
   for (const ext of V.formats) {
     const file = path.join(outDir, `${d}.${ext}`);
     sh('ffmpeg', [...input, ...codecs[ext], ...TAGS, '-an', file]);
+    if (srgb) {
+      const tagged = `${file}.tagged.mp4`;
+      sh('ffmpeg', ['-v', 'error', '-y', '-i', file, '-c', 'copy', '-bsf:v', 'h264_metadata=transfer_characteristics=13:colour_primaries=1:matrix_coefficients=1', '-movflags', '+faststart', tagged]);
+      renameSync(tagged, file);
+    }
     written.add(file);
     out.push({ file: path.relative(ASSETS, file), kb: statSync(file).size / KB, frames: meta.frames, note: `${ext}, ground ${meta.ground} decodes as ${t.got.map((x) => x.toString(16).padStart(2, '0')).join('').toUpperCase()} (off by ${t.err})` });
   }
@@ -211,12 +254,12 @@ async function encode(dir, outDir, limits) {
   const own = meta.set === 'welcome' ? m.welcome.items.find((i) => i.name === meta.name)?.animationKB : undefined;
   const limit = meta.set === 'welcome' && m.welcome?.budgets ? (isStill ? (m.welcome.items.find((i) => i.name === meta.name)?.stillKB ?? m.welcome.budgets.stillKB) : own ?? m.welcome.budgets.animationKB) * KB : isStill ? limits.still : limits.anim;
   mkdirSync(outDir, { recursive: true });
-  const asVideo = V && hasFfmpeg && !isStill && meta.set !== 'categories' && meta.set !== 'welcome' && !(V.keepWebp || []).includes(meta.groundId.replace(/-(light|dark)$/, ''));
-  if (asVideo) {
-    for (const r of await videos(dir, d, meta, outDir)) rows.push({ ...r, ok: true });
-    if (V.replaceWebp) return;
-  }
+  // A welcome item with "video": true is an MP4 baked on its page's ground (the hero's entry: 1.4 MB as WebP, a few
+  // hundred KB as H.264). The screen shows the transparent still instead while the shopper drags, so no edge shows.
+  const heroVideo = meta.set === 'welcome' && !isStill && !!m.welcome.items.find((i) => i.name === meta.name)?.video;
+  const asVideo = V && hasFfmpeg && !isStill && meta.set !== 'categories' && (heroVideo || (meta.set !== 'welcome' && !(V.keepWebp || []).includes(meta.groundId.replace(/-(light|dark)$/, ''))));
   let clipFiles = files;
+  let clipDir = dir;
   if (!isStill && meta.fadeBottom) {
     // The clip's frames get the same lower fade as the still, so the hand-off to the still shows no change.
     const dst = path.join(tmpdir(), `ill-fade-${process.pid}-${d}`);
@@ -227,6 +270,11 @@ async function encode(dir, outDir, limits) {
       await (await faded(file, meta)).png().toFile(out);
       clipFiles.push(out);
     }
+    clipDir = dst;
+  }
+  if (asVideo) {
+    for (const r of await videos(clipDir, d, meta, outDir)) rows.push({ ...r, ok: true });
+    if (V.replaceWebp) return;
   }
   const { buf, note } = isStill ? await still(files[0], limit, meta) : await anim(clipFiles, meta, limit);
   writeFileSync(out, buf);
@@ -310,7 +358,9 @@ for (const file of files(ASSETS)) {
   if (!sizeName) continue;
   const a = (((main[name] ??= {})[ground] ??= {})[sizeName] ??= {});
   const base = `${name}${clip === 'still' ? '' : `-${clip}`}.${ground}.${size}.${ext}`;
-  (a[clip] ??= { ms: ms('main', name, clip, ground, size) })[ext === 'mp4' ? 'video' : 'base'] = base;
+  const c = (a[clip] ??= { ms: ms('main', name, clip, ground, size) });
+  c[ext === 'mp4' ? 'video' : 'base'] = base;
+  if (ext === 'mp4' || !c.file) c.file = file;
 }
 const cats = {};
 for (const file of files(path.join(ASSETS, 'categories'))) {
@@ -321,6 +371,27 @@ for (const file of files(path.join(ASSETS, 'categories'))) {
   const a = ((cats[id] ??= {})[scheme] ??= {});
   a[clip] = { base: `categories/${id}${clip === 'still' ? '' : `-${clip}`}.${scheme}.${size}.${ext}`, ms: ms('categories', id, clip, scheme, size) };
 }
+
+// A clip's length when no frames are on disk (.frames is gitignored): read it from the asset itself, the sum of an
+// animated WebP's frame delays or an MP4's duration (ffprobe). Without it ms stays 0, and the screen would hand an
+// entry over to the idle loop (or the still) the moment it starts.
+async function lengthOf(file) {
+  const p = path.join(ASSETS, file);
+  try {
+    if (file.endsWith('.webp')) {
+      const md = await sharp(p, { animated: true }).metadata();
+      return Math.round((md.delay ?? []).reduce((a, b) => a + b, 0));
+    }
+    if (file.endsWith('.mp4')) return Math.round(+execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', p]).toString().trim() * 1000);
+  } catch {
+    // leave 0
+  }
+  return 0;
+}
+for (const byGround of Object.values(main))
+  for (const bySize of Object.values(byGround))
+    for (const clips of Object.values(bySize))
+      for (const [clip, a] of Object.entries(clips)) if (clip !== 'still' && !a.ms) a.ms = await lengthOf(a.file);
 
 const req = (base) => `require('../../../../assets/illustrations/${base}')`;
 const clipOf = (a, c) => (a[c] ? `, ${c}: { ${[a[c].video && `video: ${req(a[c].video)}`, a[c].base && `source: ${req(a[c].base)}`].filter(Boolean).join(', ')}, ms: ${a[c].ms} }` : '');

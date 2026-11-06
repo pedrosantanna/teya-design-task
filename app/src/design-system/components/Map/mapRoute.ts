@@ -26,8 +26,10 @@ const EARTH = 40075016.686; // metres round the equator
 const TILE = 512; // MapLibre's world is 512 px wide at zoom 0
 const MAX_ZOOM = MAP_CAMERA.zoom;
 const MIN_ZOOM = 12.5;
-/** Room kept free round the route inside the visible band, in points. */
+/** Room kept free round the route inside the visible band, in points: more at the sides, so the door clears the
+ *  back button's column and the pin the screen's edge. */
 const ROOM = 36;
+const ROOM_X = 60;
 /** With the camera pitched, ground ahead of the pin is foreshortened by about 1 / cos(pitch). */
 const FORESHORTEN = 1 / Math.cos((MAP_CAMERA.pitch * Math.PI) / 180);
 
@@ -65,10 +67,10 @@ export function routeView(place: MapPlace, width: number, pinY: number, bearingD
     up = Math.max(up, y * FORESHORTEN);
     down = Math.max(down, -y);
   }
-  const need = Math.max((right - left) / Math.max(1, width - 2 * ROOM), Math.max(up, down) / Math.max(1, pinY - ROOM));
+  const need = Math.max((right - left) / Math.max(1, width - 2 * ROOM_X), Math.max(up, down) / Math.max(1, pinY - ROOM));
   const zoom = need === 0 ? MAX_ZOOM : Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, Math.log2((EARTH * cos) / (TILE * need))));
   const perPoint = (EARTH * cos) / (TILE * 2 ** zoom);
-  const half = width / 2 - ROOM;
+  const half = width / 2 - ROOM_X;
   const offsetX = Math.max(-half, Math.min(half, -(left + right) / 2 / perPoint));
   return { zoom, offsetX };
 }

@@ -14,7 +14,8 @@ export const GENERATED = path.join(APP, 'src/design-system/components/Illustrati
 export const manifest = () => JSON.parse(readFileSync(path.join(HERE, 'manifest.json'), 'utf8'));
 
 // Every job the manifest asks for: one illustration, ground, size and scale, with its clips plus a still.
-// An illustration renders every ground × size it lists, plus each `extra` combination ({ grounds, sizes }).
+// An illustration renders every ground × size it lists, plus each `extra` combination ({ grounds, sizes }). `fit`
+// ({ center, clear }) centres the object's own bounding box, without its cast shadow, in the frame (viewer fitCenter, fitClear).
 export function jobs(m, filter = {}) {
   const pick = (list, f) => (f ? list.filter((x) => f.includes(String(x))) : list);
   const out = [];
@@ -32,7 +33,7 @@ export function jobs(m, filter = {}) {
               const key = `${ill.name}/${ground}/${sizeName}/${scale}`;
               if (seen.has(key)) continue;
               seen.add(key);
-              out.push({ ill, ground, color: tokenHex(scheme, `color.${g}`), dark: m.groundTones?.[ground], sizeName, size, scale, darkTones: combo.darkTones ?? ill.darkTones });
+              out.push({ ill, ground, color: tokenHex(scheme, `color.${g}`), dark: m.groundTones?.[ground], sizeName, size, scale, darkTones: combo.darkTones ?? ill.darkTones, fit: combo.fit ?? ill.fit });
             }
           }
         }

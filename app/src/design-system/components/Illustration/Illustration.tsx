@@ -92,6 +92,11 @@ function ClipVideo({ entry, idle }: { entry?: number; idle?: number }) {
     p.allowsExternalPlayback = false;
     p.play();
   });
+  // On the web the player is made before its <video> exists, so the play() in the setup above reaches nothing; the view
+  // is mounted by the time this effect runs.
+  useEffect(() => {
+    player.play();
+  }, [player]);
   useEffect(() => {
     if (!entry) return;
     const sub = player.addListener('playToEnd', () => {

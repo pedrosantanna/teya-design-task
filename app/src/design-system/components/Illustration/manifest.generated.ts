@@ -24,46 +24,46 @@ export const ILLUSTRATIONS: Record<IllustrationName, Grounds> = {
       large: { still: require('../../../../assets/illustrations/basket.background-light.120.png'), entry: { video: require('../../../../assets/illustrations/basket-entry.background-light.120.mp4'), ms: 2000 } },
     },
     'card-dark': {
-      large: { still: require('../../../../assets/illustrations/basket.card-dark.120.png'), entry: { video: require('../../../../assets/illustrations/basket-entry.card-dark.120.mp4'), ms: 0 } },
+      large: { still: require('../../../../assets/illustrations/basket.card-dark.120.png'), entry: { video: require('../../../../assets/illustrations/basket-entry.card-dark.120.mp4'), ms: 2000 } },
     },
     'card-light': {
-      large: { still: require('../../../../assets/illustrations/basket.card-light.120.png'), entry: { video: require('../../../../assets/illustrations/basket-entry.card-light.120.mp4'), ms: 0 } },
+      large: { still: require('../../../../assets/illustrations/basket.card-light.120.png'), entry: { video: require('../../../../assets/illustrations/basket-entry.card-light.120.mp4'), ms: 2000 } },
     },
   },
   box: {
     'card-dark': {
-      large: { still: require('../../../../assets/illustrations/box.card-dark.120.png'), entry: { video: require('../../../../assets/illustrations/box-entry.card-dark.120.mp4'), ms: 0 } },
+      large: { still: require('../../../../assets/illustrations/box.card-dark.120.png'), entry: { video: require('../../../../assets/illustrations/box-entry.card-dark.120.mp4'), ms: 1800 } },
     },
     'card-light': {
-      large: { still: require('../../../../assets/illustrations/box.card-light.120.png'), entry: { video: require('../../../../assets/illustrations/box-entry.card-light.120.mp4'), ms: 0 } },
+      large: { still: require('../../../../assets/illustrations/box.card-light.120.png'), entry: { video: require('../../../../assets/illustrations/box-entry.card-light.120.mp4'), ms: 1800 } },
     },
     'welcome-dark': {
-      welcome: { still: require('../../../../assets/illustrations/box.welcome-dark.312.png'), entry: { source: require('../../../../assets/illustrations/box-entry.welcome-dark.312.webp'), ms: 0 } },
+      welcome: { still: require('../../../../assets/illustrations/box.welcome-dark.312.png'), entry: { source: require('../../../../assets/illustrations/box-entry.welcome-dark.312.webp'), ms: 1800 } },
     },
     'welcome-light': {
-      welcome: { still: require('../../../../assets/illustrations/box.welcome-light.312.png'), entry: { source: require('../../../../assets/illustrations/box-entry.welcome-light.312.webp'), ms: 0 } },
+      welcome: { still: require('../../../../assets/illustrations/box.welcome-light.312.png'), entry: { source: require('../../../../assets/illustrations/box-entry.welcome-light.312.webp'), ms: 1800 } },
     },
   },
   crossroads: {
     'background-dark': {
-      large: { still: require('../../../../assets/illustrations/crossroads.background-dark.120.png'), entry: { video: require('../../../../assets/illustrations/crossroads-entry.background-dark.120.mp4'), ms: 0 } },
+      large: { still: require('../../../../assets/illustrations/crossroads.background-dark.120.png'), entry: { video: require('../../../../assets/illustrations/crossroads-entry.background-dark.120.mp4'), ms: 2700 } },
     },
     'background-light': {
-      large: { still: require('../../../../assets/illustrations/crossroads.background-light.120.png'), entry: { video: require('../../../../assets/illustrations/crossroads-entry.background-light.120.mp4'), ms: 0 } },
+      large: { still: require('../../../../assets/illustrations/crossroads.background-light.120.png'), entry: { video: require('../../../../assets/illustrations/crossroads-entry.background-light.120.mp4'), ms: 2700 } },
     },
     'welcome-dark': {
-      bleed: { still: require('../../../../assets/illustrations/crossroads.welcome-dark.460.png') },
+      bleed: { still: require('../../../../assets/illustrations/crossroads.welcome-dark.460.png'), entry: { video: require('../../../../assets/illustrations/crossroads-entry.welcome-dark.460.mp4'), ms: 3200 } },
     },
     'welcome-light': {
-      bleed: { still: require('../../../../assets/illustrations/crossroads.welcome-light.460.png') },
+      bleed: { still: require('../../../../assets/illustrations/crossroads.welcome-light.460.png'), entry: { video: require('../../../../assets/illustrations/crossroads-entry.welcome-light.460.mp4'), ms: 3200 } },
     },
   },
   quietstreet: {
     'background-dark': {
-      large: { still: require('../../../../assets/illustrations/quietstreet.background-dark.120.png'), entry: { video: require('../../../../assets/illustrations/quietstreet-entry.background-dark.120.mp4'), ms: 0 } },
+      large: { still: require('../../../../assets/illustrations/quietstreet.background-dark.120.png'), entry: { video: require('../../../../assets/illustrations/quietstreet-entry.background-dark.120.mp4'), ms: 2250 } },
     },
     'background-light': {
-      large: { still: require('../../../../assets/illustrations/quietstreet.background-light.120.png'), entry: { video: require('../../../../assets/illustrations/quietstreet-entry.background-light.120.mp4'), ms: 0 } },
+      large: { still: require('../../../../assets/illustrations/quietstreet.background-light.120.png'), entry: { video: require('../../../../assets/illustrations/quietstreet-entry.background-light.120.mp4'), ms: 2250 } },
     },
     'location-dark': {
       hero: { still: require('../../../../assets/illustrations/quietstreet.location-dark.352.png') },
@@ -74,16 +74,16 @@ export const ILLUSTRATIONS: Record<IllustrationName, Grounds> = {
   },
   shop: {
     'background-dark': {
-      large: { still: require('../../../../assets/illustrations/shop.background-dark.120.png'), entry: { video: require('../../../../assets/illustrations/shop-entry.background-dark.120.mp4'), ms: 0 }, idle: { video: require('../../../../assets/illustrations/shop-idle.background-dark.120.mp4'), ms: 0 } },
+      large: { still: require('../../../../assets/illustrations/shop.background-dark.120.png'), entry: { video: require('../../../../assets/illustrations/shop-entry.background-dark.120.mp4'), ms: 1900 }, idle: { video: require('../../../../assets/illustrations/shop-idle.background-dark.120.mp4'), ms: 2875 } },
     },
     'background-light': {
-      large: { still: require('../../../../assets/illustrations/shop.background-light.120.png'), entry: { video: require('../../../../assets/illustrations/shop-entry.background-light.120.mp4'), ms: 0 }, idle: { video: require('../../../../assets/illustrations/shop-idle.background-light.120.mp4'), ms: 0 } },
+      large: { still: require('../../../../assets/illustrations/shop.background-light.120.png'), entry: { video: require('../../../../assets/illustrations/shop-entry.background-light.120.mp4'), ms: 1900 }, idle: { video: require('../../../../assets/illustrations/shop-idle.background-light.120.mp4'), ms: 2875 } },
     },
     'welcome-dark': {
-      welcome: { still: require('../../../../assets/illustrations/shop.welcome-dark.312.png'), entry: { source: require('../../../../assets/illustrations/shop-entry.welcome-dark.312.webp'), ms: 0 }, idle: { source: require('../../../../assets/illustrations/shop-idle.welcome-dark.312.webp'), ms: 0 } },
+      welcome: { still: require('../../../../assets/illustrations/shop.welcome-dark.312.png'), entry: { source: require('../../../../assets/illustrations/shop-entry.welcome-dark.312.webp'), ms: 2150 }, idle: { source: require('../../../../assets/illustrations/shop-idle.welcome-dark.312.webp'), ms: 2875 } },
     },
     'welcome-light': {
-      welcome: { still: require('../../../../assets/illustrations/shop.welcome-light.312.png'), entry: { source: require('../../../../assets/illustrations/shop-entry.welcome-light.312.webp'), ms: 0 }, idle: { source: require('../../../../assets/illustrations/shop-idle.welcome-light.312.webp'), ms: 0 } },
+      welcome: { still: require('../../../../assets/illustrations/shop.welcome-light.312.png'), entry: { source: require('../../../../assets/illustrations/shop-entry.welcome-light.312.webp'), ms: 2150 }, idle: { source: require('../../../../assets/illustrations/shop-idle.welcome-light.312.webp'), ms: 2875 } },
     },
   },
 };

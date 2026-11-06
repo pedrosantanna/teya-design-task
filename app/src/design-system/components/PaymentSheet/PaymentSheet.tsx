@@ -16,6 +16,7 @@ import { cornerCurve } from '../../theme';
 import { Button } from '../Button/Button';
 import { CloseButton } from '../CloseButton/CloseButton';
 import { Icon } from '../Icon/Icon';
+import { ListGroup, ListRow } from '../ListRow/ListRow';
 import { Text } from '../Text/Text';
 
 export type PaymentSheetStatus = 'ready' | 'processing' | 'done';
@@ -103,27 +104,27 @@ export const PaymentSheet = memo(function PaymentSheet({
             {ios ? <CloseButton onPress={busy ? undefined : onCancel} accessibilityLabel="Cancel" /> : null}
           </View>
 
-          <View style={styles.list}>
-            <View style={styles.row(true)} accessible accessibilityLabel={`${cardName}, ${cardNumber.replace(/•+ /, 'ending ')}`}>
-              <Icon icon={CreditCardIcon} size="body" color="mutedForeground" />
-              <View style={styles.grow}>
-                <Text variant="body">{cardName}</Text>
-                <Text variant="footnote" color="mutedForeground">
-                  {cardNumber}
-                </Text>
-              </View>
-              <Icon icon="chevron" size="body" color="mutedForeground" />
-            </View>
-            <View style={styles.row(false)} accessible accessibilityLabel={`Pay ${merchant}, ${items.replace(' × ', ' ')}, ${total}`}>
-              <View style={styles.grow}>
-                <Text variant="body">{`Pay ${merchant}`}</Text>
-                <Text variant="footnote" color="mutedForeground">
-                  {items}
-                </Text>
-              </View>
-              <Text variant="headline">{total}</Text>
-            </View>
-          </View>
+          {/* The same rows as every grouped list: the divider starts at the text and runs to the trailing edge. */}
+          <ListGroup>
+            <ListRow
+              icon={CreditCardIcon}
+              title={cardName}
+              detail={cardNumber}
+              chevron
+              surface="background"
+              position="first"
+              accessibilityLabel={`${cardName}, ${cardNumber.replace(/•+ /, 'ending ')}`}
+            />
+            <ListRow
+              title={`Pay ${merchant}`}
+              detail={items}
+              value={total}
+              valueStrong
+              surface="background"
+              position="last"
+              accessibilityLabel={`Pay ${merchant}, ${items.replace(' × ', ' ')}, ${total}`}
+            />
+          </ListGroup>
 
           {state ??
             (ios ? (
@@ -162,21 +163,6 @@ const styles = StyleSheet.create((theme) => ({
   }),
   head: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', minHeight: theme.hit.min },
   brand: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1] },
-  list: {
-    ...cornerCurve,
-    borderRadius: theme.radius.inner,
-    backgroundColor: theme.color.background,
-    overflow: 'hidden',
-  },
-  row: (separator: boolean) => ({
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: theme.space[3],
-    padding: theme.space[4],
-    borderBottomWidth: separator ? StyleSheet.hairlineWidth : 0,
-    borderBottomColor: theme.color.separator,
-  }),
-  grow: { flex: 1, gap: theme.space[1] / 2 },
   side: { alignItems: 'center', gap: theme.space[2], paddingVertical: theme.space[2], minHeight: theme.hit.min },
   state: { alignItems: 'center', justifyContent: 'center', gap: theme.space[2], minHeight: theme.size.button.large * 2 },
 }));

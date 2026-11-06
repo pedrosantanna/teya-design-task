@@ -34,7 +34,7 @@ export function ListRowExamples() {
           id="delivery"
           icon={DeliveryTruck01Icon}
           title="They deliver"
-          detail="Paper & Co's own courier, today" value="£3.50"
+          detail="£3.50 · Paper & Co's own courier, today"
           selected={how === 'delivery'}
           onPress={setHow}
           position="last"

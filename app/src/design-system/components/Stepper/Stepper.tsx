@@ -6,6 +6,7 @@ import { Platform, Pressable, View, type AccessibilityActionEvent } from 'react-
 import Animated from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
+import { useGround } from '../../internal/ground';
 import { haptic } from '../../internal/haptics';
 import { usePress } from '../../internal/usePress';
 import { cornerCurve } from '../../theme';
@@ -22,7 +23,7 @@ export type StepperProps = {
   label?: string;
 };
 
-function StepButton({ icon, label, disabled, onPress, joined }: { icon: IconSvgElement; label: string; disabled: boolean; onPress: () => void; joined: boolean }) {
+function StepButton({ icon, label, disabled, onPress, joined, raised }: { icon: IconSvgElement; label: string; disabled: boolean; onPress: () => void; joined: boolean; raised: boolean }) {
   const { theme } = useUnistyles();
   const press = usePress();
   // React Native Web ignores hitSlop: there the button is 44 tall with a negative margin, so the capsule keeps its 36.
@@ -40,7 +41,7 @@ function StepButton({ icon, label, disabled, onPress, joined }: { icon: IconSvgE
         onPress={onPress}
         onPressIn={press.onPressIn}
         onPressOut={press.onPressOut}
-        style={[styles.button(joined), web, disabled && styles.disabled]}
+        style={[styles.button(joined), raised && !joined && styles.raised, web, disabled && styles.disabled]}
       >
         <Icon icon={icon} size="headline" weight="strong" color="tint" />
       </Pressable>
@@ -52,6 +53,8 @@ function StepButton({ icon, label, disabled, onPress, joined }: { icon: IconSvgE
 export const Stepper = memo(function Stepper({ value, onChange, min = 1, max = Number.POSITIVE_INFINITY, label = 'Quantity' }: StepperProps) {
   const { theme } = useUnistyles();
   const ios = theme.platform === 'ios';
+  // On a sheet in dark the row under the stepper is already Muted, so the capsule takes the step above it.
+  const raised = useGround() === 'sheet' && theme.scheme === 'dark';
   const set = (next: number) => {
     const clamped = Math.min(max, Math.max(min, next));
     if (clamped === value) return;
@@ -65,8 +68,8 @@ export const Stepper = memo(function Stepper({ value, onChange, min = 1, max = N
     if (e.nativeEvent.actionName === 'decrement') dec();
   };
 
-  const minus = <StepButton icon={MinusSignIcon} label="Fewer" disabled={value <= min} onPress={dec} joined={ios} />;
-  const plus = <StepButton icon={PlusSignIcon} label="More" disabled={value >= max} onPress={inc} joined={ios} />;
+  const minus = <StepButton icon={MinusSignIcon} label="Fewer" disabled={value <= min} onPress={dec} joined={ios} raised={raised} />;
+  const plus = <StepButton icon={PlusSignIcon} label="More" disabled={value >= max} onPress={inc} joined={ios} raised={raised} />;
   const valueText = (
     <Text variant="headline" align="center">
       {String(value)}
@@ -87,7 +90,7 @@ export const Stepper = memo(function Stepper({ value, onChange, min = 1, max = N
       {ios ? (
         <View style={styles.iosGroup}>
           <View style={styles.value}>{valueText}</View>
-          <View style={styles.capsule}>
+          <View style={[styles.capsule, raised && styles.raised]}>
             {minus}
             <View style={styles.divider} />
             {plus}
@@ -118,6 +121,7 @@ const styles = StyleSheet.create((theme) => ({
     // Visible on the web, so the buttons' 44 pt boxes are not clipped to the capsule.
     overflow: Platform.OS === 'web' ? 'visible' : 'hidden',
   },
+  raised: { backgroundColor: theme.color.tag.fillRaised },
   divider: { width: StyleSheet.hairlineWidth, height: theme.space[5], backgroundColor: theme.color.border },
   button: (joined: boolean) => ({
     width: joined ? theme.size.button.compact + theme.space[3] : theme.size.button.compact,
