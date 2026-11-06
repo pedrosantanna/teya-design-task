@@ -15,7 +15,9 @@ export function mapStyle(scheme: 'light' | 'dark'): StyleSpecification {
   const base = mapStyles[scheme];
   const data = mapData();
   const sources = Object.fromEntries(
-    Object.keys(base.sources).map((id) => [id, { type: 'geojson', data: data[id as keyof typeof data] }]),
+    // Tiled up to zoom 15 only (MapLibre overzooms past it): the wider area made tiling every building to zoom 18
+    // slow on the first frame, and the shop page's camera never goes past 16.4.
+    Object.keys(base.sources).map((id) => [id, { type: 'geojson', data: data[id as keyof typeof data], maxzoom: 15 }]),
   );
   const style = { ...base, sources } as StyleSpecification;
   cache[scheme] = style;

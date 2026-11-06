@@ -41,6 +41,8 @@ v10 takes decoration out of the Requests list and the chats, so Snuffle's own wo
 | v2 | Home and the scrolled home became one screen with Nearby and Requests tabs at the top. The open request and recent orders left the home for the Requests tab, a list of chats with a status per row. A screen where the concierge proposes splitting a request in two. Title spacing tightened, button labels kept on one line | I found the home mixed two jobs, browsing the street and following what I asked for, and the request card and recent orders read as one-off modules |
 | v1 | First flow from the blueprint: Granola-style home, chat, holds, payment, failure paths, other paths | First pass after the Mobbin references |
 
+Rounds 11 to 14 changed the prototype after v10 without a new version. I had an agent correct the v10 frames in place where the prototype had moved: no Promoted badge, shop facts without dots, Collect by dates, equal tonal Buy buttons when there are several offers, the sniffing mark while Snuffle asks and the request photo at the right of the top bar. The decision log records the rounds, and the prototype is the reference.
+
 ## What a request is
 
 Each request is a chat with the concierge. The question was how much one chat holds. I decided on one chat per errand, with the concierge proposing a split (decision 025).

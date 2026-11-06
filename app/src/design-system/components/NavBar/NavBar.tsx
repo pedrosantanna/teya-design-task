@@ -22,8 +22,6 @@ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { FloatingSurface } from '../../internal/FloatingSurface';
 import { IMAGE_OVER, photoSource, type PhotoSource } from '../../internal/media';
-import { categoryIllustration, useIllustrationScheme } from '../Illustration/Illustration';
-import type { CategoryId } from '../Illustration/manifest.generated';
 import { screenMargin, type ShopAccentName } from '../../theme';
 import { usePress } from '../../internal/usePress';
 import { ScrollEdge, type EdgeFill } from '../../internal/ScrollEdge';
@@ -91,10 +89,8 @@ export type NavBarProps = {
   titleMark?: boolean;
   /** A line under the inline title: the request's name in a chat titled "Snuffle". */
   subtitle?: string;
-  /** A 20 pt square before the subtitle (a chat's request): the item's photo, or the category's still on its shop
-   *  accent's tile when there is no photo. Decorative, hidden from VoiceOver and TalkBack. Pass it only when the
-   *  request is one item of a known kind; otherwise the subtitle stays text alone. */
-  subtitleThumb?: { photo: PhotoSource } | { category: CategoryId; accent: ShopAccentName };
+  /** A round photo at the right of the bar (a chat's request): a 44 pt target that opens a photo choice. */
+  trailingPhoto?: { photo: PhotoSource; label: string; onPress: () => void };
   /** Scroll offset at which the scroll-edge fade shows; defaults to 8 points, or `revealAt` in reveal mode. */
   backgroundAt?: number;
   /** A second fill the scroll edge shows until the content scrolls `until` points, then crossfades to `fill`: the
@@ -109,22 +105,16 @@ function barHeightFor(theme: ReturnType<typeof useUnistyles>['theme'], tall: boo
   return theme.platform === 'ios' ? theme.hit.min + theme.space[2] : theme.hit.min + theme.space[4];
 }
 
-/** The subtitle's square: the same image as the request's thumbnail in Requests, so the two match. */
-function SubtitleThumb({ thumb }: { thumb: NonNullable<NavBarProps['subtitleThumb']> }) {
-  const scheme = useIllustrationScheme();
-  const art = 'category' in thumb ? categoryIllustration(thumb.category, scheme)?.still : undefined;
+
+/** The round photo in the bar: hit.min wide and tall, a 1 pt Border edge, pressing like any control. */
+function PhotoButton({ photo, label, onPress }: NonNullable<NavBarProps['trailingPhoto']>) {
+  const press = usePress('selection');
   return (
-    <View
-      style={[styles.thumb, 'category' in thumb && styles.thumbTile(thumb.accent)]}
-      accessibilityElementsHidden
-      importantForAccessibility="no-hide-descendants"
-    >
-      {'photo' in thumb ? (
-        <Image source={photoSource(thumb.photo)} style={IMAGE_OVER} contentFit="cover" accessible={false} />
-      ) : art != null ? (
-        <Image source={art} style={IMAGE_OVER} contentFit="cover" contentPosition="top" accessible={false} />
-      ) : null}
-    </View>
+    <Animated.View style={press.scaleStyle}>
+      <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={onPress} onPressIn={press.onPressIn} onPressOut={press.onPressOut} style={styles.photoButton}>
+        <Image source={photoSource(photo)} style={IMAGE_OVER} contentFit="cover" accessible={false} />
+      </Pressable>
+    </Animated.View>
   );
 }
 
@@ -176,7 +166,7 @@ export const NavBar = memo(function NavBar({
   backgroundAt: backgroundAtProp,
   titleMark = false,
   subtitle,
-  subtitleThumb,
+  trailingPhoto,
   fillBefore,
 }: NavBarProps) {
   // The platform form follows the theme; the React Compiler would keep the first one, since the theme object stays the same.
@@ -265,7 +255,6 @@ export const NavBar = memo(function NavBar({
               </View>
             </View>
             <View style={styles.centredLine}>
-              {subtitleThumb ? <SubtitleThumb thumb={subtitleThumb} /> : null}
               <View style={styles.titleText}>
                 <Text variant="caption1" color="mutedForeground" numberOfLines={1}>
                   {subtitle}
@@ -285,6 +274,7 @@ export const NavBar = memo(function NavBar({
         )}
         <View style={styles.trailing} pointerEvents="box-none">
           <BarActions actions={trailing} />
+          {trailingPhoto ? <PhotoButton {...trailingPhoto} /> : null}
           {confirm ? <ConfirmButton onPress={confirm.onPress} label={confirm.label} /> : null}
         </View>
       </View>
@@ -368,7 +358,17 @@ const styles = StyleSheet.create((theme) => ({
     overflow: 'hidden',
   },
   thumbTile: (accent: ShopAccentName) => ({ backgroundColor: theme.color.shop.accent[accent].tile }),
-  trailing: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2] },
+  trailing: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2], marginLeft: 'auto' },
+  photoButton: {
+    width: theme.hit.min,
+    height: theme.hit.min,
+    borderRadius: theme.radius.full,
+    borderWidth: theme.size.edge.control,
+    borderColor: theme.color.border,
+    // Before the photo loads the circle is Muted, not an empty ring.
+    backgroundColor: theme.color.muted,
+    overflow: 'hidden',
+  },
   actions: { flexDirection: 'row', alignItems: 'center' },
   capsule: { flexDirection: 'row', alignItems: 'center', height: theme.hit.min, borderRadius: theme.radius.full, paddingHorizontal: theme.space[1] },
   barButton: { width: theme.hit.min - theme.space[1], height: theme.hit.min, alignItems: 'center', justifyContent: 'center' },

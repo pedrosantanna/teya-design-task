@@ -37,6 +37,11 @@ for (const f of files) {
   const row = { key, width, sizes: [] };
   for (const w of SIZES) {
     if (w >= width) continue;
+    // The photo picker's extra photos (`-photo-N`) are 400 px only: the web build's file count is tight.
+    if (key.includes('-photo-') && w < 400) continue;
+    // A photo of 640 px or less has no 400 px copy either: on the web (which skips 160) it would only add a file, and
+    // the full photo is already small. The artifact that hosts the web build holds about 500 files.
+    if (w === 400 && width <= 640) continue;
     const out = await sharp(join(content, f)).resize({ width: w }).jpeg({ quality: 72, progressive: true, mozjpeg: true }).toBuffer();
     writeFileSync(join(content, `w${w}`, f), out);
     bytes += out.length;

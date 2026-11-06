@@ -67,8 +67,13 @@ const MAX_TAG_CHARS = 18;
 const PAGE_REVIEWS = 5;
 // Photo width if a photo is not bundled (then it comes from Unsplash): the carousel's width, about 300 pt on a phone.
 const PHOTO_WIDTH = 400;
-// Collection window for a bought item (decision 037, H6).
-const KEEPS_ITEMS = '7 days to collect';
+/** How long the shop keeps a bought item, from its own collection window (decision 037, H6): "Same day", "By the next
+ *  day", "7 days to collect". */
+function collectionLine(window?: string): string {
+  if (!window || window === 'same day') return 'Same day';
+  if (window === 'next day') return 'By the next day';
+  return `${window} to collect`;
+}
 
 /** The shop's own photos: its main photo first, then its other shopfront and inside shots, three at most. */
 function shopPhotos(shop: Shop): ShopPhoto[] {
@@ -109,7 +114,7 @@ export default function ShopPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const content = useContent();
   const { goTo, set } = useAppActions();
-  const { shopHours, loading } = useAppStore(useShallow((s) => ({ shopHours: s.shopHours, loading: s.loading })));
+  const { shopHours, loading, atHome } = useAppStore(useShallow((s) => ({ shopHours: s.shopHours, loading: s.loading, atHome: s.place.area === 'blythe' })));
   const [sheet, setSheet] = useState<'call' | 'directions' | 'reliability' | 'ratings' | null>(null);
   const shop = shopById(content, id ?? '') ?? shopById(content, 'rossis') ?? content.shops[0];
   const index = shopNumber(shop.id);
@@ -132,7 +137,7 @@ export default function ShopPage() {
   // Made to order sits here, with how the item reaches the shopper, not in the header's facts.
   const howItWorks = [
     ...(shop.notice ? [{ title: 'Made to order', value: shop.notice }] : []),
-    { title: 'Collection', value: KEEPS_ITEMS },
+    { title: 'Collection', value: collectionLine(shop.collectWindow) },
     { title: 'Delivery', value: shop.delivers ? `${shop.delivers.by[0].toUpperCase()}${shop.delivers.by.slice(1)}, ${price(shop.delivers.fee)}` : 'Collect only' },
   ];
 
@@ -140,6 +145,8 @@ export default function ShopPage() {
     <ZoomTarget>
       <ShopPageLayout
         name={shop.name}
+        shopId={shop.id}
+        route={atHome}
         accent={shopAccent(shop)}
         facts={{ ...shopFacts(shopHours, shop), delivers: !!shop.delivers, isNew: shop.isNew }}
         photos={photos}
@@ -301,7 +308,7 @@ export default function ShopPage() {
 
       <Sheet open={sheet === 'directions'} onClose={() => setSheet(null)} title="Directions" detents={['medium']}>
         <View style={styles.route}>
-          <Map />
+          <Map shopId={shop.id} accent={shopAccent(shop)} route={atHome} />
         </View>
         <Text variant="headline">{walkLabel(shop.walkMinutes)}</Text>
         <Text variant="subheadline" color="mutedForeground">

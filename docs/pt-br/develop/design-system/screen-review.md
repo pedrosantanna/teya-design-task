@@ -52,7 +52,7 @@ Trade-offs:
 | # | Verificação | Passa quando |
 | --- | --- | --- |
 | 13 | Rótulos | Toda palavra vem da tabela de Palavras do [modelo conceitual](conceptual-model.md); nenhum sinônimo evitado. Uma lista de nomes de itens sem toque (Found here recently) só é permitida se informar a fonte dela |
-| 14 | Rótulos de status | Um rótulo de status por cartão ou linha, exatamente como na tabela de estados; a prévia de uma linha de pedido sempre acompanha o rótulo dela (as [prévias das linhas de pedido](content.md#request-row-previews)) |
+| 14 | Rótulos de status | Um rótulo de status por cartão ou linha, exatamente como na tabela de estados; a prévia de uma linha de pedido sempre acompanha o rótulo dela (as [prévias das linhas de pedido](content.md#prévias-da-linha-de-pedido)) |
 
 ## Acessibilidade
 

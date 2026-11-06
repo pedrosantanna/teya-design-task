@@ -8,9 +8,8 @@ import { memo, useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { MAP_CENTER } from './mapData';
-import { MAP_CAMERA, mapStyle } from './mapStyle';
-import { cameraPadding, MapAttribution, MapFallback, MapPin, useSettled, type MapProps } from './MapParts';
+import { MAP_CAMERA } from './mapStyle';
+import { cameraPadding, MapAttribution, MapFallback, MapPin, useMapView, useSettled, type MapProps } from './MapParts';
 
 export type { MapProps } from './MapParts';
 
@@ -43,16 +42,19 @@ function loadGl(): Promise<GlLib> {
   return glPromise;
 }
 
-export const Map = memo(function Map({ loading = false, pin = true, extent, interactive = false, accent, attribution = true }: MapProps) {
+export const Map = memo(function Map({ loading = false, pin = true, extent, interactive = false, accent, attribution = true, shopId, route = true }: MapProps) {
   const { theme } = useUnistyles();
+  const [size, setSize] = useState<{ width: number; height: number } | null>(null);
+  const view = useMapView(theme.scheme, accent, shopId, extent ?? (size ? { ...size, pinY: size.height / 2 } : undefined), route);
+  const viewRef = useRef(view);
+  viewRef.current = view;
   const container = useRef<unknown>(null);
   const map = useRef<GlMap | null>(null);
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
   const settled = useSettled();
-  const scheme = theme.scheme;
-  const padding = cameraPadding(extent);
-  const paddingKey = `${padding.bottom}`;
+  const padding = cameraPadding(extent, view.offsetX);
+  const paddingKey = `${padding.bottom}:${padding.left}:${padding.right}`;
 
   useEffect(() => {
     if (loading || !settled) return undefined;
@@ -64,9 +66,11 @@ export const Map = memo(function Map({ loading = false, pin = true, extent, inte
         if (cancelled || !node) return;
         const m = new gl.Map({
           container: node,
-          style: mapStyle(scheme) as never,
-          center: MAP_CENTER,
+          style: viewRef.current.style as never,
           ...MAP_CAMERA,
+          center: viewRef.current.center,
+          zoom: viewRef.current.zoom,
+          bearing: viewRef.current.bearing,
           interactive,
           attributionControl: false,
           fadeDuration: 0,
@@ -95,9 +99,14 @@ export const Map = memo(function Map({ loading = false, pin = true, extent, inte
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, interactive, settled]);
 
+  // A new scheme or shop: restyle and move the camera to the shop.
   useEffect(() => {
-    map.current?.setStyle(mapStyle(scheme) as never);
-  }, [scheme]);
+    const m = map.current;
+    if (!m) return;
+    m.setStyle(viewRef.current.style as never);
+    m.jumpTo({ center: viewRef.current.center, zoom: viewRef.current.zoom, bearing: viewRef.current.bearing });
+     
+  }, [view.key]);
 
   useEffect(() => {
     map.current?.setPadding(padding);
@@ -105,12 +114,13 @@ export const Map = memo(function Map({ loading = false, pin = true, extent, inte
   }, [paddingKey]);
 
   return (
-    <View style={styles.map} aria-hidden pointerEvents={interactive ? 'auto' : 'none'}>
+    <View style={styles.map} onLayout={(e) => setSize({ width: e.nativeEvent.layout.width, height: e.nativeEvent.layout.height })} aria-hidden pointerEvents={interactive ? 'auto' : 'none'}>
       {loading ? null : (
         <>
           <View ref={container as never} style={[styles.fill, failed ? styles.hidden : null]} />
-          {ready && !failed ? null : <MapFallback extent={extent} />}
-          {pin ? <MapPin extent={extent} accent={accent} /> : null}
+          {/* The static image shows the area round Blythe Road: it stands in only for the plain map, never for a shop's route. */}
+          {ready && !failed ? null : view.key === 'area' ? <MapFallback extent={extent} /> : null}
+          {pin ? <MapPin extent={extent} accent={accent} offsetX={view.offsetX} /> : null}
           {attribution ? <MapAttribution extent={extent} /> : null}
         </>
       )}

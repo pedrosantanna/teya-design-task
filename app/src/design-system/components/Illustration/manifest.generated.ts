@@ -5,7 +5,7 @@ export const ILLUSTRATION_SIZES = { small: 64, medium: 88, large: 120, hero: 352
 /** Sizes taller than wide (a bleed hero is a window onto a scene); every other size is square. */
 export const ILLUSTRATION_HEIGHTS: Partial<Record<keyof typeof ILLUSTRATION_SIZES, number>> = { bleed: 420 };
 export type IllustrationSize = keyof typeof ILLUSTRATION_SIZES;
-export type IllustrationName = 'basket' | 'box' | 'crossroads' | 'quietstreet' | 'scooter' | 'shop';
+export type IllustrationName = 'basket' | 'box' | 'crossroads' | 'quietstreet' | 'shop';
 /** welcome: Getting started, each object on its own page's ground; location: the location ask's ground (scripts/illustrations/manifest.json). */
 export type IllustrationGround = 'background' | 'card' | 'welcome' | 'location';
 export type IllustrationScheme = 'light' | 'dark';
@@ -17,6 +17,12 @@ type Grounds = Partial<Record<`${IllustrationGround}-${IllustrationScheme}`, Par
 /** name → `<ground>-<scheme>` → size → asset. Transparent, shaded for that ground. Uses: scripts/illustrations/manifest.json. */
 export const ILLUSTRATIONS: Record<IllustrationName, Grounds> = {
   basket: {
+    'background-dark': {
+      large: { still: require('../../../../assets/illustrations/basket.background-dark.120.png'), entry: { video: require('../../../../assets/illustrations/basket-entry.background-dark.120.mp4'), ms: 2000 } },
+    },
+    'background-light': {
+      large: { still: require('../../../../assets/illustrations/basket.background-light.120.png'), entry: { video: require('../../../../assets/illustrations/basket-entry.background-light.120.mp4'), ms: 2000 } },
+    },
     'card-dark': {
       large: { still: require('../../../../assets/illustrations/basket.card-dark.120.png'), entry: { video: require('../../../../assets/illustrations/basket-entry.card-dark.120.mp4'), ms: 0 } },
     },
@@ -64,14 +70,6 @@ export const ILLUSTRATIONS: Record<IllustrationName, Grounds> = {
     },
     'location-light': {
       hero: { still: require('../../../../assets/illustrations/quietstreet.location-light.352.png') },
-    },
-  },
-  scooter: {
-    'background-dark': {
-      large: { still: require('../../../../assets/illustrations/scooter.background-dark.120.png'), entry: { video: require('../../../../assets/illustrations/scooter-entry.background-dark.120.mp4'), ms: 0 }, idle: { video: require('../../../../assets/illustrations/scooter-idle.background-dark.120.mp4'), ms: 0 } },
-    },
-    'background-light': {
-      large: { still: require('../../../../assets/illustrations/scooter.background-light.120.png'), entry: { video: require('../../../../assets/illustrations/scooter-entry.background-light.120.mp4'), ms: 0 }, idle: { video: require('../../../../assets/illustrations/scooter-idle.background-light.120.mp4'), ms: 0 } },
     },
   },
   shop: {

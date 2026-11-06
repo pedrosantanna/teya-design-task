@@ -14,8 +14,8 @@ A shop's answer in the chat: shop, status with its source, price, walk time and 
 | `price` | string | required | Title 3, never truncates |
 | `walk`, `collectBy` | string | required | Footnote, with Navigation and Calendar icons |
 | `image` | string (uri) | none | The answering shop's photo, 40 at `radius.inner`; never an item photo |
-| `action` | `'buy'`, `'showMe'`, `'none'` | `'buy'` | Buy (or `buyLabel`, e.g. "Buy 1"), or Show me with No thanks |
-| `best` | boolean | `false` | Only the best answer's Buy is filled; the others are tonal (neutral) |
+| `action` | `'buy'`, `'showMe'`, `'none'` | `'buy'` | Buy (or `buyLabel`, e.g. "Buy 1 of 2"), or Show me with No thanks |
+| `best` | boolean | `false` | Filled Buy: set only when the card is the single offer in the chat; with two or more offers the screen leaves it off and every Buy is tonal (peers) |
 | `accent` | ShopAccentName | `butter` | The shop's tonal tile in the thumb (initials and awning band), under the photo or instead of it |
 | `onOpen`, `onBuy`, `onShowMe`, `onDismiss` | `(id) => void` | none | A tap anywhere on the card opens the details sheet, as Buy does |
 | `animateIn` | boolean | `false` | Arrives with `spring.arrive` (a fade with Reduce Motion) |
@@ -23,7 +23,7 @@ A shop's answer in the chat: shop, status with its source, price, walk time and 
 
 ## Do and don't
 
-- Do keep one filled Buy on screen: pass `best` to one card only.
+- Do keep at most one filled Buy on screen: pass `best` only when a single offer is the obvious next step; with several offers leave it off so they are peers.
 - Don't add a second action row; the details sheet holds the rest.
 - After Buy the card is replaced by an `OrderCard`; after No thanks show the undo `Toast`.
 

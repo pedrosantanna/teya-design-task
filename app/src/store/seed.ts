@@ -105,7 +105,7 @@ const shops: Record<string, Shop> = {
     name: 'Broadway Chemist',
     kind: 'chemist',
     street: 'Hammersmith Broadway',
-    walkMinutes: 12,
+    walkMinutes: 11,
     openUntil: '8pm',
     opensAt: '8am',
     image: 'broadway-chemist-front',
@@ -122,7 +122,7 @@ const shops: Record<string, Shop> = {
     name: 'Olympia Cameras',
     kind: 'cameras',
     street: 'Kensington High Street',
-    walkMinutes: 12,
+    walkMinutes: 14,
     openUntil: '6pm',
     opensAt: '10am',
     image: 'olympia-cameras-front',
@@ -179,7 +179,7 @@ const shops: Record<string, Shop> = {
     name: 'Bush Opticians',
     kind: 'opticians',
     street: "Shepherd's Bush Green",
-    walkMinutes: 14,
+    walkMinutes: 10,
     openUntil: '6pm',
     opensAt: '9am',
     image: 'bush-opticians-front',
@@ -196,7 +196,7 @@ const shops: Record<string, Shop> = {
     name: 'Abingdon Deli',
     kind: 'deli',
     street: 'Abingdon Road',
-    walkMinutes: 18,
+    walkMinutes: 25,
     openUntil: '8pm',
     opensAt: '8am',
     image: 'abingdon-deli-front',
@@ -215,7 +215,7 @@ const shops: Record<string, Shop> = {
     name: 'Church Street Books',
     kind: 'books',
     street: 'Kensington Church Street',
-    walkMinutes: 20,
+    walkMinutes: 28,
     openUntil: '7pm',
     opensAt: '9am',
     image: 'church-street-books-front',
@@ -577,12 +577,14 @@ function withSet(base: PersonaContent, set: ContentSet): PersonaContent {
       };
     }
     case 'manyAnswers': {
+      // Asked shops are the request's offers; the shops list may already hold these shops (as nearby ones).
+      const asked = new Set(base.active.offers.map((o) => o.shopId));
+      const added = extraAsked.filter((s) => !asked.has(s.id));
       const known = new Set(base.shops.map((s) => s.id));
-      const added = extraAsked.filter((s) => !known.has(s.id));
       return {
         ...base,
-        shops: [...base.shops, ...added],
-        nearby: [...base.nearby, ...added.filter((s) => !base.nearby.includes(s))],
+        shops: [...base.shops, ...added.filter((s) => !known.has(s.id))],
+        nearby: [...base.nearby, ...added.filter((s) => !base.nearby.some((n) => n.id === s.id))],
         active: {
           ...base.active,
           offers: [

@@ -232,6 +232,13 @@
           "pt": "Estados do pedido na loja"
         },
         {
+          "id": "agent-flow",
+          "title": "Agent flow",
+          "src": "docs/develop/ideation/agent-flow.md",
+          "canvas": "docs/develop/ideation/agent-flow.html",
+          "pt": "Fluxo do agente"
+        },
+        {
           "id": "next-step",
           "title": "Next step",
           "src": "docs/define/next-step.md",

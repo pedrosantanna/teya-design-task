@@ -359,7 +359,7 @@ export function Sheet({
                       ) : null}
                     </View>
                   ) : (
-                    <View ref={titleRef} accessible focusable={Platform.OS === 'web'} accessibilityRole="header" style={[styles.title, styles.titleStack]}>
+                    <View ref={titleRef} accessible focusable={Platform.OS === 'web'} accessibilityRole="header" style={[styles.title, styles.titleStack, styles.noRing]}>
                       <Text variant="headline" numberOfLines={1} align="center">
                         {title}
                       </Text>
@@ -387,7 +387,7 @@ export function Sheet({
             contentContainerStyle={styles.content(pad, footer ? theme.size.button.large + theme.space[6] + insets.bottom : insets.bottom)}
           >
             {inContent ? (
-              <View ref={titleRef} accessible focusable={Platform.OS === 'web'} accessibilityRole="header">
+              <View ref={titleRef} accessible focusable={Platform.OS === 'web'} accessibilityRole="header" style={styles.noRing}>
                 <Text variant="displayName" numberOfLines={2}>
                   {title}
                 </Text>
@@ -451,6 +451,8 @@ const styles = StyleSheet.create((theme) => ({
   }),
   title: { flex: 1 },
   titleStack: { gap: theme.space[1] },
+  // The title takes focus on open for screen readers; it isn't a control, so the web's focus ring doesn't show on it.
+  noRing: Platform.OS === 'web' ? ({ outlineStyle: 'none' } as object) : {},
   balance: { width: theme.hit.min },
   content: (pad: number, bottom: number) => ({
     paddingHorizontal: pad,

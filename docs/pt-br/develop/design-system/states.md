@@ -76,8 +76,8 @@ Um toast fica acima de um alerta para que o Undo continue alcançável; o scrim 
 | Estado | Quando | Ratings | How they do on Snuffle |
 | --- | --- | --- | --- |
 | Sem avaliações | Ninguém que comprou avaliou ainda | "No ratings yet · Snuffle has asked them 4 times" | Taxa e tempo de resposta; "New on Snuffle" até 10 respostas "has it" |
-| Poucas | De 1 a 4 avaliações | "New on Snuffle · 3 buyers so far", as tags com as contagens e os cartões de avaliação; sem porcentagem | Como acima, ou com a precisão de estoque quando houver 10 respostas "has it" |
-| Muitas | 5 avaliações ou mais | "92% would go back · 38 buyers", as tags, três cartões de avaliação que espelham a divisão, "All 38 ratings ›" | Taxa de resposta, precisão de estoque, tempo de resposta |
+| Poucas | De 1 a 4 avaliações | "3 people so far", as tags com as contagens e os cartões de avaliação; sem porcentagem | "New on Snuffle" com a taxa e o tempo de resposta, ou a precisão de estoque quando houver 10 respostas "has it" |
+| Muitas | 5 avaliações ou mais | "92% would go back · 38 people", as tags, até cinco cartões de avaliação que espelham a divisão, "See all 38 reviews" | Taxa de resposta, precisão de estoque, tempo de resposta |
 | Loja respondeu | Uma avaliação tem a resposta única da loja | A resposta abaixo do cartão, como "Reply from [loja]" | Sem mudança |
 
 Uma loja conectada mostra "Stock from the till" no lugar do tempo de resposta em todos os estados. Uma avaliação fica editável por 30 dias; um cartão editado mostra "Edited Oct 2026".
@@ -88,7 +88,7 @@ Uma loja conectada mostra "Stock from the till" no lugar do tempo de resposta em
 | --- | --- | --- |
 | Nearby | Formas de tile em `tile.large` e `tile.medium` com duas linhas de texto sob cada uma, em Muted | As formas seguem o grid real, para nada pular quando as fotos carregam |
 | Requests | Linhas com um quadrado de 56, duas linhas de texto e uma linha curta de status | No máximo três linhas |
-| Conversa | O indicador de digitação; as linhas de resposta na lista de lojas perguntadas mostram "Asked" na hora | Sem balões skeleton: a resposta do Snuffle chega inteira |
+| Conversa | O indicador de digitação enquanto o Snuffle escreve; a marca farejando enquanto ele pergunta às lojas e nenhuma respondeu; as linhas de resposta na lista de lojas perguntadas mostram "Asked" na hora | Sem balões skeleton: a resposta do Snuffle chega inteira |
 | Página da loja | O Map ground, as formas das fotos e o cartão com duas linhas de texto | O nome aparece assim que é conhecido |
 | Compra | A forma do cartão com a linha de status | Mudanças de status animam com `spring.status` |
 

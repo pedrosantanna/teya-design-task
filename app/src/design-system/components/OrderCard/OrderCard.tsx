@@ -1,9 +1,9 @@
 import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
 import { memo, useEffect, useRef } from 'react';
 import { AccessibilityInfo, Platform, View } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withSequence, withSpring, withTiming } from 'react-native-reanimated';
-import { StyleSheet, useUnistyles } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 
+import { CrossFade } from '../../internal/CrossFade';
 import { ShopLink } from '../../internal/ShopLink';
 import { haptic } from '../../internal/haptics';
 import { PressableCard, spoken, type CardAction } from '../../internal/PressableCard';
@@ -42,20 +42,16 @@ export type OrderCardProps = {
 };
 
 export const OrderCard = memo(function OrderCard({ id, status, tone = 'default', shop, items, total, steps, note, onOpen, onOpenShop, action, animateIn }: OrderCardProps) {
-  const { theme } = useUnistyles();
-  const change = useSharedValue(1);
   const previous = useRef(status);
 
-  // A status change fades the label through with spring.status, is announced politely and plays its haptic.
+  // A status change cross-fades the label with spring.status, is announced politely and plays its haptic.
   useEffect(() => {
     if (previous.current === status) return;
     previous.current = status;
-    change.set(withSequence(withTiming(0, { duration: 0 }), withSpring(1, theme.spring.status)));
     if (Platform.OS === 'ios') AccessibilityInfo.announceForAccessibility(spoken(status));
     if (tone === 'success') haptic('success');
     if (tone === 'warning') haptic('warning');
-  }, [status, tone, change, theme.spring.status]);
-  const changeStyle = useAnimatedStyle(() => ({ opacity: change.get() }));
+  }, [status, tone]);
 
   const shown = (steps ?? []).slice(0, 4);
   const current = shown.findIndex((s) => s.state === 'current');
@@ -74,9 +70,9 @@ export const OrderCard = memo(function OrderCard({ id, status, tone = 'default',
     >
       <View style={styles.head}>
         <View style={styles.grow} accessibilityLiveRegion="polite">
-          <Animated.View style={changeStyle}>
+          <CrossFade token={`${tone}|${status}`}>
             <StatusLabel label={status} tone={tone} />
-          </Animated.View>
+          </CrossFade>
           {onOpenShop ? (
             <ShopLink name={shop} numberOfLines={2} onPress={() => onOpenShop(id)} />
           ) : (

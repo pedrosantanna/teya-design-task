@@ -1,7 +1,7 @@
 import RefreshIcon from '@hugeicons/core-free-icons/RefreshIcon';
 import { memo, useEffect } from 'react';
 import { Pressable, View } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useReducedMotion, useSharedValue, withSpring } from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { cornerCurve } from '../../theme';
@@ -30,7 +30,7 @@ export type ChatBubbleProps = {
   /** Retry a failed bubble. Receives the bubble's `id`. */
   onRetry?: (id: string) => void;
   id?: string;
-  /** The shopper's bubble appears with spring.snappy when it is new. */
+  /** A new bubble appears: the shopper's with spring.snappy, Snuffle's with a small rise on spring.smooth. */
   animateIn?: boolean;
 };
 
@@ -46,22 +46,25 @@ export const ChatBubble = memo(function ChatBubble({
   animateIn = false,
 }: ChatBubbleProps) {
   const { theme } = useUnistyles();
+  const reduceMotion = useReducedMotion();
+  const mine = sender === 'shopper';
   const appear = useSharedValue(animateIn ? 0 : 1);
   useEffect(() => {
-    if (animateIn) appear.set(withSpring(1, theme.spring.snappy));
-  }, [animateIn, appear, theme.spring.snappy]);
+    if (animateIn) appear.set(withSpring(1, reduceMotion ? theme.spring.fade : mine ? theme.spring.snappy : theme.spring.smooth));
+  }, [animateIn, appear, mine, reduceMotion, theme.spring.snappy, theme.spring.smooth, theme.spring.fade]);
   const pressedScale = theme.state.pressedScale;
+  const rise = theme.space[2];
+  // The shopper's bubble grows from just under full size; Snuffle's group rises a little. Reduce Motion: a fade.
   const appearStyle = useAnimatedStyle(() => ({
     opacity: appear.get(),
-    transform: [{ scale: pressedScale + (1 - pressedScale) * appear.get() }],
+    transform: reduceMotion ? [] : mine ? [{ scale: pressedScale + (1 - pressedScale) * appear.get() }] : [{ translateY: (1 - appear.get()) * rise }],
   }));
 
-  const mine = sender === 'shopper';
   const failed = status === 'failed';
   const label = `${mine ? 'You' : 'Snuffle'}: ${text}${failed ? '. Not sent, tap to retry' : ''}`;
 
   const bubble = (
-    <Animated.View style={[styles.bubble(mine), appearStyle]}>
+    <Animated.View style={[styles.bubble(mine), mine && appearStyle]}>
       <Text variant="body" color={mine ? 'onPrimary' : 'foreground'} selectable>
         {text}
       </Text>
@@ -95,10 +98,10 @@ export const ChatBubble = memo(function ChatBubble({
 
   return (
     <View style={styles.row(gap, false)} accessible accessibilityLabel={label}>
-      <View style={styles.theirs}>
+      <Animated.View style={[styles.theirs, appearStyle]}>
         {firstInGroup ? <SnuffleSender day={day} /> : null}
         {bubble}
-      </View>
+      </Animated.View>
     </View>
   );
 });

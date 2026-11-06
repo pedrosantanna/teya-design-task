@@ -92,7 +92,7 @@ Every message after something goes wrong, or after an order ends, has three part
 
 ## Button labels
 
-Buttons are verbs from the conceptual model, in sentence case, with what they act on when it helps: Buy, "Buy 1", "Buy for £29.98", Ask, "Ask Rossi's", Extend, "Extend to Mon 16 Nov", "Cancel for a refund", "Keep looking", "Try again", "Show me", "No thanks", Call, Rate. Directions keeps the platform's usual noun. A button never says OK, Submit or Continue when a verb from the model fits.
+Buttons are verbs from the conceptual model, in sentence case, with what they act on when it helps: Buy, "Buy 1 of 2", "Buy for £29.98", Ask, "Ask Rossi's", Extend, "Extend to Mon 16 Nov", "Cancel for a refund", "Keep looking", "Try again", "Show me", "No thanks", Call, Rate. Directions keeps the platform's usual noun. A button never says OK, Submit or Continue when a verb from the model fits.
 
 ## Metadata lines
 
@@ -123,7 +123,7 @@ The state table's labels keep their dot in the source as the place where the sta
 | People | "38 people" for the count; "buyers" where the rule is about who can rate | customers, reviewers, users |
 | First names | A note shows the person's first name with the month ("Priya", "Oct 2026"); the shopper's own note says "You" | Surnames, photos, avatars, the type of purchase |
 | Plain verdicts | "Would go back", "Wouldn't go back" and the fixed tags | "Excellent!", "Top rated", "Highly recommended" |
-| Source on every signal | "What buyers said", "What Snuffle saw", "from 31 requests on Snuffle", "from the shop's till" | "verified", "trusted", "guaranteed" |
+| Source on every signal | "Ratings", "How they do on Snuffle", "from 31 requests on Snuffle", "from the shop's till" | "verified", "trusted", "guaranteed" |
 | Dates by month | "Oct 2026", "Edited Oct 2026" | "3 weeks ago", "12/10/2026" |
 | One element per row | Each signal is one row with a full label: "Would go back, 92 percent of 38 people"; colour and the thumbs glyph never carry the meaning alone | A green or red figure with no words |
 

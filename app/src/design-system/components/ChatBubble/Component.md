@@ -13,7 +13,7 @@ A message in a request's chat, from the shopper or from Snuffle. Spec: Chat bubb
 | `gap` | `'none'`, `'sameSender'`, `'newSender'` | `'none'` | Space above: 12 within a sender, 24 at a change. `chatGap(previous, sender)` works it out |
 | `status` | `'sending'`, `'sent'`, `'failed'` | `'sent'` | Failed shows a retry symbol and "Not sent · tap to retry" |
 | `onRetry` | `(id) => void` | none | With `id` |
-| `animateIn` | boolean | `false` | The shopper's new bubble appears with `spring.snappy` |
+| `animateIn` | boolean | `false` | A new bubble appears: the shopper's with `spring.snappy` (grows from 97%), Snuffle's group (sender line and bubble) with a small rise on `spring.smooth`. Reduce Motion: a fade |
 
 `radius.bubble`, `inset.bubble` (10 × 14), maximum width 78% of the content (`layout.bubbleMax`).
 

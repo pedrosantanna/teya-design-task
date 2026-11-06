@@ -6,7 +6,7 @@ As fundações do app do comprador, escritas como a referência a partir da qual
 Takeaways:
 - A tipografia está definida: Gambetta 700 no display em quatro lugares, Switzer em tudo o que o comprador lê, sobre os estilos de texto da Apple com os papéis correspondentes do Material 3.
 - A marca é provisória: um retriever cuja boca é o toldo de uma loja, em dois tons.
-- A cor está decidida (decisão 036, rodada 9): o Cinza biscoito é o neutro e os acentos são a Pastel parade com Índigo; o fundo claro é L 0,96 com o croma da rodada 8 (#F4F1ED), e o modo escuro mantém as superfícies da rodada 8. Os papéis semânticos (borda, separador, destrutivo, aviso, sucesso, scrim, desativado) estão definidos nos dois modos.
+- A cor está decidida (decisão 036, rodada 9): o Cinza biscoito é o neutro e os acentos são a Pastel parade com Índigo; o fundo claro passou depois para #EEE9E2 (L 0,935, decisão 045) e o fundo escuro para #0B0C0D (decisão 051). Os papéis semânticos (borda, separador, destrutivo, aviso, sucesso, scrim, desativado) estão definidos nos dois modos.
 - Espaçamento, tags e imagens são provisórios (decisão 041): uma escala de espaçamento de 4 pt e um grid de uma coluna, cinco tipos de tag, proporções de imagem e um conjunto de ícones, o HugeIcons (decisão 042). Uma revisão de quinze itens verifica cada tela contra eles.
 Call:
 - Defini a regra de entrada: uma fundação precisa de uma decisão do registro por trás, e os valores vêm da última rodada do quadro de ideação, nunca redigitados de memória.
@@ -27,7 +27,7 @@ Trade-offs:
 | [iOS e Android](platforms.md) | Provisório (decisão 043): no que cada elemento vira em cada plataforma, haptics incluídos | Revisão de design da v7 |
 | [Conteúdo e voz](content.md) | Provisório (decisão 043): a voz do Snuffle, o padrão de erro, formatos do Reino Unido | Revisão de design da v7 |
 | [Tipografia](typography.md) | Definida (decisões 027, 028, 029) | [Escala tipográfica](../ideation/type-scale.md), rodada 4 |
-| [Cor](colour.md) | Definida. Neutro: Cinza biscoito (decisão 034). Acentos escolhidos: Pastel parade com Índigo, sobre o Cinza biscoito no claro e no escuro, sem bordas (decisão 036). Fundo claro L 0,96 com o croma da rodada 8, #F4F1ED (rodada 9); escuro como na rodada 8. Papéis semânticos com contrastes nos dois modos | [Identidade](../ideation/identity.md) |
+| [Cor](colour.md) | Definida. Neutro: Cinza biscoito (decisão 034). Acentos escolhidos: Pastel parade com Índigo, sobre o Cinza biscoito no claro e no escuro, sem bordas (decisão 036). Fundo claro #EEE9E2 (L 0,935); fundo escuro #0B0C0D, cartões #252627. Papéis semânticos com contrastes nos dois modos | [Identidade](../ideation/identity.md) |
 | [Marca](mark.md) | Provisória (decisão 033): um retriever com um toldo no lugar da boca, desenhado à mão no Figma | [Identidade](../ideation/identity.md) |
 | [Forma e materiais](shape.md) | Provisório (decisão 040): seis raios da escala do Material 3, cantos concêntricos, Liquid Glass só em controles flutuantes | Pesquisa da decisão 040 |
 | [Movimento](motion.md) | Provisório (decisão 040): seis molas com valores para iOS e Material 3, regras de resposta, interrupção e Reduzir Movimento | Pesquisa da decisão 040 |

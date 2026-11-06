@@ -467,6 +467,32 @@ i.m.unknown { opacity: .45; }
 .prose table.fit { width: auto; min-width: min(100%, 24rem); }
 .embed-frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: var(--canvas-bg); }
 .embed-about { position: absolute; top: 96px; left: 16px; width: min(420px, calc(100% - 32px)); max-height: calc(100% - 120px); overflow: auto; padding: var(--s-4); background: var(--bg); border: 1px solid var(--border); border-radius: 14px; z-index: 5; }
+/* Decision log as a timeline: a rail with a date label per day and a dot per decision (built in decisionTimeline()). */
+.dl { margin-top: var(--s-6); }
+.dl-day { position: relative; padding-left: var(--s-5); }
+.dl-day::before { content: ""; position: absolute; left: 4px; top: var(--s-2); bottom: 0; width: 1px; background: var(--border-strong); }
+.dl-day + .dl-day { margin-top: var(--s-6); }
+.dl-date { position: relative; display: block; font: 500 13px var(--font-sans); letter-spacing: .02em; color: var(--muted-fg); font-variant-numeric: tabular-nums; }
+.dl-date::before { content: ""; position: absolute; left: calc(-1 * var(--s-5)); top: 50%; width: 9px; height: 9px; margin-top: -4.5px; border-radius: 2px; background: var(--border-strong); }
+.dl-item { position: relative; margin-top: var(--s-5); }
+.dl-item::before { content: ""; position: absolute; left: calc(-1 * var(--s-5) + 1px); top: 9px; width: 7px; height: 7px; border-radius: 50%; background: var(--bg); box-shadow: 0 0 0 1.5px var(--fg-2); }
+.dl-item.is-provisional::before { box-shadow: 0 0 0 1.5px var(--muted-fg); }
+.dl-item.is-assumption::before { box-shadow: 0 0 0 1.5px var(--muted-fg); background: var(--muted); }
+.dl-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); margin-bottom: var(--s-1); font-size: 12px; line-height: 20px; color: var(--muted-fg); }
+.dl-num { font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.dl-badge { display: inline-block; padding: 0 var(--s-2); border: 1px solid var(--border); border-radius: 999px; background: var(--muted); color: var(--fg-2); font-weight: 500; }
+.dl-badge.provisional { background: transparent; border-style: dashed; border-color: var(--border-strong); }
+.dl-badge.assumption { background: transparent; border-color: var(--border-strong); }
+.dl-note { color: var(--muted-fg); }
+.prose .dl-item > h2 { margin: 0; font-size: 18px; line-height: 1.35; letter-spacing: -.01em; }
+.dl-body { margin-top: var(--s-2); overflow-wrap: anywhere; }
+.dl-body > * { margin-top: 0; margin-bottom: 0; }
+.dl-body > * + * { margin-top: var(--s-3); }
+@media (max-width: 720px) {
+  .dl-day { padding-left: var(--s-4); }
+  .dl-date::before { left: calc(-1 * var(--s-4)); }
+  .dl-item::before { left: calc(-1 * var(--s-4) + 1px); }
+}
 </style>
 
 <header class="topbar">
@@ -949,6 +975,46 @@ i.m.unknown { opacity: .45; }
     cache.set(src, text);
     return text;
   }
+  // Decision log: each "NNN · Title" section becomes a timeline item, grouped by day. The Markdown stays the source.
+  function decisionTimeline(tmp) {
+    const kids = [...tmp.children];
+    const start = kids.findIndex(el => el.tagName === 'H2' && /^\d{3} · /.test(el.textContent.trim()));
+    if (start < 0) return;
+    const wrap = document.createElement('div'); wrap.className = 'dl';
+    kids[start].before(wrap);
+    let day = null, lastDate = '', i = start;
+    while (i < kids.length) {
+      const h = kids[i], m = /^(\d{3}) · (.*)$/.exec(h.textContent.trim());
+      if (h.tagName !== 'H2' || !m) break;
+      const body = [];
+      i++;
+      while (i < kids.length && kids[i].tagName !== 'H2') body.push(kids[i++]);
+      let date = '', status = '', note = '';
+      const first = body[0], strong = first && first.firstElementChild;
+      const dm = strong && strong.tagName === 'STRONG' && /^(\d{4}-\d{2}-\d{2}) · (.+)$/.exec(strong.textContent.trim());
+      if (dm) {
+        date = dm[1]; [status, ...note] = dm[2].split(' · '); note = note.join(' · ');
+        strong.remove();
+        while (first.firstChild && (first.firstChild.nodeName === 'BR' || (first.firstChild.nodeType === 3 && !first.firstChild.textContent.trim()))) first.firstChild.remove();
+        if (!first.textContent.trim() && !first.querySelector('*')) body.shift().remove();
+      }
+      if (date !== lastDate || !day) {
+        day = document.createElement('section'); day.className = 'dl-day';
+        day.innerHTML = `<time class="dl-date" datetime="${esc(date)}">${esc(date)}</time>`;
+        wrap.appendChild(day); lastDate = date;
+      }
+      const kind = /^decid/i.test(status) ? 'decided' : /^premiss|^assum/i.test(status) ? 'assumption' : /^provis/i.test(status) ? 'provisional' : 'decided';
+      const item = document.createElement('article'); item.className = `dl-item is-${kind}`;
+      const meta = document.createElement('div'); meta.className = 'dl-meta';
+      // Decided is the default, so only Provisional and Assumption carry a badge.
+      meta.innerHTML = `<span class="dl-num">${esc(m[1])}</span>${status && kind !== 'decided' ? `<span class="dl-badge ${kind}">${esc(status)}</span>` : ''}${note ? `<span class="dl-note">${esc(note)}</span>` : ''}`;
+      const bodyEl = document.createElement('div'); bodyEl.className = 'dl-body';
+      body.forEach(el => bodyEl.appendChild(el));
+      h.textContent = m[2];
+      item.append(meta, h, bodyEl);
+      day.appendChild(item);
+    }
+  }
   async function render() {
     const id = currentId();
     const page = PAGES.find(p => p.id === id);
@@ -984,6 +1050,7 @@ i.m.unknown { opacity: .45; }
       while (used.has(s)) s = `${slug(h.textContent)}-${n++}`;
       used.add(s); h.id = s;
     });
+    if (page.id === 'decision-log') decisionTimeline(tmp);
     tmp.querySelectorAll('table').forEach(t => {
       const cols = t.rows[0] ? t.rows[0].cells.length : 0;
       const emptyHead = t.tHead && ![...t.tHead.querySelectorAll('th')].some(th => th.textContent.trim());

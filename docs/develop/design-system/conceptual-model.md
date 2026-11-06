@@ -152,7 +152,7 @@ The dot in a label ("Ready · collect by Mon 9 Nov") only marks where the status
 | A buyer's verdict on an order | rating, Rate | rating | review, stars, score |
 | Who rates | buyers | buyers | customers, reviewers, users |
 | The rating question | "Would you go back?", "92% would go back" | would go back | recommend, satisfied, "Excellent!" |
-| Snuffle's own measures | "What Snuffle saw" | signals | verified, trusted, score |
+| Snuffle's own measures | "How they do on Snuffle" | signals | verified, trusted, score |
 
 Labels agree with the item: "has it" for one thing, "has them" for several. Shop messages on WhatsApp and the POS may say authorised and charged, and call a sale through Snuffle "Bought"; they never say keep or hold.
 

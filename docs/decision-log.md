@@ -241,6 +241,8 @@ A shopper can reserve without paying (held until the end of the next opening day
 **Open:** whether small independents accept a week with one unit of stock; H6 tests it.
 **Closed by 032:** whether to keep the unpaid reserve at all. I questioned it: it is there for convenience and for shoppers who pay cash (19.2% of retail transactions in 2024), but the payment then happens outside the app, the shop carries the risk of a no-show, and the desk research found no strong habit behind it (Argos dropped unpaid reservations; the shops that keep them hold for about two days). The alternative is to require payment for every hold. H12 counts which one shoppers choose when both are offered.
 
+**Superseded in part by 037:** the shopper buys, with no unpaid hold, and the shop sets the collection window.
+
 ## 031 · Connected shops and asked shops
 **2026-11-02 · Decided**
 
@@ -274,7 +276,7 @@ The app's neutral is Biscuit grey from round 4 of the identity board: an OKLCH r
 
 **Why:** warm enough to sit next to the mark without a seam, quiet enough that any accent set can carry the colour.
 **Open:** the accent set. The mark stays in black and white until then.
-**Superseded:** the background, border and text values above were replaced in rounds 8 and 9; the current ones are on the [Colour](develop/design-system/colour.md) page (light background #F4F1ED, L 0.96).
+**Superseded:** the background, border and text values above were replaced in rounds 8 and 9; the current ones are on the [Colour](develop/design-system/colour.md) page. The light background moved again in 045 (#EEE9E2, L 0.935) and the dark mode in 051.
 
 ## 035 · The app is called Snuffle
 **2026-11-02 · Decided**
@@ -291,12 +293,12 @@ The accents are Pastel parade with Indigo: Indigo for text, buttons and the tint
 
 **Why:** of the three themes tried on the same screens, Pastel parade with Indigo was the calmest, and its pale fills give tonal badges that read well on both modes. In round 7 a white card on the light background was 1.04:1 without a border, too little.
 **Update, round 9:** the light background moves to L 0.96 and keeps round 8's chroma (#F4F1ED), with muted surfaces at L 0.915; cards stay white and stand out at 1.13:1. Round 8's background read a little dark. The more saturated versions (×1.8 and ×2.5) and the less saturated one (45%) are dropped. Dark mode is unchanged: it keeps round 8's surfaces, since its chroma didn't change.
-**Superseded:** the L 0.95 background and the 1.16:1 card step in the first paragraph are replaced by round 9: L 0.96 (#F4F1ED) and 1.13:1, as on the [Colour](develop/design-system/colour.md) page.
+**Superseded:** the L 0.95 background and the 1.16:1 card step in the first paragraph are replaced by round 9: L 0.96 (#F4F1ED) and 1.13:1. Decision 045 later moved the light background to #EEE9E2 (L 0.935), and 051 the dark mode; the [Colour](develop/design-system/colour.md) page has the current values.
 
 ## 037 · Buy, then collect
 **2026-11-03 · Decided**
 
-The shopper's action is Buy, not Hold. "Hold" could read as a free reservation or as a step before buying, and leaves the shopper unsure whether they have bought anything. The shopper taps Buy and pays once with Apple Pay. At a connected shop the payment is taken at once, because the POS has the stock. At an asked shop the amount is only authorised and is taken when the shop replies that it has set the item aside; if the shop doesn't confirm within a few minutes, the authorisation lapses and the shopper is told. Each shop sets how long it keeps a bought item: 7 days by default, or 14 or 30, and the same day or the next for perishables; one extension of the same length is allowed. Buying is not reserving: the shopper owns the item once the shop confirms. If nobody collects by the end of the window, the order is cancelled and the shopper gets a full refund automatically, as the big chains do, and the shop puts the item back on sale. The shopper sees the date before tapping Buy ("Collect by Mon 9 Nov · full refund if you don't") and again on the receipt; the chat doesn't offer the window as a reason to buy.
+The shopper's action is Buy, not Hold. "Hold" could read as a free reservation or as a step before buying, and leaves the shopper unsure whether they have bought anything. The shopper taps Buy and pays once with Apple Pay. At a connected shop the payment is taken at once, because the POS has the stock. At an asked shop the amount is only authorised and is taken when the shop replies that it has set the item aside; if the shop doesn't confirm within 10 minutes, the authorisation lapses and the shopper is told. Each shop sets how long it keeps a bought item: 7 days by default, or 14 or 30, and the same day or the next for perishables; one extension of the same length is allowed. Buying is not reserving: the shopper owns the item once the shop confirms. If nobody collects by the end of the window, the order is cancelled and the shopper gets a full refund automatically, as the big chains do, and the shop puts the item back on sale. The shopper sees the date before tapping Buy ("Collect by Mon 9 Nov · full refund if you don't") and again on the receipt; the chat doesn't offer the window as a reason to buy.
 
 **Why:** UK shops have no legal minimum for collecting a paid order. The shop's own terms set it, and the Torts (Interference with Goods) Act 1977 only governs what a shop may do with goods left after notice. Chains keep paid click-and-collect orders for about a week and then cancel and refund in full, with no fee: Argos cancels after 7 days (one 7-day extension) and refunds within 5 working days; John Lewis returns the order to its warehouse after 7 days and refunds the account; IKEA cancels a missed collection and refunds within 14 days. Screwfix keeps orders for 21 days and then puts them back to stock. Uniqlo and Decathlon keep orders for 7 days, Boots for 14. Dry cleaners keep items for 60 to 90 days, but they hold a customer's own goods, often with money still owed, which is a different case. I had asked for 30 to 90 days; I chose the norm as the default and let the shop go longer, since a long window keeps a small shop's only unit off the shelf and only the shop knows what it can spare.
 **Assumption:** shoppers read "Buy" plus a collection date as clearer than "Hold"; the proof of concept can count questions about it.
@@ -388,6 +390,8 @@ I made three choices. A thumbs up or down for "Would you go back?" over stars. S
 **Open:** how a dispute is reviewed, and by whom; the wording of "How ratings work"; whether the tag lists fit every kind of shop.
 **Sources:** Digital Markets, Competition and Consumers Act 2024, Schedule 20 (https://www.legislation.gov.uk/ukpga/2024/13/schedule/20); CMA, Fake reviews guidance, CMA208 (https://assets.publishing.service.gov.uk/media/67eeb64fe9c76fa33048c790/CMA208_-_Fake_reviews_guidance.pdf); the Ratings section of the [benchmarks](discover/benchmarks.md).
 
+**Superseded in part by 056 and 060:** reviews show a first name and a month, and the ratings are one carousel with the summary first.
+
 ## 048 · Stone for dark mode
 **2026-11-03 · Decided**
 
@@ -464,6 +468,8 @@ Metadata lines no longer join facts with middle dots. A status word carries its 
 The buy button says "Buy for £29.98".
 **Open:** whether the count reads "people" or "buyers".
 
+**Closed by later work:** the count reads "people".
+
 ## 057 · Illustrations drawn for the screen, tonal badges in dark, ratings in a carousel, Snuffle's avatar
 **2026-11-05 · Decided**
 
@@ -471,6 +477,8 @@ The 3D illustrations render on a transparent ground with the object's own boundi
 
 **Why:** strokes drawn in world units grew thick and merged at small sizes, and baked tiles meant re-rendering whenever a colour changed. Borders on dark badges were doing the job colour should do, as Material's tonal containers and Apple's dark fills show. A carousel keeps the reviews to one row of the page. An unlabelled paid order would mislead, so with the label gone the order goes too.
 **Open:** whether to show paid placement again, labelled; the measured cost of a glass shop card.
+
+**Superseded in part by 060, 061 and 062:** the ratings are one panel and then cards straight on the shop card; Snuffle's avatar runs past its circle.
 
 ## 058 · The shop card takes its category colour again; glass measured and left out
 **2026-11-05 · Decided · reverses 055's neutral card**
@@ -507,6 +515,20 @@ On the chat's sender line, Snuffle's circle is the dog's head: the mark's face f
 On the shop page the rating cards sit straight on the card, with no panel around them, and a grouped list under them holds "See all N reviews" and "How ratings work"; with no ratings, one list holds "No ratings yet" and "How ratings work". The ratings carousel and the photo carousel scroll past the content padding to the card's edges and are clipped there, while the first card or photo rests on the text's edge, as the actions row already did. The strip of map above the card is taller (two `space.8` steps under the bar instead of one), since it works as the page's header. "© OpenStreetMap contributors" leaves the map's corner and becomes a centred line at the foot of the card.
 
 **Why:** a card inside a card read as one container too many, and carousels clipped at the text's edge looked cut short. The header was cramped around the pin. The credit sat over the header on every visit. OpenStreetMap's attribution guidelines ask for the credit where the map is shown; a line at the foot of the same page is the reading I took, and I chose to keep the credit only there, not also on the map. If a stricter reading is ever needed, `attribution` on the map puts it back in the corner.
+
+## 063 · Shops on their real street, with the walk drawn on the map
+**2026-11-06 · Decided**
+
+Every shop stands on the street its card names, at a real point on that street in OpenStreetMap, and the map draws the walk to it from the shopper's door, 163 Blythe Road, in the shop's accent. A build script (`npm run map:places`) reads the walkable streets from OpenStreetMap, finds the point on each shop's street whose walking distance best matches the shop's walk time, and computes the route; I then set every shop's walk time to its route's length at 80 m a minute, so the card and the map agree. The map turns so the door is to the left of the shop, zooms out until the whole walk fits in the band of map above the card, and centres the walk; the pin follows the shop sideways. The map area grew to about 4 km east to west so Askew Road and Kensington Church Street are inside it. The Wells Road Bakery moved to Uxbridge Road, since Wells Road is 10 minutes away and the bakery belongs to the shops asked only further away.
+
+**Why:** with one map for every shop, the pin stood on Blythe Road even for a shop on King Street, and the walk times were invented. Real routes changed some of them a lot (the deli and the bookshop are 25 and 28 minutes away, past the 20-minute radius, so Nearby no longer lists them; two Hammersmith Road shops went from 6 to 10 minutes). The shopper's address is an assumption of the prototype; on a phone it would come from their location.
+
+## 064 · A chat that moves, a sniffing mark, peer Buy buttons and the request's photo
+**2026-11-06 · Decided**
+
+Everything that arrives in a chat comes in one way: it fades in and rises 8 pt, chips and cards follow the message before them, a changed status cross-fades, and Reduce Motion leaves only the fade. While Snuffle asks the shops, the mark sniffs (the awning sways like whiskers and the nose twitches) where the delivery scooter stood. With two or more offers every Buy is tonal and the same size; a filled Buy only when one answer can be bought, and a partial offer reads "Buy 1 of 2". The request's photo moves to the right of the chat's bar, and a tap offers six photos of the item to choose from. A card with two objects puts the taller one behind and to the left and the lower one in front and to the right, with a long object turned against that diagonal (Illustrations, Two objects).
+
+**Why:** messages and statuses appeared and swapped in one frame and read as broken. The scooter said delivery while Snuffle was searching; I chose the mark over a small crossroads, which turns to noise at that size. Two shops with one filled and one grey Buy looked like a recommendation the app hadn't made. The photo under "Snuffle" crowded the title, and a fixed photo of someone else's eclipse glasses may not match what the shopper means.
 
 ## Still open
 

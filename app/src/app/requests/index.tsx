@@ -24,7 +24,7 @@ import {
   type StatusTone,
 } from '@/design-system';
 import { imageSource } from '@/content/images';
-import { requestFilter, requestPreview, shopAccent, shopById, sim, twelveHour, useActiveRequestRow, useApp, useContent, useSim } from '@/store';
+import { photoKey, requestFilter, requestPreview, shopAccent, shopById, sim, twelveHour, useActiveRequestRow, useApp, useContent, useSim } from '@/store';
 
 type Filter = 'All' | 'Needs you' | 'Looking' | 'Waiting' | 'Done';
 const FILTERS: Filter[] = ['All', 'Needs you', 'Looking', 'Waiting', 'Done'];
@@ -65,6 +65,7 @@ export default function Requests() {
   const top = useNavBarHeight();
   const request = useApp('request');
   const order = useApp('order');
+  const photos = useApp('requestPhotos');
   const stage = useSim((s) => s.stage);
   const active = useActiveRequestRow();
   const [filter, setFilter] = useState<Filter>('All');
@@ -82,7 +83,7 @@ export default function Requests() {
       status: active.status,
       tone: active.tone,
       filter: requestFilter(request === 'none' ? 'asking' : request, order),
-      image: imageSource(content.active.image, 56),
+      image: imageSource(photos[photoKey(content.id, content.active.id)] ?? content.active.image, 56),
       accent: order !== 'none' ? shopAccent(shopById(content, content.order.shopId)) : undefined,
       unread: active.unread,
     });
@@ -96,7 +97,7 @@ export default function Requests() {
       status: r.label,
       tone: r.state === 'needsYou' ? 'needsYou' : r.state === 'collected' ? 'success' : 'default',
       filter: r.state === 'collected' ? 'Done' : requestFilter(r.state, 'none'),
-      image: imageSource(r.image, 56),
+      image: imageSource(photos[photoKey(content.id, r.id)] ?? r.image, 56),
       unread: r.state === 'needsYou' ? 1 : 0,
     });
   }

@@ -1,6 +1,6 @@
 # TypingIndicator
 
-Three dots in a Snuffle bubble, under the sender line (the bare glyph and "Snuffle") when it starts a group, shown when Snuffle's reply takes more than about 300 ms and replaced in place by the reply. Spec: Typing indicator on `docs/develop/design-system/components.md`.
+Three dots in a Snuffle bubble, under the sender line (the bare glyph and "Snuffle") when it starts a group, shown when Snuffle's reply takes more than about 300 ms and replaced in place by the reply: the screen enters it with `ChatEntry` and it fades out on `spring.fade` as the reply rises in. Spec: Typing indicator on `docs/develop/design-system/components.md`.
 
 ## Props
 

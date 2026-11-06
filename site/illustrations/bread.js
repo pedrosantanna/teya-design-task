@@ -34,6 +34,10 @@ export default {
     const back = zig(wTop + 0.02, 9, 0.07, 0.035); back.position.set(0, H - 0.01, -dTop / 2 - 0.005);
     const side = zig(dTop + 0.02, 5, 0.06, 0.035); side.rotation.y = Math.PI / 2; side.position.set(wTop / 2 + 0.005, H - 0.01, 0);
     const bag = k.group([body, stripe, front, back, side], [bx, 0, bz]);
+    // The bag's wide face turns against the composition's diagonal; the baguettes turn with it.
+    const BAG_YAW = 1.2;
+    bag.rotation.y = BAG_YAW;
+    const turn = (x, z) => [x * Math.cos(BAG_YAW) + z * Math.sin(BAG_YAW), -x * Math.sin(BAG_YAW) + z * Math.cos(BAG_YAW)];
     // Baguettes: capsules standing out of the bag mouth, fanned out, with slashes on the face towards the camera.
     const defs = [
       { x: -0.28, z: 0.0, lean: [-0.16, 0.05], len: 0.7, r: 0.1 },
@@ -41,8 +45,10 @@ export default {
       { x: 0.27, z: 0.04, lean: [0.2, 0.08], len: 0.62, r: 0.095 },
     ];
     const loaves = defs.map((d, j) => {
-      const a = V(bx + d.x, H - 0.1, bz + d.z);
-      const dir = V(d.lean[0], 1, d.lean[1]).normalize();
+      const [ox, oz] = turn(d.x, d.z);
+      const [lx0, lz0] = turn(d.lean[0], d.lean[1]);
+      const a = V(bx + ox, H - 0.1, bz + oz);
+      const dir = V(lx0, 1, lz0).normalize();
       const b = a.clone().add(dir.clone().multiplyScalar(d.len));
       const kids = [k.capsule(a, b, d.r, P.butter[600], { part: `bg${j}` })];
       const side = V(0.55, 0, 0.84).normalize();
@@ -70,6 +76,7 @@ export default {
         return [k.mesh(new THREE.TubeGeometry(curve, 32, 0.04, 12), P.butter[100], { scale: [1, 1, 1], part: `s${i}`, noShadow: true })];
       }),
     ], [lx, 0, lz]);
+    loaf.rotation.y = 1.1; // its long axis against the diagonal too
     const parts = collect(g, [[bag, 0], ...loaves.map((l, i) => [l, 0.12 + i * 0.06]), [loaf, 0.36]]);
     return { group: g, parts };
   },

@@ -6,8 +6,8 @@ How a request moves between the shopper, the concierge and the shop, from the fi
 Takeaways:
 - The shopper talks to one concierge the whole time. Behind it, separate agents read till stock, pick likely shops, message them, collect replies, take payment and book couriers.
 - The shop does three things: answers a request, puts the item aside, hands it over. Everything else is on the concierge's side.
-- Most fail points sit where the concierge waits on a shop: no answer in time, a wrong yes, a hold that nobody collects.
-- The shop sets the item aside before the shopper pays. For Jess, collection after work needs a later slot, a collection point or evening delivery, all untested.
+- Most fail points sit where the concierge waits on a shop: no answer in time, a wrong yes, an order nobody collects.
+- A connected shop is charged at once; an asked shop is charged only after it confirms it has set the item aside. For Jess, collection after work needs a later slot, a collection point or evening delivery, all untested.
 - After collection or delivery, Snuffle asks every buyer once whether they would go back. Ratings and Snuffle's own signals (answer rate, stock accuracy, reply time) show on the shop page under a published review policy.
 Call:
 - I set the steps and which agents sit behind the concierge. The first drawing was too noisy, so I asked for a second pass with cards only for the three lanes that act.
@@ -24,43 +24,43 @@ Trade-offs:
 ## Blueprint
 
 ```blueprint
-Steps: Ask | Search | Offer | Reserve and pay | Collect or receive | After
+Steps: Ask | Search | Offer | Buy | Collect or receive | After
 Touchpoint {muted text smartphone}: App chat ; WhatsApp ; Own AI assistant (MCP) | Same thread | Option cards | Payment sheet | Shop counter ; Collection point ; Courier | Notification
-Shopper {c1 card user}: Says what, where, by when ; Or leaves a request ahead | Waits, or leaves the thread | Compares the options | Picks a shop and a collection time ; Pays once it's set aside | Shows the code ; Or collects after work ; Or gets the delivery | Rates the order: would go back, tags, a note ; Keeps a standing request
+Shopper {c1 card user}: Says what, where, by when ; Or leaves a request ahead | Waits, or leaves the thread | Compares the options | Taps Buy on a shop's answer ; Pays once, with Apple Pay | Shows the code ; Or collects after work ; Or gets the delivery | Rates the order: would go back, tags, a note ; Keeps a standing request
 --- Line of interaction
-Concierge agent {c3 card bot}: Confirms in one line ; Asks only what's missing | "Checking six shops near you" | Shows each answer as it arrives ; Instant only from shared tills ; Keeps looking | "Set aside" from the shop ; Then the payment ; Hold code, place and time | Directions ; Reminder before the hold ends | Asks every buyer "How was [shop]?", one reminder at most ; Acts on standing requests
+Concierge agent {c3 card bot}: Confirms in one line ; Asks only what's missing | "Checking six shops near you" | Shows each answer as it arrives ; Instant only from shared tills ; Keeps looking | "Set aside" from the shop ; Then the payment ; Collection code, place and Collect by date | Directions ; Reminder before the window ends | Asks every buyer "How was [shop]?", one reminder at most ; Acts on standing requests
 --- Line of visibility
-Agents behind it {c4 agent settings}: **Orchestrator** plans the tasks | **Stock** reads shared tills ; **Matching** picks likely shops within reach ; **Contact** messages each shop | Collects replies ; **Courier** quotes delivery ; Widens the search near the deadline | **Contact** gets the shop's confirmation ; **Payment** charges ; **Contact** releases the others | Watches the hold ; **Courier** books the drop or evening run | Logs demand ; Screens notes ; Works out answer rate, stock accuracy and reply time ; Matches standing requests
-Shop {c2 card store}: - | Gets the request in its merchant app or WhatsApp | Answers: has it, price, hold, delivery | Sets the item aside ; Confirms it | Hands it over ; Or leaves it at a collection point | Weekly demand summary ; Sees its signals ; Replies once to a rating ; Disputes a case
+Agents behind it {c4 agent settings}: **Orchestrator** plans the tasks | **Stock** reads shared tills ; **Matching** picks likely shops within reach ; **Contact** messages each shop | Collects replies ; **Courier** quotes delivery ; Widens the search near the deadline | **Contact** gets the shop's confirmation ; **Payment** charges ; **Contact** releases the others | Watches the collection window ; **Courier** books the drop or evening run | Logs demand ; Screens notes ; Works out answer rate, stock accuracy and reply time ; Matches standing requests
+Shop {c2 card store}: - | Gets the request in its merchant app or WhatsApp | Answers: has it, price, how long it keeps it, delivery | Sets the item aside ; Confirms it | Hands it over ; Or leaves it at a collection point | Weekly demand summary ; Sees its signals ; Replies once to a rating ; Disputes a case
 --- Line of internal interaction
 Systems {muted text server}: Location ; Saved preferences | Till stock ; Listings and hours | Courier ; Maps | Card, wallet, pay by link | Courier ; Collection points ; Settlement | Demand records ; Ratings and signals
-Fail points {fail triangle-alert}: Vague request | No answer in time (H1) | A wrong "yes" (A10) | Item already sold ; Payment fails | Hold expires ; No after-work option (H6) | Summary not valued (H9) ; Ratings only from happy buyers ; Shops reject a public figure (H19)
+Fail points {fail triangle-alert}: Vague request | No answer in time (H1) | A wrong "yes" (A10) | Item already sold ; Payment fails | Window ends uncollected ; No after-work option (H6) | Summary not valued (H9) ; Ratings only from happy buyers ; Shops reject a public figure (H19)
 ```
 
 ## Answers in step 3
 
 The concierge shows each shop's answer as soon as it arrives and keeps looking for better ones. An answer is instant only when a shop's till shares item-level stock. Every other answer comes from a shop replying to the request, which takes minutes.
 
-## Hold and payment
+## Payment and the collection window
 
-The shop confirms it has set the item aside, and only then is the shopper charged. I assume the full amount is taken at that point and refunded if the hold lapses. Authorising the card at the hold and capturing it at collection is the alternative, which I've left open.
+At a connected shop the payment is taken at once, because the POS has the stock. At an asked shop the amount is authorised and taken when the shop replies that it has set the item aside (decision 037). The shop sets how long it keeps the item, 7 days by default; the shopper sees the Collect by date and does not pick a day.
 
 | Case | What happens |
 | --- | --- |
 | Item already sold | The shop can't set it aside, so nothing is charged. The concierge offers the next shop that said yes, or keeps looking. |
-| Payment fails | The shopper can retry. After 10 minutes without payment the hold is released and the shop is told. |
-| Hold expires | The concierge reminds the shopper before the end time. At the end the hold is released, the shop is told it can sell the item, and the payment is refunded. |
+| Payment fails | The shopper can retry. After 10 minutes without payment the order is dropped and the shop is told. |
+| Window ends uncollected | The concierge reminds the shopper before the end time. At the end the order is cancelled, the shop puts the item back on sale, and the payment is refunded in full. |
 
 ## Jess's version
 
-Jess uses the same flow at a different time of day. She asks in the morning, often from WhatsApp on the way to work. The concierge has the whole shop day to collect answers, so speed matters less and the hold matters more. A standing request ("bread from the bakery on Fridays") moves step 1 to once a week.
+Jess uses the same flow at a different time of day. She asks in the morning, often from WhatsApp on the way to work. The concierge has the whole shop day to collect answers, so speed matters less and the collection window matters more. A standing request ("bread from the bakery on Fridays") moves step 1 to once a week.
 
 Paying ahead doesn't help if the shop closes before she finishes work, which I assume is around 6:30pm on weekdays. Step 5 then needs one of three options. All are assumptions and none has been tested:
 
 | Option | Who hands over | Where | When |
 | --- | --- | --- | --- |
-| Later collection at the shop | The shopkeeper | The shop's counter | An agreed slot, on a day the shop closes late enough |
-| Collection point | Staff at a late-opening shop, or a locker against the hold code | On the same street; the shop or a courier drops the item there during the day | After work, until the point closes |
+| Later collection at the shop | The shopkeeper | The shop's counter | Within the shop's window, on a day it closes late enough |
+| Collection point | Staff at a late-opening shop, or a locker against the collection code | On the same street; the shop or a courier drops the item there during the day | After work, until the point closes |
 | Evening delivery | A courier booked by the courier agent | Jess's home | An evening slot; the courier collects before the shop closes |
 
 Whether shops would offer a later slot or hand a paid item to a collection point, and whether such a point exists within reach of the shopper, is part of H6 in the [hypotheses](hypotheses.md).
@@ -87,11 +87,11 @@ The shop has no interface, so the reply and the dispute are mapped in the shop's
 | Who is asked | Every buyer, with one reminder at most |
 | What is screened | Notes, for abuse and personal data; nothing is removed for being negative |
 | How figures are shown | The percentage who would go back, rounded down, beside the buyer count; no percentage below 5 ratings; highlights mirror the overall split |
-| Snuffle's signals | Worked out from answers and orders, labelled "What Snuffle saw"; stock accuracy only after 10 "has it" answers |
+| Snuffle's signals | Worked out from answers and orders, labelled "How they do on Snuffle"; stock accuracy only after 10 "has it" answers |
 | Summaries | Built only from buyers' notes and labelled "Summary by Snuffle from buyers' notes" |
 | Incentives | Snuffle never rewards a rating; ratings a shop rewarded are flagged |
 | Shops | One public reply per rating; a dispute is reviewed against the order's record, and the rating stays up while it is reviewed |
 
 ## What the prototype covers
 
-The prototype is the app channel: the shopper's three lanes (touchpoint, shopper, concierge) for steps 1 to 4, with the shop's answers simulated. It includes the three cases under hold and payment (item already sold, payment fails, hold expires), so the reminder and refund from step 5 are in it too. WhatsApp, the MCP connection to other assistants and the shop's side stay as written assumptions.
+The prototype is the app channel: the shopper's three lanes (touchpoint, shopper, concierge) for steps 1 to 4, with the shop's answers simulated. It includes the three cases under payment and the collection window (item already sold, payment fails, window ends uncollected), so the reminder and refund from step 5 are in it too. WhatsApp, the MCP connection to other assistants and the shop's side stay as written assumptions.

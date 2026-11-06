@@ -4,12 +4,12 @@ import EyeIcon from '@hugeicons/core-free-icons/EyeIcon';
 import FlashIcon from '@hugeicons/core-free-icons/FlashIcon';
 import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
 import type { IconSvgElement } from '@hugeicons/react-native';
-import { memo, useEffect, useRef } from 'react';
+import { memo } from 'react';
 import { View } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withSequence, withSpring, withTiming } from 'react-native-reanimated';
 import { useGround } from '../../internal/ground';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
+import { CrossFade } from '../../internal/CrossFade';
 import { ShopLink } from '../../internal/ShopLink';
 import { spoken } from '../../internal/PressableCard';
 import { type ColorName } from '../../theme';
@@ -42,21 +42,13 @@ const icons: Record<AnswerRowKind, IconSvgElement> = {
 
 /**
  * An answer on the asking list (conceptual model: "Rows while asking"): shop, street and the answer's
- * status with a symbol. The status fades through with spring.status when it changes. The shop's name opens the shop's page; the full
+ * status with a symbol. The status cross-fades with spring.status when it changes. The shop's name opens the shop's page; the full
  * answer cards in the chat are where the shopper acts.
  */
 export const AnswerRow = memo(function AnswerRow({ shop, street, status, kind, position = 'only', onOpenShop }: AnswerRowProps) {
   const { theme } = useUnistyles();
   const onChat = useGround() === 'chat';
   const grouped = theme.platform === 'ios';
-  const change = useSharedValue(1);
-  const previous = useRef(status);
-  useEffect(() => {
-    if (previous.current === status) return;
-    previous.current = status;
-    change.set(withSequence(withTiming(0, { duration: 0 }), withSpring(1, theme.spring.status)));
-  }, [status, change, theme.spring.status]);
-  const changeStyle = useAnimatedStyle(() => ({ opacity: change.get() }));
   const good = kind === 'yes' || kind === 'till';
   const color: ColorName = good ? 'success' : 'mutedForeground';
 
@@ -81,10 +73,14 @@ export const AnswerRow = memo(function AnswerRow({ shop, street, status, kind, p
             {street}
           </Text>
         </View>
-        <Animated.View style={[styles.status, changeStyle]}>
-          <Icon icon={icons[kind]} size="caption1" color={color} />
-          <StatusLabel label={status} tone={good ? 'default' : 'quiet'} />
-        </Animated.View>
+        <View style={styles.statusBox}>
+          <CrossFade token={`${kind}|${status}`} align="end">
+            <View style={styles.status}>
+              <Icon icon={icons[kind]} size="caption1" color={color} />
+              <StatusLabel label={status} tone={good ? 'default' : 'quiet'} />
+            </View>
+          </CrossFade>
+        </View>
       </View>
     </View>
   );
@@ -115,5 +111,6 @@ const styles = StyleSheet.create((theme) => ({
     borderBottomColor: theme.color.separator,
   }),
   grow: { flex: 1, gap: theme.space[1] / 2 },
-  status: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1], maxWidth: '55%' },
+  statusBox: { maxWidth: '55%' },
+  status: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1] },
 }));

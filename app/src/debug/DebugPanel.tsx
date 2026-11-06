@@ -6,7 +6,7 @@ import { Platform } from 'react-native';
 import { useUnistyles } from 'react-native-unistyles';
 
 import './chrome';
-import { ActionsSection, ContentSection, JourneySection, LookSection, PersonaSection, SimulationSection, StatesSection } from './sections';
+import { ActionsSection, ContentSection, JourneySection, ShopperSection, SimulationSection, StatesSection } from './sections';
 import { useDebugger } from './visibility';
 
 export function DebugPanel({ docked = false }: { docked?: boolean }) {
@@ -36,12 +36,11 @@ export function DebugPanel({ docked = false }: { docked?: boolean }) {
         </button>
       </div>
       <div className="dbg-body">
-        <PersonaSection />
-        <LookSection />
         <JourneySection />
-        <SimulationSection />
+        <ShopperSection />
         <StatesSection />
         <ContentSection />
+        <SimulationSection />
         <ActionsSection />
       </div>
     </aside>

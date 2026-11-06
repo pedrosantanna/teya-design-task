@@ -92,7 +92,7 @@ Toda mensagem depois que algo dá errado, ou depois que uma compra termina, tem 
 
 ## Rótulos de botão
 
-Os botões são verbos do modelo conceitual, em sentence case, com o objeto da ação quando ajuda: Buy, "Buy 1", "Buy for £29.98", Ask, "Ask Rossi's", Extend, "Extend to Mon 16 Nov", "Cancel for a refund", "Keep looking", "Try again", "Show me", "No thanks", Call, Rate. Directions mantém o substantivo de costume da plataforma. Um botão nunca diz OK, Submit ou Continue quando cabe um verbo do modelo.
+Os botões são verbos do modelo conceitual, em sentence case, com o objeto da ação quando ajuda: Buy, "Buy 1 of 2", "Buy for £29.98", Ask, "Ask Rossi's", Extend, "Extend to Mon 16 Nov", "Cancel for a refund", "Keep looking", "Try again", "Show me", "No thanks", Call, Rate. Directions mantém o substantivo de costume da plataforma. Um botão nunca diz OK, Submit ou Continue quando cabe um verbo do modelo.
 
 ## Linhas de metadados
 
@@ -123,7 +123,7 @@ Os rótulos da tabela de estados mantêm o ponto na fonte como o lugar onde o es
 | Pessoas | "38 people" para a contagem; "buyers" onde a regra é sobre quem pode avaliar | customers, reviewers, users |
 | Primeiros nomes | Uma nota mostra o primeiro nome da pessoa com o mês ("Priya", "Oct 2026"); a nota da própria pessoa diz "You" | Sobrenomes, fotos, avatares, o tipo de compra |
 | Vereditos simples | "Would go back", "Wouldn't go back" e as tags fixas | "Excellent!", "Top rated", "Highly recommended" |
-| Origem em todo sinal | "What buyers said", "What Snuffle saw", "from 31 requests on Snuffle", "from the shop's till" | "verified", "trusted", "guaranteed" |
+| Origem em todo sinal | "Ratings", "How they do on Snuffle", "from 31 requests on Snuffle", "from the shop's till" | "verified", "trusted", "guaranteed" |
 | Datas pelo mês | "Oct 2026", "Edited Oct 2026" | "3 weeks ago", "12/10/2026" |
 | Um elemento por linha | Cada sinal é uma linha com rótulo completo: "Would go back, 92 percent of 38 people"; a cor e o glifo de polegar nunca levam o sentido sozinhos | Um número verde ou vermelho sem palavras |
 

@@ -6,7 +6,7 @@ The foundations of the shopper app, written as the reference the screens are bui
 Takeaways:
 - Typography is defined: Gambetta 700 for display in four places, Switzer for everything the shopper reads, on Apple's text styles with the matching Material 3 roles.
 - The mark is provisional: a retriever whose mouth is a shop's awning, in two tones.
-- Colour is decided (decision 036, round 9): Biscuit grey is the neutral and the accents are Pastel parade with Indigo; the light background is L 0.96 at round 8's chroma (#F4F1ED), and dark mode keeps round 8's surfaces. Semantic roles (border, separator, destructive, warning, success, scrim, disabled) are set in both modes.
+- Colour is decided (decision 036, round 9): Biscuit grey is the neutral and the accents are Pastel parade with Indigo; the light background has since moved to #EEE9E2 (L 0.935, decision 045) and the dark background to #0B0C0D (decision 051). Semantic roles (border, separator, destructive, warning, success, scrim, disabled) are set in both modes.
 - Spacing, tags and imagery are provisional (decision 041): a 4-pt spacing scale and a one-column grid, five kinds of tag, image ratios and one icon set, HugeIcons (decision 042). A fifteen-item screen review checks every screen against them.
 Call:
 - I set the rule for what enters: a foundation needs a decision in the log behind it, and its values come from the last round of the ideation board, never retyped from memory.
@@ -27,7 +27,7 @@ Trade-offs:
 | [iOS and Android](platforms.md) | Provisional (decision 043): what each element becomes on each platform, haptics included | Design review of v7 |
 | [Content and voice](content.md) | Provisional (decision 043): Snuffle's voice, error pattern, UK formats | Design review of v7 |
 | [Typography](typography.md) | Defined (decisions 027, 028, 029) | [Type scale](../ideation/type-scale.md), round 4 |
-| [Colour](colour.md) | Defined. Neutral: Biscuit grey (decision 034). Accents chosen: Pastel parade with Indigo, on Biscuit grey in light and dark, without borders (decision 036). Light background L 0.96 at round 8's chroma, #F4F1ED (round 9); dark as in round 8. Semantic roles with contrasts in both modes | [Identity](../ideation/identity.md) |
+| [Colour](colour.md) | Defined. Neutral: Biscuit grey (decision 034). Accents chosen: Pastel parade with Indigo, on Biscuit grey in light and dark, without borders (decision 036). Light background #EEE9E2 (L 0.935); dark background #0B0C0D, cards #252627. Semantic roles with contrasts in both modes | [Identity](../ideation/identity.md) |
 | [Mark](mark.md) | Provisional (decision 033): a retriever with an awning for a mouth, drawn by hand in Figma | [Identity](../ideation/identity.md) |
 | [Shape and materials](shape.md) | Provisional (decision 040): six radii from Material 3's scale, concentric corners, Liquid Glass only for floating controls | Research for decision 040 |
 | [Motion](motion.md) | Provisional (decision 040): six springs with iOS and Material 3 values, rules for response, interruption and Reduce Motion | Research for decision 040 |

@@ -17,6 +17,7 @@ import {
   Button,
   Illustration,
   ChatBubble,
+  ChatEntry,
   ChatGestureArea,
   Chip,
   Composer,
@@ -24,7 +25,9 @@ import {
   Ground,
   ListRow,
   ShopMeta,
+  SnuffleSniff,
   Map,
+  PhotoPickerSheet,
   NavBar,
   OrderCard,
   PaymentSheet,
@@ -37,15 +40,14 @@ import {
   TypingIndicator,
   ZoomOrigin,
   chatGap,
-  isCategoryId,
+  useChatLayout,
   screenMargin,
   useNavBarHeight,
   useNavBarScroll,
   type AnswerRowKind,
-  type NavBarProps,
   type ChatSender,
 } from '@/design-system';
-import { imageSource } from '@/content/images';
+import { imageSource, photoOptions, type ImageKey } from '@/content/images';
 import {
   DOWN_TAGS,
   NOTE_MAX,
@@ -69,6 +71,8 @@ import {
   useOtherThread,
   useSim,
   buildOtherChat,
+  chooseRequestPhoto,
+  useRequestPhoto,
   isStanding,
   otherActions,
   otherKey,
@@ -97,6 +101,7 @@ function ActiveChat() {
   const content = useContent();
   const { items, typing, fresh } = useVisibleChat();
   const request = useApp('request');
+  const layout = useChatLayout();
   const widened = useSim((s) => s.wider != null);
   const scroll = useNavBarScroll();
   // The chat's bar carries a subtitle, so it is the tall one.
@@ -105,6 +110,9 @@ function ActiveChat() {
   const [reply, setReply] = useState('');
   const [undo, setUndo] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  const [picking, setPicking] = useState(false);
+  const persona = useApp('persona');
+  const photo = useRequestPhoto(persona, content.active.id, content.active.image);
   const notifyPrompt = useSim((s) => s.notifyPrompt);
   const orderShopId = useSim((s) => s.orderShopId);
   const orderShop = shopById(content, orderShopId ?? content.order.shopId);
@@ -158,7 +166,6 @@ function ActiveChat() {
   // An inverted list keeps the chat anchored to its newest message: a deep link opens at the bottom and new
   // messages arrive in view. The data runs newest first; `before` still means the message above.
   const newestFirst = [...items].reverse();
-  const thumb = requestThumb(content);
   // The list's scroll view grows its padding with the keyboard (less the home-indicator inset the content already
   // leaves), so the newest message stays just above the composer as the keyboard rises, falls or follows a drag.
   const bottomInset = insets.bottom;
@@ -180,6 +187,8 @@ function ActiveChat() {
           inverted
           renderScrollComponent={WEB ? undefined : renderScroll}
           data={newestFirst}
+          // Not on the web: the layout transition replaces the inverted cell's flip transform there.
+          itemLayoutAnimation={WEB ? undefined : layout}
           keyExtractor={(item) => item.key}
           renderItem={({ item, index }) => (
             <ChatRow
@@ -194,12 +203,14 @@ function ActiveChat() {
           )}
           ListHeaderComponent={
             typing ? (
-              <TypingIndicator gap={last ? (last.kind === 'bubble' ? chatGap(lastSender, 'snuffle') : 'newSender') : 'none'} />
+              <ChatEntry key="typing">
+                <TypingIndicator gap={last ? (last.kind === 'bubble' ? chatGap(lastSender, 'snuffle') : 'newSender') : 'none'} />
+              </ChatEntry>
             ) : request === 'notFound' && !widened ? (
               // Nothing found: the quiet street under Snuffle's last message (the list is inverted, so the header is the bottom).
-              <View style={[styles.block, styles.art]}>
+              <ChatEntry key="quiet" style={[styles.block, styles.art]}>
                 <Illustration name="quietstreet" size="medium" />
-              </View>
+              </ChatEntry>
             ) : undefined
           }
           onScroll={scroll.onScroll}
@@ -223,13 +234,25 @@ function ActiveChat() {
         title="Snuffle"
         titleMark
         subtitle={content.active.title}
-        subtitleThumb={thumb}
+        trailingPhoto={{ photo: imageSource(photo, REQUEST_THUMB_WIDTH), label: `Change photo, ${content.active.title}`, onPress: () => setPicking(true) }}
         fill="chat"
         leading="back"
         backLabel="Requests"
         onLeading={() => (router.canGoBack() ? router.back() : router.navigate('/requests'))}
         scroll={scroll}
         backgroundAt={-theme.space[2]}
+      />
+      <PhotoPickerSheet
+        open={picking}
+        onClose={() => setPicking(false)}
+        title="Photo"
+        subtitle={content.active.title}
+        photos={photoOptions(content.active.image).map((key) => ({ id: key, photo: imageSource(key, PICKER_WIDTH) }))}
+        selected={photo}
+        onSelect={(key) => {
+          chooseRequestPhoto(persona, content.active.id, key as ImageKey);
+          setPicking(false);
+        }}
       />
       <DetailsSheet onToast={setToast} />
       <Payment />
@@ -287,22 +310,26 @@ function ChatRow({ item, before, isNew, onChip, onDismiss, onOpenOrder, onOpenSh
           day={item.day}
           firstInGroup={item.sender === 'shopper' || previous !== 'snuffle' || !!item.day}
           gap={(before && before.kind !== 'bubble') || item.day ? 'newSender' : chatGap(previous, item.sender)}
-          animateIn={isNew && item.sender === 'shopper'}
+          animateIn={isNew}
         />
       );
     case 'chips':
       return (
-        <View style={styles.chips} accessibilityLabel="Suggestions">
+        <ChatEntry animate={isNew} follows style={styles.chips} accessibilityLabel="Suggestions">
           {item.chips.map((chip) => (
             <Chip key={chip.action} kind="suggestion" label={chip.label} value={chip.action} onPress={onChip} />
           ))}
-        </View>
+        </ChatEntry>
       );
     case 'asking':
-      return <AskingList wider={item.wider} />;
+      return (
+        <ChatEntry animate={isNew}>
+          <AskingList wider={item.wider} />
+        </ChatEntry>
+      );
     case 'rows':
       return (
-        <View style={styles.block}>
+        <ChatEntry animate={isNew} style={styles.block}>
           {item.rows.map((row, i) => (
             <AnswerRow
               key={row.shopId}
@@ -314,11 +341,11 @@ function ChatRow({ item, before, isNew, onChip, onDismiss, onOpenOrder, onOpenSh
               position={item.rows.length === 1 ? 'only' : i === 0 ? 'first' : i === item.rows.length - 1 ? 'last' : 'middle'}
             />
           ))}
-        </View>
+        </ChatEntry>
       );
     case 'offer':
       return (
-        <View style={styles.block}>
+        <ChatEntry animate={isNew} style={styles.block}>
           <AnswerCard
             id={item.shopId}
             shop={item.shop}
@@ -333,13 +360,13 @@ function ChatRow({ item, before, isNew, onChip, onDismiss, onOpenOrder, onOpenSh
             onOpenShop={onOpenShop}
             onBuy={onBuy}
           />
-        </View>
+        </ChatEntry>
       );
     case 'status':
       return (
-        <View style={styles.block}>
+        <ChatEntry animate={isNew} style={styles.block}>
           <StatusLabel label={item.label} tone={item.tone} />
-        </View>
+        </ChatEntry>
       );
     case 'answer':
       return <Answer shopId={item.shopId} best={item.best} animateIn={isNew} onDismiss={onDismiss} onOpenShop={onOpenShop} />;
@@ -388,15 +415,11 @@ function AskingList({ wider = false }: { wider?: boolean }) {
   // After "Ask further away" the request's offers also hold the shops further away: one list each.
   const near = content.active.nearCount ?? content.active.offers.length;
   const offers = wider ? content.active.offers.slice(near) : content.active.offers.slice(0, near);
-  // The scooter rides while Snuffle asks and leaves when the first answer arrives (illustrations.md).
+  // Snuffle sniffs while it asks and leaves when the first answer arrives (mark.md).
   const waiting = offers.every((o) => (answers[o.shopId] ?? 'asked') === 'asked' || answers[o.shopId] === 'seen');
   return (
     <View style={styles.block}>
-      {waiting ? (
-        <View style={styles.art}>
-          <Illustration name="scooter" size="medium" />
-        </View>
-      ) : null}
+      <SnuffleSniff active={waiting} />
       {offers.map((offer, i) => {
         const shop = shopById(content, offer.shopId);
         const state = answers[offer.shopId] ?? 'asked';
@@ -456,17 +479,8 @@ function Answer({ shopId, best, animateIn, onDismiss, onOpenShop }: { shopId: st
 const COMPOSER_ID = 'chat-composer';
 // The width Requests asks the image pipeline for, so the bar shows the very file the row does.
 const REQUEST_THUMB_WIDTH = 56;
-
-/** The image beside the request's name in the bar: the photo its row in Requests shows (same key, same size), or
- *  the category's still on the shop's tile when there is no photo. The scripted requests are one item of a known
- *  kind, so they count as confident; anything else keeps the name alone. */
-function requestThumb(content: ReturnType<typeof useContent>): NavBarProps['subtitleThumb'] {
-  const request = content.active;
-  if (request.image) return { photo: imageSource(request.image, REQUEST_THUMB_WIDTH) };
-  const shop = shopById(content, request.offers[0]?.shopId ?? '');
-  if (shop && isCategoryId(shop.kind)) return { category: shop.kind, accent: shopAccent(shop) };
-  return undefined;
-}
+// And the grid in the photo picker: three across a sheet, about 110 points each.
+const PICKER_WIDTH = 120;
 
 const NOW_DAY: Record<string, number> = { sam: 2, jess: 6 };
 
@@ -485,6 +499,7 @@ function DetailsSheet({ onToast }: { onToast: (text: string) => void }) {
   const shopHours = useApp('shopHours');
   const persona = useApp('persona');
   const answers = useApp('answers');
+  const atHome = useApp('place').area === 'blythe';
   const lastShop = useSim((s) => s.buyShopId);
   const { set } = useAppActions();
   const [at, setAt] = useState<'shop' | 'collectPoint'>('collectPoint');
@@ -580,7 +595,7 @@ function DetailsSheet({ onToast }: { onToast: (text: string) => void }) {
     >
       <ShopMeta {...shopFacts(shopHours, shop)} />
       <View style={styles.map}>
-        <Map />
+        <Map shopId={shop.id} accent={shopAccent(shop)} route={atHome} />
       </View>
       <View>
         <ListRow title={offer.item ?? `${content.active.title}`} detail={`${commas(t.status)}${t.source ? `, ${t.source}` : ''}`} value={t.price} valueStrong position="first" />
@@ -675,6 +690,8 @@ function OtherRequestChat({ id }: { id: string }) {
   const request = content.others.find((r) => r.id === id);
   const thread = useOtherThread(key);
   const [reply, setReply] = useState('');
+  const [picking, setPicking] = useState(false);
+  const photo = useRequestPhoto(content.id, id, request?.image ?? 'eclipse-glasses');
   const [rating, setRating] = useState<{ open: boolean; up: boolean | null; tags: string[]; note: string }>({ open: false, up: null, tags: [], note: '' });
   const items = request ? buildOtherChat(content, id, thread) : [];
   const newestFirst = [...items].reverse();
@@ -755,7 +772,9 @@ function OtherRequestChat({ id }: { id: string }) {
         title="Snuffle"
         titleMark
         subtitle={request?.title ?? 'Request'}
-        subtitleThumb={request ? { photo: imageSource(request.image, REQUEST_THUMB_WIDTH) } : undefined}
+        trailingPhoto={
+          request ? { photo: imageSource(photo, REQUEST_THUMB_WIDTH), label: `Change photo, ${request.title}`, onPress: () => setPicking(true) } : undefined
+        }
         fill="chat"
         leading="back"
         backLabel="Requests"
@@ -763,6 +782,20 @@ function OtherRequestChat({ id }: { id: string }) {
         scroll={scroll}
         backgroundAt={-theme.space[2]}
       />
+      {request ? (
+        <PhotoPickerSheet
+          open={picking}
+          onClose={() => setPicking(false)}
+          title="Photo"
+          subtitle={request.title}
+          photos={photoOptions(request.image).map((key) => ({ id: key, photo: imageSource(key, PICKER_WIDTH) }))}
+          selected={photo}
+          onSelect={(key) => {
+            chooseRequestPhoto(content.id, id, key as ImageKey);
+            setPicking(false);
+          }}
+        />
+      ) : null}
       <RatingSheet
         open={rating.open}
         onClose={() => setRating((r) => ({ ...r, open: false }))}

@@ -26,6 +26,8 @@ Open it on its own to use the full window: `app-web/index.html`. On windows narr
 
 All shops are invented and sit around Blythe Road, W14. Walk times are from Blythe Road; the Work place (Kensington High St, W8) reuses Olympia Cameras, Abingdon Deli and Church Street Books at 3, 4 and 9 minutes, with seven of the other shops below. The accent follows the shop's kind in `app/src/store/kinds.ts`. Lavender is kept for Snuffle, so shops use only Butter, Peach and Pistachio; the 12 demo shops are four of each. A connected shop answers from its till; an asked shop answers by message (WhatsApp).
 
+Every photo in the prototype is a real photo from Unsplash, chosen by an agent and checked against its Unsplash page (photographer, profile and page are kept with it in `app/src/content/images.ts`), then downloaded and bundled, so the app makes no request to Unsplash and nothing is picked at random. A request's photo is one of these: each item in the demo (eclipse glasses, birthday cake, sourdough loaf, picture hooks, desk fan, bouquet) has its own photo plus five more of the same item, and the shopper can switch between the six from the photo in the chat's bar. A product needs its photos added by hand; an item the demo doesn't know has none. Credits are not shown in the app.
+
 | Shop | Kind | Street | Walk | Hours | Answers | Collect within | Delivers | Accent |
 |---|---|---|---|---|---|---|---|---|
 | Blythe Road News | Newsagent, post counter | Blythe Road | 1 min | 7am–11pm | Asked | 7 days | No | Butter |
@@ -33,52 +35,52 @@ All shops are invented and sit around Blythe Road, W14. Walk times are from Blyt
 | Brook Hardware | Hardware | Shepherd's Bush Road | 8 min | 8am–5:30pm | Asked | 30 days | £5, next day | Butter |
 | Brook Green Toys | Toys | Shepherd's Bush Road | 9 min | 10am–6pm | Asked | 30 days | No | Peach |
 | Goldhawk Butchers | Butcher | Goldhawk Road | 11 min | 8am–5:30pm | Asked | Next day | No | Peach |
-| Broadway Chemist | Chemist | Hammersmith Broadway | 12 min | 8am–8pm | Connected | 7 days | No | Pistachio |
-| Olympia Cameras | Cameras | Kensington High Street | 12 min | 10am–6pm | Asked | 14 days | No | Peach |
+| Broadway Chemist | Chemist | Hammersmith Broadway | 11 min | 8am–8pm | Connected | 7 days | No | Pistachio |
+| Olympia Cameras | Cameras | Kensington High Street | 14 min | 10am–6pm | Asked | 14 days | No | Peach |
 | Paper & Co | Stationer | King Street | 13 min | 9am–7pm | Asked | 7 days | £3.50, today | Pistachio |
 | Halo Florist | Florist | Goldhawk Road | 13 min | 8am–5pm | Asked | Same day | £6, today | Pistachio |
-| Bush Opticians | Opticians | Shepherd's Bush Green | 14 min | 9am–6pm | Asked | 14 days | No | Pistachio |
-| Abingdon Deli | Deli | Abingdon Road | 18 min | 8am–8pm | Asked | Same day | £4, today | Peach |
-| Church Street Books | Bookshop | Kensington Church Street | 20 min | 9am–7pm | Connected | 30 days | No | Butter |
+| Bush Opticians | Opticians | Shepherd's Bush Green | 10 min | 9am–6pm | Asked | 14 days | No | Pistachio |
+| Abingdon Deli | Deli | Abingdon Road | 25 min | 8am–8pm | Asked | Same day | £4, today | Peach |
+| Church Street Books | Bookshop | Kensington Church Street | 28 min | 9am–7pm | Connected | 30 days | No | Butter |
 
-The 15-minute radius shows the first ten shops; 20 minutes adds the deli and the bookshop.
+The 15-minute radius shows the first ten shops. Walk times come from real walking routes from 163 Blythe Road (decision 063), and the deli and the bookshop are 25 and 28 minutes away, past even the 20-minute radius, so no Nearby list shows them.
 
 ### Other shops
 
-Nearby and the Category screens also list 30 more invented shops, so every category has three to five places within 15 minutes; the 12 shops above carry the demo journey, and the other 30 are never asked in it. Fishmongers sit under Butcher, plant shops under Florist and the games shop under Toys; Abingdon Deli moves to a Deli category with the same Peach accent. Each has hours, a collection window, three items with prices, ratings and how it does on Snuffle (`app/src/store/seed-more.ts`). The Work place also lists seven of them. Each has a shopfront or inside photo from Unsplash, bundled at 640 px, and eight have a second photo.
+Nearby and the Category screens also list 30 more invented shops, so every category has two to four places within 15 minutes on foot (the walk times come from real routes, decision 063); the 12 shops above carry the demo journey, and the other 30 are never asked in it. Fishmongers sit under Butcher, plant shops under Florist and the games shop under Toys; Abingdon Deli moves to a Deli category with the same Peach accent. Each has hours, a collection window, three items with prices, ratings and how it does on Snuffle (`app/src/store/seed-more.ts`). The Work place also lists seven of them. Each has a shopfront or inside photo from Unsplash, bundled at 640 px, and eight have a second photo.
 
 | Category | Shop | Street | Walk | Answers | Note |
 |---|---|---|---|---|---|
 | Bakery (Butter) | Brook Green Bread, artisan bakery | Brook Green | 5 min | Asked |  |
-|  | Pastelaria Estrela, Portuguese pastelaria | Hammersmith Road | 6 min | Asked |  |
+|  | Pastelaria Estrela, Portuguese pastelaria | Hammersmith Road | 10 min | Asked |  |
 |  | Sugar & Spoon Cakes, cake maker | Shepherd's Bush Road | 10 min | Asked | 3 days' notice; delivers |
 | Café (Peach) | The Blythe Café, café | Blythe Road | 3 min | Asked |  |
-|  | Yellow Door Coffee, coffee shop | Hammersmith Road | 7 min | Asked | New |
+|  | Yellow Door Coffee, coffee shop | Hammersmith Road | 10 min | Asked | New |
 |  | Grove Café, café | Brook Green | 9 min | Asked |  |
-| Deli (Peach) | Alimentari Bellini, Italian grocer | North End Road | 8 min | Connected |  |
+| Deli (Peach) | Alimentari Bellini, Italian grocer | North End Road | 12 min | Connected |  |
 |  | Hammersmith Cheese Room, cheesemonger | King Street | 12 min | Asked | Delivers |
-|  | Askew Road Deli, deli | Askew Road | 15 min | Asked |  |
-| Hardware (Butter) | Heel & Key, key cutter and cobbler | Hammersmith Road | 6 min | Asked |  |
-|  | Hammersmith Paint & DIY, paint and DIY | King Street | 11 min | Asked | Delivers |
-| Toys and games (Peach) | Brook Green Games, games shop | Shepherd's Bush Road | 9 min | Asked |  |
+|  | Askew Road Deli, deli | Askew Road | 21 min | Asked |  |
+| Hardware (Butter) | Heel & Key, key cutter and cobbler | Hammersmith Road | 10 min | Asked |  |
+|  | Hammersmith Paint & DIY, paint and DIY | King Street | 14 min | Asked | Delivers |
+| Toys and games (Peach) | Brook Green Games, games shop | Shepherd's Bush Road | 10 min | Asked |  |
 |  | Little Bear Toys, toy shop | Holland Road | 10 min | Asked | New |
-| Butcher and fish (Peach) | Goldhawk Fish, fishmonger | Goldhawk Road | 11 min | Asked |  |
-|  | Larkin & Sons Butchers, organic butcher | Askew Road | 14 min | Asked | Cuts to order |
+| Butcher and fish (Peach) | Goldhawk Fish, fishmonger | Goldhawk Road | 10 min | Asked |  |
+|  | Larkin & Sons Butchers, organic butcher | Askew Road | 22 min | Asked | Cuts to order |
 | Chemist (Pistachio) | Brook Green Pharmacy, independent pharmacy | Brook Green | 4 min | Connected |  |
-|  | Hammersmith Health Foods, health-food shop | King Street | 13 min | Asked |  |
+|  | Hammersmith Health Foods, health-food shop | King Street | 15 min | Asked |  |
 | Cameras (Peach) | Addison Cameras, camera shop | Holland Road | 11 min | Asked | Delivers |
 |  | Silver Halide Film Lab, film lab | Uxbridge Road | 15 min | Asked | New, no ratings |
-| Stationery (Pistachio) | Quill & Ledger, stationer | Hammersmith Road | 7 min | Connected |  |
-|  | Pigment Art Supplies, art supplies | Shepherd's Bush Road | 10 min | Asked | New |
+| Stationery (Pistachio) | Quill & Ledger, stationer | Hammersmith Road | 11 min | Connected |  |
+|  | Pigment Art Supplies, art supplies | Shepherd's Bush Road | 7 min | Asked | New |
 | Florist and plants (Pistachio) | Fern & Pot, plant shop | Brook Green | 6 min | Asked | New, no ratings |
-|  | Wild Stem Flowers, florist | North End Road | 9 min | Asked | Delivers |
-| Opticians (Pistachio) | Clear View Opticians, opticians | Holland Road | 8 min | Asked |  |
-|  | King Street Opticians, opticians | King Street | 12 min | Asked |  |
+|  | Wild Stem Flowers, florist | North End Road | 13 min | Asked | Delivers |
+| Opticians (Pistachio) | Clear View Opticians, opticians | Holland Road | 9 min | Asked |  |
+|  | King Street Opticians, opticians | King Street | 16 min | Asked |  |
 | Newsagent (Butter) | Brook Green News & Wine, corner shop | Brook Green | 5 min | Asked |  |
-|  | Goldhawk Road Kiosk, news kiosk | Goldhawk Road | 13 min | Asked |  |
-| Books (Butter) | Riverside Books, new books | Hammersmith Road | 7 min | Connected |  |
-|  | Second Chapter Books, second-hand books | Shepherd's Bush Road | 8 min | Asked |  |
-|  | Panel Comics, comics | King Street | 13 min | Asked | New |
+|  | Goldhawk Road Kiosk, news kiosk | Goldhawk Road | 12 min | Asked |  |
+| Books (Butter) | Riverside Books, new books | Hammersmith Road | 11 min | Connected |  |
+|  | Second Chapter Books, second-hand books | Shepherd's Bush Road | 7 min | Asked |  |
+|  | Panel Comics, comics | King Street | 17 min | Asked | New |
 
 ### Items and sources
 
@@ -105,7 +107,7 @@ Sam is the default persona: he needs eclipse glasses, 2 pairs, by 4pm today (Mon
 
 | Step | Time | What happens |
 |---|---|---|
-| `home` | 13:01 | Nearby around Blythe Road: Rossi's and Paper & Co promoted, Halo and Olympia new |
+| `home` | 13:01 | Nearby around Blythe Road: Browse by category, Open near you and New near you, with Delivers on the tiles of shops that deliver |
 | `ask` | 13:02 | Sam types the glasses and a cake for Saturday in one message |
 | `split` | 13:02 | Snuffle suggests two requests, because the items go to different shops |
 | `confirm` | 13:02 | Snuffle confirms the glasses request and asks to send notifications |
@@ -133,7 +135,7 @@ Sam is the default persona: he needs eclipse glasses, 2 pairs, by 4pm today (Mon
 
 ### Jess
 
-Jess wants a sourdough from Rossi's Bakery but finishes work at 6, when Rossi's closes. In `afterWork` (12:30) she buys the £4.20 loaf, and Rossi's drops it at Blythe Road News, open till 11pm, to collect the same day. `shopPage` shows Rossi's page, with the sourdough it had two hours ago. The content sets in the debugger stress the same shops: `manyAnswers` asks all 12, `longNames` gives four of them long names.
+Jess wants a sourdough from Rossi's Bakery but finishes work at 6, when Rossi's closes. In `afterWork` (12:30) she buys the £4.20 loaf, and Rossi's drops it at Blythe Road News, open till 11pm, to collect the same day. `shopPage` shows Rossi's page, with the sourdough loaf under Found here recently, dated yesterday. The content sets in the debugger stress the same shops: `manyAnswers` asks all 12, `longNames` gives four of them long names.
 
 ## First run
 

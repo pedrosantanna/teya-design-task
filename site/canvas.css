@@ -138,14 +138,17 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .cv-proto[hidden] { display: none; }
 .cv-proto-name { flex: none; margin: 0; max-width: 100%; font-size: 14px; font-weight: 500; color: var(--muted-fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cv-proto-fit { position: relative; flex: 1; min-height: 0; align-self: stretch; }
-.cv-proto-device { position: absolute; left: 50%; top: 50%; transform-origin: 50% 50%; overflow: hidden; isolation: isolate; }
-.cv-proto-device.phone { border-radius: 52px; box-shadow: 0 0 0 1px rgb(0 0 0 / .08), 0 2px 6px rgb(0 0 0 / .05), 0 24px 60px rgb(0 0 0 / .14); }
-.cv-proto-device.card { border-radius: 20px; background: var(--bg); border: 1px solid var(--border); box-shadow: 0 12px 40px rgb(0 0 0 / .10); }
+.cv-proto-device { --r: 0px; position: absolute; left: 50%; top: 50%; transform-origin: 50% 50%; border-radius: var(--r); }
+/* The stage clips the layers with clip-path, not overflow: hidden. A rounded overflow does not clip children that are being animated on their own compositor layer, so the corners showed square until the transition ended. The clip is on a child so the device's shadow stays visible. */
+.cv-proto-stage { position: absolute; inset: 0; overflow: hidden; border-radius: var(--r); clip-path: inset(0 round var(--r)); isolation: isolate; transform: translateZ(0); }
+.cv-proto-device.phone { --r: 52px; border-radius: 52px; box-shadow: 0 0 0 1px rgb(0 0 0 / .08), 0 2px 6px rgb(0 0 0 / .05), 0 24px 60px rgb(0 0 0 / .14); }
+.cv-proto-device.card { --r: 19px; border-radius: 20px; background: var(--bg); border: 1px solid var(--border); box-shadow: 0 12px 40px rgb(0 0 0 / .10); }
 .cv-proto-layer { position: absolute; inset: 0; background: var(--canvas-bg); will-change: transform, opacity; }
-.cv-proto-device.phone .cv-proto-layer { background: #000; }
+.cv-proto-device.phone .cv-proto-layer { background: transparent; }
+.cv-proto-device.phone .cv-proto-stage { background: #000; }
 .cv-proto-device.card .cv-proto-layer { display: grid; place-items: center; background: var(--bg); }
 .cv-proto-layer > .cv-item { position: relative; left: auto; top: auto; outline: none; }
-.cv-proto-layer > .frame .ios { pointer-events: auto; box-shadow: none; }
+.cv-proto-layer > .frame .ios { pointer-events: auto; box-shadow: none; border-radius: 0; }
 .cv-proto-device.card .cv-proto-layer > .state { box-shadow: none; }
 .cv-proto-dim { position: absolute; inset: 0; z-index: 20; background: rgb(0 0 0 / .28); pointer-events: none; }
 .cv-proto .cv-hot { cursor: pointer; }
@@ -153,8 +156,7 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .cv-proto.show-hot .cv-hot, .cv-proto-device.is-flash .cv-hot { outline: 2px solid rgb(var(--indigo) / .75); outline-offset: -1px; box-shadow: inset 0 0 0 999px rgb(var(--indigo) / .22); }
 .cv-proto-device.is-flash .cv-hot { animation: cv-flash .7s ease-out both; }
 @keyframes cv-flash { 0% { outline-color: rgb(var(--indigo) / 0); box-shadow: inset 0 0 0 999px rgb(var(--indigo) / 0); } 15%, 55% { outline-color: rgb(var(--indigo) / .75); box-shadow: inset 0 0 0 999px rgb(var(--indigo) / .25); } 100% { outline-color: rgb(var(--indigo) / 0); box-shadow: inset 0 0 0 999px rgb(var(--indigo) / 0); } }
-.cv-proto-next { flex: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; max-width: 100%; }
-.cv-proto-next:empty { display: none; }
+.cv-proto-next { flex: none; min-height: 30px; /* reserved, so the screen does not rescale when a screen has no next buttons */ display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; max-width: 100%; }
 .cv-proto-next button {
   display: inline-flex; align-items: center; gap: 4px; max-width: 100%; height: 30px; padding: 0 12px 0 8px; border-radius: 999px; border: 1px solid rgb(var(--indigo) / .35);
   background: var(--bg); color: var(--fg); font: inherit; font-size: 13px; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;

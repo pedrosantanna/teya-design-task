@@ -355,7 +355,7 @@
       root.insertAdjacentHTML('beforeend', `
         <div class="cv-proto" hidden tabindex="-1">
           <p class="cv-proto-name" aria-live="polite"></p>
-          <div class="cv-proto-fit"><div class="cv-proto-device"></div></div>
+          <div class="cv-proto-fit"><div class="cv-proto-device"><div class="cv-proto-stage"></div></div></div>
           <div class="cv-proto-next"></div>
           <div class="cv-proto-bar" role="toolbar" aria-label="${t('protoBar')}">
             <button type="button" data-p="restart" title="${t('protoRestart')} (R)" aria-label="${t('protoRestart')}">${icon('rotate-ccw')}</button>
@@ -365,7 +365,7 @@
           </div>
         </div>`);
       const el = root.querySelector('.cv-proto');
-      pv = { el, name: el.querySelector('.cv-proto-name'), fit: el.querySelector('.cv-proto-fit'), device: el.querySelector('.cv-proto-device'), next: el.querySelector('.cv-proto-next'), pick: el.querySelector('.cv-proto-pick'), back: el.querySelector('[data-p=back]'), hot: el.querySelector('[data-p=hot]') };
+      pv = { el, name: el.querySelector('.cv-proto-name'), fit: el.querySelector('.cv-proto-fit'), device: el.querySelector('.cv-proto-device'), stage: el.querySelector('.cv-proto-stage'), next: el.querySelector('.cv-proto-next'), pick: el.querySelector('.cv-proto-pick'), back: el.querySelector('[data-p=back]'), hot: el.querySelector('[data-p=hot]') };
       // Screens grouped by the area they sit in, areas in title order ("0 · First run", "1 · …"), screens top-left first.
       const areas = items.filter(a => a.matches('.area')).map(a => ({ a, b: box(a), title: a.dataset[lang === 'pt' ? 'titlePt' : 'titleEn'] || a.dataset.titleEn || '', en: a.dataset.titleEn || '' }));
       const groups = new Map();
@@ -415,7 +415,7 @@
     }
     const EASE = 'cubic-bezier(.32, .72, 0, 1)', DUR = 340;
     function transition(old, neu, kind, rect) {
-      const dev = pv.device;
+      const dev = pv.stage;
       if (reduced() && kind !== 'none') kind = 'fade';
       if ((kind === 'zoom' || kind === 'unzoom') && !rect) kind = 'fade';
       const under = kind === 'unzoom' || kind === 'pop' || kind === 'close';
@@ -453,8 +453,8 @@
     }
     const REVERSE = { zoom: 'unzoom', push: 'pop', sheet: 'close', close: 'sheet', fade: 'fade', none: 'none' };
     function protoShow(id, kind = 'none', rect = null) {
-      const old = pv.device.querySelector('.cv-proto-layer:last-child');
-      pv.device.querySelectorAll('.cv-proto-layer').forEach(l => { if (l !== old) l.remove(); });
+      const old = pv.stage.querySelector('.cv-proto-layer:last-child');
+      pv.stage.querySelectorAll('.cv-proto-layer').forEach(l => { if (l !== old) l.remove(); });
       const s = byId.get(id);
       const size = screenSize(s);
       if (size.w !== proto.w || size.h !== proto.h) { proto.w = size.w; proto.h = size.h; protoLayout(); }
@@ -513,7 +513,7 @@
       if (m === 'proto') {
         select([]); drawer.hidden = true;
         proto.hist = [];
-        pv.device.innerHTML = '';
+        pv.stage.innerHTML = '';
         const first = byId.get(at) ? at : startId();
         const sz = screenSize(byId.get(first)); proto.w = sz.w; proto.h = sz.h;
         protoLayout();

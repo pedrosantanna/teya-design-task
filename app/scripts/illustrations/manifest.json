@@ -67,7 +67,8 @@
         "entry"
       ],
       "grounds": [
-        "card"
+        "card",
+        "background"
       ],
       "sizes": [
         "large"
@@ -88,23 +89,6 @@
       ],
       "grounds": [
         "card"
-      ],
-      "sizes": [
-        "large"
-      ]
-    },
-    {
-      "name": "scooter",
-      "object": "scooter",
-      "uses": [
-        "Asking the shops"
-      ],
-      "clips": [
-        "entry",
-        "idle"
-      ],
-      "grounds": [
-        "background"
       ],
       "sizes": [
         "large"

@@ -5,6 +5,7 @@ import { Platform } from 'react-native';
 import { create } from 'zustand';
 
 import { FIRST_RUN_STEPS, hrefFor, stepById, steps, type StepId, type StepPreset } from './journey';
+import type { ImageKey } from '@/content/images';
 import { readPersisted } from './persist';
 import { currentPlace, seedPlaces } from './seed';
 import { readUrlState } from './url';
@@ -51,6 +52,8 @@ export type AppState = {
   radius: Radius;
   /** Saved places (mock persistence for the session). */
   places: Place[];
+  /** The photo the shopper picked for a request, by `persona:requestId` (photos.ts). Requests without an entry keep their own. */
+  requestPhotos: Record<string, ImageKey>;
   /** First run is done (or skipped). Persisted across launches (persist.ts); see first-run.ts. */
   hasOnboarded: boolean;
 };
@@ -97,6 +100,7 @@ const defaults: AppState = {
   place: currentPlace,
   radius: 15,
   places: seedPlaces,
+  requestPhotos: {},
   hasOnboarded: false,
 };
 
@@ -157,6 +161,7 @@ export const useAppStore = create<AppState & AppActions>()((set, get) => ({
       keepLookingForMore: false,
       place: currentPlace,
       radius: 15,
+      requestPhotos: {},
     });
     for (const hook of stepHooks) hook('home');
     navigateTo('home');

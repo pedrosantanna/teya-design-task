@@ -24,7 +24,7 @@ type El = { style: Record<string, string> };
 type ViewTransition = { finished: Promise<void> };
 type Doc = {
   startViewTransition?: (cb: () => Promise<void>) => ViewTransition;
-  documentElement: { dataset: Record<string, string | undefined> };
+  documentElement: { dataset: Record<string, string | undefined>; style: { setProperty: (name: string, value: string) => void } };
   head: { appendChild: (n: unknown) => void };
   createElement: (tag: string) => { textContent: string; id: string };
   getElementById: (id: string) => unknown;
@@ -128,6 +128,7 @@ export async function navigateWith(kind: TransitionKind, navigate: () => void, s
   }
   const reduced = webReduced();
   const root = d.documentElement;
+  syncScreenRadius(root);
   root.dataset.vt = reduced ? 'fade' : kind;
   const source = sourceId ? (originNode(sourceId) as El | null) : null;
   if (!reduced && kind === 'zoom' && source) {
@@ -228,7 +229,7 @@ const RADIUS = themes.iosLight.radius.card;
 const PUSH_SHADOW = '-8px 0 24px rgba(0, 0, 0, 0.14)';
 const CSS = `
 ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
-::view-transition-group(${SCREEN}) { overflow: hidden; animation-duration: ${MS.push}ms; animation-timing-function: ${EASE}; }
+::view-transition-group(${SCREEN}) { overflow: hidden; border-radius: var(--snuffle-vt-radius, 0px); animation-duration: ${MS.push}ms; animation-timing-function: ${EASE}; }
 ::view-transition-group(${ZOOM}) { animation-duration: ${MS.zoom}ms; animation-timing-function: ${EASE}; z-index: 2; overflow: hidden; border-radius: ${RADIUS}px; }
 ::view-transition-old(${ZOOM}), ::view-transition-new(${ZOOM}) { height: 100%; object-fit: cover; }
 ::view-transition-old(${SCREEN}), ::view-transition-new(${SCREEN}) { animation-duration: ${MS.push}ms; animation-timing-function: ${EASE}; animation-fill-mode: both; }
@@ -279,6 +280,27 @@ export function nameScreenArea(node: unknown) {
   injectCss(d);
   (node as El).style.viewTransitionName = SCREEN;
   screenArea = node as typeof screenArea;
+}
+
+/**
+ * The screen's rounded corners, for the transition's group. A view transition paints in the page's own layer, so the
+ * phone frame's rounded clip does not reach it and the corners showed square until the transition ended. The group gets
+ * the radius of the nearest rounded ancestor (the phone's screen), scaled as the frame is, from the first frame.
+ */
+function syncScreenRadius(root: Doc['documentElement']) {
+  let radius = 0;
+  const node = screenArea as unknown as HTMLElement | null;
+  if (node && typeof getComputedStyle === 'function') {
+    for (let el: HTMLElement | null = node; el; el = el.parentElement) {
+      const r = parseFloat(getComputedStyle(el).borderTopLeftRadius);
+      if (r > 0 && r < 1000) {
+        const scale = el.offsetWidth ? el.getBoundingClientRect().width / el.offsetWidth : 1;
+        radius = r * scale;
+        break;
+      }
+    }
+  }
+  root.style.setProperty('--snuffle-vt-radius', `${radius}px`);
 }
 
 // Swipe back (touch only): a drag that starts at the screen's left edge and travels past EDGE_COMMIT points, mostly

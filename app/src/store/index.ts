@@ -4,6 +4,7 @@ export * from './labels';
 export { steps, stepGroups, stepById, hrefFor, FIRST_RUN_STEPS, type JourneyStep, type StepId, type StepGroup } from './journey';
 export { finishFirstRun, replayFirstRun } from './first-run';
 export { addressBook, areas, contentFor, currentPlace, personas, seedPlaces, shopById, shopNumber } from './seed';
+export { chooseRequestPhoto, photoKey, useRequestPhoto } from './photos';
 export { useAppStore, useApp, useAppActions, type AppState, type AppActions, type Draft } from './store';
 export { useArea, type AreaView } from './selectors';
 export { CATEGORIES, KIND_ACCENT, shopAccent, type Category } from './kinds';

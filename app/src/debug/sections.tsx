@@ -9,6 +9,7 @@ import { useFrameMode, type FrameMode } from '@/device-frame';
 import {
   answerLabel,
   replayFirstRun,
+  contentFor,
   currentPlace,
   orderLabel,
   orderStatesFor,
@@ -39,14 +40,23 @@ import {
   type StepId,
 } from '@/store';
 
-import { Button, Check, Note, Section, Segmented, Select, Sub, Toggle } from './controls';
+import { Button, Note, Section, Segmented, Select, Sub, Toggle } from './controls';
 import { useDebugger } from './visibility';
 
-export function PersonaSection() {
-  const persona = useApp('persona');
+const frameOptions: Option<FrameMode>[] = [
+  { value: 'auto', label: 'Follows platform' },
+  { value: 'ios', label: 'iPhone' },
+  { value: 'android', label: 'Pixel' },
+  { value: 'off', label: 'No frame' },
+];
+
+export function ShopperSection() {
+  const { persona, platform, scheme } = useAppStore(useShallow((s) => ({ persona: s.persona, platform: s.platform, scheme: s.scheme })));
   const { set } = useAppActions();
+  const frame = useFrameMode((s) => s.mode);
+  const setFrame = useFrameMode((s) => s.setMode);
   return (
-    <Section title="Persona">
+    <Section title="Shopper and device">
       <Segmented
         label="Shopper"
         options={[
@@ -56,24 +66,6 @@ export function PersonaSection() {
         value={persona}
         onChange={(p) => set({ persona: p })}
       />
-    </Section>
-  );
-}
-
-const frameOptions: Option<FrameMode>[] = [
-  { value: 'auto', label: 'Follows platform' },
-  { value: 'ios', label: 'iPhone' },
-  { value: 'android', label: 'Pixel' },
-  { value: 'off', label: 'No frame' },
-];
-
-export function LookSection() {
-  const { platform, scheme } = useAppStore(useShallow((s) => ({ platform: s.platform, scheme: s.scheme })));
-  const { set } = useAppActions();
-  const frame = useFrameMode((s) => s.mode);
-  const setFrame = useFrameMode((s) => s.setMode);
-  return (
-    <Section title="Look">
       <Segmented
         label="Platform"
         options={[
@@ -93,7 +85,7 @@ export function LookSection() {
         value={scheme}
         onChange={(s) => set({ scheme: s })}
       />
-      {Platform.OS === 'web' ? <Select label="Frame" options={frameOptions} value={frame} onChange={setFrame} /> : null}
+      {Platform.OS === 'web' ? <Select label="Phone frame" options={frameOptions} value={frame} onChange={setFrame} /> : null}
     </Section>
   );
 }
@@ -124,7 +116,7 @@ export function JourneySection() {
   };
   return (
     <Section title="Journey">
-      <Select label="Step" groups={stepGroupsFor(platform)} value={step} onChange={pick} />
+      <Select label="Screen" groups={stepGroupsFor(platform)} value={step} onChange={pick} />
     </Section>
   );
 }
@@ -132,8 +124,8 @@ export function JourneySection() {
 const requestStates: RequestState[] = ['none', 'asking', 'haveIt', 'needsYou', 'looking', 'repeat', 'notFound', 'closed'];
 const answerStates: AnswerState[] = ['asked', 'seen', 'hasIt', 'hasSome', 'similar', 'doesntHave', 'noReply', 'inStock', 'inStockSome', 'canMake'];
 const paymentOptions: Option<PaymentState>[] = [
-  { value: 'idle', label: 'Not started' },
-  { value: 'sheet', label: 'Payment sheet open' },
+  { value: 'idle', label: 'Closed' },
+  { value: 'sheet', label: 'Open' },
   { value: 'declined', label: 'Declined' },
 ];
 const fulfilmentOptions = [
@@ -143,13 +135,12 @@ const fulfilmentOptions = [
 
 export function StatesSection() {
   const content = useContent();
-  const { request, order, fulfilment, payment, shopHours, keepLookingForMore } = useAppStore(
+  const { request, order, fulfilment, payment, keepLookingForMore } = useAppStore(
     useShallow((s) => ({
       request: s.request,
       order: s.order,
       fulfilment: s.fulfilment,
       payment: s.payment,
-      shopHours: s.shopHours,
       keepLookingForMore: s.keepLookingForMore,
     })),
   );
@@ -169,12 +160,8 @@ export function StatesSection() {
       label: orderLabel(state, { shop: orderShop?.name ?? '', collectBy: content.order.collectBy, extendedTo: content.order.extendedTo }),
     }),
   );
-  const hoursOptions = (['open', 'closesSoon', 'closed'] as ShopHours[]).map(
-    (h): Option<ShopHours> => ({ value: h, label: shopHoursLabel(h, orderShop ?? { openUntil: '7pm', opensAt: '9am' }) }),
-  );
-
   return (
-    <Section title="States">
+    <Section title="Request and order">
       <Select label="Request" options={requestOptions} value={request} onChange={(r) => set({ request: r })} />
       <Segmented
         label="How to get it"
@@ -183,15 +170,14 @@ export function StatesSection() {
         onChange={(f) => set({ fulfilment: f, order: orderStatesFor[f].includes(order) ? order : 'none' })}
       />
       <Select label="Order" options={orderOptions} value={order} onChange={(o) => set({ order: o })} />
-      <Check
-        label={`Keep looking for ${Math.max(1, active.quantity - 1)} more`}
-        detail="Line on the order card after a partial buy"
-        checked={keepLookingForMore}
-        onChange={(v) => set({ keepLookingForMore: v })}
+      <Toggle
+        label={`Bought ${Math.max(1, active.quantity - 1)} of ${active.quantity}`}
+        detail="The order card says it keeps looking for the rest"
+        value={keepLookingForMore}
+        onChange={sim.setPartialBuy}
       />
-      <Select label="Payment" options={paymentOptions} value={payment} onChange={(p) => set({ payment: p })} />
-      <Select label="Shop hours" options={hoursOptions} value={shopHours} onChange={(h) => set({ shopHours: h })} />
-      <Sub>{`Answers · ${active.title}`}</Sub>
+      <Select label="Payment sheet" options={paymentOptions} value={payment} onChange={(p) => set({ payment: p })} />
+      <Sub>{`Shops' answers · ${active.title}`}</Sub>
       {active.offers.map((offer) => (
         <AnswerSelect key={offer.shopId} shopId={offer.shopId} />
       ))}
@@ -221,15 +207,19 @@ function AnswerSelect({ shopId }: { shopId: string }) {
 }
 
 const contentOptions: Option<ContentSet>[] = [
-  { value: 'default', label: 'Default (v7)' },
-  { value: 'empty', label: 'Empty' },
+  { value: 'default', label: 'Default' },
+  { value: 'empty', label: 'Few shops, no requests' },
   { value: 'longNames', label: 'Long names' },
-  { value: 'manyAnswers', label: 'Many answers' },
+  { value: 'manyAnswers', label: 'Twelve shops asked' },
 ];
 
+/** The states the added shops answer with when the set asks twelve shops, so the chat has twelve answers to show. */
+const manyAnswerCycle: AnswerState[] = ['hasIt', 'doesntHave', 'similar', 'hasSome', 'noReply', 'doesntHave'];
+
 export function ContentSection() {
-  const { contentSet, loading, locationOff, notificationsAllowed, place, places, radius } = useAppStore(
+  const { contentSet, loading, locationOff, notificationsAllowed, place, places, radius, shopHours } = useAppStore(
     useShallow((s) => ({
+      shopHours: s.shopHours,
       place: s.place,
       places: s.places,
       radius: s.radius,
@@ -240,11 +230,31 @@ export function ContentSection() {
     })),
   );
   const { set } = useAppActions();
+  const content = useContent();
+  const orderShop = shopById(content, content.order.shopId);
+  const hoursOptions = (['open', 'closesSoon', 'closed'] as ShopHours[]).map(
+    (h): Option<ShopHours> => ({ value: h, label: shopHoursLabel(h, orderShop ?? { openUntil: '7pm', opensAt: '9am' }) }),
+  );
+  // The twelve-shop set adds six shops to the request; the ones that haven't answered take a mix of answers.
+  const pickSet = (next: ContentSet) => {
+    const state = useAppStore.getState();
+    if (next !== 'manyAnswers' || state.request === 'none' || state.request === 'asking') {
+      set({ contentSet: next });
+      return;
+    }
+    const offers = contentFor(state.persona, next).active.offers;
+    const answers = { ...state.answers };
+    offers.forEach((offer, i) => {
+      answers[offer.shopId] ??= manyAnswerCycle[i % manyAnswerCycle.length];
+    });
+    set({ contentSet: next, answers });
+  };
   return (
-    <Section title="Content" defaultOpen={false}>
-      <Select label="Content set" options={contentOptions} value={contentSet} onChange={(c) => set({ contentSet: c })} />
+    <Section title="Content and context" defaultOpen={false}>
+      <Select label="Content" options={contentOptions} value={contentSet} onChange={pickSet} />
       <Toggle label="Loading" detail="Skeletons in place of content" value={loading} onChange={(v) => set({ loading: v })} />
       <Toggle label="Location off" value={locationOff} onChange={(v) => set({ locationOff: v })} />
+      <Select label="Shop hours" options={hoursOptions} value={shopHours} onChange={(h) => set({ shopHours: h })} />
       <Select
         label="Place"
         options={[currentPlace, ...places].map((p): Option<string> => ({ value: p.id, label: p.id === 'current' ? `Current location · ${p.address}` : `${p.label} · ${p.address}` }))}
@@ -252,7 +262,7 @@ export function ContentSection() {
         onChange={(id) => set({ place: [currentPlace, ...places].find((p) => p.id === id) ?? currentPlace })}
       />
       <Segmented
-        label="Radius"
+        label="Walking radius"
         options={[
           { value: '10', label: '10 min' },
           { value: '15', label: '15 min' },
@@ -261,7 +271,7 @@ export function ContentSection() {
         value={String(radius)}
         onChange={(r) => set({ radius: Number(r) as Radius })}
       />
-      <Toggle label="Notifications allowed" value={notificationsAllowed} onChange={(v) => set({ notificationsAllowed: v })} />
+      <Toggle label="Notifications" detail="When off, answers stay in the chat" value={notificationsAllowed} onChange={(v) => set({ notificationsAllowed: v })} />
     </Section>
   );
 }
@@ -289,10 +299,10 @@ export function ActionsSection() {
         <Button label="Reset" onPress={reset} />
         <Button label="Replay first run" onPress={replayFirstRun} />
         {Platform.OS === 'web' ? <Button label={copied ? 'Copied' : 'Copy link'} onPress={copy} /> : null}
-        <Button label="Hide" onPress={toggleHidden} />
+        <Button label="Hide debugger" onPress={toggleHidden} />
       </div>
       <Note>
-        Press <kbd>D</kbd> to open or close the panel. Hide removes the button too; <kbd>D</kbd> brings it back. ?debug=0 starts hidden.
+        Press <kbd>D</kbd> to open or close the panel. Hide debugger removes the button too; <kbd>D</kbd> brings it back. ?debug=0 starts hidden.
       </Note>
     </Section>
   );
@@ -322,12 +332,13 @@ export function SimulationSection() {
     <Section title="Simulation" defaultOpen={false}>
       <Toggle label="Clock running" detail={`Shops answer on a timer · ${clock} s`} value={running} onChange={sim.setRunning} />
       <div className="dbg-actions">
-        <Button label="Step 5 s" onPress={() => sim.step(5)} />
-        <Button label="Skip 1 min" onPress={() => sim.step(60)} />
+        <Button label="Advance 5 s" onPress={() => sim.step(5)} />
+        <Button label="Advance 1 min" onPress={() => sim.step(60)} />
       </div>
-      <Select label="Payment" options={payOptions} value={payOutcome} onChange={sim.setPayOutcome} />
-      <Select label="Shop after Buy" options={shopOptions} value={shopOutcome} onChange={sim.setShopOutcome} />
-      <Select label="Date" options={dateOptions} value={date} onChange={sim.setDate} />
+      <Sub>What happens next</Sub>
+      <Select label="Payment result" options={payOptions} value={payOutcome} onChange={sim.setPayOutcome} />
+      <Select label="Shop's reply" options={shopOptions} value={shopOutcome} onChange={sim.setShopOutcome} />
+      <Select label="Today is" options={dateOptions} value={date} onChange={sim.setDate} />
     </Section>
   );
 }

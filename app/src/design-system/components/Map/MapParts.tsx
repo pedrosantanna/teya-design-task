@@ -11,6 +11,9 @@ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { IMAGE_FILL } from '../../internal/media';
 import type { ShopAccentName } from '../../theme';
 import { Text } from '../Text/Text';
+import { MAP_CENTER } from './mapData';
+import { mapPlace, routeBearing, routeView, withRoute } from './mapRoute';
+import { MAP_CAMERA, mapStyle } from './mapStyle';
 
 export type MapProps = {
   /** Loading: Map ground alone. */
@@ -25,6 +28,12 @@ export type MapProps = {
   accent?: ShopAccentName;
   /** Let the shopper pan and zoom. Off by default: on the shop page the map is a backdrop. */
   interactive?: boolean;
+  /** A shop the build placed (assets/map/places.json): the map centres on it and draws the walk to it from the
+   *  shopper's door in the shop's accent, zoomed out until the door shows (in `extent`, or in the map's own size). */
+  shopId?: string;
+  /** Draw the walk from the shopper's door. Off when the shopper is somewhere else (the Work place): the map still
+   *  stands on the shop, at the area's zoom, with no route. */
+  route?: boolean;
   /** Draw "© OpenStreetMap contributors" on the map. Off where the screen credits the map itself (the shop page, at its foot). */
   attribution?: boolean;
 };
@@ -52,11 +61,38 @@ const FALLBACK = {
   dark: require('../../../../assets/map/fallback-dark.jpg'),
 };
 
+/** The style and camera for a map: the plain area, or a shop with its route. */
+export function useMapView(scheme: 'light' | 'dark', accent: ShopAccentName | undefined, shopId: string | undefined, extent: MapProps['extent'], route = true) {
+  const { theme } = useUnistyles();
+  const place = extent ? mapPlace(shopId) : undefined;
+  const base = mapStyle(scheme);
+  if (!place || !extent) return { style: base, center: MAP_CENTER, zoom: MAP_CAMERA.zoom, bearing: MAP_CAMERA.bearing, offsetX: 0, key: 'area' };
+  if (!route) return { style: base, center: place.at, zoom: MAP_CAMERA.zoom, bearing: MAP_CAMERA.bearing, offsetX: 0, key: `${shopId}:${scheme}:still` };
+  const bearing = routeBearing(place);
+  const line = accent ? theme.color.shop.accent[accent].detail : theme.color.primary;
+  const ink = accent ? theme.color.shop.accent[accent].onDetail : theme.color.onPrimary;
+  // Light: the pastel line is cased in the accent's ink, and the door is a white dot ringed in it. Dark: the line is
+  // near-white already, so the casing is the page ground (lifting it off the roofs) and the door is a light dot ringed
+  // in the ground (the card colour measured 1.29:1 on the dark map and read as a hole).
+  const dark = scheme === 'dark';
+  const colour = dark ? { line, casing: theme.color.background, door: line, doorRing: theme.color.background } : { line, casing: ink, door: theme.color.card, doorRing: ink };
+  return {
+    style: withRoute(base, place, colour),
+    center: place.at,
+    ...routeView(place, extent.width, extent.pinY, bearing),
+    bearing,
+    key: `${shopId}:${scheme}:${accent ?? ''}`,
+  };
+}
+
 /** Camera padding that puts the map's centre `pinY` points from the top of a tall view. */
-export function cameraPadding(extent: MapProps['extent']) {
-  if (!extent) return { top: 0, bottom: 0, left: 0, right: 0 };
+export function cameraPadding(extent: MapProps['extent'], offsetX = 0) {
+  // Padding on one side moves the map's centre half as far the other way: the shop sits `offsetX` right of the middle.
+  const left = Math.max(0, 2 * offsetX);
+  const right = Math.max(0, -2 * offsetX);
+  if (!extent) return { top: 0, bottom: 0, left, right };
   const bottom = Math.max(0, extent.height - 2 * extent.pinY);
-  return { top: 0, bottom, left: 0, right: 0 };
+  return { top: 0, bottom, left, right };
 }
 
 /** The static map, centred on the pin at its rendered scale; in a tall view it grows to reach the bottom edge, so the
@@ -76,13 +112,13 @@ export function MapFallback({ extent }: Pick<MapProps, 'extent'>) {
 // The glyph's paths, drawn filled: the outline in Primary, the dot in On Primary (or the shop's Detail and On detail). Its tip is at (12, 22).
 const [outline, dot] = Location01Icon as unknown as [string, { d: string }][];
 
-export function MapPin({ extent, accent }: Pick<MapProps, 'extent' | 'accent'>) {
+export function MapPin({ extent, accent, offsetX = 0 }: Pick<MapProps, 'extent' | 'accent'> & { offsetX?: number }) {
   const { theme } = useUnistyles();
   const size = theme.size.avatar.shop;
   const fill = accent ? theme.color.shop.accent[accent].detail : theme.color.primary;
   const mark = accent ? theme.color.shop.accent[accent].onDetail : theme.color.onPrimary;
   return (
-    <View style={styles.centre(extent?.pinY)} pointerEvents="none">
+    <View style={[styles.centre(extent?.pinY), { transform: [{ translateX: offsetX }] }]} pointerEvents="none">
       <View style={styles.pin(size)}>
         <Svg width={size} height={size} viewBox="0 0 24 24">
           <Path d={outline[1].d} fill={fill} stroke={mark} strokeWidth={1} />

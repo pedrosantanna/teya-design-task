@@ -41,6 +41,8 @@ A v10 tira a decoração da lista de Requests e das conversas, para que as próp
 | v2 | A tela inicial e a tela inicial rolada viraram uma tela só, com as abas Nearby e Requests no topo. O pedido em andamento e as compras recentes saíram da tela inicial e foram para a aba Requests, uma lista de chats com um status em cada linha. Uma tela em que o concierge propõe dividir um pedido em dois. Espaçamento dos títulos mais justo, rótulos dos botões numa linha só | Percebi que a tela inicial misturava duas funções, explorar a rua e acompanhar o que eu pedi, e que o cartão do pedido e as compras recentes pareciam módulos avulsos |
 | v1 | Primeiro fluxo a partir do blueprint: tela inicial no estilo do Granola, chat, reservas, pagamento, caminhos de falha, outros caminhos | Primeira versão depois das referências do Mobbin |
 
+As rodadas 11 a 14 mudaram o protótipo depois da v10, sem uma nova versão. Pedi a um agente que corrigisse os quadros da v10 no lugar onde o protótipo tinha avançado: sem selo Promoted, fatos da loja sem pontos, datas Collect by, botões Buy tonais e iguais quando há várias ofertas, a marca farejando enquanto o Snuffle pergunta e a foto do pedido à direita da barra do topo. O registro de decisões guarda as rodadas, e o protótipo é a referência.
+
 ## O que é um pedido
 
 Cada pedido é um chat com o concierge. A questão era quanto cabe num chat. Decidi por um chat por tarefa, com o concierge propondo separar (decisão 025).

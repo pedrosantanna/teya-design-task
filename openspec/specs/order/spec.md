@@ -7,10 +7,10 @@ An order is what the shopper bought from one shop through one answer. Buy is the
 ## Requirements
 
 ### Requirement: Buy pays once
-Buy SHALL open the platform's payment sheet (Apple Pay on iOS, Google Pay on Android) for the total, and the shopper SHALL pay once.
+Buy SHALL open the platform's payment sheet (Apple Pay on iOS, Google Pay on Android) for the total, and the shopper SHALL pay once. The button SHALL read "Buy for [total]".
 
 #### Scenario: Buy at Paper & Co
-- **WHEN** the shopper taps "Buy · £29.98"
+- **WHEN** the shopper taps "Buy for £29.98"
 - **THEN** the payment sheet shows "Pay Paper & Co" and "2 × eclipse glasses £29.98"
 
 ### Requirement: Charge on the shop's confirmation
@@ -22,7 +22,7 @@ At an asked shop the payment SHALL be authorised and taken only when the shop co
 
 #### Scenario: Connected shop
 - **WHEN** the shopper buys at Broadway Chemist from a till answer
-- **THEN** the order skips "Waiting for Broadway Chemist" and goes straight to "Ready · collect by Wed 4 Nov"
+- **THEN** the order skips "Waiting for Broadway Chemist" and goes straight to "Ready · collect by Mon 9 Nov"
 
 ### Requirement: Order card in the chat
 The order SHALL appear in its request's chat as an order card with one status label, shop and items, and total; tapping it SHALL open the receipt. Orders SHALL have no list of their own.
@@ -66,3 +66,67 @@ The shopper SHALL be able to cancel a Ready order for a full refund after confir
 #### Scenario: Cancel
 - **WHEN** the shopper taps Cancel for a refund and confirms
 - **THEN** the order reads "Cancelled · refunded"
+
+### Requirement: Simulated payment sheet
+The prototype SHALL draw the payment sheet itself, in the iOS or Android form set in the debugger, and the debugger SHALL choose whether the payment succeeds or is declined.
+
+#### Scenario: Declined from the debugger
+- **WHEN** the debugger sets payment to "declined" and Sam confirms the sheet
+- **THEN** the chat shows "Apple Pay declined the payment, so you haven't been charged" with Try again
+
+#### Scenario: Android form
+- **WHEN** the platform is Android and Sam taps Buy
+- **THEN** a Google Pay sheet is drawn instead of Apple Pay
+
+### Requirement: Haptics on outcomes
+On native builds the prototype SHALL play a light impact when Buy is pressed, a success haptic when an order becomes Ready or Paid, and a warning haptic on a "not charged" ending.
+
+#### Scenario: Ready
+- **WHEN** Paper & Co confirms and the order becomes Ready on an iPhone
+- **THEN** a success haptic plays
+
+### Requirement: Order status motion
+An order card's status change SHALL animate with the status spring and be announced politely to screen readers.
+
+#### Scenario: Waiting to Ready
+- **WHEN** the order changes from "Waiting for Paper & Co · not charged yet" to "Ready · collect by Mon 9 Nov"
+- **THEN** the label changes with the status animation and VoiceOver announces the new status
+
+### Requirement: Receipt header
+The receipt SHALL open with a header in the shop's accent at the tile step, with no band across the top, the status label and the shop's name in Display name. Extend and Cancel for a refund SHALL be text buttons, Cancel in the destructive colour.
+
+#### Scenario: Ready at Paper & Co
+- **WHEN** the order is Ready
+- **THEN** the header is Lavender with "Paper & Co" in Gambetta, Directions is the one filled button, and "Extend to Mon 16 Nov" and "Cancel for a refund" are text buttons
+
+#### Scenario: Receipt on a shop's colour
+- **WHEN** the shopper opens the receipt for Paper & Co
+- **THEN** the header uses the shop's accent at the tile step and has no band
+
+### Requirement: Rate after collection or delivery
+After Collected the order card SHALL read "Collected · rate [shop]" and carry a Rate action. After delivery Snuffle SHALL ask "How was [shop]?" with a Rate chip. Rate SHALL open the rating sheet.
+
+#### Scenario: Collected at Paper & Co
+- **WHEN** Paper & Co marks Sam's order collected
+- **THEN** the order card reads "Collected · rate Paper & Co" with Rate
+
+### Requirement: Rating sheet
+The rating sheet SHALL ask "Would you go back?" with a thumbs up and a thumbs down, show tags that follow the answer, take an optional note of up to 140 characters, and send only once an answer is chosen. There SHALL be no stars.
+
+#### Scenario: Thumbs down
+- **WHEN** Sam taps the thumbs down
+- **THEN** the tags change to the thumbs-down list ("Not as described", "Took a while"…)
+
+### Requirement: Rating stored on the order
+On Send the rating SHALL be stored on the order, the order card SHALL read "Collected · rated", and the shop's page SHALL count the rating.
+
+#### Scenario: After sending
+- **WHEN** Sam sends a thumbs up with "Friendly"
+- **THEN** the order card reads "Collected · rated" and Paper & Co's page counts one more buyer and one more "Friendly"
+
+### Requirement: Rating steps in the debugger
+The state debugger SHALL list the steps Collected, Rate the shop, Rate: wouldn't go back and Rated.
+
+#### Scenario: Jump to the sheet
+- **WHEN** the author picks "Rate the shop"
+- **THEN** the chat shows the collected order with the rating sheet open

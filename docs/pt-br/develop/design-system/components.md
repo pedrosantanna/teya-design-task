@@ -1,10 +1,10 @@
 # Componentes
 
-Todos os componentes que as telas da v7 usam, especificados a partir dos tokens das outras páginas do design system: do que cada um é feito, quais tokens usa, seus estados, suas formas no iOS e no Android e o que um leitor de tela recebe. O protótipo é construído a partir deles.
+Todos os componentes que as telas usam, especificados a partir dos tokens das outras páginas do design system: do que cada um é feito, quais tokens usa, seus estados, suas formas no iOS e no Android e o que um leitor de tela recebe. O protótipo é construído a partir deles.
 
 ```summary
 Takeaways:
-- Vinte componentes, cada um numa tabela: anatomia, tokens, estados, formas no iOS e no Android, acessibilidade e truncamento.
+- Cada componente tem uma tabela: anatomia, tokens, estados, formas no iOS e no Android, acessibilidade e truncamento.
 - Só entram nomes de tokens das fundações: `radius.*`, `space.*` e os espaços semânticos, `spring.*`, os papéis de cor e os estilos de texto. Onde um valor ainda não tem token, a tabela diz.
 - No máximo um controle preenchido em Índigo fica visível por vez, a ação de confirmação (Buy, Ask, enviar). Os botões tonais são neutros, o chip selecionado é cartão com texto e borda Índigo 800 (Índigo 300 no escuro), e o Índigo preenchido quer dizer que o comprador age. Cartões de resposta, de compra e linhas de pedido são um elemento só para o VoiceOver e o TalkBack, com o Buy ou o botão da linha como ação personalizada.
 - Uma loja aparece no seu acento onde quer que esteja: um tile tonal com as iniciais e o toldo da marca, o acento em pequenos detalhes na página neutra dela (os chips e o pin do mapa), um cabeçalho tingido no recibo. "Browse by category" no Nearby é uma faixa de cartões de categoria nos mesmos pastéis, e cada um abre a tela de categoria com os lugares daquele tipo.
@@ -69,7 +69,7 @@ Trade-offs:
 | Anatomia | O tile de placeholder da loja (40, no acento dela, com as iniciais); nome da loja; linha de status com a origem ("Has them", depois "Replied 2 min ago"; "In stock now", depois "1 of 2, from the shop's till"); preço; tempo a pé e data limite de retirada numa linha; no máximo uma linha de ações (Buy, Buy 1, ou Show me com No thanks) |
 | Tokens | Cor Card, `radius.card`, `inset.card`, `gap.block` entre blocos. Nome da loja em Headline, status em Caption 1 com Muted foreground, preço em Title 3, meta em Footnote. Entra com `spring.arrive` |
 | Estados | Padrão, pressionado (o cartão inteiro), comprado (depois do Buy, o cartão de compra o substitui), dispensado (No thanks, com um snackbar para desfazer) |
-| Regras | Só a melhor resposta tem Buy preenchido; "Buy", "Buy 1" e "Show me" nas outras são tonais, em cores neutras. Um toque em qualquer parte do cartão abre a folha de detalhes, como o Buy. O nome da loja é um link com um chevron pequeno depois dele (Muted foreground, área de toque de 44 pt feita da altura da linha mais 11 pt acima e abaixo no Headline, 12 pt no Subheadline) que abre a página da loja, empurrada com Back |
+| Regras | Buy preenchido só quando uma resposta pode ser comprada; com duas ou mais ofertas todo Buy é tonal e do mesmo tamanho, porque elas são equivalentes. "Buy 1 of 2" quando a loja tem menos do que o pedido; "Show me" é tonal, em cores neutras. Um toque em qualquer parte do cartão abre a folha de detalhes, como o Buy. O nome da loja é um link com um chevron pequeno depois dele (Muted foreground, área de toque de 44 pt feita da altura da linha mais 11 pt acima e abaixo no Headline, 12 pt no Subheadline) que abre a página da loja, empurrada com Back |
 | iOS ↔ Android | O mesmo cartão nos dois; o botão Buy segue a tabela de botão |
 | Acessibilidade | Um elemento. Rótulo: "Paper & Co, has them, replied 2 minutes ago, £14.99, 13 minute walk, collect by Monday 9 November". Ativá-lo abre a folha de detalhes; View shop, Buy, Show me e No thanks são ações personalizadas. O rótulo do próprio nome é "Paper & Co, view shop" |
 | Truncamento | Nome da loja em 1 linha; linha de status em 1 linha, a origem sai antes do status; o preço nunca é cortado |
@@ -136,6 +136,26 @@ Trade-offs:
 | Estados | Aparece só se a resposta do Snuffle levar mais de uns 300 ms; é substituído no lugar pela resposta |
 | iOS ↔ Android | Igual nos dois |
 | Acessibilidade | Anunciado uma vez como "Snuffle is writing"; com Reduzir Movimento os pontos ficam parados, com metade da opacidade |
+
+## Marca farejando
+
+| Aspecto | Especificação |
+| --- | --- |
+| Anatomia | O glifo do Snuffle, com 88 de largura (a largura de uma ilustração média), com o nariz e as cinco listras do toldo se movendo sobre o rosto parado. Sem balão, tile nem sombra |
+| Tokens | Cores da [marca do Snuffle](#marca-do-snuffle): Foreground, com as duas listras suaves em Muted foreground. Um ciclo de 2,6 s: o nariz sobe 2,5 unidades e cresce 10% em três farejadas de 300 ms, e as listras balançam até 3,5 graus, cada uma 45 ms depois da anterior |
+| Estados | Aparece na conversa enquanto o Snuffle pergunta às lojas e ninguém respondeu; a tela o remove quando chega a primeira resposta. Substitui a scooter de entrega, que lembrava delivery. `paused` deixa a marca parada |
+| iOS ↔ Android | Igual nos dois |
+| Acessibilidade | Decorativa e escondida dos leitores de tela; com Reduzir Movimento o glifo fica parado |
+
+## Entrada na conversa
+
+| Aspecto | Especificação |
+| --- | --- |
+| Anatomia | Um invólucro em volta de cada item da conversa (balão, cartão, linha de status, linha de chips) que define como ele entra, sai e se move |
+| Tokens | Entrada: esmaece e sobe com `spring.smooth`; `follows` atrasa um item 150 ms depois do anterior (as sugestões depois da mensagem do Snuffle). Saída: esmaece com `spring.fade`. Os vizinhos abrem espaço com a transição de layout em `spring.smooth` (`useChatLayout()`) |
+| Estados | `animate` desligado para o que já estava lá; `leaves` e `moves` valem por item. Um rótulo de status que muda faz fade cruzado no lugar. O cartão de resposta mantém a própria chegada em `spring.arrive` |
+| iOS ↔ Android | Igual nos dois |
+| Acessibilidade | Sem efeito na ordem de leitura; o conteúdo é exposto assim que monta. Com Reduzir Movimento os itens novos só esmaecem e nada se move |
 
 ## Barra de pedido e campo da conversa
 
@@ -238,10 +258,20 @@ Conferida com o iOS 26 (as HIG sobre campos de busca e barras de ferramentas, Li
 | --- | --- |
 | Formas | Sem fundo na barra: os controles flutuam em glass sobre um scroll edge effect (blur suave e fade), com a borda hard só em listas densas. Título grande em Nearby e Requests, que rola com o conteúdo e encolhe para um título em linha à esquerda. Numa conversa, o bloco do título fica centralizado na tela: "Snuffle" com o seu glifo na primeira linha e o pedido na segunda, e o Voltar como um chevron sozinho num círculo de glass, centralizado nesse bloco, com "Requests" no menu de toque longo. A barra da conversa é um preenchimento sólido do fundo da conversa, com um fio de 0,5 pt. Na página da loja a barra fica fixa: Voltar como um chevron num círculo de glass à esquerda em qualquer posição de rolagem, e o nome em Headline aparecendo sobre o scroll edge quando o título grande passa por baixo da barra; a barra é um preenchimento sólido do tile do cartão, com um fio de 0,5 pt embaixo, quando o nome aparece, para que nenhum conteúdo apareça cortado ao lado do Voltar. As ações com ícone à direita dividem uma cápsula de glass |
 | Tokens | Título grande em Display large (Gambetta 48) nas telas raiz, Nearby e Requests, e Display title (Gambetta 40) nas outras, como Places; 16 dos controles da barra ou 24 da linha de cima, e 16 até o conteúdo que ele apresenta. Título em linha em Headline; círculos de Voltar, Fechar e Confirmar de uns 44; ícones de 22 |
-| Subtítulo da conversa | O nome do pedido em Caption 1 sob "Snuffle", centralizado. A barra tem a altura das suas duas linhas (Headline e o quadrado de 28 pt) mais `space.3` acima e abaixo, então o título nunca fica a menos de 12 pt do topo da barra. Antes dele, um quadrado de 28 pt (`size.thumb.nav`) com uma borda de 1 pt, recortado com raio de 6 pt (com 20 pt a foto parecia um borrão cinza): a foto do item, a mesma da linha dele em Requests, ou a ilustração parada da categoria sobre o tile do acento da loja quando não há foto. Só aparece para um item de tipo conhecido, é decorativo (escondido do VoiceOver e do TalkBack) e a barra não ganha faixa de cor além do seu fundo sólido |
+| Subtítulo da conversa | O nome do pedido em Caption 1 sob "Snuffle", centralizado, sem imagem ao lado. A foto do pedido fica na borda final da barra, redonda, com área de toque de 44 pt ("Change photo, Eclipse glasses"); um toque abre uma sheet com seis fotos do item numa grade de 3 × 2, a atual com anel e um check, e escolher uma troca a foto na barra e na linha do pedido em Requests |
 | iOS ↔ Android | Controles flutuantes em glass sobre um scroll edge effect ↔ flexible top app bar do Material que encolhe para small, com tint ao rolar. Web: título grande, título em linha aparecendo com fade sobre uma máscara em gradiente, círculos com blur |
 | Acessibilidade | O título é um cabeçalho; o Voltar é rotulado com o título da tela anterior ("Requests"), Fechar e Confirmar pela ação |
 | Truncamento | Título em linha em 1 linha com reticências; títulos grandes quebram em duas linhas |
+
+## Sheet de seleção de foto
+
+| Aspecto | Especificação |
+| --- | --- |
+| Anatomia | Uma [Sheet](#sheet) no detent ajustado, no fundo de sheet, com título, o nome do pedido como subtítulo e uma grade de tiles quadrados de foto, três por linha. Seis fotos na conversa |
+| Tokens | Tiles em `radius.inner`; o selecionado tem um anel `size.edge.focus` em Primary e um selo de check. O anel sempre ocupa espaço (transparente quando desligado), então escolher não move nada |
+| Estados | Um tile selecionado. O toque reduz o tile e dispara o haptic de seleção; a tela fecha a sheet depois da escolha e a nova foto aparece na barra e na linha do pedido |
+| iOS ↔ Android | Igual nos dois; a sheet toma a forma de cada plataforma |
+| Acessibilidade | A grade é um grupo de rádio; cada tile lê "Photo 2 of 6" e fica marcado quando selecionado |
 
 ## Stepper
 
@@ -278,9 +308,9 @@ Conferida com o iOS 26 (as HIG sobre campos de busca e barras de ferramentas, Li
 
 | Aspecto | Especificação |
 | --- | --- |
-| Uso | O fundo fixo no topo da página da loja, centrado na loja, com um pin, inclinado a 45–60° para os prédios aparecerem em 3D |
+| Uso | O fundo fixo no topo da página da loja e o mapa da sheet Directions, na rua real da loja, com um pin, inclinado a 45–60° para os prédios aparecerem em 3D. Ele desenha o caminho a pé da porta do comprador (163 Blythe Road) até a loja na cor de acento da loja, contornado na cor On detail, com a porta como um ponto branco com anel da mesma cor. O mapa gira para a porta ficar à esquerda da loja e o caminho correr pela faixa larga de mapa que a tela mostra, se afasta (até o zoom 12,5) até o caminho inteiro caber, e centraliza o caminho na faixa; o pin acompanha a loja para o lado e mantém a altura. Longe de casa (o lugar Work) o mapa fica na loja, no zoom da área, sem desenhar o caminho, já que o caminho sai da porta de casa; ele também fica na loja na folha de detalhes de uma resposta |
 | Tokens | Um estilo gerado a partir da paleta (ver [Imagens e ícones](imagery.md)); o pin é o `Location01Icon` em Primary; `radius.none` nas bordas da tela |
-| Estados | Carregando (o Map ground e a imagem estática do mapa da loja), carregado; gestos desligados na página da loja; se o mapa não carregar, a imagem estática fica |
+| Estados | Carregando (o Map ground; a imagem estática da área só para o mapa simples, já que mostraria as ruas erradas sob o caminho de uma loja), carregado; gestos desligados na página da loja; se o mapa não carregar, a imagem estática fica |
 | iOS ↔ Android | MapLibre no iOS, no Android e na web, com um estilo só e dados do OpenStreetMap embutidos; Directions abre o app de mapas do sistema |
 | Atribuição | "© OpenStreetMap contributors" num canto do mapa, no app e na gravação; onde o conteúdo cobre o mapa (a página da loja), uma linha centralizada no pé da página (`attribution={false}` no mapa) |
 | Acessibilidade | Oculto para o leitor de tela; a rua e o tempo a pé no cartão levam a mesma informação |
@@ -479,4 +509,4 @@ Conferida com o iOS 26 (as HIG sobre campos de busca e barras de ferramentas, Li
 - React Native, acessibilidade (ações personalizadas, papel ajustável, live regions): https://reactnative.dev/docs/accessibility
 - Competition and Markets Authority, Fake reviews guidance (CMA208), 2025: https://assets.publishing.service.gov.uk/media/67eeb64fe9c76fa33048c790/CMA208_-_Fake_reviews_guidance.pdf
 - [Benchmarks](../../discover/benchmarks.md), seção de avaliações, para os padrões por trás dos componentes de avaliação
-- [Fluxo do app](../ideation/app-flow.md), v7, para as telas; [Modelo conceitual](conceptual-model.md) para as palavras e os estados; [Forma e materiais](shape.md), [Espaçamento e layout](spacing.md), [Movimento](motion.md), [Cor](colour.md), [Tipografia](typography.md), [Tags](tags.md) e [Imagens e ícones](imagery.md) para os tokens
+- [Fluxo do app](../ideation/app-flow.md), v10, para as telas; [Modelo conceitual](conceptual-model.md) para as palavras e os estados; [Forma e materiais](shape.md), [Espaçamento e layout](spacing.md), [Movimento](motion.md), [Cor](colour.md), [Tipografia](typography.md), [Tags](tags.md) e [Imagens e ícones](imagery.md) para os tokens

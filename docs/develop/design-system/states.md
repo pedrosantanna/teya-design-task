@@ -76,8 +76,8 @@ A toast sits above an alert so an Undo stays reachable; an alert's scrim covers 
 | State | When | Ratings | How they do on Snuffle |
 | --- | --- | --- | --- |
 | No ratings | No buyer has rated yet | "No ratings yet · Snuffle has asked them 4 times" | Answer rate and reply time; "New on Snuffle" until 10 "has it" answers |
-| Few | 1 to 4 ratings | "New on Snuffle · 3 buyers so far", the tags with their counts and the review cards; no percentage | As above, or with stock accuracy once there are 10 "has it" answers |
-| Many | 5 ratings or more | "92% would go back · 38 buyers", the tags, three review cards that mirror the split, "All 38 ratings ›" | Answer rate, stock accuracy, reply time |
+| Few | 1 to 4 ratings | "3 people so far", the tags with their counts and the review cards; no percentage | "New on Snuffle" with the answer rate and reply time, or stock accuracy once there are 10 "has it" answers |
+| Many | 5 ratings or more | "92% would go back · 38 people", the tags, up to five review cards that mirror the split, "See all 38 reviews" | Answer rate, stock accuracy, reply time |
 | Shop replied | A rating has the shop's one reply | The reply under its card, as "Reply from [shop]" | No change |
 
 A connected shop shows "Stock from the till" in place of reply time in every state. A rating stays editable for 30 days; an edited card shows "Edited Oct 2026".
@@ -88,7 +88,7 @@ A connected shop shows "Stock from the till" in place of reply time in every sta
 | --- | --- | --- |
 | Nearby | Tile shapes at `tile.large` and `tile.medium` with two text lines under each, in Muted | Shapes follow the real grid, so nothing jumps when photos load |
 | Requests | Rows with a 56 square, two text lines and a short status line | Three rows at most |
-| Chat | The typing indicator; answer rows on the asking list show "Asked" at once | No skeleton bubbles: Snuffle's reply arrives whole |
+| Chat | The typing indicator while Snuffle writes; the sniffing mark while it asks the shops and none has answered; answer rows on the asking list show "Asked" at once | No skeleton bubbles: Snuffle's reply arrives whole |
 | Shop page | The map ground, photo shapes and the card with two text lines | The name shows as soon as it is known |
 | Order | The card shape with the status line | Status changes animate with `spring.status` |
 

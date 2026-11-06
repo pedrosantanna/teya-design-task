@@ -38,7 +38,7 @@ export default {
       k.block(NW - 0.03, pages, ND - 0.04, P.biscuit.card, [0.015, t, 0], { part: 'pages' }),
       k.block(NW, t, ND, P.peach[600], [0, t + pages, 0], { part: 'cover1' }),
       k.block(0.04, t * 2 + pages + 0.01, ND + 0.01, P.indigo[800], [NW / 2 - 0.12, -0.005, 0], { part: 'elastic' }),
-    ], [0.45, 0, 0.18]);
+    ], [0.5, 0, -0.06]);
     book.rotation.y = -0.3;
 
     const parts = collect(g, [[book, 0], [pot, 0.16], [pencils, 0.32]]);

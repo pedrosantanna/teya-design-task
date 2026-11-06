@@ -90,6 +90,10 @@ No app em Expo, o zoom é o `Link.AppleZoom` do Expo Router, que é alpha e pede
 Na web um push leva 350 ms, uma sheet sobe em 380 ms e sai em 320 ms, um zoom leva 420 ms e o morph da barra de pergunta 420 ms, todos na curva do iOS `cubic-bezier(0.32, 0.72, 0, 1)`. Um zoom e um morph recortam em `radius.card` (28). O toque do ponteiro não tem atraso. Um arraste que começa a até 24 pt da borda esquerda e percorre 72 pt, quase na horizontal, volta como o botão Back; só funciona em telas empilhadas, então uma sheet ou o compositor do New Request fecham com o controle próprio. O navegador não consegue seguir o dedo numa view transition, então o gesto confirma ao soltar. Com Reduce Motion, toda mudança é um crossfade de 200 ms: as telas fazem fade no lugar e não deslizam. Os valores são constantes nomeadas em `internal/transitions.ts`, não tokens.
 
 
+## Conversa
+
+Tudo o que chega numa conversa entra do mesmo jeito: a mensagem do Snuffle (a linha de remetente e o balão juntos) aparece com um fade e sobe 8 pt em `spring.smooth`; o balão do comprador mantém a escala em `spring.snappy`. O indicador de digitação aparece e some com um fade, e a mensagem sobe por cima dele, então nunca há um buraco nem dois deles. Chips de sugestão, a lista de lojas consultadas, um rótulo de status e um cartão de oferta aparecem com fade e sobem 150 ms depois da mensagem anterior. Quando um status muda (uma linha de resposta, um cartão de pedido), o conteúdo antigo some enquanto o novo aparece, em `spring.status`, em vez de trocar de uma vez. No nativo, as linhas já na tela deslizam para abrir espaço; na web elas pulam de uma vez, porque a transição de layout virava a lista invertida. Enquanto o Snuffle consulta as lojas, a marca farejando ([Marca](mark.md#farejando)) fica onde antes ficava a scooter e some com um fade, devolvendo a altura em `spring.smooth`, quando chega a primeira resposta. Com Reduce Motion os itens novos só aparecem com fade e nada se move.
+
 ## Fontes
 
 - Apple, "Animate with springs", WWDC 2023: https://developer.apple.com/videos/play/wwdc2023/10158/

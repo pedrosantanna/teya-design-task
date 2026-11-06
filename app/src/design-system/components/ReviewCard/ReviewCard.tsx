@@ -72,7 +72,7 @@ export const ReviewCard = memo(function ReviewCard({ name, text, up, month, line
     );
   }
   return (
-    <View accessible accessibilityLabel={label} style={styles.row(grouped, top, bottom)}>
+    <View accessible accessibilityLabel={label} style={styles.row(grouped, top, bottom, tile)}>
       <View style={styles.inner(grouped && !bottom)}>{body}</View>
     </View>
   );
@@ -159,10 +159,11 @@ const styles = StyleSheet.create((theme) => ({
     backgroundColor: tile ? theme.color.shop.accent[tile].cardOnTile : theme.color.card,
   }),
   // The grouped row's fill, corners and inset separator, as ListRow on Card (Material: no fill, as its lists).
-  row: (grouped: boolean, top: boolean, bottom: boolean) => ({
+  row: (grouped: boolean, top: boolean, bottom: boolean, tile?: ShopAccentName) => ({
     ...cornerCurve,
     paddingLeft: theme.space[4],
-    backgroundColor: grouped ? theme.color.card : 'transparent',
+    // On an accent tile (the reviews screen) the row takes that accent's cardOnTile, as the shop page's cards and ListRow do.
+    backgroundColor: grouped ? (tile ? theme.color.shop.accent[tile].cardOnTile : theme.color.card) : 'transparent',
     borderTopLeftRadius: top && grouped ? theme.radius.inner : 0,
     borderTopRightRadius: top && grouped ? theme.radius.inner : 0,
     borderBottomLeftRadius: bottom && grouped ? theme.radius.inner : 0,

@@ -1,0 +1,646 @@
+<!-- Agent flow: the conversation between the shopper and Snuffle, and behind it between Snuffle and the shops, as turns and branches rather than screens. Every branch says whether the prototype does it (store/simulation.ts, chat.ts, other-chat.ts, journey.ts), whether a timer plays the shop, or whether it is only designed. Interface copy stays in English in both languages. Format: see AGENTS.md, canvas pages. -->
+<div class="area" data-x="-40" data-y="-700" data-w="2680" data-h="560" data-title-en="Where it stands" data-title-pt="Onde está"></div>
+<div class="area" data-x="-40" data-y="2760" data-w="3140" data-h="960" data-title-en="Behind the chat: Snuffle and the shops" data-title-pt="Por trás do chat: o Snuffle e as lojas"></div>
+<div class="area" data-x="860" data-y="1480" data-w="2780" data-h="560" data-title-en="When nothing comes back" data-title-pt="Quando nada volta"></div>
+<div class="area" data-x="-40" data-y="1480" data-w="900" data-h="1100" data-title-en="A weekly request" data-title-pt="Um pedido semanal"></div>
+<div class="area" data-x="4000" data-y="-80" data-w="1380" data-h="1480" data-title-en="Collect" data-title-pt="Retirar"></div>
+<div class="area" data-x="2660" data-y="-80" data-w="1380" data-h="1480" data-title-en="Buy" data-title-pt="Comprar"></div>
+<div class="area" data-x="1760" data-y="-80" data-w="900" data-h="1480" data-title-en="Answers" data-title-pt="Respostas"></div>
+<div class="area" data-x="860" data-y="-80" data-w="900" data-h="1480" data-title-en="Asking the shops" data-title-pt="Consultando as lojas"></div>
+<div class="area" data-x="-40" data-y="-80" data-w="900" data-h="1480" data-title-en="The ask" data-title-pt="O pedido"></div>
+<div class="state chat" id="ask" data-x="0" data-y="0" data-title="The ask" style="width:340px">
+  <span class="state-name"><i data-icon="message-square"></i><span lang="en">The ask</span><span lang="pt">O pedido</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">The shopper types or taps a suggestion. Quantity, deadline and place come from the words.</p>
+  <p lang="pt">O comprador digita ou toca numa sugestão. Quantidade, prazo e lugar vêm das palavras.</p>
+  <div class="lines">
+    <div class="ln me">Eclipse glasses, 2 pairs, before 4pm</div>
+    <div class="ln me">Sourdough from Rossi's, but I finish work at 6</div>
+    <div class="ln me">A birthday cake for 12, for Saturday</div>
+  </div>
+</div>
+<div class="state chat" id="clarify" data-x="440" data-y="0" data-title="Snuffle confirms and asks how" style="width:340px">
+  <span class="state-name"><i data-icon="concierge-bell"></i><span lang="en">Snuffle confirms and asks how</span><span lang="pt">O Snuffle confirma e pergunta como</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">Sam's glasses. Snuffle repeats what it understood and asks one thing: how to get it. Jess's sourdough skips the question and goes straight to asking.</p>
+  <p lang="pt">Os óculos do Sam. O Snuffle repete o que entendeu e pergunta uma coisa: como receber. O pão do Jess pula a pergunta e vai direto para a consulta às lojas.</p>
+  <div class="lines">
+    <div class="ln sn">Got it: 2 pairs within 15 minutes of you, by 4pm. Will you collect them, or should I check delivery too?</div>
+    <div class="chips"><span>Collect</span><span>Check delivery too</span></div>
+  </div>
+</div>
+<div class="state chat" id="split" data-x="0" data-y="440" data-title="Two errands in one message" style="width:340px">
+  <span class="state-name"><i data-icon="split"></i><span lang="en">Two errands in one message</span><span lang="pt">Dois recados numa mensagem</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">Different days and different shops. Both chips start the glasses request in the prototype; the cake already sits in the Requests list.</p>
+  <p lang="pt">Dias e lojas diferentes. Os dois chips iniciam o pedido dos óculos no protótipo; o bolo já está na lista de Pedidos.</p>
+  <div class="lines">
+    <div class="ln me">Eclipse glasses for today, and a birthday cake for Saturday</div>
+    <div class="ln sn">Glasses today and a cake for Saturday go to different shops. Shall I make them two requests, so each gets its own answers?</div>
+    <div class="chips"><span>Split into 2</span><span>Keep as one</span></div>
+  </div>
+</div>
+<div class="state chat" id="offscript" data-x="440" data-y="440" data-title="Something the prototype does not know" style="width:340px">
+  <span class="state-name"><i data-icon="info"></i><span lang="en">Something the prototype does not know</span><span lang="pt">Algo que o protótipo não conhece</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">Any text outside the scripts gets this reply, with the scripted asks as chips. It stands in for every ask Snuffle could not take.</p>
+  <p lang="pt">Qualquer texto fora dos roteiros recebe esta resposta, com os pedidos roteirizados como chips. Ela representa todo pedido que o Snuffle não conseguiria atender.</p>
+  <div class="lines">
+    <div class="ln me">A left-handed cello</div>
+    <div class="ln sn">This prototype only knows a few requests, so I can't ask the shops about that one. Try one of these.</div>
+    <div class="chips"><span>Eclipse glasses, 2 pairs, before 4pm</span><span>Eclipse glasses for today, and a birthday cake for Saturday</span></div>
+  </div>
+</div>
+<div class="state chat des" id="missing" data-x="0" data-y="960" data-title="A missing quantity or deadline" style="width:340px">
+  <span class="state-name"><i data-icon="search"></i><span lang="en">A missing quantity or deadline</span><span lang="pt">Falta quantidade ou prazo</span></span>
+  <p class="meta"><span class="pill d" lang="en">Designed only</span><span class="pill d" lang="pt">Só desenhado</span></p>
+  <p lang="en">Snuffle asks for what is missing before it asks any shop. The prototype never needs this, because its scripted asks are complete enough.</p>
+  <p lang="pt">O Snuffle pergunta o que falta antes de consultar qualquer loja. O protótipo nunca precisa disso, porque os pedidos roteirizados já vêm completos o bastante.</p>
+  <div class="lines">
+    <div class="ln me">Eclipse glasses</div>
+    <div class="ln sn">How many pairs, and by when?</div>
+    <div class="ln me">2, before 4pm</div>
+  </div>
+</div>
+<div class="state chat des" id="outarea" data-x="440" data-y="960" data-title="Outside the area" style="width:340px">
+  <span class="state-name"><i data-icon="map-pin"></i><span lang="en">Outside the area</span><span lang="pt">Fora da área</span></span>
+  <p class="meta"><span class="pill d" lang="en">Designed only</span><span class="pill d" lang="pt">Só desenhado</span></p>
+  <p lang="en">Shops are only known around Blythe Road, W14. Outside it Snuffle says so before promising anything, and keeps the ask as demand.</p>
+  <p lang="pt">As lojas só são conhecidas ao redor da Blythe Road, W14. Fora dela, o Snuffle diz isso antes de prometer qualquer coisa e guarda o pedido como demanda.</p>
+  <div class="lines">
+    <div class="ln me">Eclipse glasses in Edinburgh</div>
+    <div class="ln sn">I only know the shops around Blythe Road for now. I'll note your ask and tell you when I reach your area.</div>
+    <div class="chips"><span>Ask Blythe Road shops</span><span>Not now</span></div>
+  </div>
+</div>
+<div class="state chat" id="notify" data-x="900" data-y="0" data-title="Notifications" style="width:340px">
+  <span class="state-name"><i data-icon="bell"></i><span lang="en">Notifications</span><span lang="pt">Notificações</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">Asked once, after the first ask. If the shopper refuses, answers stay in the chat and on the Requests button.</p>
+  <p lang="pt">Perguntado uma vez, depois do primeiro pedido. Se o comprador recusa, as respostas ficam no chat e no botão Pedidos.</p>
+  <div class="lines">
+    <div class="ln sys">"Snuffle" Would Like to Send You Notifications</div>
+    <div class="chips"><span>Don't Allow</span><span>Allow</span></div>
+    <div class="ln sn">Notifications are off, so I'll keep answers here and on the Requests button.</div>
+  </div>
+</div>
+<div class="state chat" id="asking" data-x="1340" data-y="0" data-title="Asking the shops" style="width:340px">
+  <span class="state-name"><i data-icon="send"></i><span lang="en">Asking the shops</span><span lang="pt">Consultando as lojas</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">All the likely shops are asked at once. Each row goes Asked, Seen, then an answer; in the prototype the first answers arrive within about 10 seconds.</p>
+  <p lang="pt">Todas as lojas prováveis são consultadas de uma vez. Cada linha passa por Asked, Seen e uma resposta; no protótipo as primeiras chegam em cerca de 10 segundos.</p>
+  <div class="lines">
+    <div class="ln sn">I'm asking 6 shops on 5 streets near you. You can leave the app; I'll tell you as they answer.</div>
+    <div class="ln sys">Six shop rows, each starting at Asked</div>
+  </div>
+</div>
+<div class="state chat" id="away" data-x="900" data-y="440" data-title="The shopper leaves the app" style="width:340px">
+  <span class="state-name"><i data-icon="smartphone"></i><span lang="en">The shopper leaves the app</span><span lang="pt">O comprador sai do app</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">Each answer reaches the lock screen as a notification and on the Live Activity.</p>
+  <p lang="pt">Cada resposta chega à tela de bloqueio como notificação e na Live Activity.</p>
+  <div class="lines">
+    <div class="ln sys">Snuffle: Paper &amp; Co on King Street has them too: £14.99 a pair.</div>
+  </div>
+</div>
+<div class="state chat des" id="cancel" data-x="900" data-y="880" data-title="The shopper cancels while shops are asked" style="width:340px">
+  <span class="state-name"><i data-icon="x"></i><span lang="en">The shopper cancels while shops are asked</span><span lang="pt">O comprador cancela com as lojas consultadas</span></span>
+  <p class="meta"><span class="pill d" lang="en">Designed only</span><span class="pill d" lang="pt">Só desenhado</span></p>
+  <p lang="en">In the prototype only a search that keeps looking can be stopped. Cancelling the first round is designed: shops that have not replied are told to ignore the message.</p>
+  <p lang="pt">No protótipo só dá para parar uma busca que continua procurando. Cancelar a primeira rodada é só desenhado: as lojas que não responderam são avisadas para ignorar a mensagem.</p>
+  <div class="lines">
+    <div class="ln me">Cancel</div>
+    <div class="ln sn">Done. I've stopped asking, and nothing was bought.</div>
+  </div>
+</div>
+<div class="state chat" id="answers" data-x="1800" data-y="0" data-title="Answers arrive" style="width:340px">
+  <span class="state-name"><i data-icon="circle-check"></i><span lang="en">Answers arrive</span><span lang="pt">As respostas chegam</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">One answer at a time, as the shops reply. A connected shop answers from its till and says so.</p>
+  <p lang="pt">Uma resposta de cada vez, conforme as lojas respondem. Uma loja conectada responde pelo caixa e diz isso.</p>
+  <div class="lines">
+    <div class="ln sn">Paper &amp; Co on King Street has them too: £14.99 a pair.</div>
+    <div class="ln sys">Answer card: Paper &amp; Co · Has them · £14.99 · Buy</div>
+    <div class="ln sys">Answer card: Broadway Chemist · In stock now, from the till</div>
+  </div>
+</div>
+<div class="state chat" id="buy" data-x="2240" data-y="0" data-title="The shopper picks one" style="width:340px">
+  <span class="state-name"><i data-icon="shopping-bag"></i><span lang="en">The shopper picks one</span><span lang="pt">O comprador escolhe uma</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">The details sheet shows the price, the quantity, and collect or the shop delivers, with the shop's collection window before Buy.</p>
+  <p lang="pt">A folha de detalhes mostra o preço, a quantidade e retirar ou a loja entrega, com a janela de retirada da loja antes do Buy.</p>
+  <div class="lines">
+    <div class="ln me">Buy 2 at Paper &amp; Co</div>
+  </div>
+</div>
+<div class="state chat" id="similar" data-x="1800" data-y="440" data-title="Something similar" style="width:340px">
+  <span class="state-name"><i data-icon="repeat"></i><span lang="en">Something similar</span><span lang="pt">Algo parecido</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">The shop offers an alternative. The shopper decides; Snuffle assumes nothing.</p>
+  <p lang="pt">A loja oferece uma alternativa. O comprador decide; o Snuffle não presume nada.</p>
+  <div class="lines">
+    <div class="ln sys">Answer card: Olympia Cameras · Has something similar</div>
+  </div>
+</div>
+<div class="state chat" id="some" data-x="2240" data-y="440" data-title="The shop has fewer than asked" style="width:340px">
+  <span class="state-name"><i data-icon="minus"></i><span lang="en">The shop has fewer than asked</span><span lang="pt">A loja tem menos do que o pedido</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">Buying what there is leaves Snuffle looking for the rest.</p>
+  <p lang="pt">Comprar o que há deixa o Snuffle procurando o resto.</p>
+  <div class="lines">
+    <div class="ln sn">Buy 1 here and I'll keep looking for 1 more.</div>
+  </div>
+</div>
+<div class="state chat" id="cake" data-x="1800" data-y="880" data-title="Made to order" style="width:340px">
+  <span class="state-name"><i data-icon="calendar"></i><span lang="en">Made to order</span><span lang="pt">Feito sob encomenda</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">A shop that needs notice answers with what it can make, and the cake request lists it that way.</p>
+  <p lang="pt">Uma loja que precisa de aviso responde com o que pode fazer, e o pedido do bolo aparece assim.</p>
+  <div class="lines">
+    <div class="ln sys">Answer card: Rossi's Bakery · Can make it</div>
+  </div>
+</div>
+<div class="state chat" id="pay" data-x="2700" data-y="0" data-title="Payment sheet" style="width:340px">
+  <span class="state-name"><i data-icon="credit-card"></i><span lang="en">Payment sheet</span><span lang="pt">Folha de pagamento</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">Apple Pay on iPhone, Google Pay on Android. The amount is authorised, not taken.</p>
+  <p lang="pt">Apple Pay no iPhone, Google Pay no Android. O valor é autorizado, não capturado.</p>
+  <div class="lines">
+    <div class="ln sys">Apple Pay · 2 × Eclipse glasses · £29.98</div>
+  </div>
+</div>
+<div class="state chat" id="waiting" data-x="3140" data-y="0" data-title="Waiting for the shop" style="width:340px">
+  <span class="state-name"><i data-icon="hourglass"></i><span lang="en">Waiting for the shop</span><span lang="pt">Esperando a loja</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">An asked shop has 10 minutes to confirm it has set the item aside. A connected shop skips this step.</p>
+  <p lang="pt">Uma loja consultada tem 10 minutos para confirmar que separou o item. Uma loja conectada pula este passo.</p>
+  <div class="lines">
+    <div class="ln sys">Waiting for Paper &amp; Co · Charged when Paper &amp; Co confirms</div>
+  </div>
+</div>
+<div class="state chat" id="setaside" data-x="3580" data-y="0" data-title="Set aside and charged" style="width:340px">
+  <span class="state-name"><i data-icon="package"></i><span lang="en">Set aside and charged</span><span lang="pt">Separado e cobrado</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">The shop confirms, the payment is taken, and the receipt carries the collection code.</p>
+  <p lang="pt">A loja confirma, o pagamento é capturado e o recibo traz o código de retirada.</p>
+  <div class="lines">
+    <div class="ln sn">Paper &amp; Co has set them aside, so you've paid £29.98. Your collection code is on the receipt.</div>
+  </div>
+</div>
+<div class="state chat" id="declined" data-x="2700" data-y="440" data-title="Payment didn't go through" style="width:340px">
+  <span class="state-name"><i data-icon="circle-x"></i><span lang="en">Payment didn't go through</span><span lang="pt">O pagamento não passou</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">No order is created and no shop is asked.</p>
+  <p lang="pt">Nenhum pedido é criado e nenhuma loja é consultada.</p>
+  <div class="lines">
+    <div class="ln me">Buy 2 at Paper &amp; Co</div>
+    <div class="ln sn">Apple Pay declined the payment, so you haven't been charged and Paper &amp; Co hasn't been asked to set them aside.</div>
+    <div class="chips"><span>Try again</span></div>
+  </div>
+</div>
+<div class="state chat" id="sold" data-x="3140" data-y="440" data-title="The shop says sold" style="width:340px">
+  <span class="state-name"><i data-icon="circle-x"></i><span lang="en">The shop says sold</span><span lang="pt">A loja responde sold</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">Nothing is charged. Snuffle points to the next shop that still has the item.</p>
+  <p lang="pt">Nada é cobrado. O Snuffle aponta a próxima loja que ainda tem o item.</p>
+  <div class="lines">
+    <div class="ln sn">Paper &amp; Co sold the last pairs before they could set them aside, so you haven't been charged.</div>
+    <div class="ln sn">Broadway Chemist still has 1 pair.</div>
+  </div>
+</div>
+<div class="state chat" id="notconf" data-x="3580" data-y="440" data-title="The shop does not confirm" style="width:340px">
+  <span class="state-name"><i data-icon="clock"></i><span lang="en">The shop does not confirm</span><span lang="pt">A loja não confirma</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">No reply in 10 minutes: the authorisation lapses and Snuffle moves on, as with sold.</p>
+  <p lang="pt">Sem resposta em 10 minutos: a autorização cai e o Snuffle segue em frente, como no sold.</p>
+  <div class="lines">
+    <div class="ln sn">Paper &amp; Co hasn't confirmed in 10 minutes, so you haven't been charged.</div>
+  </div>
+</div>
+<div class="state chat end" id="delivers" data-x="2700" data-y="880" data-title="The shop delivers" style="width:340px">
+  <span class="state-name"><i data-icon="truck"></i><span lang="en">The shop delivers</span><span lang="pt">A loja entrega</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">The courier is the shop's own. Snuffle only relays Paid, On its way and Delivered.</p>
+  <p lang="pt">O entregador é o da própria loja. O Snuffle só repassa Paid, On its way e Delivered.</p>
+  <div class="lines">
+    <div class="ln me">Buy 2, Paper &amp; Co delivers</div>
+    <div class="ln sys">Waiting · Paid, including delivery · On its way</div>
+    <div class="ln sn">Delivered at 2:41pm.</div>
+  </div>
+</div>
+<div class="state chat des" id="lategone" data-x="3140" data-y="880" data-title="The item is gone after the shop said yes" style="width:340px">
+  <span class="state-name"><i data-icon="triangle-alert"></i><span lang="en">The item is gone after the shop said yes</span><span lang="pt">O item sumiu depois do sim da loja</span></span>
+  <p class="meta"><span class="pill d" lang="en">Designed only</span><span class="pill d" lang="pt">Só desenhado</span></p>
+  <p lang="en">Not simulated: the prototype ends a missing item at sold, before the charge. After the charge it is designed as a full refund.</p>
+  <p lang="pt">Não simulado: o protótipo encerra um item faltando no sold, antes da cobrança. Depois da cobrança, está desenhado como reembolso integral.</p>
+  <div class="lines">
+    <div class="ln sn">Paper &amp; Co can't find your pairs. I've refunded £29.98 to your card.</div>
+    <div class="chips"><span>Keep looking</span></div>
+  </div>
+</div>
+<div class="state chat des" id="closed" data-x="3580" data-y="880" data-title="The shop goes quiet" style="width:340px">
+  <span class="state-name"><i data-icon="store"></i><span lang="en">The shop goes quiet</span><span lang="pt">A loja some</span></span>
+  <p class="meta"><span class="pill d" lang="en">Designed only</span><span class="pill d" lang="pt">Só desenhado</span></p>
+  <p lang="en">A shop that cannot be reached on collection day. Snuffle warns the shopper before the trip and keeps the item set aside.</p>
+  <p lang="pt">Uma loja que não responde no dia da retirada. O Snuffle avisa o comprador antes da viagem e mantém o item separado.</p>
+  <div class="lines">
+    <div class="ln sn">I can't reach Paper &amp; Co today, and the shop may be closed. Your pairs stay set aside until Mon 9 Nov.</div>
+  </div>
+</div>
+<div class="state chat" id="daybefore" data-x="4040" data-y="0" data-title="The day before" style="width:340px">
+  <span class="state-name"><i data-icon="calendar-check"></i><span lang="en">The day before</span><span lang="pt">Na véspera</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">A reminder the day before the date. One extension, of the shop's own window length.</p>
+  <p lang="pt">Um lembrete na véspera da data. Uma prorrogação, do tamanho da janela da própria loja.</p>
+  <div class="lines">
+    <div class="ln sn">Your 2 pairs are set aside at Paper &amp; Co. Collect by Mon 9 Nov.</div>
+    <div class="ln sn">Can't make it? You can extend once.</div>
+    <div class="chips"><span>Extend to Mon 16 Nov</span><span>Directions</span></div>
+  </div>
+</div>
+<div class="state chat" id="extended" data-x="4480" data-y="0" data-title="Extended" style="width:340px">
+  <span class="state-name"><i data-icon="calendar-plus"></i><span lang="en">Extended</span><span lang="pt">Prorrogado</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">The date moves once. The shop is told.</p>
+  <p lang="pt">A data muda uma vez. A loja é avisada.</p>
+  <div class="lines">
+    <div class="ln me">Extend to Mon 16 Nov</div>
+    <div class="ln sn">Done. Collect by Mon 16 Nov.</div>
+  </div>
+</div>
+<div class="state chat end" id="collected" data-x="4920" data-y="0" data-title="Collected and rated" style="width:340px">
+  <span class="state-name"><i data-icon="shopping-bag"></i><span lang="en">Collected and rated</span><span lang="pt">Retirado e avaliado</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">The shop marks it collected. The shopper answers "Would you go back?" with a thumb, up to three tags and an optional note.</p>
+  <p lang="pt">A loja marca como retirado. O comprador responde "Would you go back?" com um polegar, até três tags e uma nota opcional.</p>
+  <div class="lines">
+    <div class="ln sn">How was Paper &amp; Co?</div>
+    <div class="chips"><span>Rate</span></div>
+    <div class="ln sn">Thanks. Your rating is on Paper &amp; Co's page now.</div>
+  </div>
+</div>
+<div class="state chat" id="code" data-x="4040" data-y="440" data-title="At the counter" style="width:340px">
+  <span class="state-name"><i data-icon="qr-code"></i><span lang="en">At the counter</span><span lang="pt">No balcão</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">The shopper shows the code. The shop scans it or taps collected.</p>
+  <p lang="pt">O comprador mostra o código. A loja lê ou toca em collected.</p>
+  <div class="lines">
+    <div class="ln sys">Collection code on the receipt, full screen</div>
+  </div>
+</div>
+<div class="state chat" id="notcollected" data-x="4480" data-y="440" data-title="Not collected in time" style="width:340px">
+  <span class="state-name"><i data-icon="calendar"></i><span lang="en">Not collected in time</span><span lang="pt">Não retirado a tempo</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">The date passes. The order is cancelled, the shopper is refunded in full and the item goes back on sale.</p>
+  <p lang="pt">A data passa. O pedido é cancelado, o comprador é reembolsado por inteiro e o item volta à venda.</p>
+  <div class="lines">
+    <div class="ln sn">You didn't collect by Mon 9 Nov, so your order at Paper &amp; Co is cancelled. I've refunded £29.98 to your card.</div>
+    <div class="chips"><span>Ask Paper &amp; Co again</span><span>Keep looking</span></div>
+  </div>
+</div>
+<div class="state chat" id="cancelled" data-x="4920" data-y="440" data-title="The shopper cancels" style="width:340px">
+  <span class="state-name"><i data-icon="circle-x"></i><span lang="en">The shopper cancels</span><span lang="pt">O comprador cancela</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">Before the date, with a full refund. The item goes back on sale.</p>
+  <p lang="pt">Antes da data, com reembolso integral. O item volta à venda.</p>
+  <div class="lines">
+    <div class="ln sn">Your order at Paper &amp; Co is cancelled. I've refunded £29.98 to your card.</div>
+    <div class="chips"><span>Keep looking</span></div>
+  </div>
+</div>
+<div class="state chat des" id="problem" data-x="4040" data-y="880" data-title="A problem after collecting" style="width:340px">
+  <span class="state-name"><i data-icon="message-circle"></i><span lang="en">A problem after collecting</span><span lang="pt">Um problema depois da retirada</span></span>
+  <p class="meta"><span class="pill d" lang="en">Designed only</span><span class="pill d" lang="pt">Só desenhado</span></p>
+  <p lang="en">Problems go to the shop. Snuffle passes the message on and relays the reply; it does not judge.</p>
+  <p lang="pt">Problemas vão para a loja. O Snuffle repassa a mensagem e a resposta; não julga.</p>
+  <div class="lines">
+    <div class="ln me">One pair has a scratch on the lens</div>
+    <div class="ln sn">Sorry about that. I've sent it to Paper &amp; Co and I'll message you when they reply.</div>
+  </div>
+</div>
+<div class="state chat" id="notfound" data-x="900" data-y="1560" data-title="No shop has it in time" style="width:340px">
+  <span class="state-name"><i data-icon="circle-x"></i><span lang="en">No shop has it in time</span><span lang="pt">Nenhuma loja tem a tempo</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">Every asked shop has answered or timed out and none has the item. Two ways forward.</p>
+  <p lang="pt">Todas as lojas consultadas responderam ou deram timeout e nenhuma tem o item. Dois caminhos.</p>
+  <div class="lines">
+    <div class="ln sn">None of the 6 shops has them before 4pm: 4 said no and 2 didn't reply.</div>
+    <div class="ln sn">I can ask shops up to 30 minutes away, or keep looking and tell you when one near you has them.</div>
+    <div class="chips"><span>Ask further away</span><span>Keep looking</span></div>
+  </div>
+</div>
+<div class="state chat" id="further" data-x="1340" data-y="1560" data-title="Ask further away" style="width:340px">
+  <span class="state-name"><i data-icon="map-pin"></i><span lang="en">Ask further away</span><span lang="pt">Perguntar mais longe</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">Shops 16 to 30 minutes away are asked, once. In Sam's script one has them; for the desk fan none does.</p>
+  <p lang="pt">As lojas a 16 a 30 minutos são consultadas, uma vez. No roteiro do Sam uma tem; para o ventilador de mesa nenhuma tem.</p>
+  <div class="lines">
+    <div class="ln me">Ask further away</div>
+    <div class="ln sn">I'm asking five more shops, up to 30 minutes away. I'll tell you as they answer.</div>
+  </div>
+</div>
+<div class="state chat" id="none2" data-x="1780" data-y="1560" data-title="Nothing further away either" style="width:340px">
+  <span class="state-name"><i data-icon="circle-x"></i><span lang="en">Nothing further away either</span><span lang="pt">Nada mais longe também</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">The desk fan request ends here unless the shopper keeps looking.</p>
+  <p lang="pt">O pedido do ventilador de mesa termina aqui, a menos que o comprador continue procurando.</p>
+  <div class="lines">
+    <div class="ln sn">None of the 5 shops further away has one either. I can keep looking and tell you when one has one.</div>
+    <div class="chips"><span>Keep looking</span></div>
+  </div>
+</div>
+<div class="state chat" id="keeping" data-x="2220" data-y="1560" data-title="Keep looking" style="width:340px">
+  <span class="state-name"><i data-icon="eye"></i><span lang="en">Keep looking</span><span lang="pt">Continuar procurando</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">A one-off search runs to Fri 6 Nov; every week runs to Fri 4 Dec. Nothing is bought without Buy.</p>
+  <p lang="pt">Uma busca única vai até sex 6 nov; toda semana vai até sex 4 dez. Nada é comprado sem o Buy.</p>
+  <div class="lines">
+    <div class="ln me">Keep looking</div>
+    <div class="ln sn">I'll keep looking until Fri 6 Nov and message you when a shop near you has them. Nothing is bought until you tap Buy.</div>
+    <div class="chips"><span>Change</span><span>Stop</span></div>
+  </div>
+</div>
+<div class="state chat des" id="found" data-x="2660" data-y="1560" data-title="A shop has it later" style="width:340px">
+  <span class="state-name"><i data-icon="bell"></i><span lang="en">A shop has it later</span><span lang="pt">Uma loja tem depois</span></span>
+  <p class="meta"><span class="pill d" lang="en">Designed only</span><span class="pill d" lang="pt">Só desenhado</span></p>
+  <p lang="en">The prototype does not simulate a later find. It is designed as a notification that opens the answer card.</p>
+  <p lang="pt">O protótipo não simula um achado posterior. Está desenhado como uma notificação que abre o cartão da resposta.</p>
+  <div class="lines">
+    <div class="ln sys">Snuffle: Holland Cameras has them now: £14.99 a pair.</div>
+  </div>
+</div>
+<div class="state chat end" id="stop" data-x="3100" data-y="1560" data-title="Stop" style="width:340px">
+  <span class="state-name"><i data-icon="hand"></i><span lang="en">Stop</span><span lang="pt">Parar</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">The search ends and nothing is bought.</p>
+  <p lang="pt">A busca termina e nada é comprado.</p>
+  <div class="lines">
+    <div class="ln me">Stop</div>
+    <div class="ln sn">Done. I've stopped looking, and nothing was bought.</div>
+  </div>
+</div>
+<div class="state chat" id="w1" data-x="0" data-y="1560" data-title="A weekly ask" style="width:340px">
+  <span class="state-name"><i data-icon="repeat"></i><span lang="en">A weekly ask</span><span lang="pt">Um pedido semanal</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">The words "every Friday" or "weekly" make it a standing request: asked now, and again each week.</p>
+  <p lang="pt">As palavras "every Friday" ou "weekly" fazem dele um pedido recorrente: consultado agora e de novo a cada semana.</p>
+  <div class="lines">
+    <div class="ln me">Sourdough from Rossi's every Friday</div>
+  </div>
+</div>
+<div class="state chat" id="w2" data-x="440" data-y="1560" data-title="Snuffle confirms the weekly ask" style="width:340px">
+  <span class="state-name"><i data-icon="concierge-bell"></i><span lang="en">Snuffle confirms the weekly ask</span><span lang="pt">O Snuffle confirma o pedido semanal</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">The first round runs like any ask. This week's answers stay in view.</p>
+  <p lang="pt">A primeira rodada corre como qualquer pedido. As respostas desta semana ficam à vista.</p>
+  <div class="lines">
+    <div class="ln sn">Got it: one sourdough loaf from Rossi's, every Friday, collected after work.</div>
+    <div class="ln sn">I'll ask Rossi's again every week, on Fridays, until Fri 4 Dec, and tell you what they say.</div>
+  </div>
+</div>
+<div class="state chat des" id="w3" data-x="0" data-y="2080" data-title="The next Friday" style="width:340px">
+  <span class="state-name"><i data-icon="calendar"></i><span lang="en">The next Friday</span><span lang="pt">A próxima sexta</span></span>
+  <p class="meta"><span class="pill d" lang="en">Designed only</span><span class="pill d" lang="pt">Só desenhado</span></p>
+  <p lang="en">Each week Snuffle asks again. The prototype shows the first round only; the new round is designed, with a way to skip a week.</p>
+  <p lang="pt">Toda semana o Snuffle pergunta de novo. O protótipo mostra só a primeira rodada; a nova rodada está desenhada, com um jeito de pular uma semana.</p>
+  <div class="lines">
+    <div class="ln sn">It's Friday. Rossi's has your sourdough loaf: £4.20.</div>
+    <div class="chips"><span>Buy</span><span>Skip this week</span></div>
+  </div>
+</div>
+<div class="state chat end" id="w4" data-x="440" data-y="2080" data-title="Stop a weekly ask" style="width:340px">
+  <span class="state-name"><i data-icon="hand"></i><span lang="en">Stop a weekly ask</span><span lang="pt">Parar um pedido semanal</span></span>
+  <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
+  <p lang="en">The weekly asks end. This week's answers stay.</p>
+  <p lang="pt">Os pedidos semanais terminam. As respostas desta semana ficam.</p>
+  <div class="lines">
+    <div class="ln me">Stop</div>
+    <div class="ln sn">Done. I won't ask again, and nothing was bought.</div>
+  </div>
+</div>
+<div class="state chat" id="s_ask" data-x="0" data-y="2860" data-title="Snuffle messages the shop" style="width:340px">
+  <span class="state-name"><i data-icon="send"></i><span lang="en">Snuffle messages the shop</span><span lang="pt">O Snuffle escreve para a loja</span></span>
+  <p class="meta"><span class="pill s" lang="en">Simulated in the prototype</span><span class="pill s" lang="pt">Simulado no protótipo</span></p>
+  <p lang="en">An asked shop gets a WhatsApp template about one item, for one shopper, with a deadline. In the prototype a timer plays the shop.</p>
+  <p lang="pt">Uma loja consultada recebe um template de WhatsApp sobre um item, para um comprador, com prazo. No protótipo um timer faz o papel da loja.</p>
+  <div class="lines">
+    <div class="ln sn">Hi Ana, someone a 13-minute walk away needs 2 pairs of eclipse glasses by 4pm today. Do you have them? Reply 1 and your price, 2 No, 3 Something similar, or tell me how many you have.</div>
+  </div>
+</div>
+<div class="state chat" id="s_reply" data-x="440" data-y="2860" data-title="The shop replies" style="width:340px">
+  <span class="state-name"><i data-icon="message-circle"></i><span lang="en">The shop replies</span><span lang="pt">A loja responde</span></span>
+  <p class="meta"><span class="pill s" lang="en">Simulated in the prototype</span><span class="pill s" lang="pt">Simulado no protótipo</span></p>
+  <p lang="en">Four kinds of answer: yes with a price, no, something similar, or a smaller number. Each becomes an answer card for the shopper.</p>
+  <p lang="pt">Quatro tipos de resposta: sim com preço, não, algo parecido ou um número menor. Cada uma vira um cartão de resposta para o comprador.</p>
+  <div class="lines">
+    <div class="ln shop">1 £14.99</div>
+    <div class="ln shop">2</div>
+    <div class="ln shop">3</div>
+    <div class="ln shop">1</div>
+  </div>
+</div>
+<div class="state chat" id="s_pos" data-x="880" data-y="2860" data-title="A connected shop answers from its till" style="width:340px">
+  <span class="state-name"><i data-icon="zap"></i><span lang="en">A connected shop answers from its till</span><span lang="pt">Uma loja conectada responde pelo caixa</span></span>
+  <p class="meta"><span class="pill s" lang="en">Simulated in the prototype</span><span class="pill s" lang="pt">Simulado no protótipo</span></p>
+  <p lang="en">The POS shares item-level stock, so nobody is asked and the answer is instant. Broadway Chemist is the one in the mock content.</p>
+  <p lang="pt">O POS compartilha o estoque por item, então ninguém é perguntado e a resposta é imediata. A Broadway Chemist é a única no conteúdo de exemplo.</p>
+  <div class="lines">
+    <div class="ln sys">In stock now, from the till</div>
+  </div>
+</div>
+<div class="state chat" id="s_quiet" data-x="1320" data-y="2860" data-title="The shop goes quiet" style="width:340px">
+  <span class="state-name"><i data-icon="clock"></i><span lang="en">The shop goes quiet</span><span lang="pt">A loja fica em silêncio</span></span>
+  <p class="meta"><span class="pill s" lang="en">Simulated in the prototype</span><span class="pill s" lang="pt">Simulado no protótipo</span></p>
+  <p lang="en">After 10 minutes the row reads No reply. The prototype shows this with Brook Hardware and Brook Green Toys.</p>
+  <p lang="pt">Depois de 10 minutos a linha mostra No reply. O protótipo mostra isso com a Brook Hardware e a Brook Green Toys.</p>
+  <div class="lines">
+    <div class="ln sys">No reply</div>
+  </div>
+</div>
+<div class="state chat des" id="s_late" data-x="1760" data-y="2860" data-title="A late reply" style="width:340px">
+  <span class="state-name"><i data-icon="hourglass"></i><span lang="en">A late reply</span><span lang="pt">Uma resposta atrasada</span></span>
+  <p class="meta"><span class="pill d" lang="en">Designed only</span><span class="pill d" lang="pt">Só desenhado</span></p>
+  <p lang="en">A reply after the 10 minutes is too late to sell, and still counts as demand for the weekly summary.</p>
+  <p lang="pt">Uma resposta depois dos 10 minutos chega tarde para vender, mas ainda conta como demanda no resumo semanal.</p>
+  <div class="lines">
+    <div class="ln shop">1 £14.99</div>
+    <div class="ln sn">Thanks, noted. The shopper has already moved on, but 3 people near you asked for it this week.</div>
+  </div>
+</div>
+<div class="state chat des" id="s_unclear" data-x="2200" data-y="2860" data-title="The shop answers in its own words" style="width:340px">
+  <span class="state-name"><i data-icon="info"></i><span lang="en">The shop answers in its own words</span><span lang="pt">A loja responde do seu jeito</span></span>
+  <p class="meta"><span class="pill d" lang="en">Designed only</span><span class="pill d" lang="pt">Só desenhado</span></p>
+  <p lang="en">A reply Snuffle cannot read with confidence is not guessed. It asks the shop once more.</p>
+  <p lang="pt">Uma resposta que o Snuffle não consegue ler com segurança não é adivinhada. Ele pergunta mais uma vez.</p>
+  <div class="lines">
+    <div class="ln shop">maybe tomorrow?</div>
+    <div class="ln sn">Sorry, I didn't get that. Reply 1 if you have them now, 2 if not, 3 for something similar.</div>
+  </div>
+</div>
+<div class="state chat" id="s_no" data-x="2640" data-y="2860" data-title="The shop says no" style="width:340px">
+  <span class="state-name"><i data-icon="circle-x"></i><span lang="en">The shop says no</span><span lang="pt">A loja diz não</span></span>
+  <p class="meta"><span class="pill s" lang="en">Simulated in the prototype</span><span class="pill s" lang="pt">Simulado no protótipo</span></p>
+  <p lang="en">A no is an answer, not a loss: it feeds the weekly demand summary.</p>
+  <p lang="pt">Um não é uma resposta, não uma perda: ele alimenta o resumo semanal de demanda.</p>
+  <div class="lines">
+    <div class="ln shop">2</div>
+    <div class="ln sn">Thanks, noted. 3 people near you asked for it this week; you will see it in Monday's summary.</div>
+  </div>
+</div>
+<div class="state chat" id="s_buy" data-x="0" data-y="3380" data-title="Snuffle tells the shop it was bought" style="width:340px">
+  <span class="state-name"><i data-icon="credit-card"></i><span lang="en">Snuffle tells the shop it was bought</span><span lang="pt">O Snuffle avisa a loja da compra</span></span>
+  <p class="meta"><span class="pill s" lang="en">Simulated in the prototype</span><span class="pill s" lang="pt">Simulado no protótipo</span></p>
+  <p lang="en">The amount is authorised. The shop has 10 minutes to reply done, or sold if the item has gone.</p>
+  <p lang="pt">O valor está autorizado. A loja tem 10 minutos para responder done, ou sold se o item acabou.</p>
+  <div class="lines">
+    <div class="ln sn">Bought: 2 × eclipse glasses at £14.99, £29.98 authorised. Please set them aside for code K7Q2 and reply done within 10 minutes, or sold if they've gone. They'll collect by Mon 9 Nov.</div>
+  </div>
+</div>
+<div class="state chat" id="s_done" data-x="440" data-y="3380" data-title="Done" style="width:340px">
+  <span class="state-name"><i data-icon="circle-check"></i><span lang="en">Done</span><span lang="pt">Done</span></span>
+  <p class="meta"><span class="pill s" lang="en">Simulated in the prototype</span><span class="pill s" lang="pt">Simulado no protótipo</span></p>
+  <p lang="en">The authorised amount is taken and the shopper is told.</p>
+  <p lang="pt">O valor autorizado é capturado e o comprador é avisado.</p>
+  <div class="lines">
+    <div class="ln shop">done</div>
+    <div class="ln sn">Charged £29.98 for K7Q2. Set aside until Mon 9 Nov. When they come in, scan the code or reply collected.</div>
+  </div>
+</div>
+<div class="state chat" id="s_sold" data-x="880" data-y="3380" data-title="Sold" style="width:340px">
+  <span class="state-name"><i data-icon="circle-x"></i><span lang="en">Sold</span><span lang="pt">Sold</span></span>
+  <p class="meta"><span class="pill s" lang="en">Simulated in the prototype</span><span class="pill s" lang="pt">Simulado no protótipo</span></p>
+  <p lang="en">The authorisation is released. The shopper sees the next answer.</p>
+  <p lang="pt">A autorização é liberada. O comprador vê a próxima resposta.</p>
+  <div class="lines">
+    <div class="ln shop">sold</div>
+  </div>
+</div>
+<div class="state chat des" id="s_lapsed" data-x="1320" data-y="3380" data-title="Done after 10 minutes" style="width:340px">
+  <span class="state-name"><i data-icon="clock"></i><span lang="en">Done after 10 minutes</span><span lang="pt">Done depois de 10 minutos</span></span>
+  <p class="meta"><span class="pill d" lang="en">Designed only</span><span class="pill d" lang="pt">Só desenhado</span></p>
+  <p lang="en">Too late for the order. The shop is told, and the item stays on sale.</p>
+  <p lang="pt">Tarde demais para o pedido. A loja é avisada e o item continua à venda.</p>
+  <div class="lines">
+    <div class="ln shop">done</div>
+    <div class="ln sn">Too late, the shopper wasn't charged; keep them on sale.</div>
+  </div>
+</div>
+<div class="state chat" id="s_expired" data-x="1760" data-y="3380" data-title="Not collected" style="width:340px">
+  <span class="state-name"><i data-icon="calendar"></i><span lang="en">Not collected</span><span lang="pt">Não retirado</span></span>
+  <p class="meta"><span class="pill s" lang="en">Simulated in the prototype</span><span class="pill s" lang="pt">Simulado no protótipo</span></p>
+  <p lang="en">The shop learns that the order is cancelled and the item can go back on sale.</p>
+  <p lang="pt">A loja fica sabendo que o pedido foi cancelado e que o item pode voltar à venda.</p>
+  <div class="lines">
+    <div class="ln sn">K7Q2 wasn't collected by Mon 9 Nov. I've cancelled it and refunded the shopper; you can put them back on sale.</div>
+  </div>
+</div>
+<div class="state chat des" id="s_deliver" data-x="2200" data-y="3380" data-title="The shop delivers" style="width:340px">
+  <span class="state-name"><i data-icon="truck"></i><span lang="en">The shop delivers</span><span lang="pt">A loja entrega</span></span>
+  <p class="meta"><span class="pill d" lang="en">Designed only</span><span class="pill d" lang="pt">Só desenhado</span></p>
+  <p lang="en">Mapped, not designed: the app takes no part in the delivery itself, only relays it.</p>
+  <p lang="pt">Mapeado, não desenhado: o app não participa da entrega em si, só repassa.</p>
+  <div class="lines">
+    <div class="ln sn">Bought for delivery: 2 pairs + £3.50 delivery to Blythe Road, W14, £33.48 authorised. Can you send them today? Reply yes, then sent when they leave.</div>
+    <div class="ln shop">yes</div>
+    <div class="ln shop">sent</div>
+  </div>
+</div>
+
+<div class="note" id="n-board" data-x="0" data-y="-600" style="width:560px"><style>
+.ln { box-sizing: border-box; width: fit-content; max-width: 88%; margin: 6px 0 0; padding: 7px 12px; border-radius: 14px; font-size: 14px; line-height: 1.4; }
+.ln.me { margin-left: auto; background: var(--fg); color: var(--bg); border-bottom-right-radius: 4px; }
+.ln.sn { background: var(--muted); color: var(--fg); border-bottom-left-radius: 4px; box-shadow: inset 0 0 0 1px var(--border-strong); }
+.ln.shop { background: var(--bg); color: var(--fg); border: 1.5px dashed var(--border-strong); border-bottom-left-radius: 4px; }
+.ln.sys { max-width: 100%; background: transparent; color: var(--muted-fg); border: 1px solid var(--border-strong); border-radius: 8px; font-size: 13px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; }
+.chips span { padding: 3px 11px; border-radius: 999px; border: 1px solid var(--border-strong); font-size: 13px; color: var(--fg); background: var(--bg); }
+.cv-item.state p.meta { margin: 8px 0 0; padding-left: 28px; }
+.cv-item.state .lines { margin-top: 10px; padding-top: 4px; border-top: 1px solid var(--border-strong); }
+.pill { display: inline-block; padding: 1px 9px; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: .01em; background: var(--muted); color: var(--fg); }
+.pill.d { background: transparent; color: var(--muted-fg); border: 1px dashed var(--border-strong); }
+.pill.s { background: transparent; color: var(--fg); border: 1px solid var(--border-strong); }
+.cv-item.state.des { border-style: dashed; }
+.lg { display: grid; gap: 6px; margin-top: 10px; }
+.lg .ln { max-width: 100%; margin: 0; }
+</style>
+  <p lang="en"><strong>What this board is.</strong> The conversation between the shopper and Snuffle, turn by turn, and underneath it the conversation between Snuffle and the shops. Boxes are states of the conversation, not screens: each holds the lines said in it. The screens are on App flow, the shop's request states on Shop request states.</p>
+  <p lang="pt"><strong>O que é este quadro.</strong> A conversa entre o comprador e o Snuffle, turno a turno, e por baixo dela a conversa entre o Snuffle e as lojas. As caixas são estados da conversa, não telas: cada uma guarda as falas ditas nele. As telas estão no Fluxo do app, e os estados do pedido na loja em Estados do pedido na loja.</p>
+</div>
+<div class="note" id="n-legend" data-x="600" data-y="-600" style="width:520px">
+  <p lang="en"><strong>How to read it.</strong> Every line is interface copy, in English in both languages. A solid frame is something the prototype does; a dashed frame is only designed, which makes it an assumption.</p>
+  <p lang="pt"><strong>Como ler.</strong> Cada fala é texto de interface, em inglês nos dois idiomas. Uma moldura contínua é algo que o protótipo faz; uma moldura tracejada só está desenhada, ou seja, é uma suposição.</p>
+  <div class="lg">
+    <div class="ln me">The shopper</div>
+    <div class="ln sn">Snuffle, to the shopper or to the shop</div>
+    <div class="ln shop">The shop, on WhatsApp</div>
+    <div class="ln sys">A system message, a card or a notification</div>
+    <div class="chips"><span>A chip the shopper taps</span></div>
+    <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span> <span class="pill s" lang="en">Simulated in the prototype</span><span class="pill s" lang="pt">Simulado no protótipo</span> <span class="pill d" lang="en">Designed only</span><span class="pill d" lang="pt">Só desenhado</span></p>
+  </div>
+</div>
+<div class="note" id="n-proto" data-x="1160" data-y="-600" style="width:760px">
+  <p lang="en"><strong>In the prototype.</strong> Three scripted asks (Sam's glasses, Sam's glasses with a cake, Jess's sourdough) and one standing ask ("every Friday"). Snuffle confirms, asks collect or delivery, and asks six shops. Shops answer on a timer: has it, no, something similar, fewer than asked, can make, from the till, no reply. Then Buy, the payment sheet and its decline, the shop's confirm, sold and not confirmed, delivery, the day-before reminder with one extension, the code, collected and rated, not collected, cancel. When nothing comes back: ask further away, keep looking, change, stop. Anything else gets the off-script reply.</p>
+  <p lang="pt"><strong>No protótipo.</strong> Três pedidos roteirizados (os óculos do Sam, os óculos do Sam com um bolo, o pão do Jess) e um pedido recorrente ("every Friday"). O Snuffle confirma, pergunta retirar ou entrega e consulta seis lojas. As lojas respondem num timer: tem, não, algo parecido, menos do que o pedido, sob encomenda, pelo caixa, sem resposta. Depois vêm o Buy, a folha de pagamento e a recusa, a confirmação da loja, o sold e o não confirmou, a entrega, o lembrete da véspera com uma prorrogação, o código, retirado e avaliado, não retirado, cancelar. Quando nada volta: perguntar mais longe, continuar procurando, mudar, parar. Qualquer outra coisa recebe a resposta fora do roteiro.</p>
+</div>
+<div class="note" id="n-designed" data-x="1960" data-y="-600" style="width:600px">
+  <p lang="en"><strong>Designed only.</strong> Assumptions I have not built: a question when the quantity or the deadline is missing, an ask outside Blythe Road, cancelling the first round, the item gone after the charge, a shop that cannot be reached on collection day, a problem after collecting, a shop that has it later while Snuffle keeps looking, the new round of a weekly ask, and on the shop's side a late reply, a free-text reply and the shop's own delivery.</p>
+  <p lang="pt"><strong>Só desenhado.</strong> Suposições que não construí: uma pergunta quando faltam quantidade ou prazo, um pedido fora da Blythe Road, cancelar a primeira rodada, o item sumido depois da cobrança, uma loja inacessível no dia da retirada, um problema depois da retirada, uma loja que tem depois enquanto o Snuffle continua procurando, a nova rodada de um pedido semanal e, do lado da loja, uma resposta atrasada, uma resposta em texto livre e a entrega da própria loja.</p>
+</div>
+
+<a class="link" data-from="ask" data-to="clarify" data-label-en="sends" data-label-pt="envia"></a>
+<a class="link alt" data-from="ask" data-to="split" data-label-en="two errands" data-label-pt="dois recados"></a>
+<a class="link alt" data-from="ask" data-to="offscript" data-label-en="something else" data-label-pt="outra coisa"></a>
+<a class="link alt" data-from="ask" data-to="missing" data-label-en="words missing" data-label-pt="faltam dados"></a>
+<a class="link alt" data-from="ask" data-to="outarea" data-label-en="outside Blythe Road" data-label-pt="fora da Blythe Road"></a>
+<a class="link" data-from="clarify" data-to="notify" data-label-en="Collect" data-label-pt="Collect"></a>
+<a class="link" data-from="notify" data-to="asking" data-label-en="Allow or Don't Allow" data-label-pt="Allow ou Don't Allow"></a>
+<a class="link alt" data-from="split" data-to="clarify" data-label-en="Split into 2" data-label-pt="Split into 2"></a>
+<a class="link alt" data-from="missing" data-to="clarify" data-label-en="asked again" data-label-pt="perguntado de novo"></a>
+<a class="link alt" data-from="asking" data-to="away" data-label-en="leaves the app" data-label-pt="sai do app"></a>
+<a class="link alt" data-from="asking" data-to="cancel" data-label-en="cancels" data-label-pt="cancela"></a>
+<a class="link" data-from="asking" data-to="answers" data-label-en="shops answer" data-label-pt="lojas respondem"></a>
+<a class="link alt" data-from="asking" data-to="notfound" data-label-en="none says yes" data-label-pt="nenhuma diz sim"></a>
+<a class="link" data-from="answers" data-to="buy" data-label-en="taps Buy" data-label-pt="toca em Buy"></a>
+<a class="link alt" data-from="answers" data-to="similar" data-label-en="something similar" data-label-pt="algo parecido"></a>
+<a class="link alt" data-from="answers" data-to="some" data-label-en="has fewer" data-label-pt="tem menos"></a>
+<a class="link alt" data-from="answers" data-to="cake" data-label-en="made to order" data-label-pt="sob encomenda"></a>
+<a class="link" data-from="buy" data-to="pay" data-label-en="Buy" data-label-pt="Buy"></a>
+<a class="link alt" data-from="buy" data-to="delivers" data-label-en="shop delivers" data-label-pt="a loja entrega"></a>
+<a class="link" data-from="pay" data-to="waiting" data-label-en="pays" data-label-pt="paga"></a>
+<a class="link alt" data-from="pay" data-to="declined" data-label-en="declined" data-label-pt="recusado"></a>
+<a class="link" data-from="waiting" data-to="setaside" data-label-en="shop replies done" data-label-pt="a loja responde done"></a>
+<a class="link alt" data-from="waiting" data-to="sold" data-label-en="sold" data-label-pt="sold"></a>
+<a class="link alt" data-from="waiting" data-to="notconf" data-label-en="10 min" data-label-pt="10 min"></a>
+<a class="link alt" data-from="setaside" data-to="lategone" data-label-en="item gone" data-label-pt="item sumiu"></a>
+<a class="link alt" data-from="setaside" data-to="closed" data-label-en="shop unreachable" data-label-pt="loja inacessível"></a>
+<a class="link" data-from="setaside" data-to="daybefore" data-label-en="next day" data-label-pt="dia seguinte"></a>
+<a class="link alt" data-from="setaside" data-to="code" data-label-en="at the counter" data-label-pt="no balcão"></a>
+<a class="link" data-from="daybefore" data-to="extended" data-label-en="extends" data-label-pt="prorroga"></a>
+<a class="link alt" data-from="daybefore" data-to="notcollected" data-label-en="the date passes" data-label-pt="a data passa"></a>
+<a class="link alt" data-from="daybefore" data-to="cancelled" data-label-en="cancels" data-label-pt="cancela"></a>
+<a class="link" data-from="extended" data-to="collected" data-label-en="collects" data-label-pt="retira"></a>
+<a class="link" data-from="code" data-to="collected" data-label-en="shop marks it" data-label-pt="a loja marca"></a>
+<a class="link alt" data-from="collected" data-to="problem" data-label-en="something wrong" data-label-pt="algo errado"></a>
+<a class="link alt" data-from="declined" data-to="pay" data-label-en="Try again" data-label-pt="Try again"></a>
+<a class="link" data-from="notfound" data-to="further" data-label-en="Ask further away" data-label-pt="Ask further away"></a>
+<a class="link alt" data-from="notfound" data-to="keeping" data-label-en="Keep looking" data-label-pt="Keep looking"></a>
+<a class="link" data-from="further" data-to="none2" data-label-en="none has it" data-label-pt="nenhuma tem"></a>
+<a class="link" data-from="none2" data-to="keeping" data-label-en="Keep looking" data-label-pt="Keep looking"></a>
+<a class="link alt" data-from="keeping" data-to="stop" data-label-en="Stop" data-label-pt="Stop"></a>
+<a class="link alt" data-from="keeping" data-to="found" data-label-en="a shop has it" data-label-pt="uma loja tem"></a>
+<a class="link" data-from="w1" data-to="w2" data-label-en="sends" data-label-pt="envia"></a>
+<a class="link" data-from="w2" data-to="w3" data-label-en="every Friday" data-label-pt="toda sexta"></a>
+<a class="link alt" data-from="w3" data-to="w4" data-label-en="Stop" data-label-pt="Stop"></a>
+<a class="link alt" data-from="asking" data-to="s_ask" data-label-en="Snuffle messages each shop" data-label-pt="o Snuffle escreve para cada loja"></a>
+<a class="link" data-from="s_ask" data-to="s_reply" data-label-en="shop answers" data-label-pt="a loja responde"></a>
+<a class="link alt" data-from="s_ask" data-to="s_pos" data-label-en="connected shop" data-label-pt="loja conectada"></a>
+<a class="link alt" data-from="s_ask" data-to="s_quiet" data-label-en="10 min" data-label-pt="10 min"></a>
+<a class="link alt" data-from="s_reply" data-to="s_no" data-label-en="2" data-label-pt="2"></a>
+<a class="link alt" data-from="s_quiet" data-to="s_late" data-label-en="replies late" data-label-pt="responde tarde"></a>
+<a class="link alt" data-from="s_reply" data-to="s_unclear" data-label-en="free text" data-label-pt="texto livre"></a>
+<a class="link alt" data-from="waiting" data-to="s_buy" data-label-en="Snuffle messages the shop" data-label-pt="o Snuffle escreve para a loja"></a>
+<a class="link" data-from="s_buy" data-to="s_done" data-label-en="done" data-label-pt=""></a>
+<a class="link alt" data-from="s_buy" data-to="s_sold" data-label-en="sold" data-label-pt="sold"></a>
+<a class="link alt" data-from="s_buy" data-to="s_lapsed" data-label-en="10 min" data-label-pt="10 min"></a>
+<a class="link alt" data-from="s_done" data-to="s_expired" data-label-en="date passes" data-label-pt="a data passa"></a>
+<a class="link alt" data-from="s_buy" data-to="s_deliver" data-label-en="delivery" data-label-pt="entrega"></a>

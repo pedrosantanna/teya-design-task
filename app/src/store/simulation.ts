@@ -608,6 +608,12 @@ export const sim = {
   step(seconds = 5) {
     advance(seconds);
   },
+  /** Debugger: the order is a partial buy (all but one of the items), and the order card keeps looking for the rest. */
+  setPartialBuy(on: boolean) {
+    const quantity = content().active.quantity;
+    setSim({ orderQty: on ? Math.max(1, quantity - 1) : quantity });
+    useAppStore.getState().set({ keepLookingForMore: on && quantity > 1 });
+  },
   setPayOutcome(payOutcome: PayOutcome) {
     setSim({ payOutcome });
   },

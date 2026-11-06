@@ -32,6 +32,10 @@ export type { ShopPhoto };
 export type ShopPageLayoutProps = {
   /** The shop's name: the large title in Display title, then the bar's inline title. */
   name: string;
+  /** The shop, so the map behind the card stands on its street and draws the walk to it (Map `shopId`). */
+  shopId?: string;
+  /** Draw the walk from the shopper's door on the map (off away from home). */
+  route?: boolean;
   /** The shop's photos, in the carousel inside the card after the actions; a tap opens the Lightbox. */
   photos?: ShopPhoto[];
   /** Back to the screen that pushed the page (Nearby): the shop page is the shop's detail, so it has Back. */
@@ -60,7 +64,7 @@ export function ShopPageText({ children }: { children: ReactNode }) {
   return <View style={styles.text(width)}>{children}</View>;
 }
 
-export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], onBack, backLabel, mapLoading = false, facts, actions, accent, children }: ShopPageLayoutProps) {
+export const ShopPageLayout = memo(function ShopPageLayout({ name, shopId, route = true, photos = [], onBack, backLabel, mapLoading = false, facts, actions, accent, children }: ShopPageLayoutProps) {
   const { theme } = useUnistyles();
   const frame = useSafeAreaFrame();
   const insets = useSafeAreaInsets();
@@ -131,6 +135,8 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
           accent={accent}
           extent={{ width: frame.width, height: frame.height, pinY }}
           attribution={false}
+          shopId={shopId}
+          route={route}
         />
       </View>
 

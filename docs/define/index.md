@@ -1,11 +1,11 @@
 # Concept
 
-A concierge for the high street that the shopper talks to in one conversation. You tell it what you need, where and by when. If a shop's till already shares its stock, it answers at once; if not, it asks the shops likely to have it and comes back with who has it, whether they'll hold it, and whether they can deliver. You reserve or pay in the same conversation and collect or get it delivered. Behind the conversation, several agents split the work.
+A concierge for the high street that the shopper talks to in one conversation. You tell it what you need, where and by when. If a shop's till already shares its stock, it answers at once; if not, it asks the shops likely to have it and comes back with who has it, whether they'll keep it for you, and whether they can deliver. You buy in the same conversation and collect or get it delivered. Behind the conversation, several agents split the work.
 
 ```summary
 Takeaways:
 - The concept answers the strongest pain from Discover, not knowing before leaving home (A1), with a confirmation from the shop itself.
-- It leads with findability. The transaction (pay to hold, collect or deliver) closes the loop and is where the brief's other problem shows up.
+- It leads with findability. The transaction (buy, then collect or have it delivered) closes the loop and is where the brief's other problem shows up.
 - I chose an agent for four reasons: one conversation for many tasks, waiting handled for the shopper, acting later on their behalf, and reach beyond one app. All four are my hypotheses; Discover has little evidence on them.
 - Everything depends on shops answering quickly. No shopkeeper is in the evidence, so that is the first thing to test.
 Call:
@@ -24,7 +24,7 @@ Trade-offs:
 1. **Ask.** The shopper says what they need, where (here, or where they'll be) and by when: "eclipse glasses today near Hammersmith". They can also ask ahead ("tell me when the bakery has rye") and leave it with the concierge. Browsing shops and categories stays available for when there's no specific item in mind.
 2. **Instant answer where possible.** If a nearby shop's till shares item-level stock, the concierge answers at once with the shop, price and opening hours.
 3. **Concierge where not.** Otherwise it says it can't see stock and asks the likely shops at the same time. While it waits, it keeps the shopper posted, widens the search if the deadline gets close, and checks delivery.
-4. **Choose and pay.** The shopper picks a shop and reserves, pays to hold, or orders delivery, without leaving the conversation.
+4. **Choose and buy.** The shopper picks a shop and taps Buy, with collection or the shop's delivery, without leaving the conversation.
 5. **Collect or receive.** Collection at the shop, inside a window the shop has agreed to, or delivery. For a shopper who works shop hours, paying ahead helps only with a way to collect after work: a later slot at a shop that closes late enough, a collection point on the street that stays open (a late-opening shop or a locker), or evening delivery. All three are assumptions, tested in H6.
 6. **After.** The concierge follows up and keeps standing requests open. Every request becomes a signal for shops nearby: what people around them are looking for, including what they didn't have.
 
@@ -32,8 +32,8 @@ The [service blueprint](blueprint.md) shows each step across the shopper, the co
 
 ## Two kinds of shop
 
-- **Connected shops.** The shop's POS shares item-level stock. The concierge answers at once ("In stock now"), and a hold is placed in the POS, which marks the item as set aside.
-- **Asked shops.** No stock data. The concierge asks the shop on WhatsApp, or through the POS's messages where it has them, and the shop replies in its own words. A hold is confirmed by the shop's reply.
+- **Connected shops.** The shop's POS shares item-level stock. The concierge answers at once ("In stock now"), and the payment is taken at once, with the POS marking the item as set aside.
+- **Asked shops.** No stock data. The concierge asks the shop on WhatsApp, or through the POS's messages where it has them, and the shop replies in its own words. The shop's reply confirms it has set the item aside.
 
 Both appear in the same list of answers, labelled by where the answer came from. Most small independents start as asked shops (A14).
 
@@ -41,12 +41,12 @@ Both appear in the same list of answers, labelled by where the answer came from.
 
 | Way | Paid | Held for | Who hands it over |
 | --- | --- | --- | --- |
-| Pay and hold | Yes, once the shop has set it aside | 7 days by default; the shopper picks a collection day. Shorter for perishables (bakery, butcher, florist), up to 14 days if the shop agrees; one extension of 7 days; automatic refund if nobody collects | The shop, at the counter, or a collection point |
+| Buy and collect | Yes. Connected shops charge at once; for asked shops the amount is authorised and taken when the shop confirms | Each shop sets the window: 7 days by default, or 14 or 30, and the same day or the next for perishables (bakery, butcher, florist); one extension of the same length; automatic refund if nobody collects. The shopper sees the Collect by date and does not pick a day | The shop, at the counter, or a collection point |
 | Pay and the shop delivers | Yes | Not held: the shop sends it with its own delivery or courier | The shop's delivery; the concierge only follows its status |
 
-The lengths come from how UK shops hold orders for collection ([desk research](../discover/high-street-landscape.md)): a week is the norm for paid orders. Delivery by the shop is mapped, not designed: the concierge would show "dispatched", "on its way" and "delivered" from the shop's updates (decision 030).
+The lengths come from how UK shops hold orders for collection ([desk research](../discover/high-street-landscape.md)): a week is the norm for paid orders. Delivery by the shop is mapped, not designed: the concierge would show "dispatched", "on its way" and "delivered" from the shop's updates (decisions 030 and 037).
 
-There is no unpaid reserve (decision 032). A shopper who doesn't want to pay goes without a hold and may find the item sold; the concierge says so. The unpaid reserve was there for convenience and cash, but the payment happened outside the app and the shop carried the no-show risk.
+There is no unpaid reserve (decision 032). A shopper who doesn't want to pay goes without buying and may find the item sold; the concierge says so. The unpaid reserve was there for convenience and cash, but the payment happened outside the app and the shop carried the no-show risk.
 
 ## Area
 
@@ -67,7 +67,7 @@ Six shopping streets sit within a 15-minute walk. Tying the shopper to one of th
 
 An agent is my main hypothesis for this product. The concierge is that agent: the one the shopper talks to, and the product's interface, whether it shows up as the app, in WhatsApp or as an MCP server for the shopper's own AI assistant. Behind it, several agents split the work. I expect four things from this setup.
 
-- **One interface for many tasks.** Searching, asking shops, holding, paying and arranging delivery happen in the same conversation, in the same pattern every time. I expect that to be simpler to learn than a screen per task.
+- **One interface for many tasks.** Searching, asking shops, buying and arranging delivery happen in the same conversation, in the same pattern every time. I expect that to be simpler to learn than a screen per task.
 - **Waiting handled for the shopper.** Shops are slow and hard to reach. The concierge asks several at once, keeps looking while they answer, and checks delivery in the meantime, so the shopper doesn't chase contacts or wait on one reply.
 - **Acting later.** The shopper can leave a request ahead of time, and the concierge acts on it when an answer or stock comes in.
 - **Not tied to an app.** The same concierge can live in WhatsApp or connect to the shopper's own AI assistant through MCP. The app is where it gets a focused interface built for this one job.
@@ -97,8 +97,8 @@ The concept works with three kinds of availability. Reported stock comes from a 
 
 The brief asks for what's missing to be assumed and written down.
 
-- **Merchant side.** Shops receive requests in a tool they already open during the day and answer in under ten minutes while open. They accept holding a paid item for about a week, less for perishables (decision 030).
-- **Hold and payment.** The shop confirms it has set the item aside before the shopper is charged. The full amount is taken then and refunded if the hold lapses; authorising at the hold and capturing at collection is the alternative I left open.
+- **Merchant side.** Shops receive requests in a tool they already open during the day and answer in under ten minutes while open. They accept keeping a bought item for the window they set: a week by default, longer if they choose, a day or less for perishables (decisions 030 and 037).
+- **Payment.** At a connected shop the payment is taken at once, because the POS has the stock. At an asked shop the amount is authorised and taken when the shop replies that it has set the item aside; if it doesn't within 10 minutes, the authorisation lapses and the shopper is told (decision 037).
 - **After work.** Shoppers who work shop hours collect through a later slot at a shop that closes late enough, a collection point on the street, or evening delivery. Who hands over, where and when is in the [blueprint](blueprint.md).
 - **Agents.** Separate agents for stock, shop matching, shop contact, payment and couriers work behind one concierge. When stock is unknown, the concierge asks the shop and never guesses.
 - **Who to ask.** The matching agent knows which shops within reach sell which kinds of things (from public listings and categories), even without stock data.
@@ -114,7 +114,7 @@ The brief asks for what's missing to be assumed and written down.
 - **Load on shops.** Every question goes to several shops. Too many questions, or questions they can't sell against, and they stop answering.
 - **Cold start.** The concierge only works if enough shops on a street answer. Few shops, few answers, no trust.
 - **Wrong answers.** A shop that says yes and doesn't have it costs the trust the concept is built on (A10). So does an agent that guesses or misreads the request.
-- **Holds and no-shows.** A shop holds an item and the shopper doesn't come. Paying to hold reduces that and adds friction.
+- **No-shows.** A shop sets an item aside and the shopper doesn't come. Paying ahead reduces that and adds friction.
 - **Channel rules.** On WhatsApp, once 24 hours have passed since the shopper's last message, a business can only write with pre-approved templates, which limits follow-ups and standing requests there.
 
 The [value proposition](value-proposition.md) sets this against the customer profiles, the [service blueprint](blueprint.md) shows who does what, and [hypotheses](hypotheses.md) turns the weak and missing evidence into tests.

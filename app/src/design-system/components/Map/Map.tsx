@@ -8,20 +8,22 @@ import { memo, useState } from 'react';
 import { View } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { MAP_CENTER } from './mapData';
-import { MAP_CAMERA, mapStyle } from './mapStyle';
-import { cameraPadding, MapAttribution, MapFallback, MapPin, useSettled, type MapProps } from './MapParts';
+import { MAP_CAMERA } from './mapStyle';
+import { cameraPadding, MapAttribution, MapFallback, MapPin, useMapView, useSettled, type MapProps } from './MapParts';
 
 export type { MapProps } from './MapParts';
 
-export const Map = memo(function Map({ loading = false, pin = true, extent, interactive = false, accent, attribution = true }: MapProps) {
+export const Map = memo(function Map({ loading = false, pin = true, extent, interactive = false, accent, attribution = true, shopId, route = true }: MapProps) {
   const { theme } = useUnistyles();
+  const [size, setSize] = useState<{ width: number; height: number } | null>(null);
+  const view = useMapView(theme.scheme, accent, shopId, extent ?? (size ? { ...size, pinY: size.height / 2 } : undefined), route);
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
   const settled = useSettled();
   return (
     <View
       style={styles.map}
+      onLayout={(e) => setSize({ width: e.nativeEvent.layout.width, height: e.nativeEvent.layout.height })}
       accessibilityElementsHidden
       importantForAccessibility="no-hide-descendants"
       pointerEvents={interactive ? 'auto' : 'none'}
@@ -31,7 +33,7 @@ export const Map = memo(function Map({ loading = false, pin = true, extent, inte
           {failed || !settled ? null : (
             <MapLibreMap
               style={styles.fill}
-              mapStyle={mapStyle(theme.scheme)}
+              mapStyle={view.style}
               attribution={false}
               logo={false}
               compass={false}
@@ -45,11 +47,12 @@ export const Map = memo(function Map({ loading = false, pin = true, extent, inte
               onDidFinishRenderingMapFully={() => setReady(true)}
               onDidFailLoadingMap={() => setFailed(true)}
             >
-              <Camera center={MAP_CENTER} {...MAP_CAMERA} padding={cameraPadding(extent)} duration={0} />
+              <Camera center={view.center} {...MAP_CAMERA} zoom={view.zoom} bearing={view.bearing} padding={cameraPadding(extent, view.offsetX)} duration={0} />
             </MapLibreMap>
           )}
-          {ready && !failed ? null : <MapFallback extent={extent} />}
-          {pin ? <MapPin extent={extent} accent={accent} /> : null}
+          {/* The static image shows the area round Blythe Road: it stands in only for the plain map, never for a shop's route. */}
+          {ready && !failed ? null : view.key === 'area' ? <MapFallback extent={extent} /> : null}
+          {pin ? <MapPin extent={extent} accent={accent} offsetX={view.offsetX} /> : null}
           {attribution ? <MapAttribution extent={extent} /> : null}
         </>
       )}

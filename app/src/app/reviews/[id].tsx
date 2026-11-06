@@ -8,7 +8,7 @@ import Animated from 'react-native-reanimated';
 import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { LargeTitle, ListBlock, ListGroup, NavBar, RatingSummary, ReviewCard, Text, screenMargin, useNavBarHeight, useNavBarScroll, type ShopAccentName } from '@/design-system';
+import { Ground, LargeTitle, ListBlock, ListGroup, NavBar, RatingSummary, ReviewCard, Text, screenMargin, useNavBarHeight, useNavBarScroll, type ShopAccentName } from '@/design-system';
 import { ratingHeadline, shopAccent, shopById, topTags, useContent, useShopRatings } from '@/store';
 
 export default function Reviews() {
@@ -28,51 +28,53 @@ export default function Reviews() {
   const back = () => (router.canGoBack() ? router.back() : router.replace({ pathname: '/shops/[id]', params: { id: shop.id } }));
 
   return (
-    <View style={styles.screen(accent)}>
-      <Animated.ScrollView onScroll={scroll.onScroll} scrollEventThrottle={16} contentContainerStyle={styles.content(margin, top, insets.bottom)}>
-        <LargeTitle title="What buyers say" scroll={scroll} />
-        <Text variant="subheadline" color="mutedForeground">
-          {shop.name}
-        </Text>
-        <ListGroup shadow>
-          <ListBlock>
-            <RatingSummary
-              figure={headline.figure}
-              caption={headline.caption}
-              title={headline.title}
-              detail={headline.detail}
-              accessibilityLabel={headline.spoken}
-              tags={topTags(ratings, 10)}
-            />
-          </ListBlock>
-        </ListGroup>
-        {ratings.notes.length > 0 ? (
-          <View style={styles.section}>
-            <Text variant="sectionTitle" accessibilityRole="header">
-              Notes
-            </Text>
-            <ListGroup shadow>
-              {ratings.notes.map((n, i) => (
-                <ReviewCard
-                  key={`${i}-${n.text}`}
-                  name={n.name}
-                  text={n.text}
-                  up={n.up}
-                  month={n.month}
-                  position={ratings.notes.length === 1 ? 'only' : i === 0 ? 'first' : i === ratings.notes.length - 1 ? 'last' : 'middle'}
-                />
-              ))}
-            </ListGroup>
-          </View>
-        ) : null}
-        {silent > 0 ? (
-          <Text variant="footnote" color="mutedForeground">
-            {`${silent} more ${silent === 1 ? 'person' : 'people'} rated without a note.`}
+    <Ground value="tile" accent={accent}>
+      <View style={styles.screen(accent)}>
+        <Animated.ScrollView onScroll={scroll.onScroll} scrollEventThrottle={16} contentContainerStyle={styles.content(margin, top, insets.bottom)}>
+          <LargeTitle title="What buyers say" scroll={scroll} />
+          <Text variant="subheadline" color="mutedForeground">
+            {shop.name}
           </Text>
-        ) : null}
-      </Animated.ScrollView>
-      <NavBar title="What buyers say" mode="large" fill={{ accent }} leading="back" backLabel={shop.name} onLeading={back} scroll={scroll} />
-    </View>
+          <ListGroup shadow>
+            <ListBlock>
+              <RatingSummary
+                figure={headline.figure}
+                caption={headline.caption}
+                title={headline.title}
+                detail={headline.detail}
+                accessibilityLabel={headline.spoken}
+                tags={topTags(ratings, 10)}
+              />
+            </ListBlock>
+          </ListGroup>
+          {ratings.notes.length > 0 ? (
+            <View style={styles.section}>
+              <Text variant="sectionTitle" accessibilityRole="header">
+                Notes
+              </Text>
+              <ListGroup shadow>
+                {ratings.notes.map((n, i) => (
+                  <ReviewCard
+                    key={`${i}-${n.text}`}
+                    name={n.name}
+                    text={n.text}
+                    up={n.up}
+                    month={n.month}
+                    position={ratings.notes.length === 1 ? 'only' : i === 0 ? 'first' : i === ratings.notes.length - 1 ? 'last' : 'middle'}
+                  />
+                ))}
+              </ListGroup>
+            </View>
+          ) : null}
+          {silent > 0 ? (
+            <Text variant="footnote" color="mutedForeground">
+              {`${silent} more ${silent === 1 ? 'person' : 'people'} rated without a note.`}
+            </Text>
+          ) : null}
+        </Animated.ScrollView>
+        <NavBar title="What buyers say" mode="large" fill={{ accent }} leading="back" backLabel={shop.name} onLeading={back} scroll={scroll} />
+      </View>
+    </Ground>
   );
 }
 

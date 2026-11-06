@@ -107,6 +107,10 @@ O vídeo toca uma vez e para na marca pronta; toque em play para ver de novo. Co
 
 O splash mostra a marca se construindo, em cerca de 1,6 s; o tempo está na [página de movimento](motion.md#splash). No começo só o toldo aparece, enrolado no alto como a cortina de uma loja. Ele desce, e as cinco listras se desenrolam uma depois da outra, cada uma com um balanço curto e um pequeno excesso. Depois aparecem as orelhas, os olhos e o nariz, e o cachorro pisca duas vezes. O último quadro é o glifo acima, igual à imagem do splash nativo. A animação começa pelo toldo enrolado, então o rosto some por um instante quando o sistema passa a vez, e depois volta a se construir. As listras são os mesmos cinco caminhos do glifo, desenhados um a um, então o último quadro coincide com ele exatamente.
 
+## Farejando
+
+Enquanto o Snuffle consulta as lojas, a conversa mostra a marca farejando, com 88 pt de largura, nas mesmas cores do glifo. O rosto fica parado; o focinho e o toldo se mexem, já que o toldo também é o focinho do cachorro. Num ciclo de 2,6 s o focinho fareja três vezes (300 ms cada, subindo um pouco e crescendo 10%), e as cinco listras balançam até 3,5° em torno da borda de cima, cada uma 45 ms depois da anterior, ondulando como bigodes; depois ela descansa por cerca de 1,7 s. Ela substituiu a scooter de entrega, que lia como entrega, não como busca. Escolhi a marca em vez de uma versão pequena do cruzamento do Getting started, que é uma cena detalhada e vira ruído nesse tamanho. Com Reduce Motion o glifo fica parado.
+
 ## Anatomia
 
 | Parte | Forma | Tom |

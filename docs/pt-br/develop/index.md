@@ -19,5 +19,6 @@ Trade-offs:
 
 - [Fluxo do app](ideation/app-flow.md): o app de quem compra, da tela inicial à retirada, com os caminhos de falha.
 - [Estados do pedido na loja](ideation/shop-states.md): um pedido do lado da loja e as mensagens que a loja vê.
+- [Fluxo do agente](ideation/agent-flow.md): a conversa entre o comprador e o Snuffle, e entre o Snuffle e as lojas, turno a turno.
 
 Num canvas, role ou use dois dedos para mover, segure ⌘ ou Ctrl e role (ou faça pinça) para dar zoom, arraste num espaço vazio para selecionar e aperte ⇧1 para ver tudo. Selecionar uma tela abre as notas e os links dela à direita.

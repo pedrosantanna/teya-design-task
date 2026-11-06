@@ -241,6 +241,8 @@ O comprador pode reservar sem pagar (guardado até o fim do próximo dia de func
 **Em aberto:** se as independentes pequenas aceitam uma semana com uma unidade em estoque; a H6 testa isso.
 **Fechado pela 032:** se vale manter a reserva sem pagamento. Eu questionei: ela existe por comodidade e para quem paga em dinheiro (19,2% das transações do varejo em 2024), mas aí o pagamento acontece fora do app, a loja fica com o risco de a pessoa não aparecer, e a pesquisa documental não encontrou um hábito forte por trás dela (a Argos acabou com as reservas sem pagamento; as lojas que mantêm guardam por cerca de dois dias). A alternativa é exigir o pagamento em toda reserva. A H12 conta qual das duas os compradores escolhem quando as duas são oferecidas.
 
+**Substituída em parte pela 037:** o comprador compra, sem reserva sem pagamento, e a loja define o prazo de retirada.
+
 ## 031 · Lojas conectadas e lojas consultadas
 **2026-11-02 · Decidido**
 
@@ -274,7 +276,7 @@ O neutro do app é o Cinza biscoito, da rodada 4 do quadro de identidade: uma es
 
 **Por quê:** quente o bastante para ficar ao lado da marca sem emenda, discreto o bastante para qualquer conjunto de acentos levar a cor.
 **Em aberto:** o conjunto de acentos. A marca fica em preto e branco até lá.
-**Substituído:** os valores de fundo, borda e texto acima foram trocados nas rodadas 8 e 9; os atuais estão na página [Cor](develop/design-system/colour.md) (fundo claro #F4F1ED, L 0,96).
+**Substituído:** os valores de fundo, borda e texto acima foram trocados nas rodadas 8 e 9; os atuais estão na página [Cor](develop/design-system/colour.md). O fundo claro mudou de novo na 045 (#EEE9E2, L 0,935) e o modo escuro na 051.
 
 ## 035 · O app se chama Snuffle
 **2026-11-02 · Decidido**
@@ -291,12 +293,12 @@ Os acentos são a Pastel parade com Índigo: o Índigo para texto, botões e tin
 
 **Por quê:** dos três temas testados nas mesmas telas, a Pastel parade com Índigo foi a mais calma, e os preenchimentos claros dela dão badges tonais que funcionam nos dois modos. Na rodada 7, um cartão branco sobre o fundo claro ficava em 1,04:1 sem borda, pouco demais.
 **Atualização, rodada 9:** o fundo claro passa para L 0,96 e mantém o croma da rodada 8 (#F4F1ED), com superfícies secundárias em L 0,915; os cartões continuam brancos e se destacam a 1,13:1. O fundo da rodada 8 parecia um pouco escuro. As versões mais saturadas (×1,8 e ×2,5) e a menos saturada (45%) foram descartadas. O modo escuro não muda: mantém as superfícies da rodada 8, já que o croma não mudou.
-**Substituído:** o fundo em L 0,95 e o passo de 1,16:1 do cartão no primeiro parágrafo foram trocados pela rodada 9: L 0,96 (#F4F1ED) e 1,13:1, como na página [Cor](develop/design-system/colour.md).
+**Substituído:** o fundo em L 0,95 e o passo de 1,16:1 do cartão no primeiro parágrafo foram trocados pela rodada 9: L 0,96 (#F4F1ED) e 1,13:1. A decisão 045 moveu depois o fundo claro para #EEE9E2 (L 0,935), e a 051 o modo escuro; a página [Cor](develop/design-system/colour.md) tem os valores atuais.
 
 ## 037 · Comprar, depois retirar
 **2026-11-03 · Decidido**
 
-A ação do comprador é Buy (comprar), não Hold (reservar). "Hold" pode ser lido como reserva grátis ou como um passo antes da compra, e deixa o comprador sem saber se já comprou. O comprador toca em Buy e paga uma vez com Apple Pay. Numa loja conectada, o pagamento é cobrado na hora, porque o POS tem o estoque. Numa loja consultada, o valor só é autorizado e é cobrado quando a loja responde que separou o item; se a loja não confirma em poucos minutos, a autorização cai e o comprador é avisado. Cada loja define por quanto tempo guarda um item comprado: 7 dias por padrão, ou 14 ou 30, e o mesmo dia ou o seguinte para perecíveis; vale uma extensão do mesmo tamanho. Comprar não é reservar: o item é do comprador assim que a loja confirma. Se ninguém retira até o fim do prazo, o pedido é cancelado e o comprador recebe o reembolso integral automaticamente, como fazem as grandes redes, e a loja volta a vender o item. O comprador vê a data antes de tocar em Buy ("Collect by Mon 9 Nov · full refund if you don't") e de novo no recibo; a conversa não oferece o prazo como motivo para comprar.
+A ação do comprador é Buy (comprar), não Hold (reservar). "Hold" pode ser lido como reserva grátis ou como um passo antes da compra, e deixa o comprador sem saber se já comprou. O comprador toca em Buy e paga uma vez com Apple Pay. Numa loja conectada, o pagamento é cobrado na hora, porque o POS tem o estoque. Numa loja consultada, o valor só é autorizado e é cobrado quando a loja responde que separou o item; se a loja não confirma em 10 minutos, a autorização cai e o comprador é avisado. Cada loja define por quanto tempo guarda um item comprado: 7 dias por padrão, ou 14 ou 30, e o mesmo dia ou o seguinte para perecíveis; vale uma extensão do mesmo tamanho. Comprar não é reservar: o item é do comprador assim que a loja confirma. Se ninguém retira até o fim do prazo, o pedido é cancelado e o comprador recebe o reembolso integral automaticamente, como fazem as grandes redes, e a loja volta a vender o item. O comprador vê a data antes de tocar em Buy ("Collect by Mon 9 Nov · full refund if you don't") e de novo no recibo; a conversa não oferece o prazo como motivo para comprar.
 
 **Por quê:** no Reino Unido não há prazo legal mínimo para retirar um pedido pago. Os termos da própria loja definem o prazo, e a Torts (Interference with Goods) Act 1977 só regula o que a loja pode fazer com itens deixados depois de um aviso. As redes guardam pedidos pagos de click-and-collect por cerca de uma semana e depois cancelam e devolvem o valor integral, sem taxa: a Argos cancela depois de 7 dias (com uma extensão de 7) e reembolsa em até 5 dias úteis; a John Lewis devolve o pedido ao depósito depois de 7 dias e reembolsa a conta; a IKEA cancela a retirada perdida e reembolsa em até 14 dias. A Screwfix guarda por 21 dias e depois devolve ao estoque. Uniqlo e Decathlon guardam por 7 dias, a Boots por 14. Lavanderias guardam peças por 60 a 90 dias, mas guardam bens do próprio cliente, muitas vezes com valor ainda a pagar, o que é outro caso. Eu tinha pedido de 30 a 90 dias; escolhi o padrão como prazo inicial e deixei a loja ir além, porque um prazo longo tira da prateleira a única unidade de uma loja pequena e só a loja sabe quanto pode esperar.
 **Suposição:** o comprador entende "Buy" com uma data de retirada melhor que "Hold"; a prova de conceito pode contar as dúvidas sobre isso.
@@ -388,6 +390,8 @@ Fiz três escolhas. Um polegar para cima ou para baixo para "Would you go back?"
 **Em aberto:** como uma contestação é analisada, e por quem; o texto de "How ratings work"; se as listas de tags servem a todo tipo de loja.
 **Fontes:** Digital Markets, Competition and Consumers Act 2024, Schedule 20 (https://www.legislation.gov.uk/ukpga/2024/13/schedule/20); CMA, Fake reviews guidance, CMA208 (https://assets.publishing.service.gov.uk/media/67eeb64fe9c76fa33048c790/CMA208_-_Fake_reviews_guidance.pdf); a seção de Avaliações dos [benchmarks](discover/benchmarks.md).
 
+**Substituída em parte pelas 056 e 060:** as avaliações mostram um primeiro nome e um mês, e as notas ficam num carrossel só com o resumo primeiro.
+
 ## 048 · Stone no modo escuro
 **2026-11-03 · Decidido**
 
@@ -404,7 +408,7 @@ Um chip de filtro selecionado é cartão com o rótulo em Índigo 800 em 600 e u
 **Em aberto:** o fundo escuro da tela de categoria (a tela inteira no tile do tipo) ainda está por decidir. O Índigo tonal (`chipSelected`) continua no passo atual do cartão de compra, nos polegares da sheet de avaliação e no botão segmentado do Android.
 
 ## 050 · Linhas tingidas mais claras na tela de categoria escura; Requests depois do campo
-**2026-11-04 · Decidido** · a posição de Requests foi revertida pela 055
+**2026-11-04 · Decidido · a posição de Requests foi revertida pela 055**
 
 No modo escuro a tela de categoria mantém o tile inteiro do tipo como fundo, e as linhas de loja sobre ele são um cartão tingido mais claro que o tile: OKLCH L 0,44, C 0,03 no matiz do acento (`shop.accent.<hue>.cardOnTile`: Pêssego #624D47, Pistache #4B5646, Manteiga #595240, Lavanda #534F62), 1,37 a 1,51:1 acima do tile. A linha de detalhes e o chevron das linhas usam o Stone 840 (#CECAC6, `mutedForegroundOnTile`), com 4,74:1 ou mais sobre todos os cartões, porque o Stone 740 media 3,35 a 3,42:1 ali. O modo claro mantém as linhas em Card branco. Na barra de pedido do Nearby, o círculo de Requests sai de antes da cápsula Ask e vai para depois dela, no fim, com o contador.
 
@@ -464,6 +468,8 @@ As linhas de metadados não juntam mais os fatos com pontos. Uma palavra de stat
 O botão de compra diz "Buy for £29.98".
 **Em aberto:** se a contagem diz "people" ou "buyers".
 
+**Fechado depois:** a contagem diz "people".
+
 ## 057 · Ilustrações desenhadas para a tela, badges tonais no escuro, avaliações em carrossel, o avatar do Snuffle
 **2026-11-05 · Decidido**
 
@@ -471,6 +477,8 @@ As ilustrações 3D são renderizadas sobre fundo transparente, com a caixa do p
 
 **Por quê:** traços desenhados em unidades do mundo engrossavam e se fundiam nos tamanhos pequenos, e tiles embutidos obrigavam a renderizar de novo a cada mudança de cor. As bordas nos badges escuros faziam o trabalho que a cor deveria fazer, como mostram os contêineres tonais do Material e os preenchimentos escuros da Apple. Um carrossel mantém as avaliações numa fileira da página. Uma ordem paga sem rótulo enganaria, então sem o rótulo a ordem também sai.
 **Em aberto:** se o destaque pago volta a aparecer, identificado; o custo medido de um cartão de loja em vidro.
+
+**Substituída em parte pelas 060, 061 e 062:** as notas viraram um painel e depois cartões direto sobre o cartão da loja; o avatar do Snuffle passa do círculo.
 
 ## 058 · O cartão da loja volta a ter a cor da categoria; vidro medido e deixado de fora
 **2026-11-05 · Decidido · reverte o cartão neutro da 055**
@@ -507,6 +515,20 @@ Na linha de remetente da conversa, o círculo do Snuffle é a cabeça do cachorr
 Na página da loja, os cartões de avaliação ficam direto sobre o cartão, sem painel em volta, e uma lista agrupada embaixo tem "See all N reviews" e "How ratings work"; sem avaliações, uma lista só tem "No ratings yet" e "How ratings work". O carrossel de avaliações e o de fotos rolam além do padding até as bordas do cartão e são cortados ali, enquanto o primeiro cartão ou foto fica na borda do texto, como a fileira de ações já fazia. A faixa de mapa acima do cartão ficou mais alta (dois passos de `space.8` abaixo da barra em vez de um), já que funciona como cabeçalho da página. "© OpenStreetMap contributors" sai do canto do mapa e vira uma linha centralizada no pé do cartão.
 
 **Por quê:** um cartão dentro de outro parecia um contêiner a mais, e carrosséis cortados na borda do texto pareciam encurtados. O cabeçalho ficava apertado em volta do alfinete. O crédito ficava sobre o cabeçalho em toda visita. As diretrizes de atribuição do OpenStreetMap pedem o crédito onde o mapa aparece; uma linha no pé da mesma página foi a leitura que adotei, e escolhi manter o crédito só ali, não também no mapa. Se um dia for preciso uma leitura mais estrita, `attribution` no mapa o devolve ao canto.
+
+## 063 · Lojas na rua real, com o caminho desenhado no mapa
+**2026-11-06 · Decidido**
+
+Cada loja fica na rua que o cartão diz, num ponto real dessa rua no OpenStreetMap, e o mapa desenha o caminho a pé da porta do comprador, 163 Blythe Road, até ela, na cor de acento da loja. Um script de build (`npm run map:places`) lê as ruas caminháveis do OpenStreetMap, acha o ponto na rua de cada loja cuja distância a pé mais se aproxima do tempo da loja e calcula o trajeto; depois ajustei o tempo a pé de cada loja ao comprimento do trajeto, a 80 m por minuto, para o cartão e o mapa concordarem. O mapa gira para a porta ficar à esquerda da loja, se afasta até o caminho inteiro caber na faixa de mapa acima do cartão e centraliza o caminho; o pin acompanha a loja para o lado. A área do mapa cresceu para uns 4 km de leste a oeste, para a Askew Road e a Kensington Church Street ficarem dentro. A Wells Road Bakery foi para a Uxbridge Road, porque a Wells Road fica a 10 minutos e a padaria é das lojas consultadas só mais longe.
+
+**Por quê:** com um mapa só para todas as lojas, o pin ficava na Blythe Road até para uma loja da King Street, e os tempos a pé eram inventados. Os trajetos reais mudaram alguns bastante (a delicatéssen e a livraria ficam a 25 e 28 minutos, além do raio de 20 minutos, então o Nearby não as lista mais; duas lojas da Hammersmith Road foram de 6 para 10 minutos). O endereço do comprador é uma premissa do protótipo; num celular ele viria da localização.
+
+## 064 · Uma conversa que se move, a marca farejando, botões Buy equivalentes e a foto do pedido
+**2026-11-06 · Decidido**
+
+Tudo o que chega numa conversa entra de um jeito só: aparece com fade e sobe 8 pt, chips e cartões seguem a mensagem anterior, um status que muda faz cross-fade, e com Reduce Motion fica só o fade. Enquanto o Snuffle consulta as lojas, a marca fareja (o toldo balança como bigode e o focinho treme) onde ficava a scooter de entrega. Com duas ou mais ofertas, todo Buy é tonal e do mesmo tamanho; Buy preenchido só quando uma resposta pode ser comprada, e uma oferta parcial diz "Buy 1 of 2". A foto do pedido vai para a direita da barra da conversa, e um toque oferece seis fotos do item para escolher. Um cartão com dois objetos põe o mais alto atrás e à esquerda e o mais baixo na frente e à direita, com um objeto comprido girado contra essa diagonal (Ilustrações, Dois objetos).
+
+**Por quê:** mensagens e status apareciam e trocavam num quadro só e pareciam quebrados. A scooter dizia entrega enquanto o Snuffle procurava; escolhi a marca em vez de um cruzamento pequeno, que vira ruído nesse tamanho. Duas lojas com um Buy preenchido e outro cinza pareciam uma recomendação que o app não fez. A foto sob "Snuffle" apertava o título, e uma foto fixa dos óculos de eclipse de outra pessoa pode não ser o que o comprador quer.
 
 ## Ainda em aberto
 

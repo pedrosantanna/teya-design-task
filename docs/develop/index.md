@@ -19,5 +19,6 @@ Trade-offs:
 
 - [App flow](ideation/app-flow.md): the shopper app from home to collection, with failure paths.
 - [Shop request states](ideation/shop-states.md): one request on the shop's side and the messages the shop sees.
+- [Agent flow](ideation/agent-flow.md): the conversation between the shopper and Snuffle, and between Snuffle and the shops, turn by turn.
 
 On a canvas, scroll or use two fingers to move, hold ⌘ or Ctrl and scroll (or pinch) to zoom, drag on empty space to select, and press ⇧1 to see everything. Selecting a screen opens its notes and links on the right.

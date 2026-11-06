@@ -276,7 +276,9 @@ export function buildChat(c: PersonaContent, app: AppSlice, sim: SimState): Chat
         : `${counted(cards.length)} ${cards.length === 1 ? 'shop has' : 'shops have'} something similar so far.`,
     );
     if (app.order === 'none') {
-      const best = cards.find((o) => app.answers[o.shopId] !== 'similar')?.shopId;
+      // Buy is filled only when there is a single obvious next step; with two or more offers they are peers (tonal).
+      const buyable = cards.filter((o) => app.answers[o.shopId] !== 'similar');
+      const best = buyable.length === 1 ? buyable[0].shopId : undefined;
       for (const o of cards) items.push({ kind: 'answer', key: `answer-${o.shopId}`, shopId: o.shopId, best: o.shopId === best });
     }
   }
@@ -488,7 +490,7 @@ export function answerCardText(c: PersonaContent, offer: Offer, state: AnswerSta
     price: price(offer.price),
     walk: `${shop?.walkMinutes ?? 0} min walk`,
     collectBy: `Collect by ${offer.collectBy}`,
-    buyLabel: short ? `Buy ${offer.available ?? 1}` : 'Buy',
+    buyLabel: short ? `Buy ${offer.available ?? 1} of ${c.active.quantity}` : 'Buy',
     similar: state === 'similar',
   };
 }

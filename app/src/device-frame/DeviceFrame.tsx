@@ -6,7 +6,7 @@ import SignalFull02Icon from '@hugeicons/core-free-icons/SignalFull02Icon';
 import Wifi01Icon from '@hugeicons/core-free-icons/Wifi01Icon';
 import { usePathname } from 'expo-router';
 import { useMemo, useState, type ReactNode } from 'react';
-import { View, type LayoutChangeEvent } from 'react-native';
+import { Platform, View, type LayoutChangeEvent } from 'react-native';
 import { SafeAreaFrameContext, SafeAreaInsetsContext } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
@@ -113,6 +113,9 @@ const styles = StyleSheet.create((theme) => ({
     borderRadius: radius,
     overflow: 'hidden',
     backgroundColor: theme.color.background,
+    // A rounded overflow does not clip a child that animates on its own compositor layer (a screen sliding in
+    // or a sheet rising), so its square corners showed until the animation ended. clip-path clips from the first frame.
+    ...(Platform.OS === 'web' ? ({ clipPath: `inset(0 round ${radius}px)`, isolation: 'isolate' } as object) : null),
   }),
   statusBar: (height: number, ios: boolean) => ({
     position: 'absolute',

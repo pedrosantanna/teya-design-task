@@ -152,7 +152,7 @@ O ponto num rótulo ("Ready · collect by Mon 9 Nov") só marca onde o estado te
 | O veredito de quem comprou sobre uma compra | rating, Rate | avaliação | review, stars, score |
 | Quem avalia | buyers | quem comprou | customers, reviewers, users |
 | A pergunta da avaliação | "Would you go back?", "92% would go back" | voltaria | recommend, satisfied, "Excellent!" |
-| As medidas do próprio Snuffle | "What Snuffle saw" | sinais | verified, trusted, score |
+| As medidas do próprio Snuffle | "How they do on Snuffle" | sinais | verified, trusted, score |
 
 Os rótulos concordam com o item: "has it" para uma coisa, "has them" para várias. As mensagens para a loja no WhatsApp e no POS podem dizer autorizado e cobrado, e chamam uma venda pelo Snuffle de "Bought"; nunca dizem keep nem hold.
 

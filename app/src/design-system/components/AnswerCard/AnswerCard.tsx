@@ -7,6 +7,7 @@ import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
 import { IMAGE_OVER, photoSource, type PhotoSource } from '../../internal/media';
+import { CrossFade } from '../../internal/CrossFade';
 import { PressableCard, spoken, type CardAction } from '../../internal/PressableCard';
 import { ShopLink } from '../../internal/ShopLink';
 import { ShopPlaceholder } from '../../internal/ShopPlaceholder';
@@ -106,10 +107,14 @@ export const AnswerCard = memo(function AnswerCard({
             </Text>
           )}
           <View style={styles.statusLine}>
-            {statusIcon ? <Icon icon={statusIcon} size="footnote" color="mutedForeground" /> : null}
-            <View style={styles.grow}>
-              <StatusLabel label={statusLine} />
-            </View>
+            <CrossFade token={statusLine}>
+              <View style={styles.statusRow}>
+                {statusIcon ? <Icon icon={statusIcon} size="footnote" color="mutedForeground" /> : null}
+                <View style={styles.grow}>
+                  <StatusLabel label={statusLine} />
+                </View>
+              </View>
+            </CrossFade>
           </View>
         </View>
         <Text variant="headline">{price}</Text>
@@ -152,8 +157,9 @@ const styles = StyleSheet.create((theme) => ({
     borderRadius: theme.radius.inner,
     overflow: 'hidden',
   },
-  title: { flex: 1, gap: theme.space[1] },
-  statusLine: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1] },
+  title: { flex: 1, minWidth: 0, gap: theme.space[1] },
+  statusLine: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1], minWidth: 0 },
+  statusRow: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1] },
   grow: { flexShrink: 1 },
   meta: { flexDirection: 'row', flexWrap: 'wrap', columnGap: theme.space[4], rowGap: theme.space[1] },
   fact: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1], flexShrink: 1 },

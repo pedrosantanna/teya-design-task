@@ -90,6 +90,10 @@ In the Expo app the zoom is Expo Router's `Link.AppleZoom`, which is alpha and n
 On the web a push takes 350 ms, a sheet rises in 380 ms and leaves in 320 ms, a zoom takes 420 ms and the ask bar's morph 420 ms, all on the iOS curve `cubic-bezier(0.32, 0.72, 0, 1)`. A zoom and a morph clip to `radius.card` (28). A pointer press has no delay. A touch drag that starts within 24 pt of the left edge and travels 72 pt, mostly sideways, goes back like the Back button; it works only on pushed screens, so a sheet or the New Request composer closes with its own control. The browser can't follow a finger through a view transition, so the gesture commits on release. With Reduce Motion, every change is a 200 ms crossfade: the screens fade in place and don't slide. The values are named constants in `internal/transitions.ts`, not tokens.
 
 
+## Chat
+
+Everything that arrives in a chat comes in the same way: Snuffle's message (its sender line and bubble together) fades in and rises 8 pt on `spring.smooth`; the shopper's bubble keeps its `spring.snappy` scale. The typing indicator fades in and out, and the message rises in over it, so there is never a gap or two of them. Suggestion chips, the asking list, a status label and an offer card fade and rise 150 ms after the message before them. When a status changes (an answer row, an order card), the old content fades out as the new fades in, on `spring.status`, instead of swapping. On native the rows already on screen slide to make room; on the web they shift in one step, because the layout transition flipped the inverted list. While Snuffle asks the shops, the sniffing mark ([Mark](mark.md#sniffing)) stands where the scooter used to be and fades out, giving back its height on `spring.smooth`, when the first answer arrives. With Reduce Motion new items only fade and nothing moves.
+
 ## Sources
 
 - Apple, "Animate with springs", WWDC 2023: https://developer.apple.com/videos/play/wwdc2023/10158/

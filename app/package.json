@@ -68,6 +68,7 @@
     "map": "node scripts/build-map-style.mjs",
     "map:check": "node scripts/build-map-style.mjs --check",
     "map:fetch": "node scripts/fetch-map.mjs",
+    "map:places": "node scripts/build-places.mjs",
     "map:fallback": "node scripts/render-map-fallback.mjs",
     "synthetic": "npx -y -p playwright@1.58.2 node e2e/run.mjs",
     "synthetic:judge": "node e2e/judge/build-bundle.mjs"

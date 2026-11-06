@@ -1,11 +1,11 @@
 # Conceito
 
-Um concierge da high street, a rua comercial do bairro, com quem o comprador fala numa conversa só. Você diz do que precisa, onde e até quando. Se o caixa de uma loja já compartilha o estoque, ele responde na hora; se não, pergunta às lojas que provavelmente têm o item e volta dizendo quem tem, se segura para você e se entrega. Você reserva ou paga na mesma conversa e retira na loja ou recebe em casa. Por trás da conversa, vários agentes dividem o trabalho.
+Um concierge da high street, a rua comercial do bairro, com quem o comprador fala numa conversa só. Você diz do que precisa, onde e até quando. Se o caixa de uma loja já compartilha o estoque, ele responde na hora; se não, pergunta às lojas que provavelmente têm o item e volta dizendo quem tem, se guarda para você e se entrega. Você compra na mesma conversa e retira na loja ou recebe em casa. Por trás da conversa, vários agentes dividem o trabalho.
 
 ```summary
 Takeaways:
 - O conceito responde à dor mais forte do Discover, não saber antes de sair de casa (A1), com uma confirmação da própria loja.
-- Ele começa pela findability. A transaction (pagar para guardar, retirar ou receber) fecha o ciclo e é onde aparece o outro problema do brief.
+- Ele começa pela findability. A transaction (comprar, depois retirar ou receber) fecha o ciclo e é onde aparece o outro problema do brief.
 - Escolhi um agente por quatro motivos: uma conversa só para várias tarefas, a espera resolvida no lugar do comprador, agir depois em nome dele e alcance além de um app. Os quatro são hipóteses minhas; o Discover tem pouca evidência sobre eles.
 - Tudo depende de as lojas responderem rápido. Nenhum lojista aparece na evidência, então é a primeira coisa a testar.
 Call:
@@ -24,7 +24,7 @@ Trade-offs:
 1. **Pedir.** O comprador diz do que precisa, onde (aqui, ou onde vai estar) e até quando: "óculos para eclipse hoje perto de Hammersmith". Ele também pode pedir com antecedência ("me avisa quando a padaria tiver pão de centeio") e deixar o pedido com o concierge. Explorar lojas e categorias continua disponível para quando não há um item específico em mente.
 2. **Resposta na hora, quando dá.** Se o caixa de uma loja próxima compartilha o estoque por item, o concierge responde na hora com a loja, o preço e o horário de funcionamento.
 3. **Concierge, quando não dá.** Fora isso, ele avisa que não enxerga o estoque e pergunta às lojas prováveis ao mesmo tempo. Enquanto espera, mantém o comprador informado, amplia a busca se o prazo apertar e verifica a entrega.
-4. **Escolher e pagar.** O comprador escolhe uma loja e reserva, paga para segurar ou pede entrega, sem sair da conversa.
+4. **Escolher e comprar.** O comprador escolhe uma loja e toca em Buy, com retirada ou a entrega da loja, sem sair da conversa.
 5. **Retirar ou receber.** Retirada na loja, dentro de uma janela que a loja aceitou, ou entrega. Para quem trabalha no horário das lojas, pagar antes só ajuda se houver uma forma de retirar depois do trabalho: um horário mais tarde numa loja que fecha tarde o bastante, um ponto de retirada na rua que fica aberto (uma loja que abre até mais tarde ou um armário), ou entrega à noite. As três são suposições, testadas na H6.
 6. **Depois.** O concierge acompanha o resultado e mantém os pedidos recorrentes abertos. Cada pedido vira um sinal para as lojas próximas: o que as pessoas em volta estão procurando, inclusive o que elas não tinham.
 
@@ -32,8 +32,8 @@ O [blueprint de serviço](blueprint.md) mostra cada etapa passando pelo comprado
 
 ## Dois tipos de loja
 
-- **Lojas conectadas.** O POS da loja compartilha o estoque por item. O concierge responde na hora ("In stock now"), e a reserva é feita no POS, que marca o item como separado.
-- **Lojas consultadas.** Sem dados de estoque. O concierge pergunta à loja pelo WhatsApp, ou pelas mensagens do POS quando ele tem, e a loja responde do jeito dela. A reserva é confirmada pela resposta da loja.
+- **Lojas conectadas.** O POS da loja compartilha o estoque por item. O concierge responde na hora ("In stock now"), e o pagamento é cobrado na hora, com o POS marcando o item como separado.
+- **Lojas consultadas.** Sem dados de estoque. O concierge pergunta à loja pelo WhatsApp, ou pelas mensagens do POS quando ele tem, e a loja responde do jeito dela. A resposta da loja confirma que ela separou o item.
 
 As duas aparecem na mesma lista de respostas, marcadas pela origem da resposta. A maioria das independentes pequenas começa como loja consultada (A14).
 
@@ -41,12 +41,12 @@ As duas aparecem na mesma lista de respostas, marcadas pela origem da resposta. 
 
 | Forma | Pago | Guardado por | Quem entrega |
 | --- | --- | --- | --- |
-| Pagar e guardar | Sim, depois que a loja separa o item | 7 dias no padrão; o comprador escolhe o dia da retirada. Menos para perecíveis (padaria, açougue, floricultura), até 14 dias se a loja aceitar; uma prorrogação de 7 dias; reembolso automático se ninguém retirar | A loja, no balcão, ou um ponto de retirada |
+| Comprar e retirar | Sim. Lojas conectadas cobram na hora; nas consultadas o valor é autorizado e cobrado quando a loja confirma | Cada loja define o prazo: 7 dias no padrão, ou 14 ou 30, e o mesmo dia ou o seguinte para perecíveis (padaria, açougue, floricultura); uma prorrogação do mesmo tamanho; reembolso automático se ninguém retirar. O comprador vê a data Collect by e não escolhe um dia | A loja, no balcão, ou um ponto de retirada |
 | Pagar e a loja entregar | Sim | Não fica guardado: a loja envia com a entrega ou o entregador dela | A entrega da loja; o concierge só acompanha o status |
 
-Os prazos vêm de como as lojas do Reino Unido guardam pedidos para retirada ([pesquisa documental](../discover/high-street-landscape.md)): uma semana é o normal para pedidos pagos. A entrega pela loja está mapeada, não desenhada: o concierge mostraria "enviado", "a caminho" e "entregue" a partir das atualizações da loja (decisão 030).
+Os prazos vêm de como as lojas do Reino Unido guardam pedidos para retirada ([pesquisa documental](../discover/high-street-landscape.md)): uma semana é o normal para pedidos pagos. A entrega pela loja está mapeada, não desenhada: o concierge mostraria "enviado", "a caminho" e "entregue" a partir das atualizações da loja (decisões 030 e 037).
 
-Não existe reserva sem pagamento (decisão 032). Quem não quer pagar vai sem reserva e pode encontrar o item vendido; o concierge avisa. A reserva sem pagamento existia por comodidade e por causa do dinheiro, mas o pagamento acontecia fora do app e a loja ficava com o risco de a pessoa não aparecer.
+Não existe reserva sem pagamento (decisão 032). Quem não quer pagar vai sem comprar e pode encontrar o item vendido; o concierge avisa. A reserva sem pagamento existia por comodidade e por causa do dinheiro, mas o pagamento acontecia fora do app e a loja ficava com o risco de a pessoa não aparecer.
 
 ## Área
 
@@ -67,7 +67,7 @@ Seis ruas comerciais ficam a menos de 15 minutos a pé. Prender o comprador a um
 
 Um agente é a minha principal hipótese para este produto. O concierge é esse agente: aquele com quem o comprador conversa e a interface do produto, seja no app, no WhatsApp ou como um servidor MCP para o assistente de IA do próprio comprador. Por trás dele, vários agentes dividem o trabalho. Espero quatro coisas desse arranjo.
 
-- **Uma interface para várias tarefas.** Buscar, perguntar às lojas, segurar, pagar e combinar a entrega acontecem na mesma conversa, sempre do mesmo jeito. Espero que isso seja mais simples de aprender do que uma tela para cada tarefa.
+- **Uma interface para várias tarefas.** Buscar, perguntar às lojas, comprar e combinar a entrega acontecem na mesma conversa, sempre do mesmo jeito. Espero que isso seja mais simples de aprender do que uma tela para cada tarefa.
 - **A espera resolvida no lugar do comprador.** As lojas são lentas e difíceis de alcançar. O concierge pergunta a várias de uma vez, continua procurando enquanto elas respondem e verifica a entrega nesse meio-tempo, e o comprador não precisa correr atrás de contatos nem ficar esperando uma resposta só.
 - **Agir depois.** O comprador pode deixar um pedido com antecedência, e o concierge age quando chega uma resposta ou o item entra no estoque.
 - **Sem depender de um app.** O mesmo concierge pode morar no WhatsApp ou se conectar ao assistente de IA do próprio comprador por MCP. O app é onde ele ganha uma interface focada, feita para esse trabalho.
@@ -97,8 +97,8 @@ O conceito trabalha com três tipos de disponibilidade. O estoque informado vem 
 
 O brief pede que o que falta seja suposto e registrado.
 
-- **Lado da loja.** As lojas recebem os pedidos numa ferramenta que já abrem durante o dia e respondem em menos de dez minutos enquanto estão abertas. Elas aceitam guardar um item pago por cerca de uma semana, menos para perecíveis (decisão 030).
-- **Reserva e pagamento.** A loja confirma que separou o item antes de o comprador ser cobrado. O valor inteiro é cobrado nesse momento e estornado se a reserva expirar; autorizar na reserva e capturar na retirada é a alternativa que deixei em aberto.
+- **Lado da loja.** As lojas recebem os pedidos numa ferramenta que já abrem durante o dia e respondem em menos de dez minutos enquanto estão abertas. Elas aceitam guardar um item comprado pelo prazo que definem: uma semana no padrão, mais se quiserem, um dia ou menos para perecíveis (decisões 030 e 037).
+- **Pagamento.** Numa loja conectada o pagamento é cobrado na hora, porque o POS tem o estoque. Numa loja consultada o valor é autorizado e cobrado quando a loja responde que separou o item; se ela não responder em 10 minutos, a autorização caduca e o comprador é avisado (decisão 037).
 - **Depois do trabalho.** Quem trabalha no horário das lojas retira num horário mais tarde numa loja que fecha tarde o bastante, num ponto de retirada na rua, ou recebe uma entrega à noite. Quem entrega, onde e quando está no [blueprint](blueprint.md).
 - **Agentes.** Agentes separados para estoque, seleção de lojas, contato com as lojas, pagamento e entrega trabalham por trás de um concierge só. Quando o estoque é desconhecido, o concierge pergunta à loja e nunca chuta.
 - **A quem perguntar.** O agente de seleção de lojas sabe quais lojas ao alcance vendem que tipo de coisa (por listagens públicas e categorias), mesmo sem dados de estoque.
@@ -114,7 +114,7 @@ O brief pede que o que falta seja suposto e registrado.
 - **Carga sobre as lojas.** Cada pergunta vai para várias lojas. Perguntas demais, ou perguntas que não viram venda, e elas param de responder.
 - **Partida a frio.** O concierge só funciona se lojas suficientes de uma rua responderem. Poucas lojas, poucas respostas, nenhuma confiança.
 - **Respostas erradas.** Uma loja que diz que tem e não tem gasta a confiança em que o conceito se apoia (A10). Um agente que chuta ou entende mal o pedido também.
-- **Reservas e faltas.** Uma loja segura um item e o comprador não aparece. Pagar para segurar reduz isso e acrescenta atrito.
+- **Faltas.** Uma loja separa um item e o comprador não aparece. Pagar antes reduz isso e acrescenta atrito.
 - **Regras do canal.** Passadas 24 horas da última mensagem da pessoa, o WhatsApp só deixa uma empresa escrever para ela com modelos pré-aprovados, o que limita os acompanhamentos e os pedidos recorrentes por lá.
 
 A [proposta de valor](value-proposition.md) confronta isso com os perfis de cliente, o [blueprint de serviço](blueprint.md) mostra quem faz o quê, e [hipóteses](hypotheses.md) transforma a evidência fraca ou ausente em testes.

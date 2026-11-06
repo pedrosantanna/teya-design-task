@@ -23,7 +23,7 @@ The app's one button. Roles and sizes follow the Button table on `docs/develop/d
 
 ## Rules
 
-- At most one filled (Indigo) button per viewport: the commit action (Buy, Ask, send). On an answer card only the best answer's Buy is filled; "Buy 1" and "Show me" are tonal. Indigo means the shopper acts; secondary actions are neutral.
+- At most one filled (Indigo) button per viewport: the commit action (Buy, Ask, send). On an answer card the Buy is filled only when it is the single offer; with two or more offers every Buy is tonal, so they read as peers. "Show me" is tonal, and a partial offer says "Buy 1 of 2". Indigo means the shopper acts; secondary actions are neutral.
 - "Cancel for a refund" is destructive and confirms in an alert.
 - Buttons in a row sit `space.2` apart.
 - The red for `destructive` has no palette token yet: the theme uses iOS system red and the Material 3 error colour, marked provisional in `tokens/primitives.tokens.json`.

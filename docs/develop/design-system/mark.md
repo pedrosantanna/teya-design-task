@@ -107,6 +107,10 @@ The clip plays once and stops on the finished mark; press play to see it again. 
 
 The splash plays the mark building itself, in about 1.6 s; the timing is on the [motion page](motion.md#splash). Only the awning shows at first, rolled up at the top like the blind of a shop. It comes down, and the five stripes unroll one after the other, each with a short sway and a small overshoot. Then the ears, eyes and nose appear and the dog blinks twice. The final frame is the glyph above, the same as the native splash image. The intro starts from the rolled awning, so the face drops out for a moment when the system hands over, then builds back. The stripes are the same five paths as the glyph, drawn one by one, so the last frame matches it exactly.
 
+## Sniffing
+
+While Snuffle asks the shops, the chat shows the mark sniffing, 88 pt wide, in the same colours as the glyph. The face stays still; the nose and the awning move, since the awning is also the dog's muzzle. In a 2.6 s loop the nose sniffs three times (300 ms each, lifting a little and growing 10%), and the five stripes sway up to 3.5° about their top edge, each 45 ms after the one before, so they ripple like whiskers; then it rests for about 1.7 s. It replaced the delivery scooter, which read as delivery rather than searching. I chose the mark over a small version of the crossroads from Getting started, which is a detailed scene and turns to noise at this size. With Reduce Motion the glyph stays still.
+
 ## Anatomy
 
 | Part | Shape | Tone |
