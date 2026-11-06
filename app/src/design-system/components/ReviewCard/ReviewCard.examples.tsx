@@ -12,15 +12,10 @@ export function ReviewCardExamples() {
   );
 }
 
-// The shop page's Ratings: the summary card at 60%, then review cards at 80%, equal height, the next one peeking in.
+// The shop page's Ratings: the summary card, then review cards, all at 86%, equal height, the next one peeking in.
 export function ReviewCarouselExamples() {
   return (
-    <ReviewCarousel accessibilityLabel="Ratings and reviews, 2 of 38" count={2}
-      links={[
-        { label: 'See all 38 reviews', onPress: () => {} },
-        { label: 'How ratings work', onPress: () => {} },
-      ]}
-    >
+    <ReviewCarousel accessibilityLabel="Ratings and reviews, 2 of 38" count={2}>
       {(width) => (
         <>
           <RatingSummary

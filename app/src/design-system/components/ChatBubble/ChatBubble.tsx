@@ -125,7 +125,7 @@ const styles = StyleSheet.create((theme) => ({
   sender: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2] },
   mine: { maxWidth: `${theme.layout.bubbleMax * 100}%`, alignItems: 'flex-end', gap: theme.space[1] },
   mineLine: { flexDirection: 'row', alignItems: 'center', gap: theme.space[2] },
-  theirs: { maxWidth: `${theme.layout.bubbleMax * 100}%`, alignItems: 'flex-start', gap: theme.space[1] },
+  theirs: { maxWidth: `${theme.layout.bubbleMax * 100}%`, alignItems: 'flex-start', gap: theme.space[2] },
   bubble: (mine: boolean) => ({
     ...cornerCurve,
     borderRadius: theme.radius.bubble,

@@ -309,6 +309,10 @@
         "$value": "{color.lavender.tile}",
         "$description": "Snuffle's chat bubbles and the typing indicator"
       },
+      "avatar": {
+        "$value": "{color.lavender.tile}",
+        "$description": "Snuffle's avatar circle on the chat's sender line: the bubble's colour"
+      },
       "dot": {
         "$value": "{color.lavender.500}",
         "$description": "Typing indicator dots"

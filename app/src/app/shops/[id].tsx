@@ -205,29 +205,39 @@ export default function ShopPage() {
               <Text variant="sectionTitle" accessibilityRole="header">
                 Ratings
               </Text>
-              <ReviewCarousel accessibilityLabel={`Ratings and reviews, ${quotes.length} of ${headline.total}`} count={quotes.length}
-                links={[
-                  ...(headline.total > 0 ? [{ label: `See all ${headline.total} reviews`, onPress: () => router.push({ pathname: '/reviews/[id]', params: { id: shop.id } }) }] : []),
-                  { label: 'How ratings work', onPress: () => setSheet('ratings') },
-                ]}
-              >
-                {(width) => (
-                  <>
-                    <RatingSummary
-                      width={width.summary}
-                      figure={headline.figure}
-                      caption={headline.caption}
-                      title={headline.title}
-                      detail={headline.detail}
-                      accessibilityLabel={headline.spoken}
-                      tags={summaryTags(ratings)}
-                    />
-                    {quotes.map((q) => (
-                      <ReviewCard key={q.text} name={q.name} text={q.text} up={q.up} month={q.month} lines={REVIEW_LINES} width={width.review} />
-                    ))}
-                  </>
-                )}
-              </ReviewCarousel>
+              {headline.total === 0 ? (
+                // No ratings: one block, the line and how ratings work.
+                <ListGroup shadow>
+                  <ListRow surface="card" title={headline.title} detail={headline.detail} position="first" accessibilityLabel={headline.spoken} />
+                  <ListRow surface="card" title="How ratings work" chevron position="last" onPress={() => setSheet('ratings')} />
+                </ListGroup>
+              ) : (
+                <>
+                  {/* The cards sit straight on the card's surface and scroll out to its edges. */}
+                  <ReviewCarousel accessibilityLabel={`Ratings and reviews, ${quotes.length} of ${headline.total}`} count={quotes.length}>
+                    {(width) => (
+                      <>
+                        <RatingSummary
+                          width={width.summary}
+                          figure={headline.figure}
+                          caption={headline.caption}
+                          title={headline.title}
+                          detail={headline.detail}
+                          accessibilityLabel={headline.spoken}
+                          tags={summaryTags(ratings)}
+                        />
+                        {quotes.map((q) => (
+                          <ReviewCard key={q.text} name={q.name} text={q.text} up={q.up} month={q.month} lines={REVIEW_LINES} width={width.review} />
+                        ))}
+                      </>
+                    )}
+                  </ReviewCarousel>
+                  <ListGroup shadow>
+                    <ListRow surface="card" title={`See all ${headline.total} reviews`} chevron position="first" onPress={() => router.push({ pathname: '/reviews/[id]', params: { id: shop.id } })} />
+                    <ListRow surface="card" title="How ratings work" chevron position="last" onPress={() => setSheet('ratings')} />
+                  </ListGroup>
+                </>
+              )}
             </View>
 
             {lines.length > 0 ? (

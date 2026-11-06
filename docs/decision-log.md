@@ -494,5 +494,19 @@ The shop page's ratings are one panel: a carousel whose first card is the summar
 
 **Why:** the ratings were three separate groups and the review list ran long; one panel keeps them together and scannable. Chips in the card's own colour looked like holes, and the bordered ones looked like inputs. A sheet that opened halfway hid part of Account. The splash video on the Mark page now plays once, since a 2.4 s loop read as flicker.
 
+## 061 · Snuffle's avatar runs past its circle
+**2026-11-05 · Decided**
+
+On the chat's sender line, Snuffle's circle is the dog's head: the mark's face fills it, the ears and the awning's corners run past its edge, and a band of the circle shows under the awning. The circle has its own token, `snuffle.avatar`: the bubble's Lavender in light and Lavender 600 in dark. The Bakery, Café and Newsagent cards follow the composition of Chemist and Deli, a tall object behind and to the left and a low one in front and to the right.
+
+**Why:** I asked to test the dog leaking out of the circle and kept it; at 24 pt the old glyph inside the circle was small and read as a sticker, while the bleed reads as a face. In dark, the bubble's Lavender 900 measured 1.4:1 on the chat ground and the head disappeared; Lavender 600 is 4.26:1.
+
+## 062 · Carousels to the card's edge, a taller map header, the map credited at the foot
+**2026-11-05 · Decided**
+
+On the shop page the rating cards sit straight on the card, with no panel around them, and a grouped list under them holds "See all N reviews" and "How ratings work"; with no ratings, one list holds "No ratings yet" and "How ratings work". The ratings carousel and the photo carousel scroll past the content padding to the card's edges and are clipped there, while the first card or photo rests on the text's edge, as the actions row already did. The strip of map above the card is taller (two `space.8` steps under the bar instead of one), since it works as the page's header. "© OpenStreetMap contributors" leaves the map's corner and becomes a centred line at the foot of the card.
+
+**Why:** a card inside a card read as one container too many, and carousels clipped at the text's edge looked cut short. The header was cramped around the pin. The credit sat over the header on every visit. OpenStreetMap's attribution guidelines ask for the credit where the map is shown; a line at the foot of the same page is the reading I took, and I chose to keep the credit only there, not also on the map. If a stricter reading is ever needed, `attribution` on the map puts it back in the corner.
+
 ## Still open
 

@@ -43,7 +43,7 @@ function loadGl(): Promise<GlLib> {
   return glPromise;
 }
 
-export const Map = memo(function Map({ loading = false, pin = true, extent, interactive = false, accent }: MapProps) {
+export const Map = memo(function Map({ loading = false, pin = true, extent, interactive = false, accent, attribution = true }: MapProps) {
   const { theme } = useUnistyles();
   const container = useRef<unknown>(null);
   const map = useRef<GlMap | null>(null);
@@ -111,7 +111,7 @@ export const Map = memo(function Map({ loading = false, pin = true, extent, inte
           <View ref={container as never} style={[styles.fill, failed ? styles.hidden : null]} />
           {ready && !failed ? null : <MapFallback extent={extent} />}
           {pin ? <MapPin extent={extent} accent={accent} /> : null}
-          <MapAttribution extent={extent} />
+          {attribution ? <MapAttribution extent={extent} /> : null}
         </>
       )}
     </View>

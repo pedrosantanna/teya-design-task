@@ -34,6 +34,9 @@ export type PhotoCarouselProps = {
   accent?: ShopAccentName;
   /** The width of one photo at rest: the container's width on the shop page. Without it, the screen width minus two screen margins. */
   width?: number;
+  /** How far the row runs past the container on each side, so photos scroll out to the edge of the surface (the shop
+   *  card's padding) and are clipped there, while the photo at rest sits on the text's edge. */
+  bleed?: number;
   /** Extra width the photos have now, in points, driven by the page's scroll: the card grows to the full width and the
    *  container with it. The photo's height stays the one at rest, so nothing below moves. */
   grow?: SharedValue<number>;
@@ -51,7 +54,7 @@ export function carouselHeight(theme: { layout: { carouselRatio: number } }, con
   return contentWidth / theme.layout.carouselRatio;
 }
 
-export const PhotoCarousel = memo(function PhotoCarousel({ photos, name, accent, width: widthProp, grow, originId, onOpen, page: pageProp, onPageChange }: PhotoCarouselProps) {
+export const PhotoCarousel = memo(function PhotoCarousel({ photos, name, accent, width: widthProp, bleed = 0, grow, originId, onOpen, page: pageProp, onPageChange }: PhotoCarouselProps) {
   const { theme } = useUnistyles();
   const frame = useSafeAreaFrame();
   const margin = screenMargin(theme, frame.width);
@@ -105,19 +108,19 @@ export const PhotoCarousel = memo(function PhotoCarousel({ photos, name, accent,
 
   if (photos.length === 0) return null;
   return (
-    <View style={styles.root(height)}>
+    <View style={styles.root(height, bleed)}>
       <Animated.ScrollView
         ref={scroller}
         horizontal
         snapToInterval={many ? interval : undefined}
         snapToAlignment="start"
-        contentContainerStyle={styles.rail(peek)}
+        contentContainerStyle={styles.rail(peek, bleed)}
         scrollEnabled={many}
         showsHorizontalScrollIndicator={false}
         decelerationRate="fast"
         onScroll={onScroll}
         onLayout={(e) => {
-          pageWidth.current = e.nativeEvent.layout.width - peek;
+          pageWidth.current = e.nativeEvent.layout.width - 2 * bleed - peek;
           setSnap(pageWidth.current);
         }}
         scrollEventThrottle={16}
@@ -140,7 +143,7 @@ export const PhotoCarousel = memo(function PhotoCarousel({ photos, name, accent,
         ))}
       </Animated.ScrollView>
       {many ? (
-        <Animated.View style={[styles.dots, dotsStyle]} pointerEvents="none">
+        <Animated.View style={[styles.dots(bleed), dotsStyle]} pointerEvents="none">
           <View style={styles.pill}>
             <PageDots count={photos.length} current={page} on="photo" />
           </View>
@@ -176,13 +179,15 @@ function Photo({ photo, name, accent }: { photo: ShopPhoto; name: string; accent
 }
 
 const styles = StyleSheet.create((theme) => ({
-  root: (height: number) => ({ height, borderRadius: theme.radius.inner, overflow: 'hidden', ...cornerCurve }),
+  // With a bleed the row reaches past the container to the surface's edge and is clipped there; each photo keeps its corners.
+  root: (height: number, bleed: number) =>
+    bleed > 0 ? { height, marginHorizontal: -bleed } : { height, borderRadius: theme.radius.inner, overflow: 'hidden', ...cornerCurve },
   page: {},
   photo: (height: number) => ({ width: '100%', height, borderRadius: theme.radius.inner, overflow: 'hidden', ...cornerCurve }),
   fill: { flex: 1 },
-  dots: { position: 'absolute', left: 0, bottom: theme.space[3], alignItems: 'center' },
+  dots: (bleed: number) => ({ position: 'absolute', left: bleed, bottom: theme.space[3], alignItems: 'center' }),
   // The last photo can rest at the start of the container: the peek's width of room after it.
-  rail: (peek: number) => ({ paddingRight: peek }),
+  rail: (peek: number, bleed: number) => ({ paddingLeft: bleed, paddingRight: peek + bleed }),
   // The dots sit in a black pill (state.photoPill, 20%) over the scrim, so they hold on a pale photo too.
   pill: {
     paddingHorizontal: theme.space[2],

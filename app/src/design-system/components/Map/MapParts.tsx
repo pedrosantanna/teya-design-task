@@ -25,6 +25,8 @@ export type MapProps = {
   accent?: ShopAccentName;
   /** Let the shopper pan and zoom. Off by default: on the shop page the map is a backdrop. */
   interactive?: boolean;
+  /** Draw "© OpenStreetMap contributors" on the map. Off where the screen credits the map itself (the shop page, at its foot). */
+  attribution?: boolean;
 };
 
 // The live map costs a lot to start (MapLibre's script and worker on the web, the native renderer on the phones), so
@@ -100,6 +102,15 @@ export function MapAttribution({ extent }: Pick<MapProps, 'extent'>) {
         © OpenStreetMap contributors
       </Text>
     </View>
+  );
+}
+
+/** The map's credit as a line of the page, for a screen whose map sits behind other content (the shop page's foot). */
+export function MapCredit() {
+  return (
+    <Text variant="caption2" color="mutedForeground" align="center">
+      © OpenStreetMap contributors
+    </Text>
   );
 }
 

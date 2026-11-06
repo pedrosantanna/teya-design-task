@@ -494,5 +494,19 @@ As avaliações da página da loja são um painel: um carrossel cujo primeiro ca
 
 **Por quê:** as avaliações eram três grupos separados e a lista ficava longa; um painel as mantém juntas e fáceis de ler. Chips na própria cor do cartão pareciam buracos, e os com borda pareciam campos. Uma sheet que abria pela metade escondia parte de Account. O vídeo do splash na página da Marca agora toca uma vez, porque um loop de 2,4 s parecia piscar.
 
+## 061 · O avatar do Snuffle passa do círculo
+**2026-11-05 · Decidido**
+
+Na linha de remetente da conversa, o círculo do Snuffle é a cabeça do cachorro: o rosto da marca o preenche, as orelhas e os cantos do toldo passam da borda, e uma faixa do círculo aparece sob o toldo. O círculo tem um token próprio, `snuffle.avatar`: a Lavanda do balão no claro e Lavanda 600 no escuro. Os cartões de Bakery, Café e Newsagent seguem a composição da Chemist e do Deli, com um objeto alto atrás e à esquerda e um baixo na frente e à direita.
+
+**Por quê:** pedi um teste com o cachorro vazando do círculo e fiquei com ele; com 24 pt, o glifo antigo dentro do círculo era pequeno e parecia um adesivo, enquanto a versão vazada se lê como um rosto. No escuro, a Lavanda 900 do balão media 1,4:1 contra o fundo da conversa e a cabeça sumia; a Lavanda 600 dá 4,26:1.
+
+## 062 · Carrosséis até a borda do cartão, um cabeçalho de mapa mais alto, o crédito do mapa no pé
+**2026-11-05 · Decidido**
+
+Na página da loja, os cartões de avaliação ficam direto sobre o cartão, sem painel em volta, e uma lista agrupada embaixo tem "See all N reviews" e "How ratings work"; sem avaliações, uma lista só tem "No ratings yet" e "How ratings work". O carrossel de avaliações e o de fotos rolam além do padding até as bordas do cartão e são cortados ali, enquanto o primeiro cartão ou foto fica na borda do texto, como a fileira de ações já fazia. A faixa de mapa acima do cartão ficou mais alta (dois passos de `space.8` abaixo da barra em vez de um), já que funciona como cabeçalho da página. "© OpenStreetMap contributors" sai do canto do mapa e vira uma linha centralizada no pé do cartão.
+
+**Por quê:** um cartão dentro de outro parecia um contêiner a mais, e carrosséis cortados na borda do texto pareciam encurtados. O cabeçalho ficava apertado em volta do alfinete. O crédito ficava sobre o cabeçalho em toda visita. As diretrizes de atribuição do OpenStreetMap pedem o crédito onde o mapa aparece; uma linha no pé da mesma página foi a leitura que adotei, e escolhi manter o crédito só ali, não também no mapa. Se um dia for preciso uma leitura mais estrita, `attribution` no mapa o devolve ao canto.
+
 ## Ainda em aberto
 

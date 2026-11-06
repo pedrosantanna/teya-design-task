@@ -310,6 +310,10 @@
         "$value": "{color.lavender.900}",
         "$description": "Snuffle's chat bubbles and the typing indicator"
       },
+      "avatar": {
+        "$value": "{color.lavender.600}",
+        "$description": "Snuffle's avatar circle on the chat's sender line: Lavender 600, 4.26:1 on the chat ground so the head reads at 24 pt (the bubble's 900 is 1.4:1); the glyph's Foreground on it is 4.41:1"
+      },
       "dot": {
         "$value": "{color.lavender.400}",
         "$description": "Typing indicator dots"

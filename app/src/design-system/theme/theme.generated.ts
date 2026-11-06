@@ -132,6 +132,7 @@ export const iosLight = {
     },
     snuffle: {
       bubble: "#D7CCFE",
+      avatar: "#D7CCFE",
       dot: "#9687C3"
     },
     chat: {
@@ -228,7 +229,6 @@ export const iosLight = {
     count: 18,
     avatar: {
       chat: 24,
-      chatMark: 14,
       mark: 28,
       shop: 40,
       shopOnRow: 20
@@ -620,6 +620,7 @@ export const iosDark = {
     },
     snuffle: {
       bubble: "#302747",
+      avatar: "#7C6CA8",
       dot: "#AEA2D6"
     },
     chat: {
@@ -716,7 +717,6 @@ export const iosDark = {
     count: 18,
     avatar: {
       chat: 24,
-      chatMark: 14,
       mark: 28,
       shop: 40,
       shopOnRow: 20
@@ -1108,6 +1108,7 @@ export const androidLight = {
     },
     snuffle: {
       bubble: "#D7CCFE",
+      avatar: "#D7CCFE",
       dot: "#9687C3"
     },
     chat: {
@@ -1204,7 +1205,6 @@ export const androidLight = {
     count: 18,
     avatar: {
       chat: 24,
-      chatMark: 14,
       mark: 28,
       shop: 40,
       shopOnRow: 20
@@ -1602,6 +1602,7 @@ export const androidDark = {
     },
     snuffle: {
       bubble: "#302747",
+      avatar: "#7C6CA8",
       dot: "#AEA2D6"
     },
     chat: {
@@ -1698,7 +1699,6 @@ export const androidDark = {
     count: 18,
     avatar: {
       chat: 24,
-      chatMark: 14,
       mark: 28,
       shop: 40,
       shopOnRow: 20

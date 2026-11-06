@@ -15,7 +15,9 @@ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { Ground } from '../../internal/ground';
 import { cornerCurve, type ShopAccentName } from '../../theme';
+import { Bleed } from '../../internal/bleed';
 import { Map } from '../Map/Map';
+import { MapCredit } from '../Map/MapParts';
 import { NavBar, useNavBarHeight, useNavBarScroll } from '../NavBar/NavBar';
 import { Lightbox } from '../Lightbox/Lightbox';
 import { PhotoCarousel, type ShopPhoto } from '../PhotoCarousel/PhotoCarousel';
@@ -69,8 +71,9 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
 
   // Geometry, all from tokens. The strip of map above the card is measured from the top of the screen (the safe area
   // included); the shop's pin sits in the middle of what is left under the status bar: the same distance from the island to the pin as from the pin to the card.
+  // The strip is the page's header, so it gets room: two of the largest steps under the bar.
   const hasPhotos = photos.length > 0;
-  const restTop = navH + theme.space[8];
+  const restTop = navH + 2 * theme.space[8];
   // The glyph's ink runs from 2 to 22 of 24 (its tip is the anchor); its middle is half the ink above the tip.
   const pinInk = (theme.size.avatar.shop * (PIN_TIP - PIN_TOP)) / PIN_BOX;
   // It is centred between the bottom of the status bar (the safe area's top inset, under the Dynamic Island) and the card's top edge.
@@ -126,7 +129,8 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
         <Map
           loading={mapLoading}
           accent={accent}
-          extent={{ width: frame.width, height: frame.height, pinY, attributionY: restTop - theme.space[5] - theme.space[2] }}
+          extent={{ width: frame.width, height: frame.height, pinY }}
+          attribution={false}
         />
       </View>
 
@@ -148,6 +152,7 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
             {/* The whole card is the accent's tile: rows take its cardOnTile, chips and tonal buttons their on-tile colours. */}
             <Ground value={accent ? 'tile' : 'background'} accent={accent}>
               <TextWidth.Provider value={textWidth}>
+              <Bleed.Provider value={pad}>
                 <View style={styles.top}>
                   <View style={styles.header(textWidth)}>
                     <Text variant="displayTitle" accessibilityRole="header" numberOfLines={2}>
@@ -165,6 +170,7 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
                       name={name}
                       accent={accent}
                       width={textWidth}
+                      bleed={pad}
                       grow={photoGrow}
                       originId={originId}
                       page={page}
@@ -174,6 +180,11 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, photos = [], 
                   </View>
                 ) : null}
                 <View style={styles.body}>{children}</View>
+                {/* The map behind the card is credited at the page's foot, where it doesn't sit over the header. */}
+                <View style={styles.credit}>
+                  <MapCredit />
+                </View>
+              </Bleed.Provider>
               </TextWidth.Provider>
             </Ground>
           </Animated.View>
@@ -258,6 +269,7 @@ const styles = StyleSheet.create((theme) => ({
   // The photos are a group of their own: a section's distance from the actions above and from the first heading below.
   photos: { paddingTop: theme.gap.section },
   body: { paddingTop: theme.gap.section, gap: theme.gap.section },
+  credit: { paddingTop: theme.gap.section },
   rail: (pad: number) => ({ flexGrow: 0, marginHorizontal: -pad }),
   railContent: (pad: number) => ({ paddingHorizontal: pad, gap: theme.space[2], alignItems: 'center' }),
 }));

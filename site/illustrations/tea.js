@@ -21,7 +21,7 @@ export default {
     const k = kit(THREE), V = k.V;
     const g = new THREE.Group();
     const ink = P.indigo[800], white = P.biscuit.card;
-    const kx = -0.4, kz = 0.22, yaw = 0.22, mx = 0.66, mz = -0.28;
+    const kx = -0.35, kz = 0.35, yaw = 0.16, mx = 0.78, mz = 0.02;
     // The kettle is modelled facing +x (spout out along +x, handle arching over the top in the same plane), then
     // placed in front of the mug and turned towards it, so the spout points into the scene just short of the mug.
     const place = o => { o.position.set(kx, 0, kz); o.rotation.y = yaw; return o; };

@@ -12,7 +12,7 @@ The top of Ratings on the shop page: the share who would go back as a large figu
 | `detail` | string | none | "48 people" in Subheadline, Muted foreground, under the caption (or under the title); with no ratings "Snuffle has asked them 4 times" |
 | `accessibilityLabel` | string | required | "Would go back, 92 percent of 48 people"; the tags are read after it |
 | `tags` | `{ tag, count, up }[]` | `[]` | At most three on the carousel's card; a thumbs-down tag leads with the ThumbsDown symbol |
-| `width` | number | none | Renders it as the first card of the Ratings carousel at this width (72% of the panel): `cardOnTile` on the shop page |
+| `width` | number | none | Renders it as the first card of the Ratings carousel at this width (86% of the panel): `cardOnTile` on the shop page |
 
 ## Rules
 

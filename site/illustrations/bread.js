@@ -11,7 +11,7 @@ export default {
   build(THREE, P) {
     const k = kit(THREE), V = k.V;
     const g = new THREE.Group();
-    const bx = -0.32, bz = -0.2;
+    const bx = -0.5, bz = 0.12;
     const W = 0.9, D = 0.52, H = 0.72, topK = 0.8;
     const paper = P.butter[200];
     // Bag: a square frustum (wider at the base), turned so its faces look along x and z.
@@ -60,7 +60,7 @@ export default {
       const [r0, y0] = prof[i - 1], [r1, y1] = prof[i];
       return y1 + (y0 - y1) * Math.min(1, Math.max(0, (r - r1) / (r0 - r1)));
     } return prof[prof.length - 1][1]; };
-    const lx = 0.64, lz = 0.62;
+    const lx = 0.62, lz = 0.02;
     const loaf = k.group([
       k.lathe(prof, P.peach[500], [0, 0, 0], { scale: [1.12, 1, 0.9], part: 'loaf' }),
       ...[-0.26, 0, 0.26].flatMap((x, i) => {
