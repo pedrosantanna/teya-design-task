@@ -9,6 +9,7 @@ import { Pressable, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { StyleSheet } from 'react-native-unistyles';
 
+import { Ground } from '../../internal/ground';
 import { IMAGE_FILL } from '../../internal/media';
 import { usePress } from '../../internal/usePress';
 import { categoryIllustration, useIllustrationScheme } from '../Illustration/Illustration';
@@ -54,10 +55,13 @@ export const CategoryCard = memo(function CategoryCard({ id, label, accent, art:
           </View>
         ) : null}
         <Animated.View pointerEvents="none" style={[styles.layer, press.layerStyle]} />
-        {/* Headline (17): the rail's labels are the one text size between the section title and the tiles' names. */}
-        <Text variant="headline" color="foreground" numberOfLines={1}>
-          {label}
-        </Text>
+        {/* Headline (17): the rail's labels are the one text size between the section title and the tiles' names. The
+            card is the kind's tile, so the label takes the on-tile ink (the pastel tile in both modes). */}
+        <Ground value="tile" accent={accent}>
+          <Text variant="headline" color="foreground" numberOfLines={1}>
+            {label}
+          </Text>
+        </Ground>
       </Pressable>
     </Animated.View>
   );
@@ -86,7 +90,7 @@ export const CategoryHeader = memo(function CategoryHeader({ id, title, detail, 
           {title}
         </Text>
         {detail ? (
-          // The header sits on the tile, like the rows' meta line: mutedForegroundOnTile (Stone 840 in dark).
+          // The header sits straight on the tile: mutedForegroundOnTile (muted ink in dark, on the pastel tile).
           <Text variant="footnote" color="mutedForegroundOnTile">
             {detail}
           </Text>

@@ -4,7 +4,8 @@
 // iOS navigation bar ↔ Material large top app bar collapsing to small.
 import type { IconSvgElement } from '@hugeicons/react-native';
 import { Image } from 'expo-image';
-import { memo } from 'react';
+import { useIsFocused } from 'expo-router';
+import { memo, useState, type ReactNode } from 'react';
 import { Pressable, View } from 'react-native';
 import Animated, {
   Extrapolation,
@@ -18,9 +19,12 @@ import Animated, {
   type SharedValue,
 } from 'react-native-reanimated';
 import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { scheduleOnRN } from 'react-native-worklets';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { FloatingSurface } from '../../internal/FloatingSurface';
+import { Ground } from '../../internal/ground';
+import { useStatusTone } from '../../internal/statusTone';
 import { IMAGE_OVER, photoSource, type PhotoSource } from '../../internal/media';
 import { screenMargin, type ShopAccentName } from '../../theme';
 import { usePress } from '../../internal/usePress';
@@ -96,6 +100,8 @@ export type NavBarProps = {
   /** A second fill the scroll edge shows until the content scrolls `until` points, then crossfades to `fill`: the
    *  shop page's accent while its wash is under the bar, so the material never lays a pale band over the wash. */
   fillBefore?: { fill: EdgeFill; until: number };
+  /** A map, not the tile, is under the status bar until the bar fills (the shop page): in dark the status bar keeps light content until then. */
+  overMap?: boolean;
 };
 
 /** The bar's height under the safe area: one height on every screen, so Back, Close and the title share an axis
@@ -167,6 +173,7 @@ export const NavBar = memo(function NavBar({
   subtitle,
   trailingPhoto,
   fillBefore,
+  overMap = false,
 }: NavBarProps) {
   // The platform form follows the theme; the React Compiler would keep the first one, since the theme object stays the same.
   'use no memo';
@@ -220,12 +227,31 @@ export const NavBar = memo(function NavBar({
     return { opacity: o, transform: [{ translateY: o < 0.01 ? -total : 0 }] };
   });
 
-  const leadingNode =
+  // On a shop's or category's tile (fill: { accent }) the inline title shows over the tile's pastel: it takes the tile's
+  // ink. In dark the Back circle over the map takes the accent's dark card with a light glyph (round 18); in light it
+  // stays the glass over the map.
+  const tileAccent = typeof fill === 'object' ? fill.accent : undefined;
+  // In dark the status bar is light, but a tile is a pastel: over the tile the bar's content turns dark. With `overMap`
+  // the tile is under the status bar only once the bar has filled (the map is under it before), so the tone follows the scroll.
+  const [filled, setFilled] = useState(false);
+  const fillAt = fillBefore ? fillBefore.until - theme.space[4] : backgroundAt - theme.space[1];
+  useAnimatedReaction(
+    () => scrollY.get() >= fillAt,
+    (now, before) => {
+      if (now !== before) scheduleOnRN(setFilled, now);
+    },
+  );
+  const focused = useIsFocused();
+  const overTile = overMap ? filled : true;
+  useStatusTone('dark', Boolean(tileAccent) && theme.scheme === 'dark' && focused && overTile);
+  const onTileTitle = (node: ReactNode) => (tileAccent ? <Ground value="tile" accent={tileAccent}>{node}</Ground> : node);
+  const leadingBare =
     leading === 'back' ? (
       <GlassButton icon="back" accessibilityLabel={backLabel ? `Back to ${backLabel}` : 'Back'} onPress={onLeading} overMedia={mode === 'reveal'} edge={fill === 'chat'} />
     ) : leading === 'close' ? (
       <CloseButton onPress={onLeading} overMedia={mode === 'reveal'} />
     ) : null;
+  const leadingNode = tileAccent && theme.scheme === 'dark' ? <Ground value="tile" accent={tileAccent}>{leadingBare}</Ground> : leadingBare;
 
   return (
     <>
@@ -235,7 +261,7 @@ export const NavBar = memo(function NavBar({
         0.5 pt hairline under it, so nothing half-cut shows beside the controls (visual critique, round 12). Elsewhere a
         scroll-edge fade shows once content is under the bar. */}
     {solidBar ? (
-      <Animated.View pointerEvents="none" style={[styles.solid(total, solidBar === 'chat' ? theme.color.chat.ground : theme.color.shop.accent[(fill as { accent: ShopAccentName }).accent].tile, solidBar === 'chat' ? theme.color.chat.edge : theme.color.border), backgroundStyle]} />
+      <Animated.View pointerEvents="none" style={[styles.solid(total, solidBar === 'chat' ? theme.color.chat.ground : theme.color.shop.accent[(fill as { accent: ShopAccentName }).accent].tile, solidBar === 'chat' ? theme.color.chat.edge : theme.color.borderOnTile), backgroundStyle]} />
     ) : (
       <ScrollEdge edge="top" height={total + theme.space[4]} fill={fill} style={backgroundStyle} />
     )}
@@ -243,7 +269,7 @@ export const NavBar = memo(function NavBar({
     <Animated.View style={[styles.bar(top), hideStyle]} pointerEvents="box-none">
       <View style={styles.row(barHeight, margin)} pointerEvents="box-none">
         {leadingNode}
-        {centred ? (
+        {onTileTitle(centred ? (
           <Animated.View style={[styles.centredSlot(margin + theme.hit.min + theme.space[2]), titleStyle]} pointerEvents="none">
             <View style={styles.centredLine}>
               {titleMark ? <SnuffleMark size="inline" /> : null}
@@ -270,7 +296,7 @@ export const NavBar = memo(function NavBar({
               </Text>
             </View>
           </Animated.View>
-        )}
+        ))}
         <View style={styles.trailing} pointerEvents="box-none">
           <BarActions actions={trailing} />
           {trailingPhoto ? <PhotoButton {...trailingPhoto} /> : null}

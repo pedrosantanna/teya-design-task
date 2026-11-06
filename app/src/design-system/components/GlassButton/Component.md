@@ -12,7 +12,7 @@ An icon in a 44 pt glass circle, floating over content: Back, the bar's single a
 | `overMedia` | boolean | `false` | Android only: a tonal circle behind the icon over the map or a photo |
 | `disabled` | boolean | `false` | |
 
-Glass follows `FloatingSurface`: Liquid Glass on iOS 26, a blur on earlier iOS, CSS glass on the web, a solid surface under Reduce Transparency. The ground changes the fill: inside `<Ground value="tile">` (the Category screen) the glass takes the `tonalOnTile` overlay instead of Card, so it lifts off the tile; on the web it also takes the on-tile glass values (`state.glassSaturateOnTile`, `state.glassShadowOnTile`): light keeps the glass, dark has saturation 1 and no shadow, so Back matches the street chips beside it (1.19 to 1.20:1 on the tile), and keeps the Stone 360 hairline of dark glass (decision 049); inside `<Ground value="sheet">` in dark (a sheet's header) it is a solid Muted circle.
+Glass follows `FloatingSurface`: Liquid Glass on iOS 26, a blur on earlier iOS, CSS glass on the web, a solid surface under Reduce Transparency. The ground changes the fill: inside `<Ground value="tile">` (the Category screen) the glass takes the accent's `tonal` at `state.tonalOnTile` instead of Card (white at 55% in light), so it lifts off the tile; on the web it also takes the on-tile glass values (`state.glassSaturateOnTile`, `state.glassShadowOnTile`). In dark the tonal colour is opaque, so Back is a solid circle in the accent's dark card with a light glyph, like the street chips beside it (5.88 to 5.99:1 on the tile, round 18); the shop page's nav bar puts its Back on that ground in dark too, over the map; inside `<Ground value="sheet">` in dark (a sheet's header) it is a solid Muted circle.
 
 ## iOS and Android
 

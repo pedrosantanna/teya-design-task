@@ -92,7 +92,7 @@ Every message after something goes wrong, or after an order ends, has three part
 
 ## Button labels
 
-Buttons are verbs from the conceptual model, in sentence case, with what they act on when it helps: Buy, "Buy 1 of 2", "Buy for £29.98", Ask, "Ask Rossi's", Extend, "Extend to Mon 16 Nov", "Cancel for a refund", "Keep looking", "Try again", "Show me", "No thanks", Call, Rate. Directions keeps the platform's usual noun. A button never says OK, Submit or Continue when a verb from the model fits.
+Buttons are verbs from the conceptual model, in sentence case, with what they act on when it helps: Buy, "Buy only 1", "Buy for £29.98", Ask, "Ask Rossi's", Extend, "Extend to Mon 16 Nov", "Cancel for a refund", "Keep looking", "Try again", "Show me", "No thanks", Call, Rate. Directions keeps the platform's usual noun. A button never says OK, Submit or Continue when a verb from the model fits.
 
 ## Metadata lines
 

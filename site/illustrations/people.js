@@ -171,24 +171,27 @@ export function trot(dog, phase) {
 // --- Walking loops in the scenes -----------------------------------------------------------
 // A closed polyline of [x, z] points in scene units, with arc-length lookup. at(s) writes x, z and the heading
 // (rotation about y for a figure facing +z) into `out`; the heading follows the chord over ±TURN, so the
-// figure turns smoothly through a corner instead of snapping.
-function loop(pts) {
-  const n = pts.length, cum = new Float64Array(n + 1);
-  for (let i = 0; i < n; i++) {
+// figure turns smoothly through a corner instead of snapping. An open polyline (open: true) is a path from one
+// hidden point to another: it has no closing segment, and past either end it carries on along the end segment
+// (a dog trotting ahead of its owner keeps going past the end, out of sight, instead of jumping to the start).
+function loop(pts, open = false) {
+  const n = pts.length, segs = open ? n - 1 : n, cum = new Float64Array(segs + 1);
+  for (let i = 0; i < segs; i++) {
     const [x0, z0] = pts[i], [x1, z1] = pts[(i + 1) % n];
     cum[i + 1] = cum[i] + Math.hypot(x1 - x0, z1 - z0);
   }
-  const len = cum[n];
+  const len = cum[segs];
   function point(s, out) {
-    s = ((s % len) + len) % len;
+    if (!open) s = ((s % len) + len) % len;
     let i = 0;
-    while (cum[i + 1] < s) i++;
+    while (i < segs - 1 && cum[i + 1] < s) i++;
     const [x0, z0] = pts[i], [x1, z1] = pts[(i + 1) % n], f = (s - cum[i]) / (cum[i + 1] - cum[i] || 1);
     out.x = x0 + (x1 - x0) * f; out.z = z0 + (z1 - z0) * f;
   }
   const a = { x: 0, z: 0 }, b = { x: 0, z: 0 }, TURN = 0.08;
   return {
     len,
+    open,
     at(s, out) {
       point(s, out);
       point(s - TURN, a); point(s + TURN, b);
@@ -198,21 +201,28 @@ function loop(pts) {
 }
 
 // walkers(THREE, P, scene, shapes) → { parts, update(t), reset() }. scene: { surface(x, z) → [feet y, shadow y], speed,
-// routes: [{ pts, people: [{ at (0–1 along the loop), dog: true | { coat }, ...buildPerson opts }] }] }.
+// period, routes: [{ pts, open, people: [{ at (0–1 along the loop), dog: true | { coat }, ...buildPerson opts }] }] }.
 // Each figure (and each dog, and each lead) is its own entry part; update(t) places everyone at idle time t.
+// period (seconds): every route is walked once per period, each at its own speed (its length over the period), and
+// each stride and trot is rounded to a whole number of cycles per route, so a clip of that length loops with no jump.
+// An open route (open: true) runs from one hidden point to another; the walker goes from its end back to its start
+// in one step, out of sight.
 export function walkers(THREE, P, scene, S) {
   const k = kit(THREE), parts = [], movers = [];
   const speed = scene.speed || 0.2, DOG = PS * 0.95, LEAD = 0.17; // dog trots this far ahead along the loop
   const tmp = { x: 0, z: 0, h: 0 };
   scene.routes.forEach(r => {
-    const path = loop(r.pts);
+    const path = loop(r.pts, !!r.open);
+    // With a period, a cycle length is rounded so the route holds a whole number of them.
+    const whole = (c) => (scene.period ? path.len / Math.max(1, Math.round(path.len / c)) : c);
     r.people.forEach(p => {
       const fig = buildPerson(THREE, P, { ...p, shapes: S, lead: !!p.dog });
       fig.scale.setScalar(PS);
       const ref = { y: 0 };
       fig.traverse(m => { if (m.isMesh) m.userData.shadowRef = ref; });
       // Slightly different strides, so the walkers start together from a standing pose and drift out of step.
-      const mv = { path, s0: p.at * path.len, fig, ref, dog: null, step: STRIDE * PS * (1 + 0.07 * movers.length) };
+      const mv = { path, s0: p.at * path.len, fig, ref, dog: null, speed: scene.period ? path.len / scene.period : speed,
+        step: whole(STRIDE * PS * (1 + 0.07 * movers.length)), trot: whole(0.5 * DOG) };
       parts.push(fig);
       if (p.dog) {
         const dog = buildDog(THREE, P, { shapes: S, ...(p.dog === true ? {} : p.dog) });
@@ -229,7 +239,8 @@ export function walkers(THREE, P, scene, S) {
   });
   const up = new THREE.Vector3(0, 1, 0), dir = new THREE.Vector3();
   function place(mv, clock) {
-    const s = mv.s0 + speed * clock;
+    let s = mv.s0 + mv.speed * clock;
+    if (mv.path.open) s = ((s % mv.path.len) + mv.path.len) % mv.path.len; // the step back to the start is out of sight
     mv.path.at(s, tmp);
     const [y, sy] = scene.surface(tmp.x, tmp.z);
     mv.fig.position.set(tmp.x, y, tmp.z);
@@ -243,7 +254,7 @@ export function walkers(THREE, P, scene, S) {
     mv.dog.position.set(tmp.x, dy, tmp.z);
     mv.dog.rotation.y = tmp.h;
     mv.dref.y = dsy;
-    trot(mv.dog, ((s - mv.s0) / (0.5 * DOG)) * Math.PI * 2);
+    trot(mv.dog, ((s - mv.s0) / mv.trot) * Math.PI * 2);
     // The lead runs from the right hand (arm held forward) to the collar.
     const hx = -0.215, hy = SHOULDER - ARM * Math.cos(0.45), hz = ARM * Math.sin(0.45);
     const ax = fx + PS * (hx * Math.cos(fh) + hz * Math.sin(fh)), az = fz + PS * (-hx * Math.sin(fh) + hz * Math.cos(fh));

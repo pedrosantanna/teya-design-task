@@ -71,9 +71,9 @@ export function useMapView(scheme: 'light' | 'dark', accent: ShopAccentName | un
   const bearing = routeBearing(place);
   const line = accent ? theme.color.shop.accent[accent].detail : theme.color.primary;
   const ink = accent ? theme.color.shop.accent[accent].onDetail : theme.color.onPrimary;
-  // Light: the pastel line is cased in the accent's ink, and the door is a white dot ringed in it. Dark: the line is
-  // near-white already, so the casing is the page ground (lifting it off the roofs) and the door is a light dot ringed
-  // in the ground (the card colour measured 1.29:1 on the dark map and read as a hole).
+  // Light: the pastel line is cased in the accent's ink, and the door is a white dot ringed in it. Dark: the line is the
+  // tile's pastel (round 18; 9.99:1 or more on the dark roads), so the casing is the page ground (lifting it off the
+  // roofs) and the door is a light dot ringed in the ground (the card colour measured 1.29:1 on the dark map and read as a hole).
   const dark = scheme === 'dark';
   const colour = dark ? { line, casing: theme.color.background, door: line, doorRing: theme.color.background } : { line, casing: ink, door: theme.color.card, doorRing: ink };
   return {

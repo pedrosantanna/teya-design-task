@@ -7,7 +7,7 @@ Takeaways:
 - Um app Expo só gera iOS, Android e esta versão web (decisão 038); a moldura troca entre um iPhone e um Pixel junto com a plataforma.
 - O state debugger é um painel encaixado à direita do celular, em seções recolhíveis como o painel direito do Figma. Define persona (Sam ou Jess), plataforma, claro ou escuro, passo da jornada, os estados do modelo conceitual e o conjunto de conteúdo; o relógio da simulação pode ser pausado ou avançado.
 - A jornada do Sam roda do começo ao fim: pedir, respostas chegando, comprar, esperar a loja, retirar; cada caminho de falha do app flow v7 está a um clique.
-- Doze lojas inventadas em volta da Blythe Road são as únicas lojas do protótipo, e cada uma vem de algo que ouvi na Descoberta.
+- Doze lojas inventadas em volta da Blythe Road carregam a jornada do demo, e cada uma vem de algo que ouvi na Descoberta; outras 30 preenchem o Nearby e as telas de Categoria, 42 no total.
 Call:
 - Pedi um protótipo que rodasse como app de verdade para o vídeo e como build web dentro destes docs, com um debugger para definir qualquer estado enquanto navego, e uma moldura de iPhone ou Android em volta.
 - Pedi que toda tela passasse pelo revisor de telas antes de publicar; o que ele achou foi corrigido neste build.

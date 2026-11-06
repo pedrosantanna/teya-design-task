@@ -12,6 +12,7 @@ import {
   Alert,
   Button,
   CollectionCode,
+  Ground,
   Illustration,
   ListRow,
   NavBar,
@@ -90,6 +91,8 @@ export default function Receipt() {
         {/* The receipt's header: the shop's accent at the tile step (colour.md, Shop accents) and the shop's name in
             Display name. */}
         <View style={styles.head(accent)}>
+          {/* The header is the shop's tile: its text takes the on-tile ink (the pastel tile in both modes, round 18). */}
+          <Ground value="tile" accent={accent}>
           <StatusLabel label={order.label} tone={order.tone} />
           <Text variant="displayName" align="center" accessibilityRole="header" numberOfLines={2}>
             {order.shop}
@@ -110,6 +113,7 @@ export default function Receipt() {
               onPress={() => router.push({ pathname: '/shops/[id]', params: { id: order.shopId } })}
             />
           </View>
+          </Ground>
         </View>
         </View>
 

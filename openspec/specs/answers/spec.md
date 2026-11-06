@@ -39,7 +39,7 @@ A yes SHALL arrive in the chat as an answer card with the shop name, status and 
 An answer that covers part of the quantity SHALL offer to buy what it has, labelled "Buy [n] of [total]", and keep looking for the rest.
 
 #### Scenario: 1 of 2
-- **WHEN** the shopper taps "Buy 1 of 2" on Broadway Chemist's answer
+- **WHEN** the shopper taps "Buy only 1" on Broadway Chemist's answer
 - **THEN** after the order the card adds "Keep looking for 1 more"
 
 ### Requirement: Something similar

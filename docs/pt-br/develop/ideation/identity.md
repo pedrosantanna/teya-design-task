@@ -9,6 +9,7 @@ Takeaways:
 - Três paletas, cada uma construída sobre um par complementar mais uma terceira cor: Pillar and park (verde e vermelho, manteiga), Awning (cobalto e laranja, menta), Tiles (verde-petróleo e rosa, ocre). Todo tint passa 4,5:1 como texto e como rótulo de botão nos modos claro e escuro.
 - A marca agora é um retriever, uma raça britânica cujo trabalho é trazer as coisas de volta. Nomes de retriever a considerar: Nous (o cão que fundou a raça, e gíria britânica para bom senso), Bonnie, Bailey, Buddy, Teddy, Primrose. Nomes de farejar: Snuffle (minha escolha, decisão 035), Sniffari, Truffle, Rootle, Boop, Waggy.
 - Vários nomes óbvios já existem ou estão concorridos (Parade, Fetch, Errand, Legwork), e "Nip" sozinho é uma ofensa étnica.
+- A rodada 11 põe no quadro três novas direções para os acentos escuros, a partir dos blocos lamacentos do build web (Padaria cáqui e Farmácia cinza-floresta; Butter e Pistache a 3,2 de distância em ΔE OK × 100, os pinos de Butter e Pêssego a 2,0): tons de joia, um fundo de tinta com detalhe luminoso e um cartão neutro com cor na arte. Todo par de texto passa de 4,5:1. O agente recomenda o fundo de tinta; nada está escolhido.
 - A rodada 10 testa os acentos e o neutro do modo escuro em quatro telas (Nearby, uma tela de Categoria, uma página de loja e um sheet): os de hoje, os acentos claros sem mudança (bloco a 12,93 a 13,48:1 sobre o fundo, contra 1,67 a 1,86:1), acentos com croma menor (cerca de 55% do de hoje, todo par de texto acima de 4,5:1) e um neutro mais frio com metade do croma do Stone. Nada foi escolhido ainda.
 - A rodada 9 devolve cor ao modo claro: o fundo em L 0,95 ou L 0,96, com o croma da rodada 8, ×1,8 ou ×2,5. O agente sugeriu L 0,96 com ×1,8; escolhi L 0,96 com o croma da rodada 8 (#F4F1ED), e o modo escuro ficou como na rodada 8 até eu passá-lo para a coluna menos cor da rodada 8. Com ×2,5 parece creme.
 - A rodada 7 substitui o modo escuro marrom: os passos escuros do Cinza biscoito se leem como marrom sujo e ficam do lado oposto ao índigo no círculo. A Berinjela, um roxo quente, é a sugestão do agente; o Céu noturno é mais frio, o Carvão ameixa mais discreto.
@@ -22,11 +23,13 @@ Call:
 - Pedi para comparar os híbridos e os modos escuros lado a lado em telas, sem bordas, e escolhi Pastel parade com Índigo (decisão 036) e um fundo claro em L 0,96 com o croma da rodada 8 (rodada 9); modo escuro como na rodada 8. O nome está decidido: Snuffle.
 - Depois voltei aos testes de modo escuro da rodada 8 e escolhi a coluna menos cor para o modo escuro: o Cinza biscoito com 45% do croma, chamado Stone, porque o croma inteiro parecia marrom à noite (decisão 048). O modo claro continua no Cinza biscoito. A escolha está marcada no quadro.
 - Perguntei se os acentos claros funcionam no escuro e se o neutro escuro deveria ser mais frio e menos saturado.
+- Na rodada 11 disse que as cores escuras das categorias ainda me parecem lamacentas e pedi ideias de acentos escuros, mostradas neste quadro.
 AI:
 - Eu dei as sementes: um cachorro farejador, um investigador no estilo Sherlock, a cultura de compras britânica. Um agente buscou na web referências e conflitos de nome, verificou a situação de direito autoral e de marca de Sherlock Holmes, montou as paletas com um script que calcula o contraste WCAG e as paletas tonais do Material 3, desenhou os esboços de marca em SVG, aplicou as paletas aos wireframes da v2 e capturou nove apps do Mobbin.
 - As verificações de nome são buscas rápidas na web, não buscas de marca registrada. Nomes marcados como "não verificado" não foram buscados.
 - Na rodada 4, um agente leu a documentação do shadcn/ui, do Tailwind, do Radix Colors e do Material sobre neutros, montou as escalas de cinza em OKLCH com um script e conferiu o contraste WCAG de cada combinação, incluindo preto e branco puros. Ele escureceu um pouco o Tea teal e o Jam para passarem sobre o Oat.
 - Um agente montou quatro opções para a rodada 10 com os mocks de Nearby, Categoria, página de loja e sheet do quadro, escolheu os valores de bloco com croma menor em OKLCH, moveu o matiz do Stone e reduziu o croma dele pela metade, e mediu cada par com o script de WCAG 2. Baixou os blocos de L 0,37 para L 0,36 depois que o texto secundário do Pistache mediu 4,44:1.
+- Para a rodada 11 um agente capturou telas do Nearby, da Categoria e das páginas de loja escuros no build web, mediu os blocos, as linhas e os pinos em OKLCH, propôs três direções com um script que resolve cada cor no gamut sRGB e mede todo par WCAG 2, e as montou como mocks com as ilustrações do app sobre fundo transparente. Recomendou uma; eu não escolhi.
 Trade-offs:
 - Cada paleta tem uma cor secundária e uma terciária que falham como texto no branco (Butter, Marmalade, Mint, Rose, Ochre). Elas ficam para preenchimentos, selos e pontos de status; texto nesses matizes usa o tom mais escuro do Material 3.
 - Mostrar todas as paletas nas mesmas duas telas facilita a comparação, e esconde como cada uma mudaria layout, tipografia ou ilustração.
@@ -38,6 +41,7 @@ Todas as rodadas ficam no mesmo quadro, a mais recente no topo, abaixo de uma á
 
 | Rodada | O que acrescentou |
 | --- | --- |
+| 11 | Três direções para os acentos escuros (tons de joia, um fundo de tinta com detalhe luminoso, um cartão neutro com cor na arte), contra os de hoje, cada uma com valores em hex e OKLCH e pares medidos |
 | 10 | Acentos e neutro do modo escuro em quatro telas: os de hoje, os acentos claros sem mudança, acentos com croma menor e um neutro mais frio com metade do croma do Stone |
 | 9 | O Cinza biscoito no modo claro com mais cor: o fundo em L 0,95 e em L 0,96, cada um com o croma da rodada 8, ×1,8 e ×2,5 |
 | 8 | A Pastel parade com Índigo no Cinza biscoito, escolhida (decisão 036), no claro e no escuro sem bordas: superfícies com mais distância de luminosidade, e um Cinza biscoito menos saturado ao lado. O modo escuro agora usa essa coluna menos saturada, com 45% do croma, como Stone (decisão 048) |
@@ -48,6 +52,10 @@ Todas as rodadas ficam no mesmo quadro, a mais recente no topo, abaixo de uma á
 | 3 | Teste de ícone 3 (sobrancelhas e bigode) com bigode de quatro ou cinco listras, nas paletas A, C, F, I e J |
 | 2 | Mais dez paletas de quatro ou cinco cores, e seis testes de ícone em que o toldo da parade vira a barba de um terrier |
 | 1 | Quatro direções de conceito, três paletas, aplicações na home da v2, referências |
+
+## Rodada 11
+
+As cores escuras das categorias ainda me parecem lamacentas, então pedi ideias a um agente. Ele mediu o escuro de hoje: os blocos têm C 0,034 a 0,045, Butter e Pistache ficam a 3,2 de distância (ΔE OK × 100; cerca de 2 é o menor passo visível) e os pinos de Butter e Pêssego a 2,0, então uma página de loja parece cáqui, marrom ou cinza-floresta. O texto está bem; o problema é a cor. O quadro mostra três direções nas mesmas três telas, cada uma com seus valores e todo par medido, ao lado dos tokens de hoje em [Cor](../design-system/colour.md#acentos-das-lojas). O agente recomenda a B, o fundo de tinta. Gostei da B e pedi quatro variações dos cartões (tingido, Stone neutro, afundado com um fio, translúcido), com blocos, detalhes e arte iguais; o agente prefere o tingido, a B1. Eu tinha me referido à opção 2 da rodada 10 (os acentos claros sem mudança no escuro), então o quadro também mostra quatro variações dela com cartões, chips e botões escuros sobre os blocos pastel; elas deixam o bloco a 12,91 a 13,46:1 do fundo, e o agente recomenda o tom profundo do matiz de cada bloco. As variações da B ficam como exploradas. Nada está escolhido ainda.
 
 ## Rodada 10
 

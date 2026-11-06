@@ -9,7 +9,7 @@ import { useReducedMotion } from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { useBleed } from '../../internal/bleed';
-import { useTileAccent } from '../../internal/ground';
+import { OnTileSurface, useTileAccent } from '../../internal/ground';
 import { cornerCurve, type ShopAccentName } from '../../theme';
 import { Icon } from '../Icon/Icon';
 import type { RowPosition } from '../ShopRow/ShopRow';
@@ -67,13 +67,15 @@ export const ReviewCard = memo(function ReviewCard({ name, text, up, month, line
   if (width != null) {
     return (
       <View accessible accessibilityLabel={label} style={styles.card(width, tile)}>
-        {body}
+        <OnTileSurface>{body}</OnTileSurface>
       </View>
     );
   }
   return (
     <View accessible accessibilityLabel={label} style={styles.row(grouped, top, bottom, tile)}>
-      <View style={styles.inner(grouped && !bottom)}>{body}</View>
+      <View style={styles.inner(grouped && !bottom)}>
+        <OnTileSurface painted={grouped}>{body}</OnTileSurface>
+      </View>
     </View>
   );
 });

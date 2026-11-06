@@ -38,7 +38,7 @@ export { SignInButtonExamples } from './components/SignInButton/SignInButton.exa
 export { CategoryCard, CategoryHeader, type CategoryCardProps, type CategoryHeaderProps } from './components/CategoryCard/CategoryCard';
 export { CategoryCardExamples } from './components/CategoryCard/CategoryCard.examples';
 export { Illustration, categoryIllustration, isCategoryId, useIllustrationScheme, type IllustrationProps } from './components/Illustration/Illustration';
-export { ILLUSTRATION_SIZES } from './components/Illustration/manifest.generated';
+export { ILLUSTRATION_HEIGHTS, ILLUSTRATION_SIZES } from './components/Illustration/manifest.generated';
 export type { CategoryId } from './components/Illustration/manifest.generated';
 export { IllustrationExamples } from './components/Illustration/Illustration.examples';
 export { CloseButton, type CloseButtonProps } from './components/CloseButton/CloseButton';
@@ -125,6 +125,7 @@ export { SwitchExamples } from './components/Switch/Switch.examples';
 export { DesignSystemRoot } from './DesignSystemRoot';
 export { haptic, type HapticKind } from './internal/haptics';
 export { Ground, type GroundName } from './internal/ground';
+export { useStatusTone, useStatusToneOverride, type StatusBarTone } from './internal/statusTone';
 export { dismissKeyboard, useDismissKeyboardOnBlur } from './internal/keyboard';
 export { ChatGestureArea, ChatScroll } from './internal/chatKeyboard';
 export * from './theme';

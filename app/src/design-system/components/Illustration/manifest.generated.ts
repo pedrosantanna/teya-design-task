@@ -3,7 +3,7 @@
 
 export const ILLUSTRATION_SIZES = { small: 64, medium: 88, large: 120, hero: 352, welcome: 312, bleed: 460 } as const;
 /** Sizes taller than wide (a bleed hero is a window onto a scene); every other size is square. */
-export const ILLUSTRATION_HEIGHTS: Partial<Record<keyof typeof ILLUSTRATION_SIZES, number>> = { bleed: 420 };
+export const ILLUSTRATION_HEIGHTS: Partial<Record<keyof typeof ILLUSTRATION_SIZES, number>> = { bleed: 600 };
 export type IllustrationSize = keyof typeof ILLUSTRATION_SIZES;
 export type IllustrationName = 'basket' | 'box' | 'crossroads' | 'quietstreet' | 'shop';
 /** welcome: Getting started, each object on its own page's ground; location: the location ask's ground (scripts/illustrations/manifest.json). */
@@ -52,10 +52,10 @@ export const ILLUSTRATIONS: Record<IllustrationName, Grounds> = {
       large: { still: require('../../../../assets/illustrations/crossroads.background-light.120.png'), entry: { video: require('../../../../assets/illustrations/crossroads-entry.background-light.120.mp4'), ms: 2700 } },
     },
     'welcome-dark': {
-      bleed: { still: require('../../../../assets/illustrations/crossroads.welcome-dark.460.png'), entry: { video: require('../../../../assets/illustrations/crossroads-entry.welcome-dark.460.mp4'), ms: 3200 } },
+      bleed: { still: require('../../../../assets/illustrations/crossroads.welcome-dark.460.png'), idle: { video: require('../../../../assets/illustrations/crossroads-idle.welcome-dark.460.mp4'), ms: 14000 } },
     },
     'welcome-light': {
-      bleed: { still: require('../../../../assets/illustrations/crossroads.welcome-light.460.png'), entry: { video: require('../../../../assets/illustrations/crossroads-entry.welcome-light.460.mp4'), ms: 3200 } },
+      bleed: { still: require('../../../../assets/illustrations/crossroads.welcome-light.460.png'), idle: { video: require('../../../../assets/illustrations/crossroads-idle.welcome-light.460.mp4'), ms: 14000 } },
     },
   },
   quietstreet: {
@@ -94,78 +94,59 @@ export const CATEGORY_LABELS: Record<CategoryId, string> = { fashion: "Fashion",
 export const CATEGORY_ILLUSTRATIONS: Record<CategoryId, Partial<Record<IllustrationScheme, { still: number; entry?: IllustrationClip }>>> = {
   bags: {
     light: { still: require('../../../../assets/illustrations/categories/bags.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/bags.dark.120.png') },
   },
   bakery: {
     light: { still: require('../../../../assets/illustrations/categories/bakery.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/bakery.dark.120.png') },
   },
   books: {
     light: { still: require('../../../../assets/illustrations/categories/books.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/books.dark.120.png') },
   },
   butcher: {
     light: { still: require('../../../../assets/illustrations/categories/butcher.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/butcher.dark.120.png') },
   },
   cafe: {
     light: { still: require('../../../../assets/illustrations/categories/cafe.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/cafe.dark.120.png') },
   },
   cameras: {
     light: { still: require('../../../../assets/illustrations/categories/cameras.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/cameras.dark.120.png') },
   },
   chemist: {
     light: { still: require('../../../../assets/illustrations/categories/chemist.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/chemist.dark.120.png') },
   },
   deli: {
     light: { still: require('../../../../assets/illustrations/categories/deli.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/deli.dark.120.png') },
   },
   fashion: {
     light: { still: require('../../../../assets/illustrations/categories/fashion.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/fashion.dark.120.png') },
   },
   fishmonger: {
     light: { still: require('../../../../assets/illustrations/categories/fishmonger.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/fishmonger.dark.120.png') },
   },
   florist: {
     light: { still: require('../../../../assets/illustrations/categories/florist.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/florist.dark.120.png') },
   },
   games: {
     light: { still: require('../../../../assets/illustrations/categories/games.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/games.dark.120.png') },
   },
   gifts: {
     light: { still: require('../../../../assets/illustrations/categories/gifts.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/gifts.dark.120.png') },
   },
   hardware: {
     light: { still: require('../../../../assets/illustrations/categories/hardware.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/hardware.dark.120.png') },
   },
   newsagent: {
     light: { still: require('../../../../assets/illustrations/categories/newsagent.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/newsagent.dark.120.png') },
   },
   opticians: {
     light: { still: require('../../../../assets/illustrations/categories/opticians.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/opticians.dark.120.png') },
   },
   plants: {
     light: { still: require('../../../../assets/illustrations/categories/plants.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/plants.dark.120.png') },
   },
   stationery: {
     light: { still: require('../../../../assets/illustrations/categories/stationery.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/stationery.dark.120.png') },
   },
   toys: {
     light: { still: require('../../../../assets/illustrations/categories/toys.light.120.png') },
-    dark: { still: require('../../../../assets/illustrations/categories/toys.dark.120.png') },
   },
 };

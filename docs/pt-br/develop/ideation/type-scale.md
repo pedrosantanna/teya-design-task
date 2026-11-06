@@ -1,4 +1,4 @@
-# Escala tipográfica
+# Tipografia
 
 Uma escala tipográfica montada a partir dos estilos de texto da Apple, com os papéis correspondentes do Material 3, e testes de fontes da Fontshare sobre ela: quatro sozinhas, fontes de display combinadas com uma fonte de corpo, e uma terceira rodada em que a fonte de display aparece só no splash, na tela de entrada, no título da home e em títulos de widget. Cada teste termina na mesma tela de conversa, que é onde o comprador mais lê. As fontes carregam de uma pasta privada e não vão para o repositório público; sem elas, o canvas usa a fonte do sistema.
 

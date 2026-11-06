@@ -92,7 +92,7 @@ Toda mensagem depois que algo dá errado, ou depois que uma compra termina, tem 
 
 ## Rótulos de botão
 
-Os botões são verbos do modelo conceitual, em sentence case, com o objeto da ação quando ajuda: Buy, "Buy 1 of 2", "Buy for £29.98", Ask, "Ask Rossi's", Extend, "Extend to Mon 16 Nov", "Cancel for a refund", "Keep looking", "Try again", "Show me", "No thanks", Call, Rate. Directions mantém o substantivo de costume da plataforma. Um botão nunca diz OK, Submit ou Continue quando cabe um verbo do modelo.
+Os botões são verbos do modelo conceitual, em sentence case, com o objeto da ação quando ajuda: Buy, "Buy only 1", "Buy for £29.98", Ask, "Ask Rossi's", Extend, "Extend to Mon 16 Nov", "Cancel for a refund", "Keep looking", "Try again", "Show me", "No thanks", Call, Rate. Directions mantém o substantivo de costume da plataforma. Um botão nunca diz OK, Submit ou Continue quando cabe um verbo do modelo.
 
 ## Linhas de metadados
 

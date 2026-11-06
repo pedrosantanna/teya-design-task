@@ -530,5 +530,23 @@ Tudo o que chega numa conversa entra de um jeito só: aparece com fade e sobe 8 
 
 **Por quê:** mensagens e status apareciam e trocavam num quadro só e pareciam quebrados. A scooter dizia entrega enquanto o Snuffle procurava; escolhi a marca em vez de um cruzamento pequeno, que vira ruído nesse tamanho. Duas lojas com um Buy preenchido e outro cinza pareciam uma recomendação que o app não fez. A foto sob "Snuffle" apertava o título, e uma foto fixa dos óculos de eclipse de outra pessoa pode não ser o que o comprador quer.
 
+**Atualizado:** a oferta parcial diz "Buy only 1" (o número que a loja tem), já que "Buy 1 of 2" parecia um passo numa sequência.
+
+**Atualizado:** a subida é de 16 pt, já que 8 pt pareciam nenhum movimento no celular (AI log, passo 78).
+
+## 065 · Os docs abrem com o case; o processo vira a documentação do harness
+**2026-11-06 · Decidido**
+
+O site tem dois blocos. O primeiro, "O case", é uma narrativa curta para quem avalia o take-home: uma visão geral com a conclusão primeiro, a posição, o produto, o protótipo, as decisões-chave, viabilidade e escala, como trabalhei, e validação e próximos passos. Cada página é uma síntese do que já existe e aponta para a evidência. O segundo bloco, "Harness de IA e contexto", mantém todas as páginas que existiam, com o conteúdo intacto, reagrupadas como a documentação do sistema de trabalho: intenção, pesquisa, specs do produto, fluxos e estados, design system, explorações, verificação e registros.
+
+**Por quê:** a ordem Discover, Define, Develop e Deliver fazia o leitor percorrer o processo antes de achar a posição e enterrava as decisões num registro com mais de 60 entradas. Agrupar as páginas existentes pelo que elas são, mais perto de uma documentação spec-driven, as mantém como o registro para o qual o case aponta. Nada foi apagado, e nenhuma página existente mudou.
+
+## 066 · No modo escuro, os tiles das lojas mantêm os pastéis do claro e os cartões sobre eles ficam escuros
+**2026-11-06 · Decidido**
+
+O tile de acento de uma loja é o mesmo pastel no claro e no escuro (Butter #E7D48F, Peach #FEC5B2, Pistachio #C5DEAE), com texto em tinta direto sobre ele, e os cartões sobre ele no escuro são um escuro translúcido do matiz do tile, como valores sólidos (#514A31, #5A453E, #454E3D), com texto claro; os botões tonais e o Back usam esse cartão, e o Ask sobre um tile é Indigo 800. O pin do mapa é o pastel com um ponto em tinta, e o caminho é o pastel contornado na cor do fundo. O escuro reusa as ilustrações claras das categorias, já que os tiles agora são iguais. É a opção 2, variação 4, do board de Identidade (round 11), e substitui os tiles escuros das decisões 051 e 058.
+
+**Por quê:** os tiles escuros tinham croma de 0,03 a 0,05 e liam como cáqui, marrom-avermelhado e cinza-floresta, a só 3 a 6 de distância de matiz, onde 2 é o menor passo visível. Comparei três direções e as variações delas no board e escolhi os pastéis claros com cartões escuros. O custo é o brilho: o tile fica a 12,9 a 13,5:1 do fundo escuro, então a página da loja, a tela de categoria e os cartões de categoria são blocos claros numa interface escura.
+
 ## Ainda em aberto
 

@@ -168,7 +168,7 @@ Every request in Requests SHALL open as a full conversation with its history, it
 - **THEN** the chat shows the history and the order card, and the composer is at the bottom
 
 ### Requirement: Chat motion
-Everything that arrives in a chat SHALL arrive the same way: Snuffle's message (sender line and bubble together) fades in and rises 8 pt on the smooth spring, and the shopper's bubble keeps its snappy scale. With Reduce Motion new items SHALL only fade.
+Everything that arrives in a chat SHALL arrive the same way: Snuffle's message (sender line and bubble together) fades in and rises 16 pt on the smooth spring, and the shopper's bubble keeps its snappy scale. With Reduce Motion new items SHALL only fade.
 
 #### Scenario: Snuffle replies
 - **WHEN** Snuffle's reply follows the shopper's message

@@ -11,7 +11,7 @@ import { Text as NativeText, Pressable, View } from 'react-native';
 import Animated, { interpolateColor, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { useGround, useGroundAccent } from '../../internal/ground';
+import { OnTileSurface, useGround, useGroundAccent } from '../../internal/ground';
 import { webHitArea } from '../../internal/hitArea';
 import { usePress } from '../../internal/usePress';
 import { cornerCurve, textStyle, withAlpha, type BadgeName, type ColorName } from '../../theme';
@@ -41,40 +41,38 @@ export const Chip = memo(function Chip({ label, kind = 'filter', selected = fals
   const press = usePress('selection');
   const on = kind === 'filter' && selected;
   const progress = useSharedValue(on ? 1 : 0);
-  // Off sits a level down from the selected chip (tags.md). Light: on a shop's or category's tile, the tonalOnTile
+  // Off sits a level down from the selected chip (tags.md). Light: on a shop's or category's tile, the accent's tonal
   // overlay; on the Background or a sheet, that ground itself with a 1 pt edge (glassEdge at state.chipEdge); on a
   // Card section, Muted; on a chat's white ground, the chat chip colour. On: Card with Indigo 800 semibold text and
   // a 1.5 pt Indigo 800 edge (decision 049).
   // Dark has no edges (round 10): every chip is a tonal container one clear step from its ground. Off: tag.fill on the
   // Background and a chat, tag.fillRaised on a sheet and a Card section, tag.fillOnRow on a row inside the shop
   // page card (its "What they sell" and rating tags: the Background on the white row in light, 1.21:1; tag.fillRaised in dark,
-  // 1.36 to 1.41:1; no edge, no tile colour), the accent's cardOnTile on a tile (the rows' colour, 1.4:1 from the tile). On: Indigo 900 (chipSelected) on
-  // the Background and a chat, Indigo 850 (chipSelectedRaised) on the raised grounds, Indigo 950 (chipSelectedOnTile) on a
+  // 1.36 to 1.41:1; no edge, no tile colour), the accent's chipOnCard on a card on a tile and its tonal on a tile. On: Indigo 900 (chipSelected) on
+  // the Background and a chat, Indigo 850 (chipSelectedRaised) on the raised grounds, Indigo 800 (chipSelectedOnTile, white text) on a
   // tile, with Indigo 200 semibold text.
+  // Round 18: on a tile the off chip takes the accent's tonal colour at state.tonalOnTile (white at 55% in light, the
+  // solid dark cardOnTile in dark, with light text); on a card on a tile (tileCard) the accent's chipOnCard.
   const ground = useGround();
   const accent = useGroundAccent();
   const dark = theme.scheme === 'dark';
-  const raised = ground === 'sheet' || ground === 'card';
-  const onRow = ground === 'card' && !on;
+  const onCard = ground === 'card' || ground === 'tileCard';
+  const raised = ground === 'sheet' || onCard;
+  const onRow = onCard && !on;
   const plain = (ground === 'background' || ground === 'sheet') && !dark;
+  const tileFill = accent ? withAlpha(theme.color.shop.accent[accent].tonal, theme.state.tonalOnTile) : theme.color.card;
+  const cardFill = ground === 'tileCard' && accent ? theme.color.shop.accent[accent].chipOnCard : theme.color.tag.fillOnRow;
   const lightOff =
     ground === 'chat'
       ? theme.color.chat.fill
       : ground === 'tile'
-        ? withAlpha(theme.color.tonalOnTile, theme.state.tonalOnTile)
-        : ground === 'card'
-          ? theme.color.tag.fillOnRow
+        ? tileFill
+        : onCard
+          ? cardFill
           : plain
             ? theme.color[ground === 'sheet' ? 'sheet' : 'background']
             : theme.color.card;
-  const darkOff =
-    ground === 'tile'
-      ? accent ? theme.color.shop.accent[accent].cardOnTile : withAlpha(theme.color.tonalOnTile, theme.state.tonalOnTile)
-      : onRow
-        ? theme.color.tag.fillOnRow
-        : raised
-          ? theme.color.tag.fillRaised
-          : theme.color.tag.fill;
+  const darkOff = ground === 'tile' ? tileFill : onRow ? cardFill : raised ? theme.color.tag.fillRaised : theme.color.tag.fill;
   const off = dark ? darkOff : lightOff;
   // The edge keeps the chip's size when it turns on; in dark it is the fill's own colour, so nothing shows.
   const lightEdge = ground === 'chat' ? theme.color.chat.fieldEdge : plain ? withAlpha(theme.color.glassEdge, theme.state.chipEdge) : off;
@@ -92,7 +90,7 @@ export const Chip = memo(function Chip({ label, kind = 'filter', selected = fals
     borderColor: interpolateColor(progress.get(), [0, 1], [edgeOff, onEdge]),
   }));
   const text = count != null ? `${label}, ${count}` : label;
-  const onText: ColorName = dark ? 'onChipSelected' : 'chipOn';
+  const onText: ColorName = dark ? (ground === 'tile' ? 'onPrimaryOnTile' : 'onChipSelected') : 'chipOn';
   const contentColor: ColorName = on ? onText : 'foreground';
   const slop = (theme.hit.min - theme.size.chip) / 2;
   // Android adds a checkmark to a selected filter chip, as Material does (tags.md).
@@ -113,6 +111,7 @@ export const Chip = memo(function Chip({ label, kind = 'filter', selected = fals
         onPressOut={press.onPressOut}
       >
         <Animated.View style={[styles.chip, on && styles.chipOn, fill]}>
+          <OnTileSurface>
           <Animated.View pointerEvents="none" style={[styles.layer, press.layerStyle]} />
           {leading ? <Icon icon={leading} size="subheadline" color={contentColor} /> : null}
           <Text variant={on ? 'subheadlineStrong' : 'subheadline'} color={contentColor} numberOfLines={1}>
@@ -124,6 +123,7 @@ export const Chip = memo(function Chip({ label, kind = 'filter', selected = fals
             </Text>
           ) : null}
           {kind === 'menu' ? <Icon icon={ArrowDown01Icon} size="subheadline" color="mutedForeground" /> : null}
+          </OnTileSurface>
         </Animated.View>
       </Pressable>
     </Animated.View>
@@ -159,15 +159,20 @@ export const StatusLabel = memo(function StatusLabel({ label, tone = 'default', 
   const pill = tone === 'needsYou';
   const { theme } = useUnistyles();
   const ground = useGround();
-  // Dark: the pill is a tonal container (tag.fill, tag.fillRaised on a sheet or a Card section), one step from its ground.
-  const darkFill = theme.scheme === 'dark' ? (ground === 'sheet' || ground === 'card' ? theme.color.tag.fillRaised : theme.color.tag.fill) : undefined;
+  const accent = useGroundAccent();
+  // Dark: the pill is a tonal container (tag.fill, tag.fillRaised on a sheet or a Card section), one step from its ground;
+  // on an accent tile (the receipt's header) the accent's tonal colour, the dark card with light text (round 18).
+  const raisedFill = ground === 'sheet' || ground === 'card' ? theme.color.tag.fillRaised : theme.color.tag.fill;
+  const darkFill = theme.scheme === 'dark' ? (ground === 'tile' && accent ? theme.color.shop.accent[accent].tonal : raisedFill) : undefined;
   return (
     <View style={styles.status}>
       <View style={[styles.statusMain, pill && styles.pill, pill && darkFill ? { backgroundColor: darkFill } : null]}>
+        <OnTileSurface painted={pill}>
         {shown ? <Icon icon={shown} size="caption1" color={tone === 'warning' || tone === 'success' ? color : 'mutedForeground'} /> : null}
         <Text variant={tone === 'quiet' ? 'caption1' : 'caption1Strong'} color={color} numberOfLines={2}>
           {status}
         </Text>
+        </OnTileSurface>
       </View>
       {detail ? (
         <Text variant="caption1" color="mutedForeground" numberOfLines={2}>

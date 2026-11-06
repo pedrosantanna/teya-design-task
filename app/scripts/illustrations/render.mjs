@@ -92,7 +92,8 @@ try {
         : { margin: c.margin };
     for (const it of c.items) {
       if (f.only && !f.only.includes(it.id)) continue;
-      for (const scheme of ['light', 'dark'].filter((x) => !f.schemes || f.schemes.includes(x))) {
+      // c.schemes: the schemes whose tile differs (round 18: one pastel tile in both, so light only; dark reuses it).
+      for (const scheme of (c.schemes ?? ['light', 'dark']).filter((x) => !f.schemes || f.schemes.includes(x))) {
         const { ground, dark } = categoryColors(it.ramp, scheme);
         for (const scale of c.scales.filter((x) => !f.scales || f.scales.includes(String(x)))) {
           for (const clip of [...c.clips, 'still'].filter(wantClip)) {

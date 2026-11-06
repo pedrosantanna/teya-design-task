@@ -490,7 +490,9 @@ export function answerCardText(c: PersonaContent, offer: Offer, state: AnswerSta
     price: price(offer.price),
     walk: `${shop?.walkMinutes ?? 0} min walk`,
     collectBy: `Collect by ${offer.collectBy}`,
-    buyLabel: short ? `Buy ${offer.available ?? 1} of ${c.active.quantity}` : 'Buy',
+    // A shop with fewer than asked offers what it has: "Buy only 1" (it has one) or "Buy only 3"; the status line above
+    // already says how many of how many.
+    buyLabel: short ? `Buy only ${offer.available ?? 1}` : 'Buy',
     similar: state === 'similar',
   };
 }

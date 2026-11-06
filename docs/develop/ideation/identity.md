@@ -9,6 +9,7 @@ Takeaways:
 - Three palettes, each built on a complementary pair plus a third colour: Pillar and park (green and red, butter), Awning (cobalt and marmalade, mint), Tiles (teal and rose, ochre). Every tint passes 4.5:1 as text and as a button label in light and dark mode.
 - The mark is now a retriever, a British breed whose job is to bring things back. Retriever names to consider: Nous (the breed's founding dog, and British slang for common sense), Bonnie, Bailey, Buddy, Teddy, Primrose. Sniffing names: Snuffle (my choice, decision 035), Sniffari, Truffle, Rootle, Boop, Waggy.
 - Several obvious names are taken or crowded (Parade, Fetch, Errand, Legwork), and "Nip" alone is an ethnic slur.
+- Round 11 puts three new directions for the dark accents on the board, from the web build's muddy tiles (khaki Bakery and forest-grey Chemist; Butter and Pistachio 3.2 apart in ΔE OK × 100, the Butter and Peach pins 2.0): jewel tones, an ink ground with luminous detail, and a neutral card with colour in the art. Every text pair passes 4.5:1. The agent recommends the ink ground; nothing is chosen.
 - Round 10 tests the dark mode's accents and neutral on four screens (Nearby, a Category screen, a shop page and a sheet): today's, the light accents unchanged (tile 12.93 to 13.48:1 on the background, against 1.67 to 1.86:1), lower-chroma accents (about 55% of today's, every text pair above 4.5:1), and a cooler neutral at half of Stone's chroma. Nothing is chosen yet.
 - Round 9 puts more colour back into the light mode: the background at L 0.95 or L 0.96, at round 8's chroma, ×1.8 or ×2.5. The agent suggested L 0.96 at ×1.8; I chose L 0.96 at round 8's chroma (#F4F1ED), and dark mode stayed as in round 8 until I moved it to round 8's less colour column. ×2.5 reads as cream.
 - Round 7 replaces the brown dark mode: Biscuit grey's dark steps read as muddy brown and sit opposite indigo on the wheel. Aubergine, a warm plum, is the agent's suggestion; Night sky is cooler, Plum charcoal quieter.
@@ -22,11 +23,13 @@ Call:
 - I asked to compare the hybrids and dark modes side by side on screens, without borders, and chose Pastel parade with Indigo (decision 036) and a light background at L 0.96 with round 8's chroma (round 9); dark mode as in round 8. The name is decided: Snuffle.
 - Later I went back to round 8's dark mode tests and chose the less colour column for dark mode: Biscuit grey at 45% of its chroma, named Stone, because the full chroma read brown at night (decision 048). Light mode keeps Biscuit grey. It is marked on the board.
 - I asked whether the light accents work in dark and whether the dark neutral should be cooler and less saturated.
+- In round 11 I said the dark category colours still look muddy and asked for ideas for dark accents, shown on this board.
 AI:
 - I gave the seeds: a sniffer dog, a Sherlock-style investigator, British shopping culture. An agent searched the web for references and name conflicts, checked the Sherlock Holmes copyright and trademark position, built the palettes with a script that computes WCAG contrast and Material 3 tonal palettes, drew the mark sketches in SVG, applied the palettes to the v2 wireframes and captured nine apps from Mobbin.
 - The name checks are quick web searches, not trademark searches. Names marked "not checked" were not searched at all.
 - In round 4 an agent read the shadcn/ui, Tailwind, Radix Colors and Material documentation on neutrals, built the grey ramps in OKLCH with a script, and checked every pairing for WCAG contrast, including pure black and white. It darkened Tea teal and Jam slightly so they pass on Oat.
 - An agent built four options for round 10 from the board's Nearby, Category, shop page and sheet mocks, chose the lower-chroma tile values in OKLCH, moved Stone's hue and halved its chroma, and measured every pair with the WCAG 2 script. It lowered the tiles from L 0.37 to L 0.36 after Pistachio's muted text measured 4.44:1.
+- For round 11 an agent took screenshots of the dark Nearby, Category and shop pages in the web build, measured the tile, row and pin colours in OKLCH, proposed three directions with a script that solves each colour into the sRGB gamut and measures every WCAG 2 pair, and built them as mocks with the app's own stills on a transparent ground. It recommended one; I haven't chosen.
 Trade-offs:
 - Each palette has a secondary and tertiary colour that fail as text on white (Butter, Marmalade, Mint, Rose, Ochre). They are kept for fills, badges and status dots; text in those hues uses the darker Material 3 tone.
 - Showing every palette on the same two screens makes them easy to compare, and hides how each would change layout, type or illustration.
@@ -38,6 +41,7 @@ Every round stays on the same board, newest at the top, under a "Where it stands
 
 | Round | What it added |
 | --- | --- |
+| 11 | Three directions for the dark accents (jewel tones, an ink ground with luminous detail, a neutral card with colour in the art), against today's, each with hex and OKLCH values and measured pairs |
 | 10 | Dark mode accents and neutral on four screens: today's, the light accents unchanged, lower-chroma accents, and a cooler neutral at half of Stone's chroma |
 | 9 | Biscuit grey in light mode with more colour: the background at L 0.95 and at L 0.96, each with round 8's chroma, ×1.8 and ×2.5 |
 | 8 | Pastel parade with Indigo on Biscuit grey, chosen (decision 036), in light and dark without borders: surfaces with more lightness distance, and a less saturated Biscuit grey beside it. Dark mode now uses that less saturated column at 45% of the chroma, as Stone (decision 048) |
@@ -48,6 +52,10 @@ Every round stays on the same board, newest at the top, under a "Where it stands
 | 3 | Icon test 3 (brows and moustache) with a four or five-stripe moustache, in palettes A, C, F, I and J |
 | 2 | Ten more palettes of four or five colours, and six icon tests where the parade's awning becomes a terrier's beard |
 | 1 | Four concept directions, three palettes, applications on the v2 home, references |
+
+## Round 11
+
+The dark category colours still look muddy to me, so I asked an agent for ideas. It measured today's dark: the tiles are at C 0.034 to 0.045, Butter and Pistachio are 3.2 apart (ΔE OK × 100; about 2 is the smallest visible step), and the Butter and Peach map pins are 2.0 apart, so a shop page reads as khaki, brown or forest grey. Text is fine; the colour is the problem. The board shows three directions on the same three screens, each with its values and every pair measured, beside today's tokens in [Colour](../design-system/colour.md#shop-accents). The agent recommends B, the ink ground. I liked B and asked for four variations of its cards (tinted, neutral Stone, recessed with a hairline, translucent), with the tiles, details and art unchanged; the agent leans to the tinted one, B1. I had meant option 2 of round 10 (the light accents unchanged in dark), so the board also shows four variations of it with dark cards, chips and buttons on the pastel tiles; they leave the tile 12.91 to 13.46:1 from the background, and the agent recommends the deep tone of each tile's own hue. The B variations stay as explored. Nothing is chosen yet.
 
 ## Round 10
 

@@ -1,4 +1,4 @@
-# Type scale
+# Typography
 
 A type scale built from Apple's text styles, with the matching Material 3 roles, and tests of fonts from Fontshare on it: four alone, display fonts paired with a body font, and a third round where a display font appears only on the splash, the get-started screen, the home title and widget titles. Each test ends in the same conversation screen, which is where the shopper reads the most. The fonts load from a private folder and don't ship with the public repo; without them the canvas falls back to the system font.
 

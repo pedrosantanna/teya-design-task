@@ -18,8 +18,16 @@
       "$description": "Secondary text"
     },
     "mutedForegroundOnTile": {
+      "$value": "{color.stone.305}",
+      "$description": "Secondary text and icons straight on an accent tile (the shop page's facts, the Category header's count, section footnotes): Muted foreground in light; muted ink, Stone 305, in dark, where the tile is the light pastel (8.84:1 or more)"
+    },
+    "mutedForegroundOnTileCard": {
       "$value": "{color.stone.880}",
-      "$description": "Secondary text and chevrons on a row card on an accent tile: Muted foreground in light; Stone 880 in dark, 5.5:1 or more on every cardOnTile (Stone 840 was 4.7:1, Stone 740 3.35:1)"
+      "$description": "Secondary text and chevrons inside a card, row, chip or tonal button on an accent tile: Muted foreground in light; Stone 880 in dark, 6.29:1 or more on every cardOnTile and 4.83:1 on chipOnCard"
+    },
+    "foregroundOnTile": {
+      "$value": "{color.stone.150}",
+      "$description": "Text and icons straight on an accent tile: Foreground in light; ink, Stone 150, in dark, where the tile is the light pastel (12.91:1 or more). Text inside a card on the tile stays Foreground"
     },
     "foreground": {
       "$value": "{color.stone.985}"
@@ -30,6 +38,14 @@
     },
     "onPrimary": {
       "$value": "{color.black}"
+    },
+    "primaryOnTile": {
+      "$value": "{color.indigo.800}",
+      "$description": "The filled button (Ask) and links on an accent tile: Primary in light; Indigo 800 in dark too, 5.77:1 or more on every tile (Indigo 300 is 1.17 to 1.22:1)"
+    },
+    "onPrimaryOnTile": {
+      "$value": "{color.white}",
+      "$description": "Text and icons on primaryOnTile: white, 8.75:1"
     },
     "tint": {
       "$value": "{color.indigo.300}",
@@ -44,8 +60,8 @@
       "$description": "A selected filter chip on a sheet, a Card section or the shop page card in dark: Indigo 850, 1.5:1 from the sheet, with onChipSelected text (tags.md)"
     },
     "chipSelectedOnTile": {
-      "$value": "{color.indigo.950}",
-      "$description": "A selected filter chip on a shop's accent tile in dark (the Category screen): Indigo 950, 1.4 to 1.5:1 from the tiles (tags.md)"
+      "$value": "{color.indigo.800}",
+      "$description": "A selected filter chip on a shop's accent tile in dark (the Category screen): Indigo 800, the same as primaryOnTile, with white text (onPrimaryOnTile, 8.75:1); 5.77:1 or more from the tiles (tags.md)"
     },
     "tag": {
       "fill": {
@@ -174,16 +190,20 @@
       "$description": "Check icon on Ready, Paid and Collected (colour.md)"
     },
     "successOnTile": {
-      "$value": "{color.stone.985}",
-      "$description": "The Open word on an accent tile (the shop page's status line, the Category rows): Foreground in dark, because Success is 4.5:1 or less on the tinted row cards"
+      "$value": "{color.pistachio.800}",
+      "$description": "The Open word straight on an accent tile (the shop page's status line): Pistachio 800 in both modes, since the dark tile is the light pastel (6.17:1 or more). Inside a card on the tile the word takes Success"
     },
     "warningOnTile": {
-      "$value": "{color.stone.985}",
-      "$description": "The Closes soon word on an accent tile: Warning 800 in light (700 is 4.30:1 on Peach), Foreground in dark"
+      "$value": "{color.butter.800}",
+      "$description": "The Closes soon word straight on an accent tile: Butter 800 in both modes (6.36:1 or more). Inside a card on the tile the word takes Warning"
     },
     "border": {
       "$value": "{color.stone.360}",
       "$description": "A card on a busy area, text fields"
+    },
+    "borderOnTile": {
+      "$value": "{color.biscuit.860}",
+      "$description": "The hairline under a nav bar filled with an accent tile: light mode's Border in both modes, since the tile is the same pastel (round 18); Stone 360 drew a near-black line on it"
     },
     "separator": {
       "$value": "{color.stone.320}",
@@ -201,106 +221,138 @@
       "accent": {
         "peach": {
           "wash": {
-            "$value": "{color.peach.washDark}",
+            "$value": "{color.peach.100}",
             "$description": "The light stripes of the awning band on the placeholder tile"
           },
           "tile": {
-            "$value": "{color.peach.tileDark}",
-            "$description": "Placeholder tile, category card, the shop page header, the receipt header"
+            "$value": "{color.peach.tile}",
+            "$description": "Placeholder tile, category card, the shop page header, the receipt header: the light pastel in both modes (round 18, option 2 variation 4), 12.91 to 13.46:1 from the dark Background"
           },
           "ink": {
-            "$value": "{color.peach.inkDark}",
+            "$value": "{color.peach.800}",
             "$description": "Initials and the dark awning stripes on the tile"
           },
           "cardOnTile": {
             "$value": "{color.peach.cardOnTileDark}",
-            "$description": "Rows on this accent's tile (the Category screen): a tinted card lighter than the tile, so rows don't read as holes (decision 050)"
+            "$description": "Rows and cards on this accent's tile (the shop page's sections, the review and summary cards, the Category rows): in dark a deep tint of the tile's hue with light text, 5.88 to 5.99:1 from the tile"
+          },
+          "chipOnCard": {
+            "$value": "{color.peach.chipOnCardDark}",
+            "$description": "Chips on a card on this accent's tile (What they sell, the rating tags): tag.fillOnRow in light; in dark the card a step lighter, 1.30 to 1.32:1 from it"
+          },
+          "tonal": {
+            "$value": "{color.peach.cardOnTileDark}",
+            "$description": "Tonal buttons (Call, Directions), unselected chips and the glass Back on this accent's tile, at state.tonalOnTile: white at 55% in light; in dark the solid cardOnTile with light text"
           },
           "detail": {
-            "$value": "{color.peach.inkDark}",
-            "$description": "Small accents on the neutral shop page: the band on the card, the chips and the map pin. Pastel in both modes: small areas in the light tone are fine on dark (Material dark theme)"
+            "$value": "{color.peach.tile}",
+            "$description": "The map pin and the walking route: the tile's pastel in both modes"
           },
           "onDetail": {
-            "$value": "{color.peach.tileDark}",
-            "$description": "Text and marks on Detail"
+            "$value": "{color.stone.150}",
+            "$description": "The pin's dot and outline on Detail: the accent's 800 in light, ink (Stone 150) in dark, 12.91:1 or more"
           }
         },
         "pistachio": {
           "wash": {
-            "$value": "{color.pistachio.washDark}",
+            "$value": "{color.pistachio.100}",
             "$description": "The light stripes of the awning band on the placeholder tile"
           },
           "tile": {
-            "$value": "{color.pistachio.tileDark}",
-            "$description": "Placeholder tile, category card, the shop page header, the receipt header"
+            "$value": "{color.pistachio.tile}",
+            "$description": "Placeholder tile, category card, the shop page header, the receipt header: the light pastel in both modes (round 18, option 2 variation 4), 12.91 to 13.46:1 from the dark Background"
           },
           "ink": {
-            "$value": "{color.pistachio.inkDark}",
+            "$value": "{color.pistachio.800}",
             "$description": "Initials and the dark awning stripes on the tile"
           },
           "cardOnTile": {
             "$value": "{color.pistachio.cardOnTileDark}",
-            "$description": "Rows on this accent's tile (the Category screen): a tinted card lighter than the tile, so rows don't read as holes (decision 050)"
+            "$description": "Rows and cards on this accent's tile (the shop page's sections, the review and summary cards, the Category rows): in dark a deep tint of the tile's hue with light text, 5.88 to 5.99:1 from the tile"
+          },
+          "chipOnCard": {
+            "$value": "{color.pistachio.chipOnCardDark}",
+            "$description": "Chips on a card on this accent's tile (What they sell, the rating tags): tag.fillOnRow in light; in dark the card a step lighter, 1.30 to 1.32:1 from it"
+          },
+          "tonal": {
+            "$value": "{color.pistachio.cardOnTileDark}",
+            "$description": "Tonal buttons (Call, Directions), unselected chips and the glass Back on this accent's tile, at state.tonalOnTile: white at 55% in light; in dark the solid cardOnTile with light text"
           },
           "detail": {
-            "$value": "{color.pistachio.inkDark}",
-            "$description": "Small accents on the neutral shop page: the band on the card, the chips and the map pin. Pastel in both modes: small areas in the light tone are fine on dark (Material dark theme)"
+            "$value": "{color.pistachio.tile}",
+            "$description": "The map pin and the walking route: the tile's pastel in both modes"
           },
           "onDetail": {
-            "$value": "{color.pistachio.tileDark}",
-            "$description": "Text and marks on Detail"
+            "$value": "{color.stone.150}",
+            "$description": "The pin's dot and outline on Detail: the accent's 800 in light, ink (Stone 150) in dark, 12.91:1 or more"
           }
         },
         "butter": {
           "wash": {
-            "$value": "{color.butter.washDark}",
+            "$value": "{color.butter.100}",
             "$description": "The light stripes of the awning band on the placeholder tile"
           },
           "tile": {
-            "$value": "{color.butter.tileDark}",
-            "$description": "Placeholder tile, category card, the shop page header, the receipt header"
+            "$value": "{color.butter.tile}",
+            "$description": "Placeholder tile, category card, the shop page header, the receipt header: the light pastel in both modes (round 18, option 2 variation 4), 12.91 to 13.46:1 from the dark Background"
           },
           "ink": {
-            "$value": "{color.butter.inkDark}",
+            "$value": "{color.butter.800}",
             "$description": "Initials and the dark awning stripes on the tile"
           },
           "cardOnTile": {
             "$value": "{color.butter.cardOnTileDark}",
-            "$description": "Rows on this accent's tile (the Category screen): a tinted card lighter than the tile, so rows don't read as holes (decision 050)"
+            "$description": "Rows and cards on this accent's tile (the shop page's sections, the review and summary cards, the Category rows): in dark a deep tint of the tile's hue with light text, 5.88 to 5.99:1 from the tile"
+          },
+          "chipOnCard": {
+            "$value": "{color.butter.chipOnCardDark}",
+            "$description": "Chips on a card on this accent's tile (What they sell, the rating tags): tag.fillOnRow in light; in dark the card a step lighter, 1.30 to 1.32:1 from it"
+          },
+          "tonal": {
+            "$value": "{color.butter.cardOnTileDark}",
+            "$description": "Tonal buttons (Call, Directions), unselected chips and the glass Back on this accent's tile, at state.tonalOnTile: white at 55% in light; in dark the solid cardOnTile with light text"
           },
           "detail": {
-            "$value": "{color.butter.inkDark}",
-            "$description": "Small accents on the neutral shop page: the band on the card, the chips and the map pin. Pastel in both modes: small areas in the light tone are fine on dark (Material dark theme)"
+            "$value": "{color.butter.tile}",
+            "$description": "The map pin and the walking route: the tile's pastel in both modes"
           },
           "onDetail": {
-            "$value": "{color.butter.tileDark}",
-            "$description": "Text and marks on Detail"
+            "$value": "{color.stone.150}",
+            "$description": "The pin's dot and outline on Detail: the accent's 800 in light, ink (Stone 150) in dark, 12.91:1 or more"
           }
         },
         "lavender": {
           "wash": {
-            "$value": "{color.lavender.washDark}",
+            "$value": "{color.lavender.100}",
             "$description": "The light stripes of the awning band on the placeholder tile"
           },
           "tile": {
-            "$value": "{color.lavender.tileDark}",
-            "$description": "Placeholder tile, category card, the shop page header, the receipt header"
+            "$value": "{color.lavender.tile}",
+            "$description": "Placeholder tile, category card, the shop page header, the receipt header: the light pastel in both modes (round 18, option 2 variation 4), 12.91 to 13.46:1 from the dark Background"
           },
           "ink": {
-            "$value": "{color.lavender.inkDark}",
+            "$value": "{color.lavender.800}",
             "$description": "Initials and the dark awning stripes on the tile"
           },
           "cardOnTile": {
             "$value": "{color.lavender.cardOnTileDark}",
-            "$description": "Rows on this accent's tile (the Category screen): a tinted card lighter than the tile, so rows don't read as holes (decision 050)"
+            "$description": "Rows and cards on this accent's tile (the shop page's sections, the review and summary cards, the Category rows): in dark a deep tint of the tile's hue with light text, 5.88 to 5.99:1 from the tile"
+          },
+          "chipOnCard": {
+            "$value": "{color.lavender.chipOnCardDark}",
+            "$description": "Chips on a card on this accent's tile (What they sell, the rating tags): tag.fillOnRow in light; in dark the card a step lighter, 1.30 to 1.32:1 from it"
+          },
+          "tonal": {
+            "$value": "{color.lavender.cardOnTileDark}",
+            "$description": "Tonal buttons (Call, Directions), unselected chips and the glass Back on this accent's tile, at state.tonalOnTile: white at 55% in light; in dark the solid cardOnTile with light text"
           },
           "detail": {
-            "$value": "{color.lavender.inkDark}",
-            "$description": "Small accents on the neutral shop page: the band on the card, the chips and the map pin. Pastel in both modes: small areas in the light tone are fine on dark (Material dark theme)"
+            "$value": "{color.lavender.tile}",
+            "$description": "The map pin and the walking route: the tile's pastel in both modes"
           },
           "onDetail": {
-            "$value": "{color.lavender.tileDark}",
-            "$description": "Text and marks on Detail"
+            "$value": "{color.stone.150}",
+            "$description": "The pin's dot and outline on Detail: the accent's 800 in light, ink (Stone 150) in dark, 12.91:1 or more"
           }
         }
       }
@@ -387,10 +439,6 @@
         "$description": "Page 3, a deeper green than the Pistachio dark tile, which read as olive on a full screen; text 11.5:1"
       }
     },
-    "tonalOnTile": {
-      "$value": "{color.white}",
-      "$description": "Tonal buttons on a shop's accent tile (the shop page's actions), at state.tonalOnTile (colour.md, Shop accents)"
-    },
     "chipOn": {
       "$value": "{color.indigo.300}",
       "$description": "A selected filter chip's text and edge, on a Card fill: Indigo 800 in light, Indigo 300 in dark (tags.md)"
@@ -462,8 +510,8 @@
       "$description": "Opacity of the black pill the carousel's dots sit in, over the scrim: 20% (round 12; the critique asked for about 12%, which measured 2.5 to 2.8:1 for the white dots on a pale photo; 30% read as a dark lozenge)"
     },
     "tonalOnTile": {
-      "$value": 0.06,
-      "$description": "Dark: white at 6% over the tile, 1.19 to 1.20:1 on it (Muted was 1.08 to 1.20:1 and read as a dirty patch)"
+      "$value": 1,
+      "$description": "Dark: the per-accent tonal colour (the solid cardOnTile) at full opacity (round 18, option 2 variation 4)"
     },
     "sheetScrim": {
       "$value": 0.48,

@@ -4,8 +4,8 @@ import { ActivityIndicator, Platform, Pressable, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { useGround } from '../../internal/ground';
-import { cornerCurve, withAlpha, type AppTheme } from '../../theme';
+import { OnTileSurface, useGround, useOnGround, useTileAccent } from '../../internal/ground';
+import { cornerCurve, withAlpha, type ColorName, type ShopAccentName } from '../../theme';
 import { Text } from '../Text/Text';
 
 export type ButtonRole = 'filled' | 'tonal' | 'plain' | 'destructive' | 'inverse' | 'quiet';
@@ -31,19 +31,19 @@ export type ButtonProps = {
   testID?: string;
 };
 
-function contentColor(theme: AppTheme, role: ButtonRole): string {
+function contentColor(role: ButtonRole): ColorName {
   switch (role) {
     case 'filled':
-      return theme.color.onPrimary;
+      return 'onPrimary';
     case 'destructive':
-      return theme.color.destructive;
+      return 'destructive';
     case 'tonal':
     case 'quiet':
-      return theme.color.foreground;
+      return 'foreground';
     case 'inverse':
-      return theme.color.background;
+      return 'background';
     default:
-      return theme.color.tint;
+      return 'tint';
   }
 }
 
@@ -62,9 +62,17 @@ export function Button({
   const scale = useSharedValue(1);
   const layer = useSharedValue(0);
   const inactive = disabled || loading;
-  // On a shop's accent tile a tonal button is a white overlay that keeps the shop's hue (colour.md, Shop accents).
-  const onTile = useGround() === 'tile' && role === 'tonal' && !disabled;
-  const color = disabled ? theme.color.foreground : contentColor(theme, role);
+  // On a shop's accent tile a tonal button takes the accent's tonal colour (colour.md, Shop accents): a white overlay that
+  // keeps the shop's hue in light, the solid dark card with light text in dark (round 18). The filled button takes
+  // primaryOnTile (Indigo 800 with white in both modes: Indigo 300 is 1.2:1 on the pastel tile).
+  const ground = useGround();
+  const tile = useTileAccent();
+  const onTile = ground === 'tile' && role === 'tonal' && !disabled;
+  const filledOnTile = ground === 'tile' && role === 'filled' && !disabled;
+  const name = disabled ? 'foreground' : contentColor(role);
+  const mapped = useOnGround(name);
+  // The tonal button's content sits on its own surface, so it keeps its colour; anything else on a tile reads on the tile.
+  const color = theme.color[onTile ? name : mapped];
   const labelVariant = size === 'large' ? 'headline' : 'subheadlineStrong';
 
   styles.useVariants({ role, size, disabled, withIcon: !!icon && !loading });
@@ -101,9 +109,10 @@ export function Button({
         onPress={onPress}
         onPressIn={pressIn}
         onPressOut={pressOut}
-        style={[styles.button, onTile && styles.onTile, webSlop as object | undefined]}
+        style={[styles.button, onTile && styles.onTile(tile), filledOnTile && styles.filledOnTile, webSlop as object | undefined]}
       >
         <Animated.View pointerEvents="none" style={[styles.layer, { backgroundColor: color }, layerStyle]} />
+        <OnTileSurface painted={onTile}>
         {loading ? (
           <ActivityIndicator color={color} accessibilityElementsHidden />
         ) : (
@@ -122,6 +131,7 @@ export function Button({
             </Text>
           </View>
         )}
+        </OnTileSurface>
       </Pressable>
     </Animated.View>
   );
@@ -190,7 +200,8 @@ const styles = StyleSheet.create((theme) => ({
       { role: 'tonal', disabled: true, styles: { backgroundColor: withAlpha(theme.color.foreground, theme.state.disabledContainer) } },
     ],
   },
-  onTile: { backgroundColor: withAlpha(theme.color.tonalOnTile, theme.state.tonalOnTile) },
+  onTile: (accent?: ShopAccentName) => ({ backgroundColor: withAlpha(accent ? theme.color.shop.accent[accent].tonal : theme.color.muted, theme.state.tonalOnTile) }),
+  filledOnTile: { backgroundColor: theme.color.primaryOnTile },
   layer: {
     ...StyleSheet.absoluteFillObject,
   },

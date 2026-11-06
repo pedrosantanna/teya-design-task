@@ -214,6 +214,7 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, shopId, route
       <NavBar
         title={name}
         mode="reveal"
+        overMap
         revealAt={revealAt}
         fill={accent ? { accent } : 'background'}
         leading="back"

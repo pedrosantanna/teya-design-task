@@ -180,8 +180,8 @@ const tmp = path.join(tmpdir(), `ill-video-${process.pid}`);
 mkdirSync(tmp, { recursive: true });
 const SCALE = 'scale=out_color_matrix=bt709:out_range=tv';
 const TAGS = ['-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-color_range', 'tv'];
-const groundPng = async (rgb, px, file) => {
-  await sharp({ create: { width: px, height: px, channels: 3, background: { r: rgb[0], g: rgb[1], b: rgb[2] } } }).png().toFile(file);
+const groundPng = async (rgb, px, file, pxH = px) => {
+  await sharp({ create: { width: px, height: pxH, channels: 3, background: { r: rgb[0], g: rgb[1], b: rgb[2] } } }).png().toFile(file);
   return file;
 };
 // What a player shows for a flat ground after H.264: encode a 16 px square, decode it with the tags honoured.
@@ -219,12 +219,16 @@ const hasFfmpeg = (() => { try { sh('ffmpeg', ['-version']); return true; } catc
 // levels off the token, so each clip showed as a box on its ground (visual sweep, round 16).
 async function videos(dir, d, meta, outDir, srgb = true) {
   const t = await tuneGround(meta.ground);
-  const png = await groundPng(t.input, meta.px, path.join(tmp, `ground-${meta.px}-${t.input.join('-')}.png`));
+  // The ground is the frame's size: a bleed window is taller than wide (meta.pxH), and the overlay takes its size.
+  const pxH = meta.pxH ?? meta.px;
+  const png = await groundPng(t.input, meta.px, path.join(tmp, `ground-${meta.px}x${pxH}-${t.input.join('-')}.png`), pxH);
   const out = [];
   const graph = `[0]format=gbrp[bg];[1]format=rgba[fg];[bg][fg]overlay=shortest=1:format=gbrp,format=rgb24,${SCALE},format=yuv420p`;
   const input = ['-v', 'error', '-y', '-loop', '1', '-framerate', String(meta.fps), '-i', png, '-framerate', String(meta.fps), '-i', path.join(dir, 'frame-%04d.png'), '-filter_complex', graph];
   const codecs = {
-    mp4: ['-c:v', 'libx264', '-preset', 'veryslow', '-crf', String(m.welcome?.items?.find((i) => meta.set === 'welcome' && i.name === meta.name)?.crf ?? V.crf), '-movflags', '+faststart'],
+    // One keyframe per clip (-g: its frame count): a loop only ever seeks to its first frame, and x264's default
+    // of a keyframe every 250 frames cost the 14 s Getting started loop a second full picture.
+    mp4: ['-c:v', 'libx264', '-preset', 'veryslow', '-crf', String(m.welcome?.items?.find((i) => meta.set === 'welcome' && i.name === meta.name)?.crf ?? V.crf), '-g', String(Math.max(1, meta.frames)), '-movflags', '+faststart'],
   };
   for (const ext of V.formats) {
     const file = path.join(outDir, `${d}.${ext}`);

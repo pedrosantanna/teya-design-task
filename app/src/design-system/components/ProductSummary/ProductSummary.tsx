@@ -5,7 +5,7 @@ import { memo } from 'react';
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
-import { Ground } from '../../internal/ground';
+import { Ground, useTileAccent } from '../../internal/ground';
 import { ListBlock, ListGroup, ListRow } from '../ListRow/ListRow';
 import { Chip } from '../Tag/Tag';
 import { Text } from '../Text/Text';
@@ -24,10 +24,12 @@ export type ProductSummaryProps = {
 };
 
 export const ProductSummary = memo(function ProductSummary({ categories, priceLine, asked = [], onCategory, shop }: ProductSummaryProps) {
+  // On a tile the block is a card in cardOnTile, and its chips take the accent's chipOnCard (a tileCard ground).
+  const tile = useTileAccent();
   return (
     <ListGroup shadow>
       <ListBlock position={asked.length > 0 ? 'first' : 'only'}>
-        <Ground value="card">
+        <Ground value={tile ? 'tileCard' : 'card'} accent={tile}>
           <View style={styles.chips} accessibilityLabel={shop ? `Ask ${shop} about` : 'Categories'}>
             {categories.map((c) => (
               <Chip key={c} kind="suggestion" label={c} onPress={onCategory} />

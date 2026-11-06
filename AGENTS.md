@@ -13,6 +13,7 @@ The shopper app is a native mobile app, iOS first: follow Apple's Human Interfac
 ## Layout and commands
 
 - `docs/` — all content, in Markdown. Single source of truth. `docs/discover/` holds the discovery research.
+- The sidebar has two blocks (decision 065): "The case" (`docs/case/`, a reader-first synthesis that links to evidence) and "AI harness and context" (every other page, grouped as intent, research, product specs, flows and states, design system, explorations, verification and logs). Sections carry a `block` in `site/nav.json`. When a page in the harness changes in a way the case summarises, update the case page too.
 - `site/` — the docs site that renders `docs/` (shadcn/ui-style neutral design, sidebar IA). `site/nav.json` defines the sidebar; every page is an entry pointing at a `docs/*.md` file. Adding a page = write the Markdown + add it to `nav.json`.
 - Preview: `python3 site/serve.py` → http://localhost:4173 (serves the repo root and wraps `site/index.html` in the document skeleton the artifact platform adds at publish time, so `index.html` itself has no `<html>/<head>/<body>`).
 - Publishing: the site is published as a Claude Artifact with `site/index.html` as the page and `site/nav.json`, `site/canvas.js`, `site/canvas.css`, every `docs/**/*.md`, every canvas `docs/**/*.html` and the persona images as supporting files under their repo paths.

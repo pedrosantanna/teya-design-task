@@ -31,7 +31,7 @@ import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-cont
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { scheduleOnRN } from 'react-native-worklets';
 
-import { Button, ILLUSTRATION_SIZES, Illustration, MarkIntro, PageDots, Text, screenMargin, type IllustrationProps } from '@/design-system';
+import { Button, ILLUSTRATION_HEIGHTS, ILLUSTRATION_SIZES, Illustration, MarkIntro, PageDots, Text, screenMargin, type IllustrationProps } from '@/design-system';
 
 type Page = { title: string; body: string; art: IllustrationProps['name']; size?: IllustrationProps['size'] };
 
@@ -54,13 +54,16 @@ const PAGES: Page[] = [
   },
 ];
 
-// The crossroads is drawn about twice the screen's width and the screen crops it at the sides (illustrations.md,
-// Getting started). Its entry clip (the blocks drop in one after another) plays when its page is shown, then the
-// last frame holds. The clip is an MP4 on the page's ground, so while the pages move the screen swaps it for the
-// transparent still. On top of it the screen drifts the art slowly from side to side on the UI thread, which costs
-// no bytes. The window the art is rendered in has PAN pt to spare on each side, and it is scaled up where the screen
-// is wider than that (the web preview). With Reduce Motion the art stays still and does not drift.
+// The crossroads is drawn about two and a half times the screen's width and the screen crops it at the sides
+// (illustrations.md, Getting started). The city is at rest from the start: no entry, only its idle loop, in which
+// people walk from shop to shop (14 s, seamless). The window's bottom sits on the headline and its last 120 pt fade into
+// the ground; it is 600 pt tall with clear ground above the roofs, so on a short screen it runs off the top edge and on
+// a tall one the roofs have room, and no crop line shows either way. The clip is an MP4 on the page's ground, so while
+// the pages move the screen swaps it for the transparent still. On top of it the screen drifts the art slowly from side
+// to side on the UI thread, which costs no bytes. The window has PAN pt to spare on each side, and it is scaled up
+// from its bottom edge where the screen is wider than that (the web preview). With Reduce Motion the art stays still.
 const ART_WIDTH = ILLUSTRATION_SIZES.bleed;
+const ART_HEIGHT = ILLUSTRATION_HEIGHTS.bleed ?? ART_WIDTH;
 const DRIFT_MS = 9000;
 
 function BleedHero({ play, width, offset }: { play: boolean; width: number; offset: SharedValue<number> }) {
@@ -84,8 +87,8 @@ function BleedHero({ play, width, offset }: { play: boolean; width: number; offs
     transform: [{ translateX: x.get() }, { scale }],
   }));
   return (
-    <Animated.View style={[styles.bleed, style]}>
-      <Illustration name="crossroads" size="bleed" ground="welcome" play={play ? 'entry-then-idle' : 'still'} />
+    <Animated.View style={[styles.bleed(width), style]}>
+      <Illustration name="crossroads" size="bleed" ground="welcome" play={play ? 'idle' : 'still'} />
     </Animated.View>
   );
 }
@@ -164,9 +167,8 @@ export default function Welcome() {
       {revealed && frozenAt == null ? (
         <View style={styles.fill}>
           <Animated.View style={[StyleSheet.absoluteFill, groundStyle]} />
-          <View style={styles.top(insets.top, margin)}>
-            {last ? null : <Button label="Skip" role="quiet" size="compact" onPress={toLocation} />}
-          </View>
+          {/* The pages fill the screen up to its top edge, under the status bar and Skip, so the crossroads can run
+              off the top instead of being cut where the pages would start; each page keeps that band clear. */}
           <Animated.ScrollView
             ref={scroller}
             horizontal
@@ -179,9 +181,9 @@ export default function Welcome() {
             accessibilityLabel="Getting started"
           >
             {PAGES.map((p, i) => (
-              <View key={p.title} style={styles.page(width, pagesHeight, margin)}>
-                <View style={styles.hero}>
-                  {/* Only the page in view plays its entry; the others hold their still. Still under Reduce Motion. */}
+              <View key={p.title} style={styles.page(width, pagesHeight, margin, insets.top + theme.hit.min)}>
+                <View style={p.size === 'bleed' ? styles.heroBleed : styles.hero}>
+                  {/* Only the page in view plays; the others hold their still. Still under Reduce Motion. */}
                   {p.size === 'bleed' ? (
                     <BleedHero play={i === page && !inTransit} width={width} offset={offset} />
                   ) : (
@@ -200,6 +202,9 @@ export default function Welcome() {
               </View>
             ))}
           </Animated.ScrollView>
+          <View style={styles.top(insets.top, margin)}>
+            {last ? null : <Button label="Skip" role="quiet" size="compact" onPress={toLocation} />}
+          </View>
           <View style={styles.bottom(insets.bottom, margin)}>
             <PageDots count={PAGES.length} current={page} />
             <Button label={last ? 'Get started' : 'Continue'} role="inverse" onPress={next} />
@@ -219,7 +224,12 @@ export default function Welcome() {
 const styles = StyleSheet.create((theme) => ({
   screen: { flex: 1, backgroundColor: theme.color.background },
   fill: { flex: 1 },
+  // Over the pages, at the top of the screen.
   top: (top: number, margin: number) => ({
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
     paddingTop: top,
     paddingHorizontal: margin,
     minHeight: top + theme.hit.min,
@@ -227,9 +237,10 @@ const styles = StyleSheet.create((theme) => ({
     justifyContent: 'flex-end',
     alignItems: 'center',
   }),
-  page: (width: number, height: number, margin: number) => ({
+  page: (width: number, height: number, margin: number, top: number) => ({
     width,
     height: height || undefined,
+    paddingTop: top,
     paddingHorizontal: margin,
     gap: theme.gap.section,
   }),
@@ -241,8 +252,16 @@ const styles = StyleSheet.create((theme) => ({
     justifyContent: 'flex-end',
     paddingBottom: theme.gap.section,
   },
-  // Wider than the page, so the sides run off the screen; the scroll view crops them.
-  bleed: { transformOrigin: 'bottom' },
+  // The crossroads' window ends on the headline (its last stretch is the fade), so it reaches down through the gap.
+  heroBleed: { flex: 1 },
+  // Wider and taller than its space: centred across the page, the sides run off the screen, the top may too.
+  bleed: (width: number) => ({
+    position: 'absolute',
+    bottom: -theme.gap.section,
+    left: (width - ART_WIDTH) / 2 - screenMargin(theme, width),
+    height: ART_HEIGHT,
+    transformOrigin: 'bottom',
+  }),
   copy: { gap: theme.gap.block, paddingBottom: theme.gap.section },
   bottom: (bottom: number, margin: number) => ({
     paddingHorizontal: margin,

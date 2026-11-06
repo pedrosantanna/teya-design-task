@@ -530,5 +530,23 @@ Everything that arrives in a chat comes in one way: it fades in and rises 8 pt, 
 
 **Why:** messages and statuses appeared and swapped in one frame and read as broken. The scooter said delivery while Snuffle was searching; I chose the mark over a small crossroads, which turns to noise at that size. Two shops with one filled and one grey Buy looked like a recommendation the app hadn't made. The photo under "Snuffle" crowded the title, and a fixed photo of someone else's eclipse glasses may not match what the shopper means.
 
+**Updated:** the partial offer reads "Buy only 1" (the number the shop has), since "Buy 1 of 2" read like a step in a sequence.
+
+**Updated:** the rise is 16 pt, since 8 pt read as no motion on the phone (AI log, step 78).
+
+## 065 · The docs open with the case; the process becomes the harness's documentation
+**2026-11-06 · Decided**
+
+The site has two blocks. The first, "The case", is a short narrative for someone reviewing the take-home: an overview with the conclusion first, the position, the product, the prototype, the key decisions, viability and scale, how I worked, and validation and next steps. Each page is a synthesis of what already exists and links to its evidence. The second block, "AI harness and context", keeps every page that existed, with its content unchanged, regrouped as the documentation of the working system: intent, research, product specs, flows and states, design system, explorations, verification and logs.
+
+**Why:** the Discover, Define, Develop and Deliver order made a reader walk the process before finding the position, and buried the decisions in a log of more than 60 entries. Grouping the existing pages by what they are, closer to spec-driven documentation, keeps them as the record the case points to. Nothing was deleted, and no existing page changed.
+
+## 066 · In dark mode, shop tiles keep their light pastels and the cards on them turn dark
+**2026-11-06 · Decided**
+
+A shop's accent tile is the same pastel in light and dark (Butter #E7D48F, Peach #FEC5B2, Pistachio #C5DEAE), with ink text straight on it, and the cards on it in dark are a translucent dark of the tile's hue as solid values (#514A31, #5A453E, #454E3D) with light text; tonal buttons and Back take that card, and Ask on a tile is Indigo 800. The map pin is the pastel with an ink dot, and the route is the pastel cased in the page ground. Dark reuses the light category stills, since the tiles are now the same. This is option 2, variation 4, on the Identity board (round 11), and it replaces the dark tiles of decisions 051 and 058.
+
+**Why:** the dark tiles had a chroma of 0.03 to 0.05 and read as khaki, brown-red and forest grey, only 3 to 6 apart in hue, where 2 is the smallest visible step. I compared three directions and their variations on the board and chose the light pastels with dark cards. The cost is glare: the tile is 12.9 to 13.5:1 from the dark page, so the shop page, the Category screen and the category cards are bright blocks in a dark UI.
+
 ## Still open
 

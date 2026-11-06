@@ -9,7 +9,7 @@ import { StyleSheet, useUnistyles, withUnistyles } from 'react-native-unistyles'
 
 import { useReducedMotion } from 'react-native-reanimated';
 
-import { DesignSystemRoot, NotificationBanner, installWebTransitions, nameScreenArea, type TransitionKind } from '@/design-system';
+import { DesignSystemRoot, NotificationBanner, installWebTransitions, nameScreenArea, useStatusToneOverride, type TransitionKind } from '@/design-system';
 import { DebugGestureArea, DebugPanel, DebugToggle, useDebugShortcut } from '@/debug';
 import { DeviceFrame, useFrameLayout } from '@/device-frame';
 import { hrefFor, openActiveChat, readUrlState, sim, startThemeSync, useAppStore, useSim } from '@/store';
@@ -53,6 +53,7 @@ const RootView = withUnistyles(GestureHandlerRootView);
 export default function RootLayout() {
   const { theme } = useUnistyles();
   const { framed, device, docked } = useFrameLayout();
+  const statusTone = useStatusToneOverride();
   useDebugShortcut();
   useOpenStepFromUrl();
   const pathname = usePathname();
@@ -71,7 +72,7 @@ export default function RootLayout() {
 
   const app = (
     <DesignSystemRoot>
-      <StatusBar style={theme.scheme === 'dark' ? 'light' : 'dark'} />
+      <StatusBar style={statusTone ? (statusTone === 'dark' ? 'dark' : 'light') : theme.scheme === 'dark' ? 'light' : 'dark'} animated />
       {/* A plain object: react-navigation's views don't take Unistyles styles on the web, so a theme switch has to re-render it. */}
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: onboarded ? theme.color.background : theme.color.splash.ground } }}>
         {/* The shop page and Requests zoom from their source (ZoomSource): the native zoom on iOS, a fade under the

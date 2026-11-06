@@ -4,7 +4,7 @@ import { Pressable, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { useTileAccent } from '../../internal/ground';
+import { OnTileSurface, useTileAccent } from '../../internal/ground';
 import { IMAGE_OVER, photoSource, type PhotoSource } from '../../internal/media';
 import { spoken } from '../../internal/PressableCard';
 import { ShopPlaceholder } from '../../internal/ShopPlaceholder';
@@ -36,8 +36,8 @@ export const ShopRow = memo(function ShopRow({ id, name, facts, logo, image, acc
   const press = usePress();
   const grouped = theme.platform === 'ios';
   // On an accent tile (the Category screen) the row takes that accent's cardOnTile: white in light, and in dark a
-  // tinted card lighter than the tile (decision 050), where Card read as a hole. Its secondary text takes
-  // mutedForegroundOnTile, which keeps 4.5:1 on the lighter card.
+  // deep tint of the tile's hue with light text (round 18). Its secondary text takes mutedForegroundOnTile, which
+  // inside the row (OnTileSurface) reads as mutedForegroundOnTileCard.
   const tile = useTileAccent();
   const fill = grouped ? (tile ? theme.color.shop.accent[tile].cardOnTile : theme.color.card) : 'transparent';
   const secondary = tile ? 'mutedForegroundOnTile' : 'mutedForeground';
@@ -53,6 +53,7 @@ export const ShopRow = memo(function ShopRow({ id, name, facts, logo, image, acc
       onPressOut={press.onPressOut}
       style={styles.row(grouped, position, fill)}
     >
+      <OnTileSurface painted={grouped}>
       <Animated.View pointerEvents="none" style={[styles.layer, press.layerStyle]} />
       {photo != null ? (
         <View style={[styles.logo, styles.thumb]}>
@@ -75,6 +76,7 @@ export const ShopRow = memo(function ShopRow({ id, name, facts, logo, image, acc
         </View>
         <Icon icon="chevron" size="body" color={secondary} />
       </View>
+      </OnTileSurface>
     </Pressable>
   );
 });

@@ -2,6 +2,7 @@
 // sets the store at start, and "Copy link" builds the same query from the store. The platform is `os`, not
 // `platform`: Expo's dev server treats `?platform=` as a manifest request. `platform` is still read, for links
 // made before the rename.
+import * as Linking from 'expo-linking';
 import { Platform } from 'react-native';
 
 import { stepById, type StepId } from './journey';
@@ -23,11 +24,21 @@ function oneOf<T extends string>(value: string | null, options: readonly T[]): T
   return value && (options as readonly string[]).includes(value) ? (value as T) : undefined;
 }
 
-/** The query string the page was opened with (web only; empty elsewhere). */
+/** The query string the page was opened with. */
 let initialSearch: string | undefined;
 
 export function startParams(): URLSearchParams {
-  if (Platform.OS !== 'web' || typeof window === 'undefined') return new URLSearchParams();
+  // Native: the same query on the link that opened the app (`snuffle://?step=answers&scheme=dark`), so a build
+  // on a device or simulator opens on any step without a debugger.
+  if (Platform.OS !== 'web') {
+    if (initialSearch === undefined) {
+      const link = Linking.getLinkingURL();
+      const at = link?.indexOf('?') ?? -1;
+      initialSearch = link && at >= 0 ? link.slice(at, link.includes('#') ? link.indexOf('#') : undefined) : '';
+    }
+    return new URLSearchParams(initialSearch);
+  }
+  if (typeof window === 'undefined') return new URLSearchParams();
   // Read once: the router rewrites the URL as the shopper moves between screens.
   initialSearch ??= window.location.search;
   return new URLSearchParams(initialSearch);

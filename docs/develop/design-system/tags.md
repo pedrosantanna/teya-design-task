@@ -53,7 +53,7 @@ In dark, a chip or pill is a tonal fill one clear step from its ground, with no 
 | Chat | `tag.fill` | Stone 320 #323334 | 1.55:1 on #0B0C0D | Foreground 12.14:1 | `chipSelected`, 1.39:1 |
 | Sheet | `tag.fillRaised` | Stone 360 #3D3E3F | 1.58:1 on #1C1D1E | Foreground 10.28:1 | `chipSelectedRaised`, Indigo 850 #2E2B8F, 1.49:1 |
 | Card section | `tag.fillRaised` | Stone 360 #3D3E3F | 1.41:1 on Card #252627 | Foreground 10.28:1 | `chipSelectedRaised`, 1.49:1 |
-| Tile (the Category screen, the shop page card) | `shop.accent.<hue>.cardOnTile` | #624D46, #4C5745, #595242, #535062 | 1.40 to 1.48:1 on the tile | Foreground 7.30 to 7.54:1 | `chipSelectedOnTile`, Indigo 950 #1A194F, 1.41 to 1.51:1 |
+| Tile (the Category screen, the shop page card) | `shop.accent.<hue>.cardOnTile` | #624D46, #4C5745, #595242, #535062 | 1.40 to 1.48:1 on the tile | Foreground 7.30 to 7.54:1 | `chipSelectedOnTile`, Indigo 800 #3D35B8 with white text (8.75:1), 5.77:1 or more on the tile |
 | Row inside the shop page card (its chips and rating tags) | `tag.fillOnRow` (`tag.fillRaised`) | Stone 360 #3D3E3F | 1.36 to 1.41:1 on the four `cardOnTile` rows | Foreground 10.28:1; the count in Stone 880 7.74:1 | None |
 
 The Peach row #624D46 is the tightest pair on the shop page, at 1.36:1 for its chip, under the 1.4:1 that a chip on a tinted row needed when it took the accent's `tile`. I chose one neutral chip for the whole card over the tinted ones, so 1.36:1 is the floor and it is above the 1.15:1 minimum for a surface. `shop.accent.<hue>.container`, which read 1.09 to 1.15:1 on the row card, is deleted: no component reads it.

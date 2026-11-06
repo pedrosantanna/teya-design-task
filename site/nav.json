@@ -1,7 +1,77 @@
 {
   "sections": [
     {
-      "title": "Overview",
+      "title": "The case",
+      "pt": "O case",
+      "block": {
+        "title": "The case",
+        "pt": "O case",
+        "sub": "The walkthrough, in order",
+        "sub_pt": "O percurso, na ordem"
+      },
+      "items": [
+        {
+          "id": "case-overview",
+          "title": "Overview",
+          "src": "docs/case/index.md",
+          "pt": "Visão geral"
+        },
+        {
+          "id": "case-position",
+          "title": "Problem and position",
+          "src": "docs/case/position.md",
+          "pt": "Problema e posição"
+        },
+        {
+          "id": "case-product",
+          "title": "The product",
+          "src": "docs/case/product.md",
+          "pt": "O produto"
+        },
+        {
+          "id": "prototype",
+          "title": "Prototype",
+          "pt": "Protótipo",
+          "src": "docs/deliver/prototype.md",
+          "embed": "app-web/index.html"
+        },
+        {
+          "id": "case-decisions",
+          "title": "Key decisions",
+          "src": "docs/case/decisions.md",
+          "pt": "Decisões principais"
+        },
+        {
+          "id": "case-how-i-worked",
+          "title": "How I built it with AI",
+          "src": "docs/case/how-i-worked.md",
+          "pt": "Como construí com IA"
+        },
+        {
+          "id": "case-viability",
+          "title": "Viability",
+          "src": "docs/case/viability.md",
+          "pt": "Viabilidade"
+        },
+        {
+          "id": "case-next",
+          "title": "What's next",
+          "src": "docs/case/next.md",
+          "pt": "Próximos passos"
+        }
+      ]
+    },
+    {
+      "title": "Intent",
+      "pt": "Intenção",
+      "block": {
+        "title": "AI harness and context",
+        "pt": "Harness de IA e contexto",
+        "sub": "Research, specs, design system and logs",
+        "sub_pt": "Pesquisa, specs, design system e registros",
+        "short": "AI harness",
+        "short_pt": "Harness de IA"
+      },
       "items": [
         {
           "id": "introduction",
@@ -15,11 +85,19 @@
           "src": "docs/brief.md",
           "pt": "O brief"
         }
-      ],
-      "pt": "Visão geral"
+      ]
     },
     {
-      "title": "Discover",
+      "title": "Research",
+      "pt": "Pesquisa",
+      "block": {
+        "title": "AI harness and context",
+        "pt": "Harness de IA e contexto",
+        "sub": "Research, specs, design system and logs",
+        "sub_pt": "Pesquisa, specs, design system e registros",
+        "short": "AI harness",
+        "short_pt": "Harness de IA"
+      },
       "items": [
         {
           "id": "discover",
@@ -111,12 +189,19 @@
           "src": "docs/discover/sources.md",
           "pt": "Fontes"
         }
-      ],
-      "pt": "Discover"
+      ]
     },
     {
-      "title": "Define",
-      "pt": "Define",
+      "title": "Product specs",
+      "pt": "Specs do produto",
+      "block": {
+        "title": "AI harness and context",
+        "pt": "Harness de IA e contexto",
+        "sub": "Research, specs, design system and logs",
+        "sub_pt": "Pesquisa, specs, design system e registros",
+        "short": "AI harness",
+        "short_pt": "Harness de IA"
+      },
       "items": [
         {
           "id": "define",
@@ -131,6 +216,18 @@
           "pt": "Proposta de valor"
         },
         {
+          "id": "hypotheses",
+          "title": "Hypotheses",
+          "src": "docs/define/hypotheses.md",
+          "pt": "Hipóteses"
+        },
+        {
+          "id": "blueprint",
+          "title": "Service blueprint",
+          "src": "docs/define/blueprint.md",
+          "pt": "Blueprint de serviço"
+        },
+        {
           "id": "revenue",
           "title": "Revenue",
           "src": "docs/define/revenue.md",
@@ -143,17 +240,25 @@
           "pt": "Estimativa de receita"
         },
         {
-          "id": "blueprint",
-          "title": "Service blueprint",
-          "src": "docs/define/blueprint.md",
-          "pt": "Blueprint de serviço"
-        },
-        {
-          "id": "hypotheses",
-          "title": "Hypotheses",
-          "src": "docs/define/hypotheses.md",
-          "pt": "Hipóteses"
-        },
+          "id": "next-step",
+          "title": "Next step",
+          "src": "docs/define/next-step.md",
+          "pt": "Próximo passo"
+        }
+      ]
+    },
+    {
+      "title": "Flows and states",
+      "pt": "Fluxos e estados",
+      "block": {
+        "title": "AI harness and context",
+        "pt": "Harness de IA e contexto",
+        "sub": "Research, specs, design system and logs",
+        "sub_pt": "Pesquisa, specs, design system e registros",
+        "short": "AI harness",
+        "short_pt": "Harness de IA"
+      },
+      "items": [
         {
           "id": "app-flow",
           "title": "App flow",
@@ -237,18 +342,131 @@
           "src": "docs/develop/ideation/agent-flow.md",
           "canvas": "docs/develop/ideation/agent-flow.html",
           "pt": "Fluxo do agente"
-        },
-        {
-          "id": "next-step",
-          "title": "Next step",
-          "src": "docs/define/next-step.md",
-          "pt": "Próximo passo"
         }
       ]
     },
     {
-      "title": "Develop",
-      "pt": "Develop",
+      "title": "Design system",
+      "pt": "Design system",
+      "block": {
+        "title": "AI harness and context",
+        "pt": "Harness de IA e contexto",
+        "sub": "Research, specs, design system and logs",
+        "sub_pt": "Pesquisa, specs, design system e registros",
+        "short": "AI harness",
+        "short_pt": "Harness de IA"
+      },
+      "items": [
+        {
+          "id": "design-system",
+          "title": "Overview",
+          "src": "docs/develop/design-system/index.md",
+          "pt": "Visão geral"
+        },
+        {
+          "id": "conceptual-model",
+          "title": "Conceptual model",
+          "src": "docs/develop/design-system/conceptual-model.md",
+          "pt": "Modelo conceitual"
+        },
+        {
+          "id": "components",
+          "title": "Components",
+          "src": "docs/develop/design-system/components.md",
+          "pt": "Componentes"
+        },
+        {
+          "id": "states",
+          "title": "States and elevation",
+          "src": "docs/develop/design-system/states.md",
+          "pt": "Estados e elevação"
+        },
+        {
+          "id": "platforms",
+          "title": "iOS and Android",
+          "src": "docs/develop/design-system/platforms.md",
+          "pt": "iOS e Android"
+        },
+        {
+          "id": "content",
+          "title": "Content and voice",
+          "src": "docs/develop/design-system/content.md",
+          "pt": "Conteúdo e voz"
+        },
+        {
+          "id": "typography",
+          "title": "Typography",
+          "src": "docs/develop/design-system/typography.md",
+          "pt": "Tipografia"
+        },
+        {
+          "id": "colour",
+          "title": "Colour",
+          "src": "docs/develop/design-system/colour.md",
+          "pt": "Cor"
+        },
+        {
+          "id": "shape",
+          "title": "Shape and materials",
+          "src": "docs/develop/design-system/shape.md",
+          "pt": "Forma e materiais"
+        },
+        {
+          "id": "motion",
+          "title": "Motion",
+          "src": "docs/develop/design-system/motion.md",
+          "pt": "Movimento"
+        },
+        {
+          "id": "spacing",
+          "title": "Spacing and layout",
+          "src": "docs/develop/design-system/spacing.md",
+          "pt": "Espaçamento e layout"
+        },
+        {
+          "id": "tags",
+          "title": "Tags",
+          "src": "docs/develop/design-system/tags.md",
+          "pt": "Tags"
+        },
+        {
+          "id": "imagery",
+          "title": "Imagery and icons",
+          "src": "docs/develop/design-system/imagery.md",
+          "pt": "Imagens e ícones"
+        },
+        {
+          "id": "illustrations",
+          "title": "Illustrations",
+          "pt": "Ilustrações",
+          "src": "docs/develop/design-system/illustrations.md",
+          "viewer": "site/illustrations/index.js"
+        },
+        {
+          "id": "screen-review",
+          "title": "Screen review",
+          "src": "docs/develop/design-system/screen-review.md",
+          "pt": "Revisão de telas"
+        },
+        {
+          "id": "mark",
+          "title": "Mark",
+          "pt": "Marca",
+          "src": "docs/develop/design-system/mark.md"
+        }
+      ]
+    },
+    {
+      "title": "Explorations",
+      "pt": "Explorações",
+      "block": {
+        "title": "AI harness and context",
+        "pt": "Harness de IA e contexto",
+        "sub": "Research, specs, design system and logs",
+        "sub_pt": "Pesquisa, specs, design system e registros",
+        "short": "AI harness",
+        "short_pt": "Harness de IA"
+      },
       "items": [
         {
           "id": "develop",
@@ -257,154 +475,46 @@
           "pt": "Visão geral"
         },
         {
-          "title": "Ideation",
-          "pt": "Ideação",
-          "children": [
-            {
-              "id": "tab-placement",
-              "title": "Tab placement",
-              "src": "docs/develop/ideation/tab-placement.md",
-              "canvas": "docs/develop/ideation/tab-placement.html",
-              "pt": "Posição das abas"
-            },
-            {
-              "id": "brand",
-              "title": "Brand",
-              "pt": "Brand",
-              "src": "docs/develop/ideation/brand.md"
-            },
-            {
-              "id": "identity",
-              "title": "Identity",
-              "src": "docs/develop/ideation/identity.md",
-              "canvas": "docs/develop/ideation/identity.html",
-              "pt": "Identidade"
-            },
-            {
-              "id": "type-scale",
-              "title": "Type scale",
-              "src": "docs/develop/ideation/type-scale.md",
-              "canvas": "docs/develop/ideation/type-scale.html",
-              "pt": "Escala tipográfica"
-            }
-          ]
+          "id": "tab-placement",
+          "title": "Tab placement",
+          "src": "docs/develop/ideation/tab-placement.md",
+          "canvas": "docs/develop/ideation/tab-placement.html",
+          "pt": "Posição das abas"
         },
         {
-          "title": "Design system",
-          "pt": "Design system",
-          "children": [
-            {
-              "id": "design-system",
-              "title": "Overview",
-              "src": "docs/develop/design-system/index.md",
-              "pt": "Visão geral"
-            },
-            {
-              "id": "conceptual-model",
-              "title": "Conceptual model",
-              "src": "docs/develop/design-system/conceptual-model.md",
-              "pt": "Modelo conceitual"
-            },
-            {
-              "id": "components",
-              "title": "Components",
-              "src": "docs/develop/design-system/components.md",
-              "pt": "Componentes"
-            },
-            {
-              "id": "states",
-              "title": "States and elevation",
-              "src": "docs/develop/design-system/states.md",
-              "pt": "Estados e elevação"
-            },
-            {
-              "id": "platforms",
-              "title": "iOS and Android",
-              "src": "docs/develop/design-system/platforms.md",
-              "pt": "iOS e Android"
-            },
-            {
-              "id": "content",
-              "title": "Content and voice",
-              "src": "docs/develop/design-system/content.md",
-              "pt": "Conteúdo e voz"
-            },
-            {
-              "id": "typography",
-              "title": "Typography",
-              "src": "docs/develop/design-system/typography.md",
-              "pt": "Tipografia"
-            },
-            {
-              "id": "colour",
-              "title": "Colour",
-              "src": "docs/develop/design-system/colour.md",
-              "pt": "Cor"
-            },
-            {
-              "id": "shape",
-              "title": "Shape and materials",
-              "src": "docs/develop/design-system/shape.md",
-              "pt": "Forma e materiais"
-            },
-            {
-              "id": "motion",
-              "title": "Motion",
-              "src": "docs/develop/design-system/motion.md",
-              "pt": "Movimento"
-            },
-            {
-              "id": "spacing",
-              "title": "Spacing and layout",
-              "src": "docs/develop/design-system/spacing.md",
-              "pt": "Espaçamento e layout"
-            },
-            {
-              "id": "tags",
-              "title": "Tags",
-              "src": "docs/develop/design-system/tags.md",
-              "pt": "Tags"
-            },
-            {
-              "id": "imagery",
-              "title": "Imagery and icons",
-              "src": "docs/develop/design-system/imagery.md",
-              "pt": "Imagens e ícones"
-            },
-            {
-              "id": "illustrations",
-              "title": "Illustrations",
-              "pt": "Ilustrações",
-              "src": "docs/develop/design-system/illustrations.md",
-              "viewer": "site/illustrations/index.js"
-            },
-            {
-              "id": "screen-review",
-              "title": "Screen review",
-              "src": "docs/develop/design-system/screen-review.md",
-              "pt": "Revisão de telas"
-            },
-            {
-              "id": "mark",
-              "title": "Mark",
-              "pt": "Marca",
-              "src": "docs/develop/design-system/mark.md"
-            }
-          ]
+          "id": "brand",
+          "title": "Brand",
+          "pt": "Brand",
+          "src": "docs/develop/ideation/brand.md"
+        },
+        {
+          "id": "identity",
+          "title": "Identity",
+          "src": "docs/develop/ideation/identity.md",
+          "canvas": "docs/develop/ideation/identity.html",
+          "pt": "Identidade"
+        },
+        {
+          "id": "type-scale",
+          "title": "Typography",
+          "src": "docs/develop/ideation/type-scale.md",
+          "canvas": "docs/develop/ideation/type-scale.html",
+          "pt": "Tipografia"
         }
       ]
     },
     {
-      "title": "Deliver",
-      "pt": "Deliver",
+      "title": "Verification",
+      "pt": "Verificação",
+      "block": {
+        "title": "AI harness and context",
+        "pt": "Harness de IA e contexto",
+        "sub": "Research, specs, design system and logs",
+        "sub_pt": "Pesquisa, specs, design system e registros",
+        "short": "AI harness",
+        "short_pt": "Harness de IA"
+      },
       "items": [
-        {
-          "id": "prototype",
-          "title": "Prototype",
-          "pt": "Protótipo",
-          "src": "docs/deliver/prototype.md",
-          "embed": "app-web/index.html"
-        },
         {
           "id": "synthetic-users",
           "title": "Synthetic test users",
@@ -414,7 +524,16 @@
       ]
     },
     {
-      "title": "Process",
+      "title": "Logs",
+      "pt": "Registros",
+      "block": {
+        "title": "AI harness and context",
+        "pt": "Harness de IA e contexto",
+        "sub": "Research, specs, design system and logs",
+        "sub_pt": "Pesquisa, specs, design system e registros",
+        "short": "AI harness",
+        "short_pt": "Harness de IA"
+      },
       "items": [
         {
           "id": "decision-log",
@@ -428,8 +547,7 @@
           "src": "docs/process/ai-log.md",
           "pt": "Como a IA foi usada"
         }
-      ],
-      "pt": "Processo"
+      ]
     }
   ]
 }

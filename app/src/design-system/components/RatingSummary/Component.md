@@ -18,7 +18,7 @@ The top of Ratings on the shop page: the share who would go back as a large figu
 
 - Thumbs, never stars. "People" for who rated: only someone who bought through Snuffle can rate.
 - No percentage below 5 ratings. Percentages are rounded down (35 of 38 is 92%).
-- Tags are chips that only inform: `tag.fillOnRow` with no edge and no tile colour (the Background on the white row in light, `tag.fillRaised` in dark), `size.chip` high, no truncation (a tag that does not fit is left out), the tag in Footnote with its count in Muted foreground, `space.2` apart, wrapping. They sit a level down from the row and are never a control's fill, and nothing happens on tap.
+- Tags are chips that only inform: the accent's `chipOnCard` on a tile's card (the Background in light, the card a step lighter in dark) and `tag.fillOnRow` elsewhere, with no edge and no tile colour, `size.chip` high, no truncation (a tag that does not fit is left out), the tag in Footnote with its count in Muted foreground, `space.2` apart, wrapping. They sit a level down from the row and are never a control's fill, and nothing happens on tap.
 
 ## Type
 

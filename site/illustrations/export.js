@@ -6,6 +6,7 @@ import lamppost from './lamppost.js';
 import bench from './bench.js';
 import flowers from './flowers.js';
 import hardware from './hardware.js';
+import { shoppers as crossroadsShoppers, SHOPPERS_T } from './crossroads.js';
 
 // A lamp column behind the left end of a bench: an empty street, for "not found".
 const quietstreet = {
@@ -44,9 +45,12 @@ export const loops = {
       });
     },
   },
-  shop: { seconds: TAU / 2.2 },        // the awning's scallops sway at 2.2 rad/s
+  shop: { seconds: TAU / 2.2 },
+  // The Getting started hero: the city at rest, the shoppers' loop (crossroads.js, shoppers).
+  'crossroads-shoppers': { seconds: SHOPPERS_T },        // the awning's scallops sway at 2.2 rad/s
   'shop-plain': { seconds: TAU / 2.2 },
 };
 
 // flowers and hardware are new objects for the category cards; add them to index.js to show them in the gallery.
-export const defs = [quietstreet, flowers, hardware];
+// crossroadsShoppers is the crossroads with the Getting started hero's walking loop.
+export const defs = [quietstreet, flowers, hardware, crossroadsShoppers];

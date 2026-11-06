@@ -6,7 +6,8 @@ import type { ReactNode } from 'react';
 import { Platform, View, type StyleProp, type ViewStyle } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { cornerCurve, withAlpha } from '../theme';
+import { cornerCurve, withAlpha, type ShopAccentName } from '../theme';
+import { useTileAccent } from './ground';
 import { useWebGlass } from './glass';
 import { ThemedBlurView, ThemedGlassView } from './media';
 import { useReduceTransparency } from './useReduceTransparency';
@@ -22,8 +23,9 @@ export type FloatingSurfaceProps = {
   tint?: boolean;
   /** The soft drop shadow under a floating control; off for a sheet or a large panel. */
   shadow?: boolean;
-  /** What the control sits on. tile: a shop's or category's accent tile, where the glass takes the tonalOnTile
-   *  overlay instead of the Card fill, so it lifts off the tile instead of reading as a dent. muted: a solid Muted
+  /** What the control sits on. tile: a shop's or category's accent tile, where the glass takes the accent's tonal colour
+   *  at state.tonalOnTile instead of the Card fill, so it lifts off the tile instead of reading as a dent; where that
+   *  is opaque (dark, round 18) the control is a solid circle in the accent's dark card. muted: a solid Muted
    *  circle (the header buttons on a dark sheet, where glass over the Sheet colour all but vanishes). */
   surface?: 'glass' | 'tile' | 'muted';
   style?: StyleProp<ViewStyle>;
@@ -44,8 +46,11 @@ export function FloatingSurface({ children, interactive = false, tint = false, s
   'use no memo';
   const { theme } = useUnistyles();
   const glass = useGlass();
-  const onTile = withAlpha(theme.color.tonalOnTile, theme.state.tonalOnTile);
+  const accent = useTileAccent();
+  const onTile = withAlpha(accent ? theme.color.shop.accent[accent].tonal : theme.color.card, theme.state.tonalOnTile);
   const webGlass = useWebGlass(shadow, surface === 'tile' ? onTile : undefined, surface === 'tile');
+  // An opaque tonal colour is a surface, not glass.
+  const solidTile = surface === 'tile' && theme.state.tonalOnTile >= 1;
 
   if (tint) {
     // Confirm: the tinted control. Liquid Glass takes the tint natively; elsewhere it is a solid Tint fill.
@@ -69,16 +74,16 @@ export function FloatingSurface({ children, interactive = false, tint = false, s
       </View>
     );
   }
-  if (surface === 'muted') {
+  if (surface === 'muted' || solidTile) {
     return (
-      <View pointerEvents={pointerEvents} style={[styles.base, styles.muted, style]}>
+      <View pointerEvents={pointerEvents} style={[styles.base, solidTile ? styles.tile(accent) : styles.muted, style]}>
         {children}
       </View>
     );
   }
   if (!glass) {
     return (
-      <View pointerEvents={pointerEvents} style={[styles.base, surface === 'tile' ? styles.tile : styles.solid, style]}>
+      <View pointerEvents={pointerEvents} style={[styles.base, surface === 'tile' ? styles.tile(accent) : styles.solid, style]}>
         {children}
       </View>
     );
@@ -120,7 +125,7 @@ const styles = StyleSheet.create((theme) => ({
   // Android and Reduce Transparency: the tonal surface container. The palette has no surface-container role; Card is the nearest.
   solid: { backgroundColor: theme.color.card },
   muted: { backgroundColor: theme.color.muted },
-  tile: { backgroundColor: withAlpha(theme.color.tonalOnTile, theme.state.tonalOnTile) },
+  tile: (accent?: ShopAccentName) => ({ backgroundColor: withAlpha(accent ? theme.color.shop.accent[accent].tonal : theme.color.card, theme.state.tonalOnTile) }),
   tint: { backgroundColor: theme.color.tint },
   // The fill is set again through the ref with the backdrop filter; this keeps it before the first paint.
   webGlass: { backgroundColor: theme.color.card },

@@ -176,8 +176,11 @@
     }
   ],
   "categories": {
-    "$comment": "Nearby's category cards (CategoryCard, size.category 120 \u00d7 164): opaque stills on the kind's tile token, color.shop.accent.<ramp>.tile from src/design-system/tokens (shade toward the ramp's 800 in light, 900 in dark; craft-pass-2). encode.mjs fails when a still's corner pixel differs from that token. Ramps follow KIND_ACCENT in store/kinds.ts. The object sits in the top 120 \u00d7 120; the label goes below. fit frames every object to the same optical area: the box around the object and its cast shadow covers area of the 120 \u00d7 120 square (capped at maxWidth of its width and maxHeight of its height), the object stands on a baseline base pt from the top, the box is centred across, and clear pt stay free on the right and under the shadow. No animation in lists.",
+    "$comment": "Nearby's category cards (CategoryCard, size.category 120 \u00d7 164): opaque stills on the kind's tile token, color.shop.accent.<ramp>.tile from src/design-system/tokens (shade toward the ramp's 800; craft-pass-2). The tile is the same pastel in light and dark (round 18, option 2 variation 4), so only light stills are rendered (schemes) and dark reuses them (categoryIllustration). encode.mjs fails when a still's corner pixel differs from that token. Ramps follow KIND_ACCENT in store/kinds.ts. The object sits in the top 120 \u00d7 120; the label goes below. fit frames every object to the same optical area: the box around the object and its cast shadow covers area of the 120 \u00d7 120 square (capped at maxWidth of its width and maxHeight of its height), the object stands on a baseline base pt from the top, the box is centred across, and clear pt stay free on the right and under the shadow. No animation in lists.",
     "size": 120,
+    "schemes": [
+      "light"
+    ],
     "scales": [
       2,
       3
@@ -311,7 +314,7 @@
     "opaque": false
   },
   "welcome": {
-    "$comment": "Getting started: each page has its own brand ground (light: Indigo 300, the Peach tile, the Pistachio tile; dark: Indigo 900, the Peach and Pistachio dark tiles; colour.md, Getting started) and its object is rendered for it at the welcome size (312 pt, 1.3 times the earlier 240). Transparent, not opaque: the page ground crossfades while the shopper drags, so an opaque square would show its edge mid-swipe. Shade and shadow mix toward the ground's own 900 step (Indigo 900, Peach 900, Pistachio 900), and toward near-black on Indigo 900. Stills at @2x and @3x; clips at @2x (animationScalesBySize.welcome). The crossroads entry (the largest scene) has its own animationKB of 480: at 312 pt it needs a lossy clip at half the frame rate (up to 490 KB). The crossroads on page 1 is a bleed hero (item.frame): a 460 \u00d7 420 pt window onto the scene drawn about 2.2 times the screen width (fitCenter 1.9 of 460 pt), centred with focusX and focusY on the busiest corner, so the screen crops it at the sides. Its entry is an MP4 (video: true, crf 23) on the page's ground, since the WebP was 1.4 MB per scheme; the screen shows the transparent still while the pages move. fit ({ center, clear }) centres each object's bounding box, without its shadow, in its image. fadeBottom dissolves the window's lower edge over that many pt (smootherstep, with a progressive blur) so no hard cut shows above the copy.",
+    "$comment": "Getting started: each page has its own brand ground (light: Indigo 300, the Peach tile, the Pistachio tile; dark: Indigo 900, the Peach and Pistachio dark tiles; colour.md, Getting started) and its object is rendered for it at the welcome size (312 pt, 1.3 times the earlier 240). Transparent, not opaque: the page ground crossfades while the shopper drags, so an opaque square would show its edge mid-swipe. Shade and shadow mix toward the ground's own 900 step (Indigo 900, Peach 900, Pistachio 900), and toward near-black on Indigo 900. Stills at @2x and @3x; clips at @2x (animationScalesBySize.welcome). The crossroads entry (the largest scene) has its own animationKB of 480: at 312 pt it needs a lossy clip at half the frame rate (up to 490 KB). The crossroads on page 1 is a bleed hero (item.frame): a 460 \u00d7 600 pt window onto the scene drawn about 2.3 times the screen width (fitCenter 2.0 of 460 pt), centred with focusX and focusY on the busiest corner with clear ground above the roofs, so the screen crops it at the sides and the window may run off the top. It has no entry: its object is crossroads-shoppers (the city at rest, walkers going from shop to shop) and its 14 s idle loop is an MP4 (video: true, crf 23) on the page's ground; the screen shows the transparent still while the pages move. fit ({ center, clear }) centres each object's bounding box, without its shadow, in its image. fadeBottom dissolves the window's lower edge over that many pt (smootherstep, with a progressive blur) so no hard cut shows above the copy.",
     "size": "welcome",
     "budgets": {
       "animationKB": 300,
@@ -320,10 +323,10 @@
     "items": [
       {
         "name": "crossroads",
-        "object": "crossroads",
+        "object": "crossroads-shoppers",
         "page": 1,
         "clips": [
-          "entry"
+          "idle"
         ],
         "light": {
           "ground": "#B5BFFF",
@@ -336,10 +339,10 @@
         },
         "size": "bleed",
         "frame": {
-          "fitCenter": 1.9,
-          "focusX": -0.03,
-          "focusY": 0.17,
-          "fadeBottom": 150
+          "fitCenter": 2.0,
+          "focusX": 0.0,
+          "focusY": 0.25,
+          "fadeBottom": 120
         },
         "stillKB": 400,
         "video": true,
@@ -386,6 +389,6 @@
   },
   "line": 1.4,
   "heights": {
-    "bleed": 420
+    "bleed": 600
   }
 }

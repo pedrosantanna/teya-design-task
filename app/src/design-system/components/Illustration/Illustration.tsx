@@ -30,7 +30,7 @@ export type IllustrationPlay = 'entry-then-idle' | 'idle' | 'still';
 
 export type IllustrationProps = {
   name: IllustrationName;
-  /** small 64, medium 88, large 120, hero 352 (the location ask), welcome 312 (Getting started), bleed 460 × 420 (a window onto the Getting started crossroads, wider than the screen so the screen crops it). */
+  /** small 64, medium 88, large 120, hero 352 (the location ask), welcome 312 (Getting started), bleed 460 × 600 (a window onto the Getting started crossroads, wider than the screen so the screen crops it). */
   size?: IllustrationSize;
   /** The surface it sits on; shading and shadow are baked for it. The light or dark file follows the theme.
    *  welcome: Getting started, where each object is rendered for its own page's Indigo ground. */
@@ -74,9 +74,10 @@ export function isCategoryId(id: string): id is CategoryId {
   return id in CATEGORY_ILLUSTRATIONS;
 }
 
-/** A category card's art (transparent, shaded for the category's colour) for the active scheme. */
+/** A category card's art (transparent, shaded for the category's colour) for the active scheme. The tile is the same
+ *  pastel in both modes (round 18), so dark reuses the light still when it has none of its own. */
 export function categoryIllustration(id: CategoryId, scheme: IllustrationScheme) {
-  return CATEGORY_ILLUSTRATIONS[id]?.[scheme];
+  return CATEGORY_ILLUSTRATIONS[id]?.[scheme] ?? CATEGORY_ILLUSTRATIONS[id]?.light;
 }
 
 type Phase = 'entry' | 'idle' | 'still';

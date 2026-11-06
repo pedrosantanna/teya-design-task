@@ -53,7 +53,7 @@ No escuro, um chip ou pílula é um preenchimento tonal um passo claro acima do 
 | Chat | `tag.fill` | Stone 320 #323334 | 1,55:1 sobre #0B0C0D | Foreground 12,14:1 | `chipSelected`, 1,39:1 |
 | Sheet | `tag.fillRaised` | Stone 360 #3D3E3F | 1,58:1 sobre #1C1D1E | Foreground 10,28:1 | `chipSelectedRaised`, Índigo 850 #2E2B8F, 1,49:1 |
 | Seção de Card | `tag.fillRaised` | Stone 360 #3D3E3F | 1,41:1 sobre Card #252627 | Foreground 10,28:1 | `chipSelectedRaised`, 1,49:1 |
-| Tile (a tela de categoria, o cartão da página da loja) | `shop.accent.<hue>.cardOnTile` | #624D46, #4C5745, #595242, #535062 | 1,40 a 1,48:1 sobre o tile | Foreground 7,30 a 7,54:1 | `chipSelectedOnTile`, Índigo 950 #1A194F, 1,41 a 1,51:1 |
+| Tile (a tela de categoria, o cartão da página da loja) | `shop.accent.<hue>.cardOnTile` | #624D46, #4C5745, #595242, #535062 | 1,40 a 1,48:1 sobre o tile | Foreground 7,30 a 7,54:1 | `chipSelectedOnTile`, Índigo 800 #3D35B8 com texto branco (8,75:1), 5,77:1 ou mais sobre o tile |
 | Linha dentro do cartão da página da loja (seus chips e tags de avaliação) | `tag.fillOnRow` (`tag.fillRaised`) | Stone 360 #3D3E3F | 1,36 a 1,41:1 sobre as quatro linhas `cardOnTile` | Foreground 10,28:1; a contagem em Stone 880 7,74:1 | Nenhum |
 
 A linha Pêssego #624D46 é o par mais apertado da página da loja, com 1,36:1 para o seu chip, abaixo dos 1,4:1 que um chip sobre uma linha tingida precisava quando usava o `tile` do destaque. Escolhi um chip neutro para o cartão inteiro em vez dos tingidos, então 1,36:1 é o piso, acima do mínimo de 1,15:1 para uma superfície. O `shop.accent.<hue>.container`, que dava 1,09 a 1,15:1 sobre o cartão de linha, foi apagado: nenhum componente o lê.

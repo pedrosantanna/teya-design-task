@@ -5,7 +5,7 @@ import { Pressable, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { useGround, useTileAccent, type GroundName } from '../../internal/ground';
+import { OnTileSurface, useGround, useTileAccent, type GroundName } from '../../internal/ground';
 import { spoken } from '../../internal/PressableCard';
 import { cardShadow } from '../../internal/shadow';
 import { usePress } from '../../internal/usePress';
@@ -75,8 +75,9 @@ export const ListRow = memo(function ListRow({
   const fill: ColorName = 'foreground';
   const ground = useGround();
   const tile = useTileAccent();
+  // On a tile the grouped row is a card in cardOnTile: its text takes the card's colours (light in dark), not the tile's ink.
   const content = (
-    <>
+    <OnTileSurface painted={grouped}>
       <Animated.View pointerEvents="none" style={[styles.layer, press.layerStyle]} />
       {icon ? (
         // The icon sits on the title's first line, so a two-line row doesn't centre it between lines (visual critique 3);
@@ -109,7 +110,7 @@ export const ListRow = memo(function ListRow({
           <View style={styles.check}>{selected ? <Icon icon={Tick02Icon} size="body" weight="strong" color="foreground" /> : null}</View>
         ) : null}
       </View>
-    </>
+    </OnTileSurface>
   );
   const label = accessibilityLabel ?? spoken(title, facts ? shopFactsLabel(facts) : detail, value);
   if (!onPress) {
@@ -176,7 +177,9 @@ export function ListBlock({ children, position = 'only', surface = 'card', acces
   const grouped = theme.platform === 'ios';
   return (
     <View accessibilityLabel={accessibilityLabel} style={[styles.row(grouped, position, false, surface, ground, tile), styles.block]}>
-      <View style={styles.blockInner(grouped && position !== 'last' && position !== 'only', ground, surface)}>{children}</View>
+      <View style={styles.blockInner(grouped && position !== 'last' && position !== 'only', ground, surface)}>
+        <OnTileSurface painted={grouped}>{children}</OnTileSurface>
+      </View>
     </View>
   );
 }

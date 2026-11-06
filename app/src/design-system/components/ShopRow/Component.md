@@ -18,7 +18,7 @@ A shop in a list: its photo (40, `radius.inner`), else its logo or monogram (40,
 
 iOS: an inset grouped list on Card, corners at `radius.card` on the first and last rows (a standalone grouped list, shape.md; `ListGroup corner="card"`), separators inset to the text, a chevron. Android: a Material list, no fill, no chevron.
 
-Inside `<Ground value="tile" accent>` (the Category screen) the fill is that accent's `shop.accent.*.cardOnTile`: white Card in light, and in dark a tinted card at OKLCH L 0.44, C 0.03 in the accent's hue, lighter than the tile (decision 050). The facts and the chevron take `mutedForegroundOnTile` there (Stone 840 in dark, 4.74:1 or more).
+Inside `<Ground value="tile" accent>` (the Category screen) the fill is that accent's `shop.accent.*.cardOnTile`: white Card in light, and in dark a deep tint of the pastel tile's hue with light text (round 18; 5.88 to 5.99:1 from the tile). The row's content is an `OnTileSurface` (on iOS, where the row is painted), so the facts and the chevron take `mutedForegroundOnTileCard` (Stone 880 in dark, 6.29:1 or more) and the Open word Success.
 
 ## Accessibility
 

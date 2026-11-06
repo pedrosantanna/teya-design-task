@@ -496,13 +496,25 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.3843,
-            0.302,
-            0.2745
+            0.3529,
+            0.2706,
+            0.2431
           ],
-          "hex": "#624D46"
+          "hex": "#5A453E"
         },
-        "$description": "Card on the dark tile: the round 10 row (OKLCH L 0.44) with its chroma raised 1.7 times so rows read as the tile's own hue, not grey (round 12); 1.40 to 1.48:1 from the tile"
+        "$description": "Card on the light tile in dark mode (round 18, option 2 variation 4): a solid stand-in for black at 90% over the tile, a dark tint of the tile's own hue at OKLCH L 0.41; 5.88 to 5.99:1 from the tile, Foreground 8.35:1 or more on it"
+      },
+      "chipOnCardDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4078,
+            0.3451,
+            0.3255
+          ],
+          "hex": "#685853"
+        },
+        "$description": "A chip on that card in dark mode: the card a step lighter (OKLCH L 0.47, less chroma), 1.30 to 1.32:1 from it, Foreground 6.42:1 or more on it"
       },
       "washDark": {
         "$value": {
@@ -669,13 +681,25 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.298,
-            0.3412,
-            0.2706
+            0.2706,
+            0.3059,
+            0.2392
           ],
-          "hex": "#4C5745"
+          "hex": "#454E3D"
         },
-        "$description": "Card on the dark tile: the round 10 row (OKLCH L 0.44) with its chroma raised 1.7 times so rows read as the tile's own hue, not grey (round 12); 1.40 to 1.48:1 from the tile"
+        "$description": "Card on the light tile in dark mode (round 18, option 2 variation 4): a solid stand-in for black at 90% over the tile, a dark tint of the tile's own hue at OKLCH L 0.41; 5.88 to 5.99:1 from the tile, Foreground 8.35:1 or more on it"
+      },
+      "chipOnCardDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3451,
+            0.3686,
+            0.3216
+          ],
+          "hex": "#585E52"
+        },
+        "$description": "A chip on that card in dark mode: the card a step lighter (OKLCH L 0.47, less chroma), 1.30 to 1.32:1 from it, Foreground 6.42:1 or more on it"
       },
       "washDark": {
         "$value": {
@@ -854,13 +878,25 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.349,
-            0.3216,
-            0.2588
+            0.3176,
+            0.2902,
+            0.1922
           ],
-          "hex": "#595242"
+          "hex": "#514A31"
         },
-        "$description": "Card on the dark tile: the round 10 row (OKLCH L 0.44) with its chroma raised 1.7 times so rows read as the tile's own hue, not grey (round 12); 1.40 to 1.48:1 from the tile"
+        "$description": "Card on the light tile in dark mode (round 18, option 2 variation 4): a solid stand-in for black at 90% over the tile, a dark tint of the tile's own hue at OKLCH L 0.41; 5.88 to 5.99:1 from the tile, Foreground 8.35:1 or more on it"
+      },
+      "chipOnCardDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3804,
+            0.3569,
+            0.2941
+          ],
+          "hex": "#615B4B"
+        },
+        "$description": "A chip on that card in dark mode: the card a step lighter (OKLCH L 0.47, less chroma), 1.30 to 1.32:1 from it, Foreground 6.42:1 or more on it"
       },
       "washDark": {
         "$value": {
@@ -1027,13 +1063,25 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.3255,
-            0.3137,
-            0.3843
+            0.2941,
+            0.2784,
+            0.3529
           ],
-          "hex": "#535062"
+          "hex": "#4B475A"
         },
-        "$description": "Card on the dark tile: the round 10 row (OKLCH L 0.44) with its chroma raised 1.7 times so rows read as the tile's own hue, not grey (round 12); 1.40 to 1.48:1 from the tile"
+        "$description": "Card on the light tile in dark mode (round 18, option 2 variation 4): a solid stand-in for black at 90% over the tile, a dark tint of the tile's own hue at OKLCH L 0.41; 5.88 to 5.99:1 from the tile, Foreground 8.35:1 or more on it"
+      },
+      "chipOnCardDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3608,
+            0.3529,
+            0.4
+          ],
+          "hex": "#5C5A66"
+        },
+        "$description": "A chip on that card in dark mode: the card a step lighter (OKLCH L 0.47, less chroma), 1.30 to 1.32:1 from it, Foreground 6.42:1 or more on it"
       },
       "washDark": {
         "$value": {
@@ -1175,6 +1223,18 @@
           "hex": "#252627"
         },
         "$description": "Biscuit 265 at 45% chroma, then hue 270 and half the chroma (round 10, option 4)"
+      },
+      "305": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1804,
+            0.1843,
+            0.1882
+          ],
+          "hex": "#2E2F30"
+        },
+        "$description": "Muted ink: secondary text and icons straight on a pastel accent tile in dark mode (round 18), 8.84:1 or more on every tile"
       },
       "320": {
         "$value": {

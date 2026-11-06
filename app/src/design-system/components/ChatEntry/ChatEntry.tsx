@@ -50,7 +50,7 @@ function NativeChatEntry({ children, animate = true, follows = false, leaves = t
   const entering = animate
     ? reduceMotion
       ? withSpringToken(new FadeIn(), theme.spring.fade)
-      : withSpringToken(new FadeInDown().withInitialValues({ opacity: 0, transform: [{ translateY: theme.space[2] }] }), theme.spring.smooth).delay(delay)
+      : withSpringToken(new FadeInDown().withInitialValues({ opacity: 0, transform: [{ translateY: theme.space[4] }] }), theme.spring.smooth).delay(delay)
     : undefined;
   const exiting = leaves ? withSpringToken(new FadeOut(), theme.spring.fade) : undefined;
   return (
@@ -74,7 +74,7 @@ function WebChatEntry({ children, animate = true, follows = false, style, access
     // Runs once, on mount.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const rise = reduceMotion ? 0 : theme.space[2];
+  const rise = reduceMotion ? 0 : theme.space[4];
   const motion = useAnimatedStyle(() => ({ opacity: shown.get(), transform: [{ translateY: -rise * (1 - shown.get()) }] }));
   return (
     <Animated.View style={[style, motion]} accessibilityLabel={accessibilityLabel}>

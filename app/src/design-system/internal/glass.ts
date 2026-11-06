@@ -12,7 +12,7 @@ type WebNode = { style: Record<string, string> } | null;
 /** A ref that turns a View into web glass. No-op on native. `shadow` adds the soft drop shadow.
  *  Values from components.md (Ask bar): Card at 55% under blur 20 and saturate 1.6, a 0.5 pt white highlight along
  *  the top edge at 60%, a 0.5 pt hairline (Foreground at 6% in light, Stone 360 in dark) and a 0 6 20 shadow at 10%.
- *  `fillOverride` replaces the Card fill (a control on a shop's tile takes the tonalOnTile overlay). `onTile` takes
+ *  `fillOverride` replaces the Card fill (a control on a shop's tile takes the accent's tonal colour at state.tonalOnTile). `onTile` takes
  *  the on-tile values of the scheme (shape.md, Glass recipe): light keeps the glass; dark drops the saturation to 1
  *  and the drop shadow, so Back matches the street chips on the tile. The hairline stays (decision 049). */
 export function useWebGlass(shadow = true, fillOverride?: string, onTile = false) {

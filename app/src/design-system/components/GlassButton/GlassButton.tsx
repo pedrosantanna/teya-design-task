@@ -8,9 +8,9 @@ import Animated from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { FloatingSurface } from '../../internal/FloatingSurface';
-import { useGround } from '../../internal/ground';
+import { OnTileSurface, useGround, useTileAccent } from '../../internal/ground';
 import { usePress } from '../../internal/usePress';
-import { withAlpha } from '../../theme';
+import { withAlpha, type ShopAccentName } from '../../theme';
 import { Icon, type PlatformIconName } from '../Icon/Icon';
 
 export type GlassButtonProps = {
@@ -32,14 +32,22 @@ export const GlassButton = memo(function GlassButton({ icon, accessibilityLabel,
   const { theme } = useUnistyles();
   const press = usePress();
   const android = theme.platform === 'android';
-  // On an accent tile (the Category screen), the tonalOnTile overlay, as the shop page's tonal actions; in a dark
+  // On an accent tile (the Category screen), the accent's tonal colour, as the shop page's tonal actions (white glass in
+  // light, the solid dark card in dark, round 18); in a dark
   // sheet's header, a solid Muted circle, since glass over the Sheet colour all but vanishes there.
   const ground = useGround();
+  const tile = useTileAccent();
   // Over the map (the shop page's Back) in dark, the same solid Muted circle with a Border edge: the glass is Card
   // there, and the dark map ground is Card too (1.0:1).
   const overMap = overMedia && theme.scheme === 'dark';
   const surface = ground === 'tile' ? 'tile' : (ground === 'sheet' || overMap) && theme.scheme === 'dark' ? 'muted' : 'glass';
-  const glyph = <Icon icon={icon} size="nav" weight="strong" color="foreground" />;
+  // On a tile the glyph sits on the button's own surface, not on the tile's pastel: it keeps Foreground. Android's plain
+  // bar button has no circle, so there it takes the tile's ink.
+  const glyph = (
+    <OnTileSurface painted={!android || overMedia}>
+      <Icon icon={icon} size="nav" weight="strong" color="foreground" />
+    </OnTileSurface>
+  );
   return (
     <Animated.View style={press.scaleStyle}>
       <Pressable
@@ -53,7 +61,7 @@ export const GlassButton = memo(function GlassButton({ icon, accessibilityLabel,
         style={styles.hit}
       >
         {android ? (
-          <View style={[styles.circle, overMedia && styles.tonal, overMedia && surface === 'tile' && styles.onTile]}>{glyph}</View>
+          <View style={[styles.circle, overMedia && styles.tonal, overMedia && surface === 'tile' && styles.onTile(tile)]}>{glyph}</View>
         ) : (
           <FloatingSurface interactive surface={surface} style={[styles.circle, edge && styles.edge, overMap && surface === 'muted' && styles.mapEdge]}>
             {glyph}
@@ -74,7 +82,7 @@ const styles = StyleSheet.create((theme) => ({
     justifyContent: 'center',
   },
   tonal: { backgroundColor: theme.color.card },
-  onTile: { backgroundColor: withAlpha(theme.color.tonalOnTile, theme.state.tonalOnTile) },
+  onTile: (accent?: ShopAccentName) => ({ backgroundColor: withAlpha(accent ? theme.color.shop.accent[accent].tonal : theme.color.card, theme.state.tonalOnTile) }),
   mapEdge: { borderWidth: StyleSheet.hairlineWidth, borderColor: theme.color.border },
   edge: { borderWidth: StyleSheet.hairlineWidth, borderColor: theme.color.chat.edge },
 }));

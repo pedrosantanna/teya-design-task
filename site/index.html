@@ -118,6 +118,16 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   font-size: 13px; font-weight: 600; padding: 0 8px 6px; color: var(--fg);
 }
 .nav-group.is-disabled .nav-group-title { color: var(--muted-fg); font-weight: 500; }
+/* The two blocks of the sidebar: the case first, then the harness's documentation. A block title sits above its
+   sections in the muted tone, and a rule separates the second block from the first. */
+.nav-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; padding: 3px; margin: 0 0 var(--s-4); border: 1px solid var(--border); border-radius: 10px; background: var(--muted); }
+.nav-tab { appearance: none; border: 0; border-radius: 7px; padding: 6px 8px; background: transparent; color: var(--muted-fg); font: 500 12.5px/1.25 var(--font-sans); cursor: pointer; text-align: center; }
+.nav-tab:hover { color: var(--fg); }
+.nav-tab[aria-selected="true"] { background: var(--bg); color: var(--fg); box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 0 0 1px var(--border); }
+.nav-tab:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
+.nav-area-sub { margin: 0 0 var(--s-3); padding: 0 8px; font-size: 12px; color: var(--muted-fg); }
+.nav-area-title { padding: var(--s-2) 8px var(--s-2); font-size: 12px; font-weight: 600; color: var(--muted-fg); border-top: 1px solid var(--border); }
+.nav-area-title:first-child { border-top: 0; padding-top: 0; }
 .badge { font-size: 12px; font-weight: 400; color: var(--muted-fg); }
 .nav-link {
   display: block; text-decoration: none; font-size: 13.5px; line-height: 1.4; color: var(--muted-fg);
@@ -524,6 +534,7 @@ i.m.unknown { opacity: .45; }
 
 <div class="shell">
   <nav class="sidebar" id="sidebar" aria-label="Documentation">
+    <div id="nav-tabs"></div>
     <input class="search" id="search" type="search" placeholder="Filter pages" aria-label="Filter pages" autocomplete="off">
     <div id="nav"></div>
   </nav>
@@ -541,7 +552,7 @@ i.m.unknown { opacity: .45; }
   // Served from the repo root in dev (site/serve.py) and from the artifact root when published,
   // so every content path is the repo-relative path, e.g. docs/discover/index.md.
   const $ = (s, el = document) => el.querySelector(s);
-  const els = { nav: $('#nav'), content: $('#content'), toc: $('#toc'), search: $('#search'), sidebar: $('#sidebar'), scrim: $('#scrim'), menu: $('#menu-btn'), side: $('#side-btn') };
+  const els = { navTabs: $('#nav-tabs'), nav: $('#nav'), content: $('#content'), toc: $('#toc'), search: $('#search'), sidebar: $('#sidebar'), scrim: $('#scrim'), menu: $('#menu-btn'), side: $('#side-btn') };
 
   // --- Language and theme (per-viewer, remembered when storage is available) ----
   const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
@@ -922,15 +933,26 @@ i.m.unknown { opacity: .45; }
     }));
     return out;
   }
+  // The sidebar's two blocks (the case, the harness) are collapsible; what the viewer closed is remembered.
+  // The sidebar holds two areas, the case and the AI harness and context. As in Vercel's and Stripe's docs, a segmented
+  // switch at the top picks the area and the list shows only that area's sections; the area of the open page is chosen
+  // when a page opens. While filtering, both areas are listed, each under its name.
+  let viewBlock = null;
+  let shownBlock = null;
+  let lastPage = null;
+  const blockOfPage = id => (PAGES.find(p => p.id === id)?.sec?.block?.title) || '';
   function renderNav(filter = '') {
     const f = filter.trim().toLowerCase();
     const match = p => !f || L(p).toLowerCase().includes(f) || L(p.grp).toLowerCase().includes(f);
-    let html = '';
+    const blocks = [];
     NAV.sections.forEach(sec => {
+      const b = sec.block || { title: '', pt: '' };
+      if (!blocks.length || blocks[blocks.length - 1].b.title !== b.title) blocks.push({ b, html: '' });
+      const cur = blocks[blocks.length - 1];
       if (sec.disabled) {
         if (f) return;
         const note = LANG === 'pt' && sec.note_pt ? sec.note_pt : sec.note;
-        html += `<div class="nav-group is-disabled"><div class="nav-group-title">${esc(L(sec))}<span class="badge">${t('soon')}</span></div>${note ? `<div class="nav-empty">${esc(note)}</div>` : ''}</div>`;
+        cur.html += `<div class="nav-group is-disabled"><div class="nav-group-title">${esc(L(sec))}<span class="badge">${t('soon')}</span></div>${note ? `<div class="nav-empty">${esc(note)}</div>` : ''}</div>`;
         return;
       }
       let inner = '';
@@ -940,9 +962,25 @@ i.m.unknown { opacity: .45; }
           if (kids.length) inner += `<div class="nav-sub-title">${esc(L(it))}</div><div class="nav-sub">${kids.map(link).join('')}</div>`;
         } else if (match(it)) inner += link(it);
       });
-      if (inner) html += `<div class="nav-group"><div class="nav-group-title">${esc(L(sec))}</div>${inner}</div>`;
+      // A section named like its area ("The case") shows only the links.
+      const title = sec.block && L(sec.block) === L(sec) ? '' : `<div class="nav-group-title">${esc(L(sec))}</div>`;
+      if (inner) cur.html += `<div class="nav-group">${title}${inner}</div>`;
     });
-    els.nav.innerHTML = html || `<div class="nav-empty">${t('noMatch')} “${esc(filter)}”.</div>`;
+    const named = blocks.filter(x => x.b.title);
+    const active = viewBlock || blockOfPage(currentId()) || named[0]?.b.title || '';
+    shownBlock = active;
+    const tabs = named.length > 1 ? `<div class="nav-tabs" role="tablist" aria-label="${esc(t('areas') || 'Areas')}">${named.map(x => `<button type="button" role="tab" class="nav-tab" data-block="${esc(x.b.title)}" aria-selected="${!f && x.b.title === active}">${esc(LANG === 'pt' ? (x.b.short_pt || x.b.pt || x.b.title) : (x.b.short || x.b.title))}</button>`).join('')}</div>` : '';
+    const sub = x => (x.b.sub ? `<p class="nav-area-sub">${esc(LANG === 'pt' && x.b.sub_pt ? x.b.sub_pt : x.b.sub)}</p>` : '');
+    const body = f
+      ? blocks.filter(x => x.html).map(x => (x.b.title ? `<div class="nav-area-title">${esc(L(x.b))}</div>` : '') + x.html).join('')
+      : blocks.filter(x => !x.b.title || x.b.title === active).map(x => sub(x) + x.html).join('');
+    els.navTabs.innerHTML = tabs;
+    els.nav.innerHTML = body || `<div class="nav-empty">${t('noMatch')} “${esc(filter)}”.</div>`;
+    els.navTabs.querySelectorAll('.nav-tab').forEach(btn => btn.addEventListener('click', () => {
+      viewBlock = btn.dataset.block;
+      els.search.value = '';
+      renderNav('');
+    }));
     markCurrent();
   }
   const link = p => `<a class="nav-link" href="#${p.id}" data-id="${p.id}">${esc(L(p))}</a>`;
@@ -951,6 +989,12 @@ i.m.unknown { opacity: .45; }
     els.nav.querySelectorAll('.nav-link').forEach(a => {
       if (a.dataset.id === id) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
+    // Opening a page shows its area in the sidebar (a tab the viewer picked holds until another page opens).
+    if (id !== lastPage) {
+      lastPage = id;
+      const area = blockOfPage(id);
+      if (area && area !== shownBlock && !els.search.value.trim()) { viewBlock = null; renderNav(''); }
+    }
   }
   const currentId = () => {
     const h = decodeURIComponent(location.hash.slice(1)).split('?')[0];
@@ -1040,8 +1084,10 @@ i.m.unknown { opacity: .45; }
     const title = h1 ? h1.innerHTML : esc(L(page));
     if (h1) h1.remove();
     let lede = '';
+    let ledeEl = null;
     const first = tmp.firstElementChild;
-    if (first && first.tagName === 'P' && !first.querySelector('img')) { lede = first.innerHTML; first.remove(); }
+    // The lede's links are routed below with the rest; its HTML is read after that.
+    if (first && first.tagName === 'P' && !first.querySelector('img')) { ledeEl = first; first.remove(); }
 
     // Headings get ids for the TOC; tables get a scroll wrapper; links get routed.
     const used = new Set();
@@ -1078,7 +1124,7 @@ i.m.unknown { opacity: .45; }
       const h = p.previousElementSibling;
       if (h && /^H[23]$/.test(h.tagName) && h.textContent.trim() === p.dataset.name) p.querySelector('.persona-name')?.remove();
     });
-    tmp.querySelectorAll('a[href]').forEach(a => {
+    [...tmp.querySelectorAll('a[href]'), ...(ledeEl ? ledeEl.querySelectorAll('a[href]') : [])].forEach(a => {
       const href = a.getAttribute('href');
       if (/^https?:/i.test(href)) { a.target = '_blank'; a.rel = 'noopener'; return; }
       if (href.startsWith('#')) return;
@@ -1089,6 +1135,7 @@ i.m.unknown { opacity: .45; }
         else { a.removeAttribute('href'); a.title = t('notPublished'); }
       }
     });
+    if (ledeEl) lede = ledeEl.innerHTML;
     // Images are written relative to their Markdown file.
     const srcOf = src;
     tmp.querySelectorAll('img[data-src], img[src]').forEach(img => {

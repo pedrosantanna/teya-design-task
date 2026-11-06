@@ -7,7 +7,7 @@ Takeaways:
 - Light mode: background #EEE9E2 (OKLCH L 0.935), white cards at 1.21:1 on it, muted #E5E2DE for tonal buttons on cards. An unselected chip sits a level below the selected one, which is Card with Indigo 800 text and edge.
 - Dark mode: background #0B0C0D, cards #252627 (1.29:1), muted #323334. These are Stone steps: Biscuit's lightness steps at hue 270 and about a fifth of its chroma, so the dark reads as a plain cool grey and the warm tiles stand out on it.
 - Indigo #3D35B8 is the shopper acting: the one filled commit button in view, links, the tint and the shopper's bubbles. In dark mode it steps up to Indigo 300 with black text.
-- Every shop has one accent for good, chosen by its kind: Peach, Pistachio or Butter. Its tile step (OKLCH L 0.87, C 0.07, Butter C 0.09; dark L 0.36, C 0.04 to 0.045 at hues 38, 135 and 295, and Butter at L 0.345, C 0.034 and hue 91) sits at 1.20 to 1.26:1 on the light background and fills the placeholder tile, the category card, the whole shop page and the receipt header (1.71 to 1.83:1 on the dark background). On the shop page it is the ground under every section, with Card rows on it under the delicate shadow; Foreground stays at 10.2:1 or more on every tile and Muted foreground at 4.6:1 or more, light and dark.
+- Every shop has one accent for good, chosen by its kind: Peach, Pistachio or Butter. Its tile step (OKLCH L 0.87, C 0.07, Butter C 0.09) sits at 1.20 to 1.26:1 on the light background and fills the placeholder tile, the category card, the whole shop page and the receipt header. Since round 18 dark mode keeps the same pastel tile: text on it is ink (12.91:1 or more), and the cards, chips, Call, Directions and Back on it are a dark tint of its hue with light text (Foreground 8.35:1 or more). The tile is 12.91 to 13.46:1 from the dark background, so those screens glare.
 - Lavender is Snuffle and no shop uses it: its bubbles (the Lavender tile step, #D7CCFE), the typing dots and the Live Activity. Chats sit on the Background in both modes (decision 059 reverses the white chat ground of craft-pass-2).
 - Semantic roles come from the same ramps: destructive is iOS red darkened to carry a white label (6.06:1), warning is Butter, success is Pistachio, and Increase Contrast gives every card a 1 px border at 3.4:1 or more.
 Call:
@@ -25,6 +25,7 @@ Call:
 - In round 10 I found the dark edges on chips and pills ugly and asked for colour and contrast to do that work, following Material 3's tonal containers and Apple's dark fills, with an edge only where a fill can't work.
 - In round 10 I asked for the shop page's card to take the shop's colour again, in light and in dark, and for everything inside to be recoloured and measured, with Ask staying the one filled Indigo (decision 056, which reverses decision 055).
 - Later I asked for one chip treatment on a row inside the shop card, a quiet neutral fill with no border and no tile colour, after the chips in the card's own colour read as holes.
+- In round 18 I chose option 2, variation 4 from the identity board: the light tiles unchanged in dark, ink text on them, dark cards, chips, Call, Directions and Back with light text, and Ask in Indigo 800 with white. I asked for it to be built into the tokens and every changed pair measured.
 AI:
 - An agent built the ramps in OKLCH, drew the rounds on the identity board and measured every pair below. I chose the palette, the neutral and the background step.
 - An agent proposed the semantic roles from the existing ramps and computed their contrasts with a script using the WCAG 2 formula. I asked for the set and for iOS red to be adapted to the palette.
@@ -42,12 +43,13 @@ AI:
 - An agent put the shop page card back on the accent tile, recoloured the rows, chips, review cards and buttons for it, added `successOnTile` and `warningOnTile` after the status word measured 4.16:1 on Peach, and measured every pair in light and dark.
 - In round 12 an agent raised the chroma of the dark row cards 1.7 times, added Stone 880 for muted text on them, took the rating tags off `tag.fillRaised` on the tinted rows, deleted the unused accent `container` role and measured every changed pair.
 - An agent added `tag.fillOnRow` and the Ratings panel on the Background, and measured each pair against the row and the tile in light and dark.
+- In round 18 an agent built variation 4 into the tokens (the light tile in dark, `cardOnTile`, `chipOnCard`, `tonal`, the on-tile text roles and `borderOnTile`), made text follow the ground under it, with a `tileCard` ground inside a surface on a tile, worked out Lavender's card and chip, which the board didn't show, swapped the dark category stills for the light ones, and measured every changed pair with the WCAG 2 script.
 Trade-offs:
 - Muted #E5E2DE on the new background is 1.07:1, so it can't mark a chip there; chips moved to the card colour, and Muted is only used on cards.
 - The dark sheet is 1.09:1 on the Background, under the 1.15:1 aimed for: lighter sheets push Card and Muted rows closer to it. The rim's highlight marks its top edge instead.
 - With a pastel per shop, the shop's colour carries no meaning beyond recognition; status and actions keep their own colours, so a Peach tile never reads as a warning.
 - The typing dots in Lavender 500 on Lavender 100 are 2.72:1. They are decorative (VoiceOver reads "Snuffle is writing"), so I kept the lighter step.
-- Muted text on the dark tile step is 4.66 to 4.99:1: it passes AA, but less comfortably than in light mode (5.00:1 or more). The lower chroma gave a little back (Pistachio went from 4.58 to 4.66:1).
+- The pastel tile in dark is 12.91 to 13.46:1 from the Background: the shop page, the Category screen and the category cards are bright blocks on a dark screen, and the dark cards on the tile leave less text room than the other variations (Foreground 8.35 to 8.57:1, Stone 880 6.29 to 6.46:1).
 - The chat sits on the Background like the rest of the app, so Card surfaces (answer and order cards, grouped rows, chips, the composer field) are white on beige (1.21:1) and keep their hairline and soft shadow.
 ```
 
@@ -173,7 +175,7 @@ Each accent is a ten-step ramp built in OKLCH from its base colour. The base sit
 | Count (`count`) | Indigo 800, white text (8.75:1), a 2 pt ring in the Background | Indigo 300, black text (11.86:1), the same ring; Indigo 800 on the dark Background was 2.24:1 | The Requests button and unread answers |
 | Badge on a photo | Accent 100 fill, 800 text, 500 dot | The light values | Promoted (Pistachio), New (Peach), Delivers (Butter) |
 | Badge on a wash | Card fill, Foreground text | Card fill, Foreground text | Not used on the shop page since round 10: Delivers and New are fact groups on its facts line |
-| Map ground (`mapGround`) | Biscuit 960 | Background #0B0C0D | The map's ground; the shop page's card is the shop's tile, 1.29 to 1.35:1 over it in light and 1.71 to 1.83:1 in dark |
+| Map ground (`mapGround`) | Biscuit 960 | Background #0B0C0D | The map's ground; the shop page's card is the shop's tile, 1.29 to 1.35:1 over it in light and 12.91 to 13.46:1 in dark |
 | Map roads (`mapRoad`, `mapRoadMain`) | Biscuit 890, Biscuit 860 | Stone 265, Stone 320 | Streets and main roads, 1.24:1 and 1.36:1 on the ground in light, 1.29:1 and 1.55:1 in dark |
 | Map buildings (`mapBuilding`) | Card (white) | Stone 200 | Extruded buildings, shaded by the extrusion light: 1.13:1 on the ground in light, 1.16:1 in dark |
 | Map parks (`mapPark`) | Pistachio tile #C5DEAE | #222B1D | Parks, 1.29:1 on the ground in light, 1.33:1 in dark |
@@ -189,46 +191,56 @@ In dark mode the map ground was Butter 900, which read as mustard behind the pin
 
 Each shop has one accent for good, chosen by its kind (`store/kinds.ts`), so it looks the same on Nearby, in the chat, on its page and on the receipt. Bakeries, hardware, newsagents, books, bags and gifts are Butter; cafés and delis, cameras, toys, butchers and fashion are Peach; opticians, florists, chemists and stationery are Pistachio. No shop is Lavender, which is Snuffle's.
 
+Since round 18 the tile is the same light pastel in both modes (option 2, variation 4 on the [identity board](../ideation/identity.md)). In dark mode the text straight on it is ink, and what sits on it (cards, chips, Call, Directions, Back) is a dark tint of the tile's hue with light text.
+
 | Token | Light | Dark | Where |
 | --- | --- | --- | --- |
-| `shop.accent.<hue>.tile` | Tile step: Peach #FEC5B2, Pistachio #C5DEAE, Butter #E7D48F, Lavender #D7CCFE | Peach #52352C, Pistachio #34422C, Butter #403925, Lavender #3E3950 | The placeholder tile, the category card and the Category header, the receipt header, the shop page's card and the chips on it |
-| `shop.accent.<hue>.detail` | The tile step | The ink step (Peach #E8D6D1, Pistachio #D3E5C0, Butter #E1DAC9) | The map pin on the shop page. Pastel in both modes: a small area in the light tone is fine on dark (Material's dark theme), and a large one never is |
-| `shop.accent.<hue>.onDetail` | Ink (800) | Tile (dark) | The pin's edge and dot: 6.4:1 to 6.5:1 on `detail` in light, 7.9:1 to 8.2:1 in dark |
-| `shop.accent.<hue>.wash` | 100 | 900 | The light stripes of the awning band on the placeholder tile |
-| `shop.accent.<hue>.ink` | 800 | 200 | Initials and the dark awning stripes on the tile |
-| `shop.accent.<hue>.cardOnTile` | Card (white) | Peach #624D46, Pistachio #4C5745, Butter #595242, Lavender #535062 | The shop rows on the Category screen, and the rows, the rating summary and review cards and the "What they sell" block on the shop page |
-| `mutedForegroundOnTile` | Muted foreground | Stone 880, #DADBDD | The rows' meta line and chevron, and every Muted foreground text on a tile ground (the `Text` and `Icon` components switch to it inside `<Ground value="tile">`) |
-| `successOnTile`, `warningOnTile` | Success 800 #384D1A, Warning 800 #53430D | Foreground | The Open and Closes soon words on a tile. Success 700 measured 4.16:1 on Peach and Warning 700 4.30:1; the 800 steps are 6.17 to 6.63:1. In dark the word takes Foreground (10.26:1 or more), since Success is 4.49 to 4.59:1 on the tinted row cards |
+| `shop.accent.<hue>.tile` | Tile step: Peach #FEC5B2, Pistachio #C5DEAE, Butter #E7D48F, Lavender #D7CCFE | The same | The placeholder tile, the category card and the Category header, the receipt header, the shop page's card |
+| `shop.accent.<hue>.detail` | The tile step | The tile step | The map pin and the walking route on the shop page |
+| `shop.accent.<hue>.onDetail` | Ink (800) | Stone 150 #0B0C0D | The pin's edge and dot: 6.4:1 to 6.5:1 on `detail` in light, 12.91:1 to 13.46:1 in dark |
+| `shop.accent.<hue>.wash` | 100 | 100 | The light stripes of the awning band on the placeholder tile |
+| `shop.accent.<hue>.ink` | 800 | 800 | Initials and the dark awning stripes on the tile |
+| `shop.accent.<hue>.cardOnTile` | Card (white) | Peach #5A453E, Pistachio #454E3D, Butter #514A31, Lavender #4B475A | The shop rows on the Category screen, and the rows, the rating summary and review cards and the "What they sell" block on the shop page |
+| `shop.accent.<hue>.chipOnCard` | `tag.fillOnRow` (the Background) | Peach #685853, Pistachio #585E52, Butter #615B4B, Lavender #5C5A66 | The "What they sell" chips and the rating tags on those cards |
+| `shop.accent.<hue>.tonal`, at `state.tonalOnTile` | White at 55% | `cardOnTile` at 100% | Call and Directions, the unselected street chips, Back on a tile and over the shop page's map, the "Needs you" pill on the receipt header |
+| `foregroundOnTile` | Foreground | Stone 150 #0B0C0D (ink) | Text and icons straight on a tile: the shop's name, the section headings, the category label |
+| `mutedForegroundOnTile` | Muted foreground | Stone 305 #2E2F30 (muted ink) | Secondary text straight on a tile: the facts line, the Category header's count, the footnotes, the map credit |
+| `mutedForegroundOnTileCard` | Muted foreground | Stone 880 #DADBDD | The meta line and the chevron inside a card, row or chip on a tile |
+| `primaryOnTile`, `onPrimaryOnTile` | Indigo 800, white | Indigo 800, white | Ask, links and plain buttons on a tile. Indigo 300, the dark Primary, is 1.17 to 1.22:1 on the pastel tile |
+| `successOnTile`, `warningOnTile` | Success 800 #384D1A, Warning 800 #53430D | The same | The Open and Closes soon words straight on a tile. Success 700 measured 4.16:1 on Peach and Warning 700 4.30:1; the 800 steps are 6.17 to 6.63:1. Inside a card on the tile the words take Success and Warning (5.02:1 or more on the dark cards) |
+| `borderOnTile` | Biscuit 860 (Border) | Biscuit 860 | The hairline under a nav bar filled with the tile; Stone 360 drew a near-black line on the pastel |
 
-The 100 steps sat at L 0.95 to 0.97, on a background at L 0.935, and measured 1.01 to 1.04:1 against it, so a tile read as the background. The tile step is set by lightness: OKLCH L 0.87 and C 0.07 at each hue's angle in light mode, with Butter at C 0.09 and hue 95 so it reads as yellow and not as a highlighter. In dark mode it is L 0.36 with a lower chroma (round 10, option 3), and the hues stay spread so the three shop colours don't collapse into one olive: Peach at 38 and C 0.045, Pistachio at 135 and C 0.042, Lavender at 295 and C 0.040. Butter is calmer, at hue 91, L 0.345 and C 0.034: at L 0.36 and C 0.073 (#4C3B01) it read khaki-brown, and the Stone Card rows on it looked dirty. The previous dark tiles had C 0.08 (Butter 0.05, Lavender 0.06), about 1.5 to 1.8 times more. The dark wash and ink are the 900 and 200 steps at the same share of their chroma (`washDark` and `inkDark` in each ramp). The receipt no longer has a 4 pt ink band.
+The components read these through the ground. Inside `<Ground value="tile" accent>`, `Text` and `Icon` map Foreground, Muted foreground, Primary, On primary, Success and Warning to their on-tile roles. A surface painted on the tile (a row, a card, a chip, a tonal button, Back) wraps its content in `OnTileSurface`, a `tileCard` ground where text keeps Foreground and secondary text takes `mutedForegroundOnTileCard`.
 
-Contrast on the tile step, light / dark:
+The 100 steps sat at L 0.95 to 0.97, on a background at L 0.935, and measured 1.01 to 1.04:1 against it, so a tile read as the background. The tile step is set by lightness: OKLCH L 0.87 and C 0.07 at each hue's angle, with Butter at C 0.09 and hue 95 so it reads as yellow and not as a highlighter. Until round 18 dark mode had its own tile at L 0.36 with a lower chroma (round 10, option 3); round 11 measured those tiles at C 0.034 to 0.045, with Butter and Pistachio 3.2 apart (ΔE OK × 100), so a shop page read as khaki, brown or forest grey. The dark cards are a solid stand-in for black at 90% over the tile, a deep tint of its hue at OKLCH L 0.41, and the chips are the card a step lighter (L 0.47, less chroma). The board showed Butter, Peach and Pistachio; Lavender's card and chip follow the same rule. The `tileDark`, `washDark`, `inkDark` and `cardOnTileDark` primitives of the earlier dark tiles stay in the ramps; only Getting started still uses one (Peach `tileDark`). The receipt no longer has a 4 pt ink band.
 
-| Hue | Tile on background | Foreground | Muted foreground | Indigo 800 / 300 | Ink on tile |
+Contrast on the tile step, light / dark (in dark, Foreground is the ink and Muted foreground the muted ink):
+
+| Hue | Tile on background | Foreground | Muted foreground | Indigo 800 | Ink (800) on tile |
 | --- | --- | --- | --- | --- | --- |
-| Peach | 1.26:1 / 1.78:1 | 12.96:1 / 10.57:1 | 5.00:1 / 4.80:1 | 5.77:1 / 6.23:1 | 6.52:1 / 7.86:1 |
-| Pistachio | 1.20:1 / 1.83:1 | 13.51:1 / 10.26:1 | 5.21:1 / 4.66:1 | 6.01:1 / 6.05:1 | 6.43:1 / 8.02:1 |
-| Butter | 1.22:1 / 1.71:1 | 13.31:1 / 11.00:1 | 5.13:1 / 4.99:1 | 5.92:1 / 6.48:1 | 6.53:1 / 8.24:1 |
-| Lavender | 1.25:1 / 1.78:1 | 13.07:1 / 10.56:1 | 5.04:1 / 4.79:1 | 5.82:1 / 6.22:1 | 6.59:1 / 7.82:1 |
+| Peach | 1.26:1 / 12.91:1 | 12.96:1 / 12.91:1 | 5.00:1 / 8.84:1 | 5.77:1 / 5.77:1 | 6.52:1 / 6.52:1 |
+| Pistachio | 1.20:1 / 13.46:1 | 13.51:1 / 13.46:1 | 5.21:1 / 9.22:1 | 6.01:1 / 6.01:1 | 6.43:1 / 6.43:1 |
+| Butter | 1.22:1 / 13.25:1 | 13.31:1 / 13.25:1 | 5.13:1 / 9.08:1 | 5.92:1 / 5.92:1 | 6.53:1 / 6.53:1 |
+| Lavender | 1.25:1 / 13.01:1 | 13.07:1 / 13.01:1 | 5.04:1 / 8.92:1 | 5.82:1 / 5.82:1 | 6.59:1 / 6.59:1 |
 
-Every text pair passes AA. Foreground passes AAA; muted text and Indigo don't.
+Every text pair passes AA. Foreground passes AAA; muted text and Indigo don't in light, and in dark the muted ink does too.
 
-On the shop page the card is the tile (round 10, decision 056, which reverses the neutral card of decision 055). It is 1.29 to 1.35:1 over the map in light and 1.71 to 1.83:1 in dark, so it needs no edge. The rows, the review cards and the "What they sell" block take `cardOnTile`: white in light (1.45 to 1.52:1 on the tile, lifted by the delicate shadow) and the tinted card in dark (1.40 to 1.48:1). Every chip on a row of that card, the "What they sell" chips and the rating tags, takes `tag.fillOnRow`, with no edge and no tile colour: the Background in light (1.21:1 on the white row, Foreground 16.28:1) and `tag.fillRaised` in dark (1.36 to 1.41:1 on the four rows, Foreground 10.28:1, the count 7.74:1). The accent's `tile` as a chip fill is retired: the chips read as holes the colour of the card behind. The Ratings cards sit straight on the tile, `cardOnTile` like the rows. Tonal buttons on a tile don't take Muted, a grey capsule that measured 1.13 to 1.17:1 in light and 1.08 to 1.20:1 in dark and looked like a stain on the hue. They take `color.tonalOnTile` (white) at `state.tonalOnTile`: 55% in light (1.23 to 1.26:1 on the tile; 40% gave 1.17 to 1.18:1 and Call and Directions disappeared into the Butter tile, Foreground on it 15.33:1 or more) and 6% in dark (1.19 to 1.20:1, Foreground 8.61:1 or more). Ask stays the one filled Indigo: 5.77 to 6.01:1 on the tile in light and 6.05 to 6.48:1 in dark. The whole card is inside `<Ground value="tile" accent>`, so the screen sets none of this.
+The cost is glare. The tile is 12.91 to 13.46:1 from the dark Background, so in dark mode the shop page, the Category screen, the Reviews screen and the category cards on Nearby are bright blocks on a dark screen. A shopper who picked dark mode for a dim room gets a mostly light screen on those pages. None of the option 2 variations on the board solves it.
+
+On the shop page the card is the tile (round 10, decision 056, which reverses the neutral card of decision 055). It is 1.29 to 1.35:1 over the map in light and 12.91 to 13.46:1 in dark, so it needs no edge. The rows, the review cards and the "What they sell" block take `cardOnTile`: white in light (1.45 to 1.52:1 on the tile, lifted by the delicate shadow) and in dark the tile's deep tint (5.88 to 5.99:1 on the tile; Foreground 8.35 to 8.57:1, Stone 880 6.29 to 6.46:1, the separator 1.42 to 1.45:1). Every chip on those cards, the "What they sell" chips and the rating tags, takes `chipOnCard`, with no edge: the Background in light (1.21:1 on the white row, Foreground 16.28:1) and in dark the card a step lighter (1.30 to 1.32:1 on it, Foreground 6.42 to 6.48:1, the count in Stone 880 4.83 to 4.88:1). Tonal buttons on a tile don't take Muted, a grey capsule that measured 1.13 to 1.17:1 in light and looked like a stain on the hue. They take the accent's `tonal` at `state.tonalOnTile`: white at 55% in light (1.23 to 1.26:1 on the tile; 40% gave 1.17 to 1.18:1 and Call and Directions disappeared into the Butter tile; Foreground on it 15.33:1 or more) and in dark the solid card with light text. Back takes the same: glass over the map in light, and in dark the card (2.19 to 2.25:1 on the dark map ground, the glyph 8.35:1 or more). Ask stays the one filled Indigo, Indigo 800 with white text in both modes (5.77 to 6.01:1 on the tile, the text 8.75:1). The map pin is the tile with an ink dot and edge (12.91:1 or more), and the walking route is the tile's pastel cased in the Background (9.99:1 or more on the dark streets, 8.35:1 or more on the main roads). The whole card is inside `<Ground value="tile" accent>`, so the screen sets none of this.
 
 ### Rows on the Category screen
 
-In dark mode the Category screen keeps the full tile as its ground, and Card rows on it (Stone #252627) were darker than the tile, so they read as holes in the colour. The rows take `shop.accent.<hue>.cardOnTile` instead: OKLCH L 0.44, C 0.026 to 0.033 at the accent's hue (round 12: the round 10 rows at C 0.015 to 0.019 read grey and dirty, so their chroma went up 1.7 times), lighter than the tile and less saturated, so the list lifts off the colour without competing with it. Light mode keeps white Card rows. The screen names its accent with `<Ground value="tile" accent>`, and `ShopRow` reads it.
+The Category screen keeps the whole tile as its ground. Before round 18 the dark tile was the darker colour, and Card rows on it (Stone #252627) read as holes in the colour, so the rows became a tint lighter than the tile (decision 050). Now the tile is the pastel and the rows take `shop.accent.<hue>.cardOnTile`, the tile's deep tint with light text, the same card as the shop page's. Light mode keeps white Card rows. The screen names its accent with `<Ground value="tile" accent>`, and `ShopRow` reads it. The header's count is muted ink on the tile; inside the rows the meta line and the chevron take `mutedForegroundOnTileCard` (Stone 880), and the Open word Success. Dark values:
 
-Muted foreground (Stone 740) measures 3.34 to 3.42:1 on the cards, under AA. Lowering the card doesn't fix it: at the 1.2:1 the card needs over the tile, Stone 740 is still about 3.9:1. The meta line and the chevron take `mutedForegroundOnTile` instead, Stone 880 (#DADBDD, Stone 740's hue and chroma at L 0.89; Stone 840 was 4.73 to 4.84:1). Dark values:
-
-| Hue | Card on tile | Card vs tile | Foreground | Muted foreground on tile (Stone 880) | Stone 740, for reference | Separator | Card #252627 vs tile, for reference |
+| Hue | Card on tile | Card vs tile | Foreground | Stone 880 | Success (Pistachio 300) | Warning (Butter 300) | Separator |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Peach | #624D46 | 1.40:1 | 7.54:1 | 5.68:1 | 3.42:1 | 1.61:1 | 1.37:1, darker |
-| Pistachio | #4C5745 | 1.41:1 | 7.30:1 | 5.50:1 | 3.31:1 | 1.66:1 | 1.42:1, darker |
-| Butter | #595242 | 1.48:1 | 7.43:1 | 5.59:1 | 3.37:1 | 1.63:1 | 1.32:1, darker |
-| Lavender | #535062 | 1.41:1 | 7.48:1 | 5.63:1 | 3.39:1 | 1.62:1 | 1.38:1, darker |
+| Peach | #5A453E | 5.88:1 | 8.55:1 | 6.43:1 | 5.22:1 | 5.14:1 | 1.42:1 |
+| Pistachio | #454E3D | 5.99:1 | 8.35:1 | 6.29:1 | 5.10:1 | 5.02:1 | 1.45:1 |
+| Butter | #514A31 | 5.99:1 | 8.48:1 | 6.39:1 | 5.18:1 | 5.10:1 | 1.43:1 |
+| Lavender | #4B475A | 5.94:1 | 8.57:1 | 6.46:1 | 5.23:1 | 5.15:1 | 1.42:1 |
 
-Every card is lighter than its tile by 1.40:1 or more. The street chips and Back keep the `tonalOnTile` overlay. The selected chip is Indigo 950 with Indigo 200 text (11.56:1) in dark; on the tinted card Indigo 300 would be 4.34 to 4.43:1, under AA, and Card with an edge is the look round 10 dropped. The shop page takes the same rows and chip colours.
+The street chips and Back take the accent's `tonal`, the dark card with light text in dark. The selected chip stays Indigo 950 with Indigo 200 text (11.56:1), 10.68 to 11.14:1 from the pastel tile. The category stills were rendered for each mode's tile; with one tile in both modes, dark shows the light still and the dark stills are gone.
 
 ## Snuffle
 

@@ -10,7 +10,7 @@ import { Platform, View, type LayoutChangeEvent } from 'react-native';
 import { SafeAreaFrameContext, SafeAreaInsetsContext } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { Text } from '@/design-system';
+import { Text, useStatusToneOverride } from '@/design-system';
 import { useStep, type PlatformName } from '@/store';
 
 import { devices, outerSize, type DeviceGeometry } from './geometry';
@@ -50,13 +50,19 @@ export function DeviceFrame({ device, children }: Props) {
                 <SafeAreaInsetsContext.Provider value={insets}>{children}</SafeAreaInsetsContext.Provider>
               </SafeAreaFrameContext.Provider>
               <StatusBar device={device} geometry={geometry} />
-              <View pointerEvents="none" style={styles.indicator(geometry.indicator)} />
+              <Indicator geometry={geometry} />
             </View>
           </View>
         </View>
       ) : null}
     </View>
   );
+}
+
+function Indicator({ geometry }: { geometry: DeviceGeometry }) {
+  const { theme } = useUnistyles();
+  const ink = useStatusInk();
+  return <View pointerEvents="none" style={[styles.indicator(geometry.indicator), { backgroundColor: theme.color[ink] }]} />;
 }
 
 function StatusBar({ device, geometry }: { device: PlatformName; geometry: DeviceGeometry }) {
@@ -66,10 +72,12 @@ function StatusBar({ device, geometry }: { device: PlatformName; geometry: Devic
   const locked = usePathname() === '/lock';
   const icon = device === 'ios' ? theme.type.subheadline.lineHeight - theme.space[1] : theme.type.footnote.lineHeight - theme.space[1];
   const cutout = geometry.cutout;
+  // Over an accent tile in dark the content turns to the tile's ink (see useStatusTone).
+  const ink = useStatusInk();
   return (
     <View pointerEvents="none" style={styles.statusBar(geometry.statusBar, device === 'ios')} accessibilityElementsHidden>
       <View style={styles.ear(device === 'ios')}>
-        {locked ? null : <Text variant={device === 'ios' ? 'headline' : 'footnote'}>{time}</Text>}
+        {locked ? null : <Text variant={device === 'ios' ? 'headline' : 'footnote'} color={ink}>{time}</Text>}
       </View>
       {cutout.kind === 'island' ? (
         <View style={styles.island(cutout.width, cutout.height, cutout.top)} />
@@ -77,12 +85,19 @@ function StatusBar({ device, geometry }: { device: PlatformName; geometry: Devic
         <View style={styles.hole(cutout.size, cutout.top)} />
       )}
       <View style={[styles.ear(device === 'ios'), styles.icons(device === 'ios')]}>
-        <HugeiconsIcon icon={SignalFull02Icon} size={icon} strokeWidth={2} color={theme.color.foreground} />
-        <HugeiconsIcon icon={Wifi01Icon} size={icon} strokeWidth={2} color={theme.color.foreground} />
-        <HugeiconsIcon icon={BatteryFullIcon} size={icon} strokeWidth={2} color={theme.color.foreground} />
+        <HugeiconsIcon icon={SignalFull02Icon} size={icon} strokeWidth={2} color={theme.color[ink]} />
+        <HugeiconsIcon icon={Wifi01Icon} size={icon} strokeWidth={2} color={theme.color[ink]} />
+        <HugeiconsIcon icon={BatteryFullIcon} size={icon} strokeWidth={2} color={theme.color[ink]} />
       </View>
     </View>
   );
+}
+
+/** The colour role of the phone's status bar and home indicator: Foreground, or the tile's ink while a screen asks for dark content in dark mode. */
+function useStatusInk(): 'foreground' | 'foregroundOnTile' {
+  const { theme } = useUnistyles();
+  const tone = useStatusToneOverride();
+  return theme.scheme === 'dark' && tone === 'dark' ? 'foregroundOnTile' : 'foreground';
 }
 
 // The phone's own chrome (status bar, home indicator) sits above every app layer, the portal's overlays
