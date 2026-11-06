@@ -35,3 +35,7 @@ I'd put a few real requests in front of shops early. The proof of concept over i
 I'd set the visual gates before the first screen. The visual critic came after the pastel tiles measured 1.01:1, and several visual calls were reversed within days: the mark's tile, the Requests button's side, the shop card's colour.
 
 I'd use real data wherever it was cheap. The walk times were invented until real routes replaced them, and two shops then fell outside the 20-minute radius.
+
+## Measurement
+
+How each hypothesis will be measured, with the tasks, events and metrics behind it, is in the [measurement plan](../verify/measurement.md).

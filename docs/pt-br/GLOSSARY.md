@@ -162,3 +162,16 @@ Source: English Markdown in `docs/`. Target: Brazilian Portuguese in `docs/pt-br
 | incentivised review | avaliação com incentivo |
 | synthetic test users | usuários sintéticos de teste |
 | persona-driven scenario test | teste de cenário guiado por persona |
+
+## Terms settled for measurement
+| English | PT-BR |
+| --- | --- |
+| measurement plan / product metrics / tasks and events | plano de medição / métricas de produto / tarefas e eventos |
+| hand-run concierge | concierge feito à mão |
+| fill rate | taxa de atendimento (fill rate on first use) |
+| north star / guardrail / liquidity | north star / guardrail / liquidez |
+| answer burden | carga de respostas |
+| time on task / task success / abandonment | tempo na tarefa / sucesso na tarefa / abandono |
+| service record / app analytics | registro do serviço / analytics do app |
+| POS attach | adesão ao POS |
+| event names (`request_created`…) | stay in English, in code format |

@@ -548,5 +548,14 @@ A shop's accent tile is the same pastel in light and dark (Butter #E7D48F, Peach
 
 **Why:** the dark tiles had a chroma of 0.03 to 0.05 and read as khaki, brown-red and forest grey, only 3 to 6 apart in hue, where 2 is the smallest visible step. I compared three directions and their variations on the board and chose the light pastels with dark cards. The cost is glare: the tile is 12.9 to 13.5:1 from the dark page, so the shop page, the Category screen and the category cards are bright blocks in a dark UI.
 
+## 067 · How the hypotheses are measured, defined and not built
+**2026-11-06 · Decided · the guardrail thresholds stay open**
+
+The harness has a verification step: a measurement plan that ties each hypothesis to a metric, the events behind it, a pass mark and a method; the shopper and shop tasks with their start, end, success and abandonment; time on task as median and 90th percentile, split into the shopper's effort and the wait for the shop; an event taxonomy of 47 events with no personal data in them; product and supply–demand metrics by area and per shopper; a liquidity model of how many shops an area needs; and guardrails. The north star is completed requests per week. None of it is built in the prototype. I don't add NPS, and I don't add a standing CSAT: the thumbs rating after collection already measures the shop, and the gaps it leaves (requests that end without an order, Snuffle itself) are covered in the proof of concept by talking to the shoppers and a weekly check-in with each shop.
+
+**Why:** the proof of concept is small (6 shoppers, 10 shops), so a score like NPS would move about 17 points per person and wouldn't say which step failed, while most of what the hypotheses need comes from records the service keeps anyway. The model's own inputs (the share of shops that have the item, how many are open, how many kinds of shop could have it) are assumptions, labelled as such.
+
+**Open:** the guardrail thresholds before the proof of concept, and whether a later build asks "Did Snuffle help?" on a sample of requests that end without an order.
+
 ## Still open
 

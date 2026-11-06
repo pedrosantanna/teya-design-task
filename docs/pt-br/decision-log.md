@@ -548,5 +548,14 @@ O tile de acento de uma loja é o mesmo pastel no claro e no escuro (Butter #E7D
 
 **Por quê:** os tiles escuros tinham croma de 0,03 a 0,05 e liam como cáqui, marrom-avermelhado e cinza-floresta, a só 3 a 6 de distância de matiz, onde 2 é o menor passo visível. Comparei três direções e as variações delas no board e escolhi os pastéis claros com cartões escuros. O custo é o brilho: o tile fica a 12,9 a 13,5:1 do fundo escuro, então a página da loja, a tela de categoria e os cartões de categoria são blocos claros numa interface escura.
 
+## 067 · Como as hipóteses são medidas, definido e não construído
+**2026-11-06 · Decidido · os limites das proteções ficam em aberto**
+
+O harness tem uma etapa de verificação: um plano de medição que liga cada hipótese a uma métrica, aos eventos por trás dela, a um critério de aprovação e a um método; as tarefas do comprador e da loja com início, fim, sucesso e abandono; o tempo na tarefa como mediana e percentil 90, separado em esforço do comprador e espera pela loja; uma taxonomia de 47 eventos sem dado pessoal; métricas de produto e de oferta e demanda por área e por comprador; um modelo de liquidez de quantas lojas uma área precisa; e proteções. A métrica norte é pedidos concluídos por semana. Nada disso é construído no protótipo. Não adiciono NPS nem um CSAT permanente: o rating de polegar após a retirada já mede a loja, e as lacunas que ele deixa (pedidos que terminam sem compra, o próprio Snuffle) são cobertas na prova de conceito conversando com os compradores e com uma conversa semanal com cada loja.
+
+**Por quê:** a prova de conceito é pequena (6 compradores, 10 lojas), então uma nota como o NPS mudaria cerca de 17 pontos por pessoa e não diria qual etapa falhou, enquanto quase tudo de que as hipóteses precisam sai de registros que o serviço guarda de qualquer jeito. As entradas do modelo (a parcela de lojas que tem o item, quantas estão abertas, quantos tipos de loja poderiam tê-lo) são premissas, marcadas como tal.
+
+**Em aberto:** os limites das proteções antes da prova de conceito, e se uma build futura pergunta "Did Snuffle help?" numa amostra de pedidos que terminam sem compra.
+
 ## Ainda em aberto
 

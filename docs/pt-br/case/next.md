@@ -35,3 +35,7 @@ Eu colocaria alguns pedidos reais na frente das lojas cedo. A prova de conceito 
 Eu definiria as etapas de revisão visual antes da primeira tela. O crítico visual chegou depois que os blocos pastel mediram 1,01:1, e várias decisões visuais foram revertidas em poucos dias: o fundo da marca, o lado do botão Requests, a cor do cartão de loja.
 
 Eu usaria dados reais sempre que fosse barato. Os tempos de caminhada eram inventados até as rotas reais os substituírem, e duas lojas então ficaram fora do raio de 20 minutos.
+
+## Medição
+
+Como cada hipótese vai ser medida, com as tarefas, os eventos e as métricas por trás dela, está no [plano de medição](../verify/measurement.md).

@@ -520,6 +520,24 @@
           "title": "Synthetic test users",
           "pt": "Usuários sintéticos de teste",
           "src": "docs/deliver/synthetic-users.md"
+        },
+        {
+          "id": "measurement-plan",
+          "title": "Measurement plan",
+          "pt": "Plano de medição",
+          "src": "docs/verify/measurement.md"
+        },
+        {
+          "id": "tasks-events",
+          "title": "Tasks and events",
+          "pt": "Tarefas e eventos",
+          "src": "docs/verify/telemetry.md"
+        },
+        {
+          "id": "product-metrics",
+          "title": "Product metrics",
+          "pt": "Métricas de produto",
+          "src": "docs/verify/metrics.md"
         }
       ]
     },
