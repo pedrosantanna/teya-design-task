@@ -1,4 +1,4 @@
-import { router, Stack, usePathname, useRootNavigationState } from 'expo-router';
+import { DarkTheme, DefaultTheme, router, Stack, ThemeProvider, usePathname, useRootNavigationState } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, type ReactNode } from 'react';
 import { Platform, View } from 'react-native';
@@ -70,7 +70,13 @@ export default function RootLayout() {
     WEB ? 'none' : reduceMotion ? 'fade' : native;
   const zoomAnim = anim(Platform.OS === 'android' ? 'fade' : 'default');
 
+  // The navigator's own colours follow the theme: its default light card (#F2F2F2) sat under every screen and showed as
+  // light patches in the framed web build's bottom corners in dark, where a blurred edge reaches past the rounded clip.
+  const base = theme.scheme === 'dark' ? DarkTheme : DefaultTheme;
+  const navTheme = { ...base, colors: { ...base.colors, background: theme.color.background, card: theme.color.background } };
+
   const app = (
+    <ThemeProvider value={navTheme}>
     <DesignSystemRoot>
       <StatusBar style={statusTone ? (statusTone === 'dark' ? 'dark' : 'light') : theme.scheme === 'dark' ? 'light' : 'dark'} animated />
       {/* A plain object: react-navigation's views don't take Unistyles styles on the web, so a theme switch has to re-render it. */}
@@ -96,6 +102,7 @@ export default function RootLayout() {
       </Stack>
       <SimulatedNotification />
     </DesignSystemRoot>
+    </ThemeProvider>
   );
 
   return (

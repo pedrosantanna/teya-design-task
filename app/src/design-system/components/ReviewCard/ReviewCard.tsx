@@ -8,7 +8,7 @@ import { ScrollView, View, useWindowDimensions } from 'react-native';
 import { useReducedMotion } from 'react-native-reanimated';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { useBleed } from '../../internal/bleed';
+import { useBleed, useRestWidth } from '../../internal/bleed';
 import { OnTileSurface, useTileAccent } from '../../internal/ground';
 import { cornerCurve, type ShopAccentName } from '../../theme';
 import { Icon } from '../Icon/Icon';
@@ -38,8 +38,9 @@ const MONTHS: Record<string, string> = {
 };
 
 export const ReviewCard = memo(function ReviewCard({ name, text, up, month, lines, position = 'only', width }: ReviewCardProps) {
-  const { theme } = useUnistyles();
-  const grouped = theme.platform === 'ios';
+  // Painted on both platforms (platforms.md, parity): a Material 3 list sits in the same card role as the iOS grouped list,
+  // so a row on a tile is cardOnTile on Android too, never the bare tile.
+  const grouped = true;
   const verdict = up ? 'Would go back' : "Wouldn't go back";
   const [m, y] = month.split(' ');
   const top = position === 'first' || position === 'only';
@@ -73,7 +74,7 @@ export const ReviewCard = memo(function ReviewCard({ name, text, up, month, line
   }
   return (
     <View accessible accessibilityLabel={label} style={styles.row(grouped, top, bottom, tile)}>
-      <View style={styles.inner(grouped && !bottom)}>
+      <View style={styles.inner(grouped && !bottom, tile)}>
         <OnTileSurface painted={grouped}>{body}</OnTileSurface>
       </View>
     </View>
@@ -109,7 +110,11 @@ export function ReviewCarousel({ accessibilityLabel, count, bleed: bleedProp, ch
   const bleed = bleedProp ?? pageBleed;
   const { theme } = useUnistyles();
   const reduceMotion = useReducedMotion();
-  const [inner, setInner] = useState(0);
+  // On the shop page the card's rest width comes from the page: measuring here re-rendered every card on each frame
+  // of the card's growth at the start of a scroll (profiled: 15 to 30 ms per commit on the JS thread).
+  const rest = useRestWidth();
+  const [measured, setInner] = useState(0);
+  const inner = rest ?? measured;
   const { fontScale } = useWindowDimensions();
   const stacked = fontScale >= ACCESSIBILITY_FONT_SCALE;
   const gap = theme.space[3];
@@ -121,7 +126,7 @@ export function ReviewCarousel({ accessibilityLabel, count, bleed: bleedProp, ch
   // Where each card starts, from the summary's left edge: the snap points.
   const offsets = [0, ...Array.from({ length: count }, (_, i) => widths.summary + gap + i * (widths.review + gap))];
   return (
-    <View onLayout={(e) => setInner(e.nativeEvent.layout.width)} accessibilityLabel={stacked ? accessibilityLabel : undefined}>
+    <View onLayout={rest === undefined ? (e) => setInner(e.nativeEvent.layout.width) : undefined} accessibilityLabel={stacked ? accessibilityLabel : undefined}>
       {inner > 0 ? (
         stacked ? (
           <View style={styles.list}>{children(widths)}</View>
@@ -171,12 +176,12 @@ const styles = StyleSheet.create((theme) => ({
     borderBottomLeftRadius: bottom && grouped ? theme.radius.inner : 0,
     borderBottomRightRadius: bottom && grouped ? theme.radius.inner : 0,
   }),
-  inner: (separator: boolean) => ({
+  inner: (separator: boolean, tile?: ShopAccentName) => ({
     gap: theme.space[1],
     paddingVertical: theme.space[3],
     paddingRight: theme.space[4],
     borderBottomWidth: separator ? StyleSheet.hairlineWidth : 0,
-    borderBottomColor: theme.color.separator,
+    borderBottomColor: tile ? theme.color.shop.accent[tile].separatorOnCard : theme.color.separator,
   }),
   line: { flexDirection: 'row', alignItems: 'center', gap: theme.space[1] },
   grow: { flex: 1 },

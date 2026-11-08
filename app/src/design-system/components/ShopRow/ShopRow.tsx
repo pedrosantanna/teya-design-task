@@ -34,7 +34,9 @@ export type ShopRowProps = {
 export const ShopRow = memo(function ShopRow({ id, name, facts, logo, image, accent, position = 'only', onPress }: ShopRowProps) {
   const { theme } = useUnistyles();
   const press = usePress();
-  const grouped = theme.platform === 'ios';
+  // Painted on both platforms (platforms.md, parity): a Material 3 list sits in the same card role as the iOS grouped list,
+  // so a row on a tile is cardOnTile on Android too, never the bare tile.
+  const grouped = true;
   // On an accent tile (the Category screen) the row takes that accent's cardOnTile: white in light, and in dark a
   // deep tint of the tile's hue with light text (round 18). Its secondary text takes mutedForegroundOnTile, which
   // inside the row (OnTileSurface) reads as mutedForegroundOnTileCard.
@@ -66,7 +68,7 @@ export const ShopRow = memo(function ShopRow({ id, name, facts, logo, image, acc
           {logo ? <Image source={{ uri: logo }} style={IMAGE_OVER} contentFit="cover" accessible={false} /> : null}
         </View>
       )}
-      <View style={styles.text(grouped && position !== 'last' && position !== 'only')}>
+      <View style={styles.text(grouped && position !== 'last' && position !== 'only', tile)}>
         <View style={styles.grow}>
           <Text variant="headline" numberOfLines={1}>
             {name}
@@ -108,8 +110,8 @@ const styles = StyleSheet.create((theme) => ({
     overflow: 'hidden',
   },
   thumb: { ...cornerCurve, borderRadius: theme.radius.inner },
-  // The separator is inset to the text, as in an iOS list.
-  text: (separator: boolean) => ({
+  // The separator is inset to the text, as in an iOS list; on a tile, the card's own hue a step lighter (separatorOnCard).
+  text: (separator: boolean, tile?: ShopAccentName) => ({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
@@ -117,7 +119,7 @@ const styles = StyleSheet.create((theme) => ({
     paddingVertical: theme.space[4],
     paddingRight: theme.space[4],
     borderBottomWidth: separator ? StyleSheet.hairlineWidth : 0,
-    borderBottomColor: theme.color.separator,
+    borderBottomColor: tile ? theme.color.shop.accent[tile].separatorOnCard : theme.color.separator,
   }),
   grow: { flex: 1, gap: theme.space[1] },
 }));

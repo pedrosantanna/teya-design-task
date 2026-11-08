@@ -3,7 +3,7 @@ import type { IconSvgElement } from '@hugeicons/react-native';
 import { memo, type ReactNode } from 'react';
 import { Pressable, View } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { StyleSheet, useUnistyles } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 
 import { OnTileSurface, useGround, useTileAccent, type GroundName } from '../../internal/ground';
 import { spoken } from '../../internal/PressableCard';
@@ -68,9 +68,10 @@ export const ListRow = memo(function ListRow({
   onPress,
   accessibilityLabel,
 }: ListRowProps) {
-  const { theme } = useUnistyles();
   const press = usePress(selected === undefined ? undefined : 'selection');
-  const grouped = theme.platform === 'ios';
+  // Painted on both platforms (platforms.md, parity): a Material 3 list sits in the same card role as the iOS grouped list,
+  // so a row on a tile is cardOnTile on Android too, never the bare tile.
+  const grouped = true;
   const choice = selected !== undefined;
   const fill: ColorName = 'foreground';
   const ground = useGround();
@@ -86,7 +87,7 @@ export const ListRow = memo(function ListRow({
           <Icon icon={icon} size="body" color={choice && selected ? 'foreground' : 'mutedForeground'} />
         </View>
       ) : null}
-      <View style={styles.text(grouped && position !== 'last' && position !== 'only', ground, surface)}>
+      <View style={styles.text(grouped && position !== 'last' && position !== 'only', ground, surface, tile)}>
         {children ? <View style={styles.grow}>{children}</View> : null}
         <View style={children ? styles.hidden : styles.grow}>
           <Text variant={strong || (choice && selected) ? 'headline' : 'body'} color={fill}>
@@ -145,8 +146,15 @@ function groupedFill(theme: { scheme: string; color: { card: string; background:
   return theme.color[surface];
 }
 
-/** The dark Separator is the Muted colour, so on Muted rows (a sheet's rows, and the Background surface in dark) the separator takes Border (#403D3A). */
-function separatorOn(theme: { scheme: string; color: { separator: string; border: string } }, ground?: GroundName, surface: 'card' | 'background' = 'card'): string {
+/** The dark Separator is the Muted colour, so on Muted rows (a sheet's rows, and the Background surface in dark) the separator takes Border (#403D3A).
+ *  On a tile the rows are the accent's cardOnTile, and the separator is that card a step lighter (separatorOnCard), never a grey line on the tint. */
+function separatorOn(
+  theme: { scheme: string; color: { separator: string; border: string; shop: { accent: Record<ShopAccentName, { separatorOnCard: string }> } } },
+  ground?: GroundName,
+  surface: 'card' | 'background' = 'card',
+  tile?: ShopAccentName,
+): string {
+  if (ground === 'tile' && tile) return theme.color.shop.accent[tile].separatorOnCard;
   return theme.scheme === 'dark' && (ground === 'sheet' || surface === 'background') ? theme.color.border : theme.color.separator;
 }
 
@@ -171,13 +179,14 @@ export type ListBlockProps = { children: ReactNode; position?: RowPosition; surf
 /** Free content inside a grouped list: a padded block with the row's fill, corners and separator, so a summary or a
  *  row of chips sits in the same card as the rows under it (the shop page's sections). */
 export function ListBlock({ children, position = 'only', surface = 'card', accessibilityLabel }: ListBlockProps) {
-  const { theme } = useUnistyles();
   const ground = useGround();
   const tile = useTileAccent();
-  const grouped = theme.platform === 'ios';
+  // Painted on both platforms (platforms.md, parity): a Material 3 list sits in the same card role as the iOS grouped list,
+  // so a row on a tile is cardOnTile on Android too, never the bare tile.
+  const grouped = true;
   return (
     <View accessibilityLabel={accessibilityLabel} style={[styles.row(grouped, position, false, surface, ground, tile), styles.block]}>
-      <View style={styles.blockInner(grouped && position !== 'last' && position !== 'only', ground, surface)}>
+      <View style={styles.blockInner(grouped && position !== 'last' && position !== 'only', ground, surface, tile)}>
         <OnTileSurface painted={grouped}>{children}</OnTileSurface>
       </View>
     </View>
@@ -186,13 +195,13 @@ export function ListBlock({ children, position = 'only', surface = 'card', acces
 
 const styles = StyleSheet.create((theme) => ({
   block: { alignItems: 'stretch' },
-  blockInner: (separator: boolean, ground?: GroundName, surface: 'card' | 'background' = 'card') => ({
+  blockInner: (separator: boolean, ground?: GroundName, surface: 'card' | 'background' = 'card', tile?: ShopAccentName) => ({
     flex: 1,
     gap: theme.gap.block,
     paddingVertical: theme.space[4],
     paddingRight: theme.space[4],
     borderBottomWidth: separator ? StyleSheet.hairlineWidth : 0,
-    borderBottomColor: separatorOn(theme, ground, surface),
+    borderBottomColor: separatorOn(theme, ground, surface, tile),
   }),
   group: { ...cornerCurve, borderRadius: theme.radius.inner },
   groupInSheet: { borderRadius: theme.radius.bubble },
@@ -230,7 +239,7 @@ const styles = StyleSheet.create((theme) => ({
     height: theme.type[variant].lineHeight,
     justifyContent: 'center',
   }),
-  text: (separator: boolean, ground?: GroundName, surface: 'card' | 'background' = 'card') => ({
+  text: (separator: boolean, ground?: GroundName, surface: 'card' | 'background' = 'card', tile?: ShopAccentName) => ({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
@@ -238,7 +247,7 @@ const styles = StyleSheet.create((theme) => ({
     paddingVertical: theme.space[3],
     paddingRight: theme.space[4],
     borderBottomWidth: separator ? StyleSheet.hairlineWidth : 0,
-    borderBottomColor: separatorOn(theme, ground, surface),
+    borderBottomColor: separatorOn(theme, ground, surface, tile),
   }),
   hidden: { display: 'none' },
   grow: { flex: 1, gap: theme.space[1] / 2 },

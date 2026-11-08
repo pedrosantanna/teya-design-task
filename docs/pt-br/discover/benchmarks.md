@@ -96,6 +96,7 @@ O Reddit bloqueou as ferramentas de pesquisa, e X, TikTok e Instagram exigem log
 
 ```screens
 image: ../../../private/benchmarks/google-maps.jpg
+alt: Telas do Google Maps de um pub: o resultado da busca no mapa, a ficha do local marcada como Closed · Opens 11 am, a visão geral com horário e Place an order, a aba de cardápio e os posts do dono.
 source: https://mobbin.com/apps/google-maps-ios-84a5727c-9a4d-40f6-95ce-aa915413c4dc/c5414d91-2c38-4da8-8d6e-f4dc01be6602/screens
 ```
 
@@ -129,11 +130,13 @@ status: verified
 
 ```screens
 image: ../../../private/benchmarks/instagram.jpg
+alt: Telas do Instagram: o perfil de uma marca com os botões Message e Shop, a coleção da loja, itens vendidos e enviados pela própria conta e uma conversa por mensagem direta.
 source: https://mobbin.com/apps/instagram-ios-3aa6c4a6-7200-43f0-81c2-397c22fa1596/c2173e91-816f-4b77-baa2-3579d4ce2b7e/screens
 ```
 
 ```screens
 image: ../../../private/benchmarks/whatsapp.jpg
+alt: Telas do WhatsApp: a lista de conversas com grupos e comunidades, uma conversa individual, o envio de uma foto com legenda e o compartilhamento de localização.
 source: https://mobbin.com/apps/whats-app-ios-8738dbc9-e7a8-4fef-91e5-6afd1c9d092b/36ae4720-4bee-4257-85b3-80d5447e899d/screens
 ```
 
@@ -167,6 +170,7 @@ status: verified
 
 ```screens
 image: ../../../private/benchmarks/amazon.jpg
+alt: Telas da Amazon: resultados de busca com o local de entrega, resultados com datas de entrega, a caixa de compra de um produto com In Stock e datas de entrega, e o carrinho.
 source: https://mobbin.com/apps/amazon-shopping-ios-f3ecc40c-1f6d-4b81-8f5a-cb67d8271469/c06b306e-d93a-4ff9-b45f-14388ab02e16/screens
 ```
 
@@ -200,6 +204,7 @@ status: verified
 
 ```screens
 image: ../../../private/benchmarks/nextdoor.jpg
+alt: Telas do Nextdoor: a área Faves, uma resposta de IA resumida de posts de vizinhos, a busca com Neighborhood Faves e uma lista de negócios locais votados pelos vizinhos.
 source: https://mobbin.com/apps/nextdoor-ios-def2c342-4fb2-4636-bbcc-a0271fbe2651/aff28b15-291f-4855-96a2-6c142dbe490d/screens
 ```
 
@@ -239,6 +244,7 @@ A ShopAppy era uma "virtual high street" (high street virtual) fundada por volta
 
 ```screens
 image: ../../../private/benchmarks/deliveroo.jpg
+alt: Telas do Deliveroo: a aba Shopping com lojas de grandes marcas, lojas de presentes com uma floricultura e farmácias por perto, a página de uma loja com taxa de entrega, pedido mínimo e horário de fechamento, e uma cesta por loja.
 source: https://mobbin.com/apps/deliveroo-ios-c53d6f39-5c63-417d-a595-2e3fa65e404e/b24076da-f39f-48dd-8dfa-fd3974e046df/screens
 ```
 
@@ -272,6 +278,7 @@ status: verified
 
 ```screens
 image: ../../../private/benchmarks/uber-eats.jpg
+alt: Telas do Uber Eats: lojas perto de você, a página de uma loja de conveniência com Delivery e Pickup, os corredores da loja, um carrinho por loja e o mapa de retirada.
 source: https://mobbin.com/apps/uber-eats-ios-647bbce0-2eac-4b6f-a34b-3753263bf409/abf2e266-f49b-44b0-a25f-07a9c7b7bcff/screens
 ```
 
@@ -403,6 +410,7 @@ Excedente de comida: os compradores pagam antes por uma "Surprise Bag" de uma lo
 
 ```screens
 image: ../../../private/benchmarks/too-good-to-go.jpg
+alt: Telas do Too Good To Go: Surprise Bags num mapa com filtro de janela de retirada, a página de uma loja com a janela de retirada e as sacolas restantes, o pedido com a contagem até a retirada, um pedido cancelado e o aviso para quando houver sacolas de novo.
 source: https://mobbin.com/apps/too-good-to-go-ios-d544c59a-6284-499f-ba07-92ca14f91002/00967c9c-7821-467b-8c31-7052fcd944b5/screens
 ```
 
@@ -421,6 +429,12 @@ status: verified
 
 Compartilhamento gratuito de comida e itens domésticos entre vizinhos, com voluntários coletando excedente de supermercados como a Tesco ([The Grocer](https://www.thegrocer.co.uk/news/tescos-olio-food-waste-partnership-hits-100-million-meals/723887.article)). Os vizinhos retiram dentro de uma janela quando vale a pena, e janelas curtas deixam pessoas de fora.
 
+```screens
+image: ../../../private/benchmarks/olio.jpg
+alt: Telas do OLIO: o feed do bairro com comida grátis, um anúncio com os horários de retirada, o lembrete para combinar dia e hora e a conversa para combinar a coleta.
+source: https://mobbin.com/apps/olio-ios-82d24ac1-c025-442c-8cb3-d92aae1044cb/dd24bfa3-2071-4a17-8410-addbd8ee1108/screens
+```
+
 ```quote
 text: "most of them post at 9pm and expect you to show up shortly before 9:30…"
 handle: sleepy.uwu.nova
@@ -436,6 +450,12 @@ status: verified
 
 Desde outubro de 2026, carrinhos de até 15 lojas Shopify são pagos em um único checkout Shop Pay, e cada loja continua sendo a vendedora ([Shopifreaks](https://www.shopifreaks.com/shopify-launches-universal-checkout-in-the-shop-app-letting-shoppers-buy-from-multiple-brands-with-one-cart-and-one-checkout/)). As lojas Shopify também oferecem retirada local e entrega ([Shopify](https://www.shopify.com/local-delivery)), mas o app não tem noção de "perto de mim" nem data para o Reino Unido. É o exemplo público mais claro de um checkout único para muitas independentes.
 
+```screens
+image: ../../../private/benchmarks/shop-app.jpg
+alt: Telas do Shop app: o carrinho de uma loja, Review & Pay com o frete, a escolha entre Ship e Pickup com um ponto de retirada, a confirmação do pedido e o acompanhamento dos pedidos.
+source: https://mobbin.com/apps/shop-ios-1f1a3d5b-cb65-4c7e-af4b-e4cdf1c03e4d/7b6adbde-de48-47c5-979b-f629f1eb87a9/screens
+```
+
 ```quote
 text: "this helps me to keep track what I've ordered and when I should expect it… with quick links to message sellers."
 handle: MoogStarr
@@ -450,6 +470,12 @@ status: verified
 ### Etsy
 
 Um marketplace global de artesanato: uma cesta com muitas lojas, cada uma enviando separadamente, sem retirada ([Etsy Help](https://help.etsy.com/hc/articles/115015627947)). Prova que uma cesta com milhares de vendedores minúsculos funciona, e que "local", ali, é um rótulo que os vendedores digitam.
+
+```screens
+image: ../../../private/benchmarks/etsy.jpg
+alt: Telas do Etsy: a página de um item com o vendedor e a entrega estimada, as opções de compra, a página da loja de um vendedor e um carrinho dividido por loja com Check out from shop.
+source: https://mobbin.com/apps/etsy-ios-f80898c8-cdab-4e15-b9e5-85c4babfcb77/d4844f33-3a12-4e0a-9282-d67e9f24da3d/screens
+```
 
 ```quote
 text: "I love finding unique gifts as well as supporting small businesses and I am NEVER disappointed on Etsy…"

@@ -16,12 +16,15 @@ Call:
 AI:
 - Um agente leu as hipóteses, o modelo conceitual, os fluxos do app, do agente e da loja, as specs e a simulação do protótipo, e escreveu as tarefas, os eventos, as métricas, o modelo de liquidez e a recomendação sobre NPS e CSAT.
 - Cada entrada do modelo de liquidez é uma premissa, marcada como tal. Nenhum benchmark externo é usado; o único link externo é o guia do regulador britânico sobre tecnologias de armazenamento e acesso, que o agente abriu.
+- Numa segunda passada, um agente conferiu as tarefas e os eventos contra os estados de compra e pagamento do protótipo e corrigiu o que não batia: a compra numa loja conectada, a entrega, a autorização separada da cobrança, Not found como estado vivo e os denominadores das taxas de erro e da H1.
 Trade-offs:
 - Medir a partir dos registros do serviço deixa o rastreamento fora do app, e perde o que acontece na tela (o tempo comparando respostas, um pedido abandonado antes de enviar) até existir analytics com consentimento.
 - O modelo de liquidez trata as lojas como independentes. Um item escasso, como óculos de eclipse na véspera, esgota em todo lugar ao mesmo tempo, então a taxa de atendimento real vai ser menor do que o modelo diz.
 ```
 
 O detalhe está em duas páginas: [Tarefas e eventos](telemetry.md) define as tarefas e a taxonomia de eventos, e [Métricas de produto](metrics.md) define as métricas, a north star, o modelo de liquidez e os guardrails.
+
+O canvas [App flow](../develop/ideation/app-flow.md) tem uma camada de medição (M) que coloca cada tarefa, evento e métrica de produto nas telas onde acontecem, lida de `docs/verify/measurement-layer.json`. `python3 scripts/build_measurement_layer.py` falha se um evento, tarefa ou métrica destas páginas não tiver lugar no canvas.
 
 ## Métodos
 
@@ -41,23 +44,23 @@ Os critérios de aprovação são copiados de [Hipóteses](../define/hypotheses.
 
 | # | Métrica | Eventos | Passa se | Método |
 | --- | --- | --- | --- | --- |
-| H1 | Parcela de consultas com resposta válida em até 10 minutos de loja aberta; parcela de buscas resolvidas | `shop_asked`, `shop_replied` (válida, minutos até responder), `shop_timed_out`, `answer_received` | 60% de 20 consultas; metade das buscas, relatadas separadamente | Prova de conceito |
-| H2 | Declarado: ir à loja em vez de pedir online. Comportamento: taxa de retirada | Escolha no protótipo; `order_set_aside`, `order_collected`, `order_not_collected` | 4 de 6; 2 de cada 3 compras retiradas | Teste do protótipo, depois prova de conceito |
-| H3 | Primeira ação por cenário: perguntar ou explorar; o que pareceu mais simples | `ask_started` contra `nearby_viewed`, `category_opened`, `shop_opened` como primeira ação; as notas de quem observa | 4 de 6 perguntam primeiro; 4 de 6 acham mais simples | Teste do protótipo |
-| H4 | Compradores que esperam a resposta | `request_created`, `answer_received`, `payment_succeeded`, `request_closed`; uma pergunta depois sobre se compraram em outro lugar, que nenhum evento mostra | 4 de 6 esperam | Concierge feito à mão |
+| H1 | Parcela de consultas com resposta válida em até 10 minutos de loja aberta; parcela de buscas resolvidas | `shop_asked` (canal WhatsApp, aberta agora), `shop_replied` (válida, minutos até responder), `shop_timed_out`, `answer_received`, `request_not_found` | 60% de 20 consultas; metade das buscas, relatadas separadamente | Prova de conceito |
+| H2 | Declarado: ir à loja em vez de pedir online. Comportamento: taxa de retirada | Escolha no protótipo; `order_ready` (retirada), `order_collected`, `order_not_collected`, `order_cancelled` | 4 de 6; 2 de cada 3 compras retiradas | Teste do protótipo, depois prova de conceito |
+| H3 | Primeira ação por cenário: perguntar ou explorar; o que pareceu mais simples | O primeiro entre `ask_started`, `category_opened`, `shop_opened` ou `area_changed` depois de `nearby_viewed`, que só marca o início da sessão; no teste do protótipo quem observa registra | 4 de 6 perguntam primeiro; 4 de 6 acham mais simples | Teste do protótipo |
+| H4 | Compradores que esperam a resposta | `request_created`, `answer_received`, `payment_authorised` ou `payment_taken`, `request_closed`; uma pergunta depois sobre se compraram em outro lugar, que nenhum evento mostra | 4 de 6 esperam | Concierge feito à mão |
 | H5 | Preferência entre a confirmação da loja e o estoque do caixa | Escolha num teste lado a lado | 4 de 6, com motivos | Teste do protótipo |
-| H6 | Lojas que guardam um item comprado por 7 dias; depois, quanto tempo os itens esperam | Declarado; depois `order_set_aside` e `order_collected` (dias depois de pronto) | 6 de 10 | Conversas com as lojas |
+| H6 | Lojas que guardam um item comprado por 7 dias; depois, quanto tempo os itens esperam | Declarado; depois `order_ready` e `order_collected` (dias depois de pronto) | 6 de 10 | Conversas com as lojas |
 | H6, depois do trabalho | Lojas que oferecem um horário mais tarde ou um ponto de retirada; pontos abertos depois das 18h30 | Declarado; uma volta pelo anel; depois `order_collected` (lugar, hora) | 3 de 10, e um ponto | Conversas e uma volta |
-| H7 | Compradores que trabalham e compram antes para retirar depois | Escolha no protótipo; `payment_succeeded`, `order_collected` (lugar, hora) | 4 de 6 declarado; 2 compras reais retiradas | Teste do protótipo, depois prova de conceito |
-| H8 | Compradores que escolhem Keep looking, uma vez ou toda semana | `keep_looking_set` (recorrente ou não) | 3 de 6 aviso pontual; 2 de 6 semanal | Teste do protótipo |
-| H9 | Lojistas que dizem que o resumo mudaria o que estocam ou os faria responder | `demand_summary_sent`, `demand_summary_read` | 3 de 5 | Conversas com as lojas |
+| H7 | Compradores que trabalham e compram antes para retirar depois | Escolha no protótipo; uma compra, `order_collected` (lugar, hora) | 4 de 6 declarado; 2 compras reais retiradas | Teste do protótipo, depois prova de conceito |
+| H8 | Compradores que escolhem Keep looking, uma vez ou toda semana | O registro da escolha por quem observa; build futuro: `keep_looking_set` (recorrente, origem) | 3 de 6 aviso pontual; 2 de 6 semanal | Teste do protótipo |
+| H9 | Lojistas que dizem que o resumo mudaria o que estocam ou os faria responder | Declarado, sobre um mock-up impresso; build futuro: `demand_summary_sent`, `demand_summary_read` | 3 de 5 | Conversas com as lojas |
 | H10 | Onde os compradores querem o concierge | Declarado; depois `request_created` (canal) | Uma divisão, sem critério | Teste do protótipo |
 | H11 | Lojas cujo caixa guarda códigos de produto | O cadastro da loja (origem: conectada) | Uma contagem, sem critério | Prova de conceito |
-| H12 | Sins que terminam em compra | `answer_received` (um sim) seguido de `payment_succeeded` no mesmo pedido | 70% | Prova de conceito |
+| H12 | Pedidos com pelo menos um sim que terminam em compra | `answer_received` com um sim (tem, tem parte, em estoque), depois `payment_authorised` ou `payment_taken` no mesmo pedido | 70% dos pedidos com um sim | Prova de conceito |
 | H13 | Lojas com outra maquininha que adotam o POS do provedor | `offer_made`, `offer_accepted` (tipo: pos) | 2 das primeiras 5 | Prova de conceito, depois de quatro semanas |
-| H14 | Lojas no POS que o manteriam ou recomendariam; vendas do app por loja | `payment_succeeded` somado por loja; declarado | 3 de 5 | Prova de conceito e conversas |
+| H14 | Lojas no POS que o manteriam ou recomendariam; vendas do app por loja | `payment_taken` (valor) somado por loja; declarado | 3 de 5 | Prova de conceito e conversas |
 | H15 | Lojas que pagam por destaque | `offer_made`, `offer_accepted` (tipo: promotion) | 2 de 10 | Prova de conceito |
-| H16 | Parcela das compras retiradas em lojas a mais de 15 minutos | `order_collected` (minutos a pé) | Uma parcela, sem critério | Prova de conceito |
+| H16 | Parcela das compras retiradas em lojas a mais de 15 minutos | `order_collected` (minutos a pé, como mostrados a partir do lugar do pedido) | Uma parcela, sem critério | Prova de conceito |
 | H17 | Quantas vezes a loja consultada é escolhida, com e sem a linha de confiabilidade | Escolha em pares de cartões | 3 de 6 pares com a linha, e mais do que sem | Teste do protótipo |
 | H18 | Leitura correta de "% would go back" contra estrelas | Respostas num teste de 5 segundos | 5 de 6, não menos do que com estrelas | Teste de 5 segundos |
 | H19 | Lojas que aceitam um número público de precisão de estoque | Declarado | 6 de 10 | Conversas com as lojas |

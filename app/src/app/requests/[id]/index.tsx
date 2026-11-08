@@ -31,6 +31,7 @@ import {
   NavBar,
   OrderCard,
   PaymentSheet,
+  PinnedOrder,
   RatingSheet,
   Sheet,
   Stepper,
@@ -68,6 +69,7 @@ import {
   useApp,
   useAppActions,
   useContent,
+  useCurrentOrder,
   useOtherThread,
   useSim,
   buildOtherChat,
@@ -115,6 +117,11 @@ function ActiveChat() {
   const notifyPrompt = useSim((s) => s.notifyPrompt);
   const orderShopId = useSim((s) => s.orderShopId);
   const orderShop = shopById(content, orderShopId ?? content.order.shopId);
+  const order = useCurrentOrder();
+  // Once there is an order, it stays pinned under the nav bar and opens the receipt (decision 068). An order that ended
+  // before it was charged (sold, not confirmed) isn't pinned: the chat carries on with the next answer.
+  const pinned = order && order.state !== 'sold' && order.state !== 'notConfirmed' ? order : null;
+  const [pinnedHeight, setPinnedHeight] = useState(0);
 
   useFocusEffect(
     useCallback(() => {
@@ -216,7 +223,7 @@ function ActiveChat() {
           scrollEventThrottle={16}
           keyboardDismissMode="interactive"
           keyboardShouldPersistTaps="handled"
-          contentContainerStyle={styles.content(margin, top, insets.bottom)}
+          contentContainerStyle={styles.content(margin, top + (pinned ? pinnedHeight : 0), insets.bottom)}
         />
       </ChatGestureArea>
       {/* The composer rides on the keyboard; with it open, the dock drops the home-indicator inset. */}
@@ -239,8 +246,28 @@ function ActiveChat() {
         backLabel="Requests"
         onLeading={() => (router.canGoBack() ? router.back() : router.navigate('/requests'))}
         scroll={scroll}
-        backgroundAt={-theme.space[2]}
+        // Always filled, overscroll included: the conversation is always under the bar (a pull past the newest
+        // message used to clear the fill and leave the pinned order floating over the messages).
+        backgroundAt={-frame.height}
       />
+      {/* After the nav bar, so its fill covers the bar's hairline: one bar, one edge. */}
+      {pinned ? (
+        <View style={styles.pinned(top)} onLayout={(e) => setPinnedHeight(e.nativeEvent.layout.height)}>
+          <PinnedOrder
+            status={pinned.label}
+            tone={pinned.tone}
+            shop={pinned.shop}
+            items={pinned.items}
+            accent={shopAccent(shopById(content, pinned.shopId))}
+            fulfilment={pinned.fulfilment}
+            code={pinned.fulfilment === 'collect' && (pinned.state === 'ready' || pinned.state === 'extended') ? pinned.code : undefined}
+            margin={margin}
+            onPress={openReceipt}
+            scroll={scroll}
+            backgroundAt={-frame.height}
+          />
+        </View>
+      ) : null}
       <PhotoPickerSheet
         open={picking}
         onClose={() => setPicking(false)}
@@ -778,7 +805,9 @@ function OtherRequestChat({ id }: { id: string }) {
         backLabel="Requests"
         onLeading={() => (router.canGoBack() ? router.back() : router.navigate('/requests'))}
         scroll={scroll}
-        backgroundAt={-theme.space[2]}
+        // Always filled, overscroll included: the conversation is always under the bar (a pull past the newest
+        // message used to clear the fill and leave the pinned order floating over the messages).
+        backgroundAt={-frame.height}
       />
       {request ? (
         <PhotoPickerSheet
@@ -829,6 +858,7 @@ const styles = StyleSheet.create((theme) => ({
     paddingBottom: top + theme.space[4],
   }),
   sticky: { position: 'absolute', left: 0, right: 0, bottom: 0 },
+  pinned: (top: number) => ({ position: 'absolute', left: 0, right: 0, top }),
   pad: (margin: number) => ({ paddingHorizontal: margin }),
   block: { marginTop: theme.space[3] },
   chips: {

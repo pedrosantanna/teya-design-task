@@ -25,8 +25,10 @@ A row in a grouped list: the details sheet (item, quantity, the ways to get it),
 
 ## iOS and Android
 
-iOS: inset grouped list on Card, `radius.inner` on the first and last rows (`radius.bubble` in a sheet; `ListGroup corner="card"` gives a standalone list `radius.card`), separators inset to the text. Android: Material list item with no fill and no separators.
+iOS: inset grouped list on Card, `radius.inner` on the first and last rows (`radius.bubble` in a sheet; `ListGroup corner="card"` gives a standalone list `radius.card`), separators inset to the text. Android: a Material 3 list item in the same container: the same fill (Card, the sheet's row colour, or `cardOnTile` on a tile), corners and inset dividers, with no chevron (parity rule in platforms.md).
 
 ## Accessibility
 
 One element: title, detail and value. A choice row is a radio with its checked state; a row with a stepper leaves the stepper as its own adjustable element.
+
+On a tile (`<Ground value="tile" accent>`) the separator is the accent's `separatorOnCard`, a lighter tone of `cardOnTile` in dark, never the grey Separator; `ShopRow` and `ReviewCard` do the same.

@@ -63,6 +63,8 @@ export { Notification, NotificationBanner, type NotificationBannerProps, type No
 export { NotificationExamples } from './components/Notification/Notification.examples';
 export { OrderCard, type OrderCardProps, type OrderStep } from './components/OrderCard/OrderCard';
 export { OrderCardExamples } from './components/OrderCard/OrderCard.examples';
+export { PinnedOrder, type PinnedOrderProps } from './components/PinnedOrder/PinnedOrder';
+export { PinnedOrderExamples } from './components/PinnedOrder/PinnedOrder.examples';
 export { PaymentSheet, type PaymentSheetProps, type PaymentSheetStatus } from './components/PaymentSheet/PaymentSheet';
 export { PaymentSheetExamples } from './components/PaymentSheet/PaymentSheet.examples';
 export { RequestRow, type RequestRowProps } from './components/RequestRow/RequestRow';

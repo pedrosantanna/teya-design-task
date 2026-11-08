@@ -86,6 +86,7 @@
       vp.style.backgroundSize = `${gap}px ${gap}px`;
       vp.style.backgroundPosition = `${x}px ${y}px`;
       pct.textContent = Math.round(k * 100) + '%';
+      try { if (mBuilt) setFar(); } catch (e) { /* layer not set up yet */ }
     }
     function setView(nx, ny, nk, animate) {
       nk = Math.min(MAX, Math.max(MIN, nk));
@@ -468,6 +469,7 @@
       const outs = plinks.filter(p => p.from === id && p.frameLevel);
       pv.next.innerHTML = outs.map(p => `<button type="button" data-n="${p.n}">${icon('chevron-right')}<span>${t('protoNext')}: ${(p.label || titleOf(byId.get(p.to))).replace(/</g, '&lt;')}</span></button>`).join('');
       opts?.onChange?.({ mode, frame: id });
+      mProtoPanel();
     }
     function protoGo(p, hotEl) {
       if (proto.busy) return;
@@ -525,6 +527,252 @@
         vp.focus({ preventScroll: true });
         opts?.onChange?.({ mode, frame: null });
       }
+      mProtoPanel();
+    }
+
+    // --- Measurement layer (M) -------------------------------------------------------------
+    // Shows the measurement plan on the board: task bars across the frames of each task, an event pill
+    // where each event fires (on the element when the plan gives a selector), metric pills on the frames
+    // they are read from, and a side lane for events with no shopper screen. The data comes from
+    // opts.measure (docs/verify/measurement-layer.json, checked by scripts/build_measurement_layer.py).
+    const M = opts?.measure && Array.isArray(opts.measure.events) ? opts.measure : null;
+    const escH = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    const nm = o => (o ? (lang === 'pt' && o.pt ? o.pt : o.en) : '');
+    const GLYPH = { start: '▶', path: '•', success: '✓', failure: '✕', abandon: '↩' };
+    const ROLES = ['start', 'path', 'success', 'failure', 'abandon'];
+    let mOn = false, mBuilt = false, mPer = null;
+    const mLayer = document.createElement('div');
+    mLayer.className = 'cv-measure'; mLayer.setAttribute('aria-hidden', 'true');
+    let mLegend = null, mPanel = null;
+    function mIndex() {
+      const per = new Map(), get = id => { if (!per.has(id)) per.set(id, { tasks: [], events: [], metrics: [] }); return per.get(id); };
+      M.tasks.forEach(tk => {
+        const roles = new Map();
+        ROLES.forEach(r => (tk[r] || []).forEach(f => { if (!roles.has(f)) roles.set(f, []); roles.get(f).push(r); }));
+        roles.forEach((rs, f) => get(f).tasks.push({ tk, roles: rs }));
+      });
+      M.events.forEach(e => (e.at || []).forEach(a => { if (a.frame) get(a.frame).events.push({ e, sel: a.sel }); }));
+      M.metrics.forEach(m => (m.at || []).forEach(f => { if (f !== 'lane') get(f).metrics.push(m); }));
+      return per;
+    }
+    const isApp = e => e.kind === 'App';
+    const evTitle = e => `${e.name} · ${isApp(e) ? t('mApp') : t('mService')}`;
+    const mtTitle = m => `${nm(m.name)}${m.events?.length ? ` · ${t('mFrom')} ${m.events.join(', ')}` : ''}`;
+    const evPill = e => `<span class="m-ev ${isApp(e) ? 'app' : 'svc'}" title="${escH(evTitle(e))}">${escH(e.name).replace(/_/g, '_<wbr>')}</span>`;
+    const mtPill = m => `<span class="m-mt" title="${escH(mtTitle(m))}"><i aria-hidden="true">◆</i>${escH(nm(m.name))}</span>`;
+    const roleText = rs => rs.map(r => `${GLYPH[r]} ${t('m_' + r)}`).join(' · ');
+    function addAt(htmlStr) {
+      mLayer.insertAdjacentHTML('beforeend', htmlStr);
+      return mLayer.lastElementChild;
+    }
+    const L = (en, pt) => (lang === 'pt' ? pt : en);
+    const nPill = (e, n) => `<span class="m-ev ${isApp(e) ? 'app' : 'svc'}" title="${escH(evTitle(e))}"><b class="m-n">${n}</b>${escH(e.name).replace(/_/g, '_<wbr>')}</span>`;
+    function buildMeasure() {
+      mBuilt = true;
+      world.appendChild(mLayer);
+      mPer = mIndex();
+      const frameEl = id => items.find(i => i.id === id && i.matches('.frame'));
+      // Task bars sit in lanes above each row of frames (lane 0 farthest from the screens), so they never cover
+      // a screen. Each task's frames get a bar segment, joined by a dashed line in the gap between frames.
+      // Bars wrap to two lines when a label is long, so each lane takes the height of its tallest bar.
+      const rows = new Map(), rowStack = new Map();
+      M.tasks.forEach(tk => {
+        const byRow = new Map();
+        mPer.forEach((p, fid) => {
+          const it = p.tasks.find(x => x.tk === tk), f = it && frameEl(fid);
+          if (!f) return;
+          const b = box(f);
+          if (!byRow.has(b.y)) byRow.set(b.y, []);
+          byRow.get(b.y).push({ b, roles: it.roles, fid });
+        });
+        byRow.forEach((segs, y) => {
+          segs.sort((a, c) => a.b.x - c.b.x);
+          const last = segs[segs.length - 1].b;
+          if (!rows.has(y)) rows.set(y, []);
+          rows.get(y).push({ tk, segs, x0: segs[0].b.x, x1: last.x + last.w });
+        });
+      });
+      const GAP = 6, ABOVE = 8;
+      rows.forEach((runs, y) => {
+        runs.sort((a, c) => a.x0 - c.x0 || (c.x1 - c.x0) - (a.x1 - a.x0));
+        const ends = [];
+        runs.forEach(r => { let l = ends.findIndex(e => e < r.x0 - 4); if (l < 0) { l = ends.length; ends.push(0); } ends[l] = r.x1; r.lane = l; });
+        const lanes = ends.length, laneH = new Array(lanes).fill(32);
+        runs.forEach(r => {
+          const shop = r.tk.actor === 'shop';
+          r.bars = r.segs.map(s => {
+            const bad = s.roles.every(x => x === 'failure' || x === 'abandon');
+            const label = `${shop ? `${t('mShopTask')} · ` : ''}${nm(r.tk.name)}`;
+            const el = addAt(`<span class="m-task${bad ? ' bad' : ''}" style="left:${s.b.x + 8}px;top:0;width:${s.b.w - 16}px" title="${escH(`${label}: ${roleText(s.roles)}`)}"><b>${escH(label)}</b><em>${escH(roleText(s.roles))}</em></span>`);
+            laneH[r.lane] = Math.max(laneH[r.lane], el.offsetHeight);
+            return el;
+          });
+        });
+        // Lane tops, counted up from the row's frames: the last lane sits just above the screens.
+        const tops = new Array(lanes);
+        let yy = y - ABOVE;
+        for (let l = lanes - 1; l >= 0; l--) { yy -= laneH[l]; tops[l] = yy; yy -= GAP; }
+        const stack = y - ABOVE - yy - GAP + ABOVE;
+        rowStack.set(y, stack);
+        runs.forEach(r => {
+          const top = tops[r.lane], mid = top + laneH[r.lane] / 2 - 1;
+          r.bars.forEach(el => { el.style.top = top + 'px'; el.style.minHeight = laneH[r.lane] + 'px'; });
+          for (let i = 1; i < r.segs.length; i++) {
+            const a = r.segs[i - 1].b, c = r.segs[i].b;
+            const j = addAt(`<i class="m-join" style="left:${a.x + a.w - 8}px;top:${mid}px;width:${c.x - a.x - a.w + 16}px"></i>`);
+            mLayer.insertBefore(j, mLayer.firstChild);
+          }
+        });
+      });
+      // The frame title moves up above its row's task bars.
+      items.filter(i => i.matches('.frame')).forEach(f => { const st = rowStack.get(box(f).y); if (st) f.style.setProperty('--m-lift', st + 'px'); });
+      // Events and metrics. An event on an element gets a dashed ring with a numbered pin; the numbered pill goes
+      // in the frame's gutter list with the events that have no element and then the metrics, so the screen stays
+      // readable. Gutter pills are placed against a board-wide list, so neighbouring frames' columns never collide.
+      let laneEl = null;
+      // Side lane: shop-side and service-only events, and metrics with no screen.
+      if (M.lane) {
+        const group = key => M.events.filter(e => (e.at || []).some(a => a.lane === key));
+        const laneM = M.metrics.filter(m => (m.at || []).includes('lane'));
+        const sec = (title, evs) => evs.length ? `<h4>${escH(title)}</h4><div class="m-pills">${evs.map(evPill).join('')}</div>` : '';
+        laneEl = addAt(`<div class="m-lane" style="left:${M.lane.x}px;top:${M.lane.y}px;width:${M.lane.w}px">
+          <p class="m-lane-title">${escH(t('mLaneTitle'))}</p><p class="m-lane-sub">${escH(t('mLaneSub'))}</p>
+          ${sec(t('mLaneShop'), group('shop'))}${sec(t('mLaneService'), group('service'))}
+          ${laneM.length ? `<h4>${escH(t('mMetrics'))}</h4><div class="m-pills">${laneM.map(mtPill).join('')}</div>` : ''}</div>`);
+      }
+      const hit = (r, list) => list.some(o => r.x < o.x + o.w && o.x < r.x + r.w && r.y < o.y + o.h && o.y < r.y + r.h);
+      const solids = items.filter(i => i.matches('.frame, .block, .state')).map(box);
+      if (laneEl) solids.push(box(laneEl));
+      const gutter = b => {
+        const near = side => solids.filter(o => o.y < b.y + b.h && b.y < o.y + o.h && (side > 0 ? o.x >= b.x + b.w : o.x + o.w <= b.x))
+          .reduce((g, o) => Math.min(g, side > 0 ? o.x - b.x - b.w : b.x - o.x - o.w), 600);
+        const right = near(1), left = near(-1);
+        return right >= 180 || right >= left ? { side: 1, room: right } : { side: -1, room: left };
+      };
+      const board = [...solids];
+      mPer.forEach((p, fid) => {
+        const f = frameEl(fid);
+        if (!f) { console.warn('measurement layer: no frame', fid); return; }
+        const b = box(f), top0 = b.y + 8;
+        const byEl = new Map(), loose = [];
+        p.events.forEach(({ e, sel }) => {
+          let el = null;
+          if (sel) { try { el = f.querySelector(sel); } catch (err) { el = null; } if (!el) console.warn('measurement layer: no match', fid, sel); }
+          if (!el) { loose.push(e); return; }
+          if (!byEl.has(el)) byEl.set(el, []);
+          byEl.get(el).push(e);
+        });
+        const list = [];
+        let n = 0;
+        // Text on the screen, so pins can keep clear of it.
+        const texts = [];
+        if (byEl.size) {
+          const tw = document.createTreeWalker(f, NodeFilter.SHOW_TEXT);
+          for (let nd = tw.nextNode(); nd; nd = tw.nextNode()) {
+            if (!nd.nodeValue.trim() || nd.parentElement.closest('.cv-frame-title')) continue;
+            const rg = document.createRange(); rg.selectNodeContents(nd);
+            const rr = worldRect(rg);
+            if (rr.w) texts.push(rr);
+          }
+        }
+        [...byEl].sort(([a], [c]) => worldRect(a).y - worldRect(c).y || worldRect(a).x - worldRect(c).x).forEach(([el, evs]) => {
+          n++;
+          const r = worldRect(el), kind = evs.some(isApp) ? 'app' : 'svc';
+          addAt(`<i class="m-ring ${kind}" style="left:${r.x - 3}px;top:${r.y - 3}px;width:${r.w + 6}px;height:${r.h + 6}px"></i>`);
+          // The pin sits off the ring's top-right corner, unless that covers text: then another corner, then inside the ring.
+          const pin = [[r.x + r.w - 7, r.y - 13], [r.x - 13, r.y - 13], [r.x + r.w - 7, r.y + r.h - 7], [r.x - 13, r.y + r.h - 7], [r.x + r.w - 23, r.y + 3]]
+            .find(([px, py]) => !hit({ x: px - 2, y: py - 2, w: 24, h: 24 }, texts)) || [r.x + r.w - 23, r.y + 3];
+          texts.push({ x: pin[0], y: pin[1], w: 20, h: 20 });
+          addAt(`<b class="m-pin ${kind}" style="left:${pin[0]}px;top:${pin[1]}px">${n}</b>`);
+          evs.forEach(e => list.push(nPill(e, n)));
+        });
+        const nEl = list.length;
+        loose.forEach(e => list.push(evPill(e)));
+        const nEv = list.length;
+        p.metrics.forEach(m => list.push(mtPill(m)));
+        const count = new Set(p.events.map(x => x.e)).size;
+        if (count) addAt(`<span class="m-count" style="left:${b.x + b.w / 2}px;top:${b.y + 56}px">${count} ${count === 1 ? L('event', 'evento') : L('events', 'eventos')}</span>`);
+        if (!list.length) return;
+        const g = gutter(b), maxW = Math.max(100, g.room - 24);
+        let y = top0;
+        const col = [];
+        list.forEach((html, i) => {
+          const el2 = addAt(html);
+          el2.style.maxWidth = maxW + 'px';
+          if (i && (i === nEl || i === nEv) && list.length > i) y += 10;
+          const w = el2.offsetWidth, h = el2.offsetHeight, x = g.side > 0 ? b.x + b.w + 12 : b.x - 12 - w;
+          for (let k2 = 0; k2 < 40 && hit({ x, y, w, h }, board); k2++) y += h + 6;
+          el2.style.left = x + 'px'; el2.style.top = y + 'px';
+          board.push({ x, y, w, h });
+          col.push({ y, h });
+          y += h + 6;
+        });
+        // A thin rule on the frame side of the column says which screen the list belongs to.
+        const y0 = Math.min(...col.map(c => c.y)), y1 = Math.max(...col.map(c => c.y + c.h));
+        addAt(`<i class="m-own" style="left:${g.side > 0 ? b.x + b.w + 5 : b.x - 7}px;top:${y0}px;height:${y1 - y0}px"></i>`);
+      });
+      setFar();
+    }
+    // At low zoom the event pills and rings are too small to read: each frame shows a count instead.
+    function setFar() { root.classList.toggle('m-far', k < 0.35); }
+    const LG_KEY = 'hs-cv-mlegend-collapsed';
+    const lgGet = () => { try { return localStorage.getItem(LG_KEY) === '1'; } catch (e) { return false; } };
+    const lgSet = v => { try { localStorage.setItem(LG_KEY, v ? '1' : '0'); } catch (e) { /* storage blocked */ } };
+    function buildLegend() {
+      root.insertAdjacentHTML('beforeend', `<aside class="cv-mlegend" aria-label="${escH(t('mLegend'))}" hidden>
+        <p class="m-lg-title"><button type="button" class="m-lg-toggle" aria-expanded="true">${icon('chevron-right', 'ic m-lg-chev')}<span>${escH(t('mLegend'))}</span></button> <kbd>M</kbd></p>
+        <div class="m-lg-body"><ul>
+          <li><span class="m-task m-sample"><b>${escH(t('mTask'))}</b><em>${GLYPH.start} ${GLYPH.path} ${GLYPH.success}</em></span><span>${escH(t('mTaskTip'))}</span></li>
+          <li><span class="m-task bad m-sample"><b>${escH(t('mTask'))}</b><em>${GLYPH.failure} ${GLYPH.abandon}</em></span><span>${escH(t('mBadTip'))}</span></li>
+          <li><span class="m-ev app">app_event</span><span>${escH(t('mAppTip'))}</span></li>
+          <li><span class="m-ev svc">service_event</span><span>${escH(t('mServiceTip'))}</span></li>
+          <li><span class="m-sample-pin"><i class="m-ring app m-sample-ring"></i><b class="m-pin app">1</b></span><span>${escH(L('App event fires here', 'O evento do app dispara aqui'))}</span></li>
+          <li><span class="m-sample-pin"><i class="m-ring svc m-sample-ring"></i><b class="m-pin svc">2</b></span><span>${escH(L('Service records here', 'O serviço registra aqui'))}</span></li>
+          <li><span class="m-mt"><i aria-hidden="true">◆</i>${escH(t('mMetric'))}</span><span>${escH(t('mMetricTip'))}</span></li>
+        </ul>
+        <p class="m-lg-count">${escH(t('mCounts')(M.tasks.length, M.events.length, M.metrics.length))}</p></div></aside>`);
+      mLegend = root.lastElementChild;
+      const tg = mLegend.querySelector('.m-lg-toggle');
+      const setLg = c => { mLegend.classList.toggle('is-collapsed', c); tg.setAttribute('aria-expanded', String(!c)); };
+      setLg(lgGet());
+      tg.addEventListener('click', () => { const c = !mLegend.classList.contains('is-collapsed'); setLg(c); lgSet(c); });
+      root.insertAdjacentHTML('beforeend', `<aside class="cv-mpanel" aria-label="${escH(t('mPanel'))}" aria-live="polite" hidden></aside>`);
+      mPanel = root.lastElementChild;
+      // In Proto, hovering an event in the panel rings the element it fires on, on the device.
+      const hl = on => e => {
+        const pill = e.target.closest?.('[data-sel]');
+        if (!pill || !pv) return;
+        pv.stage.querySelectorAll('.m-hl').forEach(x => x.classList.remove('m-hl'));
+        if (!on) return;
+        const layer = pv.stage.querySelector('.cv-proto-layer:last-child');
+        pill.dataset.sel.split('\u0001').forEach(sel => { try { layer?.querySelector(sel)?.classList.add('m-hl'); } catch (err) { /* bad selector */ } });
+      };
+      mPanel.addEventListener('mouseover', hl(true));
+      mPanel.addEventListener('mouseout', hl(false));
+    }
+    function mProtoPanel() {
+      if (!M || !mPanel) return;
+      const show = mOn && mode === 'proto' && proto.cur;
+      mPanel.hidden = !show;
+      if (!show) return;
+      if (!mPer) mPer = mIndex();
+      const p = mPer.get(proto.cur);
+      const body = !p ? `<p class="m-none">${escH(t('mNone'))}</p>` : `
+        ${p.tasks.length ? `<h4>${escH(t('mTasks'))}</h4><div class="m-pills col">${p.tasks.map(({ tk, roles }) => `<span class="m-task${roles.every(x => x === 'failure' || x === 'abandon') ? ' bad' : ''}"><b>${escH((tk.actor === 'shop' ? `${t('mShopTask')} · ` : '') + nm(tk.name))}</b><em>${escH(roleText(roles))}</em></span>`).join('')}</div>` : ''}
+        ${p.events.length ? `<h4>${escH(t('mEvents'))}</h4><div class="m-pills">${[...new Set(p.events.map(x => x.e))].map(e => { const sels = p.events.filter(x => x.e === e && x.sel).map(x => x.sel); return sels.length ? evPill(e).replace('<span ', `<span data-sel="${escH(sels.join('\u0001'))}" `) : evPill(e); }).join('')}</div>` : ''}
+        ${p.metrics.length ? `<h4>${escH(t('mMetrics'))}</h4><div class="m-pills">${p.metrics.map(mtPill).join('')}</div>` : ''}`;
+      mPanel.innerHTML = `<p class="m-lg-title">${escH(t('mPanel'))} <kbd>M</kbd></p>${body}`;
+    }
+    function setMeasure(on, quiet) {
+      if (!M) return;
+      mOn = !!on;
+      if (!mLegend) buildLegend();
+      if (mOn && !mBuilt) buildMeasure();
+      root.classList.toggle('is-measure', mOn);
+      mLayer.hidden = !mOn;
+      mLegend.hidden = !mOn;
+      mProtoPanel();
+      if (!quiet) opts?.onMeasure?.(mOn);
     }
 
     // --- Tools and input ---------------------------------------------------------------
@@ -617,6 +865,7 @@
       if (e.target.closest && e.target.closest('input, textarea, select')) return;
       const mod = e.metaKey || e.ctrlKey, cx = vp.clientWidth / 2, cy = vp.clientHeight / 2;
       if (!mod && !e.altKey && hasProto && (e.key === 'p' || e.key === 'P')) { setMode(mode === 'proto' ? 'flow' : 'proto'); return; }
+      if (!mod && !e.altKey && M && (e.key === 'm' || e.key === 'M')) { setMeasure(!mOn); return; }
       if (mode === 'proto') {
         if (mod || e.altKey) return;
         if (e.key === 'ArrowLeft' || e.key === 'Backspace') { e.preventDefault(); protoBack(); }
@@ -640,14 +889,14 @@
     document.addEventListener('keyup', onKeyUp);
 
     apply();
-    const ready = () => { drawLinks(); fitAll(false); };
+    const ready = () => { drawLinks(); fitAll(false); if (opts?.measureOn) setMeasure(true, true); };
     const imgs = [...world.querySelectorAll('img')].filter(i => !i.complete);
     Promise.all([document.fonts ? document.fonts.ready : null, ...imgs.map(i => new Promise(r => { i.onload = i.onerror = r; }))]).then(() => requestAnimationFrame(ready));
     let rt = 0;
     const ro = new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => { if (root.isConnected) { apply(); protoLayout(); } }, 50); });
     ro.observe(vp);
     if (opts?.mode === 'proto' && hasProto) setMode('proto', opts.start);
-    const api = { hasProto, setMode: (m, at) => setMode(m, at), get mode() { return mode; }, destroy: () => { document.removeEventListener('keydown', onKey); document.removeEventListener('keyup', onKeyUp); ro.disconnect(); }, showAbout: () => renderDrawer(true), fit: () => fitAll(true), zoomTo: (ids, maxK = 1.5) => { const els = String(ids).split(',').map(i => world.querySelector('#' + i.trim())).filter(Boolean); if (els.length) fitTo(els, false, maxK); } };
+    const api = { hasProto, hasMeasure: !!M, setMeasure: on => setMeasure(on), get measure() { return mOn; }, setMode: (m, at) => setMode(m, at), get mode() { return mode; }, destroy: () => { document.removeEventListener('keydown', onKey); document.removeEventListener('keyup', onKeyUp); ro.disconnect(); }, showAbout: () => renderDrawer(true), fit: () => fitAll(true), zoomTo: (ids, maxK = 1.5) => { const els = String(ids).split(',').map(i => world.querySelector('#' + i.trim())).filter(Boolean); if (els.length) fitTo(els, false, maxK); } };
     root.__canvas = api;
     return api;
   }

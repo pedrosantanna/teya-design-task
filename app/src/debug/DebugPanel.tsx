@@ -7,6 +7,7 @@ import { useUnistyles } from 'react-native-unistyles';
 
 import './chrome';
 import { ActionsSection, ContentSection, JourneySection, ShopperSection, SimulationSection, StatesSection } from './sections';
+import { screenNames, useRelevance } from './relevance';
 import { useDebugger } from './visibility';
 
 export function DebugPanel({ docked = false }: { docked?: boolean }) {
@@ -35,14 +36,30 @@ export function DebugPanel({ docked = false }: { docked?: boolean }) {
           </svg>
         </button>
       </div>
+      <Controls />
+    </aside>
+  );
+}
+
+/**
+ * The sections, for the screen showing now. Only the controls that change this screen show; the rest are named in
+ * one line per section, and a section where none applies folds to its title. It follows the route and the sheets live.
+ */
+function Controls() {
+  const { screen, on } = useRelevance();
+  return (
+    <>
+      <p className="dbg-where" aria-live="polite">
+        Controls for <b>{screenNames[screen]}</b>
+      </p>
       <div className="dbg-body">
         <JourneySection />
         <ShopperSection />
-        <StatesSection />
-        <ContentSection />
-        <SimulationSection />
+        <StatesSection on={on} />
+        <ContentSection on={on} />
+        <SimulationSection on={on} />
         <ActionsSection />
       </div>
-    </aside>
+    </>
   );
 }

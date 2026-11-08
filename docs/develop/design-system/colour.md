@@ -44,6 +44,7 @@ AI:
 - In round 12 an agent raised the chroma of the dark row cards 1.7 times, added Stone 880 for muted text on them, took the rating tags off `tag.fillRaised` on the tinted rows, deleted the unused accent `container` role and measured every changed pair.
 - An agent added `tag.fillOnRow` and the Ratings panel on the Background, and measured each pair against the row and the tile in light and dark.
 - In round 18 an agent built variation 4 into the tokens (the light tile in dark, `cardOnTile`, `chipOnCard`, `tonal`, the on-tile text roles and `borderOnTile`), made text follow the ground under it, with a `tileCard` ground inside a surface on a tile, worked out Lavender's card and chip, which the board didn't show, swapped the dark category stills for the light ones, and measured every changed pair with the WCAG 2 script.
+- An agent replaced the grey `borderOnTile` with ground edges: a darker tone of each tile, and an edge step for Background, Card, Sheet and the chat, and measured each against its ground (1.27 to 1.41:1). After the visual review it moved the dark Background edge from Stone 305 (1.46:1) to Stone 265 (1.29:1), so the chat's line weighs the same in light and dark.
 Trade-offs:
 - Muted #E5E2DE on the new background is 1.07:1, so it can't mark a chip there; chips moved to the card colour, and Muted is only used on cards.
 - The dark sheet is 1.09:1 on the Background, under the 1.15:1 aimed for: lighter sheets push Card and Muted rows closer to it. The rim's highlight marks its top edge instead.
@@ -202,13 +203,14 @@ Since round 18 the tile is the same light pastel in both modes (option 2, variat
 | `shop.accent.<hue>.ink` | 800 | 800 | Initials and the dark awning stripes on the tile |
 | `shop.accent.<hue>.cardOnTile` | Card (white) | Peach #5A453E, Pistachio #454E3D, Butter #514A31, Lavender #4B475A | The shop rows on the Category screen, and the rows, the rating summary and review cards and the "What they sell" block on the shop page |
 | `shop.accent.<hue>.chipOnCard` | `tag.fillOnRow` (the Background) | Peach #685853, Pistachio #585E52, Butter #615B4B, Lavender #5C5A66 | The "What they sell" chips and the rating tags on those cards |
+| `shop.accent.<hue>.separatorOnCard` | Separator (Biscuit 890 #DEDAD5, 1.39:1 on the white card) | Peach #6C564F, Pistachio #565F4E, Butter #625B41, Lavender #5C586C: the card lifted to OKLCH L 0.47 with its hue and chroma kept, 1.30 to 1.31:1 on it | The dividers between rows inside those cards, so a line on a tinted card is a lighter tone of the card, never a grey Separator (near black on it) |
 | `shop.accent.<hue>.tonal`, at `state.tonalOnTile` | White at 55% | `cardOnTile` at 100% | Call and Directions, the unselected street chips, Back on a tile and over the shop page's map, the "Needs you" pill on the receipt header |
 | `foregroundOnTile` | Foreground | Stone 150 #0B0C0D (ink) | Text and icons straight on a tile: the shop's name, the section headings, the category label |
 | `mutedForegroundOnTile` | Muted foreground | Stone 305 #2E2F30 (muted ink) | Secondary text straight on a tile: the facts line, the Category header's count, the footnotes, the map credit |
 | `mutedForegroundOnTileCard` | Muted foreground | Stone 880 #DADBDD | The meta line and the chevron inside a card, row or chip on a tile |
 | `primaryOnTile`, `onPrimaryOnTile` | Indigo 800, white | Indigo 800, white | Ask, links and plain buttons on a tile. Indigo 300, the dark Primary, is 1.17 to 1.22:1 on the pastel tile |
 | `successOnTile`, `warningOnTile` | Success 800 #384D1A, Warning 800 #53430D | The same | The Open and Closes soon words straight on a tile. Success 700 measured 4.16:1 on Peach and Warning 700 4.30:1; the 800 steps are 6.17 to 6.63:1. Inside a card on the tile the words take Success and Warning (5.02:1 or more on the dark cards) |
-| `borderOnTile` | Biscuit 860 (Border) | Biscuit 860 | The hairline under a nav bar filled with the tile; Stone 360 drew a near-black line on the pastel |
+| `shop.accent.<hue>.edge` | Peach #E6A691, Pistachio #A6C18B, Butter #CDB766, Lavender #BBAEE6 | The same | The hairline under a nav bar filled with the tile: the tile at OKLCH L 0.78 with its chroma kept, 1.35 to 1.36:1 on it. It replaces `borderOnTile` (Biscuit 860), a grey that measured 1.04:1 on Butter and read as a stain on the hue |
 
 The components read these through the ground. Inside `<Ground value="tile" accent>`, `Text` and `Icon` map Foreground, Muted foreground, Primary, On primary, Success and Warning to their on-tile roles. A surface painted on the tile (a row, a card, a chip, a tonal button, Back) wraps its content in `OnTileSurface`, a `tileCard` ground where text keeps Foreground and secondary text takes `mutedForegroundOnTileCard`.
 
@@ -241,6 +243,20 @@ The Category screen keeps the whole tile as its ground. Before round 18 the dark
 | Lavender | #4B475A | 5.94:1 | 8.57:1 | 6.46:1 | 5.23:1 | 5.15:1 | 1.42:1 |
 
 The street chips and Back take the accent's `tonal`, the dark card with light text in dark. The selected chip stays Indigo 950 with Indigo 200 text (11.56:1), 10.68 to 11.14:1 from the pastel tile. The category stills were rendered for each mode's tile; with one tile in both modes, dark shows the light still and the dark stills are gone.
+
+## Ground edges
+
+The hairline under a top bar takes a tone of the ground the bar sits on, so a coloured page never gets a grey line. In light it is a darker step of the ground; on the dark neutrals, where nothing is darker, it is a lighter step of the same neutral. Each one is visible but quiet: between 1.27 and 1.41:1 on its ground.
+
+| Token | Light | Dark | Ground |
+| --- | --- | --- | --- |
+| `groundEdge.background` | Biscuit 860, 1.27:1 | Stone 265, 1.29:1 | Background |
+| `groundEdge.card` | Biscuit 890, 1.39:1 | Stone 360, 1.41:1 | Card |
+| `groundEdge.sheet` | Biscuit 810 #C4C0BB, 1.30:1 | Stone 320, 1.33:1 | Sheet |
+| `chat.groundEdge` | `groundEdge.background` | `groundEdge.background` | A chat's ground |
+| `shop.accent.<hue>.edge` | 1.35 to 1.36:1 | The same | An accent tile (see Shop accents) |
+
+`chat.edge` stays the hairline around cards and grouped rows on the chat ground. The nav bar reads the edge through `groundEdge()` in `internal/ScrollEdge.tsx`, from the same `fill` that colours the bar.
 
 ## Snuffle
 
@@ -313,6 +329,8 @@ The location ask's screen is the Background in both modes. `color.location` is t
 | Muted text on the sheet | 5.45:1 | 7.79:1 |
 
 Every text pair passes WCAG AA. All but muted text on a muted surface (5.87:1 light, 5.51:1 dark), muted text on the light background (6.28:1) and the destructive, warning and success colours on the light background (5.02 to 5.40:1) pass AAA. The Increase Contrast border passes the 3:1 that WCAG 1.4.11 asks of a component's boundary (3.28:1 and 3.12:1 at the lowest). Surface pairs aren't text and have no WCAG minimum; 1.21:1 is the card step on the new background, up from 1.13:1.
+
+Android uses the same colour tokens as iOS; only its forms differ (see [iOS and Android](platforms.md#colour-and-surface-parity)). In this round an agent measured 84 text and non-text pairs per mode on the Android forms, every accent included. The lowest text pairs are the secondary text on a dark chip on a tile card (4.83 to 4.88:1) and the muted text straight on a light Peach tile (5.00:1). The outline of Android's segmented button moved from Border (1.10:1 on the light sheet) to a new `color.outline`, used only for Android control edges: #807973 in light (3.08:1 on the sheet, 3.55:1 on the Background) and #757679 in dark (3.34 to 4.31:1). A first try with Muted foreground passed at 5.45 to 8.52:1 but read as the loudest stroke on the dark screen. The dark selected filter chip has no edge (Indigo 900 at 1.39:1 on the Background); on Android its check (10.06:1) carries the state.
 
 ## Sources
 

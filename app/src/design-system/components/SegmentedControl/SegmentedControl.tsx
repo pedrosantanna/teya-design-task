@@ -79,9 +79,11 @@ const styles = StyleSheet.create((theme) => ({
     borderRadius: theme.radius.full,
     padding: ios ? theme.size.segmented.inset : 0,
     backgroundColor: ios ? theme.color.segmented.track : 'transparent',
-    // Android: the outlined Material segmented button. iOS: no edge, the track's fill is the shape.
-    borderWidth: ios ? 0 : StyleSheet.hairlineWidth * 2,
-    borderColor: theme.color.border,
+    // Android: the outlined Material segmented button. iOS: no edge, the track's fill is the shape. The outline is the
+    // control's only boundary on Android, so it takes the Outline role at 1 dp (3:1 or more on every ground); Border
+    // measured 1.10:1 on the light sheet (platforms.md, colour and surface parity).
+    borderWidth: ios ? 0 : theme.size.edge.control,
+    borderColor: theme.color.outline,
     // iOS lets the thumb's shadow out; Android clips the selected segment's fill to the capsule.
     overflow: ios ? 'visible' : 'hidden',
   }),
@@ -103,8 +105,9 @@ const styles = StyleSheet.create((theme) => ({
     justifyContent: 'center',
     gap: theme.space[1],
     paddingHorizontal: theme.space[3],
-    backgroundColor: !ios && selected ? theme.color.chipSelected : 'transparent',
-    borderLeftWidth: !ios && divider ? StyleSheet.hairlineWidth * 2 : 0,
-    borderLeftColor: theme.color.border,
+    // The selected segment: Indigo 200 in light (chipSelectedEdge; Indigo 100 was 1.03:1 on the sheet), Indigo 900 in dark.
+    backgroundColor: !ios && selected ? (theme.scheme === 'dark' ? theme.color.chipSelected : theme.color.chipSelectedEdge) : 'transparent',
+    borderLeftWidth: !ios && divider ? theme.size.edge.control : 0,
+    borderLeftColor: theme.color.outline,
   }),
 }));

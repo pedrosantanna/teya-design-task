@@ -23,4 +23,4 @@ One element: "Priya, October 2026. Would go back. Loaf was waiting…". The verd
 
 ## iOS and Android
 
-iOS: inset grouped row on Card. Android: no fill, as Material list items.
+iOS: inset grouped row on Card. Android: the same grouped row and fill (`cardOnTile` on a tile), as a Material 3 list item in a container (parity rule in platforms.md).

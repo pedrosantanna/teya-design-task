@@ -17,7 +17,7 @@ Trade-offs:
 - Themes come from posts people chose to write. Strength measures how often a theme repeats in the posts and says nothing about how common it is in daily life.
 ```
 
-The coding produced ten themes, numbered from the strongest evidence to the weakest. How quotes were chosen and what `verified` and `archive` mean is in [method](method.md).
+The coding produced ten themes, numbered from the strongest evidence to the weakest. Each card links to its post. Every quote here was matched against its live page on 1 November 2026; only a quote seen in a public archive and not on the live page would carry a label, "Via archive". How quotes were chosen is in [method](method.md).
 
 ## 1. Stock
 

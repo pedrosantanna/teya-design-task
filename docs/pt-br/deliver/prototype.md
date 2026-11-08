@@ -22,6 +22,8 @@ Trade-offs:
 
 Abra sozinho para usar a janela inteira: `app-web/index.html`. Em janelas mais estreitas que 800 px o painel aparece sobreposto, vindo da direita, com um botão de fechar, em vez de encaixado. Acrescente `?debug=0` para esconder o debugger, `?os=android` para Android, ou `?step=` para começar num passo.
 
+O painel oferece só os controles que mudam a tela que está à mostra. Persona, plataforma, esquema, moldura, passo da jornada, relógio e ações estão sempre lá; os outros seguem a rota e as folhas abertas (Loading aparece em Nearby e nas páginas de loja, Shop hours na conversa só com a folha de detalhes aberta, os desfechos só onde um pagamento ou a resposta de uma loja pode acontecer em seguida). Cada seção termina com uma linha dizendo o que esconde, e uma seção sem nada a mudar se recolhe ao título com "No effect on this screen". As regras ficam em `app/src/debug/relevance.ts`.
+
 ## Conteúdo simulado
 
 Todas as lojas são inventadas e ficam em volta da Blythe Road, W14. Os tempos a pé são a partir da Blythe Road; o lugar Trabalho (Kensington High St, W8) reaproveita a Olympia Cameras, a Abingdon Deli e a Church Street Books a 3, 4 e 9 minutos, além de sete das outras lojas abaixo. O acento segue o tipo da loja em `app/src/store/kinds.ts`. A Lavanda fica reservada ao Snuffle, então as lojas usam só Manteiga, Pêssego e Pistache; as 12 lojas do demo são quatro de cada. Uma loja conectada responde pelo caixa; uma loja consultada responde por mensagem (WhatsApp).

@@ -96,6 +96,7 @@ Reddit refused the research tools, and X, TikTok and Instagram need a login, so 
 
 ```screens
 image: ../../private/benchmarks/google-maps.jpg
+alt: Google Maps screens for a pub: the search result on the map, the place sheet marked Closed · Opens 11 am, the overview with hours and Place an order, the menu tab, and posts by the owner.
 source: https://mobbin.com/apps/google-maps-ios-84a5727c-9a4d-40f6-95ce-aa915413c4dc/c5414d91-2c38-4da8-8d6e-f4dc01be6602/screens
 ```
 
@@ -129,11 +130,13 @@ status: verified
 
 ```screens
 image: ../../private/benchmarks/instagram.jpg
+alt: Instagram screens: a brand profile with Message and Shop buttons, its shop collection, items sold and shipped by the account, and a direct-message chat.
 source: https://mobbin.com/apps/instagram-ios-3aa6c4a6-7200-43f0-81c2-397c22fa1596/c2173e91-816f-4b77-baa2-3579d4ce2b7e/screens
 ```
 
 ```screens
 image: ../../private/benchmarks/whatsapp.jpg
+alt: WhatsApp screens: the chat list with groups and communities, a one-to-one chat, sending a photo with a caption, and sharing a location.
 source: https://mobbin.com/apps/whats-app-ios-8738dbc9-e7a8-4fef-91e5-6afd1c9d092b/36ae4720-4bee-4257-85b3-80d5447e899d/screens
 ```
 
@@ -167,6 +170,7 @@ status: verified
 
 ```screens
 image: ../../private/benchmarks/amazon.jpg
+alt: Amazon screens: search results with the delivery location, results with delivery dates, a product's buy box with In Stock and delivery dates, and the shopping cart.
 source: https://mobbin.com/apps/amazon-shopping-ios-f3ecc40c-1f6d-4b81-8f5a-cb67d8271469/c06b306e-d93a-4ff9-b45f-14388ab02e16/screens
 ```
 
@@ -200,6 +204,7 @@ status: verified
 
 ```screens
 image: ../../private/benchmarks/nextdoor.jpg
+alt: Nextdoor screens: the Faves hub, an AI answer summarised from neighbours' posts, search with Neighborhood Faves, and a list of local businesses voted by neighbours.
 source: https://mobbin.com/apps/nextdoor-ios-def2c342-4fb2-4636-bbcc-a0271fbe2651/aff28b15-291f-4855-96a2-6c142dbe490d/screens
 ```
 
@@ -239,6 +244,7 @@ ShopAppy was a "virtual high street" founded around 2016: each town got a direct
 
 ```screens
 image: ../../private/benchmarks/deliveroo.jpg
+alt: Deliveroo screens: the Shopping tab with big brand stores, gift stores with a florist and pharmacies nearby, a store page with delivery fee, minimum order and closing time, and one basket per store.
 source: https://mobbin.com/apps/deliveroo-ios-c53d6f39-5c63-417d-a595-2e3fa65e404e/b24076da-f39f-48dd-8dfa-fd3974e046df/screens
 ```
 
@@ -272,6 +278,7 @@ status: verified
 
 ```screens
 image: ../../private/benchmarks/uber-eats.jpg
+alt: Uber Eats screens: stores near you, a convenience store page with Delivery and Pickup, the store's aisles, one cart per store, and the pickup map.
 source: https://mobbin.com/apps/uber-eats-ios-647bbce0-2eac-4b6f-a34b-3753263bf409/abf2e266-f49b-44b0-a25f-07a9c7b7bcff/screens
 ```
 
@@ -403,6 +410,7 @@ Surplus food: shoppers prepay a "Surprise Bag" from a nearby shop and collect it
 
 ```screens
 image: ../../private/benchmarks/too-good-to-go.jpg
+alt: Too Good To Go screens: Surprise Bags on a map with a pickup-window filter, a store page with its pickup window and bags left, the order with its pickup countdown, a cancelled order, and the alert for when bags are back.
 source: https://mobbin.com/apps/too-good-to-go-ios-d544c59a-6284-499f-ba07-92ca14f91002/00967c9c-7821-467b-8c31-7052fcd944b5/screens
 ```
 
@@ -421,6 +429,12 @@ status: verified
 
 Free sharing of food and household items between neighbours, with volunteers collecting surplus from supermarkets such as Tesco ([The Grocer](https://www.thegrocer.co.uk/news/tescos-olio-food-waste-partnership-hits-100-million-meals/723887.article)). Neighbours will collect within a window when it's worth it, and short windows shut people out.
 
+```screens
+image: ../../private/benchmarks/olio.jpg
+alt: OLIO screens: the neighbourhood feed of free food, a listing with its pick-up times, the prompt to name a day and time, and the chat to arrange collection.
+source: https://mobbin.com/apps/olio-ios-82d24ac1-c025-442c-8cb3-d92aae1044cb/dd24bfa3-2071-4a17-8410-addbd8ee1108/screens
+```
+
 ```quote
 text: "most of them post at 9pm and expect you to show up shortly before 9:30…"
 handle: sleepy.uwu.nova
@@ -436,6 +450,12 @@ status: verified
 
 Since October 2026, carts from up to 15 Shopify shops paid in one Shop Pay checkout, each shop still the seller ([Shopifreaks](https://www.shopifreaks.com/shopify-launches-universal-checkout-in-the-shop-app-letting-shoppers-buy-from-multiple-brands-with-one-cart-and-one-checkout/)). Shopify stores also offer local pickup and delivery ([Shopify](https://www.shopify.com/local-delivery)), but the app has no sense of "near me" and no UK date. It is the clearest public example of one checkout across many independents.
 
+```screens
+image: ../../private/benchmarks/shop-app.jpg
+alt: Shop app screens: a shop's cart, Review & Pay with shipping, the Ship or Pickup choice with a pickup location, the order confirmation, and order tracking.
+source: https://mobbin.com/apps/shop-ios-1f1a3d5b-cb65-4c7e-af4b-e4cdf1c03e4d/7b6adbde-de48-47c5-979b-f629f1eb87a9/screens
+```
+
 ```quote
 text: "this helps me to keep track what I've ordered and when I should expect it… with quick links to message sellers."
 handle: MoogStarr
@@ -450,6 +470,12 @@ status: verified
 ### Etsy
 
 A global handmade marketplace: one basket across many shops, each shipping separately, with no collection ([Etsy Help](https://help.etsy.com/hc/articles/115015627947)). It proves one basket across thousands of tiny sellers works, and that "local" there is a label sellers type in.
+
+```screens
+image: ../../private/benchmarks/etsy.jpg
+alt: Etsy screens: an item page with the seller and estimated delivery, the buy options, a seller's shop page, and one cart split by shop with Check out from shop.
+source: https://mobbin.com/apps/etsy-ios-f80898c8-cdab-4e15-b9e5-85c4babfcb77/d4844f33-3a12-4e0a-9282-d67e9f24da3d/screens
+```
 
 ```quote
 text: "I love finding unique gifts as well as supporting small businesses and I am NEVER disappointed on Etsy…"

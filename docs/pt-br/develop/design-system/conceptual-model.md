@@ -62,7 +62,7 @@ Não há evidência de "errand", "basket", "hold" ou "reserve" nas palavras dos 
 | Request (pedido) | O que eu pedi | Itens e quantidade, prazo, área, retirar ou entrega, repetição | Tem muitas respostas e quantas compras houver | Linha em Requests → a conversa |
 | Shop (loja) | A loja | Nome, rua, tempo a pé, aberta até, feito sob encomenda com antecedência ("2 days' notice"), responde pelo caixa ou por mensagem, janela de retirada, entrega e taxa; o que vende; avaliações; como se sai no Snuffle | Dá muitas respostas, tem muitas compras | Tile com foto em Nearby, a home; linha em qualquer outra lista → página da loja |
 | Answer (resposta) | "A Paper & Co tem" | Loja, o que tem (tudo, parte, algo parecido), preço, origem da resposta, data limite de retirada, entrega | Pertence a um pedido e a uma loja; pode virar uma compra | Linha compacta na lista de lojas perguntadas, cartão completo na conversa quando a loja responde → folha de detalhes, onde o comprador compra. O nome da loja na linha, no cartão e no cartão de compra é um link para a página da loja |
-| Order (compra) | Minha compra | Itens, loja, total, retirar ou entrega, data limite de retirada, onde retira (a loja ou um ponto de retirada), código de retirada, pagamento, avaliação | Pertence a um pedido, a uma loja e a uma resposta | Cartão na conversa com o rótulo de status → recibo, que tem o código de retirada |
+| Order (compra) | Minha compra | Itens, loja, total, retirar ou entrega, data limite de retirada, onde retira (a loja ou um ponto de retirada), código de retirada, pagamento, avaliação | Pertence a um pedido, a uma loja e a uma resposta | Cartão na conversa com o rótulo de status → recibo, que tem o código de retirada. Enquanto a compra dura, ela também fica fixada sob a barra de navegação da sua conversa, com o código em Ready ou Extended; a compra fixada é o lugar dela na conversa, não um segundo cartão (decisão 068) |
 
 ## Uma resposta, duas origens
 
@@ -147,7 +147,7 @@ O ponto num rótulo ("Ready · collect by Mon 9 Nov") só marca onde o estado te
 | Dinheiro | paid, not charged, refunded | autorizado, cobrado, autorização caiu, liberado | termos de pagamento na conversa |
 | Um pedido que fica aberto | Keep looking | pedido em aberto | keep it open, save request |
 | Onde o comprador está comprando | o endereço ("Blythe Road, W14"); "Places" para os salvos | lugar, área | neighbourhood, zone, high street |
-| Prova no balcão | collection code | código | outros nomes |
+| Prova no balcão | collection code; "Code" como rótulo ao lado do código onde falta espaço (a compra fixada) | código | outros nomes |
 | A home | Nearby | Nearby | Home, street |
 | O veredito de quem comprou sobre uma compra | rating, Rate | avaliação | review, stars, score |
 | Quem avalia | buyers | quem comprou | customers, reviewers, users |

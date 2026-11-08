@@ -19,6 +19,8 @@ import { ZoomOrigin } from '../ZoomOrigin/ZoomOrigin';
 
 // Photos fade in over the placeholder, as on tiles (spring.fade's 0.25 s; expo-image takes a duration).
 const PHOTO_FADE_MS = 250;
+// How long the carousel's width must hold before its snap interval follows it.
+const SNAP_SETTLE_MS = 120;
 
 export type ShopPhoto = {
   /** A bundled image or a URL. */
@@ -70,6 +72,10 @@ export const PhotoCarousel = memo(function PhotoCarousel({ photos, name, accent,
   const pageWidth = useRef(width - peek);
   // The same, as state, for the scroll view's snap interval (it grows with the card).
   const [interval, setSnap] = useState(width - peek);
+  const snapTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => {
+    if (snapTimer.current) clearTimeout(snapTimer.current);
+  }, []);
   const pageIndex = useSharedValue(0);
   const pageStyle = useAnimatedStyle(() => ({ width: width + (grow ? grow.get() : 0) - peek - gap, marginRight: gap }));
   // The dots are centred on the photo, not on the container.
@@ -121,7 +127,10 @@ export const PhotoCarousel = memo(function PhotoCarousel({ photos, name, accent,
         onScroll={onScroll}
         onLayout={(e) => {
           pageWidth.current = e.nativeEvent.layout.width - 2 * bleed - peek;
-          setSnap(pageWidth.current);
+          // The card grows under the carousel for the first steps of a scroll, a new width each frame: the snap interval
+          // follows once the width holds, so the growth doesn't re-render the carousel frame by frame.
+          if (snapTimer.current) clearTimeout(snapTimer.current);
+          snapTimer.current = setTimeout(() => setSnap(pageWidth.current), SNAP_SETTLE_MS);
         }}
         scrollEventThrottle={16}
         accessibilityLabel={`${name} photos`}

@@ -5,6 +5,8 @@ import Location01Icon from '@hugeicons/core-free-icons/Location01Icon';
 import { Image } from 'expo-image';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
+import Animated, { Easing, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
+import { scheduleOnRN } from 'react-native-worklets';
 import Svg, { Path } from 'react-native-svg';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
@@ -109,6 +111,62 @@ export function MapFallback({ extent }: Pick<MapProps, 'extent'>) {
   );
 }
 
+// A street pattern in viewBox units (0 to 100, sliced to the map's shape): a few long roads at the map's tilt and the
+// streets between them, so the placeholder reads as a map from the first frame, never an empty block. It is no real place.
+const SKELETON_MAIN = 'M-10 72 L110 38 M18 -10 L44 110';
+const SKELETON_STREETS = 'M-10 30 L110 2 M-10 104 L110 70 M-10 52 L71 31 M64 -10 L84 110 M86 -10 L104 110 M-4 -10 L20 110 M29 42 L40 110';
+// Stroke widths in points, whatever the map's size (non-scaling strokes): about the live map's streets at the area's
+// zoom, the main roads twice the streets.
+const SKELETON_MAIN_WIDTH = 6;
+const SKELETON_STREET_WIDTH = 3;
+
+/** The map's placeholder (components.md, Map): the live map's ground with a quiet street pattern in the live map's road colours
+ *  (mapSkeleton aliases mapGround, mapRoad and mapRoadMain), so the cross-fade only adds detail, in light and dark. It shows from the
+ *  first frame wherever the static image can't stand in (a shop's route, a still map on another street, the loading state) and under
+ *  the image while that image loads. */
+export function MapSkeleton() {
+  const { theme } = useUnistyles();
+  return (
+    <View style={styles.skeletonGround} pointerEvents="none">
+      <Svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+        <Path d={SKELETON_STREETS} stroke={theme.color.mapSkeleton.road} strokeWidth={SKELETON_STREET_WIDTH} vectorEffect="non-scaling-stroke" fill="none" />
+        <Path d={SKELETON_MAIN} stroke={theme.color.mapSkeleton.roadMain} strokeWidth={SKELETON_MAIN_WIDTH} vectorEffect="non-scaling-stroke" fill="none" />
+      </Svg>
+    </View>
+  );
+}
+
+/** What stands in for the live map until its first full render, then fades out over it (spring.fade's duration, ease-out): the skeleton, with
+ *  the static image of the area over it when the map shows the plain area. It stays if the map fails. */
+export function MapPlaceholder({ extent, image, ready }: Pick<MapProps, 'extent'> & { image: boolean; ready: boolean }) {
+  const { theme } = useUnistyles();
+  const opacity = useSharedValue(1);
+  const [gone, setGone] = useState(false);
+  useEffect(() => {
+    if (!ready) {
+      opacity.set(1);
+      return;
+    }
+    // A short ease-out where the theme gives a duration (iOS, web): a spring's tail kept the placeholder and the live map on screen
+    // together (visual critique). Android's Material fade is a physics spring, so it stays one.
+    const fade = theme.spring.fade;
+    const done = (finished?: boolean) => {
+      'worklet';
+      if (finished) scheduleOnRN(setGone, true);
+    };
+    opacity.set('duration' in fade ? withTiming(0, { duration: fade.duration, easing: Easing.out(Easing.quad) }, done) : withSpring(0, fade, done));
+  }, [ready, opacity, theme.spring.fade]);
+  const style = useAnimatedStyle(() => ({ opacity: opacity.get() }));
+  // Unmounted once faded; it shows again whenever the map stops being ready (a new style, a lost WebGL context).
+  if (gone && ready) return null;
+  return (
+    <Animated.View style={[styles.skeleton, style]} pointerEvents="none">
+      <MapSkeleton />
+      {image ? <MapFallback extent={extent} /> : null}
+    </Animated.View>
+  );
+}
+
 // The glyph's paths, drawn filled: the outline in Primary, the dot in On Primary (or the shop's Detail and On detail). Its tip is at (12, 22).
 const [outline, dot] = Location01Icon as unknown as [string, { d: string }][];
 
@@ -151,6 +209,8 @@ export function MapCredit() {
 }
 
 const styles = StyleSheet.create((theme) => ({
+  skeleton: { ...StyleSheet.absoluteFillObject, backgroundColor: theme.color.mapGround },
+  skeletonGround: { ...StyleSheet.absoluteFillObject, backgroundColor: theme.color.mapSkeleton.ground },
   // A zero-size point at the pin: the centre of the view, or `pinY` from the top.
   centre: (pinY?: number) =>
     pinY === undefined

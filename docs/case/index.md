@@ -2,26 +2,37 @@
 
 Snuffle is a concierge for the small independent shops near a shopper: you say what you need and by when, it asks the shops, and you buy and collect in the same chat.
 
-<!-- screenshot: the prototype's Nearby screen with the ask bar, Sam's persona, light mode -->
+<div class="feature"><video class="phone-video" src="media/shops-answer.mp4" data-poster="media/shops-answer.png" width="450" height="948" aria-label="Six shops move from Asked to Seen to an answer; Paper and Co, Broadway Chemist and Olympia Cameras answer with prices and Buy" controls muted playsinline loop preload="metadata"></video><div>
 
-## The thesis
+## My answer to the brief
 
-Shoppers can't tell whether a nearby independent has something, or is even open, without going or asking someone. Few small shops publish item-level stock, so a search has little to index. My position is that the shop itself answers: where a till shares stock, Snuffle answers at once, and everywhere else it asks the shop and never guesses.
+I chose findability: is it there, right now? Few small shops publish item-level stock, so a search has little to index. In Snuffle the shop itself answers. Where a till shares stock, the answer is instant; everywhere else Snuffle asks the shop and never guesses.
 
-I took findability as the primary problem and made the transaction the step that closes the loop. The bet everything rests on is that shops answer within minutes while they are open.
+The transaction decides what every answer carries: the shop, the price, a collect-by date and Buy. The search ends where the purchase starts.
 
-I did this alone, directing AI agents, from 1 to 6 November 2026, as a take-home brief with no real product, users or shops behind it.
+The bet everything rests on is that shops answer within minutes while they are open. Nothing in the evidence shows it yet, so it is the [first thing I'll test](next.md).
 
-## What you'll see
+</div></div>
 
-The walkthrough follows the brief's three parts.
+## How I work
 
-- The thinking: [the problem and my position](position.md), [the product](product.md) and the [key decisions](decisions.md), with what I left out.
-- The work: the [prototype](../deliver/prototype.md) running, and [how I built it with AI](how-i-worked.md), including what I threw away and fixed by hand.
-- What comes next: [viability](viability.md) as a projection, and [what I'd validate first](next.md).
+I used very little Figma. I build with AI agents in code, and I write every decision down as verbose context: the research, the specs, the rules and the logs. I call that the AI context, and it is the second block in the sidebar. Every agent reads it before it works, so I can run several in parallel without spending my time correcting AI slop.
+
+I did this alone, directing the agents, from 1 to 6 November 2026, on a take-home brief with no real product, shoppers or shops behind it.
+
+## The walkthrough
+
+The pages follow the order I worked in, which is also the order of the recording.
+
+1. [Discovery](discovery.md): desk research, Hammersmith, public posts, proto-personas, and the choice of findability.
+2. [Concept](concept.md): a concierge of agents between shoppers and shops, and the key decisions with what each gave up.
+3. [Value and viability](viability.md): why it belongs inside a POS provider, with a revenue projection.
+4. [How I built it](how-i-built.md): the AI context, the flows and design system, the review gates and what I threw away.
+5. [The product](product.md), its [features](features.md) and the [prototype](../deliver/prototype.md).
+6. [What I'll test next](next.md): three hypotheses with pass marks, the first experiment and the signals to stop or go.
 
 ## What isn't measured yet
 
-Nothing about demand. No shopper or shopkeeper was interviewed; the shopper evidence is 20 clustered public posts. The prototype's shops are invented and answer on a script. The revenue figures are a projection from public benchmarks and my own assumptions. The first test is whether shops answer at all.
+Nothing about demand. No shopper or shopkeeper was interviewed; the shopper evidence is 20 clustered public posts. The prototype's shops are invented and answer on a script, and the revenue figures are a projection. Whether shops answer at all is the [first test](next.md).
 
 Evidence: [the brief](../brief.md), [decision log](../decision-log.md).

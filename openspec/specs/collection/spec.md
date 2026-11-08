@@ -14,11 +14,15 @@ The shopper SHALL see the collect-by date, with its length once, before tapping 
 - **THEN** the details sheet reads "Collect by Mon 9 Nov (7 days) · full refund if you don't"
 
 ### Requirement: Receipt with collection code
-The receipt SHALL show the status, shop and items, the collection code, the shop's street and opening, the amount paid and the payment method, with Directions, Extend and Cancel for a refund.
+The receipt SHALL show the shop and items, the collection code, the shop's street and opening, the amount paid and the payment method, with Directions, Extend and Cancel for a refund. While the order can be collected, the code SHALL sit in its own card under the header, with the collect-by date and the refund rule right under it.
 
 #### Scenario: Ready order
 - **WHEN** the shopper opens a Ready order
-- **THEN** the receipt shows "Ready · collect by Mon 9 Nov", the code "K7Q2", "Paid £29.98" and "Apple Pay · debit card •••• 4021"
+- **THEN** the code card shows "K7Q2", then "Collect by Mon 9 Nov" and "Full refund if you don't", and the receipt shows "Paid £29.98" and "Apple Pay, debit card •••• 4021"
+
+#### Scenario: Extended order
+- **WHEN** the shopper has extended the order
+- **THEN** the code card reads "Collect by Mon 16 Nov"
 
 ### Requirement: Code at the counter
 Tapping the code SHALL show it full screen for the shop to scan, with the items and shop.

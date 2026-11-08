@@ -1,6 +1,6 @@
 # Método
 
-O Discover coletou dados de três fontes: pesquisa documental sobre a rua, benchmarks de produtos que já existem e posts de compradores. Sobre compradores, eu precisava de evidências que pudesse reunir em poucas horas, quase sem custo, e conferir linha por linha. Das formas de coletar, usei uma: uma netnografia, lendo o que os compradores de Londres já escrevem em público sobre a high street, a rua comercial do bairro. O que as pessoas escrevem é quase todo atitudinal, então o mapa de empatia e as proto-personas se apoiam no que as pessoas dizem que pensam e fazem. Ninguém foi observado.
+O Discover coletou dados de três fontes: pesquisa documental sobre a rua, benchmarks de produtos que já existem e posts de compradores. Sobre compradores, eu precisava de evidências que pudesse reunir em poucas horas, quase sem custo, e conferir linha por linha. Usei uma netnografia, lendo o que os compradores de Londres já escrevem em público sobre a high street, a rua comercial do bairro. O que as pessoas escrevem é quase todo atitudinal, então o mapa de empatia e as proto-personas se apoiam no que as pessoas dizem que pensam e fazem. Ninguém foi observado.
 
 ```summary
 Takeaways:
@@ -19,22 +19,9 @@ Trade-offs:
 - O Reddit puxa para um público jovem, o Mumsnet para mães. O Reddit veio de um arquivo, e o TikTok rendeu só legendas.
 ```
 
-## Opções de coleta
-
-| Método | Tipo de dado | Custo para este take-home | Usado |
-| --- | --- | --- | --- |
-| Pesquisa documental (relatórios, estatísticas, notícias) | Contexto sobre a própria rua | Baixo | Sim, para entender como a high street funciona ([a high street hoje](../high-street-landscape.md)) |
-| Benchmarks (páginas de produto, avaliações de apps) | O que os produtos existentes fazem e o que os usuários dizem deles | Baixo | Sim, em paralelo com a netnografia ([benchmarks](../benchmarks.md)) |
-| Netnografia (posts públicos) | Atitudinal: o que as pessoas dizem que pensam, sentem e fizeram | Baixo: o material já existe | Sim, a única fonte sobre compradores |
-| Entrevistas | Atitudinal, com perguntas de acompanhamento | Médio: recrutamento, sessões, anotações | Não |
-| Survey | Atitudinal, em escala | Médio: precisa de um painel para valer alguma coisa | Não |
-| Observação na rua ou acompanhamento na King Street | Comportamental: o que as pessoas fazem | Médio a alto | Não |
-| Estudo de diário | Comportamental, autorrelatado ao longo de dias | Alto | Não |
-| Teste de protótipo | Comportamental, diante de uma ideia concreta | Médio, quando houver algo para testar | Depois, após o Define |
-
 ## Por que netnografia
 
-As pessoas já escreveram muito sobre a high street do bairro, e cada afirmação continua presa a um post datado que qualquer um pode abrir. Por isso ela era o caminho mais rápido para uma base que eu pudesse conferir. Não acrescentei entrevistas nem survey, porque num take-home elas custariam mais tempo do que mudariam a direção.
+As pessoas já escreveram muito sobre a high street do bairro, e cada afirmação continua presa a um post datado que qualquer um pode abrir. Por isso ela era o caminho mais rápido para uma base que eu pudesse conferir.
 
 ## Dados atitudinais
 
@@ -45,6 +32,21 @@ Por isso o [mapa de empatia](empathy-map.md) e as [proto-personas](../personas/i
 ## Com mais tempo
 
 Num produto já estabelecido, eu acrescentaria dados de comportamento em seguida: observar pessoas na rua, ou dados de uso. Para algo que ainda não existe, eu iria o mais rápido possível para uma ideia testável e a colocaria na frente de alguns compradores. A reação deles a um protótipo é evidência de comportamento e responde às perguntas que as personas deixam em aberto (veja [o que testar primeiro](../personas/index.md)).
+
+## Em números
+
+| O quê | Quantidade |
+| --- | --- |
+| Período dos posts | De maio de 2025 a novembro de 2026 |
+| Redes | 4: Reddit, Mumsnet, X e TikTok |
+| Subreddits pesquisados | 10: sete do oeste de Londres, mais r/london, r/AskUK e r/CasualUK |
+| Termos de busca | 22 por subreddit, 5 no Mumsnet |
+| Páginas do Reddit salvas à mão para conferir as citações | 217 posts e 21 threads completas de comentários |
+| Citações distintas mantidas | 42. 41 conferidas na página original; 1 só num arquivo público |
+| Citações descartadas na conferência | 2, removidas pelos autores |
+| Cards de citação nos achados | 39: 26 do Reddit, 5 do Mumsnet, 5 do TikTok, 3 do X |
+| Códigos e temas | 14 códigos, 10 temas |
+| Posts codificados para as proto-personas | 44, dos quais 27 descrevem as compras de quem postou e 20 foram agrupados |
 
 ## Etapas
 

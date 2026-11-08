@@ -41,6 +41,7 @@ import {
 } from '@/store';
 
 import { Button, Note, Section, Segmented, Select, Sub, Toggle } from './controls';
+import type { ControlId } from './relevance';
 import { useDebugger } from './visibility';
 
 const frameOptions: Option<FrameMode>[] = [
@@ -49,6 +50,14 @@ const frameOptions: Option<FrameMode>[] = [
   { value: 'android', label: 'Pixel' },
   { value: 'off', label: 'No frame' },
 ];
+
+/** Which per-screen controls change the current screen (relevance.ts). */
+type On = Record<ControlId, boolean>;
+
+/** The labels of the controls that don't apply here, for the section's "No effect on this screen" line. */
+function offLabels(on: On, labels: Partial<Record<ControlId, string>>): string[] {
+  return (Object.keys(labels) as ControlId[]).filter((id) => !on[id]).map((id) => labels[id]!);
+}
 
 export function ShopperSection() {
   const { persona, platform, scheme } = useAppStore(useShallow((s) => ({ persona: s.persona, platform: s.platform, scheme: s.scheme })));
@@ -133,7 +142,16 @@ const fulfilmentOptions = [
   { value: 'delivery', label: 'Delivery' },
 ] as const satisfies readonly { value: Fulfilment; label: string }[];
 
-export function StatesSection() {
+const stateLabels: Partial<Record<ControlId, string>> = {
+  request: 'Request',
+  fulfilment: 'How to get it',
+  order: 'Order',
+  partialBuy: 'Bought some',
+  payment: 'Payment sheet',
+  answers: "Shops' answers",
+};
+
+export function StatesSection({ on }: { on: On }) {
   const content = useContent();
   const { request, order, fulfilment, payment, keepLookingForMore } = useAppStore(
     useShallow((s) => ({
@@ -160,27 +178,36 @@ export function StatesSection() {
       label: orderLabel(state, { shop: orderShop?.name ?? '', collectBy: content.order.collectBy, extendedTo: content.order.extendedTo }),
     }),
   );
+  const hidden = offLabels(on, stateLabels);
   return (
-    <Section title="Request and order">
-      <Select label="Request" options={requestOptions} value={request} onChange={(r) => set({ request: r })} />
-      <Segmented
-        label="How to get it"
-        options={fulfilmentOptions}
-        value={fulfilment}
-        onChange={(f) => set({ fulfilment: f, order: orderStatesFor[f].includes(order) ? order : 'none' })}
-      />
-      <Select label="Order" options={orderOptions} value={order} onChange={(o) => set({ order: o })} />
-      <Toggle
-        label={`Bought ${Math.max(1, active.quantity - 1)} of ${active.quantity}`}
-        detail="The order card says it keeps looking for the rest"
-        value={keepLookingForMore}
-        onChange={sim.setPartialBuy}
-      />
-      <Select label="Payment sheet" options={paymentOptions} value={payment} onChange={(p) => set({ payment: p })} />
-      <Sub>{`Shops' answers · ${active.title}`}</Sub>
-      {active.offers.map((offer) => (
-        <AnswerSelect key={offer.shopId} shopId={offer.shopId} />
-      ))}
+    <Section title="Request and order" hidden={hidden} idle={hidden.length === Object.keys(stateLabels).length}>
+      {on.request ? <Select label="Request" options={requestOptions} value={request} onChange={(r) => set({ request: r })} /> : null}
+      {on.fulfilment ? (
+        <Segmented
+          label="How to get it"
+          options={fulfilmentOptions}
+          value={fulfilment}
+          onChange={(f) => set({ fulfilment: f, order: orderStatesFor[f].includes(order) ? order : 'none' })}
+        />
+      ) : null}
+      {on.order ? <Select label="Order" options={orderOptions} value={order} onChange={(o) => set({ order: o })} /> : null}
+      {on.partialBuy ? (
+        <Toggle
+          label={`Bought ${Math.max(1, active.quantity - 1)} of ${active.quantity}`}
+          detail="The order card says it keeps looking for the rest"
+          value={keepLookingForMore}
+          onChange={sim.setPartialBuy}
+        />
+      ) : null}
+      {on.payment ? <Select label="Payment sheet" options={paymentOptions} value={payment} onChange={(p) => set({ payment: p })} /> : null}
+      {on.answers ? (
+        <>
+          <Sub>{`Shops' answers · ${active.title}`}</Sub>
+          {active.offers.map((offer) => (
+            <AnswerSelect key={offer.shopId} shopId={offer.shopId} />
+          ))}
+        </>
+      ) : null}
     </Section>
   );
 }
@@ -216,7 +243,17 @@ const contentOptions: Option<ContentSet>[] = [
 /** The states the added shops answer with when the set asks twelve shops, so the chat has twelve answers to show. */
 const manyAnswerCycle: AnswerState[] = ['hasIt', 'doesntHave', 'similar', 'hasSome', 'noReply', 'doesntHave'];
 
-export function ContentSection() {
+const contentLabels: Partial<Record<ControlId, string>> = {
+  contentSet: 'Content',
+  loading: 'Loading',
+  locationOff: 'Location off',
+  shopHours: 'Shop hours',
+  place: 'Place',
+  radius: 'Walking radius',
+  notifications: 'Notifications',
+};
+
+export function ContentSection({ on }: { on: On }) {
   const { contentSet, loading, locationOff, notificationsAllowed, place, places, radius, shopHours } = useAppStore(
     useShallow((s) => ({
       shopHours: s.shopHours,
@@ -249,29 +286,36 @@ export function ContentSection() {
     });
     set({ contentSet: next, answers });
   };
+  const hidden = offLabels(on, contentLabels);
   return (
-    <Section title="Content and context" defaultOpen={false}>
-      <Select label="Content" options={contentOptions} value={contentSet} onChange={pickSet} />
-      <Toggle label="Loading" detail="Skeletons in place of content" value={loading} onChange={(v) => set({ loading: v })} />
-      <Toggle label="Location off" value={locationOff} onChange={(v) => set({ locationOff: v })} />
-      <Select label="Shop hours" options={hoursOptions} value={shopHours} onChange={(h) => set({ shopHours: h })} />
-      <Select
-        label="Place"
-        options={[currentPlace, ...places].map((p): Option<string> => ({ value: p.id, label: p.id === 'current' ? `Current location · ${p.address}` : `${p.label} · ${p.address}` }))}
-        value={place.id}
-        onChange={(id) => set({ place: [currentPlace, ...places].find((p) => p.id === id) ?? currentPlace })}
-      />
-      <Segmented
-        label="Walking radius"
-        options={[
-          { value: '10', label: '10 min' },
-          { value: '15', label: '15 min' },
-          { value: '20', label: '20 min' },
-        ]}
-        value={String(radius)}
-        onChange={(r) => set({ radius: Number(r) as Radius })}
-      />
-      <Toggle label="Notifications" detail="When off, answers stay in the chat" value={notificationsAllowed} onChange={(v) => set({ notificationsAllowed: v })} />
+    <Section title="Content and context" defaultOpen={false} hidden={hidden} idle={hidden.length === Object.keys(contentLabels).length}>
+      {on.contentSet ? <Select label="Content" options={contentOptions} value={contentSet} onChange={pickSet} /> : null}
+      {on.loading ? <Toggle label="Loading" detail="Skeletons in place of content" value={loading} onChange={(v) => set({ loading: v })} /> : null}
+      {on.locationOff ? <Toggle label="Location off" value={locationOff} onChange={(v) => set({ locationOff: v })} /> : null}
+      {on.shopHours ? <Select label="Shop hours" options={hoursOptions} value={shopHours} onChange={(h) => set({ shopHours: h })} /> : null}
+      {on.place ? (
+        <Select
+          label="Place"
+          options={[currentPlace, ...places].map((p): Option<string> => ({ value: p.id, label: p.id === 'current' ? `Current location · ${p.address}` : `${p.label} · ${p.address}` }))}
+          value={place.id}
+          onChange={(id) => set({ place: [currentPlace, ...places].find((p) => p.id === id) ?? currentPlace })}
+        />
+      ) : null}
+      {on.radius ? (
+        <Segmented
+          label="Walking radius"
+          options={[
+            { value: '10', label: '10 min' },
+            { value: '15', label: '15 min' },
+            { value: '20', label: '20 min' },
+          ]}
+          value={String(radius)}
+          onChange={(r) => set({ radius: Number(r) as Radius })}
+        />
+      ) : null}
+      {on.notifications ? (
+        <Toggle label="Notifications" detail="When off, answers stay in the chat" value={notificationsAllowed} onChange={(v) => set({ notificationsAllowed: v })} />
+      ) : null}
     </Section>
   );
 }
@@ -324,21 +368,27 @@ const dateOptions: Option<SimDate>[] = [
 ];
 
 /** The simulation's clock and outcomes: shops answer on a timer, the payment and the shop's reply are chosen here. */
-export function SimulationSection() {
+const simLabels: Partial<Record<ControlId, string>> = {
+  payOutcome: 'Payment result',
+  shopOutcome: "Shop's reply",
+  date: 'Today is',
+};
+
+export function SimulationSection({ on }: { on: On }) {
   const { running, clock, payOutcome, shopOutcome, date } = useSim(
     useShallow((s) => ({ running: s.running, clock: Math.floor(s.clock), payOutcome: s.payOutcome, shopOutcome: s.shopOutcome, date: s.date })),
   );
   return (
-    <Section title="Simulation" defaultOpen={false}>
+    <Section title="Simulation" defaultOpen={false} hidden={offLabels(on, simLabels)}>
       <Toggle label="Clock running" detail={`Shops answer on a timer · ${clock} s`} value={running} onChange={sim.setRunning} />
       <div className="dbg-actions">
         <Button label="Advance 5 s" onPress={() => sim.step(5)} />
         <Button label="Advance 1 min" onPress={() => sim.step(60)} />
       </div>
-      <Sub>What happens next</Sub>
-      <Select label="Payment result" options={payOptions} value={payOutcome} onChange={sim.setPayOutcome} />
-      <Select label="Shop's reply" options={shopOptions} value={shopOutcome} onChange={sim.setShopOutcome} />
-      <Select label="Today is" options={dateOptions} value={date} onChange={sim.setDate} />
+      {on.payOutcome || on.shopOutcome || on.date ? <Sub>What happens next</Sub> : null}
+      {on.payOutcome ? <Select label="Payment result" options={payOptions} value={payOutcome} onChange={sim.setPayOutcome} /> : null}
+      {on.shopOutcome ? <Select label="Shop's reply" options={shopOptions} value={shopOutcome} onChange={sim.setShopOutcome} /> : null}
+      {on.date ? <Select label="Today is" options={dateOptions} value={date} onChange={sim.setDate} /> : null}
     </Section>
   );
 }

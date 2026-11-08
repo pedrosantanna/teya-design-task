@@ -23,6 +23,6 @@ One element: shop, street, status.
 
 ## iOS and Android
 
-iOS: inset grouped list on Card. Android: Material list item.
+iOS: inset grouped list on Card. Android: a Material 3 list item in the same container and fill (parity rule in platforms.md).
 
 The grouped list (the asking list in the chat) has `radius.card` corners, like the answer and order cards around it.

@@ -9,7 +9,7 @@ import { View } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { MAP_CAMERA } from './mapStyle';
-import { cameraPadding, MapAttribution, MapFallback, MapPin, useMapView, useSettled, type MapProps } from './MapParts';
+import { cameraPadding, MapAttribution, MapPin, MapPlaceholder, MapSkeleton, useMapView, useSettled, type MapProps } from './MapParts';
 
 export type { MapProps } from './MapParts';
 
@@ -28,7 +28,9 @@ export const Map = memo(function Map({ loading = false, pin = true, extent, inte
       importantForAccessibility="no-hide-descendants"
       pointerEvents={interactive ? 'auto' : 'none'}
     >
-      {loading ? null : (
+      {loading ? (
+        <MapSkeleton />
+      ) : (
         <>
           {failed || !settled ? null : (
             <MapLibreMap
@@ -50,8 +52,9 @@ export const Map = memo(function Map({ loading = false, pin = true, extent, inte
               <Camera center={view.center} {...MAP_CAMERA} zoom={view.zoom} bearing={view.bearing} padding={cameraPadding(extent, view.offsetX)} duration={0} />
             </MapLibreMap>
           )}
-          {/* The static image shows the area round Blythe Road: it stands in only for the plain map, never for a shop's route. */}
-          {ready && !failed ? null : view.key === 'area' ? <MapFallback extent={extent} /> : null}
+          {/* The placeholder shows from the first frame and cross-fades to the live map: the static image of the area round
+              Blythe Road for the plain map, the street skeleton for a shop's route (the image is of other streets). */}
+          <MapPlaceholder key={view.key} extent={extent} image={view.key === 'area'} ready={ready && !failed} />
           {pin ? <MapPin extent={extent} accent={accent} offsetX={view.offsetX} /> : null}
           {attribution ? <MapAttribution extent={extent} /> : null}
         </>

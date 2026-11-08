@@ -108,6 +108,8 @@ Os fatos de uma loja ou de um pedido se distinguem por peso, cor, ícone e posi�
 | Linhas de pedido | Uma tag de estado ("Needs you"), o prazo como texto próprio ("Buy by Thu 5 Nov"), a contagem como selo ao final | "Needs you · by Tuesday", "Needs you · 1" |
 | Contagens em filtros | A contagem depois do rótulo em Muted foreground: "Needs you 1" | Um ponto antes da contagem |
 | Detalhes e desfechos | Uma vírgula ou uma frase nova: "Collect by Mon 9 Nov. Full refund if you don't", "In stock now, 1 of 2" | Um ponto entre orações |
+| A compra fixada | O rótulo de status na linha 1; na linha 2 a loja e os itens com vírgula ("Paper & Co, 2 × eclipse glasses"), só os itens quando o rótulo já diz a loja; "Code" sobre o código no fim | A loja dita duas vezes em duas linhas |
+| O código no recibo | O código, depois a data até quando vale, depois a regra do reembolso: "K7Q2", "Collect by Mon 9 Nov", "Full refund if you don't"; o rótulo de status sai enquanto a data aparece (decisão 068) | A data de retirada no cabeçalho, longe do código |
 | Onde o ponto fica | Uma lista simples de fatos contáveis do mesmo tipo, como o Airbnb escreve "2 beds · 1 bath"; o protótipo não tem uma lista assim, então o app não tem pontos; um botão que leva o valor diz "Buy for £29.98" | Um ponto entre um estado e seu detalhe, ou entre fatos de tipos diferentes |
 
 Os rótulos da tabela de estados mantêm o ponto na fonte como o lugar onde o estado termina e o detalhe começa. O rótulo de estado desenha os dois em pesos e cores diferentes e nunca mostra o ponto.

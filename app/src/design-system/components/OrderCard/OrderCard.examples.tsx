@@ -9,7 +9,7 @@ import type { StatusTone } from '../Tag/Tag';
 const waitingSteps: OrderStep[] = [
   { title: 'Bought with Apple Pay', detail: '13:16', state: 'done' },
   { title: 'Paper & Co sets them aside', detail: 'Charged when Paper & Co confirms', state: 'current' },
-  { title: 'Ready · collect by Mon 9 Nov', detail: 'Collection code on the receipt', state: 'todo' },
+  { title: 'Ready · collect by Mon 9 Nov', detail: 'Collection code pinned at the top', state: 'todo' },
 ];
 
 const statuses: { status: string; tone: StatusTone }[] = [

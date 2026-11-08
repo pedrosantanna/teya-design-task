@@ -150,6 +150,20 @@
       "$value": "{color.map.waterDark}",
       "$description": "Water on the map: low-chroma cool"
     },
+    "mapSkeleton": {
+      "ground": {
+        "$value": "{color.mapGround}",
+        "$description": "The map placeholder's ground: the live map's ground, so the cross-fade only adds detail"
+      },
+      "road": {
+        "$value": "{color.mapRoad}",
+        "$description": "Streets in the map placeholder: the live map's street colour"
+      },
+      "roadMain": {
+        "$value": "{color.mapRoadMain}",
+        "$description": "Main roads in the map placeholder: the live map's main-road colour"
+      }
+    },
     "scrim": {
       "$value": "{color.black}"
     },
@@ -201,13 +215,23 @@
       "$value": "{color.stone.360}",
       "$description": "A card on a busy area, text fields"
     },
-    "borderOnTile": {
-      "$value": "{color.biscuit.860}",
-      "$description": "The hairline under a nav bar filled with an accent tile: light mode's Border in both modes, since the tile is the same pastel (round 18); Stone 360 drew a near-black line on it"
-    },
     "separator": {
       "$value": "{color.stone.320}",
       "$description": "1 px lines between rows, inset to the text"
+    },
+    "groundEdge": {
+      "background": {
+        "$value": "{color.stone.265}",
+        "$description": "The hairline under a top bar on Background: a lighter step of the same neutral (1.29:1, as light mode's 1.27:1); a darker line would vanish on the near-black ground"
+      },
+      "card": {
+        "$value": "{color.stone.360}",
+        "$description": "The hairline under a top bar on Card (1.41:1)"
+      },
+      "sheet": {
+        "$value": "{color.stone.320}",
+        "$description": "The hairline under a top bar on a Sheet (1.33:1)"
+      }
     },
     "codeSurface": {
       "$value": "{color.white}",
@@ -228,6 +252,10 @@
             "$value": "{color.peach.tile}",
             "$description": "Placeholder tile, category card, the shop page header, the receipt header: the light pastel in both modes (round 18, option 2 variation 4), 12.91 to 13.46:1 from the dark Background"
           },
+          "edge": {
+            "$value": "{color.peach.edge}",
+            "$description": "The hairline under a top bar on this tile: a darker tone of the tile (1.35:1), never grey"
+          },
           "ink": {
             "$value": "{color.peach.800}",
             "$description": "Initials and the dark awning stripes on the tile"
@@ -239,6 +267,10 @@
           "chipOnCard": {
             "$value": "{color.peach.chipOnCardDark}",
             "$description": "Chips on a card on this accent's tile (What they sell, the rating tags): tag.fillOnRow in light; in dark the card a step lighter, 1.30 to 1.32:1 from it"
+          },
+          "separatorOnCard": {
+            "$value": "{color.peach.separatorOnCardDark}",
+            "$description": "Row dividers inside a card on this accent's tile (the shop page's sections, the Category rows): the Separator in light, where the card is white; in dark the card's own hue a step lighter, 1.30:1 from cardOnTile, never a grey line on the tinted card"
           },
           "tonal": {
             "$value": "{color.peach.cardOnTileDark}",
@@ -262,6 +294,10 @@
             "$value": "{color.pistachio.tile}",
             "$description": "Placeholder tile, category card, the shop page header, the receipt header: the light pastel in both modes (round 18, option 2 variation 4), 12.91 to 13.46:1 from the dark Background"
           },
+          "edge": {
+            "$value": "{color.pistachio.edge}",
+            "$description": "The hairline under a top bar on this tile: a darker tone of the tile (1.35:1), never grey"
+          },
           "ink": {
             "$value": "{color.pistachio.800}",
             "$description": "Initials and the dark awning stripes on the tile"
@@ -273,6 +309,10 @@
           "chipOnCard": {
             "$value": "{color.pistachio.chipOnCardDark}",
             "$description": "Chips on a card on this accent's tile (What they sell, the rating tags): tag.fillOnRow in light; in dark the card a step lighter, 1.30 to 1.32:1 from it"
+          },
+          "separatorOnCard": {
+            "$value": "{color.pistachio.separatorOnCardDark}",
+            "$description": "Row dividers inside a card on this accent's tile (the shop page's sections, the Category rows): the Separator in light, where the card is white; in dark the card's own hue a step lighter, 1.30:1 from cardOnTile, never a grey line on the tinted card"
           },
           "tonal": {
             "$value": "{color.pistachio.cardOnTileDark}",
@@ -296,6 +336,10 @@
             "$value": "{color.butter.tile}",
             "$description": "Placeholder tile, category card, the shop page header, the receipt header: the light pastel in both modes (round 18, option 2 variation 4), 12.91 to 13.46:1 from the dark Background"
           },
+          "edge": {
+            "$value": "{color.butter.edge}",
+            "$description": "The hairline under a top bar on this tile: a darker tone of the tile (1.35:1), never grey"
+          },
           "ink": {
             "$value": "{color.butter.800}",
             "$description": "Initials and the dark awning stripes on the tile"
@@ -307,6 +351,10 @@
           "chipOnCard": {
             "$value": "{color.butter.chipOnCardDark}",
             "$description": "Chips on a card on this accent's tile (What they sell, the rating tags): tag.fillOnRow in light; in dark the card a step lighter, 1.30 to 1.32:1 from it"
+          },
+          "separatorOnCard": {
+            "$value": "{color.butter.separatorOnCardDark}",
+            "$description": "Row dividers inside a card on this accent's tile (the shop page's sections, the Category rows): the Separator in light, where the card is white; in dark the card's own hue a step lighter, 1.30:1 from cardOnTile, never a grey line on the tinted card"
           },
           "tonal": {
             "$value": "{color.butter.cardOnTileDark}",
@@ -330,6 +378,10 @@
             "$value": "{color.lavender.tile}",
             "$description": "Placeholder tile, category card, the shop page header, the receipt header: the light pastel in both modes (round 18, option 2 variation 4), 12.91 to 13.46:1 from the dark Background"
           },
+          "edge": {
+            "$value": "{color.lavender.edge}",
+            "$description": "The hairline under a top bar on this tile: a darker tone of the tile (1.35:1), never grey"
+          },
           "ink": {
             "$value": "{color.lavender.800}",
             "$description": "Initials and the dark awning stripes on the tile"
@@ -341,6 +393,10 @@
           "chipOnCard": {
             "$value": "{color.lavender.chipOnCardDark}",
             "$description": "Chips on a card on this accent's tile (What they sell, the rating tags): tag.fillOnRow in light; in dark the card a step lighter, 1.30 to 1.32:1 from it"
+          },
+          "separatorOnCard": {
+            "$value": "{color.lavender.separatorOnCardDark}",
+            "$description": "Row dividers inside a card on this accent's tile (the shop page's sections, the Category rows): the Separator in light, where the card is white; in dark the card's own hue a step lighter, 1.30:1 from cardOnTile, never a grey line on the tinted card"
           },
           "tonal": {
             "$value": "{color.lavender.cardOnTileDark}",
@@ -383,6 +439,10 @@
       "edge": {
         "$value": "{color.stone.265}",
         "$description": "Hairline around cards and grouped rows on the chat ground"
+      },
+      "groundEdge": {
+        "$value": "{color.groundEdge.background}",
+        "$description": "The hairline under a chat's top bar: the edge of the chat's ground (Background)"
       },
       "field": {
         "$value": "{color.card}",
@@ -464,6 +524,18 @@
     "grabber": {
       "$value": "{color.stone.445}",
       "$description": "The sheet's grabber: Muted foreground at state.grabber in light; Stone 445 in full in dark (2.37:1, solid; Muted foreground at 38% rendered #514F4C, 2.19:1)"
+    },
+    "outline": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.4588,
+          0.4627,
+          0.4745
+        ],
+        "hex": "#757679"
+      },
+      "$description": "Android only: the edge that is a control's only boundary (the outlined segmented button), Material's Outline role: 4.31:1 on the Background, 3.34:1 on Card"
     },
     "splash": {
       "$description": "The splash and its intro (motion.md, Splash): Indigo 800, the brand colour, in both modes, with the mark in white and Indigo 300 (mark.md)",

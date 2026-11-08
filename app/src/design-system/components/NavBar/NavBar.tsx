@@ -28,7 +28,7 @@ import { useStatusTone } from '../../internal/statusTone';
 import { IMAGE_OVER, photoSource, type PhotoSource } from '../../internal/media';
 import { screenMargin, type ShopAccentName } from '../../theme';
 import { usePress } from '../../internal/usePress';
-import { ScrollEdge, type EdgeFill } from '../../internal/ScrollEdge';
+import { groundEdge, groundFill, ScrollEdge, type EdgeFill } from '../../internal/ScrollEdge';
 import { SnuffleMark } from '../SnuffleMark/SnuffleMark';
 import { CloseButton } from '../CloseButton/CloseButton';
 import { ConfirmButton } from '../ConfirmButton/ConfirmButton';
@@ -102,6 +102,10 @@ export type NavBarProps = {
   fillBefore?: { fill: EdgeFill; until: number };
   /** A map, not the tile, is under the status bar until the bar fills (the shop page): in dark the status bar keeps light content until then. */
   overMap?: boolean;
+  /** The scroll edge ends at the bar's bottom, with a short fade (space.4) under the title, instead of running
+   *  space.4 past it: a heading that comes to rest right under the bar stays crisp, and only content that has
+   *  scrolled under the bar recedes (Nearby). */
+  edgeInBar?: boolean;
 };
 
 /** The bar's height under the safe area: one height on every screen, so Back, Close and the title share an axis
@@ -174,6 +178,7 @@ export const NavBar = memo(function NavBar({
   trailingPhoto,
   fillBefore,
   overMap = false,
+  edgeInBar = false,
 }: NavBarProps) {
   // The platform form follows the theme; the React Compiler would keep the first one, since the theme object stays the same.
   'use no memo';
@@ -235,11 +240,15 @@ export const NavBar = memo(function NavBar({
   // the tile is under the status bar only once the bar has filled (the map is under it before), so the tone follows the scroll.
   const [filled, setFilled] = useState(false);
   const fillAt = fillBefore ? fillBefore.until - theme.space[4] : backgroundAt - theme.space[1];
+  // Only a bar over a map with a tile under it in dark reads this; elsewhere the reaction never calls back, so crossing the
+  // threshold doesn't re-render the bar mid-scroll (profiled at 4 to 10 ms a commit on the JS thread).
+  const tracksFill = overMap && Boolean(tileAccent) && theme.scheme === 'dark';
   useAnimatedReaction(
     () => scrollY.get() >= fillAt,
     (now, before) => {
-      if (now !== before) scheduleOnRN(setFilled, now);
+      if (tracksFill && now !== before) scheduleOnRN(setFilled, now);
     },
+    [tracksFill, fillAt],
   );
   const focused = useIsFocused();
   const overTile = overMap ? filled : true;
@@ -258,12 +267,19 @@ export const NavBar = memo(function NavBar({
     {/* No bar fill (iOS 26): a scroll-edge fade under the floating controls once content is under them. */}
     {fillBefore ? <ScrollEdge edge="top" height={total + theme.space[4]} fill={fillBefore.fill} style={beforeStyle} /> : null}
     {/* On a shop's tile and in a chat the bar is a solid fill of the page's own colour down to the bar's bottom with a
-        0.5 pt hairline under it, so nothing half-cut shows beside the controls (visual critique, round 12). Elsewhere a
+        0.5 pt hairline under it in a darker tone of that ground (groundEdge, never a grey Border), so nothing half-cut
+        shows beside the controls (visual critique, round 12). Elsewhere a
         scroll-edge fade shows once content is under the bar. */}
     {solidBar ? (
-      <Animated.View pointerEvents="none" style={[styles.solid(total, solidBar === 'chat' ? theme.color.chat.ground : theme.color.shop.accent[(fill as { accent: ShopAccentName }).accent].tile, solidBar === 'chat' ? theme.color.chat.edge : theme.color.borderOnTile), backgroundStyle]} />
+      <Animated.View pointerEvents="none" style={[styles.solid(total, groundFill(theme, fill), groundEdge(theme, fill)), backgroundStyle]} />
     ) : (
-      <ScrollEdge edge="top" height={total + theme.space[4]} fill={fill} style={backgroundStyle} />
+      <ScrollEdge
+        edge="top"
+        height={edgeInBar ? total : total + theme.space[4]}
+        fadeOver={edgeInBar ? theme.space[4] : undefined}
+        fill={fill}
+        style={backgroundStyle}
+      />
     )}
     {/* box-none: the bar's empty parts let touches through to the content under it (Nearby's area row). */}
     <Animated.View style={[styles.bar(top), hideStyle]} pointerEvents="box-none">

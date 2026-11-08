@@ -17,16 +17,40 @@
           "pt": "Visão geral"
         },
         {
-          "id": "case-position",
-          "title": "Problem and position",
-          "src": "docs/case/position.md",
-          "pt": "Problema e posição"
+          "id": "case-discovery",
+          "title": "Discovery",
+          "src": "docs/case/discovery.md",
+          "pt": "Descoberta"
+        },
+        {
+          "id": "case-concept",
+          "title": "Concept",
+          "src": "docs/case/concept.md",
+          "pt": "Conceito"
+        },
+        {
+          "id": "case-viability",
+          "title": "Value and viability",
+          "src": "docs/case/viability.md",
+          "pt": "Valor e viabilidade"
+        },
+        {
+          "id": "case-how-i-built",
+          "title": "How I built it",
+          "src": "docs/case/how-i-built.md",
+          "pt": "Como construí"
         },
         {
           "id": "case-product",
           "title": "The product",
           "src": "docs/case/product.md",
           "pt": "O produto"
+        },
+        {
+          "id": "case-features",
+          "title": "Features",
+          "src": "docs/case/features.md",
+          "pt": "Funcionalidades"
         },
         {
           "id": "prototype",
@@ -36,28 +60,10 @@
           "embed": "app-web/index.html"
         },
         {
-          "id": "case-decisions",
-          "title": "Key decisions",
-          "src": "docs/case/decisions.md",
-          "pt": "Decisões principais"
-        },
-        {
-          "id": "case-how-i-worked",
-          "title": "How I built it with AI",
-          "src": "docs/case/how-i-worked.md",
-          "pt": "Como construí com IA"
-        },
-        {
-          "id": "case-viability",
-          "title": "Viability",
-          "src": "docs/case/viability.md",
-          "pt": "Viabilidade"
-        },
-        {
           "id": "case-next",
-          "title": "What's next",
+          "title": "What I'll test next",
           "src": "docs/case/next.md",
-          "pt": "Próximos passos"
+          "pt": "O que vou testar a seguir"
         }
       ]
     },
@@ -65,12 +71,12 @@
       "title": "Intent",
       "pt": "Intenção",
       "block": {
-        "title": "AI harness and context",
-        "pt": "Harness de IA e contexto",
+        "title": "AI context",
+        "pt": "Contexto de IA",
         "sub": "Research, specs, design system and logs",
         "sub_pt": "Pesquisa, specs, design system e registros",
-        "short": "AI harness",
-        "short_pt": "Harness de IA"
+        "short": "AI context",
+        "short_pt": "Contexto de IA"
       },
       "items": [
         {
@@ -91,12 +97,12 @@
       "title": "Research",
       "pt": "Pesquisa",
       "block": {
-        "title": "AI harness and context",
-        "pt": "Harness de IA e contexto",
+        "title": "AI context",
+        "pt": "Contexto de IA",
         "sub": "Research, specs, design system and logs",
         "sub_pt": "Pesquisa, specs, design system e registros",
-        "short": "AI harness",
-        "short_pt": "Harness de IA"
+        "short": "AI context",
+        "short_pt": "Contexto de IA"
       },
       "items": [
         {
@@ -195,12 +201,12 @@
       "title": "Product specs",
       "pt": "Specs do produto",
       "block": {
-        "title": "AI harness and context",
-        "pt": "Harness de IA e contexto",
+        "title": "AI context",
+        "pt": "Contexto de IA",
         "sub": "Research, specs, design system and logs",
         "sub_pt": "Pesquisa, specs, design system e registros",
-        "short": "AI harness",
-        "short_pt": "Harness de IA"
+        "short": "AI context",
+        "short_pt": "Contexto de IA"
       },
       "items": [
         {
@@ -251,12 +257,12 @@
       "title": "Flows and states",
       "pt": "Fluxos e estados",
       "block": {
-        "title": "AI harness and context",
-        "pt": "Harness de IA e contexto",
+        "title": "AI context",
+        "pt": "Contexto de IA",
         "sub": "Research, specs, design system and logs",
         "sub_pt": "Pesquisa, specs, design system e registros",
-        "short": "AI harness",
-        "short_pt": "Harness de IA"
+        "short": "AI context",
+        "short_pt": "Contexto de IA"
       },
       "items": [
         {
@@ -264,6 +270,7 @@
           "title": "App flow",
           "src": "docs/develop/ideation/app-flow.md",
           "proto": true,
+          "measure": "docs/verify/measurement-layer.json",
           "canvas": [
             {
               "version": "v10",
@@ -349,12 +356,12 @@
       "title": "Design system",
       "pt": "Design system",
       "block": {
-        "title": "AI harness and context",
-        "pt": "Harness de IA e contexto",
+        "title": "AI context",
+        "pt": "Contexto de IA",
         "sub": "Research, specs, design system and logs",
         "sub_pt": "Pesquisa, specs, design system e registros",
-        "short": "AI harness",
-        "short_pt": "Harness de IA"
+        "short": "AI context",
+        "short_pt": "Contexto de IA"
       },
       "items": [
         {
@@ -460,12 +467,12 @@
       "title": "Explorations",
       "pt": "Explorações",
       "block": {
-        "title": "AI harness and context",
-        "pt": "Harness de IA e contexto",
+        "title": "AI context",
+        "pt": "Contexto de IA",
         "sub": "Research, specs, design system and logs",
         "sub_pt": "Pesquisa, specs, design system e registros",
-        "short": "AI harness",
-        "short_pt": "Harness de IA"
+        "short": "AI context",
+        "short_pt": "Contexto de IA"
       },
       "items": [
         {
@@ -507,12 +514,12 @@
       "title": "Verification",
       "pt": "Verificação",
       "block": {
-        "title": "AI harness and context",
-        "pt": "Harness de IA e contexto",
+        "title": "AI context",
+        "pt": "Contexto de IA",
         "sub": "Research, specs, design system and logs",
         "sub_pt": "Pesquisa, specs, design system e registros",
-        "short": "AI harness",
-        "short_pt": "Harness de IA"
+        "short": "AI context",
+        "short_pt": "Contexto de IA"
       },
       "items": [
         {
@@ -545,12 +552,12 @@
       "title": "Logs",
       "pt": "Registros",
       "block": {
-        "title": "AI harness and context",
-        "pt": "Harness de IA e contexto",
+        "title": "AI context",
+        "pt": "Contexto de IA",
         "sub": "Research, specs, design system and logs",
         "sub_pt": "Pesquisa, specs, design system e registros",
-        "short": "AI harness",
-        "short_pt": "Harness de IA"
+        "short": "AI context",
+        "short_pt": "Contexto de IA"
       },
       "items": [
         {

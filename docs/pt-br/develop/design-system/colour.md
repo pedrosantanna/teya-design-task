@@ -44,6 +44,7 @@ AI:
 - Na rodada 12 um agente subiu o croma dos cartões de linha escuros em 1,7 vez, acrescentou o Stone 880 para o texto secundário sobre eles, tirou as tags de avaliação do `tag.fillRaised` nas linhas tingidas, apagou o papel `container` do acento, que ninguém usava, e mediu cada par alterado.
 - Um agente criou `tag.fillOnRow` e o painel de Ratings sobre o Background e mediu cada par contra a linha e o tile no claro e no escuro.
 - Na rodada 18 um agente levou a variação 4 aos tokens (o tile claro no escuro, `cardOnTile`, `chipOnCard`, `tonal`, os papéis de texto sobre o tile e `borderOnTile`), fez o texto seguir o chão embaixo dele, com um chão `tileCard` dentro de uma superfície sobre um tile, calculou o cartão e o chip da Lavanda, que o quadro não mostrava, trocou as imagens de categoria escuras pelas claras e mediu cada par alterado com o script do WCAG 2.
+- Um agente trocou o `borderOnTile` cinza pelas bordas de chão: um tom mais escuro de cada tile e um degrau de borda para o Background, o Card, o Sheet e o chat, e mediu cada um contra o seu chão (1,27 a 1,41:1). Depois da revisão visual, passou a borda do Background escuro de Stone 305 (1,46:1) para Stone 265 (1,29:1), para o fio da conversa pesar o mesmo no claro e no escuro.
 Trade-offs:
 - O secundário #E5E2DE sobre o novo fundo fica em 1,07:1, então não marca um chip ali; os chips foram para a cor do cartão, e o secundário só aparece sobre cartões.
 - A sheet escura fica em 1,09:1 sobre o fundo, abaixo do 1,15:1 buscado: sheets mais claras aproximam dela as linhas em cartão e em secundário. O realce do contorno marca a borda de cima no lugar disso.
@@ -202,13 +203,14 @@ Desde a rodada 18 o tile é o mesmo pastel claro nos dois modos (opção 2, vari
 | `shop.accent.<hue>.ink` | 800 | 800 | As iniciais e as listras escuras do toldo no tile |
 | `shop.accent.<hue>.cardOnTile` | Card (branco) | Pêssego #5A453E, Pistache #454E3D, Manteiga #514A31, Lavanda #4B475A | As linhas de loja na tela de categoria, e as linhas, o resumo e os cartões de avaliação e o bloco "What they sell" na página da loja |
 | `shop.accent.<hue>.chipOnCard` | `tag.fillOnRow` (o Background) | Pêssego #685853, Pistache #585E52, Manteiga #615B4B, Lavanda #5C5A66 | Os chips de "What they sell" e as tags de avaliação nesses cartões |
+| `shop.accent.<hue>.separatorOnCard` | Separator (Biscuit 890 #DEDAD5, 1,39:1 sobre o cartão branco) | Pêssego #6C564F, Pistache #565F4E, Manteiga #625B41, Lavanda #5C586C: o cartão levado a OKLCH L 0,47 com o mesmo matiz e croma, 1,30 a 1,31:1 sobre ele | Os divisores entre as linhas dentro desses cartões, para que uma linha num cartão colorido seja um tom mais claro do próprio cartão, nunca um Separator cinza (quase preto sobre ele) |
 | `shop.accent.<hue>.tonal`, a `state.tonalOnTile` | Branco a 55% | `cardOnTile` a 100% | Call e Directions, os chips de rua não selecionados, o Voltar sobre um tile e sobre o mapa da página da loja, a pílula "Needs you" no cabeçalho do recibo |
 | `foregroundOnTile` | Texto | Stone 150 #0B0C0D (tinta) | Texto e ícones direto sobre um tile: o nome da loja, os títulos de seção, o rótulo da categoria |
 | `mutedForegroundOnTile` | Texto secundário | Stone 305 #2E2F30 (tinta secundária) | Texto secundário direto sobre um tile: a linha de fatos, a contagem do cabeçalho da tela de categoria, as notas de rodapé, o crédito do mapa |
 | `mutedForegroundOnTileCard` | Texto secundário | Stone 880 #DADBDD | A linha de detalhes e o chevron dentro de um cartão, linha ou chip sobre um tile |
 | `primaryOnTile`, `onPrimaryOnTile` | Índigo 800, branco | Índigo 800, branco | O Ask, os links e os botões simples sobre um tile. O Índigo 300, o Primary escuro, fica a 1,17 a 1,22:1 do tile pastel |
 | `successOnTile`, `warningOnTile` | Success 800 #384D1A, Warning 800 #53430D | Os mesmos | As palavras Open e Closes soon direto sobre um tile. O Success 700 deu 4,16:1 sobre o Pêssego e o Warning 700 deu 4,30:1; os passos 800 dão 6,17 a 6,63:1. Dentro de um cartão sobre o tile as palavras usam Success e Warning (5,02:1 ou mais sobre os cartões escuros) |
-| `borderOnTile` | Biscoito 860 (Border) | Biscoito 860 | O fio sob uma barra de navegação preenchida com o tile; o Stone 360 desenhava uma linha quase preta sobre o pastel |
+| `shop.accent.<hue>.edge` | Pêssego #E6A691, Pistache #A6C18B, Manteiga #CDB766, Lavanda #BBAEE6 | O mesmo | O fio sob uma barra de navegação preenchida com o tile: o tile em OKLCH L 0,78 mantendo o croma, 1,35 a 1,36:1 sobre ele. Substitui o `borderOnTile` (Biscoito 860), um cinza que media 1,04:1 sobre a Manteiga e parecia uma mancha na cor |
 
 Os componentes leem esses tokens pelo chão. Dentro de `<Ground value="tile" accent>`, `Text` e `Icon` trocam Foreground, Muted foreground, Primary, On primary, Success e Warning pelos papéis sobre o tile. Uma superfície pintada sobre o tile (uma linha, um cartão, um chip, um botão tonal, o Voltar) envolve o conteúdo em `OnTileSurface`, um chão `tileCard` onde o texto mantém Foreground e o texto secundário usa `mutedForegroundOnTileCard`.
 
@@ -241,6 +243,20 @@ A tela de categoria mantém o tile inteiro como fundo. Antes da rodada 18 o tile
 | Lavanda | #4B475A | 5,94:1 | 8,57:1 | 6,46:1 | 5,23:1 | 5,15:1 | 1,42:1 |
 
 Os chips de rua e o Voltar usam o `tonal` do acento, o cartão escuro com texto claro no escuro. O chip selecionado continua Índigo 950 com texto Índigo 200 (11,56:1), a 10,68 a 11,14:1 do tile pastel. As imagens de categoria eram renderizadas para o tile de cada modo; com um tile só nos dois modos, o escuro mostra a imagem clara e as imagens escuras saíram.
+
+## Bordas de chão
+
+O fio sob uma barra superior usa um tom do chão em que a barra está, então uma página colorida nunca ganha uma linha cinza. No claro é um degrau mais escuro do chão; nos neutros escuros, onde não há nada mais escuro, é um degrau mais claro do mesmo neutro. Cada um aparece sem chamar atenção: entre 1,27 e 1,41:1 sobre o seu chão.
+
+| Token | Claro | Escuro | Chão |
+| --- | --- | --- | --- |
+| `groundEdge.background` | Biscoito 860, 1,27:1 | Stone 265, 1,29:1 | Background |
+| `groundEdge.card` | Biscoito 890, 1,39:1 | Stone 360, 1,41:1 | Card |
+| `groundEdge.sheet` | Biscoito 810 #C4C0BB, 1,30:1 | Stone 320, 1,33:1 | Sheet |
+| `chat.groundEdge` | `groundEdge.background` | `groundEdge.background` | O chão de uma conversa |
+| `shop.accent.<hue>.edge` | 1,35 a 1,36:1 | O mesmo | Um tile de destaque (ver Acentos das lojas) |
+
+O `chat.edge` continua sendo o fio em volta dos cartões e das linhas agrupadas sobre o chão da conversa. A barra de navegação lê a borda por `groundEdge()` em `internal/ScrollEdge.tsx`, a partir do mesmo `fill` que pinta a barra.
 
 ## Snuffle
 
@@ -313,6 +329,8 @@ A tela do pedido de localização é o Background nos dois modos. `color.locatio
 | Texto secundário sobre a sheet | 5,45:1 | 7,79:1 |
 
 Todo par de texto passa no WCAG AA. Todos, exceto texto secundário sobre superfície secundária (5,87:1 no claro, 5,51:1 no escuro), texto secundário sobre o fundo claro (6,28:1) e as cores de destrutivo, aviso e sucesso sobre o fundo claro (5,02 a 5,40:1), passam no AAA. A borda do Aumentar Contraste passa dos 3:1 que o WCAG 1.4.11 pede para o limite de um componente (3,28:1 e 3,12:1 no mínimo). Pares de superfície não são texto e não têm mínimo no WCAG; 1,21:1 é o passo do cartão sobre o novo fundo, acima dos 1,13:1 de antes.
+
+O Android usa os mesmos tokens de cor do iOS; só as formas mudam (veja [iOS e Android](platforms.md#paridade-de-cor-e-superf-cie)). Nesta rodada um agente mediu 84 pares de texto e de não texto por modo nas formas do Android, com todos os acentos. Os pares de texto mais baixos são o texto secundário sobre um chip escuro num cartão sobre o tile (4,83 a 4,88:1) e o texto secundário direto sobre o tile Pêssego claro (5,00:1). O contorno do botão segmentado do Android passou da borda (1,10:1 sobre a sheet clara) para um novo `color.outline`, usado só nas bordas de controles do Android: #807973 no claro (3,08:1 sobre a sheet, 3,55:1 sobre o fundo) e #757679 no escuro (3,34 a 4,31:1). Uma primeira tentativa com o texto secundário passava com 5,45 a 8,52:1, mas virava o traço mais forte da tela escura. O chip de filtro selecionado no escuro não tem borda (Índigo 900 a 1,39:1 sobre o fundo); no Android, o check dele (10,06:1) marca o estado.
 
 ## Fontes
 

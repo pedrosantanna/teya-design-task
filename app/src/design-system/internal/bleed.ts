@@ -7,3 +7,12 @@ export const Bleed = createContext(0);
 export function useBleed() {
   return useContext(Bleed);
 }
+
+/** The width a sideways row's container has at rest on a surface that grows while the page scrolls (the shop card widens
+ *  by its sliver of map over the first steps of scroll). Rows size their cards from it instead of measuring themselves, so the
+ *  growth never re-renders them frame by frame. Provided by ShopPageLayout; undefined elsewhere (rows measure). */
+export const RestWidth = createContext<number | undefined>(undefined);
+
+export function useRestWidth() {
+  return useContext(RestWidth);
+}

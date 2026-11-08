@@ -6,13 +6,41 @@ import type { Option } from '@/design-system';
 /** Which sections the viewer collapsed, kept while the panel is closed and opened again. */
 const folded = new Map<string, boolean>();
 
-/** A titled, collapsible group of controls, like a section of Figma's right sidebar. */
-export function Section({ title, children, defaultOpen = true }: { title: string; children: ReactNode; defaultOpen?: boolean }) {
+/**
+ * A titled, collapsible group of controls, like a section of Figma's right sidebar. `hidden` names the section's
+ * controls that change nothing on the current screen: they are left out and listed in one line at the end. A section
+ * where none applies (`idle`) folds to its title with a short reason and can't be opened.
+ */
+export function Section({
+  title,
+  children,
+  defaultOpen = true,
+  hidden = [],
+  idle = false,
+}: {
+  title: string;
+  children?: ReactNode;
+  defaultOpen?: boolean;
+  hidden?: readonly string[];
+  idle?: boolean;
+}) {
   const [open, setOpen] = useState(!(folded.get(title) ?? !defaultOpen));
   const toggle = () => {
     folded.set(title, open);
     setOpen(!open);
   };
+  if (idle) {
+    return (
+      <section className="dbg-sec is-idle">
+        <h3 className="dbg-sec-h">
+          <span className="dbg-sec-t" aria-disabled="true" title={hidden.length > 0 ? `No effect on this screen: ${hidden.join(', ')}` : undefined}>
+            {title}
+            <small className="dbg-sec-why">No effect on this screen</small>
+          </span>
+        </h3>
+      </section>
+    );
+  }
   return (
     <section className="dbg-sec">
       <h3 className="dbg-sec-h">
@@ -20,7 +48,12 @@ export function Section({ title, children, defaultOpen = true }: { title: string
           {title}
         </button>
       </h3>
-      {open ? <div className="dbg-sec-b">{children}</div> : null}
+      {open ? (
+        <div className="dbg-sec-b">
+          {children}
+          {hidden.length > 0 ? <p className="dbg-off">{`No effect on this screen: ${hidden.join(', ')}.`}</p> : null}
+        </div>
+      ) : null}
     </section>
   );
 }

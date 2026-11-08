@@ -108,6 +108,8 @@ Facts about a shop or a request are told apart by weight, colour, icon and posit
 | Request rows | A status tag ("Needs you"), the deadline as its own text ("Buy by Thu 5 Nov"), the count as the trailing badge | "Needs you · by Tuesday", "Needs you · 1" |
 | Filter counts | The count after the label in Muted foreground: "Needs you 1" | A dot before the count |
 | Details and endings | A comma or a new sentence: "Collect by Mon 9 Nov. Full refund if you don't", "In stock now, 1 of 2" | A dot between clauses |
+| The pinned order | The status label on line 1; line 2 the shop and items with a comma ("Paper & Co, 2 × eclipse glasses"), the items alone when the label already names the shop; "Code" over the code at the end | The shop named twice in two lines |
+| The receipt's code | The code, then the date it works until, then the refund rule: "K7Q2", "Collect by Mon 9 Nov", "Full refund if you don't"; the status label is left out while the date shows (decision 068) | The collect-by date in the header, far from the code |
 | Where a dot stays | A plain list of countable facts of one kind, as Airbnb writes "2 beds · 1 bath"; the prototype has no such list, so the app has no dots; a button that carries its amount says "Buy for £29.98" | A dot between a status and its detail, or between unlike facts |
 
 The state table's labels keep their dot in the source as the place where the status ends and its detail begins. The status label draws the two in different weights and colours and never shows the dot.

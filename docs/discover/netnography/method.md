@@ -1,6 +1,6 @@
 # Method
 
-Discover collected data from three sources: desk research on the street, benchmarks of existing products, and posts by shoppers. For shoppers I needed evidence that I could gather in hours, for almost nothing, and check line by line. Of the ways to collect it, I used one: a netnography, reading what London shoppers already write in public about their high streets. What people write is mostly attitudinal, so the empathy map and the proto-personas rest on what people say they think and do. Nobody was observed.
+Discover collected data from three sources: desk research on the street, benchmarks of existing products, and posts by shoppers. For shoppers I needed evidence that I could gather in hours, for almost nothing, and check line by line. I used a netnography, reading what London shoppers already write in public about their high streets. What people write is mostly attitudinal, so the empathy map and the proto-personas rest on what people say they think and do. Nobody was observed.
 
 ```summary
 Takeaways:
@@ -19,22 +19,9 @@ Trade-offs:
 - Reddit skews young and Mumsnet towards mothers. Reddit came through an archive, and TikTok gave captions only.
 ```
 
-## Collection options
-
-| Method | Kind of data | Cost for this take-home | Used |
-| --- | --- | --- | --- |
-| Desk research (reports, statistics, news) | Context about the street itself | Low | Yes, to learn how the high street works ([the high street today](../high-street-landscape.md)) |
-| Benchmarks (product pages, app reviews) | What existing products do, and what their users say | Low | Yes, in parallel with the netnography ([benchmarks](../benchmarks.md)) |
-| Netnography (public posts) | Attitudinal: what people say they think, feel and did | Low: the material already exists | Yes, the only source on shoppers |
-| Interviews | Attitudinal, with follow-up questions | Medium: recruiting, sessions, notes | No |
-| Survey | Attitudinal, at scale | Medium: needs a panel to mean anything | No |
-| Street observation or shadowing on King Street | Behavioural: what people do | Medium to high | No |
-| Diary study | Behavioural, self-reported over days | High | No |
-| Prototype test | Behavioural, against a concrete idea | Medium, once there is something to test | Later, after Define |
-
 ## Why netnography
 
-People have already written a lot about their high streets, and every claim stays tied to a dated post that anyone can open. That made it the quickest way to get a base I could check. I didn't add interviews or a survey on top, because for a take-home they would cost more time than they would change the direction.
+People have already written a lot about their high streets, and every claim stays tied to a dated post that anyone can open. That made it the quickest way to get a base I could check.
 
 ## Attitudinal data
 
@@ -45,6 +32,21 @@ So the [empathy map](empathy-map.md) and the [proto-personas](../personas/index.
 ## With more time
 
 On an established product I'd add behavioural data next: watching people on the street, or usage data. For something that doesn't exist yet, I'd go to a testable idea as fast as possible and put it in front of a few shoppers. Their reaction to a prototype is behavioural evidence, and it answers the questions the personas leave open (see [what to test first](../personas/index.md)).
+
+## In numbers
+
+| What | Count |
+| --- | --- |
+| Time window of the posts | May 2025 to November 2026 |
+| Networks | 4: Reddit, Mumsnet, X and TikTok |
+| Subreddits searched | 10: seven West London ones, plus r/london, r/AskUK and r/CasualUK |
+| Search terms | 22 per subreddit, 5 on Mumsnet |
+| Reddit pages saved by hand to check quotes | 217 posts and 21 full comment threads |
+| Distinct quotes kept | 42. 41 matched against the live page; 1 only in a public archive |
+| Quotes dropped at the live check | 2, removed by their authors |
+| Quote cards in the findings | 39: 26 Reddit, 5 Mumsnet, 5 TikTok, 3 X |
+| Codes and themes | 14 codes, 10 themes |
+| Posts coded for the proto-personas | 44, of which 27 describe the poster's own shopping and 20 were clustered |
 
 ## Steps
 

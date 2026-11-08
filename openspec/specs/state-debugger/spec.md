@@ -11,7 +11,7 @@ Every screen SHALL read its data from one mock store, and the debugger SHALL be 
 
 #### Scenario: Change a state
 - **WHEN** the order state is set to "Ready" in the debugger
-- **THEN** the order card, the receipt and the request's row all show "Ready · collect by Mon 9 Nov"
+- **THEN** the order card, the pinned order and the request's row all show "Ready · collect by Mon 9 Nov", and the receipt's code card shows "Collect by Mon 9 Nov"
 
 ### Requirement: Floating side panel
 The debugger SHALL be a panel on the right, docked full height beside the phone frame on windows wide enough for it and an overlay with a close button on narrow ones. It SHALL never sit over the frame, and SHALL group its controls in sections: Journey, Shopper and device, Request and order, Content and context, Simulation and Actions. Content and context and Simulation SHALL start collapsed.

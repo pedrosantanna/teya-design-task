@@ -15,7 +15,7 @@ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { Ground } from '../../internal/ground';
 import { cornerCurve, type ShopAccentName } from '../../theme';
-import { Bleed } from '../../internal/bleed';
+import { Bleed, RestWidth } from '../../internal/bleed';
 import { Map } from '../Map/Map';
 import { MapCredit } from '../Map/MapParts';
 import { NavBar, useNavBarHeight, useNavBarScroll } from '../NavBar/NavBar';
@@ -159,6 +159,7 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, shopId, route
             <Ground value={accent ? 'tile' : 'background'} accent={accent}>
               <TextWidth.Provider value={textWidth}>
               <Bleed.Provider value={pad}>
+              <RestWidth.Provider value={textWidth}>
                 <View style={styles.top}>
                   <View style={styles.header(textWidth)}>
                     <Text variant="displayTitle" accessibilityRole="header" numberOfLines={2}>
@@ -190,6 +191,7 @@ export const ShopPageLayout = memo(function ShopPageLayout({ name, shopId, route
                 <View style={styles.credit}>
                   <MapCredit />
                 </View>
+              </RestWidth.Provider>
               </Bleed.Provider>
               </TextWidth.Provider>
             </Ground>

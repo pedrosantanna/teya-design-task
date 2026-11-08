@@ -4,7 +4,7 @@ The metrics that say whether Snuffle works as a marketplace and as a business, h
 
 ```summary
 Takeaways:
-- The north star is completed requests per week, the requests that end with an order collected or delivered. Its inputs are active shoppers, requests per shopper, fill rate, conversion from a yes to a purchase, confirmation and collection, with answering shops per area as the supply input.
+- The north star is completed requests per week, the requests that end with an order collected or delivered. Its inputs are active shoppers, requests per shopper, fill rate, conversion from a filled request to a purchase, confirmation and collection, with answering shops per area as the supply input.
 - Fill rate (requests that get at least one usable yes in time) is the marketplace's core number. With an answer rate of 60% (H1's mark) and an assumed 40% chance that a shop that answers has the item, about 6 likely shops open give 80% fill; 3 give 56%.
 - That means about 4 shops on Snuffle per kind in a 15-minute ring, 24 for six kinds. The proof of concept's 10 shops come out near 52%, close to H1's mark of half the searches resolved.
 - The revenue estimate's base case works out at about 98 monthly active shoppers per active shop. With 6 shops asked per request, each shop answers about 11 requests for each order it gets, about 24 a trading day. Answer burden is the guardrail that limits how widely Snuffle can ask.
@@ -14,6 +14,7 @@ Call:
 - I asked that no benchmark be invented, and that any outside figure come from a source that was opened and linked.
 AI:
 - An agent defined the metrics from the events and the revenue estimate, built the liquidity model from the assumptions already in the docs (the 15-minute ring, H1's answer rate, the proof of concept's ten shops, the six kinds), added three assumptions of its own, labelled, and checked the arithmetic in a short script.
+- In a second pass, an agent aligned the metrics with the revised events: the collection rate counts from `order_ready`, GMV sums `payment_taken` and H12 counts per request with a yes. The liquidity arithmetic didn't change.
 Trade-offs:
 - A north star of completed requests rewards needs met and ignores order value; GMV beside it catches a drift to tiny orders.
 - The model treats each shop's answer as independent and the share of shops that have the item as one number for every kind. Both are simplifications the proof of concept will correct.
@@ -27,7 +28,7 @@ It needs every part to work: a shop answered, had the item and set it aside, the
 
 It breaks down into inputs that each have an owner:
 
-completed requests = active shoppers × requests per shopper × fill rate × yes to purchase × confirmation rate × collection rate
+completed requests = active shoppers × requests per shopper × fill rate × filled to purchase × confirmation rate × collection rate
 
 Supply sits under fill rate: answering shops per kind in the area, their answer rate and how often they have the item. I adopted this north star before the proof of concept, and its results can still change it.
 
@@ -35,25 +36,27 @@ Supply sits under fill rate: answering shops per kind in the area, their answer 
 
 | Metric | Definition | From |
 | --- | --- | --- |
+| Completed requests (north star) | Requests with an `order_collected` or `order_delivered`, per week; a standing request counts once per cycle | Service |
 | Active shoppers | Shoppers with at least one `request_created` in the week or month | Service |
 | Requests per active shopper | `request_created` per active shopper, per week and per month | Service |
-| Repeat rate | Shoppers with a collected order who make another request within 30 days | Service |
-| Standing requests | Weekly requests running, and orders they make | `keep_looking_set`, `payment_succeeded` |
+| Repeat rate | Repeat use as defined in [Tasks and events](telemetry.md#definitions): shoppers with a collected or delivered order who have another request within 30 days, new requests and standing cycles reported apart | Service |
+| Standing requests | Requests set to repeat (`keep_looking_set`, repeat yes), and purchases in their later cycles (`cycle` above 1) | Service |
 | Shops on Snuffle | Shops with `shop_joined` and no `shop_opted_out`, per area and kind | Service |
 | Answering shops | Shops with at least one valid `shop_replied` in the last 30 days | Service |
-| Answer rate in 10 minutes | Valid `shop_replied` within 10 opening minutes, per `shop_asked` while open (H1) | Service |
-| Reply time | Opening minutes from `shop_asked` to a valid `shop_replied`; median and 90th percentile | Service |
+| Answer rate in 10 minutes | Valid `shop_replied` within 10 opening minutes, per `shop_asked` on WhatsApp while open (H1) | Service |
+| Reply time | Opening minutes from `shop_asked` on WhatsApp to a valid `shop_replied`; median and 90th percentile | Service |
 | Fill rate | Requests with at least one buyable `answer_received` before the deadline, per request with a deadline | Service |
-| Coverage by kind | Fill rate by kind, with requests not found split into all said no and no reply | Service |
-| Time to first yes | `request_created` to the first buyable `answer_received`; median and 90th percentile | Service |
-| Yes to purchase | Requests with a yes that get a `payment_succeeded` (H12) | Service |
-| Request to purchase | Requests with a `payment_succeeded`, per request | Service |
-| Confirmation rate | `order_set_aside` per `payment_succeeded` at asked shops | Service |
-| Collection rate | `order_collected` per `order_set_aside` for collection (H2) | Service |
-| GMV | Sum of amounts of orders set aside, less refunds | Service |
+| Coverage by kind | Fill rate by kind, with `request_not_found` split into all said no and no reply | Service |
+| Time to first buyable answer | `request_created` to the first buyable `answer_received`; median and 90th percentile | Service |
+| Yes to purchase | Per request with at least one yes `answer_received`, whether a purchase (`payment_authorised` or `payment_taken`) follows on it (H12) | Service |
+| Filled to purchase | Requests with a purchase, per request with a buyable answer | Service |
+| Request to purchase | Requests with a purchase, per `request_created` | Service |
+| Confirmation rate | `order_confirmed` per `payment_authorised` | Service |
+| Collection rate | `order_collected` per `order_ready` for collection (H2) | Service |
+| GMV | Sum of `payment_taken` amounts, less `refund_issued` amounts | Service |
 | Average order value | GMV per order | Service |
 | Orders per buyer | Orders per shopper with at least one order in the month | Service |
-| Would go back | Thumbs up per `rating_submitted`, by shop and area | Service |
+| Would go back | Thumbs up per order, from the latest `rating_submitted` on each, by shop and area | Service |
 
 ## Money
 
@@ -80,7 +83,7 @@ How many shops an area needs so that a request gets a usable yes in time. Every 
 | r: share of asked shops that answer validly within 10 minutes | 60% | H1's pass mark, so the lowest rate the concept accepts |
 | h: share of shops that answer and have the item | 40% | Assumption, no source. The hand-run concierge gives the first figure |
 | o: share of likely shops open when the request comes in | 80% | Assumption for shop hours, no source |
-| k: kinds of shop likely to have one item | 2 | Assumption. In the prototype, eclipse glasses go to five kinds (chemist, stationer, optician, hardware, toys) and sourdough to one |
+| k: kinds of shop likely to have one item | 2 | Assumption. In the prototype, eclipse glasses go to six kinds (chemist, optician, stationer, camera shop, hardware, toys) and sourdough to one |
 | Kinds in an area | 6 | The proof of concept's categories: hardware, florist, bakery, butcher, chemist, stationery |
 | Ring | 15 minutes' walk | The concept's area and the proof of concept |
 
@@ -117,7 +120,7 @@ The supply floor above doesn't depend on how many shoppers there are. Shoppers d
 
 ### Answer burden
 
-Each order costs the shops many answers. With n = 6, fill of 80% and 70% of yeses bought (H12), a request turns into an order 0.8 × 0.7 = 56% of the time, so the shops answer 6 ÷ 0.56 ≈ 10.7 asks per order. At 58 orders a shop a month that is about 627 asks a month, about 24 a trading day over 26 days.
+Each order costs the shops many answers. With n = 6, fill of 80% and filled requests bought at H12's 70%, a request turns into an order 0.8 × 0.7 = 56% of the time, so the shops answer 6 ÷ 0.56 ≈ 10.7 asks per order. At 58 orders a shop a month that is about 620 asks a month, about 24 a trading day over 26 days.
 
 That is the tension in this marketplace: asking more shops raises the fill rate and the number of noes each shop types. The levers are matching better, since a higher h needs fewer shops (at r × h = 0.48, 3 shops give 80% and the burden halves to about 5 asks per order); till-connected shops, which answer without effort (H11); and asking in waves, stopping once there is a yes, which trades the shopper's wait for the shop's effort. Asks per shop per day and per order are a guardrail, and the shops' weekly check-in says where the limit is.
 
@@ -125,14 +128,14 @@ That is the tension in this marketplace: asking more shops raises the fill rate 
 
 | Guardrail | Definition | Watches |
 | --- | --- | --- |
-| Cancellations | `order_cancelled` per order set aside | Buying too soon, collect-by dates that don't fit |
+| Cancellations | `order_cancelled` per `order_ready` for collection | Buying too soon, collect-by dates that don't fit |
 | Refunds | `refund_issued` per order, by reason | Every money-back path |
-| Not collected | `order_not_collected` per order set aside; the reverse of H2's 2 in 3 | Stock tied up in shops, money back to shoppers |
-| Not confirmed or sold after a yes | `order_not_confirmed` and `order_sold` per `payment_succeeded` at asked shops | Answers shoppers can't trust; stock accuracy |
+| Not collected | `order_not_collected` per `order_ready` for collection; the reverse of H2's 2 in 3 | Stock tied up in shops, money back to shoppers |
+| Not confirmed or sold after a yes | `order_not_confirmed` and `order_sold` per `payment_authorised` | Answers shoppers can't trust; stock accuracy |
 | Complaints | `complaint_opened` per 100 orders, by topic, shopper and shop | Failures no other event shows |
 | Shops opting out | `shop_opted_out` per active shop a month, by reason | Answer burden, low sales |
 | Notification opt-outs | `notifications_changed` to off, per active shopper | Too many messages from Snuffle |
 | Answer burden | `shop_asked` per shop per trading day, and per order | Asking too widely |
-| Thumbs down | Thumbs down per `rating_submitted`, with tags | Shops falling short in person |
+| Thumbs down | Thumbs down per order, from the latest `rating_submitted`, with tags; "Not ready when I came" reported on its own | Shops falling short in person |
 
-Rating response is not a target. Snuffle asks every buyer once and reminds once at most (decision 047), and pushing the response rate up would mean more prompts.
+Rating response is not a target. Snuffle asks every buyer once and reminds once at most (decision 047 and the [service blueprint](../define/blueprint.md)), and pushing the response rate up would mean more prompts.

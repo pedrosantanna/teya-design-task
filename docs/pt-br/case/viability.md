@@ -1,34 +1,36 @@
-# Viabilidade
+# Valor e viabilidade
 
-Uma projeção para dimensionar a oportunidade: sem comissão sobre a venda, com o dinheiro vindo dos pagamentos e das lojas que entram no POS de um provedor.
+Minha recomendação é lançar o Snuffle dentro do ecossistema de um provedor de POS. Sozinho, ele mal se pagaria; dentro de um provedor, ele gera valor em cada elo da cadeia.
 
-## O que uma loja precisa fazer
+## Sozinho
 
-Responder a uma mensagem, separar o item e entregar. Uma loja conectada responde pelo caixa; uma loja consultada responde no WhatsApp. Nos dois casos ela não aprende nenhuma ferramenta nova. Cada pedido também registra o que as pessoas por perto pediram, inclusive o que a loja não tinha, e isso pode voltar para a loja como um resumo semanal de demanda (H9).
+Como um app independente construído do zero, o Snuffle carregaria o custo de ser construído, mais o custo comercial e operacional de conquistar uma rede de lojas e mantê-la. Para pagar isso, ele precisaria de uma comissão sobre a venda. Apps de entrega cobram uma comissão relatada de 14 a 35%, o custo de que as independentes reclamam, então descartei comissão (decisão 023).
 
-## O que uma loja ganha
+## Dentro de um provedor de POS
 
-Para a loja, o app é um canal de aquisição: traz compradores que não teriam entrado na loja, sem anúncio e sem parte da venda. Ele também leva o POS para além do balcão, então a loja vende para quem não está dentro dela. Esse valor, mais do que as taxas, é o motivo para adotar o POS do provedor e continuar com ele.
+<div class="dg dg-cols"><div class="dg-box"><b>Para a loja, um canal de aquisição</b>Compradores que não teriam entrado, sem anúncio e sem parte da venda</div><div class="dg-box"><b>Um POS que vende além do balcão</b>A loja vende para quem não está dentro dela, o que é um motivo para adotar o POS do provedor e continuar com ele</div><div class="dg-box"><b>Uma base de compradores</b>Pessoas que pedem e compram por perto, pagando pelo provedor</div><div class="dg-box"><b>Demanda e oferta por área</b>O que as pessoas por perto pediram, e quais lojas responderam, mostra onde crescer a rede em seguida</div></div>
 
-## Como gera dinheiro
+A receita vem dos pagamentos feitos no app, das lojas que entram no POS do provedor para recebê-los (o que traz junto as vendas de balcão) e do destaque pago.
 
-Defini o modelo de negócio como um cenário: um provedor de pagamento com POS próprio é dono do Snuffle (decisão 023). Apps de entrega cobram uma comissão relatada de 14 a 35%, o custo de que as independentes reclamam, então descartei comissão. A receita vem de três lugares:
-
-- pagamentos feitos no app;
-- lojas que entram no POS do provedor para recebê-los, o que traz junto as vendas de balcão;
-- destaque pago.
+Evidência: [valor e receita](../define/revenue.md).
 
 ## A estimativa
 
-Um agente montou uma estimativa básica a partir de benchmarks públicos, para um estado estável cerca de três anos depois do lançamento.
+Um agente montou uma estimativa a partir de benchmarks públicos, para um estado estável cerca de três anos depois do lançamento, dentro de um provedor. É uma projeção, e nada nela foi medido.
 
-- Cenário base no Reino Unido: cerca de 3.200 lojas ativas, 125.000 compradores por mês e £1,0 milhão por ano, contra um custo que supus em £1,0 milhão.
-- Só Londres: cerca de £170.000 por ano.
-- A maior parte vem das lojas que entram no POS. Os pagamentos no app são a menor fonte, cerca de £3 de receita líquida por comprador por ano.
+- Cenário base no Reino Unido: cerca de 3.200 lojas ativas, 125.000 compradores por mês, £40 milhões em vendas por ano pelo app e cerca de £1,0 milhão de receita por ano, contra um custo que supus em £1,0 milhão.
+- Só Londres: cerca de £170.000 por ano. Serve como mercado de lançamento e não paga o produto sozinha.
+- A maior parte da receita vem das lojas que entram no POS. Os pagamentos no app são a menor fonte, cerca de £3 de receita líquida por comprador por ano.
 
-A entrada em que menos confio é quanto dessa adesão o app causa. Ela está em 30, 50 e 70% conforme o cenário, sem fonte. Nada aqui foi medido.
+A entrada em que menos confio é quanto dessa adesão o app causa: 30, 50 e 70% conforme o cenário, sem fonte.
 
-<!-- screenshot: the scenario table on the revenue estimate page -->
+<img class="case-shot" data-src="../../case/media/revenue-scenarios.png" width="1100" height="1202" alt="A tabela de cenários da estimativa de receita, em inglês: lojas, compradores, GMV e receita em três cenários de Londres e um conservador do Reino Unido">
+
+Evidência: [estimativa de receita](../define/revenue-estimate.md).
+
+## O teste mais barato
+
+Antes de um app, o teste mais barato é um agente no WhatsApp ou no Telegram que as lojas de um provedor divulgam para os próprios clientes. O brief pede acabamento, então neste take-home o lado de quem compra é um app, enquanto as lojas ficam na conversa e nunca instalam nada.
 
 ## Riscos
 
@@ -36,5 +38,3 @@ A entrada em que menos confio é quanto dessa adesão o app causa. Ela está em 
 - Perguntas demais sobre o que a loja não pode vender, e ela para de responder.
 - Uma rua com poucas lojas respondendo dá poucas respostas e nenhuma confiança.
 - Um sim errado, de uma loja ou de um agente que entende mal o pedido, custa a confiança em que o conceito se apoia.
-
-Evidência: [valor e receita](../define/revenue.md), [estimativa de receita](../define/revenue-estimate.md), [conceito](../define/index.md).

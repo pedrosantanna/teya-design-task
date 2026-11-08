@@ -7,7 +7,7 @@ import type { IconSvgElement } from '@hugeicons/react-native';
 import { memo } from 'react';
 import { View } from 'react-native';
 import { useGround } from '../../internal/ground';
-import { StyleSheet, useUnistyles } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 
 import { CrossFade } from '../../internal/CrossFade';
 import { ShopLink } from '../../internal/ShopLink';
@@ -46,9 +46,10 @@ const icons: Record<AnswerRowKind, IconSvgElement> = {
  * answer cards in the chat are where the shopper acts.
  */
 export const AnswerRow = memo(function AnswerRow({ shop, street, status, kind, position = 'only', onOpenShop }: AnswerRowProps) {
-  const { theme } = useUnistyles();
   const onChat = useGround() === 'chat';
-  const grouped = theme.platform === 'ios';
+  // Painted on both platforms (platforms.md, parity): a Material 3 list sits in the same card role as the iOS grouped list,
+  // so a row on a tile is cardOnTile on Android too, never the bare tile.
+  const grouped = true;
   const good = kind === 'yes' || kind === 'till';
   const color: ColorName = good ? 'success' : 'mutedForeground';
 

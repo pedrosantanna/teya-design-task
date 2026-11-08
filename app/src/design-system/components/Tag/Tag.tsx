@@ -78,8 +78,11 @@ export const Chip = memo(function Chip({ label, kind = 'filter', selected = fals
   const lightEdge = ground === 'chat' ? theme.color.chat.fieldEdge : plain ? withAlpha(theme.color.glassEdge, theme.state.chipEdge) : off;
   const fillOff = off;
   const edgeOff = dark || onRow ? off : lightEdge;
-  const onFill = dark ? (ground === 'tile' ? theme.color.chipSelectedOnTile : raised ? theme.color.chipSelectedRaised : theme.color.chipSelected) : theme.color.card;
-  const onEdge = dark ? onFill : theme.color.chipOn;
+  // Android light: Material's filled chip, Indigo 200 (chipSelectedEdge) with Indigo 800 text (6.24:1) and no outline,
+  // the same form as dark and as the selected segment; iOS light keeps Card with the 1.5 pt Indigo 800 edge.
+  const filledLight = !dark && theme.platform === 'android';
+  const onFill = dark ? (ground === 'tile' ? theme.color.chipSelectedOnTile : raised ? theme.color.chipSelectedRaised : theme.color.chipSelected) : filledLight ? theme.color.chipSelectedEdge : theme.color.card;
+  const onEdge = dark || filledLight ? onFill : theme.color.chipOn;
 
   useEffect(() => {
     progress.set(withSpring(on ? 1 : 0, theme.spring.snappy));

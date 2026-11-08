@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="site/canvas.css?v=16">
 <script src="site/canvas.js?v=13"></script>
 <link rel="stylesheet" href="site/viewer3d.css?v=3">
+<link rel="stylesheet" href="site/present.css?v=8">
+<script src="site/present.js?v=6" defer></script>
 <script src="site/viewer3d.js?v=6"></script>
 <style>
 /* Docs shell in the shadcn/ui idiom: neutral zinc tokens, hierarchy from weight and space, borders only where they separate. */
@@ -24,6 +26,7 @@
   --ring: #a1a1aa;
   --link: #18181b;
   --quote-bar: #d4d4d8;
+  --dg-edge: #8a8a92;
   --c1: #3866c9; --c2: #c07a1e; --c3: #2a8a64; --c4: #8556c2; --c5: #c8473a;
   --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
@@ -36,14 +39,14 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #09090b; --bg-subtle: #111113; --fg: #fafafa; --fg-2: #d4d4d8; --muted: #18181b; --muted-fg: #a1a1aa;
-    --border: #27272a; --border-strong: #3f3f46; --primary: #fafafa; --primary-fg: #18181b; --ring: #52525b; --link: #fafafa; --quote-bar: #3f3f46;
+    --border: #27272a; --border-strong: #3f3f46; --primary: #fafafa; --primary-fg: #18181b; --ring: #52525b; --link: #fafafa; --quote-bar: #3f3f46; --dg-edge: #66666e;
     --c1: #7ea4ee; --c2: #e0a35a; --c3: #5cbf95; --c4: #b495e6; --c5: #e98272;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #09090b; --bg-subtle: #111113; --fg: #fafafa; --fg-2: #d4d4d8; --muted: #18181b; --muted-fg: #a1a1aa;
-  --border: #27272a; --border-strong: #3f3f46; --primary: #fafafa; --primary-fg: #18181b; --ring: #52525b; --link: #fafafa; --quote-bar: #3f3f46;
+  --border: #27272a; --border-strong: #3f3f46; --primary: #fafafa; --primary-fg: #18181b; --ring: #52525b; --link: #fafafa; --quote-bar: #3f3f46; --dg-edge: #66666e;
   --c1: #7ea4ee; --c2: #e0a35a; --c3: #5cbf95; --c4: #b495e6; --c5: #e98272;
   color-scheme: dark;
 }
@@ -118,7 +121,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   font-size: 13px; font-weight: 600; padding: 0 8px 6px; color: var(--fg);
 }
 .nav-group.is-disabled .nav-group-title { color: var(--muted-fg); font-weight: 500; }
-/* The two blocks of the sidebar: the case first, then the harness's documentation. A block title sits above its
+/* The two blocks of the sidebar: the case first, then the AI context. A block title sits above its
    sections in the muted tone, and a rule separates the second block from the first. */
 .nav-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; padding: 3px; margin: 0 0 var(--s-4); border: 1px solid var(--border); border-radius: 10px; background: var(--muted); }
 .nav-tab { appearance: none; border: 0; border-radius: 7px; padding: 6px 8px; background: transparent; color: var(--muted-fg); font: 500 12.5px/1.25 var(--font-sans); cursor: pointer; text-align: center; }
@@ -277,6 +280,89 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .marks.wide figcaption { max-width: 70ch; }
 .marks.wide img { border-radius: 14px; }
 .intro-video { display: block; width: 100%; max-width: 320px; height: auto; aspect-ratio: 1; margin: var(--s-4) 0 var(--s-6); border-radius: 14px; background: #3d35b8; }
+/* Phone clips and stills on the case pages. They are cropped to the device frame; the corners are rounded here so no page shows around them. */
+.phone-video, .phone-shot { display: block; width: 100%; max-width: 240px; height: auto; aspect-ratio: 450 / 948; border-radius: 18.6% / 8.8%; background: #0b0b0c; }
+.phone-video.android, .phone-shot.android { aspect-ratio: 450 / 976; border-radius: 16% / 7.4%; }
+.feature { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: var(--s-5); align-items: start; margin: var(--s-3) 0 var(--s-6); }
+.feature > div > :first-child { margin-top: 0; }
+.feature .case-shot { margin: 0; }
+@media (max-width: 640px) { .feature { grid-template-columns: minmax(0, 1fr); gap: var(--s-3); } }
+.phones { display: flex; gap: var(--s-4); margin: var(--s-4) 0 var(--s-6); }
+.phones .phone-shot { flex: 1 1 0; min-width: 0; max-width: 220px; }
+.case-shot { display: block; max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 0 0 1px var(--border); margin: var(--s-4) 0 var(--s-6); }
+/* The prose column is a size container, so the case diagrams below reflow on its width, sidebar or not. */
+.page-title ~ .prose { container: prose / inline-size; }
+/* Case diagrams. Built in HTML so labels stay text, follow the theme and reflow on a phone. Text sits only on --bg or
+   --bg-subtle in --fg, --fg-2 or --muted-fg, the pairs the site already passes at 4.5:1. A dashed edge means a dead end
+   or something only designed; a solid edge, something the prototype does. */
+.dg { margin: var(--s-4) 0 var(--s-6); font-size: 14px; line-height: 1.45; color: var(--fg-2); }
+.dg b { display: block; margin-bottom: 2px; color: var(--fg); font-weight: 600; }
+.dg small { display: block; font-size: 12.5px; color: var(--muted-fg); }
+.dg-box { padding: var(--s-3); border: 1px solid var(--border-strong); border-radius: 10px; background: var(--bg-subtle); min-width: 0; }
+.dg-box.is-dashed { border: 1.5px dashed var(--dg-edge); background: var(--bg); }
+.dg-box.is-dashed small { margin-bottom: var(--s-1); }
+.dg-list .dg-tag { white-space: normal; border-radius: 6px; }
+.dg-tag { display: inline-block; padding: 0 7px; border: 1px solid var(--border-strong); border-radius: 999px; background: var(--bg); font-size: 12px; font-weight: 500; color: var(--fg); white-space: nowrap; }
+/* Numbered steps that wrap into rows. */
+.dg-steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--s-3); counter-reset: dgstep; }
+.dg-steps .dg-box { counter-increment: dgstep; }
+.dg-steps .dg-box::before { content: counter(dgstep); display: block; margin-bottom: var(--s-1); font: 600 12px var(--font-mono); color: var(--muted-fg); }
+/* A chain of boxes with labelled arrows; it turns vertical when the column is narrow. */
+.dg-chain { display: flex; align-items: stretch; gap: var(--s-1); }
+.dg-chain > .dg-box { flex: 1 1 0; }
+.dg-arrow { flex: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; width: 72px; min-width: 0; font-size: 12px; text-wrap: balance; color: var(--muted-fg); text-align: center; }
+.dg-arrow::after { content: "→"; font-size: 18px; line-height: 1; color: var(--fg-2); }
+.dg-arrow.is-both::after { content: "⇄"; }
+.dg-arrow span { white-space: nowrap; }
+.dg-hub > .dg-box:nth-child(3) { flex: 1.2 1 0; border-color: var(--fg-2); }
+.dg-cap { margin: var(--s-4) 0 var(--s-2); font-size: 12px; color: var(--muted-fg); }
+.dg-list { display: grid; gap: var(--s-1); margin-top: var(--s-1); }
+.dg-hub .dg-list > span { display: flex; justify-content: space-between; align-items: center; gap: var(--s-2); }
+@container prose (max-width: 700px) {
+  .dg-chain { flex-direction: column; }
+  .dg-arrow { flex-direction: row; width: auto; min-width: 0; padding: 0 var(--s-3); justify-content: flex-start; gap: var(--s-2); }
+  .dg-arrow::after { content: "↓"; order: -1; }
+  .dg-arrow.is-both::after { content: "⇅"; }
+}
+/* The journey: time, step, and the dead ends that branch off it. */
+.dg-journey { display: grid; }
+.dg-jrow { position: relative; display: grid; grid-template-columns: 3.25rem minmax(0, 1fr) minmax(0, 1fr); column-gap: var(--s-4); padding-bottom: var(--s-4); }
+.dg-jrow::before { content: ""; position: absolute; left: calc(3.25rem + var(--s-4) + 4px); top: 0; bottom: 0; width: 1px; background: var(--border-strong); }
+.dg-jrow:first-child::before { top: .6em; }
+.dg-jrow:last-child { padding-bottom: 0; }
+.dg-jrow:last-child::before { bottom: auto; height: .6em; }
+.dg-jrow.is-head { padding-bottom: var(--s-2); font-size: 12px; color: var(--muted-fg); }
+.dg-jrow.is-head::before { display: none; }
+.dg-jrow.is-head > :nth-child(2) { padding-left: 22px; }
+.dg-jrow time { font: 500 12.5px/1.6 var(--font-mono); color: var(--muted-fg); text-align: right; }
+.dg-jstep { position: relative; padding-left: 22px; }
+.dg-jrow:not(.is-head) .dg-jstep::before { content: ""; position: absolute; left: 0; top: .35em; width: 9px; height: 9px; border-radius: 50%; background: var(--bg); box-shadow: inset 0 0 0 2px var(--fg); }
+.dg-jends { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-1); }
+.dg-jend { padding: 2px 9px; border: 1px dashed var(--dg-edge); border-radius: 8px; font-size: 13px; color: var(--fg-2); }
+.dg-jend::before { content: "↳ "; color: var(--muted-fg); }
+@container prose (max-width: 560px) {
+  .dg-jrow { grid-template-columns: 2.75rem minmax(0, 1fr); column-gap: var(--s-3); }
+  .dg-jrow::before { left: calc(2.75rem + var(--s-3) + 4px); }
+  .dg-jrow.is-head > :last-child { display: none; }
+  .dg-jends { grid-column: 2; padding: var(--s-2) 0 0 22px; }
+  .dg-jends:empty { display: none; }
+}
+/* Two conversations side by side. */
+.dg-convos { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--s-4); }
+.dg-convo { display: flex; flex-direction: column; gap: var(--s-2); padding: var(--s-3); border: 1px solid var(--border-strong); border-radius: 12px; }
+.dg-convo > b { margin-bottom: var(--s-1); font-size: 13px; }
+.dg-msg { max-width: 92%; padding: 6px 11px; border-radius: 12px; font-size: 13.5px; line-height: 1.4; color: var(--fg); background: var(--bg-subtle); box-shadow: inset 0 0 0 1px var(--border-strong); }
+.dg-msg.is-me { align-self: flex-end; background: var(--fg); color: var(--bg); box-shadow: none; }
+.dg-msg.is-shop { align-self: flex-end; }
+.dg-msg.is-card { max-width: 100%; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px var(--s-2); border-radius: 8px; }
+.dg-msg.is-sys { max-width: 100%; align-self: stretch; padding: 0 2px; background: none; box-shadow: none; font-size: 12.5px; color: var(--muted-fg); text-align: center; }
+:root[data-theme="dark"] .dg-msg.is-me { background: var(--fg-2); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .dg-msg.is-me { background: var(--fg-2); } }
+/* Two plain lists side by side. */
+.dg-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--s-4); }
+.dg-cols:has(> .dg-box:nth-child(4):last-child) { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.dg-cols ul { margin: var(--s-2) 0 0; padding-left: 18px; }
+.dg-cols li { margin: var(--s-1) 0; }
 .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: var(--s-3); margin: var(--s-3) 0 var(--s-5); }
 .swatch { margin: 0; display: grid; gap: var(--s-1); }
 .swatch i { display: block; height: 56px; border-radius: 10px; box-shadow: inset 0 0 0 1px rgba(127,127,127,.25); }
@@ -520,6 +606,7 @@ i.m.unknown { opacity: .45; }
   </a>
   <span class="topbar-spacer"></span>
   <div class="controls">
+    <button type="button" class="present-btn" id="present-btn" aria-keyshortcuts="P Shift+P" title="Present the case (P)" aria-label="Present the case"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/></svg><span>Present</span></button>
     <div class="seg" role="radiogroup" aria-label="Language" id="lang-seg">
       <button type="button" role="radio" data-lang="en" aria-checked="true" title="English">EN</button>
       <button type="button" role="radio" data-lang="pt" aria-checked="false" title="Português (Brasil)">PT</button>
@@ -564,18 +651,20 @@ i.m.unknown { opacity: .45; }
       photoFor: 'Photo standing in for', kept: 'kept going', gaveUp: 'gave up on local', notShown: 'not shown',
       mapNote: n => `Each dot is one post; posts with the same codes sit side by side. Not on the chart: ${n} posts where nothing broke.`,
       persists: 'persists', defects: 'defects', unknown: 'stance unknown', urgent: 'urgent', openAlone: 'Open on its own', canvasLabel: 'Canvas. Scroll to pan, ⌘ or Ctrl and scroll to zoom.', canvasTools: 'Tools', toolSelect: 'Select', toolHand: 'Hand', zoom: 'Zoom', zoomIn: 'Zoom in', zoomOut: 'Zoom out', zoom100: 'Zoom to 100%', zoomFit: 'Zoom to fit', inspect: 'Inspect', close: 'Close', about: 'About this canvas', selectedN: n => `${n} selected`, kindScreen: 'Screen', kindState: 'State', kindNote: 'Note', kindArea: 'Section', kindBlock: 'Item', notes: 'Notes', linksIn: 'Comes from', linksOut: 'Goes to', canvasFail: 'Couldn’t load the canvas.', cvMode: 'Canvas mode', modeFlow: 'Flow', modeProto: 'Proto', modeFlowTip: 'Flow: the whole board (P)', modeProtoTip: 'Proto: click through the screens (P)', protoBar: 'Prototype controls', protoRestart: 'Restart', protoBack: 'Back', protoScreens: 'Screens', protoHotspots: 'Show hotspots', protoNext: 'next', protoOther: 'Other', version: 'Version', current: 'current', notPublished: 'Not published yet', camera: 'Camera', isometric: 'Isometric', orthographic: 'Orthographic', perspective: 'Perspective', outlines: 'Outlines', shadows: 'Shadows', grid: 'Grid', autoRotate: 'Auto-rotate', background: 'Background', bgCanvas: 'Canvas', replayEntry: 'Replay entry', fps: 'FPS', viewerAbout: 'About these illustrations', viewerLabel: '3D illustration. Drag to use the selected tool, right-drag to pan, scroll to zoom.', viewerSettings: 'View settings', viewerGallery: 'Illustrations', viewerFail: 'Couldn’t load the 3D viewer.', viewerObjects: 'Objects', viewerTools: 'View tools', viewerDisplay: 'Display', viewerPerf: 'Performance', tool_orbit: 'Orbit', tool_pan: 'Pan', tool_zoom: 'Zoom', resetView: 'Reset view', light: 'Light', lightAngle: 'Angle', lightHeight: 'Height', frameTime: 'Frame time', hideNav: 'Hide sidebar', showNav: 'Show sidebar', isoShort: 'Iso', orthoShort: 'Ortho', perspShort: 'Persp', hidePanel: 'Hide panel', showObjects: 'Show objects', showSettings: 'Show settings',
+      measure: 'Measures', measureTip: 'Measurement layer: tasks, events and metrics (M)', mLegend: 'Measurement layer', mTask: 'Task', mTaskTip: 'A task across its screens', mBadTip: 'Fails or is abandoned here', mApp: 'App event', mService: 'Service event', mAppTip: 'App event, with consent', mServiceTip: 'Service record', mRingTip: 'Where it fires: app, service', mMetric: 'Metric', mMetricTip: 'Product metric', mCounts: (a, b, c) => `${a} tasks, ${b} events and ${c} metrics from the measurement plan`, m_start: 'start', m_path: 'step', m_success: 'success', m_failure: 'failure', m_abandon: 'abandon', mShopTask: 'Shop', mFrom: 'from', mLaneTitle: 'No shopper screen', mLaneSub: 'Events on the shop side or kept by the service, with no screen in the app', mLaneShop: 'Shop side', mLaneService: 'Service only', mMetrics: 'Metrics', mTasks: 'Tasks', mEvents: 'Events', mPanel: 'Measured on this screen', mNone: 'Nothing is measured on this screen.',
       loadFail: (src, m) => `Couldn’t load <code>${src}</code> (${m}). Check that the file exists in the repo and is published with the page.`,
-      valueMap: 'Value map', customerProfile: 'Customer profile', screensSource: 'Main screens on Mobbin', screensAlt: 'Main app screens, captured from Mobbin', screensMissing: 'Screens are kept locally, not in the public repo.',
-      notTranslated: 'This page isn’t translated yet, so it shows in English.' },
+      valueMap: 'Value map', customerProfile: 'Customer profile', screensSource: 'Screens: Mobbin', screensAlt: 'Main app screens, captured from Mobbin', screensMissing: 'Screens are kept locally, not in the public repo.',
+      notTranslated: 'This page isn’t translated yet, so it shows in English.', present: 'Present', presentTip: 'Present the case (P)' },
     pt: { filter: 'Filtrar páginas', noMatch: 'Nenhuma página com', soon: 'Em breve', onPage: 'Nesta página', prev: '← Anterior', next: 'Próxima →',
       takeaways: 'Principais pontos', call: 'Minha decisão', ai: 'IA nesta etapa', tradeoffs: 'Trade-offs', verified: 'Verificada', archive: 'Via arquivo',
       verifiedTip: 'Conferida na fonte original', archiveTip: 'Coletada de um arquivo público; ainda não conferida na fonte original', source: 'Fonte ↗',
       photoFor: 'Foto que representa', kept: 'continuou', gaveUp: 'desistiu do comércio local', notShown: 'não aparece',
       mapNote: n => `Cada ponto é um post; posts com as mesmas etiquetas ficam lado a lado. Fora do gráfico: ${n} posts em que nada deu errado.`,
       persists: 'continuou', defects: 'desistiu', unknown: 'não aparece', urgent: 'urgente', openAlone: 'Abrir sozinho', exportTitle: 'Exportar', exportObject: 'Objeto', exportSize: 'Tamanho (pt)', exportScale: 'Escala', exportGround: 'Fundo', exportClip: 'Trecho', exportFps: 'Quadros/s', exportGo: 'Exportar quadros PNG (.zip)', exportBusy: 'Renderizando…', exportFramesDone: 'quadros', canvasLabel: 'Canvas. Role para mover, ⌘ ou Ctrl e role para dar zoom.', canvasTools: 'Ferramentas', toolSelect: 'Selecionar', toolHand: 'Mão', zoom: 'Zoom', zoomIn: 'Aproximar', zoomOut: 'Afastar', zoom100: 'Zoom em 100%', zoomFit: 'Ajustar à tela', inspect: 'Inspecionar', close: 'Fechar', about: 'Sobre este canvas', selectedN: n => `${n} selecionados`, kindScreen: 'Tela', kindState: 'Estado', kindNote: 'Nota', kindArea: 'Seção', kindBlock: 'Item', notes: 'Notas', linksIn: 'Vem de', linksOut: 'Vai para', canvasFail: 'Não foi possível carregar o canvas.', cvMode: 'Modo do canvas', modeFlow: 'Fluxo', modeProto: 'Proto', modeFlowTip: 'Fluxo: o quadro inteiro (P)', modeProtoTip: 'Proto: navegue pelas telas clicando (P)', protoBar: 'Controles do protótipo', protoRestart: 'Recomeçar', protoBack: 'Voltar', protoScreens: 'Telas', protoHotspots: 'Mostrar áreas clicáveis', protoNext: 'próximo', protoOther: 'Outras', version: 'Versão', current: 'atual', notPublished: 'Ainda não publicada', camera: 'Câmera', isometric: 'Isométrica', orthographic: 'Ortográfica', perspective: 'Perspectiva', outlines: 'Contornos', shadows: 'Sombras', grid: 'Grade', autoRotate: 'Girar sozinho', background: 'Fundo', bgCanvas: 'Canvas', replayEntry: 'Repetir entrada', fps: 'FPS', viewerAbout: 'Sobre estas ilustrações', viewerLabel: 'Ilustração 3D. Arraste para usar a ferramenta escolhida, arraste com o botão direito para mover, role para dar zoom.', viewerSettings: 'Ajustes de visualização', viewerGallery: 'Ilustrações', viewerFail: 'Não foi possível carregar o visualizador 3D.', viewerObjects: 'Objetos', viewerTools: 'Ferramentas de visualização', viewerDisplay: 'Exibição', viewerPerf: 'Desempenho', tool_orbit: 'Orbitar', tool_pan: 'Mover', tool_zoom: 'Zoom', resetView: 'Redefinir vista', light: 'Luz', lightAngle: 'Ângulo', lightHeight: 'Altura', frameTime: 'Tempo por quadro', hideNav: 'Ocultar barra lateral', showNav: 'Mostrar barra lateral', isoShort: 'Iso', orthoShort: 'Orto', perspShort: 'Persp', hidePanel: 'Ocultar painel', showObjects: 'Mostrar objetos', showSettings: 'Mostrar ajustes',
+      measure: 'Medição', measureTip: 'Camada de medição: tarefas, eventos e métricas (M)', mLegend: 'Camada de medição', mTask: 'Tarefa', mTaskTip: 'Uma tarefa nas suas telas', mBadTip: 'Falha ou abandono aqui', mApp: 'Evento do app', mService: 'Evento do serviço', mAppTip: 'Evento do app, com consentimento', mServiceTip: 'Registro do serviço', mRingTip: 'Onde dispara: app, serviço', mMetric: 'Métrica', mMetricTip: 'Métrica de produto', mCounts: (a, b, c) => `${a} tarefas, ${b} eventos e ${c} métricas do plano de medição`, m_start: 'início', m_path: 'passo', m_success: 'sucesso', m_failure: 'falha', m_abandon: 'abandono', mShopTask: 'Loja', mFrom: 'de', mLaneTitle: 'Sem tela do comprador', mLaneSub: 'Eventos do lado da loja ou guardados pelo serviço, sem tela no app', mLaneShop: 'Lado da loja', mLaneService: 'Só no serviço', mMetrics: 'Métricas', mTasks: 'Tarefas', mEvents: 'Eventos', mPanel: 'Medido nesta tela', mNone: 'Nada é medido nesta tela.',
       loadFail: (src, m) => `Não foi possível carregar <code>${src}</code> (${m}).`,
-      valueMap: 'Mapa de valor', customerProfile: 'Perfil do cliente', screensSource: 'Telas principais no Mobbin', screensAlt: 'Telas principais do app, capturadas no Mobbin', screensMissing: 'As telas ficam só na cópia local, fora do repositório público.',
-      notTranslated: 'Esta página ainda não foi traduzida, por isso aparece em inglês.' }
+      valueMap: 'Mapa de valor', customerProfile: 'Perfil do cliente', screensSource: 'Telas: Mobbin', screensAlt: 'Telas principais do app, capturadas no Mobbin', screensMissing: 'As telas ficam só na cópia local, fora do repositório público.',
+      notTranslated: 'Esta página ainda não foi traduzida, por isso aparece em inglês.', present: 'Apresentar', presentTip: 'Apresentar o case (P); os slides são em inglês' }
   };
   const t = k => (UI[LANG][k] !== undefined ? UI[LANG][k] : UI.en[k]);
   // Labels that come from generated data (chart JSON) and are written in English.
@@ -685,6 +774,8 @@ i.m.unknown { opacity: .45; }
     document.documentElement.lang = LANG === 'pt' ? 'pt-BR' : 'en';
     document.querySelectorAll('#lang-seg button').forEach(b => b.setAttribute('aria-checked', String(b.dataset.lang === LANG)));
     els.search.placeholder = t('filter'); els.search.setAttribute('aria-label', t('filter'));
+    const pb = document.getElementById('present-btn');
+    if (pb) { pb.querySelector('span').textContent = t('present'); pb.title = t('presentTip'); pb.setAttribute('aria-label', t('presentTip')); }
   }
   applyMode();
   const cache = new Map();
@@ -711,7 +802,7 @@ i.m.unknown { opacity: .45; }
     const text = (q.text || '').replace(/^["“]|["”]$/g, '');
     const tags = (q.tags || '').split(',').map(t => t.trim()).filter(Boolean);
     return `<figure class="quote-card"><blockquote class="quote-text">“${inline(esc(text))}”</blockquote>
-      <figcaption class="quote-meta"><span class="who"><span class="handle">${esc(q.handle || 'unknown')}</span>${q.network ? `<span class="net">${esc(q.network)}</span>` : ''}</span>${q.date ? `<time datetime="${esc(q.date)}">${esc(q.date)}</time>` : ''}${q.status ? `<span class="status status-${esc(q.status)}" title="${q.status === 'verified' ? t('verifiedTip') : t('archiveTip')}">${q.status === 'verified' ? t('verified') : t('archive')}</span>` : ''}${q.url ? `<a href="${esc(q.url)}" target="_blank" rel="noopener">${t('source')}</a>` : ''}</figcaption>
+      <figcaption class="quote-meta"><span class="who"><span class="handle">${esc(q.handle || 'unknown')}</span>${q.network ? `<span class="net">${esc(q.network)}</span>` : ''}</span>${q.date ? `<time datetime="${esc(q.date)}">${esc(q.date)}</time>` : ''}${q.status && q.status !== 'verified' ? `<span class="status status-${esc(q.status)}" title="${q.status === 'verified' ? t('verifiedTip') : t('archiveTip')}">${q.status === 'verified' ? t('verified') : t('archive')}</span>` : ''}${q.url ? `<a href="${esc(q.url)}" target="_blank" rel="noopener">${t('source')}</a>` : ''}</figcaption>
       ${q.context ? `<p class="quote-context">${inline(esc(q.context))}</p>` : ''}
       ${tags.length ? `<div class="tags">${tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>` : ''}</figure>`;
   }
@@ -812,12 +903,13 @@ i.m.unknown { opacity: .45; }
     return `<div class="summary">${sec('takeaways', t('takeaways'))}${sec('call', t('call'))}${sec('ai', t('ai'))}${sec('trade-offs', t('tradeoffs'))}</div>`;
   }
 
-  // ```screens  key: value lines (image, source). Main app screens captured from Mobbin; the image may only exist locally.
+  // ```screens  key: value lines (image, alt, source). Main app screens captured from Mobbin; `alt` is written in the page's language.
+  // Loaded eagerly: a lazy image never starts inside a hidden pane or a scaled presentation view.
   function screens(src) {
     const q = {};
     src.split('\n').forEach(l => { const m = l.match(/^(\w+):\s*(.*)$/); if (m) q[m[1]] = m[2].trim(); });
     const link = q.source ? `<a href="${esc(q.source)}">${t('screensSource')}</a>` : '';
-    return `<figure class="screens"><img data-src="${esc(q.image || '')}" alt="${t('screensAlt')}" loading="lazy" onerror="this.closest('figure').classList.add('missing')"><figcaption><span class="screens-missing">${t('screensMissing')}</span> ${link}</figcaption></figure>`;
+    return `<figure class="screens"><img data-src="${esc(q.image || '')}" alt="${esc(q.alt || t('screensAlt'))}" decoding="async" onerror="this.closest('figure').classList.add('missing')"><figcaption><span class="screens-missing">${t('screensMissing')}</span> ${link}</figcaption></figure>`;
   }
 
   // ```persona  key: value lines (name, tagline, image, credit, credit_url) and "- Label: value | evidence|assumed" attributes.
@@ -933,8 +1025,8 @@ i.m.unknown { opacity: .45; }
     }));
     return out;
   }
-  // The sidebar's two blocks (the case, the harness) are collapsible; what the viewer closed is remembered.
-  // The sidebar holds two areas, the case and the AI harness and context. As in Vercel's and Stripe's docs, a segmented
+  // The sidebar's two blocks (the case, the AI context) are collapsible; what the viewer closed is remembered.
+  // The sidebar holds two areas, the case and the AI context. As in Vercel's and Stripe's docs, a segmented
   // switch at the top picks the area and the list shows only that area's sections; the area of the open page is chosen
   // when a page opens. While filtering, both areas are listed, each under its name.
   let viewBlock = null;
@@ -997,7 +1089,9 @@ i.m.unknown { opacity: .45; }
     }
   }
   const currentId = () => {
-    const h = decodeURIComponent(location.hash.slice(1)).split('?')[0];
+    let h = decodeURIComponent(location.hash.slice(1)).split('?')[0];
+    // #present-N is the slide deck (site/present.js); the page behind it is the one it was opened from.
+    if (/^present(-\d+)?$/.test(h)) h = ((window.SnufflePresent && window.SnufflePresent.origin()) || '').split('?')[0];
     return PAGES.some(p => p.id === h) ? h : PAGES[0].id;
   };
 
@@ -1146,7 +1240,8 @@ i.m.unknown { opacity: .45; }
     // Videos too; with reduced motion they wait for the viewer to press play.
     const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
     tmp.querySelectorAll('video').forEach(v => {
-      ['src', 'poster'].forEach(k => { const u = v.getAttribute(k); if (u && !/^(https?:|data:|\/)/.test(u)) v.setAttribute(k, resolve(srcOf, u)); });
+      // `data-poster` keeps the browser from fetching the poster against the page's URL before it is resolved.
+      ['src', 'poster'].forEach(k => { const u = v.getAttribute('data-' + k) || v.getAttribute(k); v.removeAttribute('data-' + k); if (u && !/^(https?:|data:|\/)/.test(u)) v.setAttribute(k, resolve(srcOf, u)); else if (u) v.setAttribute(k, u); });
       if (still) { v.removeAttribute('autoplay'); v.removeAttribute('loop'); }
     });
     // Consecutive quote cards sit in a grid.
@@ -1192,7 +1287,7 @@ i.m.unknown { opacity: .45; }
       // The mode is remembered per page; #page?proto=<frame-id> opens Proto at that screen.
       const modeSeg = `<div class="seg cv-mode" role="radiogroup" aria-label="${esc(t('cvMode'))}" hidden>${['flow', 'proto'].map(m => `<button type="button" role="radio" data-cvmode="${m}" aria-checked="false" title="${esc(t(m === 'flow' ? 'modeFlowTip' : 'modeProtoTip'))}">${esc(t(m === 'flow' ? 'modeFlow' : 'modeProto'))}</button>`).join('')}</div>`;
       els.content.innerHTML = `<div class="cv-page" data-lang="${LANG}"><div class="cv-board"></div>
-        <div class="cv-title"><div><div class="crumbs">${crumbs}</div><h1>${title}</h1></div>${modeSeg}${picker}<button type="button" class="cv-about">${esc(t('about'))}</button></div></div>`;
+        <div class="cv-title"><div><div class="crumbs">${crumbs}</div><h1>${title}</h1></div>${modeSeg}<button type="button" class="cv-mbtn" aria-pressed="false" title="${esc(t('measureTip'))}" hidden>${esc(t('measure'))}</button>${picker}<button type="button" class="cv-about">${esc(t('about'))}</button></div></div>`;
       els.toc.innerHTML = '';
       document.title = `${L(page)} · Snuffle Docs`;
       let cv = null;
@@ -1205,6 +1300,10 @@ i.m.unknown { opacity: .45; }
         if (location.hash !== h) history.replaceState(null, '', h);
       };
       seg.addEventListener('click', e => { const b = e.target.closest('[data-cvmode]'); if (b && cv) cv.setMode(b.dataset.cvmode); });
+      // The measurement layer (nav item "measure": a JSON file) is off by default and remembered per viewer; it follows the newest version only.
+      const mKey = `hs-cv-measure:${page.id}`, mBtn = els.content.querySelector('.cv-mbtn');
+      const onMeasure = on => { store.set(mKey, on ? '1' : '0'); mBtn.setAttribute('aria-pressed', String(on)); };
+      mBtn.addEventListener('click', () => { if (cv && cv.hasMeasure) cv.setMeasure(!cv.measure); });
       const show = async i => {
         const board = els.content.querySelector('.cv-board');
         let html;
@@ -1213,9 +1312,14 @@ i.m.unknown { opacity: .45; }
         const box = document.createElement('div'); box.innerHTML = html;
         box.querySelectorAll('img[src]').forEach(img => { const s = img.getAttribute('src'); if (!/^(https?:|data:|\/)/.test(s)) img.setAttribute('src', resolve(versions[i].file, s)); });
         const mode = deep ? 'proto' : (store.get(modeKey) === 'proto' ? 'proto' : 'flow');
-        cv = window.HSCanvas.mount(board, box.innerHTML, { lang: LANG, icon, t, mode, proto: page.proto === true, start: deep, onChange, about: `<div class="prose">${lede ? `<p>${lede}</p>` : ''}${tmp.innerHTML}</div>` });
+        let measure = null;
+        if (page.measure && i === 0) { try { measure = JSON.parse(await load(page.measure)); } catch (e) { console.warn('measurement layer not loaded', e); } }
+        const measureOn = !!measure && store.get(mKey) === '1';
+        cv = window.HSCanvas.mount(board, box.innerHTML, { lang: LANG, icon, t, mode, proto: page.proto === true, start: deep, onChange, measure, measureOn, onMeasure, about: `<div class="prose">${lede ? `<p>${lede}</p>` : ''}${tmp.innerHTML}</div>` });
         deep = null;
         seg.hidden = !cv.hasProto;
+        mBtn.hidden = !cv.hasMeasure;
+        mBtn.setAttribute('aria-pressed', String(cv.hasMeasure && measureOn));
         seg.querySelectorAll('button').forEach(b => b.setAttribute('aria-checked', String(b.dataset.cvmode === cv.mode)));
       };
       els.content.querySelector('.cv-about').addEventListener('click', () => cv && cv.showAbout());
@@ -1299,7 +1403,7 @@ i.m.unknown { opacity: .45; }
     .then(nav => {
       NAV = nav; PAGES = flatten(nav); BY_SRC = new Map(PAGES.map(p => [p.src, p]));
       renderNav();
-      window.addEventListener('hashchange', render);
+      window.addEventListener('hashchange', () => { if (!/^#present(-\d+)?$/.test(location.hash)) render(); });
       render();
     })
     .catch(e => { els.content.innerHTML = `<p class="state">Couldn’t load the navigation (${esc(e.message)}).</p>`; });

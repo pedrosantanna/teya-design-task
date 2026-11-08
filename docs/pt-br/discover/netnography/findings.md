@@ -17,7 +17,7 @@ Trade-offs:
 - Os temas vêm de posts que as pessoas escolheram escrever. A força mede quantas vezes um tema se repete nos posts e não diz nada sobre quão comum ele é no dia a dia.
 ```
 
-A etiquetagem produziu dez temas, numerados da evidência mais forte para a mais fraca. Como as citações foram escolhidas e o que `verified` e `archive` significam está em [método](method.md).
+A etiquetagem produziu dez temas, numerados da evidência mais forte para a mais fraca. Cada card leva ao post. Toda citação aqui foi conferida na página original em 1º de novembro de 2026; só uma citação vista num arquivo público, e não na página original, levaria um rótulo, "Via arquivo". Como as citações foram escolhidas está em [método](method.md).
 
 ## 1. Estoque
 

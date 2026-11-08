@@ -1,10 +1,16 @@
-# What's next
+# What I'll test next
 
-Test the shop side first, by hand, before building anything that depends on it.
+The first test is whether shops answer, by hand, before I build anything that depends on it. I set every pass mark before testing, so a result can't be read to fit.
 
-## What to validate first
+## Measurement
 
-I set each pass mark before testing, so a result can't be read to fit.
+Task success is the base: whether a shopper gets from the ask to an order and a collected item, and where they drop out. While the product is young I'd record events broadly, because I don't yet know which ones matter; events cost money at scale, so I'd cut them later. The plan defines 58 events and builds none of them in the prototype.
+
+The north star is completed requests per week: requests that end with an order collected or delivered. A full week evens out the difference between weekday errands and weekend shopping. The [App flow](../develop/ideation/app-flow.md) canvas has a measurement layer (press M) that places every task, event and metric on the screen where it happens.
+
+Evidence: [measurement plan](../verify/measurement.md), [product metrics](../verify/metrics.md).
+
+## What I'll test first
 
 | # | I believe that… | Pass if |
 | --- | --- | --- |
@@ -14,19 +20,19 @@ I set each pass mark before testing, so a result can't be read to fit.
 
 H1 has no evidence today, and without it the concierge doesn't work.
 
+## First experiment
+
+About ten independent shops within a 15-minute walk of Blythe Road, and about 20 requests over two days. An agent sends the requests on WhatsApp, six shoppers use the prototype, and the shops get a weekly demand summary. If the agent isn't ready, I play the concierge on WhatsApp myself. Inviting the shops is also the first conversation with a shopkeeper in this project.
+
+<img class="case-shot" data-src="media/hypothesis-h1.png" width="1100" height="661" alt="H1 in the hypotheses table: shopkeepers answer on WhatsApp within 10 minutes, the hand-run test and its pass mark">
+
+Evidence: [hypotheses](../define/hypotheses.md), [next step](../define/next-step.md).
+
 ## Signals to stop or go
 
 - H1, H3 and H4 pass: the concierge can be the main way in.
 - H1 fails: the concept narrows to shops whose tills share stock, or to a slower request with an answer by a set time.
 - H3 or H4 fails: browsing becomes the main screen, and Snuffle handles what browsing can't answer.
-
-## First experiment
-
-A proof of concept with about ten independent shops within a 15-minute walk of Blythe Road. An agent sends real requests on WhatsApp, six shoppers use the prototype, and shops get a weekly demand summary. If the agent isn't ready, I play the concierge on WhatsApp myself: about 20 requests over two days. Inviting the shops is also the first conversation with a shopkeeper in this project.
-
-<!-- screenshot: the hypotheses page, H1 row with its test and pass mark -->
-
-Evidence: [hypotheses](../define/hypotheses.md), [next step](../define/next-step.md).
 
 ## What I'd do differently
 
@@ -35,7 +41,3 @@ I'd put a few real requests in front of shops early. The proof of concept over i
 I'd set the visual gates before the first screen. The visual critic came after the pastel tiles measured 1.01:1, and several visual calls were reversed within days: the mark's tile, the Requests button's side, the shop card's colour.
 
 I'd use real data wherever it was cheap. The walk times were invented until real routes replaced them, and two shops then fell outside the 20-minute radius.
-
-## Measurement
-
-How each hypothesis will be measured, with the tasks, events and metrics behind it, is in the [measurement plan](../verify/measurement.md).

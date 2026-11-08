@@ -62,7 +62,7 @@ There is no evidence for "errand", "basket", "hold" or "reserve" in shoppers' wo
 | Request | What I asked for | Items and quantity, deadline, area, collect or delivery, repeat | Has many answers and any number of orders | Row in Requests → the chat |
 | Shop | The shop | Name, street, walk time, open until, made to order with notice ("2 days' notice"), answers from its till or by reply, collection window, delivers and fee; what it sells; ratings; how it does on Snuffle | Gives many answers, has many orders | Photo tile on Nearby, the home screen; row in any other list → shop page |
 | Answer | "Paper & Co has them" | Shop, what it has (all, some, something similar), price, source of the answer, collect-by date, delivery | Belongs to one request and one shop; may become one order | Compact row on the asking list, full card in the chat once the shop replies → details sheet, where the shopper buys. The shop's name on the row, the card and the order card is a link to the shop's page |
-| Order | My order | Items, shop, total, collect or delivery, collect-by date, collected at (the shop or a collection point), collection code, payment, rating | Belongs to one request, one shop and one answer | Card in the chat with its status label → receipt, which holds the collection code |
+| Order | My order | Items, shop, total, collect or delivery, collect-by date, collected at (the shop or a collection point), collection code, payment, rating | Belongs to one request, one shop and one answer | Card in the chat with its status label → receipt, which holds the collection code. While the order lasts, it is also pinned under its chat's nav bar, with the code while Ready or Extended; the pin is its place in the chat, not a second card (decision 068) |
 
 ## One answer, two sources
 
@@ -147,7 +147,7 @@ The dot in a label ("Ready · collect by Mon 9 Nov") only marks where the status
 | Money | paid, not charged, refunded | authorised, taken, lapsed, released | payment terms in the chat |
 | A request left open | Keep looking | standing request | keep it open, save request |
 | Where the shopper is shopping | the address ("Blythe Road, W14"); "Places" for the saved ones | place, area | neighbourhood, zone, high street |
-| Proof at the counter | collection code | code | other names |
+| Proof at the counter | collection code; "Code" as the label beside the code where space is short (the pinned order) | code | other names |
 | The home screen | Nearby | Nearby | Home, street |
 | A buyer's verdict on an order | rating, Rate | rating | review, stars, score |
 | Who rates | buyers | buyers | customers, reviewers, users |

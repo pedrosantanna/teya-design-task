@@ -14,6 +14,21 @@ import type { ShopAccentName } from '../theme';
 /** The screen's ground, or a shop's accent at the tile step (the shop page while its wash is under the bar). */
 export type EdgeFill = 'background' | 'card' | 'chat' | 'sheet' | { accent: ShopAccentName };
 
+/** The hairline under a top bar, from the ground the bar sits on (colour.md, Ground edges): a darker tone of a tile, the
+ *  chat's own edge, or the edge step of Background, Card or Sheet. Never a grey Border on a coloured ground. */
+export function groundEdge(theme: ReturnType<typeof useUnistyles>['theme'], fill: EdgeFill): string {
+  if (typeof fill === 'object') return theme.color.shop.accent[fill.accent].edge;
+  if (fill === 'chat') return theme.color.chat.groundEdge;
+  return theme.color.groundEdge[fill];
+}
+
+/** The colour a top bar's ground fills with: the tile, the chat's ground, or Background, Card or Sheet. */
+export function groundFill(theme: ReturnType<typeof useUnistyles>['theme'], fill: EdgeFill): string {
+  if (typeof fill === 'object') return theme.color.shop.accent[fill.accent].tile;
+  if (fill === 'chat') return theme.color.chat.ground;
+  return theme.color[fill];
+}
+
 export type ScrollEdgeProps = {
   edge: 'top' | 'bottom';
   /** Points, or '100%' to fill a positioned parent. */
@@ -25,18 +40,20 @@ export type ScrollEdgeProps = {
   /** Where the fade starts, as a fraction of the height (a top edge: space.6 before its end; else 0.55). The shop page's bar keeps its tile opaque
    *  down to the bar's bottom, so its title never sits over Card rows showing through (visual critique 3). */
   solid?: number;
+  /** A top edge's fade length in points (default space.6, the last part of the height). */
+  fadeOver?: number;
 };
 
-export function ScrollEdge({ edge, height, fill = 'background', style, solid: solidProp }: ScrollEdgeProps) {
+export function ScrollEdge({ edge, height, fill = 'background', style, solid: solidProp, fadeOver: fadeOverProp }: ScrollEdgeProps) {
   const { theme } = useUnistyles();
   const id = `edge${useId().replace(/[^a-zA-Z0-9]/g, '')}`;
   // Under a nav bar (a top edge of known height) the fade and its blur stay full down to the last space.6, then go
   // out together; content scrolling under the bar showed as pastel lozenges with a hard bottom edge when the blur
   // stopped at 40% and the colour at 55% (visual critique, round 3). Bottom edges keep the 0.55 start.
-  const fadeOver = edge === 'top' && typeof height === 'number' ? theme.space[6] : undefined;
+  const fadeOver = edge === 'top' && typeof height === 'number' ? (fadeOverProp ?? theme.space[6]) : undefined;
   const solid = solidProp ?? (fadeOver != null && typeof height === 'number' ? Math.max(0, (height - fadeOver) / height) : 0.55);
   const blurRef = useWebEdgeBlur(edge, fadeOver);
-  const color = typeof fill === 'object' ? theme.color.shop.accent[fill.accent].tile : fill === 'chat' ? theme.color.chat.ground : theme.color[fill];
+  const color = groundFill(theme, fill);
   const top = edge === 'top';
   return (
     <Animated.View pointerEvents="none" style={[styles.edge(edge, height), style]}>

@@ -18,6 +18,7 @@ The navigation bar. Spec: Nav bar on `docs/develop/design-system/components.md`.
 | `fill` | `'background'`, `'card'` | `'background'` | Colour of the scroll-edge fade; Card on the shop page, whose content is a card |
 | `trailingPhoto` | `{ photo, label, onPress }` | none | A round photo at the right end, `hit.min` (44) wide with a 1 pt Border edge, for a control that changes the picture (the chat's request photo). `label` is its accessibility name ("Change photo, Eclipse glasses") |
 | `backgroundAt` | number | 8, or `revealAt` in reveal mode | Scroll offset at which the fill shows (the shop page shows it when the card's top edge reaches the bar) |
+| `edgeInBar` | boolean | `false` | The scroll edge ends at the bar's bottom and fades over its last `space.4`, instead of running `space.4` past the bar: a heading resting just under the bar stays crisp (Nearby) |
 
 With `fill` set to a chat or a shop's accent the bar is a solid fill of that colour with a 0.5 pt hairline under it, so nothing shows half cut beside the controls; with a `subtitle` it is as tall as its two centred title lines plus `space.3` above and below (`useNavBarHeight(undefined, true)`). Otherwise: no bar fill (iOS 26): a scroll-edge fade from Background (or Card) to transparent fades in under the floating controls after the first 8 points of scroll, or at `backgroundAt`; the web adds a masked backdrop blur. The fade stays while a `hideOnScroll` bar is hidden. The inline title is leading, after Back. All scroll work runs in a Reanimated scroll handler on the UI thread.
 

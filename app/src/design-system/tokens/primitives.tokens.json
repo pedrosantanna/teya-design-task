@@ -134,6 +134,18 @@
         },
         "$description": "L 0.74, dark muted foreground"
       },
+      "810": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7686,
+            0.7529,
+            0.7333
+          ],
+          "hex": "#C4C0BB"
+        },
+        "$description": "L 0.81: the edge under a bar on a Sheet (1.30:1 on Biscuit 890)"
+      },
       "860": {
         "$value": {
           "colorSpace": "srgb",
@@ -480,6 +492,18 @@
         },
         "$description": "Tile step, light: OKLCH L 0.87, C 0.07 (colour.md, Shop accents)"
       },
+      "edge": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.902,
+            0.651,
+            0.5686
+          ],
+          "hex": "#E6A691"
+        },
+        "$description": "Edge step: the tile darkened in OKLCH (L 0.78, chroma kept) to 1.35:1 on the tile; the hairline under a bar on the tile, both modes"
+      },
       "tileDark": {
         "$value": {
           "colorSpace": "srgb",
@@ -515,6 +539,18 @@
           "hex": "#685853"
         },
         "$description": "A chip on that card in dark mode: the card a step lighter (OKLCH L 0.47, less chroma), 1.30 to 1.32:1 from it, Foreground 6.42:1 or more on it"
+      },
+      "separatorOnCardDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4224,
+            0.3368,
+            0.3083
+          ],
+          "hex": "#6C564F"
+        },
+        "$description": "Row dividers inside a card on this tile in dark mode: the card's own hue and chroma lifted to OKLCH L 0.47 (h 39), 1.30:1 from cardOnTileDark; never a grey Separator on the tinted card"
       },
       "washDark": {
         "$value": {
@@ -665,6 +701,18 @@
         },
         "$description": "Tile step, light: OKLCH L 0.87, C 0.07 (colour.md, Shop accents)"
       },
+      "edge": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.651,
+            0.7569,
+            0.5451
+          ],
+          "hex": "#A6C18B"
+        },
+        "$description": "Edge step: the tile darkened in OKLCH (L 0.78, chroma kept) to 1.35:1 on the tile; the hairline under a bar on the tile, both modes"
+      },
       "tileDark": {
         "$value": {
           "colorSpace": "srgb",
@@ -700,6 +748,18 @@
           "hex": "#585E52"
         },
         "$description": "A chip on that card in dark mode: the card a step lighter (OKLCH L 0.47, less chroma), 1.30 to 1.32:1 from it, Foreground 6.42:1 or more on it"
+      },
+      "separatorOnCardDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3365,
+            0.3732,
+            0.3043
+          ],
+          "hex": "#565F4E"
+        },
+        "$description": "Row dividers inside a card on this tile in dark mode: the card's own hue and chroma lifted to OKLCH L 0.47 (h 130), 1.30:1 from cardOnTileDark; never a grey Separator on the tinted card"
       },
       "washDark": {
         "$value": {
@@ -862,6 +922,18 @@
         },
         "$description": "Tile step, light: OKLCH L 0.87, C 0.09, h 95 (colour.md, Shop accents)"
       },
+      "edge": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8039,
+            0.7176,
+            0.4
+          ],
+          "hex": "#CDB766"
+        },
+        "$description": "Edge step: the tile darkened in OKLCH (L 0.78, chroma kept) to 1.35:1 on the tile; the hairline under a bar on the tile, both modes"
+      },
       "tileDark": {
         "$value": {
           "colorSpace": "srgb",
@@ -897,6 +969,18 @@
           "hex": "#615B4B"
         },
         "$description": "A chip on that card in dark mode: the card a step lighter (OKLCH L 0.47, less chroma), 1.30 to 1.32:1 from it, Foreground 6.42:1 or more on it"
+      },
+      "separatorOnCardDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3852,
+            0.3571,
+            0.2567
+          ],
+          "hex": "#625B41"
+        },
+        "$description": "Row dividers inside a card on this tile in dark mode: the card's own hue and chroma lifted to OKLCH L 0.47 (h 94), 1.30:1 from cardOnTileDark; never a grey Separator on the tinted card"
       },
       "washDark": {
         "$value": {
@@ -1047,6 +1131,18 @@
         },
         "$description": "Tile step, light: OKLCH L 0.87, C 0.07 (colour.md, Shop accents)"
       },
+      "edge": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7333,
+            0.6824,
+            0.902
+          ],
+          "hex": "#BBAEE6"
+        },
+        "$description": "Edge step: the tile darkened in OKLCH (L 0.78, chroma kept) to 1.35:1 on the tile; the hairline under a bar on the tile, both modes"
+      },
       "tileDark": {
         "$value": {
           "colorSpace": "srgb",
@@ -1082,6 +1178,18 @@
           "hex": "#5C5A66"
         },
         "$description": "A chip on that card in dark mode: the card a step lighter (OKLCH L 0.47, less chroma), 1.30 to 1.32:1 from it, Foreground 6.42:1 or more on it"
+      },
+      "separatorOnCardDark": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3607,
+            0.3448,
+            0.422
+          ],
+          "hex": "#5C586C"
+        },
+        "$description": "Row dividers inside a card on this tile in dark mode: the card's own hue and chroma lifted to OKLCH L 0.47 (h 295), 1.30:1 from cardOnTileDark; never a grey Separator on the tinted card"
       },
       "washDark": {
         "$value": {

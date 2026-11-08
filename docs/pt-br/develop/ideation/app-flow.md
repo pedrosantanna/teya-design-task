@@ -41,7 +41,9 @@ A v10 tira a decoração da lista de Requests e das conversas, para que as próp
 | v2 | A tela inicial e a tela inicial rolada viraram uma tela só, com as abas Nearby e Requests no topo. O pedido em andamento e as compras recentes saíram da tela inicial e foram para a aba Requests, uma lista de chats com um status em cada linha. Uma tela em que o concierge propõe dividir um pedido em dois. Espaçamento dos títulos mais justo, rótulos dos botões numa linha só | Percebi que a tela inicial misturava duas funções, explorar a rua e acompanhar o que eu pedi, e que o cartão do pedido e as compras recentes pareciam módulos avulsos |
 | v1 | Primeiro fluxo a partir do blueprint: tela inicial no estilo do Granola, chat, reservas, pagamento, caminhos de falha, outros caminhos | Primeira versão depois das referências do Mobbin |
 
-As rodadas 11 a 14 mudaram o protótipo depois da v10, sem uma nova versão. Pedi a um agente que corrigisse os quadros da v10 no lugar onde o protótipo tinha avançado: sem selo Promoted, fatos da loja sem pontos, datas Collect by, botões Buy tonais e iguais quando há várias ofertas, a marca farejando enquanto o Snuffle pergunta e a foto do pedido à direita da barra do topo. O registro de decisões guarda as rodadas, e o protótipo é a referência.
+As rodadas 11 a 14 mudaram o protótipo depois da v10, sem uma nova versão. Pedi a um agente que corrigisse os quadros da v10 no lugar onde o protótipo tinha avançado: sem selo Promoted, fatos da loja sem pontos, datas Collect by, botões Buy tonais e iguais quando há várias ofertas, a marca farejando enquanto o Snuffle pergunta e a foto do pedido à direita da barra do topo. Depois da rodada 17, um agente conferiu os quadros com o protótipo de novo e corrigiu os dados simulados: os tempos a pé das rotas reais (decisão 063), a data Collect by da Olympia, a contagem de Needs you, as lojas e o número de ruas da área do trabalho, a data no botão Extend, e as categorias, as contagens de tags e os números da Halo Florist na página da loja. O registro de decisões guarda as rodadas, e o protótipo é a referência.
+
+Desde então o protótipo avançou além do quadro "Bought: the receipt" da v10 (decisão 068), e o quadro fica como foi desenhado. Quando há uma compra, a conversa a fixa sob a barra de navegação com o status, a loja e os itens, e com o código de retirada enquanto ela pode ser retirada; um toque abre o recibo. No recibo, enquanto a compra pode ser retirada, o cabeçalho diz a loja e os itens, e "Collect by Mon 9 Nov" fica logo abaixo do código, no cartão do código, então o rótulo de status ("Ready", "Extended") aparece só na compra fixada e no cartão de compra. A ilustração da cesta saiu. Os ids dos quadros e as posições da camada de medição não mudaram.
 
 ## O que é um pedido
 
@@ -59,6 +61,10 @@ Cada pedido é um chat com o concierge. A questão era quanto cabe num chat. Dec
 ## Nome da aba
 
 "Requests" cobre tanto o que está sendo buscado quanto o que foi comprado. Alternativas: "Errands" (britânico, mas menos claro para quem não é falante nativo), "Chats" (diz o formato, não o conteúdo), "Orders" (só serve para o que foi comprado). Mantive "Requests" na v2.
+
+## Camada de medição
+
+Medição no cartão de título (ou M) coloca o [plano de medição](../../verify/measurement.md) sobre a versão mais nova: uma barra violeta nas telas de cada tarefa, marcada início, passo, sucesso, falha ou abandono; uma pílula verde-azulada onde cada evento dispara, preenchida para eventos do app e contornada para registros do serviço, com um anel no elemento; uma etiqueta âmbar para cada métrica de produto ao lado das telas de onde ela é lida; e uma faixa lateral para eventos do lado da loja ou só do serviço. O quadro fica esmaecido para a camada ser lida. No Proto, um painel lista o que é medido na tela atual. As posições ficam em `docs/verify/measurement-layer.json`, e `python3 scripts/build_measurement_layer.py` as confere contra o plano. Eu pedi a camada; um agente a construiu e o agente `visual-critic` a revisou no claro e no escuro.
 
 ## Referências
 

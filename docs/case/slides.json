@@ -1,0 +1,320 @@
+{
+  "about": "Slides for the recorded walkthrough of the case, opened with Present (P) in the docs site. English only. Each slide has a section, a theme (indigo, lavender, butter, peach, pistachio, paper, night) and a layout (cover, section, points, statement, stats, rows, close). Media paths are repo-relative. Every number here is checked against docs/case/*.md.",
+  "slides": [
+    {
+      "section": "Opening",
+      "theme": "indigo",
+      "layout": "cover",
+      "title": "Snuffle",
+      "lines": ["My answer to the high-street brief"],
+      "media": { "type": "mark", "alt": "The Snuffle mark: a dog's face over a striped shop awning" }
+    },
+    {
+      "section": "Opening",
+      "theme": "lavender",
+      "layout": "statement",
+      "title": "Is it there, right now?",
+      "lines": ["I chose findability", "Few small shops publish item-level stock, so the shop itself answers", "Snuffle asks, and never guesses"]
+    },
+    {
+      "section": "Opening",
+      "theme": "night",
+      "layout": "statement",
+      "title": "The bet: shops answer within minutes",
+      "lines": ["Nothing in the evidence shows it yet", "So it is the first thing I'll test"]
+    },
+    {
+      "section": "Opening",
+      "theme": "paper",
+      "layout": "points",
+      "title": "How I work",
+      "lines": ["Very little Figma", "I build with AI agents, in code", "Every decision is written down as AI context, which every agent reads before it works"],
+      "media": { "type": "code", "lines": ["AGENTS.md            rules every agent reads", "openspec/            the PRD, specs, changes", "app/src/design-system/", "  tokens/            four themes", "  components/        59 components", "docs/                this record, EN and PT"] }
+    },
+
+    {
+      "section": "Discovery",
+      "theme": "butter",
+      "layout": "section",
+      "number": "1",
+      "title": "Discovery",
+      "lines": ["From what a high street is to one shopper"],
+      "media": { "type": "illustration", "src": "app-web/assets/assets/illustrations/categories/newsagent.light.120.39a1458bf6df9a3230c9987b1faceec7@3x.png", "alt": "" }
+    },
+    {
+      "section": "Discovery",
+      "theme": "paper",
+      "layout": "stats",
+      "title": "Desk research, then one street",
+      "stats": [
+        { "value": "6,969", "label": "high streets in Britain (ONS, 2019)" },
+        { "value": "1,204", "label": "of them in London" }
+      ],
+      "lines": ["Hammersmith, where I live, as the worked example", "Locals use King Street for errands and send visitors to Chiswick"]
+    },
+    {
+      "section": "Discovery",
+      "theme": "night",
+      "layout": "stats",
+      "title": "Netnography",
+      "stats": [
+        { "value": "20", "label": "public posts clustered, from Reddit, Mumsnet and X" },
+        { "value": "0.85–0.93", "label": "kappa on the main codes, coded blind" }
+      ],
+      "lines": ["Agents collected and tagged the posts", "A second agent coded them blind"]
+    },
+    {
+      "section": "Discovery",
+      "theme": "paper",
+      "layout": "points",
+      "title": "Empathy map, two dimensions, proto-personas",
+      "lines": ["How urgent the need is, and the step where buying stopped", "Sam first (11 posts), Jess second (6)", "Ruth out (3)"],
+      "media": { "type": "doc", "src": "docs/case/media/personas-map.png", "alt": "The proto-persona map: each post placed by urgency and by the purchase stage where it stopped, clustered into Sam, Jess and Ruth", "width": 1100, "height": 962 }
+    },
+    {
+      "section": "Discovery",
+      "theme": "butter",
+      "layout": "rows",
+      "title": "The pains I chose",
+      "rows": [
+        { "big": "8 of 20", "text": "Can't tell if a shop has it, or is open", "note": "clustered posts stopped there" },
+        { "big": "<10%", "text": "No item-level stock data at small shops", "note": "of micro-businesses sold online (2019)" },
+        { "big": "17", "text": "A wrong \"in stock\" hurts more than none", "note": "benchmarked products; the complaint users repeat most" }
+      ]
+    },
+    {
+      "section": "Discovery",
+      "theme": "butter",
+      "layout": "rows",
+      "title": "And three more",
+      "rows": [
+        { "big": "Hours", "text": "Opening hours listed online are often wrong", "note": "a Mumsnet thread, Reddit, map reviews" },
+        { "big": "By 4pm", "text": "When the need is urgent, nearby beats online", "note": "eclipse glasses, a fan in a heatwave, Sunday flowers" },
+        { "big": "2 of 6", "text": "Shop hours clash with work", "note": "of Jess's posts" }
+      ]
+    },
+    {
+      "section": "Discovery",
+      "theme": "lavender",
+      "layout": "statement",
+      "title": "So findability, not the multi-shop basket",
+      "lines": ["8 of 20 posts stopped at finding out", "5 stopped at the transaction, and none of them was about buying from several shops at once"]
+    },
+
+    {
+      "section": "The concept",
+      "theme": "lavender",
+      "layout": "section",
+      "number": "2",
+      "title": "The concept",
+      "lines": ["A concierge between many shoppers and many shops"],
+      "media": { "type": "illustration", "src": "app-web/assets/assets/illustrations/shop.welcome-light.312.747951f76daa490ee91ec47ff3d0b62c@3x.png", "alt": "" }
+    },
+    {
+      "section": "The concept",
+      "theme": "paper",
+      "layout": "points",
+      "title": "A concierge that orchestrates agents",
+      "lines": ["Understands the ask", "Asks the likely shops at once: through the till where connected, on WhatsApp where not", "Brings back every answer, labelled by its source"],
+      "media": { "type": "hub", "left": [{ "name": "Sam", "via": "eclipse glasses by 4pm" }, { "name": "Jess", "via": "a sourdough after 6" }, { "name": "Every other ask", "via": "nearby" }], "centre": "Snuffle", "right": [{ "name": "Broadway Chemist", "via": "till" }, { "name": "Paper & Co", "via": "WhatsApp" }, { "name": "Rossi's Bakery", "via": "WhatsApp" }] }
+    },
+    {
+      "section": "The concept",
+      "theme": "night",
+      "layout": "points",
+      "title": "Every answer carries a price, a collect-by date and Buy",
+      "lines": ["Nobody is charged until the shop sets the item aside", "One order is one shop, collected by default"],
+      "media": { "type": "answer", "source": "WhatsApp", "shop": "Paper & Co", "line": "Has them, £14.99 a pair", "meta": ["Collect by Mon 9 Nov", "13 min walk"], "action": "Buy" }
+    },
+    {
+      "section": "The concept",
+      "theme": "paper",
+      "layout": "points",
+      "title": "Hypotheses with pass marks, and a blueprint",
+      "lines": ["Each pass mark set before any test", "The blueprint maps shopper, Snuffle, the agents and the shop"],
+      "media": { "type": "doc", "src": "docs/case/media/hypothesis-h1.png", "alt": "Hypotheses by risk: H1, shopkeepers answer a stock request on WhatsApp within 10 minutes, with its test and pass mark", "width": 1100, "height": 661, "fade": true }
+    },
+    {
+      "section": "The concept",
+      "theme": "night",
+      "layout": "statement",
+      "title": "Alone, a 0-to-1 app hardly pays",
+      "lines": ["It carries the build, plus winning a network of shops and keeping it", "It would need a commission; delivery apps take a reported 14 to 35%"]
+    },
+    {
+      "section": "The concept",
+      "theme": "butter",
+      "layout": "stats",
+      "title": "Inside a POS ecosystem, it adds value",
+      "stats": [
+        { "value": "Shops", "label": "an acquisition channel, with no ads and no cut of the sale" },
+        { "value": "Shoppers", "label": "a base that asks and buys nearby, paying through the provider" },
+        { "value": "Areas", "label": "demand by area shows where to grow the network next" }
+      ],
+      "lines": ["I'd launch it there. The revenue is a projection: about £1.0m a year in the UK base case, against a cost I assumed at £1.0m"]
+    },
+    {
+      "section": "The concept",
+      "theme": "lavender",
+      "layout": "statement",
+      "title": "The cheapest test is an agent on WhatsApp",
+      "lines": ["Promoted by a provider's shops to their own customers", "The app is here for craft; shops never install anything"]
+    },
+
+    {
+      "section": "The work and AI",
+      "theme": "peach",
+      "layout": "section",
+      "number": "3",
+      "title": "The work and AI",
+      "lines": ["I directed and decided; agents collected, drafted and checked"],
+      "media": { "type": "illustration", "src": "app-web/assets/assets/illustrations/categories/cameras.light.120.008c67c2f6edcd4f09f28fe6d5588197@3x.png", "alt": "" }
+    },
+    {
+      "section": "The work and AI",
+      "theme": "night",
+      "layout": "points",
+      "title": "AI context and flows",
+      "lines": ["The first app flow came from an agent, given the blueprint and the hypotheses", "Ten versions, every one kept; the shop's states are the base for a real agent"],
+      "media": { "type": "doc", "src": "docs/case/media/shop-states.png", "alt": "The shop's request states: answering, buy and collect, and what happens when it doesn't work out", "width": 1600, "height": 651, "below": true }
+    },
+    {
+      "section": "The work and AI",
+      "theme": "paper",
+      "layout": "points",
+      "title": "Conceptual model first, then the design system",
+      "lines": ["Four objects, one verb per action, one table of status labels", "The design system starts from Apple's guidelines: tokens and 59 components"],
+      "media": { "type": "chain", "items": [ { "name": "Request", "text": "One chat, a place and a deadline" }, { "name": "Shop", "text": "Through its till or on WhatsApp" }, { "name": "Answer", "text": "Source, price and Buy" }, { "name": "Order", "text": "One shop, a date and a code" } ] }
+    },
+    {
+      "section": "The work and AI",
+      "theme": "night",
+      "layout": "points",
+      "title": "Brand and 3D illustrations",
+      "lines": ["A dog sniffing things out", "Figma only to redraw the mark by hand", "Illustrations modelled in code, with a British high-street character"],
+      "media": { "type": "gallery", "items": [
+        { "src": "app-web/assets/assets/illustrations/categories/bakery.light.120.fc57058aa5a3616fbaac132db501c7ea@3x.png", "tile": "butter" },
+        { "src": "app-web/assets/assets/illustrations/categories/cafe.light.120.567b063edb7ee10fa381063018f6fbf7@3x.png", "tile": "peach" },
+        { "src": "app-web/assets/assets/illustrations/categories/chemist.light.120.646d4c8e26668e9f1d527bbd9b3cd7c6@3x.png", "tile": "pistachio" }
+      ], "mark": true }
+    },
+    {
+      "section": "The work and AI",
+      "theme": "peach",
+      "layout": "rows",
+      "title": "What I threw away",
+      "rows": [
+        { "big": "1.01:1", "text": "Pastel tiles against the background", "note": "before I asked for a visual critic; now every pair is measured" },
+        { "big": "8", "text": "Synthetic test users catch broken flows", "note": "they say nothing about demand" },
+        { "big": "Glass", "text": "A glass shop card", "note": "measured, and left out (decision 058)" }
+      ]
+    },
+    {
+      "section": "The work and AI",
+      "theme": "paper",
+      "layout": "points",
+      "title": "One loop, start to finish",
+      "lines": ["What I asked, what came back, what I fixed by hand", "A sweep by another agent walked all 34 steps"],
+      "media": { "type": "doc", "src": "docs/case/media/ai-log-76.png", "alt": "AI log step 76: Getting started that moves, centred art, and a chat that stopped stacking", "width": 1100, "height": 706 }
+    },
+    {
+      "section": "The work and AI",
+      "theme": "peach",
+      "layout": "statement",
+      "title": "Now live, unedited",
+      "lines": ["The real work on screen: prompts, outputs, and what I fixed by hand"]
+    },
+
+    {
+      "section": "The prototype",
+      "theme": "pistachio",
+      "layout": "section",
+      "number": "4",
+      "title": "The prototype",
+      "lines": ["One request, answered by the shops, bought and collected in the same chat"],
+      "media": { "type": "illustration", "src": "app-web/assets/assets/illustrations/categories/opticians.light.120.cf89551ee54902a322321dfe8a9e7a50@3x.png", "alt": "" }
+    },
+    {
+      "section": "The prototype",
+      "theme": "night",
+      "layout": "points",
+      "title": "First launch and browsing",
+      "lines": ["Getting started, then Nearby", "Shop pages with ratings, 42 invented shops on real streets"],
+      "media": { "type": "phones", "items": [
+        { "src": "docs/case/media/getting-started.mp4", "poster": "docs/case/media/getting-started.png", "alt": "Getting started: the street scene moves, then Continue leads to the next two pages" },
+        { "src": "docs/case/media/nearby-shop-page.mp4", "poster": "docs/case/media/nearby-shop-page.png", "alt": "From Nearby, Sam opens Bakery, then Rossi's Bakery, and scrolls to its ratings" }
+      ] }
+    },
+    {
+      "section": "The prototype",
+      "theme": "lavender",
+      "layout": "points",
+      "title": "The ask: glasses by 4pm",
+      "lines": ["\"Eclipse glasses, 2 pairs, before 4pm\"", "Broadway Chemist answers at once from its till", "The others answer on WhatsApp, in minutes"],
+      "media": { "type": "phones", "items": [
+        { "src": "docs/case/media/shops-answer.mp4", "poster": "docs/case/media/shops-answer.png", "alt": "Six shops move from Asked to Seen to an answer; Paper and Co, Broadway Chemist and Olympia Cameras answer with prices and Buy" }
+      ] }
+    },
+    {
+      "section": "The prototype",
+      "theme": "night",
+      "layout": "points",
+      "title": "Buy 2, not charged until set aside",
+      "lines": ["Apple Pay authorises £29.98; nothing is taken yet", "Paper & Co has 10 minutes to set them aside", "The receipt carries the code K7Q2"],
+      "media": { "type": "phones", "items": [
+        { "src": "docs/case/media/buy-and-wait.mp4", "poster": "docs/case/media/buy-and-wait.png", "alt": "Sam taps Buy, pays 29.98 pounds with Apple Pay and waits until Paper and Co sets the pairs aside" },
+        { "src": "docs/case/media/receipt-code.mp4", "poster": "docs/case/media/receipt-code.png", "alt": "The receipt shows Ready, collect by Mon 9 Nov and the code K7Q2, which opens full screen" }
+      ] }
+    },
+    {
+      "section": "The prototype",
+      "theme": "pistachio",
+      "layout": "points",
+      "title": "What I'd polish",
+      "lines": ["A question when the quantity or deadline is missing", "Failures after the charge", "A reply in the shop's own words", "Native glass, haptics and payment sheets, which the web build only draws"]
+    },
+
+    {
+      "section": "What's next",
+      "theme": "lavender",
+      "layout": "section",
+      "number": "5",
+      "title": "What's next",
+      "lines": ["Measure, then test the bet by hand"],
+      "media": { "type": "illustration", "src": "app-web/assets/assets/illustrations/box.welcome-light.312.c5749c31875d70ebde91d1e6a8c9d11e@3x.png", "alt": "" }
+    },
+    {
+      "section": "What's next",
+      "theme": "paper",
+      "layout": "points",
+      "title": "Task success first",
+      "lines": ["From the ask to a collected order, and where shoppers drop out", "Tag events broadly while it's early, and cut them later", "58 events defined; none built in the prototype"]
+    },
+    {
+      "section": "What's next",
+      "theme": "indigo",
+      "layout": "statement",
+      "title": "North star: completed requests per week",
+      "lines": ["Requests that end with an order collected or delivered", "A full week evens out weekday errands and weekend shopping"]
+    },
+    {
+      "section": "What's next",
+      "theme": "butter",
+      "layout": "stats",
+      "title": "First test: do shops answer in 10 minutes?",
+      "stats": [
+        { "value": "60%", "label": "of 20 requests get a valid answer in 10 minutes (H1)" },
+        { "value": "~10", "label": "shops within a 15-minute walk of Blythe Road" },
+        { "value": "2 days", "label": "to send them by hand, before anything is built on the answers" }
+      ],
+      "lines": ["H1 has no evidence today. Without it, the concierge doesn't work"]
+    },
+    {
+      "section": "What's next",
+      "theme": "indigo",
+      "layout": "close",
+      "title": "Snuffle",
+      "lines": ["Is it there, right now?"]
+    }
+  ]
+}

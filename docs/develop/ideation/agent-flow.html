@@ -181,10 +181,10 @@
 <div class="state chat" id="setaside" data-x="3580" data-y="0" data-title="Set aside and charged" style="width:340px">
   <span class="state-name"><i data-icon="package"></i><span lang="en">Set aside and charged</span><span lang="pt">Separado e cobrado</span></span>
   <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
-  <p lang="en">The shop confirms, the payment is taken, and the receipt carries the collection code.</p>
-  <p lang="pt">A loja confirma, o pagamento é capturado e o recibo traz o código de retirada.</p>
+  <p lang="en">The shop confirms, the payment is taken, and the chat pins the order with its collection code (decision 068).</p>
+  <p lang="pt">A loja confirma, o pagamento é capturado e a conversa fixa a compra com o código de retirada (decisão 068).</p>
   <div class="lines">
-    <div class="ln sn">Paper &amp; Co has set them aside, so you've paid £29.98. Your collection code is on the receipt.</div>
+    <div class="ln sn">Paper &amp; Co has set them aside, so you've paid £29.98. Your collection code is pinned at the top.</div>
   </div>
 </div>
 <div class="state chat" id="declined" data-x="2700" data-y="440" data-title="Payment didn't go through" style="width:340px">
@@ -253,7 +253,7 @@
   <p lang="en">A reminder the day before the date. One extension, of the shop's own window length.</p>
   <p lang="pt">Um lembrete na véspera da data. Uma prorrogação, do tamanho da janela da própria loja.</p>
   <div class="lines">
-    <div class="ln sn">Your 2 pairs are set aside at Paper &amp; Co. Collect by Mon 9 Nov.</div>
+    <div class="ln sn">Your 2 pairs are set aside at Paper &amp; Co. Collect by Mon 9 Nov, 7pm.</div>
     <div class="ln sn">Can't make it? You can extend once.</div>
     <div class="chips"><span>Extend to Mon 16 Nov</span><span>Directions</span></div>
   </div>
@@ -265,17 +265,16 @@
   <p lang="pt">A data muda uma vez. A loja é avisada.</p>
   <div class="lines">
     <div class="ln me">Extend to Mon 16 Nov</div>
-    <div class="ln sn">Done. Collect by Mon 16 Nov.</div>
+    <div class="ln sn">Done. Collect by Mon 16 Nov, 7pm.</div>
   </div>
 </div>
 <div class="state chat end" id="collected" data-x="4920" data-y="0" data-title="Collected and rated" style="width:340px">
   <span class="state-name"><i data-icon="shopping-bag"></i><span lang="en">Collected and rated</span><span lang="pt">Retirado e avaliado</span></span>
   <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
-  <p lang="en">The shop marks it collected. The shopper answers "Would you go back?" with a thumb, up to three tags and an optional note.</p>
-  <p lang="pt">A loja marca como retirado. O comprador responde "Would you go back?" com um polegar, até três tags e uma nota opcional.</p>
+  <p lang="en">The shop marks it collected, and the order card carries Rate. The shopper answers "Would you go back?" with a thumb, up to three tags and an optional note. After a delivery Snuffle asks "How was Paper &amp; Co?" with a Rate chip instead.</p>
+  <p lang="pt">A loja marca como retirado, e o card do pedido traz o Rate. O comprador responde "Would you go back?" com um polegar, até três tags e uma nota opcional. Depois de uma entrega, o Snuffle pergunta "How was Paper &amp; Co?" com um chip Rate.</p>
   <div class="lines">
-    <div class="ln sn">How was Paper &amp; Co?</div>
-    <div class="chips"><span>Rate</span></div>
+    <div class="ln sys">Order card: Collected · rate Paper &amp; Co · Rate</div>
     <div class="ln sn">Thanks. Your rating is on Paper &amp; Co's page now.</div>
   </div>
 </div>
@@ -332,11 +331,11 @@
 <div class="state chat" id="further" data-x="1340" data-y="1560" data-title="Ask further away" style="width:340px">
   <span class="state-name"><i data-icon="map-pin"></i><span lang="en">Ask further away</span><span lang="pt">Perguntar mais longe</span></span>
   <p class="meta"><span class="pill p" lang="en">In the prototype</span><span class="pill p" lang="pt">No protótipo</span></p>
-  <p lang="en">Shops 16 to 30 minutes away are asked, once. In Sam's script one has them; for the desk fan none does.</p>
-  <p lang="pt">As lojas a 16 a 30 minutos são consultadas, uma vez. No roteiro do Sam uma tem; para o ventilador de mesa nenhuma tem.</p>
+  <p lang="en">Shops 16 to 30 minutes away are asked, once. In Sam's script three are asked and one has them; for the desk fan two are asked and neither does.</p>
+  <p lang="pt">As lojas a 16 a 30 minutos são consultadas, uma vez. No roteiro do Sam três são consultadas e uma tem; para o ventilador de mesa duas são consultadas e nenhuma tem.</p>
   <div class="lines">
     <div class="ln me">Ask further away</div>
-    <div class="ln sn">I'm asking five more shops, up to 30 minutes away. I'll tell you as they answer.</div>
+    <div class="ln sn">I'm asking three more shops, up to 30 minutes away. I'll tell you as they answer.</div>
   </div>
 </div>
 <div class="state chat" id="none2" data-x="1780" data-y="1560" data-title="Nothing further away either" style="width:340px">
@@ -345,7 +344,7 @@
   <p lang="en">The desk fan request ends here unless the shopper keeps looking.</p>
   <p lang="pt">O pedido do ventilador de mesa termina aqui, a menos que o comprador continue procurando.</p>
   <div class="lines">
-    <div class="ln sn">None of the 5 shops further away has one either. I can keep looking and tell you when one has one.</div>
+    <div class="ln sn">None of the 2 shops further away has one either. I can keep looking and tell you when one has one.</div>
     <div class="chips"><span>Keep looking</span></div>
   </div>
 </div>
@@ -395,7 +394,7 @@
   <p lang="pt">A primeira rodada corre como qualquer pedido. As respostas desta semana ficam à vista.</p>
   <div class="lines">
     <div class="ln sn">Got it: one sourdough loaf from Rossi's, every Friday, collected after work.</div>
-    <div class="ln sn">I'll ask Rossi's again every week, on Fridays, until Fri 4 Dec, and tell you what they say.</div>
+    <div class="ln sn">I'll ask Rossi's Bakery again every week, on Fridays, until Fri 4 Dec, and tell you what they say.</div>
   </div>
 </div>
 <div class="state chat des" id="w3" data-x="0" data-y="2080" data-title="The next Friday" style="width:340px">

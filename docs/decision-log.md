@@ -537,9 +537,11 @@ Everything that arrives in a chat comes in one way: it fades in and rises 8 pt, 
 ## 065 · The docs open with the case; the process becomes the harness's documentation
 **2026-11-06 · Decided**
 
-The site has two blocks. The first, "The case", is a short narrative for someone reviewing the take-home: an overview with the conclusion first, the position, the product, the prototype, the key decisions, viability and scale, how I worked, and validation and next steps. Each page is a synthesis of what already exists and links to its evidence. The second block, "AI harness and context", keeps every page that existed, with its content unchanged, regrouped as the documentation of the working system: intent, research, product specs, flows and states, design system, explorations, verification and logs.
+The site has two blocks. The first, "The case", is a short narrative for someone reviewing the take-home: an overview with the conclusion first, the position, the product, the prototype, the key decisions, viability and scale, how I worked, and validation and next steps. Each page is a synthesis of what already exists and links to its evidence. The second block, "AI context" (first called "AI harness and context"), keeps every page that existed, with its content unchanged, regrouped as the documentation of the working system: intent, research, product specs, flows and states, design system, explorations, verification and logs.
 
 **Why:** the Discover, Define, Develop and Deliver order made a reader walk the process before finding the position, and buried the decisions in a log of more than 60 entries. Grouping the existing pages by what they are, closer to spec-driven documentation, keeps them as the record the case points to. Nothing was deleted, and no existing page changed.
+
+**Updated:** on 8 November I renamed the second block "AI context" and reordered the case to follow the order I worked in, which is also the order of the recording: overview, discovery, concept, value and viability, how I built it, the product, features, the prototype, and what I'll test next. Position and key decisions moved into Discovery and Concept (AI log, step 85).
 
 ## 066 · In dark mode, shop tiles keep their light pastels and the cards on them turn dark
 **2026-11-06 · Decided**
@@ -551,11 +553,20 @@ A shop's accent tile is the same pastel in light and dark (Butter #E7D48F, Peach
 ## 067 · How the hypotheses are measured, defined and not built
 **2026-11-06 · Decided · the guardrail thresholds stay open**
 
-The harness has a verification step: a measurement plan that ties each hypothesis to a metric, the events behind it, a pass mark and a method; the shopper and shop tasks with their start, end, success and abandonment; time on task as median and 90th percentile, split into the shopper's effort and the wait for the shop; an event taxonomy of 47 events with no personal data in them; product and supply–demand metrics by area and per shopper; a liquidity model of how many shops an area needs; and guardrails. The north star is completed requests per week. None of it is built in the prototype. I don't add NPS, and I don't add a standing CSAT: the thumbs rating after collection already measures the shop, and the gaps it leaves (requests that end without an order, Snuffle itself) are covered in the proof of concept by talking to the shoppers and a weekly check-in with each shop.
+The harness has a verification step: a measurement plan that ties each hypothesis to a metric, the events behind it, a pass mark and a method; the shopper and shop tasks with their start, end, success and abandonment; time on task as median and 90th percentile, split into the shopper's effort and the wait for the shop; an event taxonomy of 58 events with no personal data in them; product and supply–demand metrics by area and per shopper; a liquidity model of how many shops an area needs; and guardrails. The north star is completed requests per week. None of it is built in the prototype. I don't add NPS, and I don't add a standing CSAT: the thumbs rating after collection already measures the shop, and the gaps it leaves (requests that end without an order, Snuffle itself) are covered in the proof of concept by talking to the shoppers and a weekly check-in with each shop.
 
 **Why:** the proof of concept is small (6 shoppers, 10 shops), so a score like NPS would move about 17 points per person and wouldn't say which step failed, while most of what the hypotheses need comes from records the service keeps anyway. The model's own inputs (the share of shops that have the item, how many are open, how many kinds of shop could have it) are assumptions, labelled as such.
 
 **Open:** the guardrail thresholds before the proof of concept, and whether a later build asks "Did Snuffle help?" on a sample of requests that end without an order.
+
+## 068 · Once there is an order, the chat pins it, and the receipt groups the code with its date
+**2026-11-08 · Decided · the duplicate status in the chat stays open**
+
+Once a request has an order, its chat pins the order under the nav bar: the status label, the shop and items, the collection code while the order can be collected, and one tap to the receipt. It shows in every order state except Sold and Not confirmed, where nothing was charged and the chat moves on to the next answer. The strip takes the nav bar's fill and edge, and the chat's bar stays filled at any scroll, so the two read as one bar. On the receipt the lower sections and Directions stay as they were. While the order can be collected, the green header names the shop and the items, and the code card holds the code with "Collect by Mon 9 Nov" and "Full refund if you don't" right under it; the status label ("Ready", "Extended") is left out of the header, since the date says what matters at the counter and the pinned order and the order card carry the label. Every other state opens the header with its status label. The basket illustration is gone.
+
+**Why:** an agent compared Uber Eats, Too Good To Go, Live Activities, WhatsApp and Messages for Business. The ones that work keep the active order one tap away, in a fixed place, with its live phase; a pinned strip at the top of a chat does this without fighting the composer and the keyboard at the bottom, and the code at its end can be read out at the counter without opening anything. The order stays inside its request's chat, as the conceptual model says. The code and its date are one pair at the counter, and the QR needs a white quiet zone, so they share their own card; inside the green card the code felt cramped.
+
+**Open:** the order card in the chat repeats the pinned status while both are on screen, and other requests' chats don't pin their orders yet, since only the active request has a receipt in the prototype.
 
 ## Still open
 

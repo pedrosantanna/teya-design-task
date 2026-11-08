@@ -68,6 +68,10 @@ As chamadas de haptics são do `expo-haptics` no iOS e as `HapticFeedbackConstan
 
 O protótipo tem uma chave no topo que alterna a interface entre iOS, o padrão, e Android (decisão 038). Ela mostra as formas da coluna do Android a partir das mesmas telas. As superfícies que a versão web não alcança (as folhas do Apple Pay e do Google Pay, as notificações da tela bloqueada, a Live Activity e a Live Update) são desenhadas como telas simuladas nas duas formas. No navegador, o protótipo segue a coluna da web da tabela de padrões.
 
+## Paridade de cor e superfície
+
+As plataformas mudam a forma de um controle, nunca o papel de cor de uma superfície. Uma lista agrupada (as linhas de lojas, as seções da página da loja, os cartões de avaliação, as linhas de respostas, as linhas da sheet de detalhes) é pintada no mesmo papel no iOS e no Android: cartão sobre o fundo, a cor de linha da sheet dentro de uma sheet e o `cardOnTile` do acento sobre o tile de uma loja ou categoria, com os mesmos cantos e divisórias recuadas. O Android só deixa de fora a seta, porque as listas do Material não têm. Até esta rodada o Android desenhava essas linhas sem preenchimento, como itens de lista simples do Material; sobre um tile, os cartões ficavam da cor do tile e, no escuro, os chips e as tags feitos para um cartão escuro ficavam sobre o tile pastel com texto claro. Toda borda só do Android que é o único limite de um controle, como o contorno do botão segmentado, usa `color.outline` com 1 dp, o papel Outline do Material (#807973 no claro, #757679 no escuro, 3,08 a 4,31:1 sobre qualquer fundo), e não a borda (1,10:1 sobre a sheet clara). Um chip de filtro selecionado e um segmento selecionado no Android têm a forma preenchida do Material nos dois modos: Índigo 200 com texto Índigo 800 no claro (6,24:1), Índigo 900 com texto Índigo 200 no escuro (10,06:1), e um check.
+
 ## Fontes
 
 - Apple, Human Interface Guidelines: Apple Pay, notifications, Live Activities, navigation bars, sheets, segmented controls, steppers, alerts, playing haptics: https://developer.apple.com/design/human-interface-guidelines

@@ -30,6 +30,10 @@ export type CollectionCodeProps = {
   detail?: string;
   /** At the bottom when enlarged: "Paper & Co scans the code, or taps Collected on their side." */
   note?: string;
+  /** Right under the code on the receipt, how long it works: "Collect by Mon 16 Nov". */
+  until?: string;
+  /** Under `until`, in Muted: "Full refund if you don't". */
+  untilDetail?: string;
 };
 
 /** Read character by character: "K, 7, Q, 2". */
@@ -72,6 +76,8 @@ export const CollectionCode = memo(function CollectionCode({
   onEnlargedChange,
   detail,
   note,
+  until,
+  untilDetail,
 }: CollectionCodeProps) {
   const { theme } = useUnistyles();
   const frame = useSafeAreaFrame();
@@ -126,25 +132,41 @@ export const CollectionCode = memo(function CollectionCode({
       <Pressable
         ref={blockRef}
         accessibilityRole="button"
-        accessibilityLabel={`Collection code, ${spokenCode(code)}`}
+        accessibilityLabel={[`Collection code, ${spokenCode(code)}`, until, untilDetail].filter(Boolean).join(', ')}
         accessibilityHint="Opens the code full screen"
         onPress={() => setEnlarged(true)}
         style={styles.block}
       >
-        <Text variant="caption1" color="mutedForeground" align="center">
-          Collection code, show at the counter
-        </Text>
-        <Text variant="title1" align="center" numberOfLines={1}>
-          {code.split('').join(' ')}
-        </Text>
-        <View style={styles.qr} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
-          <QRCode value={value} size={smallQr} color={theme.color.codeInk} backgroundColor={theme.color.codeSurface} />
-        </View>
-        <View style={styles.hint}>
-          <Icon icon={ArrowExpand01Icon} size="caption1" color="tint" />
-          <Text variant="caption1" color="tint">
-            Tap to enlarge
+        {/* What to say: the label, the code and the date it works until, one tight group read together at the
+            counter. What to scan: the QR and its hint, below. */}
+        <View style={styles.pair}>
+          <Text variant="caption1" color="mutedForeground" align="center">
+            Collection code, show at the counter
           </Text>
+          <Text variant="title1" align="center" numberOfLines={1}>
+            {code.split('').join(' ')}
+          </Text>
+          {until ? (
+            <Text variant="subheadlineStrong" align="center">
+              {until}
+            </Text>
+          ) : null}
+          {untilDetail ? (
+            <Text variant="subheadline" color="mutedForeground" align="center">
+              {untilDetail}
+            </Text>
+          ) : null}
+        </View>
+        <View style={styles.scan}>
+          <View style={styles.qr} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+            <QRCode value={value} size={smallQr} color={theme.color.codeInk} backgroundColor={theme.color.codeSurface} />
+          </View>
+          <View style={styles.hint}>
+            <Icon icon={ArrowExpand01Icon} size="caption1" color="tint" />
+            <Text variant="caption1" color="tint">
+              Tap to enlarge
+            </Text>
+          </View>
         </View>
       </Pressable>
       {shown ? (
@@ -186,11 +208,13 @@ const styles = StyleSheet.create((theme) => ({
   block: {
     ...cornerCurve,
     alignItems: 'center',
-    gap: theme.space[2],
+    gap: theme.space[4],
     padding: theme.inset.card,
     borderRadius: theme.radius.card,
     backgroundColor: theme.color.card,
   },
+  pair: { alignItems: 'center', gap: theme.space[1] },
+  scan: { alignItems: 'center', gap: theme.space[2] },
   qr: {
     ...cornerCurve,
     padding: theme.space[3],

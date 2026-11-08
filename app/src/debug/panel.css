@@ -73,6 +73,11 @@
   transform: rotate(-45deg); transition: transform 0.15s;
 }
 .dbg-sec-t[aria-expanded="true"]::before { transform: rotate(45deg); }
+/* A section where nothing applies on the current screen: its title, muted, with the reason, and no chevron. */
+.dbg-sec.is-idle .dbg-sec-t { color: var(--d-mfg); cursor: default; white-space: nowrap; }
+.dbg-sec.is-idle .dbg-sec-t:hover { background: transparent; }
+.dbg-sec.is-idle .dbg-sec-t::before { visibility: hidden; }
+.dbg-sec-why { margin-left: auto; font-size: 11px; font-weight: 400; color: var(--d-mfg); }
 .dbg-sec-b { display: flex; flex-direction: column; gap: 8px; padding: 2px 16px 14px; }
 
 /* Rows */
@@ -80,6 +85,11 @@
 .dbg-lab { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; color: var(--d-mfg); }
 .dbg-sub { margin: 4px 0 0; font-size: 12px; font-weight: 500; color: var(--d-fg); }
 .dbg-note { margin: 0; font-size: 12px; line-height: 1.45; color: var(--d-mfg); }
+/* The controls a section leaves out on this screen, in one line under the ones it shows. */
+.dbg-off { margin: 2px 0 0; font-size: 11px; line-height: 1.45; color: var(--d-mfg); }
+/* Which screen the panel's controls are for, under its title. */
+.dbg-where { flex: none; margin: 0; padding: 8px 16px; border-bottom: 1px solid var(--d-border); font-size: 12px; color: var(--d-mfg); }
+.dbg-where b { font-weight: 500; color: var(--d-fg); }
 .dbg-note kbd { padding: 0 4px; border: 1px solid var(--d-strong); border-radius: 4px; font: 500 11px ui-monospace, "SF Mono", Menlo, monospace; color: var(--d-fg2); }
 
 .dbg-select {

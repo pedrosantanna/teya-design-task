@@ -265,7 +265,7 @@ function Nearby() {
       </Animated.ScrollView>
 
       {/* The bar's fill comes in as soon as content scrolls under the status bar; its title only at revealAt. */}
-      <NavBar title="Nearby" mode="reveal" revealAt={revealAt} backgroundAt={theme.space[2]} scroll={scroll} />
+      <NavBar title="Nearby" mode="reveal" revealAt={revealAt} backgroundAt={theme.space[2]} edgeInBar scroll={scroll} />
 
       <BottomAccessory
         margin={margin}

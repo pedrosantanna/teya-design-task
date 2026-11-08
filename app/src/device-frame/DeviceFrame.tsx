@@ -52,6 +52,9 @@ export function DeviceFrame({ device, children }: Props) {
               <StatusBar device={device} geometry={geometry} />
               <Indicator geometry={geometry} />
             </View>
+            {/* The bezel drawn again over the screen's edge: Chrome sometimes paints a blurred layer (the bottom scroll
+                edge's backdrop blur) past the screen's rounded clip, which showed as light squares in the bottom corners in dark. */}
+            <View pointerEvents="none" style={styles.bezel(geometry.screenRadius + geometry.bezel, geometry.bezel)} />
           </View>
         </View>
       ) : null}
@@ -117,6 +120,17 @@ const styles = StyleSheet.create((theme) => ({
     shadowOpacity: theme.state.scrim / 2,
     shadowRadius: theme.space[7],
     shadowOffset: { width: 0, height: theme.space[3] },
+  }),
+  bezel: (radius: number, bezel: number) => ({
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    borderRadius: radius,
+    borderWidth: bezel,
+    borderColor: theme.color.scrim,
+    zIndex: CHROME_LAYER,
   }),
   scaled: (scale: number) => ({
     transform: [{ scale }],

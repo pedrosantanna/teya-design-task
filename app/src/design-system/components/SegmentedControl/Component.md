@@ -14,7 +14,7 @@ Full content width, `radius.full`, labels in Subheadline. Selection haptic on ch
 
 ## iOS and Android
 
-iOS: the system pattern, a `color.segmented.thumb` thumb under the delicate card shadow sliding on a `color.segmented.track` track with `spring.snappy` (light: Card on Border, 1.53:1; dark: Stone 360 on Card), no edge, `size.segmented.inset` (2) between track and thumb; 32 pt segments with 6 pt of hit slop above and below, so each reaches 44; the selected label in Foreground, Subheadline 600 ↔ Material single-select segmented button: outlined, the selected segment in the selected-chip fill with a check.
+iOS: the system pattern, a `color.segmented.thumb` thumb under the delicate card shadow sliding on a `color.segmented.track` track with `spring.snappy` (light: Card on Border, 1.53:1; dark: Stone 360 on Card), no edge, `size.segmented.inset` (2) between track and thumb; 32 pt segments with 6 pt of hit slop above and below, so each reaches 44; the selected label in Foreground, Subheadline 600 ↔ Material single-select segmented button: outlined at `size.edge.control` in `color.outline` (3.08 to 4.31:1 on every ground; Border measured 1.10:1 on the light sheet), the selected segment filled (Indigo 200, `chipSelectedEdge`, in light; `chipSelected` in dark) with a check.
 
 ## Accessibility
 

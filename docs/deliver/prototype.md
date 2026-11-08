@@ -22,6 +22,8 @@ Trade-offs:
 
 Open it on its own to use the full window: `app-web/index.html`. On windows narrower than 800 px the panel overlays from the right, with a close button, instead of docking. Add `?debug=0` to hide the debugger, `?os=android` for Android, or `?step=` to start at a step.
 
+The panel offers only the controls that change the screen on show. Persona, platform, scheme, phone frame, journey step, clock and actions are always there; the rest follow the route and the open sheets (Loading shows on Nearby and shop pages, Shop hours in the chat only while the details sheet is open, the outcomes only where a payment or a shop's reply can happen next). Each section ends with a line naming what it hides, and a section with nothing to change folds to its title with "No effect on this screen". The rules are in `app/src/debug/relevance.ts`.
+
 ## Mocked content
 
 All shops are invented and sit around Blythe Road, W14. Walk times are from Blythe Road; the Work place (Kensington High St, W8) reuses Olympia Cameras, Abingdon Deli and Church Street Books at 3, 4 and 9 minutes, with seven of the other shops below. The accent follows the shop's kind in `app/src/store/kinds.ts`. Lavender is kept for Snuffle, so shops use only Butter, Peach and Pistachio; the 12 demo shops are four of each. A connected shop answers from its till; an asked shop answers by message (WhatsApp).

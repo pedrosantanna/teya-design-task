@@ -4,7 +4,7 @@ As métricas que dizem se o Snuffle funciona como marketplace e como negócio, c
 
 ```summary
 Takeaways:
-- A north star é pedidos concluídos por semana, os pedidos que terminam com uma compra retirada ou entregue. As entradas dela são compradores ativos, pedidos por comprador, taxa de atendimento, conversão de um sim em compra, confirmação e retirada, com as lojas que respondem em cada área como entrada do lado da oferta.
+- A north star é pedidos concluídos por semana, os pedidos que terminam com uma compra retirada ou entregue. As entradas dela são compradores ativos, pedidos por comprador, taxa de atendimento, conversão de um pedido atendido em compra, confirmação e retirada, com as lojas que respondem em cada área como entrada do lado da oferta.
 - A taxa de atendimento (fill rate: pedidos que recebem pelo menos um sim utilizável a tempo) é o número central do marketplace. Com uma taxa de resposta de 60% (o critério da H1) e uma chance assumida de 40% de uma loja que responde ter o item, cerca de 6 lojas prováveis abertas dão 80% de atendimento; 3 dão 56%.
 - Isso significa cerca de 4 lojas no Snuffle por tipo num anel de 15 minutos, 24 para seis tipos. As 10 lojas da prova de conceito ficam perto de 52%, próximo do critério da H1 de metade das buscas resolvidas.
 - O cenário base da estimativa de receita dá cerca de 98 compradores ativos por mês para cada loja ativa. Com 6 lojas consultadas por pedido, cada loja responde cerca de 11 pedidos para cada compra que recebe, cerca de 24 por dia útil. A carga de respostas é o guardrail que limita o quanto o Snuffle pode consultar.
@@ -14,6 +14,7 @@ Call:
 - Pedi que nenhum benchmark fosse inventado, e que qualquer número de fora viesse de uma fonte aberta e com link.
 AI:
 - Um agente definiu as métricas a partir dos eventos e da estimativa de receita, montou o modelo de liquidez com as premissas que já estavam nos documentos (o anel de 15 minutos, a taxa de resposta da H1, as dez lojas da prova de conceito, os seis tipos), acrescentou três premissas próprias, marcadas, e conferiu as contas num script curto.
+- Numa segunda passada, um agente alinhou as métricas aos eventos revisados: a taxa de retirada conta a partir de `order_ready`, o GMV soma `payment_taken` e a H12 conta por pedido com um sim. As contas da liquidez não mudaram.
 Trade-offs:
 - Uma north star de pedidos concluídos premia necessidades atendidas e ignora o valor da compra; o GMV ao lado pega um desvio para compras muito pequenas.
 - O modelo trata a resposta de cada loja como independente e a parcela de lojas que têm o item como um número só para todos os tipos. As duas coisas são simplificações que a prova de conceito vai corrigir.
@@ -27,7 +28,7 @@ Ela precisa que todas as partes funcionem: uma loja respondeu, tinha o item e o 
 
 Ela se decompõe em entradas, cada uma com um responsável:
 
-pedidos concluídos = compradores ativos × pedidos por comprador × taxa de atendimento × sim para compra × taxa de confirmação × taxa de retirada
+pedidos concluídos = compradores ativos × pedidos por comprador × taxa de atendimento × atendido para compra × taxa de confirmação × taxa de retirada
 
 A oferta fica embaixo da taxa de atendimento: lojas que respondem por tipo na área, a taxa de resposta delas e com que frequência têm o item. Adotei esta north star antes da prova de conceito, e os resultados dela ainda podem mudá-la.
 
@@ -35,25 +36,27 @@ A oferta fica embaixo da taxa de atendimento: lojas que respondem por tipo na á
 
 | Métrica | Definição | De onde |
 | --- | --- | --- |
+| Pedidos concluídos (north star) | Pedidos com um `order_collected` ou `order_delivered`, por semana; um pedido recorrente conta uma vez por ciclo | Serviço |
 | Compradores ativos | Compradores com pelo menos um `request_created` na semana ou no mês | Serviço |
 | Pedidos por comprador ativo | `request_created` por comprador ativo, por semana e por mês | Serviço |
-| Taxa de repetição | Compradores com uma compra retirada que fazem outro pedido em até 30 dias | Serviço |
-| Pedidos recorrentes | Pedidos semanais ativos, e as compras que geram | `keep_looking_set`, `payment_succeeded` |
+| Taxa de repetição | Uso repetido como definido em [Tarefas e eventos](telemetry.md): compradores com uma compra retirada ou entregue que têm outro pedido em até 30 dias, pedidos novos e ciclos recorrentes relatados à parte | Serviço |
+| Pedidos recorrentes | Pedidos que passam a se repetir (`keep_looking_set`, recorrente sim), e as compras nos ciclos seguintes (`cycle` acima de 1) | Serviço |
 | Lojas no Snuffle | Lojas com `shop_joined` e sem `shop_opted_out`, por área e tipo | Serviço |
 | Lojas que respondem | Lojas com pelo menos uma `shop_replied` válida nos últimos 30 dias | Serviço |
-| Taxa de resposta em 10 minutos | `shop_replied` válida em até 10 minutos de loja aberta, por `shop_asked` com a loja aberta (H1) | Serviço |
-| Tempo de resposta | Minutos de loja aberta de `shop_asked` até uma `shop_replied` válida; mediana e percentil 90 | Serviço |
+| Taxa de resposta em 10 minutos | `shop_replied` válida em até 10 minutos de loja aberta, por `shop_asked` no WhatsApp com a loja aberta (H1) | Serviço |
+| Tempo de resposta | Minutos de loja aberta de `shop_asked` no WhatsApp até uma `shop_replied` válida; mediana e percentil 90 | Serviço |
 | Taxa de atendimento | Pedidos com pelo menos um `answer_received` comprável antes do prazo, por pedido com prazo | Serviço |
-| Cobertura por tipo | Taxa de atendimento por tipo, com os pedidos não encontrados divididos entre todos disseram não e sem resposta | Serviço |
-| Tempo até o primeiro sim | De `request_created` ao primeiro `answer_received` comprável; mediana e percentil 90 | Serviço |
-| Sim para compra | Pedidos com um sim que recebem um `payment_succeeded` (H12) | Serviço |
-| Pedido para compra | Pedidos com um `payment_succeeded`, por pedido | Serviço |
-| Taxa de confirmação | `order_set_aside` por `payment_succeeded` em lojas consultadas | Serviço |
-| Taxa de retirada | `order_collected` por `order_set_aside` para retirada (H2) | Serviço |
-| GMV | Soma dos valores das compras separadas, menos os estornos | Serviço |
+| Cobertura por tipo | Taxa de atendimento por tipo, com `request_not_found` dividido entre todos disseram não e sem resposta | Serviço |
+| Tempo até a primeira resposta comprável | De `request_created` ao primeiro `answer_received` comprável; mediana e percentil 90 | Serviço |
+| Sim para compra | Por pedido com pelo menos um `answer_received` sim, se uma compra (`payment_authorised` ou `payment_taken`) vem depois nele (H12) | Serviço |
+| Atendido para compra | Pedidos com uma compra, por pedido com uma resposta comprável | Serviço |
+| Pedido para compra | Pedidos com uma compra, por `request_created` | Serviço |
+| Taxa de confirmação | `order_confirmed` por `payment_authorised` | Serviço |
+| Taxa de retirada | `order_collected` por `order_ready` para retirada (H2) | Serviço |
+| GMV | Soma dos valores de `payment_taken`, menos os valores de `refund_issued` | Serviço |
 | Valor médio da compra | GMV por compra | Serviço |
 | Compras por comprador | Compras por comprador com pelo menos uma compra no mês | Serviço |
-| Voltaria | Polegares para cima por `rating_submitted`, por loja e área | Serviço |
+| Voltaria | Polegares para cima por compra, pela `rating_submitted` mais recente de cada uma, por loja e área | Serviço |
 
 ## Dinheiro
 
@@ -80,7 +83,7 @@ Quantas lojas uma área precisa para que um pedido receba um sim utilizável a t
 | r: parcela das lojas consultadas que respondem de forma válida em até 10 minutos | 60% | O critério da H1, ou seja, a menor taxa que o conceito aceita |
 | h: parcela das lojas que respondem e têm o item | 40% | Premissa, sem fonte. O concierge feito à mão dá o primeiro número |
 | o: parcela das lojas prováveis abertas quando o pedido chega | 80% | Premissa para o horário comercial, sem fonte |
-| k: tipos de loja que provavelmente têm um item | 2 | Premissa. No protótipo, os óculos de eclipse vão para cinco tipos (farmácia, papelaria, ótica, loja de ferragens, brinquedos) e o pão de fermentação natural para um |
+| k: tipos de loja que provavelmente têm um item | 2 | Premissa. No protótipo, os óculos de eclipse vão para seis tipos (farmácia, ótica, papelaria, loja de câmeras, loja de ferragens, brinquedos) e o pão de fermentação natural para um |
 | Tipos numa área | 6 | As categorias da prova de conceito: ferragens, floricultura, padaria, açougue, farmácia, papelaria |
 | Anel | 15 minutos a pé | A área do conceito e da prova de conceito |
 
@@ -117,7 +120,7 @@ O piso de oferta acima não depende de quantos compradores existem. São os comp
 
 ### Carga de respostas
 
-Cada compra custa às lojas muitas respostas. Com n = 6, atendimento de 80% e 70% dos sins comprados (H12), um pedido vira compra 0,8 × 0,7 = 56% das vezes, então as lojas respondem 6 ÷ 0,56 ≈ 10,7 consultas por compra. Com 58 compras por loja por mês, são cerca de 627 consultas por mês, cerca de 24 por dia útil em 26 dias.
+Cada compra custa às lojas muitas respostas. Com n = 6, atendimento de 80% e pedidos atendidos comprados nos 70% da H12, um pedido vira compra 0,8 × 0,7 = 56% das vezes, então as lojas respondem 6 ÷ 0,56 ≈ 10,7 consultas por compra. Com 58 compras por loja por mês, são cerca de 620 consultas por mês, cerca de 24 por dia útil em 26 dias.
 
 Essa é a tensão deste marketplace: consultar mais lojas aumenta o atendimento e o número de nãos que cada loja digita. As alavancas são escolher melhor as lojas, já que um h maior precisa de menos lojas (com r × h = 0,48, 3 lojas dão 80% e a carga cai pela metade, para cerca de 5 consultas por compra); lojas conectadas pelo caixa, que respondem sem esforço (H11); e consultar em ondas, parando quando houver um sim, o que troca a espera do comprador pelo esforço da loja. Consultas por loja por dia e por compra são um guardrail, e a conversa semanal com as lojas diz onde fica o limite.
 
@@ -125,14 +128,14 @@ Essa é a tensão deste marketplace: consultar mais lojas aumenta o atendimento 
 
 | Guardrail | Definição | O que vigia |
 | --- | --- | --- |
-| Cancelamentos | `order_cancelled` por compra separada | Compra cedo demais, datas de retirada que não servem |
+| Cancelamentos | `order_cancelled` por `order_ready` para retirada | Compra cedo demais, datas de retirada que não servem |
 | Estornos | `refund_issued` por compra, por motivo | Todo caminho de devolução de dinheiro |
-| Não retiradas | `order_not_collected` por compra separada; o inverso dos 2 em 3 da H2 | Estoque preso nas lojas, dinheiro de volta aos compradores |
-| Não confirmadas ou vendidas depois de um sim | `order_not_confirmed` e `order_sold` por `payment_succeeded` em lojas consultadas | Respostas em que o comprador não pode confiar; precisão de estoque |
+| Não retiradas | `order_not_collected` por `order_ready` para retirada; o inverso dos 2 em 3 da H2 | Estoque preso nas lojas, dinheiro de volta aos compradores |
+| Não confirmadas ou vendidas depois de um sim | `order_not_confirmed` e `order_sold` por `payment_authorised` | Respostas em que o comprador não pode confiar; precisão de estoque |
 | Reclamações | `complaint_opened` por 100 compras, por assunto, de comprador e de loja | Falhas que nenhum outro evento mostra |
 | Lojas que saem | `shop_opted_out` por loja ativa por mês, por motivo | Carga de respostas, poucas vendas |
 | Notificações desligadas | `notifications_changed` para desligado, por comprador ativo | Mensagens demais do Snuffle |
 | Carga de respostas | `shop_asked` por loja por dia útil, e por compra | Consultar lojas demais |
-| Polegar para baixo | Polegares para baixo por `rating_submitted`, com as tags | Lojas que falham no atendimento presencial |
+| Polegar para baixo | Polegares para baixo por compra, pela `rating_submitted` mais recente, com as tags; "Not ready when I came" relatada à parte | Lojas que falham no atendimento presencial |
 
-A taxa de resposta às avaliações não é meta. O Snuffle pergunta uma vez a cada pessoa que comprou e lembra no máximo uma vez (decisão 047), e empurrar essa taxa para cima significaria mais pedidos de avaliação.
+A taxa de resposta às avaliações não é meta. O Snuffle pergunta uma vez a cada pessoa que comprou e lembra no máximo uma vez (decisão 047 e o [blueprint de serviço](../define/blueprint.md)), e empurrar essa taxa para cima significaria mais pedidos de avaliação.

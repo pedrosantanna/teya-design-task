@@ -68,6 +68,10 @@ The haptic calls are `expo-haptics` on iOS and Android's `HapticFeedbackConstant
 
 The prototype has a switch at the top that flips the interface between iOS, the default, and Android (decision 038). It renders the forms in the Android column from the same screens. Surfaces the web build can't reach (the Apple Pay and Google Pay sheets, lock-screen notifications, the Live Activity and the Live Update) are drawn as simulated screens in both forms. In a browser the prototype follows the web column of the patterns table.
 
+## Colour and surface parity
+
+The platforms change the form of a control, never the colour role of a surface. A grouped list (shop rows, the shop page's sections, review cards, answer rows, the details sheet's rows) is painted in the same role on iOS and Android: Card on the Background, the sheet's row colour in a sheet, and the accent's `cardOnTile` on a shop's or category's tile, with the same corners and inset dividers. Android drops only the chevron, as Material lists have none. Until this round Android drew these rows with no fill, as plain Material list items, so on a tile the cards took the tile's colour and in dark the chips and tags meant for a dark card sat on the pastel tile with light text. Every Android-only edge that is a control's only boundary, such as the outline of the segmented button, takes `color.outline` at 1 dp, Material's Outline role (#807973 in light, #757679 in dark, 3.08 to 4.31:1 on every ground), not Border (1.10:1 on the light sheet). A selected filter chip and a selected segment on Android are Material's filled form in both modes: Indigo 200 with Indigo 800 text in light (6.24:1), Indigo 900 with Indigo 200 text in dark (10.06:1), and a check.
+
 ## Sources
 
 - Apple, Human Interface Guidelines: Apple Pay, notifications, Live Activities, navigation bars, sheets, segmented controls, steppers, alerts, playing haptics: https://developer.apple.com/design/human-interface-guidelines

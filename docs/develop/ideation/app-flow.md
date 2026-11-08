@@ -41,7 +41,9 @@ v10 takes decoration out of the Requests list and the chats, so Snuffle's own wo
 | v2 | Home and the scrolled home became one screen with Nearby and Requests tabs at the top. The open request and recent orders left the home for the Requests tab, a list of chats with a status per row. A screen where the concierge proposes splitting a request in two. Title spacing tightened, button labels kept on one line | I found the home mixed two jobs, browsing the street and following what I asked for, and the request card and recent orders read as one-off modules |
 | v1 | First flow from the blueprint: Granola-style home, chat, holds, payment, failure paths, other paths | First pass after the Mobbin references |
 
-Rounds 11 to 14 changed the prototype after v10 without a new version. I had an agent correct the v10 frames in place where the prototype had moved: no Promoted badge, shop facts without dots, Collect by dates, equal tonal Buy buttons when there are several offers, the sniffing mark while Snuffle asks and the request photo at the right of the top bar. The decision log records the rounds, and the prototype is the reference.
+Rounds 11 to 14 changed the prototype after v10 without a new version. I had an agent correct the v10 frames in place where the prototype had moved: no Promoted badge, shop facts without dots, Collect by dates, equal tonal Buy buttons when there are several offers, the sniffing mark while Snuffle asks and the request photo at the right of the top bar. After round 17 an agent checked the frames against the prototype again and corrected the mock data: walk times from the real routes (decision 063), Olympia's collect-by date, the Needs you count, the Work area's shops and street count, the Extend button's date, and the shop page's categories, tag counts and Halo Florist's numbers. The decision log records the rounds, and the prototype is the reference.
+
+The prototype has since moved ahead of v10's "Bought: the receipt" frame (decision 068), and the frame is kept as drawn. Once there is an order, the chat pins it under the nav bar with its status, shop and items, and with the collection code while it can be collected; one tap opens the receipt. On the receipt, while the order can be collected, the header names the shop and the items, and "Collect by Mon 9 Nov" sits right under the code in the code card, so the status label ("Ready", "Extended") shows only on the pinned order and the order card. The basket illustration is gone. The frame ids and the measurement layer's placements are unchanged.
 
 ## What a request is
 
@@ -59,6 +61,10 @@ Each request is a chat with the concierge. The question was how much one chat ho
 ## Tab name
 
 "Requests" covers both what is being searched and what was bought. Alternatives: "Errands" (British, but less clear to non-native speakers), "Chats" (says the format, not the content), "Orders" (only fits what was bought). I kept "Requests" for v2.
+
+## Measurement layer
+
+Measures in the title card (or M) lays the [measurement plan](../../verify/measurement.md) over the newest version: a violet bar across the frames of each task, marked start, step, success, failure or abandon; a teal pill where each event fires, filled for app events and outlined for service records, with a ring on the element; an amber tag for each product metric beside the frames it is read from; and a side lane for shop-side and service-only events. The board dims so the layer reads. In Proto a panel lists what is measured on the current screen. The placements live in `docs/verify/measurement-layer.json`, and `python3 scripts/build_measurement_layer.py` checks them against the plan. I asked for the layer; an agent built it and the `visual-critic` agent reviewed it in light and dark.
 
 ## References
 

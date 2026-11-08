@@ -13,7 +13,6 @@ import {
   Button,
   CollectionCode,
   Ground,
-  Illustration,
   ListRow,
   NavBar,
   StatusLabel,
@@ -81,29 +80,31 @@ export default function Receipt() {
   return (
     <View style={styles.screen}>
       <Animated.ScrollView onScroll={scroll.onScroll} scrollEventThrottle={16} contentContainerStyle={styles.content(margin, top, insets.bottom)}>
-        {/* Ready: the basket, decorative, one per screen (illustrations.md); still under Reduce Motion. */}
-        <View style={styles.top}>
-        {collecting ? (
-          <View style={styles.art}>
-            <Illustration name="basket" size="medium" />
-          </View>
-        ) : null}
         {/* The receipt's header: the shop's accent at the tile step (colour.md, Shop accents) and the shop's name in
-            Display name. */}
+            Display name. While the order can be collected, the header names the shop and what was bought; the date
+            moves under the code, the pair the counter reads together (decision 068). The status label ("Ready",
+            "Extended") stays on the pinned order and the order card in the chat. Every other state opens with it. */}
+        {/* The header and the code are one group: who and what, then the code to show for it. */}
+        <View style={styles.top}>
         <View style={styles.head(accent)}>
           {/* The header is the shop's tile: its text takes the on-tile ink (the pastel tile in both modes, round 18). */}
           <Ground value="tile" accent={accent}>
-          <StatusLabel label={order.label} tone={order.tone} />
+          {collecting ? null : <StatusLabel label={order.label} tone={order.tone} />}
           <Text variant="displayName" align="center" accessibilityRole="header" numberOfLines={2}>
             {order.shop}
           </Text>
           <Text variant="subheadline" color="mutedForeground" align="center">
             {order.fulfilment === 'delivery'
               ? `${order.items}, delivered by ${order.shop}`
-              : collecting
-                ? `${order.items}, set aside${order.collectAt ? ` at ${order.collectAt.name}` : ''}. Full refund if you don't collect`
+              : collecting && order.collectAt
+                ? `${order.items}, at ${order.collectAt.name}`
                 : order.items}
           </Text>
+          {order.state === 'waiting' && order.fulfilment === 'collect' ? (
+            <Text variant="subheadline" color="mutedForeground" align="center">
+              Your collection code shows here once they confirm.
+            </Text>
+          ) : null}
           <View style={styles.centred}>
             <Button
               label="View shop"
@@ -115,9 +116,8 @@ export default function Receipt() {
           </View>
           </Ground>
         </View>
-        </View>
 
-        {collecting || order.state === 'collected' ? (
+        {collecting ? (
           <CollectionCode
             code={order.code}
             qrValue={`snuffle:order:${order.code}`}
@@ -125,8 +125,11 @@ export default function Receipt() {
             onEnlargedChange={sim.setCodeOpen}
             detail={`${order.items}, ${order.shop}`}
             note={`${where.name} scans the code, or taps Collected on their side.`}
+            until={`Collect by ${order.state === 'extended' ? order.extendedTo : order.collectBy}`}
+            untilDetail="Full refund if you don't"
           />
         ) : null}
+        </View>
 
         <View>
           <ListRow icon={Location01Icon} title={where.name} facts={{ state: 'open', detail: noBreak(`until ${where.openUntil}`), walk: noBreak(order.walk), street: streetLabel(where.street) }} position="first" />
@@ -187,7 +190,6 @@ const styles = StyleSheet.create((theme) => ({
     backgroundColor: theme.color.shop.accent[accent].tile,
   }),
   centred: { alignSelf: 'center' },
-  top: { gap: theme.space[2] },
-  art: { alignItems: 'center' },
+  top: { gap: theme.gap.block },
   actions: { gap: theme.space[2] },
 }));
