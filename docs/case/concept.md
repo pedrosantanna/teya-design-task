@@ -4,15 +4,29 @@ I assume most of what a small shop sells isn't in any stock system, so the hard 
 
 <div class="dg dg-chain dg-hub"><div class="dg-box"><b>Shoppers in the area</b><div class="dg-list"><span>Sam: eclipse glasses by 4pm</span><span>Jess: a sourdough she can collect after 6</span><small>and every other ask nearby</small></div></div><div class="dg-arrow is-both">ask · answers</div><div class="dg-box"><b>Snuffle</b><div class="dg-list"><span>Understands the ask</span><span>Picks the likely shops and asks them all at once</span><span>Brings back each answer, labelled by source</span></div></div><div class="dg-arrow is-both">request · reply</div><div class="dg-box"><b>Shops within reach</b><div class="dg-list"><span>Broadway Chemist <span class="dg-tag">Till</span></span><span>Paper &amp; Co <span class="dg-tag">WhatsApp</span></span><span>Rossi's Bakery <span class="dg-tag">WhatsApp</span></span></div></div></div>
 
+## Options
+
+I weighed three ways to answer "is it there, right now?" and chose the one that doesn't need a catalogue. Browsing stays in the app as the second way in.
+
+<div class="dg dg-options"><div class="dg-box"><span class="dg-badge">Not chosen</span><b>Catalogue search</b>Search an index of what every shop sells.<span>Needs item data that most small shops don't have.</span></div><div class="dg-box"><span class="dg-badge">Kept second</span><b>Shop directory and browse</b>List the shops nearby by kind, with their hours.<span>Answers who might sell it, not whether it is there now.</span></div><div class="dg-box is-chosen"><span class="dg-badge is-chosen">Chosen</span><b>A concierge that asks the shops</b>Snuffle asks the likely shops and brings back their answers.<span>Costs minutes of waiting, and depends on shops replying.</span></div></div>
+
 ## How it works
 
 Snuffle understands the ask, asks the shops through the till where the shop is connected and on WhatsApp where it isn't, and returns the answers in one chat. It sits between many shoppers and many shops at once, across every street within the shopper's reach, so nobody has to phone round.
 
-## How the transaction shapes it
+## How the transaction shapes each answer
 
 An answer only helps if the shopper can act on it in the same chat. So every answer carries the shop, the price, a collect-by date and Buy. The shopper isn't charged until the shop confirms it has set the item aside. One order is one shop, with collection as the default.
 
-## From pains to tests
+## The shop side
+
+Shops have no interface to learn. Each state has the WhatsApp message the shop sees, and the shop's whole job is three replies.
+
+<div class="dg"><div class="dg-chain"><div class="dg-box"><b>Asked</b>A template message about one item, with a deadline</div><div class="dg-arrow">replies <span>“1 £14.99”</span></div><div class="dg-box"><b>Bought</b>£29.98 authorised; set aside for K7Q2 within 10 minutes</div><div class="dg-arrow">replies <span>“done”</span></div><div class="dg-box"><b>Set aside and charged</b>Kept until the collect-by date</div><div class="dg-arrow">scans the code</div><div class="dg-box"><b>Collected</b>The buyer can rate the shop</div></div><div class="dg-cap">When it doesn't work out</div><div class="dg-cols"><div class="dg-box is-dashed"><b>No reply in 10 minutes</b><small>↳ from Asked</small>The row reads No reply; a late answer still counts as demand</div><div class="dg-box is-dashed"><b>Sold, or no “done” in time</b><small>↳ from Bought</small>The authorisation lapses and nobody is charged</div><div class="dg-box is-dashed"><b>Not collected by the date</b><small>↳ from Set aside</small>Cancelled, refunded, and back on sale</div></div></div>
+
+Evidence: [shop request states](../develop/ideation/shop-states.md), [service blueprint](../define/blueprint.md).
+
+## Value proposition, hypotheses and blueprint
 
 I wrote a value proposition from the pains in the empathy map, then turned the assumptions it rests on into hypotheses, each with a pass mark set before any test. A service blueprint maps each step across the shopper, Snuffle, the agents behind it and the shop. Every page in the AI context separates my call from what an agent did in that step.
 
@@ -29,7 +43,6 @@ Evidence: [concept](../define/index.md), [value proposition](../define/value-pro
 | Snuffle looks across the shopper's area, not one high street | A tidy one-street scope. From Blythe Road six shopping streets are within a 15-minute walk | 024 |
 | A proof of concept with shops before interviews | Building before I know whether shops answer | 015, 020 |
 
-<img class="case-shot" data-src="media/decision-017.png" width="1100" height="601" alt="Decision 017 in the decision log: what I decided, why, my position on the brief and what stays open">
 
 ## What I assumed and left out
 

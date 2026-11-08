@@ -8,6 +8,8 @@ Pedi um clipe por funcionalidade principal. Um agente escolheu as nove, gravou c
 
 <div class="feature"><video class="phone-video" src="../../case/media/ask-split.mp4" data-poster="../../case/media/ask-split.png" width="450" height="948" aria-label="Sam digita óculos para eclipse para hoje e um bolo de aniversário para sábado; o Snuffle propõe dois pedidos e ele toca em Split into 2" controls muted playsinline loop preload="metadata"></video><div>
 
+A dor que resolve: não saber qual loja vende o quê, então quem compra pergunta uma vez em vez de loja por loja.
+
 Sam digita óculos para eclipse para hoje e um bolo de aniversário para sábado numa mensagem só. Os dois vão para lojas diferentes em dias diferentes, então o Snuffle propõe dois pedidos e ele decide. Depois o Snuffle repete o pedido dos óculos com a quantidade e o prazo das 16h.
 
 Separar mantém as respostas de cada pedido numa conversa, e o comprador nunca precisa descobrir qual loja vende o quê.
@@ -17,6 +19,8 @@ Separar mantém as respostas de cada pedido numa conversa, e o comprador nunca p
 ## Respostas das lojas
 
 <div class="feature"><video class="phone-video" src="../../case/media/shops-answer.mp4" data-poster="../../case/media/shops-answer.png" width="450" height="948" aria-label="Depois de Allow, seis lojas passam de Asked para Seen e para uma resposta; Paper and Co, Broadway Chemist e Olympia Cameras respondem com preços" controls muted playsinline loop preload="metadata"></video><div>
+
+A dor que resolve: não saber se o item está lá antes de sair de casa.
 
 Quando Sam permite as notificações, o Snuffle pergunta a seis lojas. A Broadway Chemist responde na hora pelo caixa, a Bush Opticians diz que não tem, a Paper & Co responde por mensagem com preço e data para retirar, e a Olympia Cameras oferece algo parecido.
 
@@ -28,6 +32,8 @@ Cada resposta diz de onde veio, porque o estoque lido no caixa e o sim de um loj
 
 <div class="feature"><video class="phone-video" src="../../case/media/buy-and-wait.mp4" data-poster="../../case/media/buy-and-wait.png" width="450" height="948" aria-label="Sam toca em Buy, mantém 2 pares e a retirada, paga 29,98 libras com Apple Pay e espera a Paper and Co separar os pares" controls muted playsinline loop preload="metadata"></video><div>
 
+A dor que resolve: um "tem em estoque" errado, que custa mais confiança do que nenhuma resposta.
+
 Buy mostra a loja, a quantidade e a escolha entre retirar ou receber, depois o Apple Pay de £29,98. O pagamento fica só autorizado. Sam é cobrado quando a Paper & Co confirma que separou os pares; no protótipo isso leva alguns segundos, numa loja de verdade pode levar minutos.
 
 A loja não corre o risco de uma reserva sem pagamento, e o comprador não paga por um item que já acabou.
@@ -38,6 +44,8 @@ A loja não corre o risco de uma reserva sem pagamento, e o comprador não paga 
 
 <div class="feature"><video class="phone-video" src="../../case/media/receipt-code.mp4" data-poster="../../case/media/receipt-code.png" width="450" height="948" aria-label="O recibo mostra Ready, collect by Mon 9 Nov, o código K7Q2, Extend e Cancel for a refund; depois o código abre em tela cheia" controls muted playsinline loop preload="metadata"></video><div>
 
+A dor que resolve: uma viagem perdida, porque o item está pago e separado antes de o Sam ir até lá.
+
 O recibo diz que os pares estão prontos, até quando retirar e como estender uma vez ou cancelar com reembolso. No balcão o código abre em tela cheia para a loja ler ou digitar.
 
 </div></div>
@@ -45,6 +53,8 @@ O recibo diz que os pares estão prontos, até quando retirar e como estender um
 ## Vendido antes
 
 <div class="feature"><video class="phone-video" src="../../case/media/sold-first.mp4" data-poster="../../case/media/sold-first.png" width="450" height="948" aria-label="A Paper and Co vendeu os últimos pares, Sam não é cobrado e compra 1 par na Broadway Chemist" controls muted playsinline loop preload="metadata"></video><div>
+
+A dor que resolve: ouvir que algo estava lá quando não estava, a reclamação mais repetida nos benchmarks.
 
 A Paper & Co vendeu os últimos pares antes de conseguir separá-los, então Sam não é cobrado. O Snuffle indica a Broadway Chemist, que ainda tem um par, e continua procurando o segundo.
 
@@ -56,6 +66,8 @@ Toda falha do percurso termina com um próximo passo. Esta é a mais provável, 
 
 <div class="feature"><video class="phone-video" src="../../case/media/nobody-has-it.mp4" data-poster="../../case/media/nobody-has-it.png" width="450" height="948" aria-label="Nenhuma das seis lojas tem os óculos antes das 16h; Sam escolhe Keep looking até sexta, 6 de novembro" controls muted playsinline loop preload="metadata"></video><div>
 
+A dor que resolve: a volta pelas lojas que dá em nada quando a necessidade é urgente.
+
 Nenhuma das seis lojas tem os óculos antes das 16h: quatro disseram que não e duas não responderam. O Snuffle oferece perguntar a lojas mais longe, ou continuar procurando até sexta e avisar Sam quando uma tiver. Nada é comprado até ele tocar em Buy.
 
 </div></div>
@@ -63,6 +75,8 @@ Nenhuma das seis lojas tem os óculos antes das 16h: quatro disseram que não e 
 ## Retirar depois do trabalho
 
 <div class="feature"><video class="phone-video" src="../../case/media/jess-after-work.mp4" data-poster="../../case/media/jess-after-work.png" width="450" height="948" aria-label="Jess compra um pão de fermentação natural na Rossi's Bakery e escolhe retirar na banca da esquina, aberta até as 23h" controls muted playsinline loop preload="metadata"></video><div>
+
+A dor que resolve: horário das lojas que bate com o do trabalho.
 
 Jess sai do trabalho às 18h, quando a Rossi's Bakery fecha. Na hora do almoço ela compra um pão de fermentação natural e escolhe a banca da esquina como lugar de retirada; a Rossi's deixa o pão lá antes de fechar, e a banca fica aberta até as 23h.
 
@@ -74,6 +88,8 @@ Ela é a segunda persona, e o problema dela é o horário. O ponto de retirada �
 
 <div class="feature"><video class="phone-video" src="../../case/media/nearby-shop-page.mp4" data-poster="../../case/media/nearby-shop-page.png" width="450" height="948" aria-label="Em Nearby, Sam abre Bakery, depois a Rossi's Bakery, e rola até as avaliações e o desempenho dela no Snuffle" controls muted playsinline loop preload="metadata"></video><div>
 
+A dor que resolve: não saber se uma loja está aberta, ou o que ela vende, antes de ir.
+
 Navegar pelas lojas é a segunda entrada. Uma categoria em Nearby lista as lojas a até 15 minutos a pé. A página da loja mostra o que ela vende, o que compradores encontraram lá há pouco, avaliações de quem retirou, e com que rapidez e confiabilidade ela responde no Snuffle.
 
 O mapa dessas telas mostra só o marcador nesta versão web; os blocos do mapa estavam sendo corrigidos quando os clipes foram gravados.
@@ -83,6 +99,8 @@ O mapa dessas telas mostra só o marcador nesta versão web; os blocos do mapa e
 ## Android
 
 <div class="feature"><video class="phone-video android" src="../../case/media/android.mp4" data-poster="../../case/media/android.png" width="450" height="976" aria-label="A tela de respostas no Android; Buy abre a folha inferior e depois a folha do Google Pay" controls muted playsinline loop preload="metadata"></video><div>
+
+Nenhuma dor própria: mostra o mesmo percurso na outra plataforma.
 
 O mesmo código Expo roda no Android, aqui numa moldura de Pixel. A seta de voltar, a tipografia e a folha de pagamento seguem as convenções do Android, e o Google Pay ocupa o lugar do Apple Pay.
 

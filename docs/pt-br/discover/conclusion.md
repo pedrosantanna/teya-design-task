@@ -4,7 +4,7 @@ O Discover termina com três listas: fatos da pesquisa documental e dos benchmar
 
 ```summary
 Takeaways:
-- Dez fatos que limitam ou moldam qualquer produto aqui, cada um com fonte.
+- Fatos que limitam ou moldam qualquer produto aqui, cada um com fonte. Um fato só entra se passar pela regra abaixo; a quantidade é a que passa.
 - Catorze suposições, a maioria sobre compradores, cada uma com um nível de confiança sugerido e a evidência por trás.
 - Oito perguntas em aberto, seis delas sobre lojistas, que não aparecem no material.
 Call:
@@ -19,7 +19,7 @@ Trade-offs:
 
 ## Fatos
 
-Números publicados, regras e fatos sobre produtos, conferidos em dois ou mais lugares quando me surpreenderam. Detalhes e links estão em [a high street hoje](high-street-landscape.md) e em [benchmarks](benchmarks.md).
+Um fato só entra se cumprir as três condições: é um número publicado, uma regra ou lei, ou algo que um produto existente faz hoje, e não uma afirmação sobre o que os compradores pensam; vem de uma fonte oficial, regulatória ou da própria empresa, conferida num segundo lugar quando me surpreendeu; e muda uma decisão do produto, que a coluna do meio nomeia. Contexto que não muda nenhuma decisão fica nas páginas de origem. Detalhes e links estão em [a high street hoje](high-street-landscape.md) e em [benchmarks](benchmarks.md).
 
 | # | Fato | Por que importa para o produto | Fonte |
 | --- | --- | --- | --- |

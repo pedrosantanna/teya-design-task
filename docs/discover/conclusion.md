@@ -4,7 +4,7 @@ Discover ends with three lists: facts from the desk research and the benchmarks,
 
 ```summary
 Takeaways:
-- Ten facts that limit or shape any product here, each with a source.
+- Facts that limit or shape any product here, each with a source. A fact is listed only if it passes the rule below; the count is whatever passes.
 - Fourteen assumptions, most of them about shoppers, each with a suggested confidence level and the evidence behind it.
 - Eight open questions, six of them about shopkeepers, who are missing from the material.
 Call:
@@ -19,7 +19,7 @@ Trade-offs:
 
 ## Facts
 
-Published figures, rules and product facts, checked in two or more places where they surprised me. Details and links are on [the high street today](high-street-landscape.md) and [benchmarks](benchmarks.md).
+A fact is listed only if it meets all three conditions: it is a published figure, a rule or law, or something an existing product does today, not a claim about what shoppers think; it comes from an official, regulatory or company source, checked in a second place where it surprised me; and it changes a decision in the product, which the middle column names. Context that changes no decision stays on the source pages. Details and links are on [the high street today](high-street-landscape.md) and [benchmarks](benchmarks.md).
 
 | # | Fact | Why it matters for the product | Source |
 | --- | --- | --- | --- |

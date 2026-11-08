@@ -8,11 +8,14 @@
 @font-face { font-family: 'Snuffle Switzer'; src: url('../app-web/assets/assets/fonts/Switzer-Medium.b72e448a37460223244f502366169688.ttf') format('truetype'); font-weight: 500; font-display: swap; }
 @font-face { font-family: 'Snuffle Switzer'; src: url('../app-web/assets/assets/fonts/Switzer-Semibold.9ca49b3e5027ae9d42f9008c7c3074aa.ttf') format('truetype'); font-weight: 600; font-display: swap; }
 
-/* The docs' top-bar button that opens the deck; it follows the docs theme like the other controls. */
-.present-btn { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px 0 10px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg); color: var(--fg); font: 500 12.5px var(--font-sans); cursor: pointer; }
-.present-btn svg { width: 14px; height: 14px; flex: none; }
-.present-btn:hover { background: var(--muted); }
-@media (max-width: 560px) { .present-btn { width: 32px; padding: 0; justify-content: center; } .present-btn span { display: none; } }
+/* The button that opens the deck, at the top of the case's block in the sidebar; it follows the docs theme. */
+.present-btn { display: flex; align-items: center; gap: var(--s-2); width: 100%; height: 34px; margin: 0 0 var(--s-3); padding: 0 var(--s-2) 0 10px; border: 1px solid transparent; border-radius: var(--radius); background: var(--muted); color: var(--fg); font: 500 13px var(--font-sans); cursor: pointer; }
+.present-btn svg { width: 15px; height: 15px; flex: none; }
+.present-btn span { flex: 1 1 auto; text-align: left; }
+.present-btn kbd { padding: 1px 6px; border: 1px solid var(--border); border-radius: 5px; background: var(--bg); color: var(--fg-2); font: 500 11px var(--font-sans); }
+.present-btn:hover { border-color: var(--border-strong); }
+.present-btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
+@media (hover: none) { .present-btn kbd { display: none; } }
 
 /* Button rings (--pz-ring) are 3.32:1 or more on every ground. Themes. Ink #100A06 on every tile is 12.96:1 or more; each tile's muted text is its hue's 800 step (6.43 to 6.59:1).
    Indigo: white 8.75:1, Lavender 200 6.22:1. Night: Foreground 18.77:1, Muted 8.52:1, the tiles as accents 11.06:1 or more. */
@@ -85,7 +88,7 @@ html.pz-lock, html.pz-lock body { overflow: hidden; }
 .pz-slide[data-layout="section"] .pz-lines, .pz-slide[data-layout="cover"] .pz-lines, .pz-slide[data-layout="close"] .pz-lines { color: var(--pz-muted); font-size: clamp(20px, 2vw, 36px); }
 .pz-slide[data-layout="section"] .pz-lines li, .pz-slide[data-layout="cover"] .pz-lines li, .pz-slide[data-layout="close"] .pz-lines li { padding-left: 0; }
 .pz-slide[data-layout="section"] .pz-lines li::before, .pz-slide[data-layout="cover"] .pz-lines li::before, .pz-slide[data-layout="close"] .pz-lines li::before { display: none; }
-.pz-part { margin: 0 0 clamp(16px, 3vh, 32px); font-size: clamp(16px, 1.3vw, 22px); font-weight: 500; color: var(--pz-muted); font-variant-numeric: tabular-nums; }
+.pz-part { margin: 0 0 clamp(4px, 1vh, 12px); font-family: var(--pz-display); font-weight: 700; font-size: clamp(72px, 9vw, 168px); line-height: .8; color: var(--pz-muted); font-variant-numeric: tabular-nums; }
 
 /* Stats: a figure in Gambetta over a short label. */
 .pz-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), max-content)); gap: clamp(20px, 3vw, 56px) clamp(48px, 6vw, 120px); margin: clamp(28px, 5vh, 64px) 0 0; padding: 0; }
@@ -161,10 +164,78 @@ html.pz-lock, html.pz-lock body { overflow: hidden; }
 .pz-gallery .is-mark { background: #3D35B8; }
 .pz-gallery .is-mark .pz-mark { width: 62%; }
 
+/* Steps: numbered nodes on one line with arrows between them, in the slide's own ink; the last node is filled. */
+.pz-steps { margin: 0; padding: 0; list-style: none; width: 100%; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: clamp(10px, 1.4vw, 24px); counter-reset: pzs; }
+.pz-steps li { position: relative; counter-increment: pzs; padding-top: clamp(52px, 6vh, 68px); min-width: 0; }
+.pz-steps li::before { content: counter(pzs); position: absolute; top: 0; left: 0; display: grid; place-items: center; width: clamp(36px, 3vw, 48px); aspect-ratio: 1; border-radius: 50%; box-shadow: inset 0 0 0 2px currentColor; font: 600 clamp(15px, 1.2vw, 20px) var(--pz-text); font-variant-numeric: tabular-nums; }
+.pz-steps li::after { content: ""; position: absolute; top: calc(clamp(36px, 3vw, 48px) / 2 - 6px); left: calc(clamp(36px, 3vw, 48px) + 8px); right: calc(-1 * clamp(10px, 1.4vw, 24px) + 8px); height: 12px; background: var(--pz-muted);
+  clip-path: polygon(0 5px, calc(100% - 9px) 5px, calc(100% - 9px) 0, 100% 6px, calc(100% - 9px) 12px, calc(100% - 9px) 7px, 0 7px); }
+.pz-steps li:last-child::after { display: none; }
+.pz-steps li.is-end::before { background: var(--pz-fg); color: var(--pz-bg); box-shadow: none; }
+.pz-steps b { display: block; font-family: var(--pz-display); font-weight: 700; font-size: clamp(19px, 1.7vw, 32px); line-height: 1.05; }
+.pz-steps span { display: block; margin-top: .45em; font-size: clamp(15px, 1.2vw, 21px); line-height: 1.3; color: var(--pz-muted); text-wrap: pretty; }
+
+/* Themes: a numbered list in two columns. */
+.pz-themes { margin: 0; padding: 0; list-style: none; width: 100%; display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(10px, 1.8vh, 20px) clamp(20px, 3vw, 48px); counter-reset: pzt; }
+.pz-themes li { counter-increment: pzt; display: grid; grid-template-columns: 2.1ch minmax(0, 1fr); gap: .6em; align-items: baseline; font-size: clamp(17px, 1.5vw, 27px); font-weight: 500; line-height: 1.2; }
+.pz-themes li::before { content: counter(pzt); font-family: var(--pz-display); font-weight: 700; color: var(--pz-muted); text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Quotes: white cards, the theme above, the verbatim words, then who and where. */
+.pz-quotes { display: grid; gap: clamp(10px, 1.6vh, 18px); width: 100%; max-width: 44rem; }
+.pz-quotes figure { margin: 0; padding: clamp(16px, 1.8vw, 26px) clamp(18px, 2vw, 30px); border-radius: 22px; background: #FFFFFF; color: #100A06; box-shadow: 0 1px 2px rgba(16,10,6,.08), 0 10px 30px -14px rgba(16,10,6,.3); }
+.pz-quotes figcaption { font-size: clamp(13px, 1vw, 16px); font-weight: 600; color: #59534D; }
+.pz-quotes blockquote { margin: .4em 0 0; font-size: clamp(17px, 1.45vw, 26px); line-height: 1.3; font-weight: 500; text-indent: -.4em; text-wrap: pretty; }
+.pz-quotes p { margin: .55em 0 0; font-size: clamp(13px, 1vw, 16px); color: #59534D; }
+
+/* Two columns of short lines on white cards (pains and gains). */
+.pz-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 1.4vw, 20px); width: 100%; }
+.pz-cols section { padding: clamp(18px, 2vw, 30px); border-radius: 24px; background: #FFFFFF; color: #100A06; box-shadow: 0 1px 2px rgba(16,10,6,.08), 0 10px 30px -14px rgba(16,10,6,.3); }
+.pz-cols h3 { margin: 0; font-family: var(--pz-display); font-weight: 700; font-size: clamp(24px, 2.2vw, 40px); line-height: 1; }
+.pz-cols ul { margin: clamp(12px, 1.6vh, 20px) 0 0; padding: 0; list-style: none; display: grid; gap: .55em; font-size: clamp(17px, 1.5vw, 26px); line-height: 1.3; }
+.pz-cols li { position: relative; padding-left: 1em; text-wrap: pretty; }
+.pz-cols li::before { content: ""; position: absolute; left: 0; top: .5em; width: .4em; height: .4em; border-radius: 0 0 .2em .2em; background: currentColor; }
+
+/* The proto-persona map: a white panel, the stages as rules, one tile-coloured circle per cluster sized by its posts. */
+.pz-pmap { margin: 0; width: 100%; padding: clamp(16px, 1.8vw, 28px); border-radius: 24px; background: #FFFFFF; color: #100A06; box-shadow: 0 1px 2px rgba(16,10,6,.08), 0 10px 30px -14px rgba(16,10,6,.3); }
+.pz-pm-plot { position: relative; aspect-ratio: 4 / 3; border-left: 2px solid #857D72; border-bottom: 2px solid #857D72; }
+.pz-pm-y { display: block; margin-bottom: 8px; font-size: clamp(13px, 1vw, 16px); font-weight: 600; color: #100A06; }
+.pz-pm-tick { position: absolute; left: 10px; right: 0; transform: translateY(-100%); padding-bottom: 3px; border-bottom: 1px solid #E4DED6; font-size: clamp(12px, .95vw, 15px); color: #59534D; white-space: nowrap; }
+.pz-pm-tick i { font-style: normal; font-weight: 600; color: #100A06; margin-left: .6em; }
+.pz-pm-c { position: absolute; display: grid; place-content: center; justify-items: center; width: calc(var(--d) / 100 * clamp(110px, 24%, 170px)); aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%); font-size: clamp(13px, 1vw, 17px); line-height: 1.15; font-variant-numeric: tabular-nums; }
+.pz-pm-c b { font-family: var(--pz-display); font-weight: 700; font-size: clamp(16px, 1.4vw, 24px); }
+.pz-pm-plot .pz-pm-c:is(.is-lavender) { left: min(85.3%, calc(100% - 58px)) !important; }
+.pz-pm-c.is-lavender { background: #D7CCFE; box-shadow: inset 0 0 0 2px #3D35B8; }
+.pz-pm-c.is-butter { background: #E7D48F; box-shadow: inset 0 0 0 2px #53430D; }
+.pz-pm-c.is-pistachio { background: #C5DEAE; box-shadow: inset 0 0 0 2px #384D1A; }
+.pz-pmap figcaption { display: flex; justify-content: space-between; gap: 8px; margin-top: 8px; font-size: clamp(12px, .95vw, 15px); color: #59534D; }
+.pz-pmap figcaption span:nth-child(2) { font-weight: 600; color: #100A06; }
+
+/* Options: three cards side by side; the chosen one is outlined in the slide's ink and carries a badge. */
+.pz-options { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 1.2vw, 18px); width: 100%; }
+.pz-options li { position: relative; display: flex; flex-direction: column; gap: .5em; padding: clamp(18px, 1.8vw, 28px); padding-top: clamp(44px, 5.5vh, 60px); border-radius: 24px; background: #FFFFFF; color: #100A06; box-shadow: 0 1px 2px rgba(16,10,6,.08), 0 10px 30px -14px rgba(16,10,6,.3); }
+.pz-options li:not(.is-chosen) { background: rgba(255,255,255,.55); box-shadow: inset 0 0 0 1.5px rgba(16,10,6,.18); }
+.pz-options li.is-chosen { box-shadow: 0 0 0 3px #1F6B4C, 0 10px 30px -14px rgba(16,10,6,.3); }
+.pz-options b { font-family: var(--pz-display); font-weight: 700; font-size: clamp(22px, 2vw, 36px); line-height: 1.02; }
+.pz-options span:not(.pz-chosen) { font-size: clamp(15px, 1.2vw, 21px); line-height: 1.3; color: #59534D; text-wrap: pretty; }
+.pz-chosen { position: absolute; top: clamp(14px, 1.6vw, 22px); left: clamp(18px, 1.8vw, 28px); padding: 3px 12px; border-radius: 999px; background: #1F6B4C; color: #FFFFFF; font-size: clamp(13px, 1vw, 16px); font-weight: 600; }
+
+/* Bars: one per scenario on a white panel, the cost as a dashed line, and the projection badge above. */
+.pz-bars { position: relative; margin: 0; width: 100%; padding: clamp(18px, 2vw, 30px); padding-top: clamp(68px, 9vh, 88px); border-radius: 24px; background: #FFFFFF; color: #100A06; box-shadow: 0 1px 2px rgba(16,10,6,.08), 0 10px 30px -14px rgba(16,10,6,.3); }
+.pz-badge { position: absolute; top: clamp(16px, 1.8vw, 24px); left: clamp(18px, 2vw, 30px); padding: 3px 12px; border: 1.5px dashed #59534D; border-radius: 999px; font-size: clamp(13px, 1vw, 16px); font-weight: 600; color: #3B3631; }
+.pz-bars-plot { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: clamp(12px, 2vh, 20px) clamp(12px, 1.4vw, 20px); align-items: center; padding-bottom: 36px; font-size: clamp(16px, 1.4vw, 24px); }
+.pz-bar-name { font-weight: 500; line-height: 1.2; }
+.pz-bar-track { grid-column: 2; display: flex; align-items: center; gap: 20px; height: clamp(32px, 4.4vh, 48px); padding-right: 5.5em; }
+.pz-bar-track i { display: block; height: 100%; min-width: 3px; flex: none; border-radius: 0 8px 8px 0; background: #7C6CA8; }
+.pz-bar-track.is-strong i { background: #3D35B8; }
+.pz-bar-track em { margin-right: -5.5em; font-style: normal; font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.pz-bars-scale { grid-column: 2; position: relative; align-self: stretch; margin-right: 5.5em; pointer-events: none; }
+.pz-bars-line { position: absolute; top: -8px; bottom: -36px; border-left: 2px dashed #B3261E; }
+.pz-bars-line span { position: absolute; bottom: 4px; right: 8px; white-space: nowrap; font-size: clamp(13px, 1vw, 16px); font-weight: 600; color: #8C1D18; }
+
 /* Chrome: where you are, how far along, and the way out. Its colours follow the slide's theme. */
 .pz-chrome { position: absolute; z-index: 5; left: var(--pz-pad-x); right: var(--pz-pad-x); bottom: max(16px, env(safe-area-inset-bottom, 0px)); height: 48px; display: flex; align-items: center; gap: clamp(12px, 2vw, 28px); color: var(--pz-fg); transition: color .32s ease; pointer-events: none; }
 .pz-chrome > * { pointer-events: auto; }
-.pz-where { flex: 0 0 9.5rem; font-size: 15px; font-weight: 500; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.pz-where { flex: 0 0 13rem; font-size: 15px; font-weight: 500; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .pz-progress { flex: 1 1 auto; max-width: 440px; display: flex; align-items: center; gap: 3px; height: 24px; cursor: pointer; }
 .pz-progress i { flex: 1 1 0; height: 4px; border-radius: 0 0 3px 3px; background: var(--pz-track); transition: background-color .3s ease, height .3s ease; }
 .pz-progress i.is-start { margin-left: 9px; }
@@ -206,6 +277,18 @@ html.pz-lock, html.pz-lock body { overflow: hidden; }
   .pz-slide.media-below .pz-text { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .pz-slide.media-below .pz-lines { margin-top: 20px; }
   .pz-hub-core { grid-auto-flow: column; justify-content: start; align-items: center; padding: 14px 18px; }
+  .pz-steps { grid-auto-flow: row; gap: 0; }
+  .pz-steps li { padding: 4px 0 18px 52px; min-height: 76px; }
+  .pz-steps li:last-child { padding-bottom: 0; }
+  .pz-steps li::before { width: 36px; }
+  .pz-steps li::after { top: 42px; bottom: 4px; left: 12px; right: auto; width: 12px; height: auto;
+    clip-path: polygon(5px 0, 7px 0, 7px calc(100% - 9px), 12px calc(100% - 9px), 6px 100%, 0 calc(100% - 9px), 5px calc(100% - 9px)); }
+  .pz-cols { grid-template-columns: minmax(0, 1fr); }
+  .pz-options { grid-template-columns: minmax(0, 1fr); }
+  .pz-options li { padding-top: clamp(18px, 1.8vw, 28px); }
+  .pz-chosen { position: static; align-self: flex-start; }
+  .pz-bars-plot { grid-template-columns: minmax(0, 6.5em) minmax(0, 1fr); font-size: 15px; }
+  .pz-pm-plot { aspect-ratio: 1 / 1; }
 }
 @media (max-height: 520px) and (min-aspect-ratio: 4/5) {
   .pz-phone, [data-pz-theme="night"] .pz-phone { box-shadow: 0 0 0 2px #575859, 0 30px 70px -24px rgba(0,0,0,.9); }

@@ -6,64 +6,67 @@
       "block": {
         "title": "The case",
         "pt": "O case",
-        "sub": "The walkthrough, in order",
-        "sub_pt": "O percurso, na ordem"
+        "sub": "The case in six sections, the order of the deck",
+        "sub_pt": "O case em seis seções, na ordem dos slides",
+        "present": true
       },
       "items": [
         {
           "id": "case-overview",
-          "title": "Overview",
+          "title": "0 · Overview",
           "src": "docs/case/index.md",
-          "pt": "Visão geral"
+          "pt": "0 · Visão geral"
         },
         {
           "id": "case-discovery",
-          "title": "Discovery",
+          "title": "1 · Discovery",
           "src": "docs/case/discovery.md",
-          "pt": "Descoberta"
+          "pt": "1 · Descoberta"
         },
         {
           "id": "case-concept",
-          "title": "Concept",
+          "title": "2 · Concept",
           "src": "docs/case/concept.md",
-          "pt": "Conceito"
+          "pt": "2 · Conceito"
         },
         {
           "id": "case-viability",
-          "title": "Value and viability",
+          "title": "3 · Value and viability",
           "src": "docs/case/viability.md",
-          "pt": "Valor e viabilidade"
+          "pt": "3 · Valor e viabilidade"
         },
         {
           "id": "case-how-i-built",
-          "title": "How I built it",
+          "title": "4 · How I built it",
           "src": "docs/case/how-i-built.md",
-          "pt": "Como construí"
+          "pt": "4 · Como construí"
         },
         {
           "id": "case-product",
-          "title": "The product",
+          "title": "5 · The prototype",
+          "pt": "5 · O protótipo",
           "src": "docs/case/product.md",
-          "pt": "O produto"
-        },
-        {
-          "id": "case-features",
-          "title": "Features",
-          "src": "docs/case/features.md",
-          "pt": "Funcionalidades"
-        },
-        {
-          "id": "prototype",
-          "title": "Prototype",
-          "pt": "Protótipo",
-          "src": "docs/deliver/prototype.md",
-          "embed": "app-web/index.html"
+          "children": [
+            {
+              "id": "case-features",
+              "title": "Features",
+              "src": "docs/case/features.md",
+              "pt": "Funcionalidades"
+            },
+            {
+              "id": "prototype",
+              "title": "Live prototype",
+              "pt": "Protótipo ao vivo",
+              "src": "docs/deliver/prototype.md",
+              "embed": "app-web/index.html"
+            }
+          ]
         },
         {
           "id": "case-next",
-          "title": "What I'll test next",
+          "title": "6 · What I'll test next",
           "src": "docs/case/next.md",
-          "pt": "O que vou testar a seguir"
+          "pt": "6 · O que vou testar a seguir"
         }
       ]
     },

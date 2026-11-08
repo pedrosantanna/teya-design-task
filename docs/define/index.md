@@ -19,6 +19,8 @@ Trade-offs:
 - Ruth is not served. Leaving her out is my scope choice: the concept follows Sam's and Jess's needs. Her persona came from three online posts, so which channel she'd prefer and how far she'd take up a digital tool are open questions (A13). A WhatsApp channel is the closest the concept gets to her.
 ```
 
+<div class="dg dg-chain dg-hub"><div class="dg-box"><b>Shoppers in the area</b><div class="dg-list"><span>Sam: eclipse glasses by 4pm</span><span>Jess: a sourdough she can collect after 6</span><small>and every other ask nearby</small></div></div><div class="dg-arrow is-both">ask · answers</div><div class="dg-box"><b>Snuffle</b><div class="dg-list"><span>Understands the ask</span><span>Picks the likely shops and asks them all at once</span><span>Brings back each answer, labelled by source</span></div></div><div class="dg-arrow is-both">request · reply</div><div class="dg-box"><b>Shops within reach</b><div class="dg-list"><span>Broadway Chemist <span class="dg-tag">Till</span></span><span>Paper &amp; Co <span class="dg-tag">WhatsApp</span></span><span>Rossi's Bakery <span class="dg-tag">WhatsApp</span></span></div></div></div>
+
 ## How it works
 
 1. **Ask.** The shopper says what they need, where (here, or where they'll be) and by when: "eclipse glasses today near Hammersmith". They can also ask ahead ("tell me when the bakery has rye") and leave it with the concierge. Browsing shops and categories stays available for when there's no specific item in mind.

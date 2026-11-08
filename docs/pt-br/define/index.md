@@ -19,6 +19,8 @@ Trade-offs:
 - A Ruth não é atendida. Deixá-la de fora é uma escolha minha de escopo: o conceito segue as necessidades do Sam e da Jess. A persona dela veio de três posts online, então o canal que ela preferiria e até que ponto adotaria uma ferramenta digital são perguntas em aberto (A13). Um canal no WhatsApp é o mais perto que o conceito chega dela.
 ```
 
+<div class="dg dg-chain dg-hub"><div class="dg-box"><b>Compradores na área</b><div class="dg-list"><span>Sam: óculos para eclipse até as 16h</span><span>Jess: um pão de fermentação natural que ela possa retirar depois das 18h</span><small>e todo outro pedido por perto</small></div></div><div class="dg-arrow is-both">pedido · respostas</div><div class="dg-box"><b>Snuffle</b><div class="dg-list"><span>Entende o pedido</span><span>Escolhe as lojas prováveis e pergunta a todas de uma vez</span><span>Traz cada resposta, com a fonte indicada</span></div></div><div class="dg-arrow is-both">pergunta · resposta</div><div class="dg-box"><b>Lojas ao alcance</b><div class="dg-list"><span>Broadway Chemist <span class="dg-tag">Caixa</span></span><span>Paper &amp; Co <span class="dg-tag">WhatsApp</span></span><span>Rossi's Bakery <span class="dg-tag">WhatsApp</span></span></div></div></div>
+
 ## Como funciona
 
 1. **Pedir.** O comprador diz do que precisa, onde (aqui, ou onde vai estar) e até quando: "óculos para eclipse hoje perto de Hammersmith". Ele também pode pedir com antecedência ("me avisa quando a padaria tiver pão de centeio") e deixar o pedido com o concierge. Explorar lojas e categorias continua disponível para quando não há um item específico em mente.

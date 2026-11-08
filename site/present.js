@@ -1,6 +1,6 @@
 /* Presentation mode for "The case".
    Slides come from docs/case/slides.json, so their text can change without touching this file.
-   Open with the Present button in the top bar, P (on pages without a canvas) or Shift+P (anywhere).
+   Open with the Present button at the top of the case's block in the sidebar, P (on pages without a canvas) or Shift+P (anywhere).
    Move with the arrow keys, Space, Page Up/Down, Home/End, a click (left third goes back) or a swipe.
    Esc closes. F toggles the browser's full screen. The slide number lives in the hash as #present-N. */
 (() => {
@@ -52,7 +52,25 @@
       }
       case 'answer': return `<div class="pz-answer" role="img" aria-label="${esc(`An answer card: ${m.shop}, ${m.line}, ${(m.meta || []).join(', ')}, with ${m.action}`)}"><span class="pz-answer-src">${esc(m.source)}</span><h3>${esc(m.shop)}</h3><p>${esc(m.line)}</p><ul>${(m.meta || []).map(x => `<li>${esc(x)}</li>`).join('')}</ul><div class="pz-answer-buy">${esc(m.action)}</div></div>`;
       case 'chain': return `<ol class="pz-chain">${m.items.map(i => `<li><b>${esc(i.name)}</b><span>${esc(i.text)}</span></li>`).join('')}</ol>`;
+      case 'steps': return `<ol class="pz-steps" aria-label="${esc(m.label || 'Steps, in order')}">${m.items.map((i, k) => `<li${k === m.items.length - 1 ? ' class="is-end"' : ''}><b>${esc(i.name)}</b><span>${esc(i.text || '')}</span></li>`).join('')}</ol>`;
+      case 'themes': return `<ol class="pz-themes">${m.items.map(i => `<li>${esc(i)}</li>`).join('')}</ol>`;
+      case 'quotes': return `<div class="pz-quotes">${m.items.map(q => `<figure><figcaption>${esc(q.theme)}</figcaption><blockquote lang="en">“${esc(q.text)}”</blockquote><p>${esc(q.who)}</p></figure>`).join('')}</div>`;
+      case 'columns': return `<div class="pz-cols">${m.items.map(c => `<section><h3>${esc(c.title)}</h3><ul>${c.lines.map(l => `<li>${esc(l)}</li>`).join('')}</ul></section>`).join('')}</div>`;
+      case 'pmap': {
+        // The proto-persona map, simplified: one circle per cluster at its centre (urgency 0–10 across, stage 10 = find out at the top), sized by its posts.
+        const y = v => 12 + (1 - v / 10) * 76, x = v => 8 + v / 10 * 84;
+        const ticks = (m.ticks || []).map(t => `<span class="pz-pm-tick" style="top:${y(t.y)}%">${esc(t.label)}${t.note ? `<i>${esc(t.note)}</i>` : ''}</span>`).join('');
+        const max = Math.max(...m.clusters.map(c => c.n));
+        const dots = m.clusters.map(c => `<span class="pz-pm-c is-${esc(c.tile)}" style="left:${x(c.x).toFixed(1)}%;top:${y(c.y).toFixed(1)}%;--d:${(Math.sqrt(c.n / max) * 100).toFixed(0)}"><b>${esc(c.name)}</b>${esc(c.n)}</span>`).join('');
+        return `<figure class="pz-pmap" role="img" aria-label="${esc(m.alt || '')}"><span class="pz-pm-y">${esc(m.yLabel)}</span><div class="pz-pm-plot">${ticks}${dots}</div><figcaption><span>${esc(m.xMin)}</span><span>${esc(m.xLabel)}</span><span>${esc(m.xMax)}</span></figcaption></figure>`;
+      }
       case 'gallery': return `<div class="pz-gallery">${m.mark ? `<div class="is-mark">${MARK}</div>` : ''}${m.items.map(i => `<div class="is-${esc(i.tile)}">${lazyImg(i.src, '', '')}</div>`).join('')}</div>`;
+      case 'options': return `<ol class="pz-options">${m.items.map(o => `<li${o.chosen ? ' class="is-chosen"' : ''}>${o.chosen ? `<span class="pz-chosen">${esc(o.badge || 'Chosen')}</span>` : ''}<b>${esc(o.name)}</b><span>${esc(o.text)}</span></li>`).join('')}</ol>`;
+      case 'bars': {
+        // A bar per scenario on one scale, with the cost as a dashed line across them and the projection badge on top.
+        const max = m.max, pct = v => (v / max * 100).toFixed(1);
+        return `<figure class="pz-bars" role="img" aria-label="${esc(m.alt || '')}"><span class="pz-badge">${esc(m.badge)}</span><div class="pz-bars-plot">${m.items.map((b, k) => `<span class="pz-bar-name" style="grid-row:${k + 1}">${esc(b.name)}</span><span class="pz-bar-track${b.strong ? ' is-strong' : ''}" style="grid-row:${k + 1}"><i style="width:${pct(b.value)}%"></i><em>${esc(b.label)}</em></span>`).join('')}<span class="pz-bars-scale" style="grid-row:1 / span ${m.items.length}"><span class="pz-bars-line" style="left:${pct(m.line.value)}%"><span>${esc(m.line.label)}</span></span></span></div></figure>`;
+      }
       default: return '';
     }
   }
@@ -60,20 +78,20 @@
   function slideHTML(s, i, n, partOf) {
     const L = s.layout || 'points';
     let text = '';
-    if (L === 'section') text = `<p class="pz-part">Part ${esc(s.number)} of ${partOf}</p><h2 class="pz-title">${esc(s.title)}</h2>${lines(s.lines)}`;
+    if (L === 'section') text = `<p class="pz-part"><span class="pz-sr">Section </span>${esc(s.number)}<span class="pz-sr"> of ${partOf}</span></p><h2 class="pz-title">${esc(s.title)}</h2>${lines(s.lines)}`;
     else if (L === 'close') text = `${MARK}<h2 class="pz-title">${esc(s.title)}</h2>${lines(s.lines)}`;
     else if (L === 'stats') text = `<h2 class="pz-title">${esc(s.title)}</h2><dl class="pz-stats">${(s.stats || []).map(x => `<div class="pz-stat"><dt class="pz-sr">${esc(x.label)}</dt><dd style="margin:0"><b>${esc(x.value)}</b><span aria-hidden="true">${esc(x.label)}</span></dd></div>`).join('')}</dl>${lines(s.lines)}`;
     else if (L === 'rows') text = `<h2 class="pz-title">${esc(s.title)}</h2><ul class="pz-rows">${(s.rows || []).map(r => `<li class="pz-row"><b>${esc(r.big)}</b><p>${esc(r.text)}${r.note ? `<small>${esc(r.note)}</small>` : ''}</p></li>`).join('')}</ul>`;
     else text = `<h2 class="pz-title">${esc(s.title)}</h2>${lines(s.lines)}`;
     const m = media(s.media);
-    const wide = s.media && s.media.below ? ' media-below' : s.media && ['doc', 'hub'].includes(s.media.type) ? ' media-wide' : '';
+    const wide = s.media && s.media.below ? ' media-below' : s.media && ['doc', 'hub', 'pmap', 'quotes', 'columns', 'options', 'bars'].includes(s.media.type) ? ' media-wide' : '';
     return `<section class="pz-slide${m ? ' has-media' : ''}${wide}" data-pz-theme="${esc(s.theme || 'paper')}" data-layout="${esc(L)}" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${n}: ${esc(s.title)}" inert aria-hidden="true">
       <div class="pz-inner"><div class="pz-text">${text}</div>${m ? `<div class="pz-media">${m}</div>` : ''}</div></section>`;
   }
 
   function build() {
     const list = DATA.slides;
-    const parts = new Set(list.filter(s => s.layout === 'section').map(s => s.number)).size;
+    const parts = Math.max(...list.filter(s => s.layout === 'section').map(s => Number(s.number) || 0));
     root = document.createElement('div');
     root.className = 'pz';
     root.hidden = true;
@@ -299,11 +317,9 @@
   });
 
   function init() {
-    const btn = document.getElementById('present-btn');
-    if (btn) {
-      btn.addEventListener('click', () => open(1));
-      btn.addEventListener('pointerenter', () => { load().catch(() => {}); }, { once: true });
-    }
+    // The button lives in the sidebar, which the docs re-render, so clicks are delegated.
+    document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#present-btn')) open(1); });
+    document.addEventListener('pointerover', e => { if (e.target.closest && e.target.closest('#present-btn')) load().catch(() => {}); });
     const m = HASH.exec(location.hash);
     if (m) open(Number(m[1] || 1), { animate: false });
     // Fetch the slides once the docs are idle, so the first Present opens without waiting on the network.

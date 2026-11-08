@@ -1,10 +1,10 @@
-# O produto
+# O protótipo
 
-Um pedido, respondido pelas lojas, comprado e retirado na mesma conversa.
+Um pedido, respondido pelas lojas, comprado e retirado na mesma conversa. Cada funcionalidade é um clipe curto em [Funcionalidades](features.md), e o [protótipo ao vivo](../deliver/prototype.md) roda o mesmo percurso no navegador.
 
 ## O percurso
 
-O Sam precisa de dois pares de óculos para eclipse até as 16h de segunda, 2 de novembro. Todo beco sem saída no caminho tem um próximo passo.
+Começa pelo pedido. O Sam precisa de dois pares de óculos para eclipse até as 16h de segunda, 2 de novembro, e todo beco sem saída no caminho tem um próximo passo.
 
 <div class="dg dg-journey"><div class="dg-jrow is-head"><span></span><span>Etapa</span><span>Quando não dá certo</span></div><div class="dg-jrow"><time>13:02</time><div class="dg-jstep"><b>Pedido</b>“Eclipse glasses, 2 pairs, before 4pm”, com um bolo para sábado na mesma mensagem</div><div class="dg-jends"><span class="dg-jend">Duas coisas para lojas diferentes: o Snuffle propõe dois pedidos</span></div></div><div class="dg-jrow"><time>13:05</time><div class="dg-jstep"><b>Seis lojas consultadas</b>A Broadway Chemist responde na hora pelo caixa; as outras recebem uma mensagem no WhatsApp</div><div class="dg-jends"><span class="dg-jend">Ninguém tem até as 16h: perguntar mais longe, ou continuar procurando até sexta, 6 de novembro</span></div></div><div class="dg-jrow"><time>13:14</time><div class="dg-jstep"><b>Respostas na conversa</b>A Paper &amp; Co tem, a £14,99 o par, para retirar até segunda, 9 de novembro</div><div class="dg-jends"></div></div><div class="dg-jrow"><time>13:15</time><div class="dg-jstep"><b>Buy</b>O Apple Pay autoriza £29,98; nada é capturado ainda</div><div class="dg-jends"><span class="dg-jend">Pagamento recusado: nenhuma compra, e nenhuma loja é chamada para separar</span></div></div><div class="dg-jrow"><time>13:16</time><div class="dg-jstep"><b>Esperando a loja</b>A Paper &amp; Co tem 10 minutos para separar os pares</div><div class="dg-jends"><span class="dg-jend">Vendido antes: nada é cobrado, 1 par na Broadway Chemist</span><span class="dg-jend">Sem confirmação em 10 minutos: nada é cobrado</span></div></div><div class="dg-jrow"><time>13:19</time><div class="dg-jstep"><b>Separado e cobrado</b>O recibo traz o código K7Q2</div><div class="dg-jends"><span class="dg-jend">Não vai dar: prorrogar uma vez, até segunda, 16 de novembro</span><span class="dg-jend">Não retirado até segunda, 9 de novembro: reembolso integral</span></div></div><div class="dg-jrow"><time>15:42</time><div class="dg-jstep"><b>Retirada</b>O código abre em tela cheia no balcão</div><div class="dg-jends"></div></div></div>
 
@@ -30,16 +30,8 @@ As falas da conversa são o texto de interface do protótipo, em inglês.
 
 Evidência: [fluxo do agente](../develop/ideation/agent-flow.md).
 
-## O lado da loja
-
-As lojas não têm interface para aprender. Cada estado tem a mensagem de WhatsApp que a loja vê, e todo o trabalho da loja são três respostas.
-
-<div class="dg"><div class="dg-chain"><div class="dg-box"><b>Consultada</b>Uma mensagem de template sobre um item, com prazo</div><div class="dg-arrow">responde <span>“1 £14.99”</span></div><div class="dg-box"><b>Comprado</b>£29,98 autorizados; separar para K7Q2 em até 10 minutos</div><div class="dg-arrow">responde <span>“done”</span></div><div class="dg-box"><b>Separado e cobrado</b>Guardado até a data de retirada</div><div class="dg-arrow">lê o código</div><div class="dg-box"><b>Retirado</b>Quem comprou pode avaliar a loja</div></div><div class="dg-cap">Quando não dá certo</div><div class="dg-cols"><div class="dg-box is-dashed"><b>Sem resposta em 10 minutos</b><small>↳ de Consultada</small>A linha mostra No reply; uma resposta atrasada ainda conta como demanda</div><div class="dg-box is-dashed"><b>Vendido, ou sem “done” a tempo</b><small>↳ de Comprado</small>A autorização cai e ninguém é cobrado</div><div class="dg-box is-dashed"><b>Não retirado até a data</b><small>↳ de Separado</small>Cancelado, reembolsado e de volta à venda</div></div></div>
-
-Evidência: [estados do pedido na loja](../develop/ideation/shop-states.md), [blueprint de serviço](../define/blueprint.md).
-
 ## Construído e só desenhado
 
 <div class="dg dg-cols"><div class="dg-box"><b>Construído no protótipo</b><ul><li>O caminho do Sam do pedido ao código, com todos os caminhos de falha</li><li>A Jess retirando depois do trabalho</li><li>Páginas de loja com avaliações</li><li>42 lojas inventadas em ruas reais</li><li>iOS e Android, claro e escuro</li></ul></div><div class="dg-box is-dashed"><b>Só desenhado</b><ul><li>Um pedido semanal</li><li>Uma pergunta quando faltam quantidade ou prazo</li><li>Um pedido fora da área</li><li>Falhas depois da cobrança</li><li>Uma resposta da loja do seu próprio jeito</li></ul></div></div>
 
-Cada funcionalidade, como um clipe curto, está na página seguinte: [funcionalidades](features.md).
+O que a loja vê no mesmo percurso está em "O lado da loja", no [Conceito](concept.md).
