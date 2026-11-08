@@ -272,6 +272,9 @@ Pedi que os dois blocos do menu recolhessem e parecessem áreas grandes, que "Ha
 ### 80. Um plano de medição, definido e não construído
 Pedi uma etapa de verificação no harness: como cada hipótese será testada, a telemetria como eventos (documentada, não construída), as tarefas e o que significam sucesso e tempo na tarefa, métricas de produto até a oferta e demanda por área e por comprador, e se NPS ou CSAT fazem sentido. Um agente derivou as tarefas e 47 eventos dos estados do modelo e da simulação, separou o tempo na tarefa em esforço do comprador e espera pela loja, montou um modelo de liquidez com as premissas que já estavam nos docs mais três dele (cada uma marcada), conferiu as contas num script e abriu a única fonte externa que cita (a orientação do ICO); um primeiro link do ICO estava quebrado e foi descartado. Ele recomendou nem NPS nem CSAT permanente, o que batia com a minha inclinação (decisão 067).
 
+### 81. O valor para as lojas ao lado da receita
+Pedi que a página de receita dissesse com mais clareza o que o app vale para as lojas: um canal de aquisição e um motivo para adotar e manter o POS do provedor, porque o POS passa a vender para compradores que não estão na loja. Pedi para deixar a gestão de estoque de fora. Um agente acrescentou a seção em EN e PT, renomeou a página para Valor e receita, levou o ponto para a página Viabilidade do case e tirou da seção de cenário de rede uma menção a respostas a partir do estoque do caixa.
+
 ## Falhas da IA
 
 - Um primeiro rascunho de personas parecia pronto, mas era circular, porque o agente o construiu antes de o método estar certo. O agente revisor percebeu; o agente que o escreveu, não.

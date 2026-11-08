@@ -1,6 +1,6 @@
 # Hipóteses
 
-O conceito se apoia em dezenove hipóteses. A maioria vem de uma suposição ou pergunta em aberto da [conclusão do Discover](../discover/conclusion.md); quatro vêm dos meus motivos para fazer do concierge um agente, cinco da forma como ele ganha dinheiro ([receita](revenue.md)) e três das avaliações na página da loja (decisão 047). Cada uma tem um teste. Dezesseis têm um critério de aprovação definido antes do teste; a H10, a H11 e a H16 são exploratórias e registram uma divisão ou uma contagem que define uma ordem ou um tamanho. Estão ordenadas por risco: o tamanho do estrago no conceito se a hipótese estiver errada, e o pouco de evidência que existe hoje.
+O conceito se apoia em dezenove hipóteses. A maioria vem de uma suposição ou pergunta em aberto da [conclusão do Discover](../discover/conclusion.md); quatro vêm dos meus motivos para fazer do concierge um agente, cinco da forma como ele ganha dinheiro ([valor e receita](revenue.md)) e três das avaliações na página da loja (decisão 047). Cada uma tem um teste. Dezesseis têm um critério de aprovação definido antes do teste; a H10, a H11 e a H16 são exploratórias e registram uma divisão ou uma contagem que define uma ordem ou um tamanho. Estão ordenadas por risco: o tamanho do estrago no conceito se a hipótese estiver errada, e o pouco de evidência que existe hoje.
 
 ```summary
 Takeaways:

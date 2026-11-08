@@ -6,6 +6,10 @@ Uma projeção para dimensionar a oportunidade: sem comissão sobre a venda, com
 
 Responder a uma mensagem, separar o item e entregar. Uma loja conectada responde pelo caixa; uma loja consultada responde no WhatsApp. Nos dois casos ela não aprende nenhuma ferramenta nova. Cada pedido também registra o que as pessoas por perto pediram, inclusive o que a loja não tinha, e isso pode voltar para a loja como um resumo semanal de demanda (H9).
 
+## O que uma loja ganha
+
+Para a loja, o app é um canal de aquisição: traz compradores que não teriam entrado na loja, sem anúncio e sem parte da venda. Ele também leva o POS para além do balcão, então a loja vende para quem não está dentro dela. Esse valor, mais do que as taxas, é o motivo para adotar o POS do provedor e continuar com ele.
+
 ## Como gera dinheiro
 
 Defini o modelo de negócio como um cenário: um provedor de pagamento com POS próprio é dono do Snuffle (decisão 023). Apps de entrega cobram uma comissão relatada de 14 a 35%, o custo de que as independentes reclamam, então descartei comissão. A receita vem de três lugares:
@@ -33,4 +37,4 @@ A entrada em que menos confio é quanto dessa adesão o app causa. Ela está em 
 - Uma rua com poucas lojas respondendo dá poucas respostas e nenhuma confiança.
 - Um sim errado, de uma loja ou de um agente que entende mal o pedido, custa a confiança em que o conceito se apoia.
 
-Evidência: [receita](../define/revenue.md), [estimativa de receita](../define/revenue-estimate.md), [conceito](../define/index.md).
+Evidência: [valor e receita](../define/revenue.md), [estimativa de receita](../define/revenue-estimate.md), [conceito](../define/index.md).

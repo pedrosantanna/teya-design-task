@@ -1,6 +1,6 @@
 # Hypotheses
 
-The concept rests on nineteen hypotheses. Most come from an assumption or open question in the [Discover conclusion](../discover/conclusion.md); four come from my reasons for making the concierge an agent, five from how it makes money ([revenue](revenue.md)) and three from ratings on the shop page (decision 047). Each has a test. Sixteen have a pass mark set before testing; H10, H11 and H16 are exploratory and record a split or a count that sets an order or a size. They are ordered by risk: how badly the concept fails if the hypothesis is wrong, and how little evidence there is today.
+The concept rests on nineteen hypotheses. Most come from an assumption or open question in the [Discover conclusion](../discover/conclusion.md); four come from my reasons for making the concierge an agent, five from how it makes money ([value and revenue](revenue.md)) and three from ratings on the shop page (decision 047). Each has a test. Sixteen have a pass mark set before testing; H10, H11 and H16 are exploratory and record a split or a count that sets an order or a size. They are ordered by risk: how badly the concept fails if the hypothesis is wrong, and how little evidence there is today.
 
 ```summary
 Takeaways:

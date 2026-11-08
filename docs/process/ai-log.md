@@ -272,6 +272,9 @@ I asked for the sidebar's two blocks to collapse and to read as large areas, for
 ### 80. A measurement plan, defined and not built
 I asked for a verification step in the harness: how each hypothesis will be tested, the telemetry as events (documented, not built), the tasks and what task success and time on task mean, product metrics down to the supply and demand by area and per shopper, and whether NPS or CSAT make sense. An agent derived the tasks and 47 events from the model's states and the simulation, split time on task into the shopper's effort and the wait for the shop, built a liquidity model from the assumptions already in the docs plus three of its own (each labelled), checked the arithmetic in a script, and opened the one outside source it cites (the ICO's guidance); a first ICO link was dead and was dropped. It recommended no NPS and no standing CSAT, which matched my lean (decision 067).
 
+### 81. Value to shops beside the revenue
+I asked for the revenue page to say more clearly what the app is worth to shops: an acquisition channel, and a reason to take and keep the provider's POS, because the POS now sells to shoppers who aren't in the shop. I asked to leave stock management out. An agent added the section in EN and PT, renamed the page to Value and revenue, added the point to the case's Viability page and removed a mention of answers from till stock from the network scenario.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.

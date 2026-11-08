@@ -106,7 +106,7 @@ The brief asks for what's missing to be assumed and written down.
 - **Data.** Till data with item detail exists for a minority of shops and is used where it does; everything else is a question to the shop.
 - **Channels.** The app comes first. WhatsApp and an MCP connection for other assistants reuse the same agents later.
 - **Logistics.** Collection is the default. Delivery uses a courier the shop or the concierge books, one shop at a time; a basket across shops is out of scope for the prototype.
-- **Business model.** The concierge belongs to a payment provider with its own POS. Revenue comes from payments made in the app, from shops joining the provider's network, and from promotion, with no commission on the sale. See [revenue](revenue.md).
+- **Business model.** The concierge belongs to a payment provider with its own POS. Revenue comes from payments made in the app, from shops joining the provider's network, and from promotion, with no commission on the sale. See [value and revenue](revenue.md).
 
 ## Risks
 

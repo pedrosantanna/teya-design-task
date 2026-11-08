@@ -106,7 +106,7 @@ O brief pede que o que falta seja suposto e registrado.
 - **Dados.** Dados de caixa com detalhe por item existem para uma minoria das lojas e são usados onde existem; todo o resto vira uma pergunta à loja.
 - **Canais.** O app vem primeiro. O WhatsApp e uma conexão MCP para outros assistentes reaproveitam os mesmos agentes depois.
 - **Logística.** A retirada é o padrão. A entrega usa um entregador que a loja ou o concierge chama, uma loja por vez; uma cesta com várias lojas fica fora do escopo do protótipo.
-- **Modelo de negócio.** O concierge pertence a um provedor de pagamento com POS próprio. A receita vem dos pagamentos feitos no app, das lojas que entram na rede do provedor e do destaque pago, sem comissão sobre a venda. Veja [receita](revenue.md).
+- **Modelo de negócio.** O concierge pertence a um provedor de pagamento com POS próprio. A receita vem dos pagamentos feitos no app, das lojas que entram na rede do provedor e do destaque pago, sem comissão sobre a venda. Veja [valor e receita](revenue.md).
 
 ## Riscos
 

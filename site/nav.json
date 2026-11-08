@@ -229,9 +229,9 @@
         },
         {
           "id": "revenue",
-          "title": "Revenue",
+          "title": "Value and revenue",
           "src": "docs/define/revenue.md",
-          "pt": "Receita"
+          "pt": "Valor e receita"
         },
         {
           "id": "revenue-estimate",

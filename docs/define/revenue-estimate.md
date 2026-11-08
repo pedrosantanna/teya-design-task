@@ -1,6 +1,6 @@
 # Revenue estimate
 
-A basic projection of what Snuffle could earn a month and a year in London and in the UK, built from public benchmarks. It follows the three sources in [Revenue](revenue.md): payments in the app, shops that join the provider's POS because of the app, and promotion. There is no commission. These are estimates to frame the opportunity and to show which inputs matter, not forecasts.
+A basic projection of what Snuffle could earn a month and a year in London and in the UK, built from public benchmarks. It follows the three sources in [Value and revenue](revenue.md): payments in the app, shops that join the provider's POS because of the app, and promotion. There is no commission. These are estimates to frame the opportunity and to show which inputs matter, not forecasts.
 
 ```summary
 Takeaways:

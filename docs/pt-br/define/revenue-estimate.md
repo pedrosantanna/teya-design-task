@@ -1,6 +1,6 @@
 # Estimativa de receita
 
-Uma projeção básica do que o Snuffle poderia ganhar por mês e por ano em Londres e no Reino Unido, montada a partir de referências públicas. Ela segue as três fontes de [Receita](revenue.md): pagamentos no app, lojas que entram no POS do provedor por causa do app e destaque pago. Não há comissão. São estimativas para enquadrar a oportunidade e mostrar quais entradas pesam, não previsões.
+Uma projeção básica do que o Snuffle poderia ganhar por mês e por ano em Londres e no Reino Unido, montada a partir de referências públicas. Ela segue as três fontes de [Valor e receita](revenue.md): pagamentos no app, lojas que entram no POS do provedor por causa do app e destaque pago. Não há comissão. São estimativas para enquadrar a oportunidade e mostrar quais entradas pesam, não previsões.
 
 ```summary
 Takeaways:

@@ -1,17 +1,18 @@
-# Receita
+# Valor e receita
 
-Como o produto ganha dinheiro, escrito como hipóteses. O conceito responde aos problemas de quem compra e do lojista, e também precisa se pagar. Trabalho com um cenário: o concierge pertence a um provedor de pagamento com POS próprio, como a Teya. A receita vem dos pagamentos, de trazer lojas para a rede do provedor e do destaque pago.
+O que o produto vale para as lojas e como ganha dinheiro, escrito como hipóteses. O conceito responde aos problemas de quem compra e do lojista, e também precisa se pagar. Trabalho com um cenário: o concierge pertence a um provedor de pagamento com POS próprio, como a Teya. A receita vem dos pagamentos, de trazer lojas para a rede do provedor e do destaque pago.
 
 ```summary
 Takeaways:
 - A fonte principal são os pagamentos. Toda reserva, pedido pré-pago e entrega é paga no app, então o provedor processa uma compra que de outro jeito seria em dinheiro vivo ou na maquininha de outra empresa.
 - O app também dá ao provedor um motivo para as lojas entrarem no seu POS: receber esses pagamentos e esses compradores. Cada loja nova traz todas as suas vendas, não só as do app.
 - O destaque pago é a terceira fonte: posição paga na tela inicial e alcance além da rua da própria loja.
-- Para um provedor de POS, o app agrega valor à rede inteira: mais compradores para as lojas que já usam o seu POS, o que faz o POS valer a pena de manter.
+- O valor para as lojas vai além das taxas. Para uma loja pequena, o app é um canal de aquisição próprio, sem anúncio e sem comissão. Ele também leva o POS para além do balcão: a loja vende para quem não está dentro dela. Isso é um motivo para adotar o POS do provedor e para continuar com ele.
 Call:
 - Defini o cenário: um provedor de pagamento com POS próprio (decisão 023). Um app independente precisaria de comissão, e escolhi não explorar esse caminho.
 - Descartei comissão sobre a venda. Os apps de delivery cobram 14–35% (F9), e é desse custo que as lojas independentes reclamam. A receita vem do pagamento e do destaque pago, que a loja pode desligar.
 - Deixei por enquanto fora das hipóteses as duas fontes extras que o agente sugeriu.
+- Pedi que o valor para as lojas ficasse ao lado da receita, porque é ele que faz uma loja entrar e ficar. Deixei a gestão de estoque fora do argumento.
 AI:
 - Eu defini as fontes de receita e o cenário de rede. Um agente as escreveu como hipóteses com testes na prova de conceito e sugeriu mais duas fontes, listadas no fim.
 Trade-offs:
@@ -28,12 +29,20 @@ Trade-offs:
 | Destaque pago | Uma loja paga para aparecer na tela inicial ("Open near you", "New nearby") ou para alcançar compradores além da própria rua, por exemplo uma loja da Goldhawk Road mostrada a quem está em volta da Blythe Road | H15 |
 | Alcance por Londres | Um comprador compra de uma loja mais distante porque ela é a única com o item e ele pode pagar antes. É isso que faz o alcance pago valer a compra | H16 |
 
+## Valor para as lojas
+
+As taxas são o que o provedor ganha. Uma loja julga o app pelo que recebe, e é isso também que a traz para o POS do provedor e a mantém nele (H13, H14).
+
+- O app é um canal de aquisição para a loja. Ele traz compradores que não teriam entrado na loja: alguém no trabalho procurando uma peça, alguém a duas ruas que não sabia que a loja tinha o item. Uma loja pequena chega a eles sem pagar anúncio nem abrir mão de parte da venda.
+- O POS vai além do balcão. Hoje ele vende só para quem está na loja. Com o app, o mesmo POS recebe um pedido, uma reserva paga antes ou uma entrega de um comprador que não está lá. A loja vende para a rua sem montar um site nem entrar num app de delivery.
+- Isso dá à loja um motivo para escolher o POS e ficar com ele. Uma maquininha é fácil de trocar por outra mais barata. Um POS que traz compradores é mais difícil de largar, e mais fácil de recomendar para a loja vizinha.
+
 ## Cenário de rede
 
 Trato isto como um cenário hipotético: o concierge faz parte do ecossistema de um provedor de POS. Há duas versões possíveis.
 
 - **Só a rede.** Só as lojas no POS do provedor aparecem e respondem a pedidos. O app é um benefício do POS e um motivo para outras lojas entrarem. A rua parece pouco povoada até que lojas suficientes entrem.
-- **Aberto, pago pela rede.** Qualquer loja pode responder, e todo pagamento passa pelo provedor. A cobertura é melhor desde o começo, e entrar no POS vira o upgrade (repasses mais rápidos, integração com o POS, respostas na hora a partir do estoque do caixa).
+- **Aberto, pago pela rede.** Qualquer loja pode responder, e todo pagamento passa pelo provedor. A cobertura é melhor desde o começo, e entrar no POS vira o upgrade (repasses mais rápidos, pedidos respondidos pelo próprio POS).
 
 Na prova de conceito começo pela versão aberta, porque as hipóteses precisam de lojas suficientes respondendo (H1), e registro quais lojas já usam o POS do provedor para poder comparar as duas versões.
 

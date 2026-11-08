@@ -6,6 +6,10 @@ A projection to size the opportunity: no commission on the sale, with the money 
 
 Answer a message, set the item aside and hand it over. A connected shop answers from its till; an asked shop replies on WhatsApp. Either way it learns no new tool. Every request also records what people nearby asked for, including what the shop didn't have, which can come back to the shop as a weekly demand summary (H9).
 
+## What a shop gets
+
+For the shop, the app is an acquisition channel: it brings shoppers who wouldn't have walked in, with no ads and no cut of the sale. It also takes the POS past the counter, so the shop sells to someone who isn't standing in it. That value, more than the fees, is the reason to take the provider's POS and to keep it.
+
 ## How it makes money
 
 I set the business model as one scenario: a payment provider with its own POS owns Snuffle (decision 023). Delivery apps take a reported 14 to 35% commission, the cost independents complain about, so I ruled one out. Revenue comes from three places:
@@ -33,4 +37,4 @@ The input I trust least is how much of that joining the app causes. It is set at
 - A street with few shops answering gives few answers and no trust.
 - A wrong yes, from a shop or from an agent that misreads the request, costs the trust the concept is built on.
 
-Evidence: [revenue](../define/revenue.md), [revenue estimate](../define/revenue-estimate.md), [concept](../define/index.md).
+Evidence: [value and revenue](../define/revenue.md), [revenue estimate](../define/revenue-estimate.md), [concept](../define/index.md).
