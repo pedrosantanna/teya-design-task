@@ -4,11 +4,11 @@ I assume most of what a small shop sells isn't in any stock system, so the hard 
 
 <div class="dg dg-chain dg-hub"><div class="dg-box"><b>Shoppers in the area</b><div class="dg-list"><span>Sam: eclipse glasses by 4pm</span><span>Jess: a sourdough she can collect after 6</span><small>and every other ask nearby</small></div></div><div class="dg-arrow is-both">ask · answers</div><div class="dg-box"><b>Snuffle</b><div class="dg-list"><span>Understands the ask</span><span>Picks the likely shops and asks them all at once</span><span>Brings back each answer, labelled by source</span></div></div><div class="dg-arrow is-both">request · reply</div><div class="dg-box"><b>Shops within reach</b><div class="dg-list"><span>Broadway Chemist <span class="dg-tag">Till</span></span><span>Paper &amp; Co <span class="dg-tag">WhatsApp</span></span><span>Rossi's Bakery <span class="dg-tag">WhatsApp</span></span></div></div></div>
 
-## Options
+## Why a concierge
 
-I weighed three ways to answer "is it there, right now?" and chose the one that doesn't need a catalogue. Browsing stays in the app as the second way in.
+I considered the usual marketplace patterns: a catalogue to search, or a directory of shops to browse. Both treat the item as structured data that each shop keeps up to date. I needed the item to stay in words, so the shopper can describe it however they like and the shopkeeper can answer the same way, with no stock control behind it. That is why the main way in is a concierge that asks the shops. Browsing shops stays as the second way in.
 
-<div class="dg dg-options"><div class="dg-box"><span class="dg-badge">Not chosen</span><b>Catalogue search</b>Search an index of what every shop sells.<span>Needs item data that most small shops don't have.</span></div><div class="dg-box"><span class="dg-badge">Kept second</span><b>Shop directory and browse</b>List the shops nearby by kind, with their hours.<span>Answers who might sell it, not whether it is there now.</span></div><div class="dg-box is-chosen"><span class="dg-badge is-chosen">Chosen</span><b>A concierge that asks the shops</b>Snuffle asks the likely shops and brings back their answers.<span>Costs minutes of waiting, and depends on shops replying.</span></div></div>
+<div class="dg dg-options dg-options-2"><div class="dg-box"><span class="dg-badge">Considered</span><b>Marketplace patterns</b>Catalogue search, or a directory of shops to browse.<span>The item is structured data with stock levels, kept up to date by each shop.</span></div><div class="dg-box is-chosen"><span class="dg-badge is-chosen">Chosen</span><b>A concierge that asks the shops</b>The shopper asks in their own words; the shopkeeper answers in theirs.<span>No catalogue or stock control. It costs minutes of waiting and depends on shops replying.</span></div></div>
 
 ## How it works
 

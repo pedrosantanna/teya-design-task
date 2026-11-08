@@ -4,11 +4,11 @@ Suponho que a maior parte do que uma loja pequena vende não está em nenhum sis
 
 <div class="dg dg-chain dg-hub"><div class="dg-box"><b>Compradores na área</b><div class="dg-list"><span>Sam: óculos para eclipse até as 16h</span><span>Jess: um pão de fermentação natural que ela possa retirar depois das 18h</span><small>e todo outro pedido por perto</small></div></div><div class="dg-arrow is-both">pedido · respostas</div><div class="dg-box"><b>Snuffle</b><div class="dg-list"><span>Entende o pedido</span><span>Escolhe as lojas prováveis e pergunta a todas de uma vez</span><span>Traz cada resposta, com a fonte indicada</span></div></div><div class="dg-arrow is-both">pergunta · resposta</div><div class="dg-box"><b>Lojas ao alcance</b><div class="dg-list"><span>Broadway Chemist <span class="dg-tag">Caixa</span></span><span>Paper &amp; Co <span class="dg-tag">WhatsApp</span></span><span>Rossi's Bakery <span class="dg-tag">WhatsApp</span></span></div></div></div>
 
-## Opções
+## Por que um concierge
 
-Pesei três jeitos de responder "tem, agora?" e escolhi o que não depende de catálogo. Explorar continua no app como a segunda entrada.
+Considerei os padrões comuns de marketplace: um catálogo para buscar, ou um diretório de lojas para explorar. Os dois tratam o item como dado estruturado que cada loja mantém atualizado. Eu precisava que o item continuasse em palavras, para que quem compra o descreva como quiser e o lojista responda do mesmo jeito, sem controle de estoque por trás. Por isso a entrada principal é um concierge que pergunta às lojas. Explorar lojas continua como a segunda entrada.
 
-<div class="dg dg-options"><div class="dg-box"><span class="dg-badge">Não escolhida</span><b>Busca em catálogo</b>Buscar num índice do que cada loja vende.<span>Precisa de dados de item que a maioria das lojas pequenas não tem.</span></div><div class="dg-box"><span class="dg-badge">Ficou em segundo</span><b>Diretório de lojas e explorar</b>Listar as lojas por perto por tipo, com os horários.<span>Responde quem pode vender, não se o item está lá agora.</span></div><div class="dg-box is-chosen"><span class="dg-badge is-chosen">Escolhida</span><b>Um concierge que pergunta às lojas</b>O Snuffle pergunta às lojas prováveis e traz as respostas.<span>Custa minutos de espera e depende de as lojas responderem.</span></div></div>
+<div class="dg dg-options dg-options-2"><div class="dg-box"><span class="dg-badge">Considerado</span><b>Padrões de marketplace</b>Busca em catálogo, ou um diretório de lojas para explorar.<span>O item é dado estruturado, com estoque, mantido atualizado por cada loja.</span></div><div class="dg-box is-chosen"><span class="dg-badge is-chosen">Escolhido</span><b>Um concierge que pergunta às lojas</b>Quem compra pede com as próprias palavras; o lojista responde com as dele.<span>Sem catálogo nem controle de estoque. Custa minutos de espera e depende de as lojas responderem.</span></div></div>
 
 ## Como funciona
 

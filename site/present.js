@@ -21,30 +21,73 @@
   };
   // The Snuffle mark (docs/develop/design-system/img/mark-ios-light.svg) in currentColor; the awning's alternate stripes take --pz-stripe.
   const EAR = 'M61.8465 52.1482C62.5035 50.0934 61.2616 47.9309 59.1384 47.549C41.2127 44.3246 26.6877 55.4777 29.3064 76.4271C30.7064 87.6271 43.3064 90.4271 48.9064 79.2271C53.8695 69.3009 58.8326 61.5741 61.8465 52.1482Z';
+  // Parts are drawn in the app's order (MarkIntro.tsx): ears, eyes, the five stripes, then the nose, so the intro can move each one.
+  const STRIPES = [
+    'M-42.5 101 A8 8 0 0 1 -34.5 93 H-25.5 V119.1 A8.5 6.9 0 0 1 -42.5 119.1 Z',
+    'M-25.5 93 H-8.5 V119.1 A8.5 6.9 0 0 1 -25.5 119.1 Z',
+    'M-8.5 93 H8.5 V119.1 A8.5 6.9 0 0 1 -8.5 119.1 Z',
+    'M8.5 93 H25.5 V119.1 A8.5 6.9 0 0 1 8.5 119.1 Z',
+    'M25.5 93 H34.5 A8 8 0 0 1 42.5 101 V119.1 A8.5 6.9 0 0 1 25.5 119.1 Z'
+  ];
   const MARK = `<svg class="pz-mark" viewBox="-60 -42 120 84" aria-hidden="true"><g transform="translate(0 -86.45)" fill="currentColor">
-    <path d="M-42.5 101 A8 8 0 0 1 -34.5 93 H-25.5 V119.1 A8.5 6.9 0 0 1 -42.5 119.1 Z"/><path d="M-25.5 93 H-8.5 V119.1 A8.5 6.9 0 0 1 -25.5 119.1 Z" style="fill:var(--pz-stripe)"/>
-    <path d="M-8.5 93 H8.5 V119.1 A8.5 6.9 0 0 1 -8.5 119.1 Z"/><path d="M8.5 93 H25.5 V119.1 A8.5 6.9 0 0 1 8.5 119.1 Z" style="fill:var(--pz-stripe)"/>
-    <path d="M25.5 93 H34.5 A8 8 0 0 1 42.5 101 V119.1 A8.5 6.9 0 0 1 25.5 119.1 Z"/>
-    <path d="${EAR}" transform="translate(-85.306 0)"/><g transform="scale(-1 1)"><path d="${EAR}" transform="translate(-85.306 0)"/></g>
-    <circle cx="-15" cy="75" r="5"/><circle cx="15" cy="75" r="5"/><ellipse cx="0" cy="94.5" rx="12" ry="9.5"/></g></svg>`;
+    <g class="pz-m-ear" data-side="-1"><path d="${EAR}" transform="translate(-85.306 0)"/></g><g class="pz-m-ear" data-side="1"><g transform="scale(-1 1)"><path d="${EAR}" transform="translate(-85.306 0)"/></g></g>
+    <g class="pz-m-eyes"><circle cx="-15" cy="75" r="5"/><circle cx="15" cy="75" r="5"/></g>
+    ${STRIPES.map((d, i) => `<path class="pz-m-stripe" d="${d}"${i % 2 ? ' style="fill:var(--pz-stripe)"' : ''}/>`).join('')}
+    <ellipse class="pz-m-nose" cx="0" cy="94.5" rx="12" ry="9.5"/></g></svg>`;
+
+  // The splash intro (mark.md "Splash intro", motion.md#splash, MarkIntro.tsx): the same clock and springs as the app,
+  // sampled into Web Animations keyframes once. Lengths are in the glyph's own units (transform-box: fill-box).
+  const INTRO = (() => {
+    const MS = 1600, STEP = 20, N = MS / STEP;
+    const spring = (ms, z, w) => { if (ms <= 0) return 0; const t = ms / 1000, wd = w * Math.sqrt(1 - z * z); return 1 - Math.exp(-z * w * t) * (Math.cos(wd * t) + (z * w / wd) * Math.sin(wd * t)); };
+    const tri = (c, s, ms) => { const p = (c - s) / ms; return p <= 0 || p >= 1 ? 0 : 1 - Math.abs(2 * p - 1); };
+    const frames = f => Array.from({ length: N + 1 }, (_, k) => ({ ...f(k * STEP), offset: k / N }));
+    const stripe = i => frames(c => {
+      const ms = c - 100 - i * 70, s = spring(ms, 0.55, 22);
+      const sway = ms > 120 ? 7 * Math.exp(-(ms - 120) / 1000 / 0.2) * Math.sin((ms - 120) / 1000 / 0.34 * 2 * Math.PI) : 0;
+      return { transform: `translateY(${(-4 * (1 - s)).toFixed(3)}px) rotate(${sway.toFixed(3)}deg) scaleY(${(0.1 + 0.9 * s).toFixed(4)})` };
+    });
+    const ear = side => frames(c => { const s = spring(c - 780, 0.6, 20); return { opacity: Math.min(1, s * 2).toFixed(3), transform: `translateX(${(side * 8 * (1 - s)).toFixed(3)}px)` }; });
+    const eyes = frames(c => {
+      const s = spring(c - 960, 0.6, 24), b = Math.max(tri(c, 1240, 260), tri(c, 1400, 260));
+      return { opacity: Math.min(1, s * 3).toFixed(3), transform: `scale(${(0.5 + 0.5 * s).toFixed(4)}) scaleY(${(1 - 0.9 * b).toFixed(4)})` };
+    });
+    const nose = frames(c => { const s = spring(c - 1050, 0.45, 26); return { opacity: Math.min(1, s * 3).toFixed(3), transform: `scale(${s.toFixed(4)})` }; });
+    return { MS, stripes: STRIPES.map((_, i) => stripe(i)), ears: { '-1': ear(-1), '1': ear(1) }, eyes, nose };
+  })();
+  function playMarks(slide) {
+    slide.querySelectorAll('.pz-mark').forEach(svgEl => {
+      svgEl.getAnimations({ subtree: true }).forEach(a => a.cancel());
+      if (reduced()) return;
+      const opt = { duration: INTRO.MS, easing: 'linear', fill: 'both' };
+      svgEl.querySelectorAll('.pz-m-stripe').forEach((el, i) => el.animate(INTRO.stripes[i], opt));
+      svgEl.querySelectorAll('.pz-m-ear').forEach(el => el.animate(INTRO.ears[el.dataset.side], opt));
+      svgEl.querySelector('.pz-m-eyes').animate(INTRO.eyes, opt);
+      svgEl.querySelector('.pz-m-nose').animate(INTRO.nose, opt);
+    });
+  }
 
   let DATA = null, loading = null;
-  let root = null, slides = [], idx = 0, isOpen = false, busy = null, returnFocus = null;
+  let root = null, slides = [], groups = [], idx = 0, isOpen = false, busy = null, returnFocus = null;
   const load = () => loading || (loading = fetch(SRC, { cache: 'no-store' }).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => (DATA = d)));
 
   // --- Building the slides --------------------------------------------------
   const lines = (arr, cls = 'pz-lines') => arr && arr.length ? `<ul class="${cls}">${arr.map(l => `<li>${esc(l)}</li>`).join('')}</ul>` : '';
   const lazyImg = (src, cls, alt, extra = '') => `<img class="${cls}" data-src="${esc(src)}" alt="${esc(alt || '')}" ${extra} decoding="async" onerror="this.style.visibility='hidden'">`;
   const lazyVideo = (m, cls) => `<video class="${cls}" data-src="${esc(m.src)}" data-poster="${esc(m.poster || '')}" muted loop playsinline preload="none" aria-label="${esc(m.alt || '')}"></video>`;
+  // A phone clip already carries its own bezel, so the frame only keeps the clip's ratio (450 × 948 unless the slide says otherwise) and rounds its corners.
+  const phone = p => `<div class="pz-phone" style="--pz-arw:${Number(p.width) || 450};--pz-arh:${Number(p.height) || 948}">${lazyVideo(p, 'pz-phone-video')}</div>`;
+  const cap = t => t ? `<p class="pz-cap">${esc(t)}</p>` : '';
 
   function media(m) {
     if (!m) return '';
     switch (m.type) {
+      case 'group': return `<div class="pz-group">${m.items.map(media).join('')}</div>`;
       case 'video': return lazyVideo(m, 'pz-video');
       case 'mark': return `<div class="pz-cover-mark" role="img" aria-label="${esc(m.alt || 'The Snuffle mark')}">${MARK}</div>`;
       case 'illustration': return lazyImg(m.src, 'pz-illus', m.alt);
       case 'doc': return lazyImg(m.src, m.fade ? 'pz-doc is-faded' : 'pz-doc', m.alt, m.width ? `width="${m.width}" height="${m.height}"` : '');
-      case 'phones': return `<div class="pz-phones ${m.items.length > 1 ? 'is-two' : ''}">${m.items.map(p => lazyVideo(p, 'pz-phone')).join('')}</div>`;
+      case 'phones': return `<div class="pz-phones" style="--pz-n:${m.items.length}">${m.items.map(phone).join('')}</div>`;
       case 'code': return `<pre class="pz-code" aria-label="Repository layout">${m.lines.map(l => { const mm = /^(\s*\S+)(\s*)(.*)$/.exec(l); return mm ? `<span>${esc(mm[1])}</span>${mm[2]}<i>${esc(mm[3])}</i>` : esc(l); }).join('\n')}</pre>`;
       case 'hub': {
         const col = a => `<ul>${a.map(i => `<li><b>${esc(i.name)}</b><span>${esc(i.via)}</span></li>`).join('')}</ul>`;
@@ -52,20 +95,23 @@
       }
       case 'answer': return `<div class="pz-answer" role="img" aria-label="${esc(`An answer card: ${m.shop}, ${m.line}, ${(m.meta || []).join(', ')}, with ${m.action}`)}"><span class="pz-answer-src">${esc(m.source)}</span><h3>${esc(m.shop)}</h3><p>${esc(m.line)}</p><ul>${(m.meta || []).map(x => `<li>${esc(x)}</li>`).join('')}</ul><div class="pz-answer-buy">${esc(m.action)}</div></div>`;
       case 'chain': return `<ol class="pz-chain">${m.items.map(i => `<li><b>${esc(i.name)}</b><span>${esc(i.text)}</span></li>`).join('')}</ol>`;
-      case 'steps': return `<ol class="pz-steps" aria-label="${esc(m.label || 'Steps, in order')}">${m.items.map((i, k) => `<li${k === m.items.length - 1 ? ' class="is-end"' : ''}><b>${esc(i.name)}</b><span>${esc(i.text || '')}</span></li>`).join('')}</ol>`;
-      case 'themes': return `<ol class="pz-themes">${m.items.map(i => `<li>${esc(i)}</li>`).join('')}</ol>`;
+      case 'steps': return `<ol class="pz-steps" style="--pz-n:${m.items.length}" aria-label="${esc(m.label || 'Steps, in order')}">${m.items.map((i, k) => `<li${k === m.items.length - 1 ? ' class="is-end"' : ''}><b>${esc(i.name)}</b><span>${esc(i.text || '')}</span></li>`).join('')}</ol>`;
+      case 'themes': return `<div class="pz-themes-wrap">${cap(m.label)}<ol class="pz-themes">${m.items.map(i => `<li>${esc(i)}</li>`).join('')}</ol></div>`;
       case 'quotes': return `<div class="pz-quotes">${m.items.map(q => `<figure><figcaption>${esc(q.theme)}</figcaption><blockquote lang="en">“${esc(q.text)}”</blockquote><p>${esc(q.who)}</p></figure>`).join('')}</div>`;
       case 'columns': return `<div class="pz-cols">${m.items.map(c => `<section><h3>${esc(c.title)}</h3><ul>${c.lines.map(l => `<li>${esc(l)}</li>`).join('')}</ul></section>`).join('')}</div>`;
+      case 'cards': return `<div class="pz-cards-wrap">${cap(m.label)}<ul class="pz-cards" style="--pz-n:${m.items.length}">${m.items.map(c => `<li>${c.name ? `<b>${esc(c.name)}</b>` : ''}<span>${esc(c.text)}</span>${c.note ? `<small>${/^\d/.test(c.note) ? 'Decision ' : ''}${esc(c.note)}</small>` : ''}</li>`).join('')}</ul></div>`;
+      case 'pairs': return `<ol class="pz-pairs" aria-label="Pain, and what it changed in the product">${m.items.map(p => `<li><span class="pz-pair-from">${esc(p.from)}<small>${esc(p.note || '')}</small></span><span class="pz-pair-arrow" aria-hidden="true"></span><span class="pz-pair-to">${esc(p.to)}</span></li>`).join('')}</ol>`;
       case 'pmap': {
         // The proto-persona map, simplified: one circle per cluster at its centre (urgency 0–10 across, stage 10 = find out at the top), sized by its posts.
-        const y = v => 12 + (1 - v / 10) * 76, x = v => 8 + v / 10 * 84;
+        // The stages use the top 76% of the plot, so a cluster at the last stage stays clear of the axis.
+        const y = v => 12 + (1 - v / 10) * 64, x = v => 8 + v / 10 * 84;
         const ticks = (m.ticks || []).map(t => `<span class="pz-pm-tick" style="top:${y(t.y)}%">${esc(t.label)}${t.note ? `<i>${esc(t.note)}</i>` : ''}</span>`).join('');
         const max = Math.max(...m.clusters.map(c => c.n));
         const dots = m.clusters.map(c => `<span class="pz-pm-c is-${esc(c.tile)}" style="left:${x(c.x).toFixed(1)}%;top:${y(c.y).toFixed(1)}%;--d:${(Math.sqrt(c.n / max) * 100).toFixed(0)}"><b>${esc(c.name)}</b>${esc(c.n)}</span>`).join('');
         return `<figure class="pz-pmap" role="img" aria-label="${esc(m.alt || '')}"><span class="pz-pm-y">${esc(m.yLabel)}</span><div class="pz-pm-plot">${ticks}${dots}</div><figcaption><span>${esc(m.xMin)}</span><span>${esc(m.xLabel)}</span><span>${esc(m.xMax)}</span></figcaption></figure>`;
       }
       case 'gallery': return `<div class="pz-gallery">${m.mark ? `<div class="is-mark">${MARK}</div>` : ''}${m.items.map(i => `<div class="is-${esc(i.tile)}">${lazyImg(i.src, '', '')}</div>`).join('')}</div>`;
-      case 'options': return `<ol class="pz-options">${m.items.map(o => `<li${o.chosen ? ' class="is-chosen"' : ''}>${o.chosen ? `<span class="pz-chosen">${esc(o.badge || 'Chosen')}</span>` : ''}<b>${esc(o.name)}</b><span>${esc(o.text)}</span></li>`).join('')}</ol>`;
+      case 'options': return `<ol class="pz-options" style="--pz-n:${m.items.length}">${m.items.map(o => `<li${o.chosen ? ' class="is-chosen"' : ''}>${o.badge || o.chosen ? `<span class="pz-chosen">${esc(o.badge || 'Chosen')}</span>` : ''}<b>${esc(o.name)}</b><span>${esc(o.text)}</span>${o.detail ? `<small>${esc(o.detail)}</small>` : ''}</li>`).join('')}</ol>`;
       case 'bars': {
         // A bar per scenario on one scale, with the cost as a dashed line across them and the projection badge on top.
         const max = m.max, pct = v => (v / max * 100).toFixed(1);
@@ -75,17 +121,23 @@
     }
   }
 
+  // The case page's H2s this slide covers, in the page's order, so the mapping to the case stays visible.
+  const labels = s => s.labels && s.labels.length ? `<p class="pz-label">${s.labels.map(l => `<span>${esc(l)}</span>`).join('')}</p>` : '';
+  const stats = (s, compact) => s.stats && s.stats.length ? `<dl class="pz-stats${compact ? ' is-compact' : ''}" style="--pz-n:${s.stats.length}">${s.stats.map(x => `<div class="pz-stat"><dt class="pz-sr">${esc(x.label)}</dt><dd><b>${esc(x.value)}</b><span aria-hidden="true">${esc(x.label)}</span></dd></div>`).join('')}</dl>` : '';
+
   function slideHTML(s, i, n, partOf) {
     const L = s.layout || 'points';
+    const title = `<h2 class="pz-title">${esc(s.title)}</h2>`;
     let text = '';
-    if (L === 'section') text = `<p class="pz-part"><span class="pz-sr">Section </span>${esc(s.number)}<span class="pz-sr"> of ${partOf}</span></p><h2 class="pz-title">${esc(s.title)}</h2>${lines(s.lines)}`;
-    else if (L === 'close') text = `${MARK}<h2 class="pz-title">${esc(s.title)}</h2>${lines(s.lines)}`;
-    else if (L === 'stats') text = `<h2 class="pz-title">${esc(s.title)}</h2><dl class="pz-stats">${(s.stats || []).map(x => `<div class="pz-stat"><dt class="pz-sr">${esc(x.label)}</dt><dd style="margin:0"><b>${esc(x.value)}</b><span aria-hidden="true">${esc(x.label)}</span></dd></div>`).join('')}</dl>${lines(s.lines)}`;
-    else if (L === 'rows') text = `<h2 class="pz-title">${esc(s.title)}</h2><ul class="pz-rows">${(s.rows || []).map(r => `<li class="pz-row"><b>${esc(r.big)}</b><p>${esc(r.text)}${r.note ? `<small>${esc(r.note)}</small>` : ''}</p></li>`).join('')}</ul>`;
-    else text = `<h2 class="pz-title">${esc(s.title)}</h2>${lines(s.lines)}`;
+    if (L === 'section') text = `<p class="pz-part"><span class="pz-sr">Section </span>${esc(s.number)}<span class="pz-sr"> of ${partOf}</span></p>${title}${lines(s.lines)}`;
+    else if (L === 'close') text = `${MARK}${title}${lines(s.lines)}`;
+    else if (L === 'stats') text = `${labels(s)}${title}${stats(s)}${lines(s.lines)}`;
+    else if (L === 'rows') text = `${labels(s)}${title}<ul class="pz-rows">${(s.rows || []).map(r => `<li class="pz-row"><b>${esc(r.big)}</b><p>${esc(r.text)}${r.note ? `<small>${esc(r.note)}</small>` : ''}</p></li>`).join('')}</ul>`;
+    else text = `${labels(s)}${title}${lines(s.lines)}${stats(s, true)}`;
     const m = media(s.media);
-    const wide = s.media && s.media.below ? ' media-below' : s.media && ['doc', 'hub', 'pmap', 'quotes', 'columns', 'options', 'bars'].includes(s.media.type) ? ' media-wide' : '';
-    return `<section class="pz-slide${m ? ' has-media' : ''}${wide}" data-pz-theme="${esc(s.theme || 'paper')}" data-layout="${esc(L)}" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${n}: ${esc(s.title)}" inert aria-hidden="true">
+    const type = s.media && s.media.type;
+    const wide = s.media && s.media.below ? ' media-below' : ['doc', 'hub', 'pmap', 'quotes', 'columns', 'options', 'bars', 'themes', 'pairs', 'cards', 'chain', 'code'].includes(type) ? ' media-wide' : '';
+    return `<section class="pz-slide${m ? ' has-media' : ''}${wide}${type ? ` media-${esc(type)}` : ''}" data-pz-theme="${esc(s.theme || 'paper')}" data-layout="${esc(L)}" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${n}: ${esc(s.title)}" inert aria-hidden="true">
       <div class="pz-inner"><div class="pz-text">${text}</div>${m ? `<div class="pz-media">${m}</div>` : ''}</div></section>`;
   }
 
@@ -99,12 +151,18 @@
     root.setAttribute('role', 'dialog');
     root.setAttribute('aria-modal', 'true');
     root.setAttribute('aria-label', 'Presentation of the case');
-    let prevSection = null;
-    const ticks = list.map((s, i) => { const start = s.section !== prevSection; prevSection = s.section; return `<i class="${start ? 'is-start' : ''}"></i>`; }).join('');
+    // One bar per section, as long as its share of the slides; the current section's bar fills as you move through it.
+    groups = [];
+    list.forEach((s, i) => {
+      const g = groups[groups.length - 1];
+      if (g && g.key === s.section) { g.end = i; return; }
+      groups.push({ key: s.section, name: String(s.section || '').replace(/^\s*\d+\s*·\s*/, ''), start: i, end: i });
+    });
+    const segs = groups.map((g, k) => `<span class="pz-seg" data-seg="${k}" title="${esc(g.key)}" style="flex-grow:${g.end - g.start + 1}"><i></i></span>`).join('');
     root.innerHTML = `<div class="pz-stage">${list.map((s, i) => slideHTML(s, i, list.length, parts)).join('')}</div>
-      <div class="pz-top">${document.fullscreenEnabled ? `<button type="button" class="pz-btn" data-pz="full" aria-label="Full screen (F)" title="Full screen (F)">${IC.full}</button>` : ''}<button type="button" class="pz-btn" data-pz="close" aria-label="Close the presentation (Esc)" title="Close (Esc)">${IC.x}</button></div>
-      <div class="pz-chrome"><span class="pz-where"></span><div class="pz-progress" aria-hidden="true">${ticks}</div><span class="pz-count" aria-hidden="true"></span>
-        <button type="button" class="pz-btn" data-pz="prev" aria-label="Previous slide" title="Previous (←)">${IC.left}</button><button type="button" class="pz-btn" data-pz="next" aria-label="Next slide" title="Next (→ or Space)">${IC.right}</button></div>
+      <div class="pz-top pz-ctls">${document.fullscreenEnabled ? `<button type="button" class="pz-btn" data-pz="full" aria-label="Full screen (F)" title="Full screen (F)">${IC.full}</button>` : ''}<button type="button" class="pz-btn" data-pz="close" aria-label="Close the presentation (Esc)" title="Close (Esc)">${IC.x}</button></div>
+      <div class="pz-chrome"><p class="pz-where" aria-hidden="true"><b></b><span></span></p><div class="pz-progress" aria-hidden="true">${segs}</div>
+        <div class="pz-ctls"><button type="button" class="pz-btn" data-pz="prev" aria-label="Previous slide" title="Previous (←)">${IC.left}</button><button type="button" class="pz-btn" data-pz="next" aria-label="Next slide" title="Next (→ or Space)">${IC.right}</button></div></div>
       <p class="pz-sr" aria-live="polite" aria-atomic="true"></p>`;
     document.body.appendChild(root);
     slides = [...root.querySelectorAll('.pz-slide')];
@@ -113,10 +171,14 @@
     root.addEventListener('pointerup', onUp);
     root.addEventListener('pointercancel', () => { down = null; });
     root.querySelector('.pz-progress').addEventListener('click', e => {
-      const r = e.currentTarget.getBoundingClientRect();
-      go(Math.min(slides.length - 1, Math.max(0, Math.floor((e.clientX - r.left) / r.width * slides.length))));
+      const seg = e.target.closest('.pz-seg');
+      if (seg) go(groups[Number(seg.dataset.seg)].start);
       e.stopPropagation();
     });
+    // Phone frames take the clip's real ratio once it is known, in case a clip isn't 450 × 948.
+    root.querySelectorAll('.pz-phone-video').forEach(v => v.addEventListener('loadedmetadata', () => {
+      if (v.videoWidth && v.videoHeight) { v.parentElement.style.setProperty('--pz-arw', v.videoWidth); v.parentElement.style.setProperty('--pz-arh', v.videoHeight); }
+    }));
   }
 
   // Media is attached only for the slide in view and its neighbours, so opening the deck loads three slides, not all of them.
@@ -135,13 +197,17 @@
   function setChrome() {
     const s = DATA.slides[idx];
     root.setAttribute('data-pz-theme', s.theme || 'paper');
-    root.style.setProperty('--pz-p', `${((idx + 1) / slides.length * 100).toFixed(2)}%`);
-    root.querySelector('.pz-where').textContent = s.section || '';
-    root.querySelector('.pz-count').textContent = `${idx + 1} / ${slides.length}`;
-    root.querySelectorAll('.pz-progress i').forEach((t, j) => { t.classList.toggle('is-done', j < idx); t.classList.toggle('is-now', j === idx); });
+    const gi = groups.findIndex(g => idx >= g.start && idx <= g.end), g = groups[gi];
+    const n = g.end - g.start + 1, k = idx - g.start + 1;
+    root.querySelector('.pz-where b').textContent = g.name;
+    root.querySelector('.pz-where span').textContent = `${k} of ${n}`;
+    root.querySelectorAll('.pz-seg').forEach((el, j) => {
+      el.style.setProperty('--pz-fill', j < gi ? 1 : j > gi ? 0 : (k / n).toFixed(4));
+      el.classList.toggle('is-now', j === gi);
+    });
     root.querySelector('[data-pz="prev"]').disabled = idx === 0;
     root.querySelector('[data-pz="next"]').disabled = idx === slides.length - 1;
-    root.querySelector('.pz-sr[aria-live]').textContent = `Slide ${idx + 1} of ${slides.length}: ${s.title}`;
+    root.querySelector('.pz-sr[aria-live]').textContent = `Slide ${idx + 1} of ${slides.length}, ${g.name} ${k} of ${n}: ${s.title}`;
   }
   function writeHash() {
     const h = `#present-${idx + 1}`;
@@ -160,7 +226,7 @@
     next.classList.add('is-on'); next.classList.remove('is-leaving');
     next.removeAttribute('inert'); next.removeAttribute('aria-hidden');
     next.querySelector('.pz-inner').scrollTop = 0;
-    setChrome(); writeHash(); playIn(next);
+    setChrome(); writeHash(); playIn(next); playMarks(next);
     if (animate && prev && prev !== next && !reduced()) {
       // The ground changes colour underneath (CSS); the old content leaves quickly, then the new one arrives.
       prev.classList.add('is-leaving');
@@ -266,7 +332,7 @@
       if (a === 'close') close(); else if (a === 'prev') go(idx - 1); else if (a === 'next') go(idx + 1); else if (a === 'full') toggleFull();
       return;
     }
-    if (swallowClick || e.target.closest('a, button, .pz-chrome, .pz-top')) return;
+    if (swallowClick || e.target.closest('a, button, .pz-chrome, .pz-ctls')) return;
     if (getSelection && String(getSelection())) return;
     go(idx + (e.clientX < innerWidth * 0.3 ? -1 : 1));
   }

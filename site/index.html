@@ -7,8 +7,8 @@
 <link rel="stylesheet" href="site/canvas.css?v=16">
 <script src="site/canvas.js?v=13"></script>
 <link rel="stylesheet" href="site/viewer3d.css?v=3">
-<link rel="stylesheet" href="site/present.css?v=10">
-<script src="site/present.js?v=7" defer></script>
+<link rel="stylesheet" href="site/present.css?v=11">
+<script src="site/present.js?v=8" defer></script>
 <script src="site/viewer3d.js?v=6"></script>
 <style>
 /* Docs shell in the shadcn/ui idiom: neutral zinc tokens, hierarchy from weight and space, borders only where they separate. */
@@ -430,6 +430,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .dg-cols li { margin: var(--s-1) 0; }
 /* Options side by side; the chosen one has the canvases' green outline and a badge (--chosen: 6.4:1 under white text in light, 8.8:1 under the dark ground in dark). */
 .dg-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-4); }
+.dg-options.dg-options-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 @container prose (max-width: 480px) { .dg-options { grid-template-columns: minmax(0, 1fr); } }
 .dg-options .dg-box { display: flex; flex-direction: column; gap: var(--s-2); background: var(--bg); }
 .dg-options .dg-box b { margin: 0; }
