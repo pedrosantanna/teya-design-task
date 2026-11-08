@@ -261,7 +261,7 @@ async function record(browser, clip) {
   const mp4 = path.join(OUT, `${clip.name}.mp4`);
   const png = path.join(OUT, `${clip.name}.png`);
   execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', listFile,
-    '-vf', `${crop},scale=450:-2:flags=lanczos,fps=30,format=yuv420p`, '-an', '-c:v', 'libx264', '-preset', 'slow',
+    '-vf', `${crop},scale=450:-2:flags=lanczos,crop=iw-6:ih-6:3:3,pad=iw+6:ih+6:3:3:black,fps=30,format=yuv420p`, '-an', '-c:v', 'libx264', '-preset', 'slow',
     '-crf', '26', '-profile:v', 'high', '-movflags', '+faststart', mp4]);
   execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-ss', String(Math.min(clip.poster, total - 0.2)), '-i', mp4,
     '-frames:v', '1', '-vf', 'split[a][b];[a]palettegen=max_colors=192[p];[b][p]paletteuse=dither=none', png]);
