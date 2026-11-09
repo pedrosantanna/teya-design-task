@@ -1,6 +1,6 @@
 # Sources
 
-Every quote and every link used across the docs, in one place. 72 quotes (71 checked against the live source) and 192 other sources. This page is generated from the other pages by `scripts/build_sources.py`.
+Every quote and every link used across the docs, in one place. 72 quotes (71 checked against the live source) and 199 other sources. This page is generated from the other pages by `scripts/build_sources.py`.
 
 ## Quotes by network
 
@@ -96,6 +96,8 @@ Status **verified** means the text, author and date were matched against the liv
 
 | Used on | Source |
 | --- | --- |
+| [Hypotheses](../define/hypotheses.md) | [Facebook Help Center, archived 2020](https://web.archive.org/web/20200509150311/https://www.facebook.com/help/988319821208361) |
+| [Hypotheses](../define/hypotheses.md) | [Lenny Rachitsky, "The most important marketplace metrics", 29 March 2022](https://www.lennysnewsletter.com/p/the-most-important-marketplace-metrics) |
 | [Revenue estimate](../define/revenue-estimate.md) | [UK business: activity, size and location, 2025](https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/ukbusinessactivitysizeandlocation/2025) |
 | [Revenue estimate](../define/revenue-estimate.md) | [Business population estimates 2025](https://www.gov.uk/government/statistics/business-population-estimates-2025/business-population-estimates-for-the-uk-and-regions-2025-statistical-release) |
 | [Revenue estimate](../define/revenue-estimate.md) | [House of Commons Library briefing on the retail industry](https://researchbriefings.files.parliament.uk/documents/SN06186/SN06186.pdf) |
@@ -288,3 +290,8 @@ Status **verified** means the text, author and date were matched against the liv
 | [Method in detail](personas/method-details.md) | [@hackneyfleamarket](https://www.tiktok.com/@hackneyfleamarket/video/7689755751471959318) |
 | [Method](personas/method.md) | [*The Design Thinking Playbook*](https://www.wiley.com/en-us/The+Design+Thinking+Playbook%3A+Mindful+Digital+Transformation+of+Teams%2C+Products%2C+Services%2C+Businesses+and+Ecosystems-p-9781119467472) |
 | [Method](personas/method.md) | [*The Design Thinking Toolbox*](https://www.wiley.com/en-us/The+Design+Thinking+Toolbox%3A+A+Guide+to+Mastering+the+Most+Popular+and+Valuable+Innovation+Methods-p-9781119629214) |
+| [Measurement plan](../verify/measurement.md) | [MeasuringU](https://measuringu.com/small-n/) |
+| [Measurement plan](../verify/measurement.md) | [Strategyzer Test Card](https://www.strategyzer.com/library/validate-your-ideas-with-the-test-card) |
+| [Measurement plan](../verify/measurement.md) | [Nielsen](https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/) |
+| [Measurement plan](../verify/measurement.md) | [Budiu and Moran, NN/g, 2021](https://www.nngroup.com/articles/summary-quant-sample-sizes/) |
+| [Tasks and events](../verify/telemetry.md) | [guidance on storage and access technologies](https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/guidance-on-the-use-of-storage-and-access-technologies/) |

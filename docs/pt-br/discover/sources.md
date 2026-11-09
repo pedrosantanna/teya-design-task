@@ -1,6 +1,6 @@
 # Fontes
 
-Todas as citações e todos os links usados na documentação, num só lugar. 72 citações (71 conferidas na fonte original) e 192 outras fontes. Esta página é gerada a partir das outras pelo `scripts/build_sources.py`.
+Todas as citações e todos os links usados na documentação, num só lugar. 72 citações (71 conferidas na fonte original) e 199 outras fontes. Esta página é gerada a partir das outras pelo `scripts/build_sources.py`.
 
 ## Citações por rede
 
@@ -96,6 +96,8 @@ Status **verified** quer dizer que texto, autor e data foram conferidos na pági
 
 | Usada em | Fonte |
 | --- | --- |
+| [Hipóteses](../define/hypotheses.md) | [Central de Ajuda do Facebook, arquivada em 2020](https://web.archive.org/web/20200509150311/https://www.facebook.com/help/988319821208361) |
+| [Hipóteses](../define/hypotheses.md) | [Lenny Rachitsky, "The most important marketplace metrics", 29 de março de 2022](https://www.lennysnewsletter.com/p/the-most-important-marketplace-metrics) |
 | [Estimativa de receita](../define/revenue-estimate.md) | [UK business: activity, size and location, 2025](https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation/bulletins/ukbusinessactivitysizeandlocation/2025) |
 | [Estimativa de receita](../define/revenue-estimate.md) | [Business population estimates 2025](https://www.gov.uk/government/statistics/business-population-estimates-2025/business-population-estimates-for-the-uk-and-regions-2025-statistical-release) |
 | [Estimativa de receita](../define/revenue-estimate.md) | [briefing da Biblioteca da Câmara dos Comuns sobre o varejo](https://researchbriefings.files.parliament.uk/documents/SN06186/SN06186.pdf) |
@@ -288,3 +290,8 @@ Status **verified** quer dizer que texto, autor e data foram conferidos na pági
 | [Método em detalhe](personas/method-details.md) | [@hackneyfleamarket](https://www.tiktok.com/@hackneyfleamarket/video/7689755751471959318) |
 | [Método](personas/method.md) | [*The Design Thinking Playbook*](https://www.wiley.com/en-us/The+Design+Thinking+Playbook%3A+Mindful+Digital+Transformation+of+Teams%2C+Products%2C+Services%2C+Businesses+and+Ecosystems-p-9781119467472) |
 | [Método](personas/method.md) | [*The Design Thinking Toolbox*](https://www.wiley.com/en-us/The+Design+Thinking+Toolbox%3A+A+Guide+to+Mastering+the+Most+Popular+and+Valuable+Innovation+Methods-p-9781119629214) |
+| [Plano de medição](../verify/measurement.md) | [MeasuringU](https://measuringu.com/small-n/) |
+| [Plano de medição](../verify/measurement.md) | [Test Card da Strategyzer](https://www.strategyzer.com/library/validate-your-ideas-with-the-test-card) |
+| [Plano de medição](../verify/measurement.md) | [Nielsen](https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/) |
+| [Plano de medição](../verify/measurement.md) | [Budiu e Moran, NN/g, 2021](https://www.nngroup.com/articles/summary-quant-sample-sizes/) |
+| [Tarefas e eventos](../verify/telemetry.md) | [guia do ICO sobre tecnologias de armazenamento e acesso](https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/guidance-on-the-use-of-storage-and-access-technologies/) |
