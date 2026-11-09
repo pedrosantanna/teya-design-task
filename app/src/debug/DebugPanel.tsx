@@ -12,6 +12,7 @@ import { useDebugger } from './visibility';
 
 export function DebugPanel({ docked = false }: { docked?: boolean }) {
   const visible = useDebugger((s) => s.open && !s.hidden);
+  const hidden = useDebugger((s) => s.hidden);
   const setOpen = useDebugger((s) => s.setOpen);
   const { theme } = useUnistyles();
 
@@ -25,9 +26,17 @@ export function DebugPanel({ docked = false }: { docked?: boolean }) {
     return () => window.removeEventListener('keydown', onKey);
   }, [visible, docked, setOpen]);
 
-  if (Platform.OS !== 'web' || !visible) return null;
+  // The panel stays mounted while the debugger is shown, so opening and closing can slide (panel.css): docked, its
+  // column widens and the phone frame refits beside it; as an overlay, it slides in from the right.
+  if (Platform.OS !== 'web' || hidden) return null;
   return (
-    <aside className={`dbg dbg-panel ${docked ? 'is-docked' : 'is-overlay'}`} data-scheme={theme.scheme} aria-label="State debugger">
+    <aside
+      className={`dbg dbg-panel ${docked ? 'is-docked' : 'is-overlay'}${visible ? ' is-open' : ''}`}
+      data-scheme={theme.scheme}
+      aria-label="State debugger"
+      aria-hidden={!visible}
+      inert={!visible}
+    >
       <div className="dbg-head">
         <h2 className="dbg-title">State debugger</h2>
         <button type="button" className="dbg-iconbtn" aria-label="Close the state debugger" onClick={() => setOpen(false)}>

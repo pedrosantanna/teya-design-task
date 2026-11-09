@@ -40,13 +40,21 @@
   display: flex; flex-direction: column; min-height: 0; background: var(--d-bg); border-left: 1px solid var(--d-border);
   z-index: 20;
 }
-.dbg-panel.is-docked { flex: none; width: 288px; align-self: stretch; }
+.dbg-panel { overflow: hidden; }
+.dbg-panel.is-docked > * { width: 287px; }
+/* Closed, the docked column is 0 wide and the overlay sits off to the right; both slide when the panel opens or closes. */
+.dbg-panel.is-docked {
+  flex: none; width: 0; align-self: stretch; border-left-color: transparent;
+  transition: width 0.24s cubic-bezier(0.2, 0, 0, 1), border-color 0.24s;
+}
+.dbg-panel.is-docked.is-open { width: 288px; border-left-color: var(--d-border); }
 .dbg-panel.is-overlay {
   position: absolute; top: 0; right: 0; bottom: 0; width: min(288px, calc(100% - 48px));
-  box-shadow: -12px 0 40px var(--d-shadow); animation: dbg-in 0.2s ease-out;
+  box-shadow: -12px 0 40px var(--d-shadow); transform: translateX(100%); visibility: hidden;
+  transition: transform 0.24s cubic-bezier(0.2, 0, 0, 1), visibility 0s linear 0.24s;
 }
-@keyframes dbg-in { from { transform: translateX(24px); opacity: 0; } to { transform: none; opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .dbg-panel.is-overlay { animation: none; } }
+.dbg-panel.is-overlay.is-open { transform: none; visibility: visible; transition: transform 0.24s cubic-bezier(0.2, 0, 0, 1), visibility 0s; }
+@media (prefers-reduced-motion: reduce) { .dbg-panel.is-docked, .dbg-panel.is-overlay, .dbg-panel.is-overlay.is-open { transition: none; } }
 
 .dbg-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex: none; height: 44px; padding: 0 8px 0 16px; border-bottom: 1px solid var(--d-border); }
 .dbg-title { margin: 0; font-size: 12px; font-weight: 600; line-height: 1.3; color: var(--d-fg); }

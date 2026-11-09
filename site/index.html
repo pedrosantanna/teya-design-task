@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
-<link rel="stylesheet" href="site/canvas.css?v=19">
+<link rel="stylesheet" href="site/canvas.css?v=21">
 <script src="site/canvas.js?v=14"></script>
 <link rel="stylesheet" href="site/viewer3d.css?v=3">
 <link rel="stylesheet" href="site/present.css?v=12">
@@ -895,8 +895,26 @@ i.m.unknown { opacity: .45; }
     const btn = document.createElement('button');
     btn.type = 'button'; btn.className = 'cv-fold';
     head.prepend(btn);
-    const set = (folded, remember) => {
+    let done = 0;
+    // Width and height animate from where the card is to where the new state puts it (measured, then played back).
+    // Folded, the card is as wide as it is tall: a square of the open card's height.
+    const square = () => { if (!head.classList.contains('is-folded')) head.style.setProperty('--fold-w', head.offsetHeight + 'px'); };
+    const resize = folded => {
+      square();
+      const from = head.getBoundingClientRect();
+      head.classList.remove('is-sizing'); head.style.width = head.style.height = '';
       head.classList.toggle('is-folded', folded);
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const to = head.getBoundingClientRect();
+      Object.assign(head.style, { width: from.width + 'px', height: from.height + 'px' });
+      void head.offsetWidth;
+      head.classList.add('is-sizing');
+      Object.assign(head.style, { width: to.width + 'px', height: to.height + 'px' });
+      clearTimeout(done);
+      done = setTimeout(() => { head.classList.remove('is-sizing'); head.style.width = head.style.height = ''; }, 280);
+    };
+    const set = (folded, remember) => {
+      if (remember) resize(folded); else { square(); head.classList.toggle('is-folded', folded); }
       btn.setAttribute('aria-expanded', String(!folded));
       btn.title = t(folded ? 'unfoldTitle' : 'foldTitle');
       btn.setAttribute('aria-label', btn.title);

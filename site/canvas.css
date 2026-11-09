@@ -71,7 +71,7 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 /* Canvas chrome */
 .cv-title {
   position: absolute; left: 16px; top: 16px; z-index: 3; max-width: min(640px, calc(100% - 32px));
-  display: flex; align-items: center; gap: 14px; padding: 10px 10px 10px 16px; border-radius: 12px; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px);
+  display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 12px; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px);
   border: 1px solid var(--border); box-shadow: 0 4px 16px rgb(0 0 0 / .06);
 }
 .cv-title .crumbs { margin: 0 0 1px; font-size: 12px; }
@@ -84,13 +84,20 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .cv-title .cv-about:hover { border-color: var(--border-strong); }
 .cv-title a.cv-about { display: inline-flex; align-items: center; box-sizing: border-box; line-height: 1; text-decoration: none; white-space: nowrap; }
 .cv-title .cv-about:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
-.cv-title .cv-fold { flex: none; display: grid; place-items: center; width: 30px; height: 30px; margin-left: -6px; padding: 0; border: 0; border-radius: 8px; background: transparent; color: var(--muted-fg); cursor: pointer; }
+.cv-title .cv-fold { flex: none; display: grid; place-items: center; width: 38px; height: 38px; margin: 0 -2px 0 0; padding: 0; border: 0; border-radius: 8px; background: transparent; color: var(--muted-fg); cursor: pointer; transition: color .2s; }
 .cv-title .cv-fold:hover { background: var(--muted); color: var(--fg); }
 .cv-title .cv-fold .ic { width: 16px; height: 16px; }
-.cv-title .cv-fold:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
-.cv-title.is-folded { padding: 4px; gap: 0; background: var(--bg); backdrop-filter: none; box-shadow: 0 4px 16px rgb(0 0 0 / .08); }
-.cv-title.is-folded > :not(.cv-fold) { display: none !important; }
-.cv-title.is-folded .cv-fold { width: 34px; height: 34px; margin: 0; color: var(--fg-2); }
+.cv-title .cv-fold:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }
+/* Folded, the card keeps its height and shrinks to a square around the fold button; the rest fades out under the clip.
+   index.html animates the width between the two states. */
+.cv-title { transition: background-color .24s, box-shadow .24s; }
+.cv-title > :not(.cv-fold) { transition: opacity .16s ease-out; }
+.cv-title.is-folded, .cv-title.is-sizing { overflow: hidden; flex-wrap: nowrap; }
+.cv-title.is-sizing { transition: width .26s cubic-bezier(.2, 0, 0, 1), height .26s cubic-bezier(.2, 0, 0, 1), background-color .24s, box-shadow .24s; }
+.cv-title.is-folded { width: var(--fold-w, 60px); background: var(--bg); backdrop-filter: none; box-shadow: 0 4px 16px rgb(0 0 0 / .08); }
+.cv-title.is-folded > :not(.cv-fold) { opacity: 0; visibility: hidden; transition: opacity .12s ease-in, visibility 0s linear .12s; }
+.cv-title.is-folded .cv-fold { color: var(--fg-2); }
+@media (prefers-reduced-motion: reduce) { .cv-title, .cv-title.is-sizing, .cv-title > :not(.cv-fold) { transition: none; } }
 .cv-tools, .cv-zoom {
   position: absolute; z-index: 3; display: flex; gap: 2px; padding: 4px; border-radius: 12px;
   background: var(--bg); border: 1px solid var(--border); box-shadow: 0 4px 16px rgb(0 0 0 / .08);
@@ -141,7 +148,6 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .cv-list small { color: var(--muted-fg); font-size: 12.5px; }
 .cv-viewport:focus-visible { box-shadow: inset 0 0 0 2px var(--ring); }
 @media (max-width: 860px) {
-  .cv-title { padding: 10px 12px; }
   .cv-title p, .cv-title .crumbs { display: none; }
   .cv-tools { left: 16px; transform: none; }
 }
@@ -191,8 +197,8 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .cv-proto-bar .ic { width: 16px; height: 16px; flex: none; }
 .cv-proto-pick { min-width: 0; max-width: 260px; height: 34px; padding: 0 8px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--fg); font: inherit; font-size: 13px; cursor: pointer; }
 @media (max-width: 600px) {
-  .cv-title { flex-wrap: wrap; gap: 8px; }
-  .cv-title > div:first-of-type { flex-basis: calc(100% - 44px); }
+  .cv-title:not(.is-folded) { flex-wrap: wrap; gap: 8px; }
+  .cv-title > div:first-of-type { flex-basis: calc(100% - 46px); }
   .cv-proto { padding-left: 8px; padding-right: 8px; }
   .cv-proto-bar [data-p="hot"] span { display: none; }
   .cv-proto-pick { max-width: 170px; }
