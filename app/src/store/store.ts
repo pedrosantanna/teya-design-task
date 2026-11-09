@@ -42,7 +42,7 @@ export type AppState = {
   /** Location permission off: Nearby shows its location-off state. */
   locationOff: boolean;
   notificationsAllowed: boolean;
-  /** After a partial buy the order card adds "Keep looking for 1 more". */
+  /** After a partial buy the order card adds "Still looking for 1 more". */
   keepLookingForMore: boolean;
   /** What a new request starts with: a suggestion chip's text, or the shop it is addressed to (Ask from a shop page). */
   draft: Draft | null;

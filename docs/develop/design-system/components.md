@@ -81,7 +81,7 @@ Trade-offs:
 
 | Aspect | Spec |
 | --- | --- |
-| Anatomy | Status label (with a warning symbol on "not charged" endings); the shop in Headline with the items under it in Footnote ("Paper & Co", "2 × eclipse glasses"); total; while waiting, a list of up to three steps with the current one marked; an optional line "Keep looking for 1 more" |
+| Anatomy | Status label (with a warning symbol on "not charged" endings); the shop in Headline with the items under it in Footnote ("Paper & Co", "2 × eclipse glasses"); total; while waiting, a list of up to three steps with the current one marked; an optional status line "Still looking for 1 more" in Muted foreground (in Tint and worded as an order it read as a button) |
 | Tokens | Card colour, `radius.card`, `inset.card`, `gap.block`. Status Caption 1, shop and items Subheadline, total Headline, steps Footnote. A status change animates with `spring.status` |
 | States | Each label in the conceptual model's state table; pressed opens the receipt. The shop's name is a link with a chevron that opens the shop's page; its press area is 44 pt tall (the line's height plus 11 pt above and below for Headline, 12 pt for Subheadline) and the card's own press area gives way to it; the receipt has a View shop button under its header |
 | iOS ↔ Android | Same card on both |

@@ -13,6 +13,7 @@ import {
   Button,
   CollectionCode,
   Ground,
+  ListGroup,
   ListRow,
   NavBar,
   StatusLabel,
@@ -84,7 +85,8 @@ export default function Receipt() {
             Display name. While the order can be collected, the header names the shop and what was bought; the date
             moves under the code, the pair the counter reads together (decision 068). The status label ("Ready",
             "Extended") stays on the pinned order and the order card in the chat. Every other state opens with it. */}
-        {/* The header and the code are one group: who and what, then the code to show for it. */}
+        {/* The three cards (who and what, the code, where and how it was paid) sit gap.block apart as one group, all at
+            radius.card; the actions come a section below. */}
         <View style={styles.top}>
         <View style={styles.head(accent)}>
           {/* The header is the shop's tile: its text takes the on-tile ink (the pastel tile in both modes, round 18). */}
@@ -129,9 +131,8 @@ export default function Receipt() {
             untilDetail="Full refund if you don't"
           />
         ) : null}
-        </View>
 
-        <View>
+        <ListGroup corner="card">
           <ListRow icon={Location01Icon} title={where.name} facts={{ state: 'open', detail: noBreak(`until ${where.openUntil}`), walk: noBreak(order.walk), street: streetLabel(where.street) }} position="first" />
           <ListRow
             icon={CreditCardIcon}
@@ -141,6 +142,7 @@ export default function Receipt() {
             detail={`${order.payName}, ${order.card.charAt(0).toLowerCase()}${order.card.slice(1)}`}
             position="last"
           />
+        </ListGroup>
         </View>
 
         <View style={styles.actions}>

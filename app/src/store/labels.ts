@@ -218,9 +218,10 @@ export const orderStatesFor: Record<Fulfilment, OrderState[]> = {
   delivery: ['none', 'waiting', 'paid', 'onItsWay', 'delivered', 'notConfirmed', 'sold', 'cancelled'],
 };
 
-/** "Keep looking for [n] more", added to the order card after a partial buy. */
+/** "Still looking for [n] more", added to the order card after a partial buy. A status, worded so it doesn't read
+ *  as a button. */
 export function keepLookingLine(more: number): string {
-  return `Keep looking for ${more} more`;
+  return `Still looking for ${more} more`;
 }
 
 export function shopHoursLabel(hours: ShopHours, shop: Pick<Shop, 'openUntil' | 'opensAt'>): string {

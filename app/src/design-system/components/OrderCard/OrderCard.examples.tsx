@@ -32,7 +32,7 @@ export function OrderCardExamples() {
         items="2 × eclipse glasses"
         total="£29.98"
         steps={step % statuses.length === 0 ? waitingSteps : undefined}
-        note="Keep looking for 1 more"
+        note="Still looking for 1 more"
         onOpen={noop}
       />
       <Button label="Next status" role="plain" size="compact" onPress={() => setStep((n) => n + 1)} />

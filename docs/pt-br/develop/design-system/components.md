@@ -81,7 +81,7 @@ Trade-offs:
 
 | Aspecto | Especificação |
 | --- | --- |
-| Anatomia | Rótulo de status (com um símbolo de aviso nos finais "not charged"); a loja em Headline com os itens embaixo em Footnote ("Paper & Co", "2 × eclipse glasses"); total; enquanto espera, uma lista de até três passos com o atual marcado; uma linha opcional "Keep looking for 1 more" |
+| Anatomia | Rótulo de status (com um símbolo de aviso nos finais "not charged"); a loja em Headline com os itens embaixo em Footnote ("Paper & Co", "2 × eclipse glasses"); total; enquanto espera, uma lista de até três passos com o atual marcado; uma linha opcional de status "Still looking for 1 more" na cor do texto secundário (em Tint e escrita como ordem, parecia um botão) |
 | Tokens | Cor Card, `radius.card`, `inset.card`, `gap.block`. Status em Caption 1, loja e itens em Subheadline, total em Headline, passos em Footnote. Uma mudança de status anima com `spring.status` |
 | Estados | Cada rótulo da tabela de estados do modelo conceitual; pressionado abre o recibo. O nome da loja é um link com chevron que abre a página da loja, com área de toque de 44 pt, e o cartão cede a ele a sua própria área; o recibo tem um botão View shop sob o cabeçalho |
 | iOS ↔ Android | O mesmo cartão nos dois |

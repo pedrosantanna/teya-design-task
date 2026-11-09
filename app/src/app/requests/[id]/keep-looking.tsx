@@ -6,7 +6,7 @@ import { ScrollView, View } from 'react-native';
 import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { Button, ListRow, NavBar, SegmentedControl, Text, screenMargin, useNavBarHeight } from '@/design-system';
+import { Button, ListGroup, ListRow, NavBar, SegmentedControl, Text, screenMargin, useNavBarHeight } from '@/design-system';
 import { looksRepeating, lookUntil, otherActions, otherKey, sim, unitFor, useContent, useOtherThread, useSim } from '@/store';
 
 const SEGMENTS = [
@@ -46,10 +46,10 @@ export default function KeepLooking() {
       <ScrollView contentContainerStyle={styles.content(margin, top, insets.bottom)}>
         <SegmentedControl segments={SEGMENTS} value={repeat} onChange={setRepeat} accessibilityLabel="How often" />
         <Text variant="headline">{other ? other.title : `${content.active.title}, ${content.active.quantity} ${unitFor(content, content.active.quantity)}`}</Text>
-        <View>
+        <ListGroup corner="card">
           <ListRow icon={Location01Icon} title="Where" value={content.active.area} position="first" />
           <ListRow icon={Calendar03Icon} title="Until" value={lookUntil(repeat === 'weekly')} position="last" />
-        </View>
+        </ListGroup>
         <Text variant="footnote" color="mutedForeground">
           {repeat === 'weekly'
             ? `I'll ask again every ${day} and message you each time a shop near you has ${them}. Nothing is bought until you tap Buy.`

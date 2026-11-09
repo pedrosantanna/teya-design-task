@@ -324,6 +324,10 @@ The `screen-reviewer` agent caught that the 21 pt rule would put the bar over An
 
 I asked why the chat's Reply field sat higher than the bar on Nearby. The agent measured the system again in the simulator: a floating text field (the bottom search in Messages) is 48 pt tall and 28 pt from the edge, inside the safe area, while ours sat 42 pt up. The composer kept its 48 pt and now rests 28 pt from the edge on iOS (`size.askBar.fieldBottom`, `composerInset`), in a request's chat and on New Request before the keyboard opens; on Android it keeps the full inset above the navigation bar, and the web follows whichever frame is on. I chose not to add the Snuffle glyph to Reply. I also asked for the bar on the Requests list to match the one on Nearby, since both open New Request: it is now the same component without the Requests circle, 62 pt and 21 pt from the edge, and New Request grows out of it and folds back into it as it does from Nearby. The agent checked the three moves on the simulator by recording the screen.
 
+### 97. One corner and one gap on the order screen
+
+On the order screen I asked why one card was rounder than the others and why the gaps differed. The shop card and the code card took `radius.card` (28) and sat 12 apart, while the place and payment rows took the 12 pt corner meant for a list inside a card and sat 32 below. `shape.md` already says a standalone grouped list on a screen takes `radius.card`, but `ListGroup corner="card"` only rounded the group, not its first and last rows. The agent passed the corner down to the rows, wrapped the order screen's rows and the Keep looking screen's rows in that group, and put the three order cards 12 apart with one section gap before the buttons. I also asked about "Keep looking for 1 more" on the order card, which read as a button: it is a status, so it now says "Still looking for 1 more" in Muted foreground instead of Tint.
+
 ## AI failures
 
 - A first persona draft looked finished but was circular, because the agent built it before the method was right. The reviewer agent caught it; the agent that wrote it didn't.

@@ -30,7 +30,7 @@ export type OrderCardProps = {
   total: string;
   /** While waiting: up to three steps, the current one marked; four for an order the shop delivers. */
   steps?: OrderStep[];
-  /** After a partial buy: "Keep looking for 1 more". */
+  /** After a partial buy: "Still looking for 1 more", a status in Muted foreground (Tint read as a link). */
   note?: string;
   /** Opens the receipt. */
   onOpen?: (id: string) => void;
@@ -114,7 +114,7 @@ export const OrderCard = memo(function OrderCard({ id, status, tone = 'default',
         </View>
       ) : null}
       {note ? (
-        <Text variant="footnote" color="tint">
+        <Text variant="footnote" color="mutedForeground">
           {note}
         </Text>
       ) : null}

@@ -1,6 +1,6 @@
 import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
 import type { IconSvgElement } from '@hugeicons/react-native';
-import { memo, type ReactNode } from 'react';
+import { createContext, memo, useContext, type ReactNode } from 'react';
 import { Pressable, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { StyleSheet } from 'react-native-unistyles';
@@ -14,6 +14,9 @@ import { Icon } from '../Icon/Icon';
 import type { RowPosition } from '../ShopRow/ShopRow';
 import { ShopMeta, shopFactsLabel, type ShopFacts } from '../ShopMeta/ShopMeta';
 import { Text } from '../Text/Text';
+
+/** The corner a ListGroup gives its first and last rows, so the rows' fill follows the group's shape. */
+const GroupCornerContext = createContext<'inner' | 'card'>('inner');
 
 export type ListRowProps = {
   /** Passed back to `onPress`, so a list passes one stable handler. */
@@ -75,6 +78,7 @@ export const ListRow = memo(function ListRow({
   const choice = selected !== undefined;
   const fill: ColorName = 'foreground';
   const ground = useGround();
+  const groupCorner = useContext(GroupCornerContext);
   const tile = useTileAccent();
   // On a tile the grouped row is a card in cardOnTile: its text takes the card's colours (light in dark), not the tile's ink.
   const content = (
@@ -116,7 +120,7 @@ export const ListRow = memo(function ListRow({
   const label = accessibilityLabel ?? spoken(title, facts ? shopFactsLabel(facts) : detail, value);
   if (!onPress) {
     return (
-      <View accessible={!trailing && !children} accessibilityLabel={trailing || children ? undefined : label} style={styles.row(grouped, position, false, surface, ground, tile)}>
+      <View accessible={!trailing && !children} accessibilityLabel={trailing || children ? undefined : label} style={styles.row(grouped, position, false, surface, ground, tile, groupCorner)}>
         {content}
       </View>
     );
@@ -129,7 +133,7 @@ export const ListRow = memo(function ListRow({
       onPress={() => onPress(id)}
       onPressIn={press.onPressIn}
       onPressOut={press.onPressOut}
-      style={styles.row(grouped, position, choice && !!selected, surface, ground, tile)}
+      style={styles.row(grouped, position, choice && !!selected, surface, ground, tile, groupCorner)}
     >
       {content}
     </Pressable>
@@ -171,7 +175,11 @@ export type ListGroupProps = {
 export function ListGroup({ children, shadow = false, corner = 'inner' }: ListGroupProps) {
   const ground = useGround();
   const inSheet = ground === 'sheet';
-  return <View style={[styles.group, inSheet && styles.groupInSheet, corner === 'card' && styles.groupCard, shadow && styles.groupShadow]}>{children}</View>;
+  return (
+    <GroupCornerContext.Provider value={corner}>
+      <View style={[styles.group, inSheet && styles.groupInSheet, corner === 'card' && styles.groupCard, shadow && styles.groupShadow]}>{children}</View>
+    </GroupCornerContext.Provider>
+  );
 }
 
 export type ListBlockProps = { children: ReactNode; position?: RowPosition; surface?: 'card' | 'background'; accessibilityLabel?: string };
@@ -180,12 +188,13 @@ export type ListBlockProps = { children: ReactNode; position?: RowPosition; surf
  *  row of chips sits in the same card as the rows under it (the shop page's sections). */
 export function ListBlock({ children, position = 'only', surface = 'card', accessibilityLabel }: ListBlockProps) {
   const ground = useGround();
+  const groupCorner = useContext(GroupCornerContext);
   const tile = useTileAccent();
   // Painted on both platforms (platforms.md, parity): a Material 3 list sits in the same card role as the iOS grouped list,
   // so a row on a tile is cardOnTile on Android too, never the bare tile.
   const grouped = true;
   return (
-    <View accessibilityLabel={accessibilityLabel} style={[styles.row(grouped, position, false, surface, ground, tile), styles.block]}>
+    <View accessibilityLabel={accessibilityLabel} style={[styles.row(grouped, position, false, surface, ground, tile, groupCorner), styles.block]}>
       <View style={styles.blockInner(grouped && position !== 'last' && position !== 'only', ground, surface, tile)}>
         <OnTileSurface painted={grouped}>{children}</OnTileSurface>
       </View>
@@ -207,12 +216,13 @@ const styles = StyleSheet.create((theme) => ({
   groupInSheet: { borderRadius: theme.radius.bubble },
   groupCard: { borderRadius: theme.radius.card },
   groupShadow: { boxShadow: cardShadow(theme) },
-  row: (grouped: boolean, position: RowPosition, selected: boolean, surface: 'card' | 'background' = 'card', ground?: GroundName, tile?: ShopAccentName) => {
+  row: (grouped: boolean, position: RowPosition, selected: boolean, surface: 'card' | 'background' = 'card', ground?: GroundName, tile?: ShopAccentName, groupCorner: 'inner' | 'card' = 'inner') => {
     const top = position === 'first' || position === 'only';
     const bottom = position === 'last' || position === 'only';
     // Inside a sheet the group takes the iOS 26 inset-grouped corner (radius.bubble, shape.md, Sheets): the sheet's
     // own 32 pt corners made the 12 pt group read as a different family.
-    const corner = grouped ? (ground === 'sheet' ? theme.radius.bubble : theme.radius.inner) : theme.radius.none;
+    // A standalone group on a screen (ListGroup corner="card") takes radius.card, as a card does (shape.md).
+    const corner = !grouped ? theme.radius.none : ground === 'sheet' ? theme.radius.bubble : groupCorner === 'card' ? theme.radius.card : theme.radius.inner;
     return {
       ...cornerCurve,
       flexDirection: 'row',
