@@ -12,7 +12,7 @@ Takeaways:
 Call:
 - I asked for a north star candidate and its inputs, the supply and demand metrics, the money metrics from the revenue estimate, all by area and per shopper, and a model of how many shops an area needs per active shopper, with every input marked as an assumption to test. I adopted completed requests per week as the north star.
 - I asked that no benchmark be invented, and that any outside figure come from a source that was opened and linked.
-- I kept the model and set H1's marks from it (decision 070): 60% answers is my estimate, below the bar platforms set for a responsive business, and the 50% fill mark is the model's own prediction for 10 shops.
+- I kept the model and set H1's marks from it (decision 070): 60% answers is my estimate, below the bar Meta set for a responsive business, and the 50% fill mark is the model's own prediction for 10 shops.
 AI:
 - An agent defined the metrics from the events and the revenue estimate, built the liquidity model from the assumptions already in the docs (the 15-minute ring, H1's answer rate, the proof of concept's ten shops, the six kinds), added three assumptions of its own, labelled, and checked the arithmetic in a short script.
 - In a second pass, an agent aligned the metrics with the revised events: the collection rate counts from `order_ready`, GMV sums `payment_taken` and H12 counts per request with a yes. The liquidity arithmetic didn't change.
@@ -82,7 +82,7 @@ How many shops an area needs so that a request gets a usable yes in time. Every 
 
 | Input | Value | Where it comes from |
 | --- | --- | --- |
-| r: share of asked shops that answer validly within 10 minutes | 60% | H1's go mark for asks, and my estimate. No published figure exists for UK independents answering on WhatsApp. It sits below the bar platforms set for a responsive business: Meta's "Very responsive" badge needed a 90% response rate and a 15-minute response time ([Facebook Help Center, archived 2020](https://webcf.waybackmachine.org/web/20200509150311/https://www.facebook.com/help/988319821208361)); Thumbtack counts a pro's lead as answered within an hour ([Thumbtack community](https://community.thumbtack.com/discussion/comment/1583)) |
+| r: share of asked shops that answer validly within 10 minutes | 60% | H1's go mark for asks, and my estimate. No published figure exists for UK independents answering on WhatsApp. It sits below the bar Meta set for a responsive business: its "Very responsive to messages" badge needed a 90% response rate and a 15-minute response time over the last 7 days ([Facebook Help Center, archived 2020](https://web.archive.org/web/20200509150311/https://www.facebook.com/help/988319821208361)) |
 | h: share of shops that answer and have the item | 40% | Assumption, no source. The proof of concept measures it apart from r (H1) |
 | o: share of likely shops open when the request comes in | 80% | Assumption for shop hours, no source |
 | k: kinds of shop likely to have one item | 2 | Assumption. In the prototype, eclipse glasses go to six kinds (chemist, optician, stationer, camera shop, hardware, toys) and sourdough to one |
@@ -116,7 +116,7 @@ A request draws its n likely shops from k kinds, and only the open ones count, s
 
 At H1's stop mark for asks, r = 45% and r × h = 0.18, a request needs n = ln 0.2 ÷ ln 0.82 ≈ 8.1, so 9 likely shops for 80% fill: 9 ÷ 1.6 ≈ 5.6, so 6 per kind and 36 shops in a ring, rounded up as above. I judge that beyond what one ring's independents can supply.
 
-The proof of concept has 10 shops over 6 kinds, about 1.7 per kind. That gives n = 1.7 × 2 × 0.8 ≈ 2.7 likely shops per request and a fill rate of 1 − 0.76^2.7 ≈ 52%. H1's go mark for fill is 50% of about 60 requests, and its stop mark 30%. Published fill-rate benchmarks range widely and none covers this kind of marketplace ([Lenny Rachitsky, "The most important marketplace metrics", 29 March 2022](https://www.lennysnewsletter.com/p/the-most-important-marketplace-metrics)), so the mark comes from the model. A go there says the concept can work with ten shops; whether ten are enough for the product is a separate question.
+The proof of concept has 10 shops over 6 kinds, about 1.7 per kind. That gives n = 1.7 × 2 × 0.8 ≈ 2.7 likely shops per request and a fill rate of 1 − 0.76^2.7 ≈ 52%. H1's go mark for fill is 50% of about 60 requests, and its stop mark 30%. Lenny Rachitsky puts fill rate anywhere from under 5% for an e-commerce marketplace to over 80% at the bottom of the funnel ([Lenny Rachitsky, "The most important marketplace metrics", 29 March 2022](https://www.lennysnewsletter.com/p/the-most-important-marketplace-metrics)), a range too wide to set a mark, so the mark comes from the model. A go there says the concept can work with ten shops; whether ten are enough for the product is a separate question.
 
 ### Shoppers per shop
 

@@ -93,7 +93,7 @@ Source: English Markdown in `docs/`. Target: Brazilian Portuguese in `docs/pt-br
 | fit | encaixe |
 | hypothesis / pass mark / "Pass if" | hipótese / critério de aprovação / "Passa se" |
 | go / iterate / stop (marks and zones) / "Go / stop" (column) / direction only | seguir / iterar / parar / "Seguir / parar" / só direção |
-| Wilson interval | intervalo de Wilson |
+| adjusted Wald interval | intervalo de Wald ajustado |
 | "We believe that…" (hypothesis column) | "Acredito que…" |
 | hold (an item) / no-show | segurar (um item) / falta (o comprador não aparece) |
 | browse / ask (the agent) | explorar / perguntar (ao agente) |

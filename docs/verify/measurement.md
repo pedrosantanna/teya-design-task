@@ -8,7 +8,7 @@ Takeaways:
 - The event names double as the log sheet for the hand-run concierge: one row per event, with the WhatsApp timestamps.
 - The north star is completed requests per week: requests that end with an order collected or delivered. It only moves when a shop answers, has the item, and the shopper buys and collects.
 - The proof of concept runs four weeks with 10 shops and 20 shoppers: about 60 requests and about 160 asks. Its size comes from the funnel, so that H2, H7 and H12 have enough purchases to read. It tests shops at low load, about 1 ask per shop per trading day.
-- Every mark splits results into go, iterate and stop, set before testing, and each result is reported with its 90% Wilson interval.
+- Every mark splits results into go, iterate and stop, set before testing, and each result is reported with its 90% adjusted Wald interval.
 - With the current assumptions, a request needs about six likely shops open to get a yes 80% of the time. Ten shops spread over six kinds, as in the proof of concept, give 52%, which sets H1's go mark for fill at 50% of the requests.
 - The recommendation is no NPS and no standing CSAT for now. The rating after collection covers the shop; what it misses (requests that end without an order, Snuffle itself, the shop's view) is covered by talking to the twenty shoppers and ten shops in the proof of concept.
 Call:
@@ -40,14 +40,14 @@ The load is low. About 1 ask per shop per trading day, against about 24 at the m
 
 ## Go, iterate or stop
 
-Every hypothesis with a mark has three zones, set before testing: go if the result is at or above the go mark, stop if it is at or below the stop mark, iterate in between. Each result is reported with its 90% Wilson interval, which holds up with small samples ([MeasuringU](https://measuringu.com/small-n/)): 14 of 20 is 70%, with an interval of about 52% to 84%. Writing the criterion down before the test follows the [Strategyzer Test Card](https://www.strategyzer.com/library/validate-your-ideas-with-the-test-card). Where a hypothesis has a stated and a behavioural mark (H2, H7) and the two disagree, behaviour wins. Where 10 shops or 20 pairs can only show a large effect (H6, H13, H14, H17, H19), the mark is labelled direction only.
+Every hypothesis with a mark has three zones, set before testing: go if the result is at or above the go mark, stop if it is at or below the stop mark, iterate in between. Each result is reported with its 90% adjusted Wald interval, which MeasuringU recommends for yes-or-no results at any sample size ([MeasuringU](https://measuringu.com/small-n/)): 14 of 20 is 70%, with an interval of about 52% to 84%. The [Strategyzer Test Card](https://www.strategyzer.com/library/validate-your-ideas-with-the-test-card) makes the success criterion part of a test's design, next to the hypothesis, the test and the metric; I write it down before the test runs. Where a hypothesis has a stated and a behavioural mark (H2, H7) and the two disagree, behaviour wins. Where 10 shops or 20 pairs can only show a large effect (H6, H13, H14, H17, H19), the mark is labelled direction only.
 
 ## Methods
 
 | Method | Who | What it can show | Hypotheses |
 | --- | --- | --- | --- |
-| Usability round | 5 to 8 shoppers, before the choice measures | Problems in the prototype, reported as findings ([Nielsen](https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/)) | None; it fixes the prototype first |
-| Prototype test, moderated | 20 shoppers, 30 minutes each, deadline scenarios; they can be the twenty from the proof of concept | Stated choice: what they pick, whether they finish, how long it takes. Twenty give about ±20 points at 95% ([Budiu and Moran, NN/g, 2021](https://www.nngroup.com/articles/summary-quant-sample-sizes/)) | H2, H3, H5, H7, H8, H10, H17 |
+| Usability round | 5 shoppers, before the choice measures | Problems in the prototype, reported as findings ([Nielsen](https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/)) | None; it fixes the prototype first |
+| Prototype test, moderated | 20 shoppers, 30 minutes each, deadline scenarios; they can be the twenty from the proof of concept | Stated choice: what they pick, whether they finish, how long it takes. NN/g puts a ±20-point margin at 95% confidence at 21 participants, so twenty give about that ([Budiu and Moran, NN/g, 2021](https://www.nngroup.com/articles/summary-quant-sample-sizes/)) | H2, H3, H5, H7, H8, H10, H17 |
 | 5-second test | The same 20 shoppers | Whether a shop page reads at a glance | H18 |
 | Proof of concept: the agent, or the hand-run concierge on WhatsApp | 10 shops within 15 minutes' walk of Blythe Road, 20 shoppers with real needs, four weeks | Behaviour: shops answering, fill, buying, collecting, coming back | H1, H2, H4, H6, H7, H11, H12 |
 | Conversations with shops | The same 10 shops, in week four | What shops accept, commit to and value, and their effort | H6, H9, H13, H14, H15, H19 |

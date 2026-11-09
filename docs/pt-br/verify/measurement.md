@@ -8,7 +8,7 @@ Takeaways:
 - Os nomes dos eventos servem também de planilha de registro para o concierge feito à mão: uma linha por evento, com os horários do WhatsApp.
 - A north star (a métrica principal) é o número de pedidos concluídos por semana: pedidos que terminam com uma compra retirada ou entregue. Ela só sobe quando uma loja responde, tem o item, e o comprador compra e retira.
 - A prova de conceito dura quatro semanas com 10 lojas e 20 compradores: cerca de 60 pedidos e cerca de 160 consultas. O tamanho sai do funil, para que a H2, a H7 e a H12 tenham compras suficientes para ler. Ela testa as lojas com pouca carga, cerca de 1 consulta por loja por dia útil.
-- Cada marca divide os resultados em seguir, iterar e parar, definidas antes do teste, e cada resultado sai com o seu intervalo de Wilson de 90%.
+- Cada marca divide os resultados em seguir, iterar e parar, definidas antes do teste, e cada resultado sai com o seu intervalo de Wald ajustado de 90%.
 - Com as premissas atuais, um pedido precisa de cerca de seis lojas prováveis abertas para receber um sim 80% das vezes. Dez lojas espalhadas em seis tipos, como na prova de conceito, dão 52%, o que define a marca da H1 para seguir no atendimento em 50% dos pedidos.
 - A recomendação é não ter NPS nem CSAT fixo por enquanto. A avaliação depois da retirada cobre a loja; o que ela não pega (pedidos que terminam sem compra, o próprio Snuffle, o ponto de vista da loja) fica coberto por conversas com os vinte compradores e as dez lojas da prova de conceito.
 Call:
@@ -40,14 +40,14 @@ A carga é baixa. Cerca de 1 consulta por loja por dia útil, contra cerca de 24
 
 ## Seguir, iterar ou parar
 
-Toda hipótese com marca tem três zonas, definidas antes do teste: seguir se o resultado fica na marca para seguir ou acima dela, parar se fica na marca para parar ou abaixo dela, iterar no meio. Cada resultado sai com o seu intervalo de Wilson de 90%, que se sustenta com amostras pequenas ([MeasuringU](https://measuringu.com/small-n/)): 14 de 20 é 70%, com um intervalo de cerca de 52% a 84%. Escrever o critério antes do teste segue o [Test Card da Strategyzer](https://www.strategyzer.com/library/validate-your-ideas-with-the-test-card). Onde uma hipótese tem uma marca declarada e uma de comportamento (H2, H7) e as duas discordam, vale o comportamento. Onde 10 lojas ou 20 pares só mostram um efeito grande (H6, H13, H14, H17, H19), a marca vem como só direção.
+Toda hipótese com marca tem três zonas, definidas antes do teste: seguir se o resultado fica na marca para seguir ou acima dela, parar se fica na marca para parar ou abaixo dela, iterar no meio. Cada resultado sai com o seu intervalo de Wald ajustado de 90%, que a MeasuringU recomenda para resultados de sim ou não em qualquer tamanho de amostra ([MeasuringU](https://measuringu.com/small-n/)): 14 de 20 é 70%, com um intervalo de cerca de 52% a 84%. O [Test Card da Strategyzer](https://www.strategyzer.com/library/validate-your-ideas-with-the-test-card) põe o critério de sucesso no desenho do teste, junto da hipótese, do teste e da métrica; eu o escrevo antes de o teste rodar. Onde uma hipótese tem uma marca declarada e uma de comportamento (H2, H7) e as duas discordam, vale o comportamento. Onde 10 lojas ou 20 pares só mostram um efeito grande (H6, H13, H14, H17, H19), a marca vem como só direção.
 
 ## Métodos
 
 | Método | Quem | O que pode mostrar | Hipóteses |
 | --- | --- | --- | --- |
-| Rodada de usabilidade | 5 a 8 compradores, antes das medidas de escolha | Problemas no protótipo, relatados como achados ([Nielsen](https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/)) | Nenhuma; ela corrige o protótipo antes |
-| Teste do protótipo, moderado | 20 compradores, 30 minutos cada, cenários com prazo; podem ser os vinte da prova de conceito | Escolha declarada: o que escolhem, se terminam, quanto tempo levam. Vinte dão cerca de ±20 pontos a 95% ([Budiu e Moran, NN/g, 2021](https://www.nngroup.com/articles/summary-quant-sample-sizes/)) | H2, H3, H5, H7, H8, H10, H17 |
+| Rodada de usabilidade | 5 compradores, antes das medidas de escolha | Problemas no protótipo, relatados como achados ([Nielsen](https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/)) | Nenhuma; ela corrige o protótipo antes |
+| Teste do protótipo, moderado | 20 compradores, 30 minutos cada, cenários com prazo; podem ser os vinte da prova de conceito | Escolha declarada: o que escolhem, se terminam, quanto tempo levam. A NN/g põe uma margem de ±20 pontos com 95% de confiança em 21 participantes, então vinte dão mais ou menos isso ([Budiu e Moran, NN/g, 2021](https://www.nngroup.com/articles/summary-quant-sample-sizes/)) | H2, H3, H5, H7, H8, H10, H17 |
 | Teste de 5 segundos | Os mesmos 20 compradores | Se a página da loja se lê de relance | H18 |
 | Prova de conceito: o agente, ou o concierge feito à mão no WhatsApp | 10 lojas a até 15 minutos a pé da Blythe Road, 20 compradores com necessidades reais, quatro semanas | Comportamento: lojas respondendo, atendimento, compra, retirada, volta | H1, H2, H4, H6, H7, H11, H12 |
 | Conversas com as lojas | As mesmas 10 lojas, na quarta semana | O que as lojas aceitam, assumem e valorizam, e o esforço delas | H6, H9, H13, H14, H15, H19 |
