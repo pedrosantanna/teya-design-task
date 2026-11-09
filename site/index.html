@@ -289,7 +289,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .feature .case-shot { margin: 0; }
 @media (max-width: 640px) { .feature { grid-template-columns: minmax(0, 1fr); gap: var(--s-3); } }
 /* The start of the Overview: the Loom walkthrough beside the home screen as iOS renders it. */
-.overview-hero { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: var(--s-5); align-items: start; margin: var(--s-4) 0 var(--s-6); }
+.overview-hero { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: var(--s-6); align-items: start; margin: var(--s-5) 0 var(--s-7); }
+.hero-side { display: flex; flex-direction: column; gap: var(--s-5); min-width: 0; }
+.prose .hero-side .dg-brief { margin: 0; }
 .overview-hero figure { margin: 0; }
 .overview-hero figcaption { margin-top: var(--s-2); font-size: 13px; line-height: 1.4; color: var(--muted-fg); }
 /* The walkthrough opens on Loom: the artifact's page can't frame other sites, so this is a link drawn as a player. */
@@ -306,7 +308,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .loom-text small { font-size: 13px; color: #a1a1aa; }
 @media (prefers-reduced-motion: reduce) { .loom-play { transition: none; } }
 .hero-phone img { display: block; width: 100%; height: auto; }
-@media (max-width: 760px) { .overview-hero { grid-template-columns: minmax(0, 1fr); } .hero-phone { max-width: 300px; } }
+@media (max-width: 760px) { .overview-hero { grid-template-columns: minmax(0, 1fr); gap: var(--s-5); } .hero-phone { max-width: 320px; } }
 .phones { display: flex; gap: var(--s-4); margin: var(--s-4) 0 var(--s-6); }
 .phones .phone-shot { flex: 1 1 0; min-width: 0; max-width: 220px; }
 .case-shot { display: block; max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 0 0 1px var(--border); margin: var(--s-4) 0 var(--s-6); }
