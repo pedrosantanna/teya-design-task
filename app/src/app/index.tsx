@@ -21,6 +21,7 @@ import {
   AreaRow,
   Avatar,
   BottomAccessory,
+  askBarInset,
   Button,
   CategoryCard,
   Chip,
@@ -151,7 +152,7 @@ function Nearby() {
         onScroll={scroll.onScroll}
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.content(insets.top, insets.bottom)}
+        contentContainerStyle={styles.content(insets.top, askBarInset(insets.bottom, theme))}
       >
         <View style={styles.head(margin)}>
           <View style={styles.area}>
@@ -365,7 +366,7 @@ const styles = StyleSheet.create((theme) => ({
     paddingTop: top + theme.space[2],
     // Room for the dock's bottom padding (space.2) and the ask bar, then clearance.askBar: the last row rests 48 above
     // the ask bar, clear of where the dock's fade starts (36 above it), screen-review check 17.
-    paddingBottom: bottom + theme.space[2] + theme.size.field + theme.clearance.askBar,
+    paddingBottom: bottom + theme.space[2] + theme.size.bar + theme.clearance.askBar,
     // Proximity (spacing.md): the large title is 24 below the area row and 16 above the first section heading.
     gap: theme.gap.title,
   }),

@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="site/canvas.css?v=16">
 <script src="site/canvas.js?v=13"></script>
 <link rel="stylesheet" href="site/viewer3d.css?v=3">
-<link rel="stylesheet" href="site/present.css?v=11">
+<link rel="stylesheet" href="site/present.css?v=12">
 <script src="site/present.js?v=8" defer></script>
 <script src="site/viewer3d.js?v=6"></script>
 <style>
@@ -288,6 +288,21 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .feature > div > :first-child { margin-top: 0; }
 .feature .case-shot { margin: 0; }
 @media (max-width: 640px) { .feature { grid-template-columns: minmax(0, 1fr); gap: var(--s-3); } }
+/* The start of the Overview: the Loom walkthrough beside the home screen as iOS renders it. */
+.overview-hero { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: var(--s-5); align-items: start; margin: var(--s-4) 0 var(--s-6); }
+.overview-hero figure { margin: 0; }
+.overview-hero figcaption { margin-top: var(--s-2); font-size: 13px; line-height: 1.4; color: var(--muted-fg); }
+/* The walkthrough opens on Loom: the artifact's page can't frame other sites, so this is a link drawn as a player. */
+.prose a.loom-card { position: relative; display: flex; align-items: flex-end; aspect-ratio: 16 / 9; padding: var(--s-4); border-radius: 14px; background: #18181b; color: #fafafa; text-decoration: none; box-shadow: inset 0 0 0 1px var(--border); }
+.loom-card:hover .loom-play { transform: translate(-50%, -50%) scale(1.06); }
+.loom-play { position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; border-radius: 50%; background: #fafafa; transform: translate(-50%, -50%); transition: transform .15s; }
+.loom-play::after { content: ""; position: absolute; left: 26px; top: 21px; border-left: 18px solid #18181b; border-top: 11px solid transparent; border-bottom: 11px solid transparent; }
+.loom-text { display: flex; flex-direction: column; gap: 2px; }
+.loom-text b { font-size: 15px; font-weight: 600; }
+.loom-text small { font-size: 13px; color: #a1a1aa; }
+@media (prefers-reduced-motion: reduce) { .loom-play { transition: none; } }
+.hero-phone img { display: block; width: 100%; height: auto; }
+@media (max-width: 760px) { .overview-hero { grid-template-columns: minmax(0, 1fr); } .hero-phone { max-width: 300px; } }
 .phones { display: flex; gap: var(--s-4); margin: var(--s-4) 0 var(--s-6); }
 .phones .phone-shot { flex: 1 1 0; min-width: 0; max-width: 220px; }
 .case-shot { display: block; max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 0 0 1px var(--border); margin: var(--s-4) 0 var(--s-6); }
@@ -713,7 +728,7 @@ i.m.unknown { opacity: .45; }
     <img class="brand-mark" src="docs/develop/design-system/img/mark-ios-light.svg" alt="" aria-hidden="true">
     <span class="brand-name">Snuffle</span>
     <span class="brand-sep" aria-hidden="true">/</span>
-    <span class="brand-sub">Design take-home, process docs</span>
+    <span class="brand-sub">Design take-home task for Teya</span>
   </a>
   <span class="topbar-spacer"></span>
   <div class="controls">
@@ -1131,7 +1146,8 @@ i.m.unknown { opacity: .45; }
     nav.sections.forEach(sec => (sec.items || []).forEach(it => {
       // An item with children and its own src is a section page with subpages under it (5 · The prototype).
       if (it.children) { if (it.src) out.push({ ...it, sec }); it.children.forEach(ch => out.push({ ...ch, sec, grp: it })); }
-      else out.push({ ...it, sec });
+      // An item with "ref" is a second link to a page listed elsewhere (Live prototype under Flows and states): not a page.
+      else if (!it.ref) out.push({ ...it, sec });
     }));
     return out;
   }
@@ -1186,7 +1202,7 @@ i.m.unknown { opacity: .45; }
     }));
     markCurrent();
   }
-  const link = p => `<a class="nav-link" href="#${p.id}" data-id="${p.id}">${esc(L(p))}</a>`;
+  const link = p => `<a class="nav-link" href="#${p.ref || p.id}" data-id="${p.ref || p.id}">${esc(L(p))}</a>`;
   // The deck (site/present.js) opens from the top of the case's block in the sidebar; Shift+P opens it from anywhere.
   const presentBtn = () => `<button type="button" class="present-btn" id="present-btn" aria-keyshortcuts="P Shift+P" title="${esc(t('presentTip'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/></svg><span>${esc(t('present'))}</span><kbd aria-hidden="true">⇧P</kbd></button>`;
   function markCurrent() {
@@ -1198,7 +1214,9 @@ i.m.unknown { opacity: .45; }
     if (id !== lastPage) {
       lastPage = id;
       const area = blockOfPage(id);
-      if (area && area !== shownBlock && !els.search.value.trim()) { viewBlock = null; renderNav(''); }
+      // A page also linked in the area on show (a "ref" item) keeps that area.
+      const linkedHere = els.nav.querySelector(`.nav-link[data-id="${CSS.escape(id)}"]`);
+      if (area && area !== shownBlock && !linkedHere && !els.search.value.trim()) { viewBlock = null; renderNav(''); }
     }
   }
   const currentId = () => {

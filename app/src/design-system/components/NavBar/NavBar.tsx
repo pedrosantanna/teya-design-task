@@ -6,7 +6,7 @@ import type { IconSvgElement } from '@hugeicons/react-native';
 import { Image } from 'expo-image';
 import { useIsFocused } from 'expo-router';
 import { memo, useState, type ReactNode } from 'react';
-import { Pressable, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 import Animated, {
   Extrapolation,
   interpolate,
@@ -248,7 +248,8 @@ export const NavBar = memo(function NavBar({
     (now, before) => {
       if (tracksFill && now !== before) scheduleOnRN(setFilled, now);
     },
-    [tracksFill, fillAt],
+    // Reanimated reads a deps array only on the web; on iOS and Android the worklet's closure is captured anyway.
+    Platform.OS === 'web' ? [tracksFill, fillAt] : undefined,
   );
   const focused = useIsFocused();
   const overTile = overMap ? filled : true;

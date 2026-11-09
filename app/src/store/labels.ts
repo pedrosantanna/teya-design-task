@@ -2,6 +2,9 @@
 // Rows, chat cards, notifications and the Live Activity all read them from here.
 import type { AnswerSource, AnswerState, Fulfilment, OrderState, RequestState, Shop, ShopHours } from './types';
 
+/** The most rating tags a buyer can pick (ratings.ts re-exports it). */
+export const MAX_TAGS = 3;
+
 /** The day a request keeps looking until, the prototype's one date for it (the request is made on Mon 2 Nov). */
 export const LOOK_UNTIL = 'Fri 6 Nov';
 /** A search that repeats asks again on the same weekday, four weeks on (it can be renewed). */

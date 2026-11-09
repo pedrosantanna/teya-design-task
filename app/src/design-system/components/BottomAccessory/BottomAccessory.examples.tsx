@@ -20,5 +20,5 @@ export function BottomAccessoryExamples() {
 
 const styles = StyleSheet.create((theme) => ({
   list: { gap: theme.space[4] },
-  box: { height: theme.size.field * 2 },
+  box: { height: theme.size.bar * 2 },
 }));

@@ -590,8 +590,8 @@
       "$description": "Opacity of color.sheetScrim behind a sheet at rest (shape.md, Sheets)"
     },
     "askEdge": {
-      "$value": 0.1,
-      "$description": "Opacity of color.askEdge: white at 10% in dark"
+      "$value": 0.06,
+      "$description": "Opacity of color.askEdge: white at 6% in dark (10% added to the native rim read as a grey outline)"
     },
     "glassHairline": {
       "$value": 1,

@@ -589,8 +589,8 @@
       "$description": "Opacity of color.sheetScrim behind a sheet at rest (shape.md, Sheets)"
     },
     "askEdge": {
-      "$value": 0.08,
-      "$description": "Opacity of color.askEdge: black at 8% in light"
+      "$value": 0.14,
+      "$description": "Opacity of color.askEdge: Biscuit 150 at 14% in light (8% gave 1.12:1 on the Background once the bar grew to 62)"
     },
     "glassHairline": {
       "$value": 0.06,

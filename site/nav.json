@@ -6,8 +6,6 @@
       "block": {
         "title": "The case",
         "pt": "O case",
-        "sub": "The case in seven sections, in the order of the deck",
-        "sub_pt": "O case em sete seções, na ordem dos slides",
         "present": true
       },
       "items": [
@@ -309,6 +307,12 @@
             }
           ],
           "pt": "Fluxo do app"
+        },
+        {
+          "id": "prototype-in-flows",
+          "title": "Live prototype",
+          "pt": "Protótipo ao vivo",
+          "ref": "prototype"
         },
         {
           "id": "shop-states",

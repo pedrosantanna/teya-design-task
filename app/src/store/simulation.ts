@@ -7,8 +7,7 @@ import { router } from 'expo-router';
 import { Linking, Platform } from 'react-native';
 import { create } from 'zustand';
 
-import { LOOK_DAY } from './labels';
-import { MAX_TAGS } from './ratings';
+import { LOOK_DAY, MAX_TAGS } from './labels';
 import { contentFor, shopById } from './seed';
 import { stepHooks, useAppStore } from './store';
 import type { StepId } from './journey';
@@ -288,7 +287,12 @@ function setupFor(step: StepId): Partial<SimState> {
   }
 }
 
+// Pending scripted events (later()). Declared before applyStep, which runs as this module loads.
+let timers: ReturnType<typeof setTimeout>[] = [];
+
 function applyStep(step: StepId) {
+  // A step jump drops what the old step had scheduled (a payment's order, a notification prompt).
+  clearLater();
   const s = useSim.getState();
   setSim({ ...fresh(), clock: s.clock, ...setupFor(step) });
 }
@@ -300,7 +304,10 @@ applyStep(useAppStore.getState().step);
 // A new persona or content set starts the simulation over.
 useAppStore.subscribe((s, prev) => {
   if (s.persona !== prev.persona || s.contentSet !== prev.contentSet) {
-    if (s.step === prev.step) setSim({ ...fresh(), clock: useSim.getState().clock });
+    if (s.step === prev.step) {
+      clearLater();
+      setSim({ ...fresh(), clock: useSim.getState().clock });
+    }
   }
   // Any change of the order (from the clock, a button or the debugger) restarts the shop's timer.
   if (s.order !== prev.order) setSim({ orderSince: useSim.getState().clock });
@@ -426,7 +433,6 @@ export function cadenceOf(text: string): string | null {
 
 export const OFF_SCRIPT_REPLY = "This prototype only knows a few requests, so I can't ask the shops about that one. Try one of these.";
 
-let timers: ReturnType<typeof setTimeout>[] = [];
 function later(ms: number, run: () => void) {
   timers.push(setTimeout(run, ms));
 }

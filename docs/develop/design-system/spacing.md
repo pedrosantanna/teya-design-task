@@ -44,6 +44,7 @@ Trade-offs:
 | `gap.block` | 12 | Blocks within a card |
 | `inset.card` | 16 | A card at `radius.card` 28 minus 16 holds content at `radius.inner` 12 |
 | `inset.bubble` | 10 vertical, 14 horizontal | Chat bubbles |
+| `size.askBar.bottom` | 21 | Screen edge to the ask bar on an iPhone with a home indicator, where iOS 26 puts its floating tab bar. Off the 4-pt grid on purpose; on Android and the web the bar keeps the full bottom inset |
 | `inset.sheet` | 24 | Under a sheet's last content; at the sides a sheet's header and content take `margin.screen`, so Close and Confirm line up with the rows |
 | `gap.section` | 32 | Sections on a screen |
 | `margin.screen` | 16 below 414 pt wide, 20 at 414 and up; 16 dp on Android | Android value from a secondary source, to confirm on m3.material.io |

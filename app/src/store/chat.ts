@@ -513,6 +513,11 @@ function drive() {
     for (;;) {
       const app = useAppStore.getState();
       const s = useSim.getState();
+      // A closed chat with nothing to show at once has nothing to reveal: skip building it on every store change.
+      if (!s.instant && !s.chatOpen) {
+        wasOpen = false;
+        return;
+      }
       const items = buildChat(contentFor(app.persona, app.contentSet, s.wider != null), appSlice(app), s);
       const keys = items.map((i) => i.key);
       const opened = s.chatOpen && !wasOpen;

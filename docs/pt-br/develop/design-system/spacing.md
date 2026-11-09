@@ -44,6 +44,7 @@ Trade-offs:
 | `gap.block` | 12 | Blocos dentro de um cartão |
 | `inset.card` | 16 | Um cartão com `radius.card` 28 menos 16 leva o conteúdo com `radius.inner` 12 |
 | `inset.bubble` | 10 na vertical, 14 na horizontal | Balões da conversa |
+| `size.askBar.bottom` | 21 | Da borda da tela até a barra de pedido num iPhone com indicador de início, onde o iOS 26 põe a tab bar flutuante. Fora da grade de 4 pt de propósito; no Android e na web a barra mantém o recuo inferior inteiro |
 | `inset.sheet` | 24 | Abaixo do último conteúdo de uma sheet; nas laterais, o cabeçalho e o conteúdo da sheet usam `margin.screen`, para o Close e o Confirm ficarem alinhados com as linhas |
 | `gap.section` | 32 | Seções numa tela |
 | `margin.screen` | 16 abaixo de 414 pt de largura, 20 a partir de 414; 16 dp no Android | Valor do Android vindo de uma fonte secundária, a conferir em m3.material.io |

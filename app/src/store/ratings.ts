@@ -17,8 +17,9 @@ export const NOTE_MAX = 140;
 // The two fixed lists of the conceptual model (decision 047): a buyer picks up to three from the one that follows the answer.
 export const UP_TAGS: RatingTag[] = ['Had it as promised', 'Set aside on time', 'Friendly', 'Good value', 'Knew their stuff'];
 export const DOWN_TAGS: RatingTag[] = ["Wasn't as described", 'Not ready when I came', 'Hard to find'];
-/** The most tags a buyer can pick. */
-export const MAX_TAGS = 3;
+// The most tags a buyer can pick lives in labels.ts, so the simulation can read it without importing this module
+// (which imports the simulation).
+export { MAX_TAGS } from './labels';
 
 /** The prototype's month for a rating sent now (Mon 2 Nov 2026). */
 const THIS_MONTH = 'Nov 2026';

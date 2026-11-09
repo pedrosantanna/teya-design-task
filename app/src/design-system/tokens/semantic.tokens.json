@@ -236,7 +236,14 @@
         "value": 48,
         "unit": "px"
       },
-      "$description": "Ask bar, Requests circle and composer height (components.md, Ask bar)"
+      "$description": "Composer and chat field height (components.md, Ask bar and composer)"
+    },
+    "bar": {
+      "$value": {
+        "value": 62,
+        "unit": "px"
+      },
+      "$description": "Ask bar capsule and Requests circle on Nearby: the height of iOS 26's floating tab bar and search button, measured on the simulator (components.md, Ask bar)"
     },
     "dot": {
       "$value": {
@@ -286,8 +293,11 @@
       },
       "trailing": {
         "$type": "dimension",
-        "$value": "{dimension.space.4}",
-        "$description": "Ask bar and composer padding after the mic (16), measured to the icon"
+        "$value": {
+          "value": 13,
+          "unit": "px"
+        },
+        "$description": "Ask bar and composer padding after the mic (13), measured to the icon box: the Mic01 ink is 13 wide in its 20 box, so 13 puts the ink about 17 from the edge, matching the glyph at the leading end"
       },
       "gap": {
         "$type": "dimension",
@@ -309,6 +319,14 @@
           "unit": "px"
         },
         "$description": "Ring around the count and the shop circles on a request row, in the ground colour"
+      },
+      "bottom": {
+        "$type": "dimension",
+        "$value": {
+          "value": 21,
+          "unit": "px"
+        },
+        "$description": "Screen bottom edge to the ask bar on a phone with a home indicator: where iOS 26 puts its floating tab bar, measured on the simulator"
       }
     },
     "peek": {

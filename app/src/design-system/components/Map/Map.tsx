@@ -23,7 +23,11 @@ export const Map = memo(function Map({ loading = false, pin = true, extent, inte
   return (
     <View
       style={styles.map}
-      onLayout={(e) => setSize({ width: e.nativeEvent.layout.width, height: e.nativeEvent.layout.height })}
+      onLayout={(e) => {
+        const { width, height } = e.nativeEvent.layout;
+        // Same size, same object: a new one would re-render the map for nothing.
+        setSize((old) => (old && old.width === width && old.height === height ? old : { width, height }));
+      }}
       accessibilityElementsHidden
       importantForAccessibility="no-hide-descendants"
       pointerEvents={interactive ? 'auto' : 'none'}

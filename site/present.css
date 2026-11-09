@@ -324,12 +324,13 @@ html.pz-lock, html.pz-lock body { overflow: hidden; }
 
 /* Options: cards side by side; the chosen one is outlined in green and carries a badge. */
 .pz-options { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(var(--pz-n), minmax(0, 1fr)); gap: var(--g2); width: 100%; }
-.pz-options li { display: flex; flex-direction: column; align-items: flex-start; gap: .5em; padding: var(--g4) var(--g4) var(--g3); }
+/* Equal padding above and below: the badge sits as close to the top edge as the note does to the bottom. */
+.pz-options li { display: flex; flex-direction: column; align-items: flex-start; gap: .4em; padding: var(--g3) var(--g4); }
 .pz-options li:not(.is-chosen) { background: rgba(255,255,255,.55); box-shadow: inset 0 0 0 1.5px rgba(16,10,6,.18); }
 .pz-options li.is-chosen { box-shadow: inset 0 0 0 3px #1F6B4C, 0 10px 30px -14px rgba(16,10,6,.3); }
 .pz-options b { font-family: var(--pz-display); font-weight: 700; font-size: var(--t-h3); line-height: 1.04; }
 .pz-options span:not(.pz-chosen) { font-size: var(--t-body); line-height: 1.3; }
-.pz-options small { font-size: var(--t-small); line-height: 1.32; color: #59534D; }
+.pz-options small { margin-top: auto; padding-top: .5em; font-size: var(--t-small); line-height: 1.32; color: #59534D; }
 .pz-chosen { order: -1; margin-bottom: var(--g1); padding: .15em .75em; border-radius: 999px; background: #1F6B4C; color: #FFFFFF; font-size: var(--t-label); font-weight: 600; }
 .pz-options li:not(.is-chosen) .pz-chosen { background: transparent; color: #3B3631; box-shadow: inset 0 0 0 1.5px #857D72; }
 

@@ -7,7 +7,7 @@ export { Alert, type AlertAction, type AlertProps } from './components/Alert/Ale
 export { AlertExamples } from './components/Alert/Alert.examples';
 export { AreaRow, type AreaRowProps } from './components/AreaRow/AreaRow';
 export { AreaRowExamples } from './components/AreaRow/AreaRow.examples';
-export { BottomAccessory, ASK_ORIGIN, type BottomAccessoryProps } from './components/BottomAccessory/BottomAccessory';
+export { BottomAccessory, ASK_ORIGIN, askBarInset, type BottomAccessoryProps } from './components/BottomAccessory/BottomAccessory';
 export { BottomAccessoryExamples } from './components/BottomAccessory/BottomAccessory.examples';
 export { ConfirmButton, type ConfirmButtonProps } from './components/ConfirmButton/ConfirmButton';
 export { ConfirmButtonExamples } from './components/ConfirmButton/ConfirmButton.examples';

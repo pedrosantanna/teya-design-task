@@ -276,6 +276,7 @@ export const iosLight = {
     },
     close: 30,
     field: 48,
+    bar: 62,
     dot: 8,
     step: 20,
     category: {
@@ -285,10 +286,11 @@ export const iosLight = {
     },
     askBar: {
       leading: 16,
-      trailing: 16,
+      trailing: 13,
       gap: 12,
       mic: 20,
-      ring: 2
+      ring: 2,
+      bottom: 21
     },
     peek: 80,
     edge: {
@@ -488,7 +490,7 @@ export const iosLight = {
     photoPill: 0.2,
     tonalOnTile: 0.55,
     sheetScrim: 0.2,
-    askEdge: 0.08,
+    askEdge: 0.14,
     glassHairline: 0.06,
     grabber: 0.38,
     glassSaturateOnTile: 1.6,
@@ -796,6 +798,7 @@ export const iosDark = {
     },
     close: 30,
     field: 48,
+    bar: 62,
     dot: 8,
     step: 20,
     category: {
@@ -805,10 +808,11 @@ export const iosDark = {
     },
     askBar: {
       leading: 16,
-      trailing: 16,
+      trailing: 13,
       gap: 12,
       mic: 20,
-      ring: 2
+      ring: 2,
+      bottom: 21
     },
     peek: 80,
     edge: {
@@ -1008,7 +1012,7 @@ export const iosDark = {
     photoPill: 0.2,
     tonalOnTile: 1,
     sheetScrim: 0.48,
-    askEdge: 0.1,
+    askEdge: 0.06,
     glassHairline: 1,
     grabber: 1,
     glassSaturateOnTile: 1,
@@ -1316,6 +1320,7 @@ export const androidLight = {
     },
     close: 30,
     field: 48,
+    bar: 62,
     dot: 8,
     step: 20,
     category: {
@@ -1325,10 +1330,11 @@ export const androidLight = {
     },
     askBar: {
       leading: 16,
-      trailing: 16,
+      trailing: 13,
       gap: 12,
       mic: 20,
-      ring: 2
+      ring: 2,
+      bottom: 21
     },
     peek: 80,
     edge: {
@@ -1528,7 +1534,7 @@ export const androidLight = {
     photoPill: 0.2,
     tonalOnTile: 0.55,
     sheetScrim: 0.2,
-    askEdge: 0.08,
+    askEdge: 0.14,
     glassHairline: 0.06,
     grabber: 0.38,
     glassSaturateOnTile: 1.6,
@@ -1842,6 +1848,7 @@ export const androidDark = {
     },
     close: 30,
     field: 48,
+    bar: 62,
     dot: 8,
     step: 20,
     category: {
@@ -1851,10 +1858,11 @@ export const androidDark = {
     },
     askBar: {
       leading: 16,
-      trailing: 16,
+      trailing: 13,
       gap: 12,
       mic: 20,
-      ring: 2
+      ring: 2,
+      bottom: 21
     },
     peek: 80,
     edge: {
@@ -2054,7 +2062,7 @@ export const androidDark = {
     photoPill: 0.2,
     tonalOnTile: 1,
     sheetScrim: 0.48,
-    askEdge: 0.1,
+    askEdge: 0.06,
     glassHairline: 1,
     grabber: 1,
     glassSaturateOnTile: 1,
