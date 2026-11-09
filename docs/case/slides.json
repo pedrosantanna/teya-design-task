@@ -879,19 +879,20 @@
       "title": "Three hypotheses to test first",
       "stats": [
         {
-          "value": "36 of 60",
-          "label": "requests get a valid answer within 10 minutes (H1)"
+          "value": "60%",
+          "label": "of about 160 asks answered within 10 minutes (H1)"
         },
         {
           "value": "14 of 20",
           "label": "shoppers choose asking first (H3)"
         },
         {
-          "value": "14 of 20",
-          "label": "wait for the answer (H4)"
+          "value": "70%",
+          "label": "of slow requests still open when the yes arrives (H4)"
         }
       ],
       "lines": [
+        "Each go mark has a stop mark, set before testing",
         "H1 has no evidence yet, and without it the concierge doesn’t work"
       ]
     },
@@ -903,24 +904,25 @@
         "First experiment",
         "Signals to stop or go"
       ],
-      "title": "About ten shops and 60 requests, over five days",
+      "title": "Ten shops, 20 shoppers, four weeks",
       "lines": [
-        "An agent sends the requests on WhatsApp; twenty shoppers use the prototype",
+        "About 60 requests, about 160 asks; 5 shops on the provider’s POS",
+        "An agent sends the asks on WhatsApp; the same twenty use the prototype",
         "If the agent isn’t ready, I play the concierge myself"
       ],
       "media": {
         "type": "cards",
         "items": [
           {
-            "name": "All three pass",
+            "name": "All three reach go",
             "text": "The concierge is the main way in"
           },
           {
-            "name": "H1 fails",
+            "name": "H1 reaches stop",
             "text": "Narrow to shops whose tills share stock, or a slower request"
           },
           {
-            "name": "H3 or H4 fails",
+            "name": "H3 or H4 reaches stop",
             "text": "Browsing leads; Snuffle handles what it can’t answer"
           }
         ]

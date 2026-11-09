@@ -21,16 +21,16 @@ Trade-offs:
 
 | Parte | O que é | Hipóteses que testa |
 | --- | --- | --- |
-| Agente concierge com as lojas | O agente manda pedidos reais a cerca de dez lojas a até 15 minutos a pé da Blythe Road pelo WhatsApp, ou pelo POS quando o sistema da loja permite, e cuida das respostas delas | H1, H6, H11 |
+| Agente concierge com as lojas | O agente manda pedidos reais a dez lojas a até 15 minutos a pé da Blythe Road pelo WhatsApp, ou pelo POS quando o sistema da loja permite, e cuida das respostas delas | H1, H6, H11 |
 | Protótipo do app de quem compra | O lado do comprador no blueprint, etapas 1 a 5, com as respostas do agente vindo das lojas de verdade quando elas respondem | H2, H3, H4, H5, H7, H8, H10 |
-| Resumo da demanda | Um resumo semanal do que os compradores próximos pediram, enviado às lojas da prova de conceito | H9 |
-| Pagamentos e ofertas pagas | Toda reserva é paga no app. Depois de quatro semanas, as lojas recebem a oferta do POS do provedor e do destaque pago | H12 a H16 |
+| Resumo da demanda | Um resumo semanal do que os compradores próximos pediram, enviado às lojas da prova de conceito; na quarta semana, cada loja recebe o pedido de continuar respondendo por mais um mês | H9 |
+| Pagamentos e ofertas pagas | Toda reserva é paga no app. Na quarta semana, as lojas recebem a oferta do POS do provedor e do destaque pago | H12 a H15 |
 
-Os critérios de aprovação continuam como estão em [hipóteses](hypotheses.md).
+Ela dura quatro semanas. Vinte compradores fazem cerca de 60 pedidos nas três primeiras, que chegam às lojas como cerca de 160 consultas; a quarta semana fica para as conversas com os lojistas e as ofertas. As marcas para seguir e para parar estão em [hipóteses](hypotheses.md), e o [plano de medição](../verify/measurement.md#prova-de-conceito) mostra como o tamanho sai do funil. A H16 precisa de uma loja fora do anel, então espera por um segundo anel.
 
 ## Área do teste
 
-A prova de conceito acontece em volta da localização de um comprador, e não de uma rua: cerca de dez pequenas lojas independentes a até 15 minutos a pé da Blythe Road, espalhadas pelas lojas da própria Blythe Road, Shepherd's Bush Road, Shepherd's Bush Green, Goldhawk Road, Hammersmith Broadway e King Street, e Kensington High Street no lado do Olympia (distâncias no [conceito](index.md)). As lojas são escolhidas entre categorias que apareceram na netnografia: ferragens, floricultura, padaria, açougue, farmácia, papelaria. Dez lojas nesse anel ficam perto o bastante para visitar num dia, o que os convites exigem.
+A prova de conceito acontece em volta da localização de um comprador, e não de uma rua: dez pequenas lojas independentes a até 15 minutos a pé da Blythe Road, 5 no POS do provedor e 5 com outras maquininhas, espalhadas pelas lojas da própria Blythe Road, Shepherd's Bush Road, Shepherd's Bush Green, Goldhawk Road, Hammersmith Broadway e King Street, e Kensington High Street no lado do Olympia (distâncias no [conceito](index.md)). As lojas são escolhidas entre categorias que apareceram na netnografia: ferragens, floricultura, padaria, açougue, farmácia, papelaria. Dez lojas nesse anel ficam perto o bastante para visitar num dia, o que os convites exigem.
 
 ## Lojas como descoberta
 

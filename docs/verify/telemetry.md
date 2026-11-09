@@ -106,7 +106,7 @@ Every timing is split by source (asked or connected), since a till answers at on
 
 Names are object_action in the past tense. "Service" events are records the backend keeps to run the service (requests, answers, orders, payments). "App" events are analytics from the shopper app and need consent.
 
-Every event carries `event_id`, `ts` (UTC), `user_id` (a random pseudonymous id, never an email or phone number), `session_id`, `platform`, `app_version` and `area` (the postcode district the request was made from, such as W14), plus `request_id`, `order_id` and `shop_id` where they apply. Request-scoped events carry `cycle`. Every payment_* and order_* event carries `source` (asked or connected) and `fulfilment`; payment_* events also carry `answer_id` and `attempt`.
+Every event carries `event_id`, `ts` (UTC), `user_id` (a random pseudonymous id, never an email or phone number), `session_id`, `platform`, `app_version` and `area` (the postcode district the request was made from, such as W14), plus `request_id`, `order_id` and `shop_id` where they apply. Request-scoped events carry `cycle`. Every payment_* and order_* event carries `source` (asked or connected) and `fulfilment`; payment_* events also carry `answer_id` and `attempt`. Each shopper has one attribute, kept with the pseudonymous id and taken when they join: works shop hours, yes or no (H7).
 
 ### Browse and shops
 
@@ -147,7 +147,7 @@ Every event carries `event_id`, `ts` (UTC), `user_id` (a random pseudonymous id,
 | `request_widened` | Service | Ask further away | ring |
 | `request_not_found` | Service | Every asked shop has said no or not replied | said no count, no reply count |
 | `keep_looking_set` | Service | A request is set to keep looking, once or on repeat | from: ask, chat, not found; repeat: yes or no; days |
-| `request_closed` | Service | The request ends without an open order | reason: shopper, deadline with answers, deadline without answers, looking expired |
+| `request_closed` | Service | The request ends without an open order | reason: shopper, deadline with answers, deadline without answers, looking expired; bought elsewhere: before the first yes, after it, no, not asked (reported by the shopper afterwards, H4) |
 
 ### Buy and pay
 
@@ -204,6 +204,6 @@ The area is the postcode district, never the full postcode or the shopper's posi
 
 Service events exist because the service needs them to take a request and a payment, so they are processed to deliver what the shopper asked for, under UK GDPR. App events are not needed for that, so they are off until the shopper agrees, and storing or reading anything on the phone for them follows the same rules as cookies. The ICO's [guidance on storage and access technologies](https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/guidance-on-the-use-of-storage-and-access-technologies/) lists an exception for statistical purposes; whether it covers these events is to be checked when they are built.
 
-In the hand-run concierge, the log sheet uses the same event names, codes shoppers as S1 to S6 and shops by id, and holds no phone numbers. Shoppers and shops agree to take part before the first request.
+In the hand-run concierge, the log sheet uses the same event names, codes shoppers as S1 to S20 and shops by id, and holds no phone numbers. Shoppers and shops agree to take part before the first request.
 
 The [measurement layer](../develop/ideation/app-flow.md) on the App flow canvas places every task and event on the screens where it happens. It is checked against this page by `python3 scripts/build_measurement_layer.py`.

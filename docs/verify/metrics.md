@@ -5,16 +5,18 @@ The metrics that say whether Snuffle works as a marketplace and as a business, h
 ```summary
 Takeaways:
 - The north star is completed requests per week, the requests that end with an order collected or delivered. Its inputs are active shoppers, requests per shopper, fill rate, conversion from a filled request to a purchase, confirmation and collection, with answering shops per area as the supply input.
-- Fill rate (requests that get at least one usable yes in time) is the marketplace's core number. With an answer rate of 60% (H1's mark, 36 of 60 asks) and an assumed 40% chance that a shop that answers has the item, about 6 likely shops open give 80% fill; 3 give 56%.
-- That means about 4 shops on Snuffle per kind in a 15-minute ring, 24 for six kinds. The proof of concept's 10 shops come out near 52%, close to H1's mark of 12 of the 24 searches resolved.
-- The revenue estimate's base case works out at about 98 monthly active shoppers per active shop. With 6 shops asked per request, each shop answers about 11 requests for each order it gets, about 24 a trading day. Answer burden is the guardrail that limits how widely Snuffle can ask.
+- Fill rate (requests that get at least one usable yes in time) is the marketplace's core number. With an answer rate of 60% (H1's go mark for asks, my estimate) and an assumed 40% chance that a shop that answers has the item, about 6 likely shops open give 80% fill; 3 give 56%.
+- That means about 4 shops on Snuffle per kind in a 15-minute ring, 24 for six kinds. The proof of concept's 10 shops come out at 52%, which sets H1's go mark for fill at 50% of about 60 requests.
+- The revenue estimate's base case works out at about 98 monthly active shoppers per active shop. With 6 shops asked per request, each shop answers about 11 asks for each order it gets, about 24 a trading day. The proof of concept asks each shop about once a trading day. Answer burden is the guardrail that limits how widely Snuffle can ask.
 - Payments earn about 16p per order in the base case (£18 at 0.9%). Most of the money comes from shops joining the provider's POS, so POS attach per area is reported next to GMV.
 Call:
 - I asked for a north star candidate and its inputs, the supply and demand metrics, the money metrics from the revenue estimate, all by area and per shopper, and a model of how many shops an area needs per active shopper, with every input marked as an assumption to test. I adopted completed requests per week as the north star.
 - I asked that no benchmark be invented, and that any outside figure come from a source that was opened and linked.
+- I kept the model and set H1's marks from it (decision 070): 60% answers is my estimate, below the bar platforms set for a responsive business, and the 50% fill mark is the model's own prediction for 10 shops.
 AI:
 - An agent defined the metrics from the events and the revenue estimate, built the liquidity model from the assumptions already in the docs (the 15-minute ring, H1's answer rate, the proof of concept's ten shops, the six kinds), added three assumptions of its own, labelled, and checked the arithmetic in a short script.
 - In a second pass, an agent aligned the metrics with the revised events: the collection rate counts from `order_ready`, GMV sums `payment_taken` and H12 counts per request with a yes. The liquidity arithmetic didn't change.
+- In a third pass, an agent searched for benchmarks for r and fill and found none for this market; the anchors next to r are the closest it found. The arithmetic was checked again.
 Trade-offs:
 - A north star of completed requests rewards needs met and ignores order value; GMV beside it catches a drift to tiny orders.
 - The model treats each shop's answer as independent and the share of shops that have the item as one number for every kind. Both are simplifications the proof of concept will correct.
@@ -80,8 +82,8 @@ How many shops an area needs so that a request gets a usable yes in time. Every 
 
 | Input | Value | Where it comes from |
 | --- | --- | --- |
-| r: share of asked shops that answer validly within 10 minutes | 60% | H1's pass mark (36 of 60 asks), so the lowest rate the concept accepts |
-| h: share of shops that answer and have the item | 40% | Assumption, no source. The hand-run concierge gives the first figure |
+| r: share of asked shops that answer validly within 10 minutes | 60% | H1's go mark for asks, and my estimate. No published figure exists for UK independents answering on WhatsApp. It sits below the bar platforms set for a responsive business: Meta's "Very responsive" badge needed a 90% response rate and a 15-minute response time ([Facebook Help Center, archived 2020](https://webcf.waybackmachine.org/web/20200509150311/https://www.facebook.com/help/988319821208361)); Thumbtack counts a pro's lead as answered within an hour ([Thumbtack community](https://community.thumbtack.com/discussion/comment/1583)) |
+| h: share of shops that answer and have the item | 40% | Assumption, no source. The proof of concept measures it apart from r (H1) |
 | o: share of likely shops open when the request comes in | 80% | Assumption for shop hours, no source |
 | k: kinds of shop likely to have one item | 2 | Assumption. In the prototype, eclipse glasses go to six kinds (chemist, optician, stationer, camera shop, hardware, toys) and sourdough to one |
 | Kinds in an area | 6 | The proof of concept's categories: hardware, florist, bakery, butcher, chemist, stationery |
@@ -112,7 +114,9 @@ The prototype's eclipse request asks 6 shops, which is 81% at the base inputs.
 
 A request draws its n likely shops from k kinds, and only the open ones count, so n = shops per kind × k × o. For 80% fill: shops per kind = 6 ÷ (2 × 0.8) = 3.75, so 4 per kind, and 4 × 6 kinds = 24 shops on Snuffle in a 15-minute ring. For 50% fill: 3 ÷ 1.6 ≈ 2 per kind, 12 shops.
 
-The proof of concept has 10 shops over 6 kinds, about 1.7 per kind. That gives n = 1.7 × 2 × 0.8 ≈ 2.7 likely shops per request and a fill rate of 1 − 0.76^2.7 ≈ 52%, close to H1's mark of 12 of the 24 searches resolved. A pass there says the concept can work with ten shops; it doesn't say ten are enough for the product.
+At H1's stop mark for asks, r = 45% and r × h = 0.18, a request needs n = ln 0.2 ÷ ln 0.82 ≈ 8.1, so 9 likely shops for 80% fill: 9 ÷ 1.6 ≈ 5.6, so 6 per kind and 36 shops in a ring, rounded up as above. I judge that beyond what one ring's independents can supply.
+
+The proof of concept has 10 shops over 6 kinds, about 1.7 per kind. That gives n = 1.7 × 2 × 0.8 ≈ 2.7 likely shops per request and a fill rate of 1 − 0.76^2.7 ≈ 52%. H1's go mark for fill is 50% of about 60 requests, and its stop mark 30%. Published fill-rate benchmarks range widely and none covers this kind of marketplace ([Lenny Rachitsky, "The most important marketplace metrics", 29 March 2022](https://www.lennysnewsletter.com/p/the-most-important-marketplace-metrics)), so the mark comes from the model. A go there says the concept can work with ten shops; whether ten are enough for the product is a separate question.
 
 ### Shoppers per shop
 
@@ -120,9 +124,9 @@ The supply floor above doesn't depend on how many shoppers there are. Shoppers d
 
 ### Answer burden
 
-Each order costs the shops many answers. With n = 6, fill of 80% and filled requests bought at H12's 70%, a request turns into an order 0.8 × 0.7 = 56% of the time, so the shops answer 6 ÷ 0.56 ≈ 10.7 asks per order. At 58 orders a shop a month that is about 620 asks a month, about 24 a trading day over 26 days.
+Each order costs the shops many answers. With n = 6, fill of 80% and filled requests bought at H12's 70%, a request turns into an order 0.8 × 0.7 = 56% of the time, so the shops answer 6 ÷ 0.56 ≈ 10.7 asks per order. At 58 orders a shop a month that is about 620 asks a month, about 24 a trading day over 26 days. The proof of concept's 160 asks over three weeks are about 1 per shop per trading day, so it tests answering at low load.
 
-That is the tension in this marketplace: asking more shops raises the fill rate and the number of noes each shop types. The levers are matching better, since a higher h needs fewer shops (at r × h = 0.48, 3 shops give 80% and the burden halves to about 5 asks per order); till-connected shops, which answer without effort (H11); and asking in waves, stopping once there is a yes, which trades the shopper's wait for the shop's effort. Asks per shop per day and per order are a guardrail, and the shops' weekly check-in says where the limit is.
+That is the tension in this marketplace: asking more shops raises the fill rate and the number of noes each shop types. The levers are matching better, since a higher h needs fewer shops (at r × h = 0.48, 3 shops give 80% and the burden halves to about 5 asks per order); till-connected shops, which answer without effort (H11); and asking in waves, stopping once there is a yes, which trades the shopper's wait for the shop's effort. Asks per shop per day and per order are a guardrail, and the shops' weekly check-in says where the limit is. In the proof of concept a shop isn't asked again that day after 10 asks; the steady-state threshold stays open.
 
 ## Guardrails
 

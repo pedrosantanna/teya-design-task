@@ -106,7 +106,7 @@ Todo tempo é dividido por origem (consultada ou conectada), já que um caixa re
 
 Os nomes seguem objeto_ação no passado, em inglês. Eventos "Serviço" são registros que o backend guarda para funcionar (pedidos, respostas, compras, pagamentos). Eventos "App" são analytics do app do comprador e precisam de consentimento.
 
-Todo evento leva `event_id`, `ts` (UTC), `user_id` (um id pseudônimo aleatório, nunca um email ou telefone), `session_id`, `platform`, `app_version` e `area` (o distrito postal de onde o pedido foi feito, como W14), mais `request_id`, `order_id` e `shop_id` quando se aplicam. Eventos de pedido levam `cycle`. Todo evento payment_* e order_* leva `source` (consultada ou conectada) e `fulfilment`; os eventos payment_* levam também `answer_id` e `attempt`.
+Todo evento leva `event_id`, `ts` (UTC), `user_id` (um id pseudônimo aleatório, nunca um email ou telefone), `session_id`, `platform`, `app_version` e `area` (o distrito postal de onde o pedido foi feito, como W14), mais `request_id`, `order_id` e `shop_id` quando se aplicam. Eventos de pedido levam `cycle`. Todo evento payment_* e order_* leva `source` (consultada ou conectada) e `fulfilment`; os eventos payment_* levam também `answer_id` e `attempt`. Cada comprador tem um atributo, guardado com o id pseudônimo e registrado quando entra: trabalha no horário das lojas, sim ou não (H7).
 
 ### Explorar e lojas
 
@@ -147,7 +147,7 @@ Todo evento leva `event_id`, `ts` (UTC), `user_id` (um id pseudônimo aleatório
 | `request_widened` | Serviço | Ask further away | anel |
 | `request_not_found` | Serviço | Todas as lojas consultadas disseram não ou não responderam | número de nãos, número sem resposta |
 | `keep_looking_set` | Serviço | Um pedido passa a Keep looking, uma vez ou repetido | origem: ask, chat, not found; recorrente: sim ou não; dias |
-| `request_closed` | Serviço | O pedido termina sem uma compra aberta | motivo: comprador, prazo com respostas, prazo sem respostas, busca expirada |
+| `request_closed` | Serviço | O pedido termina sem uma compra aberta | motivo: comprador, prazo com respostas, prazo sem respostas, busca expirada; comprou em outro lugar: antes do primeiro sim, depois dele, não, não perguntado (informado pelo comprador depois, H4) |
 
 ### Comprar e pagar
 
@@ -204,6 +204,6 @@ A área é o distrito postal, nunca o código postal completo ou a posição do 
 
 Os eventos de serviço existem porque o serviço precisa deles para receber um pedido e um pagamento, então são tratados para entregar o que o comprador pediu, sob a UK GDPR. Os eventos do app não são necessários para isso, então ficam desligados até o comprador concordar, e guardar ou ler qualquer coisa no celular para eles segue as mesmas regras dos cookies. O [guia do ICO sobre tecnologias de armazenamento e acesso](https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/guidance-on-the-use-of-storage-and-access-technologies/) lista uma exceção para fins estatísticos; se ela cobre estes eventos é algo a conferir quando forem construídos.
 
-No concierge feito à mão, a planilha de registro usa os mesmos nomes de eventos, identifica os compradores como S1 a S6 e as lojas por id, e não guarda telefones. Compradores e lojas concordam em participar antes do primeiro pedido.
+No concierge feito à mão, a planilha de registro usa os mesmos nomes de eventos, identifica os compradores como S1 a S20 e as lojas por id, e não guarda telefones. Compradores e lojas concordam em participar antes do primeiro pedido.
 
 A [camada de medição](../develop/ideation/app-flow.md) no canvas App flow coloca cada tarefa e evento nas telas onde acontecem. Ela é conferida contra esta página por `python3 scripts/build_measurement_layer.py`.

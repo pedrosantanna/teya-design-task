@@ -21,16 +21,16 @@ Trade-offs:
 
 | Part | What it is | Hypotheses it tests |
 | --- | --- | --- |
-| Concierge agent to shops | The agent sends real requests to about ten shops within 15 minutes' walk of Blythe Road on WhatsApp, or through the POS where the shop's system allows it, and handles their replies | H1, H6, H11 |
+| Concierge agent to shops | The agent sends real requests to ten shops within 15 minutes' walk of Blythe Road on WhatsApp, or through the POS where the shop's system allows it, and handles their replies | H1, H6, H11 |
 | Shopper app prototype | The shopper side of the blueprint, steps 1 to 5, with the agent's answers coming from the real shops when they reply | H2, H3, H4, H5, H7, H8, H10 |
-| Demand summary | A weekly summary of what nearby shoppers asked for, sent to the shops in the proof of concept | H9 |
-| Payments and paid offers | Every hold is paid in the app. After four weeks, shops are offered the provider's POS and paid promotion | H12 to H16 |
+| Demand summary | A weekly summary of what nearby shoppers asked for, sent to the shops in the proof of concept; in week four each shop is asked to keep answering for another month | H9 |
+| Payments and paid offers | Every hold is paid in the app. In week four, shops are offered the provider's POS and paid promotion | H12 to H15 |
 
-The pass marks stay as written in [hypotheses](hypotheses.md).
+It runs four weeks. Twenty shoppers make about 60 requests over the first three, which reach the shops as about 160 asks; week four is for the conversations with shopkeepers and the offers. The go and stop marks are in [hypotheses](hypotheses.md), and the [measurement plan](../verify/measurement.md#proof-of-concept) shows how the size comes from the funnel. H16 needs a shop outside the ring, so it waits for a second ring.
 
 ## Test area
 
-The proof of concept runs around one shopper's location instead of one street: about ten small independent shops within a 15-minute walk of Blythe Road, spread over its own shops, Shepherd's Bush Road, Shepherd's Bush Green, Goldhawk Road, Hammersmith Broadway and King Street, and Kensington High Street at the Olympia end (distances in the [concept](index.md)). The shops are picked from categories that came up in the netnography: hardware, florist, bakery, butcher, chemist, stationery. Ten shops in that ring are close enough to visit in a day, which the invitations need.
+The proof of concept runs around one shopper's location instead of one street: ten small independent shops within a 15-minute walk of Blythe Road, 5 on the provider's POS and 5 on other terminals, spread over its own shops, Shepherd's Bush Road, Shepherd's Bush Green, Goldhawk Road, Hammersmith Broadway and King Street, and Kensington High Street at the Olympia end (distances in the [concept](index.md)). The shops are picked from categories that came up in the netnography: hardware, florist, bakery, butcher, chemist, stationery. Ten shops in that ring are close enough to visit in a day, which the invitations need.
 
 ## Shops as discovery
 

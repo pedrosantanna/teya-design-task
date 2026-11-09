@@ -5,16 +5,18 @@ As métricas que dizem se o Snuffle funciona como marketplace e como negócio, c
 ```summary
 Takeaways:
 - A north star é pedidos concluídos por semana, os pedidos que terminam com uma compra retirada ou entregue. As entradas dela são compradores ativos, pedidos por comprador, taxa de atendimento, conversão de um pedido atendido em compra, confirmação e retirada, com as lojas que respondem em cada área como entrada do lado da oferta.
-- A taxa de atendimento (fill rate: pedidos que recebem pelo menos um sim utilizável a tempo) é o número central do marketplace. Com uma taxa de resposta de 60% (o critério da H1, 36 de 60 consultas) e uma chance assumida de 40% de uma loja que responde ter o item, cerca de 6 lojas prováveis abertas dão 80% de atendimento; 3 dão 56%.
-- Isso significa cerca de 4 lojas no Snuffle por tipo num anel de 15 minutos, 24 para seis tipos. As 10 lojas da prova de conceito ficam perto de 52%, próximo do critério da H1 de 12 das 24 buscas resolvidas.
-- O cenário base da estimativa de receita dá cerca de 98 compradores ativos por mês para cada loja ativa. Com 6 lojas consultadas por pedido, cada loja responde cerca de 11 pedidos para cada compra que recebe, cerca de 24 por dia útil. A carga de respostas é o guardrail que limita o quanto o Snuffle pode consultar.
+- A taxa de atendimento (fill rate: pedidos que recebem pelo menos um sim utilizável a tempo) é o número central do marketplace. Com uma taxa de resposta de 60% (a marca da H1 para seguir nas consultas, estimativa minha) e uma chance assumida de 40% de uma loja que responde ter o item, cerca de 6 lojas prováveis abertas dão 80% de atendimento; 3 dão 56%.
+- Isso significa cerca de 4 lojas no Snuffle por tipo num anel de 15 minutos, 24 para seis tipos. As 10 lojas da prova de conceito dão 52%, o que define a marca da H1 para seguir no atendimento em 50% de cerca de 60 pedidos.
+- O cenário base da estimativa de receita dá cerca de 98 compradores ativos por mês para cada loja ativa. Com 6 lojas consultadas por pedido, cada loja responde cerca de 11 consultas para cada compra que recebe, cerca de 24 por dia útil. A prova de conceito consulta cada loja mais ou menos uma vez por dia útil. A carga de respostas é o guardrail que limita o quanto o Snuffle pode consultar.
 - Os pagamentos rendem cerca de 16 pence por compra no cenário base (£18 a 0,9%). A maior parte do dinheiro vem de lojas que adotam o POS do provedor, então a adesão ao POS por área é relatada ao lado do GMV.
 Call:
 - Pedi uma candidata a north star e suas entradas, as métricas de oferta e demanda, as métricas de dinheiro da estimativa de receita, tudo por área e por comprador, e um modelo de quantas lojas uma área precisa por comprador ativo, com cada entrada marcada como premissa a testar. Adotei pedidos concluídos por semana como north star.
 - Pedi que nenhum benchmark fosse inventado, e que qualquer número de fora viesse de uma fonte aberta e com link.
+- Mantive o modelo e defini as marcas da H1 a partir dele (decisão 070): 60% de respostas é uma estimativa minha, abaixo da régua que as plataformas usam para um negócio que responde, e a marca de 50% de atendimento é a previsão do próprio modelo para 10 lojas.
 AI:
 - Um agente definiu as métricas a partir dos eventos e da estimativa de receita, montou o modelo de liquidez com as premissas que já estavam nos documentos (o anel de 15 minutos, a taxa de resposta da H1, as dez lojas da prova de conceito, os seis tipos), acrescentou três premissas próprias, marcadas, e conferiu as contas num script curto.
 - Numa segunda passada, um agente alinhou as métricas aos eventos revisados: a taxa de retirada conta a partir de `order_ready`, o GMV soma `payment_taken` e a H12 conta por pedido com um sim. As contas da liquidez não mudaram.
+- Numa terceira passada, um agente procurou benchmarks para r e para o atendimento e não achou nenhum para este mercado; as referências ao lado de r são as mais próximas que encontrou. As contas foram conferidas de novo.
 Trade-offs:
 - Uma north star de pedidos concluídos premia necessidades atendidas e ignora o valor da compra; o GMV ao lado pega um desvio para compras muito pequenas.
 - O modelo trata a resposta de cada loja como independente e a parcela de lojas que têm o item como um número só para todos os tipos. As duas coisas são simplificações que a prova de conceito vai corrigir.
@@ -80,8 +82,8 @@ Quantas lojas uma área precisa para que um pedido receba um sim utilizável a t
 
 | Entrada | Valor | De onde vem |
 | --- | --- | --- |
-| r: parcela das lojas consultadas que respondem de forma válida em até 10 minutos | 60% | O critério da H1 (36 de 60 consultas), ou seja, a menor taxa que o conceito aceita |
-| h: parcela das lojas que respondem e têm o item | 40% | Premissa, sem fonte. O concierge feito à mão dá o primeiro número |
+| r: parcela das lojas consultadas que respondem de forma válida em até 10 minutos | 60% | A marca da H1 para seguir nas consultas, e uma estimativa minha. Não existe número publicado sobre lojas independentes do Reino Unido respondendo pelo WhatsApp. Fica abaixo da régua que as plataformas usam para um negócio que responde: o selo "Very responsive" da Meta exigia 90% de taxa de resposta e 15 minutos de tempo de resposta ([Central de Ajuda do Facebook, arquivada em 2020](https://webcf.waybackmachine.org/web/20200509150311/https://www.facebook.com/help/988319821208361)); o Thumbtack conta o contato de um profissional como respondido em até uma hora ([comunidade do Thumbtack](https://community.thumbtack.com/discussion/comment/1583)) |
+| h: parcela das lojas que respondem e têm o item | 40% | Premissa, sem fonte. A prova de conceito mede à parte de r (H1) |
 | o: parcela das lojas prováveis abertas quando o pedido chega | 80% | Premissa para o horário comercial, sem fonte |
 | k: tipos de loja que provavelmente têm um item | 2 | Premissa. No protótipo, os óculos de eclipse vão para seis tipos (farmácia, ótica, papelaria, loja de câmeras, loja de ferragens, brinquedos) e o pão de fermentação natural para um |
 | Tipos numa área | 6 | As categorias da prova de conceito: ferragens, floricultura, padaria, açougue, farmácia, papelaria |
@@ -112,7 +114,9 @@ O pedido de óculos de eclipse do protótipo consulta 6 lojas, o que dá 81% com
 
 Um pedido tira suas n lojas prováveis de k tipos, e só as abertas contam, então n = lojas por tipo × k × o. Para 80% de atendimento: lojas por tipo = 6 ÷ (2 × 0,8) = 3,75, ou seja, 4 por tipo, e 4 × 6 tipos = 24 lojas no Snuffle num anel de 15 minutos. Para 50%: 3 ÷ 1,6 ≈ 2 por tipo, 12 lojas.
 
-A prova de conceito tem 10 lojas em 6 tipos, cerca de 1,7 por tipo. Isso dá n = 1,7 × 2 × 0,8 ≈ 2,7 lojas prováveis por pedido e uma taxa de atendimento de 1 − 0,76^2,7 ≈ 52%, perto do critério da H1 de 12 das 24 buscas resolvidas. Passar ali diz que o conceito pode funcionar com dez lojas; não diz que dez bastam para o produto.
+Na marca da H1 para parar nas consultas, r = 45% e r × h = 0,18, um pedido precisa de n = ln 0,2 ÷ ln 0,82 ≈ 8,1, então 9 lojas prováveis para 80% de atendimento: 9 ÷ 1,6 ≈ 5,6, então 6 por tipo e 36 lojas num anel, arredondando para cima como acima. Eu julgo que isso passa do que as independentes de um anel conseguem oferecer.
+
+A prova de conceito tem 10 lojas em 6 tipos, cerca de 1,7 por tipo. Isso dá n = 1,7 × 2 × 0,8 ≈ 2,7 lojas prováveis por pedido e uma taxa de atendimento de 1 − 0,76^2,7 ≈ 52%. A marca da H1 para seguir no atendimento é 50% de cerca de 60 pedidos, e a marca para parar, 30%. Os benchmarks publicados de taxa de atendimento variam muito, e nenhum cobre este tipo de marketplace ([Lenny Rachitsky, "The most important marketplace metrics", 29 de março de 2022](https://www.lennysnewsletter.com/p/the-most-important-marketplace-metrics)), então a marca vem do modelo. Seguir ali diz que o conceito pode funcionar com dez lojas; se dez bastam para o produto é outra pergunta.
 
 ### Compradores por loja
 
@@ -120,9 +124,9 @@ O piso de oferta acima não depende de quantos compradores existem. São os comp
 
 ### Carga de respostas
 
-Cada compra custa às lojas muitas respostas. Com n = 6, atendimento de 80% e pedidos atendidos comprados nos 70% da H12, um pedido vira compra 0,8 × 0,7 = 56% das vezes, então as lojas respondem 6 ÷ 0,56 ≈ 10,7 consultas por compra. Com 58 compras por loja por mês, são cerca de 620 consultas por mês, cerca de 24 por dia útil em 26 dias.
+Cada compra custa às lojas muitas respostas. Com n = 6, atendimento de 80% e pedidos atendidos comprados nos 70% da H12, um pedido vira compra 0,8 × 0,7 = 56% das vezes, então as lojas respondem 6 ÷ 0,56 ≈ 10,7 consultas por compra. Com 58 compras por loja por mês, são cerca de 620 consultas por mês, cerca de 24 por dia útil em 26 dias. As 160 consultas da prova de conceito em três semanas dão cerca de 1 por loja por dia útil, então ela testa as respostas com pouca carga.
 
-Essa é a tensão deste marketplace: consultar mais lojas aumenta o atendimento e o número de nãos que cada loja digita. As alavancas são escolher melhor as lojas, já que um h maior precisa de menos lojas (com r × h = 0,48, 3 lojas dão 80% e a carga cai pela metade, para cerca de 5 consultas por compra); lojas conectadas pelo caixa, que respondem sem esforço (H11); e consultar em ondas, parando quando houver um sim, o que troca a espera do comprador pelo esforço da loja. Consultas por loja por dia e por compra são um guardrail, e a conversa semanal com as lojas diz onde fica o limite.
+Essa é a tensão deste marketplace: consultar mais lojas aumenta o atendimento e o número de nãos que cada loja digita. As alavancas são escolher melhor as lojas, já que um h maior precisa de menos lojas (com r × h = 0,48, 3 lojas dão 80% e a carga cai pela metade, para cerca de 5 consultas por compra); lojas conectadas pelo caixa, que respondem sem esforço (H11); e consultar em ondas, parando quando houver um sim, o que troca a espera do comprador pelo esforço da loja. Consultas por loja por dia e por compra são um guardrail, e a conversa semanal com as lojas diz onde fica o limite. Na prova de conceito, uma loja não é consultada de novo no mesmo dia depois de 10 consultas; o limite para a operação estável continua em aberto.
 
 ## Guardrails
 

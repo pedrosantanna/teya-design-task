@@ -92,6 +92,8 @@ Source: English Markdown in `docs/`. Target: Brazilian Portuguese in `docs/pt-br
 | Products and services / Pain relievers / Gain creators / Jobs / Pains / Gains (canvas labels) | Produtos e serviços / Aliviadores de dores / Criadores de ganhos / Tarefas / Dores / Ganhos |
 | fit | encaixe |
 | hypothesis / pass mark / "Pass if" | hipótese / critério de aprovação / "Passa se" |
+| go / iterate / stop (marks and zones) / "Go / stop" (column) / direction only | seguir / iterar / parar / "Seguir / parar" / só direção |
+| Wilson interval | intervalo de Wilson |
 | "We believe that…" (hypothesis column) | "Acredito que…" |
 | hold (an item) / no-show | segurar (um item) / falta (o comprador não aparece) |
 | browse / ask (the agent) | explorar / perguntar (ao agente) |
@@ -113,7 +115,8 @@ Source: English Markdown in `docs/`. Target: Brazilian Portuguese in `docs/pt-br
 | set aside (an item) | separar (um item) |
 | stated choice / behaviour (test result) | escolha declarada / comportamento ("Declarado:" / "Comportamento:" in pass marks) |
 | exploratory (hypothesis) | exploratória |
-| search resolved / valid answer | busca resolvida / resposta válida |
+| request (what a shopper asks Snuffle for) / ask (one request sent to one shop) | pedido / consulta |
+| request filled / valid answer | pedido atendido / resposta válida |
 | charge / authorise / capture / refund | cobrar / autorizar / capturar / estornar (estorno) |
 | proof of concept | prova de conceito |
 | ideation / canvas / wireframe | ideação / canvas / wireframe |
