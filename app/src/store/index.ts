@@ -9,7 +9,7 @@ export { useAppStore, useApp, useAppActions, type AppState, type AppActions, typ
 export { useArea, type AreaView } from './selectors';
 export { CATEGORIES, KIND_ACCENT, shopAccent, type Category } from './kinds';
 export { useContent, useStep, useAnswerState, useAnswerLabel, useRequestLabel, useOrderLabel } from './selectors';
-export { startThemeSync } from './theme-sync';
+export { startThemeSync, useChromeScheme } from './theme-sync';
 export { readUrlState, startParams, basePath, shareUrl } from './url';
 export {
   useSim,

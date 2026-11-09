@@ -249,6 +249,7 @@ export const iosLight = {
     bubble: 20,
     card: 28,
     sheet: 32,
+    sheetFloating: 54,
     full: 9999
   },
   size: {
@@ -772,6 +773,7 @@ export const iosDark = {
     bubble: 20,
     card: 28,
     sheet: 32,
+    sheetFloating: 54,
     full: 9999
   },
   size: {
@@ -1295,6 +1297,7 @@ export const androidLight = {
     bubble: 20,
     card: 28,
     sheet: 32,
+    sheetFloating: 54,
     full: 9999
   },
   size: {
@@ -1824,6 +1827,7 @@ export const androidDark = {
     bubble: 20,
     card: 28,
     sheet: 32,
+    sheetFloating: 54,
     full: 9999
   },
   size: {
@@ -2115,5 +2119,5 @@ export type BadgeName = 'promoted' | 'new' | 'delivers';
 export type ShopAccentName = 'peach' | 'pistachio' | 'butter' | 'lavender';
 export type TypeStyleName = 'splash' | 'displayLarge' | 'displayTitle' | 'displayName' | 'sectionTitle' | 'title1' | 'title2' | 'title3' | 'headline' | 'body' | 'callout' | 'subheadline' | 'subheadlineStrong' | 'footnote' | 'caption1' | 'caption1Strong' | 'caption2' | 'code' | 'clock';
 export type SpaceName = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8';
-export type RadiusName = 'none' | 'inner' | 'bubble' | 'card' | 'sheet' | 'full';
+export type RadiusName = 'none' | 'inner' | 'bubble' | 'card' | 'sheet' | 'sheetFloating' | 'full';
 export type SpringName = 'press' | 'snappy' | 'smooth' | 'arrive' | 'fade' | 'status';

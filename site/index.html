@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
-<link rel="stylesheet" href="site/canvas.css?v=21">
+<link rel="stylesheet" href="site/canvas.css?v=22">
 <script src="site/canvas.js?v=14"></script>
 <link rel="stylesheet" href="site/viewer3d.css?v=3">
 <link rel="stylesheet" href="site/present.css?v=12">
@@ -896,25 +896,22 @@ i.m.unknown { opacity: .45; }
     btn.type = 'button'; btn.className = 'cv-fold';
     head.prepend(btn);
     let done = 0;
-    // Width and height animate from where the card is to where the new state puts it (measured, then played back).
-    // Folded, the card is as wide as it is tall: a square of the open card's height.
-    const square = () => { if (!head.classList.contains('is-folded')) head.style.setProperty('--fold-w', head.offsetHeight + 'px'); };
+    // The width animates from where the card is to where the new state puts it (measured, then played back).
     const resize = folded => {
-      square();
       const from = head.getBoundingClientRect();
-      head.classList.remove('is-sizing'); head.style.width = head.style.height = '';
+      head.classList.remove('is-sizing'); head.style.width = '';
       head.classList.toggle('is-folded', folded);
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       const to = head.getBoundingClientRect();
-      Object.assign(head.style, { width: from.width + 'px', height: from.height + 'px' });
+      head.style.width = from.width + 'px';
       void head.offsetWidth;
       head.classList.add('is-sizing');
-      Object.assign(head.style, { width: to.width + 'px', height: to.height + 'px' });
+      head.style.width = to.width + 'px';
       clearTimeout(done);
-      done = setTimeout(() => { head.classList.remove('is-sizing'); head.style.width = head.style.height = ''; }, 280);
+      done = setTimeout(() => { head.classList.remove('is-sizing'); head.style.width = ''; }, 280);
     };
     const set = (folded, remember) => {
-      if (remember) resize(folded); else { square(); head.classList.toggle('is-folded', folded); }
+      if (remember) resize(folded); else head.classList.toggle('is-folded', folded);
       btn.setAttribute('aria-expanded', String(!folded));
       btn.title = t(folded ? 'unfoldTitle' : 'foldTitle');
       btn.setAttribute('aria-label', btn.title);
@@ -932,10 +929,11 @@ i.m.unknown { opacity: .45; }
   // The docs' light or dark as shown now: the reader's choice, else the device's.
   const docsScheme = () => MODE === 'system' ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : MODE;
   // An embedded prototype (page.embed) follows the docs' theme: it starts from `?scheme=` and gets a message on each switch.
-  // The live prototype opens in Light; it follows the docs into Dark only when the reader picked Dark.
+  // The live prototype's app opens in Light and follows the docs into Dark only when the reader picked Dark; the page
+  // around the phone and the state debugger (`chrome`) always follow the docs' theme.
   const protoScheme = () => MODE === 'dark' ? 'dark' : 'light';
   function postScheme() {
-    document.querySelectorAll('iframe.embed-frame').forEach(f => { try { f.contentWindow?.postMessage({ type: 'snuffle:scheme', scheme: protoScheme() }, '*'); } catch (e) {} });
+    document.querySelectorAll('iframe.embed-frame').forEach(f => { try { f.contentWindow?.postMessage({ type: 'snuffle:scheme', scheme: protoScheme(), chrome: docsScheme() }, '*'); } catch (e) {} });
   }
   function applyMode() {
     if (MODE === 'system') document.documentElement.removeAttribute('data-theme');
@@ -1437,7 +1435,7 @@ i.m.unknown { opacity: .45; }
     document.body.classList.toggle('is-canvas', !!(page.canvas || page.viewer || page.embed));
     if (page.embed) {
       // An embed page shows a built app (the prototype's web export) in a full-height frame; the summary opens from About.
-      els.content.innerHTML = `<div class="cv-page" data-lang="${LANG}"><div class="cv-board"><iframe class="embed-frame" src="${esc(page.embed + (page.embed.includes('?') ? '&' : '?') + 'scheme=' + protoScheme())}" title="${esc(L(page))}" allow="clipboard-write; fullscreen"></iframe></div>
+      els.content.innerHTML = `<div class="cv-page" data-lang="${LANG}"><div class="cv-board"><iframe class="embed-frame" src="${esc(page.embed + (page.embed.includes('?') ? '&' : '?') + 'scheme=' + protoScheme() + '&chrome=' + docsScheme())}" title="${esc(L(page))}" allow="clipboard-write; fullscreen"></iframe></div>
         <div class="cv-title"><div><div class="crumbs">${crumbs}</div><h1>${title}</h1></div><a class="cv-about" href="${esc(page.embed)}" target="_blank" rel="noopener">${esc(t('openAlone'))}</a><button type="button" class="cv-about embed-about-btn">${esc(t('about'))}</button></div>
         <aside class="embed-about prose" hidden>${lede ? `<p>${lede}</p>` : ''}${tmp.innerHTML}</aside></div>`;
       els.toc.innerHTML = '';

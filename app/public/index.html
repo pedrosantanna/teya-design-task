@@ -99,8 +99,8 @@
       /* Animated layers hint the compositor (press, arrive, sheets). */
       [style*="will-change"] { backface-visibility: hidden; }
     </style>
-    <!-- The docs canvas background (site/canvas.css), shown around the phone frame. It follows the app's scheme
-         (`data-scheme`, set by src/store/theme-sync.ts), and the device's until the app has started. -->
+    <!-- The docs canvas background (site/canvas.css), shown around the phone frame. It follows the docs' theme
+         (`data-scheme`, set by src/store/theme-sync.ts), never the app's, and the device's until the app has started. -->
     <style id="frame-page">
       body {
         margin: 0;

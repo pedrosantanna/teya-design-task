@@ -20,7 +20,7 @@ Trade-offs:
 - The photos are of real shops elsewhere in Britain and Europe, so some show another shop's name on the sign.
 ```
 
-Open it on its own to use the full window: `app-web/index.html`. On windows narrower than 800 px the panel overlays from the right, with a close button, instead of docking. The prototype opens in Light, and turns Dark only when Dark is picked in the docs' theme switch or in the debugger. The panel always starts closed. Add `?debug=1` to open it at start, `?debug=0` to hide the debugger, `?os=android` for Android, or `?step=` to start at a step.
+Open it on its own to use the full window: `app-web/index.html`. On windows narrower than 800 px the panel overlays from the right, with a close button, instead of docking. The app opens in Light, and turns Dark only when Dark is picked in the docs' theme switch or in the debugger. The page around the phone and the debugger always follow the docs' theme; the debugger's scheme changes only the app. The panel always starts closed. Add `?debug=1` to open it at start, `?debug=0` to hide the debugger, `?os=android` for Android, or `?step=` to start at a step.
 
 The panel offers only the controls that change the screen on show. Persona, platform, scheme, phone frame, journey step, clock and actions are always there; the rest follow the route and the open sheets (Loading shows on Nearby and shop pages, Shop hours in the chat only while the details sheet is open, the outcomes only where a payment or a shop's reply can happen next). Each section ends with a line naming what it hides, and a section with nothing to change folds to its title with "No effect on this screen". The rules are in `app/src/debug/relevance.ts`.
 

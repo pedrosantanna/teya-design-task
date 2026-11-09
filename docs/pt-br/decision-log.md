@@ -575,5 +575,7 @@ Aumentei o tamanho das amostras dos testes. O concierge feito à mão manda 60 p
 
 **Por quê:** uma porcentagem de 6 ou de 20 parece mais precisa do que é, e "4 de 6" é pouco para apoiar uma decisão. As lojas continuam 10 porque esse é o anel de lojas alcançáveis a até 15 minutos a pé da Blythe Road, e o modelo de liquidez das métricas de produto se apoia em 10 lojas em 6 tipos. O argumento contra o NPS da decisão 067 continua valendo com 20 compradores, já que uma pessoa move o número em 5 pontos.
 
+**Em aberto:** os números novos ampliam os critérios antigos; nenhum benchmark ou estimativa de volume os define ainda. O próximo passo é apoiar cada amostra e critério no modelo do próprio produto e em referências externas.
+
 ## Ainda em aberto
 

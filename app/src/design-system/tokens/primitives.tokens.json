@@ -1631,6 +1631,13 @@
           "unit": "px"
         }
       },
+      "sheetFloating": {
+        "$value": {
+          "value": 54,
+          "unit": "px"
+        },
+        "$description": "iOS floating sheet: the screen's corner (62 pt on the reference iPhone) minus the 8 pt margin, so the sheet is concentric with the display, as the system sheets measure on iOS 27."
+      },
       "full": {
         "$value": {
           "value": 9999,

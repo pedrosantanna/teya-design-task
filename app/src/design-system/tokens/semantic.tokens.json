@@ -112,6 +112,9 @@
     "sheet": {
       "$value": "{dimension.radius.sheet}"
     },
+    "sheetFloating": {
+      "$value": "{dimension.radius.sheetFloating}"
+    },
     "full": {
       "$value": "{dimension.radius.full}"
     }

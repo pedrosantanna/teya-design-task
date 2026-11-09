@@ -135,6 +135,13 @@ export function Sheet({
   const from = useSharedValue<Rect | null>(null);
   const smooth = theme.spring.smooth;
   const margin = floating ? theme.space[2] : 0;
+  // Below the content and the footer: a floating sheet already rests `margin` above the screen edge (8 pt, as iOS
+  // sheets do), so it only adds what still clears the home indicator; an anchored sheet adds the whole safe area.
+  const edge = floating ? Math.max(theme.inset.sheet, insets.bottom - margin) : insets.bottom + theme.inset.sheet;
+  const anchoredBottom = insets.bottom + theme.space[3];
+  const footerBottom = floating ? Math.max(theme.space[3], insets.bottom - margin) : anchoredBottom;
+  // The content leaves room for the footer at its tallest (anchored), so the last row never hides under Buy.
+  const footerH = theme.space[3] + theme.size.button.large + anchoredBottom;
   // The keyboard (negative height while it shows, tracked frame by frame on the UI thread): the sheet rides on
   // top of it as iOS sheets do, so a focused field (the address search, a place's name) stays in view. The
   // home-indicator inset under the content goes behind the keys instead of doubling the gap, and a tall detent
@@ -308,11 +315,25 @@ export function Sheet({
       right: inset,
       bottom: inset + lift,
       height: lift > 0 ? Math.min(visible, frame.height - topLimit - inset - lift) : visible,
-      borderBottomLeftRadius: theme.radius.sheet * (1 - t),
-      borderBottomRightRadius: theme.radius.sheet * (1 - t),
+      // Floating, every corner is concentric with the display; anchored at large, the top keeps the sheet radius.
+      borderTopLeftRadius: floating ? interpolate(t, [0, 1], [theme.radius.sheetFloating, theme.radius.sheet]) : theme.radius.sheet,
+      borderTopRightRadius: floating ? interpolate(t, [0, 1], [theme.radius.sheetFloating, theme.radius.sheet]) : theme.radius.sheet,
+      borderBottomLeftRadius: theme.radius.sheetFloating * (1 - t),
+      borderBottomRightRadius: theme.radius.sheetFloating * (1 - t),
       opacity: rect ? interpolate(zoom, [0, 0.35], [0, 1], Extrapolation.CLAMP) : 1,
       transform: [{ translateX: tx }, { translateY: ty }, { scale }],
     };
+  });
+  // The footer's bottom padding follows the panel: the floating gap at rest, the whole safe area once anchored.
+  const footerStyle = useAnimatedStyle(() => ({
+    paddingBottom: interpolate(anchored(h.get()), [0, 1], [footerBottom, anchoredBottom]),
+  }));
+  // The rim follows the panel's corners.
+  const rimStyle = useAnimatedStyle(() => {
+    const t = anchored(h.get());
+    const top = interpolate(t, [0, 1], [theme.radius.sheetFloating, theme.radius.sheet]);
+    const bottom = theme.radius.sheetFloating * (1 - t);
+    return { borderTopLeftRadius: top, borderTopRightRadius: top, borderBottomLeftRadius: bottom, borderBottomRightRadius: bottom };
   });
   // One scrim at every detent and on every platform: it comes in with the sheet (its height, or the zoom from the
   // origin) and is at state.sheetScrim once the sheet rests.
@@ -382,7 +403,7 @@ export function Sheet({
             keyboardShouldPersistTaps="handled"
             keyboardDismissMode="interactive"
             onContentSizeChange={(_w, ch) => setContentH(ch)}
-            contentContainerStyle={styles.content(pad, footer ? theme.size.button.large + theme.space[6] + insets.bottom : insets.bottom)}
+            contentContainerStyle={styles.content(pad, footer ? footerH + theme.inset.sheet : edge)}
           >
             {inContent ? (
               <View ref={titleRef} accessible focusable={Platform.OS === 'web'} accessibilityRole="header" style={styles.noRing}>
@@ -397,15 +418,15 @@ export function Sheet({
           {footer ? (
             <>
               {/* Drawn from the sheet's own colour, so the fade never shows a band of another ground. */}
-              <ScrollEdge edge="bottom" fill="sheet" height={theme.size.button.large + theme.space[6] + insets.bottom + theme.space[4]} />
-              <View style={styles.footer(pad, insets.bottom)}>
+              <ScrollEdge edge="bottom" fill="sheet" height={footerH + theme.space[4]} />
+              <Animated.View style={[styles.footer(pad), footerStyle]}>
                 <Ground value="sheet">{footer}</Ground>
-              </View>
+              </Animated.View>
             </>
           ) : null}
           {/* The glass rim, as on every glass element: a white highlight along the top edge and a hairline. Last, so the
               footer and its fade never paint over the side edge. */}
-          {floating ? <View pointerEvents="none" style={styles.rim} /> : null}
+          {floating ? <Animated.View pointerEvents="none" style={[styles.rim, rimStyle]} /> : null}
         </Animated.View>
       </View>
     </Portal>
@@ -427,7 +448,6 @@ const styles = StyleSheet.create((theme) => ({
   opaque: { ...StyleSheet.absoluteFillObject, backgroundColor: theme.color.sheet },
   rim: {
     ...StyleSheet.absoluteFillObject,
-    borderRadius: theme.radius.sheet,
     borderWidth: theme.state.glassRim,
     borderColor: withAlpha(theme.color.glassHairline, theme.state.glassHairline),
     borderTopColor: withAlpha(theme.color.glassShine, theme.state.glassHighlight),
@@ -458,16 +478,15 @@ const styles = StyleSheet.create((theme) => ({
   content: (pad: number, bottom: number) => ({
     paddingHorizontal: pad,
     paddingTop: theme.space[2],
-    paddingBottom: bottom + theme.inset.sheet,
+    paddingBottom: bottom,
     gap: theme.gap.block,
   }),
-  footer: (pad: number, bottom: number) => ({
+  footer: (pad: number) => ({
     position: 'absolute',
     left: 0,
     right: 0,
     bottom: 0,
     paddingHorizontal: pad,
     paddingTop: theme.space[3],
-    paddingBottom: bottom + theme.space[3],
   }),
 }));

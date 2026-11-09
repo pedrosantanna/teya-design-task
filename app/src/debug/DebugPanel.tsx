@@ -3,18 +3,20 @@
 // Plain DOM styled by panel.css, like the docs site's panels; native builds never mount it.
 import { useEffect } from 'react';
 import { Platform } from 'react-native';
-import { useUnistyles } from 'react-native-unistyles';
 
 import './chrome';
 import { ActionsSection, ContentSection, JourneySection, ShopperSection, SimulationSection, StatesSection } from './sections';
 import { screenNames, useRelevance } from './relevance';
+import { useChromeScheme } from '@/store';
+
 import { useDebugger } from './visibility';
 
 export function DebugPanel({ docked = false }: { docked?: boolean }) {
   const visible = useDebugger((s) => s.open && !s.hidden);
   const hidden = useDebugger((s) => s.hidden);
   const setOpen = useDebugger((s) => s.setOpen);
-  const { theme } = useUnistyles();
+  // The debugger is prototype chrome: it follows the docs' theme, not the app's.
+  const chrome = useChromeScheme((s) => s.scheme);
 
   // The overlay closes with Escape.
   useEffect(() => {
@@ -32,7 +34,7 @@ export function DebugPanel({ docked = false }: { docked?: boolean }) {
   return (
     <aside
       className={`dbg dbg-panel ${docked ? 'is-docked' : 'is-overlay'}${visible ? ' is-open' : ''}`}
-      data-scheme={theme.scheme}
+      data-scheme={chrome}
       aria-label="State debugger"
       aria-hidden={!visible}
       inert={!visible}

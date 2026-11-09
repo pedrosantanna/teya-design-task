@@ -30,7 +30,8 @@ Trade-offs:
 | `radius.inner` | 12 | medium | Imagens e miniaturas dentro de um cartão ou linha (a foto de 40 pt da linha de loja), campos dentro de uma sheet |
 | `radius.bubble` | 20 | large increased | Balões da conversa, tiles com foto em Nearby, listas agrupadas dentro de uma sheet (o canto inset grouped do iOS 26; com 12 elas pareciam de outra família que os 32 da sheet) |
 | `radius.card` | 28 | extra large | Cartões, cartões de resposta e de compra na conversa, listas agrupadas avulsas (a lista de lojas perguntadas, os grupos de ajustes, as linhas de loja da tela de categoria) |
-| `radius.sheet` | 32 | extra large increased | Sheets no Android e na web, e o cartão de conteúdo da página da loja; as sheets do sistema no iOS mantêm os cantos delas |
+| `radius.sheet` | 32 | extra large increased | Sheets no Android e na web, o topo de uma sheet do iOS ancorada no tamanho grande, e o cartão de conteúdo da página da loja |
+| `radius.sheetFloating` | 54 | nenhum | Uma sheet do iOS flutuando em repouso, e a sheet do Apple Pay: o canto de 62 pt da tela menos a margem de 8 pt, para a sheet ser concêntrica com a tela. Medi a share sheet do sistema no iOS 27: 8 pt das laterais e da borda de baixo, com esse raio |
 | `radius.full` | metade da altura | full | Botões, chips, a barra de pedido, o botão de Requests, badges, avatares |
 
 ## Regras

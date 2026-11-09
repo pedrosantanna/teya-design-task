@@ -30,7 +30,8 @@ Trade-offs:
 | `radius.inner` | 12 | medium | Images and thumbnails inside a card or row (the shop row's 40 pt photo), fields inside a sheet |
 | `radius.bubble` | 20 | large increased | Chat bubbles, photo tiles on Nearby, grouped lists inside a sheet (the iOS 26 inset-grouped corner; at 12 they read as a different family from the sheet's 32) |
 | `radius.card` | 28 | extra large | Cards, answer cards and order cards in the chat, standalone grouped lists (the asking list, settings groups, the Category screen's shop rows) |
-| `radius.sheet` | 32 | extra large increased | Sheets on Android and the web, and the shop page's content card; iOS system sheets keep their own corners |
+| `radius.sheet` | 32 | extra large increased | Sheets on Android and the web, the top of an iOS sheet anchored at large, and the shop page's content card |
+| `radius.sheetFloating` | 54 | none | An iOS sheet floating at rest, and the Apple Pay sheet: the screen's 62 pt corner minus the 8 pt margin, so the sheet is concentric with the display. I measured the system share sheet on iOS 27: 8 pt from the sides and the bottom edge, with this radius |
 | `radius.full` | half the height | full | Buttons, chips, the ask bar, the Requests button, badges, avatars |
 
 ## Rules

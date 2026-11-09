@@ -147,18 +147,19 @@ export const PaymentSheet = memo(function PaymentSheet({
 const styles = StyleSheet.create((theme) => ({
   overlay: { ...StyleSheet.absoluteFillObject, justifyContent: 'flex-end' },
   scrim: { ...StyleSheet.absoluteFillObject, backgroundColor: theme.color.scrim, opacity: theme.state.scrim },
-  // iOS: a floating sheet with margins all round; Android: a bottom sheet attached to the bottom edge.
+  // iOS: a floating sheet 8 pt from the sides and the bottom edge, as the system sheets rest (measured on iOS 27), with
+  // its content clear of the home indicator; Android: a bottom sheet attached to the bottom edge.
   sheet: (ios: boolean, bottom: number) => ({
     ...cornerCurve,
     marginHorizontal: ios ? theme.space[2] : 0,
-    marginBottom: ios ? bottom + theme.space[2] : 0,
+    marginBottom: ios ? theme.space[2] : 0,
     paddingHorizontal: theme.inset.sheet,
     paddingTop: theme.space[4],
-    paddingBottom: ios ? theme.inset.sheet : bottom + theme.space[4],
+    paddingBottom: ios ? Math.max(theme.inset.sheet, bottom - theme.space[2]) : bottom + theme.space[4],
     gap: theme.space[4],
-    borderRadius: ios ? theme.radius.sheet : 0,
-    borderTopLeftRadius: theme.radius.sheet,
-    borderTopRightRadius: theme.radius.sheet,
+    borderRadius: ios ? theme.radius.sheetFloating : 0,
+    borderTopLeftRadius: ios ? theme.radius.sheetFloating : theme.radius.sheet,
+    borderTopRightRadius: ios ? theme.radius.sheetFloating : theme.radius.sheet,
     backgroundColor: theme.color.card,
   }),
   head: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', minHeight: theme.hit.min },

@@ -575,5 +575,7 @@ I raised the sample sizes of the tests. The hand-run concierge sends 60 requests
 
 **Why:** a percentage of 6 or 20 reads as more precise than it is, and "4 of 6" is too few to rest a decision on. The shops stay at 10 because that is the ring of shops reachable within 15 minutes' walk of Blythe Road, and the liquidity model in the product metrics is built on 10 shops over 6 kinds. The case against NPS in decision 067 still holds with 20 shoppers, since one person moves the score by 5 points.
 
+**Open:** the new numbers scale the old marks up; no benchmark or volume estimate sets them yet. Grounding each sample and mark in the product's own model and in external references is the next step.
+
 ## Still open
 
