@@ -361,7 +361,7 @@ function tick(dt: number) {
     const next: OrderState = sim.shopOutcome === 'sold' ? 'sold' : sim.shopOutcome === 'noConfirm' ? 'notConfirmed' : confirmed;
     app.set({ order: next });
     if (next === 'ready' && !sim.chatOpen && app.notificationsAllowed) {
-      setSim({ banner: { title: c.active.title, body: `${shopName} has set ${c.active.plural ? 'them' : 'it'} aside. Your collection code is pinned in the chat.` } });
+      setSim({ banner: { title: c.active.title, body: `${shopName} has set ${c.active.plural ? 'them' : 'it'} aside. Your collection code is on the receipt.` } });
     }
   } else if (app.order === 'paid' && since >= DELIVERY_STEP_S) {
     app.set({ order: 'onItsWay' });

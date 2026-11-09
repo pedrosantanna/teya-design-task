@@ -93,10 +93,10 @@ Trade-offs:
 | Aspect | Spec |
 | --- | --- |
 | Use | The active request's chat, from Buy until the order ends, in every state except Sold and Not confirmed (nothing was charged and the chat moves on to the next answer). Tapping it opens the receipt. It is the order's place in its chat, like a pinned message: the order card stays in the history (decision 068) |
-| Anatomy | Full width under the nav bar: a 40 square in the shop's accent `tile` with the Store symbol (the Truck for a delivery); the status label; the shop and items in Footnote ("Paper & Co, 2 × eclipse glasses", the items alone when the label already names the shop); while Ready or Extended, "Code" in Caption 1 over the code in Headline ("K 7 Q 2"); a chevron on iOS |
-| Tokens | The nav bar's fill and edge (`chat.ground`, a hairline in `chat.groundEdge`); it covers the bar's own hairline, so bar and strip read as one bar with one edge. `space.3` between parts, `space.1` between the two lines; `space.1` above (8 pt or more from Back) and `space.3` below. The chat's nav bar stays filled whatever the scroll, overscroll included |
+| Anatomy | Full width under the nav bar: a 40 square in the shop's accent `tile` with the Store symbol (the Truck for a delivery); the shop and items in Subheadline on the first line ("Paper & Co, 2 × eclipse glasses", the items alone when the label already names the shop) and the status label right under it, the two lines as one unit; a chevron on iOS. No collection code: it lives on the receipt, one tap away |
+| Tokens | The nav bar's fill and edge (`chat.ground`, a hairline in `chat.groundEdge`); it covers the bar's own hairline, so bar and strip read as one bar with one edge. `space.3` between parts, no gap between the two lines; `space.1` above (8 pt or more from Back) and `space.3` below. The chat's nav bar stays filled whatever the scroll, overscroll included |
 | iOS ↔ Android | The same strip; no chevron on Android |
-| Accessibility | One button: "Order, Ready, collect by Mon 9 Nov, Paper & Co, 2 eclipse glasses, collection code K, 7, Q, 2", hint "Opens the receipt". The status is a polite live region |
+| Accessibility | One button: "Order, Paper & Co, 2 eclipse glasses, Ready, collect by Mon 9 Nov", hint "Opens the receipt". The status is a polite live region |
 
 ## Snuffle mark
 

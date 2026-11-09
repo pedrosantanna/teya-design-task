@@ -117,7 +117,7 @@ export function orderView(
     steps = [
       { title: `Bought with ${payName}`, detail: c.id === 'sam' ? '1:16pm' : '12:31pm', state: 'done' },
       { title: `${name} sets ${them} aside`, detail: `Charged when ${name} confirms`, state: 'current' },
-      { title: `Ready · collect by ${collectBy}`, detail: 'Collection code pinned at the top', state: 'todo' },
+      { title: `Ready · collect by ${collectBy}`, detail: 'Collection code on the receipt', state: 'todo' },
     ];
   }
   const more = c.active.quantity - quantity;
@@ -322,7 +322,7 @@ export function buildChat(c: PersonaContent, app: AppSlice, sim: SimState): Chat
     switch (o.state) {
       case 'ready':
       case 'extended':
-        if (!view.till && o.fulfilment === 'collect') snuffle(k('ready'), `${view.shop} has set ${it} aside, so you've paid ${view.total}. Your collection code is pinned at the top.`);
+        if (!view.till && o.fulfilment === 'collect') snuffle(k('ready'), `${view.shop} has set ${it} aside, so you've paid ${view.total}. Your collection code is on the receipt: tap the order at the top.`);
         if (sim.date === 'dayBefore' || sim.extendedInChat) {
           snuffle(k('reminder'), `Your ${o.quantity} ${unitFor(c, o.quantity)} ${o.quantity === 1 ? 'is' : 'are'} set aside at ${view.collectAt?.name ?? view.shop}. Collect by ${view.collectBy}, ${closes}.`, 'Sun 8 Nov');
           snuffle(k('reminder2'), "Can't make it? You can extend once.");

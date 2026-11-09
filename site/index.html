@@ -457,6 +457,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 @container prose (max-width: 480px) { .dg-bars { padding: var(--s-3); } .dg-bars-plot { grid-template-columns: minmax(0, 5.5rem) minmax(0, 1fr); } .dg-bar-name { font-size: 12px; line-height: 1.3; } }
 /* A hypothesis card: its number and status, then belief, test and pass mark as label and text. */
 .dg-hyp { padding: var(--s-4); border: 1px solid var(--border-strong); border-radius: 12px; }
+.dg-hyps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-4); align-items: stretch; }
+.dg-hyps .dg-hyp dl { grid-template-columns: minmax(0, 1fr); gap: 0; }
+.dg-hyps .dg-hyp dd + dt { margin-top: var(--s-3); }
+@container prose (max-width: 720px) { .dg-hyps { grid-template-columns: minmax(0, 1fr); } }
 .dg-hyp-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); margin-bottom: var(--s-3); }
 .dg-hyp-head b { margin: 0; font-size: 14px; }
 .dg-hyp dl { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: var(--s-2) var(--s-4); margin: 0; }
@@ -880,6 +884,7 @@ i.m.unknown { opacity: .45; }
     document.documentElement.lang = LANG === 'pt' ? 'pt-BR' : 'en';
     document.querySelectorAll('#lang-seg button').forEach(b => b.setAttribute('aria-checked', String(b.dataset.lang === LANG)));
     els.search.placeholder = t('filter'); els.search.setAttribute('aria-label', t('filter'));
+    els.menu.setAttribute('aria-label', LANG === 'pt' ? 'Abrir navegação' : 'Open navigation');
   }
   applyMode();
   const cache = new Map();

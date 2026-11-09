@@ -93,10 +93,10 @@ Trade-offs:
 | Aspecto | Especificação |
 | --- | --- |
 | Uso | A conversa do pedido ativo, do Buy até a compra terminar, em todos os estados menos Sold e Not confirmed (nada foi cobrado e a conversa segue para a próxima resposta). Um toque abre o recibo. É o lugar da compra na sua conversa, como uma mensagem fixada: o cartão de compra continua no histórico (decisão 068) |
-| Anatomia | Largura total sob a barra de navegação: um quadrado de 40 no `tile` do acento da loja com o símbolo Store (o caminhão numa entrega); o rótulo de status; a loja e os itens em Footnote ("Paper & Co, 2 × eclipse glasses", só os itens quando o rótulo já diz a loja); em Ready ou Extended, "Code" em Caption 1 sobre o código em Headline ("K 7 Q 2"); um chevron no iOS |
-| Tokens | O preenchimento e a borda da barra de navegação (`chat.ground`, um fio em `chat.groundEdge`); cobre o fio da própria barra, então barra e faixa se leem como uma barra só, com uma borda. `space.3` entre as partes, `space.1` entre as duas linhas; `space.1` acima (8 pt ou mais do Back) e `space.3` abaixo. A barra de navegação da conversa fica preenchida em qualquer rolagem, inclusive no overscroll |
+| Anatomia | Largura total sob a barra de navegação: um quadrado de 40 no `tile` do acento da loja com o símbolo Store (o caminhão numa entrega); a loja e os itens em Subheadline na primeira linha ("Paper & Co, 2 × eclipse glasses", só os itens quando o rótulo já diz a loja) e o rótulo de status logo abaixo, as duas linhas como uma unidade; um chevron no iOS. Sem código de retirada: ele fica no recibo, a um toque |
+| Tokens | O preenchimento e a borda da barra de navegação (`chat.ground`, um fio em `chat.groundEdge`); cobre o fio da própria barra, então barra e faixa se leem como uma barra só, com uma borda. `space.3` entre as partes, sem espaço entre as duas linhas; `space.1` acima (8 pt ou mais do Back) e `space.3` abaixo. A barra de navegação da conversa fica preenchida em qualquer rolagem, inclusive no overscroll |
 | iOS ↔ Android | A mesma faixa; sem chevron no Android |
-| Acessibilidade | Um botão: "Order, Ready, collect by Mon 9 Nov, Paper & Co, 2 eclipse glasses, collection code K, 7, Q, 2", dica "Opens the receipt". O status é uma região viva educada (polite) |
+| Acessibilidade | Um botão: "Order, Paper & Co, 2 eclipse glasses, Ready, collect by Mon 9 Nov", dica "Opens the receipt". O status é uma região viva educada (polite) |
 
 ## Marca do Snuffle
 

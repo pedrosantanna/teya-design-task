@@ -136,11 +136,11 @@ The state debugger SHALL list the steps Collected, Rate the shop, Rate: wouldn't
 - **THEN** the chat shows the collected order with the rating sheet open
 
 ### Requirement: Pinned order
-Once a request has an order, its chat SHALL pin the order under the nav bar with the status label, the shop and items, and the collection code while the order is Ready or Extended for collection. A tap SHALL open the receipt. The pinned order SHALL show in every order state except Sold and Not confirmed, and SHALL take the nav bar's fill and edge, with the chat's bar filled at any scroll.
+Once a request has an order, its chat SHALL pin the order under the nav bar with the shop and items on the first line and the status label under it, close together, and no collection code (the code is on the receipt). A tap SHALL open the receipt. The pinned order SHALL show in every order state except Sold and Not confirmed, and SHALL take the nav bar's fill and edge, with the chat's bar filled at any scroll.
 
 #### Scenario: Ready at Paper & Co
 - **WHEN** Paper & Co confirms it has set Sam's order aside
-- **THEN** the chat pins "Ready · collect by Mon 9 Nov" with "Paper & Co, 2 × eclipse glasses" and the code "K7Q2" at its end, and Snuffle says "Your collection code is pinned at the top."
+- **THEN** the chat pins "Paper & Co, 2 × eclipse glasses" over "Ready · collect by Mon 9 Nov", with no code in the strip, and Snuffle says "Your collection code is on the receipt: tap the order at the top."
 
 #### Scenario: Open the receipt
 - **WHEN** the shopper taps the pinned order

@@ -2,18 +2,11 @@
 
 The first test is whether shops answer, by hand, before I build anything that depends on it. I set every pass mark before testing, so a result can't be read to fit.
 
-## Hypothesis H1
+## The three hypotheses
 
-Without H1 the concierge doesn't work, and nothing in the evidence supports it yet.
+The concept rests on these three. H1 decides whether the concierge can work at all; H3 and H4 decide whether shoppers want it. None has evidence yet.
 
-<div class="dg dg-hyp"><div class="dg-hyp-head"><b>H1 · Shops answer</b><span class="dg-badge">No evidence</span></div><dl><dt>I believe that</dt><dd>Shopkeepers answer a stock request on WhatsApp within 10 minutes while open, with an answer the shopper can act on.</dd><dt>Test</dt><dd>By hand on WhatsApp: 20 requests to 10 shops within a 15-minute walk of Blythe Road, over two days.</dd><dt>Pass if</dt><dd>60% of the 20 requests get a valid answer within 10 minutes, and at least half the searches end with a usable yes before the deadline.</dd></dl></div>
-
-## H3 and H4
-
-| # | I believe that… | Pass if |
-| --- | --- | --- |
-| H3 | Shoppers would rather ask one concierge than browse and contact shops one by one | Asking chosen first in 4 of 6 scenarios, and called simpler by 4 of 6 |
-| H4 | Shoppers accept a wait of several minutes while the concierge works | 4 of 6 wait for the answer |
+<div class="dg dg-hyps"><div class="dg-hyp"><div class="dg-hyp-head"><b>H1 · Shops answer</b><span class="dg-badge">No evidence</span></div><dl><dt>I believe that</dt><dd>Shopkeepers answer a stock request on WhatsApp within 10 minutes while open, with an answer the shopper can act on.</dd><dt>Test</dt><dd>By hand on WhatsApp: 20 requests to 10 shops within a 15-minute walk of Blythe Road, over two days.</dd><dt>Pass if</dt><dd>60% of the 20 requests get a valid answer within 10 minutes, and at least half the searches end with a usable yes before the deadline.</dd></dl></div><div class="dg-hyp"><div class="dg-hyp-head"><b>H3 · Shoppers ask</b><span class="dg-badge">One post</span></div><dl><dt>I believe that</dt><dd>Shoppers with a specific need would rather ask one concierge than browse shops and contact them one by one.</dd><dt>Test</dt><dd>The prototype offers asking and browsing from the first screen; I note the first choice in each scenario and ask which felt simpler.</dd><dt>Pass if</dt><dd>Asking is chosen first in 4 of 6 scenarios, and called simpler by 4 of 6.</dd></dl></div><div class="dg-hyp"><div class="dg-hyp-head"><b>H4 · Shoppers wait</b><span class="dg-badge">No evidence</span></div><dl><dt>I believe that</dt><dd>Shoppers accept a wait of several minutes when the concierge says what it's doing and keeps looking.</dd><dt>Test</dt><dd>A hand-run concierge on WhatsApp with 6 shoppers and real requests; I note who waits and who buys elsewhere.</dd><dt>Pass if</dt><dd>4 of 6 wait for the answer.</dd></dl></div></div>
 
 ## First experiment
 

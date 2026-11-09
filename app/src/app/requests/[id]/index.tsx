@@ -260,7 +260,6 @@ function ActiveChat() {
             items={pinned.items}
             accent={shopAccent(shopById(content, pinned.shopId))}
             fulfilment={pinned.fulfilment}
-            code={pinned.fulfilment === 'collect' && (pinned.state === 'ready' || pinned.state === 'extended') ? pinned.code : undefined}
             margin={margin}
             onPress={openReceipt}
             scroll={scroll}

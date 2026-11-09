@@ -97,7 +97,7 @@ When a shop answers while the shopper is on another screen, the prototype SHALL 
 
 #### Scenario: Order ready
 - **WHEN** Paper & Co sets Sam's order aside while Sam is on another screen
-- **THEN** the banner reads "Paper & Co has set them aside. Your collection code is pinned in the chat."
+- **THEN** the banner reads "Paper & Co has set them aside. Your collection code is on the receipt."
 
 ### Requirement: Unmatched messages
 When the shopper types something the script doesn't cover, Snuffle SHALL reply once that this prototype only knows a few requests and show them as suggestion chips.

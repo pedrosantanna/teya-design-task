@@ -20,8 +20,7 @@
       "theme": "lavender",
       "layout": "points",
       "labels": [
-        "The problem",
-        "My answer"
+        "The problem"
       ],
       "title": "Is it there, right now?",
       "lines": [
@@ -44,11 +43,7 @@
       "section": "0 · Overview",
       "theme": "night",
       "layout": "points",
-      "labels": [
-        "The bet",
-        "What isn’t measured yet"
-      ],
-      "title": "The bet: shops answer within minutes",
+      "title": "Would shops answer within minutes?",
       "lines": [
         "Untested, so it is the first thing I’ll test"
       ],
@@ -62,10 +57,6 @@
           {
             "name": "Who and when",
             "text": "Alone, directing agents, 1 to 6 November 2026. An Expo app, iOS first, also on Android and the web"
-          },
-          {
-            "name": "What isn’t measured yet",
-            "text": "Nothing about demand. No shopper or shopkeeper was interviewed; the evidence is 20 clustered public posts"
           }
         ]
       }
@@ -132,35 +123,27 @@
       "stats": [
         {
           "value": "4",
-          "label": "networks"
+          "label": "social networks: Reddit, Mumsnet, X, TikTok"
         },
         {
           "value": "42",
-          "label": "quotes kept"
-        },
-        {
-          "value": "20",
-          "label": "posts clustered"
-        },
-        {
-          "value": "0.85–0.93",
-          "label": "kappa, two coders"
+          "label": "quotes from public posts"
         }
       ],
       "media": {
         "type": "themes",
         "label": "Ten themes, strongest first",
         "items": [
-          "Stock",
-          "Opening hours",
-          "Failed trips and urgent needs",
-          "Loyalty to local",
-          "King Street versus Chiswick",
-          "Closures",
-          "Chains and independents",
-          "Collection and delivery",
-          "Cash, parking and the bridge",
-          "X and TikTok"
+          "Stock: the only way to know is to ask",
+          "Opening hours: listed hours aren’t trusted",
+          "Failed trips: they end on Amazon; urgency beats online",
+          "Loyalty: it depends on convenience",
+          "King Street: locals send visitors to Chiswick",
+          "Closures: practical shops are leaving",
+          "Chains or independents: chosen on practical grounds",
+          "Collection and delivery: a way to control timing",
+          "Cash, parking, the bridge: small frictions",
+          "X and TikTok: the street as somewhere to discover"
         ]
       }
     },
@@ -892,10 +875,9 @@
       "theme": "butter",
       "layout": "stats",
       "labels": [
-        "Hypothesis H1",
-        "H3 and H4"
+        "The three hypotheses"
       ],
-      "title": "First: do shops answer within 10 minutes?",
+      "title": "Three hypotheses to test first",
       "stats": [
         {
           "value": "60%",

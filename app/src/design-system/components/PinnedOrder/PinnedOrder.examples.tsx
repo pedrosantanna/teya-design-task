@@ -30,7 +30,6 @@ export function PinnedOrderExamples() {
           items="2 × eclipse glasses"
           accent="pistachio"
           fulfilment={s.fulfilment}
-          code={s.code}
           margin={margin}
           onPress={noop}
         />

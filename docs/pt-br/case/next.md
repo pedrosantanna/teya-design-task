@@ -2,18 +2,11 @@
 
 O primeiro teste é saber se as lojas respondem, à mão, antes de construir qualquer coisa que dependa disso. Defini cada critério de aprovação antes de testar, para que um resultado não possa ser lido a favor.
 
-## Hipótese H1
+## As três hipóteses
 
-Sem a H1 o concierge não funciona, e nada na evidência a sustenta ainda.
+O conceito se apoia nestas três. A H1 decide se o concierge pode funcionar; a H3 e a H4 decidem se quem compra quer usá-lo. Nenhuma tem evidência ainda.
 
-<div class="dg dg-hyp"><div class="dg-hyp-head"><b>H1 · As lojas respondem</b><span class="dg-badge">Sem evidência</span></div><dl><dt>Acredito que</dt><dd>Os lojistas respondem a um pedido de estoque no WhatsApp em até 10 minutos enquanto estão abertos, com uma resposta sobre a qual quem compra pode agir.</dd><dt>Teste</dt><dd>À mão, no WhatsApp: 20 pedidos para 10 lojas a menos de 15 minutos a pé da Blythe Road, em dois dias.</dd><dt>Passa se</dt><dd>60% dos 20 pedidos recebem uma resposta válida em até 10 minutos, e pelo menos metade das buscas termina com um sim utilizável antes do prazo.</dd></dl></div>
-
-## H3 e H4
-
-| # | Acredito que… | Passa se |
-| --- | --- | --- |
-| H3 | Os compradores preferem perguntar a um concierge do que explorar e contatar lojas uma a uma | Perguntar escolhido primeiro em 4 de 6 cenários, e considerado mais simples por 4 de 6 |
-| H4 | Os compradores aceitam esperar alguns minutos enquanto o concierge trabalha | 4 de 6 esperam a resposta |
+<div class="dg dg-hyps"><div class="dg-hyp"><div class="dg-hyp-head"><b>H1 · As lojas respondem</b><span class="dg-badge">Sem evidência</span></div><dl><dt>Acredito que</dt><dd>Os lojistas respondem a um pedido de estoque no WhatsApp em até 10 minutos enquanto estão abertos, com uma resposta sobre a qual quem compra pode agir.</dd><dt>Teste</dt><dd>À mão, no WhatsApp: 20 pedidos para 10 lojas a menos de 15 minutos a pé da Blythe Road, em dois dias.</dd><dt>Passa se</dt><dd>60% dos 20 pedidos recebem uma resposta válida em até 10 minutos, e pelo menos metade das buscas termina com um sim utilizável antes do prazo.</dd></dl></div><div class="dg-hyp"><div class="dg-hyp-head"><b>H3 · Quem compra pergunta</b><span class="dg-badge">Um post</span></div><dl><dt>Acredito que</dt><dd>Compradores com uma necessidade específica preferem perguntar a um concierge só a explorar lojas e contatá-las uma a uma.</dd><dt>Teste</dt><dd>O protótipo oferece perguntar e explorar desde a primeira tela; anoto a primeira escolha em cada cenário e pergunto qual pareceu mais simples.</dd><dt>Passa se</dt><dd>Perguntar é a primeira escolha em 4 de 6 cenários, e 4 de 6 dizem que é mais simples.</dd></dl></div><div class="dg-hyp"><div class="dg-hyp-head"><b>H4 · Quem compra espera</b><span class="dg-badge">Sem evidência</span></div><dl><dt>Acredito que</dt><dd>Os compradores aceitam esperar vários minutos quando o concierge diz o que está fazendo e continua procurando.</dd><dt>Teste</dt><dd>Concierge feito à mão no WhatsApp com 6 compradores e pedidos reais; anoto quem espera e quem compra em outro lugar.</dd><dt>Passa se</dt><dd>4 de 6 esperam a resposta.</dd></dl></div></div>
 
 ## Primeiro experimento
 

@@ -2,7 +2,7 @@
 
 Snuffle asks the small shops near you whether they have what you need, and you buy and collect in the same chat.
 
-<div class="feature"><video class="phone-video" src="media/shops-answer.mp4" data-poster="media/shops-answer.png" width="450" height="948" aria-label="Six shops move from Asked to Seen to an answer; Paper and Co, Broadway Chemist and Olympia Cameras answer with prices and Buy" controls muted playsinline loop preload="metadata"></video><div>
+<div class="feature"><video class="phone-video" src="media/shops-answer.mp4" data-poster="media/shops-answer.png" width="450" height="948" aria-label="Six shops move from Asked to Seen to an answer; Paper and Co, Broadway Chemist and Olympia Cameras answer with prices and Buy" autoplay muted playsinline loop preload="metadata"></video><div>
 
 <ul class="dg dg-brief"><li><b>The brief</b><span>Bring a high street's small shops into one app, and take a position on findability or the transaction.</span></li><li><b>The problem</b><span>A shopper can't tell whether a nearby independent has the thing now, and the shop has no catalogue to search.</span></li><li><b>My answer</b><span>Snuffle asks the shops; you buy and collect in the same chat.</span></li><li><b>The bet</b><span>Shops answer within minutes while they are open. It is untested, so it is the <a href="next.md">first thing I'll test</a>.</span></li><li><b>How I work</b><span>Very little Figma. I build with AI agents in code and write every decision down as AI context, the second block in the sidebar.</span></li><li><b>Who and when</b><span>Alone, directing agents, from 1 to 6 November 2026. An Expo app, iOS first, that also runs on Android and the web.</span></li></ul>
 

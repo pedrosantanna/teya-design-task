@@ -27,8 +27,6 @@ export type PinnedOrderProps = {
   accent: ShopAccentName;
   /** Collect or delivery: the symbol in the leading square. */
   fulfilment?: 'collect' | 'delivery';
-  /** The collection code, shown at the trailing end only while the order can be collected ("K7Q2"). */
-  code?: string;
   /** Opens the receipt. */
   onPress: () => void;
   /** Screen margin. */
@@ -39,15 +37,11 @@ export type PinnedOrderProps = {
   backgroundAt?: number;
 };
 
-/** Read character by character: "K, 7, Q, 2". */
-const spokenCode = (code: string) => code.split('').join(', ');
-
 /**
  * The order pinned under the chat's nav bar (components.md, Pinned order): once a request has an order, its status,
- * shop and items stay in view whatever the scroll, and one tap opens the receipt. While the order can be collected the
- * code itself sits at the trailing end, so it can be read out at the counter without opening anything.
+ * shop and items stay in view whatever the scroll, and one tap opens the receipt, where the collection code is.
  */
-export const PinnedOrder = memo(function PinnedOrder({ status, tone = 'default', shop, items, accent, fulfilment = 'collect', code, onPress, margin, scroll, backgroundAt = 0 }: PinnedOrderProps) {
+export const PinnedOrder = memo(function PinnedOrder({ status, tone = 'default', shop, items, accent, fulfilment = 'collect', onPress, margin, scroll, backgroundAt = 0 }: PinnedOrderProps) {
   const { theme } = useUnistyles();
   const press = usePress();
   const ios = theme.platform === 'ios';
@@ -57,7 +51,7 @@ export const PinnedOrder = memo(function PinnedOrder({ status, tone = 'default',
   const fillStyle = useAnimatedStyle(() => ({
     opacity: scrollY ? interpolate(scrollY.get(), [backgroundAt - step, backgroundAt], [0, 1], Extrapolation.CLAMP) : 1,
   }));
-  const label = spoken('Order', status, shop, items, code ? `collection code ${spokenCode(code)}` : undefined);
+  const label = spoken('Order', shop, items, status);
 
   return (
     <View style={styles.bar}>
@@ -78,24 +72,15 @@ export const PinnedOrder = memo(function PinnedOrder({ status, tone = 'default',
           </Ground>
         </View>
         <View style={styles.grow} accessibilityLiveRegion="polite">
+          {/* What was bought first, then where it stands, tight together as one unit. "Waiting for Paper & Co" already
+              names the shop: the first line then holds the items alone. */}
+          <Text variant="subheadline" numberOfLines={1}>
+            {status.includes(shop) ? items : `${shop}, ${items}`}
+          </Text>
           <CrossFade token={`${tone}|${status}`}>
             <StatusLabel label={status} tone={tone} />
           </CrossFade>
-          <Text variant="footnote" color="mutedForeground" numberOfLines={1}>
-            {/* "Waiting for Paper & Co" already names the shop: the line then holds the items alone. */}
-            {status.includes(shop) ? items : `${shop}, ${items}`}
-          </Text>
         </View>
-        {code ? (
-          <View style={styles.code}>
-            <Text variant="caption1" color="mutedForeground">
-              Code
-            </Text>
-            <Text variant="headline" numberOfLines={1}>
-              {code.split('').join(' ')}
-            </Text>
-          </View>
-        ) : null}
         {ios ? <Icon icon={ArrowRight01Icon} size="caption1" color="mutedForeground" /> : null}
       </Pressable>
     </View>
@@ -136,6 +121,6 @@ const styles = StyleSheet.create((theme) => ({
     justifyContent: 'center',
     backgroundColor: theme.color.shop.accent[accent].tile,
   }),
-  grow: { flex: 1, gap: theme.space[1] },
-  code: { alignItems: 'flex-end' },
+  // No gap: the two lines read as one unit (Gestalt proximity), their own leading is the only space between them.
+  grow: { flex: 1 },
 }));

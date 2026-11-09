@@ -329,7 +329,7 @@ export function buildOtherChat(c: PersonaContent, id: string, t: Thread): ChatIt
             steps: [
               { title: 'Bought with Apple Pay', detail: '11:09am', state: 'done' },
               { title: "Rossi's Bakery sets it aside", detail: "Charged when Rossi's Bakery confirms", state: 'current' },
-              { title: 'Ready · collect by Sat 7 Nov', detail: 'Collection code pinned at the top', state: 'todo' },
+              { title: 'Ready · collect by Sat 7 Nov', detail: 'Collection code on the receipt', state: 'todo' },
             ],
           }),
         });
@@ -369,7 +369,7 @@ export function buildOtherChat(c: PersonaContent, id: string, t: Thread): ChatIt
     snuffle('has', `${name} has ${plural ? 'them' : 'it'}.`);
     shopper('buy', `Buy 1 at ${name}`);
     snuffle('waiting', `${name} is setting ${plural ? 'them' : 'it'} aside. You're only charged when they confirm.`);
-    snuffle('ready', `${name} has set ${plural ? 'them' : 'it'} aside, so you've paid ${price(isHooks ? 2.49 : 35)}. Your collection code is pinned at the top.`);
+    snuffle('ready', `${name} has set ${plural ? 'them' : 'it'} aside, so you've paid ${price(isHooks ? 2.49 : 35)}. Your collection code is on the receipt.`);
     const rated = t.rated != null;
     items.push({
       kind: 'order',
