@@ -56,14 +56,15 @@ export function isEmbedded(): boolean {
 
 export function readUrlState(params: URLSearchParams = startParams()): UrlState {
   const scheme = oneOf(params.get('scheme'), ['light', 'dark', 'system'] as const);
-  // Inside the docs site, `scheme` is the docs' own theme: the app's "System" follows it, and the debugger can
-  // still pick Light or Dark over it. Opened on its own, `scheme` is the debugger's choice, as in a shared link.
+  // Inside the docs site, `scheme` is the docs' theme for the prototype (light unless the reader picked Dark there):
+  // the app's "System" follows it, and the debugger can still pick Light or Dark over it. Opened on its own, `scheme`
+  // is the debugger's choice, as in a shared link, and the web build opens in Light without one.
   const embedded = isEmbedded();
   return {
     step: stepById(params.get('step'))?.id,
     persona: oneOf(params.get('persona'), ['sam', 'jess'] as const),
     platform: oneOf(params.get('os') ?? params.get('platform'), ['ios', 'android'] as const),
-    scheme: embedded ? undefined : scheme,
+    scheme: embedded ? undefined : (scheme ?? (Platform.OS === 'web' ? 'light' : undefined)),
     hostScheme: embedded && scheme !== 'system' ? scheme : undefined,
     set: oneOf(params.get('set'), ['default', 'empty', 'longNames', 'manyAnswers'] as const),
     firstRun: params.get('firstRun') === '1',
