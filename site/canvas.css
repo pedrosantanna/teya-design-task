@@ -82,6 +82,8 @@ img.cv-missing { display: block; min-height: 120px; background: repeating-linear
 .cv-title .cv-ver { flex: none; height: 30px; padding: 0 8px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--fg); font: inherit; font-size: 13px; cursor: pointer; }
 .cv-title .cv-about { flex: none; height: 30px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--fg); font: inherit; font-size: 13px; cursor: pointer; }
 .cv-title .cv-about:hover { border-color: var(--border-strong); }
+.cv-title a.cv-about { display: inline-flex; align-items: center; box-sizing: border-box; line-height: 1; text-decoration: none; white-space: nowrap; }
+.cv-title .cv-about:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
 .cv-title .cv-fold { flex: none; display: grid; place-items: center; width: 30px; height: 30px; margin-left: -6px; padding: 0; border: 0; border-radius: 8px; background: transparent; color: var(--muted-fg); cursor: pointer; }
 .cv-title .cv-fold:hover { background: var(--muted); color: var(--fg); }
 .cv-title .cv-fold .ic { width: 16px; height: 16px; }
