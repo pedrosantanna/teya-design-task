@@ -187,6 +187,9 @@ const styles = StyleSheet.create((theme) => ({
     alignItems: 'center',
     gap: theme.space[1],
     padding: theme.inset.card,
+    // The card ends on the compact "View shop", 36 tall around a 20 pt label: take that air off the bottom padding so
+    // the label sits inset.card from the edge, as the title does from the top.
+    paddingBottom: theme.inset.card - (theme.size.button.compact - theme.type.subheadlineStrong.lineHeight) / 2,
     borderRadius: theme.radius.card,
     overflow: 'hidden',
     backgroundColor: theme.color.shop.accent[accent].tile,
