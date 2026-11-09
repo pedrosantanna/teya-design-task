@@ -290,7 +290,8 @@ export const iosLight = {
       gap: 12,
       mic: 20,
       ring: 2,
-      bottom: 21
+      bottom: 21,
+      fieldBottom: 28
     },
     peek: 80,
     edge: {
@@ -812,7 +813,8 @@ export const iosDark = {
       gap: 12,
       mic: 20,
       ring: 2,
-      bottom: 21
+      bottom: 21,
+      fieldBottom: 28
     },
     peek: 80,
     edge: {
@@ -1334,7 +1336,8 @@ export const androidLight = {
       gap: 12,
       mic: 20,
       ring: 2,
-      bottom: 21
+      bottom: 21,
+      fieldBottom: 28
     },
     peek: 80,
     edge: {
@@ -1862,7 +1865,8 @@ export const androidDark = {
       gap: 12,
       mic: 20,
       ring: 2,
-      bottom: 21
+      bottom: 21,
+      fieldBottom: 28
     },
     peek: 80,
     edge: {

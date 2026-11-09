@@ -7,8 +7,10 @@ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import {
   Chip,
-  Composer,
-  Dock,
+  ASK_ORIGIN_REQUESTS,
+  askBarInset,
+  BottomAccessory,
+  navigateWith,
   Illustration,
   LargeTitle,
   NavBar,
@@ -115,7 +117,7 @@ export default function Requests() {
   return (
     <ZoomTarget>
     <View style={styles.screen}>
-      <Animated.ScrollView onScroll={scroll.onScroll} scrollEventThrottle={16} contentContainerStyle={styles.content(top, insets.bottom)}>
+      <Animated.ScrollView onScroll={scroll.onScroll} scrollEventThrottle={16} contentContainerStyle={styles.content(top, askBarInset(insets.bottom, theme))}>
         <View style={styles.pad(margin)}>
           <LargeTitle title="Requests" display scroll={scroll} />
         </View>
@@ -161,20 +163,17 @@ export default function Requests() {
         onLeading={() => (router.canGoBack() ? router.back() : router.navigate('/'))}
         scroll={scroll}
       />
-      <Dock>
-        <View style={styles.composer(margin)}>
-        <Composer
-          value=""
-          onChangeText={() => undefined}
-          placeholder="Ask for anything nearby"
-          mark
-          onFieldPress={() => {
-            sim.compose(null);
-            router.push('/requests/new');
-          }}
-        />
-        </View>
-      </Dock>
+      {/* The same bar as on Nearby, without the Requests button: this list is where that button leads. */}
+      <BottomAccessory
+        margin={margin}
+        requests={false}
+        origin={ASK_ORIGIN_REQUESTS}
+        onAskPress={() => {
+          sim.compose(null);
+          // As from Nearby: the bar's glass morphs into New Request's composer while the screen crossfades.
+          navigateWith('morph', () => router.push({ pathname: '/requests/new', params: { from: 'requests' } }), ASK_ORIGIN_REQUESTS);
+        }}
+      />
       <Toast
         visible={undo != null}
         message="Request closed"
@@ -192,11 +191,11 @@ const styles = StyleSheet.create((theme) => ({
   // Proximity (spacing.md): 16 from the bar's controls to the large title, 16 from the title to the filters.
   content: (top: number, bottom: number) => ({
     paddingTop: top + theme.gap.title,
-    paddingBottom: bottom + theme.space[3] + theme.size.field + theme.space[2] + theme.clearance.askBar,
+    // As on Nearby: the dock's space.2, the ask bar, then clearance.askBar above it.
+    paddingBottom: bottom + theme.space[2] + theme.size.bar + theme.clearance.askBar,
     gap: theme.gap.title,
   }),
   pad: (margin: number) => ({ paddingHorizontal: margin }),
   filters: (margin: number) => ({ paddingHorizontal: margin, gap: theme.space[2] }),
   empty: (margin: number) => ({ paddingHorizontal: margin, paddingTop: theme.space[8], alignItems: 'center', gap: theme.space[4] }),
-  composer: (margin: number) => ({ paddingHorizontal: margin }),
 }));

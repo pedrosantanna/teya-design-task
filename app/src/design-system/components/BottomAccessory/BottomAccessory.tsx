@@ -24,6 +24,8 @@ import { Text } from '../Text/Text';
 
 /** The origin id the ask capsule registers under; New Request's composer morphs from it. */
 export const ASK_ORIGIN = 'ask';
+/** The same capsule on the Requests list registers here, so New Request grows from whichever bar opened it. */
+export const ASK_ORIGIN_REQUESTS = 'ask-requests';
 
 export type BottomAccessoryProps = {
   placeholder?: string;
@@ -34,6 +36,10 @@ export type BottomAccessoryProps = {
   onRequestsPress?: () => void;
   /** Screen margin. */
   margin: number;
+  /** The round Requests button before the capsule. Off on the Requests list, which is where it leads. */
+  requests?: boolean;
+  /** The origin id the capsule registers under; New Request grows from it. */
+  origin?: string;
 };
 
 export const BottomAccessory = memo(function BottomAccessory({
@@ -43,13 +49,15 @@ export const BottomAccessory = memo(function BottomAccessory({
   renderRequests,
   onRequestsPress,
   margin,
+  requests = true,
+  origin = ASK_ORIGIN,
 }: BottomAccessoryProps) {
   const askPress = usePress();
   const { theme } = useUnistyles();
   const insets = useSafeAreaInsets();
   const requestsPress = usePress();
   const askRef = useRef<ViewRef>(null);
-  useEffect(() => registerOrigin(ASK_ORIGIN, askRef), []);
+  useEffect(() => registerOrigin(origin, askRef), [origin]);
 
   const requestsLabel = requestsCount > 0 ? `Requests, ${requestsCount} ${requestsCount === 1 ? 'needs' : 'need'} you` : 'Requests';
   const button = (onPress: () => void) => (
@@ -74,7 +82,7 @@ export const BottomAccessory = memo(function BottomAccessory({
   return (
     <Dock bottomInset={askBarInset(insets.bottom, theme)}>
       <View style={styles.row(margin)}>
-        {renderRequests ? renderRequests(button) : button(() => onRequestsPress?.())}
+        {!requests ? null : renderRequests ? renderRequests(button) : button(() => onRequestsPress?.())}
         <Animated.View style={[styles.grow, askPress.scaleStyle]}>
           <Pressable
             accessibilityRole="button"

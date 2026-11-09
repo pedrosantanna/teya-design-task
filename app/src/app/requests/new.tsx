@@ -1,11 +1,11 @@
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { KeyboardStickyView } from 'react-native-keyboard-controller';
 import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { ASK_ORIGIN, ChatBubble, ChatGestureArea, ChatScroll, Chip, Composer, Ground, ListRow, NavBar, Sheet, TypingIndicator, navigateWith, screenMargin, useNavBarHeight } from '@/design-system';
+import { ASK_ORIGIN, ASK_ORIGIN_REQUESTS, ChatBubble, ChatGestureArea, ChatScroll, Chip, Composer, composerInset, Ground, ListRow, NavBar, Sheet, TypingIndicator, navigateWith, screenMargin, useNavBarHeight } from '@/design-system';
 import { LocationSheet } from '@/screens/LocationSheet';
 import { OFF_SCRIPT_REPLY, TYPING_MS, matchAsk, scriptedAsks, shopById, sim, useApp, useAppActions, useContent, useSim } from '@/store';
 
@@ -37,6 +37,9 @@ function deadlineFrom(text: string): string | null {
 // The composer grows out of Nearby's ask bar as the keyboard rises.
 export default function NewRequest() {
   const { theme } = useUnistyles();
+  // Opened from the Requests list's bar or from Nearby's: the composer grows from that bar and folds back into it.
+  const fromRequests = useLocalSearchParams<{ from?: string }>().from === 'requests';
+  const origin = fromRequests ? ASK_ORIGIN_REQUESTS : ASK_ORIGIN;
   const frame = useSafeAreaFrame();
   const insets = useSafeAreaInsets();
   const top = useNavBarHeight();
@@ -76,7 +79,7 @@ export default function NewRequest() {
           keyboardLiftBehavior="whenAtEnd"
           keyboardDismissMode="interactive"
           keyboardShouldPersistTaps="handled"
-          contentContainerStyle={styles.content(margin, top, insets.bottom)}
+          contentContainerStyle={styles.content(margin, top, composerInset(insets.bottom, theme))}
         >
           {sent ? (
             <Conversation key={sent} text={sent} />
@@ -92,13 +95,13 @@ export default function NewRequest() {
           )}
         </ChatScroll>
       </ChatGestureArea>
-      <KeyboardStickyView style={styles.composer(margin, insets.bottom)} offset={{ opened: insets.bottom }}>
+      <KeyboardStickyView style={styles.composer(margin, composerInset(insets.bottom, theme))} offset={{ opened: composerInset(insets.bottom, theme) }}>
         <Composer
           value={text}
           onChangeText={setText}
           onSend={send}
           mark
-          morphFrom={ASK_ORIGIN}
+          morphFrom={origin}
           autoFocus={!sent}
           nativeID={COMPOSER_ID}
           placeholder={shop ? `Ask ${shop.name}` : 'Ask for anything nearby'}
@@ -114,12 +117,12 @@ export default function NewRequest() {
         title="New request"
         fill="chat"
         leading="back"
-        backLabel="Nearby"
+        backLabel={fromRequests ? 'Requests' : 'Nearby'}
         onLeading={() => {
           sim.compose(null);
           set({ draft: null });
           // Back the way it came: the composer folds into the ask bar while the screen crossfades.
-          if (router.canGoBack()) navigateWith('unmorph', () => router.back(), ASK_ORIGIN);
+          if (router.canGoBack()) navigateWith('unmorph', () => router.back(), origin);
           else router.navigate('/');
         }}
       />

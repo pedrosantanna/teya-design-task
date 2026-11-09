@@ -20,6 +20,17 @@ import { SnuffleMark } from '../SnuffleMark/SnuffleMark';
 import { Count } from '../Tag/Tag';
 import { Text } from '../Text/Text';
 
+/** The bottom inset under a docked composer at rest (the dock adds its own space.2 on top): on an iPhone with a home
+ *  indicator the field sits size.askBar.fieldBottom (28) above the screen's edge, inside the safe area, as iOS 26
+ *  places a floating text field. Android keeps the full inset, above the navigation bar. It is also the keyboard
+ *  offset, so with the keyboard open the field still rides space.2 above it. */
+export function composerInset(
+  safeBottom: number,
+  theme: { platform: string; size: { askBar: { fieldBottom: number } }; space: Record<number, number> },
+) {
+  return theme.platform === 'ios' ? Math.min(safeBottom, theme.size.askBar.fieldBottom - theme.space[2]) : safeBottom;
+}
+
 // The field grows to five lines, then scrolls (components.md).
 const MAX_LINES = 5;
 

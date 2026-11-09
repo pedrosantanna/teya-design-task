@@ -7,7 +7,7 @@ export { Alert, type AlertAction, type AlertProps } from './components/Alert/Ale
 export { AlertExamples } from './components/Alert/Alert.examples';
 export { AreaRow, type AreaRowProps } from './components/AreaRow/AreaRow';
 export { AreaRowExamples } from './components/AreaRow/AreaRow.examples';
-export { BottomAccessory, ASK_ORIGIN, askBarInset, type BottomAccessoryProps } from './components/BottomAccessory/BottomAccessory';
+export { BottomAccessory, ASK_ORIGIN, ASK_ORIGIN_REQUESTS, askBarInset, type BottomAccessoryProps } from './components/BottomAccessory/BottomAccessory';
 export { BottomAccessoryExamples } from './components/BottomAccessory/BottomAccessory.examples';
 export { ConfirmButton, type ConfirmButtonProps } from './components/ConfirmButton/ConfirmButton';
 export { ConfirmButtonExamples } from './components/ConfirmButton/ConfirmButton.examples';
@@ -45,7 +45,7 @@ export { CloseButton, type CloseButtonProps } from './components/CloseButton/Clo
 export { CloseButtonExamples } from './components/CloseButton/CloseButton.examples';
 export { CollectionCode, type CollectionCodeProps } from './components/CollectionCode/CollectionCode';
 export { CollectionCodeExamples } from './components/CollectionCode/CollectionCode.examples';
-export { Composer, type ComposerProps } from './components/Composer/Composer';
+export { Composer, composerInset, type ComposerProps } from './components/Composer/Composer';
 export { Dock, type DockProps } from './components/Dock/Dock';
 export { DockExamples } from './components/Dock/Dock.examples';
 export { ComposerExamples } from './components/Composer/Composer.examples';

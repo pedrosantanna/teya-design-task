@@ -12,6 +12,8 @@ Nearby's ask bar: the round Requests button and the Ask capsule after it, floati
 | `renderRequests` | function | none | Wraps the Requests button (a `ZoomSource` into Requests) |
 | `onRequestsPress` | function | none | Used when `renderRequests` is not given |
 | `margin` | number | required | Screen margin |
+| `requests` | boolean | true | The Requests circle; off on the Requests list |
+| `origin` | string | `ASK_ORIGIN` | The origin id New Request grows from; `ASK_ORIGIN_REQUESTS` on the Requests list |
 
 ## Anatomy
 

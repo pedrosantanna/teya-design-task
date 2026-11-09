@@ -327,6 +327,14 @@
           "unit": "px"
         },
         "$description": "Screen bottom edge to the ask bar on a phone with a home indicator: where iOS 26 puts its floating tab bar, measured on the simulator"
+      },
+      "fieldBottom": {
+        "$type": "dimension",
+        "$value": {
+          "value": 28,
+          "unit": "px"
+        },
+        "$description": "Screen bottom edge to the composer at rest on a phone with a home indicator: where iOS 26 puts a floating text field (the bottom search in Messages, 48 tall), measured on the simulator"
       }
     },
     "peek": {

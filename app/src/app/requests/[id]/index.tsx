@@ -21,6 +21,7 @@ import {
   ChatGestureArea,
   Chip,
   Composer,
+  composerInset,
   Dock,
   Ground,
   ListRow,
@@ -223,12 +224,12 @@ function ActiveChat() {
           scrollEventThrottle={16}
           keyboardDismissMode="interactive"
           keyboardShouldPersistTaps="handled"
-          contentContainerStyle={styles.content(margin, top + (pinned ? pinnedHeight : 0), insets.bottom)}
+          contentContainerStyle={styles.content(margin, top + (pinned ? pinnedHeight : 0), composerInset(insets.bottom, theme))}
         />
       </ChatGestureArea>
       {/* The composer rides on the keyboard; with it open, the dock drops the home-indicator inset. */}
-      <KeyboardStickyView style={styles.sticky} offset={{ opened: insets.bottom }}>
-        <Dock floating={false}>
+      <KeyboardStickyView style={styles.sticky} offset={{ opened: composerInset(insets.bottom, theme) }}>
+        <Dock floating={false} bottomInset={composerInset(insets.bottom, theme)}>
           <View style={styles.pad(margin)}>
             <Composer value={reply} onChangeText={setReply} onSend={send} nativeID={COMPOSER_ID} />
           </View>
@@ -782,11 +783,11 @@ function OtherRequestChat({ id }: { id: string }) {
           scrollEventThrottle={16}
           keyboardDismissMode="interactive"
           keyboardShouldPersistTaps="handled"
-          contentContainerStyle={styles.content(margin, top, insets.bottom)}
+          contentContainerStyle={styles.content(margin, top, composerInset(insets.bottom, theme))}
         />
       </ChatGestureArea>
-      <KeyboardStickyView style={styles.sticky} offset={{ opened: insets.bottom }}>
-        <Dock floating={false}>
+      <KeyboardStickyView style={styles.sticky} offset={{ opened: composerInset(insets.bottom, theme) }}>
+        <Dock floating={false} bottomInset={composerInset(insets.bottom, theme)}>
           <View style={styles.pad(margin)}>
             <Composer value={reply} onChangeText={setReply} onSend={send} nativeID={COMPOSER_ID} />
           </View>
