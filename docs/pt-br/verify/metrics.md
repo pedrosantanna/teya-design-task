@@ -5,8 +5,8 @@ As métricas que dizem se o Snuffle funciona como marketplace e como negócio, c
 ```summary
 Takeaways:
 - A north star é pedidos concluídos por semana, os pedidos que terminam com uma compra retirada ou entregue. As entradas dela são compradores ativos, pedidos por comprador, taxa de atendimento, conversão de um pedido atendido em compra, confirmação e retirada, com as lojas que respondem em cada área como entrada do lado da oferta.
-- A taxa de atendimento (fill rate: pedidos que recebem pelo menos um sim utilizável a tempo) é o número central do marketplace. Com uma taxa de resposta de 60% (o critério da H1) e uma chance assumida de 40% de uma loja que responde ter o item, cerca de 6 lojas prováveis abertas dão 80% de atendimento; 3 dão 56%.
-- Isso significa cerca de 4 lojas no Snuffle por tipo num anel de 15 minutos, 24 para seis tipos. As 10 lojas da prova de conceito ficam perto de 52%, próximo do critério da H1 de metade das buscas resolvidas.
+- A taxa de atendimento (fill rate: pedidos que recebem pelo menos um sim utilizável a tempo) é o número central do marketplace. Com uma taxa de resposta de 60% (o critério da H1, 36 de 60 consultas) e uma chance assumida de 40% de uma loja que responde ter o item, cerca de 6 lojas prováveis abertas dão 80% de atendimento; 3 dão 56%.
+- Isso significa cerca de 4 lojas no Snuffle por tipo num anel de 15 minutos, 24 para seis tipos. As 10 lojas da prova de conceito ficam perto de 52%, próximo do critério da H1 de 12 das 24 buscas resolvidas.
 - O cenário base da estimativa de receita dá cerca de 98 compradores ativos por mês para cada loja ativa. Com 6 lojas consultadas por pedido, cada loja responde cerca de 11 pedidos para cada compra que recebe, cerca de 24 por dia útil. A carga de respostas é o guardrail que limita o quanto o Snuffle pode consultar.
 - Os pagamentos rendem cerca de 16 pence por compra no cenário base (£18 a 0,9%). A maior parte do dinheiro vem de lojas que adotam o POS do provedor, então a adesão ao POS por área é relatada ao lado do GMV.
 Call:
@@ -80,7 +80,7 @@ Quantas lojas uma área precisa para que um pedido receba um sim utilizável a t
 
 | Entrada | Valor | De onde vem |
 | --- | --- | --- |
-| r: parcela das lojas consultadas que respondem de forma válida em até 10 minutos | 60% | O critério da H1, ou seja, a menor taxa que o conceito aceita |
+| r: parcela das lojas consultadas que respondem de forma válida em até 10 minutos | 60% | O critério da H1 (36 de 60 consultas), ou seja, a menor taxa que o conceito aceita |
 | h: parcela das lojas que respondem e têm o item | 40% | Premissa, sem fonte. O concierge feito à mão dá o primeiro número |
 | o: parcela das lojas prováveis abertas quando o pedido chega | 80% | Premissa para o horário comercial, sem fonte |
 | k: tipos de loja que provavelmente têm um item | 2 | Premissa. No protótipo, os óculos de eclipse vão para seis tipos (farmácia, ótica, papelaria, loja de câmeras, loja de ferragens, brinquedos) e o pão de fermentação natural para um |
@@ -112,7 +112,7 @@ O pedido de óculos de eclipse do protótipo consulta 6 lojas, o que dá 81% com
 
 Um pedido tira suas n lojas prováveis de k tipos, e só as abertas contam, então n = lojas por tipo × k × o. Para 80% de atendimento: lojas por tipo = 6 ÷ (2 × 0,8) = 3,75, ou seja, 4 por tipo, e 4 × 6 tipos = 24 lojas no Snuffle num anel de 15 minutos. Para 50%: 3 ÷ 1,6 ≈ 2 por tipo, 12 lojas.
 
-A prova de conceito tem 10 lojas em 6 tipos, cerca de 1,7 por tipo. Isso dá n = 1,7 × 2 × 0,8 ≈ 2,7 lojas prováveis por pedido e uma taxa de atendimento de 1 − 0,76^2,7 ≈ 52%, perto do critério da H1 de metade das buscas resolvidas. Passar ali diz que o conceito pode funcionar com dez lojas; não diz que dez bastam para o produto.
+A prova de conceito tem 10 lojas em 6 tipos, cerca de 1,7 por tipo. Isso dá n = 1,7 × 2 × 0,8 ≈ 2,7 lojas prováveis por pedido e uma taxa de atendimento de 1 − 0,76^2,7 ≈ 52%, perto do critério da H1 de 12 das 24 buscas resolvidas. Passar ali diz que o conceito pode funcionar com dez lojas; não diz que dez bastam para o produto.
 
 ### Compradores por loja
 

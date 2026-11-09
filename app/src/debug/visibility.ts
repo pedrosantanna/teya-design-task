@@ -31,10 +31,11 @@ function save(value: Saved) {
 function initial(): Saved {
   const saved = load();
   const debug = startParams().get('debug');
-  // `?debug=0` starts hidden, `?debug=1` shown and open; otherwise the last visit's choice, else shown and closed.
-  if (debug === '0') return { hidden: true, open: saved?.open ?? false };
+  // The panel always starts closed; only `?debug=1` opens it. `?debug=0` starts hidden, otherwise the last
+  // visit's hidden or shown choice applies.
+  if (debug === '0') return { hidden: true, open: false };
   if (debug === '1') return { hidden: false, open: true };
-  return saved ?? { hidden: false, open: false };
+  return { hidden: saved?.hidden ?? false, open: false };
 }
 
 type DebuggerState = Saved & {

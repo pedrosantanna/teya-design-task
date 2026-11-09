@@ -5,8 +5,8 @@ The metrics that say whether Snuffle works as a marketplace and as a business, h
 ```summary
 Takeaways:
 - The north star is completed requests per week, the requests that end with an order collected or delivered. Its inputs are active shoppers, requests per shopper, fill rate, conversion from a filled request to a purchase, confirmation and collection, with answering shops per area as the supply input.
-- Fill rate (requests that get at least one usable yes in time) is the marketplace's core number. With an answer rate of 60% (H1's mark) and an assumed 40% chance that a shop that answers has the item, about 6 likely shops open give 80% fill; 3 give 56%.
-- That means about 4 shops on Snuffle per kind in a 15-minute ring, 24 for six kinds. The proof of concept's 10 shops come out near 52%, close to H1's mark of half the searches resolved.
+- Fill rate (requests that get at least one usable yes in time) is the marketplace's core number. With an answer rate of 60% (H1's mark, 36 of 60 asks) and an assumed 40% chance that a shop that answers has the item, about 6 likely shops open give 80% fill; 3 give 56%.
+- That means about 4 shops on Snuffle per kind in a 15-minute ring, 24 for six kinds. The proof of concept's 10 shops come out near 52%, close to H1's mark of 12 of the 24 searches resolved.
 - The revenue estimate's base case works out at about 98 monthly active shoppers per active shop. With 6 shops asked per request, each shop answers about 11 requests for each order it gets, about 24 a trading day. Answer burden is the guardrail that limits how widely Snuffle can ask.
 - Payments earn about 16p per order in the base case (£18 at 0.9%). Most of the money comes from shops joining the provider's POS, so POS attach per area is reported next to GMV.
 Call:
@@ -80,7 +80,7 @@ How many shops an area needs so that a request gets a usable yes in time. Every 
 
 | Input | Value | Where it comes from |
 | --- | --- | --- |
-| r: share of asked shops that answer validly within 10 minutes | 60% | H1's pass mark, so the lowest rate the concept accepts |
+| r: share of asked shops that answer validly within 10 minutes | 60% | H1's pass mark (36 of 60 asks), so the lowest rate the concept accepts |
 | h: share of shops that answer and have the item | 40% | Assumption, no source. The hand-run concierge gives the first figure |
 | o: share of likely shops open when the request comes in | 80% | Assumption for shop hours, no source |
 | k: kinds of shop likely to have one item | 2 | Assumption. In the prototype, eclipse glasses go to six kinds (chemist, optician, stationer, camera shop, hardware, toys) and sourdough to one |
@@ -112,7 +112,7 @@ The prototype's eclipse request asks 6 shops, which is 81% at the base inputs.
 
 A request draws its n likely shops from k kinds, and only the open ones count, so n = shops per kind × k × o. For 80% fill: shops per kind = 6 ÷ (2 × 0.8) = 3.75, so 4 per kind, and 4 × 6 kinds = 24 shops on Snuffle in a 15-minute ring. For 50% fill: 3 ÷ 1.6 ≈ 2 per kind, 12 shops.
 
-The proof of concept has 10 shops over 6 kinds, about 1.7 per kind. That gives n = 1.7 × 2 × 0.8 ≈ 2.7 likely shops per request and a fill rate of 1 − 0.76^2.7 ≈ 52%, close to H1's mark of half the searches resolved. A pass there says the concept can work with ten shops; it doesn't say ten are enough for the product.
+The proof of concept has 10 shops over 6 kinds, about 1.7 per kind. That gives n = 1.7 × 2 × 0.8 ≈ 2.7 likely shops per request and a fill rate of 1 − 0.76^2.7 ≈ 52%, close to H1's mark of 12 of the 24 searches resolved. A pass there says the concept can work with ten shops; it doesn't say ten are enough for the product.
 
 ### Shoppers per shop
 

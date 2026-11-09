@@ -879,15 +879,15 @@
       "title": "Three hypotheses to test first",
       "stats": [
         {
-          "value": "60%",
-          "label": "of 20 requests get a valid answer within 10 minutes (H1)"
+          "value": "36 of 60",
+          "label": "requests get a valid answer within 10 minutes (H1)"
         },
         {
-          "value": "4 of 6",
+          "value": "14 of 20",
           "label": "shoppers choose asking first (H3)"
         },
         {
-          "value": "4 of 6",
+          "value": "14 of 20",
           "label": "wait for the answer (H4)"
         }
       ],
@@ -903,9 +903,9 @@
         "First experiment",
         "Signals to stop or go"
       ],
-      "title": "About ten shops and 20 requests, over two days",
+      "title": "About ten shops and 60 requests, over five days",
       "lines": [
-        "An agent sends the requests on WhatsApp; six shoppers use the prototype",
+        "An agent sends the requests on WhatsApp; twenty shoppers use the prototype",
         "If the agent isn’t ready, I play the concierge myself"
       ],
       "media": {

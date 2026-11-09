@@ -167,7 +167,7 @@ status: verified
 
 ## What to test first
 
-The personas come from public posts, so they only cover people who post. Before I commit to one of them in Define, I want to check three things with five or six shoppers on King Street, with a rough prototype in front of them where it fits:
+The personas come from public posts, so they only cover people who post. Before I commit to one of them in Define, I want to check three things with about twenty shoppers on King Street, with a rough prototype in front of them where it fits:
 
 - **Ruth:** is routine, loyal local shopping mostly a habit of people over 50, as London polling suggests? And how do people who never post online find out what's still open?
 - **Sam:** would a shop confirming "it's here, I'll hold it" be enough to make the trip?

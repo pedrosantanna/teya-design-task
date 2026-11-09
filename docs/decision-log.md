@@ -568,5 +568,12 @@ Once a request has an order, its chat pins the order under the nav bar: the stat
 
 **Open:** the order card in the chat repeats the pinned status while both are on screen, and other requests' chats don't pin their orders yet, since only the active request has a receipt in the prototype.
 
+## 069 · Larger samples, and pass marks written as counts
+**2026-11-09 · Decided**
+
+I raised the sample sizes of the tests. The hand-run concierge sends 60 requests over five days (6 per shop, about 24 searches) instead of 20 over two days. The prototype test and the hand-run concierge each have 20 shoppers instead of 6, with at least 10 of them working shop hours, and the demand-summary conversations go from 5 shopkeepers to 10. Every pass mark is now written as a count. H1 passes if 36 of the 60 requests get a valid answer within 10 minutes and at least 12 of the 24 searches are resolved, and the shopper marks out of 6 scale to 20 (4 of 6 becomes 14 of 20). The shops stay at 10.
+
+**Why:** a percentage of 6 or 20 reads as more precise than it is, and "4 of 6" is too few to rest a decision on. The shops stay at 10 because that is the ring of shops reachable within 15 minutes' walk of Blythe Road, and the liquidity model in the product metrics is built on 10 shops over 6 kinds. The case against NPS in decision 067 still holds with 20 shoppers, since one person moves the score by 5 points.
+
 ## Still open
 

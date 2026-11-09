@@ -7,8 +7,8 @@ Takeaways:
 - Cada hipótese tem uma métrica, os eventos que a calculam, o critério de aprovação e um método. A maior parte dos números vem de registros que o serviço guarda de qualquer jeito (pedidos, respostas, compras, pagamentos), então a prova de conceito não precisa de rastreamento no app.
 - Os nomes dos eventos servem também de planilha de registro para o concierge feito à mão: uma linha por evento, com os horários do WhatsApp.
 - A north star (a métrica principal) é o número de pedidos concluídos por semana: pedidos que terminam com uma compra retirada ou entregue. Ela só sobe quando uma loja responde, tem o item, e o comprador compra e retira.
-- Com as premissas atuais, um pedido precisa de cerca de seis lojas prováveis abertas para receber um sim 80% das vezes. Dez lojas espalhadas em seis tipos, como na prova de conceito, deixam isso perto de 50%, que é o critério da H1 para as buscas.
-- A recomendação é não ter NPS nem CSAT fixo por enquanto. A avaliação depois da retirada cobre a loja; o que ela não pega (pedidos que terminam sem compra, o próprio Snuffle, o ponto de vista da loja) fica coberto por conversas com os seis compradores e as dez lojas da prova de conceito.
+- Com as premissas atuais, um pedido precisa de cerca de seis lojas prováveis abertas para receber um sim 80% das vezes. Dez lojas espalhadas em seis tipos, como na prova de conceito, deixam isso perto de 50%, o mesmo que o critério da H1 de 12 buscas resolvidas em 24.
+- A recomendação é não ter NPS nem CSAT fixo por enquanto. A avaliação depois da retirada cobre a loja; o que ela não pega (pedidos que terminam sem compra, o próprio Snuffle, o ponto de vista da loja) fica coberto por conversas com os vinte compradores e as dez lojas da prova de conceito.
 Call:
 - Pedi uma etapa de verificação ao lado dos usuários sintéticos de teste: como cada hipótese vai ser testada e a telemetria necessária para medir comportamento, documentada e explicitamente fora do protótipo.
 - Pedi as tarefas principais com início e fim, sucesso, falha, abandono, tempo na tarefa e erros; uma taxonomia de eventos com notas de privacidade; métricas de produto e de marketplace, incluindo quantas lojas uma área precisa por comprador ativo; guardrails; e como as hipóteses se ligam a tudo isso.
@@ -30,13 +30,13 @@ O canvas [App flow](../develop/ideation/app-flow.md) tem uma camada de medição
 
 | Método | Quem | O que pode mostrar | Hipóteses |
 | --- | --- | --- | --- |
-| Teste do protótipo, moderado | 6 compradores, 30 minutos cada, cenários com prazo | Escolha declarada e usabilidade: o que escolhem, se terminam, quanto tempo levam, onde travam | H2, H3, H5, H7, H8, H10, H17 |
-| Teste de 5 segundos | Os mesmos 6 compradores | Se a página da loja se lê de relance | H18 |
-| Prova de conceito: o agente, ou o concierge feito à mão no WhatsApp | 10 lojas a até 15 minutos a pé da Blythe Road, 6 compradores com necessidades reais | Comportamento: lojas respondendo, atendimento, compra, retirada, volta | H1, H2, H4, H6, H7, H11, H12, H16 |
-| Conversas com as lojas | As 10 lojas, mais 5 para o resumo de demanda | O que as lojas aceitam e valorizam, e o esforço delas | H6, H9, H13, H14, H15, H19 |
+| Teste do protótipo, moderado | 20 compradores, 30 minutos cada, cenários com prazo | Escolha declarada e usabilidade: o que escolhem, se terminam, quanto tempo levam, onde travam | H2, H3, H5, H7, H8, H10, H17 |
+| Teste de 5 segundos | Os mesmos 20 compradores | Se a página da loja se lê de relance | H18 |
+| Prova de conceito: o agente, ou o concierge feito à mão no WhatsApp | 10 lojas a até 15 minutos a pé da Blythe Road, 20 compradores com necessidades reais | Comportamento: lojas respondendo, atendimento, compra, retirada, volta | H1, H2, H4, H6, H7, H11, H12, H16 |
+| Conversas com as lojas | As 10 lojas, mais 10 para o resumo de demanda | O que as lojas aceitam e valorizam, e o esforço delas | H6, H9, H13, H14, H15, H19 |
 | Analytics num build futuro | Todo comprador que consentir | As mesmas métricas em escala, por área e ao longo do tempo | Todas, quando existir |
 
-Um diário de duas semanas com os três compradores que trabalham no horário das lojas mostraria o que os dois dias da prova de conceito não mostram: se eles pedem de novo na semana seguinte. É uma proposta, fora dos testes como estão escritos.
+Um diário de duas semanas com os dez compradores que trabalham no horário das lojas mostraria o que os cinco dias da prova de conceito não mostram: se eles pedem de novo na semana seguinte. É uma proposta, fora dos testes como estão escritos.
 
 ## Hipóteses e suas medidas
 
@@ -44,16 +44,16 @@ Os critérios de aprovação são copiados de [Hipóteses](../define/hypotheses.
 
 | # | Métrica | Eventos | Passa se | Método |
 | --- | --- | --- | --- | --- |
-| H1 | Parcela de consultas com resposta válida em até 10 minutos de loja aberta; parcela de buscas resolvidas | `shop_asked` (canal WhatsApp, aberta agora), `shop_replied` (válida, minutos até responder), `shop_timed_out`, `answer_received`, `request_not_found` | 60% de 20 consultas; metade das buscas, relatadas separadamente | Prova de conceito |
-| H2 | Declarado: ir à loja em vez de pedir online. Comportamento: taxa de retirada | Escolha no protótipo; `order_ready` (retirada), `order_collected`, `order_not_collected`, `order_cancelled` | 4 de 6; 2 de cada 3 compras retiradas | Teste do protótipo, depois prova de conceito |
-| H3 | Primeira ação por cenário: perguntar ou explorar; o que pareceu mais simples | O primeiro entre `ask_started`, `category_opened`, `shop_opened` ou `area_changed` depois de `nearby_viewed`, que só marca o início da sessão; no teste do protótipo quem observa registra | 4 de 6 perguntam primeiro; 4 de 6 acham mais simples | Teste do protótipo |
-| H4 | Compradores que esperam a resposta | `request_created`, `answer_received`, `payment_authorised` ou `payment_taken`, `request_closed`; uma pergunta depois sobre se compraram em outro lugar, que nenhum evento mostra | 4 de 6 esperam | Concierge feito à mão |
-| H5 | Preferência entre a confirmação da loja e o estoque do caixa | Escolha num teste lado a lado | 4 de 6, com motivos | Teste do protótipo |
+| H1 | Parcela de consultas com resposta válida em até 10 minutos de loja aberta; parcela de buscas resolvidas | `shop_asked` (canal WhatsApp, aberta agora), `shop_replied` (válida, minutos até responder), `shop_timed_out`, `answer_received`, `request_not_found` | 36 de 60 consultas; 12 de 24 buscas, relatadas separadamente | Prova de conceito |
+| H2 | Declarado: ir à loja em vez de pedir online. Comportamento: taxa de retirada | Escolha no protótipo; `order_ready` (retirada), `order_collected`, `order_not_collected`, `order_cancelled` | 14 de 20; 2 de cada 3 compras retiradas | Teste do protótipo, depois prova de conceito |
+| H3 | Primeira ação por cenário: perguntar ou explorar; o que pareceu mais simples | O primeiro entre `ask_started`, `category_opened`, `shop_opened` ou `area_changed` depois de `nearby_viewed`, que só marca o início da sessão; no teste do protótipo quem observa registra | 14 de 20 perguntam primeiro; 14 de 20 acham mais simples | Teste do protótipo |
+| H4 | Compradores que esperam a resposta | `request_created`, `answer_received`, `payment_authorised` ou `payment_taken`, `request_closed`; uma pergunta depois sobre se compraram em outro lugar, que nenhum evento mostra | 14 de 20 esperam | Concierge feito à mão |
+| H5 | Preferência entre a confirmação da loja e o estoque do caixa | Escolha num teste lado a lado | 14 de 20, com motivos | Teste do protótipo |
 | H6 | Lojas que guardam um item comprado por 7 dias; depois, quanto tempo os itens esperam | Declarado; depois `order_ready` e `order_collected` (dias depois de pronto) | 6 de 10 | Conversas com as lojas |
 | H6, depois do trabalho | Lojas que oferecem um horário mais tarde ou um ponto de retirada; pontos abertos depois das 18h30 | Declarado; uma volta pelo anel; depois `order_collected` (lugar, hora) | 3 de 10, e um ponto | Conversas e uma volta |
-| H7 | Compradores que trabalham e compram antes para retirar depois | Escolha no protótipo; uma compra, `order_collected` (lugar, hora) | 4 de 6 declarado; 2 compras reais retiradas | Teste do protótipo, depois prova de conceito |
-| H8 | Compradores que escolhem Keep looking, uma vez ou toda semana | O registro da escolha por quem observa; build futuro: `keep_looking_set` (recorrente, origem) | 3 de 6 aviso pontual; 2 de 6 semanal | Teste do protótipo |
-| H9 | Lojistas que dizem que o resumo mudaria o que estocam ou os faria responder | Declarado, sobre um mock-up impresso; build futuro: `demand_summary_sent`, `demand_summary_read` | 3 de 5 | Conversas com as lojas |
+| H7 | Compradores que trabalham e compram antes para retirar depois | Escolha no protótipo; uma compra, `order_collected` (lugar, hora) | 14 de 20 declarado; 6 compras reais retiradas | Teste do protótipo, depois prova de conceito |
+| H8 | Compradores que escolhem Keep looking, uma vez ou toda semana | O registro da escolha por quem observa; build futuro: `keep_looking_set` (recorrente, origem) | 10 de 20 aviso pontual; 7 de 20 semanal | Teste do protótipo |
+| H9 | Lojistas que dizem que o resumo mudaria o que estocam ou os faria responder | Declarado, sobre um mock-up impresso; build futuro: `demand_summary_sent`, `demand_summary_read` | 6 de 10 | Conversas com as lojas |
 | H10 | Onde os compradores querem o concierge | Declarado; depois `request_created` (canal) | Uma divisão, sem critério | Teste do protótipo |
 | H11 | Lojas cujo caixa guarda códigos de produto | O cadastro da loja (origem: conectada) | Uma contagem, sem critério | Prova de conceito |
 | H12 | Pedidos com pelo menos um sim que terminam em compra | `answer_received` com um sim (tem, tem parte, em estoque), depois `payment_authorised` ou `payment_taken` no mesmo pedido | 70% dos pedidos com um sim | Prova de conceito |
@@ -61,8 +61,8 @@ Os critérios de aprovação são copiados de [Hipóteses](../define/hypotheses.
 | H14 | Lojas no POS que o manteriam ou recomendariam; vendas do app por loja | `payment_taken` (valor) somado por loja; declarado | 3 de 5 | Prova de conceito e conversas |
 | H15 | Lojas que pagam por destaque | `offer_made`, `offer_accepted` (tipo: promotion) | 2 de 10 | Prova de conceito |
 | H16 | Parcela das compras retiradas em lojas a mais de 15 minutos | `order_collected` (minutos a pé, como mostrados a partir do lugar do pedido) | Uma parcela, sem critério | Prova de conceito |
-| H17 | Quantas vezes a loja consultada é escolhida, com e sem a linha de confiabilidade | Escolha em pares de cartões | 3 de 6 pares com a linha, e mais do que sem | Teste do protótipo |
-| H18 | Leitura correta de "% would go back" contra estrelas | Respostas num teste de 5 segundos | 5 de 6, não menos do que com estrelas | Teste de 5 segundos |
+| H17 | Quantas vezes a loja consultada é escolhida, com e sem a linha de confiabilidade | Escolha em pares de cartões | 10 de 20 pares com a linha, e mais do que sem | Teste do protótipo |
+| H18 | Leitura correta de "% would go back" contra estrelas | Respostas num teste de 5 segundos | 17 de 20, não menos do que com estrelas | Teste de 5 segundos |
 | H19 | Lojas que aceitam um número público de precisão de estoque | Declarado | 6 de 10 | Conversas com as lojas |
 
 ## Indicadores de usabilidade e de produto
@@ -81,9 +81,9 @@ Cada métrica de crescimento tem um guardrail que ela não pode empurrar para ci
 
 O produto já pede uma medida atitudinal. Depois que uma compra é retirada ou entregue, o Snuffle pergunta a todo mundo que comprou "Would you go back?" com polegar para cima ou para baixo, até três tags e uma nota opcional (decisão 047). A parcela de polegares para cima é uma nota de satisfação por loja e por compra, e as tags dizem que parte deu errado ("Not ready when I came", "Wasn't as described").
 
-A recomendação é não adicionar NPS. A prova de conceito tem seis compradores, então uma pessoa move o número em cerca de 17 pontos, e nenhuma decisão poderia se apoiar nele. O NPS pergunta se a pessoa recomendaria o app, um indicador indireto de voltar, e a prova de conceito consegue contar quem volta. As compras são poucas por mês, então um segundo pedido de resposta depois de uma tarefa rápida acrescenta atrito a um utilitário que já pede uma avaliação, e não diz qual etapa falhou.
+A recomendação é não adicionar NPS. A prova de conceito tem vinte compradores, então uma pessoa move o número em 5 pontos, e nenhuma decisão poderia se apoiar nele. O NPS pergunta se a pessoa recomendaria o app, um indicador indireto de voltar, e a prova de conceito consegue contar quem volta. As compras são poucas por mês, então um segundo pedido de resposta depois de uma tarefa rápida acrescenta atrito a um utilitário que já pede uma avaliação, e não diz qual etapa falhou.
 
-Um CSAT fixo também não é necessário, porque a avaliação já é um, para a loja. A avaliação tem duas lacunas. Ela só chega a quem retirou, o caminho que deu certo, então um comprador cujo pedido terminou em "Not found" ou "Not confirmed" nunca é perguntado. E ela avalia a loja, não o Snuffle. Na prova de conceito, as duas lacunas saem mais baratas numa conversa com os seis compradores no fim do que numa pesquisa. Se um build futuro precisar de um número, a opção é uma pergunta opcional, "Did Snuffle help?", mostrada uma vez numa amostra dos pedidos que terminam sem compra. É uma opção para eu decidir, fora do plano.
+Um CSAT fixo também não é necessário, porque a avaliação já é um, para a loja. A avaliação tem duas lacunas. Ela só chega a quem retirou, o caminho que deu certo, então um comprador cujo pedido terminou em "Not found" ou "Not confirmed" nunca é perguntado. E ela avalia a loja, não o Snuffle. Na prova de conceito, as duas lacunas saem mais baratas numa conversa com os vinte compradores no fim do que numa pesquisa. Se um build futuro precisar de um número, a opção é uma pergunta opcional, "Did Snuffle help?", mostrada uma vez numa amostra dos pedidos que terminam sem compra. É uma opção para eu decidir, fora do plano.
 
 As lojas precisam da própria pergunta. A satisfação delas é sobre esforço e vendas, e a nota de um comprador não diz nada sobre isso. Na prova de conceito, isso é uma conversa semanal com cada uma das dez lojas, pessoalmente ou no WhatsApp: quantos pedidos pareceram demais, o que mudariam, se continuariam. As lojas que saem são a medida de comportamento que acompanha essa conversa.
 

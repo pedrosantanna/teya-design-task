@@ -895,6 +895,8 @@
     let rt = 0;
     const ro = new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => { if (root.isConnected) { apply(); protoLayout(); } }, 50); });
     ro.observe(vp);
+    const headEl = root.parentElement?.querySelector('.cv-title');
+    if (headEl) ro.observe(headEl); // the title card folds: Proto re-fits below it
     if (opts?.mode === 'proto' && hasProto) setMode('proto', opts.start);
     const api = { hasProto, hasMeasure: !!M, setMeasure: on => setMeasure(on), get measure() { return mOn; }, setMode: (m, at) => setMode(m, at), get mode() { return mode; }, destroy: () => { document.removeEventListener('keydown', onKey); document.removeEventListener('keyup', onKeyUp); ro.disconnect(); }, showAbout: () => renderDrawer(true), fit: () => fitAll(true), zoomTo: (ids, maxK = 1.5) => { const els = String(ids).split(',').map(i => world.querySelector('#' + i.trim())).filter(Boolean); if (els.length) fitTo(els, false, maxK); } };
     root.__canvas = api;

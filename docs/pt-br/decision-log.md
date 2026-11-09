@@ -568,5 +568,12 @@ Quando um pedido tem uma compra, a conversa dele fixa a compra sob a barra de na
 
 **Em aberto:** o cartão de compra na conversa repete o status fixado quando os dois estão na tela, e as conversas dos outros pedidos ainda não fixam as compras, porque só o pedido ativo tem recibo no protótipo.
 
+## 069 · Amostras maiores, e critérios de aprovação escritos como contagens
+**2026-11-09 · Decidido**
+
+Aumentei o tamanho das amostras dos testes. O concierge feito à mão manda 60 pedidos em cinco dias (6 por loja, cerca de 24 buscas) em vez de 20 em dois dias. O teste do protótipo e o concierge feito à mão têm 20 compradores cada em vez de 6, com pelo menos 10 deles trabalhando no horário das lojas, e as conversas sobre o resumo de demanda passam de 5 lojistas para 10. Todo critério de aprovação agora é escrito como contagem. A H1 passa se 36 dos 60 pedidos recebem uma resposta válida em até 10 minutos e pelo menos 12 das 24 buscas são resolvidas, e os critérios de compradores sobre 6 passam para 20 (4 de 6 vira 14 de 20). As lojas continuam 10.
+
+**Por quê:** uma porcentagem de 6 ou de 20 parece mais precisa do que é, e "4 de 6" é pouco para apoiar uma decisão. As lojas continuam 10 porque esse é o anel de lojas alcançáveis a até 15 minutos a pé da Blythe Road, e o modelo de liquidez das métricas de produto se apoia em 10 lojas em 6 tipos. O argumento contra o NPS da decisão 067 continua valendo com 20 compradores, já que uma pessoa move o número em 5 pontos.
+
 ## Ainda em aberto
 
